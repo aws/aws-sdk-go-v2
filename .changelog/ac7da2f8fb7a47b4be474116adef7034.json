@@ -1,0 +1,8 @@
+{
+    "id": "ac7da2f8-fb7a-47b4-be47-4116adef7034",
+    "type": "feature",
+    "description": "Service-managed parameter groups now only apply optimized defaults to DB Clusters automatically. New field effectiveDbParameterGroupIdentifier surfaces the parameter group actually applied.",
+    "modules": [
+        "service/timestreaminfluxdb"
+    ]
+}

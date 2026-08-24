@@ -89056,6 +89056,85 @@ func awsRestjson1_deserializeDocumentRealTimeContactAnalysisCharacterIntervals(v
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRealTimeContactAnalysisExtractedInformationValue(v **types.RealTimeContactAnalysisExtractedInformationValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RealTimeContactAnalysisExtractedInformationValue
+	if *v == nil {
+		sv = &types.RealTimeContactAnalysisExtractedInformationValue{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Content":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RealTimeContactAnalysisExtractedInformationContent to be of type string, got %T instead", value)
+				}
+				sv.Content = ptr.String(jtv)
+			}
+
+		case "PointsOfInterest":
+			if err := awsRestjson1_deserializeDocumentRealTimeContactAnalysisTranscriptItemsWithCharacterOffsets(&sv.PointsOfInterest, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRealTimeContactAnalysisExtractedInformationValues(v *[]types.RealTimeContactAnalysisExtractedInformationValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RealTimeContactAnalysisExtractedInformationValue
+	if *v == nil {
+		cv = []types.RealTimeContactAnalysisExtractedInformationValue{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RealTimeContactAnalysisExtractedInformationValue
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRealTimeContactAnalysisExtractedInformationValue(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRealTimeContactAnalysisIssueDetected(v **types.RealTimeContactAnalysisIssueDetected, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -89281,6 +89360,16 @@ loop:
 			uv = &types.RealtimeContactAnalysisSegmentMemberEvent{Value: mv}
 			break loop
 
+		case "ExtractedInformation":
+			var mv types.RealTimeContactAnalysisSegmentExtractedInformation
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentRealTimeContactAnalysisSegmentExtractedInformation(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.RealtimeContactAnalysisSegmentMemberExtractedInformation{Value: mv}
+			break loop
+
 		case "Issues":
 			var mv types.RealTimeContactAnalysisSegmentIssues
 			destAddr := &mv
@@ -89504,6 +89593,78 @@ func awsRestjson1_deserializeDocumentRealTimeContactAnalysisSegmentEvent(v **typ
 		case "Time":
 			if err := awsRestjson1_deserializeDocumentRealTimeContactAnalysisTimeData(&sv.Time, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRealTimeContactAnalysisSegmentExtractedInformation(v **types.RealTimeContactAnalysisSegmentExtractedInformation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RealTimeContactAnalysisSegmentExtractedInformation
+	if *v == nil {
+		sv = &types.RealTimeContactAnalysisSegmentExtractedInformation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ExtractedValues":
+			if err := awsRestjson1_deserializeDocumentRealTimeContactAnalysisExtractedInformationValues(&sv.ExtractedValues, value); err != nil {
+				return err
+			}
+
+		case "ExtractionDefinitionDisplayLabel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExtractionDefinitionDisplayLabel to be of type string, got %T instead", value)
+				}
+				sv.ExtractionDefinitionDisplayLabel = ptr.String(jtv)
+			}
+
+		case "ExtractionDefinitionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExtractionDefinitionId to be of type string, got %T instead", value)
+				}
+				sv.ExtractionDefinitionId = ptr.String(jtv)
+			}
+
+		case "ExtractionDefinitionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExtractionDefinitionName to be of type string, got %T instead", value)
+				}
+				sv.ExtractionDefinitionName = ptr.String(jtv)
+			}
+
+		case "FailureCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RealTimeContactAnalysisExtractedInformationFailureCode to be of type string, got %T instead", value)
+				}
+				sv.FailureCode = types.RealTimeContactAnalysisExtractedInformationFailureCode(jtv)
 			}
 
 		default:

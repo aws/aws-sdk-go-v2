@@ -7931,6 +7931,15 @@ func awsAwsjson10_deserializeOpDocumentGetDbClusterOutput(v **GetDbClusterOutput
 				sv.DeploymentType = types.ClusterDeploymentType(jtv)
 			}
 
+		case "effectiveDbParameterGroupIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DbParameterGroupIdentifier to be of type string, got %T instead", value)
+				}
+				sv.EffectiveDbParameterGroupIdentifier = ptr.String(jtv)
+			}
+
 		case "endpoint":
 			if value != nil {
 				jtv, ok := value.(string)

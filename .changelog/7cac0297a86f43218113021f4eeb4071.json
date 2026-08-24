@@ -1,0 +1,8 @@
+{
+    "id": "7cac0297-a86f-4321-8113-021f4eeb4071",
+    "type": "feature",
+    "description": "This release adds the ExtractedInformation segment to the ListRealtimeContactAnalysisSegmentsV2 API, enabling customers to retrieve information extracted from real-time contact analysis.",
+    "modules": [
+        "service/connect"
+    ]
+}

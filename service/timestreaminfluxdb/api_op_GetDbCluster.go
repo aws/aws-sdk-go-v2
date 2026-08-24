@@ -73,6 +73,13 @@ type GetDbClusterOutput struct {
 	// Deployment type of the DB cluster.
 	DeploymentType types.ClusterDeploymentType
 
+	// The ID of the DB parameter group actually applied to your DB cluster. When the
+	// service applies optimized defaults, it creates a service-managed DB parameter
+	// group and this field reflects that group, while dbParameterGroupIdentifier
+	// reflects the customer-provided DB parameter group. When no service-managed DB
+	// parameter group is applied, this value matches dbParameterGroupIdentifier.
+	EffectiveDbParameterGroupIdentifier *string
+
 	// The endpoint used to connect to the Timestream for InfluxDB cluster for write
 	// and read operations.
 	Endpoint *string

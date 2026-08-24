@@ -2513,6 +2513,88 @@ func awsRestjson1_deserializeErrorValidationException(response *smithyhttp.Respo
 	return output
 }
 
+func awsRestjson1_deserializeDocumentAccountConstraint(v *types.AccountConstraint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.AccountConstraint
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "delegatedAdmin":
+			var mv types.DelegatedAdminConstraint
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentDelegatedAdminConstraint(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AccountConstraintMemberDelegatedAdmin{Value: mv}
+			break loop
+
+		case "managementAccount":
+			var mv types.ManagementAccountConstraint
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentManagementAccountConstraint(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AccountConstraintMemberManagementAccount{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAccountConstraintsList(v *[]types.AccountConstraint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AccountConstraint
+	if *v == nil {
+		cv = []types.AccountConstraint{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AccountConstraint
+		if err := awsRestjson1_deserializeDocumentAccountConstraint(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAllowedValues(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2546,6 +2628,46 @@ func awsRestjson1_deserializeDocumentAllowedValues(v *[]string, value interface{
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDelegatedAdminConstraint(v **types.DelegatedAdminConstraint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DelegatedAdminConstraint
+	if *v == nil {
+		sv = &types.DelegatedAdminConstraint{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "servicePrincipal":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServicePrincipalType to be of type string, got %T instead", value)
+				}
+				sv.ServicePrincipal = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -2932,6 +3054,11 @@ func awsRestjson1_deserializeDocumentDeploymentEventDataSummary(v **types.Deploy
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "metadata":
+			if err := awsRestjson1_deserializeDocumentDeploymentEventMetadata(&sv.Metadata, value); err != nil {
+				return err
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3015,6 +3142,42 @@ func awsRestjson1_deserializeDocumentDeploymentEventDataSummaryList(v *[]types.D
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDeploymentEventMetadata(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected DeploymentEventMetadataValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -3306,6 +3469,37 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentManagementAccountConstraint(v **types.ManagementAccountConstraint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ManagementAccountConstraint
+	if *v == nil {
+		sv = &types.ManagementAccountConstraint{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentResourceLimitException(v **types.ResourceLimitException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3518,6 +3712,11 @@ func awsRestjson1_deserializeDocumentWorkloadData(v **types.WorkloadData, value 
 
 	for key, value := range shape {
 		switch key {
+		case "accountConstraints":
+			if err := awsRestjson1_deserializeDocumentAccountConstraintsList(&sv.AccountConstraints, value); err != nil {
+				return err
+			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3612,6 +3811,11 @@ func awsRestjson1_deserializeDocumentWorkloadDataSummary(v **types.WorkloadDataS
 
 	for key, value := range shape {
 		switch key {
+		case "accountConstraints":
+			if err := awsRestjson1_deserializeDocumentAccountConstraintsList(&sv.AccountConstraints, value); err != nil {
+				return err
+			}
+
 		case "displayName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3704,6 +3908,11 @@ func awsRestjson1_deserializeDocumentWorkloadDeploymentPatternData(v **types.Wor
 
 	for key, value := range shape {
 		switch key {
+		case "accountConstraints":
+			if err := awsRestjson1_deserializeDocumentAccountConstraintsList(&sv.AccountConstraints, value); err != nil {
+				return err
+			}
+
 		case "deploymentPatternName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3812,6 +4021,11 @@ func awsRestjson1_deserializeDocumentWorkloadDeploymentPatternDataSummary(v **ty
 
 	for key, value := range shape {
 		switch key {
+		case "accountConstraints":
+			if err := awsRestjson1_deserializeDocumentAccountConstraintsList(&sv.AccountConstraints, value); err != nil {
+				return err
+			}
+
 		case "deploymentPatternName":
 			if value != nil {
 				jtv, ok := value.(string)

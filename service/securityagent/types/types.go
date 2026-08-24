@@ -202,6 +202,11 @@ type Assets struct {
 	// The list of source code repositories to analyze during the pentest.
 	SourceCode []SourceCodeRepository
 
+	// The trust anchors used to validate target endpoint TLS certificates. Provide
+	// these for endpoints served by a private or internal certificate authority (CA),
+	// an intermediate CA, or a self-signed certificate.
+	TrustedCaCertificates []TrustedCaCertificate
+
 	noSmithyDocumentSerde
 }
 
@@ -439,6 +444,44 @@ type BitbucketResourceCapabilities struct {
 
 	noSmithyDocumentSerde
 }
+
+// The source of a trusted CA certificate. Exactly one member must be set.
+//
+// The following types satisfy this interface:
+//
+//	CaCertificateSourceMemberArtifactId
+//	CaCertificateSourceMemberInlinePem
+//	CaCertificateSourceMemberS3Location
+type CaCertificateSource interface {
+	isCaCertificateSource()
+}
+
+// The artifact ID of an uploaded certificate file.
+type CaCertificateSourceMemberArtifactId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*CaCertificateSourceMemberArtifactId) isCaCertificateSource() {}
+
+// A PEM-encoded X.509 certificate supplied inline.
+type CaCertificateSourceMemberInlinePem struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*CaCertificateSourceMemberInlinePem) isCaCertificateSource() {}
+
+// The Amazon S3 location URI of a customer-staged certificate.
+type CaCertificateSourceMemberS3Location struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*CaCertificateSourceMemberS3Location) isCaCertificateSource() {}
 
 // Represents a category assigned to a security testing task.
 type Category struct {
@@ -1977,6 +2020,10 @@ type PentestJob struct {
 	// The title of the pentest job.
 	Title *string
 
+	// The trust anchors used to validate target endpoint TLS certificates during the
+	// pentest job.
+	TrustedCaCertificates []TrustedCaCertificate
+
 	// The date and time the pentest job was last updated, in UTC format.
 	UpdatedAt *time.Time
 
@@ -2917,6 +2964,17 @@ type ThreatSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A trust anchor used when validating a target endpoint's TLS certificate.
+type TrustedCaCertificate struct {
+
+	// The source that AWS Security Agent reads the certificate from.
+	//
+	// This member is required.
+	Source CaCertificateSource
+
+	noSmithyDocumentSerde
+}
+
 // Contains the details for updating an existing security requirement within a
 // pack. The name is an immutable identifier used to locate the requirement and
 // cannot be modified.
@@ -3062,6 +3120,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isCaCertificateSource()          {}
 func (*UnknownUnionMember) isDiffSource()                   {}
 func (*UnknownUnionMember) isImportSource()                 {}
 func (*UnknownUnionMember) isIntegratedResource()           {}

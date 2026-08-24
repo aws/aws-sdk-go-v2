@@ -3754,6 +3754,32 @@ func (QuickConnectType) Values() []QuickConnectType {
 	}
 }
 
+type RealTimeContactAnalysisExtractedInformationFailureCode string
+
+// Enum values for RealTimeContactAnalysisExtractedInformationFailureCode
+const (
+	RealTimeContactAnalysisExtractedInformationFailureCodeQuotaExceeded                   RealTimeContactAnalysisExtractedInformationFailureCode = "QUOTA_EXCEEDED"
+	RealTimeContactAnalysisExtractedInformationFailureCodeInsufficientConversationContent RealTimeContactAnalysisExtractedInformationFailureCode = "INSUFFICIENT_CONVERSATION_CONTENT"
+	RealTimeContactAnalysisExtractedInformationFailureCodeFailedSafetyGuidelines          RealTimeContactAnalysisExtractedInformationFailureCode = "FAILED_SAFETY_GUIDELINES"
+	RealTimeContactAnalysisExtractedInformationFailureCodeInternalError                   RealTimeContactAnalysisExtractedInformationFailureCode = "INTERNAL_ERROR"
+	RealTimeContactAnalysisExtractedInformationFailureCodeMaxPackageFeatureOnly           RealTimeContactAnalysisExtractedInformationFailureCode = "MAX_PACKAGE_FEATURE_ONLY"
+)
+
+// Values returns all known values for
+// RealTimeContactAnalysisExtractedInformationFailureCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RealTimeContactAnalysisExtractedInformationFailureCode) Values() []RealTimeContactAnalysisExtractedInformationFailureCode {
+	return []RealTimeContactAnalysisExtractedInformationFailureCode{
+		"QUOTA_EXCEEDED",
+		"INSUFFICIENT_CONVERSATION_CONTENT",
+		"FAILED_SAFETY_GUIDELINES",
+		"INTERNAL_ERROR",
+		"MAX_PACKAGE_FEATURE_ONLY",
+	}
+}
+
 type RealTimeContactAnalysisOutputType string
 
 // Enum values for RealTimeContactAnalysisOutputType
@@ -3824,12 +3850,13 @@ type RealTimeContactAnalysisSegmentType string
 
 // Enum values for RealTimeContactAnalysisSegmentType
 const (
-	RealTimeContactAnalysisSegmentTypeTranscript         RealTimeContactAnalysisSegmentType = "Transcript"
-	RealTimeContactAnalysisSegmentTypeCategories         RealTimeContactAnalysisSegmentType = "Categories"
-	RealTimeContactAnalysisSegmentTypeIssues             RealTimeContactAnalysisSegmentType = "Issues"
-	RealTimeContactAnalysisSegmentTypeEvent              RealTimeContactAnalysisSegmentType = "Event"
-	RealTimeContactAnalysisSegmentTypeAttachments        RealTimeContactAnalysisSegmentType = "Attachments"
-	RealTimeContactAnalysisSegmentTypePostContactSummary RealTimeContactAnalysisSegmentType = "PostContactSummary"
+	RealTimeContactAnalysisSegmentTypeTranscript           RealTimeContactAnalysisSegmentType = "Transcript"
+	RealTimeContactAnalysisSegmentTypeCategories           RealTimeContactAnalysisSegmentType = "Categories"
+	RealTimeContactAnalysisSegmentTypeIssues               RealTimeContactAnalysisSegmentType = "Issues"
+	RealTimeContactAnalysisSegmentTypeEvent                RealTimeContactAnalysisSegmentType = "Event"
+	RealTimeContactAnalysisSegmentTypeAttachments          RealTimeContactAnalysisSegmentType = "Attachments"
+	RealTimeContactAnalysisSegmentTypePostContactSummary   RealTimeContactAnalysisSegmentType = "PostContactSummary"
+	RealTimeContactAnalysisSegmentTypeExtractedInformation RealTimeContactAnalysisSegmentType = "ExtractedInformation"
 )
 
 // Values returns all known values for RealTimeContactAnalysisSegmentType. Note
@@ -3845,6 +3872,7 @@ func (RealTimeContactAnalysisSegmentType) Values() []RealTimeContactAnalysisSegm
 		"Event",
 		"Attachments",
 		"PostContactSummary",
+		"ExtractedInformation",
 	}
 }
 

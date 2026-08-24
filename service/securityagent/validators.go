@@ -2065,6 +2065,11 @@ func validateAssets(v *types.Assets) error {
 			invalidParams.AddNested("IntegratedRepositories", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.TrustedCaCertificates != nil {
+		if err := validateTrustedCaCertificateList(v.TrustedCaCertificates); err != nil {
+			invalidParams.AddNested("TrustedCaCertificates", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2608,6 +2613,38 @@ func validateServiceManagedInput(v *types.ServiceManagedInput) error {
 	}
 	if v.SubnetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrustedCaCertificate(v *types.TrustedCaCertificate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrustedCaCertificate"}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrustedCaCertificateList(v []types.TrustedCaCertificate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrustedCaCertificateList"}
+	for i := range v {
+		if err := validateTrustedCaCertificate(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

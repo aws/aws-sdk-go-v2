@@ -1,0 +1,8 @@
+{
+    "id": "e6839629-45cd-4e47-88de-da210a47ed66",
+    "type": "feature",
+    "description": "Corrected the validation pattern on the ServiceName response field in the GetVpcEndpointServiceName API to match the values Amazon Aurora DSQL actually returns.",
+    "modules": [
+        "service/dsql"
+    ]
+}

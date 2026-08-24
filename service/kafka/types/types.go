@@ -1017,6 +1017,9 @@ type KafkaClusterClientAuthentication struct {
 	// Details for mTLS client authentication.
 	MTLS *KafkaClusterMTLSAuthentication
 
+	// Details for SASL/OAUTHBEARER client authentication.
+	SaslOAuthBearer *KafkaClusterSaslOAuthBearerAuthentication
+
 	// Details for SASL/SCRAM client authentication.
 	SaslScram *KafkaClusterSaslScramAuthentication
 
@@ -1084,6 +1087,94 @@ type KafkaClusterMTLSAuthentication struct {
 	//
 	// This member is required.
 	SecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Details for SASL/OAUTHBEARER using standard client_credentials grant.
+type KafkaClusterOAuthClientCredentials struct {
+
+	// The Amazon Resource Name (ARN) of the Secrets Manager secret containing the
+	// OAuth client credentials.
+	//
+	// This member is required.
+	TokenRequestSecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Details for SASL/OAUTHBEARER using client credentials grant with JWT client
+// assertion.
+type KafkaClusterOAuthClientCredentialsAssertion struct {
+
+	// The audience for the JWT client assertion.
+	//
+	// This member is required.
+	Audience *string
+
+	// The signing algorithm for the JWT client assertion.
+	//
+	// This member is required.
+	SigningAlgorithm JwtSigningAlgorithm
+
+	// The Amazon Resource Name (ARN) of the Secrets Manager secret containing the
+	// signing key.
+	TokenRequestSecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Details for SASL/OAUTHBEARER using JWT Bearer assertion grant.
+type KafkaClusterOAuthIamJwtBearer struct {
+
+	// The audience for the JWT Bearer assertion.
+	//
+	// This member is required.
+	Audience *string
+
+	// The signing algorithm for the JWT Bearer assertion.
+	//
+	// This member is required.
+	SigningAlgorithm JwtSigningAlgorithm
+
+	// The Amazon Resource Name (ARN) of the Secrets Manager secret containing the
+	// signing key.
+	TokenRequestSecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Details for SASL/OAUTHBEARER client authentication.
+type KafkaClusterSaslOAuthBearerAuthentication struct {
+
+	// How client credentials are sent to the identity provider. Valid values are
+	// POST, BASIC, or NONE.
+	//
+	// This member is required.
+	TokenEndpointAuthenticationMethod TokenEndpointAuthenticationMethod
+
+	// The HTTPS URL of the OAuth token endpoint that vends OAuth Bearer tokens per
+	// RFC 6749.
+	//
+	// This member is required.
+	TokenEndpointUrl *string
+
+	// Details for SASL/OAUTHBEARER using standard client_credentials grant.
+	ClientCredentials *KafkaClusterOAuthClientCredentials
+
+	// Details for SASL/OAUTHBEARER using client credentials grant with JWT client
+	// assertion.
+	ClientCredentialsAssertion *KafkaClusterOAuthClientCredentialsAssertion
+
+	// Details for SASL/OAUTHBEARER using JWT Bearer assertion grant (RFC 7523).
+	IamJwtBearer *KafkaClusterOAuthIamJwtBearer
+
+	// OAuth scope to request.
+	Scope *string
+
+	// Secrets Manager ARN containing a custom CA certificate for the identity
+	// provider.
+	TokenEndpointTlsCertificateArn *string
 
 	noSmithyDocumentSerde
 }

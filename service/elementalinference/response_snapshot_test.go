@@ -287,7 +287,8 @@ func TestCheckResponseSnapshot_CreateFeed(t *testing.T) {
 				FromAssociation: ptr.Bool(true),
 			},
 		},
-		Status: types.FeedStatus("CREATING"),
+		AccessRoleArn: ptr.String("__AccessRoleArn__"),
+		Status:        types.FeedStatus("CREATING"),
 		Association: &types.FeedAssociation{
 			AssociatedResourceName: ptr.String("__AssociatedResourceName__"),
 		},
@@ -566,7 +567,8 @@ func TestCheckResponseSnapshot_GetFeed(t *testing.T) {
 				FromAssociation: ptr.Bool(true),
 			},
 		},
-		Status: types.FeedStatus("CREATING"),
+		AccessRoleArn: ptr.String("__AccessRoleArn__"),
+		Status:        types.FeedStatus("CREATING"),
 		Association: &types.FeedAssociation{
 			AssociatedResourceName: ptr.String("__AssociatedResourceName__"),
 		},
@@ -590,6 +592,43 @@ func TestCheckResponseSnapshot_GetFeed(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetFeed.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetFixture(t *testing.T) {
+	want := &GetFixtureOutput{
+		FixtureId:      ptr.String("__FixtureId__"),
+		Name:           ptr.String("__Name__"),
+		FixtureGroup:   ptr.String("__FixtureGroup__"),
+		ScheduledStart: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		Status:         ptr.String("__Status__"),
+		Competitors: []types.Competitor{
+			{
+				Name:   ptr.String("__Name__"),
+				IsHome: ptr.Bool(true),
+			},
+			{
+				Name:   ptr.String("__Name__"),
+				IsHome: ptr.Bool(true),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetFixture.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetFixture(context.Background(), &GetFixtureInput{
+		FixtureId: ptr.String("__FixtureId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetFixture.response", err)
 	}
 }
 
@@ -930,7 +969,8 @@ func TestCheckResponseSnapshot_UpdateFeed(t *testing.T) {
 				FromAssociation: ptr.Bool(true),
 			},
 		},
-		Status: types.FeedStatus("CREATING"),
+		AccessRoleArn: ptr.String("__AccessRoleArn__"),
+		Status:        types.FeedStatus("CREATING"),
 		Association: &types.FeedAssociation{
 			AssociatedResourceName: ptr.String("__AssociatedResourceName__"),
 		},
@@ -1187,28 +1227,8 @@ func TestCheckResponseSnapshot_Error_GatewayTimedOutException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SearchFixtures(context.Background(), &SearchFixturesInput{
-		Sport:     types.DataSourceSport("basketball"),
-		StartDate: ptr.String("__StartDate__"),
-		EndDate:   ptr.String("__EndDate__"),
-		Filters: []types.SearchFilter{
-			{
-				Name: types.FilterName("COMPETITOR"),
-				Values: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-			{
-				Name: types.FilterName("COMPETITOR"),
-				Values: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-		},
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
+	_, opErr := svc.GetFixture(context.Background(), &GetFixtureInput{
+		FixtureId: ptr.String("__FixtureId__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1477,28 +1497,8 @@ func TestCheckResponseSnapshot_Error_ServiceUnavailableException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.SearchFixtures(context.Background(), &SearchFixturesInput{
-		Sport:     types.DataSourceSport("basketball"),
-		StartDate: ptr.String("__StartDate__"),
-		EndDate:   ptr.String("__EndDate__"),
-		Filters: []types.SearchFilter{
-			{
-				Name: types.FilterName("COMPETITOR"),
-				Values: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-			{
-				Name: types.FilterName("COMPETITOR"),
-				Values: []string{
-					"__Member__",
-					"__Member__",
-				},
-			},
-		},
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
+	_, opErr := svc.GetFixture(context.Background(), &GetFixtureInput{
+		FixtureId: ptr.String("__FixtureId__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

@@ -16812,6 +16812,11 @@ func awsRestjson1_deserializeDocumentKafkaClusterClientAuthentication(v **types.
 				return err
 			}
 
+		case "saslOAuthBearer":
+			if err := awsRestjson1_deserializeDocumentKafkaClusterSaslOAuthBearerAuthentication(&sv.SaslOAuthBearer, value); err != nil {
+				return err
+			}
+
 		case "saslScram":
 			if err := awsRestjson1_deserializeDocumentKafkaClusterSaslScramAuthentication(&sv.SaslScram, value); err != nil {
 				return err
@@ -17010,6 +17015,244 @@ func awsRestjson1_deserializeDocumentKafkaClusterMTLSAuthentication(v **types.Ka
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.SecretArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentKafkaClusterOAuthClientCredentials(v **types.KafkaClusterOAuthClientCredentials, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KafkaClusterOAuthClientCredentials
+	if *v == nil {
+		sv = &types.KafkaClusterOAuthClientCredentials{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "tokenRequestSecretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.TokenRequestSecretArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentKafkaClusterOAuthClientCredentialsAssertion(v **types.KafkaClusterOAuthClientCredentialsAssertion, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KafkaClusterOAuthClientCredentialsAssertion
+	if *v == nil {
+		sv = &types.KafkaClusterOAuthClientCredentialsAssertion{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "audience":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Audience = ptr.String(jtv)
+			}
+
+		case "signingAlgorithm":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JwtSigningAlgorithm to be of type string, got %T instead", value)
+				}
+				sv.SigningAlgorithm = types.JwtSigningAlgorithm(jtv)
+			}
+
+		case "tokenRequestSecretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.TokenRequestSecretArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentKafkaClusterOAuthIamJwtBearer(v **types.KafkaClusterOAuthIamJwtBearer, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KafkaClusterOAuthIamJwtBearer
+	if *v == nil {
+		sv = &types.KafkaClusterOAuthIamJwtBearer{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "audience":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Audience = ptr.String(jtv)
+			}
+
+		case "signingAlgorithm":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JwtSigningAlgorithm to be of type string, got %T instead", value)
+				}
+				sv.SigningAlgorithm = types.JwtSigningAlgorithm(jtv)
+			}
+
+		case "tokenRequestSecretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.TokenRequestSecretArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentKafkaClusterSaslOAuthBearerAuthentication(v **types.KafkaClusterSaslOAuthBearerAuthentication, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KafkaClusterSaslOAuthBearerAuthentication
+	if *v == nil {
+		sv = &types.KafkaClusterSaslOAuthBearerAuthentication{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "clientCredentials":
+			if err := awsRestjson1_deserializeDocumentKafkaClusterOAuthClientCredentials(&sv.ClientCredentials, value); err != nil {
+				return err
+			}
+
+		case "clientCredentialsAssertion":
+			if err := awsRestjson1_deserializeDocumentKafkaClusterOAuthClientCredentialsAssertion(&sv.ClientCredentialsAssertion, value); err != nil {
+				return err
+			}
+
+		case "iamJwtBearer":
+			if err := awsRestjson1_deserializeDocumentKafkaClusterOAuthIamJwtBearer(&sv.IamJwtBearer, value); err != nil {
+				return err
+			}
+
+		case "scope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Scope = ptr.String(jtv)
+			}
+
+		case "tokenEndpointAuthenticationMethod":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TokenEndpointAuthenticationMethod to be of type string, got %T instead", value)
+				}
+				sv.TokenEndpointAuthenticationMethod = types.TokenEndpointAuthenticationMethod(jtv)
+			}
+
+		case "tokenEndpointTlsCertificateArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.TokenEndpointTlsCertificateArn = ptr.String(jtv)
+			}
+
+		case "tokenEndpointUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.TokenEndpointUrl = ptr.String(jtv)
 			}
 
 		default:

@@ -549,6 +549,157 @@ func awsRestjson1_deserializeDocumentCharacterOffsets(v **types.CharacterOffsets
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentExtractedInformation(v **types.ExtractedInformation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExtractedInformation
+	if *v == nil {
+		sv = &types.ExtractedInformation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ExtractedValues":
+			if err := awsRestjson1_deserializeDocumentExtractedInformationValues(&sv.ExtractedValues, value); err != nil {
+				return err
+			}
+
+		case "ExtractionDefinitionDisplayLabel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExtractionDefinitionDisplayLabel to be of type string, got %T instead", value)
+				}
+				sv.ExtractionDefinitionDisplayLabel = ptr.String(jtv)
+			}
+
+		case "ExtractionDefinitionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExtractionDefinitionId to be of type string, got %T instead", value)
+				}
+				sv.ExtractionDefinitionId = ptr.String(jtv)
+			}
+
+		case "ExtractionDefinitionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExtractionDefinitionName to be of type string, got %T instead", value)
+				}
+				sv.ExtractionDefinitionName = ptr.String(jtv)
+			}
+
+		case "FailureCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExtractedInformationFailureCode to be of type string, got %T instead", value)
+				}
+				sv.FailureCode = types.ExtractedInformationFailureCode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentExtractedInformationValue(v **types.ExtractedInformationValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExtractedInformationValue
+	if *v == nil {
+		sv = &types.ExtractedInformationValue{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Content":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExtractedInformationContent to be of type string, got %T instead", value)
+				}
+				sv.Content = ptr.String(jtv)
+			}
+
+		case "PointsOfInterest":
+			if err := awsRestjson1_deserializeDocumentPointsOfInterest(&sv.PointsOfInterest, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentExtractedInformationValues(v *[]types.ExtractedInformationValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ExtractedInformationValue
+	if *v == nil {
+		cv = []types.ExtractedInformationValue{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ExtractedInformationValue
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentExtractedInformationValue(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentInternalServiceException(v **types.InternalServiceException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -943,6 +1094,11 @@ func awsRestjson1_deserializeDocumentRealtimeContactAnalysisSegment(v **types.Re
 		switch key {
 		case "Categories":
 			if err := awsRestjson1_deserializeDocumentCategories(&sv.Categories, value); err != nil {
+				return err
+			}
+
+		case "ExtractedInformation":
+			if err := awsRestjson1_deserializeDocumentExtractedInformation(&sv.ExtractedInformation, value); err != nil {
 				return err
 			}
 

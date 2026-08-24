@@ -329,6 +329,18 @@ func TestCheckResponseSnapshot_BatchDeletePentests(t *testing.T) {
 							Branch:             ptr.String("__Branch__"),
 						},
 					},
+					TrustedCaCertificates: []types.TrustedCaCertificate{
+						{
+							Source: &types.CaCertificateSourceMemberInlinePem{
+								Value: "__CaCertificateSourceMemberInlinePem__",
+							},
+						},
+						{
+							Source: &types.CaCertificateSourceMemberInlinePem{
+								Value: "__CaCertificateSourceMemberInlinePem__",
+							},
+						},
+					},
 				},
 				ExcludeRiskTypes: []types.RiskType{
 					types.RiskType("CROSS_SITE_SCRIPTING"),
@@ -463,6 +475,18 @@ func TestCheckResponseSnapshot_BatchDeletePentests(t *testing.T) {
 							IntegrationId:      ptr.String("__IntegrationId__"),
 							ProviderResourceId: ptr.String("__ProviderResourceId__"),
 							Branch:             ptr.String("__Branch__"),
+						},
+					},
+					TrustedCaCertificates: []types.TrustedCaCertificate{
+						{
+							Source: &types.CaCertificateSourceMemberInlinePem{
+								Value: "__CaCertificateSourceMemberInlinePem__",
+							},
+						},
+						{
+							Source: &types.CaCertificateSourceMemberInlinePem{
+								Value: "__CaCertificateSourceMemberInlinePem__",
+							},
 						},
 					},
 				},
@@ -1206,6 +1230,18 @@ func TestCheckResponseSnapshot_BatchGetCodeReviews(t *testing.T) {
 							Branch:             ptr.String("__Branch__"),
 						},
 					},
+					TrustedCaCertificates: []types.TrustedCaCertificate{
+						{
+							Source: &types.CaCertificateSourceMemberInlinePem{
+								Value: "__CaCertificateSourceMemberInlinePem__",
+							},
+						},
+						{
+							Source: &types.CaCertificateSourceMemberInlinePem{
+								Value: "__CaCertificateSourceMemberInlinePem__",
+							},
+						},
+					},
 				},
 				ServiceRole: ptr.String("__ServiceRole__"),
 				LogConfig: &types.CloudWatchLog{
@@ -1297,6 +1333,18 @@ func TestCheckResponseSnapshot_BatchGetCodeReviews(t *testing.T) {
 							IntegrationId:      ptr.String("__IntegrationId__"),
 							ProviderResourceId: ptr.String("__ProviderResourceId__"),
 							Branch:             ptr.String("__Branch__"),
+						},
+					},
+					TrustedCaCertificates: []types.TrustedCaCertificate{
+						{
+							Source: &types.CaCertificateSourceMemberInlinePem{
+								Value: "__CaCertificateSourceMemberInlinePem__",
+							},
+						},
+						{
+							Source: &types.CaCertificateSourceMemberInlinePem{
+								Value: "__CaCertificateSourceMemberInlinePem__",
+							},
 						},
 					},
 				},
@@ -1793,6 +1841,18 @@ func TestCheckResponseSnapshot_BatchGetPentestJobs(t *testing.T) {
 						Branch:             ptr.String("__Branch__"),
 					},
 				},
+				TrustedCaCertificates: []types.TrustedCaCertificate{
+					{
+						Source: &types.CaCertificateSourceMemberInlinePem{
+							Value: "__CaCertificateSourceMemberInlinePem__",
+						},
+					},
+					{
+						Source: &types.CaCertificateSourceMemberInlinePem{
+							Value: "__CaCertificateSourceMemberInlinePem__",
+						},
+					},
+				},
 				CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 				CleanUpStrategy:         types.CleanUpStrategy("BEST_EFFORT_DELETE"),
 				DisableManagedSkills: []types.SkillType{
@@ -1980,6 +2040,18 @@ func TestCheckResponseSnapshot_BatchGetPentestJobs(t *testing.T) {
 						Branch:             ptr.String("__Branch__"),
 					},
 				},
+				TrustedCaCertificates: []types.TrustedCaCertificate{
+					{
+						Source: &types.CaCertificateSourceMemberInlinePem{
+							Value: "__CaCertificateSourceMemberInlinePem__",
+						},
+					},
+					{
+						Source: &types.CaCertificateSourceMemberInlinePem{
+							Value: "__CaCertificateSourceMemberInlinePem__",
+						},
+					},
+				},
 				CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 				CleanUpStrategy:         types.CleanUpStrategy("BEST_EFFORT_DELETE"),
 				DisableManagedSkills: []types.SkillType{
@@ -2106,6 +2178,18 @@ func TestCheckResponseSnapshot_BatchGetPentests(t *testing.T) {
 							IntegrationId:      ptr.String("__IntegrationId__"),
 							ProviderResourceId: ptr.String("__ProviderResourceId__"),
 							Branch:             ptr.String("__Branch__"),
+						},
+					},
+					TrustedCaCertificates: []types.TrustedCaCertificate{
+						{
+							Source: &types.CaCertificateSourceMemberInlinePem{
+								Value: "__CaCertificateSourceMemberInlinePem__",
+							},
+						},
+						{
+							Source: &types.CaCertificateSourceMemberInlinePem{
+								Value: "__CaCertificateSourceMemberInlinePem__",
+							},
 						},
 					},
 				},
@@ -2242,6 +2326,18 @@ func TestCheckResponseSnapshot_BatchGetPentests(t *testing.T) {
 							IntegrationId:      ptr.String("__IntegrationId__"),
 							ProviderResourceId: ptr.String("__ProviderResourceId__"),
 							Branch:             ptr.String("__Branch__"),
+						},
+					},
+					TrustedCaCertificates: []types.TrustedCaCertificate{
+						{
+							Source: &types.CaCertificateSourceMemberInlinePem{
+								Value: "__CaCertificateSourceMemberInlinePem__",
+							},
+						},
+						{
+							Source: &types.CaCertificateSourceMemberInlinePem{
+								Value: "__CaCertificateSourceMemberInlinePem__",
+							},
 						},
 					},
 				},
@@ -2788,6 +2884,18 @@ func TestCheckResponseSnapshot_BatchGetThreatModels(t *testing.T) {
 							Branch:             ptr.String("__Branch__"),
 						},
 					},
+					TrustedCaCertificates: []types.TrustedCaCertificate{
+						{
+							Source: &types.CaCertificateSourceMemberInlinePem{
+								Value: "__CaCertificateSourceMemberInlinePem__",
+							},
+						},
+						{
+							Source: &types.CaCertificateSourceMemberInlinePem{
+								Value: "__CaCertificateSourceMemberInlinePem__",
+							},
+						},
+					},
 				},
 				ScopeDocs: []types.DocumentInfo{
 					{
@@ -2895,6 +3003,18 @@ func TestCheckResponseSnapshot_BatchGetThreatModels(t *testing.T) {
 							IntegrationId:      ptr.String("__IntegrationId__"),
 							ProviderResourceId: ptr.String("__ProviderResourceId__"),
 							Branch:             ptr.String("__Branch__"),
+						},
+					},
+					TrustedCaCertificates: []types.TrustedCaCertificate{
+						{
+							Source: &types.CaCertificateSourceMemberInlinePem{
+								Value: "__CaCertificateSourceMemberInlinePem__",
+							},
+						},
+						{
+							Source: &types.CaCertificateSourceMemberInlinePem{
+								Value: "__CaCertificateSourceMemberInlinePem__",
+							},
 						},
 					},
 				},
@@ -3381,6 +3501,18 @@ func TestCheckResponseSnapshot_CreateCodeReview(t *testing.T) {
 					Branch:             ptr.String("__Branch__"),
 				},
 			},
+			TrustedCaCertificates: []types.TrustedCaCertificate{
+				{
+					Source: &types.CaCertificateSourceMemberInlinePem{
+						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+				{
+					Source: &types.CaCertificateSourceMemberInlinePem{
+						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+			},
 		},
 		ServiceRole: ptr.String("__ServiceRole__"),
 		LogConfig: &types.CloudWatchLog{
@@ -3478,6 +3610,18 @@ func TestCheckResponseSnapshot_CreateCodeReview(t *testing.T) {
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
 					Branch:             ptr.String("__Branch__"),
+				},
+			},
+			TrustedCaCertificates: []types.TrustedCaCertificate{
+				{
+					Source: &types.CaCertificateSourceMemberInlinePem{
+						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+				{
+					Source: &types.CaCertificateSourceMemberInlinePem{
+						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
 				},
 			},
 		},
@@ -3648,6 +3792,18 @@ func TestCheckResponseSnapshot_CreatePentest(t *testing.T) {
 					Branch:             ptr.String("__Branch__"),
 				},
 			},
+			TrustedCaCertificates: []types.TrustedCaCertificate{
+				{
+					Source: &types.CaCertificateSourceMemberInlinePem{
+						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+				{
+					Source: &types.CaCertificateSourceMemberInlinePem{
+						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+			},
 		},
 		ExcludeRiskTypes: []types.RiskType{
 			types.RiskType("CROSS_SITE_SCRIPTING"),
@@ -3746,6 +3902,18 @@ func TestCheckResponseSnapshot_CreatePentest(t *testing.T) {
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
 					Branch:             ptr.String("__Branch__"),
+				},
+			},
+			TrustedCaCertificates: []types.TrustedCaCertificate{
+				{
+					Source: &types.CaCertificateSourceMemberInlinePem{
+						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+				{
+					Source: &types.CaCertificateSourceMemberInlinePem{
+						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
 				},
 			},
 		},
@@ -4128,6 +4296,18 @@ func TestCheckResponseSnapshot_CreateThreatModel(t *testing.T) {
 					Branch:             ptr.String("__Branch__"),
 				},
 			},
+			TrustedCaCertificates: []types.TrustedCaCertificate{
+				{
+					Source: &types.CaCertificateSourceMemberInlinePem{
+						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+				{
+					Source: &types.CaCertificateSourceMemberInlinePem{
+						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+			},
 		},
 		ScopeDocs: []types.DocumentInfo{
 			{
@@ -4242,6 +4422,18 @@ func TestCheckResponseSnapshot_CreateThreatModel(t *testing.T) {
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
 					Branch:             ptr.String("__Branch__"),
+				},
+			},
+			TrustedCaCertificates: []types.TrustedCaCertificate{
+				{
+					Source: &types.CaCertificateSourceMemberInlinePem{
+						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+				{
+					Source: &types.CaCertificateSourceMemberInlinePem{
+						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
 				},
 			},
 		},
@@ -6265,6 +6457,18 @@ func TestCheckResponseSnapshot_UpdateCodeReview(t *testing.T) {
 					Branch:             ptr.String("__Branch__"),
 				},
 			},
+			TrustedCaCertificates: []types.TrustedCaCertificate{
+				{
+					Source: &types.CaCertificateSourceMemberInlinePem{
+						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+				{
+					Source: &types.CaCertificateSourceMemberInlinePem{
+						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+			},
 		},
 		ServiceRole: ptr.String("__ServiceRole__"),
 		LogConfig: &types.CloudWatchLog{
@@ -6363,6 +6567,18 @@ func TestCheckResponseSnapshot_UpdateCodeReview(t *testing.T) {
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
 					Branch:             ptr.String("__Branch__"),
+				},
+			},
+			TrustedCaCertificates: []types.TrustedCaCertificate{
+				{
+					Source: &types.CaCertificateSourceMemberInlinePem{
+						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+				{
+					Source: &types.CaCertificateSourceMemberInlinePem{
+						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
 				},
 			},
 		},
@@ -6549,6 +6765,18 @@ func TestCheckResponseSnapshot_UpdatePentest(t *testing.T) {
 					Branch:             ptr.String("__Branch__"),
 				},
 			},
+			TrustedCaCertificates: []types.TrustedCaCertificate{
+				{
+					Source: &types.CaCertificateSourceMemberInlinePem{
+						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+				{
+					Source: &types.CaCertificateSourceMemberInlinePem{
+						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+			},
 		},
 		ExcludeRiskTypes: []types.RiskType{
 			types.RiskType("CROSS_SITE_SCRIPTING"),
@@ -6648,6 +6876,18 @@ func TestCheckResponseSnapshot_UpdatePentest(t *testing.T) {
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
 					Branch:             ptr.String("__Branch__"),
+				},
+			},
+			TrustedCaCertificates: []types.TrustedCaCertificate{
+				{
+					Source: &types.CaCertificateSourceMemberInlinePem{
+						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+				{
+					Source: &types.CaCertificateSourceMemberInlinePem{
+						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
 				},
 			},
 		},
@@ -6998,6 +7238,18 @@ func TestCheckResponseSnapshot_UpdateThreatModel(t *testing.T) {
 					Branch:             ptr.String("__Branch__"),
 				},
 			},
+			TrustedCaCertificates: []types.TrustedCaCertificate{
+				{
+					Source: &types.CaCertificateSourceMemberInlinePem{
+						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+				{
+					Source: &types.CaCertificateSourceMemberInlinePem{
+						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+			},
 		},
 		ScopeDocs: []types.DocumentInfo{
 			{
@@ -7113,6 +7365,18 @@ func TestCheckResponseSnapshot_UpdateThreatModel(t *testing.T) {
 					IntegrationId:      ptr.String("__IntegrationId__"),
 					ProviderResourceId: ptr.String("__ProviderResourceId__"),
 					Branch:             ptr.String("__Branch__"),
+				},
+			},
+			TrustedCaCertificates: []types.TrustedCaCertificate{
+				{
+					Source: &types.CaCertificateSourceMemberInlinePem{
+						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+				{
+					Source: &types.CaCertificateSourceMemberInlinePem{
+						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
 				},
 			},
 		},

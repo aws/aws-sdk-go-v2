@@ -1913,6 +1913,11 @@ func validateKafkaClusterClientAuthentication(v *types.KafkaClusterClientAuthent
 			invalidParams.AddNested("MTLS", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SaslOAuthBearer != nil {
+		if err := validateKafkaClusterSaslOAuthBearerAuthentication(v.SaslOAuthBearer); err != nil {
+			invalidParams.AddNested("SaslOAuthBearer", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1957,6 +1962,90 @@ func validateKafkaClusterMTLSAuthentication(v *types.KafkaClusterMTLSAuthenticat
 	invalidParams := smithy.InvalidParamsError{Context: "KafkaClusterMTLSAuthentication"}
 	if v.SecretArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecretArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKafkaClusterOAuthClientCredentials(v *types.KafkaClusterOAuthClientCredentials) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KafkaClusterOAuthClientCredentials"}
+	if v.TokenRequestSecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TokenRequestSecretArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKafkaClusterOAuthClientCredentialsAssertion(v *types.KafkaClusterOAuthClientCredentialsAssertion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KafkaClusterOAuthClientCredentialsAssertion"}
+	if v.Audience == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Audience"))
+	}
+	if len(v.SigningAlgorithm) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SigningAlgorithm"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKafkaClusterOAuthIamJwtBearer(v *types.KafkaClusterOAuthIamJwtBearer) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KafkaClusterOAuthIamJwtBearer"}
+	if v.Audience == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Audience"))
+	}
+	if len(v.SigningAlgorithm) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SigningAlgorithm"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKafkaClusterSaslOAuthBearerAuthentication(v *types.KafkaClusterSaslOAuthBearerAuthentication) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KafkaClusterSaslOAuthBearerAuthentication"}
+	if v.TokenEndpointUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TokenEndpointUrl"))
+	}
+	if v.ClientCredentials != nil {
+		if err := validateKafkaClusterOAuthClientCredentials(v.ClientCredentials); err != nil {
+			invalidParams.AddNested("ClientCredentials", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IamJwtBearer != nil {
+		if err := validateKafkaClusterOAuthIamJwtBearer(v.IamJwtBearer); err != nil {
+			invalidParams.AddNested("IamJwtBearer", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ClientCredentialsAssertion != nil {
+		if err := validateKafkaClusterOAuthClientCredentialsAssertion(v.ClientCredentialsAssertion); err != nil {
+			invalidParams.AddNested("ClientCredentialsAssertion", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.TokenEndpointAuthenticationMethod) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TokenEndpointAuthenticationMethod"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

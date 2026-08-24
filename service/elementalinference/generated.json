@@ -17,6 +17,7 @@
         "api_op_ExportDictionaryEntries.go",
         "api_op_GetDictionary.go",
         "api_op_GetFeed.go",
+        "api_op_GetFixture.go",
         "api_op_ListDictionaries.go",
         "api_op_ListFeeds.go",
         "api_op_ListTagsForResource.go",

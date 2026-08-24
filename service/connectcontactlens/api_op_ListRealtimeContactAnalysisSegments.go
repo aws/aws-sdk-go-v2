@@ -9,7 +9,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Provides a list of analysis segments for a real-time analysis session.
+// Provides a list of analysis segments for a real-time analysis session for voice.
+//
+// Voice data is retained for 24 hours. You must invoke this API during that time.
 func (c *Client) ListRealtimeContactAnalysisSegments(ctx context.Context, params *ListRealtimeContactAnalysisSegmentsInput, optFns ...func(*Options)) (*ListRealtimeContactAnalysisSegmentsOutput, error) {
 	if params == nil {
 		params = &ListRealtimeContactAnalysisSegmentsInput{}

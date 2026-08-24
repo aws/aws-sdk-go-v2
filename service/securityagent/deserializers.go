@@ -17098,6 +17098,11 @@ func awsRestjson1_deserializeDocumentAssets(v **types.Assets, value interface{})
 				return err
 			}
 
+		case "trustedCaCertificates":
+			if err := awsRestjson1_deserializeDocumentTrustedCaCertificateList(&sv.TrustedCaCertificates, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -17712,6 +17717,72 @@ func awsRestjson1_deserializeDocumentBitbucketResourceCapabilities(v **types.Bit
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCaCertificateSource(v *types.CaCertificateSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.CaCertificateSource
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "artifactId":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.CaCertificateSourceMemberArtifactId{Value: mv}
+			break loop
+
+		case "inlinePem":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CaCertificatePem to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.CaCertificateSourceMemberInlinePem{Value: mv}
+			break loop
+
+		case "s3Location":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.CaCertificateSourceMemberS3Location{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -22500,6 +22571,11 @@ func awsRestjson1_deserializeDocumentPentestJob(v **types.PentestJob, value inte
 				sv.Title = ptr.String(jtv)
 			}
 
+		case "trustedCaCertificates":
+			if err := awsRestjson1_deserializeDocumentTrustedCaCertificateList(&sv.TrustedCaCertificates, value); err != nil {
+				return err
+			}
+
 		case "updatedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -26311,6 +26387,76 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTrustedCaCertificate(v **types.TrustedCaCertificate, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TrustedCaCertificate
+	if *v == nil {
+		sv = &types.TrustedCaCertificate{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "source":
+			if err := awsRestjson1_deserializeDocumentCaCertificateSource(&sv.Source, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTrustedCaCertificateList(v *[]types.TrustedCaCertificate, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TrustedCaCertificate
+	if *v == nil {
+		cv = []types.TrustedCaCertificate{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TrustedCaCertificate
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentTrustedCaCertificate(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

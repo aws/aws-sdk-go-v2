@@ -7,6 +7,31 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
 )
 
+func ExampleCaCertificateSource_outputUsage() {
+	var union types.CaCertificateSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CaCertificateSourceMemberArtifactId:
+		_ = v.Value // Value is string
+
+	case *types.CaCertificateSourceMemberInlinePem:
+		_ = v.Value // Value is string
+
+	case *types.CaCertificateSourceMemberS3Location:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *string
+
 func ExampleDiffSource_outputUsage() {
 	var union types.DiffSource
 	// type switches can be used to check the union value

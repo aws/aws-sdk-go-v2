@@ -50,6 +50,66 @@ type CharacterOffsets struct {
 	noSmithyDocumentSerde
 }
 
+// Segment containing information extracted from the conversation. Each segment
+// represents the results for a single extraction definition.
+type ExtractedInformation struct {
+
+	// The identifier of the extraction definition that produced this result.
+	//
+	// This member is required.
+	ExtractionDefinitionId *string
+
+	// The name of the extraction definition that produced this result.
+	//
+	// This member is required.
+	ExtractionDefinitionName *string
+
+	// The list of values extracted from the conversation for this extraction
+	// definition. This field is empty when a FailureCode is present.
+	ExtractedValues []ExtractedInformationValue
+
+	// The display label of the extraction definition that produced this result.
+	ExtractionDefinitionDisplayLabel *string
+
+	// If the information failed to be extracted, one of the following failure codes
+	// occurs:
+	//
+	//   - QUOTA_EXCEEDED : The number of concurrent analytics jobs reached your
+	//   service quota.
+	//
+	//   - INSUFFICIENT_CONVERSATION_CONTENT : Information extraction requires a
+	//   conversation with at least one turn from each participant.
+	//
+	//   - FAILED_SAFETY_GUIDELINES : The extracted information cannot be provided
+	//   because it failed to meet system safety guidelines.
+	//
+	//   - INTERNAL_ERROR : Internal system error.
+	//
+	//   - MAX_PACKAGE_FEATURE_ONLY : Information extraction is only available in
+	//   Amazon Connect Customer instances.
+	FailureCode ExtractedInformationFailureCode
+
+	noSmithyDocumentSerde
+}
+
+// An individual value extracted from the conversation, including its content and
+// the locations where it was found.
+type ExtractedInformationValue struct {
+
+	// The text content of the extracted value.
+	//
+	// This member is required.
+	Content *string
+
+	// The sections in the conversation that indicate where the extracted value was
+	// found.
+	//
+	// This member is required.
+	PointsOfInterest []PointOfInterest
+
+	noSmithyDocumentSerde
+}
+
 // Potential issues that are detected based on an artificial intelligence analysis
 // of each turn in the conversation.
 type IssueDetected struct {
@@ -62,15 +122,15 @@ type IssueDetected struct {
 	noSmithyDocumentSerde
 }
 
-// The section of the contact audio where that category rule was detected.
+// The section of the contact audio where a match was detected.
 type PointOfInterest struct {
 
-	// The beginning offset in milliseconds where the category rule was detected.
+	// The beginning offset (in milliseconds) where the match was detected.
 	//
 	// This member is required.
 	BeginOffsetMillis *int32
 
-	// The ending offset in milliseconds where the category rule was detected.
+	// The ending offset (in milliseconds) where the match was detected.
 	//
 	// This member is required.
 	EndOffsetMillis *int32
@@ -117,6 +177,9 @@ type RealtimeContactAnalysisSegment struct {
 
 	// The matched category rules.
 	Categories *Categories
+
+	// The extracted information from the conversation.
+	ExtractedInformation *ExtractedInformation
 
 	// Information about the post-contact summary.
 	PostContactSummary *PostContactSummary

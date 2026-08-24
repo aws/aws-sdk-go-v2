@@ -6001,6 +6001,11 @@ type UpdateManagedInstancesProviderConfiguration struct {
 // environment. For more information about infrastructure updates, see [Updating compute environments]in the
 // Batch User Guide.
 //
+// The updatePolicy property applies only to Amazon EC2 managed compute
+// environments. Batch doesn't support updatePolicy for Fargate compute
+// environments. If you specify it for a Fargate compute environment, Batch ignores
+// it.
+//
 // [Updating compute environments]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
 type UpdatePolicy struct {
 

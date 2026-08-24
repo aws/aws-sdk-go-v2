@@ -190,6 +190,26 @@ func (m *validateOpGetFeed) HandleInitialize(ctx context.Context, in middleware.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetFixture struct {
+}
+
+func (*validateOpGetFixture) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFixture) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFixtureInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFixtureInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -344,6 +364,10 @@ func addOpGetDictionaryValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetFeedValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFeed{}, middleware.After)
+}
+
+func addOpGetFixtureValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFixture{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -790,6 +814,21 @@ func validateOpGetFeedInput(v *GetFeedInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetFeedInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetFixtureInput(v *GetFixtureInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFixtureInput"}
+	if v.FixtureId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FixtureId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

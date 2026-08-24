@@ -8956,6 +8956,13 @@ func awsRestjson1_serializeDocumentAssets(v *types.Assets, value smithyjson.Valu
 		}
 	}
 
+	if v.TrustedCaCertificates != nil {
+		ok := object.Key("trustedCaCertificates")
+		if err := awsRestjson1_serializeDocumentTrustedCaCertificateList(v.TrustedCaCertificates, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -9083,6 +9090,30 @@ func awsRestjson1_serializeDocumentBitbucketResourceCapabilities(v *types.Bitbuc
 		ok.Boolean(*v.RemediateCode)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCaCertificateSource(v types.CaCertificateSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.CaCertificateSourceMemberArtifactId:
+		av := object.Key("artifactId")
+		av.String(uv.Value)
+
+	case *types.CaCertificateSourceMemberInlinePem:
+		av := object.Key("inlinePem")
+		av.String(uv.Value)
+
+	case *types.CaCertificateSourceMemberS3Location:
+		av := object.Key("s3Location")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 
@@ -10324,6 +10355,33 @@ func awsRestjson1_serializeDocumentThreatModelJobIdList(v []string, value smithy
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTrustedCaCertificate(v *types.TrustedCaCertificate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Source != nil {
+		ok := object.Key("source")
+		if err := awsRestjson1_serializeDocumentCaCertificateSource(v.Source, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTrustedCaCertificateList(v []types.TrustedCaCertificate, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTrustedCaCertificate(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }

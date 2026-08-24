@@ -94,6 +94,11 @@ type CreateFeedOutput struct {
 	// This member is required.
 	Status types.FeedStatus
 
+	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
+	// role that you specified in the request. This property is absent if you didn't
+	// specify an IAM role.
+	AccessRoleArn *string
+
 	// The association for this feed. When you create the feed, this property is
 	// empty. You must associate a resource with the feed using AssociateFeed or
 	// UpdateFeed.

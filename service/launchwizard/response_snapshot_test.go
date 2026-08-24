@@ -237,9 +237,17 @@ func TestCheckResponseSnapshot_GetDeploymentPatternVersion(t *testing.T) {
 func TestCheckResponseSnapshot_GetWorkload(t *testing.T) {
 	want := &GetWorkloadOutput{
 		Workload: &types.WorkloadData{
-			WorkloadName:     ptr.String("__WorkloadName__"),
-			DisplayName:      ptr.String("__DisplayName__"),
-			Status:           types.WorkloadStatus("ACTIVE"),
+			WorkloadName: ptr.String("__WorkloadName__"),
+			DisplayName:  ptr.String("__DisplayName__"),
+			Status:       types.WorkloadStatus("ACTIVE"),
+			AccountConstraints: []types.AccountConstraint{
+				&types.AccountConstraintMemberManagementAccount{
+					Value: types.ManagementAccountConstraint{},
+				},
+				&types.AccountConstraintMemberManagementAccount{
+					Value: types.ManagementAccountConstraint{},
+				},
+			},
 			Description:      ptr.String("__Description__"),
 			DocumentationUrl: ptr.String("__DocumentationUrl__"),
 			IconUrl:          ptr.String("__IconUrl__"),
@@ -276,6 +284,14 @@ func TestCheckResponseSnapshot_GetWorkloadDeploymentPattern(t *testing.T) {
 			Description:                  ptr.String("__Description__"),
 			Status:                       types.WorkloadDeploymentPatternStatus("ACTIVE"),
 			StatusMessage:                ptr.String("__StatusMessage__"),
+			AccountConstraints: []types.AccountConstraint{
+				&types.AccountConstraintMemberManagementAccount{
+					Value: types.ManagementAccountConstraint{},
+				},
+				&types.AccountConstraintMemberManagementAccount{
+					Value: types.ManagementAccountConstraint{},
+				},
+			},
 			Specifications: []types.DeploymentSpecificationsField{
 				{
 					Name:        ptr.String("__Name__"),
@@ -351,6 +367,9 @@ func TestCheckResponseSnapshot_ListDeploymentEvents(t *testing.T) {
 				Status:       types.EventStatus("CANCELED"),
 				StatusReason: ptr.String("__StatusReason__"),
 				Timestamp:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Metadata: map[string]string{
+					"key0": "__Value__",
+				},
 			},
 			{
 				Name:         ptr.String("__Name__"),
@@ -358,6 +377,9 @@ func TestCheckResponseSnapshot_ListDeploymentEvents(t *testing.T) {
 				Status:       types.EventStatus("CANCELED"),
 				StatusReason: ptr.String("__StatusReason__"),
 				Timestamp:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Metadata: map[string]string{
+					"key0": "__Value__",
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -538,6 +560,14 @@ func TestCheckResponseSnapshot_ListWorkloadDeploymentPatterns(t *testing.T) {
 				Description:                  ptr.String("__Description__"),
 				Status:                       types.WorkloadDeploymentPatternStatus("ACTIVE"),
 				StatusMessage:                ptr.String("__StatusMessage__"),
+				AccountConstraints: []types.AccountConstraint{
+					&types.AccountConstraintMemberManagementAccount{
+						Value: types.ManagementAccountConstraint{},
+					},
+					&types.AccountConstraintMemberManagementAccount{
+						Value: types.ManagementAccountConstraint{},
+					},
+				},
 			},
 			{
 				WorkloadName:                 ptr.String("__WorkloadName__"),
@@ -548,6 +578,14 @@ func TestCheckResponseSnapshot_ListWorkloadDeploymentPatterns(t *testing.T) {
 				Description:                  ptr.String("__Description__"),
 				Status:                       types.WorkloadDeploymentPatternStatus("ACTIVE"),
 				StatusMessage:                ptr.String("__StatusMessage__"),
+				AccountConstraints: []types.AccountConstraint{
+					&types.AccountConstraintMemberManagementAccount{
+						Value: types.ManagementAccountConstraint{},
+					},
+					&types.AccountConstraintMemberManagementAccount{
+						Value: types.ManagementAccountConstraint{},
+					},
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -580,11 +618,27 @@ func TestCheckResponseSnapshot_ListWorkloads(t *testing.T) {
 				WorkloadName: ptr.String("__WorkloadName__"),
 				DisplayName:  ptr.String("__DisplayName__"),
 				Status:       types.WorkloadStatus("ACTIVE"),
+				AccountConstraints: []types.AccountConstraint{
+					&types.AccountConstraintMemberManagementAccount{
+						Value: types.ManagementAccountConstraint{},
+					},
+					&types.AccountConstraintMemberManagementAccount{
+						Value: types.ManagementAccountConstraint{},
+					},
+				},
 			},
 			{
 				WorkloadName: ptr.String("__WorkloadName__"),
 				DisplayName:  ptr.String("__DisplayName__"),
 				Status:       types.WorkloadStatus("ACTIVE"),
+				AccountConstraints: []types.AccountConstraint{
+					&types.AccountConstraintMemberManagementAccount{
+						Value: types.ManagementAccountConstraint{},
+					},
+					&types.AccountConstraintMemberManagementAccount{
+						Value: types.ManagementAccountConstraint{},
+					},
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),

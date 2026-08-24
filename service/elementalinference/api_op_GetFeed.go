@@ -71,6 +71,12 @@ type GetFeedOutput struct {
 	// This member is required.
 	Status types.FeedStatus
 
+	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
+	// role that Elemental Inference assumes. Elemental Inference uses this role to
+	// access resources in your account on your behalf. This property is absent if the
+	// feed doesn't have an IAM role.
+	AccessRoleArn *string
+
 	// Information about the resource that is associated with the feed. It's possible
 	// that there is no associated resource. This is not an error.
 	Association *types.FeedAssociation

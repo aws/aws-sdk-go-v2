@@ -241,6 +241,25 @@ func (IcebergCompressionType) Values() []IcebergCompressionType {
 	}
 }
 
+type JwtSigningAlgorithm string
+
+// Enum values for JwtSigningAlgorithm
+const (
+	JwtSigningAlgorithmRs256 JwtSigningAlgorithm = "RS256"
+	JwtSigningAlgorithmEs384 JwtSigningAlgorithm = "ES384"
+)
+
+// Values returns all known values for JwtSigningAlgorithm. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JwtSigningAlgorithm) Values() []JwtSigningAlgorithm {
+	return []JwtSigningAlgorithm{
+		"RS256",
+		"ES384",
+	}
+}
+
 type KafkaClusterEncryptionInTransitType string
 
 // Enum values for KafkaClusterEncryptionInTransitType
@@ -518,6 +537,28 @@ func (TargetCompressionType) Values() []TargetCompressionType {
 		"SNAPPY",
 		"LZ4",
 		"ZSTD",
+	}
+}
+
+type TokenEndpointAuthenticationMethod string
+
+// Enum values for TokenEndpointAuthenticationMethod
+const (
+	TokenEndpointAuthenticationMethodPost  TokenEndpointAuthenticationMethod = "POST"
+	TokenEndpointAuthenticationMethodBasic TokenEndpointAuthenticationMethod = "BASIC"
+	TokenEndpointAuthenticationMethodNone  TokenEndpointAuthenticationMethod = "NONE"
+)
+
+// Values returns all known values for TokenEndpointAuthenticationMethod. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TokenEndpointAuthenticationMethod) Values() []TokenEndpointAuthenticationMethod {
+	return []TokenEndpointAuthenticationMethod{
+		"POST",
+		"BASIC",
+		"NONE",
 	}
 }
 

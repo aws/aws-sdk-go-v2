@@ -158,6 +158,40 @@ func TestCheckResponseSnapshot_ListRealtimeContactAnalysisSegments(t *testing.T)
 					Status:      types.PostContactSummaryStatus("FAILED"),
 					FailureCode: types.PostContactSummaryFailureCode("QUOTA_EXCEEDED"),
 				},
+				ExtractedInformation: &types.ExtractedInformation{
+					ExtractionDefinitionId:           ptr.String("__ExtractionDefinitionId__"),
+					ExtractionDefinitionName:         ptr.String("__ExtractionDefinitionName__"),
+					ExtractionDefinitionDisplayLabel: ptr.String("__ExtractionDefinitionDisplayLabel__"),
+					ExtractedValues: []types.ExtractedInformationValue{
+						{
+							Content: ptr.String("__Content__"),
+							PointsOfInterest: []types.PointOfInterest{
+								{
+									BeginOffsetMillis: ptr.Int32(1),
+									EndOffsetMillis:   ptr.Int32(1),
+								},
+								{
+									BeginOffsetMillis: ptr.Int32(1),
+									EndOffsetMillis:   ptr.Int32(1),
+								},
+							},
+						},
+						{
+							Content: ptr.String("__Content__"),
+							PointsOfInterest: []types.PointOfInterest{
+								{
+									BeginOffsetMillis: ptr.Int32(1),
+									EndOffsetMillis:   ptr.Int32(1),
+								},
+								{
+									BeginOffsetMillis: ptr.Int32(1),
+									EndOffsetMillis:   ptr.Int32(1),
+								},
+							},
+						},
+					},
+					FailureCode: types.ExtractedInformationFailureCode("QUOTA_EXCEEDED"),
+				},
 			},
 			{
 				Transcript: &types.Transcript{
@@ -207,6 +241,40 @@ func TestCheckResponseSnapshot_ListRealtimeContactAnalysisSegments(t *testing.T)
 					Content:     ptr.String("__Content__"),
 					Status:      types.PostContactSummaryStatus("FAILED"),
 					FailureCode: types.PostContactSummaryFailureCode("QUOTA_EXCEEDED"),
+				},
+				ExtractedInformation: &types.ExtractedInformation{
+					ExtractionDefinitionId:           ptr.String("__ExtractionDefinitionId__"),
+					ExtractionDefinitionName:         ptr.String("__ExtractionDefinitionName__"),
+					ExtractionDefinitionDisplayLabel: ptr.String("__ExtractionDefinitionDisplayLabel__"),
+					ExtractedValues: []types.ExtractedInformationValue{
+						{
+							Content: ptr.String("__Content__"),
+							PointsOfInterest: []types.PointOfInterest{
+								{
+									BeginOffsetMillis: ptr.Int32(1),
+									EndOffsetMillis:   ptr.Int32(1),
+								},
+								{
+									BeginOffsetMillis: ptr.Int32(1),
+									EndOffsetMillis:   ptr.Int32(1),
+								},
+							},
+						},
+						{
+							Content: ptr.String("__Content__"),
+							PointsOfInterest: []types.PointOfInterest{
+								{
+									BeginOffsetMillis: ptr.Int32(1),
+									EndOffsetMillis:   ptr.Int32(1),
+								},
+								{
+									BeginOffsetMillis: ptr.Int32(1),
+									EndOffsetMillis:   ptr.Int32(1),
+								},
+							},
+						},
+					},
+					FailureCode: types.ExtractedInformationFailureCode("QUOTA_EXCEEDED"),
 				},
 			},
 		},

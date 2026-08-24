@@ -32614,7 +32614,7 @@ func awsRestjson1_deserializeDocumentModelConfiguration(v **types.ModelConfigura
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected BedrockModelId to be of type string, got %T instead", value)
+					return fmt.Errorf("expected AdvancedPromptOptimizationModelIdentifier to be of type string, got %T instead", value)
 				}
 				sv.ModelId = ptr.String(jtv)
 			}

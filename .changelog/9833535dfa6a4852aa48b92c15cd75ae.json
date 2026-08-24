@@ -1,0 +1,8 @@
+{
+    "id": "9833535d-fa6a-4852-aa48-b92c15cd75ae",
+    "type": "feature",
+    "description": "This release adds the ExtractedInformation segment to the ListRealtimeContactAnalysisSegments API, enabling customers to retrieve information extracted from real-time contact analysis.",
+    "modules": [
+        "service/connectcontactlens"
+    ]
+}

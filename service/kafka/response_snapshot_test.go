@@ -747,6 +747,25 @@ func TestCheckResponseSnapshot_CreateReplicator(t *testing.T) {
 					MTLS: &types.KafkaClusterMTLSAuthentication{
 						SecretArn: ptr.String("__SecretArn__"),
 					},
+					SaslOAuthBearer: &types.KafkaClusterSaslOAuthBearerAuthentication{
+						TokenEndpointUrl: ptr.String("__TokenEndpointUrl__"),
+						ClientCredentials: &types.KafkaClusterOAuthClientCredentials{
+							TokenRequestSecretArn: ptr.String("__TokenRequestSecretArn__"),
+						},
+						IamJwtBearer: &types.KafkaClusterOAuthIamJwtBearer{
+							Audience:              ptr.String("__Audience__"),
+							SigningAlgorithm:      types.JwtSigningAlgorithm("RS256"),
+							TokenRequestSecretArn: ptr.String("__TokenRequestSecretArn__"),
+						},
+						ClientCredentialsAssertion: &types.KafkaClusterOAuthClientCredentialsAssertion{
+							Audience:              ptr.String("__Audience__"),
+							SigningAlgorithm:      types.JwtSigningAlgorithm("RS256"),
+							TokenRequestSecretArn: ptr.String("__TokenRequestSecretArn__"),
+						},
+						TokenEndpointAuthenticationMethod: types.TokenEndpointAuthenticationMethod("POST"),
+						Scope:                             ptr.String("__Scope__"),
+						TokenEndpointTlsCertificateArn:    ptr.String("__TokenEndpointTlsCertificateArn__"),
+					},
 				},
 				EncryptionInTransit: &types.KafkaClusterEncryptionInTransit{
 					EncryptionType:    types.KafkaClusterEncryptionInTransitType("TLS"),
@@ -778,6 +797,25 @@ func TestCheckResponseSnapshot_CreateReplicator(t *testing.T) {
 					},
 					MTLS: &types.KafkaClusterMTLSAuthentication{
 						SecretArn: ptr.String("__SecretArn__"),
+					},
+					SaslOAuthBearer: &types.KafkaClusterSaslOAuthBearerAuthentication{
+						TokenEndpointUrl: ptr.String("__TokenEndpointUrl__"),
+						ClientCredentials: &types.KafkaClusterOAuthClientCredentials{
+							TokenRequestSecretArn: ptr.String("__TokenRequestSecretArn__"),
+						},
+						IamJwtBearer: &types.KafkaClusterOAuthIamJwtBearer{
+							Audience:              ptr.String("__Audience__"),
+							SigningAlgorithm:      types.JwtSigningAlgorithm("RS256"),
+							TokenRequestSecretArn: ptr.String("__TokenRequestSecretArn__"),
+						},
+						ClientCredentialsAssertion: &types.KafkaClusterOAuthClientCredentialsAssertion{
+							Audience:              ptr.String("__Audience__"),
+							SigningAlgorithm:      types.JwtSigningAlgorithm("RS256"),
+							TokenRequestSecretArn: ptr.String("__TokenRequestSecretArn__"),
+						},
+						TokenEndpointAuthenticationMethod: types.TokenEndpointAuthenticationMethod("POST"),
+						Scope:                             ptr.String("__Scope__"),
+						TokenEndpointTlsCertificateArn:    ptr.String("__TokenEndpointTlsCertificateArn__"),
 					},
 				},
 				EncryptionInTransit: &types.KafkaClusterEncryptionInTransit{
@@ -2444,6 +2482,25 @@ func TestCheckResponseSnapshot_DescribeReplicator(t *testing.T) {
 					MTLS: &types.KafkaClusterMTLSAuthentication{
 						SecretArn: ptr.String("__SecretArn__"),
 					},
+					SaslOAuthBearer: &types.KafkaClusterSaslOAuthBearerAuthentication{
+						TokenEndpointUrl: ptr.String("__TokenEndpointUrl__"),
+						ClientCredentials: &types.KafkaClusterOAuthClientCredentials{
+							TokenRequestSecretArn: ptr.String("__TokenRequestSecretArn__"),
+						},
+						IamJwtBearer: &types.KafkaClusterOAuthIamJwtBearer{
+							Audience:              ptr.String("__Audience__"),
+							SigningAlgorithm:      types.JwtSigningAlgorithm("RS256"),
+							TokenRequestSecretArn: ptr.String("__TokenRequestSecretArn__"),
+						},
+						ClientCredentialsAssertion: &types.KafkaClusterOAuthClientCredentialsAssertion{
+							Audience:              ptr.String("__Audience__"),
+							SigningAlgorithm:      types.JwtSigningAlgorithm("RS256"),
+							TokenRequestSecretArn: ptr.String("__TokenRequestSecretArn__"),
+						},
+						TokenEndpointAuthenticationMethod: types.TokenEndpointAuthenticationMethod("POST"),
+						Scope:                             ptr.String("__Scope__"),
+						TokenEndpointTlsCertificateArn:    ptr.String("__TokenEndpointTlsCertificateArn__"),
+					},
 				},
 				EncryptionInTransit: &types.KafkaClusterEncryptionInTransit{
 					EncryptionType:    types.KafkaClusterEncryptionInTransitType("TLS"),
@@ -2476,6 +2533,25 @@ func TestCheckResponseSnapshot_DescribeReplicator(t *testing.T) {
 					},
 					MTLS: &types.KafkaClusterMTLSAuthentication{
 						SecretArn: ptr.String("__SecretArn__"),
+					},
+					SaslOAuthBearer: &types.KafkaClusterSaslOAuthBearerAuthentication{
+						TokenEndpointUrl: ptr.String("__TokenEndpointUrl__"),
+						ClientCredentials: &types.KafkaClusterOAuthClientCredentials{
+							TokenRequestSecretArn: ptr.String("__TokenRequestSecretArn__"),
+						},
+						IamJwtBearer: &types.KafkaClusterOAuthIamJwtBearer{
+							Audience:              ptr.String("__Audience__"),
+							SigningAlgorithm:      types.JwtSigningAlgorithm("RS256"),
+							TokenRequestSecretArn: ptr.String("__TokenRequestSecretArn__"),
+						},
+						ClientCredentialsAssertion: &types.KafkaClusterOAuthClientCredentialsAssertion{
+							Audience:              ptr.String("__Audience__"),
+							SigningAlgorithm:      types.JwtSigningAlgorithm("RS256"),
+							TokenRequestSecretArn: ptr.String("__TokenRequestSecretArn__"),
+						},
+						TokenEndpointAuthenticationMethod: types.TokenEndpointAuthenticationMethod("POST"),
+						Scope:                             ptr.String("__Scope__"),
+						TokenEndpointTlsCertificateArn:    ptr.String("__TokenEndpointTlsCertificateArn__"),
 					},
 				},
 				EncryptionInTransit: &types.KafkaClusterEncryptionInTransit{

@@ -170,6 +170,18 @@ func TestCheckSnapshot_GetFeed(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetFixture(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFixture(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetFixture")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListDictionaries(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDictionaries(context.Background(), nil, func(o *Options) {
@@ -366,6 +378,18 @@ func TestUpdateSnapshot_GetFeed(t *testing.T) {
 	_, err := svc.GetFeed(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetFeed")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetFixture(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFixture(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetFixture")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -6497,6 +6497,13 @@ func awsRestjson1_serializeDocumentKafkaClusterClientAuthentication(v *types.Kaf
 		}
 	}
 
+	if v.SaslOAuthBearer != nil {
+		ok := object.Key("saslOAuthBearer")
+		if err := awsRestjson1_serializeDocumentKafkaClusterSaslOAuthBearerAuthentication(v.SaslOAuthBearer, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SaslScram != nil {
 		ok := object.Key("saslScram")
 		if err := awsRestjson1_serializeDocumentKafkaClusterSaslScramAuthentication(v.SaslScram, ok); err != nil {
@@ -6552,6 +6559,110 @@ func awsRestjson1_serializeDocumentKafkaClusterMTLSAuthentication(v *types.Kafka
 	if v.SecretArn != nil {
 		ok := object.Key("secretArn")
 		ok.String(*v.SecretArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKafkaClusterOAuthClientCredentials(v *types.KafkaClusterOAuthClientCredentials, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TokenRequestSecretArn != nil {
+		ok := object.Key("tokenRequestSecretArn")
+		ok.String(*v.TokenRequestSecretArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKafkaClusterOAuthClientCredentialsAssertion(v *types.KafkaClusterOAuthClientCredentialsAssertion, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Audience != nil {
+		ok := object.Key("audience")
+		ok.String(*v.Audience)
+	}
+
+	if len(v.SigningAlgorithm) > 0 {
+		ok := object.Key("signingAlgorithm")
+		ok.String(string(v.SigningAlgorithm))
+	}
+
+	if v.TokenRequestSecretArn != nil {
+		ok := object.Key("tokenRequestSecretArn")
+		ok.String(*v.TokenRequestSecretArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKafkaClusterOAuthIamJwtBearer(v *types.KafkaClusterOAuthIamJwtBearer, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Audience != nil {
+		ok := object.Key("audience")
+		ok.String(*v.Audience)
+	}
+
+	if len(v.SigningAlgorithm) > 0 {
+		ok := object.Key("signingAlgorithm")
+		ok.String(string(v.SigningAlgorithm))
+	}
+
+	if v.TokenRequestSecretArn != nil {
+		ok := object.Key("tokenRequestSecretArn")
+		ok.String(*v.TokenRequestSecretArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKafkaClusterSaslOAuthBearerAuthentication(v *types.KafkaClusterSaslOAuthBearerAuthentication, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientCredentials != nil {
+		ok := object.Key("clientCredentials")
+		if err := awsRestjson1_serializeDocumentKafkaClusterOAuthClientCredentials(v.ClientCredentials, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClientCredentialsAssertion != nil {
+		ok := object.Key("clientCredentialsAssertion")
+		if err := awsRestjson1_serializeDocumentKafkaClusterOAuthClientCredentialsAssertion(v.ClientCredentialsAssertion, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IamJwtBearer != nil {
+		ok := object.Key("iamJwtBearer")
+		if err := awsRestjson1_serializeDocumentKafkaClusterOAuthIamJwtBearer(v.IamJwtBearer, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Scope != nil {
+		ok := object.Key("scope")
+		ok.String(*v.Scope)
+	}
+
+	if len(v.TokenEndpointAuthenticationMethod) > 0 {
+		ok := object.Key("tokenEndpointAuthenticationMethod")
+		ok.String(string(v.TokenEndpointAuthenticationMethod))
+	}
+
+	if v.TokenEndpointTlsCertificateArn != nil {
+		ok := object.Key("tokenEndpointTlsCertificateArn")
+		ok.String(*v.TokenEndpointTlsCertificateArn)
+	}
+
+	if v.TokenEndpointUrl != nil {
+		ok := object.Key("tokenEndpointUrl")
+		ok.String(*v.TokenEndpointUrl)
 	}
 
 	return nil

@@ -94,6 +94,11 @@ type UpdateFeedOutput struct {
 	// This member is required.
 	Status types.FeedStatus
 
+	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
+	// role for the feed, after the update. This property is absent if the feed doesn't
+	// have an IAM role.
+	AccessRoleArn *string
+
 	// Information about the resource that is associated with the feed, if any.
 	Association *types.FeedAssociation
 

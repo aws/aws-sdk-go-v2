@@ -1,0 +1,8 @@
+{
+    "id": "29163d94-0604-42ac-9b45-df5144f9f910",
+    "type": "feature",
+    "description": "Added accountConstraints and patternType to GetWorkload, ListWorkloads, GetWorkloadDeploymentPattern and ListWorkloadDeploymentPatterns for Launch Wizard",
+    "modules": [
+        "service/launchwizard"
+    ]
+}
