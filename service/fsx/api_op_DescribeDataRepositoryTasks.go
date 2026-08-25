@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,23 @@ type DescribeDataRepositoryTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataRepositoryTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataRepositoryTasksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataRepositoryTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataRepositoryTaskFilters(s, schemas.DescribeDataRepositoryTasksRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeDataRepositoryTasksRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDataRepositoryTasksRequest_NextToken, *v.NextToken)
+	}
+	serializeTaskIds(s, schemas.DescribeDataRepositoryTasksRequest_TaskIds, v.TaskIds)
+}
+
 type DescribeDataRepositoryTasksOutput struct {
 
 	// The collection of data repository task descriptions returned.
@@ -75,13 +94,35 @@ type DescribeDataRepositoryTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataRepositoryTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataRepositoryTasksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataRepositoryTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataRepositoryTasks(s, schemas.DescribeDataRepositoryTasksResponse_DataRepositoryTasks, v.DataRepositoryTasks)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDataRepositoryTasksResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeDataRepositoryTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDataRepositoryTasksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDataRepositoryTasksResponse_DataRepositoryTasks:
+			return deserializeDataRepositoryTasks(d, schemas.DescribeDataRepositoryTasksResponse_DataRepositoryTasks, &v.DataRepositoryTasks)
+		case schemas.DescribeDataRepositoryTasksResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeDataRepositoryTasksResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDataRepositoryTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDataRepositoryTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataRepositoryTasks, schemas.DescribeDataRepositoryTasksRequest, schemas.DescribeDataRepositoryTasksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDataRepositoryTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataRepositoryTasks, schemas.DescribeDataRepositoryTasksRequest, schemas.DescribeDataRepositoryTasksResponse), output: &DescribeDataRepositoryTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

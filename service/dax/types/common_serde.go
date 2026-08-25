@@ -249,6 +249,7 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) 
 }
 
 func deserializeAvailabilityZoneList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -262,6 +263,7 @@ func deserializeAvailabilityZoneList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeClusterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Cluster) error {
+	*v = make([]Cluster, 0)
 	var vv Cluster
 	return smithy.ReadList(d, s, func() error {
 		vv = Cluster{}
@@ -275,6 +277,7 @@ func deserializeClusterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]C
 }
 
 func deserializeClusterNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -288,6 +291,7 @@ func deserializeClusterNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeEventList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Event) error {
+	*v = make([]Event, 0)
 	var vv Event
 	return smithy.ReadList(d, s, func() error {
 		vv = Event{}
@@ -301,6 +305,7 @@ func deserializeEventList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Eve
 }
 
 func deserializeKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -314,6 +319,7 @@ func deserializeKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]strin
 }
 
 func deserializeNetworkTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]NetworkType) error {
+	*v = make([]NetworkType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -327,6 +333,7 @@ func deserializeNetworkTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeNodeIdentifierList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -340,6 +347,7 @@ func deserializeNodeIdentifierList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeNodeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Node) error {
+	*v = make([]Node, 0)
 	var vv Node
 	return smithy.ReadList(d, s, func() error {
 		vv = Node{}
@@ -353,6 +361,7 @@ func deserializeNodeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Node
 }
 
 func deserializeNodeTypeSpecificValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]NodeTypeSpecificValue) error {
+	*v = make([]NodeTypeSpecificValue, 0)
 	var vv NodeTypeSpecificValue
 	return smithy.ReadList(d, s, func() error {
 		vv = NodeTypeSpecificValue{}
@@ -366,6 +375,7 @@ func deserializeNodeTypeSpecificValueList(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeParameterGroupList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ParameterGroup) error {
+	*v = make([]ParameterGroup, 0)
 	var vv ParameterGroup
 	return smithy.ReadList(d, s, func() error {
 		vv = ParameterGroup{}
@@ -379,6 +389,7 @@ func deserializeParameterGroupList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeParameterGroupNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -392,6 +403,7 @@ func deserializeParameterGroupNameList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeParameterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Parameter) error {
+	*v = make([]Parameter, 0)
 	var vv Parameter
 	return smithy.ReadList(d, s, func() error {
 		vv = Parameter{}
@@ -405,6 +417,7 @@ func deserializeParameterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeParameterNameValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ParameterNameValue) error {
+	*v = make([]ParameterNameValue, 0)
 	var vv ParameterNameValue
 	return smithy.ReadList(d, s, func() error {
 		vv = ParameterNameValue{}
@@ -418,6 +431,7 @@ func deserializeParameterNameValueList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeSecurityGroupIdentifierList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -431,6 +445,7 @@ func deserializeSecurityGroupIdentifierList(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializeSecurityGroupMembershipList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SecurityGroupMembership) error {
+	*v = make([]SecurityGroupMembership, 0)
 	var vv SecurityGroupMembership
 	return smithy.ReadList(d, s, func() error {
 		vv = SecurityGroupMembership{}
@@ -444,6 +459,7 @@ func deserializeSecurityGroupMembershipList(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializeSubnetGroupList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SubnetGroup) error {
+	*v = make([]SubnetGroup, 0)
 	var vv SubnetGroup
 	return smithy.ReadList(d, s, func() error {
 		vv = SubnetGroup{}
@@ -457,6 +473,7 @@ func deserializeSubnetGroupList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeSubnetGroupNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -470,6 +487,7 @@ func deserializeSubnetGroupNameList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeSubnetIdentifierList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -483,6 +501,7 @@ func deserializeSubnetIdentifierList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeSubnetList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Subnet) error {
+	*v = make([]Subnet, 0)
 	var vv Subnet
 	return smithy.ReadList(d, s, func() error {
 		vv = Subnet{}
@@ -496,6 +515,7 @@ func deserializeSubnetList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Su
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) error {
+	*v = make([]Tag, 0)
 	var vv Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = Tag{}

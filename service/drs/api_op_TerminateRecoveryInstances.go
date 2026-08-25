@@ -4,7 +4,9 @@ package drs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,25 @@ type TerminateRecoveryInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateRecoveryInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateRecoveryInstancesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateRecoveryInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRecoveryInstancesForTerminationRequest(s, schemas.TerminateRecoveryInstancesRequest_recoveryInstanceIDs, v.RecoveryInstanceIDs)
+}
+func (v *TerminateRecoveryInstancesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TerminateRecoveryInstancesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TerminateRecoveryInstancesRequest_recoveryInstanceIDs:
+			return deserializeRecoveryInstancesForTerminationRequest(d, schemas.TerminateRecoveryInstancesRequest_recoveryInstanceIDs, &v.RecoveryInstanceIDs)
+		}
+		return nil
+	})
+}
+
 type TerminateRecoveryInstancesOutput struct {
 
 	// The Job for terminating the Recovery Instances.
@@ -47,13 +68,34 @@ type TerminateRecoveryInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateRecoveryInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateRecoveryInstancesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateRecoveryInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Job != nil {
+		s.WriteStruct(schemas.TerminateRecoveryInstancesResponse_job)
+		v.Job.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TerminateRecoveryInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TerminateRecoveryInstancesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TerminateRecoveryInstancesResponse_job:
+			v.Job = &types.Job{}
+			return v.Job.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTerminateRecoveryInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTerminateRecoveryInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateRecoveryInstances, schemas.TerminateRecoveryInstancesRequest, schemas.TerminateRecoveryInstancesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTerminateRecoveryInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateRecoveryInstances, schemas.TerminateRecoveryInstancesRequest, schemas.TerminateRecoveryInstancesResponse), output: &TerminateRecoveryInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

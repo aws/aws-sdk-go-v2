@@ -4,7 +4,9 @@ package ivs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,34 @@ type GetStreamSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStreamSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStreamSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStreamSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.GetStreamSessionRequest_channelArn, *v.ChannelArn)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.GetStreamSessionRequest_streamId, *v.StreamId)
+	}
+}
+func (v *GetStreamSessionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetStreamSessionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetStreamSessionRequest_channelArn:
+			v.ChannelArn = new(string)
+			return d.ReadString(schemas.GetStreamSessionRequest_channelArn, v.ChannelArn)
+		case schemas.GetStreamSessionRequest_streamId:
+			v.StreamId = new(string)
+			return d.ReadString(schemas.GetStreamSessionRequest_streamId, v.StreamId)
+		}
+		return nil
+	})
+}
+
 type GetStreamSessionOutput struct {
 
 	// List of stream details.
@@ -50,13 +80,34 @@ type GetStreamSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStreamSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStreamSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStreamSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamSession != nil {
+		s.WriteStruct(schemas.GetStreamSessionResponse_streamSession)
+		v.StreamSession.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetStreamSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetStreamSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetStreamSessionResponse_streamSession:
+			v.StreamSession = &types.StreamSession{}
+			return v.StreamSession.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetStreamSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetStreamSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStreamSession, schemas.GetStreamSessionRequest, schemas.GetStreamSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetStreamSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStreamSession, schemas.GetStreamSessionRequest, schemas.GetStreamSessionResponse), output: &GetStreamSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

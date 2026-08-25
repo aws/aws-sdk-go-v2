@@ -5,7 +5,9 @@ package swf
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -85,6 +87,33 @@ type ListActivityTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListActivityTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListActivityTypesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListActivityTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.ListActivityTypesInput_domain, *v.Domain)
+	}
+	if v.MaximumPageSize != 0 {
+		s.WriteInt32(schemas.ListActivityTypesInput_maximumPageSize, v.MaximumPageSize)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListActivityTypesInput_name, *v.Name)
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.ListActivityTypesInput_nextPageToken, *v.NextPageToken)
+	}
+	if v.RegistrationStatus != "" {
+		s.WriteString(schemas.ListActivityTypesInput_registrationStatus, string(v.RegistrationStatus))
+	}
+	if v.ReverseOrder != false {
+		s.WriteBool(schemas.ListActivityTypesInput_reverseOrder, v.ReverseOrder)
+	}
+}
+
 // Contains a paginated list of activity type information structures.
 type ListActivityTypesOutput struct {
 
@@ -107,13 +136,35 @@ type ListActivityTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListActivityTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivityTypeInfos)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListActivityTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.ActivityTypeInfos_nextPageToken, *v.NextPageToken)
+	}
+	serializeActivityTypeInfoList(s, schemas.ActivityTypeInfos_typeInfos, v.TypeInfos)
+}
+func (v *ListActivityTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivityTypeInfos, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivityTypeInfos_nextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.ActivityTypeInfos_nextPageToken, v.NextPageToken)
+		case schemas.ActivityTypeInfos_typeInfos:
+			return deserializeActivityTypeInfoList(d, schemas.ActivityTypeInfos_typeInfos, &v.TypeInfos)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListActivityTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListActivityTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListActivityTypes, schemas.ListActivityTypesInput, schemas.ActivityTypeInfos)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListActivityTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListActivityTypes, schemas.ListActivityTypesInput, schemas.ActivityTypeInfos), output: &ListActivityTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

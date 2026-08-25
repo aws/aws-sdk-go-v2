@@ -4,7 +4,9 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -279,6 +281,90 @@ type CreateSMBFileShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSMBFileShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSMBFileShareInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSMBFileShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessBasedEnumeration != nil {
+		s.WriteBool(schemas.CreateSMBFileShareInput_AccessBasedEnumeration, *v.AccessBasedEnumeration)
+	}
+	serializeUserList(s, schemas.CreateSMBFileShareInput_AdminUserList, v.AdminUserList)
+	if v.AuditDestinationARN != nil {
+		s.WriteString(schemas.CreateSMBFileShareInput_AuditDestinationARN, *v.AuditDestinationARN)
+	}
+	if v.Authentication != nil {
+		s.WriteString(schemas.CreateSMBFileShareInput_Authentication, *v.Authentication)
+	}
+	if v.BucketRegion != nil {
+		s.WriteString(schemas.CreateSMBFileShareInput_BucketRegion, *v.BucketRegion)
+	}
+	if v.CacheAttributes != nil {
+		s.WriteStruct(schemas.CreateSMBFileShareInput_CacheAttributes)
+		v.CacheAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CaseSensitivity != "" {
+		s.WriteString(schemas.CreateSMBFileShareInput_CaseSensitivity, string(v.CaseSensitivity))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateSMBFileShareInput_ClientToken, *v.ClientToken)
+	}
+	if v.DefaultStorageClass != nil {
+		s.WriteString(schemas.CreateSMBFileShareInput_DefaultStorageClass, *v.DefaultStorageClass)
+	}
+	if v.EncryptionType != "" {
+		s.WriteString(schemas.CreateSMBFileShareInput_EncryptionType, string(v.EncryptionType))
+	}
+	if v.FileShareName != nil {
+		s.WriteString(schemas.CreateSMBFileShareInput_FileShareName, *v.FileShareName)
+	}
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.CreateSMBFileShareInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.GuessMIMETypeEnabled != nil {
+		s.WriteBool(schemas.CreateSMBFileShareInput_GuessMIMETypeEnabled, *v.GuessMIMETypeEnabled)
+	}
+	serializeUserList(s, schemas.CreateSMBFileShareInput_InvalidUserList, v.InvalidUserList)
+	if v.KMSEncrypted != nil {
+		s.WriteBool(schemas.CreateSMBFileShareInput_KMSEncrypted, *v.KMSEncrypted)
+	}
+	if v.KMSKey != nil {
+		s.WriteString(schemas.CreateSMBFileShareInput_KMSKey, *v.KMSKey)
+	}
+	if v.LocationARN != nil {
+		s.WriteString(schemas.CreateSMBFileShareInput_LocationARN, *v.LocationARN)
+	}
+	if v.NotificationPolicy != nil {
+		s.WriteString(schemas.CreateSMBFileShareInput_NotificationPolicy, *v.NotificationPolicy)
+	}
+	if v.ObjectACL != "" {
+		s.WriteString(schemas.CreateSMBFileShareInput_ObjectACL, string(v.ObjectACL))
+	}
+	if v.OplocksEnabled != nil {
+		s.WriteBool(schemas.CreateSMBFileShareInput_OplocksEnabled, *v.OplocksEnabled)
+	}
+	if v.ReadOnly != nil {
+		s.WriteBool(schemas.CreateSMBFileShareInput_ReadOnly, *v.ReadOnly)
+	}
+	if v.RequesterPays != nil {
+		s.WriteBool(schemas.CreateSMBFileShareInput_RequesterPays, *v.RequesterPays)
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.CreateSMBFileShareInput_Role, *v.Role)
+	}
+	if v.SMBACLEnabled != nil {
+		s.WriteBool(schemas.CreateSMBFileShareInput_SMBACLEnabled, *v.SMBACLEnabled)
+	}
+	serializeTags(s, schemas.CreateSMBFileShareInput_Tags, v.Tags)
+	if v.VPCEndpointDNSName != nil {
+		s.WriteString(schemas.CreateSMBFileShareInput_VPCEndpointDNSName, *v.VPCEndpointDNSName)
+	}
+	serializeUserList(s, schemas.CreateSMBFileShareInput_ValidUserList, v.ValidUserList)
+}
+
 // CreateSMBFileShareOutput
 type CreateSMBFileShareOutput struct {
 
@@ -291,13 +377,32 @@ type CreateSMBFileShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSMBFileShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSMBFileShareOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSMBFileShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileShareARN != nil {
+		s.WriteString(schemas.CreateSMBFileShareOutput_FileShareARN, *v.FileShareARN)
+	}
+}
+func (v *CreateSMBFileShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSMBFileShareOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSMBFileShareOutput_FileShareARN:
+			v.FileShareARN = new(string)
+			return d.ReadString(schemas.CreateSMBFileShareOutput_FileShareARN, v.FileShareARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSMBFileShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSMBFileShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSMBFileShare, schemas.CreateSMBFileShareInput, schemas.CreateSMBFileShareOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateSMBFileShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSMBFileShare, schemas.CreateSMBFileShareInput, schemas.CreateSMBFileShareOutput), output: &CreateSMBFileShareOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

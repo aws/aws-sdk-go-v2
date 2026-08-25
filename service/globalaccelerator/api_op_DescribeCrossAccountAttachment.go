@@ -4,7 +4,9 @@ package globalaccelerator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribeCrossAccountAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCrossAccountAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCrossAccountAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCrossAccountAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentArn != nil {
+		s.WriteString(schemas.DescribeCrossAccountAttachmentRequest_AttachmentArn, *v.AttachmentArn)
+	}
+}
+
 type DescribeCrossAccountAttachmentOutput struct {
 
 	// Information about the cross-account attachment.
@@ -45,13 +59,34 @@ type DescribeCrossAccountAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCrossAccountAttachmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCrossAccountAttachmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCrossAccountAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossAccountAttachment != nil {
+		s.WriteStruct(schemas.DescribeCrossAccountAttachmentResponse_CrossAccountAttachment)
+		v.CrossAccountAttachment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeCrossAccountAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCrossAccountAttachmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCrossAccountAttachmentResponse_CrossAccountAttachment:
+			v.CrossAccountAttachment = &types.Attachment{}
+			return v.CrossAccountAttachment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCrossAccountAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCrossAccountAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCrossAccountAttachment, schemas.DescribeCrossAccountAttachmentRequest, schemas.DescribeCrossAccountAttachmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCrossAccountAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCrossAccountAttachment, schemas.DescribeCrossAccountAttachmentRequest, schemas.DescribeCrossAccountAttachmentResponse), output: &DescribeCrossAccountAttachmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

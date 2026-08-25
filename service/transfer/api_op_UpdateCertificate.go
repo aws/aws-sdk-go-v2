@@ -4,6 +4,8 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -47,6 +49,27 @@ type UpdateCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveDate != nil {
+		s.WriteTime(schemas.UpdateCertificateRequest_ActiveDate, *v.ActiveDate)
+	}
+	if v.CertificateId != nil {
+		s.WriteString(schemas.UpdateCertificateRequest_CertificateId, *v.CertificateId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateCertificateRequest_Description, *v.Description)
+	}
+	if v.InactiveDate != nil {
+		s.WriteTime(schemas.UpdateCertificateRequest_InactiveDate, *v.InactiveDate)
+	}
+}
+
 type UpdateCertificateOutput struct {
 
 	// Returns the identifier of the certificate object that you are updating.
@@ -60,13 +83,32 @@ type UpdateCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateId != nil {
+		s.WriteString(schemas.UpdateCertificateResponse_CertificateId, *v.CertificateId)
+	}
+}
+func (v *UpdateCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCertificateResponse_CertificateId:
+			v.CertificateId = new(string)
+			return d.ReadString(schemas.UpdateCertificateResponse_CertificateId, v.CertificateId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCertificate, schemas.UpdateCertificateRequest, schemas.UpdateCertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCertificate, schemas.UpdateCertificateRequest, schemas.UpdateCertificateResponse), output: &UpdateCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

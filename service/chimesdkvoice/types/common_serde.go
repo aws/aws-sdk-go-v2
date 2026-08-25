@@ -486,6 +486,7 @@ func serializeVoiceProfileSummaryList(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func deserializeAlexaSkillIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -499,6 +500,7 @@ func deserializeAlexaSkillIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeCallingRegionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -512,6 +514,7 @@ func deserializeCallingRegionList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeCandidateAddressList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]CandidateAddress) error {
+	*v = make([]CandidateAddress, 0)
 	var vv CandidateAddress
 	return smithy.ReadList(d, s, func() error {
 		vv = CandidateAddress{}
@@ -525,6 +528,7 @@ func deserializeCandidateAddressList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeCapabilityList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Capability) error {
+	*v = make([]Capability, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -538,6 +542,7 @@ func deserializeCapabilityList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeContactCenterSystemTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ContactCenterSystemType) error {
+	*v = make([]ContactCenterSystemType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -551,6 +556,7 @@ func deserializeContactCenterSystemTypeList(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializeCountryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -564,6 +570,7 @@ func deserializeCountryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]s
 }
 
 func deserializeCredentialList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Credential) error {
+	*v = make([]Credential, 0)
 	var vv Credential
 	return smithy.ReadList(d, s, func() error {
 		vv = Credential{}
@@ -577,6 +584,7 @@ func deserializeCredentialList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeDNISEmergencyCallingConfigurationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DNISEmergencyCallingConfiguration) error {
+	*v = make([]DNISEmergencyCallingConfiguration, 0)
 	var vv DNISEmergencyCallingConfiguration
 	return smithy.ReadList(d, s, func() error {
 		vv = DNISEmergencyCallingConfiguration{}
@@ -590,6 +598,7 @@ func deserializeDNISEmergencyCallingConfigurationList(d smithy.ShapeDeserializer
 }
 
 func deserializeE164PhoneNumberList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -603,6 +612,7 @@ func deserializeE164PhoneNumberList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeNonEmptyStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -616,6 +626,7 @@ func deserializeNonEmptyStringList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeOrderedPhoneNumberList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]OrderedPhoneNumber) error {
+	*v = make([]OrderedPhoneNumber, 0)
 	var vv OrderedPhoneNumber
 	return smithy.ReadList(d, s, func() error {
 		vv = OrderedPhoneNumber{}
@@ -629,6 +640,7 @@ func deserializeOrderedPhoneNumberList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeOriginationRouteList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]OriginationRoute) error {
+	*v = make([]OriginationRoute, 0)
 	var vv OriginationRoute
 	return smithy.ReadList(d, s, func() error {
 		vv = OriginationRoute{}
@@ -642,6 +654,7 @@ func deserializeOriginationRouteList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeParticipantPhoneNumberList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -655,6 +668,7 @@ func deserializeParticipantPhoneNumberList(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializeParticipants(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Participant) error {
+	*v = make([]Participant, 0)
 	var vv Participant
 	return smithy.ReadList(d, s, func() error {
 		vv = Participant{}
@@ -668,6 +682,7 @@ func deserializeParticipants(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializePhoneNumberAssociationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PhoneNumberAssociation) error {
+	*v = make([]PhoneNumberAssociation, 0)
 	var vv PhoneNumberAssociation
 	return smithy.ReadList(d, s, func() error {
 		vv = PhoneNumberAssociation{}
@@ -681,6 +696,7 @@ func deserializePhoneNumberAssociationList(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializePhoneNumberCountriesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PhoneNumberCountry) error {
+	*v = make([]PhoneNumberCountry, 0)
 	var vv PhoneNumberCountry
 	return smithy.ReadList(d, s, func() error {
 		vv = PhoneNumberCountry{}
@@ -694,6 +710,7 @@ func deserializePhoneNumberCountriesList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializePhoneNumberErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PhoneNumberError) error {
+	*v = make([]PhoneNumberError, 0)
 	var vv PhoneNumberError
 	return smithy.ReadList(d, s, func() error {
 		vv = PhoneNumberError{}
@@ -707,6 +724,7 @@ func deserializePhoneNumberErrorList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializePhoneNumberList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PhoneNumber) error {
+	*v = make([]PhoneNumber, 0)
 	var vv PhoneNumber
 	return smithy.ReadList(d, s, func() error {
 		vv = PhoneNumber{}
@@ -720,6 +738,7 @@ func deserializePhoneNumberList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializePhoneNumberOrderList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PhoneNumberOrder) error {
+	*v = make([]PhoneNumberOrder, 0)
 	var vv PhoneNumberOrder
 	return smithy.ReadList(d, s, func() error {
 		vv = PhoneNumberOrder{}
@@ -733,6 +752,7 @@ func deserializePhoneNumberOrderList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializePhoneNumberTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PhoneNumberType) error {
+	*v = make([]PhoneNumberType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -746,6 +766,7 @@ func deserializePhoneNumberTypeList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeProxySessions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ProxySession) error {
+	*v = make([]ProxySession, 0)
 	var vv ProxySession
 	return smithy.ReadList(d, s, func() error {
 		vv = ProxySession{}
@@ -759,6 +780,7 @@ func deserializeProxySessions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeSensitiveStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -772,6 +794,7 @@ func deserializeSensitiveStringList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeSessionBorderControllerTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SessionBorderControllerType) error {
+	*v = make([]SessionBorderControllerType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -785,6 +808,7 @@ func deserializeSessionBorderControllerTypeList(d smithy.ShapeDeserializer, s *s
 }
 
 func deserializeSipMediaApplicationEndpointList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SipMediaApplicationEndpoint) error {
+	*v = make([]SipMediaApplicationEndpoint, 0)
 	var vv SipMediaApplicationEndpoint
 	return smithy.ReadList(d, s, func() error {
 		vv = SipMediaApplicationEndpoint{}
@@ -798,6 +822,7 @@ func deserializeSipMediaApplicationEndpointList(d smithy.ShapeDeserializer, s *s
 }
 
 func deserializeSipMediaApplicationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SipMediaApplication) error {
+	*v = make([]SipMediaApplication, 0)
 	var vv SipMediaApplication
 	return smithy.ReadList(d, s, func() error {
 		vv = SipMediaApplication{}
@@ -811,6 +836,7 @@ func deserializeSipMediaApplicationList(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeSipRuleList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SipRule) error {
+	*v = make([]SipRule, 0)
 	var vv SipRule
 	return smithy.ReadList(d, s, func() error {
 		vv = SipRule{}
@@ -824,6 +850,7 @@ func deserializeSipRuleList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]S
 }
 
 func deserializeSipRuleTargetApplicationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SipRuleTargetApplication) error {
+	*v = make([]SipRuleTargetApplication, 0)
 	var vv SipRuleTargetApplication
 	return smithy.ReadList(d, s, func() error {
 		vv = SipRuleTargetApplication{}
@@ -837,6 +864,7 @@ func deserializeSipRuleTargetApplicationList(d smithy.ShapeDeserializer, s *smit
 }
 
 func deserializeSpeakerSearchResultList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SpeakerSearchResult) error {
+	*v = make([]SpeakerSearchResult, 0)
 	var vv SpeakerSearchResult
 	return smithy.ReadList(d, s, func() error {
 		vv = SpeakerSearchResult{}
@@ -850,6 +878,7 @@ func deserializeSpeakerSearchResultList(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeStreamingNotificationTargetList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]StreamingNotificationTarget) error {
+	*v = make([]StreamingNotificationTarget, 0)
 	var vv StreamingNotificationTarget
 	return smithy.ReadList(d, s, func() error {
 		vv = StreamingNotificationTarget{}
@@ -863,6 +892,7 @@ func deserializeStreamingNotificationTargetList(d smithy.ShapeDeserializer, s *s
 }
 
 func deserializeStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -876,6 +906,7 @@ func deserializeStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -889,6 +920,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) error {
+	*v = make([]Tag, 0)
 	var vv Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = Tag{}
@@ -902,6 +934,7 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) 
 }
 
 func deserializeUpdatePhoneNumberRequestItemList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]UpdatePhoneNumberRequestItem) error {
+	*v = make([]UpdatePhoneNumberRequestItem, 0)
 	var vv UpdatePhoneNumberRequestItem
 	return smithy.ReadList(d, s, func() error {
 		vv = UpdatePhoneNumberRequestItem{}
@@ -915,6 +948,7 @@ func deserializeUpdatePhoneNumberRequestItemList(d smithy.ShapeDeserializer, s *
 }
 
 func deserializeVoiceConnectorAwsRegionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]VoiceConnectorAwsRegion) error {
+	*v = make([]VoiceConnectorAwsRegion, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -928,6 +962,7 @@ func deserializeVoiceConnectorAwsRegionList(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializeVoiceConnectorGroupList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]VoiceConnectorGroup) error {
+	*v = make([]VoiceConnectorGroup, 0)
 	var vv VoiceConnectorGroup
 	return smithy.ReadList(d, s, func() error {
 		vv = VoiceConnectorGroup{}
@@ -941,6 +976,7 @@ func deserializeVoiceConnectorGroupList(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeVoiceConnectorItemList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]VoiceConnectorItem) error {
+	*v = make([]VoiceConnectorItem, 0)
 	var vv VoiceConnectorItem
 	return smithy.ReadList(d, s, func() error {
 		vv = VoiceConnectorItem{}
@@ -954,6 +990,7 @@ func deserializeVoiceConnectorItemList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeVoiceConnectorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]VoiceConnector) error {
+	*v = make([]VoiceConnector, 0)
 	var vv VoiceConnector
 	return smithy.ReadList(d, s, func() error {
 		vv = VoiceConnector{}
@@ -967,6 +1004,7 @@ func deserializeVoiceConnectorList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeVoiceProfileDomainSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]VoiceProfileDomainSummary) error {
+	*v = make([]VoiceProfileDomainSummary, 0)
 	var vv VoiceProfileDomainSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = VoiceProfileDomainSummary{}
@@ -980,6 +1018,7 @@ func deserializeVoiceProfileDomainSummaryList(d smithy.ShapeDeserializer, s *smi
 }
 
 func deserializeVoiceProfileSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]VoiceProfileSummary) error {
+	*v = make([]VoiceProfileSummary, 0)
 	var vv VoiceProfileSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = VoiceProfileSummary{}

@@ -4,7 +4,9 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,39 @@ type CreateMicrosoftADInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMicrosoftADInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMicrosoftADRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMicrosoftADInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateMicrosoftADRequest_Description, *v.Description)
+	}
+	if v.Edition != "" {
+		s.WriteString(schemas.CreateMicrosoftADRequest_Edition, string(v.Edition))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateMicrosoftADRequest_Name, *v.Name)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.CreateMicrosoftADRequest_NetworkType, string(v.NetworkType))
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.CreateMicrosoftADRequest_Password, *v.Password)
+	}
+	if v.ShortName != nil {
+		s.WriteString(schemas.CreateMicrosoftADRequest_ShortName, *v.ShortName)
+	}
+	serializeTags(s, schemas.CreateMicrosoftADRequest_Tags, v.Tags)
+	if v.VpcSettings != nil {
+		s.WriteStruct(schemas.CreateMicrosoftADRequest_VpcSettings)
+		v.VpcSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Result of a CreateMicrosoftAD request.
 type CreateMicrosoftADOutput struct {
 
@@ -90,13 +125,32 @@ type CreateMicrosoftADOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMicrosoftADOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMicrosoftADResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMicrosoftADOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.CreateMicrosoftADResult_DirectoryId, *v.DirectoryId)
+	}
+}
+func (v *CreateMicrosoftADOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMicrosoftADResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMicrosoftADResult_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.CreateMicrosoftADResult_DirectoryId, v.DirectoryId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMicrosoftADMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateMicrosoftAD{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMicrosoftAD, schemas.CreateMicrosoftADRequest, schemas.CreateMicrosoftADResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateMicrosoftAD{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMicrosoftAD, schemas.CreateMicrosoftADRequest, schemas.CreateMicrosoftADResult), output: &CreateMicrosoftADOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

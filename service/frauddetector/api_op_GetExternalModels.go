@@ -5,7 +5,9 @@ package frauddetector
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type GetExternalModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExternalModelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExternalModelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExternalModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetExternalModelsRequest_maxResults, *v.MaxResults)
+	}
+	if v.ModelEndpoint != nil {
+		s.WriteString(schemas.GetExternalModelsRequest_modelEndpoint, *v.ModelEndpoint)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetExternalModelsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetExternalModelsOutput struct {
 
 	// Gets the Amazon SageMaker models.
@@ -58,13 +78,35 @@ type GetExternalModelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExternalModelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExternalModelsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExternalModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExternalModelList(s, schemas.GetExternalModelsResult_externalModels, v.ExternalModels)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetExternalModelsResult_nextToken, *v.NextToken)
+	}
+}
+func (v *GetExternalModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetExternalModelsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetExternalModelsResult_externalModels:
+			return deserializeExternalModelList(d, schemas.GetExternalModelsResult_externalModels, &v.ExternalModels)
+		case schemas.GetExternalModelsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetExternalModelsResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetExternalModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetExternalModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExternalModels, schemas.GetExternalModelsRequest, schemas.GetExternalModelsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetExternalModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExternalModels, schemas.GetExternalModelsRequest, schemas.GetExternalModelsResult), output: &GetExternalModelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

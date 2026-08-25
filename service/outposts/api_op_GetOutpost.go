@@ -4,7 +4,9 @@ package outposts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetOutpostInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOutpostInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOutpostInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOutpostInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutpostId != nil {
+		s.WriteString(schemas.GetOutpostInput_OutpostId, *v.OutpostId)
+	}
+}
+
 type GetOutpostOutput struct {
 
 	// Information about an Outpost.
@@ -45,13 +59,34 @@ type GetOutpostOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOutpostOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOutpostOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOutpostOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Outpost != nil {
+		s.WriteStruct(schemas.GetOutpostOutput_Outpost)
+		v.Outpost.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetOutpostOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOutpostOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOutpostOutput_Outpost:
+			v.Outpost = &types.Outpost{}
+			return v.Outpost.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOutpostMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOutpost{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOutpost, schemas.GetOutpostInput, schemas.GetOutpostOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOutpost{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOutpost, schemas.GetOutpostInput, schemas.GetOutpostOutput), output: &GetOutpostOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

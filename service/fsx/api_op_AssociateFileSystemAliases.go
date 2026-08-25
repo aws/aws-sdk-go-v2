@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,22 @@ type AssociateFileSystemAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateFileSystemAliasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateFileSystemAliasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateFileSystemAliasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAlternateDNSNames(s, schemas.AssociateFileSystemAliasesRequest_Aliases, v.Aliases)
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.AssociateFileSystemAliasesRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.AssociateFileSystemAliasesRequest_FileSystemId, *v.FileSystemId)
+	}
+}
+
 // The system generated response showing the DNS aliases that Amazon FSx is
 // attempting to associate with the file system. Use the API operation to monitor
 // the status of the aliases Amazon FSx is associating with the file system. It can
@@ -91,13 +109,29 @@ type AssociateFileSystemAliasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateFileSystemAliasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateFileSystemAliasesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateFileSystemAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAliases(s, schemas.AssociateFileSystemAliasesResponse_Aliases, v.Aliases)
+}
+func (v *AssociateFileSystemAliasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateFileSystemAliasesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateFileSystemAliasesResponse_Aliases:
+			return deserializeAliases(d, schemas.AssociateFileSystemAliasesResponse_Aliases, &v.Aliases)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateFileSystemAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateFileSystemAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateFileSystemAliases, schemas.AssociateFileSystemAliasesRequest, schemas.AssociateFileSystemAliasesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateFileSystemAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateFileSystemAliases, schemas.AssociateFileSystemAliasesRequest, schemas.AssociateFileSystemAliasesResponse), output: &AssociateFileSystemAliasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

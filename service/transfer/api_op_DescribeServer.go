@@ -5,7 +5,9 @@ package transfer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -42,6 +44,18 @@ type DescribeServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeServerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeServerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeServerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerId != nil {
+		s.WriteString(schemas.DescribeServerRequest_ServerId, *v.ServerId)
+	}
+}
+
 type DescribeServerOutput struct {
 
 	// An array containing the properties of a server with the ServerID you specified.
@@ -55,13 +69,34 @@ type DescribeServerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeServerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeServerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeServerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Server != nil {
+		s.WriteStruct(schemas.DescribeServerResponse_Server)
+		v.Server.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeServerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeServerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeServerResponse_Server:
+			v.Server = &types.DescribedServer{}
+			return v.Server.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeServer, schemas.DescribeServerRequest, schemas.DescribeServerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeServer, schemas.DescribeServerRequest, schemas.DescribeServerResponse), output: &DescribeServerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

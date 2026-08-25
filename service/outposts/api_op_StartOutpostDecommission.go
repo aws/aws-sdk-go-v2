@@ -4,7 +4,9 @@ package outposts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type StartOutpostDecommissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartOutpostDecommissionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartOutpostDecommissionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartOutpostDecommissionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutpostIdentifier != nil {
+		s.WriteString(schemas.StartOutpostDecommissionInput_OutpostIdentifier, *v.OutpostIdentifier)
+	}
+	if v.ValidateOnly != false {
+		s.WriteBool(schemas.StartOutpostDecommissionInput_ValidateOnly, v.ValidateOnly)
+	}
+}
+
 type StartOutpostDecommissionOutput struct {
 
 	// The resources still associated with the Outpost that you are decommissioning.
@@ -51,13 +68,39 @@ type StartOutpostDecommissionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartOutpostDecommissionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartOutpostDecommissionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartOutpostDecommissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBlockingResourceTypeList(s, schemas.StartOutpostDecommissionOutput_BlockingResourceTypes, v.BlockingResourceTypes)
+	if v.Status != "" {
+		s.WriteString(schemas.StartOutpostDecommissionOutput_Status, string(v.Status))
+	}
+}
+func (v *StartOutpostDecommissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartOutpostDecommissionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartOutpostDecommissionOutput_BlockingResourceTypes:
+			return deserializeBlockingResourceTypeList(d, schemas.StartOutpostDecommissionOutput_BlockingResourceTypes, &v.BlockingResourceTypes)
+		case schemas.StartOutpostDecommissionOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.StartOutpostDecommissionOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DecommissionRequestStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartOutpostDecommissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartOutpostDecommission{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartOutpostDecommission, schemas.StartOutpostDecommissionInput, schemas.StartOutpostDecommissionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartOutpostDecommission{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartOutpostDecommission, schemas.StartOutpostDecommissionInput, schemas.StartOutpostDecommissionOutput), output: &StartOutpostDecommissionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

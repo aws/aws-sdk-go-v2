@@ -5,7 +5,9 @@ package codebuild
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,29 @@ type ListBuildBatchesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBuildBatchesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBuildBatchesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBuildBatchesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListBuildBatchesInput_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBuildBatchesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBuildBatchesInput_nextToken, *v.NextToken)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListBuildBatchesInput_sortOrder, string(v.SortOrder))
+	}
+}
+
 type ListBuildBatchesOutput struct {
 
 	// An array of strings that contains the batch build identifiers.
@@ -65,13 +90,35 @@ type ListBuildBatchesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBuildBatchesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBuildBatchesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBuildBatchesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBuildBatchIds(s, schemas.ListBuildBatchesOutput_ids, v.Ids)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBuildBatchesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListBuildBatchesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBuildBatchesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBuildBatchesOutput_ids:
+			return deserializeBuildBatchIds(d, schemas.ListBuildBatchesOutput_ids, &v.Ids)
+		case schemas.ListBuildBatchesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBuildBatchesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBuildBatchesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListBuildBatches{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBuildBatches, schemas.ListBuildBatchesInput, schemas.ListBuildBatchesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListBuildBatches{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBuildBatches, schemas.ListBuildBatchesInput, schemas.ListBuildBatchesOutput), output: &ListBuildBatchesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

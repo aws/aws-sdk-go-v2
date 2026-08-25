@@ -5,7 +5,9 @@ package codebuild
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type ListBuildsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBuildsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBuildsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBuildsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBuildsInput_nextToken, *v.NextToken)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListBuildsInput_sortOrder, string(v.SortOrder))
+	}
+}
+
 type ListBuildsOutput struct {
 
 	// A list of build IDs, with each build ID representing a single build.
@@ -62,13 +79,35 @@ type ListBuildsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBuildsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBuildsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBuildsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBuildIds(s, schemas.ListBuildsOutput_ids, v.Ids)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBuildsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListBuildsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBuildsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBuildsOutput_ids:
+			return deserializeBuildIds(d, schemas.ListBuildsOutput_ids, &v.Ids)
+		case schemas.ListBuildsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBuildsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBuildsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListBuilds{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBuilds, schemas.ListBuildsInput, schemas.ListBuildsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListBuilds{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBuilds, schemas.ListBuildsInput, schemas.ListBuildsOutput), output: &ListBuildsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

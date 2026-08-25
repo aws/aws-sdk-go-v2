@@ -4,6 +4,8 @@ package mediastore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteContainerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContainerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContainerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContainerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerName != nil {
+		s.WriteString(schemas.DeleteContainerInput_ContainerName, *v.ContainerName)
+	}
+}
+
 type DeleteContainerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type DeleteContainerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContainerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContainerOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContainerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteContainerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteContainerOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteContainerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteContainer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContainer, schemas.DeleteContainerInput, schemas.DeleteContainerOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteContainer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContainer, schemas.DeleteContainerInput, schemas.DeleteContainerOutput), output: &DeleteContainerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

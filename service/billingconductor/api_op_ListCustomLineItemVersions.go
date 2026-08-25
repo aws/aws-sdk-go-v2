@@ -5,7 +5,9 @@ package billingconductor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,48 @@ type ListCustomLineItemVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomLineItemVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomLineItemVersionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomLineItemVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListCustomLineItemVersionsInput_Arn, *v.Arn)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListCustomLineItemVersionsInput_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCustomLineItemVersionsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomLineItemVersionsInput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCustomLineItemVersionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomLineItemVersionsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomLineItemVersionsInput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ListCustomLineItemVersionsInput_Arn, v.Arn)
+		case schemas.ListCustomLineItemVersionsInput_Filters:
+			v.Filters = &types.ListCustomLineItemVersionsFilter{}
+			return v.Filters.Deserialize(d)
+		case schemas.ListCustomLineItemVersionsInput_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListCustomLineItemVersionsInput_MaxResults, v.MaxResults)
+		case schemas.ListCustomLineItemVersionsInput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCustomLineItemVersionsInput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListCustomLineItemVersionsOutput struct {
 
 	// A list of CustomLineItemVersionListElements that are received.
@@ -61,13 +105,35 @@ type ListCustomLineItemVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomLineItemVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomLineItemVersionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomLineItemVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomLineItemVersionList(s, schemas.ListCustomLineItemVersionsOutput_CustomLineItemVersions, v.CustomLineItemVersions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomLineItemVersionsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCustomLineItemVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomLineItemVersionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomLineItemVersionsOutput_CustomLineItemVersions:
+			return deserializeCustomLineItemVersionList(d, schemas.ListCustomLineItemVersionsOutput_CustomLineItemVersions, &v.CustomLineItemVersions)
+		case schemas.ListCustomLineItemVersionsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCustomLineItemVersionsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCustomLineItemVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCustomLineItemVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomLineItemVersions, schemas.ListCustomLineItemVersionsInput, schemas.ListCustomLineItemVersionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCustomLineItemVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomLineItemVersions, schemas.ListCustomLineItemVersionsInput, schemas.ListCustomLineItemVersionsOutput), output: &ListCustomLineItemVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

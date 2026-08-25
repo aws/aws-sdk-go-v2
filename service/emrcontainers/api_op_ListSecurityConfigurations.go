@@ -5,7 +5,9 @@ package emrcontainers
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -47,6 +49,27 @@ type ListSecurityConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAfter != nil {
+		s.WriteTime(schemas.ListSecurityConfigurationsRequest_createdAfter, *v.CreatedAfter)
+	}
+	if v.CreatedBefore != nil {
+		s.WriteTime(schemas.ListSecurityConfigurationsRequest_createdBefore, *v.CreatedBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSecurityConfigurationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityConfigurationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListSecurityConfigurationsOutput struct {
 
 	// The token for the next set of security configurations to return.
@@ -61,13 +84,35 @@ type ListSecurityConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityConfigurationsResponse_nextToken, *v.NextToken)
+	}
+	serializeSecurityConfigurations(s, schemas.ListSecurityConfigurationsResponse_securityConfigurations, v.SecurityConfigurations)
+}
+func (v *ListSecurityConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSecurityConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSecurityConfigurationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSecurityConfigurationsResponse_nextToken, v.NextToken)
+		case schemas.ListSecurityConfigurationsResponse_securityConfigurations:
+			return deserializeSecurityConfigurations(d, schemas.ListSecurityConfigurationsResponse_securityConfigurations, &v.SecurityConfigurations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSecurityConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSecurityConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityConfigurations, schemas.ListSecurityConfigurationsRequest, schemas.ListSecurityConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSecurityConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityConfigurations, schemas.ListSecurityConfigurationsRequest, schemas.ListSecurityConfigurationsResponse), output: &ListSecurityConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

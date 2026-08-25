@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NetworkResourceCounts":[{"Count":1,"ResourceType":"__ResourceType__"},{"Count":1,"ResourceType":"__ResourceType__"}],"NextToken":"__NextToken__"}

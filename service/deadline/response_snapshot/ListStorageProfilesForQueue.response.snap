@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","storageProfiles":[{"displayName":"__DisplayName__","osFamily":"WINDOWS","storageProfileId":"__StorageProfileId__"},{"displayName":"__DisplayName__","osFamily":"WINDOWS","storageProfileId":"__StorageProfileId__"}]}

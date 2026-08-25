@@ -4,6 +4,8 @@ package xray
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -67,6 +69,22 @@ type StartTraceRetrievalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTraceRetrievalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTraceRetrievalRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTraceRetrievalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.StartTraceRetrievalRequest_EndTime, *v.EndTime)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.StartTraceRetrievalRequest_StartTime, *v.StartTime)
+	}
+	serializeTraceIdListForRetrieval(s, schemas.StartTraceRetrievalRequest_TraceIds, v.TraceIds)
+}
+
 type StartTraceRetrievalOutput struct {
 
 	//  Retrieval token.
@@ -78,13 +96,32 @@ type StartTraceRetrievalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTraceRetrievalOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTraceRetrievalResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTraceRetrievalOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RetrievalToken != nil {
+		s.WriteString(schemas.StartTraceRetrievalResult_RetrievalToken, *v.RetrievalToken)
+	}
+}
+func (v *StartTraceRetrievalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartTraceRetrievalResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartTraceRetrievalResult_RetrievalToken:
+			v.RetrievalToken = new(string)
+			return d.ReadString(schemas.StartTraceRetrievalResult_RetrievalToken, v.RetrievalToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartTraceRetrievalMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartTraceRetrieval{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTraceRetrieval, schemas.StartTraceRetrievalRequest, schemas.StartTraceRetrievalResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartTraceRetrieval{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTraceRetrieval, schemas.StartTraceRetrievalRequest, schemas.StartTraceRetrievalResult), output: &StartTraceRetrievalOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

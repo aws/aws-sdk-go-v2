@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,18 @@ type GetWebACLForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWebACLForResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWebACLForResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWebACLForResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetWebACLForResourceRequest_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type GetWebACLForResourceOutput struct {
 
 	// The web ACL that is associated with the resource. If there is no associated
@@ -90,13 +104,34 @@ type GetWebACLForResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWebACLForResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWebACLForResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWebACLForResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WebACL != nil {
+		s.WriteStruct(schemas.GetWebACLForResourceResponse_WebACL)
+		v.WebACL.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetWebACLForResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWebACLForResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWebACLForResourceResponse_WebACL:
+			v.WebACL = &types.WebACL{}
+			return v.WebACL.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWebACLForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetWebACLForResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWebACLForResource, schemas.GetWebACLForResourceRequest, schemas.GetWebACLForResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetWebACLForResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWebACLForResource, schemas.GetWebACLForResourceRequest, schemas.GetWebACLForResourceResponse), output: &GetWebACLForResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

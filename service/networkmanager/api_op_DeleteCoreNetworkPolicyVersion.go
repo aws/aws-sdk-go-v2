@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteCoreNetworkPolicyVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCoreNetworkPolicyVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCoreNetworkPolicyVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCoreNetworkPolicyVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.DeleteCoreNetworkPolicyVersionRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.PolicyVersionId != nil {
+		s.WriteInt32(schemas.DeleteCoreNetworkPolicyVersionRequest_PolicyVersionId, *v.PolicyVersionId)
+	}
+}
+
 type DeleteCoreNetworkPolicyVersionOutput struct {
 
 	// Returns information about the deleted policy version.
@@ -51,13 +68,34 @@ type DeleteCoreNetworkPolicyVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCoreNetworkPolicyVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCoreNetworkPolicyVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCoreNetworkPolicyVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkPolicy != nil {
+		s.WriteStruct(schemas.DeleteCoreNetworkPolicyVersionResponse_CoreNetworkPolicy)
+		v.CoreNetworkPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteCoreNetworkPolicyVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCoreNetworkPolicyVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteCoreNetworkPolicyVersionResponse_CoreNetworkPolicy:
+			v.CoreNetworkPolicy = &types.CoreNetworkPolicy{}
+			return v.CoreNetworkPolicy.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCoreNetworkPolicyVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCoreNetworkPolicyVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCoreNetworkPolicyVersion, schemas.DeleteCoreNetworkPolicyVersionRequest, schemas.DeleteCoreNetworkPolicyVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCoreNetworkPolicyVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCoreNetworkPolicyVersion, schemas.DeleteCoreNetworkPolicyVersionRequest, schemas.DeleteCoreNetworkPolicyVersionResponse), output: &DeleteCoreNetworkPolicyVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

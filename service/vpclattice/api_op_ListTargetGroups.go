@@ -5,7 +5,9 @@ package vpclattice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,50 @@ type ListTargetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTargetGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTargetGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTargetGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTargetGroupsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTargetGroupsRequest_nextToken, *v.NextToken)
+	}
+	if v.TargetGroupType != "" {
+		s.WriteString(schemas.ListTargetGroupsRequest_targetGroupType, string(v.TargetGroupType))
+	}
+	if v.VpcIdentifier != nil {
+		s.WriteString(schemas.ListTargetGroupsRequest_vpcIdentifier, *v.VpcIdentifier)
+	}
+}
+func (v *ListTargetGroupsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTargetGroupsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTargetGroupsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListTargetGroupsRequest_maxResults, v.MaxResults)
+		case schemas.ListTargetGroupsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTargetGroupsRequest_nextToken, v.NextToken)
+		case schemas.ListTargetGroupsRequest_targetGroupType:
+			var ev string
+			if err := d.ReadString(schemas.ListTargetGroupsRequest_targetGroupType, &ev); err != nil {
+				return err
+			}
+			v.TargetGroupType = types.TargetGroupType(ev)
+			return nil
+		case schemas.ListTargetGroupsRequest_vpcIdentifier:
+			v.VpcIdentifier = new(string)
+			return d.ReadString(schemas.ListTargetGroupsRequest_vpcIdentifier, v.VpcIdentifier)
+		}
+		return nil
+	})
+}
+
 type ListTargetGroupsOutput struct {
 
 	// Information about the target groups.
@@ -58,13 +104,35 @@ type ListTargetGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTargetGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTargetGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTargetGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTargetGroupList(s, schemas.ListTargetGroupsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTargetGroupsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListTargetGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTargetGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTargetGroupsResponse_items:
+			return deserializeTargetGroupList(d, schemas.ListTargetGroupsResponse_items, &v.Items)
+		case schemas.ListTargetGroupsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTargetGroupsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTargetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTargetGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTargetGroups, schemas.ListTargetGroupsRequest, schemas.ListTargetGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTargetGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTargetGroups, schemas.ListTargetGroupsRequest, schemas.ListTargetGroupsResponse), output: &ListTargetGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

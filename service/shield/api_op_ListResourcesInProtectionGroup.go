@@ -5,6 +5,8 @@ package shield
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/shield/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,24 @@ type ListResourcesInProtectionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourcesInProtectionGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourcesInProtectionGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourcesInProtectionGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResourcesInProtectionGroupRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourcesInProtectionGroupRequest_NextToken, *v.NextToken)
+	}
+	if v.ProtectionGroupId != nil {
+		s.WriteString(schemas.ListResourcesInProtectionGroupRequest_ProtectionGroupId, *v.ProtectionGroupId)
+	}
+}
+
 type ListResourcesInProtectionGroupOutput struct {
 
 	// The Amazon Resource Names (ARNs) of the resources that are included in the
@@ -91,13 +111,35 @@ type ListResourcesInProtectionGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourcesInProtectionGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourcesInProtectionGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourcesInProtectionGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourcesInProtectionGroupResponse_NextToken, *v.NextToken)
+	}
+	serializeResourceArnList(s, schemas.ListResourcesInProtectionGroupResponse_ResourceArns, v.ResourceArns)
+}
+func (v *ListResourcesInProtectionGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourcesInProtectionGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourcesInProtectionGroupResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResourcesInProtectionGroupResponse_NextToken, v.NextToken)
+		case schemas.ListResourcesInProtectionGroupResponse_ResourceArns:
+			return deserializeResourceArnList(d, schemas.ListResourcesInProtectionGroupResponse_ResourceArns, &v.ResourceArns)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResourcesInProtectionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResourcesInProtectionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourcesInProtectionGroup, schemas.ListResourcesInProtectionGroupRequest, schemas.ListResourcesInProtectionGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListResourcesInProtectionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourcesInProtectionGroup, schemas.ListResourcesInProtectionGroupRequest, schemas.ListResourcesInProtectionGroupResponse), output: &ListResourcesInProtectionGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

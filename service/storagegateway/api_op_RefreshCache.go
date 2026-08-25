@@ -4,6 +4,8 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -88,6 +90,22 @@ type RefreshCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RefreshCacheInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RefreshCacheInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RefreshCacheInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileShareARN != nil {
+		s.WriteString(schemas.RefreshCacheInput_FileShareARN, *v.FileShareARN)
+	}
+	serializeFolderList(s, schemas.RefreshCacheInput_FolderList, v.FolderList)
+	if v.Recursive != nil {
+		s.WriteBool(schemas.RefreshCacheInput_Recursive, *v.Recursive)
+	}
+}
+
 // RefreshCacheOutput
 type RefreshCacheOutput struct {
 
@@ -104,13 +122,38 @@ type RefreshCacheOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RefreshCacheOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RefreshCacheOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RefreshCacheOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileShareARN != nil {
+		s.WriteString(schemas.RefreshCacheOutput_FileShareARN, *v.FileShareARN)
+	}
+	if v.NotificationId != nil {
+		s.WriteString(schemas.RefreshCacheOutput_NotificationId, *v.NotificationId)
+	}
+}
+func (v *RefreshCacheOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RefreshCacheOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RefreshCacheOutput_FileShareARN:
+			v.FileShareARN = new(string)
+			return d.ReadString(schemas.RefreshCacheOutput_FileShareARN, v.FileShareARN)
+		case schemas.RefreshCacheOutput_NotificationId:
+			v.NotificationId = new(string)
+			return d.ReadString(schemas.RefreshCacheOutput_NotificationId, v.NotificationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRefreshCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRefreshCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RefreshCache, schemas.RefreshCacheInput, schemas.RefreshCacheOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRefreshCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RefreshCache, schemas.RefreshCacheInput, schemas.RefreshCacheOutput), output: &RefreshCacheOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

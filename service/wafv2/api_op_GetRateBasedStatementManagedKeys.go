@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -85,6 +87,30 @@ type GetRateBasedStatementManagedKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRateBasedStatementManagedKeysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRateBasedStatementManagedKeysRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRateBasedStatementManagedKeysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleGroupRuleName != nil {
+		s.WriteString(schemas.GetRateBasedStatementManagedKeysRequest_RuleGroupRuleName, *v.RuleGroupRuleName)
+	}
+	if v.RuleName != nil {
+		s.WriteString(schemas.GetRateBasedStatementManagedKeysRequest_RuleName, *v.RuleName)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.GetRateBasedStatementManagedKeysRequest_Scope, string(v.Scope))
+	}
+	if v.WebACLId != nil {
+		s.WriteString(schemas.GetRateBasedStatementManagedKeysRequest_WebACLId, *v.WebACLId)
+	}
+	if v.WebACLName != nil {
+		s.WriteString(schemas.GetRateBasedStatementManagedKeysRequest_WebACLName, *v.WebACLName)
+	}
+}
+
 type GetRateBasedStatementManagedKeysOutput struct {
 
 	// The keys that are of Internet Protocol version 4 (IPv4).
@@ -99,13 +125,42 @@ type GetRateBasedStatementManagedKeysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRateBasedStatementManagedKeysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRateBasedStatementManagedKeysResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRateBasedStatementManagedKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagedKeysIPV4 != nil {
+		s.WriteStruct(schemas.GetRateBasedStatementManagedKeysResponse_ManagedKeysIPV4)
+		v.ManagedKeysIPV4.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ManagedKeysIPV6 != nil {
+		s.WriteStruct(schemas.GetRateBasedStatementManagedKeysResponse_ManagedKeysIPV6)
+		v.ManagedKeysIPV6.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetRateBasedStatementManagedKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRateBasedStatementManagedKeysResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRateBasedStatementManagedKeysResponse_ManagedKeysIPV4:
+			v.ManagedKeysIPV4 = &types.RateBasedStatementManagedKeysIPSet{}
+			return v.ManagedKeysIPV4.Deserialize(d)
+		case schemas.GetRateBasedStatementManagedKeysResponse_ManagedKeysIPV6:
+			v.ManagedKeysIPV6 = &types.RateBasedStatementManagedKeysIPSet{}
+			return v.ManagedKeysIPV6.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRateBasedStatementManagedKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRateBasedStatementManagedKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRateBasedStatementManagedKeys, schemas.GetRateBasedStatementManagedKeysRequest, schemas.GetRateBasedStatementManagedKeysResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRateBasedStatementManagedKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRateBasedStatementManagedKeys, schemas.GetRateBasedStatementManagedKeysRequest, schemas.GetRateBasedStatementManagedKeysResponse), output: &GetRateBasedStatementManagedKeysOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

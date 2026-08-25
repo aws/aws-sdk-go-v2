@@ -5,6 +5,8 @@ package billingconductor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,46 @@ type ListPricingRulesAssociatedToPricingPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPricingRulesAssociatedToPricingPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPricingRulesAssociatedToPricingPlanInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPricingRulesAssociatedToPricingPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingPeriod != nil {
+		s.WriteString(schemas.ListPricingRulesAssociatedToPricingPlanInput_BillingPeriod, *v.BillingPeriod)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPricingRulesAssociatedToPricingPlanInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPricingRulesAssociatedToPricingPlanInput_NextToken, *v.NextToken)
+	}
+	if v.PricingPlanArn != nil {
+		s.WriteString(schemas.ListPricingRulesAssociatedToPricingPlanInput_PricingPlanArn, *v.PricingPlanArn)
+	}
+}
+func (v *ListPricingRulesAssociatedToPricingPlanInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPricingRulesAssociatedToPricingPlanInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPricingRulesAssociatedToPricingPlanInput_BillingPeriod:
+			v.BillingPeriod = new(string)
+			return d.ReadString(schemas.ListPricingRulesAssociatedToPricingPlanInput_BillingPeriod, v.BillingPeriod)
+		case schemas.ListPricingRulesAssociatedToPricingPlanInput_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListPricingRulesAssociatedToPricingPlanInput_MaxResults, v.MaxResults)
+		case schemas.ListPricingRulesAssociatedToPricingPlanInput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPricingRulesAssociatedToPricingPlanInput_NextToken, v.NextToken)
+		case schemas.ListPricingRulesAssociatedToPricingPlanInput_PricingPlanArn:
+			v.PricingPlanArn = new(string)
+			return d.ReadString(schemas.ListPricingRulesAssociatedToPricingPlanInput_PricingPlanArn, v.PricingPlanArn)
+		}
+		return nil
+	})
+}
+
 type ListPricingRulesAssociatedToPricingPlanOutput struct {
 
 	//  The billing period for which the pricing rule associations are listed.
@@ -66,13 +108,47 @@ type ListPricingRulesAssociatedToPricingPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPricingRulesAssociatedToPricingPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPricingRulesAssociatedToPricingPlanOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPricingRulesAssociatedToPricingPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingPeriod != nil {
+		s.WriteString(schemas.ListPricingRulesAssociatedToPricingPlanOutput_BillingPeriod, *v.BillingPeriod)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPricingRulesAssociatedToPricingPlanOutput_NextToken, *v.NextToken)
+	}
+	if v.PricingPlanArn != nil {
+		s.WriteString(schemas.ListPricingRulesAssociatedToPricingPlanOutput_PricingPlanArn, *v.PricingPlanArn)
+	}
+	serializePricingRuleArns(s, schemas.ListPricingRulesAssociatedToPricingPlanOutput_PricingRuleArns, v.PricingRuleArns)
+}
+func (v *ListPricingRulesAssociatedToPricingPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPricingRulesAssociatedToPricingPlanOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPricingRulesAssociatedToPricingPlanOutput_BillingPeriod:
+			v.BillingPeriod = new(string)
+			return d.ReadString(schemas.ListPricingRulesAssociatedToPricingPlanOutput_BillingPeriod, v.BillingPeriod)
+		case schemas.ListPricingRulesAssociatedToPricingPlanOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPricingRulesAssociatedToPricingPlanOutput_NextToken, v.NextToken)
+		case schemas.ListPricingRulesAssociatedToPricingPlanOutput_PricingPlanArn:
+			v.PricingPlanArn = new(string)
+			return d.ReadString(schemas.ListPricingRulesAssociatedToPricingPlanOutput_PricingPlanArn, v.PricingPlanArn)
+		case schemas.ListPricingRulesAssociatedToPricingPlanOutput_PricingRuleArns:
+			return deserializePricingRuleArns(d, schemas.ListPricingRulesAssociatedToPricingPlanOutput_PricingRuleArns, &v.PricingRuleArns)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPricingRulesAssociatedToPricingPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPricingRulesAssociatedToPricingPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPricingRulesAssociatedToPricingPlan, schemas.ListPricingRulesAssociatedToPricingPlanInput, schemas.ListPricingRulesAssociatedToPricingPlanOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPricingRulesAssociatedToPricingPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPricingRulesAssociatedToPricingPlan, schemas.ListPricingRulesAssociatedToPricingPlanInput, schemas.ListPricingRulesAssociatedToPricingPlanOutput), output: &ListPricingRulesAssociatedToPricingPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteLicenseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLicenseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLicenseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLicenseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseArn != nil {
+		s.WriteString(schemas.DeleteLicenseRequest_LicenseArn, *v.LicenseArn)
+	}
+	if v.SourceVersion != nil {
+		s.WriteString(schemas.DeleteLicenseRequest_SourceVersion, *v.SourceVersion)
+	}
+}
+
 type DeleteLicenseOutput struct {
 
 	// Date when the license is deleted.
@@ -53,13 +70,42 @@ type DeleteLicenseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLicenseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLicenseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLicenseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletionDate != nil {
+		s.WriteString(schemas.DeleteLicenseResponse_DeletionDate, *v.DeletionDate)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteLicenseResponse_Status, string(v.Status))
+	}
+}
+func (v *DeleteLicenseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLicenseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteLicenseResponse_DeletionDate:
+			v.DeletionDate = new(string)
+			return d.ReadString(schemas.DeleteLicenseResponse_DeletionDate, v.DeletionDate)
+		case schemas.DeleteLicenseResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteLicenseResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.LicenseDeletionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLicenseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteLicense{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLicense, schemas.DeleteLicenseRequest, schemas.DeleteLicenseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteLicense{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLicense, schemas.DeleteLicenseRequest, schemas.DeleteLicenseResponse), output: &DeleteLicenseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeletePeeringInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePeeringInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePeeringRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePeeringInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PeeringId != nil {
+		s.WriteString(schemas.DeletePeeringRequest_PeeringId, *v.PeeringId)
+	}
+}
+
 type DeletePeeringOutput struct {
 
 	// Information about a deleted peering connection.
@@ -45,13 +59,34 @@ type DeletePeeringOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePeeringOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePeeringResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePeeringOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Peering != nil {
+		s.WriteStruct(schemas.DeletePeeringResponse_Peering)
+		v.Peering.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeletePeeringOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePeeringResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePeeringResponse_Peering:
+			v.Peering = &types.Peering{}
+			return v.Peering.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePeeringMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePeering{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePeering, schemas.DeletePeeringRequest, schemas.DeletePeeringResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePeering{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePeering, schemas.DeletePeeringRequest, schemas.DeletePeeringResponse), output: &DeletePeeringOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

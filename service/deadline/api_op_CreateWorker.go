@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,6 +64,30 @@ type CreateWorkerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateWorkerRequest_clientToken, *v.ClientToken)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.CreateWorkerRequest_farmId, *v.FarmId)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.CreateWorkerRequest_fleetId, *v.FleetId)
+	}
+	if v.HostProperties != nil {
+		s.WriteStruct(schemas.CreateWorkerRequest_hostProperties)
+		v.HostProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateWorkerRequest_tags, v.Tags)
+}
+
 // Mixin that adds an optional ARN field to response structures. Apply to
 // SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type CreateWorkerOutput struct {
@@ -77,13 +103,32 @@ type CreateWorkerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkerId != nil {
+		s.WriteString(schemas.CreateWorkerResponse_workerId, *v.WorkerId)
+	}
+}
+func (v *CreateWorkerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkerResponse_workerId:
+			v.WorkerId = new(string)
+			return d.ReadString(schemas.CreateWorkerResponse_workerId, v.WorkerId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWorkerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWorker{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorker, schemas.CreateWorkerRequest, schemas.CreateWorkerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWorker{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorker, schemas.CreateWorkerRequest, schemas.CreateWorkerResponse), output: &CreateWorkerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

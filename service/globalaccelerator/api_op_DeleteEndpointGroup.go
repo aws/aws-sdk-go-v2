@@ -4,6 +4,8 @@ package globalaccelerator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteEndpointGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEndpointGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEndpointGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEndpointGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointGroupArn != nil {
+		s.WriteString(schemas.DeleteEndpointGroupRequest_EndpointGroupArn, *v.EndpointGroupArn)
+	}
+}
+
 type DeleteEndpointGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteEndpointGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEndpointGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEndpointGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteEndpointGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEndpointGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteEndpointGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEndpointGroup, schemas.DeleteEndpointGroupRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteEndpointGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEndpointGroup, schemas.DeleteEndpointGroupRequest, nil), output: &DeleteEndpointGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

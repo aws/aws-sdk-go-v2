@@ -5,7 +5,9 @@ package qconnect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type ListAIGuardrailVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAIGuardrailVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAIGuardrailVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAIGuardrailVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AiGuardrailId != nil {
+		s.WriteString(schemas.ListAIGuardrailVersionsRequest_aiGuardrailId, *v.AiGuardrailId)
+	}
+	if v.AssistantId != nil {
+		s.WriteString(schemas.ListAIGuardrailVersionsRequest_assistantId, *v.AssistantId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAIGuardrailVersionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAIGuardrailVersionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAIGuardrailVersionsOutput struct {
 
 	// The summaries of the AI Guardrail versions.
@@ -66,13 +89,35 @@ type ListAIGuardrailVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAIGuardrailVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAIGuardrailVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAIGuardrailVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAIGuardrailVersionSummariesList(s, schemas.ListAIGuardrailVersionsResponse_aiGuardrailVersionSummaries, v.AiGuardrailVersionSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAIGuardrailVersionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAIGuardrailVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAIGuardrailVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAIGuardrailVersionsResponse_aiGuardrailVersionSummaries:
+			return deserializeAIGuardrailVersionSummariesList(d, schemas.ListAIGuardrailVersionsResponse_aiGuardrailVersionSummaries, &v.AiGuardrailVersionSummaries)
+		case schemas.ListAIGuardrailVersionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAIGuardrailVersionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAIGuardrailVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAIGuardrailVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAIGuardrailVersions, schemas.ListAIGuardrailVersionsRequest, schemas.ListAIGuardrailVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAIGuardrailVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAIGuardrailVersions, schemas.ListAIGuardrailVersionsRequest, schemas.ListAIGuardrailVersionsResponse), output: &ListAIGuardrailVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

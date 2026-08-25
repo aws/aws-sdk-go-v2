@@ -5,7 +5,9 @@ package cloudcontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -102,6 +104,52 @@ type DeleteResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteResourceInput_ClientToken, *v.ClientToken)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.DeleteResourceInput_Identifier, *v.Identifier)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DeleteResourceInput_RoleArn, *v.RoleArn)
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.DeleteResourceInput_TypeName, *v.TypeName)
+	}
+	if v.TypeVersionId != nil {
+		s.WriteString(schemas.DeleteResourceInput_TypeVersionId, *v.TypeVersionId)
+	}
+}
+func (v *DeleteResourceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteResourceInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteResourceInput_ClientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DeleteResourceInput_ClientToken, v.ClientToken)
+		case schemas.DeleteResourceInput_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.DeleteResourceInput_Identifier, v.Identifier)
+		case schemas.DeleteResourceInput_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DeleteResourceInput_RoleArn, v.RoleArn)
+		case schemas.DeleteResourceInput_TypeName:
+			v.TypeName = new(string)
+			return d.ReadString(schemas.DeleteResourceInput_TypeName, v.TypeName)
+		case schemas.DeleteResourceInput_TypeVersionId:
+			v.TypeVersionId = new(string)
+			return d.ReadString(schemas.DeleteResourceInput_TypeVersionId, v.TypeVersionId)
+		}
+		return nil
+	})
+}
+
 type DeleteResourceOutput struct {
 
 	// Represents the current status of the resource deletion request.
@@ -119,13 +167,34 @@ type DeleteResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProgressEvent != nil {
+		s.WriteStruct(schemas.DeleteResourceOutput_ProgressEvent)
+		v.ProgressEvent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteResourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteResourceOutput_ProgressEvent:
+			v.ProgressEvent = &types.ProgressEvent{}
+			return v.ProgressEvent.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResource, schemas.DeleteResourceInput, schemas.DeleteResourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResource, schemas.DeleteResourceInput, schemas.DeleteResourceOutput), output: &DeleteResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

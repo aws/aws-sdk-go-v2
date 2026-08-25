@@ -5,7 +5,9 @@ package swf
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -132,6 +134,57 @@ type ListClosedWorkflowExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClosedWorkflowExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClosedWorkflowExecutionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClosedWorkflowExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloseStatusFilter != nil {
+		s.WriteStruct(schemas.ListClosedWorkflowExecutionsInput_closeStatusFilter)
+		v.CloseStatusFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CloseTimeFilter != nil {
+		s.WriteStruct(schemas.ListClosedWorkflowExecutionsInput_closeTimeFilter)
+		v.CloseTimeFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.ListClosedWorkflowExecutionsInput_domain, *v.Domain)
+	}
+	if v.ExecutionFilter != nil {
+		s.WriteStruct(schemas.ListClosedWorkflowExecutionsInput_executionFilter)
+		v.ExecutionFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaximumPageSize != 0 {
+		s.WriteInt32(schemas.ListClosedWorkflowExecutionsInput_maximumPageSize, v.MaximumPageSize)
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.ListClosedWorkflowExecutionsInput_nextPageToken, *v.NextPageToken)
+	}
+	if v.ReverseOrder != false {
+		s.WriteBool(schemas.ListClosedWorkflowExecutionsInput_reverseOrder, v.ReverseOrder)
+	}
+	if v.StartTimeFilter != nil {
+		s.WriteStruct(schemas.ListClosedWorkflowExecutionsInput_startTimeFilter)
+		v.StartTimeFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TagFilter != nil {
+		s.WriteStruct(schemas.ListClosedWorkflowExecutionsInput_tagFilter)
+		v.TagFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TypeFilter != nil {
+		s.WriteStruct(schemas.ListClosedWorkflowExecutionsInput_typeFilter)
+		v.TypeFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Contains a paginated list of information about workflow executions.
 type ListClosedWorkflowExecutionsOutput struct {
 
@@ -154,13 +207,35 @@ type ListClosedWorkflowExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClosedWorkflowExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowExecutionInfos)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClosedWorkflowExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWorkflowExecutionInfoList(s, schemas.WorkflowExecutionInfos_executionInfos, v.ExecutionInfos)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.WorkflowExecutionInfos_nextPageToken, *v.NextPageToken)
+	}
+}
+func (v *ListClosedWorkflowExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowExecutionInfos, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowExecutionInfos_executionInfos:
+			return deserializeWorkflowExecutionInfoList(d, schemas.WorkflowExecutionInfos_executionInfos, &v.ExecutionInfos)
+		case schemas.WorkflowExecutionInfos_nextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.WorkflowExecutionInfos_nextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListClosedWorkflowExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListClosedWorkflowExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClosedWorkflowExecutions, schemas.ListClosedWorkflowExecutionsInput, schemas.WorkflowExecutionInfos)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListClosedWorkflowExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClosedWorkflowExecutions, schemas.ListClosedWorkflowExecutionsInput, schemas.WorkflowExecutionInfos), output: &ListClosedWorkflowExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

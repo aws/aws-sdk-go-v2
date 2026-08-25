@@ -4,7 +4,9 @@ package paymentcryptography
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,18 @@ type GetMpaTeamAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMpaTeamAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMpaTeamAssociationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMpaTeamAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.GetMpaTeamAssociationInput_Action, string(v.Action))
+	}
+}
+
 type GetMpaTeamAssociationOutput struct {
 
 	// The details of the MPA team association.
@@ -61,13 +75,34 @@ type GetMpaTeamAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMpaTeamAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMpaTeamAssociationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMpaTeamAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MpaTeamAssociation != nil {
+		s.WriteStruct(schemas.GetMpaTeamAssociationOutput_MpaTeamAssociation)
+		v.MpaTeamAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetMpaTeamAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMpaTeamAssociationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMpaTeamAssociationOutput_MpaTeamAssociation:
+			v.MpaTeamAssociation = &types.MpaTeamAssociation{}
+			return v.MpaTeamAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMpaTeamAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetMpaTeamAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMpaTeamAssociation, schemas.GetMpaTeamAssociationInput, schemas.GetMpaTeamAssociationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetMpaTeamAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMpaTeamAssociation, schemas.GetMpaTeamAssociationInput, schemas.GetMpaTeamAssociationOutput), output: &GetMpaTeamAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

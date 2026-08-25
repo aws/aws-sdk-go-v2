@@ -4,7 +4,9 @@ package mediapackagevod
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,31 @@ type CreateAssetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAssetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAssetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CreateAssetRequest_Id, *v.Id)
+	}
+	if v.PackagingGroupId != nil {
+		s.WriteString(schemas.CreateAssetRequest_PackagingGroupId, *v.PackagingGroupId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.CreateAssetRequest_ResourceId, *v.ResourceId)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.CreateAssetRequest_SourceArn, *v.SourceArn)
+	}
+	if v.SourceRoleArn != nil {
+		s.WriteString(schemas.CreateAssetRequest_SourceRoleArn, *v.SourceRoleArn)
+	}
+	serializeTags(s, schemas.CreateAssetRequest_Tags, v.Tags)
+}
+
 type CreateAssetOutput struct {
 
 	// The ARN of the Asset.
@@ -91,13 +118,74 @@ type CreateAssetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAssetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAssetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateAssetResponse_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteString(schemas.CreateAssetResponse_CreatedAt, *v.CreatedAt)
+	}
+	serialize__listOfEgressEndpoint(s, schemas.CreateAssetResponse_EgressEndpoints, v.EgressEndpoints)
+	if v.Id != nil {
+		s.WriteString(schemas.CreateAssetResponse_Id, *v.Id)
+	}
+	if v.PackagingGroupId != nil {
+		s.WriteString(schemas.CreateAssetResponse_PackagingGroupId, *v.PackagingGroupId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.CreateAssetResponse_ResourceId, *v.ResourceId)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.CreateAssetResponse_SourceArn, *v.SourceArn)
+	}
+	if v.SourceRoleArn != nil {
+		s.WriteString(schemas.CreateAssetResponse_SourceRoleArn, *v.SourceRoleArn)
+	}
+	serializeTags(s, schemas.CreateAssetResponse_Tags, v.Tags)
+}
+func (v *CreateAssetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAssetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAssetResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateAssetResponse_Arn, v.Arn)
+		case schemas.CreateAssetResponse_CreatedAt:
+			v.CreatedAt = new(string)
+			return d.ReadString(schemas.CreateAssetResponse_CreatedAt, v.CreatedAt)
+		case schemas.CreateAssetResponse_EgressEndpoints:
+			return deserialize__listOfEgressEndpoint(d, schemas.CreateAssetResponse_EgressEndpoints, &v.EgressEndpoints)
+		case schemas.CreateAssetResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateAssetResponse_Id, v.Id)
+		case schemas.CreateAssetResponse_PackagingGroupId:
+			v.PackagingGroupId = new(string)
+			return d.ReadString(schemas.CreateAssetResponse_PackagingGroupId, v.PackagingGroupId)
+		case schemas.CreateAssetResponse_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.CreateAssetResponse_ResourceId, v.ResourceId)
+		case schemas.CreateAssetResponse_SourceArn:
+			v.SourceArn = new(string)
+			return d.ReadString(schemas.CreateAssetResponse_SourceArn, v.SourceArn)
+		case schemas.CreateAssetResponse_SourceRoleArn:
+			v.SourceRoleArn = new(string)
+			return d.ReadString(schemas.CreateAssetResponse_SourceRoleArn, v.SourceRoleArn)
+		case schemas.CreateAssetResponse_Tags:
+			return deserializeTags(d, schemas.CreateAssetResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAsset, schemas.CreateAssetRequest, schemas.CreateAssetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAsset, schemas.CreateAssetRequest, schemas.CreateAssetResponse), output: &CreateAssetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

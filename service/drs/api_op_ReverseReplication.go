@@ -4,6 +4,8 @@ package drs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,28 @@ type ReverseReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReverseReplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReverseReplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReverseReplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecoveryInstanceID != nil {
+		s.WriteString(schemas.ReverseReplicationRequest_recoveryInstanceID, *v.RecoveryInstanceID)
+	}
+}
+func (v *ReverseReplicationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReverseReplicationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReverseReplicationRequest_recoveryInstanceID:
+			v.RecoveryInstanceID = new(string)
+			return d.ReadString(schemas.ReverseReplicationRequest_recoveryInstanceID, v.RecoveryInstanceID)
+		}
+		return nil
+	})
+}
+
 type ReverseReplicationOutput struct {
 
 	// ARN of created SourceServer.
@@ -47,13 +71,32 @@ type ReverseReplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReverseReplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReverseReplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReverseReplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReversedDirectionSourceServerArn != nil {
+		s.WriteString(schemas.ReverseReplicationResponse_reversedDirectionSourceServerArn, *v.ReversedDirectionSourceServerArn)
+	}
+}
+func (v *ReverseReplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReverseReplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReverseReplicationResponse_reversedDirectionSourceServerArn:
+			v.ReversedDirectionSourceServerArn = new(string)
+			return d.ReadString(schemas.ReverseReplicationResponse_reversedDirectionSourceServerArn, v.ReversedDirectionSourceServerArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationReverseReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpReverseReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReverseReplication, schemas.ReverseReplicationRequest, schemas.ReverseReplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpReverseReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReverseReplication, schemas.ReverseReplicationRequest, schemas.ReverseReplicationResponse), output: &ReverseReplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

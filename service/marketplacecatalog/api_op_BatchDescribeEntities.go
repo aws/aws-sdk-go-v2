@@ -4,7 +4,9 @@ package marketplacecatalog
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,16 @@ type BatchDescribeEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDescribeEntitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDescribeEntitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDescribeEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntityRequestList(s, schemas.BatchDescribeEntitiesRequest_EntityRequestList, v.EntityRequestList)
+}
+
 type BatchDescribeEntitiesOutput struct {
 
 	// Details about each entity.
@@ -50,13 +62,32 @@ type BatchDescribeEntitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDescribeEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDescribeEntitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDescribeEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntityDetails(s, schemas.BatchDescribeEntitiesResponse_EntityDetails, v.EntityDetails)
+	serializeErrors(s, schemas.BatchDescribeEntitiesResponse_Errors, v.Errors)
+}
+func (v *BatchDescribeEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDescribeEntitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDescribeEntitiesResponse_EntityDetails:
+			return deserializeEntityDetails(d, schemas.BatchDescribeEntitiesResponse_EntityDetails, &v.EntityDetails)
+		case schemas.BatchDescribeEntitiesResponse_Errors:
+			return deserializeErrors(d, schemas.BatchDescribeEntitiesResponse_Errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDescribeEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDescribeEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDescribeEntities, schemas.BatchDescribeEntitiesRequest, schemas.BatchDescribeEntitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDescribeEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDescribeEntities, schemas.BatchDescribeEntitiesRequest, schemas.BatchDescribeEntitiesResponse), output: &BatchDescribeEntitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

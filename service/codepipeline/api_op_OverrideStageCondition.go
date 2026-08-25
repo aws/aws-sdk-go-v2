@@ -4,7 +4,9 @@ package codepipeline
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,27 @@ type OverrideStageConditionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OverrideStageConditionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OverrideStageConditionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OverrideStageConditionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConditionType != "" {
+		s.WriteString(schemas.OverrideStageConditionInput_conditionType, string(v.ConditionType))
+	}
+	if v.PipelineExecutionId != nil {
+		s.WriteString(schemas.OverrideStageConditionInput_pipelineExecutionId, *v.PipelineExecutionId)
+	}
+	if v.PipelineName != nil {
+		s.WriteString(schemas.OverrideStageConditionInput_pipelineName, *v.PipelineName)
+	}
+	if v.StageName != nil {
+		s.WriteString(schemas.OverrideStageConditionInput_stageName, *v.StageName)
+	}
+}
+
 type OverrideStageConditionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,13 +84,26 @@ type OverrideStageConditionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OverrideStageConditionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OverrideStageConditionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *OverrideStageConditionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationOverrideStageConditionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpOverrideStageCondition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OverrideStageCondition, schemas.OverrideStageConditionInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpOverrideStageCondition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OverrideStageCondition, schemas.OverrideStageConditionInput, nil), output: &OverrideStageConditionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

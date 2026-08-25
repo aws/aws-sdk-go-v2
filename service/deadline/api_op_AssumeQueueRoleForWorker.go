@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,27 @@ type AssumeQueueRoleForWorkerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssumeQueueRoleForWorkerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssumeQueueRoleForWorkerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssumeQueueRoleForWorkerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.AssumeQueueRoleForWorkerRequest_farmId, *v.FarmId)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.AssumeQueueRoleForWorkerRequest_fleetId, *v.FleetId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.AssumeQueueRoleForWorkerRequest_queueId, *v.QueueId)
+	}
+	if v.WorkerId != nil {
+		s.WriteString(schemas.AssumeQueueRoleForWorkerRequest_workerId, *v.WorkerId)
+	}
+}
+
 type AssumeQueueRoleForWorkerOutput struct {
 
 	// The Amazon Web Services credentials for the role that the worker is assuming.
@@ -62,13 +85,34 @@ type AssumeQueueRoleForWorkerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssumeQueueRoleForWorkerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssumeQueueRoleForWorkerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssumeQueueRoleForWorkerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Credentials != nil {
+		s.WriteStruct(schemas.AssumeQueueRoleForWorkerResponse_credentials)
+		v.Credentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssumeQueueRoleForWorkerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssumeQueueRoleForWorkerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssumeQueueRoleForWorkerResponse_credentials:
+			v.Credentials = &types.AwsCredentials{}
+			return v.Credentials.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssumeQueueRoleForWorkerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssumeQueueRoleForWorker{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssumeQueueRoleForWorker, schemas.AssumeQueueRoleForWorkerRequest, schemas.AssumeQueueRoleForWorkerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssumeQueueRoleForWorker{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssumeQueueRoleForWorker, schemas.AssumeQueueRoleForWorkerRequest, schemas.AssumeQueueRoleForWorkerResponse), output: &AssumeQueueRoleForWorkerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

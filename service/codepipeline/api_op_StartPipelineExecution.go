@@ -5,7 +5,9 @@ package codepipeline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,23 @@ type StartPipelineExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartPipelineExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartPipelineExecutionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartPipelineExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartPipelineExecutionInput_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartPipelineExecutionInput_name, *v.Name)
+	}
+	serializeSourceRevisionOverrideList(s, schemas.StartPipelineExecutionInput_sourceRevisions, v.SourceRevisions)
+	serializePipelineVariableList(s, schemas.StartPipelineExecutionInput_variables, v.Variables)
+}
+
 // Represents the output of a StartPipelineExecution action.
 type StartPipelineExecutionOutput struct {
 
@@ -63,13 +82,32 @@ type StartPipelineExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartPipelineExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartPipelineExecutionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartPipelineExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineExecutionId != nil {
+		s.WriteString(schemas.StartPipelineExecutionOutput_pipelineExecutionId, *v.PipelineExecutionId)
+	}
+}
+func (v *StartPipelineExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartPipelineExecutionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartPipelineExecutionOutput_pipelineExecutionId:
+			v.PipelineExecutionId = new(string)
+			return d.ReadString(schemas.StartPipelineExecutionOutput_pipelineExecutionId, v.PipelineExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartPipelineExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartPipelineExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPipelineExecution, schemas.StartPipelineExecutionInput, schemas.StartPipelineExecutionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartPipelineExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPipelineExecution, schemas.StartPipelineExecutionInput, schemas.StartPipelineExecutionOutput), output: &StartPipelineExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

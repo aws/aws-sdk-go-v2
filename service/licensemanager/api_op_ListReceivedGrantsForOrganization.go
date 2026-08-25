@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,25 @@ type ListReceivedGrantsForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReceivedGrantsForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReceivedGrantsForOrganizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReceivedGrantsForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.ListReceivedGrantsForOrganizationRequest_Filters, v.Filters)
+	if v.LicenseArn != nil {
+		s.WriteString(schemas.ListReceivedGrantsForOrganizationRequest_LicenseArn, *v.LicenseArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListReceivedGrantsForOrganizationRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReceivedGrantsForOrganizationRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListReceivedGrantsForOrganizationOutput struct {
 
 	// Lists the grants the organization has received.
@@ -61,13 +82,35 @@ type ListReceivedGrantsForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReceivedGrantsForOrganizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReceivedGrantsForOrganizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReceivedGrantsForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGrantList(s, schemas.ListReceivedGrantsForOrganizationResponse_Grants, v.Grants)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReceivedGrantsForOrganizationResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListReceivedGrantsForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReceivedGrantsForOrganizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReceivedGrantsForOrganizationResponse_Grants:
+			return deserializeGrantList(d, schemas.ListReceivedGrantsForOrganizationResponse_Grants, &v.Grants)
+		case schemas.ListReceivedGrantsForOrganizationResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReceivedGrantsForOrganizationResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReceivedGrantsForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListReceivedGrantsForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReceivedGrantsForOrganization, schemas.ListReceivedGrantsForOrganizationRequest, schemas.ListReceivedGrantsForOrganizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListReceivedGrantsForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReceivedGrantsForOrganization, schemas.ListReceivedGrantsForOrganizationRequest, schemas.ListReceivedGrantsForOrganizationResponse), output: &ListReceivedGrantsForOrganizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

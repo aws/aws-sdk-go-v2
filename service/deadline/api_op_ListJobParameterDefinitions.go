@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/document"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,30 @@ type ListJobParameterDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobParameterDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobParameterDefinitionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobParameterDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.ListJobParameterDefinitionsRequest_farmId, *v.FarmId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.ListJobParameterDefinitionsRequest_jobId, *v.JobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListJobParameterDefinitionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListJobParameterDefinitionsRequest_nextToken, *v.NextToken)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.ListJobParameterDefinitionsRequest_queueId, *v.QueueId)
+	}
+}
+
 // Shared pagination field for List operation outputs (nextToken).
 type ListJobParameterDefinitionsOutput struct {
 
@@ -76,13 +102,35 @@ type ListJobParameterDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobParameterDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobParameterDefinitionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobParameterDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeJobParameterDefinitions(s, schemas.ListJobParameterDefinitionsResponse_jobParameterDefinitions, v.JobParameterDefinitions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListJobParameterDefinitionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListJobParameterDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListJobParameterDefinitionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListJobParameterDefinitionsResponse_jobParameterDefinitions:
+			return deserializeJobParameterDefinitions(d, schemas.ListJobParameterDefinitionsResponse_jobParameterDefinitions, &v.JobParameterDefinitions)
+		case schemas.ListJobParameterDefinitionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListJobParameterDefinitionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListJobParameterDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListJobParameterDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobParameterDefinitions, schemas.ListJobParameterDefinitionsRequest, schemas.ListJobParameterDefinitionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListJobParameterDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobParameterDefinitions, schemas.ListJobParameterDefinitionsRequest, schemas.ListJobParameterDefinitionsResponse), output: &ListJobParameterDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

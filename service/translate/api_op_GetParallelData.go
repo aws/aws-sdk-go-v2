@@ -4,7 +4,9 @@ package translate
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/translate/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/translate/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type GetParallelDataInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetParallelDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParallelDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParallelDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetParallelDataRequest_Name, *v.Name)
+	}
 }
 
 type GetParallelDataOutput struct {
@@ -73,13 +87,58 @@ type GetParallelDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetParallelDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParallelDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParallelDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuxiliaryDataLocation != nil {
+		s.WriteStruct(schemas.GetParallelDataResponse_AuxiliaryDataLocation)
+		v.AuxiliaryDataLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataLocation != nil {
+		s.WriteStruct(schemas.GetParallelDataResponse_DataLocation)
+		v.DataLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LatestUpdateAttemptAuxiliaryDataLocation != nil {
+		s.WriteStruct(schemas.GetParallelDataResponse_LatestUpdateAttemptAuxiliaryDataLocation)
+		v.LatestUpdateAttemptAuxiliaryDataLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParallelDataProperties != nil {
+		s.WriteStruct(schemas.GetParallelDataResponse_ParallelDataProperties)
+		v.ParallelDataProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetParallelDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetParallelDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetParallelDataResponse_AuxiliaryDataLocation:
+			v.AuxiliaryDataLocation = &types.ParallelDataDataLocation{}
+			return v.AuxiliaryDataLocation.Deserialize(d)
+		case schemas.GetParallelDataResponse_DataLocation:
+			v.DataLocation = &types.ParallelDataDataLocation{}
+			return v.DataLocation.Deserialize(d)
+		case schemas.GetParallelDataResponse_LatestUpdateAttemptAuxiliaryDataLocation:
+			v.LatestUpdateAttemptAuxiliaryDataLocation = &types.ParallelDataDataLocation{}
+			return v.LatestUpdateAttemptAuxiliaryDataLocation.Deserialize(d)
+		case schemas.GetParallelDataResponse_ParallelDataProperties:
+			v.ParallelDataProperties = &types.ParallelDataProperties{}
+			return v.ParallelDataProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetParallelDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetParallelData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParallelData, schemas.GetParallelDataRequest, schemas.GetParallelDataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetParallelData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParallelData, schemas.GetParallelDataRequest, schemas.GetParallelDataResponse), output: &GetParallelDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

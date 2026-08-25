@@ -5,7 +5,9 @@ package servicediscovery
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -86,6 +88,32 @@ type DiscoverInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DiscoverInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DiscoverInstancesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DiscoverInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HealthStatus != "" {
+		s.WriteString(schemas.DiscoverInstancesRequest_HealthStatus, string(v.HealthStatus))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DiscoverInstancesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NamespaceName != nil {
+		s.WriteString(schemas.DiscoverInstancesRequest_NamespaceName, *v.NamespaceName)
+	}
+	serializeAttributes(s, schemas.DiscoverInstancesRequest_OptionalParameters, v.OptionalParameters)
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.DiscoverInstancesRequest_OwnerAccount, *v.OwnerAccount)
+	}
+	serializeAttributes(s, schemas.DiscoverInstancesRequest_QueryParameters, v.QueryParameters)
+	if v.ServiceName != nil {
+		s.WriteString(schemas.DiscoverInstancesRequest_ServiceName, *v.ServiceName)
+	}
+}
+
 type DiscoverInstancesOutput struct {
 
 	// A complex type that contains one HttpInstanceSummary for each registered
@@ -103,13 +131,35 @@ type DiscoverInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DiscoverInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DiscoverInstancesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DiscoverInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHttpInstanceSummaryList(s, schemas.DiscoverInstancesResponse_Instances, v.Instances)
+	if v.InstancesRevision != nil {
+		s.WriteInt64(schemas.DiscoverInstancesResponse_InstancesRevision, *v.InstancesRevision)
+	}
+}
+func (v *DiscoverInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DiscoverInstancesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DiscoverInstancesResponse_Instances:
+			return deserializeHttpInstanceSummaryList(d, schemas.DiscoverInstancesResponse_Instances, &v.Instances)
+		case schemas.DiscoverInstancesResponse_InstancesRevision:
+			v.InstancesRevision = new(int64)
+			return d.ReadInt64(schemas.DiscoverInstancesResponse_InstancesRevision, v.InstancesRevision)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDiscoverInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDiscoverInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DiscoverInstances, schemas.DiscoverInstancesRequest, schemas.DiscoverInstancesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDiscoverInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DiscoverInstances, schemas.DiscoverInstancesRequest, schemas.DiscoverInstancesResponse), output: &DiscoverInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

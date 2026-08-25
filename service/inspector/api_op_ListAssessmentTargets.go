@@ -5,7 +5,9 @@ package inspector
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,26 @@ type ListAssessmentTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssessmentTargetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssessmentTargetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssessmentTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListAssessmentTargetsRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssessmentTargetsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssessmentTargetsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAssessmentTargetsOutput struct {
 
 	// A list of ARNs that specifies the assessment targets that are returned by the
@@ -71,13 +93,35 @@ type ListAssessmentTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssessmentTargetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssessmentTargetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssessmentTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListReturnedArnList(s, schemas.ListAssessmentTargetsResponse_assessmentTargetArns, v.AssessmentTargetArns)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssessmentTargetsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAssessmentTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssessmentTargetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssessmentTargetsResponse_assessmentTargetArns:
+			return deserializeListReturnedArnList(d, schemas.ListAssessmentTargetsResponse_assessmentTargetArns, &v.AssessmentTargetArns)
+		case schemas.ListAssessmentTargetsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssessmentTargetsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssessmentTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAssessmentTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssessmentTargets, schemas.ListAssessmentTargetsRequest, schemas.ListAssessmentTargetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAssessmentTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssessmentTargets, schemas.ListAssessmentTargetsRequest, schemas.ListAssessmentTargetsResponse), output: &ListAssessmentTargetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

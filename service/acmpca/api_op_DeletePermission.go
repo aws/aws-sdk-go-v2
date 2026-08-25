@@ -4,6 +4,8 @@ package acmpca
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,24 @@ type DeletePermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePermissionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePermissionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateAuthorityArn != nil {
+		s.WriteString(schemas.DeletePermissionRequest_CertificateAuthorityArn, *v.CertificateAuthorityArn)
+	}
+	if v.Principal != nil {
+		s.WriteString(schemas.DeletePermissionRequest_Principal, *v.Principal)
+	}
+	if v.SourceAccount != nil {
+		s.WriteString(schemas.DeletePermissionRequest_SourceAccount, *v.SourceAccount)
+	}
+}
+
 type DeletePermissionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -81,13 +101,26 @@ type DeletePermissionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePermissionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeletePermissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeletePermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePermission, schemas.DeletePermissionRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeletePermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePermission, schemas.DeletePermissionRequest, nil), output: &DeletePermissionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

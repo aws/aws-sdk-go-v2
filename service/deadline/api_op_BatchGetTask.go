@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,16 @@ type BatchGetTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetTaskIdentifiers(s, schemas.BatchGetTaskRequest_identifiers, v.Identifiers)
+}
+
 type BatchGetTaskOutput struct {
 
 	// A list of errors for tasks that could not be retrieved.
@@ -61,13 +73,32 @@ type BatchGetTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetTaskErrors(s, schemas.BatchGetTaskResponse_errors, v.Errors)
+	serializeBatchGetTaskItems(s, schemas.BatchGetTaskResponse_tasks, v.Tasks)
+}
+func (v *BatchGetTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetTaskResponse_errors:
+			return deserializeBatchGetTaskErrors(d, schemas.BatchGetTaskResponse_errors, &v.Errors)
+		case schemas.BatchGetTaskResponse_tasks:
+			return deserializeBatchGetTaskItems(d, schemas.BatchGetTaskResponse_tasks, &v.Tasks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetTask, schemas.BatchGetTaskRequest, schemas.BatchGetTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetTask, schemas.BatchGetTaskRequest, schemas.BatchGetTaskResponse), output: &BatchGetTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package ivs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListPlaybackRestrictionPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlaybackRestrictionPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlaybackRestrictionPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlaybackRestrictionPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPlaybackRestrictionPoliciesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlaybackRestrictionPoliciesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListPlaybackRestrictionPoliciesOutput struct {
 
 	// List of the matching policies.
@@ -54,13 +71,35 @@ type ListPlaybackRestrictionPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlaybackRestrictionPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlaybackRestrictionPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlaybackRestrictionPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlaybackRestrictionPoliciesResponse_nextToken, *v.NextToken)
+	}
+	serializePlaybackRestrictionPolicyList(s, schemas.ListPlaybackRestrictionPoliciesResponse_playbackRestrictionPolicies, v.PlaybackRestrictionPolicies)
+}
+func (v *ListPlaybackRestrictionPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPlaybackRestrictionPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPlaybackRestrictionPoliciesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPlaybackRestrictionPoliciesResponse_nextToken, v.NextToken)
+		case schemas.ListPlaybackRestrictionPoliciesResponse_playbackRestrictionPolicies:
+			return deserializePlaybackRestrictionPolicyList(d, schemas.ListPlaybackRestrictionPoliciesResponse_playbackRestrictionPolicies, &v.PlaybackRestrictionPolicies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPlaybackRestrictionPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPlaybackRestrictionPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlaybackRestrictionPolicies, schemas.ListPlaybackRestrictionPoliciesRequest, schemas.ListPlaybackRestrictionPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPlaybackRestrictionPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlaybackRestrictionPolicies, schemas.ListPlaybackRestrictionPoliciesRequest, schemas.ListPlaybackRestrictionPoliciesResponse), output: &ListPlaybackRestrictionPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

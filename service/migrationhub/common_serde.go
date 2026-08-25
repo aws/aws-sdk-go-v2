@@ -136,6 +136,7 @@ func serializeSourceResourceList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func deserializeApplicationIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -149,6 +150,7 @@ func deserializeApplicationIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeApplicationStateList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ApplicationState) error {
+	*v = make([]types.ApplicationState, 0)
 	var vv types.ApplicationState
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ApplicationState{}
@@ -162,6 +164,7 @@ func deserializeApplicationStateList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeCreatedArtifactList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CreatedArtifact) error {
+	*v = make([]types.CreatedArtifact, 0)
 	var vv types.CreatedArtifact
 	return smithy.ReadList(d, s, func() error {
 		vv = types.CreatedArtifact{}
@@ -175,6 +178,7 @@ func deserializeCreatedArtifactList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeDiscoveredResourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DiscoveredResource) error {
+	*v = make([]types.DiscoveredResource, 0)
 	var vv types.DiscoveredResource
 	return smithy.ReadList(d, s, func() error {
 		vv = types.DiscoveredResource{}
@@ -188,6 +192,7 @@ func deserializeDiscoveredResourceList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeLatestResourceAttributeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ResourceAttribute) error {
+	*v = make([]types.ResourceAttribute, 0)
 	var vv types.ResourceAttribute
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ResourceAttribute{}
@@ -201,6 +206,7 @@ func deserializeLatestResourceAttributeList(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializeMigrationTaskSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MigrationTaskSummary) error {
+	*v = make([]types.MigrationTaskSummary, 0)
 	var vv types.MigrationTaskSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.MigrationTaskSummary{}
@@ -214,6 +220,7 @@ func deserializeMigrationTaskSummaryList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeMigrationTaskUpdateList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MigrationTaskUpdate) error {
+	*v = make([]types.MigrationTaskUpdate, 0)
 	var vv types.MigrationTaskUpdate
 	return smithy.ReadList(d, s, func() error {
 		vv = types.MigrationTaskUpdate{}
@@ -227,6 +234,7 @@ func deserializeMigrationTaskUpdateList(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func deserializeProgressUpdateStreamSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ProgressUpdateStreamSummary) error {
+	*v = make([]types.ProgressUpdateStreamSummary, 0)
 	var vv types.ProgressUpdateStreamSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ProgressUpdateStreamSummary{}
@@ -240,6 +248,7 @@ func deserializeProgressUpdateStreamSummaryList(d smithy.ShapeDeserializer, s *s
 }
 
 func deserializeResourceAttributeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ResourceAttribute) error {
+	*v = make([]types.ResourceAttribute, 0)
 	var vv types.ResourceAttribute
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ResourceAttribute{}
@@ -253,6 +262,7 @@ func deserializeResourceAttributeList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeSourceResourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SourceResource) error {
+	*v = make([]types.SourceResource, 0)
 	var vv types.SourceResource
 	return smithy.ReadList(d, s, func() error {
 		vv = types.SourceResource{}

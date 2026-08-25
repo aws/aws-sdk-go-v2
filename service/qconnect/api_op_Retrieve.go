@@ -4,7 +4,9 @@ package qconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,26 @@ type RetrieveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetrieveInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrieveRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrieveInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssistantId != nil {
+		s.WriteString(schemas.RetrieveRequest_assistantId, *v.AssistantId)
+	}
+	if v.RetrievalConfiguration != nil {
+		s.WriteStruct(schemas.RetrieveRequest_retrievalConfiguration)
+		v.RetrievalConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetrievalQuery != nil {
+		s.WriteString(schemas.RetrieveRequest_retrievalQuery, *v.RetrievalQuery)
+	}
+}
+
 type RetrieveOutput struct {
 
 	// The results of the content retrieval operation.
@@ -57,13 +79,29 @@ type RetrieveOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetrieveOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrieveResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrieveOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRetrieveResultList(s, schemas.RetrieveResponse_results, v.Results)
+}
+func (v *RetrieveOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetrieveResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetrieveResponse_results:
+			return deserializeRetrieveResultList(d, schemas.RetrieveResponse_results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRetrieveMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRetrieve{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Retrieve, schemas.RetrieveRequest, schemas.RetrieveResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRetrieve{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Retrieve, schemas.RetrieveRequest, schemas.RetrieveResponse), output: &RetrieveOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

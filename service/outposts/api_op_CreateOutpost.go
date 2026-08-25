@@ -4,7 +4,9 @@ package outposts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,34 @@ type CreateOutpostInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOutpostInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOutpostInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOutpostInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.CreateOutpostInput_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.CreateOutpostInput_AvailabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateOutpostInput_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateOutpostInput_Name, *v.Name)
+	}
+	if v.SiteId != nil {
+		s.WriteString(schemas.CreateOutpostInput_SiteId, *v.SiteId)
+	}
+	if v.SupportedHardwareType != "" {
+		s.WriteString(schemas.CreateOutpostInput_SupportedHardwareType, string(v.SupportedHardwareType))
+	}
+	serializeTagMap(s, schemas.CreateOutpostInput_Tags, v.Tags)
+}
+
 type CreateOutpostOutput struct {
 
 	// Information about an Outpost.
@@ -67,13 +97,34 @@ type CreateOutpostOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOutpostOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOutpostOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOutpostOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Outpost != nil {
+		s.WriteStruct(schemas.CreateOutpostOutput_Outpost)
+		v.Outpost.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateOutpostOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOutpostOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOutpostOutput_Outpost:
+			v.Outpost = &types.Outpost{}
+			return v.Outpost.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateOutpostMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateOutpost{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOutpost, schemas.CreateOutpostInput, schemas.CreateOutpostOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateOutpost{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOutpost, schemas.CreateOutpostInput, schemas.CreateOutpostOutput), output: &CreateOutpostOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

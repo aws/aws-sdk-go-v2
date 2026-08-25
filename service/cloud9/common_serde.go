@@ -91,6 +91,7 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types
 }
 
 func deserializeBoundedEnvironmentIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -104,6 +105,7 @@ func deserializeBoundedEnvironmentIdList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeEnvironmentIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -117,6 +119,7 @@ func deserializeEnvironmentIdList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeEnvironmentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Environment) error {
+	*v = make([]types.Environment, 0)
 	var vv types.Environment
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Environment{}
@@ -130,6 +133,7 @@ func deserializeEnvironmentList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeEnvironmentMembersList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EnvironmentMember) error {
+	*v = make([]types.EnvironmentMember, 0)
 	var vv types.EnvironmentMember
 	return smithy.ReadList(d, s, func() error {
 		vv = types.EnvironmentMember{}
@@ -143,6 +147,7 @@ func deserializeEnvironmentMembersList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializePermissionsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Permissions) error {
+	*v = make([]types.Permissions, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -156,6 +161,7 @@ func deserializePermissionsList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -169,6 +175,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Tag) error {
+	*v = make([]types.Tag, 0)
 	var vv types.Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Tag{}

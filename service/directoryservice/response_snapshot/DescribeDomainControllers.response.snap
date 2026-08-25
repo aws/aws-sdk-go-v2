@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DirectoryService_20150416.DescribeDomainControllers
+
+{"DomainControllers":[{"AvailabilityZone":"__AvailabilityZone__","DirectoryId":"__DirectoryId__","DnsIpAddr":"__DnsIpAddr__","DnsIpv6Addr":"__DnsIpv6Addr__","DomainControllerId":"__DomainControllerId__","LaunchTime":946684800,"Status":"Creating","StatusLastUpdatedDateTime":946684800,"StatusReason":"__StatusReason__","SubnetId":"__SubnetId__","VpcId":"__VpcId__"},{"AvailabilityZone":"__AvailabilityZone__","DirectoryId":"__DirectoryId__","DnsIpAddr":"__DnsIpAddr__","DnsIpv6Addr":"__DnsIpv6Addr__","DomainControllerId":"__DomainControllerId__","LaunchTime":946684800,"Status":"Creating","StatusLastUpdatedDateTime":946684800,"StatusReason":"__StatusReason__","SubnetId":"__SubnetId__","VpcId":"__VpcId__"}],"NextToken":"__NextToken__"}

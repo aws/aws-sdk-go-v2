@@ -4,6 +4,9 @@ package types
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -27,6 +30,34 @@ type BatchGetViewError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetViewError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetViewError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetViewError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.BatchGetViewError_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.ViewArn != nil {
+		s.WriteString(schemas.BatchGetViewError_ViewArn, *v.ViewArn)
+	}
+}
+func (v *BatchGetViewError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetViewError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetViewError_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.BatchGetViewError_ErrorMessage, v.ErrorMessage)
+		case schemas.BatchGetViewError_ViewArn:
+			v.ViewArn = new(string)
+			return d.ReadString(schemas.BatchGetViewError_ViewArn, v.ViewArn)
+		}
+		return nil
+	})
+}
+
 // Contains information about an error that occurred during a Resource Explorer
 // setup operation.
 type ErrorDetails struct {
@@ -38,6 +69,34 @@ type ErrorDetails struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ErrorDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ErrorDetails_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ErrorDetails_Message, *v.Message)
+	}
+}
+func (v *ErrorDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ErrorDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ErrorDetails_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ErrorDetails_Code, v.Code)
+		case schemas.ErrorDetails_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ErrorDetails_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // Information about an additional property that describes a resource, that you
@@ -55,6 +114,28 @@ type IncludedProperty struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *IncludedProperty) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IncludedProperty)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IncludedProperty) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.IncludedProperty_Name, *v.Name)
+	}
+}
+func (v *IncludedProperty) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IncludedProperty, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IncludedProperty_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.IncludedProperty_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // An index is the data store used by Amazon Web Services Resource Explorer to
@@ -93,6 +174,44 @@ type Index struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Index) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Index)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Index) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Index_Arn, *v.Arn)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.Index_Region, *v.Region)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Index_Type, string(v.Type))
+	}
+}
+func (v *Index) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Index, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Index_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Index_Arn, v.Arn)
+		case schemas.Index_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.Index_Region, v.Region)
+		case schemas.Index_Type:
+			var ev string
+			if err := d.ReadString(schemas.Index_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = IndexType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains information about the status of a Resource Explorer index operation in
 // a specific Region.
 type IndexStatus struct {
@@ -118,6 +237,48 @@ type IndexStatus struct {
 	Status OperationStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *IndexStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IndexStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IndexStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorDetails != nil {
+		s.WriteStruct(schemas.IndexStatus_ErrorDetails)
+		v.ErrorDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Index != nil {
+		s.WriteStruct(schemas.IndexStatus_Index)
+		v.Index.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.IndexStatus_Status, string(v.Status))
+	}
+}
+func (v *IndexStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IndexStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IndexStatus_ErrorDetails:
+			v.ErrorDetails = &ErrorDetails{}
+			return v.ErrorDetails.Deserialize(d)
+		case schemas.IndexStatus_Index:
+			v.Index = &Index{}
+			return v.Index.Deserialize(d)
+		case schemas.IndexStatus_Status:
+			var ev string
+			if err := d.ReadString(schemas.IndexStatus_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = OperationStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // An Amazon Web Services-managed view is how other Amazon Web Services services
@@ -171,6 +332,81 @@ type ManagedView struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ManagedView) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedView)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedView) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ManagedView_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIncludedPropertyList(s, schemas.ManagedView_IncludedProperties, v.IncludedProperties)
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.ManagedView_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.ManagedViewArn != nil {
+		s.WriteString(schemas.ManagedView_ManagedViewArn, *v.ManagedViewArn)
+	}
+	if v.ManagedViewName != nil {
+		s.WriteString(schemas.ManagedView_ManagedViewName, *v.ManagedViewName)
+	}
+	if v.Owner != nil {
+		s.WriteString(schemas.ManagedView_Owner, *v.Owner)
+	}
+	if v.ResourcePolicy != nil {
+		s.WriteString(schemas.ManagedView_ResourcePolicy, *v.ResourcePolicy)
+	}
+	if v.Scope != nil {
+		s.WriteString(schemas.ManagedView_Scope, *v.Scope)
+	}
+	if v.TrustedService != nil {
+		s.WriteString(schemas.ManagedView_TrustedService, *v.TrustedService)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.ManagedView_Version, *v.Version)
+	}
+}
+func (v *ManagedView) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedView, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedView_Filters:
+			v.Filters = &SearchFilter{}
+			return v.Filters.Deserialize(d)
+		case schemas.ManagedView_IncludedProperties:
+			return deserializeIncludedPropertyList(d, schemas.ManagedView_IncludedProperties, &v.IncludedProperties)
+		case schemas.ManagedView_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ManagedView_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.ManagedView_ManagedViewArn:
+			v.ManagedViewArn = new(string)
+			return d.ReadString(schemas.ManagedView_ManagedViewArn, v.ManagedViewArn)
+		case schemas.ManagedView_ManagedViewName:
+			v.ManagedViewName = new(string)
+			return d.ReadString(schemas.ManagedView_ManagedViewName, v.ManagedViewName)
+		case schemas.ManagedView_Owner:
+			v.Owner = new(string)
+			return d.ReadString(schemas.ManagedView_Owner, v.Owner)
+		case schemas.ManagedView_ResourcePolicy:
+			v.ResourcePolicy = new(string)
+			return d.ReadString(schemas.ManagedView_ResourcePolicy, v.ResourcePolicy)
+		case schemas.ManagedView_Scope:
+			v.Scope = new(string)
+			return d.ReadString(schemas.ManagedView_Scope, v.Scope)
+		case schemas.ManagedView_TrustedService:
+			v.TrustedService = new(string)
+			return d.ReadString(schemas.ManagedView_TrustedService, v.TrustedService)
+		case schemas.ManagedView_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.ManagedView_Version, v.Version)
+		}
+		return nil
+	})
+}
+
 // An index is the data store used by Amazon Web Services Resource Explorer to
 // hold information about your Amazon Web Services resources that the service
 // discovers.
@@ -202,6 +438,50 @@ type MemberIndex struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MemberIndex) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MemberIndex)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MemberIndex) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.MemberIndex_AccountId, *v.AccountId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.MemberIndex_Arn, *v.Arn)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.MemberIndex_Region, *v.Region)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.MemberIndex_Type, string(v.Type))
+	}
+}
+func (v *MemberIndex) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MemberIndex, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MemberIndex_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.MemberIndex_AccountId, v.AccountId)
+		case schemas.MemberIndex_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.MemberIndex_Arn, v.Arn)
+		case schemas.MemberIndex_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.MemberIndex_Region, v.Region)
+		case schemas.MemberIndex_Type:
+			var ev string
+			if err := d.ReadString(schemas.MemberIndex_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = IndexType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // This is a structure that contains the status of Amazon Web Services service
 // access, and whether you have a valid service-linked role to enable multi-account
 // search for your organization.
@@ -220,6 +500,38 @@ type OrgConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OrgConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrgConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrgConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AWSServiceAccessStatus != "" {
+		s.WriteString(schemas.OrgConfiguration_AWSServiceAccessStatus, string(v.AWSServiceAccessStatus))
+	}
+	if v.ServiceLinkedRole != nil {
+		s.WriteString(schemas.OrgConfiguration_ServiceLinkedRole, *v.ServiceLinkedRole)
+	}
+}
+func (v *OrgConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrgConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrgConfiguration_AWSServiceAccessStatus:
+			var ev string
+			if err := d.ReadString(schemas.OrgConfiguration_AWSServiceAccessStatus, &ev); err != nil {
+				return err
+			}
+			v.AWSServiceAccessStatus = AWSServiceAccessStatus(ev)
+			return nil
+		case schemas.OrgConfiguration_ServiceLinkedRole:
+			v.ServiceLinkedRole = new(string)
+			return d.ReadString(schemas.OrgConfiguration_ServiceLinkedRole, v.ServiceLinkedRole)
+		}
+		return nil
+	})
+}
+
 // Contains information about the status of Resource Explorer configuration in a
 // specific Amazon Web Services Region.
 type RegionStatus struct {
@@ -234,6 +546,44 @@ type RegionStatus struct {
 	View *ViewStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *RegionStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegionStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegionStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Index != nil {
+		s.WriteStruct(schemas.RegionStatus_Index)
+		v.Index.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.RegionStatus_Region, *v.Region)
+	}
+	if v.View != nil {
+		s.WriteStruct(schemas.RegionStatus_View)
+		v.View.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RegionStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegionStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegionStatus_Index:
+			v.Index = &IndexStatus{}
+			return v.Index.Deserialize(d)
+		case schemas.RegionStatus_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.RegionStatus_Region, v.Region)
+		case schemas.RegionStatus_View:
+			v.View = &ViewStatus{}
+			return v.View.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A resource in Amazon Web Services that Amazon Web Services Resource Explorer
@@ -275,6 +625,67 @@ type Resource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Resource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Resource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Resource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Resource_Arn, *v.Arn)
+	}
+	if v.CfnResourceType != nil {
+		s.WriteString(schemas.Resource_CfnResourceType, *v.CfnResourceType)
+	}
+	if v.LastReportedAt != nil {
+		s.WriteTime(schemas.Resource_LastReportedAt, *v.LastReportedAt)
+	}
+	if v.OwningAccountId != nil {
+		s.WriteString(schemas.Resource_OwningAccountId, *v.OwningAccountId)
+	}
+	serializeResourcePropertyList(s, schemas.Resource_Properties, v.Properties)
+	if v.Region != nil {
+		s.WriteString(schemas.Resource_Region, *v.Region)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.Resource_ResourceType, *v.ResourceType)
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.Resource_Service, *v.Service)
+	}
+}
+func (v *Resource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Resource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Resource_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Resource_Arn, v.Arn)
+		case schemas.Resource_CfnResourceType:
+			v.CfnResourceType = new(string)
+			return d.ReadString(schemas.Resource_CfnResourceType, v.CfnResourceType)
+		case schemas.Resource_LastReportedAt:
+			v.LastReportedAt = new(time.Time)
+			return d.ReadTime(schemas.Resource_LastReportedAt, v.LastReportedAt)
+		case schemas.Resource_OwningAccountId:
+			v.OwningAccountId = new(string)
+			return d.ReadString(schemas.Resource_OwningAccountId, v.OwningAccountId)
+		case schemas.Resource_Properties:
+			return deserializeResourcePropertyList(d, schemas.Resource_Properties, &v.Properties)
+		case schemas.Resource_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.Resource_Region, v.Region)
+		case schemas.Resource_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.Resource_ResourceType, v.ResourceType)
+		case schemas.Resource_Service:
+			v.Service = new(string)
+			return d.ReadString(schemas.Resource_Service, v.Service)
+		}
+		return nil
+	})
+}
+
 // Information about the number of results that match the query. At this time,
 // Amazon Web Services Resource Explorer doesn't count more than 1,000 matches for
 // any query. This structure provides information about whether the query exceeded
@@ -302,6 +713,34 @@ type ResourceCount struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceCount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceCount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceCount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Complete != nil {
+		s.WriteBool(schemas.ResourceCount_Complete, *v.Complete)
+	}
+	if v.TotalResources != nil {
+		s.WriteInt64(schemas.ResourceCount_TotalResources, *v.TotalResources)
+	}
+}
+func (v *ResourceCount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceCount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceCount_Complete:
+			v.Complete = new(bool)
+			return d.ReadBool(schemas.ResourceCount_Complete, v.Complete)
+		case schemas.ResourceCount_TotalResources:
+			v.TotalResources = new(int64)
+			return d.ReadInt64(schemas.ResourceCount_TotalResources, v.TotalResources)
+		}
+		return nil
+	})
+}
+
 // A structure that describes a property of a resource.
 type ResourceProperty struct {
 
@@ -319,6 +758,46 @@ type ResourceProperty struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceProperty) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceProperty)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceProperty) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Data != nil {
+		s.WriteDocument(schemas.ResourceProperty_Data, &smithydocument.Opaque{Value: v.Data})
+	}
+	if v.LastReportedAt != nil {
+		s.WriteTime(schemas.ResourceProperty_LastReportedAt, *v.LastReportedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ResourceProperty_Name, *v.Name)
+	}
+}
+func (v *ResourceProperty) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceProperty, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceProperty_Data:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.ResourceProperty_Data, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Data = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.ResourceProperty_LastReportedAt:
+			v.LastReportedAt = new(time.Time)
+			return d.ReadTime(schemas.ResourceProperty_LastReportedAt, v.LastReportedAt)
+		case schemas.ResourceProperty_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ResourceProperty_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // A search filter defines which resources can be part of a search query result
 // set.
 type SearchFilter struct {
@@ -332,6 +811,28 @@ type SearchFilter struct {
 	FilterString *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SearchFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterString != nil {
+		s.WriteString(schemas.SearchFilter_FilterString, *v.FilterString)
+	}
+}
+func (v *SearchFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchFilter_FilterString:
+			v.FilterString = new(string)
+			return d.ReadString(schemas.SearchFilter_FilterString, v.FilterString)
+		}
+		return nil
+	})
 }
 
 // Contains information about the service-linked recorder paired with a service
@@ -350,6 +851,44 @@ type ServiceLinkedRecorderInfo struct {
 	ServicePrincipal *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceLinkedRecorderInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceLinkedRecorderInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceLinkedRecorderInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecorderName != nil {
+		s.WriteString(schemas.ServiceLinkedRecorderInfo_RecorderName, *v.RecorderName)
+	}
+	if v.RecorderType != "" {
+		s.WriteString(schemas.ServiceLinkedRecorderInfo_RecorderType, string(v.RecorderType))
+	}
+	if v.ServicePrincipal != nil {
+		s.WriteString(schemas.ServiceLinkedRecorderInfo_ServicePrincipal, *v.ServicePrincipal)
+	}
+}
+func (v *ServiceLinkedRecorderInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceLinkedRecorderInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceLinkedRecorderInfo_RecorderName:
+			v.RecorderName = new(string)
+			return d.ReadString(schemas.ServiceLinkedRecorderInfo_RecorderName, v.RecorderName)
+		case schemas.ServiceLinkedRecorderInfo_RecorderType:
+			var ev string
+			if err := d.ReadString(schemas.ServiceLinkedRecorderInfo_RecorderType, &ev); err != nil {
+				return err
+			}
+			v.RecorderType = RecorderType(ev)
+			return nil
+		case schemas.ServiceLinkedRecorderInfo_ServicePrincipal:
+			v.ServicePrincipal = new(string)
+			return d.ReadString(schemas.ServiceLinkedRecorderInfo_ServicePrincipal, v.ServicePrincipal)
+		}
+		return nil
+	})
 }
 
 // Contains the configuration and properties of a Resource Explorer service view.
@@ -387,6 +926,65 @@ type ServiceView struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ServiceView) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceView)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceView) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ServiceView_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIncludedPropertyList(s, schemas.ServiceView_IncludedProperties, v.IncludedProperties)
+	if v.ScopeType != nil {
+		s.WriteString(schemas.ServiceView_ScopeType, *v.ScopeType)
+	}
+	if v.ServiceLinkedRecorder != nil {
+		s.WriteStruct(schemas.ServiceView_ServiceLinkedRecorder)
+		v.ServiceLinkedRecorder.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceViewArn != nil {
+		s.WriteString(schemas.ServiceView_ServiceViewArn, *v.ServiceViewArn)
+	}
+	if v.ServiceViewName != nil {
+		s.WriteString(schemas.ServiceView_ServiceViewName, *v.ServiceViewName)
+	}
+	if v.StreamingAccessForService != nil {
+		s.WriteString(schemas.ServiceView_StreamingAccessForService, *v.StreamingAccessForService)
+	}
+}
+func (v *ServiceView) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceView, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceView_Filters:
+			v.Filters = &SearchFilter{}
+			return v.Filters.Deserialize(d)
+		case schemas.ServiceView_IncludedProperties:
+			return deserializeIncludedPropertyList(d, schemas.ServiceView_IncludedProperties, &v.IncludedProperties)
+		case schemas.ServiceView_ScopeType:
+			v.ScopeType = new(string)
+			return d.ReadString(schemas.ServiceView_ScopeType, v.ScopeType)
+		case schemas.ServiceView_ServiceLinkedRecorder:
+			v.ServiceLinkedRecorder = &ServiceLinkedRecorderInfo{}
+			return v.ServiceLinkedRecorder.Deserialize(d)
+		case schemas.ServiceView_ServiceViewArn:
+			v.ServiceViewArn = new(string)
+			return d.ReadString(schemas.ServiceView_ServiceViewArn, v.ServiceViewArn)
+		case schemas.ServiceView_ServiceViewName:
+			v.ServiceViewName = new(string)
+			return d.ReadString(schemas.ServiceView_ServiceViewName, v.ServiceViewName)
+		case schemas.ServiceView_StreamingAccessForService:
+			v.StreamingAccessForService = new(string)
+			return d.ReadString(schemas.ServiceView_StreamingAccessForService, v.StreamingAccessForService)
+		}
+		return nil
+	})
+}
+
 // Contains information about an Amazon Web Services service that has been granted
 // streaming access to your Resource Explorer data.
 type StreamingAccessDetails struct {
@@ -405,6 +1003,34 @@ type StreamingAccessDetails struct {
 	ServicePrincipal *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StreamingAccessDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamingAccessDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamingAccessDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.StreamingAccessDetails_CreatedAt, *v.CreatedAt)
+	}
+	if v.ServicePrincipal != nil {
+		s.WriteString(schemas.StreamingAccessDetails_ServicePrincipal, *v.ServicePrincipal)
+	}
+}
+func (v *StreamingAccessDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamingAccessDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamingAccessDetails_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.StreamingAccessDetails_CreatedAt, v.CreatedAt)
+		case schemas.StreamingAccessDetails_ServicePrincipal:
+			v.ServicePrincipal = new(string)
+			return d.ReadString(schemas.StreamingAccessDetails_ServicePrincipal, v.ServicePrincipal)
+		}
+		return nil
+	})
 }
 
 // A structure that describes a resource type supported by Amazon Web Services
@@ -426,6 +1052,37 @@ type SupportedResourceType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SupportedResourceType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SupportedResourceType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SupportedResourceType) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCFNResourceTypeList(s, schemas.SupportedResourceType_CFNResourceTypes, v.CFNResourceTypes)
+	if v.ResourceType != nil {
+		s.WriteString(schemas.SupportedResourceType_ResourceType, *v.ResourceType)
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.SupportedResourceType_Service, *v.Service)
+	}
+}
+func (v *SupportedResourceType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SupportedResourceType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SupportedResourceType_CFNResourceTypes:
+			return deserializeCFNResourceTypeList(d, schemas.SupportedResourceType_CFNResourceTypes, &v.CFNResourceTypes)
+		case schemas.SupportedResourceType_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.SupportedResourceType_ResourceType, v.ResourceType)
+		case schemas.SupportedResourceType_Service:
+			v.Service = new(string)
+			return d.ReadString(schemas.SupportedResourceType_Service, v.Service)
+		}
+		return nil
+	})
+}
+
 // A structure that describes a request field with a validation error.
 type ValidationExceptionField struct {
 
@@ -440,6 +1097,34 @@ type ValidationExceptionField struct {
 	ValidationIssue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_Name, *v.Name)
+	}
+	if v.ValidationIssue != nil {
+		s.WriteString(schemas.ValidationExceptionField_ValidationIssue, *v.ValidationIssue)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_Name, v.Name)
+		case schemas.ValidationExceptionField_ValidationIssue:
+			v.ValidationIssue = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_ValidationIssue, v.ValidationIssue)
+		}
+		return nil
+	})
 }
 
 // A view is a structure that defines a set of filters that provide a view into
@@ -486,6 +1171,63 @@ type View struct {
 	noSmithyDocumentSerde
 }
 
+func (v *View) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.View)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *View) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.View_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIncludedPropertyList(s, schemas.View_IncludedProperties, v.IncludedProperties)
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.View_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Owner != nil {
+		s.WriteString(schemas.View_Owner, *v.Owner)
+	}
+	if v.Scope != nil {
+		s.WriteString(schemas.View_Scope, *v.Scope)
+	}
+	if v.ViewArn != nil {
+		s.WriteString(schemas.View_ViewArn, *v.ViewArn)
+	}
+	if v.ViewName != nil {
+		s.WriteString(schemas.View_ViewName, *v.ViewName)
+	}
+}
+func (v *View) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.View, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.View_Filters:
+			v.Filters = &SearchFilter{}
+			return v.Filters.Deserialize(d)
+		case schemas.View_IncludedProperties:
+			return deserializeIncludedPropertyList(d, schemas.View_IncludedProperties, &v.IncludedProperties)
+		case schemas.View_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.View_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.View_Owner:
+			v.Owner = new(string)
+			return d.ReadString(schemas.View_Owner, v.Owner)
+		case schemas.View_Scope:
+			v.Scope = new(string)
+			return d.ReadString(schemas.View_Scope, v.Scope)
+		case schemas.View_ViewArn:
+			v.ViewArn = new(string)
+			return d.ReadString(schemas.View_ViewArn, v.ViewArn)
+		case schemas.View_ViewName:
+			v.ViewName = new(string)
+			return d.ReadString(schemas.View_ViewName, v.ViewName)
+		}
+		return nil
+	})
+}
+
 // Contains information about the status of a Resource Explorer view operation in
 // a specific Region.
 type ViewStatus struct {
@@ -507,6 +1249,48 @@ type ViewStatus struct {
 	View *View
 
 	noSmithyDocumentSerde
+}
+
+func (v *ViewStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ViewStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ViewStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorDetails != nil {
+		s.WriteStruct(schemas.ViewStatus_ErrorDetails)
+		v.ErrorDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ViewStatus_Status, string(v.Status))
+	}
+	if v.View != nil {
+		s.WriteStruct(schemas.ViewStatus_View)
+		v.View.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ViewStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ViewStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ViewStatus_ErrorDetails:
+			v.ErrorDetails = &ErrorDetails{}
+			return v.ErrorDetails.Deserialize(d)
+		case schemas.ViewStatus_Status:
+			var ev string
+			if err := d.ReadString(schemas.ViewStatus_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = OperationStatus(ev)
+			return nil
+		case schemas.ViewStatus_View:
+			v.View = &View{}
+			return v.View.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

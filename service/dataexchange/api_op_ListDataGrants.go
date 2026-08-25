@@ -5,7 +5,9 @@ package dataexchange
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dataexchange/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListDataGrantsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataGrantsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataGrantsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataGrantsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataGrantsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataGrantsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDataGrantsOutput struct {
 
 	// An object that contains a list of data grant information.
@@ -52,13 +69,35 @@ type ListDataGrantsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataGrantsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataGrantsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataGrantsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfDataGrantSummaryEntry(s, schemas.ListDataGrantsResponse_DataGrantSummaries, v.DataGrantSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataGrantsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDataGrantsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataGrantsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataGrantsResponse_DataGrantSummaries:
+			return deserializeListOfDataGrantSummaryEntry(d, schemas.ListDataGrantsResponse_DataGrantSummaries, &v.DataGrantSummaries)
+		case schemas.ListDataGrantsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataGrantsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataGrantsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataGrants{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataGrants, schemas.ListDataGrantsRequest, schemas.ListDataGrantsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataGrants{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataGrants, schemas.ListDataGrantsRequest, schemas.ListDataGrantsResponse), output: &ListDataGrantsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

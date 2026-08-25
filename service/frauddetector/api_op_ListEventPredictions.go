@@ -5,7 +5,9 @@ package frauddetector
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,46 @@ type ListEventPredictionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventPredictionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventPredictionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventPredictionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteStruct(schemas.ListEventPredictionsRequest_detectorId)
+		v.DetectorId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DetectorVersionId != nil {
+		s.WriteStruct(schemas.ListEventPredictionsRequest_detectorVersionId)
+		v.DetectorVersionId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventId != nil {
+		s.WriteStruct(schemas.ListEventPredictionsRequest_eventId)
+		v.EventId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventType != nil {
+		s.WriteStruct(schemas.ListEventPredictionsRequest_eventType)
+		v.EventType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEventPredictionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventPredictionsRequest_nextToken, *v.NextToken)
+	}
+	if v.PredictionTimeRange != nil {
+		s.WriteStruct(schemas.ListEventPredictionsRequest_predictionTimeRange)
+		v.PredictionTimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListEventPredictionsOutput struct {
 
 	//  The summary of the past predictions.
@@ -80,13 +122,35 @@ type ListEventPredictionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventPredictionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventPredictionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventPredictionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfEventPredictionSummaries(s, schemas.ListEventPredictionsResult_eventPredictionSummaries, v.EventPredictionSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventPredictionsResult_nextToken, *v.NextToken)
+	}
+}
+func (v *ListEventPredictionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEventPredictionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEventPredictionsResult_eventPredictionSummaries:
+			return deserializeListOfEventPredictionSummaries(d, schemas.ListEventPredictionsResult_eventPredictionSummaries, &v.EventPredictionSummaries)
+		case schemas.ListEventPredictionsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEventPredictionsResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEventPredictionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEventPredictions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventPredictions, schemas.ListEventPredictionsRequest, schemas.ListEventPredictionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListEventPredictions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventPredictions, schemas.ListEventPredictionsRequest, schemas.ListEventPredictionsResult), output: &ListEventPredictionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

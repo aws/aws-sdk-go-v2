@@ -4,6 +4,8 @@ package billingconductor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,31 @@ type AssociatePricingRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociatePricingRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociatePricingRulesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociatePricingRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AssociatePricingRulesInput_Arn, *v.Arn)
+	}
+	serializePricingRuleArnsNonEmptyInput(s, schemas.AssociatePricingRulesInput_PricingRuleArns, v.PricingRuleArns)
+}
+func (v *AssociatePricingRulesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociatePricingRulesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociatePricingRulesInput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AssociatePricingRulesInput_Arn, v.Arn)
+		case schemas.AssociatePricingRulesInput_PricingRuleArns:
+			return deserializePricingRuleArnsNonEmptyInput(d, schemas.AssociatePricingRulesInput_PricingRuleArns, &v.PricingRuleArns)
+		}
+		return nil
+	})
+}
+
 type AssociatePricingRulesOutput struct {
 
 	//  The PricingPlanArn that the PricingRuleArns are associated with.
@@ -50,13 +77,32 @@ type AssociatePricingRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociatePricingRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociatePricingRulesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociatePricingRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.AssociatePricingRulesOutput_Arn, *v.Arn)
+	}
+}
+func (v *AssociatePricingRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociatePricingRulesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociatePricingRulesOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AssociatePricingRulesOutput_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociatePricingRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociatePricingRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociatePricingRules, schemas.AssociatePricingRulesInput, schemas.AssociatePricingRulesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociatePricingRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociatePricingRules, schemas.AssociatePricingRulesInput, schemas.AssociatePricingRulesOutput), output: &AssociatePricingRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

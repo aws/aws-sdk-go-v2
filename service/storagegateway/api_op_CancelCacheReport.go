@@ -4,6 +4,8 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type CancelCacheReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelCacheReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelCacheReportInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelCacheReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheReportARN != nil {
+		s.WriteString(schemas.CancelCacheReportInput_CacheReportARN, *v.CacheReportARN)
+	}
+}
+
 type CancelCacheReportOutput struct {
 
 	// The Amazon Resource Name (ARN) of the cache report you want to cancel.
@@ -48,13 +62,32 @@ type CancelCacheReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelCacheReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelCacheReportOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelCacheReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheReportARN != nil {
+		s.WriteString(schemas.CancelCacheReportOutput_CacheReportARN, *v.CacheReportARN)
+	}
+}
+func (v *CancelCacheReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelCacheReportOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelCacheReportOutput_CacheReportARN:
+			v.CacheReportARN = new(string)
+			return d.ReadString(schemas.CancelCacheReportOutput_CacheReportARN, v.CacheReportARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelCacheReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelCacheReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelCacheReport, schemas.CancelCacheReportInput, schemas.CancelCacheReportOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCancelCacheReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelCacheReport, schemas.CancelCacheReportInput, schemas.CancelCacheReportOutput), output: &CancelCacheReportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

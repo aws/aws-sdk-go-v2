@@ -5,7 +5,9 @@ package outposts
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListOrderableInstanceTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOrderableInstanceTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOrderableInstanceTypesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOrderableInstanceTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOrderableInstanceTypesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOrderableInstanceTypesInput_NextToken, *v.NextToken)
+	}
+	if v.OutpostGenerationFilter != "" {
+		s.WriteString(schemas.ListOrderableInstanceTypesInput_OutpostGenerationFilter, string(v.OutpostGenerationFilter))
+	}
+}
+
 type ListOrderableInstanceTypesOutput struct {
 
 	// Information about the instance types that can be ordered for the Outpost.
@@ -56,13 +76,35 @@ type ListOrderableInstanceTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOrderableInstanceTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOrderableInstanceTypesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOrderableInstanceTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDetailedInstanceTypeListDefinition(s, schemas.ListOrderableInstanceTypesOutput_InstanceTypes, v.InstanceTypes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOrderableInstanceTypesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListOrderableInstanceTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOrderableInstanceTypesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOrderableInstanceTypesOutput_InstanceTypes:
+			return deserializeDetailedInstanceTypeListDefinition(d, schemas.ListOrderableInstanceTypesOutput_InstanceTypes, &v.InstanceTypes)
+		case schemas.ListOrderableInstanceTypesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOrderableInstanceTypesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOrderableInstanceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOrderableInstanceTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOrderableInstanceTypes, schemas.ListOrderableInstanceTypesInput, schemas.ListOrderableInstanceTypesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListOrderableInstanceTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOrderableInstanceTypes, schemas.ListOrderableInstanceTypesInput, schemas.ListOrderableInstanceTypesOutput), output: &ListOrderableInstanceTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

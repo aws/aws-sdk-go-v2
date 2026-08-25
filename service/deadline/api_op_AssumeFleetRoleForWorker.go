@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,24 @@ type AssumeFleetRoleForWorkerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssumeFleetRoleForWorkerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssumeFleetRoleForWorkerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssumeFleetRoleForWorkerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.AssumeFleetRoleForWorkerRequest_farmId, *v.FarmId)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.AssumeFleetRoleForWorkerRequest_fleetId, *v.FleetId)
+	}
+	if v.WorkerId != nil {
+		s.WriteString(schemas.AssumeFleetRoleForWorkerRequest_workerId, *v.WorkerId)
+	}
+}
+
 // Shared response body for AssumeRole operations where credentials are required.
 // AssumeQueueRoleForWorkerResponse is excluded because credentials is optional
 // there because Queue.roleArn is optional, so the mixin's @required trait would be
@@ -63,13 +83,34 @@ type AssumeFleetRoleForWorkerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssumeFleetRoleForWorkerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssumeFleetRoleForWorkerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssumeFleetRoleForWorkerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Credentials != nil {
+		s.WriteStruct(schemas.AssumeFleetRoleForWorkerResponse_credentials)
+		v.Credentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssumeFleetRoleForWorkerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssumeFleetRoleForWorkerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssumeFleetRoleForWorkerResponse_credentials:
+			v.Credentials = &types.AwsCredentials{}
+			return v.Credentials.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssumeFleetRoleForWorkerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssumeFleetRoleForWorker{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssumeFleetRoleForWorker, schemas.AssumeFleetRoleForWorkerRequest, schemas.AssumeFleetRoleForWorkerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssumeFleetRoleForWorker{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssumeFleetRoleForWorker, schemas.AssumeFleetRoleForWorkerRequest, schemas.AssumeFleetRoleForWorkerResponse), output: &AssumeFleetRoleForWorkerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

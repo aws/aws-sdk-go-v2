@@ -4,7 +4,9 @@ package dataexchange
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dataexchange/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -43,6 +45,41 @@ type CreateEventActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEventActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEventActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEventActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteStruct(schemas.CreateEventActionRequest_Action)
+		v.Action.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Event != nil {
+		s.WriteStruct(schemas.CreateEventActionRequest_Event)
+		v.Event.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMapOf__string(s, schemas.CreateEventActionRequest_Tags, v.Tags)
+}
+func (v *CreateEventActionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEventActionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEventActionRequest_Action:
+			v.Action = &types.Action{}
+			return v.Action.Deserialize(d)
+		case schemas.CreateEventActionRequest_Event:
+			v.Event = &types.Event{}
+			return v.Event.Deserialize(d)
+		case schemas.CreateEventActionRequest_Tags:
+			return deserializeMapOf__string(d, schemas.CreateEventActionRequest_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateEventActionOutput struct {
 
 	// What occurs after a certain event.
@@ -72,13 +109,69 @@ type CreateEventActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEventActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEventActionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEventActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteStruct(schemas.CreateEventActionResponse_Action)
+		v.Action.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateEventActionResponse_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateEventActionResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Event != nil {
+		s.WriteStruct(schemas.CreateEventActionResponse_Event)
+		v.Event.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateEventActionResponse_Id, *v.Id)
+	}
+	serializeMapOf__string(s, schemas.CreateEventActionResponse_Tags, v.Tags)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.CreateEventActionResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *CreateEventActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEventActionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEventActionResponse_Action:
+			v.Action = &types.Action{}
+			return v.Action.Deserialize(d)
+		case schemas.CreateEventActionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateEventActionResponse_Arn, v.Arn)
+		case schemas.CreateEventActionResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateEventActionResponse_CreatedAt, v.CreatedAt)
+		case schemas.CreateEventActionResponse_Event:
+			v.Event = &types.Event{}
+			return v.Event.Deserialize(d)
+		case schemas.CreateEventActionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateEventActionResponse_Id, v.Id)
+		case schemas.CreateEventActionResponse_Tags:
+			return deserializeMapOf__string(d, schemas.CreateEventActionResponse_Tags, &v.Tags)
+		case schemas.CreateEventActionResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateEventActionResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEventActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEventAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventAction, schemas.CreateEventActionRequest, schemas.CreateEventActionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEventAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventAction, schemas.CreateEventActionRequest, schemas.CreateEventActionResponse), output: &CreateEventActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

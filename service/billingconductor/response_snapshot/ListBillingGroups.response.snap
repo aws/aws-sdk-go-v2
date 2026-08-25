@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"BillingGroups":[{"AccountGrouping":{"AutoAssociate":true,"ResponsibilityTransferArn":"__ResponsibilityTransferArn__"},"Arn":"__Arn__","BillingGroupType":"STANDARD","ComputationPreference":{"PricingPlanArn":"__PricingPlanArn__"},"CreationTime":1,"Description":"__Description__","LastModifiedTime":1,"Name":"__Name__","PrimaryAccountId":"__PrimaryAccountId__","Size":1,"Status":"ACTIVE","StatusReason":"__StatusReason__"},{"AccountGrouping":{"AutoAssociate":true,"ResponsibilityTransferArn":"__ResponsibilityTransferArn__"},"Arn":"__Arn__","BillingGroupType":"STANDARD","ComputationPreference":{"PricingPlanArn":"__PricingPlanArn__"},"CreationTime":1,"Description":"__Description__","LastModifiedTime":1,"Name":"__Name__","PrimaryAccountId":"__PrimaryAccountId__","Size":1,"Status":"ACTIVE","StatusReason":"__StatusReason__"}],"NextToken":"__NextToken__"}

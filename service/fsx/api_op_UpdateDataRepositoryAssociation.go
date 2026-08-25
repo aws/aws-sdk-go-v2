@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,29 @@ type UpdateDataRepositoryAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataRepositoryAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataRepositoryAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataRepositoryAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.UpdateDataRepositoryAssociationRequest_AssociationId, *v.AssociationId)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpdateDataRepositoryAssociationRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ImportedFileChunkSize != nil {
+		s.WriteInt32(schemas.UpdateDataRepositoryAssociationRequest_ImportedFileChunkSize, *v.ImportedFileChunkSize)
+	}
+	if v.S3 != nil {
+		s.WriteStruct(schemas.UpdateDataRepositoryAssociationRequest_S3)
+		v.S3.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateDataRepositoryAssociationOutput struct {
 
 	// The response object returned after the data repository association is updated.
@@ -70,13 +95,34 @@ type UpdateDataRepositoryAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataRepositoryAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataRepositoryAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataRepositoryAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Association != nil {
+		s.WriteStruct(schemas.UpdateDataRepositoryAssociationResponse_Association)
+		v.Association.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateDataRepositoryAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataRepositoryAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDataRepositoryAssociationResponse_Association:
+			v.Association = &types.DataRepositoryAssociation{}
+			return v.Association.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDataRepositoryAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDataRepositoryAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataRepositoryAssociation, schemas.UpdateDataRepositoryAssociationRequest, schemas.UpdateDataRepositoryAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDataRepositoryAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataRepositoryAssociation, schemas.UpdateDataRepositoryAssociationRequest, schemas.UpdateDataRepositoryAssociationResponse), output: &UpdateDataRepositoryAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

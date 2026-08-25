@@ -4,7 +4,9 @@ package cloudhsmv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type ModifyBackupAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyBackupAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyBackupAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyBackupAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupId != nil {
+		s.WriteString(schemas.ModifyBackupAttributesRequest_BackupId, *v.BackupId)
+	}
+	if v.NeverExpires != nil {
+		s.WriteBool(schemas.ModifyBackupAttributesRequest_NeverExpires, *v.NeverExpires)
+	}
+}
+
 type ModifyBackupAttributesOutput struct {
 
 	// Contains information about a backup of an CloudHSM cluster. All backup objects
@@ -61,13 +78,34 @@ type ModifyBackupAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyBackupAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyBackupAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyBackupAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Backup != nil {
+		s.WriteStruct(schemas.ModifyBackupAttributesResponse_Backup)
+		v.Backup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyBackupAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyBackupAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyBackupAttributesResponse_Backup:
+			v.Backup = &types.Backup{}
+			return v.Backup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyBackupAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyBackupAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyBackupAttributes, schemas.ModifyBackupAttributesRequest, schemas.ModifyBackupAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpModifyBackupAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyBackupAttributes, schemas.ModifyBackupAttributesRequest, schemas.ModifyBackupAttributesResponse), output: &ModifyBackupAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

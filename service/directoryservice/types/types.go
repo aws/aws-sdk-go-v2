@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -66,6 +68,100 @@ type Assessment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Assessment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Assessment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Assessment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.Assessment_AssessmentId, *v.AssessmentId)
+	}
+	serializeCustomerDnsIps(s, schemas.Assessment_CustomerDnsIps, v.CustomerDnsIps)
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.Assessment_DirectoryId, *v.DirectoryId)
+	}
+	if v.DnsName != nil {
+		s.WriteString(schemas.Assessment_DnsName, *v.DnsName)
+	}
+	if v.LastUpdateDateTime != nil {
+		s.WriteTime(schemas.Assessment_LastUpdateDateTime, *v.LastUpdateDateTime)
+	}
+	if v.ReportType != nil {
+		s.WriteString(schemas.Assessment_ReportType, *v.ReportType)
+	}
+	serializeSecurityGroupIds(s, schemas.Assessment_SecurityGroupIds, v.SecurityGroupIds)
+	serializeAssessmentInstanceIds(s, schemas.Assessment_SelfManagedInstanceIds, v.SelfManagedInstanceIds)
+	if v.StartTime != nil {
+		s.WriteTime(schemas.Assessment_StartTime, *v.StartTime)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.Assessment_Status, *v.Status)
+	}
+	if v.StatusCode != nil {
+		s.WriteString(schemas.Assessment_StatusCode, *v.StatusCode)
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.Assessment_StatusReason, *v.StatusReason)
+	}
+	serializeSubnetIds(s, schemas.Assessment_SubnetIds, v.SubnetIds)
+	if v.Version != nil {
+		s.WriteString(schemas.Assessment_Version, *v.Version)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.Assessment_VpcId, *v.VpcId)
+	}
+}
+func (v *Assessment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Assessment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Assessment_AssessmentId:
+			v.AssessmentId = new(string)
+			return d.ReadString(schemas.Assessment_AssessmentId, v.AssessmentId)
+		case schemas.Assessment_CustomerDnsIps:
+			return deserializeCustomerDnsIps(d, schemas.Assessment_CustomerDnsIps, &v.CustomerDnsIps)
+		case schemas.Assessment_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.Assessment_DirectoryId, v.DirectoryId)
+		case schemas.Assessment_DnsName:
+			v.DnsName = new(string)
+			return d.ReadString(schemas.Assessment_DnsName, v.DnsName)
+		case schemas.Assessment_LastUpdateDateTime:
+			v.LastUpdateDateTime = new(time.Time)
+			return d.ReadTime(schemas.Assessment_LastUpdateDateTime, v.LastUpdateDateTime)
+		case schemas.Assessment_ReportType:
+			v.ReportType = new(string)
+			return d.ReadString(schemas.Assessment_ReportType, v.ReportType)
+		case schemas.Assessment_SecurityGroupIds:
+			return deserializeSecurityGroupIds(d, schemas.Assessment_SecurityGroupIds, &v.SecurityGroupIds)
+		case schemas.Assessment_SelfManagedInstanceIds:
+			return deserializeAssessmentInstanceIds(d, schemas.Assessment_SelfManagedInstanceIds, &v.SelfManagedInstanceIds)
+		case schemas.Assessment_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.Assessment_StartTime, v.StartTime)
+		case schemas.Assessment_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.Assessment_Status, v.Status)
+		case schemas.Assessment_StatusCode:
+			v.StatusCode = new(string)
+			return d.ReadString(schemas.Assessment_StatusCode, v.StatusCode)
+		case schemas.Assessment_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.Assessment_StatusReason, v.StatusReason)
+		case schemas.Assessment_SubnetIds:
+			return deserializeSubnetIds(d, schemas.Assessment_SubnetIds, &v.SubnetIds)
+		case schemas.Assessment_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.Assessment_Version, v.Version)
+		case schemas.Assessment_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.Assessment_VpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 // Contains configuration parameters required to perform a directory assessment.
 type AssessmentConfiguration struct {
 
@@ -100,6 +196,45 @@ type AssessmentConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssessmentConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomerDnsIps(s, schemas.AssessmentConfiguration_CustomerDnsIps, v.CustomerDnsIps)
+	if v.DnsName != nil {
+		s.WriteString(schemas.AssessmentConfiguration_DnsName, *v.DnsName)
+	}
+	serializeAssessmentInstanceIds(s, schemas.AssessmentConfiguration_InstanceIds, v.InstanceIds)
+	serializeSecurityGroupIds(s, schemas.AssessmentConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	if v.VpcSettings != nil {
+		s.WriteStruct(schemas.AssessmentConfiguration_VpcSettings)
+		v.VpcSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssessmentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentConfiguration_CustomerDnsIps:
+			return deserializeCustomerDnsIps(d, schemas.AssessmentConfiguration_CustomerDnsIps, &v.CustomerDnsIps)
+		case schemas.AssessmentConfiguration_DnsName:
+			v.DnsName = new(string)
+			return d.ReadString(schemas.AssessmentConfiguration_DnsName, v.DnsName)
+		case schemas.AssessmentConfiguration_InstanceIds:
+			return deserializeAssessmentInstanceIds(d, schemas.AssessmentConfiguration_InstanceIds, &v.InstanceIds)
+		case schemas.AssessmentConfiguration_SecurityGroupIds:
+			return deserializeSecurityGroupIds(d, schemas.AssessmentConfiguration_SecurityGroupIds, &v.SecurityGroupIds)
+		case schemas.AssessmentConfiguration_VpcSettings:
+			v.VpcSettings = &DirectoryVpcSettings{}
+			return v.VpcSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains the results of validation tests performed against a specific domain
 // controller during a directory assessment.
 type AssessmentReport struct {
@@ -112,6 +247,31 @@ type AssessmentReport struct {
 	Validations []AssessmentValidation
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssessmentReport) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentReport)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentReport) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainControllerIp != nil {
+		s.WriteString(schemas.AssessmentReport_DomainControllerIp, *v.DomainControllerIp)
+	}
+	serializeAssessmentValidations(s, schemas.AssessmentReport_Validations, v.Validations)
+}
+func (v *AssessmentReport) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentReport, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentReport_DomainControllerIp:
+			v.DomainControllerIp = new(string)
+			return d.ReadString(schemas.AssessmentReport_DomainControllerIp, v.DomainControllerIp)
+		case schemas.AssessmentReport_Validations:
+			return deserializeAssessmentValidations(d, schemas.AssessmentReport_Validations, &v.Validations)
+		}
+		return nil
+	})
 }
 
 // Contains summary information about a directory assessment, providing a
@@ -149,6 +309,67 @@ type AssessmentSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssessmentSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.AssessmentSummary_AssessmentId, *v.AssessmentId)
+	}
+	serializeCustomerDnsIps(s, schemas.AssessmentSummary_CustomerDnsIps, v.CustomerDnsIps)
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.AssessmentSummary_DirectoryId, *v.DirectoryId)
+	}
+	if v.DnsName != nil {
+		s.WriteString(schemas.AssessmentSummary_DnsName, *v.DnsName)
+	}
+	if v.LastUpdateDateTime != nil {
+		s.WriteTime(schemas.AssessmentSummary_LastUpdateDateTime, *v.LastUpdateDateTime)
+	}
+	if v.ReportType != nil {
+		s.WriteString(schemas.AssessmentSummary_ReportType, *v.ReportType)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.AssessmentSummary_StartTime, *v.StartTime)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.AssessmentSummary_Status, *v.Status)
+	}
+}
+func (v *AssessmentSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentSummary_AssessmentId:
+			v.AssessmentId = new(string)
+			return d.ReadString(schemas.AssessmentSummary_AssessmentId, v.AssessmentId)
+		case schemas.AssessmentSummary_CustomerDnsIps:
+			return deserializeCustomerDnsIps(d, schemas.AssessmentSummary_CustomerDnsIps, &v.CustomerDnsIps)
+		case schemas.AssessmentSummary_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.AssessmentSummary_DirectoryId, v.DirectoryId)
+		case schemas.AssessmentSummary_DnsName:
+			v.DnsName = new(string)
+			return d.ReadString(schemas.AssessmentSummary_DnsName, v.DnsName)
+		case schemas.AssessmentSummary_LastUpdateDateTime:
+			v.LastUpdateDateTime = new(time.Time)
+			return d.ReadTime(schemas.AssessmentSummary_LastUpdateDateTime, v.LastUpdateDateTime)
+		case schemas.AssessmentSummary_ReportType:
+			v.ReportType = new(string)
+			return d.ReadString(schemas.AssessmentSummary_ReportType, v.ReportType)
+		case schemas.AssessmentSummary_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.AssessmentSummary_StartTime, v.StartTime)
+		case schemas.AssessmentSummary_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.AssessmentSummary_Status, v.Status)
+		}
+		return nil
+	})
+}
+
 // Contains information about a specific validation test performed during a
 // directory assessment.
 type AssessmentValidation struct {
@@ -180,6 +401,64 @@ type AssessmentValidation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssessmentValidation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssessmentValidation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssessmentValidation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Category != nil {
+		s.WriteString(schemas.AssessmentValidation_Category, *v.Category)
+	}
+	if v.LastUpdateDateTime != nil {
+		s.WriteTime(schemas.AssessmentValidation_LastUpdateDateTime, *v.LastUpdateDateTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AssessmentValidation_Name, *v.Name)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.AssessmentValidation_StartTime, *v.StartTime)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.AssessmentValidation_Status, *v.Status)
+	}
+	if v.StatusCode != nil {
+		s.WriteString(schemas.AssessmentValidation_StatusCode, *v.StatusCode)
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.AssessmentValidation_StatusReason, *v.StatusReason)
+	}
+}
+func (v *AssessmentValidation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssessmentValidation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssessmentValidation_Category:
+			v.Category = new(string)
+			return d.ReadString(schemas.AssessmentValidation_Category, v.Category)
+		case schemas.AssessmentValidation_LastUpdateDateTime:
+			v.LastUpdateDateTime = new(time.Time)
+			return d.ReadTime(schemas.AssessmentValidation_LastUpdateDateTime, v.LastUpdateDateTime)
+		case schemas.AssessmentValidation_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AssessmentValidation_Name, v.Name)
+		case schemas.AssessmentValidation_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.AssessmentValidation_StartTime, v.StartTime)
+		case schemas.AssessmentValidation_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.AssessmentValidation_Status, v.Status)
+		case schemas.AssessmentValidation_StatusCode:
+			v.StatusCode = new(string)
+			return d.ReadString(schemas.AssessmentValidation_StatusCode, v.StatusCode)
+		case schemas.AssessmentValidation_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.AssessmentValidation_StatusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
+
 // Represents a named directory attribute.
 type Attribute struct {
 
@@ -190,6 +469,34 @@ type Attribute struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Attribute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Attribute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Attribute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.Attribute_Name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Attribute_Value, *v.Value)
+	}
+}
+func (v *Attribute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Attribute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Attribute_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Attribute_Name, v.Name)
+		case schemas.Attribute_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Attribute_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Information about the certificate.
@@ -224,6 +531,80 @@ type Certificate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Certificate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Certificate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Certificate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateId != nil {
+		s.WriteString(schemas.Certificate_CertificateId, *v.CertificateId)
+	}
+	if v.ClientCertAuthSettings != nil {
+		s.WriteStruct(schemas.Certificate_ClientCertAuthSettings)
+		v.ClientCertAuthSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CommonName != nil {
+		s.WriteString(schemas.Certificate_CommonName, *v.CommonName)
+	}
+	if v.ExpiryDateTime != nil {
+		s.WriteTime(schemas.Certificate_ExpiryDateTime, *v.ExpiryDateTime)
+	}
+	if v.RegisteredDateTime != nil {
+		s.WriteTime(schemas.Certificate_RegisteredDateTime, *v.RegisteredDateTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Certificate_State, string(v.State))
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.Certificate_StateReason, *v.StateReason)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Certificate_Type, string(v.Type))
+	}
+}
+func (v *Certificate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Certificate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Certificate_CertificateId:
+			v.CertificateId = new(string)
+			return d.ReadString(schemas.Certificate_CertificateId, v.CertificateId)
+		case schemas.Certificate_ClientCertAuthSettings:
+			v.ClientCertAuthSettings = &ClientCertAuthSettings{}
+			return v.ClientCertAuthSettings.Deserialize(d)
+		case schemas.Certificate_CommonName:
+			v.CommonName = new(string)
+			return d.ReadString(schemas.Certificate_CommonName, v.CommonName)
+		case schemas.Certificate_ExpiryDateTime:
+			v.ExpiryDateTime = new(time.Time)
+			return d.ReadTime(schemas.Certificate_ExpiryDateTime, v.ExpiryDateTime)
+		case schemas.Certificate_RegisteredDateTime:
+			v.RegisteredDateTime = new(time.Time)
+			return d.ReadTime(schemas.Certificate_RegisteredDateTime, v.RegisteredDateTime)
+		case schemas.Certificate_State:
+			var ev string
+			if err := d.ReadString(schemas.Certificate_State, &ev); err != nil {
+				return err
+			}
+			v.State = CertificateState(ev)
+			return nil
+		case schemas.Certificate_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.Certificate_StateReason, v.StateReason)
+		case schemas.Certificate_Type:
+			var ev string
+			if err := d.ReadString(schemas.Certificate_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = CertificateType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains general information about a certificate.
 type CertificateInfo struct {
 
@@ -246,6 +627,60 @@ type CertificateInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CertificateInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CertificateInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CertificateInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateId != nil {
+		s.WriteString(schemas.CertificateInfo_CertificateId, *v.CertificateId)
+	}
+	if v.CommonName != nil {
+		s.WriteString(schemas.CertificateInfo_CommonName, *v.CommonName)
+	}
+	if v.ExpiryDateTime != nil {
+		s.WriteTime(schemas.CertificateInfo_ExpiryDateTime, *v.ExpiryDateTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CertificateInfo_State, string(v.State))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CertificateInfo_Type, string(v.Type))
+	}
+}
+func (v *CertificateInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CertificateInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CertificateInfo_CertificateId:
+			v.CertificateId = new(string)
+			return d.ReadString(schemas.CertificateInfo_CertificateId, v.CertificateId)
+		case schemas.CertificateInfo_CommonName:
+			v.CommonName = new(string)
+			return d.ReadString(schemas.CertificateInfo_CommonName, v.CommonName)
+		case schemas.CertificateInfo_ExpiryDateTime:
+			v.ExpiryDateTime = new(time.Time)
+			return d.ReadTime(schemas.CertificateInfo_ExpiryDateTime, v.ExpiryDateTime)
+		case schemas.CertificateInfo_State:
+			var ev string
+			if err := d.ReadString(schemas.CertificateInfo_State, &ev); err != nil {
+				return err
+			}
+			v.State = CertificateState(ev)
+			return nil
+		case schemas.CertificateInfo_Type:
+			var ev string
+			if err := d.ReadString(schemas.CertificateInfo_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = CertificateType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains information about a client authentication method for a directory.
 type ClientAuthenticationSettingInfo struct {
 
@@ -265,6 +700,48 @@ type ClientAuthenticationSettingInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClientAuthenticationSettingInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientAuthenticationSettingInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClientAuthenticationSettingInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.ClientAuthenticationSettingInfo_LastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ClientAuthenticationSettingInfo_Status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ClientAuthenticationSettingInfo_Type, string(v.Type))
+	}
+}
+func (v *ClientAuthenticationSettingInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientAuthenticationSettingInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientAuthenticationSettingInfo_LastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.ClientAuthenticationSettingInfo_LastUpdatedDateTime, v.LastUpdatedDateTime)
+		case schemas.ClientAuthenticationSettingInfo_Status:
+			var ev string
+			if err := d.ReadString(schemas.ClientAuthenticationSettingInfo_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ClientAuthenticationStatus(ev)
+			return nil
+		case schemas.ClientAuthenticationSettingInfo_Type:
+			var ev string
+			if err := d.ReadString(schemas.ClientAuthenticationSettingInfo_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ClientAuthenticationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains information about the client certificate authentication settings for
 // the RegisterCertificate and DescribeCertificate operations.
 type ClientCertAuthSettings struct {
@@ -275,6 +752,28 @@ type ClientCertAuthSettings struct {
 	OCSPUrl *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ClientCertAuthSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientCertAuthSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClientCertAuthSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OCSPUrl != nil {
+		s.WriteString(schemas.ClientCertAuthSettings_OCSPUrl, *v.OCSPUrl)
+	}
+}
+func (v *ClientCertAuthSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientCertAuthSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientCertAuthSettings_OCSPUrl:
+			v.OCSPUrl = new(string)
+			return d.ReadString(schemas.ClientCertAuthSettings_OCSPUrl, v.OCSPUrl)
+		}
+		return nil
+	})
 }
 
 // Contains information about a computer account in a directory.
@@ -291,6 +790,37 @@ type Computer struct {
 	ComputerName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Computer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Computer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Computer) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.Computer_ComputerAttributes, v.ComputerAttributes)
+	if v.ComputerId != nil {
+		s.WriteString(schemas.Computer_ComputerId, *v.ComputerId)
+	}
+	if v.ComputerName != nil {
+		s.WriteString(schemas.Computer_ComputerName, *v.ComputerName)
+	}
+}
+func (v *Computer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Computer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Computer_ComputerAttributes:
+			return deserializeAttributes(d, schemas.Computer_ComputerAttributes, &v.ComputerAttributes)
+		case schemas.Computer_ComputerId:
+			v.ComputerId = new(string)
+			return d.ReadString(schemas.Computer_ComputerId, v.ComputerId)
+		case schemas.Computer_ComputerName:
+			v.ComputerName = new(string)
+			return d.ReadString(schemas.Computer_ComputerName, v.ComputerName)
+		}
+		return nil
+	})
 }
 
 // Points to a remote domain with which you are setting up a trust relationship.
@@ -318,6 +848,44 @@ type ConditionalForwarder struct {
 	ReplicationScope ReplicationScope
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConditionalForwarder) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConditionalForwarder)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConditionalForwarder) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDnsIpAddrs(s, schemas.ConditionalForwarder_DnsIpAddrs, v.DnsIpAddrs)
+	serializeDnsIpv6Addrs(s, schemas.ConditionalForwarder_DnsIpv6Addrs, v.DnsIpv6Addrs)
+	if v.RemoteDomainName != nil {
+		s.WriteString(schemas.ConditionalForwarder_RemoteDomainName, *v.RemoteDomainName)
+	}
+	if v.ReplicationScope != "" {
+		s.WriteString(schemas.ConditionalForwarder_ReplicationScope, string(v.ReplicationScope))
+	}
+}
+func (v *ConditionalForwarder) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConditionalForwarder, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConditionalForwarder_DnsIpAddrs:
+			return deserializeDnsIpAddrs(d, schemas.ConditionalForwarder_DnsIpAddrs, &v.DnsIpAddrs)
+		case schemas.ConditionalForwarder_DnsIpv6Addrs:
+			return deserializeDnsIpv6Addrs(d, schemas.ConditionalForwarder_DnsIpv6Addrs, &v.DnsIpv6Addrs)
+		case schemas.ConditionalForwarder_RemoteDomainName:
+			v.RemoteDomainName = new(string)
+			return d.ReadString(schemas.ConditionalForwarder_RemoteDomainName, v.RemoteDomainName)
+		case schemas.ConditionalForwarder_ReplicationScope:
+			var ev string
+			if err := d.ReadString(schemas.ConditionalForwarder_ReplicationScope, &ev); err != nil {
+				return err
+			}
+			v.ReplicationScope = ReplicationScope(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains connection settings for creating an AD Connector with the ConnectDirectory action.
@@ -356,6 +924,43 @@ type DirectoryConnectSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DirectoryConnectSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DirectoryConnectSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DirectoryConnectSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDnsIpAddrs(s, schemas.DirectoryConnectSettings_CustomerDnsIps, v.CustomerDnsIps)
+	serializeDnsIpv6Addrs(s, schemas.DirectoryConnectSettings_CustomerDnsIpsV6, v.CustomerDnsIpsV6)
+	if v.CustomerUserName != nil {
+		s.WriteString(schemas.DirectoryConnectSettings_CustomerUserName, *v.CustomerUserName)
+	}
+	serializeSubnetIds(s, schemas.DirectoryConnectSettings_SubnetIds, v.SubnetIds)
+	if v.VpcId != nil {
+		s.WriteString(schemas.DirectoryConnectSettings_VpcId, *v.VpcId)
+	}
+}
+func (v *DirectoryConnectSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectoryConnectSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectoryConnectSettings_CustomerDnsIps:
+			return deserializeDnsIpAddrs(d, schemas.DirectoryConnectSettings_CustomerDnsIps, &v.CustomerDnsIps)
+		case schemas.DirectoryConnectSettings_CustomerDnsIpsV6:
+			return deserializeDnsIpv6Addrs(d, schemas.DirectoryConnectSettings_CustomerDnsIpsV6, &v.CustomerDnsIpsV6)
+		case schemas.DirectoryConnectSettings_CustomerUserName:
+			v.CustomerUserName = new(string)
+			return d.ReadString(schemas.DirectoryConnectSettings_CustomerUserName, v.CustomerUserName)
+		case schemas.DirectoryConnectSettings_SubnetIds:
+			return deserializeSubnetIds(d, schemas.DirectoryConnectSettings_SubnetIds, &v.SubnetIds)
+		case schemas.DirectoryConnectSettings_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.DirectoryConnectSettings_VpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 // Contains information about an AD Connector directory.
 type DirectoryConnectSettingsDescription struct {
 
@@ -381,6 +986,52 @@ type DirectoryConnectSettingsDescription struct {
 	VpcId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DirectoryConnectSettingsDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DirectoryConnectSettingsDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DirectoryConnectSettingsDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAvailabilityZones(s, schemas.DirectoryConnectSettingsDescription_AvailabilityZones, v.AvailabilityZones)
+	serializeIpAddrs(s, schemas.DirectoryConnectSettingsDescription_ConnectIps, v.ConnectIps)
+	serializeIpV6Addrs(s, schemas.DirectoryConnectSettingsDescription_ConnectIpsV6, v.ConnectIpsV6)
+	if v.CustomerUserName != nil {
+		s.WriteString(schemas.DirectoryConnectSettingsDescription_CustomerUserName, *v.CustomerUserName)
+	}
+	if v.SecurityGroupId != nil {
+		s.WriteString(schemas.DirectoryConnectSettingsDescription_SecurityGroupId, *v.SecurityGroupId)
+	}
+	serializeSubnetIds(s, schemas.DirectoryConnectSettingsDescription_SubnetIds, v.SubnetIds)
+	if v.VpcId != nil {
+		s.WriteString(schemas.DirectoryConnectSettingsDescription_VpcId, *v.VpcId)
+	}
+}
+func (v *DirectoryConnectSettingsDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectoryConnectSettingsDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectoryConnectSettingsDescription_AvailabilityZones:
+			return deserializeAvailabilityZones(d, schemas.DirectoryConnectSettingsDescription_AvailabilityZones, &v.AvailabilityZones)
+		case schemas.DirectoryConnectSettingsDescription_ConnectIps:
+			return deserializeIpAddrs(d, schemas.DirectoryConnectSettingsDescription_ConnectIps, &v.ConnectIps)
+		case schemas.DirectoryConnectSettingsDescription_ConnectIpsV6:
+			return deserializeIpV6Addrs(d, schemas.DirectoryConnectSettingsDescription_ConnectIpsV6, &v.ConnectIpsV6)
+		case schemas.DirectoryConnectSettingsDescription_CustomerUserName:
+			v.CustomerUserName = new(string)
+			return d.ReadString(schemas.DirectoryConnectSettingsDescription_CustomerUserName, v.CustomerUserName)
+		case schemas.DirectoryConnectSettingsDescription_SecurityGroupId:
+			v.SecurityGroupId = new(string)
+			return d.ReadString(schemas.DirectoryConnectSettingsDescription_SecurityGroupId, v.SecurityGroupId)
+		case schemas.DirectoryConnectSettingsDescription_SubnetIds:
+			return deserializeSubnetIds(d, schemas.DirectoryConnectSettingsDescription_SubnetIds, &v.SubnetIds)
+		case schemas.DirectoryConnectSettingsDescription_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.DirectoryConnectSettingsDescription_VpcId, v.VpcId)
+		}
+		return nil
+	})
 }
 
 // Contains information about an Directory Service directory.
@@ -496,6 +1147,237 @@ type DirectoryDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DirectoryDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DirectoryDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DirectoryDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessUrl != nil {
+		s.WriteString(schemas.DirectoryDescription_AccessUrl, *v.AccessUrl)
+	}
+	if v.Alias != nil {
+		s.WriteString(schemas.DirectoryDescription_Alias, *v.Alias)
+	}
+	if v.ConnectSettings != nil {
+		s.WriteStruct(schemas.DirectoryDescription_ConnectSettings)
+		v.ConnectSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DirectoryDescription_Description, *v.Description)
+	}
+	if v.DesiredNumberOfDomainControllers != nil {
+		s.WriteInt32(schemas.DirectoryDescription_DesiredNumberOfDomainControllers, *v.DesiredNumberOfDomainControllers)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DirectoryDescription_DirectoryId, *v.DirectoryId)
+	}
+	serializeDnsIpAddrs(s, schemas.DirectoryDescription_DnsIpAddrs, v.DnsIpAddrs)
+	serializeDnsIpv6Addrs(s, schemas.DirectoryDescription_DnsIpv6Addrs, v.DnsIpv6Addrs)
+	if v.Edition != "" {
+		s.WriteString(schemas.DirectoryDescription_Edition, string(v.Edition))
+	}
+	if v.HybridSettings != nil {
+		s.WriteStruct(schemas.DirectoryDescription_HybridSettings)
+		v.HybridSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LaunchTime != nil {
+		s.WriteTime(schemas.DirectoryDescription_LaunchTime, *v.LaunchTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DirectoryDescription_Name, *v.Name)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.DirectoryDescription_NetworkType, string(v.NetworkType))
+	}
+	if v.OsVersion != "" {
+		s.WriteString(schemas.DirectoryDescription_OsVersion, string(v.OsVersion))
+	}
+	if v.OwnerDirectoryDescription != nil {
+		s.WriteStruct(schemas.DirectoryDescription_OwnerDirectoryDescription)
+		v.OwnerDirectoryDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RadiusSettings != nil {
+		s.WriteStruct(schemas.DirectoryDescription_RadiusSettings)
+		v.RadiusSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RadiusStatus != "" {
+		s.WriteString(schemas.DirectoryDescription_RadiusStatus, string(v.RadiusStatus))
+	}
+	if v.RegionsInfo != nil {
+		s.WriteStruct(schemas.DirectoryDescription_RegionsInfo)
+		v.RegionsInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ShareMethod != "" {
+		s.WriteString(schemas.DirectoryDescription_ShareMethod, string(v.ShareMethod))
+	}
+	if v.ShareNotes != nil {
+		s.WriteString(schemas.DirectoryDescription_ShareNotes, *v.ShareNotes)
+	}
+	if v.ShareStatus != "" {
+		s.WriteString(schemas.DirectoryDescription_ShareStatus, string(v.ShareStatus))
+	}
+	if v.ShortName != nil {
+		s.WriteString(schemas.DirectoryDescription_ShortName, *v.ShortName)
+	}
+	if v.Size != "" {
+		s.WriteString(schemas.DirectoryDescription_Size, string(v.Size))
+	}
+	if v.SsoEnabled != false {
+		s.WriteBool(schemas.DirectoryDescription_SsoEnabled, v.SsoEnabled)
+	}
+	if v.Stage != "" {
+		s.WriteString(schemas.DirectoryDescription_Stage, string(v.Stage))
+	}
+	if v.StageLastUpdatedDateTime != nil {
+		s.WriteTime(schemas.DirectoryDescription_StageLastUpdatedDateTime, *v.StageLastUpdatedDateTime)
+	}
+	if v.StageReason != nil {
+		s.WriteString(schemas.DirectoryDescription_StageReason, *v.StageReason)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DirectoryDescription_Type, string(v.Type))
+	}
+	if v.VpcSettings != nil {
+		s.WriteStruct(schemas.DirectoryDescription_VpcSettings)
+		v.VpcSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DirectoryDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectoryDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectoryDescription_AccessUrl:
+			v.AccessUrl = new(string)
+			return d.ReadString(schemas.DirectoryDescription_AccessUrl, v.AccessUrl)
+		case schemas.DirectoryDescription_Alias:
+			v.Alias = new(string)
+			return d.ReadString(schemas.DirectoryDescription_Alias, v.Alias)
+		case schemas.DirectoryDescription_ConnectSettings:
+			v.ConnectSettings = &DirectoryConnectSettingsDescription{}
+			return v.ConnectSettings.Deserialize(d)
+		case schemas.DirectoryDescription_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DirectoryDescription_Description, v.Description)
+		case schemas.DirectoryDescription_DesiredNumberOfDomainControllers:
+			v.DesiredNumberOfDomainControllers = new(int32)
+			return d.ReadInt32(schemas.DirectoryDescription_DesiredNumberOfDomainControllers, v.DesiredNumberOfDomainControllers)
+		case schemas.DirectoryDescription_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.DirectoryDescription_DirectoryId, v.DirectoryId)
+		case schemas.DirectoryDescription_DnsIpAddrs:
+			return deserializeDnsIpAddrs(d, schemas.DirectoryDescription_DnsIpAddrs, &v.DnsIpAddrs)
+		case schemas.DirectoryDescription_DnsIpv6Addrs:
+			return deserializeDnsIpv6Addrs(d, schemas.DirectoryDescription_DnsIpv6Addrs, &v.DnsIpv6Addrs)
+		case schemas.DirectoryDescription_Edition:
+			var ev string
+			if err := d.ReadString(schemas.DirectoryDescription_Edition, &ev); err != nil {
+				return err
+			}
+			v.Edition = DirectoryEdition(ev)
+			return nil
+		case schemas.DirectoryDescription_HybridSettings:
+			v.HybridSettings = &HybridSettingsDescription{}
+			return v.HybridSettings.Deserialize(d)
+		case schemas.DirectoryDescription_LaunchTime:
+			v.LaunchTime = new(time.Time)
+			return d.ReadTime(schemas.DirectoryDescription_LaunchTime, v.LaunchTime)
+		case schemas.DirectoryDescription_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DirectoryDescription_Name, v.Name)
+		case schemas.DirectoryDescription_NetworkType:
+			var ev string
+			if err := d.ReadString(schemas.DirectoryDescription_NetworkType, &ev); err != nil {
+				return err
+			}
+			v.NetworkType = NetworkType(ev)
+			return nil
+		case schemas.DirectoryDescription_OsVersion:
+			var ev string
+			if err := d.ReadString(schemas.DirectoryDescription_OsVersion, &ev); err != nil {
+				return err
+			}
+			v.OsVersion = OSVersion(ev)
+			return nil
+		case schemas.DirectoryDescription_OwnerDirectoryDescription:
+			v.OwnerDirectoryDescription = &OwnerDirectoryDescription{}
+			return v.OwnerDirectoryDescription.Deserialize(d)
+		case schemas.DirectoryDescription_RadiusSettings:
+			v.RadiusSettings = &RadiusSettings{}
+			return v.RadiusSettings.Deserialize(d)
+		case schemas.DirectoryDescription_RadiusStatus:
+			var ev string
+			if err := d.ReadString(schemas.DirectoryDescription_RadiusStatus, &ev); err != nil {
+				return err
+			}
+			v.RadiusStatus = RadiusStatus(ev)
+			return nil
+		case schemas.DirectoryDescription_RegionsInfo:
+			v.RegionsInfo = &RegionsInfo{}
+			return v.RegionsInfo.Deserialize(d)
+		case schemas.DirectoryDescription_ShareMethod:
+			var ev string
+			if err := d.ReadString(schemas.DirectoryDescription_ShareMethod, &ev); err != nil {
+				return err
+			}
+			v.ShareMethod = ShareMethod(ev)
+			return nil
+		case schemas.DirectoryDescription_ShareNotes:
+			v.ShareNotes = new(string)
+			return d.ReadString(schemas.DirectoryDescription_ShareNotes, v.ShareNotes)
+		case schemas.DirectoryDescription_ShareStatus:
+			var ev string
+			if err := d.ReadString(schemas.DirectoryDescription_ShareStatus, &ev); err != nil {
+				return err
+			}
+			v.ShareStatus = ShareStatus(ev)
+			return nil
+		case schemas.DirectoryDescription_ShortName:
+			v.ShortName = new(string)
+			return d.ReadString(schemas.DirectoryDescription_ShortName, v.ShortName)
+		case schemas.DirectoryDescription_Size:
+			var ev string
+			if err := d.ReadString(schemas.DirectoryDescription_Size, &ev); err != nil {
+				return err
+			}
+			v.Size = DirectorySize(ev)
+			return nil
+		case schemas.DirectoryDescription_SsoEnabled:
+			return d.ReadBool(schemas.DirectoryDescription_SsoEnabled, &v.SsoEnabled)
+		case schemas.DirectoryDescription_Stage:
+			var ev string
+			if err := d.ReadString(schemas.DirectoryDescription_Stage, &ev); err != nil {
+				return err
+			}
+			v.Stage = DirectoryStage(ev)
+			return nil
+		case schemas.DirectoryDescription_StageLastUpdatedDateTime:
+			v.StageLastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.DirectoryDescription_StageLastUpdatedDateTime, v.StageLastUpdatedDateTime)
+		case schemas.DirectoryDescription_StageReason:
+			v.StageReason = new(string)
+			return d.ReadString(schemas.DirectoryDescription_StageReason, v.StageReason)
+		case schemas.DirectoryDescription_Type:
+			var ev string
+			if err := d.ReadString(schemas.DirectoryDescription_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = DirectoryType(ev)
+			return nil
+		case schemas.DirectoryDescription_VpcSettings:
+			v.VpcSettings = &DirectoryVpcSettingsDescription{}
+			return v.VpcSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains directory limit information for a Region.
 type DirectoryLimits struct {
 
@@ -529,6 +1411,73 @@ type DirectoryLimits struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DirectoryLimits) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DirectoryLimits)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DirectoryLimits) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudOnlyDirectoriesCurrentCount != nil {
+		s.WriteInt32(schemas.DirectoryLimits_CloudOnlyDirectoriesCurrentCount, *v.CloudOnlyDirectoriesCurrentCount)
+	}
+	if v.CloudOnlyDirectoriesLimit != nil {
+		s.WriteInt32(schemas.DirectoryLimits_CloudOnlyDirectoriesLimit, *v.CloudOnlyDirectoriesLimit)
+	}
+	if v.CloudOnlyDirectoriesLimitReached != false {
+		s.WriteBool(schemas.DirectoryLimits_CloudOnlyDirectoriesLimitReached, v.CloudOnlyDirectoriesLimitReached)
+	}
+	if v.CloudOnlyMicrosoftADCurrentCount != nil {
+		s.WriteInt32(schemas.DirectoryLimits_CloudOnlyMicrosoftADCurrentCount, *v.CloudOnlyMicrosoftADCurrentCount)
+	}
+	if v.CloudOnlyMicrosoftADLimit != nil {
+		s.WriteInt32(schemas.DirectoryLimits_CloudOnlyMicrosoftADLimit, *v.CloudOnlyMicrosoftADLimit)
+	}
+	if v.CloudOnlyMicrosoftADLimitReached != false {
+		s.WriteBool(schemas.DirectoryLimits_CloudOnlyMicrosoftADLimitReached, v.CloudOnlyMicrosoftADLimitReached)
+	}
+	if v.ConnectedDirectoriesCurrentCount != nil {
+		s.WriteInt32(schemas.DirectoryLimits_ConnectedDirectoriesCurrentCount, *v.ConnectedDirectoriesCurrentCount)
+	}
+	if v.ConnectedDirectoriesLimit != nil {
+		s.WriteInt32(schemas.DirectoryLimits_ConnectedDirectoriesLimit, *v.ConnectedDirectoriesLimit)
+	}
+	if v.ConnectedDirectoriesLimitReached != false {
+		s.WriteBool(schemas.DirectoryLimits_ConnectedDirectoriesLimitReached, v.ConnectedDirectoriesLimitReached)
+	}
+}
+func (v *DirectoryLimits) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectoryLimits, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectoryLimits_CloudOnlyDirectoriesCurrentCount:
+			v.CloudOnlyDirectoriesCurrentCount = new(int32)
+			return d.ReadInt32(schemas.DirectoryLimits_CloudOnlyDirectoriesCurrentCount, v.CloudOnlyDirectoriesCurrentCount)
+		case schemas.DirectoryLimits_CloudOnlyDirectoriesLimit:
+			v.CloudOnlyDirectoriesLimit = new(int32)
+			return d.ReadInt32(schemas.DirectoryLimits_CloudOnlyDirectoriesLimit, v.CloudOnlyDirectoriesLimit)
+		case schemas.DirectoryLimits_CloudOnlyDirectoriesLimitReached:
+			return d.ReadBool(schemas.DirectoryLimits_CloudOnlyDirectoriesLimitReached, &v.CloudOnlyDirectoriesLimitReached)
+		case schemas.DirectoryLimits_CloudOnlyMicrosoftADCurrentCount:
+			v.CloudOnlyMicrosoftADCurrentCount = new(int32)
+			return d.ReadInt32(schemas.DirectoryLimits_CloudOnlyMicrosoftADCurrentCount, v.CloudOnlyMicrosoftADCurrentCount)
+		case schemas.DirectoryLimits_CloudOnlyMicrosoftADLimit:
+			v.CloudOnlyMicrosoftADLimit = new(int32)
+			return d.ReadInt32(schemas.DirectoryLimits_CloudOnlyMicrosoftADLimit, v.CloudOnlyMicrosoftADLimit)
+		case schemas.DirectoryLimits_CloudOnlyMicrosoftADLimitReached:
+			return d.ReadBool(schemas.DirectoryLimits_CloudOnlyMicrosoftADLimitReached, &v.CloudOnlyMicrosoftADLimitReached)
+		case schemas.DirectoryLimits_ConnectedDirectoriesCurrentCount:
+			v.ConnectedDirectoriesCurrentCount = new(int32)
+			return d.ReadInt32(schemas.DirectoryLimits_ConnectedDirectoriesCurrentCount, v.ConnectedDirectoriesCurrentCount)
+		case schemas.DirectoryLimits_ConnectedDirectoriesLimit:
+			v.ConnectedDirectoriesLimit = new(int32)
+			return d.ReadInt32(schemas.DirectoryLimits_ConnectedDirectoriesLimit, v.ConnectedDirectoriesLimit)
+		case schemas.DirectoryLimits_ConnectedDirectoriesLimitReached:
+			return d.ReadBool(schemas.DirectoryLimits_ConnectedDirectoriesLimitReached, &v.ConnectedDirectoriesLimitReached)
+		}
+		return nil
+	})
+}
+
 // Contains the directory size configuration for update operations.
 type DirectorySizeUpdateSettings struct {
 
@@ -536,6 +1485,32 @@ type DirectorySizeUpdateSettings struct {
 	DirectorySize DirectorySize
 
 	noSmithyDocumentSerde
+}
+
+func (v *DirectorySizeUpdateSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DirectorySizeUpdateSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DirectorySizeUpdateSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectorySize != "" {
+		s.WriteString(schemas.DirectorySizeUpdateSettings_DirectorySize, string(v.DirectorySize))
+	}
+}
+func (v *DirectorySizeUpdateSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectorySizeUpdateSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectorySizeUpdateSettings_DirectorySize:
+			var ev string
+			if err := d.ReadString(schemas.DirectorySizeUpdateSettings_DirectorySize, &ev); err != nil {
+				return err
+			}
+			v.DirectorySize = DirectorySize(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains VPC information for the CreateDirectory, CreateMicrosoftAD, or CreateHybridAD operation.
@@ -556,6 +1531,31 @@ type DirectoryVpcSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DirectoryVpcSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DirectoryVpcSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DirectoryVpcSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSubnetIds(s, schemas.DirectoryVpcSettings_SubnetIds, v.SubnetIds)
+	if v.VpcId != nil {
+		s.WriteString(schemas.DirectoryVpcSettings_VpcId, *v.VpcId)
+	}
+}
+func (v *DirectoryVpcSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectoryVpcSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectoryVpcSettings_SubnetIds:
+			return deserializeSubnetIds(d, schemas.DirectoryVpcSettings_SubnetIds, &v.SubnetIds)
+		case schemas.DirectoryVpcSettings_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.DirectoryVpcSettings_VpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 // Contains information about the directory.
 type DirectoryVpcSettingsDescription struct {
 
@@ -572,6 +1572,40 @@ type DirectoryVpcSettingsDescription struct {
 	VpcId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DirectoryVpcSettingsDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DirectoryVpcSettingsDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DirectoryVpcSettingsDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAvailabilityZones(s, schemas.DirectoryVpcSettingsDescription_AvailabilityZones, v.AvailabilityZones)
+	if v.SecurityGroupId != nil {
+		s.WriteString(schemas.DirectoryVpcSettingsDescription_SecurityGroupId, *v.SecurityGroupId)
+	}
+	serializeSubnetIds(s, schemas.DirectoryVpcSettingsDescription_SubnetIds, v.SubnetIds)
+	if v.VpcId != nil {
+		s.WriteString(schemas.DirectoryVpcSettingsDescription_VpcId, *v.VpcId)
+	}
+}
+func (v *DirectoryVpcSettingsDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectoryVpcSettingsDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectoryVpcSettingsDescription_AvailabilityZones:
+			return deserializeAvailabilityZones(d, schemas.DirectoryVpcSettingsDescription_AvailabilityZones, &v.AvailabilityZones)
+		case schemas.DirectoryVpcSettingsDescription_SecurityGroupId:
+			v.SecurityGroupId = new(string)
+			return d.ReadString(schemas.DirectoryVpcSettingsDescription_SecurityGroupId, v.SecurityGroupId)
+		case schemas.DirectoryVpcSettingsDescription_SubnetIds:
+			return deserializeSubnetIds(d, schemas.DirectoryVpcSettingsDescription_SubnetIds, &v.SubnetIds)
+		case schemas.DirectoryVpcSettingsDescription_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.DirectoryVpcSettingsDescription_VpcId, v.VpcId)
+		}
+		return nil
+	})
 }
 
 // Contains information about the domain controllers for a specified directory.
@@ -613,6 +1647,92 @@ type DomainController struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DomainController) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainController)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainController) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.DomainController_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DomainController_DirectoryId, *v.DirectoryId)
+	}
+	if v.DnsIpAddr != nil {
+		s.WriteString(schemas.DomainController_DnsIpAddr, *v.DnsIpAddr)
+	}
+	if v.DnsIpv6Addr != nil {
+		s.WriteString(schemas.DomainController_DnsIpv6Addr, *v.DnsIpv6Addr)
+	}
+	if v.DomainControllerId != nil {
+		s.WriteString(schemas.DomainController_DomainControllerId, *v.DomainControllerId)
+	}
+	if v.LaunchTime != nil {
+		s.WriteTime(schemas.DomainController_LaunchTime, *v.LaunchTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DomainController_Status, string(v.Status))
+	}
+	if v.StatusLastUpdatedDateTime != nil {
+		s.WriteTime(schemas.DomainController_StatusLastUpdatedDateTime, *v.StatusLastUpdatedDateTime)
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.DomainController_StatusReason, *v.StatusReason)
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.DomainController_SubnetId, *v.SubnetId)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.DomainController_VpcId, *v.VpcId)
+	}
+}
+func (v *DomainController) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainController, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainController_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.DomainController_AvailabilityZone, v.AvailabilityZone)
+		case schemas.DomainController_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.DomainController_DirectoryId, v.DirectoryId)
+		case schemas.DomainController_DnsIpAddr:
+			v.DnsIpAddr = new(string)
+			return d.ReadString(schemas.DomainController_DnsIpAddr, v.DnsIpAddr)
+		case schemas.DomainController_DnsIpv6Addr:
+			v.DnsIpv6Addr = new(string)
+			return d.ReadString(schemas.DomainController_DnsIpv6Addr, v.DnsIpv6Addr)
+		case schemas.DomainController_DomainControllerId:
+			v.DomainControllerId = new(string)
+			return d.ReadString(schemas.DomainController_DomainControllerId, v.DomainControllerId)
+		case schemas.DomainController_LaunchTime:
+			v.LaunchTime = new(time.Time)
+			return d.ReadTime(schemas.DomainController_LaunchTime, v.LaunchTime)
+		case schemas.DomainController_Status:
+			var ev string
+			if err := d.ReadString(schemas.DomainController_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = DomainControllerStatus(ev)
+			return nil
+		case schemas.DomainController_StatusLastUpdatedDateTime:
+			v.StatusLastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.DomainController_StatusLastUpdatedDateTime, v.StatusLastUpdatedDateTime)
+		case schemas.DomainController_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.DomainController_StatusReason, v.StatusReason)
+		case schemas.DomainController_SubnetId:
+			v.SubnetId = new(string)
+			return d.ReadString(schemas.DomainController_SubnetId, v.SubnetId)
+		case schemas.DomainController_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.DomainController_VpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 // Information about Amazon SNS topic and Directory Service directory associations.
 type EventTopic struct {
 
@@ -636,6 +1756,56 @@ type EventTopic struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EventTopic) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventTopic)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventTopic) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDateTime != nil {
+		s.WriteTime(schemas.EventTopic_CreatedDateTime, *v.CreatedDateTime)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.EventTopic_DirectoryId, *v.DirectoryId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.EventTopic_Status, string(v.Status))
+	}
+	if v.TopicArn != nil {
+		s.WriteString(schemas.EventTopic_TopicArn, *v.TopicArn)
+	}
+	if v.TopicName != nil {
+		s.WriteString(schemas.EventTopic_TopicName, *v.TopicName)
+	}
+}
+func (v *EventTopic) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventTopic, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventTopic_CreatedDateTime:
+			v.CreatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.EventTopic_CreatedDateTime, v.CreatedDateTime)
+		case schemas.EventTopic_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.EventTopic_DirectoryId, v.DirectoryId)
+		case schemas.EventTopic_Status:
+			var ev string
+			if err := d.ReadString(schemas.EventTopic_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = TopicStatus(ev)
+			return nil
+		case schemas.EventTopic_TopicArn:
+			v.TopicArn = new(string)
+			return d.ReadString(schemas.EventTopic_TopicArn, v.TopicArn)
+		case schemas.EventTopic_TopicName:
+			v.TopicName = new(string)
+			return d.ReadString(schemas.EventTopic_TopicName, v.TopicName)
+		}
+		return nil
+	})
+}
+
 // Use to recover to the hybrid directory administrator account credentials.
 type HybridAdministratorAccountUpdate struct {
 
@@ -649,6 +1819,28 @@ type HybridAdministratorAccountUpdate struct {
 	SecretArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HybridAdministratorAccountUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HybridAdministratorAccountUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HybridAdministratorAccountUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecretArn != nil {
+		s.WriteString(schemas.HybridAdministratorAccountUpdate_SecretArn, *v.SecretArn)
+	}
+}
+func (v *HybridAdministratorAccountUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HybridAdministratorAccountUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HybridAdministratorAccountUpdate_SecretArn:
+			v.SecretArn = new(string)
+			return d.ReadString(schemas.HybridAdministratorAccountUpdate_SecretArn, v.SecretArn)
+		}
+		return nil
+	})
 }
 
 // Contains configuration settings for self-managed instances with SSM used in
@@ -669,6 +1861,28 @@ type HybridCustomerInstancesSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HybridCustomerInstancesSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HybridCustomerInstancesSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HybridCustomerInstancesSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomerDnsIps(s, schemas.HybridCustomerInstancesSettings_CustomerDnsIps, v.CustomerDnsIps)
+	serializeAssessmentInstanceIds(s, schemas.HybridCustomerInstancesSettings_InstanceIds, v.InstanceIds)
+}
+func (v *HybridCustomerInstancesSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HybridCustomerInstancesSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HybridCustomerInstancesSettings_CustomerDnsIps:
+			return deserializeCustomerDnsIps(d, schemas.HybridCustomerInstancesSettings_CustomerDnsIps, &v.CustomerDnsIps)
+		case schemas.HybridCustomerInstancesSettings_InstanceIds:
+			return deserializeAssessmentInstanceIds(d, schemas.HybridCustomerInstancesSettings_InstanceIds, &v.InstanceIds)
+		}
+		return nil
+	})
+}
+
 // Describes the current hybrid directory configuration settings for a directory.
 type HybridSettingsDescription struct {
 
@@ -680,6 +1894,28 @@ type HybridSettingsDescription struct {
 	SelfManagedInstanceIds []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HybridSettingsDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HybridSettingsDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HybridSettingsDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIpAddrs(s, schemas.HybridSettingsDescription_SelfManagedDnsIpAddrs, v.SelfManagedDnsIpAddrs)
+	serializeAssessmentInstanceIds(s, schemas.HybridSettingsDescription_SelfManagedInstanceIds, v.SelfManagedInstanceIds)
+}
+func (v *HybridSettingsDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HybridSettingsDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HybridSettingsDescription_SelfManagedDnsIpAddrs:
+			return deserializeIpAddrs(d, schemas.HybridSettingsDescription_SelfManagedDnsIpAddrs, &v.SelfManagedDnsIpAddrs)
+		case schemas.HybridSettingsDescription_SelfManagedInstanceIds:
+			return deserializeAssessmentInstanceIds(d, schemas.HybridSettingsDescription_SelfManagedInstanceIds, &v.SelfManagedInstanceIds)
+		}
+		return nil
+	})
 }
 
 // Contains information about update activities for different components of a
@@ -695,6 +1931,28 @@ type HybridUpdateActivities struct {
 	SelfManagedInstances []HybridUpdateInfoEntry
 
 	noSmithyDocumentSerde
+}
+
+func (v *HybridUpdateActivities) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HybridUpdateActivities)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HybridUpdateActivities) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHybridUpdateInfoEntries(s, schemas.HybridUpdateActivities_HybridAdministratorAccount, v.HybridAdministratorAccount)
+	serializeHybridUpdateInfoEntries(s, schemas.HybridUpdateActivities_SelfManagedInstances, v.SelfManagedInstances)
+}
+func (v *HybridUpdateActivities) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HybridUpdateActivities, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HybridUpdateActivities_HybridAdministratorAccount:
+			return deserializeHybridUpdateInfoEntries(d, schemas.HybridUpdateActivities_HybridAdministratorAccount, &v.HybridAdministratorAccount)
+		case schemas.HybridUpdateActivities_SelfManagedInstances:
+			return deserializeHybridUpdateInfoEntries(d, schemas.HybridUpdateActivities_SelfManagedInstances, &v.SelfManagedInstances)
+		}
+		return nil
+	})
 }
 
 // Contains detailed information about a specific update activity for a hybrid
@@ -731,6 +1989,78 @@ type HybridUpdateInfoEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HybridUpdateInfoEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HybridUpdateInfoEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HybridUpdateInfoEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.HybridUpdateInfoEntry_AssessmentId, *v.AssessmentId)
+	}
+	if v.InitiatedBy != nil {
+		s.WriteString(schemas.HybridUpdateInfoEntry_InitiatedBy, *v.InitiatedBy)
+	}
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.HybridUpdateInfoEntry_LastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+	if v.NewValue != nil {
+		s.WriteStruct(schemas.HybridUpdateInfoEntry_NewValue)
+		v.NewValue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PreviousValue != nil {
+		s.WriteStruct(schemas.HybridUpdateInfoEntry_PreviousValue)
+		v.PreviousValue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.HybridUpdateInfoEntry_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.HybridUpdateInfoEntry_Status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.HybridUpdateInfoEntry_StatusReason, *v.StatusReason)
+	}
+}
+func (v *HybridUpdateInfoEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HybridUpdateInfoEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HybridUpdateInfoEntry_AssessmentId:
+			v.AssessmentId = new(string)
+			return d.ReadString(schemas.HybridUpdateInfoEntry_AssessmentId, v.AssessmentId)
+		case schemas.HybridUpdateInfoEntry_InitiatedBy:
+			v.InitiatedBy = new(string)
+			return d.ReadString(schemas.HybridUpdateInfoEntry_InitiatedBy, v.InitiatedBy)
+		case schemas.HybridUpdateInfoEntry_LastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.HybridUpdateInfoEntry_LastUpdatedDateTime, v.LastUpdatedDateTime)
+		case schemas.HybridUpdateInfoEntry_NewValue:
+			v.NewValue = &HybridUpdateValue{}
+			return v.NewValue.Deserialize(d)
+		case schemas.HybridUpdateInfoEntry_PreviousValue:
+			v.PreviousValue = &HybridUpdateValue{}
+			return v.PreviousValue.Deserialize(d)
+		case schemas.HybridUpdateInfoEntry_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.HybridUpdateInfoEntry_StartTime, v.StartTime)
+		case schemas.HybridUpdateInfoEntry_Status:
+			var ev string
+			if err := d.ReadString(schemas.HybridUpdateInfoEntry_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = UpdateStatus(ev)
+			return nil
+		case schemas.HybridUpdateInfoEntry_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.HybridUpdateInfoEntry_StatusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
+
 // Contains the configuration values for a hybrid directory update, including
 // Amazon Web Services System Manager managed node and DNS information.
 type HybridUpdateValue struct {
@@ -744,6 +2074,28 @@ type HybridUpdateValue struct {
 	InstanceIds []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HybridUpdateValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HybridUpdateValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HybridUpdateValue) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomerDnsIps(s, schemas.HybridUpdateValue_DnsIps, v.DnsIps)
+	serializeAssessmentInstanceIds(s, schemas.HybridUpdateValue_InstanceIds, v.InstanceIds)
+}
+func (v *HybridUpdateValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HybridUpdateValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HybridUpdateValue_DnsIps:
+			return deserializeCustomerDnsIps(d, schemas.HybridUpdateValue_DnsIps, &v.DnsIps)
+		case schemas.HybridUpdateValue_InstanceIds:
+			return deserializeAssessmentInstanceIds(d, schemas.HybridUpdateValue_InstanceIds, &v.InstanceIds)
+		}
+		return nil
+	})
 }
 
 // Contains the IP address block. This is often the address block of the DNS
@@ -764,6 +2116,40 @@ type IpRoute struct {
 	Description *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *IpRoute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IpRoute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IpRoute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CidrIp != nil {
+		s.WriteString(schemas.IpRoute_CidrIp, *v.CidrIp)
+	}
+	if v.CidrIpv6 != nil {
+		s.WriteString(schemas.IpRoute_CidrIpv6, *v.CidrIpv6)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.IpRoute_Description, *v.Description)
+	}
+}
+func (v *IpRoute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IpRoute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IpRoute_CidrIp:
+			v.CidrIp = new(string)
+			return d.ReadString(schemas.IpRoute_CidrIp, v.CidrIp)
+		case schemas.IpRoute_CidrIpv6:
+			v.CidrIpv6 = new(string)
+			return d.ReadString(schemas.IpRoute_CidrIpv6, v.CidrIpv6)
+		case schemas.IpRoute_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.IpRoute_Description, v.Description)
+		}
+		return nil
+	})
 }
 
 // Information about one or more IP address blocks.
@@ -793,6 +2179,68 @@ type IpRouteInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IpRouteInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IpRouteInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IpRouteInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddedDateTime != nil {
+		s.WriteTime(schemas.IpRouteInfo_AddedDateTime, *v.AddedDateTime)
+	}
+	if v.CidrIp != nil {
+		s.WriteString(schemas.IpRouteInfo_CidrIp, *v.CidrIp)
+	}
+	if v.CidrIpv6 != nil {
+		s.WriteString(schemas.IpRouteInfo_CidrIpv6, *v.CidrIpv6)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.IpRouteInfo_Description, *v.Description)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.IpRouteInfo_DirectoryId, *v.DirectoryId)
+	}
+	if v.IpRouteStatusMsg != "" {
+		s.WriteString(schemas.IpRouteInfo_IpRouteStatusMsg, string(v.IpRouteStatusMsg))
+	}
+	if v.IpRouteStatusReason != nil {
+		s.WriteString(schemas.IpRouteInfo_IpRouteStatusReason, *v.IpRouteStatusReason)
+	}
+}
+func (v *IpRouteInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IpRouteInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IpRouteInfo_AddedDateTime:
+			v.AddedDateTime = new(time.Time)
+			return d.ReadTime(schemas.IpRouteInfo_AddedDateTime, v.AddedDateTime)
+		case schemas.IpRouteInfo_CidrIp:
+			v.CidrIp = new(string)
+			return d.ReadString(schemas.IpRouteInfo_CidrIp, v.CidrIp)
+		case schemas.IpRouteInfo_CidrIpv6:
+			v.CidrIpv6 = new(string)
+			return d.ReadString(schemas.IpRouteInfo_CidrIpv6, v.CidrIpv6)
+		case schemas.IpRouteInfo_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.IpRouteInfo_Description, v.Description)
+		case schemas.IpRouteInfo_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.IpRouteInfo_DirectoryId, v.DirectoryId)
+		case schemas.IpRouteInfo_IpRouteStatusMsg:
+			var ev string
+			if err := d.ReadString(schemas.IpRouteInfo_IpRouteStatusMsg, &ev); err != nil {
+				return err
+			}
+			v.IpRouteStatusMsg = IpRouteStatusMsg(ev)
+			return nil
+		case schemas.IpRouteInfo_IpRouteStatusReason:
+			v.IpRouteStatusReason = new(string)
+			return d.ReadString(schemas.IpRouteInfo_IpRouteStatusReason, v.IpRouteStatusReason)
+		}
+		return nil
+	})
+}
+
 // Contains general information about the LDAPS settings.
 type LDAPSSettingInfo struct {
 
@@ -806,6 +2254,44 @@ type LDAPSSettingInfo struct {
 	LastUpdatedDateTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *LDAPSSettingInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LDAPSSettingInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LDAPSSettingInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LDAPSStatus != "" {
+		s.WriteString(schemas.LDAPSSettingInfo_LDAPSStatus, string(v.LDAPSStatus))
+	}
+	if v.LDAPSStatusReason != nil {
+		s.WriteString(schemas.LDAPSSettingInfo_LDAPSStatusReason, *v.LDAPSStatusReason)
+	}
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.LDAPSSettingInfo_LastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+}
+func (v *LDAPSSettingInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LDAPSSettingInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LDAPSSettingInfo_LDAPSStatus:
+			var ev string
+			if err := d.ReadString(schemas.LDAPSSettingInfo_LDAPSStatus, &ev); err != nil {
+				return err
+			}
+			v.LDAPSStatus = LDAPSStatus(ev)
+			return nil
+		case schemas.LDAPSSettingInfo_LDAPSStatusReason:
+			v.LDAPSStatusReason = new(string)
+			return d.ReadString(schemas.LDAPSSettingInfo_LDAPSStatusReason, v.LDAPSStatusReason)
+		case schemas.LDAPSSettingInfo_LastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.LDAPSSettingInfo_LastUpdatedDateTime, v.LastUpdatedDateTime)
+		}
+		return nil
+	})
 }
 
 // Represents a log subscription, which tracks real-time data from a chosen log
@@ -825,6 +2311,40 @@ type LogSubscription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LogSubscription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LogSubscription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LogSubscription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.LogSubscription_DirectoryId, *v.DirectoryId)
+	}
+	if v.LogGroupName != nil {
+		s.WriteString(schemas.LogSubscription_LogGroupName, *v.LogGroupName)
+	}
+	if v.SubscriptionCreatedDateTime != nil {
+		s.WriteTime(schemas.LogSubscription_SubscriptionCreatedDateTime, *v.SubscriptionCreatedDateTime)
+	}
+}
+func (v *LogSubscription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LogSubscription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LogSubscription_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.LogSubscription_DirectoryId, v.DirectoryId)
+		case schemas.LogSubscription_LogGroupName:
+			v.LogGroupName = new(string)
+			return d.ReadString(schemas.LogSubscription_LogGroupName, v.LogGroupName)
+		case schemas.LogSubscription_SubscriptionCreatedDateTime:
+			v.SubscriptionCreatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.LogSubscription_SubscriptionCreatedDateTime, v.SubscriptionCreatedDateTime)
+		}
+		return nil
+	})
+}
+
 // Contains the network configuration for directory update operations.
 type NetworkUpdateSettings struct {
 
@@ -838,6 +2358,35 @@ type NetworkUpdateSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NetworkUpdateSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkUpdateSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkUpdateSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDnsIpv6Addrs(s, schemas.NetworkUpdateSettings_CustomerDnsIpsV6, v.CustomerDnsIpsV6)
+	if v.NetworkType != "" {
+		s.WriteString(schemas.NetworkUpdateSettings_NetworkType, string(v.NetworkType))
+	}
+}
+func (v *NetworkUpdateSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkUpdateSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkUpdateSettings_CustomerDnsIpsV6:
+			return deserializeDnsIpv6Addrs(d, schemas.NetworkUpdateSettings_CustomerDnsIpsV6, &v.CustomerDnsIpsV6)
+		case schemas.NetworkUpdateSettings_NetworkType:
+			var ev string
+			if err := d.ReadString(schemas.NetworkUpdateSettings_NetworkType, &ev); err != nil {
+				return err
+			}
+			v.NetworkType = NetworkType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // OS version that the directory needs to be updated to.
 type OSUpdateSettings struct {
 
@@ -845,6 +2394,32 @@ type OSUpdateSettings struct {
 	OSVersion OSVersion
 
 	noSmithyDocumentSerde
+}
+
+func (v *OSUpdateSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OSUpdateSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OSUpdateSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OSVersion != "" {
+		s.WriteString(schemas.OSUpdateSettings_OSVersion, string(v.OSVersion))
+	}
+}
+func (v *OSUpdateSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OSUpdateSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OSUpdateSettings_OSVersion:
+			var ev string
+			if err := d.ReadString(schemas.OSUpdateSettings_OSVersion, &ev); err != nil {
+				return err
+			}
+			v.OSVersion = OSVersion(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains the directory owner account details shared with the directory consumer
@@ -876,6 +2451,76 @@ type OwnerDirectoryDescription struct {
 	VpcSettings *DirectoryVpcSettingsDescription
 
 	noSmithyDocumentSerde
+}
+
+func (v *OwnerDirectoryDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OwnerDirectoryDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OwnerDirectoryDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.OwnerDirectoryDescription_AccountId, *v.AccountId)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.OwnerDirectoryDescription_DirectoryId, *v.DirectoryId)
+	}
+	serializeDnsIpAddrs(s, schemas.OwnerDirectoryDescription_DnsIpAddrs, v.DnsIpAddrs)
+	serializeDnsIpv6Addrs(s, schemas.OwnerDirectoryDescription_DnsIpv6Addrs, v.DnsIpv6Addrs)
+	if v.NetworkType != "" {
+		s.WriteString(schemas.OwnerDirectoryDescription_NetworkType, string(v.NetworkType))
+	}
+	if v.RadiusSettings != nil {
+		s.WriteStruct(schemas.OwnerDirectoryDescription_RadiusSettings)
+		v.RadiusSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RadiusStatus != "" {
+		s.WriteString(schemas.OwnerDirectoryDescription_RadiusStatus, string(v.RadiusStatus))
+	}
+	if v.VpcSettings != nil {
+		s.WriteStruct(schemas.OwnerDirectoryDescription_VpcSettings)
+		v.VpcSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OwnerDirectoryDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OwnerDirectoryDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OwnerDirectoryDescription_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.OwnerDirectoryDescription_AccountId, v.AccountId)
+		case schemas.OwnerDirectoryDescription_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.OwnerDirectoryDescription_DirectoryId, v.DirectoryId)
+		case schemas.OwnerDirectoryDescription_DnsIpAddrs:
+			return deserializeDnsIpAddrs(d, schemas.OwnerDirectoryDescription_DnsIpAddrs, &v.DnsIpAddrs)
+		case schemas.OwnerDirectoryDescription_DnsIpv6Addrs:
+			return deserializeDnsIpv6Addrs(d, schemas.OwnerDirectoryDescription_DnsIpv6Addrs, &v.DnsIpv6Addrs)
+		case schemas.OwnerDirectoryDescription_NetworkType:
+			var ev string
+			if err := d.ReadString(schemas.OwnerDirectoryDescription_NetworkType, &ev); err != nil {
+				return err
+			}
+			v.NetworkType = NetworkType(ev)
+			return nil
+		case schemas.OwnerDirectoryDescription_RadiusSettings:
+			v.RadiusSettings = &RadiusSettings{}
+			return v.RadiusSettings.Deserialize(d)
+		case schemas.OwnerDirectoryDescription_RadiusStatus:
+			var ev string
+			if err := d.ReadString(schemas.OwnerDirectoryDescription_RadiusStatus, &ev); err != nil {
+				return err
+			}
+			v.RadiusStatus = RadiusStatus(ev)
+			return nil
+		case schemas.OwnerDirectoryDescription_VpcSettings:
+			v.VpcSettings = &DirectoryVpcSettingsDescription{}
+			return v.VpcSettings.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Contains information about a Remote Authentication Dial In User Service
@@ -917,6 +2562,72 @@ type RadiusSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RadiusSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RadiusSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RadiusSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationProtocol != "" {
+		s.WriteString(schemas.RadiusSettings_AuthenticationProtocol, string(v.AuthenticationProtocol))
+	}
+	if v.DisplayLabel != nil {
+		s.WriteString(schemas.RadiusSettings_DisplayLabel, *v.DisplayLabel)
+	}
+	if v.RadiusPort != nil {
+		s.WriteInt32(schemas.RadiusSettings_RadiusPort, *v.RadiusPort)
+	}
+	if v.RadiusRetries != 0 {
+		s.WriteInt32(schemas.RadiusSettings_RadiusRetries, v.RadiusRetries)
+	}
+	serializeServers(s, schemas.RadiusSettings_RadiusServers, v.RadiusServers)
+	serializeServers(s, schemas.RadiusSettings_RadiusServersIpv6, v.RadiusServersIpv6)
+	if v.RadiusTimeout != nil {
+		s.WriteInt32(schemas.RadiusSettings_RadiusTimeout, *v.RadiusTimeout)
+	}
+	if v.SharedSecret != nil {
+		s.WriteString(schemas.RadiusSettings_SharedSecret, *v.SharedSecret)
+	}
+	if v.UseSameUsername != false {
+		s.WriteBool(schemas.RadiusSettings_UseSameUsername, v.UseSameUsername)
+	}
+}
+func (v *RadiusSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RadiusSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RadiusSettings_AuthenticationProtocol:
+			var ev string
+			if err := d.ReadString(schemas.RadiusSettings_AuthenticationProtocol, &ev); err != nil {
+				return err
+			}
+			v.AuthenticationProtocol = RadiusAuthenticationProtocol(ev)
+			return nil
+		case schemas.RadiusSettings_DisplayLabel:
+			v.DisplayLabel = new(string)
+			return d.ReadString(schemas.RadiusSettings_DisplayLabel, v.DisplayLabel)
+		case schemas.RadiusSettings_RadiusPort:
+			v.RadiusPort = new(int32)
+			return d.ReadInt32(schemas.RadiusSettings_RadiusPort, v.RadiusPort)
+		case schemas.RadiusSettings_RadiusRetries:
+			return d.ReadInt32(schemas.RadiusSettings_RadiusRetries, &v.RadiusRetries)
+		case schemas.RadiusSettings_RadiusServers:
+			return deserializeServers(d, schemas.RadiusSettings_RadiusServers, &v.RadiusServers)
+		case schemas.RadiusSettings_RadiusServersIpv6:
+			return deserializeServers(d, schemas.RadiusSettings_RadiusServersIpv6, &v.RadiusServersIpv6)
+		case schemas.RadiusSettings_RadiusTimeout:
+			v.RadiusTimeout = new(int32)
+			return d.ReadInt32(schemas.RadiusSettings_RadiusTimeout, v.RadiusTimeout)
+		case schemas.RadiusSettings_SharedSecret:
+			v.SharedSecret = new(string)
+			return d.ReadString(schemas.RadiusSettings_SharedSecret, v.SharedSecret)
+		case schemas.RadiusSettings_UseSameUsername:
+			return d.ReadBool(schemas.RadiusSettings_UseSameUsername, &v.UseSameUsername)
+		}
+		return nil
+	})
+}
+
 // The replicated Region information for a directory.
 type RegionDescription struct {
 
@@ -951,6 +2662,86 @@ type RegionDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegionDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegionDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegionDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DesiredNumberOfDomainControllers != nil {
+		s.WriteInt32(schemas.RegionDescription_DesiredNumberOfDomainControllers, *v.DesiredNumberOfDomainControllers)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.RegionDescription_DirectoryId, *v.DirectoryId)
+	}
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.RegionDescription_LastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+	if v.LaunchTime != nil {
+		s.WriteTime(schemas.RegionDescription_LaunchTime, *v.LaunchTime)
+	}
+	if v.RegionName != nil {
+		s.WriteString(schemas.RegionDescription_RegionName, *v.RegionName)
+	}
+	if v.RegionType != "" {
+		s.WriteString(schemas.RegionDescription_RegionType, string(v.RegionType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RegionDescription_Status, string(v.Status))
+	}
+	if v.StatusLastUpdatedDateTime != nil {
+		s.WriteTime(schemas.RegionDescription_StatusLastUpdatedDateTime, *v.StatusLastUpdatedDateTime)
+	}
+	if v.VpcSettings != nil {
+		s.WriteStruct(schemas.RegionDescription_VpcSettings)
+		v.VpcSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RegionDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegionDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegionDescription_DesiredNumberOfDomainControllers:
+			v.DesiredNumberOfDomainControllers = new(int32)
+			return d.ReadInt32(schemas.RegionDescription_DesiredNumberOfDomainControllers, v.DesiredNumberOfDomainControllers)
+		case schemas.RegionDescription_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.RegionDescription_DirectoryId, v.DirectoryId)
+		case schemas.RegionDescription_LastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.RegionDescription_LastUpdatedDateTime, v.LastUpdatedDateTime)
+		case schemas.RegionDescription_LaunchTime:
+			v.LaunchTime = new(time.Time)
+			return d.ReadTime(schemas.RegionDescription_LaunchTime, v.LaunchTime)
+		case schemas.RegionDescription_RegionName:
+			v.RegionName = new(string)
+			return d.ReadString(schemas.RegionDescription_RegionName, v.RegionName)
+		case schemas.RegionDescription_RegionType:
+			var ev string
+			if err := d.ReadString(schemas.RegionDescription_RegionType, &ev); err != nil {
+				return err
+			}
+			v.RegionType = RegionType(ev)
+			return nil
+		case schemas.RegionDescription_Status:
+			var ev string
+			if err := d.ReadString(schemas.RegionDescription_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = DirectoryStage(ev)
+			return nil
+		case schemas.RegionDescription_StatusLastUpdatedDateTime:
+			v.StatusLastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.RegionDescription_StatusLastUpdatedDateTime, v.StatusLastUpdatedDateTime)
+		case schemas.RegionDescription_VpcSettings:
+			v.VpcSettings = &DirectoryVpcSettings{}
+			return v.VpcSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides information about the Regions that are configured for multi-Region
 // replication.
 type RegionsInfo struct {
@@ -963,6 +2754,31 @@ type RegionsInfo struct {
 	PrimaryRegion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RegionsInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegionsInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegionsInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalRegions(s, schemas.RegionsInfo_AdditionalRegions, v.AdditionalRegions)
+	if v.PrimaryRegion != nil {
+		s.WriteString(schemas.RegionsInfo_PrimaryRegion, *v.PrimaryRegion)
+	}
+}
+func (v *RegionsInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegionsInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegionsInfo_AdditionalRegions:
+			return deserializeAdditionalRegions(d, schemas.RegionsInfo_AdditionalRegions, &v.AdditionalRegions)
+		case schemas.RegionsInfo_PrimaryRegion:
+			v.PrimaryRegion = new(string)
+			return d.ReadString(schemas.RegionsInfo_PrimaryRegion, v.PrimaryRegion)
+		}
+		return nil
+	})
 }
 
 // Information about a schema extension.
@@ -993,6 +2809,68 @@ type SchemaExtensionInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SchemaExtensionInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SchemaExtensionInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SchemaExtensionInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.SchemaExtensionInfo_Description, *v.Description)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.SchemaExtensionInfo_DirectoryId, *v.DirectoryId)
+	}
+	if v.EndDateTime != nil {
+		s.WriteTime(schemas.SchemaExtensionInfo_EndDateTime, *v.EndDateTime)
+	}
+	if v.SchemaExtensionId != nil {
+		s.WriteString(schemas.SchemaExtensionInfo_SchemaExtensionId, *v.SchemaExtensionId)
+	}
+	if v.SchemaExtensionStatus != "" {
+		s.WriteString(schemas.SchemaExtensionInfo_SchemaExtensionStatus, string(v.SchemaExtensionStatus))
+	}
+	if v.SchemaExtensionStatusReason != nil {
+		s.WriteString(schemas.SchemaExtensionInfo_SchemaExtensionStatusReason, *v.SchemaExtensionStatusReason)
+	}
+	if v.StartDateTime != nil {
+		s.WriteTime(schemas.SchemaExtensionInfo_StartDateTime, *v.StartDateTime)
+	}
+}
+func (v *SchemaExtensionInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SchemaExtensionInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SchemaExtensionInfo_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.SchemaExtensionInfo_Description, v.Description)
+		case schemas.SchemaExtensionInfo_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.SchemaExtensionInfo_DirectoryId, v.DirectoryId)
+		case schemas.SchemaExtensionInfo_EndDateTime:
+			v.EndDateTime = new(time.Time)
+			return d.ReadTime(schemas.SchemaExtensionInfo_EndDateTime, v.EndDateTime)
+		case schemas.SchemaExtensionInfo_SchemaExtensionId:
+			v.SchemaExtensionId = new(string)
+			return d.ReadString(schemas.SchemaExtensionInfo_SchemaExtensionId, v.SchemaExtensionId)
+		case schemas.SchemaExtensionInfo_SchemaExtensionStatus:
+			var ev string
+			if err := d.ReadString(schemas.SchemaExtensionInfo_SchemaExtensionStatus, &ev); err != nil {
+				return err
+			}
+			v.SchemaExtensionStatus = SchemaExtensionStatus(ev)
+			return nil
+		case schemas.SchemaExtensionInfo_SchemaExtensionStatusReason:
+			v.SchemaExtensionStatusReason = new(string)
+			return d.ReadString(schemas.SchemaExtensionInfo_SchemaExtensionStatusReason, v.SchemaExtensionStatusReason)
+		case schemas.SchemaExtensionInfo_StartDateTime:
+			v.StartDateTime = new(time.Time)
+			return d.ReadTime(schemas.SchemaExtensionInfo_StartDateTime, v.StartDateTime)
+		}
+		return nil
+	})
+}
+
 // Contains information about the configurable settings for a directory.
 type Setting struct {
 
@@ -1010,6 +2888,34 @@ type Setting struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Setting) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Setting)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Setting) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.Setting_Name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Setting_Value, *v.Value)
+	}
+}
+func (v *Setting) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Setting, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Setting_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Setting_Name, v.Name)
+		case schemas.Setting_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Setting_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Contains information about the specified configurable setting for a directory.
@@ -1062,6 +2968,89 @@ type SettingEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SettingEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SettingEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SettingEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowedValues != nil {
+		s.WriteString(schemas.SettingEntry_AllowedValues, *v.AllowedValues)
+	}
+	if v.AppliedValue != nil {
+		s.WriteString(schemas.SettingEntry_AppliedValue, *v.AppliedValue)
+	}
+	if v.DataType != nil {
+		s.WriteString(schemas.SettingEntry_DataType, *v.DataType)
+	}
+	if v.LastRequestedDateTime != nil {
+		s.WriteTime(schemas.SettingEntry_LastRequestedDateTime, *v.LastRequestedDateTime)
+	}
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.SettingEntry_LastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SettingEntry_Name, *v.Name)
+	}
+	serializeDirectoryConfigurationSettingRequestDetailedStatus(s, schemas.SettingEntry_RequestDetailedStatus, v.RequestDetailedStatus)
+	if v.RequestStatus != "" {
+		s.WriteString(schemas.SettingEntry_RequestStatus, string(v.RequestStatus))
+	}
+	if v.RequestStatusMessage != nil {
+		s.WriteString(schemas.SettingEntry_RequestStatusMessage, *v.RequestStatusMessage)
+	}
+	if v.RequestedValue != nil {
+		s.WriteString(schemas.SettingEntry_RequestedValue, *v.RequestedValue)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.SettingEntry_Type, *v.Type)
+	}
+}
+func (v *SettingEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SettingEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SettingEntry_AllowedValues:
+			v.AllowedValues = new(string)
+			return d.ReadString(schemas.SettingEntry_AllowedValues, v.AllowedValues)
+		case schemas.SettingEntry_AppliedValue:
+			v.AppliedValue = new(string)
+			return d.ReadString(schemas.SettingEntry_AppliedValue, v.AppliedValue)
+		case schemas.SettingEntry_DataType:
+			v.DataType = new(string)
+			return d.ReadString(schemas.SettingEntry_DataType, v.DataType)
+		case schemas.SettingEntry_LastRequestedDateTime:
+			v.LastRequestedDateTime = new(time.Time)
+			return d.ReadTime(schemas.SettingEntry_LastRequestedDateTime, v.LastRequestedDateTime)
+		case schemas.SettingEntry_LastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.SettingEntry_LastUpdatedDateTime, v.LastUpdatedDateTime)
+		case schemas.SettingEntry_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SettingEntry_Name, v.Name)
+		case schemas.SettingEntry_RequestDetailedStatus:
+			return deserializeDirectoryConfigurationSettingRequestDetailedStatus(d, schemas.SettingEntry_RequestDetailedStatus, &v.RequestDetailedStatus)
+		case schemas.SettingEntry_RequestStatus:
+			var ev string
+			if err := d.ReadString(schemas.SettingEntry_RequestStatus, &ev); err != nil {
+				return err
+			}
+			v.RequestStatus = DirectoryConfigurationStatus(ev)
+			return nil
+		case schemas.SettingEntry_RequestStatusMessage:
+			v.RequestStatusMessage = new(string)
+			return d.ReadString(schemas.SettingEntry_RequestStatusMessage, v.RequestStatusMessage)
+		case schemas.SettingEntry_RequestedValue:
+			v.RequestedValue = new(string)
+			return d.ReadString(schemas.SettingEntry_RequestedValue, v.RequestedValue)
+		case schemas.SettingEntry_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.SettingEntry_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Details about the shared directory in the directory owner account for which the
 // share request in the directory consumer account has been accepted.
 type SharedDirectory struct {
@@ -1104,6 +3093,84 @@ type SharedDirectory struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SharedDirectory) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SharedDirectory)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SharedDirectory) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDateTime != nil {
+		s.WriteTime(schemas.SharedDirectory_CreatedDateTime, *v.CreatedDateTime)
+	}
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.SharedDirectory_LastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.SharedDirectory_OwnerAccountId, *v.OwnerAccountId)
+	}
+	if v.OwnerDirectoryId != nil {
+		s.WriteString(schemas.SharedDirectory_OwnerDirectoryId, *v.OwnerDirectoryId)
+	}
+	if v.ShareMethod != "" {
+		s.WriteString(schemas.SharedDirectory_ShareMethod, string(v.ShareMethod))
+	}
+	if v.ShareNotes != nil {
+		s.WriteString(schemas.SharedDirectory_ShareNotes, *v.ShareNotes)
+	}
+	if v.ShareStatus != "" {
+		s.WriteString(schemas.SharedDirectory_ShareStatus, string(v.ShareStatus))
+	}
+	if v.SharedAccountId != nil {
+		s.WriteString(schemas.SharedDirectory_SharedAccountId, *v.SharedAccountId)
+	}
+	if v.SharedDirectoryId != nil {
+		s.WriteString(schemas.SharedDirectory_SharedDirectoryId, *v.SharedDirectoryId)
+	}
+}
+func (v *SharedDirectory) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SharedDirectory, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SharedDirectory_CreatedDateTime:
+			v.CreatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.SharedDirectory_CreatedDateTime, v.CreatedDateTime)
+		case schemas.SharedDirectory_LastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.SharedDirectory_LastUpdatedDateTime, v.LastUpdatedDateTime)
+		case schemas.SharedDirectory_OwnerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.SharedDirectory_OwnerAccountId, v.OwnerAccountId)
+		case schemas.SharedDirectory_OwnerDirectoryId:
+			v.OwnerDirectoryId = new(string)
+			return d.ReadString(schemas.SharedDirectory_OwnerDirectoryId, v.OwnerDirectoryId)
+		case schemas.SharedDirectory_ShareMethod:
+			var ev string
+			if err := d.ReadString(schemas.SharedDirectory_ShareMethod, &ev); err != nil {
+				return err
+			}
+			v.ShareMethod = ShareMethod(ev)
+			return nil
+		case schemas.SharedDirectory_ShareNotes:
+			v.ShareNotes = new(string)
+			return d.ReadString(schemas.SharedDirectory_ShareNotes, v.ShareNotes)
+		case schemas.SharedDirectory_ShareStatus:
+			var ev string
+			if err := d.ReadString(schemas.SharedDirectory_ShareStatus, &ev); err != nil {
+				return err
+			}
+			v.ShareStatus = ShareStatus(ev)
+			return nil
+		case schemas.SharedDirectory_SharedAccountId:
+			v.SharedAccountId = new(string)
+			return d.ReadString(schemas.SharedDirectory_SharedAccountId, v.SharedAccountId)
+		case schemas.SharedDirectory_SharedDirectoryId:
+			v.SharedDirectoryId = new(string)
+			return d.ReadString(schemas.SharedDirectory_SharedDirectoryId, v.SharedDirectoryId)
+		}
+		return nil
+	})
+}
+
 // Identifier that contains details about the directory consumer account.
 type ShareTarget struct {
 
@@ -1118,6 +3185,38 @@ type ShareTarget struct {
 	Type TargetType
 
 	noSmithyDocumentSerde
+}
+
+func (v *ShareTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ShareTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ShareTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.ShareTarget_Id, *v.Id)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ShareTarget_Type, string(v.Type))
+	}
+}
+func (v *ShareTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ShareTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ShareTarget_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ShareTarget_Id, v.Id)
+		case schemas.ShareTarget_Type:
+			var ev string
+			if err := d.ReadString(schemas.ShareTarget_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = TargetType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes a directory snapshot.
@@ -1144,6 +3243,66 @@ type Snapshot struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Snapshot) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Snapshot)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Snapshot) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.Snapshot_DirectoryId, *v.DirectoryId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Snapshot_Name, *v.Name)
+	}
+	if v.SnapshotId != nil {
+		s.WriteString(schemas.Snapshot_SnapshotId, *v.SnapshotId)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.Snapshot_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Snapshot_Status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Snapshot_Type, string(v.Type))
+	}
+}
+func (v *Snapshot) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Snapshot, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Snapshot_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.Snapshot_DirectoryId, v.DirectoryId)
+		case schemas.Snapshot_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Snapshot_Name, v.Name)
+		case schemas.Snapshot_SnapshotId:
+			v.SnapshotId = new(string)
+			return d.ReadString(schemas.Snapshot_SnapshotId, v.SnapshotId)
+		case schemas.Snapshot_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.Snapshot_StartTime, v.StartTime)
+		case schemas.Snapshot_Status:
+			var ev string
+			if err := d.ReadString(schemas.Snapshot_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = SnapshotStatus(ev)
+			return nil
+		case schemas.Snapshot_Type:
+			var ev string
+			if err := d.ReadString(schemas.Snapshot_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = SnapshotType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains manual snapshot limit information for a directory.
 type SnapshotLimits struct {
 
@@ -1157,6 +3316,39 @@ type SnapshotLimits struct {
 	ManualSnapshotsLimitReached bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *SnapshotLimits) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapshotLimits)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapshotLimits) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManualSnapshotsCurrentCount != nil {
+		s.WriteInt32(schemas.SnapshotLimits_ManualSnapshotsCurrentCount, *v.ManualSnapshotsCurrentCount)
+	}
+	if v.ManualSnapshotsLimit != nil {
+		s.WriteInt32(schemas.SnapshotLimits_ManualSnapshotsLimit, *v.ManualSnapshotsLimit)
+	}
+	if v.ManualSnapshotsLimitReached != false {
+		s.WriteBool(schemas.SnapshotLimits_ManualSnapshotsLimitReached, v.ManualSnapshotsLimitReached)
+	}
+}
+func (v *SnapshotLimits) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapshotLimits, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapshotLimits_ManualSnapshotsCurrentCount:
+			v.ManualSnapshotsCurrentCount = new(int32)
+			return d.ReadInt32(schemas.SnapshotLimits_ManualSnapshotsCurrentCount, v.ManualSnapshotsCurrentCount)
+		case schemas.SnapshotLimits_ManualSnapshotsLimit:
+			v.ManualSnapshotsLimit = new(int32)
+			return d.ReadInt32(schemas.SnapshotLimits_ManualSnapshotsLimit, v.ManualSnapshotsLimit)
+		case schemas.SnapshotLimits_ManualSnapshotsLimitReached:
+			return d.ReadBool(schemas.SnapshotLimits_ManualSnapshotsLimitReached, &v.ManualSnapshotsLimitReached)
+		}
+		return nil
+	})
 }
 
 // Metadata assigned to a directory consisting of a key-value pair.
@@ -1179,6 +3371,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Describes a trust relationship between an Managed Microsoft AD directory and an
@@ -1223,6 +3443,104 @@ type Trust struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Trust) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Trust)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Trust) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDateTime != nil {
+		s.WriteTime(schemas.Trust_CreatedDateTime, *v.CreatedDateTime)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.Trust_DirectoryId, *v.DirectoryId)
+	}
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.Trust_LastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+	if v.RemoteDomainName != nil {
+		s.WriteString(schemas.Trust_RemoteDomainName, *v.RemoteDomainName)
+	}
+	if v.SelectiveAuth != "" {
+		s.WriteString(schemas.Trust_SelectiveAuth, string(v.SelectiveAuth))
+	}
+	if v.StateLastUpdatedDateTime != nil {
+		s.WriteTime(schemas.Trust_StateLastUpdatedDateTime, *v.StateLastUpdatedDateTime)
+	}
+	if v.TrustDirection != "" {
+		s.WriteString(schemas.Trust_TrustDirection, string(v.TrustDirection))
+	}
+	if v.TrustId != nil {
+		s.WriteString(schemas.Trust_TrustId, *v.TrustId)
+	}
+	if v.TrustState != "" {
+		s.WriteString(schemas.Trust_TrustState, string(v.TrustState))
+	}
+	if v.TrustStateReason != nil {
+		s.WriteString(schemas.Trust_TrustStateReason, *v.TrustStateReason)
+	}
+	if v.TrustType != "" {
+		s.WriteString(schemas.Trust_TrustType, string(v.TrustType))
+	}
+}
+func (v *Trust) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Trust, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Trust_CreatedDateTime:
+			v.CreatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.Trust_CreatedDateTime, v.CreatedDateTime)
+		case schemas.Trust_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.Trust_DirectoryId, v.DirectoryId)
+		case schemas.Trust_LastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.Trust_LastUpdatedDateTime, v.LastUpdatedDateTime)
+		case schemas.Trust_RemoteDomainName:
+			v.RemoteDomainName = new(string)
+			return d.ReadString(schemas.Trust_RemoteDomainName, v.RemoteDomainName)
+		case schemas.Trust_SelectiveAuth:
+			var ev string
+			if err := d.ReadString(schemas.Trust_SelectiveAuth, &ev); err != nil {
+				return err
+			}
+			v.SelectiveAuth = SelectiveAuth(ev)
+			return nil
+		case schemas.Trust_StateLastUpdatedDateTime:
+			v.StateLastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.Trust_StateLastUpdatedDateTime, v.StateLastUpdatedDateTime)
+		case schemas.Trust_TrustDirection:
+			var ev string
+			if err := d.ReadString(schemas.Trust_TrustDirection, &ev); err != nil {
+				return err
+			}
+			v.TrustDirection = TrustDirection(ev)
+			return nil
+		case schemas.Trust_TrustId:
+			v.TrustId = new(string)
+			return d.ReadString(schemas.Trust_TrustId, v.TrustId)
+		case schemas.Trust_TrustState:
+			var ev string
+			if err := d.ReadString(schemas.Trust_TrustState, &ev); err != nil {
+				return err
+			}
+			v.TrustState = TrustState(ev)
+			return nil
+		case schemas.Trust_TrustStateReason:
+			v.TrustStateReason = new(string)
+			return d.ReadString(schemas.Trust_TrustStateReason, v.TrustStateReason)
+		case schemas.Trust_TrustType:
+			var ev string
+			if err := d.ReadString(schemas.Trust_TrustType, &ev); err != nil {
+				return err
+			}
+			v.TrustType = TrustType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Identifier that contains details about the directory consumer account with whom
 // the directory is being unshared.
 type UnshareTarget struct {
@@ -1238,6 +3556,38 @@ type UnshareTarget struct {
 	Type TargetType
 
 	noSmithyDocumentSerde
+}
+
+func (v *UnshareTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnshareTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnshareTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.UnshareTarget_Id, *v.Id)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UnshareTarget_Type, string(v.Type))
+	}
+}
+func (v *UnshareTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnshareTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnshareTarget_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UnshareTarget_Id, v.Id)
+		case schemas.UnshareTarget_Type:
+			var ev string
+			if err := d.ReadString(schemas.UnshareTarget_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = TargetType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // An entry of update information related to a requested update type.
@@ -1271,6 +3621,78 @@ type UpdateInfoEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInfoEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInfoEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInfoEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InitiatedBy != nil {
+		s.WriteString(schemas.UpdateInfoEntry_InitiatedBy, *v.InitiatedBy)
+	}
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.UpdateInfoEntry_LastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+	if v.NewValue != nil {
+		s.WriteStruct(schemas.UpdateInfoEntry_NewValue)
+		v.NewValue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PreviousValue != nil {
+		s.WriteStruct(schemas.UpdateInfoEntry_PreviousValue)
+		v.PreviousValue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.UpdateInfoEntry_Region, *v.Region)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.UpdateInfoEntry_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateInfoEntry_Status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.UpdateInfoEntry_StatusReason, *v.StatusReason)
+	}
+}
+func (v *UpdateInfoEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateInfoEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateInfoEntry_InitiatedBy:
+			v.InitiatedBy = new(string)
+			return d.ReadString(schemas.UpdateInfoEntry_InitiatedBy, v.InitiatedBy)
+		case schemas.UpdateInfoEntry_LastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateInfoEntry_LastUpdatedDateTime, v.LastUpdatedDateTime)
+		case schemas.UpdateInfoEntry_NewValue:
+			v.NewValue = &UpdateValue{}
+			return v.NewValue.Deserialize(d)
+		case schemas.UpdateInfoEntry_PreviousValue:
+			v.PreviousValue = &UpdateValue{}
+			return v.PreviousValue.Deserialize(d)
+		case schemas.UpdateInfoEntry_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.UpdateInfoEntry_Region, v.Region)
+		case schemas.UpdateInfoEntry_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateInfoEntry_StartTime, v.StartTime)
+		case schemas.UpdateInfoEntry_Status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateInfoEntry_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = UpdateStatus(ev)
+			return nil
+		case schemas.UpdateInfoEntry_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.UpdateInfoEntry_StatusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
+
 // The value for a given type of UpdateSettings .
 type UpdateValue struct {
 
@@ -1278,6 +3700,30 @@ type UpdateValue struct {
 	OSUpdateSettings *OSUpdateSettings
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OSUpdateSettings != nil {
+		s.WriteStruct(schemas.UpdateValue_OSUpdateSettings)
+		v.OSUpdateSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateValue_OSUpdateSettings:
+			v.OSUpdateSettings = &OSUpdateSettings{}
+			return v.OSUpdateSettings.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

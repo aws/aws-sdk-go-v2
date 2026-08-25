@@ -4,6 +4,8 @@ package account
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/account/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,21 @@ type EnableRegionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableRegionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableRegionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableRegionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.EnableRegionRequest_AccountId, *v.AccountId)
+	}
+	if v.RegionName != nil {
+		s.WriteString(schemas.EnableRegionRequest_RegionName, *v.RegionName)
+	}
+}
+
 type EnableRegionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -67,13 +84,26 @@ type EnableRegionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableRegionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableRegionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *EnableRegionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableRegionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpEnableRegion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableRegion, schemas.EnableRegionRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpEnableRegion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableRegion, schemas.EnableRegionRequest, nil), output: &EnableRegionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

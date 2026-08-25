@@ -5,7 +5,9 @@ package iotsecuretunneling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type ListTunnelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTunnelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTunnelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTunnelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTunnelsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTunnelsRequest_nextToken, *v.NextToken)
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.ListTunnelsRequest_thingName, *v.ThingName)
+	}
+}
+
 type ListTunnelsOutput struct {
 
 	// The token to use to get the next set of results, or null if there are no
@@ -61,13 +81,35 @@ type ListTunnelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTunnelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTunnelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTunnelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTunnelsResponse_nextToken, *v.NextToken)
+	}
+	serializeTunnelSummaryList(s, schemas.ListTunnelsResponse_tunnelSummaries, v.TunnelSummaries)
+}
+func (v *ListTunnelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTunnelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTunnelsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTunnelsResponse_nextToken, v.NextToken)
+		case schemas.ListTunnelsResponse_tunnelSummaries:
+			return deserializeTunnelSummaryList(d, schemas.ListTunnelsResponse_tunnelSummaries, &v.TunnelSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTunnelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTunnels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTunnels, schemas.ListTunnelsRequest, schemas.ListTunnelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTunnels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTunnels, schemas.ListTunnelsRequest, schemas.ListTunnelsResponse), output: &ListTunnelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

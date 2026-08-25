@@ -4,7 +4,9 @@ package qconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,25 @@ type UpdateSessionDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSessionDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSessionDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSessionDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssistantId != nil {
+		s.WriteString(schemas.UpdateSessionDataRequest_assistantId, *v.AssistantId)
+	}
+	serializeRuntimeSessionDataList(s, schemas.UpdateSessionDataRequest_data, v.Data)
+	if v.Namespace != "" {
+		s.WriteString(schemas.UpdateSessionDataRequest_namespace, string(v.Namespace))
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.UpdateSessionDataRequest_sessionId, *v.SessionId)
+	}
+}
+
 type UpdateSessionDataOutput struct {
 
 	// Data stored in the session.
@@ -79,13 +100,51 @@ type UpdateSessionDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSessionDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSessionDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSessionDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRuntimeSessionDataList(s, schemas.UpdateSessionDataResponse_data, v.Data)
+	if v.Namespace != "" {
+		s.WriteString(schemas.UpdateSessionDataResponse_namespace, string(v.Namespace))
+	}
+	if v.SessionArn != nil {
+		s.WriteString(schemas.UpdateSessionDataResponse_sessionArn, *v.SessionArn)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.UpdateSessionDataResponse_sessionId, *v.SessionId)
+	}
+}
+func (v *UpdateSessionDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSessionDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSessionDataResponse_data:
+			return deserializeRuntimeSessionDataList(d, schemas.UpdateSessionDataResponse_data, &v.Data)
+		case schemas.UpdateSessionDataResponse_namespace:
+			var ev string
+			if err := d.ReadString(schemas.UpdateSessionDataResponse_namespace, &ev); err != nil {
+				return err
+			}
+			v.Namespace = types.SessionDataNamespace(ev)
+			return nil
+		case schemas.UpdateSessionDataResponse_sessionArn:
+			v.SessionArn = new(string)
+			return d.ReadString(schemas.UpdateSessionDataResponse_sessionArn, v.SessionArn)
+		case schemas.UpdateSessionDataResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.UpdateSessionDataResponse_sessionId, v.SessionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSessionDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSessionData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSessionData, schemas.UpdateSessionDataRequest, schemas.UpdateSessionDataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSessionData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSessionData, schemas.UpdateSessionDataRequest, schemas.UpdateSessionDataResponse), output: &UpdateSessionDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

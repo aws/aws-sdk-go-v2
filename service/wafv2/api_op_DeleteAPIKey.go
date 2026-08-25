@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,21 @@ type DeleteAPIKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAPIKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAPIKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAPIKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.APIKey != nil {
+		s.WriteString(schemas.DeleteAPIKeyRequest_APIKey, *v.APIKey)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.DeleteAPIKeyRequest_Scope, string(v.Scope))
+	}
+}
+
 type DeleteAPIKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,13 +75,26 @@ type DeleteAPIKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAPIKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAPIKeyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAPIKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAPIKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAPIKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAPIKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAPIKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAPIKey, schemas.DeleteAPIKeyRequest, schemas.DeleteAPIKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteAPIKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAPIKey, schemas.DeleteAPIKeyRequest, schemas.DeleteAPIKeyResponse), output: &DeleteAPIKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

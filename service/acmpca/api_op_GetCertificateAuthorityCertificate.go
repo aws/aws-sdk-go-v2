@@ -4,6 +4,8 @@ package acmpca
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type GetCertificateAuthorityCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCertificateAuthorityCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCertificateAuthorityCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCertificateAuthorityCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateAuthorityArn != nil {
+		s.WriteString(schemas.GetCertificateAuthorityCertificateRequest_CertificateAuthorityArn, *v.CertificateAuthorityArn)
+	}
+}
+
 type GetCertificateAuthorityCertificateOutput struct {
 
 	// Base64-encoded certificate authority (CA) certificate.
@@ -56,13 +70,38 @@ type GetCertificateAuthorityCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCertificateAuthorityCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCertificateAuthorityCertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCertificateAuthorityCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Certificate != nil {
+		s.WriteString(schemas.GetCertificateAuthorityCertificateResponse_Certificate, *v.Certificate)
+	}
+	if v.CertificateChain != nil {
+		s.WriteString(schemas.GetCertificateAuthorityCertificateResponse_CertificateChain, *v.CertificateChain)
+	}
+}
+func (v *GetCertificateAuthorityCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCertificateAuthorityCertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCertificateAuthorityCertificateResponse_Certificate:
+			v.Certificate = new(string)
+			return d.ReadString(schemas.GetCertificateAuthorityCertificateResponse_Certificate, v.Certificate)
+		case schemas.GetCertificateAuthorityCertificateResponse_CertificateChain:
+			v.CertificateChain = new(string)
+			return d.ReadString(schemas.GetCertificateAuthorityCertificateResponse_CertificateChain, v.CertificateChain)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCertificateAuthorityCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCertificateAuthorityCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCertificateAuthorityCertificate, schemas.GetCertificateAuthorityCertificateRequest, schemas.GetCertificateAuthorityCertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCertificateAuthorityCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCertificateAuthorityCertificate, schemas.GetCertificateAuthorityCertificateRequest, schemas.GetCertificateAuthorityCertificateResponse), output: &GetCertificateAuthorityCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

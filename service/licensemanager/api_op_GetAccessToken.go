@@ -4,6 +4,8 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,19 @@ type GetAccessTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccessTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccessTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccessTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Token != nil {
+		s.WriteString(schemas.GetAccessTokenRequest_Token, *v.Token)
+	}
+	serializeMaxSize3StringList(s, schemas.GetAccessTokenRequest_TokenProperties, v.TokenProperties)
+}
+
 type GetAccessTokenOutput struct {
 
 	// Temporary access token.
@@ -48,13 +63,32 @@ type GetAccessTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccessTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccessTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccessTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.GetAccessTokenResponse_AccessToken, *v.AccessToken)
+	}
+}
+func (v *GetAccessTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccessTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccessTokenResponse_AccessToken:
+			v.AccessToken = new(string)
+			return d.ReadString(schemas.GetAccessTokenResponse_AccessToken, v.AccessToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccessTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAccessToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccessToken, schemas.GetAccessTokenRequest, schemas.GetAccessTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAccessToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccessToken, schemas.GetAccessTokenRequest, schemas.GetAccessTokenResponse), output: &GetAccessTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

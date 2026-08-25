@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -90,6 +92,27 @@ type DeleteWebACLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWebACLInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWebACLRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWebACLInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteWebACLRequest_Id, *v.Id)
+	}
+	if v.LockToken != nil {
+		s.WriteString(schemas.DeleteWebACLRequest_LockToken, *v.LockToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteWebACLRequest_Name, *v.Name)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.DeleteWebACLRequest_Scope, string(v.Scope))
+	}
+}
+
 type DeleteWebACLOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -97,13 +120,26 @@ type DeleteWebACLOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWebACLOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWebACLResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWebACLOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteWebACLOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWebACLResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteWebACL{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWebACL, schemas.DeleteWebACLRequest, schemas.DeleteWebACLResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteWebACL{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWebACL, schemas.DeleteWebACLRequest, schemas.DeleteWebACLResponse), output: &DeleteWebACLOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

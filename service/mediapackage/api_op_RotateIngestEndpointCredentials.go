@@ -4,7 +4,9 @@ package mediapackage
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackage/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackage/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type RotateIngestEndpointCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RotateIngestEndpointCredentialsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RotateIngestEndpointCredentialsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RotateIngestEndpointCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.RotateIngestEndpointCredentialsRequest_Id, *v.Id)
+	}
+	if v.IngestEndpointId != nil {
+		s.WriteString(schemas.RotateIngestEndpointCredentialsRequest_IngestEndpointId, *v.IngestEndpointId)
+	}
+}
+
 type RotateIngestEndpointCredentialsOutput struct {
 
 	// The Amazon Resource Name (ARN) assigned to the Channel.
@@ -72,13 +89,77 @@ type RotateIngestEndpointCredentialsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RotateIngestEndpointCredentialsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RotateIngestEndpointCredentialsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RotateIngestEndpointCredentialsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.RotateIngestEndpointCredentialsResponse_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteString(schemas.RotateIngestEndpointCredentialsResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RotateIngestEndpointCredentialsResponse_Description, *v.Description)
+	}
+	if v.EgressAccessLogs != nil {
+		s.WriteStruct(schemas.RotateIngestEndpointCredentialsResponse_EgressAccessLogs)
+		v.EgressAccessLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HlsIngest != nil {
+		s.WriteStruct(schemas.RotateIngestEndpointCredentialsResponse_HlsIngest)
+		v.HlsIngest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.RotateIngestEndpointCredentialsResponse_Id, *v.Id)
+	}
+	if v.IngressAccessLogs != nil {
+		s.WriteStruct(schemas.RotateIngestEndpointCredentialsResponse_IngressAccessLogs)
+		v.IngressAccessLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.RotateIngestEndpointCredentialsResponse_Tags, v.Tags)
+}
+func (v *RotateIngestEndpointCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RotateIngestEndpointCredentialsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RotateIngestEndpointCredentialsResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RotateIngestEndpointCredentialsResponse_Arn, v.Arn)
+		case schemas.RotateIngestEndpointCredentialsResponse_CreatedAt:
+			v.CreatedAt = new(string)
+			return d.ReadString(schemas.RotateIngestEndpointCredentialsResponse_CreatedAt, v.CreatedAt)
+		case schemas.RotateIngestEndpointCredentialsResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RotateIngestEndpointCredentialsResponse_Description, v.Description)
+		case schemas.RotateIngestEndpointCredentialsResponse_EgressAccessLogs:
+			v.EgressAccessLogs = &types.EgressAccessLogs{}
+			return v.EgressAccessLogs.Deserialize(d)
+		case schemas.RotateIngestEndpointCredentialsResponse_HlsIngest:
+			v.HlsIngest = &types.HlsIngest{}
+			return v.HlsIngest.Deserialize(d)
+		case schemas.RotateIngestEndpointCredentialsResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RotateIngestEndpointCredentialsResponse_Id, v.Id)
+		case schemas.RotateIngestEndpointCredentialsResponse_IngressAccessLogs:
+			v.IngressAccessLogs = &types.IngressAccessLogs{}
+			return v.IngressAccessLogs.Deserialize(d)
+		case schemas.RotateIngestEndpointCredentialsResponse_Tags:
+			return deserializeTags(d, schemas.RotateIngestEndpointCredentialsResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRotateIngestEndpointCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRotateIngestEndpointCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RotateIngestEndpointCredentials, schemas.RotateIngestEndpointCredentialsRequest, schemas.RotateIngestEndpointCredentialsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRotateIngestEndpointCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RotateIngestEndpointCredentials, schemas.RotateIngestEndpointCredentialsRequest, schemas.RotateIngestEndpointCredentialsResponse), output: &RotateIngestEndpointCredentialsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

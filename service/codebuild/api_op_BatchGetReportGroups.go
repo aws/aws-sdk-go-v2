@@ -4,7 +4,9 @@ package codebuild
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,16 @@ type BatchGetReportGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetReportGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetReportGroupsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetReportGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeReportGroupArns(s, schemas.BatchGetReportGroupsInput_reportGroupArns, v.ReportGroupArns)
+}
+
 type BatchGetReportGroupsOutput struct {
 
 	//  The array of report groups returned by BatchGetReportGroups .
@@ -49,13 +61,32 @@ type BatchGetReportGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetReportGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetReportGroupsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetReportGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeReportGroups(s, schemas.BatchGetReportGroupsOutput_reportGroups, v.ReportGroups)
+	serializeReportGroupArns(s, schemas.BatchGetReportGroupsOutput_reportGroupsNotFound, v.ReportGroupsNotFound)
+}
+func (v *BatchGetReportGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetReportGroupsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetReportGroupsOutput_reportGroups:
+			return deserializeReportGroups(d, schemas.BatchGetReportGroupsOutput_reportGroups, &v.ReportGroups)
+		case schemas.BatchGetReportGroupsOutput_reportGroupsNotFound:
+			return deserializeReportGroupArns(d, schemas.BatchGetReportGroupsOutput_reportGroupsNotFound, &v.ReportGroupsNotFound)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetReportGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetReportGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetReportGroups, schemas.BatchGetReportGroupsInput, schemas.BatchGetReportGroupsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetReportGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetReportGroups, schemas.BatchGetReportGroupsInput, schemas.BatchGetReportGroupsOutput), output: &BatchGetReportGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

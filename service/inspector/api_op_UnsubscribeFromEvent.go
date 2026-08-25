@@ -4,7 +4,9 @@ package inspector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type UnsubscribeFromEventInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnsubscribeFromEventInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsubscribeFromEventRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsubscribeFromEventInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Event != "" {
+		s.WriteString(schemas.UnsubscribeFromEventRequest_event, string(v.Event))
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.UnsubscribeFromEventRequest_resourceArn, *v.ResourceArn)
+	}
+	if v.TopicArn != nil {
+		s.WriteString(schemas.UnsubscribeFromEventRequest_topicArn, *v.TopicArn)
+	}
+}
+
 type UnsubscribeFromEventOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +73,26 @@ type UnsubscribeFromEventOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnsubscribeFromEventOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsubscribeFromEventOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UnsubscribeFromEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUnsubscribeFromEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUnsubscribeFromEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UnsubscribeFromEvent, schemas.UnsubscribeFromEventRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUnsubscribeFromEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UnsubscribeFromEvent, schemas.UnsubscribeFromEventRequest, nil), output: &UnsubscribeFromEventOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

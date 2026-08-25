@@ -5,7 +5,9 @@ package swf
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -121,6 +123,38 @@ type PollForDecisionTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PollForDecisionTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PollForDecisionTaskInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PollForDecisionTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.PollForDecisionTaskInput_domain, *v.Domain)
+	}
+	if v.Identity != nil {
+		s.WriteString(schemas.PollForDecisionTaskInput_identity, *v.Identity)
+	}
+	if v.MaximumPageSize != 0 {
+		s.WriteInt32(schemas.PollForDecisionTaskInput_maximumPageSize, v.MaximumPageSize)
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.PollForDecisionTaskInput_nextPageToken, *v.NextPageToken)
+	}
+	if v.ReverseOrder != false {
+		s.WriteBool(schemas.PollForDecisionTaskInput_reverseOrder, v.ReverseOrder)
+	}
+	if v.StartAtPreviousStartedEvent != false {
+		s.WriteBool(schemas.PollForDecisionTaskInput_startAtPreviousStartedEvent, v.StartAtPreviousStartedEvent)
+	}
+	if v.TaskList != nil {
+		s.WriteStruct(schemas.PollForDecisionTaskInput_taskList)
+		v.TaskList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // A structure that represents a decision task. Decision tasks are sent to
 // deciders in order for them to make decisions.
 type PollForDecisionTaskOutput struct {
@@ -173,13 +207,65 @@ type PollForDecisionTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PollForDecisionTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DecisionTask)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PollForDecisionTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHistoryEventList(s, schemas.DecisionTask_events, v.Events)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.DecisionTask_nextPageToken, *v.NextPageToken)
+	}
+	if v.PreviousStartedEventId != 0 {
+		s.WriteInt64(schemas.DecisionTask_previousStartedEventId, v.PreviousStartedEventId)
+	}
+	s.WriteInt64(schemas.DecisionTask_startedEventId, v.StartedEventId)
+	if v.TaskToken != nil {
+		s.WriteString(schemas.DecisionTask_taskToken, *v.TaskToken)
+	}
+	if v.WorkflowExecution != nil {
+		s.WriteStruct(schemas.DecisionTask_workflowExecution)
+		v.WorkflowExecution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkflowType != nil {
+		s.WriteStruct(schemas.DecisionTask_workflowType)
+		v.WorkflowType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PollForDecisionTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DecisionTask, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DecisionTask_events:
+			return deserializeHistoryEventList(d, schemas.DecisionTask_events, &v.Events)
+		case schemas.DecisionTask_nextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.DecisionTask_nextPageToken, v.NextPageToken)
+		case schemas.DecisionTask_previousStartedEventId:
+			return d.ReadInt64(schemas.DecisionTask_previousStartedEventId, &v.PreviousStartedEventId)
+		case schemas.DecisionTask_startedEventId:
+			return d.ReadInt64(schemas.DecisionTask_startedEventId, &v.StartedEventId)
+		case schemas.DecisionTask_taskToken:
+			v.TaskToken = new(string)
+			return d.ReadString(schemas.DecisionTask_taskToken, v.TaskToken)
+		case schemas.DecisionTask_workflowExecution:
+			v.WorkflowExecution = &types.WorkflowExecution{}
+			return v.WorkflowExecution.Deserialize(d)
+		case schemas.DecisionTask_workflowType:
+			v.WorkflowType = &types.WorkflowType{}
+			return v.WorkflowType.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPollForDecisionTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPollForDecisionTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PollForDecisionTask, schemas.PollForDecisionTaskInput, schemas.DecisionTask)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpPollForDecisionTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PollForDecisionTask, schemas.PollForDecisionTaskInput, schemas.DecisionTask), output: &PollForDecisionTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

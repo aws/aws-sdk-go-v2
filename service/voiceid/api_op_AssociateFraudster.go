@@ -4,7 +4,9 @@ package voiceid
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/voiceid/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/voiceid/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,40 @@ type AssociateFraudsterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateFraudsterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateFraudsterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateFraudsterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.AssociateFraudsterRequest_DomainId, *v.DomainId)
+	}
+	if v.FraudsterId != nil {
+		s.WriteString(schemas.AssociateFraudsterRequest_FraudsterId, *v.FraudsterId)
+	}
+	if v.WatchlistId != nil {
+		s.WriteString(schemas.AssociateFraudsterRequest_WatchlistId, *v.WatchlistId)
+	}
+}
+func (v *AssociateFraudsterInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateFraudsterRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateFraudsterRequest_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.AssociateFraudsterRequest_DomainId, v.DomainId)
+		case schemas.AssociateFraudsterRequest_FraudsterId:
+			v.FraudsterId = new(string)
+			return d.ReadString(schemas.AssociateFraudsterRequest_FraudsterId, v.FraudsterId)
+		case schemas.AssociateFraudsterRequest_WatchlistId:
+			v.WatchlistId = new(string)
+			return d.ReadString(schemas.AssociateFraudsterRequest_WatchlistId, v.WatchlistId)
+		}
+		return nil
+	})
+}
+
 type AssociateFraudsterOutput struct {
 
 	// Contains all the information about a fraudster.
@@ -55,13 +91,34 @@ type AssociateFraudsterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateFraudsterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateFraudsterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateFraudsterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Fraudster != nil {
+		s.WriteStruct(schemas.AssociateFraudsterResponse_Fraudster)
+		v.Fraudster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateFraudsterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateFraudsterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateFraudsterResponse_Fraudster:
+			v.Fraudster = &types.Fraudster{}
+			return v.Fraudster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateFraudsterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAssociateFraudster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateFraudster, schemas.AssociateFraudsterRequest, schemas.AssociateFraudsterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAssociateFraudster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateFraudster, schemas.AssociateFraudsterRequest, schemas.AssociateFraudsterResponse), output: &AssociateFraudsterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

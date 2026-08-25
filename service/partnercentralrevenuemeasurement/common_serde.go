@@ -202,6 +202,7 @@ func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smi
 }
 
 func deserializeCustomerAwsAccountIdFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -215,6 +216,7 @@ func deserializeCustomerAwsAccountIdFilterList(d smithy.ShapeDeserializer, s *sm
 }
 
 func deserializeEntityIdentifierFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -228,6 +230,7 @@ func deserializeEntityIdentifierFilterList(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializeEntityTypeFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.EntityType) error {
+	*v = make([]types.EntityType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -241,6 +244,7 @@ func deserializeEntityTypeFilterList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeMarketplaceProductIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -254,6 +258,7 @@ func deserializeMarketplaceProductIdList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeMarketplaceRevenueShareAllocationSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MarketplaceRevenueShareAllocationSummary) error {
+	*v = make([]types.MarketplaceRevenueShareAllocationSummary, 0)
 	var vv types.MarketplaceRevenueShareAllocationSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.MarketplaceRevenueShareAllocationSummary{}
@@ -267,6 +272,7 @@ func deserializeMarketplaceRevenueShareAllocationSummaryList(d smithy.ShapeDeser
 }
 
 func deserializeMarketplaceRevenueShareSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MarketplaceRevenueShareSummary) error {
+	*v = make([]types.MarketplaceRevenueShareSummary, 0)
 	var vv types.MarketplaceRevenueShareSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.MarketplaceRevenueShareSummary{}
@@ -280,6 +286,7 @@ func deserializeMarketplaceRevenueShareSummaryList(d smithy.ShapeDeserializer, s
 }
 
 func deserializeMarketplaceRevenueShareTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Tag) error {
+	*v = make([]types.Tag, 0)
 	var vv types.Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Tag{}
@@ -293,6 +300,7 @@ func deserializeMarketplaceRevenueShareTagList(d smithy.ShapeDeserializer, s *sm
 }
 
 func deserializeProductCodeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -306,6 +314,7 @@ func deserializeProductCodeList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeRevenueAttributionAllocationErrorDetailList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RevenueAttributionAllocationErrorDetail) error {
+	*v = make([]types.RevenueAttributionAllocationErrorDetail, 0)
 	var vv types.RevenueAttributionAllocationErrorDetail
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RevenueAttributionAllocationErrorDetail{}
@@ -319,6 +328,7 @@ func deserializeRevenueAttributionAllocationErrorDetailList(d smithy.ShapeDeseri
 }
 
 func deserializeRevenueAttributionAllocationSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RevenueAttributionAllocationSummary) error {
+	*v = make([]types.RevenueAttributionAllocationSummary, 0)
 	var vv types.RevenueAttributionAllocationSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RevenueAttributionAllocationSummary{}
@@ -332,6 +342,7 @@ func deserializeRevenueAttributionAllocationSummaryList(d smithy.ShapeDeserializ
 }
 
 func deserializeRevenueAttributionIdentifierList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -345,6 +356,7 @@ func deserializeRevenueAttributionIdentifierList(d smithy.ShapeDeserializer, s *
 }
 
 func deserializeRevenueAttributionSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AttributionSummary) error {
+	*v = make([]types.AttributionSummary, 0)
 	var vv types.AttributionSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.AttributionSummary{}
@@ -358,6 +370,7 @@ func deserializeRevenueAttributionSummaries(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializeRevenueShareAllocationChangeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RevenueShareAllocation) error {
+	*v = make([]types.RevenueShareAllocation, 0)
 	var vv types.RevenueShareAllocation
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RevenueShareAllocation{}
@@ -371,6 +384,7 @@ func deserializeRevenueShareAllocationChangeList(d smithy.ShapeDeserializer, s *
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -384,6 +398,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Tag) error {
+	*v = make([]types.Tag, 0)
 	var vv types.Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Tag{}
@@ -397,6 +412,7 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 }
 
 func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ValidationExceptionField) error {
+	*v = make([]types.ValidationExceptionField, 0)
 	var vv types.ValidationExceptionField
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ValidationExceptionField{}

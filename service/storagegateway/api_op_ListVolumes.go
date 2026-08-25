@@ -5,7 +5,9 @@ package storagegateway
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,24 @@ type ListVolumesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVolumesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVolumesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVolumesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.ListVolumesInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListVolumesInput_Limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListVolumesInput_Marker, *v.Marker)
+	}
+}
+
 // A JSON object containing the following fields:
 //
 // # ListVolumesOutput$Marker
@@ -84,13 +104,41 @@ type ListVolumesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVolumesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVolumesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVolumesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.ListVolumesOutput_GatewayARN, *v.GatewayARN)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListVolumesOutput_Marker, *v.Marker)
+	}
+	serializeVolumeInfos(s, schemas.ListVolumesOutput_VolumeInfos, v.VolumeInfos)
+}
+func (v *ListVolumesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVolumesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVolumesOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.ListVolumesOutput_GatewayARN, v.GatewayARN)
+		case schemas.ListVolumesOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListVolumesOutput_Marker, v.Marker)
+		case schemas.ListVolumesOutput_VolumeInfos:
+			return deserializeVolumeInfos(d, schemas.ListVolumesOutput_VolumeInfos, &v.VolumeInfos)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVolumesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListVolumes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVolumes, schemas.ListVolumesInput, schemas.ListVolumesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListVolumes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVolumes, schemas.ListVolumesInput, schemas.ListVolumesOutput), output: &ListVolumesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

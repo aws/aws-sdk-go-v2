@@ -4,7 +4,9 @@ package codebuild
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,16 @@ type BatchGetProjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetProjectsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetProjectsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetProjectsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeProjectNames(s, schemas.BatchGetProjectsInput_names, v.Names)
+}
+
 type BatchGetProjectsOutput struct {
 
 	// Information about the requested build projects.
@@ -50,13 +62,32 @@ type BatchGetProjectsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetProjectsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetProjectsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetProjectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeProjects(s, schemas.BatchGetProjectsOutput_projects, v.Projects)
+	serializeProjectNames(s, schemas.BatchGetProjectsOutput_projectsNotFound, v.ProjectsNotFound)
+}
+func (v *BatchGetProjectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetProjectsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetProjectsOutput_projects:
+			return deserializeProjects(d, schemas.BatchGetProjectsOutput_projects, &v.Projects)
+		case schemas.BatchGetProjectsOutput_projectsNotFound:
+			return deserializeProjectNames(d, schemas.BatchGetProjectsOutput_projectsNotFound, &v.ProjectsNotFound)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetProjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetProjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetProjects, schemas.BatchGetProjectsInput, schemas.BatchGetProjectsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetProjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetProjects, schemas.BatchGetProjectsInput, schemas.BatchGetProjectsOutput), output: &BatchGetProjectsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

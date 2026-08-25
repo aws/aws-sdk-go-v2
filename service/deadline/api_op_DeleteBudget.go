@@ -5,6 +5,8 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,6 +42,21 @@ type DeleteBudgetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBudgetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBudgetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBudgetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BudgetId != nil {
+		s.WriteString(schemas.DeleteBudgetRequest_budgetId, *v.BudgetId)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.DeleteBudgetRequest_farmId, *v.FarmId)
+	}
+}
+
 type DeleteBudgetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +64,26 @@ type DeleteBudgetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBudgetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBudgetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBudgetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteBudgetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBudgetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBudgetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBudget{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBudget, schemas.DeleteBudgetRequest, schemas.DeleteBudgetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteBudget{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBudget, schemas.DeleteBudgetRequest, schemas.DeleteBudgetResponse), output: &DeleteBudgetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

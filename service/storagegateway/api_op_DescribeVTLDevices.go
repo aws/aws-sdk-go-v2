@@ -5,7 +5,9 @@ package storagegateway
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,25 @@ type DescribeVTLDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVTLDevicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVTLDevicesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVTLDevicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.DescribeVTLDevicesInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeVTLDevicesInput_Limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeVTLDevicesInput_Marker, *v.Marker)
+	}
+	serializeVTLDeviceARNs(s, schemas.DescribeVTLDevicesInput_VTLDeviceARNs, v.VTLDeviceARNs)
+}
+
 // DescribeVTLDevicesOutput
 type DescribeVTLDevicesOutput struct {
 
@@ -79,13 +100,41 @@ type DescribeVTLDevicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVTLDevicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVTLDevicesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVTLDevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.DescribeVTLDevicesOutput_GatewayARN, *v.GatewayARN)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeVTLDevicesOutput_Marker, *v.Marker)
+	}
+	serializeVTLDevices(s, schemas.DescribeVTLDevicesOutput_VTLDevices, v.VTLDevices)
+}
+func (v *DescribeVTLDevicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVTLDevicesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVTLDevicesOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.DescribeVTLDevicesOutput_GatewayARN, v.GatewayARN)
+		case schemas.DescribeVTLDevicesOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeVTLDevicesOutput_Marker, v.Marker)
+		case schemas.DescribeVTLDevicesOutput_VTLDevices:
+			return deserializeVTLDevices(d, schemas.DescribeVTLDevicesOutput_VTLDevices, &v.VTLDevices)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeVTLDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeVTLDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVTLDevices, schemas.DescribeVTLDevicesInput, schemas.DescribeVTLDevicesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeVTLDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVTLDevices, schemas.DescribeVTLDevicesInput, schemas.DescribeVTLDevicesOutput), output: &DescribeVTLDevicesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package vpclattice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,55 @@ type CreateServiceNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceNetworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceNetworkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthType != "" {
+		s.WriteString(schemas.CreateServiceNetworkRequest_authType, string(v.AuthType))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateServiceNetworkRequest_clientToken, *v.ClientToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateServiceNetworkRequest_name, *v.Name)
+	}
+	if v.SharingConfig != nil {
+		s.WriteStruct(schemas.CreateServiceNetworkRequest_sharingConfig)
+		v.SharingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateServiceNetworkRequest_tags, v.Tags)
+}
+func (v *CreateServiceNetworkInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateServiceNetworkRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateServiceNetworkRequest_authType:
+			var ev string
+			if err := d.ReadString(schemas.CreateServiceNetworkRequest_authType, &ev); err != nil {
+				return err
+			}
+			v.AuthType = types.AuthType(ev)
+			return nil
+		case schemas.CreateServiceNetworkRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateServiceNetworkRequest_clientToken, v.ClientToken)
+		case schemas.CreateServiceNetworkRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateServiceNetworkRequest_name, v.Name)
+		case schemas.CreateServiceNetworkRequest_sharingConfig:
+			v.SharingConfig = &types.SharingConfig{}
+			return v.SharingConfig.Deserialize(d)
+		case schemas.CreateServiceNetworkRequest_tags:
+			return deserializeTagMap(d, schemas.CreateServiceNetworkRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateServiceNetworkOutput struct {
 
 	// The Amazon Resource Name (ARN) of the service network.
@@ -86,13 +137,62 @@ type CreateServiceNetworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceNetworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceNetworkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceNetworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateServiceNetworkResponse_arn, *v.Arn)
+	}
+	if v.AuthType != "" {
+		s.WriteString(schemas.CreateServiceNetworkResponse_authType, string(v.AuthType))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateServiceNetworkResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateServiceNetworkResponse_name, *v.Name)
+	}
+	if v.SharingConfig != nil {
+		s.WriteStruct(schemas.CreateServiceNetworkResponse_sharingConfig)
+		v.SharingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateServiceNetworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateServiceNetworkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateServiceNetworkResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateServiceNetworkResponse_arn, v.Arn)
+		case schemas.CreateServiceNetworkResponse_authType:
+			var ev string
+			if err := d.ReadString(schemas.CreateServiceNetworkResponse_authType, &ev); err != nil {
+				return err
+			}
+			v.AuthType = types.AuthType(ev)
+			return nil
+		case schemas.CreateServiceNetworkResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateServiceNetworkResponse_id, v.Id)
+		case schemas.CreateServiceNetworkResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateServiceNetworkResponse_name, v.Name)
+		case schemas.CreateServiceNetworkResponse_sharingConfig:
+			v.SharingConfig = &types.SharingConfig{}
+			return v.SharingConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateServiceNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateServiceNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceNetwork, schemas.CreateServiceNetworkRequest, schemas.CreateServiceNetworkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateServiceNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceNetwork, schemas.CreateServiceNetworkRequest, schemas.CreateServiceNetworkResponse), output: &CreateServiceNetworkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

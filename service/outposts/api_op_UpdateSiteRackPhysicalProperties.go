@@ -4,7 +4,9 @@ package outposts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -130,6 +132,45 @@ type UpdateSiteRackPhysicalPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSiteRackPhysicalPropertiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSiteRackPhysicalPropertiesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSiteRackPhysicalPropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FiberOpticCableType != "" {
+		s.WriteString(schemas.UpdateSiteRackPhysicalPropertiesInput_FiberOpticCableType, string(v.FiberOpticCableType))
+	}
+	if v.MaximumSupportedWeightLbs != "" {
+		s.WriteString(schemas.UpdateSiteRackPhysicalPropertiesInput_MaximumSupportedWeightLbs, string(v.MaximumSupportedWeightLbs))
+	}
+	if v.OpticalStandard != "" {
+		s.WriteString(schemas.UpdateSiteRackPhysicalPropertiesInput_OpticalStandard, string(v.OpticalStandard))
+	}
+	if v.PowerConnector != "" {
+		s.WriteString(schemas.UpdateSiteRackPhysicalPropertiesInput_PowerConnector, string(v.PowerConnector))
+	}
+	if v.PowerDrawKva != "" {
+		s.WriteString(schemas.UpdateSiteRackPhysicalPropertiesInput_PowerDrawKva, string(v.PowerDrawKva))
+	}
+	if v.PowerFeedDrop != "" {
+		s.WriteString(schemas.UpdateSiteRackPhysicalPropertiesInput_PowerFeedDrop, string(v.PowerFeedDrop))
+	}
+	if v.PowerPhase != "" {
+		s.WriteString(schemas.UpdateSiteRackPhysicalPropertiesInput_PowerPhase, string(v.PowerPhase))
+	}
+	if v.SiteId != nil {
+		s.WriteString(schemas.UpdateSiteRackPhysicalPropertiesInput_SiteId, *v.SiteId)
+	}
+	if v.UplinkCount != "" {
+		s.WriteString(schemas.UpdateSiteRackPhysicalPropertiesInput_UplinkCount, string(v.UplinkCount))
+	}
+	if v.UplinkGbps != "" {
+		s.WriteString(schemas.UpdateSiteRackPhysicalPropertiesInput_UplinkGbps, string(v.UplinkGbps))
+	}
+}
+
 type UpdateSiteRackPhysicalPropertiesOutput struct {
 
 	// Information about a site.
@@ -141,13 +182,34 @@ type UpdateSiteRackPhysicalPropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSiteRackPhysicalPropertiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSiteRackPhysicalPropertiesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSiteRackPhysicalPropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Site != nil {
+		s.WriteStruct(schemas.UpdateSiteRackPhysicalPropertiesOutput_Site)
+		v.Site.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateSiteRackPhysicalPropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSiteRackPhysicalPropertiesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSiteRackPhysicalPropertiesOutput_Site:
+			v.Site = &types.Site{}
+			return v.Site.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSiteRackPhysicalPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSiteRackPhysicalProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSiteRackPhysicalProperties, schemas.UpdateSiteRackPhysicalPropertiesInput, schemas.UpdateSiteRackPhysicalPropertiesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSiteRackPhysicalProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSiteRackPhysicalProperties, schemas.UpdateSiteRackPhysicalPropertiesInput, schemas.UpdateSiteRackPhysicalPropertiesOutput), output: &UpdateSiteRackPhysicalPropertiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

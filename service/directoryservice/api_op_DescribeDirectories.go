@@ -5,7 +5,9 @@ package directoryservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,22 @@ type DescribeDirectoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDirectoriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDirectoriesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDirectoriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDirectoryIds(s, schemas.DescribeDirectoriesRequest_DirectoryIds, v.DirectoryIds)
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeDirectoriesRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDirectoriesRequest_NextToken, *v.NextToken)
+	}
+}
+
 // Contains the results of the DescribeDirectories operation.
 type DescribeDirectoriesOutput struct {
 
@@ -79,13 +97,35 @@ type DescribeDirectoriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDirectoriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDirectoriesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDirectoriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDirectoryDescriptions(s, schemas.DescribeDirectoriesResult_DirectoryDescriptions, v.DirectoryDescriptions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDirectoriesResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeDirectoriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDirectoriesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDirectoriesResult_DirectoryDescriptions:
+			return deserializeDirectoryDescriptions(d, schemas.DescribeDirectoriesResult_DirectoryDescriptions, &v.DirectoryDescriptions)
+		case schemas.DescribeDirectoriesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeDirectoriesResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDirectoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDirectories{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDirectories, schemas.DescribeDirectoriesRequest, schemas.DescribeDirectoriesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDirectories{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDirectories, schemas.DescribeDirectoriesRequest, schemas.DescribeDirectoriesResult), output: &DescribeDirectoriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -52,6 +53,18 @@ type GetCertificateAuthorityCsrInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCertificateAuthorityCsrInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCertificateAuthorityCsrRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCertificateAuthorityCsrInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateAuthorityArn != nil {
+		s.WriteString(schemas.GetCertificateAuthorityCsrRequest_CertificateAuthorityArn, *v.CertificateAuthorityArn)
+	}
+}
+
 type GetCertificateAuthorityCsrOutput struct {
 
 	// The base64 PEM-encoded certificate signing request (CSR) for your private CA
@@ -64,13 +77,32 @@ type GetCertificateAuthorityCsrOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCertificateAuthorityCsrOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCertificateAuthorityCsrResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCertificateAuthorityCsrOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Csr != nil {
+		s.WriteString(schemas.GetCertificateAuthorityCsrResponse_Csr, *v.Csr)
+	}
+}
+func (v *GetCertificateAuthorityCsrOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCertificateAuthorityCsrResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCertificateAuthorityCsrResponse_Csr:
+			v.Csr = new(string)
+			return d.ReadString(schemas.GetCertificateAuthorityCsrResponse_Csr, v.Csr)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCertificateAuthorityCsrMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCertificateAuthorityCsr{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCertificateAuthorityCsr, schemas.GetCertificateAuthorityCsrRequest, schemas.GetCertificateAuthorityCsrResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCertificateAuthorityCsr{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCertificateAuthorityCsr, schemas.GetCertificateAuthorityCsrRequest, schemas.GetCertificateAuthorityCsrResponse), output: &GetCertificateAuthorityCsrOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

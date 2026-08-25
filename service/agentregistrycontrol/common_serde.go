@@ -360,6 +360,7 @@ func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smi
 }
 
 func deserializeAllowedAudienceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -373,6 +374,7 @@ func deserializeAllowedAudienceList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeAllowedClientsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -386,6 +388,7 @@ func deserializeAllowedClientsList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeAllowedScopesType(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -399,6 +402,7 @@ func deserializeAllowedScopesType(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeAutoApprovalRuleList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.AutoApprovalRule) error {
+	*v = make([]types.AutoApprovalRule, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -412,6 +416,7 @@ func deserializeAutoApprovalRuleList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeCustomClaimValidationsType(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.CustomClaimValidationType) error {
+	*v = make([]types.CustomClaimValidationType, 0)
 	var vv types.CustomClaimValidationType
 	return smithy.ReadList(d, s, func() error {
 		vv = types.CustomClaimValidationType{}
@@ -425,6 +430,7 @@ func deserializeCustomClaimValidationsType(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializeFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -438,6 +444,7 @@ func deserializeFilterValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeMatchValueStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -451,6 +458,7 @@ func deserializeMatchValueStringList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializePrivateEndpointOverrides(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PrivateEndpointOverride) error {
+	*v = make([]types.PrivateEndpointOverride, 0)
 	var vv types.PrivateEndpointOverride
 	return smithy.ReadList(d, s, func() error {
 		vv = types.PrivateEndpointOverride{}
@@ -464,6 +472,7 @@ func deserializePrivateEndpointOverrides(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeRegistryFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RegistryFilter) error {
+	*v = make([]types.RegistryFilter, 0)
 	var vv types.RegistryFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RegistryFilter{}
@@ -477,6 +486,7 @@ func deserializeRegistryFilterList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeRegistryRecordCredentialProviderConfigurationList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RegistryRecordCredentialProviderConfiguration) error {
+	*v = make([]types.RegistryRecordCredentialProviderConfiguration, 0)
 	var vv types.RegistryRecordCredentialProviderConfiguration
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RegistryRecordCredentialProviderConfiguration{}
@@ -490,6 +500,7 @@ func deserializeRegistryRecordCredentialProviderConfigurationList(d smithy.Shape
 }
 
 func deserializeRegistryRecordFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RegistryRecordFilter) error {
+	*v = make([]types.RegistryRecordFilter, 0)
 	var vv types.RegistryRecordFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RegistryRecordFilter{}
@@ -503,6 +514,7 @@ func deserializeRegistryRecordFilterList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeRegistryRecordSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RegistryRecordSummary) error {
+	*v = make([]types.RegistryRecordSummary, 0)
 	var vv types.RegistryRecordSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RegistryRecordSummary{}
@@ -516,6 +528,7 @@ func deserializeRegistryRecordSummaryList(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeRegistrySummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RegistrySummary) error {
+	*v = make([]types.RegistrySummary, 0)
 	var vv types.RegistrySummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RegistrySummary{}
@@ -529,6 +542,7 @@ func deserializeRegistrySummaryList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeScopeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -542,6 +556,7 @@ func deserializeScopeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]str
 }
 
 func deserializeSecurityGroupIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -555,6 +570,7 @@ func deserializeSecurityGroupIds(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeSubnetIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -568,6 +584,7 @@ func deserializeSubnetIds(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]str
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -581,6 +598,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ValidationExceptionField) error {
+	*v = make([]types.ValidationExceptionField, 0)
 	var vv types.ValidationExceptionField
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ValidationExceptionField{}

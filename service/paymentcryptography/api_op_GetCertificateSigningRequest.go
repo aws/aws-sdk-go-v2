@@ -4,7 +4,9 @@ package paymentcryptography
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,26 @@ type GetCertificateSigningRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCertificateSigningRequestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCertificateSigningRequestInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCertificateSigningRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateSubject != nil {
+		s.WriteStruct(schemas.GetCertificateSigningRequestInput_CertificateSubject)
+		v.CertificateSubject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KeyIdentifier != nil {
+		s.WriteString(schemas.GetCertificateSigningRequestInput_KeyIdentifier, *v.KeyIdentifier)
+	}
+	if v.SigningAlgorithm != "" {
+		s.WriteString(schemas.GetCertificateSigningRequestInput_SigningAlgorithm, string(v.SigningAlgorithm))
+	}
+}
+
 type GetCertificateSigningRequestOutput struct {
 
 	// The certificate signing request generated using the key pair associated with
@@ -58,13 +80,32 @@ type GetCertificateSigningRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCertificateSigningRequestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCertificateSigningRequestOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCertificateSigningRequestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateSigningRequest != nil {
+		s.WriteString(schemas.GetCertificateSigningRequestOutput_CertificateSigningRequest, *v.CertificateSigningRequest)
+	}
+}
+func (v *GetCertificateSigningRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCertificateSigningRequestOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCertificateSigningRequestOutput_CertificateSigningRequest:
+			v.CertificateSigningRequest = new(string)
+			return d.ReadString(schemas.GetCertificateSigningRequestOutput_CertificateSigningRequest, v.CertificateSigningRequest)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCertificateSigningRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetCertificateSigningRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCertificateSigningRequest, schemas.GetCertificateSigningRequestInput, schemas.GetCertificateSigningRequestOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetCertificateSigningRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCertificateSigningRequest, schemas.GetCertificateSigningRequestInput, schemas.GetCertificateSigningRequestOutput), output: &GetCertificateSigningRequestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

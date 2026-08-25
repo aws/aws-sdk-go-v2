@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,6 +57,27 @@ type GetSessionsStatisticsAggregationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSessionsStatisticsAggregationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionsStatisticsAggregationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionsStatisticsAggregationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationId != nil {
+		s.WriteString(schemas.GetSessionsStatisticsAggregationRequest_aggregationId, *v.AggregationId)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.GetSessionsStatisticsAggregationRequest_farmId, *v.FarmId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetSessionsStatisticsAggregationRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSessionsStatisticsAggregationRequest_nextToken, *v.NextToken)
+	}
+}
+
 // Shared pagination field for List operation outputs (nextToken).
 type GetSessionsStatisticsAggregationOutput struct {
 
@@ -90,13 +113,51 @@ type GetSessionsStatisticsAggregationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSessionsStatisticsAggregationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionsStatisticsAggregationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionsStatisticsAggregationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSessionsStatisticsAggregationResponse_nextToken, *v.NextToken)
+	}
+	serializeStatisticsList(s, schemas.GetSessionsStatisticsAggregationResponse_statistics, v.Statistics)
+	if v.Status != "" {
+		s.WriteString(schemas.GetSessionsStatisticsAggregationResponse_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetSessionsStatisticsAggregationResponse_statusMessage, *v.StatusMessage)
+	}
+}
+func (v *GetSessionsStatisticsAggregationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSessionsStatisticsAggregationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSessionsStatisticsAggregationResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetSessionsStatisticsAggregationResponse_nextToken, v.NextToken)
+		case schemas.GetSessionsStatisticsAggregationResponse_statistics:
+			return deserializeStatisticsList(d, schemas.GetSessionsStatisticsAggregationResponse_statistics, &v.Statistics)
+		case schemas.GetSessionsStatisticsAggregationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetSessionsStatisticsAggregationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SessionsStatisticsAggregationStatus(ev)
+			return nil
+		case schemas.GetSessionsStatisticsAggregationResponse_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetSessionsStatisticsAggregationResponse_statusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSessionsStatisticsAggregationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSessionsStatisticsAggregation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSessionsStatisticsAggregation, schemas.GetSessionsStatisticsAggregationRequest, schemas.GetSessionsStatisticsAggregationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSessionsStatisticsAggregation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSessionsStatisticsAggregation, schemas.GetSessionsStatisticsAggregationRequest, schemas.GetSessionsStatisticsAggregationResponse), output: &GetSessionsStatisticsAggregationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

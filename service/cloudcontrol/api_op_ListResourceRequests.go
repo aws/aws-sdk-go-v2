@@ -5,7 +5,9 @@ package cloudcontrol
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,42 @@ type ListResourceRequestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceRequestsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceRequestsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceRequestsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResourceRequestsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceRequestsInput_NextToken, *v.NextToken)
+	}
+	if v.ResourceRequestStatusFilter != nil {
+		s.WriteStruct(schemas.ListResourceRequestsInput_ResourceRequestStatusFilter)
+		v.ResourceRequestStatusFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ListResourceRequestsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourceRequestsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourceRequestsInput_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListResourceRequestsInput_MaxResults, v.MaxResults)
+		case schemas.ListResourceRequestsInput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResourceRequestsInput_NextToken, v.NextToken)
+		case schemas.ListResourceRequestsInput_ResourceRequestStatusFilter:
+			v.ResourceRequestStatusFilter = &types.ResourceRequestStatusFilter{}
+			return v.ResourceRequestStatusFilter.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type ListResourceRequestsOutput struct {
 
 	// If the request doesn't return all of the remaining results, NextToken is set to
@@ -71,13 +109,35 @@ type ListResourceRequestsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceRequestsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceRequestsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceRequestsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceRequestsOutput_NextToken, *v.NextToken)
+	}
+	serializeResourceRequestStatusSummaries(s, schemas.ListResourceRequestsOutput_ResourceRequestStatusSummaries, v.ResourceRequestStatusSummaries)
+}
+func (v *ListResourceRequestsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourceRequestsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourceRequestsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResourceRequestsOutput_NextToken, v.NextToken)
+		case schemas.ListResourceRequestsOutput_ResourceRequestStatusSummaries:
+			return deserializeResourceRequestStatusSummaries(d, schemas.ListResourceRequestsOutput_ResourceRequestStatusSummaries, &v.ResourceRequestStatusSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResourceRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListResourceRequests{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceRequests, schemas.ListResourceRequestsInput, schemas.ListResourceRequestsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListResourceRequests{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceRequests, schemas.ListResourceRequestsInput, schemas.ListResourceRequestsOutput), output: &ListResourceRequestsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

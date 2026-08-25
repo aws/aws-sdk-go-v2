@@ -5,7 +5,9 @@ package xray
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type GetSamplingRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSamplingRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSamplingRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSamplingRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSamplingRulesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetSamplingRulesOutput struct {
 
 	// Pagination token.
@@ -47,13 +61,35 @@ type GetSamplingRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSamplingRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSamplingRulesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSamplingRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSamplingRulesResult_NextToken, *v.NextToken)
+	}
+	serializeSamplingRuleRecordList(s, schemas.GetSamplingRulesResult_SamplingRuleRecords, v.SamplingRuleRecords)
+}
+func (v *GetSamplingRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSamplingRulesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSamplingRulesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetSamplingRulesResult_NextToken, v.NextToken)
+		case schemas.GetSamplingRulesResult_SamplingRuleRecords:
+			return deserializeSamplingRuleRecordList(d, schemas.GetSamplingRulesResult_SamplingRuleRecords, &v.SamplingRuleRecords)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSamplingRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSamplingRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSamplingRules, schemas.GetSamplingRulesRequest, schemas.GetSamplingRulesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSamplingRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSamplingRules, schemas.GetSamplingRulesRequest, schemas.GetSamplingRulesResult), output: &GetSamplingRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

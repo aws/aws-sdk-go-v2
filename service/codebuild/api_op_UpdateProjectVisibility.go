@@ -4,7 +4,9 @@ package codebuild
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,24 @@ type UpdateProjectVisibilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProjectVisibilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProjectVisibilityInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProjectVisibilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.UpdateProjectVisibilityInput_projectArn, *v.ProjectArn)
+	}
+	if v.ProjectVisibility != "" {
+		s.WriteString(schemas.UpdateProjectVisibilityInput_projectVisibility, string(v.ProjectVisibility))
+	}
+	if v.ResourceAccessRole != nil {
+		s.WriteString(schemas.UpdateProjectVisibilityInput_resourceAccessRole, *v.ResourceAccessRole)
+	}
+}
+
 type UpdateProjectVisibilityOutput struct {
 
 	// The Amazon Resource Name (ARN) of the build project.
@@ -96,13 +116,48 @@ type UpdateProjectVisibilityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProjectVisibilityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProjectVisibilityOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProjectVisibilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.UpdateProjectVisibilityOutput_projectArn, *v.ProjectArn)
+	}
+	if v.ProjectVisibility != "" {
+		s.WriteString(schemas.UpdateProjectVisibilityOutput_projectVisibility, string(v.ProjectVisibility))
+	}
+	if v.PublicProjectAlias != nil {
+		s.WriteString(schemas.UpdateProjectVisibilityOutput_publicProjectAlias, *v.PublicProjectAlias)
+	}
+}
+func (v *UpdateProjectVisibilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProjectVisibilityOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProjectVisibilityOutput_projectArn:
+			v.ProjectArn = new(string)
+			return d.ReadString(schemas.UpdateProjectVisibilityOutput_projectArn, v.ProjectArn)
+		case schemas.UpdateProjectVisibilityOutput_projectVisibility:
+			var ev string
+			if err := d.ReadString(schemas.UpdateProjectVisibilityOutput_projectVisibility, &ev); err != nil {
+				return err
+			}
+			v.ProjectVisibility = types.ProjectVisibilityType(ev)
+			return nil
+		case schemas.UpdateProjectVisibilityOutput_publicProjectAlias:
+			v.PublicProjectAlias = new(string)
+			return d.ReadString(schemas.UpdateProjectVisibilityOutput_publicProjectAlias, v.PublicProjectAlias)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProjectVisibilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateProjectVisibility{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProjectVisibility, schemas.UpdateProjectVisibilityInput, schemas.UpdateProjectVisibilityOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateProjectVisibility{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProjectVisibility, schemas.UpdateProjectVisibilityInput, schemas.UpdateProjectVisibilityOutput), output: &UpdateProjectVisibilityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

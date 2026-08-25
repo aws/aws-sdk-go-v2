@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -45,6 +47,24 @@ type GetQueueEnvironmentInput struct {
 	QueueId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetQueueEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueueEnvironmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueueEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.GetQueueEnvironmentRequest_farmId, *v.FarmId)
+	}
+	if v.QueueEnvironmentId != nil {
+		s.WriteString(schemas.GetQueueEnvironmentRequest_queueEnvironmentId, *v.QueueEnvironmentId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.GetQueueEnvironmentRequest_queueId, *v.QueueId)
+	}
 }
 
 type GetQueueEnvironmentOutput struct {
@@ -96,13 +116,84 @@ type GetQueueEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueueEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueueEnvironmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueueEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetQueueEnvironmentResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetQueueEnvironmentResponse_createdBy, *v.CreatedBy)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetQueueEnvironmentResponse_name, *v.Name)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.GetQueueEnvironmentResponse_priority, *v.Priority)
+	}
+	if v.QueueEnvironmentId != nil {
+		s.WriteString(schemas.GetQueueEnvironmentResponse_queueEnvironmentId, *v.QueueEnvironmentId)
+	}
+	if v.Template != nil {
+		s.WriteString(schemas.GetQueueEnvironmentResponse_template, *v.Template)
+	}
+	if v.TemplateType != "" {
+		s.WriteString(schemas.GetQueueEnvironmentResponse_templateType, string(v.TemplateType))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetQueueEnvironmentResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.GetQueueEnvironmentResponse_updatedBy, *v.UpdatedBy)
+	}
+}
+func (v *GetQueueEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetQueueEnvironmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetQueueEnvironmentResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetQueueEnvironmentResponse_createdAt, v.CreatedAt)
+		case schemas.GetQueueEnvironmentResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetQueueEnvironmentResponse_createdBy, v.CreatedBy)
+		case schemas.GetQueueEnvironmentResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetQueueEnvironmentResponse_name, v.Name)
+		case schemas.GetQueueEnvironmentResponse_priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.GetQueueEnvironmentResponse_priority, v.Priority)
+		case schemas.GetQueueEnvironmentResponse_queueEnvironmentId:
+			v.QueueEnvironmentId = new(string)
+			return d.ReadString(schemas.GetQueueEnvironmentResponse_queueEnvironmentId, v.QueueEnvironmentId)
+		case schemas.GetQueueEnvironmentResponse_template:
+			v.Template = new(string)
+			return d.ReadString(schemas.GetQueueEnvironmentResponse_template, v.Template)
+		case schemas.GetQueueEnvironmentResponse_templateType:
+			var ev string
+			if err := d.ReadString(schemas.GetQueueEnvironmentResponse_templateType, &ev); err != nil {
+				return err
+			}
+			v.TemplateType = types.EnvironmentTemplateType(ev)
+			return nil
+		case schemas.GetQueueEnvironmentResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetQueueEnvironmentResponse_updatedAt, v.UpdatedAt)
+		case schemas.GetQueueEnvironmentResponse_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.GetQueueEnvironmentResponse_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetQueueEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetQueueEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueueEnvironment, schemas.GetQueueEnvironmentRequest, schemas.GetQueueEnvironmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetQueueEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueueEnvironment, schemas.GetQueueEnvironmentRequest, schemas.GetQueueEnvironmentResponse), output: &GetQueueEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

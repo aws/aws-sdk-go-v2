@@ -150,6 +150,7 @@ func serializeStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func deserializeDialogList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Dialog) error {
+	*v = make([]types.Dialog, 0)
 	var vv types.Dialog
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Dialog{}
@@ -163,6 +164,7 @@ func deserializeDialogList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 }
 
 func deserializeRequiredStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -176,6 +178,7 @@ func deserializeRequiredStringList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeTestStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -189,6 +192,7 @@ func deserializeTestStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeStringList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 

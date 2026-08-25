@@ -4,7 +4,9 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribeWebAppCustomizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWebAppCustomizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWebAppCustomizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWebAppCustomizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WebAppId != nil {
+		s.WriteString(schemas.DescribeWebAppCustomizationRequest_WebAppId, *v.WebAppId)
+	}
+}
+
 type DescribeWebAppCustomizationOutput struct {
 
 	// Returns a structure that contains the details of the web app customizations.
@@ -47,13 +61,34 @@ type DescribeWebAppCustomizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWebAppCustomizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWebAppCustomizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWebAppCustomizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WebAppCustomization != nil {
+		s.WriteStruct(schemas.DescribeWebAppCustomizationResponse_WebAppCustomization)
+		v.WebAppCustomization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeWebAppCustomizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWebAppCustomizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWebAppCustomizationResponse_WebAppCustomization:
+			v.WebAppCustomization = &types.DescribedWebAppCustomization{}
+			return v.WebAppCustomization.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeWebAppCustomizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWebAppCustomization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWebAppCustomization, schemas.DescribeWebAppCustomizationRequest, schemas.DescribeWebAppCustomizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeWebAppCustomization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWebAppCustomization, schemas.DescribeWebAppCustomizationRequest, schemas.DescribeWebAppCustomizationResponse), output: &DescribeWebAppCustomizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

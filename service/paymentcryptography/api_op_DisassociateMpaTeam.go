@@ -4,7 +4,9 @@ package paymentcryptography
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,21 @@ type DisassociateMpaTeamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateMpaTeamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateMpaTeamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateMpaTeamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.DisassociateMpaTeamInput_Action, string(v.Action))
+	}
+	if v.RequesterComment != nil {
+		s.WriteString(schemas.DisassociateMpaTeamInput_RequesterComment, *v.RequesterComment)
+	}
+}
+
 type DisassociateMpaTeamOutput struct {
 
 	// The details of the MPA team association.
@@ -67,13 +84,34 @@ type DisassociateMpaTeamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateMpaTeamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateMpaTeamOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateMpaTeamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MpaTeamAssociation != nil {
+		s.WriteStruct(schemas.DisassociateMpaTeamOutput_MpaTeamAssociation)
+		v.MpaTeamAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DisassociateMpaTeamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateMpaTeamOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateMpaTeamOutput_MpaTeamAssociation:
+			v.MpaTeamAssociation = &types.MpaTeamAssociation{}
+			return v.MpaTeamAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateMpaTeamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDisassociateMpaTeam{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateMpaTeam, schemas.DisassociateMpaTeamInput, schemas.DisassociateMpaTeamOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDisassociateMpaTeam{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateMpaTeam, schemas.DisassociateMpaTeamInput, schemas.DisassociateMpaTeamOutput), output: &DisassociateMpaTeamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

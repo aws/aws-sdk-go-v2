@@ -4,7 +4,9 @@ package inspector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type StopAssessmentRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopAssessmentRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopAssessmentRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopAssessmentRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentRunArn != nil {
+		s.WriteString(schemas.StopAssessmentRunRequest_assessmentRunArn, *v.AssessmentRunArn)
+	}
+	if v.StopAction != "" {
+		s.WriteString(schemas.StopAssessmentRunRequest_stopAction, string(v.StopAction))
+	}
+}
+
 type StopAssessmentRunOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +65,26 @@ type StopAssessmentRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopAssessmentRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopAssessmentRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopAssessmentRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopAssessmentRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopAssessmentRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopAssessmentRun, schemas.StopAssessmentRunRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopAssessmentRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopAssessmentRun, schemas.StopAssessmentRunRequest, nil), output: &StopAssessmentRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

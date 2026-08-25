@@ -4,6 +4,8 @@ package shield
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/shield/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,18 @@ type AssociateDRTLogBucketInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateDRTLogBucketInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateDRTLogBucketRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateDRTLogBucketInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogBucket != nil {
+		s.WriteString(schemas.AssociateDRTLogBucketRequest_LogBucket, *v.LogBucket)
+	}
+}
+
 type AssociateDRTLogBucketOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +63,26 @@ type AssociateDRTLogBucketOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateDRTLogBucketOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateDRTLogBucketResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateDRTLogBucketOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateDRTLogBucketOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateDRTLogBucketResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateDRTLogBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateDRTLogBucket{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateDRTLogBucket, schemas.AssociateDRTLogBucketRequest, schemas.AssociateDRTLogBucketResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateDRTLogBucket{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateDRTLogBucket, schemas.AssociateDRTLogBucketRequest, schemas.AssociateDRTLogBucketResponse), output: &AssociateDRTLogBucketOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package shield
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/shield/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/shield/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,23 @@ type UpdateApplicationLayerAutomaticResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApplicationLayerAutomaticResponseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApplicationLayerAutomaticResponseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApplicationLayerAutomaticResponseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteStruct(schemas.UpdateApplicationLayerAutomaticResponseRequest_Action)
+		v.Action.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.UpdateApplicationLayerAutomaticResponseRequest_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type UpdateApplicationLayerAutomaticResponseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +71,26 @@ type UpdateApplicationLayerAutomaticResponseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApplicationLayerAutomaticResponseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApplicationLayerAutomaticResponseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApplicationLayerAutomaticResponseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateApplicationLayerAutomaticResponseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateApplicationLayerAutomaticResponseResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateApplicationLayerAutomaticResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateApplicationLayerAutomaticResponse{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplicationLayerAutomaticResponse, schemas.UpdateApplicationLayerAutomaticResponseRequest, schemas.UpdateApplicationLayerAutomaticResponseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateApplicationLayerAutomaticResponse{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplicationLayerAutomaticResponse, schemas.UpdateApplicationLayerAutomaticResponseRequest, schemas.UpdateApplicationLayerAutomaticResponseResponse), output: &UpdateApplicationLayerAutomaticResponseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

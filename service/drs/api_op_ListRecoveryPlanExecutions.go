@@ -5,7 +5,9 @@ package drs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,27 @@ type ListRecoveryPlanExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecoveryPlanExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecoveryPlanExecutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecoveryPlanExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRecoveryPlanExecutionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecoveryPlanExecutionsRequest_nextToken, *v.NextToken)
+	}
+	if v.RecoveryPlanArn != nil {
+		s.WriteString(schemas.ListRecoveryPlanExecutionsRequest_recoveryPlanArn, *v.RecoveryPlanArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListRecoveryPlanExecutionsRequest_status, string(v.Status))
+	}
+}
+
 type ListRecoveryPlanExecutionsOutput struct {
 
 	// The list of Recovery Plan executions.
@@ -58,13 +81,35 @@ type ListRecoveryPlanExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecoveryPlanExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecoveryPlanExecutionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecoveryPlanExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecoveryPlanExecutionsResponse_nextToken, *v.NextToken)
+	}
+	serializeRecoveryPlanExecutionSummaryList(s, schemas.ListRecoveryPlanExecutionsResponse_recoveryPlanExecutions, v.RecoveryPlanExecutions)
+}
+func (v *ListRecoveryPlanExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecoveryPlanExecutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecoveryPlanExecutionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecoveryPlanExecutionsResponse_nextToken, v.NextToken)
+		case schemas.ListRecoveryPlanExecutionsResponse_recoveryPlanExecutions:
+			return deserializeRecoveryPlanExecutionSummaryList(d, schemas.ListRecoveryPlanExecutionsResponse_recoveryPlanExecutions, &v.RecoveryPlanExecutions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecoveryPlanExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRecoveryPlanExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecoveryPlanExecutions, schemas.ListRecoveryPlanExecutionsRequest, schemas.ListRecoveryPlanExecutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRecoveryPlanExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecoveryPlanExecutions, schemas.ListRecoveryPlanExecutionsRequest, schemas.ListRecoveryPlanExecutionsResponse), output: &ListRecoveryPlanExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

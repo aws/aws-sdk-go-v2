@@ -5,7 +5,9 @@ package voiceid
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/voiceid/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/voiceid/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,50 @@ type ListFraudsterRegistrationJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFraudsterRegistrationJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFraudsterRegistrationJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFraudsterRegistrationJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.ListFraudsterRegistrationJobsRequest_DomainId, *v.DomainId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.ListFraudsterRegistrationJobsRequest_JobStatus, string(v.JobStatus))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFraudsterRegistrationJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFraudsterRegistrationJobsRequest_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFraudsterRegistrationJobsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFraudsterRegistrationJobsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFraudsterRegistrationJobsRequest_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.ListFraudsterRegistrationJobsRequest_DomainId, v.DomainId)
+		case schemas.ListFraudsterRegistrationJobsRequest_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.ListFraudsterRegistrationJobsRequest_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.FraudsterRegistrationJobStatus(ev)
+			return nil
+		case schemas.ListFraudsterRegistrationJobsRequest_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListFraudsterRegistrationJobsRequest_MaxResults, v.MaxResults)
+		case schemas.ListFraudsterRegistrationJobsRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFraudsterRegistrationJobsRequest_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListFraudsterRegistrationJobsOutput struct {
 
 	// A list containing details about each specified fraudster registration job.
@@ -68,13 +114,35 @@ type ListFraudsterRegistrationJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFraudsterRegistrationJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFraudsterRegistrationJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFraudsterRegistrationJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFraudsterRegistrationJobSummaries(s, schemas.ListFraudsterRegistrationJobsResponse_JobSummaries, v.JobSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFraudsterRegistrationJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFraudsterRegistrationJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFraudsterRegistrationJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFraudsterRegistrationJobsResponse_JobSummaries:
+			return deserializeFraudsterRegistrationJobSummaries(d, schemas.ListFraudsterRegistrationJobsResponse_JobSummaries, &v.JobSummaries)
+		case schemas.ListFraudsterRegistrationJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFraudsterRegistrationJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFraudsterRegistrationJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListFraudsterRegistrationJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFraudsterRegistrationJobs, schemas.ListFraudsterRegistrationJobsRequest, schemas.ListFraudsterRegistrationJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListFraudsterRegistrationJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFraudsterRegistrationJobs, schemas.ListFraudsterRegistrationJobsRequest, schemas.ListFraudsterRegistrationJobsResponse), output: &ListFraudsterRegistrationJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

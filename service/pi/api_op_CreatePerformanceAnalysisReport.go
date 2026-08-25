@@ -4,7 +4,9 @@ package pi
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -57,6 +59,28 @@ type CreatePerformanceAnalysisReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePerformanceAnalysisReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePerformanceAnalysisReportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePerformanceAnalysisReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.CreatePerformanceAnalysisReportRequest_EndTime, *v.EndTime)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.CreatePerformanceAnalysisReportRequest_Identifier, *v.Identifier)
+	}
+	if v.ServiceType != "" {
+		s.WriteString(schemas.CreatePerformanceAnalysisReportRequest_ServiceType, string(v.ServiceType))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.CreatePerformanceAnalysisReportRequest_StartTime, *v.StartTime)
+	}
+	serializeTagList(s, schemas.CreatePerformanceAnalysisReportRequest_Tags, v.Tags)
+}
+
 type CreatePerformanceAnalysisReportOutput struct {
 
 	// A unique identifier for the created analysis report.
@@ -68,13 +92,32 @@ type CreatePerformanceAnalysisReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePerformanceAnalysisReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePerformanceAnalysisReportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePerformanceAnalysisReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisReportId != nil {
+		s.WriteString(schemas.CreatePerformanceAnalysisReportResponse_AnalysisReportId, *v.AnalysisReportId)
+	}
+}
+func (v *CreatePerformanceAnalysisReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePerformanceAnalysisReportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePerformanceAnalysisReportResponse_AnalysisReportId:
+			v.AnalysisReportId = new(string)
+			return d.ReadString(schemas.CreatePerformanceAnalysisReportResponse_AnalysisReportId, v.AnalysisReportId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePerformanceAnalysisReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePerformanceAnalysisReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePerformanceAnalysisReport, schemas.CreatePerformanceAnalysisReportRequest, schemas.CreatePerformanceAnalysisReportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePerformanceAnalysisReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePerformanceAnalysisReport, schemas.CreatePerformanceAnalysisReportRequest, schemas.CreatePerformanceAnalysisReportResponse), output: &CreatePerformanceAnalysisReportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

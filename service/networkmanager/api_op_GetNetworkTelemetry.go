@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,42 @@ type GetNetworkTelemetryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNetworkTelemetryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNetworkTelemetryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNetworkTelemetryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetNetworkTelemetryRequest_AccountId, *v.AccountId)
+	}
+	if v.AwsRegion != nil {
+		s.WriteString(schemas.GetNetworkTelemetryRequest_AwsRegion, *v.AwsRegion)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.GetNetworkTelemetryRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.GetNetworkTelemetryRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetNetworkTelemetryRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetNetworkTelemetryRequest_NextToken, *v.NextToken)
+	}
+	if v.RegisteredGatewayArn != nil {
+		s.WriteString(schemas.GetNetworkTelemetryRequest_RegisteredGatewayArn, *v.RegisteredGatewayArn)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetNetworkTelemetryRequest_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.GetNetworkTelemetryRequest_ResourceType, *v.ResourceType)
+	}
+}
+
 type GetNetworkTelemetryOutput struct {
 
 	// The network telemetry.
@@ -79,13 +117,35 @@ type GetNetworkTelemetryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNetworkTelemetryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNetworkTelemetryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNetworkTelemetryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNetworkTelemetryList(s, schemas.GetNetworkTelemetryResponse_NetworkTelemetry, v.NetworkTelemetry)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetNetworkTelemetryResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetNetworkTelemetryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNetworkTelemetryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNetworkTelemetryResponse_NetworkTelemetry:
+			return deserializeNetworkTelemetryList(d, schemas.GetNetworkTelemetryResponse_NetworkTelemetry, &v.NetworkTelemetry)
+		case schemas.GetNetworkTelemetryResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetNetworkTelemetryResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetNetworkTelemetryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetNetworkTelemetry{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetworkTelemetry, schemas.GetNetworkTelemetryRequest, schemas.GetNetworkTelemetryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetNetworkTelemetry{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetworkTelemetry, schemas.GetNetworkTelemetryRequest, schemas.GetNetworkTelemetryResponse), output: &GetNetworkTelemetryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package voiceid
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/voiceid/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/voiceid/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,40 @@ type DisassociateFraudsterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateFraudsterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateFraudsterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateFraudsterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.DisassociateFraudsterRequest_DomainId, *v.DomainId)
+	}
+	if v.FraudsterId != nil {
+		s.WriteString(schemas.DisassociateFraudsterRequest_FraudsterId, *v.FraudsterId)
+	}
+	if v.WatchlistId != nil {
+		s.WriteString(schemas.DisassociateFraudsterRequest_WatchlistId, *v.WatchlistId)
+	}
+}
+func (v *DisassociateFraudsterInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateFraudsterRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateFraudsterRequest_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.DisassociateFraudsterRequest_DomainId, v.DomainId)
+		case schemas.DisassociateFraudsterRequest_FraudsterId:
+			v.FraudsterId = new(string)
+			return d.ReadString(schemas.DisassociateFraudsterRequest_FraudsterId, v.FraudsterId)
+		case schemas.DisassociateFraudsterRequest_WatchlistId:
+			v.WatchlistId = new(string)
+			return d.ReadString(schemas.DisassociateFraudsterRequest_WatchlistId, v.WatchlistId)
+		}
+		return nil
+	})
+}
+
 type DisassociateFraudsterOutput struct {
 
 	// Contains all the information about a fraudster.
@@ -59,13 +95,34 @@ type DisassociateFraudsterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateFraudsterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateFraudsterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateFraudsterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Fraudster != nil {
+		s.WriteStruct(schemas.DisassociateFraudsterResponse_Fraudster)
+		v.Fraudster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DisassociateFraudsterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateFraudsterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateFraudsterResponse_Fraudster:
+			v.Fraudster = &types.Fraudster{}
+			return v.Fraudster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateFraudsterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDisassociateFraudster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateFraudster, schemas.DisassociateFraudsterRequest, schemas.DisassociateFraudsterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDisassociateFraudster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateFraudster, schemas.DisassociateFraudsterRequest, schemas.DisassociateFraudsterResponse), output: &DisassociateFraudsterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

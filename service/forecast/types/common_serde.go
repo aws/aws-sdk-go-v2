@@ -539,6 +539,7 @@ func serializeWhatIfForecasts(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func deserializeAdditionalDatasets(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AdditionalDataset) error {
+	*v = make([]AdditionalDataset, 0)
 	var vv AdditionalDataset
 	return smithy.ReadList(d, s, func() error {
 		vv = AdditionalDataset{}
@@ -552,6 +553,7 @@ func deserializeAdditionalDatasets(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeArnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -565,6 +567,7 @@ func deserializeArnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]strin
 }
 
 func deserializeAttributeConfigs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AttributeConfig) error {
+	*v = make([]AttributeConfig, 0)
 	var vv AttributeConfig
 	return smithy.ReadList(d, s, func() error {
 		vv = AttributeConfig{}
@@ -578,6 +581,7 @@ func deserializeAttributeConfigs(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeBaselineMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]BaselineMetric) error {
+	*v = make([]BaselineMetric, 0)
 	var vv BaselineMetric
 	return smithy.ReadList(d, s, func() error {
 		vv = BaselineMetric{}
@@ -591,6 +595,7 @@ func deserializeBaselineMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeCategoricalParameterRanges(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]CategoricalParameterRange) error {
+	*v = make([]CategoricalParameterRange, 0)
 	var vv CategoricalParameterRange
 	return smithy.ReadList(d, s, func() error {
 		vv = CategoricalParameterRange{}
@@ -604,6 +609,7 @@ func deserializeCategoricalParameterRanges(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializeContinuousParameterRanges(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ContinuousParameterRange) error {
+	*v = make([]ContinuousParameterRange, 0)
 	var vv ContinuousParameterRange
 	return smithy.ReadList(d, s, func() error {
 		vv = ContinuousParameterRange{}
@@ -617,6 +623,7 @@ func deserializeContinuousParameterRanges(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeDatasetGroups(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DatasetGroupSummary) error {
+	*v = make([]DatasetGroupSummary, 0)
 	var vv DatasetGroupSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = DatasetGroupSummary{}
@@ -630,6 +637,7 @@ func deserializeDatasetGroups(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeDatasetImportJobs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DatasetImportJobSummary) error {
+	*v = make([]DatasetImportJobSummary, 0)
 	var vv DatasetImportJobSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = DatasetImportJobSummary{}
@@ -643,6 +651,7 @@ func deserializeDatasetImportJobs(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeDatasets(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]DatasetSummary) error {
+	*v = make([]DatasetSummary, 0)
 	var vv DatasetSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = DatasetSummary{}
@@ -656,6 +665,7 @@ func deserializeDatasets(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Data
 }
 
 func deserializeErrorMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ErrorMetric) error {
+	*v = make([]ErrorMetric, 0)
 	var vv ErrorMetric
 	return smithy.ReadList(d, s, func() error {
 		vv = ErrorMetric{}
@@ -669,6 +679,7 @@ func deserializeErrorMetrics(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeExplainabilities(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ExplainabilitySummary) error {
+	*v = make([]ExplainabilitySummary, 0)
 	var vv ExplainabilitySummary
 	return smithy.ReadList(d, s, func() error {
 		vv = ExplainabilitySummary{}
@@ -682,6 +693,7 @@ func deserializeExplainabilities(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeExplainabilityExports(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ExplainabilityExportSummary) error {
+	*v = make([]ExplainabilityExportSummary, 0)
 	var vv ExplainabilityExportSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = ExplainabilityExportSummary{}
@@ -695,6 +707,7 @@ func deserializeExplainabilityExports(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeFeaturizationPipeline(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]FeaturizationMethod) error {
+	*v = make([]FeaturizationMethod, 0)
 	var vv FeaturizationMethod
 	return smithy.ReadList(d, s, func() error {
 		vv = FeaturizationMethod{}
@@ -708,6 +721,7 @@ func deserializeFeaturizationPipeline(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeFeaturizations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Featurization) error {
+	*v = make([]Featurization, 0)
 	var vv Featurization
 	return smithy.ReadList(d, s, func() error {
 		vv = Featurization{}
@@ -721,6 +735,7 @@ func deserializeFeaturizations(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Filter) error {
+	*v = make([]Filter, 0)
 	var vv Filter
 	return smithy.ReadList(d, s, func() error {
 		vv = Filter{}
@@ -734,6 +749,7 @@ func deserializeFilters(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Filte
 }
 
 func deserializeForecastDimensions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -747,6 +763,7 @@ func deserializeForecastDimensions(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeForecastExportJobs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ForecastExportJobSummary) error {
+	*v = make([]ForecastExportJobSummary, 0)
 	var vv ForecastExportJobSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = ForecastExportJobSummary{}
@@ -760,6 +777,7 @@ func deserializeForecastExportJobs(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeForecasts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ForecastSummary) error {
+	*v = make([]ForecastSummary, 0)
 	var vv ForecastSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = ForecastSummary{}
@@ -773,6 +791,7 @@ func deserializeForecasts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]For
 }
 
 func deserializeForecastTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -786,6 +805,7 @@ func deserializeForecastTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeIntegerParameterRanges(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]IntegerParameterRange) error {
+	*v = make([]IntegerParameterRange, 0)
 	var vv IntegerParameterRange
 	return smithy.ReadList(d, s, func() error {
 		vv = IntegerParameterRange{}
@@ -799,6 +819,7 @@ func deserializeIntegerParameterRanges(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeLongArnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -812,6 +833,7 @@ func deserializeLongArnList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]s
 }
 
 func deserializeMetricResults(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]MetricResult) error {
+	*v = make([]MetricResult, 0)
 	var vv MetricResult
 	return smithy.ReadList(d, s, func() error {
 		vv = MetricResult{}
@@ -825,6 +847,7 @@ func deserializeMetricResults(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeMonitors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]MonitorSummary) error {
+	*v = make([]MonitorSummary, 0)
 	var vv MonitorSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = MonitorSummary{}
@@ -838,6 +861,7 @@ func deserializeMonitors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Moni
 }
 
 func deserializePredictorBacktestExportJobs(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PredictorBacktestExportJobSummary) error {
+	*v = make([]PredictorBacktestExportJobSummary, 0)
 	var vv PredictorBacktestExportJobSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = PredictorBacktestExportJobSummary{}
@@ -851,6 +875,7 @@ func deserializePredictorBacktestExportJobs(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializePredictorEvaluationResults(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]EvaluationResult) error {
+	*v = make([]EvaluationResult, 0)
 	var vv EvaluationResult
 	return smithy.ReadList(d, s, func() error {
 		vv = EvaluationResult{}
@@ -864,6 +889,7 @@ func deserializePredictorEvaluationResults(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializePredictorExecutions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PredictorExecution) error {
+	*v = make([]PredictorExecution, 0)
 	var vv PredictorExecution
 	return smithy.ReadList(d, s, func() error {
 		vv = PredictorExecution{}
@@ -877,6 +903,7 @@ func deserializePredictorExecutions(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializePredictorMonitorEvaluations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PredictorMonitorEvaluation) error {
+	*v = make([]PredictorMonitorEvaluation, 0)
 	var vv PredictorMonitorEvaluation
 	return smithy.ReadList(d, s, func() error {
 		vv = PredictorMonitorEvaluation{}
@@ -890,6 +917,7 @@ func deserializePredictorMonitorEvaluations(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializePredictors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]PredictorSummary) error {
+	*v = make([]PredictorSummary, 0)
 	var vv PredictorSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = PredictorSummary{}
@@ -903,6 +931,7 @@ func deserializePredictors(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Pr
 }
 
 func deserializeSchemaAttributes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SchemaAttribute) error {
+	*v = make([]SchemaAttribute, 0)
 	var vv SchemaAttribute
 	return smithy.ReadList(d, s, func() error {
 		vv = SchemaAttribute{}
@@ -916,6 +945,7 @@ func deserializeSchemaAttributes(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeSupplementaryFeatures(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]SupplementaryFeature) error {
+	*v = make([]SupplementaryFeature, 0)
 	var vv SupplementaryFeature
 	return smithy.ReadList(d, s, func() error {
 		vv = SupplementaryFeature{}
@@ -929,6 +959,7 @@ func deserializeSupplementaryFeatures(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -942,6 +973,7 @@ func deserializeTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]strin
 }
 
 func deserializeTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) error {
+	*v = make([]Tag, 0)
 	var vv Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = Tag{}
@@ -955,6 +987,7 @@ func deserializeTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) err
 }
 
 func deserializeTestWindowDetails(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]TestWindowSummary) error {
+	*v = make([]TestWindowSummary, 0)
 	var vv TestWindowSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = TestWindowSummary{}
@@ -968,6 +1001,7 @@ func deserializeTestWindowDetails(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeTestWindows(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]WindowSummary) error {
+	*v = make([]WindowSummary, 0)
 	var vv WindowSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = WindowSummary{}
@@ -981,6 +1015,7 @@ func deserializeTestWindows(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]W
 }
 
 func deserializeTimeSeriesConditions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]TimeSeriesCondition) error {
+	*v = make([]TimeSeriesCondition, 0)
 	var vv TimeSeriesCondition
 	return smithy.ReadList(d, s, func() error {
 		vv = TimeSeriesCondition{}
@@ -994,6 +1029,7 @@ func deserializeTimeSeriesConditions(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeTimeSeriesTransformations(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]TimeSeriesTransformation) error {
+	*v = make([]TimeSeriesTransformation, 0)
 	var vv TimeSeriesTransformation
 	return smithy.ReadList(d, s, func() error {
 		vv = TimeSeriesTransformation{}
@@ -1007,6 +1043,7 @@ func deserializeTimeSeriesTransformations(d smithy.ShapeDeserializer, s *smithy.
 }
 
 func deserializeValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1020,6 +1057,7 @@ func deserializeValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string
 }
 
 func deserializeWeightedQuantileLosses(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]WeightedQuantileLoss) error {
+	*v = make([]WeightedQuantileLoss, 0)
 	var vv WeightedQuantileLoss
 	return smithy.ReadList(d, s, func() error {
 		vv = WeightedQuantileLoss{}
@@ -1033,6 +1071,7 @@ func deserializeWeightedQuantileLosses(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeWhatIfAnalyses(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]WhatIfAnalysisSummary) error {
+	*v = make([]WhatIfAnalysisSummary, 0)
 	var vv WhatIfAnalysisSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = WhatIfAnalysisSummary{}
@@ -1046,6 +1085,7 @@ func deserializeWhatIfAnalyses(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeWhatIfForecastArnListForExport(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -1059,6 +1099,7 @@ func deserializeWhatIfForecastArnListForExport(d smithy.ShapeDeserializer, s *sm
 }
 
 func deserializeWhatIfForecastExports(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]WhatIfForecastExportSummary) error {
+	*v = make([]WhatIfForecastExportSummary, 0)
 	var vv WhatIfForecastExportSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = WhatIfForecastExportSummary{}
@@ -1072,6 +1113,7 @@ func deserializeWhatIfForecastExports(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeWhatIfForecasts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]WhatIfForecastSummary) error {
+	*v = make([]WhatIfForecastSummary, 0)
 	var vv WhatIfForecastSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = WhatIfForecastSummary{}

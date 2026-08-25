@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,30 @@ type ListJobMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobMembersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobMembersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobMembersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.ListJobMembersRequest_farmId, *v.FarmId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.ListJobMembersRequest_jobId, *v.JobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListJobMembersRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListJobMembersRequest_nextToken, *v.NextToken)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.ListJobMembersRequest_queueId, *v.QueueId)
+	}
+}
+
 // Shared pagination field for List operation outputs (nextToken).
 type ListJobMembersOutput struct {
 
@@ -76,13 +102,35 @@ type ListJobMembersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobMembersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobMembersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobMembersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeJobMembers(s, schemas.ListJobMembersResponse_members, v.Members)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListJobMembersResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListJobMembersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListJobMembersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListJobMembersResponse_members:
+			return deserializeJobMembers(d, schemas.ListJobMembersResponse_members, &v.Members)
+		case schemas.ListJobMembersResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListJobMembersResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListJobMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListJobMembers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobMembers, schemas.ListJobMembersRequest, schemas.ListJobMembersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListJobMembers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobMembers, schemas.ListJobMembersRequest, schemas.ListJobMembersResponse), output: &ListJobMembersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

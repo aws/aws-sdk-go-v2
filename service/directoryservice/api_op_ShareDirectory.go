@@ -4,7 +4,9 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,29 @@ type ShareDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ShareDirectoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ShareDirectoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ShareDirectoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.ShareDirectoryRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.ShareMethod != "" {
+		s.WriteString(schemas.ShareDirectoryRequest_ShareMethod, string(v.ShareMethod))
+	}
+	if v.ShareNotes != nil {
+		s.WriteString(schemas.ShareDirectoryRequest_ShareNotes, *v.ShareNotes)
+	}
+	if v.ShareTarget != nil {
+		s.WriteStruct(schemas.ShareDirectoryRequest_ShareTarget)
+		v.ShareTarget.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ShareDirectoryOutput struct {
 
 	// Identifier of the directory that is stored in the directory consumer account
@@ -84,13 +109,32 @@ type ShareDirectoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ShareDirectoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ShareDirectoryResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ShareDirectoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SharedDirectoryId != nil {
+		s.WriteString(schemas.ShareDirectoryResult_SharedDirectoryId, *v.SharedDirectoryId)
+	}
+}
+func (v *ShareDirectoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ShareDirectoryResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ShareDirectoryResult_SharedDirectoryId:
+			v.SharedDirectoryId = new(string)
+			return d.ReadString(schemas.ShareDirectoryResult_SharedDirectoryId, v.SharedDirectoryId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationShareDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpShareDirectory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ShareDirectory, schemas.ShareDirectoryRequest, schemas.ShareDirectoryResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpShareDirectory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ShareDirectory, schemas.ShareDirectoryRequest, schemas.ShareDirectoryResult), output: &ShareDirectoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -35,6 +37,39 @@ type ActivityTaskCanceledEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActivityTaskCanceledEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivityTaskCanceledEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivityTaskCanceledEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Details != nil {
+		s.WriteString(schemas.ActivityTaskCanceledEventAttributes_details, *v.Details)
+	}
+	if v.LatestCancelRequestedEventId != 0 {
+		s.WriteInt64(schemas.ActivityTaskCanceledEventAttributes_latestCancelRequestedEventId, v.LatestCancelRequestedEventId)
+	}
+	s.WriteInt64(schemas.ActivityTaskCanceledEventAttributes_scheduledEventId, v.ScheduledEventId)
+	s.WriteInt64(schemas.ActivityTaskCanceledEventAttributes_startedEventId, v.StartedEventId)
+}
+func (v *ActivityTaskCanceledEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivityTaskCanceledEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivityTaskCanceledEventAttributes_details:
+			v.Details = new(string)
+			return d.ReadString(schemas.ActivityTaskCanceledEventAttributes_details, v.Details)
+		case schemas.ActivityTaskCanceledEventAttributes_latestCancelRequestedEventId:
+			return d.ReadInt64(schemas.ActivityTaskCanceledEventAttributes_latestCancelRequestedEventId, &v.LatestCancelRequestedEventId)
+		case schemas.ActivityTaskCanceledEventAttributes_scheduledEventId:
+			return d.ReadInt64(schemas.ActivityTaskCanceledEventAttributes_scheduledEventId, &v.ScheduledEventId)
+		case schemas.ActivityTaskCanceledEventAttributes_startedEventId:
+			return d.ReadInt64(schemas.ActivityTaskCanceledEventAttributes_startedEventId, &v.StartedEventId)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the ActivityTaskCancelRequested event.
 type ActivityTaskCancelRequestedEventAttributes struct {
 
@@ -52,6 +87,31 @@ type ActivityTaskCancelRequestedEventAttributes struct {
 	DecisionTaskCompletedEventId int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *ActivityTaskCancelRequestedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivityTaskCancelRequestedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivityTaskCancelRequestedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityId != nil {
+		s.WriteString(schemas.ActivityTaskCancelRequestedEventAttributes_activityId, *v.ActivityId)
+	}
+	s.WriteInt64(schemas.ActivityTaskCancelRequestedEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+}
+func (v *ActivityTaskCancelRequestedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivityTaskCancelRequestedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivityTaskCancelRequestedEventAttributes_activityId:
+			v.ActivityId = new(string)
+			return d.ReadString(schemas.ActivityTaskCancelRequestedEventAttributes_activityId, v.ActivityId)
+		case schemas.ActivityTaskCancelRequestedEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.ActivityTaskCancelRequestedEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the ActivityTaskCompleted event.
@@ -75,6 +135,34 @@ type ActivityTaskCompletedEventAttributes struct {
 	Result *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ActivityTaskCompletedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivityTaskCompletedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivityTaskCompletedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Result != nil {
+		s.WriteString(schemas.ActivityTaskCompletedEventAttributes_result, *v.Result)
+	}
+	s.WriteInt64(schemas.ActivityTaskCompletedEventAttributes_scheduledEventId, v.ScheduledEventId)
+	s.WriteInt64(schemas.ActivityTaskCompletedEventAttributes_startedEventId, v.StartedEventId)
+}
+func (v *ActivityTaskCompletedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivityTaskCompletedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivityTaskCompletedEventAttributes_result:
+			v.Result = new(string)
+			return d.ReadString(schemas.ActivityTaskCompletedEventAttributes_result, v.Result)
+		case schemas.ActivityTaskCompletedEventAttributes_scheduledEventId:
+			return d.ReadInt64(schemas.ActivityTaskCompletedEventAttributes_scheduledEventId, &v.ScheduledEventId)
+		case schemas.ActivityTaskCompletedEventAttributes_startedEventId:
+			return d.ReadInt64(schemas.ActivityTaskCompletedEventAttributes_startedEventId, &v.StartedEventId)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the ActivityTaskFailed event.
@@ -101,6 +189,40 @@ type ActivityTaskFailedEventAttributes struct {
 	Reason *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ActivityTaskFailedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivityTaskFailedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivityTaskFailedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Details != nil {
+		s.WriteString(schemas.ActivityTaskFailedEventAttributes_details, *v.Details)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.ActivityTaskFailedEventAttributes_reason, *v.Reason)
+	}
+	s.WriteInt64(schemas.ActivityTaskFailedEventAttributes_scheduledEventId, v.ScheduledEventId)
+	s.WriteInt64(schemas.ActivityTaskFailedEventAttributes_startedEventId, v.StartedEventId)
+}
+func (v *ActivityTaskFailedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivityTaskFailedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivityTaskFailedEventAttributes_details:
+			v.Details = new(string)
+			return d.ReadString(schemas.ActivityTaskFailedEventAttributes_details, v.Details)
+		case schemas.ActivityTaskFailedEventAttributes_reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.ActivityTaskFailedEventAttributes_reason, v.Reason)
+		case schemas.ActivityTaskFailedEventAttributes_scheduledEventId:
+			return d.ReadInt64(schemas.ActivityTaskFailedEventAttributes_scheduledEventId, &v.ScheduledEventId)
+		case schemas.ActivityTaskFailedEventAttributes_startedEventId:
+			return d.ReadInt64(schemas.ActivityTaskFailedEventAttributes_startedEventId, &v.StartedEventId)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the ActivityTaskScheduled event.
@@ -169,6 +291,89 @@ type ActivityTaskScheduledEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActivityTaskScheduledEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivityTaskScheduledEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivityTaskScheduledEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityId != nil {
+		s.WriteString(schemas.ActivityTaskScheduledEventAttributes_activityId, *v.ActivityId)
+	}
+	if v.ActivityType != nil {
+		s.WriteStruct(schemas.ActivityTaskScheduledEventAttributes_activityType)
+		v.ActivityType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Control != nil {
+		s.WriteString(schemas.ActivityTaskScheduledEventAttributes_control, *v.Control)
+	}
+	s.WriteInt64(schemas.ActivityTaskScheduledEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+	if v.HeartbeatTimeout != nil {
+		s.WriteString(schemas.ActivityTaskScheduledEventAttributes_heartbeatTimeout, *v.HeartbeatTimeout)
+	}
+	if v.Input != nil {
+		s.WriteString(schemas.ActivityTaskScheduledEventAttributes_input, *v.Input)
+	}
+	if v.ScheduleToCloseTimeout != nil {
+		s.WriteString(schemas.ActivityTaskScheduledEventAttributes_scheduleToCloseTimeout, *v.ScheduleToCloseTimeout)
+	}
+	if v.ScheduleToStartTimeout != nil {
+		s.WriteString(schemas.ActivityTaskScheduledEventAttributes_scheduleToStartTimeout, *v.ScheduleToStartTimeout)
+	}
+	if v.StartToCloseTimeout != nil {
+		s.WriteString(schemas.ActivityTaskScheduledEventAttributes_startToCloseTimeout, *v.StartToCloseTimeout)
+	}
+	if v.TaskList != nil {
+		s.WriteStruct(schemas.ActivityTaskScheduledEventAttributes_taskList)
+		v.TaskList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskPriority != nil {
+		s.WriteString(schemas.ActivityTaskScheduledEventAttributes_taskPriority, *v.TaskPriority)
+	}
+}
+func (v *ActivityTaskScheduledEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivityTaskScheduledEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivityTaskScheduledEventAttributes_activityId:
+			v.ActivityId = new(string)
+			return d.ReadString(schemas.ActivityTaskScheduledEventAttributes_activityId, v.ActivityId)
+		case schemas.ActivityTaskScheduledEventAttributes_activityType:
+			v.ActivityType = &ActivityType{}
+			return v.ActivityType.Deserialize(d)
+		case schemas.ActivityTaskScheduledEventAttributes_control:
+			v.Control = new(string)
+			return d.ReadString(schemas.ActivityTaskScheduledEventAttributes_control, v.Control)
+		case schemas.ActivityTaskScheduledEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.ActivityTaskScheduledEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		case schemas.ActivityTaskScheduledEventAttributes_heartbeatTimeout:
+			v.HeartbeatTimeout = new(string)
+			return d.ReadString(schemas.ActivityTaskScheduledEventAttributes_heartbeatTimeout, v.HeartbeatTimeout)
+		case schemas.ActivityTaskScheduledEventAttributes_input:
+			v.Input = new(string)
+			return d.ReadString(schemas.ActivityTaskScheduledEventAttributes_input, v.Input)
+		case schemas.ActivityTaskScheduledEventAttributes_scheduleToCloseTimeout:
+			v.ScheduleToCloseTimeout = new(string)
+			return d.ReadString(schemas.ActivityTaskScheduledEventAttributes_scheduleToCloseTimeout, v.ScheduleToCloseTimeout)
+		case schemas.ActivityTaskScheduledEventAttributes_scheduleToStartTimeout:
+			v.ScheduleToStartTimeout = new(string)
+			return d.ReadString(schemas.ActivityTaskScheduledEventAttributes_scheduleToStartTimeout, v.ScheduleToStartTimeout)
+		case schemas.ActivityTaskScheduledEventAttributes_startToCloseTimeout:
+			v.StartToCloseTimeout = new(string)
+			return d.ReadString(schemas.ActivityTaskScheduledEventAttributes_startToCloseTimeout, v.StartToCloseTimeout)
+		case schemas.ActivityTaskScheduledEventAttributes_taskList:
+			v.TaskList = &TaskList{}
+			return v.TaskList.Deserialize(d)
+		case schemas.ActivityTaskScheduledEventAttributes_taskPriority:
+			v.TaskPriority = new(string)
+			return d.ReadString(schemas.ActivityTaskScheduledEventAttributes_taskPriority, v.TaskPriority)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the ActivityTaskStarted event.
 type ActivityTaskStartedEventAttributes struct {
 
@@ -184,6 +389,31 @@ type ActivityTaskStartedEventAttributes struct {
 	Identity *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ActivityTaskStartedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivityTaskStartedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivityTaskStartedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identity != nil {
+		s.WriteString(schemas.ActivityTaskStartedEventAttributes_identity, *v.Identity)
+	}
+	s.WriteInt64(schemas.ActivityTaskStartedEventAttributes_scheduledEventId, v.ScheduledEventId)
+}
+func (v *ActivityTaskStartedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivityTaskStartedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivityTaskStartedEventAttributes_identity:
+			v.Identity = new(string)
+			return d.ReadString(schemas.ActivityTaskStartedEventAttributes_identity, v.Identity)
+		case schemas.ActivityTaskStartedEventAttributes_scheduledEventId:
+			return d.ReadInt64(schemas.ActivityTaskStartedEventAttributes_scheduledEventId, &v.ScheduledEventId)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the ActivityTaskTimedOut event.
@@ -215,6 +445,44 @@ type ActivityTaskTimedOutEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActivityTaskTimedOutEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivityTaskTimedOutEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivityTaskTimedOutEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Details != nil {
+		s.WriteString(schemas.ActivityTaskTimedOutEventAttributes_details, *v.Details)
+	}
+	s.WriteInt64(schemas.ActivityTaskTimedOutEventAttributes_scheduledEventId, v.ScheduledEventId)
+	s.WriteInt64(schemas.ActivityTaskTimedOutEventAttributes_startedEventId, v.StartedEventId)
+	if v.TimeoutType != "" {
+		s.WriteString(schemas.ActivityTaskTimedOutEventAttributes_timeoutType, string(v.TimeoutType))
+	}
+}
+func (v *ActivityTaskTimedOutEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivityTaskTimedOutEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivityTaskTimedOutEventAttributes_details:
+			v.Details = new(string)
+			return d.ReadString(schemas.ActivityTaskTimedOutEventAttributes_details, v.Details)
+		case schemas.ActivityTaskTimedOutEventAttributes_scheduledEventId:
+			return d.ReadInt64(schemas.ActivityTaskTimedOutEventAttributes_scheduledEventId, &v.ScheduledEventId)
+		case schemas.ActivityTaskTimedOutEventAttributes_startedEventId:
+			return d.ReadInt64(schemas.ActivityTaskTimedOutEventAttributes_startedEventId, &v.StartedEventId)
+		case schemas.ActivityTaskTimedOutEventAttributes_timeoutType:
+			var ev string
+			if err := d.ReadString(schemas.ActivityTaskTimedOutEventAttributes_timeoutType, &ev); err != nil {
+				return err
+			}
+			v.TimeoutType = ActivityTaskTimeoutType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Represents an activity type.
 type ActivityType struct {
 
@@ -235,6 +503,34 @@ type ActivityType struct {
 	Version *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ActivityType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivityType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivityType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ActivityType_name, *v.Name)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.ActivityType_version, *v.Version)
+	}
+}
+func (v *ActivityType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivityType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivityType_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ActivityType_name, v.Name)
+		case schemas.ActivityType_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.ActivityType_version, v.Version)
+		}
+		return nil
+	})
 }
 
 // Configuration settings registered with the activity type.
@@ -302,6 +598,60 @@ type ActivityTypeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActivityTypeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivityTypeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivityTypeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultTaskHeartbeatTimeout != nil {
+		s.WriteString(schemas.ActivityTypeConfiguration_defaultTaskHeartbeatTimeout, *v.DefaultTaskHeartbeatTimeout)
+	}
+	if v.DefaultTaskList != nil {
+		s.WriteStruct(schemas.ActivityTypeConfiguration_defaultTaskList)
+		v.DefaultTaskList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultTaskPriority != nil {
+		s.WriteString(schemas.ActivityTypeConfiguration_defaultTaskPriority, *v.DefaultTaskPriority)
+	}
+	if v.DefaultTaskScheduleToCloseTimeout != nil {
+		s.WriteString(schemas.ActivityTypeConfiguration_defaultTaskScheduleToCloseTimeout, *v.DefaultTaskScheduleToCloseTimeout)
+	}
+	if v.DefaultTaskScheduleToStartTimeout != nil {
+		s.WriteString(schemas.ActivityTypeConfiguration_defaultTaskScheduleToStartTimeout, *v.DefaultTaskScheduleToStartTimeout)
+	}
+	if v.DefaultTaskStartToCloseTimeout != nil {
+		s.WriteString(schemas.ActivityTypeConfiguration_defaultTaskStartToCloseTimeout, *v.DefaultTaskStartToCloseTimeout)
+	}
+}
+func (v *ActivityTypeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivityTypeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivityTypeConfiguration_defaultTaskHeartbeatTimeout:
+			v.DefaultTaskHeartbeatTimeout = new(string)
+			return d.ReadString(schemas.ActivityTypeConfiguration_defaultTaskHeartbeatTimeout, v.DefaultTaskHeartbeatTimeout)
+		case schemas.ActivityTypeConfiguration_defaultTaskList:
+			v.DefaultTaskList = &TaskList{}
+			return v.DefaultTaskList.Deserialize(d)
+		case schemas.ActivityTypeConfiguration_defaultTaskPriority:
+			v.DefaultTaskPriority = new(string)
+			return d.ReadString(schemas.ActivityTypeConfiguration_defaultTaskPriority, v.DefaultTaskPriority)
+		case schemas.ActivityTypeConfiguration_defaultTaskScheduleToCloseTimeout:
+			v.DefaultTaskScheduleToCloseTimeout = new(string)
+			return d.ReadString(schemas.ActivityTypeConfiguration_defaultTaskScheduleToCloseTimeout, v.DefaultTaskScheduleToCloseTimeout)
+		case schemas.ActivityTypeConfiguration_defaultTaskScheduleToStartTimeout:
+			v.DefaultTaskScheduleToStartTimeout = new(string)
+			return d.ReadString(schemas.ActivityTypeConfiguration_defaultTaskScheduleToStartTimeout, v.DefaultTaskScheduleToStartTimeout)
+		case schemas.ActivityTypeConfiguration_defaultTaskStartToCloseTimeout:
+			v.DefaultTaskStartToCloseTimeout = new(string)
+			return d.ReadString(schemas.ActivityTypeConfiguration_defaultTaskStartToCloseTimeout, v.DefaultTaskStartToCloseTimeout)
+		}
+		return nil
+	})
+}
+
 // Detailed information about an activity type.
 type ActivityTypeInfo struct {
 
@@ -327,6 +677,58 @@ type ActivityTypeInfo struct {
 	Description *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ActivityTypeInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivityTypeInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivityTypeInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityType != nil {
+		s.WriteStruct(schemas.ActivityTypeInfo_activityType)
+		v.ActivityType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.ActivityTypeInfo_creationDate, *v.CreationDate)
+	}
+	if v.DeprecationDate != nil {
+		s.WriteTime(schemas.ActivityTypeInfo_deprecationDate, *v.DeprecationDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ActivityTypeInfo_description, *v.Description)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ActivityTypeInfo_status, string(v.Status))
+	}
+}
+func (v *ActivityTypeInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivityTypeInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivityTypeInfo_activityType:
+			v.ActivityType = &ActivityType{}
+			return v.ActivityType.Deserialize(d)
+		case schemas.ActivityTypeInfo_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.ActivityTypeInfo_creationDate, v.CreationDate)
+		case schemas.ActivityTypeInfo_deprecationDate:
+			v.DeprecationDate = new(time.Time)
+			return d.ReadTime(schemas.ActivityTypeInfo_deprecationDate, v.DeprecationDate)
+		case schemas.ActivityTypeInfo_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ActivityTypeInfo_description, v.Description)
+		case schemas.ActivityTypeInfo_status:
+			var ev string
+			if err := d.ReadString(schemas.ActivityTypeInfo_status, &ev); err != nil {
+				return err
+			}
+			v.Status = RegistrationStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Provides the details of the CancelTimer decision.
@@ -357,6 +759,28 @@ type CancelTimerDecisionAttributes struct {
 	TimerId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CancelTimerDecisionAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelTimerDecisionAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelTimerDecisionAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TimerId != nil {
+		s.WriteString(schemas.CancelTimerDecisionAttributes_timerId, *v.TimerId)
+	}
+}
+func (v *CancelTimerDecisionAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelTimerDecisionAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelTimerDecisionAttributes_timerId:
+			v.TimerId = new(string)
+			return d.ReadString(schemas.CancelTimerDecisionAttributes_timerId, v.TimerId)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the CancelTimerFailed event.
@@ -390,6 +814,41 @@ type CancelTimerFailedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelTimerFailedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelTimerFailedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelTimerFailedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != "" {
+		s.WriteString(schemas.CancelTimerFailedEventAttributes_cause, string(v.Cause))
+	}
+	s.WriteInt64(schemas.CancelTimerFailedEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+	if v.TimerId != nil {
+		s.WriteString(schemas.CancelTimerFailedEventAttributes_timerId, *v.TimerId)
+	}
+}
+func (v *CancelTimerFailedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelTimerFailedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelTimerFailedEventAttributes_cause:
+			var ev string
+			if err := d.ReadString(schemas.CancelTimerFailedEventAttributes_cause, &ev); err != nil {
+				return err
+			}
+			v.Cause = CancelTimerFailedCause(ev)
+			return nil
+		case schemas.CancelTimerFailedEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.CancelTimerFailedEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		case schemas.CancelTimerFailedEventAttributes_timerId:
+			v.TimerId = new(string)
+			return d.ReadString(schemas.CancelTimerFailedEventAttributes_timerId, v.TimerId)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the CancelWorkflowExecution decision.
 //
 // # Access Control
@@ -418,6 +877,28 @@ type CancelWorkflowExecutionDecisionAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelWorkflowExecutionDecisionAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelWorkflowExecutionDecisionAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelWorkflowExecutionDecisionAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Details != nil {
+		s.WriteString(schemas.CancelWorkflowExecutionDecisionAttributes_details, *v.Details)
+	}
+}
+func (v *CancelWorkflowExecutionDecisionAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelWorkflowExecutionDecisionAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelWorkflowExecutionDecisionAttributes_details:
+			v.Details = new(string)
+			return d.ReadString(schemas.CancelWorkflowExecutionDecisionAttributes_details, v.Details)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the CancelWorkflowExecutionFailed event.
 type CancelWorkflowExecutionFailedEventAttributes struct {
 
@@ -442,6 +923,35 @@ type CancelWorkflowExecutionFailedEventAttributes struct {
 	DecisionTaskCompletedEventId int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *CancelWorkflowExecutionFailedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelWorkflowExecutionFailedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelWorkflowExecutionFailedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != "" {
+		s.WriteString(schemas.CancelWorkflowExecutionFailedEventAttributes_cause, string(v.Cause))
+	}
+	s.WriteInt64(schemas.CancelWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+}
+func (v *CancelWorkflowExecutionFailedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelWorkflowExecutionFailedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelWorkflowExecutionFailedEventAttributes_cause:
+			var ev string
+			if err := d.ReadString(schemas.CancelWorkflowExecutionFailedEventAttributes_cause, &ev); err != nil {
+				return err
+			}
+			v.Cause = CancelWorkflowExecutionFailedCause(ev)
+			return nil
+		case schemas.CancelWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.CancelWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		}
+		return nil
+	})
 }
 
 // Provide details of the ChildWorkflowExecutionCanceled event.
@@ -478,6 +988,50 @@ type ChildWorkflowExecutionCanceledEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChildWorkflowExecutionCanceledEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChildWorkflowExecutionCanceledEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChildWorkflowExecutionCanceledEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Details != nil {
+		s.WriteString(schemas.ChildWorkflowExecutionCanceledEventAttributes_details, *v.Details)
+	}
+	s.WriteInt64(schemas.ChildWorkflowExecutionCanceledEventAttributes_initiatedEventId, v.InitiatedEventId)
+	s.WriteInt64(schemas.ChildWorkflowExecutionCanceledEventAttributes_startedEventId, v.StartedEventId)
+	if v.WorkflowExecution != nil {
+		s.WriteStruct(schemas.ChildWorkflowExecutionCanceledEventAttributes_workflowExecution)
+		v.WorkflowExecution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkflowType != nil {
+		s.WriteStruct(schemas.ChildWorkflowExecutionCanceledEventAttributes_workflowType)
+		v.WorkflowType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ChildWorkflowExecutionCanceledEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChildWorkflowExecutionCanceledEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChildWorkflowExecutionCanceledEventAttributes_details:
+			v.Details = new(string)
+			return d.ReadString(schemas.ChildWorkflowExecutionCanceledEventAttributes_details, v.Details)
+		case schemas.ChildWorkflowExecutionCanceledEventAttributes_initiatedEventId:
+			return d.ReadInt64(schemas.ChildWorkflowExecutionCanceledEventAttributes_initiatedEventId, &v.InitiatedEventId)
+		case schemas.ChildWorkflowExecutionCanceledEventAttributes_startedEventId:
+			return d.ReadInt64(schemas.ChildWorkflowExecutionCanceledEventAttributes_startedEventId, &v.StartedEventId)
+		case schemas.ChildWorkflowExecutionCanceledEventAttributes_workflowExecution:
+			v.WorkflowExecution = &WorkflowExecution{}
+			return v.WorkflowExecution.Deserialize(d)
+		case schemas.ChildWorkflowExecutionCanceledEventAttributes_workflowType:
+			v.WorkflowType = &WorkflowType{}
+			return v.WorkflowType.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the ChildWorkflowExecutionCompleted event.
 type ChildWorkflowExecutionCompletedEventAttributes struct {
 
@@ -510,6 +1064,50 @@ type ChildWorkflowExecutionCompletedEventAttributes struct {
 	Result *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ChildWorkflowExecutionCompletedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChildWorkflowExecutionCompletedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChildWorkflowExecutionCompletedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.ChildWorkflowExecutionCompletedEventAttributes_initiatedEventId, v.InitiatedEventId)
+	if v.Result != nil {
+		s.WriteString(schemas.ChildWorkflowExecutionCompletedEventAttributes_result, *v.Result)
+	}
+	s.WriteInt64(schemas.ChildWorkflowExecutionCompletedEventAttributes_startedEventId, v.StartedEventId)
+	if v.WorkflowExecution != nil {
+		s.WriteStruct(schemas.ChildWorkflowExecutionCompletedEventAttributes_workflowExecution)
+		v.WorkflowExecution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkflowType != nil {
+		s.WriteStruct(schemas.ChildWorkflowExecutionCompletedEventAttributes_workflowType)
+		v.WorkflowType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ChildWorkflowExecutionCompletedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChildWorkflowExecutionCompletedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChildWorkflowExecutionCompletedEventAttributes_initiatedEventId:
+			return d.ReadInt64(schemas.ChildWorkflowExecutionCompletedEventAttributes_initiatedEventId, &v.InitiatedEventId)
+		case schemas.ChildWorkflowExecutionCompletedEventAttributes_result:
+			v.Result = new(string)
+			return d.ReadString(schemas.ChildWorkflowExecutionCompletedEventAttributes_result, v.Result)
+		case schemas.ChildWorkflowExecutionCompletedEventAttributes_startedEventId:
+			return d.ReadInt64(schemas.ChildWorkflowExecutionCompletedEventAttributes_startedEventId, &v.StartedEventId)
+		case schemas.ChildWorkflowExecutionCompletedEventAttributes_workflowExecution:
+			v.WorkflowExecution = &WorkflowExecution{}
+			return v.WorkflowExecution.Deserialize(d)
+		case schemas.ChildWorkflowExecutionCompletedEventAttributes_workflowType:
+			v.WorkflowType = &WorkflowType{}
+			return v.WorkflowType.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the ChildWorkflowExecutionFailed event.
@@ -549,6 +1147,56 @@ type ChildWorkflowExecutionFailedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChildWorkflowExecutionFailedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChildWorkflowExecutionFailedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChildWorkflowExecutionFailedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Details != nil {
+		s.WriteString(schemas.ChildWorkflowExecutionFailedEventAttributes_details, *v.Details)
+	}
+	s.WriteInt64(schemas.ChildWorkflowExecutionFailedEventAttributes_initiatedEventId, v.InitiatedEventId)
+	if v.Reason != nil {
+		s.WriteString(schemas.ChildWorkflowExecutionFailedEventAttributes_reason, *v.Reason)
+	}
+	s.WriteInt64(schemas.ChildWorkflowExecutionFailedEventAttributes_startedEventId, v.StartedEventId)
+	if v.WorkflowExecution != nil {
+		s.WriteStruct(schemas.ChildWorkflowExecutionFailedEventAttributes_workflowExecution)
+		v.WorkflowExecution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkflowType != nil {
+		s.WriteStruct(schemas.ChildWorkflowExecutionFailedEventAttributes_workflowType)
+		v.WorkflowType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ChildWorkflowExecutionFailedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChildWorkflowExecutionFailedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChildWorkflowExecutionFailedEventAttributes_details:
+			v.Details = new(string)
+			return d.ReadString(schemas.ChildWorkflowExecutionFailedEventAttributes_details, v.Details)
+		case schemas.ChildWorkflowExecutionFailedEventAttributes_initiatedEventId:
+			return d.ReadInt64(schemas.ChildWorkflowExecutionFailedEventAttributes_initiatedEventId, &v.InitiatedEventId)
+		case schemas.ChildWorkflowExecutionFailedEventAttributes_reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.ChildWorkflowExecutionFailedEventAttributes_reason, v.Reason)
+		case schemas.ChildWorkflowExecutionFailedEventAttributes_startedEventId:
+			return d.ReadInt64(schemas.ChildWorkflowExecutionFailedEventAttributes_startedEventId, &v.StartedEventId)
+		case schemas.ChildWorkflowExecutionFailedEventAttributes_workflowExecution:
+			v.WorkflowExecution = &WorkflowExecution{}
+			return v.WorkflowExecution.Deserialize(d)
+		case schemas.ChildWorkflowExecutionFailedEventAttributes_workflowType:
+			v.WorkflowType = &WorkflowType{}
+			return v.WorkflowType.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the ChildWorkflowExecutionStarted event.
 type ChildWorkflowExecutionStartedEventAttributes struct {
 
@@ -571,6 +1219,41 @@ type ChildWorkflowExecutionStartedEventAttributes struct {
 	WorkflowType *WorkflowType
 
 	noSmithyDocumentSerde
+}
+
+func (v *ChildWorkflowExecutionStartedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChildWorkflowExecutionStartedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChildWorkflowExecutionStartedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.ChildWorkflowExecutionStartedEventAttributes_initiatedEventId, v.InitiatedEventId)
+	if v.WorkflowExecution != nil {
+		s.WriteStruct(schemas.ChildWorkflowExecutionStartedEventAttributes_workflowExecution)
+		v.WorkflowExecution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkflowType != nil {
+		s.WriteStruct(schemas.ChildWorkflowExecutionStartedEventAttributes_workflowType)
+		v.WorkflowType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ChildWorkflowExecutionStartedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChildWorkflowExecutionStartedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChildWorkflowExecutionStartedEventAttributes_initiatedEventId:
+			return d.ReadInt64(schemas.ChildWorkflowExecutionStartedEventAttributes_initiatedEventId, &v.InitiatedEventId)
+		case schemas.ChildWorkflowExecutionStartedEventAttributes_workflowExecution:
+			v.WorkflowExecution = &WorkflowExecution{}
+			return v.WorkflowExecution.Deserialize(d)
+		case schemas.ChildWorkflowExecutionStartedEventAttributes_workflowType:
+			v.WorkflowType = &WorkflowType{}
+			return v.WorkflowType.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the ChildWorkflowExecutionTerminated event.
@@ -602,6 +1285,44 @@ type ChildWorkflowExecutionTerminatedEventAttributes struct {
 	WorkflowType *WorkflowType
 
 	noSmithyDocumentSerde
+}
+
+func (v *ChildWorkflowExecutionTerminatedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChildWorkflowExecutionTerminatedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChildWorkflowExecutionTerminatedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.ChildWorkflowExecutionTerminatedEventAttributes_initiatedEventId, v.InitiatedEventId)
+	s.WriteInt64(schemas.ChildWorkflowExecutionTerminatedEventAttributes_startedEventId, v.StartedEventId)
+	if v.WorkflowExecution != nil {
+		s.WriteStruct(schemas.ChildWorkflowExecutionTerminatedEventAttributes_workflowExecution)
+		v.WorkflowExecution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkflowType != nil {
+		s.WriteStruct(schemas.ChildWorkflowExecutionTerminatedEventAttributes_workflowType)
+		v.WorkflowType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ChildWorkflowExecutionTerminatedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChildWorkflowExecutionTerminatedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChildWorkflowExecutionTerminatedEventAttributes_initiatedEventId:
+			return d.ReadInt64(schemas.ChildWorkflowExecutionTerminatedEventAttributes_initiatedEventId, &v.InitiatedEventId)
+		case schemas.ChildWorkflowExecutionTerminatedEventAttributes_startedEventId:
+			return d.ReadInt64(schemas.ChildWorkflowExecutionTerminatedEventAttributes_startedEventId, &v.StartedEventId)
+		case schemas.ChildWorkflowExecutionTerminatedEventAttributes_workflowExecution:
+			v.WorkflowExecution = &WorkflowExecution{}
+			return v.WorkflowExecution.Deserialize(d)
+		case schemas.ChildWorkflowExecutionTerminatedEventAttributes_workflowType:
+			v.WorkflowType = &WorkflowType{}
+			return v.WorkflowType.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the ChildWorkflowExecutionTimedOut event.
@@ -640,6 +1361,54 @@ type ChildWorkflowExecutionTimedOutEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChildWorkflowExecutionTimedOutEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChildWorkflowExecutionTimedOutEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChildWorkflowExecutionTimedOutEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.ChildWorkflowExecutionTimedOutEventAttributes_initiatedEventId, v.InitiatedEventId)
+	s.WriteInt64(schemas.ChildWorkflowExecutionTimedOutEventAttributes_startedEventId, v.StartedEventId)
+	if v.TimeoutType != "" {
+		s.WriteString(schemas.ChildWorkflowExecutionTimedOutEventAttributes_timeoutType, string(v.TimeoutType))
+	}
+	if v.WorkflowExecution != nil {
+		s.WriteStruct(schemas.ChildWorkflowExecutionTimedOutEventAttributes_workflowExecution)
+		v.WorkflowExecution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkflowType != nil {
+		s.WriteStruct(schemas.ChildWorkflowExecutionTimedOutEventAttributes_workflowType)
+		v.WorkflowType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ChildWorkflowExecutionTimedOutEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChildWorkflowExecutionTimedOutEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChildWorkflowExecutionTimedOutEventAttributes_initiatedEventId:
+			return d.ReadInt64(schemas.ChildWorkflowExecutionTimedOutEventAttributes_initiatedEventId, &v.InitiatedEventId)
+		case schemas.ChildWorkflowExecutionTimedOutEventAttributes_startedEventId:
+			return d.ReadInt64(schemas.ChildWorkflowExecutionTimedOutEventAttributes_startedEventId, &v.StartedEventId)
+		case schemas.ChildWorkflowExecutionTimedOutEventAttributes_timeoutType:
+			var ev string
+			if err := d.ReadString(schemas.ChildWorkflowExecutionTimedOutEventAttributes_timeoutType, &ev); err != nil {
+				return err
+			}
+			v.TimeoutType = WorkflowExecutionTimeoutType(ev)
+			return nil
+		case schemas.ChildWorkflowExecutionTimedOutEventAttributes_workflowExecution:
+			v.WorkflowExecution = &WorkflowExecution{}
+			return v.WorkflowExecution.Deserialize(d)
+		case schemas.ChildWorkflowExecutionTimedOutEventAttributes_workflowType:
+			v.WorkflowType = &WorkflowType{}
+			return v.WorkflowType.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Used to filter the closed workflow executions in visibility APIs by their close
 // status.
 type CloseStatusFilter struct {
@@ -651,6 +1420,32 @@ type CloseStatusFilter struct {
 	Status CloseStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *CloseStatusFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloseStatusFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloseStatusFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.CloseStatusFilter_status, string(v.Status))
+	}
+}
+func (v *CloseStatusFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloseStatusFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloseStatusFilter_status:
+			var ev string
+			if err := d.ReadString(schemas.CloseStatusFilter_status, &ev); err != nil {
+				return err
+			}
+			v.Status = CloseStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Provides the details of the CompleteWorkflowExecution decision.
@@ -682,6 +1477,28 @@ type CompleteWorkflowExecutionDecisionAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompleteWorkflowExecutionDecisionAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompleteWorkflowExecutionDecisionAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompleteWorkflowExecutionDecisionAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Result != nil {
+		s.WriteString(schemas.CompleteWorkflowExecutionDecisionAttributes_result, *v.Result)
+	}
+}
+func (v *CompleteWorkflowExecutionDecisionAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CompleteWorkflowExecutionDecisionAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CompleteWorkflowExecutionDecisionAttributes_result:
+			v.Result = new(string)
+			return d.ReadString(schemas.CompleteWorkflowExecutionDecisionAttributes_result, v.Result)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the CompleteWorkflowExecutionFailed event.
 type CompleteWorkflowExecutionFailedEventAttributes struct {
 
@@ -706,6 +1523,35 @@ type CompleteWorkflowExecutionFailedEventAttributes struct {
 	DecisionTaskCompletedEventId int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *CompleteWorkflowExecutionFailedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompleteWorkflowExecutionFailedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompleteWorkflowExecutionFailedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != "" {
+		s.WriteString(schemas.CompleteWorkflowExecutionFailedEventAttributes_cause, string(v.Cause))
+	}
+	s.WriteInt64(schemas.CompleteWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+}
+func (v *CompleteWorkflowExecutionFailedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CompleteWorkflowExecutionFailedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CompleteWorkflowExecutionFailedEventAttributes_cause:
+			var ev string
+			if err := d.ReadString(schemas.CompleteWorkflowExecutionFailedEventAttributes_cause, &ev); err != nil {
+				return err
+			}
+			v.Cause = CompleteWorkflowExecutionFailedCause(ev)
+			return nil
+		case schemas.CompleteWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.CompleteWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the ContinueAsNewWorkflowExecution decision.
@@ -819,6 +1665,79 @@ type ContinueAsNewWorkflowExecutionDecisionAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContinueAsNewWorkflowExecutionDecisionAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContinueAsNewWorkflowExecutionDecisionAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContinueAsNewWorkflowExecutionDecisionAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChildPolicy != "" {
+		s.WriteString(schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_childPolicy, string(v.ChildPolicy))
+	}
+	if v.ExecutionStartToCloseTimeout != nil {
+		s.WriteString(schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_executionStartToCloseTimeout, *v.ExecutionStartToCloseTimeout)
+	}
+	if v.Input != nil {
+		s.WriteString(schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_input, *v.Input)
+	}
+	if v.LambdaRole != nil {
+		s.WriteString(schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_lambdaRole, *v.LambdaRole)
+	}
+	serializeTagList(s, schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_tagList, v.TagList)
+	if v.TaskList != nil {
+		s.WriteStruct(schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_taskList)
+		v.TaskList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskPriority != nil {
+		s.WriteString(schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_taskPriority, *v.TaskPriority)
+	}
+	if v.TaskStartToCloseTimeout != nil {
+		s.WriteString(schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_taskStartToCloseTimeout, *v.TaskStartToCloseTimeout)
+	}
+	if v.WorkflowTypeVersion != nil {
+		s.WriteString(schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_workflowTypeVersion, *v.WorkflowTypeVersion)
+	}
+}
+func (v *ContinueAsNewWorkflowExecutionDecisionAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContinueAsNewWorkflowExecutionDecisionAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_childPolicy:
+			var ev string
+			if err := d.ReadString(schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_childPolicy, &ev); err != nil {
+				return err
+			}
+			v.ChildPolicy = ChildPolicy(ev)
+			return nil
+		case schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_executionStartToCloseTimeout:
+			v.ExecutionStartToCloseTimeout = new(string)
+			return d.ReadString(schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_executionStartToCloseTimeout, v.ExecutionStartToCloseTimeout)
+		case schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_input:
+			v.Input = new(string)
+			return d.ReadString(schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_input, v.Input)
+		case schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_lambdaRole:
+			v.LambdaRole = new(string)
+			return d.ReadString(schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_lambdaRole, v.LambdaRole)
+		case schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_tagList:
+			return deserializeTagList(d, schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_tagList, &v.TagList)
+		case schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_taskList:
+			v.TaskList = &TaskList{}
+			return v.TaskList.Deserialize(d)
+		case schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_taskPriority:
+			v.TaskPriority = new(string)
+			return d.ReadString(schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_taskPriority, v.TaskPriority)
+		case schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_taskStartToCloseTimeout:
+			v.TaskStartToCloseTimeout = new(string)
+			return d.ReadString(schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_taskStartToCloseTimeout, v.TaskStartToCloseTimeout)
+		case schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_workflowTypeVersion:
+			v.WorkflowTypeVersion = new(string)
+			return d.ReadString(schemas.ContinueAsNewWorkflowExecutionDecisionAttributes_workflowTypeVersion, v.WorkflowTypeVersion)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the ContinueAsNewWorkflowExecutionFailed event.
 type ContinueAsNewWorkflowExecutionFailedEventAttributes struct {
 
@@ -843,6 +1762,35 @@ type ContinueAsNewWorkflowExecutionFailedEventAttributes struct {
 	DecisionTaskCompletedEventId int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *ContinueAsNewWorkflowExecutionFailedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContinueAsNewWorkflowExecutionFailedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContinueAsNewWorkflowExecutionFailedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != "" {
+		s.WriteString(schemas.ContinueAsNewWorkflowExecutionFailedEventAttributes_cause, string(v.Cause))
+	}
+	s.WriteInt64(schemas.ContinueAsNewWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+}
+func (v *ContinueAsNewWorkflowExecutionFailedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContinueAsNewWorkflowExecutionFailedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContinueAsNewWorkflowExecutionFailedEventAttributes_cause:
+			var ev string
+			if err := d.ReadString(schemas.ContinueAsNewWorkflowExecutionFailedEventAttributes_cause, &ev); err != nil {
+				return err
+			}
+			v.Cause = ContinueAsNewWorkflowExecutionFailedCause(ev)
+			return nil
+		case schemas.ContinueAsNewWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.ContinueAsNewWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		}
+		return nil
+	})
 }
 
 // Specifies a decision made by the decider. A decision can be one of these types:
@@ -1070,6 +2018,136 @@ type Decision struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Decision) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Decision)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Decision) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CancelTimerDecisionAttributes != nil {
+		s.WriteStruct(schemas.Decision_cancelTimerDecisionAttributes)
+		v.CancelTimerDecisionAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CancelWorkflowExecutionDecisionAttributes != nil {
+		s.WriteStruct(schemas.Decision_cancelWorkflowExecutionDecisionAttributes)
+		v.CancelWorkflowExecutionDecisionAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CompleteWorkflowExecutionDecisionAttributes != nil {
+		s.WriteStruct(schemas.Decision_completeWorkflowExecutionDecisionAttributes)
+		v.CompleteWorkflowExecutionDecisionAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContinueAsNewWorkflowExecutionDecisionAttributes != nil {
+		s.WriteStruct(schemas.Decision_continueAsNewWorkflowExecutionDecisionAttributes)
+		v.ContinueAsNewWorkflowExecutionDecisionAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DecisionType != "" {
+		s.WriteString(schemas.Decision_decisionType, string(v.DecisionType))
+	}
+	if v.FailWorkflowExecutionDecisionAttributes != nil {
+		s.WriteStruct(schemas.Decision_failWorkflowExecutionDecisionAttributes)
+		v.FailWorkflowExecutionDecisionAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RecordMarkerDecisionAttributes != nil {
+		s.WriteStruct(schemas.Decision_recordMarkerDecisionAttributes)
+		v.RecordMarkerDecisionAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestCancelActivityTaskDecisionAttributes != nil {
+		s.WriteStruct(schemas.Decision_requestCancelActivityTaskDecisionAttributes)
+		v.RequestCancelActivityTaskDecisionAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestCancelExternalWorkflowExecutionDecisionAttributes != nil {
+		s.WriteStruct(schemas.Decision_requestCancelExternalWorkflowExecutionDecisionAttributes)
+		v.RequestCancelExternalWorkflowExecutionDecisionAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScheduleActivityTaskDecisionAttributes != nil {
+		s.WriteStruct(schemas.Decision_scheduleActivityTaskDecisionAttributes)
+		v.ScheduleActivityTaskDecisionAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScheduleLambdaFunctionDecisionAttributes != nil {
+		s.WriteStruct(schemas.Decision_scheduleLambdaFunctionDecisionAttributes)
+		v.ScheduleLambdaFunctionDecisionAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SignalExternalWorkflowExecutionDecisionAttributes != nil {
+		s.WriteStruct(schemas.Decision_signalExternalWorkflowExecutionDecisionAttributes)
+		v.SignalExternalWorkflowExecutionDecisionAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartChildWorkflowExecutionDecisionAttributes != nil {
+		s.WriteStruct(schemas.Decision_startChildWorkflowExecutionDecisionAttributes)
+		v.StartChildWorkflowExecutionDecisionAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTimerDecisionAttributes != nil {
+		s.WriteStruct(schemas.Decision_startTimerDecisionAttributes)
+		v.StartTimerDecisionAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Decision) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Decision, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Decision_cancelTimerDecisionAttributes:
+			v.CancelTimerDecisionAttributes = &CancelTimerDecisionAttributes{}
+			return v.CancelTimerDecisionAttributes.Deserialize(d)
+		case schemas.Decision_cancelWorkflowExecutionDecisionAttributes:
+			v.CancelWorkflowExecutionDecisionAttributes = &CancelWorkflowExecutionDecisionAttributes{}
+			return v.CancelWorkflowExecutionDecisionAttributes.Deserialize(d)
+		case schemas.Decision_completeWorkflowExecutionDecisionAttributes:
+			v.CompleteWorkflowExecutionDecisionAttributes = &CompleteWorkflowExecutionDecisionAttributes{}
+			return v.CompleteWorkflowExecutionDecisionAttributes.Deserialize(d)
+		case schemas.Decision_continueAsNewWorkflowExecutionDecisionAttributes:
+			v.ContinueAsNewWorkflowExecutionDecisionAttributes = &ContinueAsNewWorkflowExecutionDecisionAttributes{}
+			return v.ContinueAsNewWorkflowExecutionDecisionAttributes.Deserialize(d)
+		case schemas.Decision_decisionType:
+			var ev string
+			if err := d.ReadString(schemas.Decision_decisionType, &ev); err != nil {
+				return err
+			}
+			v.DecisionType = DecisionType(ev)
+			return nil
+		case schemas.Decision_failWorkflowExecutionDecisionAttributes:
+			v.FailWorkflowExecutionDecisionAttributes = &FailWorkflowExecutionDecisionAttributes{}
+			return v.FailWorkflowExecutionDecisionAttributes.Deserialize(d)
+		case schemas.Decision_recordMarkerDecisionAttributes:
+			v.RecordMarkerDecisionAttributes = &RecordMarkerDecisionAttributes{}
+			return v.RecordMarkerDecisionAttributes.Deserialize(d)
+		case schemas.Decision_requestCancelActivityTaskDecisionAttributes:
+			v.RequestCancelActivityTaskDecisionAttributes = &RequestCancelActivityTaskDecisionAttributes{}
+			return v.RequestCancelActivityTaskDecisionAttributes.Deserialize(d)
+		case schemas.Decision_requestCancelExternalWorkflowExecutionDecisionAttributes:
+			v.RequestCancelExternalWorkflowExecutionDecisionAttributes = &RequestCancelExternalWorkflowExecutionDecisionAttributes{}
+			return v.RequestCancelExternalWorkflowExecutionDecisionAttributes.Deserialize(d)
+		case schemas.Decision_scheduleActivityTaskDecisionAttributes:
+			v.ScheduleActivityTaskDecisionAttributes = &ScheduleActivityTaskDecisionAttributes{}
+			return v.ScheduleActivityTaskDecisionAttributes.Deserialize(d)
+		case schemas.Decision_scheduleLambdaFunctionDecisionAttributes:
+			v.ScheduleLambdaFunctionDecisionAttributes = &ScheduleLambdaFunctionDecisionAttributes{}
+			return v.ScheduleLambdaFunctionDecisionAttributes.Deserialize(d)
+		case schemas.Decision_signalExternalWorkflowExecutionDecisionAttributes:
+			v.SignalExternalWorkflowExecutionDecisionAttributes = &SignalExternalWorkflowExecutionDecisionAttributes{}
+			return v.SignalExternalWorkflowExecutionDecisionAttributes.Deserialize(d)
+		case schemas.Decision_startChildWorkflowExecutionDecisionAttributes:
+			v.StartChildWorkflowExecutionDecisionAttributes = &StartChildWorkflowExecutionDecisionAttributes{}
+			return v.StartChildWorkflowExecutionDecisionAttributes.Deserialize(d)
+		case schemas.Decision_startTimerDecisionAttributes:
+			v.StartTimerDecisionAttributes = &StartTimerDecisionAttributes{}
+			return v.StartTimerDecisionAttributes.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the DecisionTaskCompleted event.
 type DecisionTaskCompletedEventAttributes struct {
 
@@ -1098,6 +2176,48 @@ type DecisionTaskCompletedEventAttributes struct {
 	TaskListScheduleToStartTimeout *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DecisionTaskCompletedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DecisionTaskCompletedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DecisionTaskCompletedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionContext != nil {
+		s.WriteString(schemas.DecisionTaskCompletedEventAttributes_executionContext, *v.ExecutionContext)
+	}
+	s.WriteInt64(schemas.DecisionTaskCompletedEventAttributes_scheduledEventId, v.ScheduledEventId)
+	s.WriteInt64(schemas.DecisionTaskCompletedEventAttributes_startedEventId, v.StartedEventId)
+	if v.TaskList != nil {
+		s.WriteStruct(schemas.DecisionTaskCompletedEventAttributes_taskList)
+		v.TaskList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskListScheduleToStartTimeout != nil {
+		s.WriteString(schemas.DecisionTaskCompletedEventAttributes_taskListScheduleToStartTimeout, *v.TaskListScheduleToStartTimeout)
+	}
+}
+func (v *DecisionTaskCompletedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DecisionTaskCompletedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DecisionTaskCompletedEventAttributes_executionContext:
+			v.ExecutionContext = new(string)
+			return d.ReadString(schemas.DecisionTaskCompletedEventAttributes_executionContext, v.ExecutionContext)
+		case schemas.DecisionTaskCompletedEventAttributes_scheduledEventId:
+			return d.ReadInt64(schemas.DecisionTaskCompletedEventAttributes_scheduledEventId, &v.ScheduledEventId)
+		case schemas.DecisionTaskCompletedEventAttributes_startedEventId:
+			return d.ReadInt64(schemas.DecisionTaskCompletedEventAttributes_startedEventId, &v.StartedEventId)
+		case schemas.DecisionTaskCompletedEventAttributes_taskList:
+			v.TaskList = &TaskList{}
+			return v.TaskList.Deserialize(d)
+		case schemas.DecisionTaskCompletedEventAttributes_taskListScheduleToStartTimeout:
+			v.TaskListScheduleToStartTimeout = new(string)
+			return d.ReadString(schemas.DecisionTaskCompletedEventAttributes_taskListScheduleToStartTimeout, v.TaskListScheduleToStartTimeout)
+		}
+		return nil
+	})
 }
 
 // Provides details about the DecisionTaskScheduled event.
@@ -1133,6 +2253,48 @@ type DecisionTaskScheduledEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DecisionTaskScheduledEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DecisionTaskScheduledEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DecisionTaskScheduledEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScheduleToStartTimeout != nil {
+		s.WriteString(schemas.DecisionTaskScheduledEventAttributes_scheduleToStartTimeout, *v.ScheduleToStartTimeout)
+	}
+	if v.StartToCloseTimeout != nil {
+		s.WriteString(schemas.DecisionTaskScheduledEventAttributes_startToCloseTimeout, *v.StartToCloseTimeout)
+	}
+	if v.TaskList != nil {
+		s.WriteStruct(schemas.DecisionTaskScheduledEventAttributes_taskList)
+		v.TaskList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskPriority != nil {
+		s.WriteString(schemas.DecisionTaskScheduledEventAttributes_taskPriority, *v.TaskPriority)
+	}
+}
+func (v *DecisionTaskScheduledEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DecisionTaskScheduledEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DecisionTaskScheduledEventAttributes_scheduleToStartTimeout:
+			v.ScheduleToStartTimeout = new(string)
+			return d.ReadString(schemas.DecisionTaskScheduledEventAttributes_scheduleToStartTimeout, v.ScheduleToStartTimeout)
+		case schemas.DecisionTaskScheduledEventAttributes_startToCloseTimeout:
+			v.StartToCloseTimeout = new(string)
+			return d.ReadString(schemas.DecisionTaskScheduledEventAttributes_startToCloseTimeout, v.StartToCloseTimeout)
+		case schemas.DecisionTaskScheduledEventAttributes_taskList:
+			v.TaskList = &TaskList{}
+			return v.TaskList.Deserialize(d)
+		case schemas.DecisionTaskScheduledEventAttributes_taskPriority:
+			v.TaskPriority = new(string)
+			return d.ReadString(schemas.DecisionTaskScheduledEventAttributes_taskPriority, v.TaskPriority)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the DecisionTaskStarted event.
 type DecisionTaskStartedEventAttributes struct {
 
@@ -1148,6 +2310,31 @@ type DecisionTaskStartedEventAttributes struct {
 	Identity *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DecisionTaskStartedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DecisionTaskStartedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DecisionTaskStartedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identity != nil {
+		s.WriteString(schemas.DecisionTaskStartedEventAttributes_identity, *v.Identity)
+	}
+	s.WriteInt64(schemas.DecisionTaskStartedEventAttributes_scheduledEventId, v.ScheduledEventId)
+}
+func (v *DecisionTaskStartedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DecisionTaskStartedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DecisionTaskStartedEventAttributes_identity:
+			v.Identity = new(string)
+			return d.ReadString(schemas.DecisionTaskStartedEventAttributes_identity, v.Identity)
+		case schemas.DecisionTaskStartedEventAttributes_scheduledEventId:
+			return d.ReadInt64(schemas.DecisionTaskStartedEventAttributes_scheduledEventId, &v.ScheduledEventId)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the DecisionTaskTimedOut event.
@@ -1175,6 +2362,38 @@ type DecisionTaskTimedOutEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DecisionTaskTimedOutEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DecisionTaskTimedOutEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DecisionTaskTimedOutEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.DecisionTaskTimedOutEventAttributes_scheduledEventId, v.ScheduledEventId)
+	s.WriteInt64(schemas.DecisionTaskTimedOutEventAttributes_startedEventId, v.StartedEventId)
+	if v.TimeoutType != "" {
+		s.WriteString(schemas.DecisionTaskTimedOutEventAttributes_timeoutType, string(v.TimeoutType))
+	}
+}
+func (v *DecisionTaskTimedOutEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DecisionTaskTimedOutEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DecisionTaskTimedOutEventAttributes_scheduledEventId:
+			return d.ReadInt64(schemas.DecisionTaskTimedOutEventAttributes_scheduledEventId, &v.ScheduledEventId)
+		case schemas.DecisionTaskTimedOutEventAttributes_startedEventId:
+			return d.ReadInt64(schemas.DecisionTaskTimedOutEventAttributes_startedEventId, &v.StartedEventId)
+		case schemas.DecisionTaskTimedOutEventAttributes_timeoutType:
+			var ev string
+			if err := d.ReadString(schemas.DecisionTaskTimedOutEventAttributes_timeoutType, &ev); err != nil {
+				return err
+			}
+			v.TimeoutType = DecisionTaskTimeoutType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains the configuration settings of a domain.
 type DomainConfiguration struct {
 
@@ -1184,6 +2403,28 @@ type DomainConfiguration struct {
 	WorkflowExecutionRetentionPeriodInDays *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DomainConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkflowExecutionRetentionPeriodInDays != nil {
+		s.WriteString(schemas.DomainConfiguration_workflowExecutionRetentionPeriodInDays, *v.WorkflowExecutionRetentionPeriodInDays)
+	}
+}
+func (v *DomainConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainConfiguration_workflowExecutionRetentionPeriodInDays:
+			v.WorkflowExecutionRetentionPeriodInDays = new(string)
+			return d.ReadString(schemas.DomainConfiguration_workflowExecutionRetentionPeriodInDays, v.WorkflowExecutionRetentionPeriodInDays)
+		}
+		return nil
+	})
 }
 
 // Contains general information about a domain.
@@ -1214,6 +2455,50 @@ type DomainInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DomainInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DomainInfo_arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DomainInfo_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DomainInfo_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DomainInfo_status, string(v.Status))
+	}
+}
+func (v *DomainInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainInfo_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DomainInfo_arn, v.Arn)
+		case schemas.DomainInfo_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DomainInfo_description, v.Description)
+		case schemas.DomainInfo_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DomainInfo_name, v.Name)
+		case schemas.DomainInfo_status:
+			var ev string
+			if err := d.ReadString(schemas.DomainInfo_status, &ev); err != nil {
+				return err
+			}
+			v.Status = RegistrationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Used to filter the workflow executions in visibility APIs by various time-based
 // rules. Each parameter, if specified, defines a rule that must be satisfied by
 // each returned query result. The parameter values are in the [Unix Time format]. For example:
@@ -1231,6 +2516,34 @@ type ExecutionTimeFilter struct {
 	LatestDate *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExecutionTimeFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutionTimeFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecutionTimeFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LatestDate != nil {
+		s.WriteTime(schemas.ExecutionTimeFilter_latestDate, *v.LatestDate)
+	}
+	if v.OldestDate != nil {
+		s.WriteTime(schemas.ExecutionTimeFilter_oldestDate, *v.OldestDate)
+	}
+}
+func (v *ExecutionTimeFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecutionTimeFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecutionTimeFilter_latestDate:
+			v.LatestDate = new(time.Time)
+			return d.ReadTime(schemas.ExecutionTimeFilter_latestDate, v.LatestDate)
+		case schemas.ExecutionTimeFilter_oldestDate:
+			v.OldestDate = new(time.Time)
+			return d.ReadTime(schemas.ExecutionTimeFilter_oldestDate, v.OldestDate)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the ExternalWorkflowExecutionCancelRequested event.
@@ -1252,6 +2565,33 @@ type ExternalWorkflowExecutionCancelRequestedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExternalWorkflowExecutionCancelRequestedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExternalWorkflowExecutionCancelRequestedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExternalWorkflowExecutionCancelRequestedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.ExternalWorkflowExecutionCancelRequestedEventAttributes_initiatedEventId, v.InitiatedEventId)
+	if v.WorkflowExecution != nil {
+		s.WriteStruct(schemas.ExternalWorkflowExecutionCancelRequestedEventAttributes_workflowExecution)
+		v.WorkflowExecution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExternalWorkflowExecutionCancelRequestedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExternalWorkflowExecutionCancelRequestedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExternalWorkflowExecutionCancelRequestedEventAttributes_initiatedEventId:
+			return d.ReadInt64(schemas.ExternalWorkflowExecutionCancelRequestedEventAttributes_initiatedEventId, &v.InitiatedEventId)
+		case schemas.ExternalWorkflowExecutionCancelRequestedEventAttributes_workflowExecution:
+			v.WorkflowExecution = &WorkflowExecution{}
+			return v.WorkflowExecution.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the ExternalWorkflowExecutionSignaled event.
 type ExternalWorkflowExecutionSignaledEventAttributes struct {
 
@@ -1269,6 +2609,33 @@ type ExternalWorkflowExecutionSignaledEventAttributes struct {
 	WorkflowExecution *WorkflowExecution
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExternalWorkflowExecutionSignaledEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExternalWorkflowExecutionSignaledEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExternalWorkflowExecutionSignaledEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.ExternalWorkflowExecutionSignaledEventAttributes_initiatedEventId, v.InitiatedEventId)
+	if v.WorkflowExecution != nil {
+		s.WriteStruct(schemas.ExternalWorkflowExecutionSignaledEventAttributes_workflowExecution)
+		v.WorkflowExecution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExternalWorkflowExecutionSignaledEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExternalWorkflowExecutionSignaledEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExternalWorkflowExecutionSignaledEventAttributes_initiatedEventId:
+			return d.ReadInt64(schemas.ExternalWorkflowExecutionSignaledEventAttributes_initiatedEventId, &v.InitiatedEventId)
+		case schemas.ExternalWorkflowExecutionSignaledEventAttributes_workflowExecution:
+			v.WorkflowExecution = &WorkflowExecution{}
+			return v.WorkflowExecution.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the FailWorkflowExecution decision.
@@ -1302,6 +2669,34 @@ type FailWorkflowExecutionDecisionAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FailWorkflowExecutionDecisionAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailWorkflowExecutionDecisionAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailWorkflowExecutionDecisionAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Details != nil {
+		s.WriteString(schemas.FailWorkflowExecutionDecisionAttributes_details, *v.Details)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.FailWorkflowExecutionDecisionAttributes_reason, *v.Reason)
+	}
+}
+func (v *FailWorkflowExecutionDecisionAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailWorkflowExecutionDecisionAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailWorkflowExecutionDecisionAttributes_details:
+			v.Details = new(string)
+			return d.ReadString(schemas.FailWorkflowExecutionDecisionAttributes_details, v.Details)
+		case schemas.FailWorkflowExecutionDecisionAttributes_reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.FailWorkflowExecutionDecisionAttributes_reason, v.Reason)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the FailWorkflowExecutionFailed event.
 type FailWorkflowExecutionFailedEventAttributes struct {
 
@@ -1326,6 +2721,35 @@ type FailWorkflowExecutionFailedEventAttributes struct {
 	DecisionTaskCompletedEventId int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *FailWorkflowExecutionFailedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailWorkflowExecutionFailedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailWorkflowExecutionFailedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != "" {
+		s.WriteString(schemas.FailWorkflowExecutionFailedEventAttributes_cause, string(v.Cause))
+	}
+	s.WriteInt64(schemas.FailWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+}
+func (v *FailWorkflowExecutionFailedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailWorkflowExecutionFailedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailWorkflowExecutionFailedEventAttributes_cause:
+			var ev string
+			if err := d.ReadString(schemas.FailWorkflowExecutionFailedEventAttributes_cause, &ev); err != nil {
+				return err
+			}
+			v.Cause = FailWorkflowExecutionFailedCause(ev)
+			return nil
+		case schemas.FailWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.FailWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		}
+		return nil
+	})
 }
 
 // Event within a workflow execution. A history event can be one of these types:
@@ -1740,6 +3164,473 @@ type HistoryEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HistoryEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HistoryEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HistoryEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityTaskCancelRequestedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_activityTaskCancelRequestedEventAttributes)
+		v.ActivityTaskCancelRequestedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ActivityTaskCanceledEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_activityTaskCanceledEventAttributes)
+		v.ActivityTaskCanceledEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ActivityTaskCompletedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_activityTaskCompletedEventAttributes)
+		v.ActivityTaskCompletedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ActivityTaskFailedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_activityTaskFailedEventAttributes)
+		v.ActivityTaskFailedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ActivityTaskScheduledEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_activityTaskScheduledEventAttributes)
+		v.ActivityTaskScheduledEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ActivityTaskStartedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_activityTaskStartedEventAttributes)
+		v.ActivityTaskStartedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ActivityTaskTimedOutEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_activityTaskTimedOutEventAttributes)
+		v.ActivityTaskTimedOutEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CancelTimerFailedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_cancelTimerFailedEventAttributes)
+		v.CancelTimerFailedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CancelWorkflowExecutionFailedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_cancelWorkflowExecutionFailedEventAttributes)
+		v.CancelWorkflowExecutionFailedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChildWorkflowExecutionCanceledEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_childWorkflowExecutionCanceledEventAttributes)
+		v.ChildWorkflowExecutionCanceledEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChildWorkflowExecutionCompletedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_childWorkflowExecutionCompletedEventAttributes)
+		v.ChildWorkflowExecutionCompletedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChildWorkflowExecutionFailedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_childWorkflowExecutionFailedEventAttributes)
+		v.ChildWorkflowExecutionFailedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChildWorkflowExecutionStartedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_childWorkflowExecutionStartedEventAttributes)
+		v.ChildWorkflowExecutionStartedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChildWorkflowExecutionTerminatedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_childWorkflowExecutionTerminatedEventAttributes)
+		v.ChildWorkflowExecutionTerminatedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChildWorkflowExecutionTimedOutEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_childWorkflowExecutionTimedOutEventAttributes)
+		v.ChildWorkflowExecutionTimedOutEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CompleteWorkflowExecutionFailedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_completeWorkflowExecutionFailedEventAttributes)
+		v.CompleteWorkflowExecutionFailedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContinueAsNewWorkflowExecutionFailedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_continueAsNewWorkflowExecutionFailedEventAttributes)
+		v.ContinueAsNewWorkflowExecutionFailedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DecisionTaskCompletedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_decisionTaskCompletedEventAttributes)
+		v.DecisionTaskCompletedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DecisionTaskScheduledEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_decisionTaskScheduledEventAttributes)
+		v.DecisionTaskScheduledEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DecisionTaskStartedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_decisionTaskStartedEventAttributes)
+		v.DecisionTaskStartedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DecisionTaskTimedOutEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_decisionTaskTimedOutEventAttributes)
+		v.DecisionTaskTimedOutEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.WriteInt64(schemas.HistoryEvent_eventId, v.EventId)
+	if v.EventTimestamp != nil {
+		s.WriteTime(schemas.HistoryEvent_eventTimestamp, *v.EventTimestamp)
+	}
+	if v.EventType != "" {
+		s.WriteString(schemas.HistoryEvent_eventType, string(v.EventType))
+	}
+	if v.ExternalWorkflowExecutionCancelRequestedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_externalWorkflowExecutionCancelRequestedEventAttributes)
+		v.ExternalWorkflowExecutionCancelRequestedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExternalWorkflowExecutionSignaledEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_externalWorkflowExecutionSignaledEventAttributes)
+		v.ExternalWorkflowExecutionSignaledEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FailWorkflowExecutionFailedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_failWorkflowExecutionFailedEventAttributes)
+		v.FailWorkflowExecutionFailedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaFunctionCompletedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_lambdaFunctionCompletedEventAttributes)
+		v.LambdaFunctionCompletedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaFunctionFailedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_lambdaFunctionFailedEventAttributes)
+		v.LambdaFunctionFailedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaFunctionScheduledEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_lambdaFunctionScheduledEventAttributes)
+		v.LambdaFunctionScheduledEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaFunctionStartedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_lambdaFunctionStartedEventAttributes)
+		v.LambdaFunctionStartedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaFunctionTimedOutEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_lambdaFunctionTimedOutEventAttributes)
+		v.LambdaFunctionTimedOutEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MarkerRecordedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_markerRecordedEventAttributes)
+		v.MarkerRecordedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RecordMarkerFailedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_recordMarkerFailedEventAttributes)
+		v.RecordMarkerFailedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestCancelActivityTaskFailedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_requestCancelActivityTaskFailedEventAttributes)
+		v.RequestCancelActivityTaskFailedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestCancelExternalWorkflowExecutionFailedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_requestCancelExternalWorkflowExecutionFailedEventAttributes)
+		v.RequestCancelExternalWorkflowExecutionFailedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestCancelExternalWorkflowExecutionInitiatedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_requestCancelExternalWorkflowExecutionInitiatedEventAttributes)
+		v.RequestCancelExternalWorkflowExecutionInitiatedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScheduleActivityTaskFailedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_scheduleActivityTaskFailedEventAttributes)
+		v.ScheduleActivityTaskFailedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScheduleLambdaFunctionFailedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_scheduleLambdaFunctionFailedEventAttributes)
+		v.ScheduleLambdaFunctionFailedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SignalExternalWorkflowExecutionFailedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_signalExternalWorkflowExecutionFailedEventAttributes)
+		v.SignalExternalWorkflowExecutionFailedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SignalExternalWorkflowExecutionInitiatedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_signalExternalWorkflowExecutionInitiatedEventAttributes)
+		v.SignalExternalWorkflowExecutionInitiatedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartChildWorkflowExecutionFailedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_startChildWorkflowExecutionFailedEventAttributes)
+		v.StartChildWorkflowExecutionFailedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartChildWorkflowExecutionInitiatedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_startChildWorkflowExecutionInitiatedEventAttributes)
+		v.StartChildWorkflowExecutionInitiatedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartLambdaFunctionFailedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_startLambdaFunctionFailedEventAttributes)
+		v.StartLambdaFunctionFailedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTimerFailedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_startTimerFailedEventAttributes)
+		v.StartTimerFailedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimerCanceledEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_timerCanceledEventAttributes)
+		v.TimerCanceledEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimerFiredEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_timerFiredEventAttributes)
+		v.TimerFiredEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimerStartedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_timerStartedEventAttributes)
+		v.TimerStartedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkflowExecutionCancelRequestedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_workflowExecutionCancelRequestedEventAttributes)
+		v.WorkflowExecutionCancelRequestedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkflowExecutionCanceledEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_workflowExecutionCanceledEventAttributes)
+		v.WorkflowExecutionCanceledEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkflowExecutionCompletedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_workflowExecutionCompletedEventAttributes)
+		v.WorkflowExecutionCompletedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkflowExecutionContinuedAsNewEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_workflowExecutionContinuedAsNewEventAttributes)
+		v.WorkflowExecutionContinuedAsNewEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkflowExecutionFailedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_workflowExecutionFailedEventAttributes)
+		v.WorkflowExecutionFailedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkflowExecutionSignaledEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_workflowExecutionSignaledEventAttributes)
+		v.WorkflowExecutionSignaledEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkflowExecutionStartedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_workflowExecutionStartedEventAttributes)
+		v.WorkflowExecutionStartedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkflowExecutionTerminatedEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_workflowExecutionTerminatedEventAttributes)
+		v.WorkflowExecutionTerminatedEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkflowExecutionTimedOutEventAttributes != nil {
+		s.WriteStruct(schemas.HistoryEvent_workflowExecutionTimedOutEventAttributes)
+		v.WorkflowExecutionTimedOutEventAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *HistoryEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HistoryEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HistoryEvent_activityTaskCancelRequestedEventAttributes:
+			v.ActivityTaskCancelRequestedEventAttributes = &ActivityTaskCancelRequestedEventAttributes{}
+			return v.ActivityTaskCancelRequestedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_activityTaskCanceledEventAttributes:
+			v.ActivityTaskCanceledEventAttributes = &ActivityTaskCanceledEventAttributes{}
+			return v.ActivityTaskCanceledEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_activityTaskCompletedEventAttributes:
+			v.ActivityTaskCompletedEventAttributes = &ActivityTaskCompletedEventAttributes{}
+			return v.ActivityTaskCompletedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_activityTaskFailedEventAttributes:
+			v.ActivityTaskFailedEventAttributes = &ActivityTaskFailedEventAttributes{}
+			return v.ActivityTaskFailedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_activityTaskScheduledEventAttributes:
+			v.ActivityTaskScheduledEventAttributes = &ActivityTaskScheduledEventAttributes{}
+			return v.ActivityTaskScheduledEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_activityTaskStartedEventAttributes:
+			v.ActivityTaskStartedEventAttributes = &ActivityTaskStartedEventAttributes{}
+			return v.ActivityTaskStartedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_activityTaskTimedOutEventAttributes:
+			v.ActivityTaskTimedOutEventAttributes = &ActivityTaskTimedOutEventAttributes{}
+			return v.ActivityTaskTimedOutEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_cancelTimerFailedEventAttributes:
+			v.CancelTimerFailedEventAttributes = &CancelTimerFailedEventAttributes{}
+			return v.CancelTimerFailedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_cancelWorkflowExecutionFailedEventAttributes:
+			v.CancelWorkflowExecutionFailedEventAttributes = &CancelWorkflowExecutionFailedEventAttributes{}
+			return v.CancelWorkflowExecutionFailedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_childWorkflowExecutionCanceledEventAttributes:
+			v.ChildWorkflowExecutionCanceledEventAttributes = &ChildWorkflowExecutionCanceledEventAttributes{}
+			return v.ChildWorkflowExecutionCanceledEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_childWorkflowExecutionCompletedEventAttributes:
+			v.ChildWorkflowExecutionCompletedEventAttributes = &ChildWorkflowExecutionCompletedEventAttributes{}
+			return v.ChildWorkflowExecutionCompletedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_childWorkflowExecutionFailedEventAttributes:
+			v.ChildWorkflowExecutionFailedEventAttributes = &ChildWorkflowExecutionFailedEventAttributes{}
+			return v.ChildWorkflowExecutionFailedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_childWorkflowExecutionStartedEventAttributes:
+			v.ChildWorkflowExecutionStartedEventAttributes = &ChildWorkflowExecutionStartedEventAttributes{}
+			return v.ChildWorkflowExecutionStartedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_childWorkflowExecutionTerminatedEventAttributes:
+			v.ChildWorkflowExecutionTerminatedEventAttributes = &ChildWorkflowExecutionTerminatedEventAttributes{}
+			return v.ChildWorkflowExecutionTerminatedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_childWorkflowExecutionTimedOutEventAttributes:
+			v.ChildWorkflowExecutionTimedOutEventAttributes = &ChildWorkflowExecutionTimedOutEventAttributes{}
+			return v.ChildWorkflowExecutionTimedOutEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_completeWorkflowExecutionFailedEventAttributes:
+			v.CompleteWorkflowExecutionFailedEventAttributes = &CompleteWorkflowExecutionFailedEventAttributes{}
+			return v.CompleteWorkflowExecutionFailedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_continueAsNewWorkflowExecutionFailedEventAttributes:
+			v.ContinueAsNewWorkflowExecutionFailedEventAttributes = &ContinueAsNewWorkflowExecutionFailedEventAttributes{}
+			return v.ContinueAsNewWorkflowExecutionFailedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_decisionTaskCompletedEventAttributes:
+			v.DecisionTaskCompletedEventAttributes = &DecisionTaskCompletedEventAttributes{}
+			return v.DecisionTaskCompletedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_decisionTaskScheduledEventAttributes:
+			v.DecisionTaskScheduledEventAttributes = &DecisionTaskScheduledEventAttributes{}
+			return v.DecisionTaskScheduledEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_decisionTaskStartedEventAttributes:
+			v.DecisionTaskStartedEventAttributes = &DecisionTaskStartedEventAttributes{}
+			return v.DecisionTaskStartedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_decisionTaskTimedOutEventAttributes:
+			v.DecisionTaskTimedOutEventAttributes = &DecisionTaskTimedOutEventAttributes{}
+			return v.DecisionTaskTimedOutEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_eventId:
+			return d.ReadInt64(schemas.HistoryEvent_eventId, &v.EventId)
+		case schemas.HistoryEvent_eventTimestamp:
+			v.EventTimestamp = new(time.Time)
+			return d.ReadTime(schemas.HistoryEvent_eventTimestamp, v.EventTimestamp)
+		case schemas.HistoryEvent_eventType:
+			var ev string
+			if err := d.ReadString(schemas.HistoryEvent_eventType, &ev); err != nil {
+				return err
+			}
+			v.EventType = EventType(ev)
+			return nil
+		case schemas.HistoryEvent_externalWorkflowExecutionCancelRequestedEventAttributes:
+			v.ExternalWorkflowExecutionCancelRequestedEventAttributes = &ExternalWorkflowExecutionCancelRequestedEventAttributes{}
+			return v.ExternalWorkflowExecutionCancelRequestedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_externalWorkflowExecutionSignaledEventAttributes:
+			v.ExternalWorkflowExecutionSignaledEventAttributes = &ExternalWorkflowExecutionSignaledEventAttributes{}
+			return v.ExternalWorkflowExecutionSignaledEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_failWorkflowExecutionFailedEventAttributes:
+			v.FailWorkflowExecutionFailedEventAttributes = &FailWorkflowExecutionFailedEventAttributes{}
+			return v.FailWorkflowExecutionFailedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_lambdaFunctionCompletedEventAttributes:
+			v.LambdaFunctionCompletedEventAttributes = &LambdaFunctionCompletedEventAttributes{}
+			return v.LambdaFunctionCompletedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_lambdaFunctionFailedEventAttributes:
+			v.LambdaFunctionFailedEventAttributes = &LambdaFunctionFailedEventAttributes{}
+			return v.LambdaFunctionFailedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_lambdaFunctionScheduledEventAttributes:
+			v.LambdaFunctionScheduledEventAttributes = &LambdaFunctionScheduledEventAttributes{}
+			return v.LambdaFunctionScheduledEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_lambdaFunctionStartedEventAttributes:
+			v.LambdaFunctionStartedEventAttributes = &LambdaFunctionStartedEventAttributes{}
+			return v.LambdaFunctionStartedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_lambdaFunctionTimedOutEventAttributes:
+			v.LambdaFunctionTimedOutEventAttributes = &LambdaFunctionTimedOutEventAttributes{}
+			return v.LambdaFunctionTimedOutEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_markerRecordedEventAttributes:
+			v.MarkerRecordedEventAttributes = &MarkerRecordedEventAttributes{}
+			return v.MarkerRecordedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_recordMarkerFailedEventAttributes:
+			v.RecordMarkerFailedEventAttributes = &RecordMarkerFailedEventAttributes{}
+			return v.RecordMarkerFailedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_requestCancelActivityTaskFailedEventAttributes:
+			v.RequestCancelActivityTaskFailedEventAttributes = &RequestCancelActivityTaskFailedEventAttributes{}
+			return v.RequestCancelActivityTaskFailedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_requestCancelExternalWorkflowExecutionFailedEventAttributes:
+			v.RequestCancelExternalWorkflowExecutionFailedEventAttributes = &RequestCancelExternalWorkflowExecutionFailedEventAttributes{}
+			return v.RequestCancelExternalWorkflowExecutionFailedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_requestCancelExternalWorkflowExecutionInitiatedEventAttributes:
+			v.RequestCancelExternalWorkflowExecutionInitiatedEventAttributes = &RequestCancelExternalWorkflowExecutionInitiatedEventAttributes{}
+			return v.RequestCancelExternalWorkflowExecutionInitiatedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_scheduleActivityTaskFailedEventAttributes:
+			v.ScheduleActivityTaskFailedEventAttributes = &ScheduleActivityTaskFailedEventAttributes{}
+			return v.ScheduleActivityTaskFailedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_scheduleLambdaFunctionFailedEventAttributes:
+			v.ScheduleLambdaFunctionFailedEventAttributes = &ScheduleLambdaFunctionFailedEventAttributes{}
+			return v.ScheduleLambdaFunctionFailedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_signalExternalWorkflowExecutionFailedEventAttributes:
+			v.SignalExternalWorkflowExecutionFailedEventAttributes = &SignalExternalWorkflowExecutionFailedEventAttributes{}
+			return v.SignalExternalWorkflowExecutionFailedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_signalExternalWorkflowExecutionInitiatedEventAttributes:
+			v.SignalExternalWorkflowExecutionInitiatedEventAttributes = &SignalExternalWorkflowExecutionInitiatedEventAttributes{}
+			return v.SignalExternalWorkflowExecutionInitiatedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_startChildWorkflowExecutionFailedEventAttributes:
+			v.StartChildWorkflowExecutionFailedEventAttributes = &StartChildWorkflowExecutionFailedEventAttributes{}
+			return v.StartChildWorkflowExecutionFailedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_startChildWorkflowExecutionInitiatedEventAttributes:
+			v.StartChildWorkflowExecutionInitiatedEventAttributes = &StartChildWorkflowExecutionInitiatedEventAttributes{}
+			return v.StartChildWorkflowExecutionInitiatedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_startLambdaFunctionFailedEventAttributes:
+			v.StartLambdaFunctionFailedEventAttributes = &StartLambdaFunctionFailedEventAttributes{}
+			return v.StartLambdaFunctionFailedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_startTimerFailedEventAttributes:
+			v.StartTimerFailedEventAttributes = &StartTimerFailedEventAttributes{}
+			return v.StartTimerFailedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_timerCanceledEventAttributes:
+			v.TimerCanceledEventAttributes = &TimerCanceledEventAttributes{}
+			return v.TimerCanceledEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_timerFiredEventAttributes:
+			v.TimerFiredEventAttributes = &TimerFiredEventAttributes{}
+			return v.TimerFiredEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_timerStartedEventAttributes:
+			v.TimerStartedEventAttributes = &TimerStartedEventAttributes{}
+			return v.TimerStartedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_workflowExecutionCancelRequestedEventAttributes:
+			v.WorkflowExecutionCancelRequestedEventAttributes = &WorkflowExecutionCancelRequestedEventAttributes{}
+			return v.WorkflowExecutionCancelRequestedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_workflowExecutionCanceledEventAttributes:
+			v.WorkflowExecutionCanceledEventAttributes = &WorkflowExecutionCanceledEventAttributes{}
+			return v.WorkflowExecutionCanceledEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_workflowExecutionCompletedEventAttributes:
+			v.WorkflowExecutionCompletedEventAttributes = &WorkflowExecutionCompletedEventAttributes{}
+			return v.WorkflowExecutionCompletedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_workflowExecutionContinuedAsNewEventAttributes:
+			v.WorkflowExecutionContinuedAsNewEventAttributes = &WorkflowExecutionContinuedAsNewEventAttributes{}
+			return v.WorkflowExecutionContinuedAsNewEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_workflowExecutionFailedEventAttributes:
+			v.WorkflowExecutionFailedEventAttributes = &WorkflowExecutionFailedEventAttributes{}
+			return v.WorkflowExecutionFailedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_workflowExecutionSignaledEventAttributes:
+			v.WorkflowExecutionSignaledEventAttributes = &WorkflowExecutionSignaledEventAttributes{}
+			return v.WorkflowExecutionSignaledEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_workflowExecutionStartedEventAttributes:
+			v.WorkflowExecutionStartedEventAttributes = &WorkflowExecutionStartedEventAttributes{}
+			return v.WorkflowExecutionStartedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_workflowExecutionTerminatedEventAttributes:
+			v.WorkflowExecutionTerminatedEventAttributes = &WorkflowExecutionTerminatedEventAttributes{}
+			return v.WorkflowExecutionTerminatedEventAttributes.Deserialize(d)
+		case schemas.HistoryEvent_workflowExecutionTimedOutEventAttributes:
+			v.WorkflowExecutionTimedOutEventAttributes = &WorkflowExecutionTimedOutEventAttributes{}
+			return v.WorkflowExecutionTimedOutEventAttributes.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the LambdaFunctionCompleted event. It isn't set for
 // other event types.
 type LambdaFunctionCompletedEventAttributes struct {
@@ -1762,6 +3653,34 @@ type LambdaFunctionCompletedEventAttributes struct {
 	Result *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LambdaFunctionCompletedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaFunctionCompletedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaFunctionCompletedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Result != nil {
+		s.WriteString(schemas.LambdaFunctionCompletedEventAttributes_result, *v.Result)
+	}
+	s.WriteInt64(schemas.LambdaFunctionCompletedEventAttributes_scheduledEventId, v.ScheduledEventId)
+	s.WriteInt64(schemas.LambdaFunctionCompletedEventAttributes_startedEventId, v.StartedEventId)
+}
+func (v *LambdaFunctionCompletedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaFunctionCompletedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaFunctionCompletedEventAttributes_result:
+			v.Result = new(string)
+			return d.ReadString(schemas.LambdaFunctionCompletedEventAttributes_result, v.Result)
+		case schemas.LambdaFunctionCompletedEventAttributes_scheduledEventId:
+			return d.ReadInt64(schemas.LambdaFunctionCompletedEventAttributes_scheduledEventId, &v.ScheduledEventId)
+		case schemas.LambdaFunctionCompletedEventAttributes_startedEventId:
+			return d.ReadInt64(schemas.LambdaFunctionCompletedEventAttributes_startedEventId, &v.StartedEventId)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the LambdaFunctionFailed event. It isn't set for other
@@ -1789,6 +3708,40 @@ type LambdaFunctionFailedEventAttributes struct {
 	Reason *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LambdaFunctionFailedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaFunctionFailedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaFunctionFailedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Details != nil {
+		s.WriteString(schemas.LambdaFunctionFailedEventAttributes_details, *v.Details)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.LambdaFunctionFailedEventAttributes_reason, *v.Reason)
+	}
+	s.WriteInt64(schemas.LambdaFunctionFailedEventAttributes_scheduledEventId, v.ScheduledEventId)
+	s.WriteInt64(schemas.LambdaFunctionFailedEventAttributes_startedEventId, v.StartedEventId)
+}
+func (v *LambdaFunctionFailedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaFunctionFailedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaFunctionFailedEventAttributes_details:
+			v.Details = new(string)
+			return d.ReadString(schemas.LambdaFunctionFailedEventAttributes_details, v.Details)
+		case schemas.LambdaFunctionFailedEventAttributes_reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.LambdaFunctionFailedEventAttributes_reason, v.Reason)
+		case schemas.LambdaFunctionFailedEventAttributes_scheduledEventId:
+			return d.ReadInt64(schemas.LambdaFunctionFailedEventAttributes_scheduledEventId, &v.ScheduledEventId)
+		case schemas.LambdaFunctionFailedEventAttributes_startedEventId:
+			return d.ReadInt64(schemas.LambdaFunctionFailedEventAttributes_startedEventId, &v.StartedEventId)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the LambdaFunctionScheduled event. It isn't set for
@@ -1825,6 +3778,55 @@ type LambdaFunctionScheduledEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LambdaFunctionScheduledEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaFunctionScheduledEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaFunctionScheduledEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Control != nil {
+		s.WriteString(schemas.LambdaFunctionScheduledEventAttributes_control, *v.Control)
+	}
+	s.WriteInt64(schemas.LambdaFunctionScheduledEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+	if v.Id != nil {
+		s.WriteString(schemas.LambdaFunctionScheduledEventAttributes_id, *v.Id)
+	}
+	if v.Input != nil {
+		s.WriteString(schemas.LambdaFunctionScheduledEventAttributes_input, *v.Input)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.LambdaFunctionScheduledEventAttributes_name, *v.Name)
+	}
+	if v.StartToCloseTimeout != nil {
+		s.WriteString(schemas.LambdaFunctionScheduledEventAttributes_startToCloseTimeout, *v.StartToCloseTimeout)
+	}
+}
+func (v *LambdaFunctionScheduledEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaFunctionScheduledEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaFunctionScheduledEventAttributes_control:
+			v.Control = new(string)
+			return d.ReadString(schemas.LambdaFunctionScheduledEventAttributes_control, v.Control)
+		case schemas.LambdaFunctionScheduledEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.LambdaFunctionScheduledEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		case schemas.LambdaFunctionScheduledEventAttributes_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.LambdaFunctionScheduledEventAttributes_id, v.Id)
+		case schemas.LambdaFunctionScheduledEventAttributes_input:
+			v.Input = new(string)
+			return d.ReadString(schemas.LambdaFunctionScheduledEventAttributes_input, v.Input)
+		case schemas.LambdaFunctionScheduledEventAttributes_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.LambdaFunctionScheduledEventAttributes_name, v.Name)
+		case schemas.LambdaFunctionScheduledEventAttributes_startToCloseTimeout:
+			v.StartToCloseTimeout = new(string)
+			return d.ReadString(schemas.LambdaFunctionScheduledEventAttributes_startToCloseTimeout, v.StartToCloseTimeout)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the LambdaFunctionStarted event. It isn't set for other
 // event types.
 type LambdaFunctionStartedEventAttributes struct {
@@ -1837,6 +3839,25 @@ type LambdaFunctionStartedEventAttributes struct {
 	ScheduledEventId int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *LambdaFunctionStartedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaFunctionStartedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaFunctionStartedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.LambdaFunctionStartedEventAttributes_scheduledEventId, v.ScheduledEventId)
+}
+func (v *LambdaFunctionStartedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaFunctionStartedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaFunctionStartedEventAttributes_scheduledEventId:
+			return d.ReadInt64(schemas.LambdaFunctionStartedEventAttributes_scheduledEventId, &v.ScheduledEventId)
+		}
+		return nil
+	})
 }
 
 // Provides details of the LambdaFunctionTimedOut event.
@@ -1862,6 +3883,38 @@ type LambdaFunctionTimedOutEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LambdaFunctionTimedOutEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaFunctionTimedOutEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaFunctionTimedOutEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.LambdaFunctionTimedOutEventAttributes_scheduledEventId, v.ScheduledEventId)
+	s.WriteInt64(schemas.LambdaFunctionTimedOutEventAttributes_startedEventId, v.StartedEventId)
+	if v.TimeoutType != "" {
+		s.WriteString(schemas.LambdaFunctionTimedOutEventAttributes_timeoutType, string(v.TimeoutType))
+	}
+}
+func (v *LambdaFunctionTimedOutEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaFunctionTimedOutEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaFunctionTimedOutEventAttributes_scheduledEventId:
+			return d.ReadInt64(schemas.LambdaFunctionTimedOutEventAttributes_scheduledEventId, &v.ScheduledEventId)
+		case schemas.LambdaFunctionTimedOutEventAttributes_startedEventId:
+			return d.ReadInt64(schemas.LambdaFunctionTimedOutEventAttributes_startedEventId, &v.StartedEventId)
+		case schemas.LambdaFunctionTimedOutEventAttributes_timeoutType:
+			var ev string
+			if err := d.ReadString(schemas.LambdaFunctionTimedOutEventAttributes_timeoutType, &ev); err != nil {
+				return err
+			}
+			v.TimeoutType = LambdaFunctionTimeoutType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Provides the details of the MarkerRecorded event.
 type MarkerRecordedEventAttributes struct {
 
@@ -1882,6 +3935,37 @@ type MarkerRecordedEventAttributes struct {
 	Details *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MarkerRecordedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MarkerRecordedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MarkerRecordedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.MarkerRecordedEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+	if v.Details != nil {
+		s.WriteString(schemas.MarkerRecordedEventAttributes_details, *v.Details)
+	}
+	if v.MarkerName != nil {
+		s.WriteString(schemas.MarkerRecordedEventAttributes_markerName, *v.MarkerName)
+	}
+}
+func (v *MarkerRecordedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MarkerRecordedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MarkerRecordedEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.MarkerRecordedEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		case schemas.MarkerRecordedEventAttributes_details:
+			v.Details = new(string)
+			return d.ReadString(schemas.MarkerRecordedEventAttributes_details, v.Details)
+		case schemas.MarkerRecordedEventAttributes_markerName:
+			v.MarkerName = new(string)
+			return d.ReadString(schemas.MarkerRecordedEventAttributes_markerName, v.MarkerName)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the RecordMarker decision.
@@ -1917,6 +4001,34 @@ type RecordMarkerDecisionAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecordMarkerDecisionAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecordMarkerDecisionAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecordMarkerDecisionAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Details != nil {
+		s.WriteString(schemas.RecordMarkerDecisionAttributes_details, *v.Details)
+	}
+	if v.MarkerName != nil {
+		s.WriteString(schemas.RecordMarkerDecisionAttributes_markerName, *v.MarkerName)
+	}
+}
+func (v *RecordMarkerDecisionAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecordMarkerDecisionAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecordMarkerDecisionAttributes_details:
+			v.Details = new(string)
+			return d.ReadString(schemas.RecordMarkerDecisionAttributes_details, v.Details)
+		case schemas.RecordMarkerDecisionAttributes_markerName:
+			v.MarkerName = new(string)
+			return d.ReadString(schemas.RecordMarkerDecisionAttributes_markerName, v.MarkerName)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the RecordMarkerFailed event.
 type RecordMarkerFailedEventAttributes struct {
 
@@ -1946,6 +4058,41 @@ type RecordMarkerFailedEventAttributes struct {
 	MarkerName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RecordMarkerFailedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecordMarkerFailedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecordMarkerFailedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != "" {
+		s.WriteString(schemas.RecordMarkerFailedEventAttributes_cause, string(v.Cause))
+	}
+	s.WriteInt64(schemas.RecordMarkerFailedEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+	if v.MarkerName != nil {
+		s.WriteString(schemas.RecordMarkerFailedEventAttributes_markerName, *v.MarkerName)
+	}
+}
+func (v *RecordMarkerFailedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecordMarkerFailedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecordMarkerFailedEventAttributes_cause:
+			var ev string
+			if err := d.ReadString(schemas.RecordMarkerFailedEventAttributes_cause, &ev); err != nil {
+				return err
+			}
+			v.Cause = RecordMarkerFailedCause(ev)
+			return nil
+		case schemas.RecordMarkerFailedEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.RecordMarkerFailedEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		case schemas.RecordMarkerFailedEventAttributes_markerName:
+			v.MarkerName = new(string)
+			return d.ReadString(schemas.RecordMarkerFailedEventAttributes_markerName, v.MarkerName)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the RequestCancelActivityTask decision.
@@ -1978,6 +4125,28 @@ type RequestCancelActivityTaskDecisionAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RequestCancelActivityTaskDecisionAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestCancelActivityTaskDecisionAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestCancelActivityTaskDecisionAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityId != nil {
+		s.WriteString(schemas.RequestCancelActivityTaskDecisionAttributes_activityId, *v.ActivityId)
+	}
+}
+func (v *RequestCancelActivityTaskDecisionAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestCancelActivityTaskDecisionAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestCancelActivityTaskDecisionAttributes_activityId:
+			v.ActivityId = new(string)
+			return d.ReadString(schemas.RequestCancelActivityTaskDecisionAttributes_activityId, v.ActivityId)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the RequestCancelActivityTaskFailed event.
 type RequestCancelActivityTaskFailedEventAttributes struct {
 
@@ -2007,6 +4176,41 @@ type RequestCancelActivityTaskFailedEventAttributes struct {
 	DecisionTaskCompletedEventId int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *RequestCancelActivityTaskFailedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestCancelActivityTaskFailedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestCancelActivityTaskFailedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityId != nil {
+		s.WriteString(schemas.RequestCancelActivityTaskFailedEventAttributes_activityId, *v.ActivityId)
+	}
+	if v.Cause != "" {
+		s.WriteString(schemas.RequestCancelActivityTaskFailedEventAttributes_cause, string(v.Cause))
+	}
+	s.WriteInt64(schemas.RequestCancelActivityTaskFailedEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+}
+func (v *RequestCancelActivityTaskFailedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestCancelActivityTaskFailedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestCancelActivityTaskFailedEventAttributes_activityId:
+			v.ActivityId = new(string)
+			return d.ReadString(schemas.RequestCancelActivityTaskFailedEventAttributes_activityId, v.ActivityId)
+		case schemas.RequestCancelActivityTaskFailedEventAttributes_cause:
+			var ev string
+			if err := d.ReadString(schemas.RequestCancelActivityTaskFailedEventAttributes_cause, &ev); err != nil {
+				return err
+			}
+			v.Cause = RequestCancelActivityTaskFailedCause(ev)
+			return nil
+		case schemas.RequestCancelActivityTaskFailedEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.RequestCancelActivityTaskFailedEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the RequestCancelExternalWorkflowExecution decision.
@@ -2044,6 +4248,40 @@ type RequestCancelExternalWorkflowExecutionDecisionAttributes struct {
 	RunId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RequestCancelExternalWorkflowExecutionDecisionAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestCancelExternalWorkflowExecutionDecisionAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestCancelExternalWorkflowExecutionDecisionAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Control != nil {
+		s.WriteString(schemas.RequestCancelExternalWorkflowExecutionDecisionAttributes_control, *v.Control)
+	}
+	if v.RunId != nil {
+		s.WriteString(schemas.RequestCancelExternalWorkflowExecutionDecisionAttributes_runId, *v.RunId)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.RequestCancelExternalWorkflowExecutionDecisionAttributes_workflowId, *v.WorkflowId)
+	}
+}
+func (v *RequestCancelExternalWorkflowExecutionDecisionAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestCancelExternalWorkflowExecutionDecisionAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestCancelExternalWorkflowExecutionDecisionAttributes_control:
+			v.Control = new(string)
+			return d.ReadString(schemas.RequestCancelExternalWorkflowExecutionDecisionAttributes_control, v.Control)
+		case schemas.RequestCancelExternalWorkflowExecutionDecisionAttributes_runId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.RequestCancelExternalWorkflowExecutionDecisionAttributes_runId, v.RunId)
+		case schemas.RequestCancelExternalWorkflowExecutionDecisionAttributes_workflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.RequestCancelExternalWorkflowExecutionDecisionAttributes_workflowId, v.WorkflowId)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the RequestCancelExternalWorkflowExecutionFailed event.
@@ -2093,6 +4331,56 @@ type RequestCancelExternalWorkflowExecutionFailedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RequestCancelExternalWorkflowExecutionFailedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestCancelExternalWorkflowExecutionFailedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestCancelExternalWorkflowExecutionFailedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != "" {
+		s.WriteString(schemas.RequestCancelExternalWorkflowExecutionFailedEventAttributes_cause, string(v.Cause))
+	}
+	if v.Control != nil {
+		s.WriteString(schemas.RequestCancelExternalWorkflowExecutionFailedEventAttributes_control, *v.Control)
+	}
+	s.WriteInt64(schemas.RequestCancelExternalWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+	s.WriteInt64(schemas.RequestCancelExternalWorkflowExecutionFailedEventAttributes_initiatedEventId, v.InitiatedEventId)
+	if v.RunId != nil {
+		s.WriteString(schemas.RequestCancelExternalWorkflowExecutionFailedEventAttributes_runId, *v.RunId)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.RequestCancelExternalWorkflowExecutionFailedEventAttributes_workflowId, *v.WorkflowId)
+	}
+}
+func (v *RequestCancelExternalWorkflowExecutionFailedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestCancelExternalWorkflowExecutionFailedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestCancelExternalWorkflowExecutionFailedEventAttributes_cause:
+			var ev string
+			if err := d.ReadString(schemas.RequestCancelExternalWorkflowExecutionFailedEventAttributes_cause, &ev); err != nil {
+				return err
+			}
+			v.Cause = RequestCancelExternalWorkflowExecutionFailedCause(ev)
+			return nil
+		case schemas.RequestCancelExternalWorkflowExecutionFailedEventAttributes_control:
+			v.Control = new(string)
+			return d.ReadString(schemas.RequestCancelExternalWorkflowExecutionFailedEventAttributes_control, v.Control)
+		case schemas.RequestCancelExternalWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.RequestCancelExternalWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		case schemas.RequestCancelExternalWorkflowExecutionFailedEventAttributes_initiatedEventId:
+			return d.ReadInt64(schemas.RequestCancelExternalWorkflowExecutionFailedEventAttributes_initiatedEventId, &v.InitiatedEventId)
+		case schemas.RequestCancelExternalWorkflowExecutionFailedEventAttributes_runId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.RequestCancelExternalWorkflowExecutionFailedEventAttributes_runId, v.RunId)
+		case schemas.RequestCancelExternalWorkflowExecutionFailedEventAttributes_workflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.RequestCancelExternalWorkflowExecutionFailedEventAttributes_workflowId, v.WorkflowId)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the RequestCancelExternalWorkflowExecutionInitiated
 // event.
 type RequestCancelExternalWorkflowExecutionInitiatedEventAttributes struct {
@@ -2120,6 +4408,43 @@ type RequestCancelExternalWorkflowExecutionInitiatedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RequestCancelExternalWorkflowExecutionInitiatedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestCancelExternalWorkflowExecutionInitiatedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestCancelExternalWorkflowExecutionInitiatedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Control != nil {
+		s.WriteString(schemas.RequestCancelExternalWorkflowExecutionInitiatedEventAttributes_control, *v.Control)
+	}
+	s.WriteInt64(schemas.RequestCancelExternalWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+	if v.RunId != nil {
+		s.WriteString(schemas.RequestCancelExternalWorkflowExecutionInitiatedEventAttributes_runId, *v.RunId)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.RequestCancelExternalWorkflowExecutionInitiatedEventAttributes_workflowId, *v.WorkflowId)
+	}
+}
+func (v *RequestCancelExternalWorkflowExecutionInitiatedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestCancelExternalWorkflowExecutionInitiatedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestCancelExternalWorkflowExecutionInitiatedEventAttributes_control:
+			v.Control = new(string)
+			return d.ReadString(schemas.RequestCancelExternalWorkflowExecutionInitiatedEventAttributes_control, v.Control)
+		case schemas.RequestCancelExternalWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.RequestCancelExternalWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		case schemas.RequestCancelExternalWorkflowExecutionInitiatedEventAttributes_runId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.RequestCancelExternalWorkflowExecutionInitiatedEventAttributes_runId, v.RunId)
+		case schemas.RequestCancelExternalWorkflowExecutionInitiatedEventAttributes_workflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.RequestCancelExternalWorkflowExecutionInitiatedEventAttributes_workflowId, v.WorkflowId)
+		}
+		return nil
+	})
+}
+
 // Tags are key-value pairs that can be associated with Amazon SWF state machines
 // and activities.
 //
@@ -2136,6 +4461,34 @@ type ResourceTag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceTag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceTag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceTag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.ResourceTag_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ResourceTag_value, *v.Value)
+	}
+}
+func (v *ResourceTag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceTag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceTag_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.ResourceTag_key, v.Key)
+		case schemas.ResourceTag_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ResourceTag_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the ScheduleActivityTask decision.
@@ -2264,6 +4617,86 @@ type ScheduleActivityTaskDecisionAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScheduleActivityTaskDecisionAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduleActivityTaskDecisionAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduleActivityTaskDecisionAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityId != nil {
+		s.WriteString(schemas.ScheduleActivityTaskDecisionAttributes_activityId, *v.ActivityId)
+	}
+	if v.ActivityType != nil {
+		s.WriteStruct(schemas.ScheduleActivityTaskDecisionAttributes_activityType)
+		v.ActivityType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Control != nil {
+		s.WriteString(schemas.ScheduleActivityTaskDecisionAttributes_control, *v.Control)
+	}
+	if v.HeartbeatTimeout != nil {
+		s.WriteString(schemas.ScheduleActivityTaskDecisionAttributes_heartbeatTimeout, *v.HeartbeatTimeout)
+	}
+	if v.Input != nil {
+		s.WriteString(schemas.ScheduleActivityTaskDecisionAttributes_input, *v.Input)
+	}
+	if v.ScheduleToCloseTimeout != nil {
+		s.WriteString(schemas.ScheduleActivityTaskDecisionAttributes_scheduleToCloseTimeout, *v.ScheduleToCloseTimeout)
+	}
+	if v.ScheduleToStartTimeout != nil {
+		s.WriteString(schemas.ScheduleActivityTaskDecisionAttributes_scheduleToStartTimeout, *v.ScheduleToStartTimeout)
+	}
+	if v.StartToCloseTimeout != nil {
+		s.WriteString(schemas.ScheduleActivityTaskDecisionAttributes_startToCloseTimeout, *v.StartToCloseTimeout)
+	}
+	if v.TaskList != nil {
+		s.WriteStruct(schemas.ScheduleActivityTaskDecisionAttributes_taskList)
+		v.TaskList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskPriority != nil {
+		s.WriteString(schemas.ScheduleActivityTaskDecisionAttributes_taskPriority, *v.TaskPriority)
+	}
+}
+func (v *ScheduleActivityTaskDecisionAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduleActivityTaskDecisionAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduleActivityTaskDecisionAttributes_activityId:
+			v.ActivityId = new(string)
+			return d.ReadString(schemas.ScheduleActivityTaskDecisionAttributes_activityId, v.ActivityId)
+		case schemas.ScheduleActivityTaskDecisionAttributes_activityType:
+			v.ActivityType = &ActivityType{}
+			return v.ActivityType.Deserialize(d)
+		case schemas.ScheduleActivityTaskDecisionAttributes_control:
+			v.Control = new(string)
+			return d.ReadString(schemas.ScheduleActivityTaskDecisionAttributes_control, v.Control)
+		case schemas.ScheduleActivityTaskDecisionAttributes_heartbeatTimeout:
+			v.HeartbeatTimeout = new(string)
+			return d.ReadString(schemas.ScheduleActivityTaskDecisionAttributes_heartbeatTimeout, v.HeartbeatTimeout)
+		case schemas.ScheduleActivityTaskDecisionAttributes_input:
+			v.Input = new(string)
+			return d.ReadString(schemas.ScheduleActivityTaskDecisionAttributes_input, v.Input)
+		case schemas.ScheduleActivityTaskDecisionAttributes_scheduleToCloseTimeout:
+			v.ScheduleToCloseTimeout = new(string)
+			return d.ReadString(schemas.ScheduleActivityTaskDecisionAttributes_scheduleToCloseTimeout, v.ScheduleToCloseTimeout)
+		case schemas.ScheduleActivityTaskDecisionAttributes_scheduleToStartTimeout:
+			v.ScheduleToStartTimeout = new(string)
+			return d.ReadString(schemas.ScheduleActivityTaskDecisionAttributes_scheduleToStartTimeout, v.ScheduleToStartTimeout)
+		case schemas.ScheduleActivityTaskDecisionAttributes_startToCloseTimeout:
+			v.StartToCloseTimeout = new(string)
+			return d.ReadString(schemas.ScheduleActivityTaskDecisionAttributes_startToCloseTimeout, v.StartToCloseTimeout)
+		case schemas.ScheduleActivityTaskDecisionAttributes_taskList:
+			v.TaskList = &TaskList{}
+			return v.TaskList.Deserialize(d)
+		case schemas.ScheduleActivityTaskDecisionAttributes_taskPriority:
+			v.TaskPriority = new(string)
+			return d.ReadString(schemas.ScheduleActivityTaskDecisionAttributes_taskPriority, v.TaskPriority)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the ScheduleActivityTaskFailed event.
 type ScheduleActivityTaskFailedEventAttributes struct {
 
@@ -2300,6 +4733,49 @@ type ScheduleActivityTaskFailedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScheduleActivityTaskFailedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduleActivityTaskFailedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduleActivityTaskFailedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityId != nil {
+		s.WriteString(schemas.ScheduleActivityTaskFailedEventAttributes_activityId, *v.ActivityId)
+	}
+	if v.ActivityType != nil {
+		s.WriteStruct(schemas.ScheduleActivityTaskFailedEventAttributes_activityType)
+		v.ActivityType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Cause != "" {
+		s.WriteString(schemas.ScheduleActivityTaskFailedEventAttributes_cause, string(v.Cause))
+	}
+	s.WriteInt64(schemas.ScheduleActivityTaskFailedEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+}
+func (v *ScheduleActivityTaskFailedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduleActivityTaskFailedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduleActivityTaskFailedEventAttributes_activityId:
+			v.ActivityId = new(string)
+			return d.ReadString(schemas.ScheduleActivityTaskFailedEventAttributes_activityId, v.ActivityId)
+		case schemas.ScheduleActivityTaskFailedEventAttributes_activityType:
+			v.ActivityType = &ActivityType{}
+			return v.ActivityType.Deserialize(d)
+		case schemas.ScheduleActivityTaskFailedEventAttributes_cause:
+			var ev string
+			if err := d.ReadString(schemas.ScheduleActivityTaskFailedEventAttributes_cause, &ev); err != nil {
+				return err
+			}
+			v.Cause = ScheduleActivityTaskFailedCause(ev)
+			return nil
+		case schemas.ScheduleActivityTaskFailedEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.ScheduleActivityTaskFailedEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		}
+		return nil
+	})
+}
+
 // Decision attributes specified in scheduleLambdaFunctionDecisionAttributes
 // within the list of decisions decisions passed to RespondDecisionTaskCompleted.
 type ScheduleLambdaFunctionDecisionAttributes struct {
@@ -2328,6 +4804,52 @@ type ScheduleLambdaFunctionDecisionAttributes struct {
 	StartToCloseTimeout *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScheduleLambdaFunctionDecisionAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduleLambdaFunctionDecisionAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduleLambdaFunctionDecisionAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Control != nil {
+		s.WriteString(schemas.ScheduleLambdaFunctionDecisionAttributes_control, *v.Control)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ScheduleLambdaFunctionDecisionAttributes_id, *v.Id)
+	}
+	if v.Input != nil {
+		s.WriteString(schemas.ScheduleLambdaFunctionDecisionAttributes_input, *v.Input)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ScheduleLambdaFunctionDecisionAttributes_name, *v.Name)
+	}
+	if v.StartToCloseTimeout != nil {
+		s.WriteString(schemas.ScheduleLambdaFunctionDecisionAttributes_startToCloseTimeout, *v.StartToCloseTimeout)
+	}
+}
+func (v *ScheduleLambdaFunctionDecisionAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduleLambdaFunctionDecisionAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduleLambdaFunctionDecisionAttributes_control:
+			v.Control = new(string)
+			return d.ReadString(schemas.ScheduleLambdaFunctionDecisionAttributes_control, v.Control)
+		case schemas.ScheduleLambdaFunctionDecisionAttributes_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ScheduleLambdaFunctionDecisionAttributes_id, v.Id)
+		case schemas.ScheduleLambdaFunctionDecisionAttributes_input:
+			v.Input = new(string)
+			return d.ReadString(schemas.ScheduleLambdaFunctionDecisionAttributes_input, v.Input)
+		case schemas.ScheduleLambdaFunctionDecisionAttributes_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ScheduleLambdaFunctionDecisionAttributes_name, v.Name)
+		case schemas.ScheduleLambdaFunctionDecisionAttributes_startToCloseTimeout:
+			v.StartToCloseTimeout = new(string)
+			return d.ReadString(schemas.ScheduleLambdaFunctionDecisionAttributes_startToCloseTimeout, v.StartToCloseTimeout)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the ScheduleLambdaFunctionFailed event. It isn't set
@@ -2364,6 +4886,47 @@ type ScheduleLambdaFunctionFailedEventAttributes struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScheduleLambdaFunctionFailedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduleLambdaFunctionFailedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduleLambdaFunctionFailedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != "" {
+		s.WriteString(schemas.ScheduleLambdaFunctionFailedEventAttributes_cause, string(v.Cause))
+	}
+	s.WriteInt64(schemas.ScheduleLambdaFunctionFailedEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+	if v.Id != nil {
+		s.WriteString(schemas.ScheduleLambdaFunctionFailedEventAttributes_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ScheduleLambdaFunctionFailedEventAttributes_name, *v.Name)
+	}
+}
+func (v *ScheduleLambdaFunctionFailedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduleLambdaFunctionFailedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduleLambdaFunctionFailedEventAttributes_cause:
+			var ev string
+			if err := d.ReadString(schemas.ScheduleLambdaFunctionFailedEventAttributes_cause, &ev); err != nil {
+				return err
+			}
+			v.Cause = ScheduleLambdaFunctionFailedCause(ev)
+			return nil
+		case schemas.ScheduleLambdaFunctionFailedEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.ScheduleLambdaFunctionFailedEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		case schemas.ScheduleLambdaFunctionFailedEventAttributes_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ScheduleLambdaFunctionFailedEventAttributes_id, v.Id)
+		case schemas.ScheduleLambdaFunctionFailedEventAttributes_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ScheduleLambdaFunctionFailedEventAttributes_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the SignalExternalWorkflowExecution decision.
@@ -2411,6 +4974,52 @@ type SignalExternalWorkflowExecutionDecisionAttributes struct {
 	RunId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SignalExternalWorkflowExecutionDecisionAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SignalExternalWorkflowExecutionDecisionAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignalExternalWorkflowExecutionDecisionAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Control != nil {
+		s.WriteString(schemas.SignalExternalWorkflowExecutionDecisionAttributes_control, *v.Control)
+	}
+	if v.Input != nil {
+		s.WriteString(schemas.SignalExternalWorkflowExecutionDecisionAttributes_input, *v.Input)
+	}
+	if v.RunId != nil {
+		s.WriteString(schemas.SignalExternalWorkflowExecutionDecisionAttributes_runId, *v.RunId)
+	}
+	if v.SignalName != nil {
+		s.WriteString(schemas.SignalExternalWorkflowExecutionDecisionAttributes_signalName, *v.SignalName)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.SignalExternalWorkflowExecutionDecisionAttributes_workflowId, *v.WorkflowId)
+	}
+}
+func (v *SignalExternalWorkflowExecutionDecisionAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SignalExternalWorkflowExecutionDecisionAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SignalExternalWorkflowExecutionDecisionAttributes_control:
+			v.Control = new(string)
+			return d.ReadString(schemas.SignalExternalWorkflowExecutionDecisionAttributes_control, v.Control)
+		case schemas.SignalExternalWorkflowExecutionDecisionAttributes_input:
+			v.Input = new(string)
+			return d.ReadString(schemas.SignalExternalWorkflowExecutionDecisionAttributes_input, v.Input)
+		case schemas.SignalExternalWorkflowExecutionDecisionAttributes_runId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.SignalExternalWorkflowExecutionDecisionAttributes_runId, v.RunId)
+		case schemas.SignalExternalWorkflowExecutionDecisionAttributes_signalName:
+			v.SignalName = new(string)
+			return d.ReadString(schemas.SignalExternalWorkflowExecutionDecisionAttributes_signalName, v.SignalName)
+		case schemas.SignalExternalWorkflowExecutionDecisionAttributes_workflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.SignalExternalWorkflowExecutionDecisionAttributes_workflowId, v.WorkflowId)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the SignalExternalWorkflowExecutionFailed event.
@@ -2461,6 +5070,56 @@ type SignalExternalWorkflowExecutionFailedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SignalExternalWorkflowExecutionFailedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SignalExternalWorkflowExecutionFailedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignalExternalWorkflowExecutionFailedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != "" {
+		s.WriteString(schemas.SignalExternalWorkflowExecutionFailedEventAttributes_cause, string(v.Cause))
+	}
+	if v.Control != nil {
+		s.WriteString(schemas.SignalExternalWorkflowExecutionFailedEventAttributes_control, *v.Control)
+	}
+	s.WriteInt64(schemas.SignalExternalWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+	s.WriteInt64(schemas.SignalExternalWorkflowExecutionFailedEventAttributes_initiatedEventId, v.InitiatedEventId)
+	if v.RunId != nil {
+		s.WriteString(schemas.SignalExternalWorkflowExecutionFailedEventAttributes_runId, *v.RunId)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.SignalExternalWorkflowExecutionFailedEventAttributes_workflowId, *v.WorkflowId)
+	}
+}
+func (v *SignalExternalWorkflowExecutionFailedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SignalExternalWorkflowExecutionFailedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SignalExternalWorkflowExecutionFailedEventAttributes_cause:
+			var ev string
+			if err := d.ReadString(schemas.SignalExternalWorkflowExecutionFailedEventAttributes_cause, &ev); err != nil {
+				return err
+			}
+			v.Cause = SignalExternalWorkflowExecutionFailedCause(ev)
+			return nil
+		case schemas.SignalExternalWorkflowExecutionFailedEventAttributes_control:
+			v.Control = new(string)
+			return d.ReadString(schemas.SignalExternalWorkflowExecutionFailedEventAttributes_control, v.Control)
+		case schemas.SignalExternalWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.SignalExternalWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		case schemas.SignalExternalWorkflowExecutionFailedEventAttributes_initiatedEventId:
+			return d.ReadInt64(schemas.SignalExternalWorkflowExecutionFailedEventAttributes_initiatedEventId, &v.InitiatedEventId)
+		case schemas.SignalExternalWorkflowExecutionFailedEventAttributes_runId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.SignalExternalWorkflowExecutionFailedEventAttributes_runId, v.RunId)
+		case schemas.SignalExternalWorkflowExecutionFailedEventAttributes_workflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.SignalExternalWorkflowExecutionFailedEventAttributes_workflowId, v.WorkflowId)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the SignalExternalWorkflowExecutionInitiated event.
 type SignalExternalWorkflowExecutionInitiatedEventAttributes struct {
 
@@ -2493,6 +5152,55 @@ type SignalExternalWorkflowExecutionInitiatedEventAttributes struct {
 	RunId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SignalExternalWorkflowExecutionInitiatedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SignalExternalWorkflowExecutionInitiatedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignalExternalWorkflowExecutionInitiatedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Control != nil {
+		s.WriteString(schemas.SignalExternalWorkflowExecutionInitiatedEventAttributes_control, *v.Control)
+	}
+	s.WriteInt64(schemas.SignalExternalWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+	if v.Input != nil {
+		s.WriteString(schemas.SignalExternalWorkflowExecutionInitiatedEventAttributes_input, *v.Input)
+	}
+	if v.RunId != nil {
+		s.WriteString(schemas.SignalExternalWorkflowExecutionInitiatedEventAttributes_runId, *v.RunId)
+	}
+	if v.SignalName != nil {
+		s.WriteString(schemas.SignalExternalWorkflowExecutionInitiatedEventAttributes_signalName, *v.SignalName)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.SignalExternalWorkflowExecutionInitiatedEventAttributes_workflowId, *v.WorkflowId)
+	}
+}
+func (v *SignalExternalWorkflowExecutionInitiatedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SignalExternalWorkflowExecutionInitiatedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SignalExternalWorkflowExecutionInitiatedEventAttributes_control:
+			v.Control = new(string)
+			return d.ReadString(schemas.SignalExternalWorkflowExecutionInitiatedEventAttributes_control, v.Control)
+		case schemas.SignalExternalWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.SignalExternalWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		case schemas.SignalExternalWorkflowExecutionInitiatedEventAttributes_input:
+			v.Input = new(string)
+			return d.ReadString(schemas.SignalExternalWorkflowExecutionInitiatedEventAttributes_input, v.Input)
+		case schemas.SignalExternalWorkflowExecutionInitiatedEventAttributes_runId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.SignalExternalWorkflowExecutionInitiatedEventAttributes_runId, v.RunId)
+		case schemas.SignalExternalWorkflowExecutionInitiatedEventAttributes_signalName:
+			v.SignalName = new(string)
+			return d.ReadString(schemas.SignalExternalWorkflowExecutionInitiatedEventAttributes_signalName, v.SignalName)
+		case schemas.SignalExternalWorkflowExecutionInitiatedEventAttributes_workflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.SignalExternalWorkflowExecutionInitiatedEventAttributes_workflowId, v.WorkflowId)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the StartChildWorkflowExecution decision.
@@ -2633,6 +5341,93 @@ type StartChildWorkflowExecutionDecisionAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartChildWorkflowExecutionDecisionAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartChildWorkflowExecutionDecisionAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartChildWorkflowExecutionDecisionAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChildPolicy != "" {
+		s.WriteString(schemas.StartChildWorkflowExecutionDecisionAttributes_childPolicy, string(v.ChildPolicy))
+	}
+	if v.Control != nil {
+		s.WriteString(schemas.StartChildWorkflowExecutionDecisionAttributes_control, *v.Control)
+	}
+	if v.ExecutionStartToCloseTimeout != nil {
+		s.WriteString(schemas.StartChildWorkflowExecutionDecisionAttributes_executionStartToCloseTimeout, *v.ExecutionStartToCloseTimeout)
+	}
+	if v.Input != nil {
+		s.WriteString(schemas.StartChildWorkflowExecutionDecisionAttributes_input, *v.Input)
+	}
+	if v.LambdaRole != nil {
+		s.WriteString(schemas.StartChildWorkflowExecutionDecisionAttributes_lambdaRole, *v.LambdaRole)
+	}
+	serializeTagList(s, schemas.StartChildWorkflowExecutionDecisionAttributes_tagList, v.TagList)
+	if v.TaskList != nil {
+		s.WriteStruct(schemas.StartChildWorkflowExecutionDecisionAttributes_taskList)
+		v.TaskList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskPriority != nil {
+		s.WriteString(schemas.StartChildWorkflowExecutionDecisionAttributes_taskPriority, *v.TaskPriority)
+	}
+	if v.TaskStartToCloseTimeout != nil {
+		s.WriteString(schemas.StartChildWorkflowExecutionDecisionAttributes_taskStartToCloseTimeout, *v.TaskStartToCloseTimeout)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.StartChildWorkflowExecutionDecisionAttributes_workflowId, *v.WorkflowId)
+	}
+	if v.WorkflowType != nil {
+		s.WriteStruct(schemas.StartChildWorkflowExecutionDecisionAttributes_workflowType)
+		v.WorkflowType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartChildWorkflowExecutionDecisionAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartChildWorkflowExecutionDecisionAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartChildWorkflowExecutionDecisionAttributes_childPolicy:
+			var ev string
+			if err := d.ReadString(schemas.StartChildWorkflowExecutionDecisionAttributes_childPolicy, &ev); err != nil {
+				return err
+			}
+			v.ChildPolicy = ChildPolicy(ev)
+			return nil
+		case schemas.StartChildWorkflowExecutionDecisionAttributes_control:
+			v.Control = new(string)
+			return d.ReadString(schemas.StartChildWorkflowExecutionDecisionAttributes_control, v.Control)
+		case schemas.StartChildWorkflowExecutionDecisionAttributes_executionStartToCloseTimeout:
+			v.ExecutionStartToCloseTimeout = new(string)
+			return d.ReadString(schemas.StartChildWorkflowExecutionDecisionAttributes_executionStartToCloseTimeout, v.ExecutionStartToCloseTimeout)
+		case schemas.StartChildWorkflowExecutionDecisionAttributes_input:
+			v.Input = new(string)
+			return d.ReadString(schemas.StartChildWorkflowExecutionDecisionAttributes_input, v.Input)
+		case schemas.StartChildWorkflowExecutionDecisionAttributes_lambdaRole:
+			v.LambdaRole = new(string)
+			return d.ReadString(schemas.StartChildWorkflowExecutionDecisionAttributes_lambdaRole, v.LambdaRole)
+		case schemas.StartChildWorkflowExecutionDecisionAttributes_tagList:
+			return deserializeTagList(d, schemas.StartChildWorkflowExecutionDecisionAttributes_tagList, &v.TagList)
+		case schemas.StartChildWorkflowExecutionDecisionAttributes_taskList:
+			v.TaskList = &TaskList{}
+			return v.TaskList.Deserialize(d)
+		case schemas.StartChildWorkflowExecutionDecisionAttributes_taskPriority:
+			v.TaskPriority = new(string)
+			return d.ReadString(schemas.StartChildWorkflowExecutionDecisionAttributes_taskPriority, v.TaskPriority)
+		case schemas.StartChildWorkflowExecutionDecisionAttributes_taskStartToCloseTimeout:
+			v.TaskStartToCloseTimeout = new(string)
+			return d.ReadString(schemas.StartChildWorkflowExecutionDecisionAttributes_taskStartToCloseTimeout, v.TaskStartToCloseTimeout)
+		case schemas.StartChildWorkflowExecutionDecisionAttributes_workflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.StartChildWorkflowExecutionDecisionAttributes_workflowId, v.WorkflowId)
+		case schemas.StartChildWorkflowExecutionDecisionAttributes_workflowType:
+			v.WorkflowType = &WorkflowType{}
+			return v.WorkflowType.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the StartChildWorkflowExecutionFailed event.
 type StartChildWorkflowExecutionFailedEventAttributes struct {
 
@@ -2683,6 +5478,58 @@ type StartChildWorkflowExecutionFailedEventAttributes struct {
 	Control *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartChildWorkflowExecutionFailedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartChildWorkflowExecutionFailedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartChildWorkflowExecutionFailedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != "" {
+		s.WriteString(schemas.StartChildWorkflowExecutionFailedEventAttributes_cause, string(v.Cause))
+	}
+	if v.Control != nil {
+		s.WriteString(schemas.StartChildWorkflowExecutionFailedEventAttributes_control, *v.Control)
+	}
+	s.WriteInt64(schemas.StartChildWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+	s.WriteInt64(schemas.StartChildWorkflowExecutionFailedEventAttributes_initiatedEventId, v.InitiatedEventId)
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.StartChildWorkflowExecutionFailedEventAttributes_workflowId, *v.WorkflowId)
+	}
+	if v.WorkflowType != nil {
+		s.WriteStruct(schemas.StartChildWorkflowExecutionFailedEventAttributes_workflowType)
+		v.WorkflowType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartChildWorkflowExecutionFailedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartChildWorkflowExecutionFailedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartChildWorkflowExecutionFailedEventAttributes_cause:
+			var ev string
+			if err := d.ReadString(schemas.StartChildWorkflowExecutionFailedEventAttributes_cause, &ev); err != nil {
+				return err
+			}
+			v.Cause = StartChildWorkflowExecutionFailedCause(ev)
+			return nil
+		case schemas.StartChildWorkflowExecutionFailedEventAttributes_control:
+			v.Control = new(string)
+			return d.ReadString(schemas.StartChildWorkflowExecutionFailedEventAttributes_control, v.Control)
+		case schemas.StartChildWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.StartChildWorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		case schemas.StartChildWorkflowExecutionFailedEventAttributes_initiatedEventId:
+			return d.ReadInt64(schemas.StartChildWorkflowExecutionFailedEventAttributes_initiatedEventId, &v.InitiatedEventId)
+		case schemas.StartChildWorkflowExecutionFailedEventAttributes_workflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.StartChildWorkflowExecutionFailedEventAttributes_workflowId, v.WorkflowId)
+		case schemas.StartChildWorkflowExecutionFailedEventAttributes_workflowType:
+			v.WorkflowType = &WorkflowType{}
+			return v.WorkflowType.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the StartChildWorkflowExecutionInitiated event.
@@ -2770,6 +5617,96 @@ type StartChildWorkflowExecutionInitiatedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartChildWorkflowExecutionInitiatedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartChildWorkflowExecutionInitiatedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartChildWorkflowExecutionInitiatedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChildPolicy != "" {
+		s.WriteString(schemas.StartChildWorkflowExecutionInitiatedEventAttributes_childPolicy, string(v.ChildPolicy))
+	}
+	if v.Control != nil {
+		s.WriteString(schemas.StartChildWorkflowExecutionInitiatedEventAttributes_control, *v.Control)
+	}
+	s.WriteInt64(schemas.StartChildWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+	if v.ExecutionStartToCloseTimeout != nil {
+		s.WriteString(schemas.StartChildWorkflowExecutionInitiatedEventAttributes_executionStartToCloseTimeout, *v.ExecutionStartToCloseTimeout)
+	}
+	if v.Input != nil {
+		s.WriteString(schemas.StartChildWorkflowExecutionInitiatedEventAttributes_input, *v.Input)
+	}
+	if v.LambdaRole != nil {
+		s.WriteString(schemas.StartChildWorkflowExecutionInitiatedEventAttributes_lambdaRole, *v.LambdaRole)
+	}
+	serializeTagList(s, schemas.StartChildWorkflowExecutionInitiatedEventAttributes_tagList, v.TagList)
+	if v.TaskList != nil {
+		s.WriteStruct(schemas.StartChildWorkflowExecutionInitiatedEventAttributes_taskList)
+		v.TaskList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskPriority != nil {
+		s.WriteString(schemas.StartChildWorkflowExecutionInitiatedEventAttributes_taskPriority, *v.TaskPriority)
+	}
+	if v.TaskStartToCloseTimeout != nil {
+		s.WriteString(schemas.StartChildWorkflowExecutionInitiatedEventAttributes_taskStartToCloseTimeout, *v.TaskStartToCloseTimeout)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.StartChildWorkflowExecutionInitiatedEventAttributes_workflowId, *v.WorkflowId)
+	}
+	if v.WorkflowType != nil {
+		s.WriteStruct(schemas.StartChildWorkflowExecutionInitiatedEventAttributes_workflowType)
+		v.WorkflowType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartChildWorkflowExecutionInitiatedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartChildWorkflowExecutionInitiatedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartChildWorkflowExecutionInitiatedEventAttributes_childPolicy:
+			var ev string
+			if err := d.ReadString(schemas.StartChildWorkflowExecutionInitiatedEventAttributes_childPolicy, &ev); err != nil {
+				return err
+			}
+			v.ChildPolicy = ChildPolicy(ev)
+			return nil
+		case schemas.StartChildWorkflowExecutionInitiatedEventAttributes_control:
+			v.Control = new(string)
+			return d.ReadString(schemas.StartChildWorkflowExecutionInitiatedEventAttributes_control, v.Control)
+		case schemas.StartChildWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.StartChildWorkflowExecutionInitiatedEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		case schemas.StartChildWorkflowExecutionInitiatedEventAttributes_executionStartToCloseTimeout:
+			v.ExecutionStartToCloseTimeout = new(string)
+			return d.ReadString(schemas.StartChildWorkflowExecutionInitiatedEventAttributes_executionStartToCloseTimeout, v.ExecutionStartToCloseTimeout)
+		case schemas.StartChildWorkflowExecutionInitiatedEventAttributes_input:
+			v.Input = new(string)
+			return d.ReadString(schemas.StartChildWorkflowExecutionInitiatedEventAttributes_input, v.Input)
+		case schemas.StartChildWorkflowExecutionInitiatedEventAttributes_lambdaRole:
+			v.LambdaRole = new(string)
+			return d.ReadString(schemas.StartChildWorkflowExecutionInitiatedEventAttributes_lambdaRole, v.LambdaRole)
+		case schemas.StartChildWorkflowExecutionInitiatedEventAttributes_tagList:
+			return deserializeTagList(d, schemas.StartChildWorkflowExecutionInitiatedEventAttributes_tagList, &v.TagList)
+		case schemas.StartChildWorkflowExecutionInitiatedEventAttributes_taskList:
+			v.TaskList = &TaskList{}
+			return v.TaskList.Deserialize(d)
+		case schemas.StartChildWorkflowExecutionInitiatedEventAttributes_taskPriority:
+			v.TaskPriority = new(string)
+			return d.ReadString(schemas.StartChildWorkflowExecutionInitiatedEventAttributes_taskPriority, v.TaskPriority)
+		case schemas.StartChildWorkflowExecutionInitiatedEventAttributes_taskStartToCloseTimeout:
+			v.TaskStartToCloseTimeout = new(string)
+			return d.ReadString(schemas.StartChildWorkflowExecutionInitiatedEventAttributes_taskStartToCloseTimeout, v.TaskStartToCloseTimeout)
+		case schemas.StartChildWorkflowExecutionInitiatedEventAttributes_workflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.StartChildWorkflowExecutionInitiatedEventAttributes_workflowId, v.WorkflowId)
+		case schemas.StartChildWorkflowExecutionInitiatedEventAttributes_workflowType:
+			v.WorkflowType = &WorkflowType{}
+			return v.WorkflowType.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the StartLambdaFunctionFailed event. It isn't set for
 // other event types.
 type StartLambdaFunctionFailedEventAttributes struct {
@@ -2793,6 +5730,43 @@ type StartLambdaFunctionFailedEventAttributes struct {
 	ScheduledEventId int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartLambdaFunctionFailedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartLambdaFunctionFailedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartLambdaFunctionFailedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != "" {
+		s.WriteString(schemas.StartLambdaFunctionFailedEventAttributes_cause, string(v.Cause))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.StartLambdaFunctionFailedEventAttributes_message, *v.Message)
+	}
+	if v.ScheduledEventId != 0 {
+		s.WriteInt64(schemas.StartLambdaFunctionFailedEventAttributes_scheduledEventId, v.ScheduledEventId)
+	}
+}
+func (v *StartLambdaFunctionFailedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartLambdaFunctionFailedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartLambdaFunctionFailedEventAttributes_cause:
+			var ev string
+			if err := d.ReadString(schemas.StartLambdaFunctionFailedEventAttributes_cause, &ev); err != nil {
+				return err
+			}
+			v.Cause = StartLambdaFunctionFailedCause(ev)
+			return nil
+		case schemas.StartLambdaFunctionFailedEventAttributes_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.StartLambdaFunctionFailedEventAttributes_message, v.Message)
+		case schemas.StartLambdaFunctionFailedEventAttributes_scheduledEventId:
+			return d.ReadInt64(schemas.StartLambdaFunctionFailedEventAttributes_scheduledEventId, &v.ScheduledEventId)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the StartTimer decision.
@@ -2840,6 +5814,40 @@ type StartTimerDecisionAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTimerDecisionAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTimerDecisionAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTimerDecisionAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Control != nil {
+		s.WriteString(schemas.StartTimerDecisionAttributes_control, *v.Control)
+	}
+	if v.StartToFireTimeout != nil {
+		s.WriteString(schemas.StartTimerDecisionAttributes_startToFireTimeout, *v.StartToFireTimeout)
+	}
+	if v.TimerId != nil {
+		s.WriteString(schemas.StartTimerDecisionAttributes_timerId, *v.TimerId)
+	}
+}
+func (v *StartTimerDecisionAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartTimerDecisionAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartTimerDecisionAttributes_control:
+			v.Control = new(string)
+			return d.ReadString(schemas.StartTimerDecisionAttributes_control, v.Control)
+		case schemas.StartTimerDecisionAttributes_startToFireTimeout:
+			v.StartToFireTimeout = new(string)
+			return d.ReadString(schemas.StartTimerDecisionAttributes_startToFireTimeout, v.StartToFireTimeout)
+		case schemas.StartTimerDecisionAttributes_timerId:
+			v.TimerId = new(string)
+			return d.ReadString(schemas.StartTimerDecisionAttributes_timerId, v.TimerId)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the StartTimerFailed event.
 type StartTimerFailedEventAttributes struct {
 
@@ -2871,6 +5879,41 @@ type StartTimerFailedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTimerFailedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTimerFailedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTimerFailedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != "" {
+		s.WriteString(schemas.StartTimerFailedEventAttributes_cause, string(v.Cause))
+	}
+	s.WriteInt64(schemas.StartTimerFailedEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+	if v.TimerId != nil {
+		s.WriteString(schemas.StartTimerFailedEventAttributes_timerId, *v.TimerId)
+	}
+}
+func (v *StartTimerFailedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartTimerFailedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartTimerFailedEventAttributes_cause:
+			var ev string
+			if err := d.ReadString(schemas.StartTimerFailedEventAttributes_cause, &ev); err != nil {
+				return err
+			}
+			v.Cause = StartTimerFailedCause(ev)
+			return nil
+		case schemas.StartTimerFailedEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.StartTimerFailedEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		case schemas.StartTimerFailedEventAttributes_timerId:
+			v.TimerId = new(string)
+			return d.ReadString(schemas.StartTimerFailedEventAttributes_timerId, v.TimerId)
+		}
+		return nil
+	})
+}
+
 // Used to filter the workflow executions in visibility APIs based on a tag.
 type TagFilter struct {
 
@@ -2886,6 +5929,28 @@ type TagFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TagFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Tag != nil {
+		s.WriteString(schemas.TagFilter_tag, *v.Tag)
+	}
+}
+func (v *TagFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TagFilter_tag:
+			v.Tag = new(string)
+			return d.ReadString(schemas.TagFilter_tag, v.Tag)
+		}
+		return nil
+	})
+}
+
 // Represents a task list.
 type TaskList struct {
 
@@ -2895,6 +5960,28 @@ type TaskList struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TaskList) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskList)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskList) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.TaskList_name, *v.Name)
+	}
+}
+func (v *TaskList) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskList, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskList_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.TaskList_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the TimerCanceled event.
@@ -2923,6 +6010,34 @@ type TimerCanceledEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TimerCanceledEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimerCanceledEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimerCanceledEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.TimerCanceledEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+	s.WriteInt64(schemas.TimerCanceledEventAttributes_startedEventId, v.StartedEventId)
+	if v.TimerId != nil {
+		s.WriteString(schemas.TimerCanceledEventAttributes_timerId, *v.TimerId)
+	}
+}
+func (v *TimerCanceledEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimerCanceledEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimerCanceledEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.TimerCanceledEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		case schemas.TimerCanceledEventAttributes_startedEventId:
+			return d.ReadInt64(schemas.TimerCanceledEventAttributes_startedEventId, &v.StartedEventId)
+		case schemas.TimerCanceledEventAttributes_timerId:
+			v.TimerId = new(string)
+			return d.ReadString(schemas.TimerCanceledEventAttributes_timerId, v.TimerId)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the TimerFired event.
 type TimerFiredEventAttributes struct {
 
@@ -2939,6 +6054,31 @@ type TimerFiredEventAttributes struct {
 	TimerId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TimerFiredEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimerFiredEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimerFiredEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.TimerFiredEventAttributes_startedEventId, v.StartedEventId)
+	if v.TimerId != nil {
+		s.WriteString(schemas.TimerFiredEventAttributes_timerId, *v.TimerId)
+	}
+}
+func (v *TimerFiredEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimerFiredEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimerFiredEventAttributes_startedEventId:
+			return d.ReadInt64(schemas.TimerFiredEventAttributes_startedEventId, &v.StartedEventId)
+		case schemas.TimerFiredEventAttributes_timerId:
+			v.TimerId = new(string)
+			return d.ReadString(schemas.TimerFiredEventAttributes_timerId, v.TimerId)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the TimerStarted event.
@@ -2971,6 +6111,43 @@ type TimerStartedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TimerStartedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimerStartedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimerStartedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Control != nil {
+		s.WriteString(schemas.TimerStartedEventAttributes_control, *v.Control)
+	}
+	s.WriteInt64(schemas.TimerStartedEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+	if v.StartToFireTimeout != nil {
+		s.WriteString(schemas.TimerStartedEventAttributes_startToFireTimeout, *v.StartToFireTimeout)
+	}
+	if v.TimerId != nil {
+		s.WriteString(schemas.TimerStartedEventAttributes_timerId, *v.TimerId)
+	}
+}
+func (v *TimerStartedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimerStartedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimerStartedEventAttributes_control:
+			v.Control = new(string)
+			return d.ReadString(schemas.TimerStartedEventAttributes_control, v.Control)
+		case schemas.TimerStartedEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.TimerStartedEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		case schemas.TimerStartedEventAttributes_startToFireTimeout:
+			v.StartToFireTimeout = new(string)
+			return d.ReadString(schemas.TimerStartedEventAttributes_startToFireTimeout, v.StartToFireTimeout)
+		case schemas.TimerStartedEventAttributes_timerId:
+			v.TimerId = new(string)
+			return d.ReadString(schemas.TimerStartedEventAttributes_timerId, v.TimerId)
+		}
+		return nil
+	})
+}
+
 // Represents a workflow execution.
 type WorkflowExecution struct {
 
@@ -2985,6 +6162,34 @@ type WorkflowExecution struct {
 	WorkflowId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkflowExecution) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowExecution)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowExecution) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RunId != nil {
+		s.WriteString(schemas.WorkflowExecution_runId, *v.RunId)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.WorkflowExecution_workflowId, *v.WorkflowId)
+	}
+}
+func (v *WorkflowExecution) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowExecution, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowExecution_runId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.WorkflowExecution_runId, v.RunId)
+		case schemas.WorkflowExecution_workflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.WorkflowExecution_workflowId, v.WorkflowId)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the WorkflowExecutionCanceled event.
@@ -3002,6 +6207,31 @@ type WorkflowExecutionCanceledEventAttributes struct {
 	Details *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkflowExecutionCanceledEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowExecutionCanceledEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowExecutionCanceledEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.WorkflowExecutionCanceledEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+	if v.Details != nil {
+		s.WriteString(schemas.WorkflowExecutionCanceledEventAttributes_details, *v.Details)
+	}
+}
+func (v *WorkflowExecutionCanceledEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowExecutionCanceledEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowExecutionCanceledEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.WorkflowExecutionCanceledEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		case schemas.WorkflowExecutionCanceledEventAttributes_details:
+			v.Details = new(string)
+			return d.ReadString(schemas.WorkflowExecutionCanceledEventAttributes_details, v.Details)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the WorkflowExecutionCancelRequested event.
@@ -3027,6 +6257,45 @@ type WorkflowExecutionCancelRequestedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkflowExecutionCancelRequestedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowExecutionCancelRequestedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowExecutionCancelRequestedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != "" {
+		s.WriteString(schemas.WorkflowExecutionCancelRequestedEventAttributes_cause, string(v.Cause))
+	}
+	if v.ExternalInitiatedEventId != 0 {
+		s.WriteInt64(schemas.WorkflowExecutionCancelRequestedEventAttributes_externalInitiatedEventId, v.ExternalInitiatedEventId)
+	}
+	if v.ExternalWorkflowExecution != nil {
+		s.WriteStruct(schemas.WorkflowExecutionCancelRequestedEventAttributes_externalWorkflowExecution)
+		v.ExternalWorkflowExecution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *WorkflowExecutionCancelRequestedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowExecutionCancelRequestedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowExecutionCancelRequestedEventAttributes_cause:
+			var ev string
+			if err := d.ReadString(schemas.WorkflowExecutionCancelRequestedEventAttributes_cause, &ev); err != nil {
+				return err
+			}
+			v.Cause = WorkflowExecutionCancelRequestedCause(ev)
+			return nil
+		case schemas.WorkflowExecutionCancelRequestedEventAttributes_externalInitiatedEventId:
+			return d.ReadInt64(schemas.WorkflowExecutionCancelRequestedEventAttributes_externalInitiatedEventId, &v.ExternalInitiatedEventId)
+		case schemas.WorkflowExecutionCancelRequestedEventAttributes_externalWorkflowExecution:
+			v.ExternalWorkflowExecution = &WorkflowExecution{}
+			return v.ExternalWorkflowExecution.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the WorkflowExecutionCompleted event.
 type WorkflowExecutionCompletedEventAttributes struct {
 
@@ -3042,6 +6311,31 @@ type WorkflowExecutionCompletedEventAttributes struct {
 	Result *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkflowExecutionCompletedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowExecutionCompletedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowExecutionCompletedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.WorkflowExecutionCompletedEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+	if v.Result != nil {
+		s.WriteString(schemas.WorkflowExecutionCompletedEventAttributes_result, *v.Result)
+	}
+}
+func (v *WorkflowExecutionCompletedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowExecutionCompletedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowExecutionCompletedEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.WorkflowExecutionCompletedEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		case schemas.WorkflowExecutionCompletedEventAttributes_result:
+			v.Result = new(string)
+			return d.ReadString(schemas.WorkflowExecutionCompletedEventAttributes_result, v.Result)
+		}
+		return nil
+	})
 }
 
 // The configuration settings for a workflow execution including timeout values,
@@ -3102,6 +6396,64 @@ type WorkflowExecutionConfiguration struct {
 	TaskPriority *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkflowExecutionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowExecutionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowExecutionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChildPolicy != "" {
+		s.WriteString(schemas.WorkflowExecutionConfiguration_childPolicy, string(v.ChildPolicy))
+	}
+	if v.ExecutionStartToCloseTimeout != nil {
+		s.WriteString(schemas.WorkflowExecutionConfiguration_executionStartToCloseTimeout, *v.ExecutionStartToCloseTimeout)
+	}
+	if v.LambdaRole != nil {
+		s.WriteString(schemas.WorkflowExecutionConfiguration_lambdaRole, *v.LambdaRole)
+	}
+	if v.TaskList != nil {
+		s.WriteStruct(schemas.WorkflowExecutionConfiguration_taskList)
+		v.TaskList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskPriority != nil {
+		s.WriteString(schemas.WorkflowExecutionConfiguration_taskPriority, *v.TaskPriority)
+	}
+	if v.TaskStartToCloseTimeout != nil {
+		s.WriteString(schemas.WorkflowExecutionConfiguration_taskStartToCloseTimeout, *v.TaskStartToCloseTimeout)
+	}
+}
+func (v *WorkflowExecutionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowExecutionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowExecutionConfiguration_childPolicy:
+			var ev string
+			if err := d.ReadString(schemas.WorkflowExecutionConfiguration_childPolicy, &ev); err != nil {
+				return err
+			}
+			v.ChildPolicy = ChildPolicy(ev)
+			return nil
+		case schemas.WorkflowExecutionConfiguration_executionStartToCloseTimeout:
+			v.ExecutionStartToCloseTimeout = new(string)
+			return d.ReadString(schemas.WorkflowExecutionConfiguration_executionStartToCloseTimeout, v.ExecutionStartToCloseTimeout)
+		case schemas.WorkflowExecutionConfiguration_lambdaRole:
+			v.LambdaRole = new(string)
+			return d.ReadString(schemas.WorkflowExecutionConfiguration_lambdaRole, v.LambdaRole)
+		case schemas.WorkflowExecutionConfiguration_taskList:
+			v.TaskList = &TaskList{}
+			return v.TaskList.Deserialize(d)
+		case schemas.WorkflowExecutionConfiguration_taskPriority:
+			v.TaskPriority = new(string)
+			return d.ReadString(schemas.WorkflowExecutionConfiguration_taskPriority, v.TaskPriority)
+		case schemas.WorkflowExecutionConfiguration_taskStartToCloseTimeout:
+			v.TaskStartToCloseTimeout = new(string)
+			return d.ReadString(schemas.WorkflowExecutionConfiguration_taskStartToCloseTimeout, v.TaskStartToCloseTimeout)
+		}
+		return nil
+	})
 }
 
 // Provides the details of the WorkflowExecutionContinuedAsNew event.
@@ -3176,6 +6528,90 @@ type WorkflowExecutionContinuedAsNewEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkflowExecutionContinuedAsNewEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowExecutionContinuedAsNewEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowExecutionContinuedAsNewEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChildPolicy != "" {
+		s.WriteString(schemas.WorkflowExecutionContinuedAsNewEventAttributes_childPolicy, string(v.ChildPolicy))
+	}
+	s.WriteInt64(schemas.WorkflowExecutionContinuedAsNewEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+	if v.ExecutionStartToCloseTimeout != nil {
+		s.WriteString(schemas.WorkflowExecutionContinuedAsNewEventAttributes_executionStartToCloseTimeout, *v.ExecutionStartToCloseTimeout)
+	}
+	if v.Input != nil {
+		s.WriteString(schemas.WorkflowExecutionContinuedAsNewEventAttributes_input, *v.Input)
+	}
+	if v.LambdaRole != nil {
+		s.WriteString(schemas.WorkflowExecutionContinuedAsNewEventAttributes_lambdaRole, *v.LambdaRole)
+	}
+	if v.NewExecutionRunId != nil {
+		s.WriteString(schemas.WorkflowExecutionContinuedAsNewEventAttributes_newExecutionRunId, *v.NewExecutionRunId)
+	}
+	serializeTagList(s, schemas.WorkflowExecutionContinuedAsNewEventAttributes_tagList, v.TagList)
+	if v.TaskList != nil {
+		s.WriteStruct(schemas.WorkflowExecutionContinuedAsNewEventAttributes_taskList)
+		v.TaskList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskPriority != nil {
+		s.WriteString(schemas.WorkflowExecutionContinuedAsNewEventAttributes_taskPriority, *v.TaskPriority)
+	}
+	if v.TaskStartToCloseTimeout != nil {
+		s.WriteString(schemas.WorkflowExecutionContinuedAsNewEventAttributes_taskStartToCloseTimeout, *v.TaskStartToCloseTimeout)
+	}
+	if v.WorkflowType != nil {
+		s.WriteStruct(schemas.WorkflowExecutionContinuedAsNewEventAttributes_workflowType)
+		v.WorkflowType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *WorkflowExecutionContinuedAsNewEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowExecutionContinuedAsNewEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowExecutionContinuedAsNewEventAttributes_childPolicy:
+			var ev string
+			if err := d.ReadString(schemas.WorkflowExecutionContinuedAsNewEventAttributes_childPolicy, &ev); err != nil {
+				return err
+			}
+			v.ChildPolicy = ChildPolicy(ev)
+			return nil
+		case schemas.WorkflowExecutionContinuedAsNewEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.WorkflowExecutionContinuedAsNewEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		case schemas.WorkflowExecutionContinuedAsNewEventAttributes_executionStartToCloseTimeout:
+			v.ExecutionStartToCloseTimeout = new(string)
+			return d.ReadString(schemas.WorkflowExecutionContinuedAsNewEventAttributes_executionStartToCloseTimeout, v.ExecutionStartToCloseTimeout)
+		case schemas.WorkflowExecutionContinuedAsNewEventAttributes_input:
+			v.Input = new(string)
+			return d.ReadString(schemas.WorkflowExecutionContinuedAsNewEventAttributes_input, v.Input)
+		case schemas.WorkflowExecutionContinuedAsNewEventAttributes_lambdaRole:
+			v.LambdaRole = new(string)
+			return d.ReadString(schemas.WorkflowExecutionContinuedAsNewEventAttributes_lambdaRole, v.LambdaRole)
+		case schemas.WorkflowExecutionContinuedAsNewEventAttributes_newExecutionRunId:
+			v.NewExecutionRunId = new(string)
+			return d.ReadString(schemas.WorkflowExecutionContinuedAsNewEventAttributes_newExecutionRunId, v.NewExecutionRunId)
+		case schemas.WorkflowExecutionContinuedAsNewEventAttributes_tagList:
+			return deserializeTagList(d, schemas.WorkflowExecutionContinuedAsNewEventAttributes_tagList, &v.TagList)
+		case schemas.WorkflowExecutionContinuedAsNewEventAttributes_taskList:
+			v.TaskList = &TaskList{}
+			return v.TaskList.Deserialize(d)
+		case schemas.WorkflowExecutionContinuedAsNewEventAttributes_taskPriority:
+			v.TaskPriority = new(string)
+			return d.ReadString(schemas.WorkflowExecutionContinuedAsNewEventAttributes_taskPriority, v.TaskPriority)
+		case schemas.WorkflowExecutionContinuedAsNewEventAttributes_taskStartToCloseTimeout:
+			v.TaskStartToCloseTimeout = new(string)
+			return d.ReadString(schemas.WorkflowExecutionContinuedAsNewEventAttributes_taskStartToCloseTimeout, v.TaskStartToCloseTimeout)
+		case schemas.WorkflowExecutionContinuedAsNewEventAttributes_workflowType:
+			v.WorkflowType = &WorkflowType{}
+			return v.WorkflowType.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the WorkflowExecutionFailed event.
 type WorkflowExecutionFailedEventAttributes struct {
 
@@ -3196,6 +6632,37 @@ type WorkflowExecutionFailedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkflowExecutionFailedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowExecutionFailedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowExecutionFailedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.WorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId, v.DecisionTaskCompletedEventId)
+	if v.Details != nil {
+		s.WriteString(schemas.WorkflowExecutionFailedEventAttributes_details, *v.Details)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.WorkflowExecutionFailedEventAttributes_reason, *v.Reason)
+	}
+}
+func (v *WorkflowExecutionFailedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowExecutionFailedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId:
+			return d.ReadInt64(schemas.WorkflowExecutionFailedEventAttributes_decisionTaskCompletedEventId, &v.DecisionTaskCompletedEventId)
+		case schemas.WorkflowExecutionFailedEventAttributes_details:
+			v.Details = new(string)
+			return d.ReadString(schemas.WorkflowExecutionFailedEventAttributes_details, v.Details)
+		case schemas.WorkflowExecutionFailedEventAttributes_reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.WorkflowExecutionFailedEventAttributes_reason, v.Reason)
+		}
+		return nil
+	})
+}
+
 // Used to filter the workflow executions in visibility APIs by their workflowId .
 type WorkflowExecutionFilter struct {
 
@@ -3205,6 +6672,28 @@ type WorkflowExecutionFilter struct {
 	WorkflowId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkflowExecutionFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowExecutionFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowExecutionFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.WorkflowExecutionFilter_workflowId, *v.WorkflowId)
+	}
+}
+func (v *WorkflowExecutionFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowExecutionFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowExecutionFilter_workflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.WorkflowExecutionFilter_workflowId, v.WorkflowId)
+		}
+		return nil
+	})
 }
 
 // Contains information about a workflow execution.
@@ -3269,6 +6758,86 @@ type WorkflowExecutionInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkflowExecutionInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowExecutionInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowExecutionInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CancelRequested != false {
+		s.WriteBool(schemas.WorkflowExecutionInfo_cancelRequested, v.CancelRequested)
+	}
+	if v.CloseStatus != "" {
+		s.WriteString(schemas.WorkflowExecutionInfo_closeStatus, string(v.CloseStatus))
+	}
+	if v.CloseTimestamp != nil {
+		s.WriteTime(schemas.WorkflowExecutionInfo_closeTimestamp, *v.CloseTimestamp)
+	}
+	if v.Execution != nil {
+		s.WriteStruct(schemas.WorkflowExecutionInfo_execution)
+		v.Execution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionStatus != "" {
+		s.WriteString(schemas.WorkflowExecutionInfo_executionStatus, string(v.ExecutionStatus))
+	}
+	if v.Parent != nil {
+		s.WriteStruct(schemas.WorkflowExecutionInfo_parent)
+		v.Parent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTimestamp != nil {
+		s.WriteTime(schemas.WorkflowExecutionInfo_startTimestamp, *v.StartTimestamp)
+	}
+	serializeTagList(s, schemas.WorkflowExecutionInfo_tagList, v.TagList)
+	if v.WorkflowType != nil {
+		s.WriteStruct(schemas.WorkflowExecutionInfo_workflowType)
+		v.WorkflowType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *WorkflowExecutionInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowExecutionInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowExecutionInfo_cancelRequested:
+			return d.ReadBool(schemas.WorkflowExecutionInfo_cancelRequested, &v.CancelRequested)
+		case schemas.WorkflowExecutionInfo_closeStatus:
+			var ev string
+			if err := d.ReadString(schemas.WorkflowExecutionInfo_closeStatus, &ev); err != nil {
+				return err
+			}
+			v.CloseStatus = CloseStatus(ev)
+			return nil
+		case schemas.WorkflowExecutionInfo_closeTimestamp:
+			v.CloseTimestamp = new(time.Time)
+			return d.ReadTime(schemas.WorkflowExecutionInfo_closeTimestamp, v.CloseTimestamp)
+		case schemas.WorkflowExecutionInfo_execution:
+			v.Execution = &WorkflowExecution{}
+			return v.Execution.Deserialize(d)
+		case schemas.WorkflowExecutionInfo_executionStatus:
+			var ev string
+			if err := d.ReadString(schemas.WorkflowExecutionInfo_executionStatus, &ev); err != nil {
+				return err
+			}
+			v.ExecutionStatus = ExecutionStatus(ev)
+			return nil
+		case schemas.WorkflowExecutionInfo_parent:
+			v.Parent = &WorkflowExecution{}
+			return v.Parent.Deserialize(d)
+		case schemas.WorkflowExecutionInfo_startTimestamp:
+			v.StartTimestamp = new(time.Time)
+			return d.ReadTime(schemas.WorkflowExecutionInfo_startTimestamp, v.StartTimestamp)
+		case schemas.WorkflowExecutionInfo_tagList:
+			return deserializeTagList(d, schemas.WorkflowExecutionInfo_tagList, &v.TagList)
+		case schemas.WorkflowExecutionInfo_workflowType:
+			v.WorkflowType = &WorkflowType{}
+			return v.WorkflowType.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains the counts of open tasks, child workflow executions and timers for a
 // workflow execution.
 type WorkflowExecutionOpenCounts struct {
@@ -3300,6 +6869,39 @@ type WorkflowExecutionOpenCounts struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkflowExecutionOpenCounts) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowExecutionOpenCounts)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowExecutionOpenCounts) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.WorkflowExecutionOpenCounts_openActivityTasks, v.OpenActivityTasks)
+	s.WriteInt32(schemas.WorkflowExecutionOpenCounts_openChildWorkflowExecutions, v.OpenChildWorkflowExecutions)
+	s.WriteInt32(schemas.WorkflowExecutionOpenCounts_openDecisionTasks, v.OpenDecisionTasks)
+	if v.OpenLambdaFunctions != 0 {
+		s.WriteInt32(schemas.WorkflowExecutionOpenCounts_openLambdaFunctions, v.OpenLambdaFunctions)
+	}
+	s.WriteInt32(schemas.WorkflowExecutionOpenCounts_openTimers, v.OpenTimers)
+}
+func (v *WorkflowExecutionOpenCounts) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowExecutionOpenCounts, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowExecutionOpenCounts_openActivityTasks:
+			return d.ReadInt32(schemas.WorkflowExecutionOpenCounts_openActivityTasks, &v.OpenActivityTasks)
+		case schemas.WorkflowExecutionOpenCounts_openChildWorkflowExecutions:
+			return d.ReadInt32(schemas.WorkflowExecutionOpenCounts_openChildWorkflowExecutions, &v.OpenChildWorkflowExecutions)
+		case schemas.WorkflowExecutionOpenCounts_openDecisionTasks:
+			return d.ReadInt32(schemas.WorkflowExecutionOpenCounts_openDecisionTasks, &v.OpenDecisionTasks)
+		case schemas.WorkflowExecutionOpenCounts_openLambdaFunctions:
+			return d.ReadInt32(schemas.WorkflowExecutionOpenCounts_openLambdaFunctions, &v.OpenLambdaFunctions)
+		case schemas.WorkflowExecutionOpenCounts_openTimers:
+			return d.ReadInt32(schemas.WorkflowExecutionOpenCounts_openTimers, &v.OpenTimers)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the WorkflowExecutionSignaled event.
 type WorkflowExecutionSignaledEventAttributes struct {
 
@@ -3326,6 +6928,47 @@ type WorkflowExecutionSignaledEventAttributes struct {
 	Input *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkflowExecutionSignaledEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowExecutionSignaledEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowExecutionSignaledEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExternalInitiatedEventId != 0 {
+		s.WriteInt64(schemas.WorkflowExecutionSignaledEventAttributes_externalInitiatedEventId, v.ExternalInitiatedEventId)
+	}
+	if v.ExternalWorkflowExecution != nil {
+		s.WriteStruct(schemas.WorkflowExecutionSignaledEventAttributes_externalWorkflowExecution)
+		v.ExternalWorkflowExecution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Input != nil {
+		s.WriteString(schemas.WorkflowExecutionSignaledEventAttributes_input, *v.Input)
+	}
+	if v.SignalName != nil {
+		s.WriteString(schemas.WorkflowExecutionSignaledEventAttributes_signalName, *v.SignalName)
+	}
+}
+func (v *WorkflowExecutionSignaledEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowExecutionSignaledEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowExecutionSignaledEventAttributes_externalInitiatedEventId:
+			return d.ReadInt64(schemas.WorkflowExecutionSignaledEventAttributes_externalInitiatedEventId, &v.ExternalInitiatedEventId)
+		case schemas.WorkflowExecutionSignaledEventAttributes_externalWorkflowExecution:
+			v.ExternalWorkflowExecution = &WorkflowExecution{}
+			return v.ExternalWorkflowExecution.Deserialize(d)
+		case schemas.WorkflowExecutionSignaledEventAttributes_input:
+			v.Input = new(string)
+			return d.ReadString(schemas.WorkflowExecutionSignaledEventAttributes_input, v.Input)
+		case schemas.WorkflowExecutionSignaledEventAttributes_signalName:
+			v.SignalName = new(string)
+			return d.ReadString(schemas.WorkflowExecutionSignaledEventAttributes_signalName, v.SignalName)
+		}
+		return nil
+	})
 }
 
 // Provides details of WorkflowExecutionStarted event.
@@ -3403,6 +7046,100 @@ type WorkflowExecutionStartedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkflowExecutionStartedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowExecutionStartedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowExecutionStartedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChildPolicy != "" {
+		s.WriteString(schemas.WorkflowExecutionStartedEventAttributes_childPolicy, string(v.ChildPolicy))
+	}
+	if v.ContinuedExecutionRunId != nil {
+		s.WriteString(schemas.WorkflowExecutionStartedEventAttributes_continuedExecutionRunId, *v.ContinuedExecutionRunId)
+	}
+	if v.ExecutionStartToCloseTimeout != nil {
+		s.WriteString(schemas.WorkflowExecutionStartedEventAttributes_executionStartToCloseTimeout, *v.ExecutionStartToCloseTimeout)
+	}
+	if v.Input != nil {
+		s.WriteString(schemas.WorkflowExecutionStartedEventAttributes_input, *v.Input)
+	}
+	if v.LambdaRole != nil {
+		s.WriteString(schemas.WorkflowExecutionStartedEventAttributes_lambdaRole, *v.LambdaRole)
+	}
+	if v.ParentInitiatedEventId != 0 {
+		s.WriteInt64(schemas.WorkflowExecutionStartedEventAttributes_parentInitiatedEventId, v.ParentInitiatedEventId)
+	}
+	if v.ParentWorkflowExecution != nil {
+		s.WriteStruct(schemas.WorkflowExecutionStartedEventAttributes_parentWorkflowExecution)
+		v.ParentWorkflowExecution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.WorkflowExecutionStartedEventAttributes_tagList, v.TagList)
+	if v.TaskList != nil {
+		s.WriteStruct(schemas.WorkflowExecutionStartedEventAttributes_taskList)
+		v.TaskList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskPriority != nil {
+		s.WriteString(schemas.WorkflowExecutionStartedEventAttributes_taskPriority, *v.TaskPriority)
+	}
+	if v.TaskStartToCloseTimeout != nil {
+		s.WriteString(schemas.WorkflowExecutionStartedEventAttributes_taskStartToCloseTimeout, *v.TaskStartToCloseTimeout)
+	}
+	if v.WorkflowType != nil {
+		s.WriteStruct(schemas.WorkflowExecutionStartedEventAttributes_workflowType)
+		v.WorkflowType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *WorkflowExecutionStartedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowExecutionStartedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowExecutionStartedEventAttributes_childPolicy:
+			var ev string
+			if err := d.ReadString(schemas.WorkflowExecutionStartedEventAttributes_childPolicy, &ev); err != nil {
+				return err
+			}
+			v.ChildPolicy = ChildPolicy(ev)
+			return nil
+		case schemas.WorkflowExecutionStartedEventAttributes_continuedExecutionRunId:
+			v.ContinuedExecutionRunId = new(string)
+			return d.ReadString(schemas.WorkflowExecutionStartedEventAttributes_continuedExecutionRunId, v.ContinuedExecutionRunId)
+		case schemas.WorkflowExecutionStartedEventAttributes_executionStartToCloseTimeout:
+			v.ExecutionStartToCloseTimeout = new(string)
+			return d.ReadString(schemas.WorkflowExecutionStartedEventAttributes_executionStartToCloseTimeout, v.ExecutionStartToCloseTimeout)
+		case schemas.WorkflowExecutionStartedEventAttributes_input:
+			v.Input = new(string)
+			return d.ReadString(schemas.WorkflowExecutionStartedEventAttributes_input, v.Input)
+		case schemas.WorkflowExecutionStartedEventAttributes_lambdaRole:
+			v.LambdaRole = new(string)
+			return d.ReadString(schemas.WorkflowExecutionStartedEventAttributes_lambdaRole, v.LambdaRole)
+		case schemas.WorkflowExecutionStartedEventAttributes_parentInitiatedEventId:
+			return d.ReadInt64(schemas.WorkflowExecutionStartedEventAttributes_parentInitiatedEventId, &v.ParentInitiatedEventId)
+		case schemas.WorkflowExecutionStartedEventAttributes_parentWorkflowExecution:
+			v.ParentWorkflowExecution = &WorkflowExecution{}
+			return v.ParentWorkflowExecution.Deserialize(d)
+		case schemas.WorkflowExecutionStartedEventAttributes_tagList:
+			return deserializeTagList(d, schemas.WorkflowExecutionStartedEventAttributes_tagList, &v.TagList)
+		case schemas.WorkflowExecutionStartedEventAttributes_taskList:
+			v.TaskList = &TaskList{}
+			return v.TaskList.Deserialize(d)
+		case schemas.WorkflowExecutionStartedEventAttributes_taskPriority:
+			v.TaskPriority = new(string)
+			return d.ReadString(schemas.WorkflowExecutionStartedEventAttributes_taskPriority, v.TaskPriority)
+		case schemas.WorkflowExecutionStartedEventAttributes_taskStartToCloseTimeout:
+			v.TaskStartToCloseTimeout = new(string)
+			return d.ReadString(schemas.WorkflowExecutionStartedEventAttributes_taskStartToCloseTimeout, v.TaskStartToCloseTimeout)
+		case schemas.WorkflowExecutionStartedEventAttributes_workflowType:
+			v.WorkflowType = &WorkflowType{}
+			return v.WorkflowType.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the WorkflowExecutionTerminated event.
 type WorkflowExecutionTerminatedEventAttributes struct {
 
@@ -3436,6 +7173,54 @@ type WorkflowExecutionTerminatedEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkflowExecutionTerminatedEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowExecutionTerminatedEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowExecutionTerminatedEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != "" {
+		s.WriteString(schemas.WorkflowExecutionTerminatedEventAttributes_cause, string(v.Cause))
+	}
+	if v.ChildPolicy != "" {
+		s.WriteString(schemas.WorkflowExecutionTerminatedEventAttributes_childPolicy, string(v.ChildPolicy))
+	}
+	if v.Details != nil {
+		s.WriteString(schemas.WorkflowExecutionTerminatedEventAttributes_details, *v.Details)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.WorkflowExecutionTerminatedEventAttributes_reason, *v.Reason)
+	}
+}
+func (v *WorkflowExecutionTerminatedEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowExecutionTerminatedEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowExecutionTerminatedEventAttributes_cause:
+			var ev string
+			if err := d.ReadString(schemas.WorkflowExecutionTerminatedEventAttributes_cause, &ev); err != nil {
+				return err
+			}
+			v.Cause = WorkflowExecutionTerminatedCause(ev)
+			return nil
+		case schemas.WorkflowExecutionTerminatedEventAttributes_childPolicy:
+			var ev string
+			if err := d.ReadString(schemas.WorkflowExecutionTerminatedEventAttributes_childPolicy, &ev); err != nil {
+				return err
+			}
+			v.ChildPolicy = ChildPolicy(ev)
+			return nil
+		case schemas.WorkflowExecutionTerminatedEventAttributes_details:
+			v.Details = new(string)
+			return d.ReadString(schemas.WorkflowExecutionTerminatedEventAttributes_details, v.Details)
+		case schemas.WorkflowExecutionTerminatedEventAttributes_reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.WorkflowExecutionTerminatedEventAttributes_reason, v.Reason)
+		}
+		return nil
+	})
+}
+
 // Provides the details of the WorkflowExecutionTimedOut event.
 type WorkflowExecutionTimedOutEventAttributes struct {
 
@@ -3463,6 +7248,42 @@ type WorkflowExecutionTimedOutEventAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkflowExecutionTimedOutEventAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowExecutionTimedOutEventAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowExecutionTimedOutEventAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChildPolicy != "" {
+		s.WriteString(schemas.WorkflowExecutionTimedOutEventAttributes_childPolicy, string(v.ChildPolicy))
+	}
+	if v.TimeoutType != "" {
+		s.WriteString(schemas.WorkflowExecutionTimedOutEventAttributes_timeoutType, string(v.TimeoutType))
+	}
+}
+func (v *WorkflowExecutionTimedOutEventAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowExecutionTimedOutEventAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowExecutionTimedOutEventAttributes_childPolicy:
+			var ev string
+			if err := d.ReadString(schemas.WorkflowExecutionTimedOutEventAttributes_childPolicy, &ev); err != nil {
+				return err
+			}
+			v.ChildPolicy = ChildPolicy(ev)
+			return nil
+		case schemas.WorkflowExecutionTimedOutEventAttributes_timeoutType:
+			var ev string
+			if err := d.ReadString(schemas.WorkflowExecutionTimedOutEventAttributes_timeoutType, &ev); err != nil {
+				return err
+			}
+			v.TimeoutType = WorkflowExecutionTimeoutType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Represents a workflow type.
 type WorkflowType struct {
 
@@ -3483,6 +7304,34 @@ type WorkflowType struct {
 	Version *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkflowType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.WorkflowType_name, *v.Name)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.WorkflowType_version, *v.Version)
+	}
+}
+func (v *WorkflowType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowType_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.WorkflowType_name, v.Name)
+		case schemas.WorkflowType_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.WorkflowType_version, v.Version)
+		}
+		return nil
+	})
 }
 
 // The configuration settings of a workflow type.
@@ -3560,6 +7409,64 @@ type WorkflowTypeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkflowTypeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowTypeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowTypeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultChildPolicy != "" {
+		s.WriteString(schemas.WorkflowTypeConfiguration_defaultChildPolicy, string(v.DefaultChildPolicy))
+	}
+	if v.DefaultExecutionStartToCloseTimeout != nil {
+		s.WriteString(schemas.WorkflowTypeConfiguration_defaultExecutionStartToCloseTimeout, *v.DefaultExecutionStartToCloseTimeout)
+	}
+	if v.DefaultLambdaRole != nil {
+		s.WriteString(schemas.WorkflowTypeConfiguration_defaultLambdaRole, *v.DefaultLambdaRole)
+	}
+	if v.DefaultTaskList != nil {
+		s.WriteStruct(schemas.WorkflowTypeConfiguration_defaultTaskList)
+		v.DefaultTaskList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultTaskPriority != nil {
+		s.WriteString(schemas.WorkflowTypeConfiguration_defaultTaskPriority, *v.DefaultTaskPriority)
+	}
+	if v.DefaultTaskStartToCloseTimeout != nil {
+		s.WriteString(schemas.WorkflowTypeConfiguration_defaultTaskStartToCloseTimeout, *v.DefaultTaskStartToCloseTimeout)
+	}
+}
+func (v *WorkflowTypeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowTypeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowTypeConfiguration_defaultChildPolicy:
+			var ev string
+			if err := d.ReadString(schemas.WorkflowTypeConfiguration_defaultChildPolicy, &ev); err != nil {
+				return err
+			}
+			v.DefaultChildPolicy = ChildPolicy(ev)
+			return nil
+		case schemas.WorkflowTypeConfiguration_defaultExecutionStartToCloseTimeout:
+			v.DefaultExecutionStartToCloseTimeout = new(string)
+			return d.ReadString(schemas.WorkflowTypeConfiguration_defaultExecutionStartToCloseTimeout, v.DefaultExecutionStartToCloseTimeout)
+		case schemas.WorkflowTypeConfiguration_defaultLambdaRole:
+			v.DefaultLambdaRole = new(string)
+			return d.ReadString(schemas.WorkflowTypeConfiguration_defaultLambdaRole, v.DefaultLambdaRole)
+		case schemas.WorkflowTypeConfiguration_defaultTaskList:
+			v.DefaultTaskList = &TaskList{}
+			return v.DefaultTaskList.Deserialize(d)
+		case schemas.WorkflowTypeConfiguration_defaultTaskPriority:
+			v.DefaultTaskPriority = new(string)
+			return d.ReadString(schemas.WorkflowTypeConfiguration_defaultTaskPriority, v.DefaultTaskPriority)
+		case schemas.WorkflowTypeConfiguration_defaultTaskStartToCloseTimeout:
+			v.DefaultTaskStartToCloseTimeout = new(string)
+			return d.ReadString(schemas.WorkflowTypeConfiguration_defaultTaskStartToCloseTimeout, v.DefaultTaskStartToCloseTimeout)
+		}
+		return nil
+	})
+}
+
 // Used to filter workflow execution query results by type. Each parameter, if
 // specified, defines a rule that must be satisfied by each returned result.
 type WorkflowTypeFilter struct {
@@ -3573,6 +7480,34 @@ type WorkflowTypeFilter struct {
 	Version *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkflowTypeFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowTypeFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowTypeFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.WorkflowTypeFilter_name, *v.Name)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.WorkflowTypeFilter_version, *v.Version)
+	}
+}
+func (v *WorkflowTypeFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowTypeFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowTypeFilter_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.WorkflowTypeFilter_name, v.Name)
+		case schemas.WorkflowTypeFilter_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.WorkflowTypeFilter_version, v.Version)
+		}
+		return nil
+	})
 }
 
 // Contains information about a workflow type.
@@ -3601,6 +7536,58 @@ type WorkflowTypeInfo struct {
 	Description *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkflowTypeInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowTypeInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowTypeInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.WorkflowTypeInfo_creationDate, *v.CreationDate)
+	}
+	if v.DeprecationDate != nil {
+		s.WriteTime(schemas.WorkflowTypeInfo_deprecationDate, *v.DeprecationDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.WorkflowTypeInfo_description, *v.Description)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.WorkflowTypeInfo_status, string(v.Status))
+	}
+	if v.WorkflowType != nil {
+		s.WriteStruct(schemas.WorkflowTypeInfo_workflowType)
+		v.WorkflowType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *WorkflowTypeInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowTypeInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowTypeInfo_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.WorkflowTypeInfo_creationDate, v.CreationDate)
+		case schemas.WorkflowTypeInfo_deprecationDate:
+			v.DeprecationDate = new(time.Time)
+			return d.ReadTime(schemas.WorkflowTypeInfo_deprecationDate, v.DeprecationDate)
+		case schemas.WorkflowTypeInfo_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.WorkflowTypeInfo_description, v.Description)
+		case schemas.WorkflowTypeInfo_status:
+			var ev string
+			if err := d.ReadString(schemas.WorkflowTypeInfo_status, &ev); err != nil {
+				return err
+			}
+			v.Status = RegistrationStatus(ev)
+			return nil
+		case schemas.WorkflowTypeInfo_workflowType:
+			v.WorkflowType = &WorkflowType{}
+			return v.WorkflowType.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

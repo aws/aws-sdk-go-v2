@@ -4,6 +4,8 @@ package drs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,28 @@ type DeleteSourceServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSourceServerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSourceServerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSourceServerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceServerID != nil {
+		s.WriteString(schemas.DeleteSourceServerRequest_sourceServerID, *v.SourceServerID)
+	}
+}
+func (v *DeleteSourceServerInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSourceServerRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSourceServerRequest_sourceServerID:
+			v.SourceServerID = new(string)
+			return d.ReadString(schemas.DeleteSourceServerRequest_sourceServerID, v.SourceServerID)
+		}
+		return nil
+	})
+}
+
 type DeleteSourceServerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +65,26 @@ type DeleteSourceServerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSourceServerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSourceServerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSourceServerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSourceServerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSourceServerResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSourceServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSourceServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSourceServer, schemas.DeleteSourceServerRequest, schemas.DeleteSourceServerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSourceServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSourceServer, schemas.DeleteSourceServerRequest, schemas.DeleteSourceServerResponse), output: &DeleteSourceServerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

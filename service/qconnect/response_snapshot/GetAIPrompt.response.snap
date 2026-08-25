@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"aiPrompt":{"aiPromptArn":"__AiPromptArn__","aiPromptId":"__AiPromptId__","apiFormat":"ANTHROPIC_CLAUDE_MESSAGES","assistantArn":"__AssistantArn__","assistantId":"__AssistantId__","description":"__Description__","inferenceConfiguration":{"maxTokensToSample":1,"temperature":1,"topK":1,"topP":1},"modelId":"__ModelId__","modifiedTime":946684800,"name":"__Name__","origin":"SYSTEM","status":"CREATE_IN_PROGRESS","tags":{"key0":"__Value__"},"templateConfiguration":{"textFullAIPromptEditTemplateConfiguration":{"text":"__Text__"}},"templateType":"TEXT","type":"ANSWER_GENERATION","visibilityStatus":"SAVED"},"versionNumber":1}

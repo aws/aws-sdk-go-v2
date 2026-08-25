@@ -4,6 +4,8 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DeleteLicenseManagerReportGeneratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLicenseManagerReportGeneratorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLicenseManagerReportGeneratorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLicenseManagerReportGeneratorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseManagerReportGeneratorArn != nil {
+		s.WriteString(schemas.DeleteLicenseManagerReportGeneratorRequest_LicenseManagerReportGeneratorArn, *v.LicenseManagerReportGeneratorArn)
+	}
+}
+
 type DeleteLicenseManagerReportGeneratorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +58,26 @@ type DeleteLicenseManagerReportGeneratorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLicenseManagerReportGeneratorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLicenseManagerReportGeneratorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLicenseManagerReportGeneratorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteLicenseManagerReportGeneratorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLicenseManagerReportGeneratorResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLicenseManagerReportGeneratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteLicenseManagerReportGenerator{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLicenseManagerReportGenerator, schemas.DeleteLicenseManagerReportGeneratorRequest, schemas.DeleteLicenseManagerReportGeneratorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteLicenseManagerReportGenerator{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLicenseManagerReportGenerator, schemas.DeleteLicenseManagerReportGeneratorRequest, schemas.DeleteLicenseManagerReportGeneratorResponse), output: &DeleteLicenseManagerReportGeneratorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

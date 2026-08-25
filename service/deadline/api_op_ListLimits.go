@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,24 @@ type ListLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLimitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLimitsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.ListLimitsRequest_farmId, *v.FarmId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLimitsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLimitsRequest_nextToken, *v.NextToken)
+	}
+}
+
 // Shared pagination field for List operation outputs (nextToken).
 type ListLimitsOutput struct {
 
@@ -65,13 +85,35 @@ type ListLimitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLimitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLimitsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLimitSummaries(s, schemas.ListLimitsResponse_limits, v.Limits)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLimitsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLimitsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLimitsResponse_limits:
+			return deserializeLimitSummaries(d, schemas.ListLimitsResponse_limits, &v.Limits)
+		case schemas.ListLimitsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLimitsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLimits, schemas.ListLimitsRequest, schemas.ListLimitsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLimits, schemas.ListLimitsRequest, schemas.ListLimitsResponse), output: &ListLimitsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

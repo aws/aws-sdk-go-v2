@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -122,6 +124,42 @@ type CreateFileCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFileCacheInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFileCacheRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFileCacheInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateFileCacheRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.CopyTagsToDataRepositoryAssociations != nil {
+		s.WriteBool(schemas.CreateFileCacheRequest_CopyTagsToDataRepositoryAssociations, *v.CopyTagsToDataRepositoryAssociations)
+	}
+	serializeCreateFileCacheDataRepositoryAssociations(s, schemas.CreateFileCacheRequest_DataRepositoryAssociations, v.DataRepositoryAssociations)
+	if v.FileCacheType != "" {
+		s.WriteString(schemas.CreateFileCacheRequest_FileCacheType, string(v.FileCacheType))
+	}
+	if v.FileCacheTypeVersion != nil {
+		s.WriteString(schemas.CreateFileCacheRequest_FileCacheTypeVersion, *v.FileCacheTypeVersion)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateFileCacheRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.LustreConfiguration != nil {
+		s.WriteStruct(schemas.CreateFileCacheRequest_LustreConfiguration)
+		v.LustreConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSecurityGroupIds(s, schemas.CreateFileCacheRequest_SecurityGroupIds, v.SecurityGroupIds)
+	if v.StorageCapacity != nil {
+		s.WriteInt32(schemas.CreateFileCacheRequest_StorageCapacity, *v.StorageCapacity)
+	}
+	serializeSubnetIds(s, schemas.CreateFileCacheRequest_SubnetIds, v.SubnetIds)
+	serializeTags(s, schemas.CreateFileCacheRequest_Tags, v.Tags)
+}
+
 type CreateFileCacheOutput struct {
 
 	// A description of the cache that was created.
@@ -133,13 +171,34 @@ type CreateFileCacheOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFileCacheOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFileCacheResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFileCacheOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileCache != nil {
+		s.WriteStruct(schemas.CreateFileCacheResponse_FileCache)
+		v.FileCache.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateFileCacheOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFileCacheResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFileCacheResponse_FileCache:
+			v.FileCache = &types.FileCacheCreating{}
+			return v.FileCache.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFileCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateFileCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFileCache, schemas.CreateFileCacheRequest, schemas.CreateFileCacheResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateFileCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFileCache, schemas.CreateFileCacheRequest, schemas.CreateFileCacheResponse), output: &CreateFileCacheOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,29 @@ type UpdateSiteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSiteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSiteRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSiteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSiteRequest_Description, *v.Description)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.UpdateSiteRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.Location != nil {
+		s.WriteStruct(schemas.UpdateSiteRequest_Location)
+		v.Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SiteId != nil {
+		s.WriteString(schemas.UpdateSiteRequest_SiteId, *v.SiteId)
+	}
+}
+
 type UpdateSiteOutput struct {
 
 	// Information about the site.
@@ -65,13 +90,34 @@ type UpdateSiteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSiteOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSiteResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSiteOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Site != nil {
+		s.WriteStruct(schemas.UpdateSiteResponse_Site)
+		v.Site.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateSiteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSiteResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSiteResponse_Site:
+			v.Site = &types.Site{}
+			return v.Site.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSiteMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSite{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSite, schemas.UpdateSiteRequest, schemas.UpdateSiteResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSite{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSite, schemas.UpdateSiteRequest, schemas.UpdateSiteResponse), output: &UpdateSiteOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DisassociateCustomerGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateCustomerGatewayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateCustomerGatewayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateCustomerGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomerGatewayArn != nil {
+		s.WriteString(schemas.DisassociateCustomerGatewayRequest_CustomerGatewayArn, *v.CustomerGatewayArn)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.DisassociateCustomerGatewayRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+}
+
 type DisassociateCustomerGatewayOutput struct {
 
 	// Information about the customer gateway association.
@@ -50,13 +67,34 @@ type DisassociateCustomerGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateCustomerGatewayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateCustomerGatewayResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateCustomerGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomerGatewayAssociation != nil {
+		s.WriteStruct(schemas.DisassociateCustomerGatewayResponse_CustomerGatewayAssociation)
+		v.CustomerGatewayAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DisassociateCustomerGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateCustomerGatewayResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateCustomerGatewayResponse_CustomerGatewayAssociation:
+			v.CustomerGatewayAssociation = &types.CustomerGatewayAssociation{}
+			return v.CustomerGatewayAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateCustomerGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateCustomerGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateCustomerGateway, schemas.DisassociateCustomerGatewayRequest, schemas.DisassociateCustomerGatewayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateCustomerGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateCustomerGateway, schemas.DisassociateCustomerGatewayRequest, schemas.DisassociateCustomerGatewayResponse), output: &DisassociateCustomerGatewayOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

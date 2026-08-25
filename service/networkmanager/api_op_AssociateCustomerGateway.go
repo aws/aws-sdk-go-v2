@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,27 @@ type AssociateCustomerGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateCustomerGatewayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateCustomerGatewayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateCustomerGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomerGatewayArn != nil {
+		s.WriteString(schemas.AssociateCustomerGatewayRequest_CustomerGatewayArn, *v.CustomerGatewayArn)
+	}
+	if v.DeviceId != nil {
+		s.WriteString(schemas.AssociateCustomerGatewayRequest_DeviceId, *v.DeviceId)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.AssociateCustomerGatewayRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.AssociateCustomerGatewayRequest_LinkId, *v.LinkId)
+	}
+}
+
 type AssociateCustomerGatewayOutput struct {
 
 	// The customer gateway association.
@@ -70,13 +93,34 @@ type AssociateCustomerGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateCustomerGatewayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateCustomerGatewayResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateCustomerGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomerGatewayAssociation != nil {
+		s.WriteStruct(schemas.AssociateCustomerGatewayResponse_CustomerGatewayAssociation)
+		v.CustomerGatewayAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateCustomerGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateCustomerGatewayResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateCustomerGatewayResponse_CustomerGatewayAssociation:
+			v.CustomerGatewayAssociation = &types.CustomerGatewayAssociation{}
+			return v.CustomerGatewayAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateCustomerGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateCustomerGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateCustomerGateway, schemas.AssociateCustomerGatewayRequest, schemas.AssociateCustomerGatewayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateCustomerGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateCustomerGateway, schemas.AssociateCustomerGatewayRequest, schemas.AssociateCustomerGatewayResponse), output: &AssociateCustomerGatewayOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

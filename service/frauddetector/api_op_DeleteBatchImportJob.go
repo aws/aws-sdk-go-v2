@@ -4,6 +4,8 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteBatchImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBatchImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBatchImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBatchImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DeleteBatchImportJobRequest_jobId, *v.JobId)
+	}
+}
+
 type DeleteBatchImportJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteBatchImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBatchImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBatchImportJobResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBatchImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteBatchImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBatchImportJobResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBatchImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteBatchImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBatchImportJob, schemas.DeleteBatchImportJobRequest, schemas.DeleteBatchImportJobResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteBatchImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBatchImportJob, schemas.DeleteBatchImportJobRequest, schemas.DeleteBatchImportJobResult), output: &DeleteBatchImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package codegurureviewer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,29 @@ type CreateCodeReviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCodeReviewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCodeReviewRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCodeReviewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateCodeReviewRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCodeReviewRequest_Name, *v.Name)
+	}
+	if v.RepositoryAssociationArn != nil {
+		s.WriteString(schemas.CreateCodeReviewRequest_RepositoryAssociationArn, *v.RepositoryAssociationArn)
+	}
+	if v.Type != nil {
+		s.WriteStruct(schemas.CreateCodeReviewRequest_Type)
+		v.Type.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateCodeReviewOutput struct {
 
 	// Information about a code review. A code review belongs to the associated
@@ -76,13 +101,34 @@ type CreateCodeReviewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCodeReviewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCodeReviewResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCodeReviewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeReview != nil {
+		s.WriteStruct(schemas.CreateCodeReviewResponse_CodeReview)
+		v.CodeReview.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateCodeReviewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCodeReviewResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCodeReviewResponse_CodeReview:
+			v.CodeReview = &types.CodeReview{}
+			return v.CodeReview.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCodeReviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCodeReview{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCodeReview, schemas.CreateCodeReviewRequest, schemas.CreateCodeReviewResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCodeReview{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCodeReview, schemas.CreateCodeReviewRequest, schemas.CreateCodeReviewResponse), output: &CreateCodeReviewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

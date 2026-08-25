@@ -4,7 +4,9 @@ package globalaccelerator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,19 @@ type UpdateCustomRoutingListenerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCustomRoutingListenerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCustomRoutingListenerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCustomRoutingListenerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ListenerArn != nil {
+		s.WriteString(schemas.UpdateCustomRoutingListenerRequest_ListenerArn, *v.ListenerArn)
+	}
+	serializePortRanges(s, schemas.UpdateCustomRoutingListenerRequest_PortRanges, v.PortRanges)
+}
+
 type UpdateCustomRoutingListenerOutput struct {
 
 	// Information for the updated listener for a custom routing accelerator.
@@ -56,13 +71,34 @@ type UpdateCustomRoutingListenerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCustomRoutingListenerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCustomRoutingListenerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCustomRoutingListenerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Listener != nil {
+		s.WriteStruct(schemas.UpdateCustomRoutingListenerResponse_Listener)
+		v.Listener.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateCustomRoutingListenerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCustomRoutingListenerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCustomRoutingListenerResponse_Listener:
+			v.Listener = &types.CustomRoutingListener{}
+			return v.Listener.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCustomRoutingListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateCustomRoutingListener{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCustomRoutingListener, schemas.UpdateCustomRoutingListenerRequest, schemas.UpdateCustomRoutingListenerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateCustomRoutingListener{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCustomRoutingListener, schemas.UpdateCustomRoutingListenerRequest, schemas.UpdateCustomRoutingListenerResponse), output: &UpdateCustomRoutingListenerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

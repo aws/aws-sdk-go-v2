@@ -4,6 +4,8 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DeleteDetectorVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDetectorVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDetectorVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDetectorVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.DeleteDetectorVersionRequest_detectorId, *v.DetectorId)
+	}
+	if v.DetectorVersionId != nil {
+		s.WriteString(schemas.DeleteDetectorVersionRequest_detectorVersionId, *v.DetectorVersionId)
+	}
+}
+
 type DeleteDetectorVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +66,26 @@ type DeleteDetectorVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDetectorVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDetectorVersionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDetectorVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteDetectorVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDetectorVersionResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDetectorVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDetectorVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDetectorVersion, schemas.DeleteDetectorVersionRequest, schemas.DeleteDetectorVersionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteDetectorVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDetectorVersion, schemas.DeleteDetectorVersionRequest, schemas.DeleteDetectorVersionResult), output: &DeleteDetectorVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

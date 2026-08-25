@@ -4,7 +4,9 @@ package drs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,28 @@ type GetFailbackReplicationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFailbackReplicationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFailbackReplicationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFailbackReplicationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecoveryInstanceID != nil {
+		s.WriteString(schemas.GetFailbackReplicationConfigurationRequest_recoveryInstanceID, *v.RecoveryInstanceID)
+	}
+}
+func (v *GetFailbackReplicationConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFailbackReplicationConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFailbackReplicationConfigurationRequest_recoveryInstanceID:
+			v.RecoveryInstanceID = new(string)
+			return d.ReadString(schemas.GetFailbackReplicationConfigurationRequest_recoveryInstanceID, v.RecoveryInstanceID)
+		}
+		return nil
+	})
+}
+
 type GetFailbackReplicationConfigurationOutput struct {
 
 	// The ID of the Recovery Instance.
@@ -62,13 +86,59 @@ type GetFailbackReplicationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFailbackReplicationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFailbackReplicationConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFailbackReplicationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BandwidthThrottling != 0 {
+		s.WriteInt64(schemas.GetFailbackReplicationConfigurationResponse_bandwidthThrottling, v.BandwidthThrottling)
+	}
+	if v.InternetProtocol != "" {
+		s.WriteString(schemas.GetFailbackReplicationConfigurationResponse_internetProtocol, string(v.InternetProtocol))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetFailbackReplicationConfigurationResponse_name, *v.Name)
+	}
+	if v.RecoveryInstanceID != nil {
+		s.WriteString(schemas.GetFailbackReplicationConfigurationResponse_recoveryInstanceID, *v.RecoveryInstanceID)
+	}
+	if v.UsePrivateIP != nil {
+		s.WriteBool(schemas.GetFailbackReplicationConfigurationResponse_usePrivateIP, *v.UsePrivateIP)
+	}
+}
+func (v *GetFailbackReplicationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFailbackReplicationConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFailbackReplicationConfigurationResponse_bandwidthThrottling:
+			return d.ReadInt64(schemas.GetFailbackReplicationConfigurationResponse_bandwidthThrottling, &v.BandwidthThrottling)
+		case schemas.GetFailbackReplicationConfigurationResponse_internetProtocol:
+			var ev string
+			if err := d.ReadString(schemas.GetFailbackReplicationConfigurationResponse_internetProtocol, &ev); err != nil {
+				return err
+			}
+			v.InternetProtocol = types.InternetProtocol(ev)
+			return nil
+		case schemas.GetFailbackReplicationConfigurationResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetFailbackReplicationConfigurationResponse_name, v.Name)
+		case schemas.GetFailbackReplicationConfigurationResponse_recoveryInstanceID:
+			v.RecoveryInstanceID = new(string)
+			return d.ReadString(schemas.GetFailbackReplicationConfigurationResponse_recoveryInstanceID, v.RecoveryInstanceID)
+		case schemas.GetFailbackReplicationConfigurationResponse_usePrivateIP:
+			v.UsePrivateIP = new(bool)
+			return d.ReadBool(schemas.GetFailbackReplicationConfigurationResponse_usePrivateIP, v.UsePrivateIP)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFailbackReplicationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFailbackReplicationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFailbackReplicationConfiguration, schemas.GetFailbackReplicationConfigurationRequest, schemas.GetFailbackReplicationConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFailbackReplicationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFailbackReplicationConfiguration, schemas.GetFailbackReplicationConfigurationRequest, schemas.GetFailbackReplicationConfigurationResponse), output: &GetFailbackReplicationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

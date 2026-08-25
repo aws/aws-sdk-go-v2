@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,27 @@ type DeleteIPSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIPSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIPSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIPSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteIPSetRequest_Id, *v.Id)
+	}
+	if v.LockToken != nil {
+		s.WriteString(schemas.DeleteIPSetRequest_LockToken, *v.LockToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteIPSetRequest_Name, *v.Name)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.DeleteIPSetRequest_Scope, string(v.Scope))
+	}
+}
+
 type DeleteIPSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -73,13 +96,26 @@ type DeleteIPSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIPSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIPSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIPSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteIPSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteIPSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteIPSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteIPSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIPSet, schemas.DeleteIPSetRequest, schemas.DeleteIPSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteIPSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIPSet, schemas.DeleteIPSetRequest, schemas.DeleteIPSetResponse), output: &DeleteIPSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

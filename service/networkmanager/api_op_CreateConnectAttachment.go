@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,36 @@ type CreateConnectAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateConnectAttachmentRequest_ClientToken, *v.ClientToken)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.CreateConnectAttachmentRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.EdgeLocation != nil {
+		s.WriteString(schemas.CreateConnectAttachmentRequest_EdgeLocation, *v.EdgeLocation)
+	}
+	if v.Options != nil {
+		s.WriteStruct(schemas.CreateConnectAttachmentRequest_Options)
+		v.Options.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoutingPolicyLabel != nil {
+		s.WriteString(schemas.CreateConnectAttachmentRequest_RoutingPolicyLabel, *v.RoutingPolicyLabel)
+	}
+	serializeTagList(s, schemas.CreateConnectAttachmentRequest_Tags, v.Tags)
+	if v.TransportAttachmentId != nil {
+		s.WriteString(schemas.CreateConnectAttachmentRequest_TransportAttachmentId, *v.TransportAttachmentId)
+	}
+}
+
 type CreateConnectAttachmentOutput struct {
 
 	// The response to a Connect attachment request.
@@ -77,13 +109,34 @@ type CreateConnectAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectAttachmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectAttachmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectAttachment != nil {
+		s.WriteStruct(schemas.CreateConnectAttachmentResponse_ConnectAttachment)
+		v.ConnectAttachment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateConnectAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConnectAttachmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConnectAttachmentResponse_ConnectAttachment:
+			v.ConnectAttachment = &types.ConnectAttachment{}
+			return v.ConnectAttachment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConnectAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConnectAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnectAttachment, schemas.CreateConnectAttachmentRequest, schemas.CreateConnectAttachmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConnectAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnectAttachment, schemas.CreateConnectAttachmentRequest, schemas.CreateConnectAttachmentResponse), output: &CreateConnectAttachmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

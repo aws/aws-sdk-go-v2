@@ -4,6 +4,8 @@ package account
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/account/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,21 @@ type DisableRegionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableRegionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableRegionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableRegionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DisableRegionRequest_AccountId, *v.AccountId)
+	}
+	if v.RegionName != nil {
+		s.WriteString(schemas.DisableRegionRequest_RegionName, *v.RegionName)
+	}
+}
+
 type DisableRegionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -70,13 +87,26 @@ type DisableRegionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableRegionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableRegionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisableRegionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableRegionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisableRegion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableRegion, schemas.DisableRegionRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisableRegion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableRegion, schemas.DisableRegionRequest, nil), output: &DisableRegionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

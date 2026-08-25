@@ -4,7 +4,9 @@ package codegurureviewer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DisassociateRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateRepositoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateRepositoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateRepositoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationArn != nil {
+		s.WriteString(schemas.DisassociateRepositoryRequest_AssociationArn, *v.AssociationArn)
+	}
+}
+
 type DisassociateRepositoryOutput struct {
 
 	// Information about the disassociated repository.
@@ -60,13 +74,37 @@ type DisassociateRepositoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateRepositoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateRepositoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateRepositoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RepositoryAssociation != nil {
+		s.WriteStruct(schemas.DisassociateRepositoryResponse_RepositoryAssociation)
+		v.RepositoryAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.DisassociateRepositoryResponse_Tags, v.Tags)
+}
+func (v *DisassociateRepositoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateRepositoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateRepositoryResponse_RepositoryAssociation:
+			v.RepositoryAssociation = &types.RepositoryAssociation{}
+			return v.RepositoryAssociation.Deserialize(d)
+		case schemas.DisassociateRepositoryResponse_Tags:
+			return deserializeTagMap(d, schemas.DisassociateRepositoryResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateRepository, schemas.DisassociateRepositoryRequest, schemas.DisassociateRepositoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateRepository, schemas.DisassociateRepositoryRequest, schemas.DisassociateRepositoryResponse), output: &DisassociateRepositoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

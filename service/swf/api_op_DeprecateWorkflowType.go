@@ -4,7 +4,9 @@ package swf
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,23 @@ type DeprecateWorkflowTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeprecateWorkflowTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeprecateWorkflowTypeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeprecateWorkflowTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.DeprecateWorkflowTypeInput_domain, *v.Domain)
+	}
+	if v.WorkflowType != nil {
+		s.WriteStruct(schemas.DeprecateWorkflowTypeInput_workflowType)
+		v.WorkflowType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type DeprecateWorkflowTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -77,13 +96,26 @@ type DeprecateWorkflowTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeprecateWorkflowTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeprecateWorkflowTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeprecateWorkflowTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeprecateWorkflowTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeprecateWorkflowType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeprecateWorkflowType, schemas.DeprecateWorkflowTypeInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeprecateWorkflowType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeprecateWorkflowType, schemas.DeprecateWorkflowTypeInput, nil), output: &DeprecateWorkflowTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

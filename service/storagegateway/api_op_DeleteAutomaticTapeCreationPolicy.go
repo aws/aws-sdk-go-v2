@@ -4,6 +4,8 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteAutomaticTapeCreationPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAutomaticTapeCreationPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAutomaticTapeCreationPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAutomaticTapeCreationPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.DeleteAutomaticTapeCreationPolicyInput_GatewayARN, *v.GatewayARN)
+	}
+}
+
 type DeleteAutomaticTapeCreationPolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
@@ -48,13 +62,32 @@ type DeleteAutomaticTapeCreationPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAutomaticTapeCreationPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAutomaticTapeCreationPolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAutomaticTapeCreationPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.DeleteAutomaticTapeCreationPolicyOutput_GatewayARN, *v.GatewayARN)
+	}
+}
+func (v *DeleteAutomaticTapeCreationPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAutomaticTapeCreationPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAutomaticTapeCreationPolicyOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.DeleteAutomaticTapeCreationPolicyOutput_GatewayARN, v.GatewayARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAutomaticTapeCreationPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAutomaticTapeCreationPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAutomaticTapeCreationPolicy, schemas.DeleteAutomaticTapeCreationPolicyInput, schemas.DeleteAutomaticTapeCreationPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteAutomaticTapeCreationPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAutomaticTapeCreationPolicy, schemas.DeleteAutomaticTapeCreationPolicyInput, schemas.DeleteAutomaticTapeCreationPolicyOutput), output: &DeleteAutomaticTapeCreationPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package account
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/account/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/account/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,18 @@ type GetGovCloudAccountInformationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGovCloudAccountInformationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGovCloudAccountInformationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGovCloudAccountInformationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StandardAccountId != nil {
+		s.WriteString(schemas.GetGovCloudAccountInformationRequest_StandardAccountId, *v.StandardAccountId)
+	}
+}
+
 type GetGovCloudAccountInformationOutput struct {
 
 	// The account state of the linked GovCloud account.
@@ -75,13 +89,42 @@ type GetGovCloudAccountInformationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGovCloudAccountInformationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGovCloudAccountInformationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGovCloudAccountInformationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountState != "" {
+		s.WriteString(schemas.GetGovCloudAccountInformationResponse_AccountState, string(v.AccountState))
+	}
+	if v.GovCloudAccountId != nil {
+		s.WriteString(schemas.GetGovCloudAccountInformationResponse_GovCloudAccountId, *v.GovCloudAccountId)
+	}
+}
+func (v *GetGovCloudAccountInformationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGovCloudAccountInformationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGovCloudAccountInformationResponse_AccountState:
+			var ev string
+			if err := d.ReadString(schemas.GetGovCloudAccountInformationResponse_AccountState, &ev); err != nil {
+				return err
+			}
+			v.AccountState = types.AwsAccountState(ev)
+			return nil
+		case schemas.GetGovCloudAccountInformationResponse_GovCloudAccountId:
+			v.GovCloudAccountId = new(string)
+			return d.ReadString(schemas.GetGovCloudAccountInformationResponse_GovCloudAccountId, v.GovCloudAccountId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGovCloudAccountInformationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGovCloudAccountInformation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGovCloudAccountInformation, schemas.GetGovCloudAccountInformationRequest, schemas.GetGovCloudAccountInformationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGovCloudAccountInformation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGovCloudAccountInformation, schemas.GetGovCloudAccountInformationRequest, schemas.GetGovCloudAccountInformationResponse), output: &GetGovCloudAccountInformationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

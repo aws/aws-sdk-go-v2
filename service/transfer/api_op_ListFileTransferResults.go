@@ -5,7 +5,9 @@ package transfer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,27 @@ type ListFileTransferResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFileTransferResultsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFileTransferResultsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFileTransferResultsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.ListFileTransferResultsRequest_ConnectorId, *v.ConnectorId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFileTransferResultsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFileTransferResultsRequest_NextToken, *v.NextToken)
+	}
+	if v.TransferId != nil {
+		s.WriteString(schemas.ListFileTransferResultsRequest_TransferId, *v.TransferId)
+	}
+}
+
 type ListFileTransferResultsOutput struct {
 
 	// Returns the details for the files transferred in the transfer identified by the
@@ -89,13 +112,35 @@ type ListFileTransferResultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFileTransferResultsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFileTransferResultsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFileTransferResultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectorFileTransferResults(s, schemas.ListFileTransferResultsResponse_FileTransferResults, v.FileTransferResults)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFileTransferResultsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFileTransferResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFileTransferResultsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFileTransferResultsResponse_FileTransferResults:
+			return deserializeConnectorFileTransferResults(d, schemas.ListFileTransferResultsResponse_FileTransferResults, &v.FileTransferResults)
+		case schemas.ListFileTransferResultsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFileTransferResultsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFileTransferResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFileTransferResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFileTransferResults, schemas.ListFileTransferResultsRequest, schemas.ListFileTransferResultsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListFileTransferResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFileTransferResults, schemas.ListFileTransferResultsRequest, schemas.ListFileTransferResultsResponse), output: &ListFileTransferResultsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

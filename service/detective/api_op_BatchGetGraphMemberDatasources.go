@@ -4,7 +4,9 @@ package detective
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/detective/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/detective/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,19 @@ type BatchGetGraphMemberDatasourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetGraphMemberDatasourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetGraphMemberDatasourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetGraphMemberDatasourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdExtendedList(s, schemas.BatchGetGraphMemberDatasourcesRequest_AccountIds, v.AccountIds)
+	if v.GraphArn != nil {
+		s.WriteString(schemas.BatchGetGraphMemberDatasourcesRequest_GraphArn, *v.GraphArn)
+	}
+}
+
 type BatchGetGraphMemberDatasourcesOutput struct {
 
 	// Details on the status of data source packages for members of the behavior graph.
@@ -54,13 +69,32 @@ type BatchGetGraphMemberDatasourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetGraphMemberDatasourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetGraphMemberDatasourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetGraphMemberDatasourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMembershipDatasourcesList(s, schemas.BatchGetGraphMemberDatasourcesResponse_MemberDatasources, v.MemberDatasources)
+	serializeUnprocessedAccountList(s, schemas.BatchGetGraphMemberDatasourcesResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+}
+func (v *BatchGetGraphMemberDatasourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetGraphMemberDatasourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetGraphMemberDatasourcesResponse_MemberDatasources:
+			return deserializeMembershipDatasourcesList(d, schemas.BatchGetGraphMemberDatasourcesResponse_MemberDatasources, &v.MemberDatasources)
+		case schemas.BatchGetGraphMemberDatasourcesResponse_UnprocessedAccounts:
+			return deserializeUnprocessedAccountList(d, schemas.BatchGetGraphMemberDatasourcesResponse_UnprocessedAccounts, &v.UnprocessedAccounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetGraphMemberDatasourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetGraphMemberDatasources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetGraphMemberDatasources, schemas.BatchGetGraphMemberDatasourcesRequest, schemas.BatchGetGraphMemberDatasourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetGraphMemberDatasources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetGraphMemberDatasources, schemas.BatchGetGraphMemberDatasourcesRequest, schemas.BatchGetGraphMemberDatasourcesResponse), output: &BatchGetGraphMemberDatasourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

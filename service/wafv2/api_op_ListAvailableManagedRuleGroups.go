@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,24 @@ type ListAvailableManagedRuleGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAvailableManagedRuleGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAvailableManagedRuleGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAvailableManagedRuleGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListAvailableManagedRuleGroupsRequest_Limit, *v.Limit)
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListAvailableManagedRuleGroupsRequest_NextMarker, *v.NextMarker)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.ListAvailableManagedRuleGroupsRequest_Scope, string(v.Scope))
+	}
+}
+
 type ListAvailableManagedRuleGroupsOutput struct {
 
 	// Array of managed rule groups that you can use. If you specified a Limit in your
@@ -75,13 +95,35 @@ type ListAvailableManagedRuleGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAvailableManagedRuleGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAvailableManagedRuleGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAvailableManagedRuleGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeManagedRuleGroupSummaries(s, schemas.ListAvailableManagedRuleGroupsResponse_ManagedRuleGroups, v.ManagedRuleGroups)
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListAvailableManagedRuleGroupsResponse_NextMarker, *v.NextMarker)
+	}
+}
+func (v *ListAvailableManagedRuleGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAvailableManagedRuleGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAvailableManagedRuleGroupsResponse_ManagedRuleGroups:
+			return deserializeManagedRuleGroupSummaries(d, schemas.ListAvailableManagedRuleGroupsResponse_ManagedRuleGroups, &v.ManagedRuleGroups)
+		case schemas.ListAvailableManagedRuleGroupsResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListAvailableManagedRuleGroupsResponse_NextMarker, v.NextMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAvailableManagedRuleGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAvailableManagedRuleGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAvailableManagedRuleGroups, schemas.ListAvailableManagedRuleGroupsRequest, schemas.ListAvailableManagedRuleGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAvailableManagedRuleGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAvailableManagedRuleGroups, schemas.ListAvailableManagedRuleGroupsRequest, schemas.ListAvailableManagedRuleGroupsResponse), output: &ListAvailableManagedRuleGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package eventbridge
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -43,6 +45,18 @@ type DescribeEventBusInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeEventBusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEventBusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEventBusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeEventBusRequest_Name, *v.Name)
+	}
 }
 
 type DescribeEventBusOutput struct {
@@ -95,13 +109,84 @@ type DescribeEventBusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEventBusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEventBusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEventBusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeEventBusResponse_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeEventBusResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DeadLetterConfig != nil {
+		s.WriteStruct(schemas.DescribeEventBusResponse_DeadLetterConfig)
+		v.DeadLetterConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeEventBusResponse_Description, *v.Description)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.DescribeEventBusResponse_KmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeEventBusResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.LogConfig != nil {
+		s.WriteStruct(schemas.DescribeEventBusResponse_LogConfig)
+		v.LogConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeEventBusResponse_Name, *v.Name)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.DescribeEventBusResponse_Policy, *v.Policy)
+	}
+}
+func (v *DescribeEventBusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEventBusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEventBusResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeEventBusResponse_Arn, v.Arn)
+		case schemas.DescribeEventBusResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeEventBusResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeEventBusResponse_DeadLetterConfig:
+			v.DeadLetterConfig = &types.DeadLetterConfig{}
+			return v.DeadLetterConfig.Deserialize(d)
+		case schemas.DescribeEventBusResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeEventBusResponse_Description, v.Description)
+		case schemas.DescribeEventBusResponse_KmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.DescribeEventBusResponse_KmsKeyIdentifier, v.KmsKeyIdentifier)
+		case schemas.DescribeEventBusResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeEventBusResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeEventBusResponse_LogConfig:
+			v.LogConfig = &types.LogConfig{}
+			return v.LogConfig.Deserialize(d)
+		case schemas.DescribeEventBusResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeEventBusResponse_Name, v.Name)
+		case schemas.DescribeEventBusResponse_Policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.DescribeEventBusResponse_Policy, v.Policy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEventBusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEventBus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventBus, schemas.DescribeEventBusRequest, schemas.DescribeEventBusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEventBus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEventBus, schemas.DescribeEventBusRequest, schemas.DescribeEventBusResponse), output: &DescribeEventBusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

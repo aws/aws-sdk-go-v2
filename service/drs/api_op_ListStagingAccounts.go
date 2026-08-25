@@ -5,7 +5,9 @@ package drs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,34 @@ type ListStagingAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStagingAccountsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStagingAccountsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStagingAccountsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListStagingAccountsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStagingAccountsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListStagingAccountsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStagingAccountsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStagingAccountsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListStagingAccountsRequest_maxResults, v.MaxResults)
+		case schemas.ListStagingAccountsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStagingAccountsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListStagingAccountsOutput struct {
 
 	// An array of staging AWS Accounts.
@@ -50,13 +80,35 @@ type ListStagingAccountsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStagingAccountsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStagingAccountsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStagingAccountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccounts(s, schemas.ListStagingAccountsResponse_accounts, v.Accounts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStagingAccountsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListStagingAccountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStagingAccountsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStagingAccountsResponse_accounts:
+			return deserializeAccounts(d, schemas.ListStagingAccountsResponse_accounts, &v.Accounts)
+		case schemas.ListStagingAccountsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStagingAccountsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStagingAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListStagingAccounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStagingAccounts, schemas.ListStagingAccountsRequest, schemas.ListStagingAccountsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListStagingAccounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStagingAccounts, schemas.ListStagingAccountsRequest, schemas.ListStagingAccountsResponse), output: &ListStagingAccountsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package servicecatalogappregistry
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,25 @@ type AssociateResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Application != nil {
+		s.WriteString(schemas.AssociateResourceRequest_application, *v.Application)
+	}
+	serializeOptions(s, schemas.AssociateResourceRequest_options, v.Options)
+	if v.Resource != nil {
+		s.WriteString(schemas.AssociateResourceRequest_resource, *v.Resource)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.AssociateResourceRequest_resourceType, string(v.ResourceType))
+	}
+}
+
 type AssociateResourceOutput struct {
 
 	// The Amazon resource name (ARN) of the application that was augmented with
@@ -93,13 +114,41 @@ type AssociateResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.AssociateResourceResponse_applicationArn, *v.ApplicationArn)
+	}
+	serializeOptions(s, schemas.AssociateResourceResponse_options, v.Options)
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.AssociateResourceResponse_resourceArn, *v.ResourceArn)
+	}
+}
+func (v *AssociateResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateResourceResponse_applicationArn:
+			v.ApplicationArn = new(string)
+			return d.ReadString(schemas.AssociateResourceResponse_applicationArn, v.ApplicationArn)
+		case schemas.AssociateResourceResponse_options:
+			return deserializeOptions(d, schemas.AssociateResourceResponse_options, &v.Options)
+		case schemas.AssociateResourceResponse_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.AssociateResourceResponse_resourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateResource, schemas.AssociateResourceRequest, schemas.AssociateResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateResource, schemas.AssociateResourceRequest, schemas.AssociateResourceResponse), output: &AssociateResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

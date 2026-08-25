@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -49,6 +51,24 @@ type GetQueueLimitAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueueLimitAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueueLimitAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueueLimitAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.GetQueueLimitAssociationRequest_farmId, *v.FarmId)
+	}
+	if v.LimitId != nil {
+		s.WriteString(schemas.GetQueueLimitAssociationRequest_limitId, *v.LimitId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.GetQueueLimitAssociationRequest_queueId, *v.QueueId)
+	}
+}
+
 // Domain fields for QueueLimitAssociation summary/response shapes, ordered before
 // timestamps.
 type GetQueueLimitAssociationOutput struct {
@@ -90,13 +110,72 @@ type GetQueueLimitAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueueLimitAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueueLimitAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueueLimitAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetQueueLimitAssociationResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetQueueLimitAssociationResponse_createdBy, *v.CreatedBy)
+	}
+	if v.LimitId != nil {
+		s.WriteString(schemas.GetQueueLimitAssociationResponse_limitId, *v.LimitId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.GetQueueLimitAssociationResponse_queueId, *v.QueueId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetQueueLimitAssociationResponse_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetQueueLimitAssociationResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.GetQueueLimitAssociationResponse_updatedBy, *v.UpdatedBy)
+	}
+}
+func (v *GetQueueLimitAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetQueueLimitAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetQueueLimitAssociationResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetQueueLimitAssociationResponse_createdAt, v.CreatedAt)
+		case schemas.GetQueueLimitAssociationResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetQueueLimitAssociationResponse_createdBy, v.CreatedBy)
+		case schemas.GetQueueLimitAssociationResponse_limitId:
+			v.LimitId = new(string)
+			return d.ReadString(schemas.GetQueueLimitAssociationResponse_limitId, v.LimitId)
+		case schemas.GetQueueLimitAssociationResponse_queueId:
+			v.QueueId = new(string)
+			return d.ReadString(schemas.GetQueueLimitAssociationResponse_queueId, v.QueueId)
+		case schemas.GetQueueLimitAssociationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetQueueLimitAssociationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.QueueLimitAssociationStatus(ev)
+			return nil
+		case schemas.GetQueueLimitAssociationResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetQueueLimitAssociationResponse_updatedAt, v.UpdatedAt)
+		case schemas.GetQueueLimitAssociationResponse_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.GetQueueLimitAssociationResponse_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetQueueLimitAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetQueueLimitAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueueLimitAssociation, schemas.GetQueueLimitAssociationRequest, schemas.GetQueueLimitAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetQueueLimitAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueueLimitAssociation, schemas.GetQueueLimitAssociationRequest, schemas.GetQueueLimitAssociationResponse), output: &GetQueueLimitAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

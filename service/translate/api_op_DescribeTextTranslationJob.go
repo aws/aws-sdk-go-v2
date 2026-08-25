@@ -4,7 +4,9 @@ package translate
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/translate/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/translate/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DescribeTextTranslationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTextTranslationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTextTranslationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTextTranslationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeTextTranslationJobRequest_JobId, *v.JobId)
+	}
+}
+
 type DescribeTextTranslationJobOutput struct {
 
 	// An object that contains the properties associated with an asynchronous batch
@@ -49,13 +63,34 @@ type DescribeTextTranslationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTextTranslationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTextTranslationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTextTranslationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TextTranslationJobProperties != nil {
+		s.WriteStruct(schemas.DescribeTextTranslationJobResponse_TextTranslationJobProperties)
+		v.TextTranslationJobProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeTextTranslationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTextTranslationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTextTranslationJobResponse_TextTranslationJobProperties:
+			v.TextTranslationJobProperties = &types.TextTranslationJobProperties{}
+			return v.TextTranslationJobProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTextTranslationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTextTranslationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTextTranslationJob, schemas.DescribeTextTranslationJobRequest, schemas.DescribeTextTranslationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTextTranslationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTextTranslationJob, schemas.DescribeTextTranslationJobRequest, schemas.DescribeTextTranslationJobResponse), output: &DescribeTextTranslationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

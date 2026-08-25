@@ -5,7 +5,9 @@ package vpclattice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,46 @@ type ListRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ListenerIdentifier != nil {
+		s.WriteString(schemas.ListRulesRequest_listenerIdentifier, *v.ListenerIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRulesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRulesRequest_nextToken, *v.NextToken)
+	}
+	if v.ServiceIdentifier != nil {
+		s.WriteString(schemas.ListRulesRequest_serviceIdentifier, *v.ServiceIdentifier)
+	}
+}
+func (v *ListRulesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRulesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRulesRequest_listenerIdentifier:
+			v.ListenerIdentifier = new(string)
+			return d.ReadString(schemas.ListRulesRequest_listenerIdentifier, v.ListenerIdentifier)
+		case schemas.ListRulesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListRulesRequest_maxResults, v.MaxResults)
+		case schemas.ListRulesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRulesRequest_nextToken, v.NextToken)
+		case schemas.ListRulesRequest_serviceIdentifier:
+			v.ServiceIdentifier = new(string)
+			return d.ReadString(schemas.ListRulesRequest_serviceIdentifier, v.ServiceIdentifier)
+		}
+		return nil
+	})
+}
+
 type ListRulesOutput struct {
 
 	// Information about the rules.
@@ -63,13 +105,35 @@ type ListRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRulesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRuleSummaryList(s, schemas.ListRulesResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRulesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRulesResponse_items:
+			return deserializeRuleSummaryList(d, schemas.ListRulesResponse_items, &v.Items)
+		case schemas.ListRulesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRulesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRules, schemas.ListRulesRequest, schemas.ListRulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRules, schemas.ListRulesRequest, schemas.ListRulesResponse), output: &ListRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

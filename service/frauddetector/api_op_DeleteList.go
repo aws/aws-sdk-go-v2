@@ -4,6 +4,8 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteListRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteListRequest_name, *v.Name)
+	}
+}
+
 type DeleteListOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type DeleteListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteListOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteListResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteListOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteListResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteListMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteList{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteList, schemas.DeleteListRequest, schemas.DeleteListResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteList, schemas.DeleteListRequest, schemas.DeleteListResult), output: &DeleteListOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

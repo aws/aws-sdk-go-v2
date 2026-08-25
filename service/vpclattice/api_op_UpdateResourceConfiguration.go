@@ -4,7 +4,9 @@ package vpclattice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,23 @@ type UpdateResourceConfigurationInput struct {
 	ResourceConfigurationDefinition types.ResourceConfigurationDefinition
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateResourceConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResourceConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResourceConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowAssociationToShareableServiceNetwork != nil {
+		s.WriteBool(schemas.UpdateResourceConfigurationRequest_allowAssociationToShareableServiceNetwork, *v.AllowAssociationToShareableServiceNetwork)
+	}
+	serializePortRangeList(s, schemas.UpdateResourceConfigurationRequest_portRanges, v.PortRanges)
+	serializeResourceConfigurationDefinition(s, schemas.UpdateResourceConfigurationRequest_resourceConfigurationDefinition, v.ResourceConfigurationDefinition)
+	if v.ResourceConfigurationIdentifier != nil {
+		s.WriteString(schemas.UpdateResourceConfigurationRequest_resourceConfigurationIdentifier, *v.ResourceConfigurationIdentifier)
+	}
 }
 
 type UpdateResourceConfigurationOutput struct {
@@ -104,13 +123,98 @@ type UpdateResourceConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResourceConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResourceConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResourceConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowAssociationToShareableServiceNetwork != nil {
+		s.WriteBool(schemas.UpdateResourceConfigurationResponse_allowAssociationToShareableServiceNetwork, *v.AllowAssociationToShareableServiceNetwork)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateResourceConfigurationResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateResourceConfigurationResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateResourceConfigurationResponse_name, *v.Name)
+	}
+	serializePortRangeList(s, schemas.UpdateResourceConfigurationResponse_portRanges, v.PortRanges)
+	if v.Protocol != "" {
+		s.WriteString(schemas.UpdateResourceConfigurationResponse_protocol, string(v.Protocol))
+	}
+	serializeResourceConfigurationDefinition(s, schemas.UpdateResourceConfigurationResponse_resourceConfigurationDefinition, v.ResourceConfigurationDefinition)
+	if v.ResourceConfigurationGroupId != nil {
+		s.WriteString(schemas.UpdateResourceConfigurationResponse_resourceConfigurationGroupId, *v.ResourceConfigurationGroupId)
+	}
+	if v.ResourceGatewayId != nil {
+		s.WriteString(schemas.UpdateResourceConfigurationResponse_resourceGatewayId, *v.ResourceGatewayId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateResourceConfigurationResponse_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateResourceConfigurationResponse_type, string(v.Type))
+	}
+}
+func (v *UpdateResourceConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateResourceConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateResourceConfigurationResponse_allowAssociationToShareableServiceNetwork:
+			v.AllowAssociationToShareableServiceNetwork = new(bool)
+			return d.ReadBool(schemas.UpdateResourceConfigurationResponse_allowAssociationToShareableServiceNetwork, v.AllowAssociationToShareableServiceNetwork)
+		case schemas.UpdateResourceConfigurationResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateResourceConfigurationResponse_arn, v.Arn)
+		case schemas.UpdateResourceConfigurationResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateResourceConfigurationResponse_id, v.Id)
+		case schemas.UpdateResourceConfigurationResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateResourceConfigurationResponse_name, v.Name)
+		case schemas.UpdateResourceConfigurationResponse_portRanges:
+			return deserializePortRangeList(d, schemas.UpdateResourceConfigurationResponse_portRanges, &v.PortRanges)
+		case schemas.UpdateResourceConfigurationResponse_protocol:
+			var ev string
+			if err := d.ReadString(schemas.UpdateResourceConfigurationResponse_protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = types.ProtocolType(ev)
+			return nil
+		case schemas.UpdateResourceConfigurationResponse_resourceConfigurationDefinition:
+			return deserializeResourceConfigurationDefinition(d, schemas.UpdateResourceConfigurationResponse_resourceConfigurationDefinition, &v.ResourceConfigurationDefinition)
+		case schemas.UpdateResourceConfigurationResponse_resourceConfigurationGroupId:
+			v.ResourceConfigurationGroupId = new(string)
+			return d.ReadString(schemas.UpdateResourceConfigurationResponse_resourceConfigurationGroupId, v.ResourceConfigurationGroupId)
+		case schemas.UpdateResourceConfigurationResponse_resourceGatewayId:
+			v.ResourceGatewayId = new(string)
+			return d.ReadString(schemas.UpdateResourceConfigurationResponse_resourceGatewayId, v.ResourceGatewayId)
+		case schemas.UpdateResourceConfigurationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateResourceConfigurationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ResourceConfigurationStatus(ev)
+			return nil
+		case schemas.UpdateResourceConfigurationResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.UpdateResourceConfigurationResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.ResourceConfigurationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateResourceConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateResourceConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResourceConfiguration, schemas.UpdateResourceConfigurationRequest, schemas.UpdateResourceConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateResourceConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResourceConfiguration, schemas.UpdateResourceConfigurationRequest, schemas.UpdateResourceConfigurationResponse), output: &UpdateResourceConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

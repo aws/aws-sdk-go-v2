@@ -4,7 +4,9 @@ package mediapackagevod
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,23 @@ type UpdatePackagingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePackagingGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePackagingGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePackagingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Authorization != nil {
+		s.WriteStruct(schemas.UpdatePackagingGroupRequest_Authorization)
+		v.Authorization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdatePackagingGroupRequest_Id, *v.Id)
+	}
+}
+
 type UpdatePackagingGroupOutput struct {
 
 	// The approximate asset count of the PackagingGroup.
@@ -71,13 +90,75 @@ type UpdatePackagingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePackagingGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePackagingGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePackagingGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateAssetCount != nil {
+		s.WriteInt32(schemas.UpdatePackagingGroupResponse_ApproximateAssetCount, *v.ApproximateAssetCount)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdatePackagingGroupResponse_Arn, *v.Arn)
+	}
+	if v.Authorization != nil {
+		s.WriteStruct(schemas.UpdatePackagingGroupResponse_Authorization)
+		v.Authorization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteString(schemas.UpdatePackagingGroupResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpdatePackagingGroupResponse_DomainName, *v.DomainName)
+	}
+	if v.EgressAccessLogs != nil {
+		s.WriteStruct(schemas.UpdatePackagingGroupResponse_EgressAccessLogs)
+		v.EgressAccessLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdatePackagingGroupResponse_Id, *v.Id)
+	}
+	serializeTags(s, schemas.UpdatePackagingGroupResponse_Tags, v.Tags)
+}
+func (v *UpdatePackagingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePackagingGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePackagingGroupResponse_ApproximateAssetCount:
+			v.ApproximateAssetCount = new(int32)
+			return d.ReadInt32(schemas.UpdatePackagingGroupResponse_ApproximateAssetCount, v.ApproximateAssetCount)
+		case schemas.UpdatePackagingGroupResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdatePackagingGroupResponse_Arn, v.Arn)
+		case schemas.UpdatePackagingGroupResponse_Authorization:
+			v.Authorization = &types.Authorization{}
+			return v.Authorization.Deserialize(d)
+		case schemas.UpdatePackagingGroupResponse_CreatedAt:
+			v.CreatedAt = new(string)
+			return d.ReadString(schemas.UpdatePackagingGroupResponse_CreatedAt, v.CreatedAt)
+		case schemas.UpdatePackagingGroupResponse_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.UpdatePackagingGroupResponse_DomainName, v.DomainName)
+		case schemas.UpdatePackagingGroupResponse_EgressAccessLogs:
+			v.EgressAccessLogs = &types.EgressAccessLogs{}
+			return v.EgressAccessLogs.Deserialize(d)
+		case schemas.UpdatePackagingGroupResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdatePackagingGroupResponse_Id, v.Id)
+		case schemas.UpdatePackagingGroupResponse_Tags:
+			return deserializeTags(d, schemas.UpdatePackagingGroupResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePackagingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePackagingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePackagingGroup, schemas.UpdatePackagingGroupRequest, schemas.UpdatePackagingGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePackagingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePackagingGroup, schemas.UpdatePackagingGroupRequest, schemas.UpdatePackagingGroupResponse), output: &UpdatePackagingGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

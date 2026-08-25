@@ -90,6 +90,7 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) 
 }
 
 func deserializeBoundedEnvironmentIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -103,6 +104,7 @@ func deserializeBoundedEnvironmentIdList(d smithy.ShapeDeserializer, s *smithy.S
 }
 
 func deserializeEnvironmentIdList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -116,6 +118,7 @@ func deserializeEnvironmentIdList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeEnvironmentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Environment) error {
+	*v = make([]Environment, 0)
 	var vv Environment
 	return smithy.ReadList(d, s, func() error {
 		vv = Environment{}
@@ -129,6 +132,7 @@ func deserializeEnvironmentList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeEnvironmentMembersList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]EnvironmentMember) error {
+	*v = make([]EnvironmentMember, 0)
 	var vv EnvironmentMember
 	return smithy.ReadList(d, s, func() error {
 		vv = EnvironmentMember{}
@@ -142,6 +146,7 @@ func deserializeEnvironmentMembersList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializePermissionsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Permissions) error {
+	*v = make([]Permissions, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -155,6 +160,7 @@ func deserializePermissionsList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -168,6 +174,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) error {
+	*v = make([]Tag, 0)
 	var vv Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = Tag{}

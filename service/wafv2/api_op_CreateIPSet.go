@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -103,6 +105,29 @@ type CreateIPSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIPSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIPSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIPSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIPAddresses(s, schemas.CreateIPSetRequest_Addresses, v.Addresses)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateIPSetRequest_Description, *v.Description)
+	}
+	if v.IPAddressVersion != "" {
+		s.WriteString(schemas.CreateIPSetRequest_IPAddressVersion, string(v.IPAddressVersion))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateIPSetRequest_Name, *v.Name)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.CreateIPSetRequest_Scope, string(v.Scope))
+	}
+	serializeTagList(s, schemas.CreateIPSetRequest_Tags, v.Tags)
+}
+
 type CreateIPSetOutput struct {
 
 	// High-level information about an IPSet, returned by operations like create and list.
@@ -116,13 +141,34 @@ type CreateIPSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIPSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIPSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIPSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Summary != nil {
+		s.WriteStruct(schemas.CreateIPSetResponse_Summary)
+		v.Summary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateIPSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIPSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIPSetResponse_Summary:
+			v.Summary = &types.IPSetSummary{}
+			return v.Summary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIPSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateIPSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIPSet, schemas.CreateIPSetRequest, schemas.CreateIPSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateIPSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIPSet, schemas.CreateIPSetRequest, schemas.CreateIPSetResponse), output: &CreateIPSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

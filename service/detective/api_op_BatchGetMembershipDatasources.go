@@ -4,7 +4,9 @@ package detective
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/detective/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/detective/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,16 @@ type BatchGetMembershipDatasourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetMembershipDatasourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetMembershipDatasourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetMembershipDatasourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGraphArnList(s, schemas.BatchGetMembershipDatasourcesRequest_GraphArns, v.GraphArns)
+}
+
 type BatchGetMembershipDatasourcesOutput struct {
 
 	// Details on the data source package history for an member of the behavior graph.
@@ -48,13 +60,32 @@ type BatchGetMembershipDatasourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetMembershipDatasourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetMembershipDatasourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetMembershipDatasourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMembershipDatasourcesList(s, schemas.BatchGetMembershipDatasourcesResponse_MembershipDatasources, v.MembershipDatasources)
+	serializeUnprocessedGraphList(s, schemas.BatchGetMembershipDatasourcesResponse_UnprocessedGraphs, v.UnprocessedGraphs)
+}
+func (v *BatchGetMembershipDatasourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetMembershipDatasourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetMembershipDatasourcesResponse_MembershipDatasources:
+			return deserializeMembershipDatasourcesList(d, schemas.BatchGetMembershipDatasourcesResponse_MembershipDatasources, &v.MembershipDatasources)
+		case schemas.BatchGetMembershipDatasourcesResponse_UnprocessedGraphs:
+			return deserializeUnprocessedGraphList(d, schemas.BatchGetMembershipDatasourcesResponse_UnprocessedGraphs, &v.UnprocessedGraphs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetMembershipDatasourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetMembershipDatasources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetMembershipDatasources, schemas.BatchGetMembershipDatasourcesRequest, schemas.BatchGetMembershipDatasourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetMembershipDatasources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetMembershipDatasources, schemas.BatchGetMembershipDatasourcesRequest, schemas.BatchGetMembershipDatasourcesResponse), output: &BatchGetMembershipDatasourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

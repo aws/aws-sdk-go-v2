@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,37 @@ type CreateConnectPeerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectPeerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectPeerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectPeerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BgpOptions != nil {
+		s.WriteStruct(schemas.CreateConnectPeerRequest_BgpOptions)
+		v.BgpOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateConnectPeerRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ConnectAttachmentId != nil {
+		s.WriteString(schemas.CreateConnectPeerRequest_ConnectAttachmentId, *v.ConnectAttachmentId)
+	}
+	if v.CoreNetworkAddress != nil {
+		s.WriteString(schemas.CreateConnectPeerRequest_CoreNetworkAddress, *v.CoreNetworkAddress)
+	}
+	serializeConstrainedStringList(s, schemas.CreateConnectPeerRequest_InsideCidrBlocks, v.InsideCidrBlocks)
+	if v.PeerAddress != nil {
+		s.WriteString(schemas.CreateConnectPeerRequest_PeerAddress, *v.PeerAddress)
+	}
+	if v.SubnetArn != nil {
+		s.WriteString(schemas.CreateConnectPeerRequest_SubnetArn, *v.SubnetArn)
+	}
+	serializeTagList(s, schemas.CreateConnectPeerRequest_Tags, v.Tags)
+}
+
 type CreateConnectPeerOutput struct {
 
 	// The response to the request.
@@ -73,13 +106,34 @@ type CreateConnectPeerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectPeerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectPeerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectPeerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectPeer != nil {
+		s.WriteStruct(schemas.CreateConnectPeerResponse_ConnectPeer)
+		v.ConnectPeer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateConnectPeerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConnectPeerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConnectPeerResponse_ConnectPeer:
+			v.ConnectPeer = &types.ConnectPeer{}
+			return v.ConnectPeer.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConnectPeerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConnectPeer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnectPeer, schemas.CreateConnectPeerRequest, schemas.CreateConnectPeerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConnectPeer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnectPeer, schemas.CreateConnectPeerRequest, schemas.CreateConnectPeerResponse), output: &CreateConnectPeerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package pi
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,30 @@ type GetPerformanceAnalysisReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPerformanceAnalysisReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPerformanceAnalysisReportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPerformanceAnalysisReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != "" {
+		s.WriteString(schemas.GetPerformanceAnalysisReportRequest_AcceptLanguage, string(v.AcceptLanguage))
+	}
+	if v.AnalysisReportId != nil {
+		s.WriteString(schemas.GetPerformanceAnalysisReportRequest_AnalysisReportId, *v.AnalysisReportId)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetPerformanceAnalysisReportRequest_Identifier, *v.Identifier)
+	}
+	if v.ServiceType != "" {
+		s.WriteString(schemas.GetPerformanceAnalysisReportRequest_ServiceType, string(v.ServiceType))
+	}
+	if v.TextFormat != "" {
+		s.WriteString(schemas.GetPerformanceAnalysisReportRequest_TextFormat, string(v.TextFormat))
+	}
+}
+
 type GetPerformanceAnalysisReportOutput struct {
 
 	// The summary of the performance analysis report created for a time period.
@@ -72,13 +98,34 @@ type GetPerformanceAnalysisReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPerformanceAnalysisReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPerformanceAnalysisReportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPerformanceAnalysisReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisReport != nil {
+		s.WriteStruct(schemas.GetPerformanceAnalysisReportResponse_AnalysisReport)
+		v.AnalysisReport.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetPerformanceAnalysisReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPerformanceAnalysisReportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPerformanceAnalysisReportResponse_AnalysisReport:
+			v.AnalysisReport = &types.AnalysisReport{}
+			return v.AnalysisReport.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPerformanceAnalysisReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPerformanceAnalysisReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPerformanceAnalysisReport, schemas.GetPerformanceAnalysisReportRequest, schemas.GetPerformanceAnalysisReportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetPerformanceAnalysisReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPerformanceAnalysisReport, schemas.GetPerformanceAnalysisReportRequest, schemas.GetPerformanceAnalysisReportResponse), output: &GetPerformanceAnalysisReportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

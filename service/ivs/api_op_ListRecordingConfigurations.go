@@ -5,7 +5,9 @@ package ivs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,34 @@ type ListRecordingConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecordingConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecordingConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecordingConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRecordingConfigurationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecordingConfigurationsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListRecordingConfigurationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecordingConfigurationsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecordingConfigurationsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListRecordingConfigurationsRequest_maxResults, v.MaxResults)
+		case schemas.ListRecordingConfigurationsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecordingConfigurationsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListRecordingConfigurationsOutput struct {
 
 	// List of the matching recording configurations.
@@ -56,13 +86,35 @@ type ListRecordingConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecordingConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecordingConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecordingConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecordingConfigurationsResponse_nextToken, *v.NextToken)
+	}
+	serializeRecordingConfigurationList(s, schemas.ListRecordingConfigurationsResponse_recordingConfigurations, v.RecordingConfigurations)
+}
+func (v *ListRecordingConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecordingConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecordingConfigurationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecordingConfigurationsResponse_nextToken, v.NextToken)
+		case schemas.ListRecordingConfigurationsResponse_recordingConfigurations:
+			return deserializeRecordingConfigurationList(d, schemas.ListRecordingConfigurationsResponse_recordingConfigurations, &v.RecordingConfigurations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecordingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRecordingConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecordingConfigurations, schemas.ListRecordingConfigurationsRequest, schemas.ListRecordingConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRecordingConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecordingConfigurations, schemas.ListRecordingConfigurationsRequest, schemas.ListRecordingConfigurationsResponse), output: &ListRecordingConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

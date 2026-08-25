@@ -4,7 +4,9 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type DeleteModelVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteModelVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteModelVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteModelVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelId != nil {
+		s.WriteString(schemas.DeleteModelVersionRequest_modelId, *v.ModelId)
+	}
+	if v.ModelType != "" {
+		s.WriteString(schemas.DeleteModelVersionRequest_modelType, string(v.ModelType))
+	}
+	if v.ModelVersionNumber != nil {
+		s.WriteString(schemas.DeleteModelVersionRequest_modelVersionNumber, *v.ModelVersionNumber)
+	}
+}
+
 type DeleteModelVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +77,26 @@ type DeleteModelVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteModelVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteModelVersionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteModelVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteModelVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteModelVersionResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteModelVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteModelVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteModelVersion, schemas.DeleteModelVersionRequest, schemas.DeleteModelVersionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteModelVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteModelVersion, schemas.DeleteModelVersionRequest, schemas.DeleteModelVersionResult), output: &DeleteModelVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

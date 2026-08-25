@@ -4,6 +4,8 @@ package servicecatalogappregistry
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DisassociateAttributeGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateAttributeGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateAttributeGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateAttributeGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Application != nil {
+		s.WriteString(schemas.DisassociateAttributeGroupRequest_application, *v.Application)
+	}
+	if v.AttributeGroup != nil {
+		s.WriteString(schemas.DisassociateAttributeGroupRequest_attributeGroup, *v.AttributeGroup)
+	}
+}
+
 type DisassociateAttributeGroupOutput struct {
 
 	// The Amazon resource name (ARN) that specifies the application.
@@ -55,13 +72,38 @@ type DisassociateAttributeGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateAttributeGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateAttributeGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateAttributeGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.DisassociateAttributeGroupResponse_applicationArn, *v.ApplicationArn)
+	}
+	if v.AttributeGroupArn != nil {
+		s.WriteString(schemas.DisassociateAttributeGroupResponse_attributeGroupArn, *v.AttributeGroupArn)
+	}
+}
+func (v *DisassociateAttributeGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateAttributeGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateAttributeGroupResponse_applicationArn:
+			v.ApplicationArn = new(string)
+			return d.ReadString(schemas.DisassociateAttributeGroupResponse_applicationArn, v.ApplicationArn)
+		case schemas.DisassociateAttributeGroupResponse_attributeGroupArn:
+			v.AttributeGroupArn = new(string)
+			return d.ReadString(schemas.DisassociateAttributeGroupResponse_attributeGroupArn, v.AttributeGroupArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateAttributeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateAttributeGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateAttributeGroup, schemas.DisassociateAttributeGroupRequest, schemas.DisassociateAttributeGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateAttributeGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateAttributeGroup, schemas.DisassociateAttributeGroupRequest, schemas.DisassociateAttributeGroupResponse), output: &DisassociateAttributeGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

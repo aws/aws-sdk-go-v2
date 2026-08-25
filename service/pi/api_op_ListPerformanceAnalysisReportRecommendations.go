@@ -5,7 +5,9 @@ package pi
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,31 @@ type ListPerformanceAnalysisReportRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPerformanceAnalysisReportRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPerformanceAnalysisReportRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPerformanceAnalysisReportRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisReportId != nil {
+		s.WriteString(schemas.ListPerformanceAnalysisReportRecommendationsRequest_AnalysisReportId, *v.AnalysisReportId)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.ListPerformanceAnalysisReportRecommendationsRequest_Identifier, *v.Identifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPerformanceAnalysisReportRecommendationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPerformanceAnalysisReportRecommendationsRequest_NextToken, *v.NextToken)
+	}
+	serializeRecommendationIdList(s, schemas.ListPerformanceAnalysisReportRecommendationsRequest_RecommendationIds, v.RecommendationIds)
+	if v.ServiceType != "" {
+		s.WriteString(schemas.ListPerformanceAnalysisReportRecommendationsRequest_ServiceType, string(v.ServiceType))
+	}
+}
+
 type ListPerformanceAnalysisReportRecommendationsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -82,13 +109,35 @@ type ListPerformanceAnalysisReportRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPerformanceAnalysisReportRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPerformanceAnalysisReportRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPerformanceAnalysisReportRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPerformanceAnalysisReportRecommendationsResponse_NextToken, *v.NextToken)
+	}
+	serializeRecommendationList(s, schemas.ListPerformanceAnalysisReportRecommendationsResponse_Recommendations, v.Recommendations)
+}
+func (v *ListPerformanceAnalysisReportRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPerformanceAnalysisReportRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPerformanceAnalysisReportRecommendationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPerformanceAnalysisReportRecommendationsResponse_NextToken, v.NextToken)
+		case schemas.ListPerformanceAnalysisReportRecommendationsResponse_Recommendations:
+			return deserializeRecommendationList(d, schemas.ListPerformanceAnalysisReportRecommendationsResponse_Recommendations, &v.Recommendations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPerformanceAnalysisReportRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPerformanceAnalysisReportRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPerformanceAnalysisReportRecommendations, schemas.ListPerformanceAnalysisReportRecommendationsRequest, schemas.ListPerformanceAnalysisReportRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPerformanceAnalysisReportRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPerformanceAnalysisReportRecommendations, schemas.ListPerformanceAnalysisReportRecommendationsRequest, schemas.ListPerformanceAnalysisReportRecommendationsResponse), output: &ListPerformanceAnalysisReportRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

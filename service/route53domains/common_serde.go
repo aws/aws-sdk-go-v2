@@ -204,6 +204,7 @@ func serializeValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []string
 }
 
 func deserializeBillingRecords(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.BillingRecord) error {
+	*v = make([]types.BillingRecord, 0)
 	var vv types.BillingRecord
 	return smithy.ReadList(d, s, func() error {
 		vv = types.BillingRecord{}
@@ -217,6 +218,7 @@ func deserializeBillingRecords(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeDnssecKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DnssecKey) error {
+	*v = make([]types.DnssecKey, 0)
 	var vv types.DnssecKey
 	return smithy.ReadList(d, s, func() error {
 		vv = types.DnssecKey{}
@@ -230,6 +232,7 @@ func deserializeDnssecKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeDomainPriceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DomainPrice) error {
+	*v = make([]types.DomainPrice, 0)
 	var vv types.DomainPrice
 	return smithy.ReadList(d, s, func() error {
 		vv = types.DomainPrice{}
@@ -243,6 +246,7 @@ func deserializeDomainPriceList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeDomainStatusList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -256,6 +260,7 @@ func deserializeDomainStatusList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeDomainSuggestionsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DomainSuggestion) error {
+	*v = make([]types.DomainSuggestion, 0)
 	var vv types.DomainSuggestion
 	return smithy.ReadList(d, s, func() error {
 		vv = types.DomainSuggestion{}
@@ -269,6 +274,7 @@ func deserializeDomainSuggestionsList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeDomainSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DomainSummary) error {
+	*v = make([]types.DomainSummary, 0)
 	var vv types.DomainSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.DomainSummary{}
@@ -282,6 +288,7 @@ func deserializeDomainSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeExtraParamList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ExtraParam) error {
+	*v = make([]types.ExtraParam, 0)
 	var vv types.ExtraParam
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ExtraParam{}
@@ -295,6 +302,7 @@ func deserializeExtraParamList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeFilterConditions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.FilterCondition) error {
+	*v = make([]types.FilterCondition, 0)
 	var vv types.FilterCondition
 	return smithy.ReadList(d, s, func() error {
 		vv = types.FilterCondition{}
@@ -308,6 +316,7 @@ func deserializeFilterConditions(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeGlueIpList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -321,6 +330,7 @@ func deserializeGlueIpList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeNameserverList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Nameserver) error {
+	*v = make([]types.Nameserver, 0)
 	var vv types.Nameserver
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Nameserver{}
@@ -334,6 +344,7 @@ func deserializeNameserverList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func deserializeOperationStatusList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.OperationStatus) error {
+	*v = make([]types.OperationStatus, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -347,6 +358,7 @@ func deserializeOperationStatusList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeOperationSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.OperationSummary) error {
+	*v = make([]types.OperationSummary, 0)
 	var vv types.OperationSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.OperationSummary{}
@@ -360,6 +372,7 @@ func deserializeOperationSummaryList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeOperationTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.OperationType) error {
+	*v = make([]types.OperationType, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -373,6 +386,7 @@ func deserializeOperationTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -386,6 +400,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Tag) error {
+	*v = make([]types.Tag, 0)
 	var vv types.Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Tag{}
@@ -399,6 +414,7 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 }
 
 func deserializeValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 

@@ -4,7 +4,9 @@ package mediapackagevod
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type DescribeAssetInput struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeAssetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAssetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeAssetRequest_Id, *v.Id)
+	}
 }
 
 type DescribeAssetOutput struct {
@@ -69,13 +83,74 @@ type DescribeAssetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAssetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAssetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeAssetResponse_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteString(schemas.DescribeAssetResponse_CreatedAt, *v.CreatedAt)
+	}
+	serialize__listOfEgressEndpoint(s, schemas.DescribeAssetResponse_EgressEndpoints, v.EgressEndpoints)
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeAssetResponse_Id, *v.Id)
+	}
+	if v.PackagingGroupId != nil {
+		s.WriteString(schemas.DescribeAssetResponse_PackagingGroupId, *v.PackagingGroupId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.DescribeAssetResponse_ResourceId, *v.ResourceId)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.DescribeAssetResponse_SourceArn, *v.SourceArn)
+	}
+	if v.SourceRoleArn != nil {
+		s.WriteString(schemas.DescribeAssetResponse_SourceRoleArn, *v.SourceRoleArn)
+	}
+	serializeTags(s, schemas.DescribeAssetResponse_Tags, v.Tags)
+}
+func (v *DescribeAssetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAssetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAssetResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeAssetResponse_Arn, v.Arn)
+		case schemas.DescribeAssetResponse_CreatedAt:
+			v.CreatedAt = new(string)
+			return d.ReadString(schemas.DescribeAssetResponse_CreatedAt, v.CreatedAt)
+		case schemas.DescribeAssetResponse_EgressEndpoints:
+			return deserialize__listOfEgressEndpoint(d, schemas.DescribeAssetResponse_EgressEndpoints, &v.EgressEndpoints)
+		case schemas.DescribeAssetResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DescribeAssetResponse_Id, v.Id)
+		case schemas.DescribeAssetResponse_PackagingGroupId:
+			v.PackagingGroupId = new(string)
+			return d.ReadString(schemas.DescribeAssetResponse_PackagingGroupId, v.PackagingGroupId)
+		case schemas.DescribeAssetResponse_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.DescribeAssetResponse_ResourceId, v.ResourceId)
+		case schemas.DescribeAssetResponse_SourceArn:
+			v.SourceArn = new(string)
+			return d.ReadString(schemas.DescribeAssetResponse_SourceArn, v.SourceArn)
+		case schemas.DescribeAssetResponse_SourceRoleArn:
+			v.SourceRoleArn = new(string)
+			return d.ReadString(schemas.DescribeAssetResponse_SourceRoleArn, v.SourceRoleArn)
+		case schemas.DescribeAssetResponse_Tags:
+			return deserializeTags(d, schemas.DescribeAssetResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAsset, schemas.DescribeAssetRequest, schemas.DescribeAssetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAsset, schemas.DescribeAssetRequest, schemas.DescribeAssetResponse), output: &DescribeAssetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

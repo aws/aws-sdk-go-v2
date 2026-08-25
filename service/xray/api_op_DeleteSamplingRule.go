@@ -4,7 +4,9 @@ package xray
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type DeleteSamplingRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSamplingRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSamplingRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSamplingRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleARN != nil {
+		s.WriteString(schemas.DeleteSamplingRuleRequest_RuleARN, *v.RuleARN)
+	}
+	if v.RuleName != nil {
+		s.WriteString(schemas.DeleteSamplingRuleRequest_RuleName, *v.RuleName)
+	}
+}
+
 type DeleteSamplingRuleOutput struct {
 
 	// The deleted rule definition and metadata.
@@ -48,13 +65,34 @@ type DeleteSamplingRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSamplingRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSamplingRuleResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSamplingRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SamplingRuleRecord != nil {
+		s.WriteStruct(schemas.DeleteSamplingRuleResult_SamplingRuleRecord)
+		v.SamplingRuleRecord.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteSamplingRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSamplingRuleResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSamplingRuleResult_SamplingRuleRecord:
+			v.SamplingRuleRecord = &types.SamplingRuleRecord{}
+			return v.SamplingRuleRecord.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSamplingRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSamplingRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSamplingRule, schemas.DeleteSamplingRuleRequest, schemas.DeleteSamplingRuleResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSamplingRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSamplingRule, schemas.DeleteSamplingRuleRequest, schemas.DeleteSamplingRuleResult), output: &DeleteSamplingRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

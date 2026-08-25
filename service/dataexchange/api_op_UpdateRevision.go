@@ -4,6 +4,8 @@ package dataexchange
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -45,6 +47,46 @@ type UpdateRevisionInput struct {
 	Finalized *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateRevisionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRevisionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRevisionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Comment != nil {
+		s.WriteString(schemas.UpdateRevisionRequest_Comment, *v.Comment)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.UpdateRevisionRequest_DataSetId, *v.DataSetId)
+	}
+	if v.Finalized != nil {
+		s.WriteBool(schemas.UpdateRevisionRequest_Finalized, *v.Finalized)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.UpdateRevisionRequest_RevisionId, *v.RevisionId)
+	}
+}
+func (v *UpdateRevisionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRevisionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRevisionRequest_Comment:
+			v.Comment = new(string)
+			return d.ReadString(schemas.UpdateRevisionRequest_Comment, v.Comment)
+		case schemas.UpdateRevisionRequest_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.UpdateRevisionRequest_DataSetId, v.DataSetId)
+		case schemas.UpdateRevisionRequest_Finalized:
+			v.Finalized = new(bool)
+			return d.ReadBool(schemas.UpdateRevisionRequest_Finalized, v.Finalized)
+		case schemas.UpdateRevisionRequest_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.UpdateRevisionRequest_RevisionId, v.RevisionId)
+		}
+		return nil
+	})
 }
 
 type UpdateRevisionOutput struct {
@@ -97,13 +139,90 @@ type UpdateRevisionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRevisionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRevisionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRevisionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateRevisionResponse_Arn, *v.Arn)
+	}
+	if v.Comment != nil {
+		s.WriteString(schemas.UpdateRevisionResponse_Comment, *v.Comment)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateRevisionResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.UpdateRevisionResponse_DataSetId, *v.DataSetId)
+	}
+	if v.Finalized != false {
+		s.WriteBool(schemas.UpdateRevisionResponse_Finalized, v.Finalized)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateRevisionResponse_Id, *v.Id)
+	}
+	if v.RevocationComment != nil {
+		s.WriteString(schemas.UpdateRevisionResponse_RevocationComment, *v.RevocationComment)
+	}
+	if v.Revoked != false {
+		s.WriteBool(schemas.UpdateRevisionResponse_Revoked, v.Revoked)
+	}
+	if v.RevokedAt != nil {
+		s.WriteTime(schemas.UpdateRevisionResponse_RevokedAt, *v.RevokedAt)
+	}
+	if v.SourceId != nil {
+		s.WriteString(schemas.UpdateRevisionResponse_SourceId, *v.SourceId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.UpdateRevisionResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *UpdateRevisionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRevisionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRevisionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateRevisionResponse_Arn, v.Arn)
+		case schemas.UpdateRevisionResponse_Comment:
+			v.Comment = new(string)
+			return d.ReadString(schemas.UpdateRevisionResponse_Comment, v.Comment)
+		case schemas.UpdateRevisionResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateRevisionResponse_CreatedAt, v.CreatedAt)
+		case schemas.UpdateRevisionResponse_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.UpdateRevisionResponse_DataSetId, v.DataSetId)
+		case schemas.UpdateRevisionResponse_Finalized:
+			return d.ReadBool(schemas.UpdateRevisionResponse_Finalized, &v.Finalized)
+		case schemas.UpdateRevisionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateRevisionResponse_Id, v.Id)
+		case schemas.UpdateRevisionResponse_RevocationComment:
+			v.RevocationComment = new(string)
+			return d.ReadString(schemas.UpdateRevisionResponse_RevocationComment, v.RevocationComment)
+		case schemas.UpdateRevisionResponse_Revoked:
+			return d.ReadBool(schemas.UpdateRevisionResponse_Revoked, &v.Revoked)
+		case schemas.UpdateRevisionResponse_RevokedAt:
+			v.RevokedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateRevisionResponse_RevokedAt, v.RevokedAt)
+		case schemas.UpdateRevisionResponse_SourceId:
+			v.SourceId = new(string)
+			return d.ReadString(schemas.UpdateRevisionResponse_SourceId, v.SourceId)
+		case schemas.UpdateRevisionResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateRevisionResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRevision{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRevision, schemas.UpdateRevisionRequest, schemas.UpdateRevisionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRevision{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRevision, schemas.UpdateRevisionRequest, schemas.UpdateRevisionResponse), output: &UpdateRevisionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

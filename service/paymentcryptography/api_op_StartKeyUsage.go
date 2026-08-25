@@ -4,7 +4,9 @@ package paymentcryptography
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,18 @@ type StartKeyUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartKeyUsageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartKeyUsageInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartKeyUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyIdentifier != nil {
+		s.WriteString(schemas.StartKeyUsageInput_KeyIdentifier, *v.KeyIdentifier)
+	}
+}
+
 type StartKeyUsageOutput struct {
 
 	// The KeyARN of the Amazon Web Services Payment Cryptography key activated for
@@ -59,13 +73,34 @@ type StartKeyUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartKeyUsageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartKeyUsageOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartKeyUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteStruct(schemas.StartKeyUsageOutput_Key)
+		v.Key.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartKeyUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartKeyUsageOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartKeyUsageOutput_Key:
+			v.Key = &types.Key{}
+			return v.Key.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartKeyUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartKeyUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartKeyUsage, schemas.StartKeyUsageInput, schemas.StartKeyUsageOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartKeyUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartKeyUsage, schemas.StartKeyUsageInput, schemas.StartKeyUsageOutput), output: &StartKeyUsageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package emrcontainers
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteVirtualClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVirtualClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVirtualClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVirtualClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteVirtualClusterRequest_id, *v.Id)
+	}
+}
+
 type DeleteVirtualClusterOutput struct {
 
 	// This output contains the ID of the virtual cluster that will be deleted.
@@ -49,13 +63,32 @@ type DeleteVirtualClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVirtualClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVirtualClusterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVirtualClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteVirtualClusterResponse_id, *v.Id)
+	}
+}
+func (v *DeleteVirtualClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVirtualClusterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVirtualClusterResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteVirtualClusterResponse_id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVirtualClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVirtualCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVirtualCluster, schemas.DeleteVirtualClusterRequest, schemas.DeleteVirtualClusterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteVirtualCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVirtualCluster, schemas.DeleteVirtualClusterRequest, schemas.DeleteVirtualClusterResponse), output: &DeleteVirtualClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

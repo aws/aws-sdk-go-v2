@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetTransitGatewayRouteTableAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTransitGatewayRouteTableAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTransitGatewayRouteTableAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTransitGatewayRouteTableAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.GetTransitGatewayRouteTableAttachmentRequest_AttachmentId, *v.AttachmentId)
+	}
+}
+
 type GetTransitGatewayRouteTableAttachmentOutput struct {
 
 	// Returns information about the transit gateway route table attachment.
@@ -45,13 +59,34 @@ type GetTransitGatewayRouteTableAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTransitGatewayRouteTableAttachmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTransitGatewayRouteTableAttachmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTransitGatewayRouteTableAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransitGatewayRouteTableAttachment != nil {
+		s.WriteStruct(schemas.GetTransitGatewayRouteTableAttachmentResponse_TransitGatewayRouteTableAttachment)
+		v.TransitGatewayRouteTableAttachment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTransitGatewayRouteTableAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTransitGatewayRouteTableAttachmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTransitGatewayRouteTableAttachmentResponse_TransitGatewayRouteTableAttachment:
+			v.TransitGatewayRouteTableAttachment = &types.TransitGatewayRouteTableAttachment{}
+			return v.TransitGatewayRouteTableAttachment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTransitGatewayRouteTableAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTransitGatewayRouteTableAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTransitGatewayRouteTableAttachment, schemas.GetTransitGatewayRouteTableAttachmentRequest, schemas.GetTransitGatewayRouteTableAttachmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTransitGatewayRouteTableAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTransitGatewayRouteTableAttachment, schemas.GetTransitGatewayRouteTableAttachmentRequest, schemas.GetTransitGatewayRouteTableAttachmentResponse), output: &GetTransitGatewayRouteTableAttachmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

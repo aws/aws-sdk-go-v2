@@ -4,6 +4,8 @@ package vpclattice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,34 @@ type DeleteListenerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteListenerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteListenerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteListenerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ListenerIdentifier != nil {
+		s.WriteString(schemas.DeleteListenerRequest_listenerIdentifier, *v.ListenerIdentifier)
+	}
+	if v.ServiceIdentifier != nil {
+		s.WriteString(schemas.DeleteListenerRequest_serviceIdentifier, *v.ServiceIdentifier)
+	}
+}
+func (v *DeleteListenerInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteListenerRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteListenerRequest_listenerIdentifier:
+			v.ListenerIdentifier = new(string)
+			return d.ReadString(schemas.DeleteListenerRequest_listenerIdentifier, v.ListenerIdentifier)
+		case schemas.DeleteListenerRequest_serviceIdentifier:
+			v.ServiceIdentifier = new(string)
+			return d.ReadString(schemas.DeleteListenerRequest_serviceIdentifier, v.ServiceIdentifier)
+		}
+		return nil
+	})
+}
+
 type DeleteListenerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +75,26 @@ type DeleteListenerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteListenerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteListenerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteListenerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteListenerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteListenerResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteListener{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteListener, schemas.DeleteListenerRequest, schemas.DeleteListenerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteListener{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteListener, schemas.DeleteListenerRequest, schemas.DeleteListenerResponse), output: &DeleteListenerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

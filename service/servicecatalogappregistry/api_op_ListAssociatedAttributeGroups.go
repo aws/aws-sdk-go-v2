@@ -5,6 +5,8 @@ package servicecatalogappregistry
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListAssociatedAttributeGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssociatedAttributeGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssociatedAttributeGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssociatedAttributeGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Application != nil {
+		s.WriteString(schemas.ListAssociatedAttributeGroupsRequest_application, *v.Application)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssociatedAttributeGroupsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssociatedAttributeGroupsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAssociatedAttributeGroupsOutput struct {
 
 	// A list of attribute group IDs.
@@ -56,13 +76,35 @@ type ListAssociatedAttributeGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssociatedAttributeGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssociatedAttributeGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssociatedAttributeGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeGroupIds(s, schemas.ListAssociatedAttributeGroupsResponse_attributeGroups, v.AttributeGroups)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssociatedAttributeGroupsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAssociatedAttributeGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssociatedAttributeGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssociatedAttributeGroupsResponse_attributeGroups:
+			return deserializeAttributeGroupIds(d, schemas.ListAssociatedAttributeGroupsResponse_attributeGroups, &v.AttributeGroups)
+		case schemas.ListAssociatedAttributeGroupsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssociatedAttributeGroupsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssociatedAttributeGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssociatedAttributeGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociatedAttributeGroups, schemas.ListAssociatedAttributeGroupsRequest, schemas.ListAssociatedAttributeGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssociatedAttributeGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociatedAttributeGroups, schemas.ListAssociatedAttributeGroupsRequest, schemas.ListAssociatedAttributeGroupsResponse), output: &ListAssociatedAttributeGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

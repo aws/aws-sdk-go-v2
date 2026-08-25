@@ -5,7 +5,9 @@ package resourceexplorer2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -89,6 +91,54 @@ type CreateViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateViewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateViewInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateViewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateViewInput_ClientToken, *v.ClientToken)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.CreateViewInput_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIncludedPropertyList(s, schemas.CreateViewInput_IncludedProperties, v.IncludedProperties)
+	if v.Scope != nil {
+		s.WriteString(schemas.CreateViewInput_Scope, *v.Scope)
+	}
+	serializeTagMap(s, schemas.CreateViewInput_Tags, v.Tags)
+	if v.ViewName != nil {
+		s.WriteString(schemas.CreateViewInput_ViewName, *v.ViewName)
+	}
+}
+func (v *CreateViewInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateViewInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateViewInput_ClientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateViewInput_ClientToken, v.ClientToken)
+		case schemas.CreateViewInput_Filters:
+			v.Filters = &types.SearchFilter{}
+			return v.Filters.Deserialize(d)
+		case schemas.CreateViewInput_IncludedProperties:
+			return deserializeIncludedPropertyList(d, schemas.CreateViewInput_IncludedProperties, &v.IncludedProperties)
+		case schemas.CreateViewInput_Scope:
+			v.Scope = new(string)
+			return d.ReadString(schemas.CreateViewInput_Scope, v.Scope)
+		case schemas.CreateViewInput_Tags:
+			return deserializeTagMap(d, schemas.CreateViewInput_Tags, &v.Tags)
+		case schemas.CreateViewInput_ViewName:
+			v.ViewName = new(string)
+			return d.ReadString(schemas.CreateViewInput_ViewName, v.ViewName)
+		}
+		return nil
+	})
+}
+
 type CreateViewOutput struct {
 
 	// A structure that contains the details about the new view.
@@ -100,13 +150,34 @@ type CreateViewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateViewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateViewOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateViewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.View != nil {
+		s.WriteStruct(schemas.CreateViewOutput_View)
+		v.View.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateViewOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateViewOutput_View:
+			v.View = &types.View{}
+			return v.View.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateView{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateView, schemas.CreateViewInput, schemas.CreateViewOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateView{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateView, schemas.CreateViewInput, schemas.CreateViewOutput), output: &CreateViewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

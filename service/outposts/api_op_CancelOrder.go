@@ -4,6 +4,8 @@ package outposts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type CancelOrderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelOrderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelOrderInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelOrderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrderId != nil {
+		s.WriteString(schemas.CancelOrderInput_OrderId, *v.OrderId)
+	}
+}
+
 type CancelOrderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type CancelOrderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelOrderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelOrderOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelOrderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelOrderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelOrderOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelOrderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelOrder{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelOrder, schemas.CancelOrderInput, schemas.CancelOrderOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelOrder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelOrder, schemas.CancelOrderInput, schemas.CancelOrderOutput), output: &CancelOrderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

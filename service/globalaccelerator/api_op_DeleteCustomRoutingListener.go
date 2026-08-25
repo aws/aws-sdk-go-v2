@@ -4,6 +4,8 @@ package globalaccelerator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteCustomRoutingListenerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomRoutingListenerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCustomRoutingListenerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomRoutingListenerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ListenerArn != nil {
+		s.WriteString(schemas.DeleteCustomRoutingListenerRequest_ListenerArn, *v.ListenerArn)
+	}
+}
+
 type DeleteCustomRoutingListenerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteCustomRoutingListenerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomRoutingListenerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomRoutingListenerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCustomRoutingListenerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCustomRoutingListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCustomRoutingListener{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomRoutingListener, schemas.DeleteCustomRoutingListenerRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteCustomRoutingListener{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomRoutingListener, schemas.DeleteCustomRoutingListenerRequest, nil), output: &DeleteCustomRoutingListenerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package wisdom
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wisdom/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wisdom/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,34 @@ type GetAssistantAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssistantAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssistantAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssistantAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssistantAssociationId != nil {
+		s.WriteString(schemas.GetAssistantAssociationRequest_assistantAssociationId, *v.AssistantAssociationId)
+	}
+	if v.AssistantId != nil {
+		s.WriteString(schemas.GetAssistantAssociationRequest_assistantId, *v.AssistantId)
+	}
+}
+func (v *GetAssistantAssociationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAssistantAssociationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAssistantAssociationRequest_assistantAssociationId:
+			v.AssistantAssociationId = new(string)
+			return d.ReadString(schemas.GetAssistantAssociationRequest_assistantAssociationId, v.AssistantAssociationId)
+		case schemas.GetAssistantAssociationRequest_assistantId:
+			v.AssistantId = new(string)
+			return d.ReadString(schemas.GetAssistantAssociationRequest_assistantId, v.AssistantId)
+		}
+		return nil
+	})
+}
+
 type GetAssistantAssociationOutput struct {
 
 	// The assistant association.
@@ -52,13 +82,34 @@ type GetAssistantAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssistantAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssistantAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssistantAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssistantAssociation != nil {
+		s.WriteStruct(schemas.GetAssistantAssociationResponse_assistantAssociation)
+		v.AssistantAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAssistantAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAssistantAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAssistantAssociationResponse_assistantAssociation:
+			v.AssistantAssociation = &types.AssistantAssociationData{}
+			return v.AssistantAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAssistantAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAssistantAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssistantAssociation, schemas.GetAssistantAssociationRequest, schemas.GetAssistantAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAssistantAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssistantAssociation, schemas.GetAssistantAssociationRequest, schemas.GetAssistantAssociationResponse), output: &GetAssistantAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

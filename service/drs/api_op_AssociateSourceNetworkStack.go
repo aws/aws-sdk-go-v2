@@ -4,7 +4,9 @@ package drs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type AssociateSourceNetworkStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSourceNetworkStackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSourceNetworkStackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSourceNetworkStackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CfnStackName != nil {
+		s.WriteString(schemas.AssociateSourceNetworkStackRequest_cfnStackName, *v.CfnStackName)
+	}
+	if v.SourceNetworkID != nil {
+		s.WriteString(schemas.AssociateSourceNetworkStackRequest_sourceNetworkID, *v.SourceNetworkID)
+	}
+}
+
 type AssociateSourceNetworkStackOutput struct {
 
 	// The Source Network association Job.
@@ -52,13 +69,34 @@ type AssociateSourceNetworkStackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSourceNetworkStackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSourceNetworkStackResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSourceNetworkStackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Job != nil {
+		s.WriteStruct(schemas.AssociateSourceNetworkStackResponse_job)
+		v.Job.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateSourceNetworkStackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateSourceNetworkStackResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateSourceNetworkStackResponse_job:
+			v.Job = &types.Job{}
+			return v.Job.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateSourceNetworkStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateSourceNetworkStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSourceNetworkStack, schemas.AssociateSourceNetworkStackRequest, schemas.AssociateSourceNetworkStackResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateSourceNetworkStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSourceNetworkStack, schemas.AssociateSourceNetworkStackRequest, schemas.AssociateSourceNetworkStackResponse), output: &AssociateSourceNetworkStackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -139,6 +141,48 @@ type CreateAgreementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAgreementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAgreementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAgreementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessRole != nil {
+		s.WriteString(schemas.CreateAgreementRequest_AccessRole, *v.AccessRole)
+	}
+	if v.BaseDirectory != nil {
+		s.WriteString(schemas.CreateAgreementRequest_BaseDirectory, *v.BaseDirectory)
+	}
+	if v.CustomDirectories != nil {
+		s.WriteStruct(schemas.CreateAgreementRequest_CustomDirectories)
+		v.CustomDirectories.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAgreementRequest_Description, *v.Description)
+	}
+	if v.EnforceMessageSigning != "" {
+		s.WriteString(schemas.CreateAgreementRequest_EnforceMessageSigning, string(v.EnforceMessageSigning))
+	}
+	if v.LocalProfileId != nil {
+		s.WriteString(schemas.CreateAgreementRequest_LocalProfileId, *v.LocalProfileId)
+	}
+	if v.PartnerProfileId != nil {
+		s.WriteString(schemas.CreateAgreementRequest_PartnerProfileId, *v.PartnerProfileId)
+	}
+	if v.PreserveFilename != "" {
+		s.WriteString(schemas.CreateAgreementRequest_PreserveFilename, string(v.PreserveFilename))
+	}
+	if v.ServerId != nil {
+		s.WriteString(schemas.CreateAgreementRequest_ServerId, *v.ServerId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateAgreementRequest_Status, string(v.Status))
+	}
+	serializeTags(s, schemas.CreateAgreementRequest_Tags, v.Tags)
+}
+
 type CreateAgreementOutput struct {
 
 	// The unique identifier for the agreement. Use this ID for deleting, or updating
@@ -154,13 +198,32 @@ type CreateAgreementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAgreementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAgreementResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAgreementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementId != nil {
+		s.WriteString(schemas.CreateAgreementResponse_AgreementId, *v.AgreementId)
+	}
+}
+func (v *CreateAgreementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAgreementResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAgreementResponse_AgreementId:
+			v.AgreementId = new(string)
+			return d.ReadString(schemas.CreateAgreementResponse_AgreementId, v.AgreementId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAgreementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAgreement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgreement, schemas.CreateAgreementRequest, schemas.CreateAgreementResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAgreement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgreement, schemas.CreateAgreementRequest, schemas.CreateAgreementResponse), output: &CreateAgreementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

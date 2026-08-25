@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -85,6 +87,27 @@ type GetNetworkResourceCountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNetworkResourceCountsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNetworkResourceCountsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNetworkResourceCountsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.GetNetworkResourceCountsRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetNetworkResourceCountsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetNetworkResourceCountsRequest_NextToken, *v.NextToken)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.GetNetworkResourceCountsRequest_ResourceType, *v.ResourceType)
+	}
+}
+
 type GetNetworkResourceCountsOutput struct {
 
 	// The count of resources.
@@ -99,13 +122,35 @@ type GetNetworkResourceCountsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNetworkResourceCountsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNetworkResourceCountsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNetworkResourceCountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNetworkResourceCountList(s, schemas.GetNetworkResourceCountsResponse_NetworkResourceCounts, v.NetworkResourceCounts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetNetworkResourceCountsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetNetworkResourceCountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNetworkResourceCountsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNetworkResourceCountsResponse_NetworkResourceCounts:
+			return deserializeNetworkResourceCountList(d, schemas.GetNetworkResourceCountsResponse_NetworkResourceCounts, &v.NetworkResourceCounts)
+		case schemas.GetNetworkResourceCountsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetNetworkResourceCountsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetNetworkResourceCountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetNetworkResourceCounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetworkResourceCounts, schemas.GetNetworkResourceCountsRequest, schemas.GetNetworkResourceCountsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetNetworkResourceCounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNetworkResourceCounts, schemas.GetNetworkResourceCountsRequest, schemas.GetNetworkResourceCountsResponse), output: &GetNetworkResourceCountsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

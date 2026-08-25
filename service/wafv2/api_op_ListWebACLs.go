@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,24 @@ type ListWebACLsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWebACLsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWebACLsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWebACLsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListWebACLsRequest_Limit, *v.Limit)
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListWebACLsRequest_NextMarker, *v.NextMarker)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.ListWebACLsRequest_Scope, string(v.Scope))
+	}
+}
+
 type ListWebACLsOutput struct {
 
 	// When you request a list of objects with a Limit setting, if the number of
@@ -72,13 +92,35 @@ type ListWebACLsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWebACLsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWebACLsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWebACLsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListWebACLsResponse_NextMarker, *v.NextMarker)
+	}
+	serializeWebACLSummaries(s, schemas.ListWebACLsResponse_WebACLs, v.WebACLs)
+}
+func (v *ListWebACLsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWebACLsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWebACLsResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListWebACLsResponse_NextMarker, v.NextMarker)
+		case schemas.ListWebACLsResponse_WebACLs:
+			return deserializeWebACLSummaries(d, schemas.ListWebACLsResponse_WebACLs, &v.WebACLs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWebACLsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListWebACLs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWebACLs, schemas.ListWebACLsRequest, schemas.ListWebACLsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListWebACLs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWebACLs, schemas.ListWebACLsRequest, schemas.ListWebACLsResponse), output: &ListWebACLsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

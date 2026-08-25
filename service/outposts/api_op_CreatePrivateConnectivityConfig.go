@@ -4,7 +4,9 @@ package outposts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,19 @@ type CreatePrivateConnectivityConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePrivateConnectivityConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePrivateConnectivityConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePrivateConnectivityConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutpostId != nil {
+		s.WriteString(schemas.CreatePrivateConnectivityConfigInput_OutpostId, *v.OutpostId)
+	}
+	serializeVpcInformationList(s, schemas.CreatePrivateConnectivityConfigInput_VpcInformationList, v.VpcInformationList)
+}
+
 type CreatePrivateConnectivityConfigOutput struct {
 
 	// The ID of the Outpost.
@@ -58,13 +73,40 @@ type CreatePrivateConnectivityConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePrivateConnectivityConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePrivateConnectivityConfigOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePrivateConnectivityConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutpostId != nil {
+		s.WriteString(schemas.CreatePrivateConnectivityConfigOutput_OutpostId, *v.OutpostId)
+	}
+	if v.PrivateConnectivityConfig != nil {
+		s.WriteStruct(schemas.CreatePrivateConnectivityConfigOutput_PrivateConnectivityConfig)
+		v.PrivateConnectivityConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreatePrivateConnectivityConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePrivateConnectivityConfigOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePrivateConnectivityConfigOutput_OutpostId:
+			v.OutpostId = new(string)
+			return d.ReadString(schemas.CreatePrivateConnectivityConfigOutput_OutpostId, v.OutpostId)
+		case schemas.CreatePrivateConnectivityConfigOutput_PrivateConnectivityConfig:
+			v.PrivateConnectivityConfig = &types.PrivateConnectivityConfig{}
+			return v.PrivateConnectivityConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePrivateConnectivityConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePrivateConnectivityConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePrivateConnectivityConfig, schemas.CreatePrivateConnectivityConfigInput, schemas.CreatePrivateConnectivityConfigOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePrivateConnectivityConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePrivateConnectivityConfig, schemas.CreatePrivateConnectivityConfigInput, schemas.CreatePrivateConnectivityConfigOutput), output: &CreatePrivateConnectivityConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

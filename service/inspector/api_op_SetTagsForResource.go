@@ -4,7 +4,9 @@ package inspector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,19 @@ type SetTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetTagsForResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetTagsForResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetTagsForResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.SetTagsForResourceRequest_resourceArn, *v.ResourceArn)
+	}
+	serializeTagList(s, schemas.SetTagsForResourceRequest_tags, v.Tags)
+}
+
 type SetTagsForResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +61,26 @@ type SetTagsForResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetTagsForResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetTagsForResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SetTagsForResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetTagsForResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetTagsForResource, schemas.SetTagsForResourceRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSetTagsForResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetTagsForResource, schemas.SetTagsForResourceRequest, nil), output: &SetTagsForResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

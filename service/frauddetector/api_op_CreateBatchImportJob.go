@@ -4,7 +4,9 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,31 @@ type CreateBatchImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBatchImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBatchImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBatchImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventTypeName != nil {
+		s.WriteString(schemas.CreateBatchImportJobRequest_eventTypeName, *v.EventTypeName)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.CreateBatchImportJobRequest_iamRoleArn, *v.IamRoleArn)
+	}
+	if v.InputPath != nil {
+		s.WriteString(schemas.CreateBatchImportJobRequest_inputPath, *v.InputPath)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.CreateBatchImportJobRequest_jobId, *v.JobId)
+	}
+	if v.OutputPath != nil {
+		s.WriteString(schemas.CreateBatchImportJobRequest_outputPath, *v.OutputPath)
+	}
+	serializetagList(s, schemas.CreateBatchImportJobRequest_tags, v.Tags)
+}
+
 type CreateBatchImportJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -71,13 +98,26 @@ type CreateBatchImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBatchImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBatchImportJobResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBatchImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateBatchImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBatchImportJobResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBatchImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateBatchImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBatchImportJob, schemas.CreateBatchImportJobRequest, schemas.CreateBatchImportJobResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateBatchImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBatchImportJob, schemas.CreateBatchImportJobRequest, schemas.CreateBatchImportJobResult), output: &CreateBatchImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

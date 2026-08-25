@@ -4,6 +4,8 @@ package mediastore
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediastore/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,21 @@ type PutContainerPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutContainerPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutContainerPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutContainerPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerName != nil {
+		s.WriteString(schemas.PutContainerPolicyInput_ContainerName, *v.ContainerName)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.PutContainerPolicyInput_Policy, *v.Policy)
+	}
+}
+
 type PutContainerPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +74,26 @@ type PutContainerPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutContainerPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutContainerPolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutContainerPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutContainerPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutContainerPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutContainerPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutContainerPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutContainerPolicy, schemas.PutContainerPolicyInput, schemas.PutContainerPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutContainerPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutContainerPolicy, schemas.PutContainerPolicyInput, schemas.PutContainerPolicyOutput), output: &PutContainerPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package vpclattice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,31 @@ type DeregisterTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterTargetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterTargetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetGroupIdentifier != nil {
+		s.WriteString(schemas.DeregisterTargetsRequest_targetGroupIdentifier, *v.TargetGroupIdentifier)
+	}
+	serializeTargetList(s, schemas.DeregisterTargetsRequest_targets, v.Targets)
+}
+func (v *DeregisterTargetsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterTargetsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeregisterTargetsRequest_targetGroupIdentifier:
+			v.TargetGroupIdentifier = new(string)
+			return d.ReadString(schemas.DeregisterTargetsRequest_targetGroupIdentifier, v.TargetGroupIdentifier)
+		case schemas.DeregisterTargetsRequest_targets:
+			return deserializeTargetList(d, schemas.DeregisterTargetsRequest_targets, &v.Targets)
+		}
+		return nil
+	})
+}
+
 type DeregisterTargetsOutput struct {
 
 	// The targets that were successfully deregistered.
@@ -53,13 +80,32 @@ type DeregisterTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterTargetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterTargetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTargetList(s, schemas.DeregisterTargetsResponse_successful, v.Successful)
+	serializeTargetFailureList(s, schemas.DeregisterTargetsResponse_unsuccessful, v.Unsuccessful)
+}
+func (v *DeregisterTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterTargetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeregisterTargetsResponse_successful:
+			return deserializeTargetList(d, schemas.DeregisterTargetsResponse_successful, &v.Successful)
+		case schemas.DeregisterTargetsResponse_unsuccessful:
+			return deserializeTargetFailureList(d, schemas.DeregisterTargetsResponse_unsuccessful, &v.Unsuccessful)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeregisterTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterTargets, schemas.DeregisterTargetsRequest, schemas.DeregisterTargetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeregisterTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterTargets, schemas.DeregisterTargetsRequest, schemas.DeregisterTargetsResponse), output: &DeregisterTargetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

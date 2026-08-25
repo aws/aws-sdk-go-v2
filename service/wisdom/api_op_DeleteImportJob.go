@@ -4,6 +4,8 @@ package wisdom
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wisdom/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImportJobId != nil {
+		s.WriteString(schemas.DeleteImportJobRequest_importJobId, *v.ImportJobId)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.DeleteImportJobRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+}
+
 type DeleteImportJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type DeleteImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteImportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteImportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteImportJob, schemas.DeleteImportJobRequest, schemas.DeleteImportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteImportJob, schemas.DeleteImportJobRequest, schemas.DeleteImportJobResponse), output: &DeleteImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

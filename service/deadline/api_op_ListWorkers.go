@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,27 @@ type ListWorkersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.ListWorkersRequest_farmId, *v.FarmId)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.ListWorkersRequest_fleetId, *v.FleetId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWorkersRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkersRequest_nextToken, *v.NextToken)
+	}
+}
+
 // Shared pagination field for List operation outputs (nextToken).
 type ListWorkersOutput struct {
 
@@ -71,13 +94,35 @@ type ListWorkersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkersResponse_nextToken, *v.NextToken)
+	}
+	serializeWorkerSummaries(s, schemas.ListWorkersResponse_workers, v.Workers)
+}
+func (v *ListWorkersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkersResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkersResponse_nextToken, v.NextToken)
+		case schemas.ListWorkersResponse_workers:
+			return deserializeWorkerSummaries(d, schemas.ListWorkersResponse_workers, &v.Workers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWorkers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkers, schemas.ListWorkersRequest, schemas.ListWorkersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWorkers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkers, schemas.ListWorkersRequest, schemas.ListWorkersResponse), output: &ListWorkersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

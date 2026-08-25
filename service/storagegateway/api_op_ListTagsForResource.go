@@ -5,7 +5,9 @@ package storagegateway
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsForResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsForResourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsForResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListTagsForResourceInput_Limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListTagsForResourceInput_Marker, *v.Marker)
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.ListTagsForResourceInput_ResourceARN, *v.ResourceARN)
+	}
+}
+
 // ListTagsForResourceOutput
 type ListTagsForResourceOutput struct {
 
@@ -64,13 +84,41 @@ type ListTagsForResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsForResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsForResourceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsForResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListTagsForResourceOutput_Marker, *v.Marker)
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.ListTagsForResourceOutput_ResourceARN, *v.ResourceARN)
+	}
+	serializeTags(s, schemas.ListTagsForResourceOutput_Tags, v.Tags)
+}
+func (v *ListTagsForResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTagsForResourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTagsForResourceOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListTagsForResourceOutput_Marker, v.Marker)
+		case schemas.ListTagsForResourceOutput_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.ListTagsForResourceOutput_ResourceARN, v.ResourceARN)
+		case schemas.ListTagsForResourceOutput_Tags:
+			return deserializeTags(d, schemas.ListTagsForResourceOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTagsForResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ListTagsForResourceInput, schemas.ListTagsForResourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTagsForResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForResource, schemas.ListTagsForResourceInput, schemas.ListTagsForResourceOutput), output: &ListTagsForResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

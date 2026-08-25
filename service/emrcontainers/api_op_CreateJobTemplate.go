@@ -5,7 +5,9 @@ package emrcontainers
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -55,6 +57,30 @@ type CreateJobTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateJobTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateJobTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateJobTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateJobTemplateRequest_clientToken, *v.ClientToken)
+	}
+	if v.JobTemplateData != nil {
+		s.WriteStruct(schemas.CreateJobTemplateRequest_jobTemplateData)
+		v.JobTemplateData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.CreateJobTemplateRequest_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateJobTemplateRequest_name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateJobTemplateRequest_tags, v.Tags)
+}
+
 type CreateJobTemplateOutput struct {
 
 	// This output display the ARN of the created job template.
@@ -75,13 +101,50 @@ type CreateJobTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateJobTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateJobTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateJobTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateJobTemplateResponse_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateJobTemplateResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateJobTemplateResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateJobTemplateResponse_name, *v.Name)
+	}
+}
+func (v *CreateJobTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateJobTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateJobTemplateResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateJobTemplateResponse_arn, v.Arn)
+		case schemas.CreateJobTemplateResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateJobTemplateResponse_createdAt, v.CreatedAt)
+		case schemas.CreateJobTemplateResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateJobTemplateResponse_id, v.Id)
+		case schemas.CreateJobTemplateResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateJobTemplateResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateJobTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateJobTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateJobTemplate, schemas.CreateJobTemplateRequest, schemas.CreateJobTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateJobTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateJobTemplate, schemas.CreateJobTemplateRequest, schemas.CreateJobTemplateResponse), output: &CreateJobTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

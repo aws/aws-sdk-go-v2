@@ -5,7 +5,9 @@ package codegurureviewer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,27 @@ type ListCodeReviewsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCodeReviewsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCodeReviewsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCodeReviewsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCodeReviewsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCodeReviewsRequest_NextToken, *v.NextToken)
+	}
+	serializeProviderTypes(s, schemas.ListCodeReviewsRequest_ProviderTypes, v.ProviderTypes)
+	serializeRepositoryNames(s, schemas.ListCodeReviewsRequest_RepositoryNames, v.RepositoryNames)
+	serializeJobStates(s, schemas.ListCodeReviewsRequest_States, v.States)
+	if v.Type != "" {
+		s.WriteString(schemas.ListCodeReviewsRequest_Type, string(v.Type))
+	}
+}
+
 type ListCodeReviewsOutput struct {
 
 	// A list of code reviews that meet the criteria of the request.
@@ -80,13 +103,35 @@ type ListCodeReviewsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCodeReviewsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCodeReviewsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCodeReviewsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCodeReviewSummaries(s, schemas.ListCodeReviewsResponse_CodeReviewSummaries, v.CodeReviewSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCodeReviewsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCodeReviewsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCodeReviewsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCodeReviewsResponse_CodeReviewSummaries:
+			return deserializeCodeReviewSummaries(d, schemas.ListCodeReviewsResponse_CodeReviewSummaries, &v.CodeReviewSummaries)
+		case schemas.ListCodeReviewsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCodeReviewsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCodeReviewsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCodeReviews{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCodeReviews, schemas.ListCodeReviewsRequest, schemas.ListCodeReviewsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCodeReviews{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCodeReviews, schemas.ListCodeReviewsRequest, schemas.ListCodeReviewsResponse), output: &ListCodeReviewsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

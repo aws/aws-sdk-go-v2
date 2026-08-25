@@ -4,7 +4,9 @@ package outposts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetOrderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOrderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOrderInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOrderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrderId != nil {
+		s.WriteString(schemas.GetOrderInput_OrderId, *v.OrderId)
+	}
+}
+
 type GetOrderOutput struct {
 
 	// Information about an order.
@@ -45,13 +59,34 @@ type GetOrderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOrderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOrderOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOrderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Order != nil {
+		s.WriteStruct(schemas.GetOrderOutput_Order)
+		v.Order.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetOrderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOrderOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOrderOutput_Order:
+			v.Order = &types.Order{}
+			return v.Order.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOrderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOrder{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOrder, schemas.GetOrderInput, schemas.GetOrderOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOrder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOrder, schemas.GetOrderInput, schemas.GetOrderOutput), output: &GetOrderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

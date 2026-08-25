@@ -4,7 +4,9 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,20 @@ type DeleteRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Rule != nil {
+		s.WriteStruct(schemas.DeleteRuleRequest_rule)
+		v.Rule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type DeleteRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +61,26 @@ type DeleteRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRuleResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRuleResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRule, schemas.DeleteRuleRequest, schemas.DeleteRuleResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRule, schemas.DeleteRuleRequest, schemas.DeleteRuleResult), output: &DeleteRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

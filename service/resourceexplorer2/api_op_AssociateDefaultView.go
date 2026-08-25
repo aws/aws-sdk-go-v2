@@ -4,6 +4,8 @@ package resourceexplorer2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,28 @@ type AssociateDefaultViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateDefaultViewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateDefaultViewInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateDefaultViewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ViewArn != nil {
+		s.WriteString(schemas.AssociateDefaultViewInput_ViewArn, *v.ViewArn)
+	}
+}
+func (v *AssociateDefaultViewInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateDefaultViewInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateDefaultViewInput_ViewArn:
+			v.ViewArn = new(string)
+			return d.ReadString(schemas.AssociateDefaultViewInput_ViewArn, v.ViewArn)
+		}
+		return nil
+	})
+}
+
 type AssociateDefaultViewOutput struct {
 
 	// The [Amazon resource name (ARN)] of the view that the operation set as the default for queries made in the
@@ -60,13 +84,32 @@ type AssociateDefaultViewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateDefaultViewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateDefaultViewOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateDefaultViewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ViewArn != nil {
+		s.WriteString(schemas.AssociateDefaultViewOutput_ViewArn, *v.ViewArn)
+	}
+}
+func (v *AssociateDefaultViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateDefaultViewOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateDefaultViewOutput_ViewArn:
+			v.ViewArn = new(string)
+			return d.ReadString(schemas.AssociateDefaultViewOutput_ViewArn, v.ViewArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateDefaultViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateDefaultView{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateDefaultView, schemas.AssociateDefaultViewInput, schemas.AssociateDefaultViewOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateDefaultView{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateDefaultView, schemas.AssociateDefaultViewInput, schemas.AssociateDefaultViewOutput), output: &AssociateDefaultViewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

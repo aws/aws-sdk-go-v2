@@ -4,7 +4,9 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribeSMBSettingsInput struct {
 	GatewayARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeSMBSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSMBSettingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSMBSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.DescribeSMBSettingsInput_GatewayARN, *v.GatewayARN)
+	}
 }
 
 type DescribeSMBSettingsOutput struct {
@@ -116,13 +130,78 @@ type DescribeSMBSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSMBSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSMBSettingsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSMBSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveDirectoryStatus != "" {
+		s.WriteString(schemas.DescribeSMBSettingsOutput_ActiveDirectoryStatus, string(v.ActiveDirectoryStatus))
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.DescribeSMBSettingsOutput_DomainName, *v.DomainName)
+	}
+	if v.FileSharesVisible != nil {
+		s.WriteBool(schemas.DescribeSMBSettingsOutput_FileSharesVisible, *v.FileSharesVisible)
+	}
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.DescribeSMBSettingsOutput_GatewayARN, *v.GatewayARN)
+	}
+	if v.SMBGuestPasswordSet != nil {
+		s.WriteBool(schemas.DescribeSMBSettingsOutput_SMBGuestPasswordSet, *v.SMBGuestPasswordSet)
+	}
+	if v.SMBLocalGroups != nil {
+		s.WriteStruct(schemas.DescribeSMBSettingsOutput_SMBLocalGroups)
+		v.SMBLocalGroups.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SMBSecurityStrategy != "" {
+		s.WriteString(schemas.DescribeSMBSettingsOutput_SMBSecurityStrategy, string(v.SMBSecurityStrategy))
+	}
+}
+func (v *DescribeSMBSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSMBSettingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSMBSettingsOutput_ActiveDirectoryStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeSMBSettingsOutput_ActiveDirectoryStatus, &ev); err != nil {
+				return err
+			}
+			v.ActiveDirectoryStatus = types.ActiveDirectoryStatus(ev)
+			return nil
+		case schemas.DescribeSMBSettingsOutput_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.DescribeSMBSettingsOutput_DomainName, v.DomainName)
+		case schemas.DescribeSMBSettingsOutput_FileSharesVisible:
+			v.FileSharesVisible = new(bool)
+			return d.ReadBool(schemas.DescribeSMBSettingsOutput_FileSharesVisible, v.FileSharesVisible)
+		case schemas.DescribeSMBSettingsOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.DescribeSMBSettingsOutput_GatewayARN, v.GatewayARN)
+		case schemas.DescribeSMBSettingsOutput_SMBGuestPasswordSet:
+			v.SMBGuestPasswordSet = new(bool)
+			return d.ReadBool(schemas.DescribeSMBSettingsOutput_SMBGuestPasswordSet, v.SMBGuestPasswordSet)
+		case schemas.DescribeSMBSettingsOutput_SMBLocalGroups:
+			v.SMBLocalGroups = &types.SMBLocalGroups{}
+			return v.SMBLocalGroups.Deserialize(d)
+		case schemas.DescribeSMBSettingsOutput_SMBSecurityStrategy:
+			var ev string
+			if err := d.ReadString(schemas.DescribeSMBSettingsOutput_SMBSecurityStrategy, &ev); err != nil {
+				return err
+			}
+			v.SMBSecurityStrategy = types.SMBSecurityStrategy(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSMBSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSMBSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSMBSettings, schemas.DescribeSMBSettingsInput, schemas.DescribeSMBSettingsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeSMBSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSMBSettings, schemas.DescribeSMBSettingsInput, schemas.DescribeSMBSettingsOutput), output: &DescribeSMBSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

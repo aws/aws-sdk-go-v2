@@ -5,7 +5,9 @@ package outposts
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,24 @@ type ListOrdersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOrdersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOrdersInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOrdersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOrdersInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOrdersInput_NextToken, *v.NextToken)
+	}
+	if v.OutpostIdentifierFilter != nil {
+		s.WriteString(schemas.ListOrdersInput_OutpostIdentifierFilter, *v.OutpostIdentifierFilter)
+	}
+}
+
 type ListOrdersOutput struct {
 
 	// The pagination token.
@@ -53,13 +73,35 @@ type ListOrdersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOrdersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOrdersOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOrdersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOrdersOutput_NextToken, *v.NextToken)
+	}
+	serializeOrderSummaryListDefinition(s, schemas.ListOrdersOutput_Orders, v.Orders)
+}
+func (v *ListOrdersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOrdersOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOrdersOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOrdersOutput_NextToken, v.NextToken)
+		case schemas.ListOrdersOutput_Orders:
+			return deserializeOrderSummaryListDefinition(d, schemas.ListOrdersOutput_Orders, &v.Orders)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOrdersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOrders{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOrders, schemas.ListOrdersInput, schemas.ListOrdersOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListOrders{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOrders, schemas.ListOrdersInput, schemas.ListOrdersOutput), output: &ListOrdersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

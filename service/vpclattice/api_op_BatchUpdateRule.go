@@ -4,7 +4,9 @@ package vpclattice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,37 @@ type BatchUpdateRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ListenerIdentifier != nil {
+		s.WriteString(schemas.BatchUpdateRuleRequest_listenerIdentifier, *v.ListenerIdentifier)
+	}
+	serializeRuleUpdateList(s, schemas.BatchUpdateRuleRequest_rules, v.Rules)
+	if v.ServiceIdentifier != nil {
+		s.WriteString(schemas.BatchUpdateRuleRequest_serviceIdentifier, *v.ServiceIdentifier)
+	}
+}
+func (v *BatchUpdateRuleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateRuleRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateRuleRequest_listenerIdentifier:
+			v.ListenerIdentifier = new(string)
+			return d.ReadString(schemas.BatchUpdateRuleRequest_listenerIdentifier, v.ListenerIdentifier)
+		case schemas.BatchUpdateRuleRequest_rules:
+			return deserializeRuleUpdateList(d, schemas.BatchUpdateRuleRequest_rules, &v.Rules)
+		case schemas.BatchUpdateRuleRequest_serviceIdentifier:
+			v.ServiceIdentifier = new(string)
+			return d.ReadString(schemas.BatchUpdateRuleRequest_serviceIdentifier, v.ServiceIdentifier)
+		}
+		return nil
+	})
+}
+
 type BatchUpdateRuleOutput struct {
 
 	// The rules that were successfully updated.
@@ -66,13 +99,32 @@ type BatchUpdateRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRuleUpdateSuccessList(s, schemas.BatchUpdateRuleResponse_successful, v.Successful)
+	serializeRuleUpdateFailureList(s, schemas.BatchUpdateRuleResponse_unsuccessful, v.Unsuccessful)
+}
+func (v *BatchUpdateRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateRuleResponse_successful:
+			return deserializeRuleUpdateSuccessList(d, schemas.BatchUpdateRuleResponse_successful, &v.Successful)
+		case schemas.BatchUpdateRuleResponse_unsuccessful:
+			return deserializeRuleUpdateFailureList(d, schemas.BatchUpdateRuleResponse_unsuccessful, &v.Unsuccessful)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUpdateRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateRule, schemas.BatchUpdateRuleRequest, schemas.BatchUpdateRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateRule, schemas.BatchUpdateRuleRequest, schemas.BatchUpdateRuleResponse), output: &BatchUpdateRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

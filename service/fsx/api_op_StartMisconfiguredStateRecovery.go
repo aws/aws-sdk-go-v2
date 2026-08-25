@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type StartMisconfiguredStateRecoveryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMisconfiguredStateRecoveryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMisconfiguredStateRecoveryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMisconfiguredStateRecoveryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartMisconfiguredStateRecoveryRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.StartMisconfiguredStateRecoveryRequest_FileSystemId, *v.FileSystemId)
+	}
+}
+
 type StartMisconfiguredStateRecoveryOutput struct {
 
 	// A description of a specific Amazon FSx file system.
@@ -53,13 +70,34 @@ type StartMisconfiguredStateRecoveryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMisconfiguredStateRecoveryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMisconfiguredStateRecoveryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMisconfiguredStateRecoveryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystem != nil {
+		s.WriteStruct(schemas.StartMisconfiguredStateRecoveryResponse_FileSystem)
+		v.FileSystem.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartMisconfiguredStateRecoveryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMisconfiguredStateRecoveryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMisconfiguredStateRecoveryResponse_FileSystem:
+			v.FileSystem = &types.FileSystem{}
+			return v.FileSystem.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMisconfiguredStateRecoveryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMisconfiguredStateRecovery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMisconfiguredStateRecovery, schemas.StartMisconfiguredStateRecoveryRequest, schemas.StartMisconfiguredStateRecoveryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartMisconfiguredStateRecovery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMisconfiguredStateRecovery, schemas.StartMisconfiguredStateRecoveryRequest, schemas.StartMisconfiguredStateRecoveryResponse), output: &StartMisconfiguredStateRecoveryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

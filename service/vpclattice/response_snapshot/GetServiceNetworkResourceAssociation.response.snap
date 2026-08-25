@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","dnsEntry":{"domainName":"__DomainName__","hostedZoneId":"__HostedZoneId__"},"domainVerificationStatus":"VERIFIED","failureCode":"__FailureCode__","failureReason":"__FailureReason__","id":"__Id__","isManagedAssociation":true,"lastUpdatedAt":"2000-01-01T00:00:00Z","privateDnsEnabled":true,"privateDnsEntry":{"domainName":"__DomainName__","hostedZoneId":"__HostedZoneId__"},"resourceConfigurationArn":"__ResourceConfigurationArn__","resourceConfigurationId":"__ResourceConfigurationId__","resourceConfigurationName":"__ResourceConfigurationName__","serviceNetworkArn":"__ServiceNetworkArn__","serviceNetworkId":"__ServiceNetworkId__","serviceNetworkName":"__ServiceNetworkName__","status":"CREATE_IN_PROGRESS"}

@@ -4,7 +4,9 @@ package networkmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,47 @@ type CreateDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AWSLocation != nil {
+		s.WriteStruct(schemas.CreateDeviceRequest_AWSLocation)
+		v.AWSLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDeviceRequest_Description, *v.Description)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.CreateDeviceRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.Location != nil {
+		s.WriteStruct(schemas.CreateDeviceRequest_Location)
+		v.Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Model != nil {
+		s.WriteString(schemas.CreateDeviceRequest_Model, *v.Model)
+	}
+	if v.SerialNumber != nil {
+		s.WriteString(schemas.CreateDeviceRequest_SerialNumber, *v.SerialNumber)
+	}
+	if v.SiteId != nil {
+		s.WriteString(schemas.CreateDeviceRequest_SiteId, *v.SiteId)
+	}
+	serializeTagList(s, schemas.CreateDeviceRequest_Tags, v.Tags)
+	if v.Type != nil {
+		s.WriteString(schemas.CreateDeviceRequest_Type, *v.Type)
+	}
+	if v.Vendor != nil {
+		s.WriteString(schemas.CreateDeviceRequest_Vendor, *v.Vendor)
+	}
+}
+
 type CreateDeviceOutput struct {
 
 	// Information about the device.
@@ -83,13 +126,34 @@ type CreateDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeviceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Device != nil {
+		s.WriteStruct(schemas.CreateDeviceResponse_Device)
+		v.Device.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDeviceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDeviceResponse_Device:
+			v.Device = &types.Device{}
+			return v.Device.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDevice, schemas.CreateDeviceRequest, schemas.CreateDeviceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDevice, schemas.CreateDeviceRequest, schemas.CreateDeviceResponse), output: &CreateDeviceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package inspector
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,30 @@ type GetExclusionsPreviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExclusionsPreviewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExclusionsPreviewRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExclusionsPreviewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentTemplateArn != nil {
+		s.WriteString(schemas.GetExclusionsPreviewRequest_assessmentTemplateArn, *v.AssessmentTemplateArn)
+	}
+	if v.Locale != "" {
+		s.WriteString(schemas.GetExclusionsPreviewRequest_locale, string(v.Locale))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetExclusionsPreviewRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetExclusionsPreviewRequest_nextToken, *v.NextToken)
+	}
+	if v.PreviewToken != nil {
+		s.WriteString(schemas.GetExclusionsPreviewRequest_previewToken, *v.PreviewToken)
+	}
+}
+
 type GetExclusionsPreviewOutput struct {
 
 	// Specifies the status of the request to generate an exclusions preview.
@@ -79,13 +105,45 @@ type GetExclusionsPreviewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExclusionsPreviewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExclusionsPreviewResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExclusionsPreviewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExclusionPreviewList(s, schemas.GetExclusionsPreviewResponse_exclusionPreviews, v.ExclusionPreviews)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetExclusionsPreviewResponse_nextToken, *v.NextToken)
+	}
+	if v.PreviewStatus != "" {
+		s.WriteString(schemas.GetExclusionsPreviewResponse_previewStatus, string(v.PreviewStatus))
+	}
+}
+func (v *GetExclusionsPreviewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetExclusionsPreviewResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetExclusionsPreviewResponse_exclusionPreviews:
+			return deserializeExclusionPreviewList(d, schemas.GetExclusionsPreviewResponse_exclusionPreviews, &v.ExclusionPreviews)
+		case schemas.GetExclusionsPreviewResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetExclusionsPreviewResponse_nextToken, v.NextToken)
+		case schemas.GetExclusionsPreviewResponse_previewStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetExclusionsPreviewResponse_previewStatus, &ev); err != nil {
+				return err
+			}
+			v.PreviewStatus = types.PreviewStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetExclusionsPreviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetExclusionsPreview{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExclusionsPreview, schemas.GetExclusionsPreviewRequest, schemas.GetExclusionsPreviewResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetExclusionsPreview{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExclusionsPreview, schemas.GetExclusionsPreviewRequest, schemas.GetExclusionsPreviewResponse), output: &GetExclusionsPreviewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

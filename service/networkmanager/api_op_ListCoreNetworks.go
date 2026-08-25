@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type ListCoreNetworksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCoreNetworksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCoreNetworksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCoreNetworksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCoreNetworksRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCoreNetworksRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListCoreNetworksOutput struct {
 
 	// Describes the list of core networks.
@@ -50,13 +67,35 @@ type ListCoreNetworksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCoreNetworksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCoreNetworksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCoreNetworksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCoreNetworkSummaryList(s, schemas.ListCoreNetworksResponse_CoreNetworks, v.CoreNetworks)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCoreNetworksResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCoreNetworksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCoreNetworksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCoreNetworksResponse_CoreNetworks:
+			return deserializeCoreNetworkSummaryList(d, schemas.ListCoreNetworksResponse_CoreNetworks, &v.CoreNetworks)
+		case schemas.ListCoreNetworksResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCoreNetworksResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCoreNetworksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCoreNetworks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCoreNetworks, schemas.ListCoreNetworksRequest, schemas.ListCoreNetworksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCoreNetworks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCoreNetworks, schemas.ListCoreNetworksRequest, schemas.ListCoreNetworksResponse), output: &ListCoreNetworksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

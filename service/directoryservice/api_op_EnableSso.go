@@ -4,6 +4,8 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type EnableSsoInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableSsoInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableSsoRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableSsoInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.EnableSsoRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.EnableSsoRequest_Password, *v.Password)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.EnableSsoRequest_UserName, *v.UserName)
+	}
+}
+
 // Contains the results of the EnableSso operation.
 type EnableSsoOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -60,13 +80,26 @@ type EnableSsoOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableSsoOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableSsoResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableSsoOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *EnableSsoOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnableSsoResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableSsoMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnableSso{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableSso, schemas.EnableSsoRequest, schemas.EnableSsoResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpEnableSso{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableSso, schemas.EnableSsoRequest, schemas.EnableSsoResult), output: &EnableSsoOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

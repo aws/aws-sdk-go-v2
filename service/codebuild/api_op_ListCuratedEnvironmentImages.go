@@ -4,7 +4,9 @@ package codebuild
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type ListCuratedEnvironmentImagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCuratedEnvironmentImagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCuratedEnvironmentImagesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCuratedEnvironmentImagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type ListCuratedEnvironmentImagesOutput struct {
 
 	// Information about supported platforms for Docker images that are managed by
@@ -40,13 +51,29 @@ type ListCuratedEnvironmentImagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCuratedEnvironmentImagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCuratedEnvironmentImagesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCuratedEnvironmentImagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEnvironmentPlatforms(s, schemas.ListCuratedEnvironmentImagesOutput_platforms, v.Platforms)
+}
+func (v *ListCuratedEnvironmentImagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCuratedEnvironmentImagesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCuratedEnvironmentImagesOutput_platforms:
+			return deserializeEnvironmentPlatforms(d, schemas.ListCuratedEnvironmentImagesOutput_platforms, &v.Platforms)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCuratedEnvironmentImagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCuratedEnvironmentImages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCuratedEnvironmentImages, schemas.ListCuratedEnvironmentImagesInput, schemas.ListCuratedEnvironmentImagesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCuratedEnvironmentImages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCuratedEnvironmentImages, schemas.ListCuratedEnvironmentImagesInput, schemas.ListCuratedEnvironmentImagesOutput), output: &ListCuratedEnvironmentImagesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

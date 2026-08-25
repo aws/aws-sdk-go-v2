@@ -229,6 +229,7 @@ func serializeUnmappedAttributeList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func deserializeAttributeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Attribute) error {
+	*v = make([]types.Attribute, 0)
 	var vv types.Attribute
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Attribute{}
@@ -242,6 +243,7 @@ func deserializeAttributeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeComprehendMedicalAsyncJobPropertiesList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ComprehendMedicalAsyncJobProperties) error {
+	*v = make([]types.ComprehendMedicalAsyncJobProperties, 0)
 	var vv types.ComprehendMedicalAsyncJobProperties
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ComprehendMedicalAsyncJobProperties{}
@@ -255,6 +257,7 @@ func deserializeComprehendMedicalAsyncJobPropertiesList(d smithy.ShapeDeserializ
 }
 
 func deserializeEntityList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Entity) error {
+	*v = make([]types.Entity, 0)
 	var vv types.Entity
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Entity{}
@@ -268,6 +271,7 @@ func deserializeEntityList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 }
 
 func deserializeICD10CMAttributeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ICD10CMAttribute) error {
+	*v = make([]types.ICD10CMAttribute, 0)
 	var vv types.ICD10CMAttribute
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ICD10CMAttribute{}
@@ -281,6 +285,7 @@ func deserializeICD10CMAttributeList(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func deserializeICD10CMConceptList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ICD10CMConcept) error {
+	*v = make([]types.ICD10CMConcept, 0)
 	var vv types.ICD10CMConcept
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ICD10CMConcept{}
@@ -294,6 +299,7 @@ func deserializeICD10CMConceptList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeICD10CMEntityList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ICD10CMEntity) error {
+	*v = make([]types.ICD10CMEntity, 0)
 	var vv types.ICD10CMEntity
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ICD10CMEntity{}
@@ -307,6 +313,7 @@ func deserializeICD10CMEntityList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeICD10CMTraitList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ICD10CMTrait) error {
+	*v = make([]types.ICD10CMTrait, 0)
 	var vv types.ICD10CMTrait
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ICD10CMTrait{}
@@ -320,6 +327,7 @@ func deserializeICD10CMTraitList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeRxNormAttributeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RxNormAttribute) error {
+	*v = make([]types.RxNormAttribute, 0)
 	var vv types.RxNormAttribute
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RxNormAttribute{}
@@ -333,6 +341,7 @@ func deserializeRxNormAttributeList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeRxNormConceptList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RxNormConcept) error {
+	*v = make([]types.RxNormConcept, 0)
 	var vv types.RxNormConcept
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RxNormConcept{}
@@ -346,6 +355,7 @@ func deserializeRxNormConceptList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeRxNormEntityList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RxNormEntity) error {
+	*v = make([]types.RxNormEntity, 0)
 	var vv types.RxNormEntity
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RxNormEntity{}
@@ -359,6 +369,7 @@ func deserializeRxNormEntityList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeRxNormTraitList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RxNormTrait) error {
+	*v = make([]types.RxNormTrait, 0)
 	var vv types.RxNormTrait
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RxNormTrait{}
@@ -372,6 +383,7 @@ func deserializeRxNormTraitList(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func deserializeSNOMEDCTAttributeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SNOMEDCTAttribute) error {
+	*v = make([]types.SNOMEDCTAttribute, 0)
 	var vv types.SNOMEDCTAttribute
 	return smithy.ReadList(d, s, func() error {
 		vv = types.SNOMEDCTAttribute{}
@@ -385,6 +397,7 @@ func deserializeSNOMEDCTAttributeList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeSNOMEDCTConceptList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SNOMEDCTConcept) error {
+	*v = make([]types.SNOMEDCTConcept, 0)
 	var vv types.SNOMEDCTConcept
 	return smithy.ReadList(d, s, func() error {
 		vv = types.SNOMEDCTConcept{}
@@ -398,6 +411,7 @@ func deserializeSNOMEDCTConceptList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeSNOMEDCTEntityList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SNOMEDCTEntity) error {
+	*v = make([]types.SNOMEDCTEntity, 0)
 	var vv types.SNOMEDCTEntity
 	return smithy.ReadList(d, s, func() error {
 		vv = types.SNOMEDCTEntity{}
@@ -411,6 +425,7 @@ func deserializeSNOMEDCTEntityList(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeSNOMEDCTTraitList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SNOMEDCTTrait) error {
+	*v = make([]types.SNOMEDCTTrait, 0)
 	var vv types.SNOMEDCTTrait
 	return smithy.ReadList(d, s, func() error {
 		vv = types.SNOMEDCTTrait{}
@@ -424,6 +439,7 @@ func deserializeSNOMEDCTTraitList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func deserializeTraitList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Trait) error {
+	*v = make([]types.Trait, 0)
 	var vv types.Trait
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Trait{}
@@ -437,6 +453,7 @@ func deserializeTraitList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]typ
 }
 
 func deserializeUnmappedAttributeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.UnmappedAttribute) error {
+	*v = make([]types.UnmappedAttribute, 0)
 	var vv types.UnmappedAttribute
 	return smithy.ReadList(d, s, func() error {
 		vv = types.UnmappedAttribute{}

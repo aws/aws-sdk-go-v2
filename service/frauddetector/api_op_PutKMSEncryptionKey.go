@@ -4,6 +4,8 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type PutKMSEncryptionKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutKMSEncryptionKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutKMSEncryptionKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutKMSEncryptionKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsEncryptionKeyArn != nil {
+		s.WriteString(schemas.PutKMSEncryptionKeyRequest_kmsEncryptionKeyArn, *v.KmsEncryptionKeyArn)
+	}
+}
+
 type PutKMSEncryptionKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type PutKMSEncryptionKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutKMSEncryptionKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutKMSEncryptionKeyResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutKMSEncryptionKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutKMSEncryptionKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutKMSEncryptionKeyResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutKMSEncryptionKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutKMSEncryptionKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutKMSEncryptionKey, schemas.PutKMSEncryptionKeyRequest, schemas.PutKMSEncryptionKeyResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutKMSEncryptionKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutKMSEncryptionKey, schemas.PutKMSEncryptionKeyRequest, schemas.PutKMSEncryptionKeyResult), output: &PutKMSEncryptionKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

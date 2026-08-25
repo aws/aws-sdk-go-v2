@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,6 +59,33 @@ type ListFleetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFleetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFleetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFleetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.ListFleetsRequest_displayName, *v.DisplayName)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.ListFleetsRequest_farmId, *v.FarmId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFleetsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFleetsRequest_nextToken, *v.NextToken)
+	}
+	if v.PrincipalId != nil {
+		s.WriteString(schemas.ListFleetsRequest_principalId, *v.PrincipalId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListFleetsRequest_status, string(v.Status))
+	}
+}
+
 // Shared pagination field for List operation outputs (nextToken).
 type ListFleetsOutput struct {
 
@@ -79,13 +108,35 @@ type ListFleetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFleetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFleetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFleetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFleetSummaries(s, schemas.ListFleetsResponse_fleets, v.Fleets)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFleetsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListFleetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFleetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFleetsResponse_fleets:
+			return deserializeFleetSummaries(d, schemas.ListFleetsResponse_fleets, &v.Fleets)
+		case schemas.ListFleetsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFleetsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFleetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFleets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFleets, schemas.ListFleetsRequest, schemas.ListFleetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFleets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFleets, schemas.ListFleetsRequest, schemas.ListFleetsResponse), output: &ListFleetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,5 @@
+500
+Content-Type: application/json
+Retry-After: 1
+
+{"__type":"InternalServerErrorException","message":"__Message__"}

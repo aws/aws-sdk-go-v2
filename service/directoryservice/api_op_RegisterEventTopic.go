@@ -4,6 +4,8 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type RegisterEventTopicInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterEventTopicInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterEventTopicRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterEventTopicInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.RegisterEventTopicRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.TopicName != nil {
+		s.WriteString(schemas.RegisterEventTopicRequest_TopicName, *v.TopicName)
+	}
+}
+
 // The result of a RegisterEventTopic request.
 type RegisterEventTopicOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -53,13 +70,26 @@ type RegisterEventTopicOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterEventTopicOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterEventTopicResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterEventTopicOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RegisterEventTopicOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterEventTopicResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterEventTopicMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterEventTopic{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterEventTopic, schemas.RegisterEventTopicRequest, schemas.RegisterEventTopicResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterEventTopic{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterEventTopic, schemas.RegisterEventTopicRequest, schemas.RegisterEventTopicResult), output: &RegisterEventTopicOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

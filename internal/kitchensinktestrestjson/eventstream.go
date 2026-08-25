@@ -10,6 +10,7 @@ import (
 	"github.com/aws/smithy-go/eventstream"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"sync"
 )
 
 // EventsReader provides the interface for reading events from a stream.
@@ -24,6 +25,9 @@ type eventsReader struct {
 	reader *smithyhttp.EventStreamReader
 	ch     chan types.Events
 	done   chan struct{}
+	closed chan struct{}
+
+	closeOnce sync.Once
 }
 
 var _ EventsReader = (*eventsReader)(nil)
@@ -33,12 +37,14 @@ func newEventsReader(reader *smithyhttp.EventStreamReader) *eventsReader {
 		reader: reader,
 		ch:     make(chan types.Events),
 		done:   make(chan struct{}),
+		closed: make(chan struct{}),
 	}
 	go r.pipe()
 	return r
 }
 
 func (r *eventsReader) pipe() {
+	defer close(r.closed)
 	defer close(r.ch)
 	for event := range r.reader.Events() {
 		var ev types.Events
@@ -63,12 +69,18 @@ func (r *eventsReader) Events() <-chan types.Events {
 }
 
 func (r *eventsReader) Close() error {
-	close(r.done)
+	r.closeOnce.Do(func() {
+		close(r.done)
+	})
 	return r.reader.Close()
 }
 
 func (r *eventsReader) Err() error {
 	return r.reader.Err()
+}
+
+func (r *eventsReader) Closed() <-chan struct{} {
+	return r.closed
 }
 
 type deserializeOpEventStreamSubscribeEvents struct {

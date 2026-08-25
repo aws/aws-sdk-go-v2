@@ -5,7 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,40 @@ type ListSyncJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSyncJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSyncJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSyncJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSyncJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSyncJobsRequest_nextToken, *v.NextToken)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.ListSyncJobsRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *ListSyncJobsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSyncJobsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSyncJobsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListSyncJobsRequest_maxResults, v.MaxResults)
+		case schemas.ListSyncJobsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSyncJobsRequest_nextToken, v.NextToken)
+		case schemas.ListSyncJobsRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.ListSyncJobsRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type ListSyncJobsOutput struct {
 
 	// The string that specifies the next page of results.
@@ -58,13 +94,35 @@ type ListSyncJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSyncJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSyncJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSyncJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSyncJobsResponse_nextToken, *v.NextToken)
+	}
+	serializeSyncJobSummaries(s, schemas.ListSyncJobsResponse_syncJobSummaries, v.SyncJobSummaries)
+}
+func (v *ListSyncJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSyncJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSyncJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSyncJobsResponse_nextToken, v.NextToken)
+		case schemas.ListSyncJobsResponse_syncJobSummaries:
+			return deserializeSyncJobSummaries(d, schemas.ListSyncJobsResponse_syncJobSummaries, &v.SyncJobSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSyncJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSyncJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSyncJobs, schemas.ListSyncJobsRequest, schemas.ListSyncJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSyncJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSyncJobs, schemas.ListSyncJobsRequest, schemas.ListSyncJobsResponse), output: &ListSyncJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

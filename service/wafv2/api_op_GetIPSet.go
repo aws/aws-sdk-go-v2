@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,24 @@ type GetIPSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIPSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIPSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIPSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetIPSetRequest_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetIPSetRequest_Name, *v.Name)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.GetIPSetRequest_Scope, string(v.Scope))
+	}
+}
+
 type GetIPSetOutput struct {
 
 	//
@@ -75,13 +95,40 @@ type GetIPSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIPSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIPSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIPSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IPSet != nil {
+		s.WriteStruct(schemas.GetIPSetResponse_IPSet)
+		v.IPSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LockToken != nil {
+		s.WriteString(schemas.GetIPSetResponse_LockToken, *v.LockToken)
+	}
+}
+func (v *GetIPSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIPSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIPSetResponse_IPSet:
+			v.IPSet = &types.IPSet{}
+			return v.IPSet.Deserialize(d)
+		case schemas.GetIPSetResponse_LockToken:
+			v.LockToken = new(string)
+			return d.ReadString(schemas.GetIPSetResponse_LockToken, v.LockToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIPSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetIPSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIPSet, schemas.GetIPSetRequest, schemas.GetIPSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetIPSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIPSet, schemas.GetIPSetRequest, schemas.GetIPSetResponse), output: &GetIPSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,30 @@ type ListStepsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStepsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStepsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStepsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.ListStepsRequest_farmId, *v.FarmId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.ListStepsRequest_jobId, *v.JobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListStepsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStepsRequest_nextToken, *v.NextToken)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.ListStepsRequest_queueId, *v.QueueId)
+	}
+}
+
 // Shared pagination field for List operation outputs (nextToken).
 type ListStepsOutput struct {
 
@@ -76,13 +102,35 @@ type ListStepsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStepsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStepsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStepsResponse_nextToken, *v.NextToken)
+	}
+	serializeStepSummaries(s, schemas.ListStepsResponse_steps, v.Steps)
+}
+func (v *ListStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStepsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStepsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStepsResponse_nextToken, v.NextToken)
+		case schemas.ListStepsResponse_steps:
+			return deserializeStepSummaries(d, schemas.ListStepsResponse_steps, &v.Steps)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStepsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSteps, schemas.ListStepsRequest, schemas.ListStepsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSteps, schemas.ListStepsRequest, schemas.ListStepsResponse), output: &ListStepsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

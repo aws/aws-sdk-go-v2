@@ -4,6 +4,8 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,19 @@ type RemoveTagsFromResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveTagsFromResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveTagsFromResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveTagsFromResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceId != nil {
+		s.WriteString(schemas.RemoveTagsFromResourceRequest_ResourceId, *v.ResourceId)
+	}
+	serializeTagKeys(s, schemas.RemoveTagsFromResourceRequest_TagKeys, v.TagKeys)
+}
+
 type RemoveTagsFromResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +60,26 @@ type RemoveTagsFromResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveTagsFromResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveTagsFromResourceResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveTagsFromResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RemoveTagsFromResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveTagsFromResourceResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveTagsFromResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveTagsFromResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveTagsFromResource, schemas.RemoveTagsFromResourceRequest, schemas.RemoveTagsFromResourceResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRemoveTagsFromResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveTagsFromResource, schemas.RemoveTagsFromResourceRequest, schemas.RemoveTagsFromResourceResult), output: &RemoveTagsFromResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

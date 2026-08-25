@@ -4,7 +4,9 @@ package globalaccelerator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,19 @@ type RemoveEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveEndpointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointGroupArn != nil {
+		s.WriteString(schemas.RemoveEndpointsRequest_EndpointGroupArn, *v.EndpointGroupArn)
+	}
+	serializeEndpointIdentifiers(s, schemas.RemoveEndpointsRequest_EndpointIdentifiers, v.EndpointIdentifiers)
+}
+
 type RemoveEndpointsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,13 +77,26 @@ type RemoveEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RemoveEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveEndpoints, schemas.RemoveEndpointsRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRemoveEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveEndpoints, schemas.RemoveEndpointsRequest, nil), output: &RemoveEndpointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

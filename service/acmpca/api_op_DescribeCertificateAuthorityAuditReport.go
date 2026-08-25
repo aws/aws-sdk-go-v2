@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -56,6 +57,21 @@ type DescribeCertificateAuthorityAuditReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCertificateAuthorityAuditReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCertificateAuthorityAuditReportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCertificateAuthorityAuditReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditReportId != nil {
+		s.WriteString(schemas.DescribeCertificateAuthorityAuditReportRequest_AuditReportId, *v.AuditReportId)
+	}
+	if v.CertificateAuthorityArn != nil {
+		s.WriteString(schemas.DescribeCertificateAuthorityAuditReportRequest_CertificateAuthorityArn, *v.CertificateAuthorityArn)
+	}
+}
+
 type DescribeCertificateAuthorityAuditReportOutput struct {
 
 	// Specifies whether report creation is in progress, has succeeded, or has failed.
@@ -76,13 +92,54 @@ type DescribeCertificateAuthorityAuditReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCertificateAuthorityAuditReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCertificateAuthorityAuditReportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCertificateAuthorityAuditReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditReportStatus != "" {
+		s.WriteString(schemas.DescribeCertificateAuthorityAuditReportResponse_AuditReportStatus, string(v.AuditReportStatus))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DescribeCertificateAuthorityAuditReportResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.S3BucketName != nil {
+		s.WriteString(schemas.DescribeCertificateAuthorityAuditReportResponse_S3BucketName, *v.S3BucketName)
+	}
+	if v.S3Key != nil {
+		s.WriteString(schemas.DescribeCertificateAuthorityAuditReportResponse_S3Key, *v.S3Key)
+	}
+}
+func (v *DescribeCertificateAuthorityAuditReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCertificateAuthorityAuditReportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCertificateAuthorityAuditReportResponse_AuditReportStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeCertificateAuthorityAuditReportResponse_AuditReportStatus, &ev); err != nil {
+				return err
+			}
+			v.AuditReportStatus = types.AuditReportStatus(ev)
+			return nil
+		case schemas.DescribeCertificateAuthorityAuditReportResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeCertificateAuthorityAuditReportResponse_CreatedAt, v.CreatedAt)
+		case schemas.DescribeCertificateAuthorityAuditReportResponse_S3BucketName:
+			v.S3BucketName = new(string)
+			return d.ReadString(schemas.DescribeCertificateAuthorityAuditReportResponse_S3BucketName, v.S3BucketName)
+		case schemas.DescribeCertificateAuthorityAuditReportResponse_S3Key:
+			v.S3Key = new(string)
+			return d.ReadString(schemas.DescribeCertificateAuthorityAuditReportResponse_S3Key, v.S3Key)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCertificateAuthorityAuditReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCertificateAuthorityAuditReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCertificateAuthorityAuditReport, schemas.DescribeCertificateAuthorityAuditReportRequest, schemas.DescribeCertificateAuthorityAuditReportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCertificateAuthorityAuditReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCertificateAuthorityAuditReport, schemas.DescribeCertificateAuthorityAuditReportRequest, schemas.DescribeCertificateAuthorityAuditReportResponse), output: &DescribeCertificateAuthorityAuditReportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

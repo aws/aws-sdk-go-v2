@@ -4,7 +4,9 @@ package eventbridge
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -69,6 +71,35 @@ type StartReplayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartReplayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartReplayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartReplayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.StartReplayRequest_Description, *v.Description)
+	}
+	if v.Destination != nil {
+		s.WriteStruct(schemas.StartReplayRequest_Destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventEndTime != nil {
+		s.WriteTime(schemas.StartReplayRequest_EventEndTime, *v.EventEndTime)
+	}
+	if v.EventSourceArn != nil {
+		s.WriteString(schemas.StartReplayRequest_EventSourceArn, *v.EventSourceArn)
+	}
+	if v.EventStartTime != nil {
+		s.WriteTime(schemas.StartReplayRequest_EventStartTime, *v.EventStartTime)
+	}
+	if v.ReplayName != nil {
+		s.WriteString(schemas.StartReplayRequest_ReplayName, *v.ReplayName)
+	}
+}
+
 type StartReplayOutput struct {
 
 	// The ARN of the replay.
@@ -89,13 +120,54 @@ type StartReplayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartReplayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartReplayResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartReplayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplayArn != nil {
+		s.WriteString(schemas.StartReplayResponse_ReplayArn, *v.ReplayArn)
+	}
+	if v.ReplayStartTime != nil {
+		s.WriteTime(schemas.StartReplayResponse_ReplayStartTime, *v.ReplayStartTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.StartReplayResponse_State, string(v.State))
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.StartReplayResponse_StateReason, *v.StateReason)
+	}
+}
+func (v *StartReplayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartReplayResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartReplayResponse_ReplayArn:
+			v.ReplayArn = new(string)
+			return d.ReadString(schemas.StartReplayResponse_ReplayArn, v.ReplayArn)
+		case schemas.StartReplayResponse_ReplayStartTime:
+			v.ReplayStartTime = new(time.Time)
+			return d.ReadTime(schemas.StartReplayResponse_ReplayStartTime, v.ReplayStartTime)
+		case schemas.StartReplayResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.StartReplayResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ReplayState(ev)
+			return nil
+		case schemas.StartReplayResponse_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.StartReplayResponse_StateReason, v.StateReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartReplayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartReplay{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartReplay, schemas.StartReplayRequest, schemas.StartReplayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartReplay{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartReplay, schemas.StartReplayRequest, schemas.StartReplayResponse), output: &StartReplayOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

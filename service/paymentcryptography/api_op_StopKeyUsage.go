@@ -4,7 +4,9 @@ package paymentcryptography
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,18 @@ type StopKeyUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopKeyUsageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopKeyUsageInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopKeyUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyIdentifier != nil {
+		s.WriteString(schemas.StopKeyUsageInput_KeyIdentifier, *v.KeyIdentifier)
+	}
+}
+
 type StopKeyUsageOutput struct {
 
 	// The KeyARN of the key.
@@ -64,13 +78,34 @@ type StopKeyUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopKeyUsageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopKeyUsageOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopKeyUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteStruct(schemas.StopKeyUsageOutput_Key)
+		v.Key.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StopKeyUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopKeyUsageOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopKeyUsageOutput_Key:
+			v.Key = &types.Key{}
+			return v.Key.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopKeyUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStopKeyUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopKeyUsage, schemas.StopKeyUsageInput, schemas.StopKeyUsageOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStopKeyUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopKeyUsage, schemas.StopKeyUsageInput, schemas.StopKeyUsageOutput), output: &StopKeyUsageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

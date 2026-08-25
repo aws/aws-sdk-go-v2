@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,25 @@ type GetTransitGatewayRegistrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTransitGatewayRegistrationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTransitGatewayRegistrationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTransitGatewayRegistrationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.GetTransitGatewayRegistrationsRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetTransitGatewayRegistrationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetTransitGatewayRegistrationsRequest_NextToken, *v.NextToken)
+	}
+	serializeTransitGatewayArnList(s, schemas.GetTransitGatewayRegistrationsRequest_TransitGatewayArns, v.TransitGatewayArns)
+}
+
 type GetTransitGatewayRegistrationsOutput struct {
 
 	// The token for the next page of results.
@@ -60,13 +81,35 @@ type GetTransitGatewayRegistrationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTransitGatewayRegistrationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTransitGatewayRegistrationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTransitGatewayRegistrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetTransitGatewayRegistrationsResponse_NextToken, *v.NextToken)
+	}
+	serializeTransitGatewayRegistrationList(s, schemas.GetTransitGatewayRegistrationsResponse_TransitGatewayRegistrations, v.TransitGatewayRegistrations)
+}
+func (v *GetTransitGatewayRegistrationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTransitGatewayRegistrationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTransitGatewayRegistrationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetTransitGatewayRegistrationsResponse_NextToken, v.NextToken)
+		case schemas.GetTransitGatewayRegistrationsResponse_TransitGatewayRegistrations:
+			return deserializeTransitGatewayRegistrationList(d, schemas.GetTransitGatewayRegistrationsResponse_TransitGatewayRegistrations, &v.TransitGatewayRegistrations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTransitGatewayRegistrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTransitGatewayRegistrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTransitGatewayRegistrations, schemas.GetTransitGatewayRegistrationsRequest, schemas.GetTransitGatewayRegistrationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTransitGatewayRegistrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTransitGatewayRegistrations, schemas.GetTransitGatewayRegistrationsRequest, schemas.GetTransitGatewayRegistrationsResponse), output: &GetTransitGatewayRegistrationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Tags":{"key0":"__Value__"},"View":{"Filters":{"FilterString":"__FilterString__"},"IncludedProperties":[{"Name":"__Name__"},{"Name":"__Name__"}],"LastUpdatedAt":"2000-01-01T00:00:00Z","Owner":"__Owner__","Scope":"__Scope__","ViewArn":"__ViewArn__","ViewName":"__ViewName__"}}

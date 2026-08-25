@@ -4,7 +4,9 @@ package globalaccelerator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribeListenerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeListenerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeListenerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeListenerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ListenerArn != nil {
+		s.WriteString(schemas.DescribeListenerRequest_ListenerArn, *v.ListenerArn)
+	}
+}
+
 type DescribeListenerOutput struct {
 
 	// The description of a listener.
@@ -45,13 +59,34 @@ type DescribeListenerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeListenerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeListenerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeListenerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Listener != nil {
+		s.WriteStruct(schemas.DescribeListenerResponse_Listener)
+		v.Listener.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeListenerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeListenerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeListenerResponse_Listener:
+			v.Listener = &types.Listener{}
+			return v.Listener.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeListener{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeListener, schemas.DescribeListenerRequest, schemas.DescribeListenerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeListener{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeListener, schemas.DescribeListenerRequest, schemas.DescribeListenerResponse), output: &DescribeListenerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

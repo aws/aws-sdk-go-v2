@@ -4,6 +4,8 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteBatchPredictionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBatchPredictionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBatchPredictionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBatchPredictionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DeleteBatchPredictionJobRequest_jobId, *v.JobId)
+	}
+}
+
 type DeleteBatchPredictionJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteBatchPredictionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBatchPredictionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBatchPredictionJobResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBatchPredictionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteBatchPredictionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBatchPredictionJobResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBatchPredictionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteBatchPredictionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBatchPredictionJob, schemas.DeleteBatchPredictionJobRequest, schemas.DeleteBatchPredictionJobResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteBatchPredictionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBatchPredictionJob, schemas.DeleteBatchPredictionJobRequest, schemas.DeleteBatchPredictionJobResult), output: &DeleteBatchPredictionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

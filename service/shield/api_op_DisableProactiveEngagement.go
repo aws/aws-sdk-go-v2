@@ -4,6 +4,8 @@ package shield
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/shield/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type DisableProactiveEngagementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableProactiveEngagementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableProactiveEngagementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableProactiveEngagementInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DisableProactiveEngagementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -35,13 +46,26 @@ type DisableProactiveEngagementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableProactiveEngagementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableProactiveEngagementResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableProactiveEngagementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisableProactiveEngagementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableProactiveEngagementResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableProactiveEngagementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisableProactiveEngagement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableProactiveEngagement, schemas.DisableProactiveEngagementRequest, schemas.DisableProactiveEngagementResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisableProactiveEngagement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableProactiveEngagement, schemas.DisableProactiveEngagementRequest, schemas.DisableProactiveEngagementResponse), output: &DisableProactiveEngagementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

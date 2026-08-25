@@ -4,7 +4,9 @@ package ivsrealtime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type GetParticipantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetParticipantInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParticipantRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParticipantInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParticipantId != nil {
+		s.WriteString(schemas.GetParticipantRequest_participantId, *v.ParticipantId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetParticipantRequest_sessionId, *v.SessionId)
+	}
+	if v.StageArn != nil {
+		s.WriteString(schemas.GetParticipantRequest_stageArn, *v.StageArn)
+	}
+}
+
 type GetParticipantOutput struct {
 
 	// The participant that is returned.
@@ -55,13 +75,34 @@ type GetParticipantOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetParticipantOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParticipantResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParticipantOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Participant != nil {
+		s.WriteStruct(schemas.GetParticipantResponse_participant)
+		v.Participant.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetParticipantOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetParticipantResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetParticipantResponse_participant:
+			v.Participant = &types.Participant{}
+			return v.Participant.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetParticipantMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetParticipant{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParticipant, schemas.GetParticipantRequest, schemas.GetParticipantResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetParticipant{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParticipant, schemas.GetParticipantRequest, schemas.GetParticipantResponse), output: &GetParticipantOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

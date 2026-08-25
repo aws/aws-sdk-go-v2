@@ -4,7 +4,9 @@ package codepipeline
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,23 @@ type PutJobFailureResultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutJobFailureResultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutJobFailureResultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutJobFailureResultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureDetails != nil {
+		s.WriteStruct(schemas.PutJobFailureResultInput_failureDetails)
+		v.FailureDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.PutJobFailureResultInput_jobId, *v.JobId)
+	}
+}
+
 type PutJobFailureResultOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +68,26 @@ type PutJobFailureResultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutJobFailureResultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutJobFailureResultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutJobFailureResultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutJobFailureResultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutJobFailureResult{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutJobFailureResult, schemas.PutJobFailureResultInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutJobFailureResult{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutJobFailureResult, schemas.PutJobFailureResultInput, nil), output: &PutJobFailureResultOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

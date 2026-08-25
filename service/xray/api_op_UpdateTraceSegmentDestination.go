@@ -4,7 +4,9 @@ package xray
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type UpdateTraceSegmentDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTraceSegmentDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTraceSegmentDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTraceSegmentDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != "" {
+		s.WriteString(schemas.UpdateTraceSegmentDestinationRequest_Destination, string(v.Destination))
+	}
+}
+
 type UpdateTraceSegmentDestinationOutput struct {
 
 	//  The destination of the trace segments.
@@ -51,13 +65,46 @@ type UpdateTraceSegmentDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTraceSegmentDestinationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTraceSegmentDestinationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTraceSegmentDestinationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != "" {
+		s.WriteString(schemas.UpdateTraceSegmentDestinationResult_Destination, string(v.Destination))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateTraceSegmentDestinationResult_Status, string(v.Status))
+	}
+}
+func (v *UpdateTraceSegmentDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTraceSegmentDestinationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTraceSegmentDestinationResult_Destination:
+			var ev string
+			if err := d.ReadString(schemas.UpdateTraceSegmentDestinationResult_Destination, &ev); err != nil {
+				return err
+			}
+			v.Destination = types.TraceSegmentDestination(ev)
+			return nil
+		case schemas.UpdateTraceSegmentDestinationResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateTraceSegmentDestinationResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TraceSegmentDestinationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTraceSegmentDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTraceSegmentDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTraceSegmentDestination, schemas.UpdateTraceSegmentDestinationRequest, schemas.UpdateTraceSegmentDestinationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTraceSegmentDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTraceSegmentDestination, schemas.UpdateTraceSegmentDestinationRequest, schemas.UpdateTraceSegmentDestinationResult), output: &UpdateTraceSegmentDestinationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

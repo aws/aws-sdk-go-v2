@@ -4,7 +4,9 @@ package mediapackage
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackage/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackage/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,59 @@ type UpdateOriginEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateOriginEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOriginEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOriginEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Authorization != nil {
+		s.WriteStruct(schemas.UpdateOriginEndpointRequest_Authorization)
+		v.Authorization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CmafPackage != nil {
+		s.WriteStruct(schemas.UpdateOriginEndpointRequest_CmafPackage)
+		v.CmafPackage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DashPackage != nil {
+		s.WriteStruct(schemas.UpdateOriginEndpointRequest_DashPackage)
+		v.DashPackage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateOriginEndpointRequest_Description, *v.Description)
+	}
+	if v.HlsPackage != nil {
+		s.WriteStruct(schemas.UpdateOriginEndpointRequest_HlsPackage)
+		v.HlsPackage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateOriginEndpointRequest_Id, *v.Id)
+	}
+	if v.ManifestName != nil {
+		s.WriteString(schemas.UpdateOriginEndpointRequest_ManifestName, *v.ManifestName)
+	}
+	if v.MssPackage != nil {
+		s.WriteStruct(schemas.UpdateOriginEndpointRequest_MssPackage)
+		v.MssPackage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Origination != "" {
+		s.WriteString(schemas.UpdateOriginEndpointRequest_Origination, string(v.Origination))
+	}
+	if v.StartoverWindowSeconds != nil {
+		s.WriteInt32(schemas.UpdateOriginEndpointRequest_StartoverWindowSeconds, *v.StartoverWindowSeconds)
+	}
+	if v.TimeDelaySeconds != nil {
+		s.WriteInt32(schemas.UpdateOriginEndpointRequest_TimeDelaySeconds, *v.TimeDelaySeconds)
+	}
+	serialize__listOf__string(s, schemas.UpdateOriginEndpointRequest_Whitelist, v.Whitelist)
+}
+
 type UpdateOriginEndpointOutput struct {
 
 	// The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
@@ -141,13 +196,136 @@ type UpdateOriginEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateOriginEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOriginEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOriginEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateOriginEndpointResponse_Arn, *v.Arn)
+	}
+	if v.Authorization != nil {
+		s.WriteStruct(schemas.UpdateOriginEndpointResponse_Authorization)
+		v.Authorization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChannelId != nil {
+		s.WriteString(schemas.UpdateOriginEndpointResponse_ChannelId, *v.ChannelId)
+	}
+	if v.CmafPackage != nil {
+		s.WriteStruct(schemas.UpdateOriginEndpointResponse_CmafPackage)
+		v.CmafPackage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteString(schemas.UpdateOriginEndpointResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.DashPackage != nil {
+		s.WriteStruct(schemas.UpdateOriginEndpointResponse_DashPackage)
+		v.DashPackage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateOriginEndpointResponse_Description, *v.Description)
+	}
+	if v.HlsPackage != nil {
+		s.WriteStruct(schemas.UpdateOriginEndpointResponse_HlsPackage)
+		v.HlsPackage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateOriginEndpointResponse_Id, *v.Id)
+	}
+	if v.ManifestName != nil {
+		s.WriteString(schemas.UpdateOriginEndpointResponse_ManifestName, *v.ManifestName)
+	}
+	if v.MssPackage != nil {
+		s.WriteStruct(schemas.UpdateOriginEndpointResponse_MssPackage)
+		v.MssPackage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Origination != "" {
+		s.WriteString(schemas.UpdateOriginEndpointResponse_Origination, string(v.Origination))
+	}
+	if v.StartoverWindowSeconds != nil {
+		s.WriteInt32(schemas.UpdateOriginEndpointResponse_StartoverWindowSeconds, *v.StartoverWindowSeconds)
+	}
+	serializeTags(s, schemas.UpdateOriginEndpointResponse_Tags, v.Tags)
+	if v.TimeDelaySeconds != nil {
+		s.WriteInt32(schemas.UpdateOriginEndpointResponse_TimeDelaySeconds, *v.TimeDelaySeconds)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.UpdateOriginEndpointResponse_Url, *v.Url)
+	}
+	serialize__listOf__string(s, schemas.UpdateOriginEndpointResponse_Whitelist, v.Whitelist)
+}
+func (v *UpdateOriginEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateOriginEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateOriginEndpointResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateOriginEndpointResponse_Arn, v.Arn)
+		case schemas.UpdateOriginEndpointResponse_Authorization:
+			v.Authorization = &types.Authorization{}
+			return v.Authorization.Deserialize(d)
+		case schemas.UpdateOriginEndpointResponse_ChannelId:
+			v.ChannelId = new(string)
+			return d.ReadString(schemas.UpdateOriginEndpointResponse_ChannelId, v.ChannelId)
+		case schemas.UpdateOriginEndpointResponse_CmafPackage:
+			v.CmafPackage = &types.CmafPackage{}
+			return v.CmafPackage.Deserialize(d)
+		case schemas.UpdateOriginEndpointResponse_CreatedAt:
+			v.CreatedAt = new(string)
+			return d.ReadString(schemas.UpdateOriginEndpointResponse_CreatedAt, v.CreatedAt)
+		case schemas.UpdateOriginEndpointResponse_DashPackage:
+			v.DashPackage = &types.DashPackage{}
+			return v.DashPackage.Deserialize(d)
+		case schemas.UpdateOriginEndpointResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateOriginEndpointResponse_Description, v.Description)
+		case schemas.UpdateOriginEndpointResponse_HlsPackage:
+			v.HlsPackage = &types.HlsPackage{}
+			return v.HlsPackage.Deserialize(d)
+		case schemas.UpdateOriginEndpointResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateOriginEndpointResponse_Id, v.Id)
+		case schemas.UpdateOriginEndpointResponse_ManifestName:
+			v.ManifestName = new(string)
+			return d.ReadString(schemas.UpdateOriginEndpointResponse_ManifestName, v.ManifestName)
+		case schemas.UpdateOriginEndpointResponse_MssPackage:
+			v.MssPackage = &types.MssPackage{}
+			return v.MssPackage.Deserialize(d)
+		case schemas.UpdateOriginEndpointResponse_Origination:
+			var ev string
+			if err := d.ReadString(schemas.UpdateOriginEndpointResponse_Origination, &ev); err != nil {
+				return err
+			}
+			v.Origination = types.Origination(ev)
+			return nil
+		case schemas.UpdateOriginEndpointResponse_StartoverWindowSeconds:
+			v.StartoverWindowSeconds = new(int32)
+			return d.ReadInt32(schemas.UpdateOriginEndpointResponse_StartoverWindowSeconds, v.StartoverWindowSeconds)
+		case schemas.UpdateOriginEndpointResponse_Tags:
+			return deserializeTags(d, schemas.UpdateOriginEndpointResponse_Tags, &v.Tags)
+		case schemas.UpdateOriginEndpointResponse_TimeDelaySeconds:
+			v.TimeDelaySeconds = new(int32)
+			return d.ReadInt32(schemas.UpdateOriginEndpointResponse_TimeDelaySeconds, v.TimeDelaySeconds)
+		case schemas.UpdateOriginEndpointResponse_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.UpdateOriginEndpointResponse_Url, v.Url)
+		case schemas.UpdateOriginEndpointResponse_Whitelist:
+			return deserialize__listOf__string(d, schemas.UpdateOriginEndpointResponse_Whitelist, &v.Whitelist)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateOriginEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateOriginEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOriginEndpoint, schemas.UpdateOriginEndpointRequest, schemas.UpdateOriginEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateOriginEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOriginEndpoint, schemas.UpdateOriginEndpointRequest, schemas.UpdateOriginEndpointResponse), output: &UpdateOriginEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

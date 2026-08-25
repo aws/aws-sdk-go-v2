@@ -4,7 +4,9 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,22 @@ type CreateHybridADInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHybridADInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHybridADRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHybridADInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.CreateHybridADRequest_AssessmentId, *v.AssessmentId)
+	}
+	if v.SecretArn != nil {
+		s.WriteString(schemas.CreateHybridADRequest_SecretArn, *v.SecretArn)
+	}
+	serializeTags(s, schemas.CreateHybridADRequest_Tags, v.Tags)
+}
+
 type CreateHybridADOutput struct {
 
 	// The unique identifier of the newly created hybrid directory.
@@ -71,13 +89,32 @@ type CreateHybridADOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHybridADOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHybridADResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHybridADOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.CreateHybridADResult_DirectoryId, *v.DirectoryId)
+	}
+}
+func (v *CreateHybridADOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateHybridADResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateHybridADResult_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.CreateHybridADResult_DirectoryId, v.DirectoryId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateHybridADMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateHybridAD{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHybridAD, schemas.CreateHybridADRequest, schemas.CreateHybridADResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateHybridAD{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHybridAD, schemas.CreateHybridADRequest, schemas.CreateHybridADResult), output: &CreateHybridADOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

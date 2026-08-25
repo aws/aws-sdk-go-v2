@@ -5,7 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -53,6 +55,43 @@ type CreateSyncJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSyncJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSyncJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSyncJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SyncRole != nil {
+		s.WriteString(schemas.CreateSyncJobRequest_syncRole, *v.SyncRole)
+	}
+	if v.SyncSource != nil {
+		s.WriteString(schemas.CreateSyncJobRequest_syncSource, *v.SyncSource)
+	}
+	serializeTagMap(s, schemas.CreateSyncJobRequest_tags, v.Tags)
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.CreateSyncJobRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *CreateSyncJobInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSyncJobRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSyncJobRequest_syncRole:
+			v.SyncRole = new(string)
+			return d.ReadString(schemas.CreateSyncJobRequest_syncRole, v.SyncRole)
+		case schemas.CreateSyncJobRequest_syncSource:
+			v.SyncSource = new(string)
+			return d.ReadString(schemas.CreateSyncJobRequest_syncSource, v.SyncSource)
+		case schemas.CreateSyncJobRequest_tags:
+			return deserializeTagMap(d, schemas.CreateSyncJobRequest_tags, &v.Tags)
+		case schemas.CreateSyncJobRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.CreateSyncJobRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type CreateSyncJobOutput struct {
 
 	// The SyncJob ARN.
@@ -76,13 +115,48 @@ type CreateSyncJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSyncJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSyncJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSyncJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateSyncJobResponse_arn, *v.Arn)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.CreateSyncJobResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CreateSyncJobResponse_state, string(v.State))
+	}
+}
+func (v *CreateSyncJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSyncJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSyncJobResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateSyncJobResponse_arn, v.Arn)
+		case schemas.CreateSyncJobResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.CreateSyncJobResponse_creationDateTime, v.CreationDateTime)
+		case schemas.CreateSyncJobResponse_state:
+			var ev string
+			if err := d.ReadString(schemas.CreateSyncJobResponse_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.SyncJobState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSyncJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSyncJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSyncJob, schemas.CreateSyncJobRequest, schemas.CreateSyncJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSyncJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSyncJob, schemas.CreateSyncJobRequest, schemas.CreateSyncJobResponse), output: &CreateSyncJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

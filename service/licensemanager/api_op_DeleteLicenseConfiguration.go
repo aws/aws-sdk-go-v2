@@ -4,6 +4,8 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteLicenseConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLicenseConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLicenseConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLicenseConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseConfigurationArn != nil {
+		s.WriteString(schemas.DeleteLicenseConfigurationRequest_LicenseConfigurationArn, *v.LicenseConfigurationArn)
+	}
+}
+
 type DeleteLicenseConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type DeleteLicenseConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLicenseConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLicenseConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLicenseConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteLicenseConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLicenseConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLicenseConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteLicenseConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLicenseConfiguration, schemas.DeleteLicenseConfigurationRequest, schemas.DeleteLicenseConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteLicenseConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLicenseConfiguration, schemas.DeleteLicenseConfigurationRequest, schemas.DeleteLicenseConfigurationResponse), output: &DeleteLicenseConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

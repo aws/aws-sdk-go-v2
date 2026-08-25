@@ -4,6 +4,8 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type EnableDirectoryDataAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableDirectoryDataAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableDirectoryDataAccessRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableDirectoryDataAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.EnableDirectoryDataAccessRequest_DirectoryId, *v.DirectoryId)
+	}
+}
+
 type EnableDirectoryDataAccessOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type EnableDirectoryDataAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableDirectoryDataAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableDirectoryDataAccessResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableDirectoryDataAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *EnableDirectoryDataAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnableDirectoryDataAccessResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableDirectoryDataAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnableDirectoryDataAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableDirectoryDataAccess, schemas.EnableDirectoryDataAccessRequest, schemas.EnableDirectoryDataAccessResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpEnableDirectoryDataAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableDirectoryDataAccess, schemas.EnableDirectoryDataAccessRequest, schemas.EnableDirectoryDataAccessResult), output: &EnableDirectoryDataAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

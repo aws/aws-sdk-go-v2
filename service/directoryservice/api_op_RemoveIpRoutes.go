@@ -4,6 +4,8 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,20 @@ type RemoveIpRoutesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveIpRoutesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveIpRoutesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveIpRoutesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCidrIps(s, schemas.RemoveIpRoutesRequest_CidrIps, v.CidrIps)
+	serializeCidrIpv6s(s, schemas.RemoveIpRoutesRequest_CidrIpv6s, v.CidrIpv6s)
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.RemoveIpRoutesRequest_DirectoryId, *v.DirectoryId)
+	}
+}
+
 type RemoveIpRoutesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +62,26 @@ type RemoveIpRoutesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveIpRoutesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveIpRoutesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveIpRoutesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RemoveIpRoutesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveIpRoutesResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveIpRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveIpRoutes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveIpRoutes, schemas.RemoveIpRoutesRequest, schemas.RemoveIpRoutesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRemoveIpRoutes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveIpRoutes, schemas.RemoveIpRoutesRequest, schemas.RemoveIpRoutesResult), output: &RemoveIpRoutesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

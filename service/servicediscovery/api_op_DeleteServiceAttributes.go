@@ -4,6 +4,8 @@ package servicediscovery
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,19 @@ type DeleteServiceAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeServiceAttributeKeyList(s, schemas.DeleteServiceAttributesRequest_Attributes, v.Attributes)
+	if v.ServiceId != nil {
+		s.WriteString(schemas.DeleteServiceAttributesRequest_ServiceId, *v.ServiceId)
+	}
+}
+
 type DeleteServiceAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +65,26 @@ type DeleteServiceAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteServiceAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteServiceAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteServiceAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteServiceAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceAttributes, schemas.DeleteServiceAttributesRequest, schemas.DeleteServiceAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteServiceAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceAttributes, schemas.DeleteServiceAttributesRequest, schemas.DeleteServiceAttributesResponse), output: &DeleteServiceAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

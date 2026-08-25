@@ -4,6 +4,8 @@ package dataexchange
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,40 @@ type DeleteAssetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAssetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAssetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetId != nil {
+		s.WriteString(schemas.DeleteAssetRequest_AssetId, *v.AssetId)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.DeleteAssetRequest_DataSetId, *v.DataSetId)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.DeleteAssetRequest_RevisionId, *v.RevisionId)
+	}
+}
+func (v *DeleteAssetInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAssetRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAssetRequest_AssetId:
+			v.AssetId = new(string)
+			return d.ReadString(schemas.DeleteAssetRequest_AssetId, v.AssetId)
+		case schemas.DeleteAssetRequest_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.DeleteAssetRequest_DataSetId, v.DataSetId)
+		case schemas.DeleteAssetRequest_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.DeleteAssetRequest_RevisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
+
 type DeleteAssetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +86,26 @@ type DeleteAssetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAssetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAssetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAsset, schemas.DeleteAssetRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAsset, schemas.DeleteAssetRequest, nil), output: &DeleteAssetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

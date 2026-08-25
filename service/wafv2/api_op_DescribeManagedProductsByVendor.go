@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,21 @@ type DescribeManagedProductsByVendorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeManagedProductsByVendorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeManagedProductsByVendorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeManagedProductsByVendorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Scope != "" {
+		s.WriteString(schemas.DescribeManagedProductsByVendorRequest_Scope, string(v.Scope))
+	}
+	if v.VendorName != nil {
+		s.WriteString(schemas.DescribeManagedProductsByVendorRequest_VendorName, *v.VendorName)
+	}
+}
+
 type DescribeManagedProductsByVendorOutput struct {
 
 	// High-level information for the managed rule groups owned by the specified
@@ -62,13 +79,29 @@ type DescribeManagedProductsByVendorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeManagedProductsByVendorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeManagedProductsByVendorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeManagedProductsByVendorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeManagedProductDescriptors(s, schemas.DescribeManagedProductsByVendorResponse_ManagedProducts, v.ManagedProducts)
+}
+func (v *DescribeManagedProductsByVendorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeManagedProductsByVendorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeManagedProductsByVendorResponse_ManagedProducts:
+			return deserializeManagedProductDescriptors(d, schemas.DescribeManagedProductsByVendorResponse_ManagedProducts, &v.ManagedProducts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeManagedProductsByVendorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeManagedProductsByVendor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeManagedProductsByVendor, schemas.DescribeManagedProductsByVendorRequest, schemas.DescribeManagedProductsByVendorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeManagedProductsByVendor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeManagedProductsByVendor, schemas.DescribeManagedProductsByVendorRequest, schemas.DescribeManagedProductsByVendorResponse), output: &DescribeManagedProductsByVendorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

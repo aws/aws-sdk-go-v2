@@ -4,7 +4,9 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,16 @@ type BatchGetVariableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetVariableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetVariableRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetVariableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNameList(s, schemas.BatchGetVariableRequest_names, v.Names)
+}
+
 type BatchGetVariableOutput struct {
 
 	// The errors from the request.
@@ -48,13 +60,32 @@ type BatchGetVariableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetVariableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetVariableResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetVariableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetVariableErrorList(s, schemas.BatchGetVariableResult_errors, v.Errors)
+	serializeVariableList(s, schemas.BatchGetVariableResult_variables, v.Variables)
+}
+func (v *BatchGetVariableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetVariableResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetVariableResult_errors:
+			return deserializeBatchGetVariableErrorList(d, schemas.BatchGetVariableResult_errors, &v.Errors)
+		case schemas.BatchGetVariableResult_variables:
+			return deserializeVariableList(d, schemas.BatchGetVariableResult_variables, &v.Variables)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetVariableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetVariable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetVariable, schemas.BatchGetVariableRequest, schemas.BatchGetVariableResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetVariable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetVariable, schemas.BatchGetVariableRequest, schemas.BatchGetVariableResult), output: &BatchGetVariableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

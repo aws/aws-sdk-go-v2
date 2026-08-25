@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,6 +62,34 @@ type SearchTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchTasksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.SearchTasksRequest_farmId, *v.FarmId)
+	}
+	if v.FilterExpressions != nil {
+		s.WriteStruct(schemas.SearchTasksRequest_filterExpressions)
+		v.FilterExpressions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ItemOffset != nil {
+		s.WriteInt32(schemas.SearchTasksRequest_itemOffset, *v.ItemOffset)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.SearchTasksRequest_jobId, *v.JobId)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.SearchTasksRequest_pageSize, *v.PageSize)
+	}
+	serializeQueueIds(s, schemas.SearchTasksRequest_queueIds, v.QueueIds)
+	serializeSearchSortExpressions(s, schemas.SearchTasksRequest_sortExpressions, v.SortExpressions)
+}
+
 // Shared output fields for all Search operations (nextItemOffset, totalResults).
 type SearchTasksOutput struct {
 
@@ -82,13 +112,41 @@ type SearchTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchTasksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextItemOffset != nil {
+		s.WriteInt32(schemas.SearchTasksResponse_nextItemOffset, *v.NextItemOffset)
+	}
+	serializeTaskSearchSummaries(s, schemas.SearchTasksResponse_tasks, v.Tasks)
+	if v.TotalResults != nil {
+		s.WriteInt32(schemas.SearchTasksResponse_totalResults, *v.TotalResults)
+	}
+}
+func (v *SearchTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchTasksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchTasksResponse_nextItemOffset:
+			v.NextItemOffset = new(int32)
+			return d.ReadInt32(schemas.SearchTasksResponse_nextItemOffset, v.NextItemOffset)
+		case schemas.SearchTasksResponse_tasks:
+			return deserializeTaskSearchSummaries(d, schemas.SearchTasksResponse_tasks, &v.Tasks)
+		case schemas.SearchTasksResponse_totalResults:
+			v.TotalResults = new(int32)
+			return d.ReadInt32(schemas.SearchTasksResponse_totalResults, v.TotalResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchTasks, schemas.SearchTasksRequest, schemas.SearchTasksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchTasks, schemas.SearchTasksRequest, schemas.SearchTasksResponse), output: &SearchTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

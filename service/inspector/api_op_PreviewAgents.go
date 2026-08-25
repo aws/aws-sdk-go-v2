@@ -5,7 +5,9 @@ package inspector
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type PreviewAgentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PreviewAgentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PreviewAgentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PreviewAgentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.PreviewAgentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.PreviewAgentsRequest_nextToken, *v.NextToken)
+	}
+	if v.PreviewAgentsArn != nil {
+		s.WriteString(schemas.PreviewAgentsRequest_previewAgentsArn, *v.PreviewAgentsArn)
+	}
+}
+
 type PreviewAgentsOutput struct {
 
 	// The resulting list of agents.
@@ -65,13 +85,35 @@ type PreviewAgentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PreviewAgentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PreviewAgentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PreviewAgentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentPreviewList(s, schemas.PreviewAgentsResponse_agentPreviews, v.AgentPreviews)
+	if v.NextToken != nil {
+		s.WriteString(schemas.PreviewAgentsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *PreviewAgentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PreviewAgentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PreviewAgentsResponse_agentPreviews:
+			return deserializeAgentPreviewList(d, schemas.PreviewAgentsResponse_agentPreviews, &v.AgentPreviews)
+		case schemas.PreviewAgentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.PreviewAgentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPreviewAgentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPreviewAgents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PreviewAgents, schemas.PreviewAgentsRequest, schemas.PreviewAgentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPreviewAgents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PreviewAgents, schemas.PreviewAgentsRequest, schemas.PreviewAgentsResponse), output: &PreviewAgentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

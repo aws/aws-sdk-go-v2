@@ -5,7 +5,9 @@ package translate
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/translate/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/translate/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -51,6 +53,29 @@ type UpdateParallelDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateParallelDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateParallelDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateParallelDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateParallelDataRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateParallelDataRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateParallelDataRequest_Name, *v.Name)
+	}
+	if v.ParallelDataConfig != nil {
+		s.WriteStruct(schemas.UpdateParallelDataRequest_ParallelDataConfig)
+		v.ParallelDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateParallelDataOutput struct {
 
 	// The time that the most recent update was attempted.
@@ -73,13 +98,58 @@ type UpdateParallelDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateParallelDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateParallelDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateParallelDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LatestUpdateAttemptAt != nil {
+		s.WriteTime(schemas.UpdateParallelDataResponse_LatestUpdateAttemptAt, *v.LatestUpdateAttemptAt)
+	}
+	if v.LatestUpdateAttemptStatus != "" {
+		s.WriteString(schemas.UpdateParallelDataResponse_LatestUpdateAttemptStatus, string(v.LatestUpdateAttemptStatus))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateParallelDataResponse_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateParallelDataResponse_Status, string(v.Status))
+	}
+}
+func (v *UpdateParallelDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateParallelDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateParallelDataResponse_LatestUpdateAttemptAt:
+			v.LatestUpdateAttemptAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateParallelDataResponse_LatestUpdateAttemptAt, v.LatestUpdateAttemptAt)
+		case schemas.UpdateParallelDataResponse_LatestUpdateAttemptStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateParallelDataResponse_LatestUpdateAttemptStatus, &ev); err != nil {
+				return err
+			}
+			v.LatestUpdateAttemptStatus = types.ParallelDataStatus(ev)
+			return nil
+		case schemas.UpdateParallelDataResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateParallelDataResponse_Name, v.Name)
+		case schemas.UpdateParallelDataResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateParallelDataResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ParallelDataStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateParallelDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateParallelData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateParallelData, schemas.UpdateParallelDataRequest, schemas.UpdateParallelDataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateParallelData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateParallelData, schemas.UpdateParallelDataRequest, schemas.UpdateParallelDataResponse), output: &UpdateParallelDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

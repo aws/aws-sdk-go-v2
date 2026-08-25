@@ -5,6 +5,8 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,24 @@ type DeleteQueueLimitAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteQueueLimitAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteQueueLimitAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteQueueLimitAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.DeleteQueueLimitAssociationRequest_farmId, *v.FarmId)
+	}
+	if v.LimitId != nil {
+		s.WriteString(schemas.DeleteQueueLimitAssociationRequest_limitId, *v.LimitId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.DeleteQueueLimitAssociationRequest_queueId, *v.QueueId)
+	}
+}
+
 type DeleteQueueLimitAssociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +77,26 @@ type DeleteQueueLimitAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteQueueLimitAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteQueueLimitAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteQueueLimitAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteQueueLimitAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteQueueLimitAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteQueueLimitAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteQueueLimitAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteQueueLimitAssociation, schemas.DeleteQueueLimitAssociationRequest, schemas.DeleteQueueLimitAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteQueueLimitAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteQueueLimitAssociation, schemas.DeleteQueueLimitAssociationRequest, schemas.DeleteQueueLimitAssociationResponse), output: &DeleteQueueLimitAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

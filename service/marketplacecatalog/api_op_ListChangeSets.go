@@ -5,7 +5,9 @@ package marketplacecatalog
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,30 @@ type ListChangeSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChangeSetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListChangeSetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListChangeSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.ListChangeSetsRequest_Catalog, *v.Catalog)
+	}
+	serializeFilterList(s, schemas.ListChangeSetsRequest_FilterList, v.FilterList)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListChangeSetsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListChangeSetsRequest_NextToken, *v.NextToken)
+	}
+	if v.Sort != nil {
+		s.WriteStruct(schemas.ListChangeSetsRequest_Sort)
+		v.Sort.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListChangeSetsOutput struct {
 
 	//  Array of ChangeSetSummaryListItem objects.
@@ -70,13 +96,35 @@ type ListChangeSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChangeSetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListChangeSetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListChangeSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChangeSetSummaryList(s, schemas.ListChangeSetsResponse_ChangeSetSummaryList, v.ChangeSetSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListChangeSetsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListChangeSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListChangeSetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListChangeSetsResponse_ChangeSetSummaryList:
+			return deserializeChangeSetSummaryList(d, schemas.ListChangeSetsResponse_ChangeSetSummaryList, &v.ChangeSetSummaryList)
+		case schemas.ListChangeSetsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListChangeSetsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListChangeSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListChangeSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChangeSets, schemas.ListChangeSetsRequest, schemas.ListChangeSetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListChangeSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChangeSets, schemas.ListChangeSetsRequest, schemas.ListChangeSetsResponse), output: &ListChangeSetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

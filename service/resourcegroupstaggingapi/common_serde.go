@@ -216,6 +216,7 @@ func serializeTargetIdFilterList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func deserializeCloudFormationResourceTypes(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -229,6 +230,7 @@ func deserializeCloudFormationResourceTypes(d smithy.ShapeDeserializer, s *smith
 }
 
 func deserializeGroupBy(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GroupByAttribute) error {
+	*v = make([]types.GroupByAttribute, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -242,6 +244,7 @@ func deserializeGroupBy(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 }
 
 func deserializeRegionFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -255,6 +258,7 @@ func deserializeRegionFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeReportingTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -268,6 +272,7 @@ func deserializeReportingTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeRequiredTagsForListRequiredTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RequiredTag) error {
+	*v = make([]types.RequiredTag, 0)
 	var vv types.RequiredTag
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RequiredTag{}
@@ -281,6 +286,7 @@ func deserializeRequiredTagsForListRequiredTags(d smithy.ShapeDeserializer, s *s
 }
 
 func deserializeResourceARNListForGet(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -294,6 +300,7 @@ func deserializeResourceARNListForGet(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func deserializeResourceARNListForTagUntag(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -307,6 +314,7 @@ func deserializeResourceARNListForTagUntag(d smithy.ShapeDeserializer, s *smithy
 }
 
 func deserializeResourceTagMappingList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ResourceTagMapping) error {
+	*v = make([]types.ResourceTagMapping, 0)
 	var vv types.ResourceTagMapping
 	return smithy.ReadList(d, s, func() error {
 		vv = types.ResourceTagMapping{}
@@ -320,6 +328,7 @@ func deserializeResourceTagMappingList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeResourceTypeFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -333,6 +342,7 @@ func deserializeResourceTypeFilterList(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func deserializeSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Summary) error {
+	*v = make([]types.Summary, 0)
 	var vv types.Summary
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Summary{}
@@ -346,6 +356,7 @@ func deserializeSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]t
 }
 
 func deserializeTagFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.TagFilter) error {
+	*v = make([]types.TagFilter, 0)
 	var vv types.TagFilter
 	return smithy.ReadList(d, s, func() error {
 		vv = types.TagFilter{}
@@ -359,6 +370,7 @@ func deserializeTagFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 }
 
 func deserializeTagKeyFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -372,6 +384,7 @@ func deserializeTagKeyFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -385,6 +398,7 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func deserializeTagKeyListForUntag(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -398,6 +412,7 @@ func deserializeTagKeyListForUntag(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Tag) error {
+	*v = make([]types.Tag, 0)
 	var vv types.Tag
 	return smithy.ReadList(d, s, func() error {
 		vv = types.Tag{}
@@ -411,6 +426,7 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types
 }
 
 func deserializeTagValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -424,6 +440,7 @@ func deserializeTagValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func deserializeTagValuesOutputList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 
@@ -437,6 +454,7 @@ func deserializeTagValuesOutputList(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func deserializeTargetIdFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
 	var vv string
 	return smithy.ReadList(d, s, func() error {
 

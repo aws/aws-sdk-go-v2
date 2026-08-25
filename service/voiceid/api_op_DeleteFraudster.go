@@ -4,6 +4,8 @@ package voiceid
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/voiceid/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,34 @@ type DeleteFraudsterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFraudsterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFraudsterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFraudsterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.DeleteFraudsterRequest_DomainId, *v.DomainId)
+	}
+	if v.FraudsterId != nil {
+		s.WriteString(schemas.DeleteFraudsterRequest_FraudsterId, *v.FraudsterId)
+	}
+}
+func (v *DeleteFraudsterInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFraudsterRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFraudsterRequest_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.DeleteFraudsterRequest_DomainId, v.DomainId)
+		case schemas.DeleteFraudsterRequest_FraudsterId:
+			v.FraudsterId = new(string)
+			return d.ReadString(schemas.DeleteFraudsterRequest_FraudsterId, v.FraudsterId)
+		}
+		return nil
+	})
+}
+
 type DeleteFraudsterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +76,26 @@ type DeleteFraudsterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFraudsterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFraudsterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteFraudsterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFraudsterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteFraudster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFraudster, schemas.DeleteFraudsterRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteFraudster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFraudster, schemas.DeleteFraudsterRequest, nil), output: &DeleteFraudsterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

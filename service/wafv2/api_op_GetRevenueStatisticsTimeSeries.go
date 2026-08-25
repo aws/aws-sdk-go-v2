@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,42 @@ type GetRevenueStatisticsTimeSeriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRevenueStatisticsTimeSeriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRevenueStatisticsTimeSeriesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRevenueStatisticsTimeSeriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Currency != "" {
+		s.WriteString(schemas.GetRevenueStatisticsTimeSeriesRequest_Currency, string(v.Currency))
+	}
+	serializeMonetizationFilterList(s, schemas.GetRevenueStatisticsTimeSeriesRequest_Filters, v.Filters)
+	if v.GroupBy != "" {
+		s.WriteString(schemas.GetRevenueStatisticsTimeSeriesRequest_GroupBy, string(v.GroupBy))
+	}
+	if v.Interval != "" {
+		s.WriteString(schemas.GetRevenueStatisticsTimeSeriesRequest_Interval, string(v.Interval))
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.GetRevenueStatisticsTimeSeriesRequest_Limit, *v.Limit)
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.GetRevenueStatisticsTimeSeriesRequest_NextMarker, *v.NextMarker)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.GetRevenueStatisticsTimeSeriesRequest_Scope, string(v.Scope))
+	}
+	if v.StatisticType != "" {
+		s.WriteString(schemas.GetRevenueStatisticsTimeSeriesRequest_StatisticType, string(v.StatisticType))
+	}
+	if v.TimeWindow != nil {
+		s.WriteStruct(schemas.GetRevenueStatisticsTimeSeriesRequest_TimeWindow)
+		v.TimeWindow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetRevenueStatisticsTimeSeriesOutput struct {
 
 	// The list of time series data points.
@@ -89,13 +127,35 @@ type GetRevenueStatisticsTimeSeriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRevenueStatisticsTimeSeriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRevenueStatisticsTimeSeriesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRevenueStatisticsTimeSeriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataPointsList(s, schemas.GetRevenueStatisticsTimeSeriesResponse_DataPoints, v.DataPoints)
+	if v.NextMarker != nil {
+		s.WriteString(schemas.GetRevenueStatisticsTimeSeriesResponse_NextMarker, *v.NextMarker)
+	}
+}
+func (v *GetRevenueStatisticsTimeSeriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRevenueStatisticsTimeSeriesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRevenueStatisticsTimeSeriesResponse_DataPoints:
+			return deserializeDataPointsList(d, schemas.GetRevenueStatisticsTimeSeriesResponse_DataPoints, &v.DataPoints)
+		case schemas.GetRevenueStatisticsTimeSeriesResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.GetRevenueStatisticsTimeSeriesResponse_NextMarker, v.NextMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRevenueStatisticsTimeSeriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRevenueStatisticsTimeSeries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRevenueStatisticsTimeSeries, schemas.GetRevenueStatisticsTimeSeriesRequest, schemas.GetRevenueStatisticsTimeSeriesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRevenueStatisticsTimeSeries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRevenueStatisticsTimeSeries, schemas.GetRevenueStatisticsTimeSeriesRequest, schemas.GetRevenueStatisticsTimeSeriesResponse), output: &GetRevenueStatisticsTimeSeriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type GetLicenseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLicenseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLicenseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLicenseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseArn != nil {
+		s.WriteString(schemas.GetLicenseRequest_LicenseArn, *v.LicenseArn)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.GetLicenseRequest_Version, *v.Version)
+	}
+}
+
 type GetLicenseOutput struct {
 
 	// License details.
@@ -48,13 +65,34 @@ type GetLicenseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLicenseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLicenseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLicenseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.License != nil {
+		s.WriteStruct(schemas.GetLicenseResponse_License)
+		v.License.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetLicenseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLicenseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLicenseResponse_License:
+			v.License = &types.License{}
+			return v.License.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLicenseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetLicense{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLicense, schemas.GetLicenseRequest, schemas.GetLicenseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetLicense{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLicense, schemas.GetLicenseRequest, schemas.GetLicenseResponse), output: &GetLicenseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: VoiceID.EvaluateSession
+
+{"AuthenticationResult":{"AudioAggregationEndedAt":946684800,"AudioAggregationStartedAt":946684800,"AuthenticationResultId":"__AuthenticationResultId__","Configuration":{"AcceptanceThreshold":1},"CustomerSpeakerId":"__CustomerSpeakerId__","Decision":"ACCEPT","GeneratedSpeakerId":"__GeneratedSpeakerId__","Score":1},"DomainId":"__DomainId__","FraudDetectionResult":{"AudioAggregationEndedAt":946684800,"AudioAggregationStartedAt":946684800,"Configuration":{"RiskThreshold":1,"WatchlistId":"__WatchlistId__"},"Decision":"HIGH_RISK","FraudDetectionResultId":"__FraudDetectionResultId__","Reasons":["KNOWN_FRAUDSTER","KNOWN_FRAUDSTER"],"RiskDetails":{"KnownFraudsterRisk":{"GeneratedFraudsterId":"__GeneratedFraudsterId__","RiskScore":1},"VoiceSpoofingRisk":{"RiskScore":1}}},"SessionId":"__SessionId__","SessionName":"__SessionName__","StreamingStatus":"PENDING_CONFIGURATION"}

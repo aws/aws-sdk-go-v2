@@ -5,6 +5,8 @@ package signer
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/signer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -76,6 +78,28 @@ type GetRevocationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRevocationStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRevocationStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRevocationStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCertificateHashes(s, schemas.GetRevocationStatusRequest_certificateHashes, v.CertificateHashes)
+	if v.JobArn != nil {
+		s.WriteString(schemas.GetRevocationStatusRequest_jobArn, *v.JobArn)
+	}
+	if v.PlatformId != nil {
+		s.WriteString(schemas.GetRevocationStatusRequest_platformId, *v.PlatformId)
+	}
+	if v.ProfileVersionArn != nil {
+		s.WriteString(schemas.GetRevocationStatusRequest_profileVersionArn, *v.ProfileVersionArn)
+	}
+	if v.SignatureTimestamp != nil {
+		s.WriteTime(schemas.GetRevocationStatusRequest_signatureTimestamp, *v.SignatureTimestamp)
+	}
+}
+
 type GetRevocationStatusOutput struct {
 
 	// A list of revoked entities (including zero or more of the signing profile ARN,
@@ -88,13 +112,29 @@ type GetRevocationStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRevocationStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRevocationStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRevocationStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRevokedEntities(s, schemas.GetRevocationStatusResponse_revokedEntities, v.RevokedEntities)
+}
+func (v *GetRevocationStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRevocationStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRevocationStatusResponse_revokedEntities:
+			return deserializeRevokedEntities(d, schemas.GetRevocationStatusResponse_revokedEntities, &v.RevokedEntities)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRevocationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRevocationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRevocationStatus, schemas.GetRevocationStatusRequest, schemas.GetRevocationStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRevocationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRevocationStatus, schemas.GetRevocationStatusRequest, schemas.GetRevocationStatusResponse), output: &GetRevocationStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

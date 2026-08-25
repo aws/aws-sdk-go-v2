@@ -4,7 +4,9 @@ package codegurureviewer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type DescribeRecommendationFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRecommendationFeedbackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRecommendationFeedbackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRecommendationFeedbackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeReviewArn != nil {
+		s.WriteString(schemas.DescribeRecommendationFeedbackRequest_CodeReviewArn, *v.CodeReviewArn)
+	}
+	if v.RecommendationId != nil {
+		s.WriteString(schemas.DescribeRecommendationFeedbackRequest_RecommendationId, *v.RecommendationId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.DescribeRecommendationFeedbackRequest_UserId, *v.UserId)
+	}
+}
+
 type DescribeRecommendationFeedbackOutput struct {
 
 	// The recommendation feedback given by the user.
@@ -63,13 +83,34 @@ type DescribeRecommendationFeedbackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRecommendationFeedbackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRecommendationFeedbackResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRecommendationFeedbackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecommendationFeedback != nil {
+		s.WriteStruct(schemas.DescribeRecommendationFeedbackResponse_RecommendationFeedback)
+		v.RecommendationFeedback.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeRecommendationFeedbackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRecommendationFeedbackResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRecommendationFeedbackResponse_RecommendationFeedback:
+			v.RecommendationFeedback = &types.RecommendationFeedback{}
+			return v.RecommendationFeedback.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRecommendationFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRecommendationFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRecommendationFeedback, schemas.DescribeRecommendationFeedbackRequest, schemas.DescribeRecommendationFeedbackResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeRecommendationFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRecommendationFeedback, schemas.DescribeRecommendationFeedbackRequest, schemas.DescribeRecommendationFeedbackResponse), output: &DescribeRecommendationFeedbackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

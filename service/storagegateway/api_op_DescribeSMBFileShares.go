@@ -4,7 +4,9 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,16 @@ type DescribeSMBFileSharesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSMBFileSharesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSMBFileSharesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSMBFileSharesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFileShareARNList(s, schemas.DescribeSMBFileSharesInput_FileShareARNList, v.FileShareARNList)
+}
+
 // DescribeSMBFileSharesOutput
 type DescribeSMBFileSharesOutput struct {
 
@@ -49,13 +61,29 @@ type DescribeSMBFileSharesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSMBFileSharesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSMBFileSharesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSMBFileSharesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSMBFileShareInfoList(s, schemas.DescribeSMBFileSharesOutput_SMBFileShareInfoList, v.SMBFileShareInfoList)
+}
+func (v *DescribeSMBFileSharesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSMBFileSharesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSMBFileSharesOutput_SMBFileShareInfoList:
+			return deserializeSMBFileShareInfoList(d, schemas.DescribeSMBFileSharesOutput_SMBFileShareInfoList, &v.SMBFileShareInfoList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSMBFileSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSMBFileShares{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSMBFileShares, schemas.DescribeSMBFileSharesInput, schemas.DescribeSMBFileSharesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeSMBFileShares{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSMBFileShares, schemas.DescribeSMBFileSharesInput, schemas.DescribeSMBFileSharesOutput), output: &DescribeSMBFileSharesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

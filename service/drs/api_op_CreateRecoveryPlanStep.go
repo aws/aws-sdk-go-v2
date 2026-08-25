@@ -5,7 +5,9 @@ package drs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,28 @@ type CreateRecoveryPlanStepInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRecoveryPlanStepInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRecoveryPlanStepRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRecoveryPlanStepInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateRecoveryPlanStepRequest_clientToken, *v.ClientToken)
+	}
+	serializeRecoveryPlanStepConfiguration(s, schemas.CreateRecoveryPlanStepRequest_configuration, v.Configuration)
+	if v.RecoveryPlanArn != nil {
+		s.WriteString(schemas.CreateRecoveryPlanStepRequest_recoveryPlanArn, *v.RecoveryPlanArn)
+	}
+	if v.StepName != nil {
+		s.WriteString(schemas.CreateRecoveryPlanStepRequest_stepName, *v.StepName)
+	}
+	if v.StepOrder != nil {
+		s.WriteInt32(schemas.CreateRecoveryPlanStepRequest_stepOrder, *v.StepOrder)
+	}
+}
+
 type CreateRecoveryPlanStepOutput struct {
 
 	// A Recovery Plan Step resource.
@@ -66,13 +90,34 @@ type CreateRecoveryPlanStepOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRecoveryPlanStepOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRecoveryPlanStepResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRecoveryPlanStepOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecoveryPlanStep != nil {
+		s.WriteStruct(schemas.CreateRecoveryPlanStepResponse_recoveryPlanStep)
+		v.RecoveryPlanStep.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateRecoveryPlanStepOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRecoveryPlanStepResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRecoveryPlanStepResponse_recoveryPlanStep:
+			v.RecoveryPlanStep = &types.RecoveryPlanStep{}
+			return v.RecoveryPlanStep.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRecoveryPlanStepMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRecoveryPlanStep{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRecoveryPlanStep, schemas.CreateRecoveryPlanStepRequest, schemas.CreateRecoveryPlanStepResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRecoveryPlanStep{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRecoveryPlanStep, schemas.CreateRecoveryPlanStepRequest, schemas.CreateRecoveryPlanStepResponse), output: &CreateRecoveryPlanStepOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

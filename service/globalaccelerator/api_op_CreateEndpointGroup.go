@@ -5,7 +5,9 @@ package globalaccelerator
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -102,6 +104,44 @@ type CreateEndpointGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEndpointGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEndpointGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEndpointGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEndpointConfigurations(s, schemas.CreateEndpointGroupRequest_EndpointConfigurations, v.EndpointConfigurations)
+	if v.EndpointGroupRegion != nil {
+		s.WriteString(schemas.CreateEndpointGroupRequest_EndpointGroupRegion, *v.EndpointGroupRegion)
+	}
+	if v.HealthCheckIntervalSeconds != nil {
+		s.WriteInt32(schemas.CreateEndpointGroupRequest_HealthCheckIntervalSeconds, *v.HealthCheckIntervalSeconds)
+	}
+	if v.HealthCheckPath != nil {
+		s.WriteString(schemas.CreateEndpointGroupRequest_HealthCheckPath, *v.HealthCheckPath)
+	}
+	if v.HealthCheckPort != nil {
+		s.WriteInt32(schemas.CreateEndpointGroupRequest_HealthCheckPort, *v.HealthCheckPort)
+	}
+	if v.HealthCheckProtocol != "" {
+		s.WriteString(schemas.CreateEndpointGroupRequest_HealthCheckProtocol, string(v.HealthCheckProtocol))
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.CreateEndpointGroupRequest_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.ListenerArn != nil {
+		s.WriteString(schemas.CreateEndpointGroupRequest_ListenerArn, *v.ListenerArn)
+	}
+	serializePortOverrides(s, schemas.CreateEndpointGroupRequest_PortOverrides, v.PortOverrides)
+	if v.ThresholdCount != nil {
+		s.WriteInt32(schemas.CreateEndpointGroupRequest_ThresholdCount, *v.ThresholdCount)
+	}
+	if v.TrafficDialPercentage != nil {
+		s.WriteFloat32(schemas.CreateEndpointGroupRequest_TrafficDialPercentage, *v.TrafficDialPercentage)
+	}
+}
+
 type CreateEndpointGroupOutput struct {
 
 	// The information about the endpoint group that was created.
@@ -113,13 +153,34 @@ type CreateEndpointGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEndpointGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEndpointGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEndpointGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointGroup != nil {
+		s.WriteStruct(schemas.CreateEndpointGroupResponse_EndpointGroup)
+		v.EndpointGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateEndpointGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEndpointGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEndpointGroupResponse_EndpointGroup:
+			v.EndpointGroup = &types.EndpointGroup{}
+			return v.EndpointGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEndpointGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEndpointGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEndpointGroup, schemas.CreateEndpointGroupRequest, schemas.CreateEndpointGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateEndpointGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEndpointGroup, schemas.CreateEndpointGroupRequest, schemas.CreateEndpointGroupResponse), output: &CreateEndpointGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

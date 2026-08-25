@@ -4,7 +4,9 @@ package detective
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/detective/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/detective/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -84,6 +86,25 @@ type CreateMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMembersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMembersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMembersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountList(s, schemas.CreateMembersRequest_Accounts, v.Accounts)
+	if v.DisableEmailNotification != false {
+		s.WriteBool(schemas.CreateMembersRequest_DisableEmailNotification, v.DisableEmailNotification)
+	}
+	if v.GraphArn != nil {
+		s.WriteString(schemas.CreateMembersRequest_GraphArn, *v.GraphArn)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.CreateMembersRequest_Message, *v.Message)
+	}
+}
+
 type CreateMembersOutput struct {
 
 	// The set of member account invitation or enablement requests that Detective was
@@ -104,13 +125,32 @@ type CreateMembersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMembersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMembersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMembersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMemberDetailList(s, schemas.CreateMembersResponse_Members, v.Members)
+	serializeUnprocessedAccountList(s, schemas.CreateMembersResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+}
+func (v *CreateMembersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMembersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMembersResponse_Members:
+			return deserializeMemberDetailList(d, schemas.CreateMembersResponse_Members, &v.Members)
+		case schemas.CreateMembersResponse_UnprocessedAccounts:
+			return deserializeUnprocessedAccountList(d, schemas.CreateMembersResponse_UnprocessedAccounts, &v.UnprocessedAccounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMembers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMembers, schemas.CreateMembersRequest, schemas.CreateMembersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMembers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMembers, schemas.CreateMembersRequest, schemas.CreateMembersResponse), output: &CreateMembersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

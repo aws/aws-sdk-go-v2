@@ -5,7 +5,9 @@ package codebuild
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,27 @@ type ListCommandExecutionsForSandboxInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCommandExecutionsForSandboxInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCommandExecutionsForSandboxInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCommandExecutionsForSandboxInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCommandExecutionsForSandboxInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCommandExecutionsForSandboxInput_nextToken, *v.NextToken)
+	}
+	if v.SandboxId != nil {
+		s.WriteString(schemas.ListCommandExecutionsForSandboxInput_sandboxId, *v.SandboxId)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListCommandExecutionsForSandboxInput_sortOrder, string(v.SortOrder))
+	}
+}
+
 type ListCommandExecutionsForSandboxOutput struct {
 
 	// Information about the requested command executions.
@@ -59,13 +82,35 @@ type ListCommandExecutionsForSandboxOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCommandExecutionsForSandboxOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCommandExecutionsForSandboxOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCommandExecutionsForSandboxOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCommandExecutions(s, schemas.ListCommandExecutionsForSandboxOutput_commandExecutions, v.CommandExecutions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCommandExecutionsForSandboxOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCommandExecutionsForSandboxOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCommandExecutionsForSandboxOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCommandExecutionsForSandboxOutput_commandExecutions:
+			return deserializeCommandExecutions(d, schemas.ListCommandExecutionsForSandboxOutput_commandExecutions, &v.CommandExecutions)
+		case schemas.ListCommandExecutionsForSandboxOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCommandExecutionsForSandboxOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCommandExecutionsForSandboxMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCommandExecutionsForSandbox{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCommandExecutionsForSandbox, schemas.ListCommandExecutionsForSandboxInput, schemas.ListCommandExecutionsForSandboxOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCommandExecutionsForSandbox{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCommandExecutionsForSandbox, schemas.ListCommandExecutionsForSandboxInput, schemas.ListCommandExecutionsForSandboxOutput), output: &ListCommandExecutionsForSandboxOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

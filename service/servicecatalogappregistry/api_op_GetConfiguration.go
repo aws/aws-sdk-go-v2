@@ -4,7 +4,9 @@ package servicecatalogappregistry
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,22 @@ type GetConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type GetConfigurationOutput struct {
 
 	//  Retrieves TagKey configuration from an account.
@@ -39,13 +57,34 @@ type GetConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.GetConfigurationResponse_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfigurationResponse_configuration:
+			v.Configuration = &types.AppRegistryConfiguration{}
+			return v.Configuration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfiguration, nil, schemas.GetConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfiguration, nil, schemas.GetConfigurationResponse), output: &GetConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

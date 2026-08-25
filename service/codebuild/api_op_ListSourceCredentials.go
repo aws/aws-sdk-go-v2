@@ -4,7 +4,9 @@ package codebuild
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type ListSourceCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSourceCredentialsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSourceCredentialsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSourceCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type ListSourceCredentialsOutput struct {
 
 	//  A list of SourceCredentialsInfo objects. Each SourceCredentialsInfo object
@@ -41,13 +52,29 @@ type ListSourceCredentialsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSourceCredentialsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSourceCredentialsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSourceCredentialsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSourceCredentialsInfos(s, schemas.ListSourceCredentialsOutput_sourceCredentialsInfos, v.SourceCredentialsInfos)
+}
+func (v *ListSourceCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSourceCredentialsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSourceCredentialsOutput_sourceCredentialsInfos:
+			return deserializeSourceCredentialsInfos(d, schemas.ListSourceCredentialsOutput_sourceCredentialsInfos, &v.SourceCredentialsInfos)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSourceCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSourceCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSourceCredentials, schemas.ListSourceCredentialsInput, schemas.ListSourceCredentialsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSourceCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSourceCredentials, schemas.ListSourceCredentialsInput, schemas.ListSourceCredentialsOutput), output: &ListSourceCredentialsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

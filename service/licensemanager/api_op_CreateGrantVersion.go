@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,39 @@ type CreateGrantVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGrantVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGrantVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGrantVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAllowedOperationList(s, schemas.CreateGrantVersionRequest_AllowedOperations, v.AllowedOperations)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateGrantVersionRequest_ClientToken, *v.ClientToken)
+	}
+	if v.GrantArn != nil {
+		s.WriteString(schemas.CreateGrantVersionRequest_GrantArn, *v.GrantArn)
+	}
+	if v.GrantName != nil {
+		s.WriteString(schemas.CreateGrantVersionRequest_GrantName, *v.GrantName)
+	}
+	if v.Options != nil {
+		s.WriteStruct(schemas.CreateGrantVersionRequest_Options)
+		v.Options.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceVersion != nil {
+		s.WriteString(schemas.CreateGrantVersionRequest_SourceVersion, *v.SourceVersion)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateGrantVersionRequest_Status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.CreateGrantVersionRequest_StatusReason, *v.StatusReason)
+	}
+}
+
 type CreateGrantVersionOutput struct {
 
 	// Grant ARN.
@@ -78,13 +113,48 @@ type CreateGrantVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGrantVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGrantVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGrantVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GrantArn != nil {
+		s.WriteString(schemas.CreateGrantVersionResponse_GrantArn, *v.GrantArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateGrantVersionResponse_Status, string(v.Status))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.CreateGrantVersionResponse_Version, *v.Version)
+	}
+}
+func (v *CreateGrantVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGrantVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGrantVersionResponse_GrantArn:
+			v.GrantArn = new(string)
+			return d.ReadString(schemas.CreateGrantVersionResponse_GrantArn, v.GrantArn)
+		case schemas.CreateGrantVersionResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateGrantVersionResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.GrantStatus(ev)
+			return nil
+		case schemas.CreateGrantVersionResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.CreateGrantVersionResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGrantVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateGrantVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGrantVersion, schemas.CreateGrantVersionRequest, schemas.CreateGrantVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateGrantVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGrantVersion, schemas.CreateGrantVersionRequest, schemas.CreateGrantVersionResponse), output: &CreateGrantVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,24 @@ type DescribeDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDetectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDetectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDetectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.DescribeDetectorRequest_detectorId, *v.DetectorId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeDetectorRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDetectorRequest_nextToken, *v.NextToken)
+	}
+}
+
 type DescribeDetectorOutput struct {
 
 	// The detector ARN.
@@ -60,13 +80,47 @@ type DescribeDetectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDetectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDetectorResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDetectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeDetectorResult_arn, *v.Arn)
+	}
+	if v.DetectorId != nil {
+		s.WriteString(schemas.DescribeDetectorResult_detectorId, *v.DetectorId)
+	}
+	serializeDetectorVersionSummaryList(s, schemas.DescribeDetectorResult_detectorVersionSummaries, v.DetectorVersionSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDetectorResult_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeDetectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDetectorResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDetectorResult_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeDetectorResult_arn, v.Arn)
+		case schemas.DescribeDetectorResult_detectorId:
+			v.DetectorId = new(string)
+			return d.ReadString(schemas.DescribeDetectorResult_detectorId, v.DetectorId)
+		case schemas.DescribeDetectorResult_detectorVersionSummaries:
+			return deserializeDetectorVersionSummaryList(d, schemas.DescribeDetectorResult_detectorVersionSummaries, &v.DetectorVersionSummaries)
+		case schemas.DescribeDetectorResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeDetectorResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDetector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDetector, schemas.DescribeDetectorRequest, schemas.DescribeDetectorResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDetector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDetector, schemas.DescribeDetectorRequest, schemas.DescribeDetectorResult), output: &DescribeDetectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package resourceexplorer2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,25 @@ type BatchGetViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetViewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetViewInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetViewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeViewArnList(s, schemas.BatchGetViewInput_ViewArns, v.ViewArns)
+}
+func (v *BatchGetViewInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetViewInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetViewInput_ViewArns:
+			return deserializeViewArnList(d, schemas.BatchGetViewInput_ViewArns, &v.ViewArns)
+		}
+		return nil
+	})
+}
+
 type BatchGetViewOutput struct {
 
 	// If any of the specified ARNs result in an error, then this structure describes
@@ -49,13 +70,32 @@ type BatchGetViewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetViewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetViewOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetViewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetViewErrors(s, schemas.BatchGetViewOutput_Errors, v.Errors)
+	serializeViewList(s, schemas.BatchGetViewOutput_Views, v.Views)
+}
+func (v *BatchGetViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetViewOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetViewOutput_Errors:
+			return deserializeBatchGetViewErrors(d, schemas.BatchGetViewOutput_Errors, &v.Errors)
+		case schemas.BatchGetViewOutput_Views:
+			return deserializeViewList(d, schemas.BatchGetViewOutput_Views, &v.Views)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetView{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetView, schemas.BatchGetViewInput, schemas.BatchGetViewOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetView{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetView, schemas.BatchGetViewInput, schemas.BatchGetViewOutput), output: &BatchGetViewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

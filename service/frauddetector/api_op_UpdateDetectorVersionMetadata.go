@@ -4,6 +4,8 @@ package frauddetector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type UpdateDetectorVersionMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDetectorVersionMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDetectorVersionMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDetectorVersionMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateDetectorVersionMetadataRequest_description, *v.Description)
+	}
+	if v.DetectorId != nil {
+		s.WriteString(schemas.UpdateDetectorVersionMetadataRequest_detectorId, *v.DetectorId)
+	}
+	if v.DetectorVersionId != nil {
+		s.WriteString(schemas.UpdateDetectorVersionMetadataRequest_detectorVersionId, *v.DetectorVersionId)
+	}
+}
+
 type UpdateDetectorVersionMetadataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +71,26 @@ type UpdateDetectorVersionMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDetectorVersionMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDetectorVersionMetadataResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDetectorVersionMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateDetectorVersionMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDetectorVersionMetadataResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDetectorVersionMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDetectorVersionMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDetectorVersionMetadata, schemas.UpdateDetectorVersionMetadataRequest, schemas.UpdateDetectorVersionMetadataResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDetectorVersionMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDetectorVersionMetadata, schemas.UpdateDetectorVersionMetadataRequest, schemas.UpdateDetectorVersionMetadataResult), output: &UpdateDetectorVersionMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type StartRemoteDeleteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRemoteDeleteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRemoteDeleteRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRemoteDeleteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.StartRemoteDeleteRequest_ConnectorId, *v.ConnectorId)
+	}
+	if v.DeletePath != nil {
+		s.WriteString(schemas.StartRemoteDeleteRequest_DeletePath, *v.DeletePath)
+	}
+}
+
 type StartRemoteDeleteOutput struct {
 
 	// Returns a unique identifier for the delete operation.
@@ -52,13 +69,32 @@ type StartRemoteDeleteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRemoteDeleteOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRemoteDeleteResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRemoteDeleteOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeleteId != nil {
+		s.WriteString(schemas.StartRemoteDeleteResponse_DeleteId, *v.DeleteId)
+	}
+}
+func (v *StartRemoteDeleteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartRemoteDeleteResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartRemoteDeleteResponse_DeleteId:
+			v.DeleteId = new(string)
+			return d.ReadString(schemas.StartRemoteDeleteResponse_DeleteId, v.DeleteId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartRemoteDeleteMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartRemoteDelete{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRemoteDelete, schemas.StartRemoteDeleteRequest, schemas.StartRemoteDeleteResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartRemoteDelete{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRemoteDelete, schemas.StartRemoteDeleteRequest, schemas.StartRemoteDeleteResponse), output: &StartRemoteDeleteOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

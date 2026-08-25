@@ -5,7 +5,9 @@ package resourceexplorer2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -93,6 +95,31 @@ type CreateIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIndexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIndexInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateIndexInput_ClientToken, *v.ClientToken)
+	}
+	serializeTagMap(s, schemas.CreateIndexInput_Tags, v.Tags)
+}
+func (v *CreateIndexInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIndexInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIndexInput_ClientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateIndexInput_ClientToken, v.ClientToken)
+		case schemas.CreateIndexInput_Tags:
+			return deserializeTagMap(d, schemas.CreateIndexInput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateIndexOutput struct {
 
 	// The ARN of the new local index for the Region. You can reference this ARN in
@@ -116,13 +143,48 @@ type CreateIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIndexOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIndexOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateIndexOutput_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateIndexOutput_CreatedAt, *v.CreatedAt)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CreateIndexOutput_State, string(v.State))
+	}
+}
+func (v *CreateIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIndexOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIndexOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateIndexOutput_Arn, v.Arn)
+		case schemas.CreateIndexOutput_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateIndexOutput_CreatedAt, v.CreatedAt)
+		case schemas.CreateIndexOutput_State:
+			var ev string
+			if err := d.ReadString(schemas.CreateIndexOutput_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.IndexState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIndex, schemas.CreateIndexInput, schemas.CreateIndexOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIndex, schemas.CreateIndexInput, schemas.CreateIndexOutput), output: &CreateIndexOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

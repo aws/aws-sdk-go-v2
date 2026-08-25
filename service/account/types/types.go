@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/account/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -26,6 +28,56 @@ type AlternateContact struct {
 	Title *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AlternateContact) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AlternateContact)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AlternateContact) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlternateContactType != "" {
+		s.WriteString(schemas.AlternateContact_AlternateContactType, string(v.AlternateContactType))
+	}
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.AlternateContact_EmailAddress, *v.EmailAddress)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AlternateContact_Name, *v.Name)
+	}
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.AlternateContact_PhoneNumber, *v.PhoneNumber)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.AlternateContact_Title, *v.Title)
+	}
+}
+func (v *AlternateContact) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AlternateContact, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AlternateContact_AlternateContactType:
+			var ev string
+			if err := d.ReadString(schemas.AlternateContact_AlternateContactType, &ev); err != nil {
+				return err
+			}
+			v.AlternateContactType = AlternateContactType(ev)
+			return nil
+		case schemas.AlternateContact_EmailAddress:
+			v.EmailAddress = new(string)
+			return d.ReadString(schemas.AlternateContact_EmailAddress, v.EmailAddress)
+		case schemas.AlternateContact_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AlternateContact_Name, v.Name)
+		case schemas.AlternateContact_PhoneNumber:
+			v.PhoneNumber = new(string)
+			return d.ReadString(schemas.AlternateContact_PhoneNumber, v.PhoneNumber)
+		case schemas.AlternateContact_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.AlternateContact_Title, v.Title)
+		}
+		return nil
+	})
 }
 
 // Contains the details of the primary contact information associated with an
@@ -88,6 +140,94 @@ type ContactInformation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContactInformation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContactInformation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContactInformation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressLine1 != nil {
+		s.WriteString(schemas.ContactInformation_AddressLine1, *v.AddressLine1)
+	}
+	if v.AddressLine2 != nil {
+		s.WriteString(schemas.ContactInformation_AddressLine2, *v.AddressLine2)
+	}
+	if v.AddressLine3 != nil {
+		s.WriteString(schemas.ContactInformation_AddressLine3, *v.AddressLine3)
+	}
+	if v.City != nil {
+		s.WriteString(schemas.ContactInformation_City, *v.City)
+	}
+	if v.CompanyName != nil {
+		s.WriteString(schemas.ContactInformation_CompanyName, *v.CompanyName)
+	}
+	if v.CountryCode != nil {
+		s.WriteString(schemas.ContactInformation_CountryCode, *v.CountryCode)
+	}
+	if v.DistrictOrCounty != nil {
+		s.WriteString(schemas.ContactInformation_DistrictOrCounty, *v.DistrictOrCounty)
+	}
+	if v.FullName != nil {
+		s.WriteString(schemas.ContactInformation_FullName, *v.FullName)
+	}
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.ContactInformation_PhoneNumber, *v.PhoneNumber)
+	}
+	if v.PostalCode != nil {
+		s.WriteString(schemas.ContactInformation_PostalCode, *v.PostalCode)
+	}
+	if v.StateOrRegion != nil {
+		s.WriteString(schemas.ContactInformation_StateOrRegion, *v.StateOrRegion)
+	}
+	if v.WebsiteUrl != nil {
+		s.WriteString(schemas.ContactInformation_WebsiteUrl, *v.WebsiteUrl)
+	}
+}
+func (v *ContactInformation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContactInformation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContactInformation_AddressLine1:
+			v.AddressLine1 = new(string)
+			return d.ReadString(schemas.ContactInformation_AddressLine1, v.AddressLine1)
+		case schemas.ContactInformation_AddressLine2:
+			v.AddressLine2 = new(string)
+			return d.ReadString(schemas.ContactInformation_AddressLine2, v.AddressLine2)
+		case schemas.ContactInformation_AddressLine3:
+			v.AddressLine3 = new(string)
+			return d.ReadString(schemas.ContactInformation_AddressLine3, v.AddressLine3)
+		case schemas.ContactInformation_City:
+			v.City = new(string)
+			return d.ReadString(schemas.ContactInformation_City, v.City)
+		case schemas.ContactInformation_CompanyName:
+			v.CompanyName = new(string)
+			return d.ReadString(schemas.ContactInformation_CompanyName, v.CompanyName)
+		case schemas.ContactInformation_CountryCode:
+			v.CountryCode = new(string)
+			return d.ReadString(schemas.ContactInformation_CountryCode, v.CountryCode)
+		case schemas.ContactInformation_DistrictOrCounty:
+			v.DistrictOrCounty = new(string)
+			return d.ReadString(schemas.ContactInformation_DistrictOrCounty, v.DistrictOrCounty)
+		case schemas.ContactInformation_FullName:
+			v.FullName = new(string)
+			return d.ReadString(schemas.ContactInformation_FullName, v.FullName)
+		case schemas.ContactInformation_PhoneNumber:
+			v.PhoneNumber = new(string)
+			return d.ReadString(schemas.ContactInformation_PhoneNumber, v.PhoneNumber)
+		case schemas.ContactInformation_PostalCode:
+			v.PostalCode = new(string)
+			return d.ReadString(schemas.ContactInformation_PostalCode, v.PostalCode)
+		case schemas.ContactInformation_StateOrRegion:
+			v.StateOrRegion = new(string)
+			return d.ReadString(schemas.ContactInformation_StateOrRegion, v.StateOrRegion)
+		case schemas.ContactInformation_WebsiteUrl:
+			v.WebsiteUrl = new(string)
+			return d.ReadString(schemas.ContactInformation_WebsiteUrl, v.WebsiteUrl)
+		}
+		return nil
+	})
+}
+
 // This is a structure that expresses the Region for a given account, consisting
 // of a name and opt-in status.
 type Region struct {
@@ -100,6 +240,38 @@ type Region struct {
 	RegionOptStatus RegionOptStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *Region) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Region)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Region) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegionName != nil {
+		s.WriteString(schemas.Region_RegionName, *v.RegionName)
+	}
+	if v.RegionOptStatus != "" {
+		s.WriteString(schemas.Region_RegionOptStatus, string(v.RegionOptStatus))
+	}
+}
+func (v *Region) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Region, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Region_RegionName:
+			v.RegionName = new(string)
+			return d.ReadString(schemas.Region_RegionName, v.RegionName)
+		case schemas.Region_RegionOptStatus:
+			var ev string
+			if err := d.ReadString(schemas.Region_RegionOptStatus, &ev); err != nil {
+				return err
+			}
+			v.RegionOptStatus = RegionOptStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The input failed to meet the constraints specified by the Amazon Web Services
@@ -117,6 +289,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
+		case schemas.ValidationExceptionField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

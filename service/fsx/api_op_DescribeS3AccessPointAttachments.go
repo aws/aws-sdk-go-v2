@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,23 @@ type DescribeS3AccessPointAttachmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeS3AccessPointAttachmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeS3AccessPointAttachmentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeS3AccessPointAttachmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeS3AccessPointAttachmentsFilters(s, schemas.DescribeS3AccessPointAttachmentsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeS3AccessPointAttachmentsRequest_MaxResults, *v.MaxResults)
+	}
+	serializeS3AccessPointAttachmentNames(s, schemas.DescribeS3AccessPointAttachmentsRequest_Names, v.Names)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeS3AccessPointAttachmentsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeS3AccessPointAttachmentsOutput struct {
 
 	// (Optional) Opaque pagination token returned from a previous operation (String).
@@ -68,13 +87,35 @@ type DescribeS3AccessPointAttachmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeS3AccessPointAttachmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeS3AccessPointAttachmentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeS3AccessPointAttachmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeS3AccessPointAttachmentsResponse_NextToken, *v.NextToken)
+	}
+	serializeS3AccessPointAttachments(s, schemas.DescribeS3AccessPointAttachmentsResponse_S3AccessPointAttachments, v.S3AccessPointAttachments)
+}
+func (v *DescribeS3AccessPointAttachmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeS3AccessPointAttachmentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeS3AccessPointAttachmentsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeS3AccessPointAttachmentsResponse_NextToken, v.NextToken)
+		case schemas.DescribeS3AccessPointAttachmentsResponse_S3AccessPointAttachments:
+			return deserializeS3AccessPointAttachments(d, schemas.DescribeS3AccessPointAttachmentsResponse_S3AccessPointAttachments, &v.S3AccessPointAttachments)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeS3AccessPointAttachmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeS3AccessPointAttachments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeS3AccessPointAttachments, schemas.DescribeS3AccessPointAttachmentsRequest, schemas.DescribeS3AccessPointAttachmentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeS3AccessPointAttachments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeS3AccessPointAttachments, schemas.DescribeS3AccessPointAttachmentsRequest, schemas.DescribeS3AccessPointAttachmentsResponse), output: &DescribeS3AccessPointAttachmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,6 +5,8 @@ package resourceexplorer2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,24 @@ type ListManagedViewsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedViewsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedViewsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedViewsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListManagedViewsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedViewsInput_NextToken, *v.NextToken)
+	}
+	if v.ServicePrincipal != nil {
+		s.WriteString(schemas.ListManagedViewsInput_ServicePrincipal, *v.ServicePrincipal)
+	}
+}
+
 type ListManagedViewsOutput struct {
 
 	// The list of managed views available in the Amazon Web Services Region in which
@@ -74,13 +94,35 @@ type ListManagedViewsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedViewsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedViewsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedViewsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeManagedViewArnList(s, schemas.ListManagedViewsOutput_ManagedViews, v.ManagedViews)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedViewsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListManagedViewsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListManagedViewsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListManagedViewsOutput_ManagedViews:
+			return deserializeManagedViewArnList(d, schemas.ListManagedViewsOutput_ManagedViews, &v.ManagedViews)
+		case schemas.ListManagedViewsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListManagedViewsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListManagedViewsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListManagedViews{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedViews, schemas.ListManagedViewsInput, schemas.ListManagedViewsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListManagedViews{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedViews, schemas.ListManagedViewsInput, schemas.ListManagedViewsOutput), output: &ListManagedViewsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package workspacesthinclient
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesthinclient/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesthinclient/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,24 @@ type DeregisterDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterDeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeregisterDeviceRequest_clientToken, *v.ClientToken)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeregisterDeviceRequest_id, *v.Id)
+	}
+	if v.TargetDeviceStatus != "" {
+		s.WriteString(schemas.DeregisterDeviceRequest_targetDeviceStatus, string(v.TargetDeviceStatus))
+	}
+}
+
 type DeregisterDeviceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,13 +81,26 @@ type DeregisterDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterDeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterDeviceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeregisterDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterDeviceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeregisterDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterDevice, schemas.DeregisterDeviceRequest, schemas.DeregisterDeviceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeregisterDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterDevice, schemas.DeregisterDeviceRequest, schemas.DeregisterDeviceResponse), output: &DeregisterDeviceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

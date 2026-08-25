@@ -5,7 +5,9 @@ package ivs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,34 @@ type ListPlaybackKeyPairsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlaybackKeyPairsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlaybackKeyPairsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlaybackKeyPairsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPlaybackKeyPairsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlaybackKeyPairsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListPlaybackKeyPairsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPlaybackKeyPairsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPlaybackKeyPairsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListPlaybackKeyPairsRequest_maxResults, v.MaxResults)
+		case schemas.ListPlaybackKeyPairsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPlaybackKeyPairsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListPlaybackKeyPairsOutput struct {
 
 	// List of key pairs.
@@ -58,13 +88,35 @@ type ListPlaybackKeyPairsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlaybackKeyPairsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlaybackKeyPairsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlaybackKeyPairsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePlaybackKeyPairList(s, schemas.ListPlaybackKeyPairsResponse_keyPairs, v.KeyPairs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlaybackKeyPairsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListPlaybackKeyPairsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPlaybackKeyPairsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPlaybackKeyPairsResponse_keyPairs:
+			return deserializePlaybackKeyPairList(d, schemas.ListPlaybackKeyPairsResponse_keyPairs, &v.KeyPairs)
+		case schemas.ListPlaybackKeyPairsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPlaybackKeyPairsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPlaybackKeyPairsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPlaybackKeyPairs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlaybackKeyPairs, schemas.ListPlaybackKeyPairsRequest, schemas.ListPlaybackKeyPairsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPlaybackKeyPairs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlaybackKeyPairs, schemas.ListPlaybackKeyPairsRequest, schemas.ListPlaybackKeyPairsResponse), output: &ListPlaybackKeyPairsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

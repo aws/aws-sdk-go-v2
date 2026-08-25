@@ -5,7 +5,9 @@ package resourceexplorer2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,22 @@ type ListServiceIndexesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceIndexesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceIndexesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceIndexesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListServiceIndexesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceIndexesInput_NextToken, *v.NextToken)
+	}
+	serializeRegionList(s, schemas.ListServiceIndexesInput_Regions, v.Regions)
+}
+
 type ListServiceIndexesOutput struct {
 
 	// A list of Index objects that describe the Resource Explorer indexes found in
@@ -60,13 +78,35 @@ type ListServiceIndexesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceIndexesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceIndexesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceIndexesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIndexList(s, schemas.ListServiceIndexesOutput_Indexes, v.Indexes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceIndexesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListServiceIndexesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceIndexesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceIndexesOutput_Indexes:
+			return deserializeIndexList(d, schemas.ListServiceIndexesOutput_Indexes, &v.Indexes)
+		case schemas.ListServiceIndexesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceIndexesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServiceIndexesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListServiceIndexes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceIndexes, schemas.ListServiceIndexesInput, schemas.ListServiceIndexesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListServiceIndexes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceIndexes, schemas.ListServiceIndexesInput, schemas.ListServiceIndexesOutput), output: &ListServiceIndexesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

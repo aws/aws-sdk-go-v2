@@ -4,7 +4,9 @@ package wisdom
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wisdom/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wisdom/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetQuickResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQuickResponseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQuickResponseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQuickResponseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.GetQuickResponseRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.QuickResponseId != nil {
+		s.WriteString(schemas.GetQuickResponseRequest_quickResponseId, *v.QuickResponseId)
+	}
+}
+
 type GetQuickResponseOutput struct {
 
 	// The quick response.
@@ -51,13 +68,34 @@ type GetQuickResponseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQuickResponseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQuickResponseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQuickResponseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QuickResponse != nil {
+		s.WriteStruct(schemas.GetQuickResponseResponse_quickResponse)
+		v.QuickResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetQuickResponseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetQuickResponseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetQuickResponseResponse_quickResponse:
+			v.QuickResponse = &types.QuickResponseData{}
+			return v.QuickResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetQuickResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetQuickResponse{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQuickResponse, schemas.GetQuickResponseRequest, schemas.GetQuickResponseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetQuickResponse{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQuickResponse, schemas.GetQuickResponseRequest, schemas.GetQuickResponseResponse), output: &GetQuickResponseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

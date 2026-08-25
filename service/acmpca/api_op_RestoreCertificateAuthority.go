@@ -4,6 +4,8 @@ package acmpca
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,18 @@ type RestoreCertificateAuthorityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreCertificateAuthorityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreCertificateAuthorityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreCertificateAuthorityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateAuthorityArn != nil {
+		s.WriteString(schemas.RestoreCertificateAuthorityRequest_CertificateAuthorityArn, *v.CertificateAuthorityArn)
+	}
+}
+
 type RestoreCertificateAuthorityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,13 +76,26 @@ type RestoreCertificateAuthorityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreCertificateAuthorityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreCertificateAuthorityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RestoreCertificateAuthorityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestoreCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRestoreCertificateAuthority{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreCertificateAuthority, schemas.RestoreCertificateAuthorityRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRestoreCertificateAuthority{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreCertificateAuthority, schemas.RestoreCertificateAuthorityRequest, nil), output: &RestoreCertificateAuthorityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

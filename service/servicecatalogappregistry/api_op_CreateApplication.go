@@ -5,7 +5,9 @@ package servicecatalogappregistry
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,25 @@ type CreateApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateApplicationRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateApplicationRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateApplicationRequest_name, *v.Name)
+	}
+	serializeTags(s, schemas.CreateApplicationRequest_tags, v.Tags)
+}
+
 type CreateApplicationOutput struct {
 
 	// Information about the application.
@@ -63,13 +84,34 @@ type CreateApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Application != nil {
+		s.WriteStruct(schemas.CreateApplicationResponse_application)
+		v.Application.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateApplicationResponse_application:
+			v.Application = &types.Application{}
+			return v.Application.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplication, schemas.CreateApplicationRequest, schemas.CreateApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplication, schemas.CreateApplicationRequest, schemas.CreateApplicationResponse), output: &CreateApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package outposts
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type ListCatalogItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCatalogItemsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCatalogItemsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCatalogItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEC2FamilyList(s, schemas.ListCatalogItemsInput_EC2FamilyFilter, v.EC2FamilyFilter)
+	serializeCatalogItemClassList(s, schemas.ListCatalogItemsInput_ItemClassFilter, v.ItemClassFilter)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCatalogItemsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCatalogItemsInput_NextToken, *v.NextToken)
+	}
+	serializeSupportedStorageList(s, schemas.ListCatalogItemsInput_SupportedStorageFilter, v.SupportedStorageFilter)
+}
+
 type ListCatalogItemsOutput struct {
 
 	// Information about the catalog items.
@@ -64,13 +84,35 @@ type ListCatalogItemsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCatalogItemsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCatalogItemsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCatalogItemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCatalogItemListDefinition(s, schemas.ListCatalogItemsOutput_CatalogItems, v.CatalogItems)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCatalogItemsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCatalogItemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCatalogItemsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCatalogItemsOutput_CatalogItems:
+			return deserializeCatalogItemListDefinition(d, schemas.ListCatalogItemsOutput_CatalogItems, &v.CatalogItems)
+		case schemas.ListCatalogItemsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCatalogItemsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCatalogItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCatalogItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCatalogItems, schemas.ListCatalogItemsInput, schemas.ListCatalogItemsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCatalogItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCatalogItems, schemas.ListCatalogItemsInput, schemas.ListCatalogItemsOutput), output: &ListCatalogItemsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

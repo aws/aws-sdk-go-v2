@@ -4,6 +4,8 @@ package drs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteSourceNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSourceNetworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSourceNetworkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSourceNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceNetworkID != nil {
+		s.WriteString(schemas.DeleteSourceNetworkRequest_sourceNetworkID, *v.SourceNetworkID)
+	}
+}
+
 type DeleteSourceNetworkOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteSourceNetworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSourceNetworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSourceNetworkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSourceNetworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSourceNetworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSourceNetworkResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSourceNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSourceNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSourceNetwork, schemas.DeleteSourceNetworkRequest, schemas.DeleteSourceNetworkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSourceNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSourceNetwork, schemas.DeleteSourceNetworkRequest, schemas.DeleteSourceNetworkResponse), output: &DeleteSourceNetworkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

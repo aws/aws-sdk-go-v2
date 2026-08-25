@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,30 @@ type ListJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.ListJobsRequest_farmId, *v.FarmId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListJobsRequest_nextToken, *v.NextToken)
+	}
+	if v.PrincipalId != nil {
+		s.WriteString(schemas.ListJobsRequest_principalId, *v.PrincipalId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.ListJobsRequest_queueId, *v.QueueId)
+	}
+}
+
 // Shared pagination field for List operation outputs (nextToken).
 type ListJobsOutput struct {
 
@@ -74,13 +100,35 @@ type ListJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeJobSummaries(s, schemas.ListJobsResponse_jobs, v.Jobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListJobsResponse_jobs:
+			return deserializeJobSummaries(d, schemas.ListJobsResponse_jobs, &v.Jobs)
+		case schemas.ListJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobs, schemas.ListJobsRequest, schemas.ListJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobs, schemas.ListJobsRequest, schemas.ListJobsResponse), output: &ListJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package drs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,93 @@ type CreateLaunchConfigurationTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLaunchConfigurationTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLaunchConfigurationTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLaunchConfigurationTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CopyPrivateIp != nil {
+		s.WriteBool(schemas.CreateLaunchConfigurationTemplateRequest_copyPrivateIp, *v.CopyPrivateIp)
+	}
+	if v.CopyTags != nil {
+		s.WriteBool(schemas.CreateLaunchConfigurationTemplateRequest_copyTags, *v.CopyTags)
+	}
+	if v.ExportBucketArn != nil {
+		s.WriteString(schemas.CreateLaunchConfigurationTemplateRequest_exportBucketArn, *v.ExportBucketArn)
+	}
+	if v.LaunchDisposition != "" {
+		s.WriteString(schemas.CreateLaunchConfigurationTemplateRequest_launchDisposition, string(v.LaunchDisposition))
+	}
+	if v.LaunchIntoSourceInstance != nil {
+		s.WriteBool(schemas.CreateLaunchConfigurationTemplateRequest_launchIntoSourceInstance, *v.LaunchIntoSourceInstance)
+	}
+	if v.Licensing != nil {
+		s.WriteStruct(schemas.CreateLaunchConfigurationTemplateRequest_licensing)
+		v.Licensing.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PostLaunchEnabled != nil {
+		s.WriteBool(schemas.CreateLaunchConfigurationTemplateRequest_postLaunchEnabled, *v.PostLaunchEnabled)
+	}
+	if v.RecoveryMode != "" {
+		s.WriteString(schemas.CreateLaunchConfigurationTemplateRequest_recoveryMode, string(v.RecoveryMode))
+	}
+	serializeTagsMap(s, schemas.CreateLaunchConfigurationTemplateRequest_tags, v.Tags)
+	if v.TargetInstanceTypeRightSizingMethod != "" {
+		s.WriteString(schemas.CreateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod, string(v.TargetInstanceTypeRightSizingMethod))
+	}
+}
+func (v *CreateLaunchConfigurationTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLaunchConfigurationTemplateRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLaunchConfigurationTemplateRequest_copyPrivateIp:
+			v.CopyPrivateIp = new(bool)
+			return d.ReadBool(schemas.CreateLaunchConfigurationTemplateRequest_copyPrivateIp, v.CopyPrivateIp)
+		case schemas.CreateLaunchConfigurationTemplateRequest_copyTags:
+			v.CopyTags = new(bool)
+			return d.ReadBool(schemas.CreateLaunchConfigurationTemplateRequest_copyTags, v.CopyTags)
+		case schemas.CreateLaunchConfigurationTemplateRequest_exportBucketArn:
+			v.ExportBucketArn = new(string)
+			return d.ReadString(schemas.CreateLaunchConfigurationTemplateRequest_exportBucketArn, v.ExportBucketArn)
+		case schemas.CreateLaunchConfigurationTemplateRequest_launchDisposition:
+			var ev string
+			if err := d.ReadString(schemas.CreateLaunchConfigurationTemplateRequest_launchDisposition, &ev); err != nil {
+				return err
+			}
+			v.LaunchDisposition = types.LaunchDisposition(ev)
+			return nil
+		case schemas.CreateLaunchConfigurationTemplateRequest_launchIntoSourceInstance:
+			v.LaunchIntoSourceInstance = new(bool)
+			return d.ReadBool(schemas.CreateLaunchConfigurationTemplateRequest_launchIntoSourceInstance, v.LaunchIntoSourceInstance)
+		case schemas.CreateLaunchConfigurationTemplateRequest_licensing:
+			v.Licensing = &types.Licensing{}
+			return v.Licensing.Deserialize(d)
+		case schemas.CreateLaunchConfigurationTemplateRequest_postLaunchEnabled:
+			v.PostLaunchEnabled = new(bool)
+			return d.ReadBool(schemas.CreateLaunchConfigurationTemplateRequest_postLaunchEnabled, v.PostLaunchEnabled)
+		case schemas.CreateLaunchConfigurationTemplateRequest_recoveryMode:
+			var ev string
+			if err := d.ReadString(schemas.CreateLaunchConfigurationTemplateRequest_recoveryMode, &ev); err != nil {
+				return err
+			}
+			v.RecoveryMode = types.RecoveryMode(ev)
+			return nil
+		case schemas.CreateLaunchConfigurationTemplateRequest_tags:
+			return deserializeTagsMap(d, schemas.CreateLaunchConfigurationTemplateRequest_tags, &v.Tags)
+		case schemas.CreateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod:
+			var ev string
+			if err := d.ReadString(schemas.CreateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod, &ev); err != nil {
+				return err
+			}
+			v.TargetInstanceTypeRightSizingMethod = types.TargetInstanceTypeRightSizingMethod(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type CreateLaunchConfigurationTemplateOutput struct {
 
 	// Created Launch Configuration Template.
@@ -72,13 +161,34 @@ type CreateLaunchConfigurationTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLaunchConfigurationTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLaunchConfigurationTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLaunchConfigurationTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LaunchConfigurationTemplate != nil {
+		s.WriteStruct(schemas.CreateLaunchConfigurationTemplateResponse_launchConfigurationTemplate)
+		v.LaunchConfigurationTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateLaunchConfigurationTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLaunchConfigurationTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLaunchConfigurationTemplateResponse_launchConfigurationTemplate:
+			v.LaunchConfigurationTemplate = &types.LaunchConfigurationTemplate{}
+			return v.LaunchConfigurationTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLaunchConfigurationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLaunchConfigurationTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLaunchConfigurationTemplate, schemas.CreateLaunchConfigurationTemplateRequest, schemas.CreateLaunchConfigurationTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLaunchConfigurationTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLaunchConfigurationTemplate, schemas.CreateLaunchConfigurationTemplateRequest, schemas.CreateLaunchConfigurationTemplateResponse), output: &CreateLaunchConfigurationTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

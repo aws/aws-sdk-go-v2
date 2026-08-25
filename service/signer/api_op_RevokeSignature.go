@@ -4,6 +4,8 @@ package signer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/signer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type RevokeSignatureInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeSignatureInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeSignatureRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeSignatureInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.RevokeSignatureRequest_jobId, *v.JobId)
+	}
+	if v.JobOwner != nil {
+		s.WriteString(schemas.RevokeSignatureRequest_jobOwner, *v.JobOwner)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.RevokeSignatureRequest_reason, *v.Reason)
+	}
+}
+
 type RevokeSignatureOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +69,26 @@ type RevokeSignatureOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeSignatureOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeSignatureOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RevokeSignatureOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRevokeSignatureMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRevokeSignature{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeSignature, schemas.RevokeSignatureRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRevokeSignature{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeSignature, schemas.RevokeSignatureRequest, nil), output: &RevokeSignatureOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

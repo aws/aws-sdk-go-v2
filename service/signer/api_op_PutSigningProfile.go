@@ -4,7 +4,9 @@ package signer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/signer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/signer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,38 @@ type PutSigningProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSigningProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutSigningProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutSigningProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Overrides != nil {
+		s.WriteStruct(schemas.PutSigningProfileRequest_overrides)
+		v.Overrides.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PlatformId != nil {
+		s.WriteString(schemas.PutSigningProfileRequest_platformId, *v.PlatformId)
+	}
+	if v.ProfileName != nil {
+		s.WriteString(schemas.PutSigningProfileRequest_profileName, *v.ProfileName)
+	}
+	if v.SignatureValidityPeriod != nil {
+		s.WriteStruct(schemas.PutSigningProfileRequest_signatureValidityPeriod)
+		v.SignatureValidityPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SigningMaterial != nil {
+		s.WriteStruct(schemas.PutSigningProfileRequest_signingMaterial)
+		v.SigningMaterial.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSigningParameters(s, schemas.PutSigningProfileRequest_signingParameters, v.SigningParameters)
+	serializeTagMap(s, schemas.PutSigningProfileRequest_tags, v.Tags)
+}
+
 type PutSigningProfileOutput struct {
 
 	// The Amazon Resource Name (ARN) of the signing profile created.
@@ -77,13 +111,44 @@ type PutSigningProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSigningProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutSigningProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutSigningProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.PutSigningProfileResponse_arn, *v.Arn)
+	}
+	if v.ProfileVersion != nil {
+		s.WriteString(schemas.PutSigningProfileResponse_profileVersion, *v.ProfileVersion)
+	}
+	if v.ProfileVersionArn != nil {
+		s.WriteString(schemas.PutSigningProfileResponse_profileVersionArn, *v.ProfileVersionArn)
+	}
+}
+func (v *PutSigningProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutSigningProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutSigningProfileResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.PutSigningProfileResponse_arn, v.Arn)
+		case schemas.PutSigningProfileResponse_profileVersion:
+			v.ProfileVersion = new(string)
+			return d.ReadString(schemas.PutSigningProfileResponse_profileVersion, v.ProfileVersion)
+		case schemas.PutSigningProfileResponse_profileVersionArn:
+			v.ProfileVersionArn = new(string)
+			return d.ReadString(schemas.PutSigningProfileResponse_profileVersionArn, v.ProfileVersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutSigningProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutSigningProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSigningProfile, schemas.PutSigningProfileRequest, schemas.PutSigningProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutSigningProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSigningProfile, schemas.PutSigningProfileRequest, schemas.PutSigningProfileResponse), output: &PutSigningProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

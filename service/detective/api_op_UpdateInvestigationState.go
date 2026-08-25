@@ -4,7 +4,9 @@ package detective
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/detective/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/detective/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type UpdateInvestigationStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInvestigationStateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInvestigationStateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInvestigationStateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphArn != nil {
+		s.WriteString(schemas.UpdateInvestigationStateRequest_GraphArn, *v.GraphArn)
+	}
+	if v.InvestigationId != nil {
+		s.WriteString(schemas.UpdateInvestigationStateRequest_InvestigationId, *v.InvestigationId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.UpdateInvestigationStateRequest_State, string(v.State))
+	}
+}
+
 type UpdateInvestigationStateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +72,26 @@ type UpdateInvestigationStateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInvestigationStateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInvestigationStateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateInvestigationStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateInvestigationStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateInvestigationState{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInvestigationState, schemas.UpdateInvestigationStateRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateInvestigationState{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInvestigationState, schemas.UpdateInvestigationStateRequest, nil), output: &UpdateInvestigationStateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

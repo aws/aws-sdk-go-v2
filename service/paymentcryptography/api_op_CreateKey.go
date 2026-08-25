@@ -4,7 +4,9 @@ package paymentcryptography
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -143,6 +145,34 @@ type CreateKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateKeyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeriveKeyUsage != "" {
+		s.WriteString(schemas.CreateKeyInput_DeriveKeyUsage, string(v.DeriveKeyUsage))
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.CreateKeyInput_Enabled, *v.Enabled)
+	}
+	if v.Exportable != nil {
+		s.WriteBool(schemas.CreateKeyInput_Exportable, *v.Exportable)
+	}
+	if v.KeyAttributes != nil {
+		s.WriteStruct(schemas.CreateKeyInput_KeyAttributes)
+		v.KeyAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KeyCheckValueAlgorithm != "" {
+		s.WriteString(schemas.CreateKeyInput_KeyCheckValueAlgorithm, string(v.KeyCheckValueAlgorithm))
+	}
+	serializeRegions(s, schemas.CreateKeyInput_ReplicationRegions, v.ReplicationRegions)
+	serializeTags(s, schemas.CreateKeyInput_Tags, v.Tags)
+}
+
 type CreateKeyOutput struct {
 
 	// The key material that contains all the key attributes.
@@ -156,13 +186,34 @@ type CreateKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateKeyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteStruct(schemas.CreateKeyOutput_Key)
+		v.Key.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateKeyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateKeyOutput_Key:
+			v.Key = &types.Key{}
+			return v.Key.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKey, schemas.CreateKeyInput, schemas.CreateKeyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKey, schemas.CreateKeyInput, schemas.CreateKeyOutput), output: &CreateKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

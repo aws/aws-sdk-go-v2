@@ -4,7 +4,9 @@ package transfer
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,25 @@ type ImportHostKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportHostKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportHostKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportHostKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.ImportHostKeyRequest_Description, *v.Description)
+	}
+	if v.HostKeyBody != nil {
+		s.WriteString(schemas.ImportHostKeyRequest_HostKeyBody, *v.HostKeyBody)
+	}
+	if v.ServerId != nil {
+		s.WriteString(schemas.ImportHostKeyRequest_ServerId, *v.ServerId)
+	}
+	serializeTags(s, schemas.ImportHostKeyRequest_Tags, v.Tags)
+}
+
 type ImportHostKeyOutput struct {
 
 	// Returns the host key identifier for the imported key.
@@ -65,13 +86,38 @@ type ImportHostKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportHostKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportHostKeyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportHostKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HostKeyId != nil {
+		s.WriteString(schemas.ImportHostKeyResponse_HostKeyId, *v.HostKeyId)
+	}
+	if v.ServerId != nil {
+		s.WriteString(schemas.ImportHostKeyResponse_ServerId, *v.ServerId)
+	}
+}
+func (v *ImportHostKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportHostKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportHostKeyResponse_HostKeyId:
+			v.HostKeyId = new(string)
+			return d.ReadString(schemas.ImportHostKeyResponse_HostKeyId, v.HostKeyId)
+		case schemas.ImportHostKeyResponse_ServerId:
+			v.ServerId = new(string)
+			return d.ReadString(schemas.ImportHostKeyResponse_ServerId, v.ServerId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportHostKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportHostKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportHostKey, schemas.ImportHostKeyRequest, schemas.ImportHostKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpImportHostKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportHostKey, schemas.ImportHostKeyRequest, schemas.ImportHostKeyResponse), output: &ImportHostKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

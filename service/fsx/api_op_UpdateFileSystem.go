@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -212,6 +214,53 @@ type UpdateFileSystemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFileSystemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFileSystemRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFileSystemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpdateFileSystemRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.UpdateFileSystemRequest_FileSystemId, *v.FileSystemId)
+	}
+	if v.FileSystemTypeVersion != nil {
+		s.WriteString(schemas.UpdateFileSystemRequest_FileSystemTypeVersion, *v.FileSystemTypeVersion)
+	}
+	if v.LustreConfiguration != nil {
+		s.WriteStruct(schemas.UpdateFileSystemRequest_LustreConfiguration)
+		v.LustreConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.UpdateFileSystemRequest_NetworkType, string(v.NetworkType))
+	}
+	if v.OntapConfiguration != nil {
+		s.WriteStruct(schemas.UpdateFileSystemRequest_OntapConfiguration)
+		v.OntapConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OpenZFSConfiguration != nil {
+		s.WriteStruct(schemas.UpdateFileSystemRequest_OpenZFSConfiguration)
+		v.OpenZFSConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StorageCapacity != nil {
+		s.WriteInt32(schemas.UpdateFileSystemRequest_StorageCapacity, *v.StorageCapacity)
+	}
+	if v.StorageType != "" {
+		s.WriteString(schemas.UpdateFileSystemRequest_StorageType, string(v.StorageType))
+	}
+	if v.WindowsConfiguration != nil {
+		s.WriteStruct(schemas.UpdateFileSystemRequest_WindowsConfiguration)
+		v.WindowsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The response object for the UpdateFileSystem operation.
 type UpdateFileSystemOutput struct {
 
@@ -224,13 +273,34 @@ type UpdateFileSystemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFileSystemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFileSystemResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFileSystemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystem != nil {
+		s.WriteStruct(schemas.UpdateFileSystemResponse_FileSystem)
+		v.FileSystem.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateFileSystemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFileSystemResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFileSystemResponse_FileSystem:
+			v.FileSystem = &types.FileSystem{}
+			return v.FileSystem.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFileSystemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateFileSystem{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFileSystem, schemas.UpdateFileSystemRequest, schemas.UpdateFileSystemResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateFileSystem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFileSystem, schemas.UpdateFileSystemRequest, schemas.UpdateFileSystemResponse), output: &UpdateFileSystemOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

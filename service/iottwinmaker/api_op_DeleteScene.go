@@ -5,6 +5,8 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,6 +42,34 @@ type DeleteSceneInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSceneInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSceneRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSceneInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SceneId != nil {
+		s.WriteString(schemas.DeleteSceneRequest_sceneId, *v.SceneId)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DeleteSceneRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *DeleteSceneInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSceneRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSceneRequest_sceneId:
+			v.SceneId = new(string)
+			return d.ReadString(schemas.DeleteSceneRequest_sceneId, v.SceneId)
+		case schemas.DeleteSceneRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.DeleteSceneRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type DeleteSceneOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +77,26 @@ type DeleteSceneOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSceneOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSceneResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSceneOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSceneOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSceneResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSceneMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteScene{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteScene, schemas.DeleteSceneRequest, schemas.DeleteSceneResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteScene{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteScene, schemas.DeleteSceneRequest, schemas.DeleteSceneResponse), output: &DeleteSceneOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

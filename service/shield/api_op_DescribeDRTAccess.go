@@ -4,6 +4,8 @@ package shield
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/shield/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -29,6 +31,15 @@ type DescribeDRTAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDRTAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDRTAccessRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDRTAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DescribeDRTAccessOutput struct {
 
 	// The list of Amazon S3 buckets accessed by the SRT.
@@ -44,13 +55,35 @@ type DescribeDRTAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDRTAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDRTAccessResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDRTAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLogBucketList(s, schemas.DescribeDRTAccessResponse_LogBucketList, v.LogBucketList)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeDRTAccessResponse_RoleArn, *v.RoleArn)
+	}
+}
+func (v *DescribeDRTAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDRTAccessResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDRTAccessResponse_LogBucketList:
+			return deserializeLogBucketList(d, schemas.DescribeDRTAccessResponse_LogBucketList, &v.LogBucketList)
+		case schemas.DescribeDRTAccessResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeDRTAccessResponse_RoleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDRTAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDRTAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDRTAccess, schemas.DescribeDRTAccessRequest, schemas.DescribeDRTAccessResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDRTAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDRTAccess, schemas.DescribeDRTAccessRequest, schemas.DescribeDRTAccessResponse), output: &DescribeDRTAccessOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

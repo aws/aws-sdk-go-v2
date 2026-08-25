@@ -4,7 +4,9 @@ package vpclattice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,38 @@ type UpdateServiceNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceNetworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceNetworkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthType != "" {
+		s.WriteString(schemas.UpdateServiceNetworkRequest_authType, string(v.AuthType))
+	}
+	if v.ServiceNetworkIdentifier != nil {
+		s.WriteString(schemas.UpdateServiceNetworkRequest_serviceNetworkIdentifier, *v.ServiceNetworkIdentifier)
+	}
+}
+func (v *UpdateServiceNetworkInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceNetworkRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceNetworkRequest_authType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateServiceNetworkRequest_authType, &ev); err != nil {
+				return err
+			}
+			v.AuthType = types.AuthType(ev)
+			return nil
+		case schemas.UpdateServiceNetworkRequest_serviceNetworkIdentifier:
+			v.ServiceNetworkIdentifier = new(string)
+			return d.ReadString(schemas.UpdateServiceNetworkRequest_serviceNetworkIdentifier, v.ServiceNetworkIdentifier)
+		}
+		return nil
+	})
+}
+
 type UpdateServiceNetworkOutput struct {
 
 	// The Amazon Resource Name (ARN) of the service network.
@@ -64,13 +98,54 @@ type UpdateServiceNetworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceNetworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceNetworkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceNetworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateServiceNetworkResponse_arn, *v.Arn)
+	}
+	if v.AuthType != "" {
+		s.WriteString(schemas.UpdateServiceNetworkResponse_authType, string(v.AuthType))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateServiceNetworkResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateServiceNetworkResponse_name, *v.Name)
+	}
+}
+func (v *UpdateServiceNetworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceNetworkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceNetworkResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateServiceNetworkResponse_arn, v.Arn)
+		case schemas.UpdateServiceNetworkResponse_authType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateServiceNetworkResponse_authType, &ev); err != nil {
+				return err
+			}
+			v.AuthType = types.AuthType(ev)
+			return nil
+		case schemas.UpdateServiceNetworkResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateServiceNetworkResponse_id, v.Id)
+		case schemas.UpdateServiceNetworkResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateServiceNetworkResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateServiceNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateServiceNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceNetwork, schemas.UpdateServiceNetworkRequest, schemas.UpdateServiceNetworkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateServiceNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceNetwork, schemas.UpdateServiceNetworkRequest, schemas.UpdateServiceNetworkResponse), output: &UpdateServiceNetworkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

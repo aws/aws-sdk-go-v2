@@ -4,7 +4,9 @@ package transcribestreaming
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transcribestreaming/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribestreaming/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type GetMedicalScribeStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMedicalScribeStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMedicalScribeStreamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMedicalScribeStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetMedicalScribeStreamRequest_SessionId, *v.SessionId)
+	}
+}
+
 type GetMedicalScribeStreamOutput struct {
 
 	// Provides details about a HealthScribe streaming session.
@@ -48,13 +62,34 @@ type GetMedicalScribeStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMedicalScribeStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMedicalScribeStreamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMedicalScribeStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MedicalScribeStreamDetails != nil {
+		s.WriteStruct(schemas.GetMedicalScribeStreamResponse_MedicalScribeStreamDetails)
+		v.MedicalScribeStreamDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetMedicalScribeStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMedicalScribeStreamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMedicalScribeStreamResponse_MedicalScribeStreamDetails:
+			v.MedicalScribeStreamDetails = &types.MedicalScribeStreamDetails{}
+			return v.MedicalScribeStreamDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMedicalScribeStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMedicalScribeStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMedicalScribeStream, schemas.GetMedicalScribeStreamRequest, schemas.GetMedicalScribeStreamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMedicalScribeStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMedicalScribeStream, schemas.GetMedicalScribeStreamRequest, schemas.GetMedicalScribeStreamResponse), output: &GetMedicalScribeStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

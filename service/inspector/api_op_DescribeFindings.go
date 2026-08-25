@@ -4,7 +4,9 @@ package inspector
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,19 @@ type DescribeFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFindingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFindingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchDescribeArnList(s, schemas.DescribeFindingsRequest_findingArns, v.FindingArns)
+	if v.Locale != "" {
+		s.WriteString(schemas.DescribeFindingsRequest_locale, string(v.Locale))
+	}
+}
+
 type DescribeFindingsOutput struct {
 
 	// Finding details that cannot be described. An error code is provided for each
@@ -57,13 +72,32 @@ type DescribeFindingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFindingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFindingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedItems(s, schemas.DescribeFindingsResponse_failedItems, v.FailedItems)
+	serializeFindingList(s, schemas.DescribeFindingsResponse_findings, v.Findings)
+}
+func (v *DescribeFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFindingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFindingsResponse_failedItems:
+			return deserializeFailedItems(d, schemas.DescribeFindingsResponse_failedItems, &v.FailedItems)
+		case schemas.DescribeFindingsResponse_findings:
+			return deserializeFindingList(d, schemas.DescribeFindingsResponse_findings, &v.Findings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFindings, schemas.DescribeFindingsRequest, schemas.DescribeFindingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFindings, schemas.DescribeFindingsRequest, schemas.DescribeFindingsResponse), output: &DescribeFindingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

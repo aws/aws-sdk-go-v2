@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,21 @@ type ListMonitorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMonitorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMonitorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMonitorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMonitorsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMonitorsRequest_nextToken, *v.NextToken)
+	}
+}
+
 // Shared pagination field for List operation outputs (nextToken).
 type ListMonitorsOutput struct {
 
@@ -62,13 +79,35 @@ type ListMonitorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMonitorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMonitorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMonitorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMonitorSummaries(s, schemas.ListMonitorsResponse_monitors, v.Monitors)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMonitorsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListMonitorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMonitorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMonitorsResponse_monitors:
+			return deserializeMonitorSummaries(d, schemas.ListMonitorsResponse_monitors, &v.Monitors)
+		case schemas.ListMonitorsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMonitorsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMonitorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMonitors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMonitors, schemas.ListMonitorsRequest, schemas.ListMonitorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMonitors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMonitors, schemas.ListMonitorsRequest, schemas.ListMonitorsResponse), output: &ListMonitorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

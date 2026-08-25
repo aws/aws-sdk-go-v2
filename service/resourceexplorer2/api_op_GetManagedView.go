@@ -4,7 +4,9 @@ package resourceexplorer2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetManagedViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetManagedViewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetManagedViewInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetManagedViewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagedViewArn != nil {
+		s.WriteString(schemas.GetManagedViewInput_ManagedViewArn, *v.ManagedViewArn)
+	}
+}
+
 type GetManagedViewOutput struct {
 
 	// Details about the specified managed view.
@@ -47,13 +61,34 @@ type GetManagedViewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetManagedViewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetManagedViewOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetManagedViewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagedView != nil {
+		s.WriteStruct(schemas.GetManagedViewOutput_ManagedView)
+		v.ManagedView.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetManagedViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetManagedViewOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetManagedViewOutput_ManagedView:
+			v.ManagedView = &types.ManagedView{}
+			return v.ManagedView.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetManagedViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetManagedView{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedView, schemas.GetManagedViewInput, schemas.GetManagedViewOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetManagedView{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedView, schemas.GetManagedViewInput, schemas.GetManagedViewOutput), output: &GetManagedViewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

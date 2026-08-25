@@ -4,7 +4,9 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type ListVolumeRecoveryPointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVolumeRecoveryPointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVolumeRecoveryPointsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVolumeRecoveryPointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.ListVolumeRecoveryPointsInput_GatewayARN, *v.GatewayARN)
+	}
+}
+
 type ListVolumeRecoveryPointsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
@@ -56,13 +70,35 @@ type ListVolumeRecoveryPointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVolumeRecoveryPointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVolumeRecoveryPointsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVolumeRecoveryPointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.ListVolumeRecoveryPointsOutput_GatewayARN, *v.GatewayARN)
+	}
+	serializeVolumeRecoveryPointInfos(s, schemas.ListVolumeRecoveryPointsOutput_VolumeRecoveryPointInfos, v.VolumeRecoveryPointInfos)
+}
+func (v *ListVolumeRecoveryPointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVolumeRecoveryPointsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVolumeRecoveryPointsOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.ListVolumeRecoveryPointsOutput_GatewayARN, v.GatewayARN)
+		case schemas.ListVolumeRecoveryPointsOutput_VolumeRecoveryPointInfos:
+			return deserializeVolumeRecoveryPointInfos(d, schemas.ListVolumeRecoveryPointsOutput_VolumeRecoveryPointInfos, &v.VolumeRecoveryPointInfos)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVolumeRecoveryPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListVolumeRecoveryPoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVolumeRecoveryPoints, schemas.ListVolumeRecoveryPointsInput, schemas.ListVolumeRecoveryPointsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListVolumeRecoveryPoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVolumeRecoveryPoints, schemas.ListVolumeRecoveryPointsInput, schemas.ListVolumeRecoveryPointsOutput), output: &ListVolumeRecoveryPointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

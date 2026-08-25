@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,26 @@ type CreateRegexPatternSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRegexPatternSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRegexPatternSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRegexPatternSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateRegexPatternSetRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRegexPatternSetRequest_Name, *v.Name)
+	}
+	serializeRegularExpressionList(s, schemas.CreateRegexPatternSetRequest_RegularExpressionList, v.RegularExpressionList)
+	if v.Scope != "" {
+		s.WriteString(schemas.CreateRegexPatternSetRequest_Scope, string(v.Scope))
+	}
+	serializeTagList(s, schemas.CreateRegexPatternSetRequest_Tags, v.Tags)
+}
+
 type CreateRegexPatternSetOutput struct {
 
 	// High-level information about a RegexPatternSet, returned by operations like create and list.
@@ -74,13 +96,34 @@ type CreateRegexPatternSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRegexPatternSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRegexPatternSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRegexPatternSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Summary != nil {
+		s.WriteStruct(schemas.CreateRegexPatternSetResponse_Summary)
+		v.Summary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateRegexPatternSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRegexPatternSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRegexPatternSetResponse_Summary:
+			v.Summary = &types.RegexPatternSetSummary{}
+			return v.Summary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRegexPatternSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRegexPatternSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRegexPatternSet, schemas.CreateRegexPatternSetRequest, schemas.CreateRegexPatternSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateRegexPatternSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRegexPatternSet, schemas.CreateRegexPatternSetRequest, schemas.CreateRegexPatternSetResponse), output: &CreateRegexPatternSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package outposts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,40 @@ type CreateSiteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSiteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSiteInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSiteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateSiteInput_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSiteInput_Name, *v.Name)
+	}
+	if v.Notes != nil {
+		s.WriteString(schemas.CreateSiteInput_Notes, *v.Notes)
+	}
+	if v.OperatingAddress != nil {
+		s.WriteStruct(schemas.CreateSiteInput_OperatingAddress)
+		v.OperatingAddress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RackPhysicalProperties != nil {
+		s.WriteStruct(schemas.CreateSiteInput_RackPhysicalProperties)
+		v.RackPhysicalProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ShippingAddress != nil {
+		s.WriteStruct(schemas.CreateSiteInput_ShippingAddress)
+		v.ShippingAddress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateSiteInput_Tags, v.Tags)
+}
+
 type CreateSiteOutput struct {
 
 	// Information about a site.
@@ -71,13 +107,34 @@ type CreateSiteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSiteOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSiteOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSiteOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Site != nil {
+		s.WriteStruct(schemas.CreateSiteOutput_Site)
+		v.Site.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateSiteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSiteOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSiteOutput_Site:
+			v.Site = &types.Site{}
+			return v.Site.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSiteMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSite{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSite, schemas.CreateSiteInput, schemas.CreateSiteOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSite{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSite, schemas.CreateSiteInput, schemas.CreateSiteOutput), output: &CreateSiteOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

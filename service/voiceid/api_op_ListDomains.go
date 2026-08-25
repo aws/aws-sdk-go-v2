@@ -5,7 +5,9 @@ package voiceid
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/voiceid/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/voiceid/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,34 @@ type ListDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDomainsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDomainsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDomainsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDomainsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDomainsRequest_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDomainsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDomainsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDomainsRequest_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListDomainsRequest_MaxResults, v.MaxResults)
+		case schemas.ListDomainsRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDomainsRequest_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListDomainsOutput struct {
 
 	// A list containing details about each domain in the Amazon Web Services account.
@@ -58,13 +88,35 @@ type ListDomainsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDomainsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDomainsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDomainsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDomainSummaries(s, schemas.ListDomainsResponse_DomainSummaries, v.DomainSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDomainsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDomainsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDomainsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDomainsResponse_DomainSummaries:
+			return deserializeDomainSummaries(d, schemas.ListDomainsResponse_DomainSummaries, &v.DomainSummaries)
+		case schemas.ListDomainsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDomainsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListDomains{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomains, schemas.ListDomainsRequest, schemas.ListDomainsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListDomains{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomains, schemas.ListDomainsRequest, schemas.ListDomainsResponse), output: &ListDomainsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

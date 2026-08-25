@@ -4,6 +4,8 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetPermissionPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPermissionPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPermissionPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPermissionPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetPermissionPolicyRequest_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type GetPermissionPolicyOutput struct {
 
 	// The IAM policy that is attached to the specified rule group.
@@ -47,13 +61,32 @@ type GetPermissionPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPermissionPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPermissionPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPermissionPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteString(schemas.GetPermissionPolicyResponse_Policy, *v.Policy)
+	}
+}
+func (v *GetPermissionPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPermissionPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPermissionPolicyResponse_Policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.GetPermissionPolicyResponse_Policy, v.Policy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPermissionPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPermissionPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPermissionPolicy, schemas.GetPermissionPolicyRequest, schemas.GetPermissionPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetPermissionPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPermissionPolicy, schemas.GetPermissionPolicyRequest, schemas.GetPermissionPolicyResponse), output: &GetPermissionPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

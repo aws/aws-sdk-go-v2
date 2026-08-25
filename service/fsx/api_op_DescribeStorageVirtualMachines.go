@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,23 @@ type DescribeStorageVirtualMachinesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStorageVirtualMachinesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStorageVirtualMachinesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStorageVirtualMachinesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStorageVirtualMachineFilters(s, schemas.DescribeStorageVirtualMachinesRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeStorageVirtualMachinesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeStorageVirtualMachinesRequest_NextToken, *v.NextToken)
+	}
+	serializeStorageVirtualMachineIds(s, schemas.DescribeStorageVirtualMachinesRequest_StorageVirtualMachineIds, v.StorageVirtualMachineIds)
+}
+
 type DescribeStorageVirtualMachinesOutput struct {
 
 	// (Optional) Opaque pagination token returned from a previous operation (String).
@@ -63,13 +82,35 @@ type DescribeStorageVirtualMachinesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStorageVirtualMachinesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStorageVirtualMachinesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStorageVirtualMachinesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeStorageVirtualMachinesResponse_NextToken, *v.NextToken)
+	}
+	serializeStorageVirtualMachines(s, schemas.DescribeStorageVirtualMachinesResponse_StorageVirtualMachines, v.StorageVirtualMachines)
+}
+func (v *DescribeStorageVirtualMachinesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeStorageVirtualMachinesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeStorageVirtualMachinesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeStorageVirtualMachinesResponse_NextToken, v.NextToken)
+		case schemas.DescribeStorageVirtualMachinesResponse_StorageVirtualMachines:
+			return deserializeStorageVirtualMachines(d, schemas.DescribeStorageVirtualMachinesResponse_StorageVirtualMachines, &v.StorageVirtualMachines)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeStorageVirtualMachinesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeStorageVirtualMachines{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStorageVirtualMachines, schemas.DescribeStorageVirtualMachinesRequest, schemas.DescribeStorageVirtualMachinesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeStorageVirtualMachines{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStorageVirtualMachines, schemas.DescribeStorageVirtualMachinesRequest, schemas.DescribeStorageVirtualMachinesResponse), output: &DescribeStorageVirtualMachinesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

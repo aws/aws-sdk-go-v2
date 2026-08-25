@@ -4,7 +4,9 @@ package acmpca
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -79,6 +81,25 @@ type CreatePermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePermissionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePermissionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionList(s, schemas.CreatePermissionRequest_Actions, v.Actions)
+	if v.CertificateAuthorityArn != nil {
+		s.WriteString(schemas.CreatePermissionRequest_CertificateAuthorityArn, *v.CertificateAuthorityArn)
+	}
+	if v.Principal != nil {
+		s.WriteString(schemas.CreatePermissionRequest_Principal, *v.Principal)
+	}
+	if v.SourceAccount != nil {
+		s.WriteString(schemas.CreatePermissionRequest_SourceAccount, *v.SourceAccount)
+	}
+}
+
 type CreatePermissionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -86,13 +107,26 @@ type CreatePermissionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePermissionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreatePermissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePermission, schemas.CreatePermissionRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePermission, schemas.CreatePermissionRequest, nil), output: &CreatePermissionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

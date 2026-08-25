@@ -4,7 +4,9 @@ package codebuild
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type StopSandboxInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopSandboxInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopSandboxInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopSandboxInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.StopSandboxInput_id, *v.Id)
+	}
+}
+
 type StopSandboxOutput struct {
 
 	// Information about the requested sandbox.
@@ -45,13 +59,34 @@ type StopSandboxOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopSandboxOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopSandboxOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopSandboxOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Sandbox != nil {
+		s.WriteStruct(schemas.StopSandboxOutput_sandbox)
+		v.Sandbox.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StopSandboxOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopSandboxOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopSandboxOutput_sandbox:
+			v.Sandbox = &types.Sandbox{}
+			return v.Sandbox.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopSandboxMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopSandbox{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopSandbox, schemas.StopSandboxInput, schemas.StopSandboxOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopSandbox{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopSandbox, schemas.StopSandboxInput, schemas.StopSandboxOutput), output: &StopSandboxOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

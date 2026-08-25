@@ -5,7 +5,9 @@ package outposts
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,27 @@ type ListAssetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssetsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssetTypeList(s, schemas.ListAssetsInput_AssetTypeFilter, v.AssetTypeFilter)
+	serializeHostIdList(s, schemas.ListAssetsInput_HostIdFilter, v.HostIdFilter)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssetsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssetsInput_NextToken, *v.NextToken)
+	}
+	if v.OutpostIdentifier != nil {
+		s.WriteString(schemas.ListAssetsInput_OutpostIdentifier, *v.OutpostIdentifier)
+	}
+	serializeStatusList(s, schemas.ListAssetsInput_StatusFilter, v.StatusFilter)
+}
+
 type ListAssetsOutput struct {
 
 	// Information about the hardware assets.
@@ -79,13 +102,35 @@ type ListAssetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssetsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssetListDefinition(s, schemas.ListAssetsOutput_Assets, v.Assets)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssetsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAssetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssetsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssetsOutput_Assets:
+			return deserializeAssetListDefinition(d, schemas.ListAssetsOutput_Assets, &v.Assets)
+		case schemas.ListAssetsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssetsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssets, schemas.ListAssetsInput, schemas.ListAssetsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssets, schemas.ListAssetsInput, schemas.ListAssetsOutput), output: &ListAssetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

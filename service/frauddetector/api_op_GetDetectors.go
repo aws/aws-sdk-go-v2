@@ -5,7 +5,9 @@ package frauddetector
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type GetDetectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDetectorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDetectorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDetectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.GetDetectorsRequest_detectorId, *v.DetectorId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetDetectorsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetDetectorsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetDetectorsOutput struct {
 
 	// The detectors.
@@ -58,13 +78,35 @@ type GetDetectorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDetectorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDetectorsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDetectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDetectorList(s, schemas.GetDetectorsResult_detectors, v.Detectors)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetDetectorsResult_nextToken, *v.NextToken)
+	}
+}
+func (v *GetDetectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDetectorsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDetectorsResult_detectors:
+			return deserializeDetectorList(d, schemas.GetDetectorsResult_detectors, &v.Detectors)
+		case schemas.GetDetectorsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetDetectorsResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDetectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDetectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDetectors, schemas.GetDetectorsRequest, schemas.GetDetectorsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDetectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDetectors, schemas.GetDetectorsRequest, schemas.GetDetectorsResult), output: &GetDetectorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

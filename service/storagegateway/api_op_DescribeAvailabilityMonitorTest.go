@@ -4,7 +4,9 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,18 @@ type DescribeAvailabilityMonitorTestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAvailabilityMonitorTestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAvailabilityMonitorTestInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAvailabilityMonitorTestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.DescribeAvailabilityMonitorTestInput_GatewayARN, *v.GatewayARN)
+	}
+}
+
 type DescribeAvailabilityMonitorTestOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
@@ -58,13 +72,48 @@ type DescribeAvailabilityMonitorTestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAvailabilityMonitorTestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAvailabilityMonitorTestOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAvailabilityMonitorTestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.DescribeAvailabilityMonitorTestOutput_GatewayARN, *v.GatewayARN)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.DescribeAvailabilityMonitorTestOutput_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeAvailabilityMonitorTestOutput_Status, string(v.Status))
+	}
+}
+func (v *DescribeAvailabilityMonitorTestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAvailabilityMonitorTestOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAvailabilityMonitorTestOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.DescribeAvailabilityMonitorTestOutput_GatewayARN, v.GatewayARN)
+		case schemas.DescribeAvailabilityMonitorTestOutput_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeAvailabilityMonitorTestOutput_StartTime, v.StartTime)
+		case schemas.DescribeAvailabilityMonitorTestOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAvailabilityMonitorTestOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AvailabilityMonitorTestStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAvailabilityMonitorTestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAvailabilityMonitorTest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAvailabilityMonitorTest, schemas.DescribeAvailabilityMonitorTestInput, schemas.DescribeAvailabilityMonitorTestOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAvailabilityMonitorTest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAvailabilityMonitorTest, schemas.DescribeAvailabilityMonitorTestInput, schemas.DescribeAvailabilityMonitorTestOutput), output: &DescribeAvailabilityMonitorTestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package outposts
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type ListBlockingInstancesForCapacityTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBlockingInstancesForCapacityTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBlockingInstancesForCapacityTaskInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBlockingInstancesForCapacityTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityTaskId != nil {
+		s.WriteString(schemas.ListBlockingInstancesForCapacityTaskInput_CapacityTaskId, *v.CapacityTaskId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBlockingInstancesForCapacityTaskInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBlockingInstancesForCapacityTaskInput_NextToken, *v.NextToken)
+	}
+	if v.OutpostIdentifier != nil {
+		s.WriteString(schemas.ListBlockingInstancesForCapacityTaskInput_OutpostIdentifier, *v.OutpostIdentifier)
+	}
+}
+
 type ListBlockingInstancesForCapacityTaskOutput struct {
 
 	// A list of all running Amazon EC2 instances on the Outpost. Stopping one or more
@@ -63,13 +86,35 @@ type ListBlockingInstancesForCapacityTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBlockingInstancesForCapacityTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBlockingInstancesForCapacityTaskOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBlockingInstancesForCapacityTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBlockingInstancesList(s, schemas.ListBlockingInstancesForCapacityTaskOutput_BlockingInstances, v.BlockingInstances)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBlockingInstancesForCapacityTaskOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListBlockingInstancesForCapacityTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBlockingInstancesForCapacityTaskOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBlockingInstancesForCapacityTaskOutput_BlockingInstances:
+			return deserializeBlockingInstancesList(d, schemas.ListBlockingInstancesForCapacityTaskOutput_BlockingInstances, &v.BlockingInstances)
+		case schemas.ListBlockingInstancesForCapacityTaskOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBlockingInstancesForCapacityTaskOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBlockingInstancesForCapacityTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBlockingInstancesForCapacityTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBlockingInstancesForCapacityTask, schemas.ListBlockingInstancesForCapacityTaskInput, schemas.ListBlockingInstancesForCapacityTaskOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBlockingInstancesForCapacityTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBlockingInstancesForCapacityTask, schemas.ListBlockingInstancesForCapacityTaskInput, schemas.ListBlockingInstancesForCapacityTaskOutput), output: &ListBlockingInstancesForCapacityTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

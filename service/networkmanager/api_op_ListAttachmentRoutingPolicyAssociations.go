@@ -5,7 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,27 @@ type ListAttachmentRoutingPolicyAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAttachmentRoutingPolicyAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAttachmentRoutingPolicyAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAttachmentRoutingPolicyAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.ListAttachmentRoutingPolicyAssociationsRequest_AttachmentId, *v.AttachmentId)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.ListAttachmentRoutingPolicyAssociationsRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAttachmentRoutingPolicyAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAttachmentRoutingPolicyAssociationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAttachmentRoutingPolicyAssociationsOutput struct {
 
 	// The list of attachment routing policy associations.
@@ -58,13 +81,35 @@ type ListAttachmentRoutingPolicyAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAttachmentRoutingPolicyAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAttachmentRoutingPolicyAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAttachmentRoutingPolicyAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttachmentRoutingPolicyAssociationsList(s, schemas.ListAttachmentRoutingPolicyAssociationsResponse_AttachmentRoutingPolicyAssociations, v.AttachmentRoutingPolicyAssociations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAttachmentRoutingPolicyAssociationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAttachmentRoutingPolicyAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAttachmentRoutingPolicyAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAttachmentRoutingPolicyAssociationsResponse_AttachmentRoutingPolicyAssociations:
+			return deserializeAttachmentRoutingPolicyAssociationsList(d, schemas.ListAttachmentRoutingPolicyAssociationsResponse_AttachmentRoutingPolicyAssociations, &v.AttachmentRoutingPolicyAssociations)
+		case schemas.ListAttachmentRoutingPolicyAssociationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAttachmentRoutingPolicyAssociationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAttachmentRoutingPolicyAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAttachmentRoutingPolicyAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAttachmentRoutingPolicyAssociations, schemas.ListAttachmentRoutingPolicyAssociationsRequest, schemas.ListAttachmentRoutingPolicyAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAttachmentRoutingPolicyAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAttachmentRoutingPolicyAssociations, schemas.ListAttachmentRoutingPolicyAssociationsRequest, schemas.ListAttachmentRoutingPolicyAssociationsResponse), output: &ListAttachmentRoutingPolicyAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

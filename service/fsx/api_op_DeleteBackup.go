@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,21 @@ type DeleteBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBackupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBackupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBackupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupId != nil {
+		s.WriteString(schemas.DeleteBackupRequest_BackupId, *v.BackupId)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.DeleteBackupRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+}
+
 // The response object for the DeleteBackup operation.
 type DeleteBackupOutput struct {
 
@@ -64,13 +81,42 @@ type DeleteBackupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBackupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBackupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBackupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupId != nil {
+		s.WriteString(schemas.DeleteBackupResponse_BackupId, *v.BackupId)
+	}
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.DeleteBackupResponse_Lifecycle, string(v.Lifecycle))
+	}
+}
+func (v *DeleteBackupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBackupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBackupResponse_BackupId:
+			v.BackupId = new(string)
+			return d.ReadString(schemas.DeleteBackupResponse_BackupId, v.BackupId)
+		case schemas.DeleteBackupResponse_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.DeleteBackupResponse_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = types.BackupLifecycle(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBackup, schemas.DeleteBackupRequest, schemas.DeleteBackupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBackup, schemas.DeleteBackupRequest, schemas.DeleteBackupResponse), output: &DeleteBackupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

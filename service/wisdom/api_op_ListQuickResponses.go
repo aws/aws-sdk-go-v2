@@ -5,7 +5,9 @@ package wisdom
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wisdom/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wisdom/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListQuickResponsesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQuickResponsesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQuickResponsesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQuickResponsesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.ListQuickResponsesRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListQuickResponsesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQuickResponsesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListQuickResponsesOutput struct {
 
 	// Summary information about the quick responses.
@@ -61,13 +81,35 @@ type ListQuickResponsesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQuickResponsesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQuickResponsesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQuickResponsesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQuickResponsesResponse_nextToken, *v.NextToken)
+	}
+	serializeQuickResponseSummaryList(s, schemas.ListQuickResponsesResponse_quickResponseSummaries, v.QuickResponseSummaries)
+}
+func (v *ListQuickResponsesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListQuickResponsesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListQuickResponsesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListQuickResponsesResponse_nextToken, v.NextToken)
+		case schemas.ListQuickResponsesResponse_quickResponseSummaries:
+			return deserializeQuickResponseSummaryList(d, schemas.ListQuickResponsesResponse_quickResponseSummaries, &v.QuickResponseSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListQuickResponsesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListQuickResponses{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQuickResponses, schemas.ListQuickResponsesRequest, schemas.ListQuickResponsesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListQuickResponses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQuickResponses, schemas.ListQuickResponsesRequest, schemas.ListQuickResponsesResponse), output: &ListQuickResponsesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

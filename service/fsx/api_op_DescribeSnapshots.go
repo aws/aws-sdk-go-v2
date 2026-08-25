@@ -5,7 +5,9 @@ package fsx
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,26 @@ type DescribeSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSnapshotsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSnapshotsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSnapshotsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSnapshotFilters(s, schemas.DescribeSnapshotsRequest_Filters, v.Filters)
+	if v.IncludeShared != nil {
+		s.WriteBool(schemas.DescribeSnapshotsRequest_IncludeShared, *v.IncludeShared)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeSnapshotsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSnapshotsRequest_NextToken, *v.NextToken)
+	}
+	serializeSnapshotIds(s, schemas.DescribeSnapshotsRequest_SnapshotIds, v.SnapshotIds)
+}
+
 type DescribeSnapshotsOutput struct {
 
 	// (Optional) Opaque pagination token returned from a previous operation (String).
@@ -90,13 +112,35 @@ type DescribeSnapshotsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSnapshotsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSnapshotsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSnapshotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSnapshotsResponse_NextToken, *v.NextToken)
+	}
+	serializeSnapshots(s, schemas.DescribeSnapshotsResponse_Snapshots, v.Snapshots)
+}
+func (v *DescribeSnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSnapshotsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSnapshotsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeSnapshotsResponse_NextToken, v.NextToken)
+		case schemas.DescribeSnapshotsResponse_Snapshots:
+			return deserializeSnapshots(d, schemas.DescribeSnapshotsResponse_Snapshots, &v.Snapshots)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSnapshots, schemas.DescribeSnapshotsRequest, schemas.DescribeSnapshotsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSnapshots, schemas.DescribeSnapshotsRequest, schemas.DescribeSnapshotsResponse), output: &DescribeSnapshotsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

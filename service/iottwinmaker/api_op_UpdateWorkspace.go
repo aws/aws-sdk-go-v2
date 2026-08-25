@@ -5,6 +5,8 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -46,6 +48,46 @@ type UpdateWorkspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkspaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkspaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateWorkspaceRequest_description, *v.Description)
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.UpdateWorkspaceRequest_role, *v.Role)
+	}
+	if v.S3Location != nil {
+		s.WriteString(schemas.UpdateWorkspaceRequest_s3Location, *v.S3Location)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.UpdateWorkspaceRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *UpdateWorkspaceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkspaceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWorkspaceRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateWorkspaceRequest_description, v.Description)
+		case schemas.UpdateWorkspaceRequest_role:
+			v.Role = new(string)
+			return d.ReadString(schemas.UpdateWorkspaceRequest_role, v.Role)
+		case schemas.UpdateWorkspaceRequest_s3Location:
+			v.S3Location = new(string)
+			return d.ReadString(schemas.UpdateWorkspaceRequest_s3Location, v.S3Location)
+		case schemas.UpdateWorkspaceRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.UpdateWorkspaceRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type UpdateWorkspaceOutput struct {
 
 	// The date and time of the current update.
@@ -59,13 +101,32 @@ type UpdateWorkspaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkspaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkspaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkspaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UpdateDateTime != nil {
+		s.WriteTime(schemas.UpdateWorkspaceResponse_updateDateTime, *v.UpdateDateTime)
+	}
+}
+func (v *UpdateWorkspaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkspaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWorkspaceResponse_updateDateTime:
+			v.UpdateDateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateWorkspaceResponse_updateDateTime, v.UpdateDateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkspace, schemas.UpdateWorkspaceRequest, schemas.UpdateWorkspaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkspace, schemas.UpdateWorkspaceRequest, schemas.UpdateWorkspaceResponse), output: &UpdateWorkspaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

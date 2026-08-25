@@ -4,6 +4,8 @@ package dataexchange
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,28 @@ type StartJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartJobRequest_JobId, *v.JobId)
+	}
+}
+func (v *StartJobInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartJobRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartJobRequest_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartJobRequest_JobId, v.JobId)
+		}
+		return nil
+	})
+}
+
 type StartJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +64,26 @@ type StartJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartJob, schemas.StartJobRequest, schemas.StartJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartJob, schemas.StartJobRequest, schemas.StartJobResponse), output: &StartJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

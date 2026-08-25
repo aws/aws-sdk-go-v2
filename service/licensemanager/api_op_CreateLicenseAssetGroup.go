@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,28 @@ type CreateLicenseAssetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLicenseAssetGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLicenseAssetGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLicenseAssetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLicenseAssetRulesetArnList(s, schemas.CreateLicenseAssetGroupRequest_AssociatedLicenseAssetRulesetARNs, v.AssociatedLicenseAssetRulesetARNs)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateLicenseAssetGroupRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateLicenseAssetGroupRequest_Description, *v.Description)
+	}
+	serializeLicenseAssetGroupConfigurationList(s, schemas.CreateLicenseAssetGroupRequest_LicenseAssetGroupConfigurations, v.LicenseAssetGroupConfigurations)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateLicenseAssetGroupRequest_Name, *v.Name)
+	}
+	serializeLicenseAssetGroupPropertyList(s, schemas.CreateLicenseAssetGroupRequest_Properties, v.Properties)
+	serializeTagList(s, schemas.CreateLicenseAssetGroupRequest_Tags, v.Tags)
+}
+
 type CreateLicenseAssetGroupOutput struct {
 
 	// Amazon Resource Name (ARN) of the license asset group.
@@ -77,13 +101,38 @@ type CreateLicenseAssetGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLicenseAssetGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLicenseAssetGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLicenseAssetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseAssetGroupArn != nil {
+		s.WriteString(schemas.CreateLicenseAssetGroupResponse_LicenseAssetGroupArn, *v.LicenseAssetGroupArn)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.CreateLicenseAssetGroupResponse_Status, *v.Status)
+	}
+}
+func (v *CreateLicenseAssetGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLicenseAssetGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLicenseAssetGroupResponse_LicenseAssetGroupArn:
+			v.LicenseAssetGroupArn = new(string)
+			return d.ReadString(schemas.CreateLicenseAssetGroupResponse_LicenseAssetGroupArn, v.LicenseAssetGroupArn)
+		case schemas.CreateLicenseAssetGroupResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.CreateLicenseAssetGroupResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLicenseAssetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLicenseAssetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLicenseAssetGroup, schemas.CreateLicenseAssetGroupRequest, schemas.CreateLicenseAssetGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLicenseAssetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLicenseAssetGroup, schemas.CreateLicenseAssetGroupRequest, schemas.CreateLicenseAssetGroupResponse), output: &CreateLicenseAssetGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

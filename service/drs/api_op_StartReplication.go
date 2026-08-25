@@ -4,7 +4,9 @@ package drs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,28 @@ type StartReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartReplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartReplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartReplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceServerID != nil {
+		s.WriteString(schemas.StartReplicationRequest_sourceServerID, *v.SourceServerID)
+	}
+}
+func (v *StartReplicationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartReplicationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartReplicationRequest_sourceServerID:
+			v.SourceServerID = new(string)
+			return d.ReadString(schemas.StartReplicationRequest_sourceServerID, v.SourceServerID)
+		}
+		return nil
+	})
+}
+
 type StartReplicationOutput struct {
 
 	// The Source Server that this action was targeted on.
@@ -46,13 +70,34 @@ type StartReplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartReplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartReplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartReplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceServer != nil {
+		s.WriteStruct(schemas.StartReplicationResponse_sourceServer)
+		v.SourceServer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartReplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartReplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartReplicationResponse_sourceServer:
+			v.SourceServer = &types.SourceServer{}
+			return v.SourceServer.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartReplication, schemas.StartReplicationRequest, schemas.StartReplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartReplication, schemas.StartReplicationRequest, schemas.StartReplicationResponse), output: &StartReplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package marketplacecatalog
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,29 @@ type StartChangeSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartChangeSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartChangeSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartChangeSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.StartChangeSetRequest_Catalog, *v.Catalog)
+	}
+	serializeRequestedChangeList(s, schemas.StartChangeSetRequest_ChangeSet, v.ChangeSet)
+	if v.ChangeSetName != nil {
+		s.WriteString(schemas.StartChangeSetRequest_ChangeSetName, *v.ChangeSetName)
+	}
+	serializeTagList(s, schemas.StartChangeSetRequest_ChangeSetTags, v.ChangeSetTags)
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartChangeSetRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Intent != "" {
+		s.WriteString(schemas.StartChangeSetRequest_Intent, string(v.Intent))
+	}
+}
+
 type StartChangeSetOutput struct {
 
 	// The ARN associated to the unique identifier generated for the request.
@@ -96,13 +121,38 @@ type StartChangeSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartChangeSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartChangeSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartChangeSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeSetArn != nil {
+		s.WriteString(schemas.StartChangeSetResponse_ChangeSetArn, *v.ChangeSetArn)
+	}
+	if v.ChangeSetId != nil {
+		s.WriteString(schemas.StartChangeSetResponse_ChangeSetId, *v.ChangeSetId)
+	}
+}
+func (v *StartChangeSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartChangeSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartChangeSetResponse_ChangeSetArn:
+			v.ChangeSetArn = new(string)
+			return d.ReadString(schemas.StartChangeSetResponse_ChangeSetArn, v.ChangeSetArn)
+		case schemas.StartChangeSetResponse_ChangeSetId:
+			v.ChangeSetId = new(string)
+			return d.ReadString(schemas.StartChangeSetResponse_ChangeSetId, v.ChangeSetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartChangeSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartChangeSet, schemas.StartChangeSetRequest, schemas.StartChangeSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartChangeSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartChangeSet, schemas.StartChangeSetRequest, schemas.StartChangeSetResponse), output: &StartChangeSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

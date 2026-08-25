@@ -4,6 +4,8 @@ package outposts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type CancelCapacityTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelCapacityTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelCapacityTaskInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelCapacityTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityTaskId != nil {
+		s.WriteString(schemas.CancelCapacityTaskInput_CapacityTaskId, *v.CapacityTaskId)
+	}
+	if v.OutpostIdentifier != nil {
+		s.WriteString(schemas.CancelCapacityTaskInput_OutpostIdentifier, *v.OutpostIdentifier)
+	}
+}
+
 type CancelCapacityTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type CancelCapacityTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelCapacityTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelCapacityTaskOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelCapacityTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelCapacityTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelCapacityTaskOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelCapacityTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelCapacityTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelCapacityTask, schemas.CancelCapacityTaskInput, schemas.CancelCapacityTaskOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelCapacityTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelCapacityTask, schemas.CancelCapacityTaskInput, schemas.CancelCapacityTaskOutput), output: &CancelCapacityTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

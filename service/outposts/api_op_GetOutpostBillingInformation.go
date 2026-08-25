@@ -5,7 +5,9 @@ package outposts
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type GetOutpostBillingInformationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOutpostBillingInformationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOutpostBillingInformationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOutpostBillingInformationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetOutpostBillingInformationInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetOutpostBillingInformationInput_NextToken, *v.NextToken)
+	}
+	if v.OutpostIdentifier != nil {
+		s.WriteString(schemas.GetOutpostBillingInformationInput_OutpostIdentifier, *v.OutpostIdentifier)
+	}
+}
+
 type GetOutpostBillingInformationOutput struct {
 
 	// The date the current contract term ends for the specified Outpost. You must
@@ -68,13 +88,61 @@ type GetOutpostBillingInformationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOutpostBillingInformationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOutpostBillingInformationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOutpostBillingInformationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContractEndDate != nil {
+		s.WriteString(schemas.GetOutpostBillingInformationOutput_ContractEndDate, *v.ContractEndDate)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetOutpostBillingInformationOutput_NextToken, *v.NextToken)
+	}
+	if v.PaymentOption != "" {
+		s.WriteString(schemas.GetOutpostBillingInformationOutput_PaymentOption, string(v.PaymentOption))
+	}
+	if v.PaymentTerm != "" {
+		s.WriteString(schemas.GetOutpostBillingInformationOutput_PaymentTerm, string(v.PaymentTerm))
+	}
+	serializeSubscriptionList(s, schemas.GetOutpostBillingInformationOutput_Subscriptions, v.Subscriptions)
+}
+func (v *GetOutpostBillingInformationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOutpostBillingInformationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOutpostBillingInformationOutput_ContractEndDate:
+			v.ContractEndDate = new(string)
+			return d.ReadString(schemas.GetOutpostBillingInformationOutput_ContractEndDate, v.ContractEndDate)
+		case schemas.GetOutpostBillingInformationOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetOutpostBillingInformationOutput_NextToken, v.NextToken)
+		case schemas.GetOutpostBillingInformationOutput_PaymentOption:
+			var ev string
+			if err := d.ReadString(schemas.GetOutpostBillingInformationOutput_PaymentOption, &ev); err != nil {
+				return err
+			}
+			v.PaymentOption = types.PaymentOption(ev)
+			return nil
+		case schemas.GetOutpostBillingInformationOutput_PaymentTerm:
+			var ev string
+			if err := d.ReadString(schemas.GetOutpostBillingInformationOutput_PaymentTerm, &ev); err != nil {
+				return err
+			}
+			v.PaymentTerm = types.PaymentTerm(ev)
+			return nil
+		case schemas.GetOutpostBillingInformationOutput_Subscriptions:
+			return deserializeSubscriptionList(d, schemas.GetOutpostBillingInformationOutput_Subscriptions, &v.Subscriptions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOutpostBillingInformationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOutpostBillingInformation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOutpostBillingInformation, schemas.GetOutpostBillingInformationInput, schemas.GetOutpostBillingInformationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOutpostBillingInformation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOutpostBillingInformation, schemas.GetOutpostBillingInformationInput, schemas.GetOutpostBillingInformationOutput), output: &GetOutpostBillingInformationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

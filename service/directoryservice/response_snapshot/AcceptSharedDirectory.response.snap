@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DirectoryService_20150416.AcceptSharedDirectory
+
+{"SharedDirectory":{"CreatedDateTime":946684800,"LastUpdatedDateTime":946684800,"OwnerAccountId":"__OwnerAccountId__","OwnerDirectoryId":"__OwnerDirectoryId__","ShareMethod":"ORGANIZATIONS","ShareNotes":"__ShareNotes__","ShareStatus":"Shared","SharedAccountId":"__SharedAccountId__","SharedDirectoryId":"__SharedDirectoryId__"}}

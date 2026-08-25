@@ -4,7 +4,9 @@ package resourceexplorer2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,28 @@ type GetViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetViewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetViewInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetViewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ViewArn != nil {
+		s.WriteString(schemas.GetViewInput_ViewArn, *v.ViewArn)
+	}
+}
+func (v *GetViewInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetViewInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetViewInput_ViewArn:
+			v.ViewArn = new(string)
+			return d.ReadString(schemas.GetViewInput_ViewArn, v.ViewArn)
+		}
+		return nil
+	})
+}
+
 type GetViewOutput struct {
 
 	// Tag key and value pairs that are attached to the view.
@@ -50,13 +74,37 @@ type GetViewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetViewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetViewOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetViewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTagMap(s, schemas.GetViewOutput_Tags, v.Tags)
+	if v.View != nil {
+		s.WriteStruct(schemas.GetViewOutput_View)
+		v.View.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetViewOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetViewOutput_Tags:
+			return deserializeTagMap(d, schemas.GetViewOutput_Tags, &v.Tags)
+		case schemas.GetViewOutput_View:
+			v.View = &types.View{}
+			return v.View.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetView{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetView, schemas.GetViewInput, schemas.GetViewOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetView{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetView, schemas.GetViewInput, schemas.GetViewOutput), output: &GetViewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

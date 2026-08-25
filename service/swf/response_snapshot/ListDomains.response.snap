@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: SimpleWorkflowService.ListDomains
+
+{"domainInfos":[{"arn":"__Arn__","description":"__Description__","name":"__Name__","status":"REGISTERED"},{"arn":"__Arn__","description":"__Description__","name":"__Name__","status":"REGISTERED"}],"nextPageToken":"__NextPageToken__"}

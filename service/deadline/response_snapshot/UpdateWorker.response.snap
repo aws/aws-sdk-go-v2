@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"hostConfiguration":{"scriptBody":"__ScriptBody__","scriptTimeoutSeconds":1},"log":{"error":"__Error__","logDriver":"__LogDriver__","options":{"key0":"__Value__"},"parameters":{"key0":"__Value__"}}}

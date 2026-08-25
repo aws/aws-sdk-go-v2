@@ -4,7 +4,9 @@ package mediapackagevod
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type DescribePackagingConfigurationInput struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribePackagingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePackagingConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePackagingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DescribePackagingConfigurationRequest_Id, *v.Id)
+	}
 }
 
 type DescribePackagingConfigurationOutput struct {
@@ -69,13 +83,85 @@ type DescribePackagingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePackagingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePackagingConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePackagingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribePackagingConfigurationResponse_Arn, *v.Arn)
+	}
+	if v.CmafPackage != nil {
+		s.WriteStruct(schemas.DescribePackagingConfigurationResponse_CmafPackage)
+		v.CmafPackage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteString(schemas.DescribePackagingConfigurationResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.DashPackage != nil {
+		s.WriteStruct(schemas.DescribePackagingConfigurationResponse_DashPackage)
+		v.DashPackage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HlsPackage != nil {
+		s.WriteStruct(schemas.DescribePackagingConfigurationResponse_HlsPackage)
+		v.HlsPackage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DescribePackagingConfigurationResponse_Id, *v.Id)
+	}
+	if v.MssPackage != nil {
+		s.WriteStruct(schemas.DescribePackagingConfigurationResponse_MssPackage)
+		v.MssPackage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PackagingGroupId != nil {
+		s.WriteString(schemas.DescribePackagingConfigurationResponse_PackagingGroupId, *v.PackagingGroupId)
+	}
+	serializeTags(s, schemas.DescribePackagingConfigurationResponse_Tags, v.Tags)
+}
+func (v *DescribePackagingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePackagingConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePackagingConfigurationResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribePackagingConfigurationResponse_Arn, v.Arn)
+		case schemas.DescribePackagingConfigurationResponse_CmafPackage:
+			v.CmafPackage = &types.CmafPackage{}
+			return v.CmafPackage.Deserialize(d)
+		case schemas.DescribePackagingConfigurationResponse_CreatedAt:
+			v.CreatedAt = new(string)
+			return d.ReadString(schemas.DescribePackagingConfigurationResponse_CreatedAt, v.CreatedAt)
+		case schemas.DescribePackagingConfigurationResponse_DashPackage:
+			v.DashPackage = &types.DashPackage{}
+			return v.DashPackage.Deserialize(d)
+		case schemas.DescribePackagingConfigurationResponse_HlsPackage:
+			v.HlsPackage = &types.HlsPackage{}
+			return v.HlsPackage.Deserialize(d)
+		case schemas.DescribePackagingConfigurationResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DescribePackagingConfigurationResponse_Id, v.Id)
+		case schemas.DescribePackagingConfigurationResponse_MssPackage:
+			v.MssPackage = &types.MssPackage{}
+			return v.MssPackage.Deserialize(d)
+		case schemas.DescribePackagingConfigurationResponse_PackagingGroupId:
+			v.PackagingGroupId = new(string)
+			return d.ReadString(schemas.DescribePackagingConfigurationResponse_PackagingGroupId, v.PackagingGroupId)
+		case schemas.DescribePackagingConfigurationResponse_Tags:
+			return deserializeTags(d, schemas.DescribePackagingConfigurationResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePackagingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribePackagingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePackagingConfiguration, schemas.DescribePackagingConfigurationRequest, schemas.DescribePackagingConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribePackagingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePackagingConfiguration, schemas.DescribePackagingConfigurationRequest, schemas.DescribePackagingConfigurationResponse), output: &DescribePackagingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

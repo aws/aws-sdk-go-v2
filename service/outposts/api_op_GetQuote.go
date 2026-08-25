@@ -4,7 +4,9 @@ package outposts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetQuoteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQuoteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQuoteInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQuoteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QuoteIdentifier != nil {
+		s.WriteString(schemas.GetQuoteInput_QuoteIdentifier, *v.QuoteIdentifier)
+	}
+}
+
 type GetQuoteOutput struct {
 
 	// Information about the quote.
@@ -45,13 +59,34 @@ type GetQuoteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQuoteOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQuoteOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQuoteOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Quote != nil {
+		s.WriteStruct(schemas.GetQuoteOutput_Quote)
+		v.Quote.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetQuoteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetQuoteOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetQuoteOutput_Quote:
+			v.Quote = &types.Quote{}
+			return v.Quote.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetQuoteMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetQuote{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQuote, schemas.GetQuoteInput, schemas.GetQuoteOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetQuote{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQuote, schemas.GetQuoteInput, schemas.GetQuoteOutput), output: &GetQuoteOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

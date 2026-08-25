@@ -4,6 +4,8 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type CancelRetrievalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelRetrievalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelRetrievalInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelRetrievalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.CancelRetrievalInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.TapeARN != nil {
+		s.WriteString(schemas.CancelRetrievalInput_TapeARN, *v.TapeARN)
+	}
+}
+
 // CancelRetrievalOutput
 type CancelRetrievalOutput struct {
 
@@ -56,13 +73,32 @@ type CancelRetrievalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelRetrievalOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelRetrievalOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelRetrievalOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TapeARN != nil {
+		s.WriteString(schemas.CancelRetrievalOutput_TapeARN, *v.TapeARN)
+	}
+}
+func (v *CancelRetrievalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelRetrievalOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelRetrievalOutput_TapeARN:
+			v.TapeARN = new(string)
+			return d.ReadString(schemas.CancelRetrievalOutput_TapeARN, v.TapeARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelRetrievalMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelRetrieval{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelRetrieval, schemas.CancelRetrievalInput, schemas.CancelRetrievalOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCancelRetrieval{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelRetrieval, schemas.CancelRetrievalInput, schemas.CancelRetrievalOutput), output: &CancelRetrievalOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

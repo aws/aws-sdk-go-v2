@@ -5,7 +5,9 @@ package directoryservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListLogSubscriptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLogSubscriptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLogSubscriptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLogSubscriptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.ListLogSubscriptionsRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListLogSubscriptionsRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLogSubscriptionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListLogSubscriptionsOutput struct {
 
 	// A list of active LogSubscription objects for calling the Amazon Web Services account.
@@ -57,13 +77,35 @@ type ListLogSubscriptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLogSubscriptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLogSubscriptionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLogSubscriptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLogSubscriptions(s, schemas.ListLogSubscriptionsResult_LogSubscriptions, v.LogSubscriptions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLogSubscriptionsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLogSubscriptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLogSubscriptionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLogSubscriptionsResult_LogSubscriptions:
+			return deserializeLogSubscriptions(d, schemas.ListLogSubscriptionsResult_LogSubscriptions, &v.LogSubscriptions)
+		case schemas.ListLogSubscriptionsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLogSubscriptionsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLogSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLogSubscriptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLogSubscriptions, schemas.ListLogSubscriptionsRequest, schemas.ListLogSubscriptionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListLogSubscriptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLogSubscriptions, schemas.ListLogSubscriptionsRequest, schemas.ListLogSubscriptionsResult), output: &ListLogSubscriptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

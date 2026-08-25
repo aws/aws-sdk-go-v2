@@ -4,6 +4,8 @@ package outposts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteQuoteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteQuoteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteQuoteInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteQuoteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QuoteIdentifier != nil {
+		s.WriteString(schemas.DeleteQuoteInput_QuoteIdentifier, *v.QuoteIdentifier)
+	}
+}
+
 type DeleteQuoteOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteQuoteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteQuoteOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteQuoteOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteQuoteOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteQuoteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteQuoteOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteQuoteMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteQuote{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteQuote, schemas.DeleteQuoteInput, schemas.DeleteQuoteOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteQuote{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteQuote, schemas.DeleteQuoteInput, schemas.DeleteQuoteOutput), output: &DeleteQuoteOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

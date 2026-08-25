@@ -4,7 +4,9 @@ package storagegateway
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -243,6 +245,81 @@ type CreateNFSFileShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNFSFileShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNFSFileShareInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNFSFileShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditDestinationARN != nil {
+		s.WriteString(schemas.CreateNFSFileShareInput_AuditDestinationARN, *v.AuditDestinationARN)
+	}
+	if v.BucketRegion != nil {
+		s.WriteString(schemas.CreateNFSFileShareInput_BucketRegion, *v.BucketRegion)
+	}
+	if v.CacheAttributes != nil {
+		s.WriteStruct(schemas.CreateNFSFileShareInput_CacheAttributes)
+		v.CacheAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFileShareClientList(s, schemas.CreateNFSFileShareInput_ClientList, v.ClientList)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateNFSFileShareInput_ClientToken, *v.ClientToken)
+	}
+	if v.DefaultStorageClass != nil {
+		s.WriteString(schemas.CreateNFSFileShareInput_DefaultStorageClass, *v.DefaultStorageClass)
+	}
+	if v.EncryptionType != "" {
+		s.WriteString(schemas.CreateNFSFileShareInput_EncryptionType, string(v.EncryptionType))
+	}
+	if v.FileShareName != nil {
+		s.WriteString(schemas.CreateNFSFileShareInput_FileShareName, *v.FileShareName)
+	}
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.CreateNFSFileShareInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.GuessMIMETypeEnabled != nil {
+		s.WriteBool(schemas.CreateNFSFileShareInput_GuessMIMETypeEnabled, *v.GuessMIMETypeEnabled)
+	}
+	if v.KMSEncrypted != nil {
+		s.WriteBool(schemas.CreateNFSFileShareInput_KMSEncrypted, *v.KMSEncrypted)
+	}
+	if v.KMSKey != nil {
+		s.WriteString(schemas.CreateNFSFileShareInput_KMSKey, *v.KMSKey)
+	}
+	if v.LocationARN != nil {
+		s.WriteString(schemas.CreateNFSFileShareInput_LocationARN, *v.LocationARN)
+	}
+	if v.NFSFileShareDefaults != nil {
+		s.WriteStruct(schemas.CreateNFSFileShareInput_NFSFileShareDefaults)
+		v.NFSFileShareDefaults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NotificationPolicy != nil {
+		s.WriteString(schemas.CreateNFSFileShareInput_NotificationPolicy, *v.NotificationPolicy)
+	}
+	if v.ObjectACL != "" {
+		s.WriteString(schemas.CreateNFSFileShareInput_ObjectACL, string(v.ObjectACL))
+	}
+	if v.ReadOnly != nil {
+		s.WriteBool(schemas.CreateNFSFileShareInput_ReadOnly, *v.ReadOnly)
+	}
+	if v.RequesterPays != nil {
+		s.WriteBool(schemas.CreateNFSFileShareInput_RequesterPays, *v.RequesterPays)
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.CreateNFSFileShareInput_Role, *v.Role)
+	}
+	if v.Squash != nil {
+		s.WriteString(schemas.CreateNFSFileShareInput_Squash, *v.Squash)
+	}
+	serializeTags(s, schemas.CreateNFSFileShareInput_Tags, v.Tags)
+	if v.VPCEndpointDNSName != nil {
+		s.WriteString(schemas.CreateNFSFileShareInput_VPCEndpointDNSName, *v.VPCEndpointDNSName)
+	}
+}
+
 // CreateNFSFileShareOutput
 type CreateNFSFileShareOutput struct {
 
@@ -255,13 +332,32 @@ type CreateNFSFileShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNFSFileShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNFSFileShareOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNFSFileShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileShareARN != nil {
+		s.WriteString(schemas.CreateNFSFileShareOutput_FileShareARN, *v.FileShareARN)
+	}
+}
+func (v *CreateNFSFileShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateNFSFileShareOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateNFSFileShareOutput_FileShareARN:
+			v.FileShareARN = new(string)
+			return d.ReadString(schemas.CreateNFSFileShareOutput_FileShareARN, v.FileShareARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateNFSFileShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateNFSFileShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNFSFileShare, schemas.CreateNFSFileShareInput, schemas.CreateNFSFileShareOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateNFSFileShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNFSFileShare, schemas.CreateNFSFileShareInput, schemas.CreateNFSFileShareOutput), output: &CreateNFSFileShareOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

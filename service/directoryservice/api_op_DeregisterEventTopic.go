@@ -4,6 +4,8 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type DeregisterEventTopicInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterEventTopicInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterEventTopicRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterEventTopicInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DeregisterEventTopicRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.TopicName != nil {
+		s.WriteString(schemas.DeregisterEventTopicRequest_TopicName, *v.TopicName)
+	}
+}
+
 // The result of a DeregisterEventTopic request.
 type DeregisterEventTopicOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -51,13 +68,26 @@ type DeregisterEventTopicOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterEventTopicOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterEventTopicResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterEventTopicOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeregisterEventTopicOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterEventTopicResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterEventTopicMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterEventTopic{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterEventTopic, schemas.DeregisterEventTopicRequest, schemas.DeregisterEventTopicResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeregisterEventTopic{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterEventTopic, schemas.DeregisterEventTopicRequest, schemas.DeregisterEventTopicResult), output: &DeregisterEventTopicOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

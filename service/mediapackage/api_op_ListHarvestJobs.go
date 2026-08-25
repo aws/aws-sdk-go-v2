@@ -5,7 +5,9 @@ package mediapackage
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackage/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackage/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,27 @@ type ListHarvestJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHarvestJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHarvestJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHarvestJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeChannelId != nil {
+		s.WriteString(schemas.ListHarvestJobsRequest_IncludeChannelId, *v.IncludeChannelId)
+	}
+	if v.IncludeStatus != nil {
+		s.WriteString(schemas.ListHarvestJobsRequest_IncludeStatus, *v.IncludeStatus)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListHarvestJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHarvestJobsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListHarvestJobsOutput struct {
 
 	// A list of HarvestJob records.
@@ -57,13 +80,35 @@ type ListHarvestJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHarvestJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHarvestJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHarvestJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfHarvestJob(s, schemas.ListHarvestJobsResponse_HarvestJobs, v.HarvestJobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHarvestJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListHarvestJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListHarvestJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListHarvestJobsResponse_HarvestJobs:
+			return deserialize__listOfHarvestJob(d, schemas.ListHarvestJobsResponse_HarvestJobs, &v.HarvestJobs)
+		case schemas.ListHarvestJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListHarvestJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListHarvestJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListHarvestJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHarvestJobs, schemas.ListHarvestJobsRequest, schemas.ListHarvestJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListHarvestJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHarvestJobs, schemas.ListHarvestJobsRequest, schemas.ListHarvestJobsResponse), output: &ListHarvestJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

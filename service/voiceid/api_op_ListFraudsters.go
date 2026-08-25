@@ -5,7 +5,9 @@ package voiceid
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/voiceid/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/voiceid/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,46 @@ type ListFraudstersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFraudstersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFraudstersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFraudstersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.ListFraudstersRequest_DomainId, *v.DomainId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFraudstersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFraudstersRequest_NextToken, *v.NextToken)
+	}
+	if v.WatchlistId != nil {
+		s.WriteString(schemas.ListFraudstersRequest_WatchlistId, *v.WatchlistId)
+	}
+}
+func (v *ListFraudstersInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFraudstersRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFraudstersRequest_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.ListFraudstersRequest_DomainId, v.DomainId)
+		case schemas.ListFraudstersRequest_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListFraudstersRequest_MaxResults, v.MaxResults)
+		case schemas.ListFraudstersRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFraudstersRequest_NextToken, v.NextToken)
+		case schemas.ListFraudstersRequest_WatchlistId:
+			v.WatchlistId = new(string)
+			return d.ReadString(schemas.ListFraudstersRequest_WatchlistId, v.WatchlistId)
+		}
+		return nil
+	})
+}
+
 type ListFraudstersOutput struct {
 
 	// A list that contains details about each fraudster in the Amazon Web Services
@@ -68,13 +110,35 @@ type ListFraudstersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFraudstersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFraudstersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFraudstersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFraudsterSummaries(s, schemas.ListFraudstersResponse_FraudsterSummaries, v.FraudsterSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFraudstersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFraudstersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFraudstersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFraudstersResponse_FraudsterSummaries:
+			return deserializeFraudsterSummaries(d, schemas.ListFraudstersResponse_FraudsterSummaries, &v.FraudsterSummaries)
+		case schemas.ListFraudstersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFraudstersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFraudstersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListFraudsters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFraudsters, schemas.ListFraudstersRequest, schemas.ListFraudstersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListFraudsters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFraudsters, schemas.ListFraudstersRequest, schemas.ListFraudstersResponse), output: &ListFraudstersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

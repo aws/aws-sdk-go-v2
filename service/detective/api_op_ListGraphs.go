@@ -5,7 +5,9 @@ package detective
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/detective/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/detective/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type ListGraphsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGraphsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGraphsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGraphsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGraphsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGraphsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListGraphsOutput struct {
 
 	// A list of behavior graphs that the account is an administrator account for.
@@ -59,13 +76,35 @@ type ListGraphsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGraphsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGraphsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGraphsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGraphList(s, schemas.ListGraphsResponse_GraphList, v.GraphList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGraphsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListGraphsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGraphsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGraphsResponse_GraphList:
+			return deserializeGraphList(d, schemas.ListGraphsResponse_GraphList, &v.GraphList)
+		case schemas.ListGraphsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGraphsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGraphsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGraphs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGraphs, schemas.ListGraphsRequest, schemas.ListGraphsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGraphs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGraphs, schemas.ListGraphsRequest, schemas.ListGraphsResponse), output: &ListGraphsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

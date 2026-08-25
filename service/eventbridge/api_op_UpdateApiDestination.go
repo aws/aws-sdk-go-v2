@@ -4,7 +4,9 @@ package eventbridge
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -50,6 +52,33 @@ type UpdateApiDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApiDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApiDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApiDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionArn != nil {
+		s.WriteString(schemas.UpdateApiDestinationRequest_ConnectionArn, *v.ConnectionArn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateApiDestinationRequest_Description, *v.Description)
+	}
+	if v.HttpMethod != "" {
+		s.WriteString(schemas.UpdateApiDestinationRequest_HttpMethod, string(v.HttpMethod))
+	}
+	if v.InvocationEndpoint != nil {
+		s.WriteString(schemas.UpdateApiDestinationRequest_InvocationEndpoint, *v.InvocationEndpoint)
+	}
+	if v.InvocationRateLimitPerSecond != nil {
+		s.WriteInt32(schemas.UpdateApiDestinationRequest_InvocationRateLimitPerSecond, *v.InvocationRateLimitPerSecond)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateApiDestinationRequest_Name, *v.Name)
+	}
+}
+
 type UpdateApiDestinationOutput struct {
 
 	// The ARN of the API destination that was updated.
@@ -70,13 +99,54 @@ type UpdateApiDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApiDestinationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApiDestinationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApiDestinationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiDestinationArn != nil {
+		s.WriteString(schemas.UpdateApiDestinationResponse_ApiDestinationArn, *v.ApiDestinationArn)
+	}
+	if v.ApiDestinationState != "" {
+		s.WriteString(schemas.UpdateApiDestinationResponse_ApiDestinationState, string(v.ApiDestinationState))
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.UpdateApiDestinationResponse_CreationTime, *v.CreationTime)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.UpdateApiDestinationResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+}
+func (v *UpdateApiDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateApiDestinationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateApiDestinationResponse_ApiDestinationArn:
+			v.ApiDestinationArn = new(string)
+			return d.ReadString(schemas.UpdateApiDestinationResponse_ApiDestinationArn, v.ApiDestinationArn)
+		case schemas.UpdateApiDestinationResponse_ApiDestinationState:
+			var ev string
+			if err := d.ReadString(schemas.UpdateApiDestinationResponse_ApiDestinationState, &ev); err != nil {
+				return err
+			}
+			v.ApiDestinationState = types.ApiDestinationState(ev)
+			return nil
+		case schemas.UpdateApiDestinationResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateApiDestinationResponse_CreationTime, v.CreationTime)
+		case schemas.UpdateApiDestinationResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateApiDestinationResponse_LastModifiedTime, v.LastModifiedTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateApiDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateApiDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApiDestination, schemas.UpdateApiDestinationRequest, schemas.UpdateApiDestinationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateApiDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApiDestination, schemas.UpdateApiDestinationRequest, schemas.UpdateApiDestinationResponse), output: &UpdateApiDestinationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

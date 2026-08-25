@@ -5,7 +5,9 @@ package storagegateway
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,21 @@ type ListGatewaysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGatewaysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGatewaysInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGatewaysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListGatewaysInput_Limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListGatewaysInput_Marker, *v.Marker)
+	}
+}
+
 type ListGatewaysOutput struct {
 
 	// An array of GatewayInfo objects.
@@ -70,13 +87,35 @@ type ListGatewaysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGatewaysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGatewaysOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGatewaysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGateways(s, schemas.ListGatewaysOutput_Gateways, v.Gateways)
+	if v.Marker != nil {
+		s.WriteString(schemas.ListGatewaysOutput_Marker, *v.Marker)
+	}
+}
+func (v *ListGatewaysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGatewaysOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGatewaysOutput_Gateways:
+			return deserializeGateways(d, schemas.ListGatewaysOutput_Gateways, &v.Gateways)
+		case schemas.ListGatewaysOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListGatewaysOutput_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListGateways{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGateways, schemas.ListGatewaysInput, schemas.ListGatewaysOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListGateways{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGateways, schemas.ListGatewaysInput, schemas.ListGatewaysOutput), output: &ListGatewaysOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

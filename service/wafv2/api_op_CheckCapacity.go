@@ -4,7 +4,9 @@ package wafv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,19 @@ type CheckCapacityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckCapacityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckCapacityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckCapacityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRules(s, schemas.CheckCapacityRequest_Rules, v.Rules)
+	if v.Scope != "" {
+		s.WriteString(schemas.CheckCapacityRequest_Scope, string(v.Scope))
+	}
+}
+
 type CheckCapacityOutput struct {
 
 	// The capacity required by the rules and scope.
@@ -71,13 +86,31 @@ type CheckCapacityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckCapacityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckCapacityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckCapacityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Capacity != 0 {
+		s.WriteInt64(schemas.CheckCapacityResponse_Capacity, v.Capacity)
+	}
+}
+func (v *CheckCapacityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CheckCapacityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CheckCapacityResponse_Capacity:
+			return d.ReadInt64(schemas.CheckCapacityResponse_Capacity, &v.Capacity)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCheckCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCheckCapacity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckCapacity, schemas.CheckCapacityRequest, schemas.CheckCapacityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCheckCapacity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckCapacity, schemas.CheckCapacityRequest, schemas.CheckCapacityResponse), output: &CheckCapacityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

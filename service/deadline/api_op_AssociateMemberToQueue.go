@@ -5,7 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,6 +70,36 @@ type AssociateMemberToQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateMemberToQueueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateMemberToQueueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateMemberToQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.AssociateMemberToQueueRequest_farmId, *v.FarmId)
+	}
+	if v.IdentityCenterRegion != nil {
+		s.WriteString(schemas.AssociateMemberToQueueRequest_identityCenterRegion, *v.IdentityCenterRegion)
+	}
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.AssociateMemberToQueueRequest_identityStoreId, *v.IdentityStoreId)
+	}
+	if v.MembershipLevel != "" {
+		s.WriteString(schemas.AssociateMemberToQueueRequest_membershipLevel, string(v.MembershipLevel))
+	}
+	if v.PrincipalId != nil {
+		s.WriteString(schemas.AssociateMemberToQueueRequest_principalId, *v.PrincipalId)
+	}
+	if v.PrincipalType != "" {
+		s.WriteString(schemas.AssociateMemberToQueueRequest_principalType, string(v.PrincipalType))
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.AssociateMemberToQueueRequest_queueId, *v.QueueId)
+	}
+}
+
 type AssociateMemberToQueueOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -75,13 +107,26 @@ type AssociateMemberToQueueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateMemberToQueueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateMemberToQueueResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateMemberToQueueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateMemberToQueueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateMemberToQueueResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateMemberToQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateMemberToQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateMemberToQueue, schemas.AssociateMemberToQueueRequest, schemas.AssociateMemberToQueueResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateMemberToQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateMemberToQueue, schemas.AssociateMemberToQueueRequest, schemas.AssociateMemberToQueueResponse), output: &AssociateMemberToQueueOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package licensemanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -26,6 +28,15 @@ func (c *Client) GetServiceSettings(ctx context.Context, params *GetServiceSetti
 
 type GetServiceSettingsInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *GetServiceSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type GetServiceSettingsOutput struct {
@@ -63,13 +74,75 @@ type GetServiceSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossRegionDiscoveryHomeRegion != nil {
+		s.WriteString(schemas.GetServiceSettingsResponse_CrossRegionDiscoveryHomeRegion, *v.CrossRegionDiscoveryHomeRegion)
+	}
+	serializeStringList(s, schemas.GetServiceSettingsResponse_CrossRegionDiscoverySourceRegions, v.CrossRegionDiscoverySourceRegions)
+	if v.EnableCrossAccountsDiscovery != nil {
+		s.WriteBool(schemas.GetServiceSettingsResponse_EnableCrossAccountsDiscovery, *v.EnableCrossAccountsDiscovery)
+	}
+	if v.LicenseManagerResourceShareArn != nil {
+		s.WriteString(schemas.GetServiceSettingsResponse_LicenseManagerResourceShareArn, *v.LicenseManagerResourceShareArn)
+	}
+	if v.OrganizationConfiguration != nil {
+		s.WriteStruct(schemas.GetServiceSettingsResponse_OrganizationConfiguration)
+		v.OrganizationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3BucketArn != nil {
+		s.WriteString(schemas.GetServiceSettingsResponse_S3BucketArn, *v.S3BucketArn)
+	}
+	if v.ServiceStatus != nil {
+		s.WriteStruct(schemas.GetServiceSettingsResponse_ServiceStatus)
+		v.ServiceStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnsTopicArn != nil {
+		s.WriteString(schemas.GetServiceSettingsResponse_SnsTopicArn, *v.SnsTopicArn)
+	}
+}
+func (v *GetServiceSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceSettingsResponse_CrossRegionDiscoveryHomeRegion:
+			v.CrossRegionDiscoveryHomeRegion = new(string)
+			return d.ReadString(schemas.GetServiceSettingsResponse_CrossRegionDiscoveryHomeRegion, v.CrossRegionDiscoveryHomeRegion)
+		case schemas.GetServiceSettingsResponse_CrossRegionDiscoverySourceRegions:
+			return deserializeStringList(d, schemas.GetServiceSettingsResponse_CrossRegionDiscoverySourceRegions, &v.CrossRegionDiscoverySourceRegions)
+		case schemas.GetServiceSettingsResponse_EnableCrossAccountsDiscovery:
+			v.EnableCrossAccountsDiscovery = new(bool)
+			return d.ReadBool(schemas.GetServiceSettingsResponse_EnableCrossAccountsDiscovery, v.EnableCrossAccountsDiscovery)
+		case schemas.GetServiceSettingsResponse_LicenseManagerResourceShareArn:
+			v.LicenseManagerResourceShareArn = new(string)
+			return d.ReadString(schemas.GetServiceSettingsResponse_LicenseManagerResourceShareArn, v.LicenseManagerResourceShareArn)
+		case schemas.GetServiceSettingsResponse_OrganizationConfiguration:
+			v.OrganizationConfiguration = &types.OrganizationConfiguration{}
+			return v.OrganizationConfiguration.Deserialize(d)
+		case schemas.GetServiceSettingsResponse_S3BucketArn:
+			v.S3BucketArn = new(string)
+			return d.ReadString(schemas.GetServiceSettingsResponse_S3BucketArn, v.S3BucketArn)
+		case schemas.GetServiceSettingsResponse_ServiceStatus:
+			v.ServiceStatus = &types.ServiceStatus{}
+			return v.ServiceStatus.Deserialize(d)
+		case schemas.GetServiceSettingsResponse_SnsTopicArn:
+			v.SnsTopicArn = new(string)
+			return d.ReadString(schemas.GetServiceSettingsResponse_SnsTopicArn, v.SnsTopicArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetServiceSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceSettings, schemas.GetServiceSettingsRequest, schemas.GetServiceSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetServiceSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceSettings, schemas.GetServiceSettingsRequest, schemas.GetServiceSettingsResponse), output: &GetServiceSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

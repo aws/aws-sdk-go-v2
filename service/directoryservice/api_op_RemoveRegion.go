@@ -4,6 +4,8 @@ package directoryservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type RemoveRegionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveRegionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveRegionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveRegionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.RemoveRegionRequest_DirectoryId, *v.DirectoryId)
+	}
+}
+
 type RemoveRegionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type RemoveRegionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveRegionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveRegionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveRegionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RemoveRegionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveRegionResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveRegionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveRegion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveRegion, schemas.RemoveRegionRequest, schemas.RemoveRegionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRemoveRegion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveRegion, schemas.RemoveRegionRequest, schemas.RemoveRegionResult), output: &RemoveRegionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
