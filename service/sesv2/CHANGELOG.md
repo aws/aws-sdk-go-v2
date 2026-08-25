@@ -1,3 +1,8 @@
+# v1.67.1 (2026-08-25)
+
+* **Dependency Update**: Update to smithy-go v1.27.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.67.0 (2026-08-20)
 
 * **Feature**: Amazon SES now supports per-message tracking overrides. You can use the new ConfigurationOverrides parameter in SendEmail and SendBulkEmail to enable or disable open and click tracking for individual messages without changing your account-level or configuration set settings.

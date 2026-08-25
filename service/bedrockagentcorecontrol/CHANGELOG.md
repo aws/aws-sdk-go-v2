@@ -1,3 +1,8 @@
+# v1.59.1 (2026-08-25)
+
+* **Dependency Update**: Update to smithy-go v1.27.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.59.0 (2026-08-21)
 
 * **Feature**: Update Dataset schema to THIRDPARTYEVALUATIONV1

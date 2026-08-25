@@ -1,3 +1,8 @@
+# v1.67.1 (2026-08-25)
+
+* **Dependency Update**: Update to smithy-go v1.27.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.67.0 (2026-08-21)
 
 * **Feature**: Allows customers to specify an initial warm up period to wait for metrics to arrive when creating metric or log alarms

@@ -1,3 +1,8 @@
+# v1.102.1 (2026-08-25)
+
+* **Dependency Update**: Update to smithy-go v1.27.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.102.0 (2026-08-20)
 
 * **Feature**: Adds support for full JSON resource-based policies, enabling customers to create, retrieve, update, and delete function resource policies as complete JSON documents.

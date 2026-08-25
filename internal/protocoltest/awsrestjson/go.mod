@@ -3,11 +3,11 @@ module github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson
 go 1.24
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.43.7
-	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.18
-	github.com/aws/aws-sdk-go-v2/credentials v1.19.37
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.38
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.38
+	github.com/aws/aws-sdk-go-v2 v1.43.8
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.19
+	github.com/aws/aws-sdk-go-v2/credentials v1.19.38
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.39
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.39
 	github.com/aws/smithy-go v1.27.10
 )
 

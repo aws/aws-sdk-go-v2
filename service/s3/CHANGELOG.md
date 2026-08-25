@@ -1,3 +1,8 @@
+# v1.107.4 (2026-08-25)
+
+* **Dependency Update**: Update to smithy-go v1.27.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.107.3 (2026-08-20)
 
 * **Bug Fix**: Expand S3 operations that check for an error inside an HTTP 200 response (wave 2/4)

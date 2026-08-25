@@ -1,3 +1,9 @@
+# v1.78.0 (2026-08-25)
+
+* **Feature**: As part of this release, we are extending capability of AWS IoT Rules Engine to support IoT InfluxDB Action. The IoT InfluxDB action lets customers send messages from IoT sensors and applications to InfluxDB.
+* **Dependency Update**: Update to smithy-go v1.27.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.77.7 (2026-08-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

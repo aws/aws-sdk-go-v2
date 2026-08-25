@@ -1,3 +1,9 @@
+# v1.40.3 (2026-08-25)
+
+* **Documentation**: Updated documentation to clarify duplicate-billing prevention and BatchMeterUsage retry guidance
+* **Dependency Update**: Update to smithy-go v1.27.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.2 (2026-08-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,9 @@
+# v1.93.0 (2026-08-25)
+
+* **Feature**: This feature would give customers the ability to tune TerminatedPodGcThreshold configuration in an Amazon EKS cluster.
+* **Dependency Update**: Update to smithy-go v1.27.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.92.1 (2026-08-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "eac4e7b7-6520-487a-904a-f6f66f12caa1",
-    "type": "bugfix",
-    "description": "Make X-Amz-Checksum-Mode appear on query parameters on presigned URLs",
-    "modules": [
-        "."
-    ]
-}

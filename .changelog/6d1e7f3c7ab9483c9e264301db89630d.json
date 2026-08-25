@@ -1,8 +1,0 @@
-{
-    "id": "6d1e7f3c-7ab9-483c-9e26-4301db89630d",
-    "type": "documentation",
-    "description": "Updated documentation to clarify duplicate-billing prevention and BatchMeterUsage retry guidance",
-    "modules": [
-        "service/marketplacemetering"
-    ]
-}

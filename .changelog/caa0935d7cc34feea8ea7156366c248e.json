@@ -1,8 +1,0 @@
-{
-    "id": "caa0935d-7cc3-4fee-a8ea-7156366c248e",
-    "type": "feature",
-    "description": "Adds the UpdateApprovalAction API for resolving agent action approvals in AWS DevOps Agent agent spaces.",
-    "modules": [
-        "service/devopsagent"
-    ]
-}

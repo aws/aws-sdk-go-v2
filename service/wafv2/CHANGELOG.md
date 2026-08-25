@@ -1,3 +1,9 @@
+# v1.78.0 (2026-08-25)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+* **Dependency Update**: Update to smithy-go v1.27.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.77.7 (2026-08-21)
 
 * **Documentation**: DataProtectionConfig field Key Documentation Update

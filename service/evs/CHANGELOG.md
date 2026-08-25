@@ -1,3 +1,9 @@
+# v1.14.0 (2026-08-25)
+
+* **Feature**: EVS now supports i7i.metal-48xl EC2 bare metal instance type, delivering high random IOPS performance with real-time latency, ideal for IO intensive and latency-sensitive workloads such as transactional databases, real-time analytics, and AI ML pre-processing.
+* **Dependency Update**: Update to smithy-go v1.27.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.7 (2026-08-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,9 @@
+# v1.73.0 (2026-08-25)
+
+* **Feature**: Adds support for Distribution Segments in mixed instances policies, providing ordered prioritization across On-Demand Capacity Reservations, Capacity Blocks, interruptible Capacity Reservations, and On-Demand capacity.
+* **Dependency Update**: Update to smithy-go v1.27.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.72.2 (2026-08-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

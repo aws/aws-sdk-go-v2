@@ -1,3 +1,9 @@
+# v1.11.0 (2026-08-25)
+
+* **Feature**: Adds the UpdateApprovalAction API for resolving agent action approvals in AWS DevOps Agent agent spaces.
+* **Dependency Update**: Update to smithy-go v1.27.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.10.7 (2026-08-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "26c4789f-47f3-4811-a3b4-dea7d60e7834",
-    "type": "feature",
-    "description": "Adds support for Distribution Segments in mixed instances policies, providing ordered prioritization across On-Demand Capacity Reservations, Capacity Blocks, interruptible Capacity Reservations, and On-Demand capacity.",
-    "modules": [
-        "service/autoscaling"
-    ]
-}

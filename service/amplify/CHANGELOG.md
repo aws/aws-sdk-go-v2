@@ -1,3 +1,8 @@
+# v1.42.1 (2026-08-25)
+
+* **Dependency Update**: Update to smithy-go v1.27.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.42.0 (2026-08-20)
 
 * **Feature**: Increased the maximum allowed length from 255 to 4,096 characters to support longer access tokens.

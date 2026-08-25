@@ -1,3 +1,8 @@
+# v1.70.2 (2026-08-25)
+
+* **Dependency Update**: Update to smithy-go v1.27.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.70.1 (2026-08-24)
 
 * **Documentation**: Doc Update, Add note that UpdatePolicy applies only to EC2 managed compute environments
