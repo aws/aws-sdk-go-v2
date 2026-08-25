@@ -3038,6 +3038,12 @@
                     "traits": {
                         "smithy.api#enumValue": "i7i.metal-24xl"
                     }
+                },
+                "I7I_METAL_48XL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "i7i.metal-48xl"
+                    }
                 }
             }
         },

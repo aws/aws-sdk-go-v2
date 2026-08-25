@@ -1,0 +1,1305 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.iamtoolbox#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The caller does not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.iamtoolbox#AttachedTo": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the entity that the policy is attached to. The ARN format depends on the policy type:</p> <ul> <li> <p>For identity, session, and permissions boundary policies, this is the principal ARN (for example, an IAM role or user ARN).</p> </li> <li> <p>For resource-based policies, this is the resource ARN.</p> </li> <li> <p>For organization control policies (SCPs and RCPs), this is the AWS Organizations ARN of the account, organizational unit, or root.</p> </li> </ul>",
+                        "smithy.api#pattern": "^arn:[^:]*:[^:]*:[^:]*:[^:]*:.*$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An entity that a policy is attached to, identified by its ARN.</p>"
+            }
+        },
+        "com.amazonaws.iamtoolbox#AttachedToList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iamtoolbox#AttachedTo"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of entities that a policy is attached to.</p>"
+            }
+        },
+        "com.amazonaws.iamtoolbox#AuthRequestService": {
+            "type": "service",
+            "version": "2018-05-10",
+            "operations": [
+                {
+                    "target": "com.amazonaws.iamtoolbox#GetRequestAuthorizationDetails"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "IAM Toolbox",
+                    "arnNamespace": "iam",
+                    "cloudTrailEventSource": "iam-toolbox.amazonaws.com",
+                    "endpointPrefix": "iam-toolbox"
+                },
+                "aws.auth#sigv4": {
+                    "name": "iam"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "*",
+                        "authorization",
+                        "content-type",
+                        "x-amz-date",
+                        "x-amz-security-token",
+                        "x-amz-user-agent",
+                        "amz-sdk-invocation-id",
+                        "amz-sdk-request"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Contains APIs to work with AWS Identity and Access Management (IAM).</p>",
+                "smithy.api#title": "IAM Toolbox (Preview)",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://iam-toolbox-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://iam-toolbox-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://iam-toolbox.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://iam-toolbox.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://iam-toolbox-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://iam-toolbox-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://iam-toolbox.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://iam-toolbox.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iam-toolbox-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iam-toolbox-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iam-toolbox.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iam-toolbox.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iam-toolbox-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iam-toolbox-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iam-toolbox.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iam-toolbox.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iam-toolbox-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iam-toolbox-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iam-toolbox.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iam-toolbox.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iam-toolbox-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iam-toolbox.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iam-toolbox-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://iam-toolbox.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.iamtoolbox#AuthorizationContext": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#Document"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The map of context keys and their values in the request context. Context keys vary by service and request type.</p>"
+            }
+        },
+        "com.amazonaws.iamtoolbox#EvaluatedEffect": {
+            "type": "enum",
+            "members": {
+                "ALLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLOW"
+                    }
+                },
+                "EXPLICIT_DENY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPLICIT_DENY"
+                    }
+                },
+                "IMPLICIT_DENY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPLICIT_DENY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of a policy evaluation.</p>"
+            }
+        },
+        "com.amazonaws.iamtoolbox#Evaluation": {
+            "type": "structure",
+            "members": {
+                "action": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action evaluated for this request (for example, <code>iam:PassRole</code>).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resource": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource that the action targeted. This is typically a resource ARN, but can be a wildcard ARN that matches multiple resources, or empty for actions that are not resource-specific.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "context": {
+                    "target": "com.amazonaws.iamtoolbox#AuthorizationContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The context keys and values specific to this evaluation. These are applied on top of the request context.</p>"
+                    }
+                },
+                "evaluatedEffect": {
+                    "target": "com.amazonaws.iamtoolbox#EvaluatedEffect",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result of the evaluation. Valid values:</p> <ul> <li> <p> <code>ALLOW</code> - The action was allowed.</p> </li> <li> <p> <code>EXPLICIT_DENY</code> - The action was explicitly denied by a policy.</p> </li> <li> <p> <code>IMPLICIT_DENY</code> - The action was denied because no policy allowed it.</p> </li> </ul>"
+                    }
+                },
+                "matchedPolicies": {
+                    "target": "com.amazonaws.iamtoolbox#MatchedPolicyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policies that matched during evaluation of this action and resource. An implicit denial produces no matched policies.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents an individual evaluation for a single action and resource pair. This includes the context, the resulting effect, and any policies that matched.</p>"
+            }
+        },
+        "com.amazonaws.iamtoolbox#Evaluations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iamtoolbox#Evaluation"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of evaluations.</p>"
+            }
+        },
+        "com.amazonaws.iamtoolbox#GetRequestAuthorizationDetails": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iamtoolbox#GetRequestAuthorizationDetailsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.iamtoolbox#GetRequestAuthorizationDetailsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iamtoolbox#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iamtoolbox#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iamtoolbox#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iamtoolbox#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the authorization details for a specific access denied request. The details include the request context, the evaluations performed, and the policies that were evaluated.</p> <p>Use this operation to understand why a request was denied. Supported services include an authorization ID in the access denied error message. Pass that ID to this operation to retrieve the details.</p> <p>Authorization details are available for at least 24 hours after the denial.</p> <p>To use this operation, you must have the <code>iam:GetRequestAuthorizationDetails</code> permission.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/authorization-details/{authorizationId}"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "evaluations"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetRequestAuthorizationDetailsInvalidId",
+                        "params": {
+                            "authorizationId": "aaaaaaaaaaaaaaaaaaaa"
+                        },
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.iamtoolbox#ValidationException"
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iamtoolbox#GetRequestAuthorizationDetailsInput": {
+            "type": "structure",
+            "members": {
+                "authorizationId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authorization ID received in the access denied error message. This ID identifies the specific request to retrieve details for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#pattern": "^[0123456789abcdefghijklmnopqrstuvwxyz]+$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from a previous call, used to retrieve the next page of evaluations. Omit this value on the first call.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iamtoolbox#GetRequestAuthorizationDetailsOutput": {
+            "type": "structure",
+            "members": {
+                "requestContext": {
+                    "target": "com.amazonaws.iamtoolbox#AuthorizationContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request context is the set of context keys and values that apply to the entire request and are shared by all evaluations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "evaluations": {
+                    "target": "com.amazonaws.iamtoolbox#Evaluations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of evaluations for this request. Each evaluation shows how a single action and resource pair was evaluated. This includes the context, the effect, and any policies that matched.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policies": {
+                    "target": "com.amazonaws.iamtoolbox#PolicyInfoList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of policies that were evaluated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token for retrieving the next page of evaluations. This value is absent when there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iamtoolbox#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An unexpected error occurred while processing the request. Try again.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.iamtoolbox#MatchedPolicy": {
+            "type": "structure",
+            "members": {
+                "uri": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI of the policy. This cross-references an entry in the top-level policies list. The value depends on the policy type:</p> <ul> <li> <p>For managed policies, this is the policy ARN.</p> </li> <li> <p>For inline policies, this is an opaque identifier.</p> </li> </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "matchedStatements": {
+                    "target": "com.amazonaws.iamtoolbox#MatchedStatementList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The statements within the policy that matched during the evaluation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A policy that matched during evaluation, referenced by URI. The URI corresponds to a policy in the top-level policies list.</p>"
+            }
+        },
+        "com.amazonaws.iamtoolbox#MatchedPolicyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iamtoolbox#MatchedPolicy"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of policies that matched during an evaluation.</p>"
+            }
+        },
+        "com.amazonaws.iamtoolbox#MatchedStatement": {
+            "type": "structure",
+            "members": {
+                "sid": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The statement ID (Sid). If the statement has no Sid, one is generated for reference.</p>"
+                    }
+                },
+                "evaluatedEffect": {
+                    "target": "com.amazonaws.iamtoolbox#StatementEffect",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The evaluated effect of this statement. Valid values:</p> <ul> <li> <p> <code>ALLOW</code> - The statement allows the action.</p> </li> <li> <p> <code>DENY</code> - The statement denies the action.</p> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A statement that matched during evaluation.</p>"
+            }
+        },
+        "com.amazonaws.iamtoolbox#MatchedStatementList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iamtoolbox#MatchedStatement"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of statements that matched within a policy.</p>"
+            }
+        },
+        "com.amazonaws.iamtoolbox#PolicyInfo": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.iamtoolbox#PolicyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of policy. Valid values:</p> <ul> <li> <p> <code>IDENTITY_BASED_POLICY</code> - An identity-based policy attached to an IAM user, group, or role.</p> </li> <li> <p> <code>PERMISSIONS_BOUNDARY</code> - A permissions boundary for an IAM entity.</p> </li> <li> <p> <code>RESOURCE_BASED_POLICY</code> - A resource-based policy attached to a resource.</p> </li> <li> <p> <code>RESOURCE_CONTROL_POLICY</code> - A resource control policy (RCP) in AWS Organizations.</p> </li> <li> <p> <code>SERVICE_CONTROL_POLICY</code> - A service control policy (SCP) in AWS Organizations.</p> </li> <li> <p> <code>SESSION_POLICY</code> - A session policy passed during role assumption or federation.</p> </li> <li> <p> <code>VPC_ENDPOINT_POLICY</code> - A VPC endpoint policy.</p> </li> </ul>"
+                    }
+                },
+                "inline": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether this is an inline policy (<code>true</code>) or a managed policy (<code>false</code>).</p>"
+                    }
+                },
+                "uri": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A URI that identifies the policy. Use this URI to cross-reference the policy with the matching policies in each evaluation. The value depends on the policy type:</p> <ul> <li> <p>For managed policies, this is the policy ARN.</p> </li> <li> <p>For inline policies, which have no ARN, this is an opaque identifier.</p> </li> </ul>"
+                    }
+                },
+                "attachedTo": {
+                    "target": "com.amazonaws.iamtoolbox#AttachedToList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entities that the policy is attached to. For identity, session, and resource-based policies, this is typically a single entity. For organization control policies (SCPs and RCPs), it can be multiple entities at different levels of the organization hierarchy.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about a policy evaluated during authorization. Details include the policy type, whether it is inline or managed, a URI that identifies it, and the entities it is attached to.</p>"
+            }
+        },
+        "com.amazonaws.iamtoolbox#PolicyInfoList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iamtoolbox#PolicyInfo"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of policy details.</p>"
+            }
+        },
+        "com.amazonaws.iamtoolbox#PolicyType": {
+            "type": "enum",
+            "members": {
+                "IDENTITY_BASED_POLICY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IDENTITY_BASED_POLICY"
+                    }
+                },
+                "RESOURCE_BASED_POLICY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_BASED_POLICY"
+                    }
+                },
+                "PERMISSIONS_BOUNDARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERMISSIONS_BOUNDARY"
+                    }
+                },
+                "SESSION_POLICY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SESSION_POLICY"
+                    }
+                },
+                "SERVICE_CONTROL_POLICY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE_CONTROL_POLICY"
+                    }
+                },
+                "RESOURCE_CONTROL_POLICY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_CONTROL_POLICY"
+                    }
+                },
+                "VPC_ENDPOINT_POLICY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VPC_ENDPOINT_POLICY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The policy type.</p>"
+            }
+        },
+        "com.amazonaws.iamtoolbox#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requested authorization details do not exist in this region or have expired. Verify that the authorization ID from the access denied error message is correct and the call is made in the region where the denial occurred. Ensure that the calling principal belongs to the same account or organization as the original denied request.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.iamtoolbox#StatementEffect": {
+            "type": "enum",
+            "members": {
+                "ALLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALLOW"
+                    }
+                },
+                "DENY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DENY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The effect of a matched statement.</p>"
+            }
+        },
+        "com.amazonaws.iamtoolbox#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request is malformed or is missing one or more required parameters. Check the request parameters and try again.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}

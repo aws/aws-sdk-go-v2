@@ -9427,6 +9427,46 @@
                 "smithy.api#default": 0
             }
         },
+        "com.amazonaws.eks#IntegerConstraints": {
+            "type": "structure",
+            "members": {
+                "min": {
+                    "target": "com.amazonaws.eks#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum allowed value.</p>"
+                    }
+                },
+                "max": {
+                    "target": "com.amazonaws.eks#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum allowed value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Constraints for an integer parameter specifying allowed range.</p>"
+            }
+        },
+        "com.amazonaws.eks#IntegerParameterConfig": {
+            "type": "structure",
+            "members": {
+                "defaultValue": {
+                    "target": "com.amazonaws.eks#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default value for the integer parameter.</p>"
+                    }
+                },
+                "constraints": {
+                    "target": "com.amazonaws.eks#IntegerConstraints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The constraints for the integer parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An integer parameter configuration with default value and constraints.</p>"
+            }
+        },
         "com.amazonaws.eks#IntegerRangeConstraint": {
             "type": "structure",
             "members": {
@@ -9664,6 +9704,12 @@
         "com.amazonaws.eks#KubeControllerManagerConfigRequest": {
             "type": "structure",
             "members": {
+                "podGcControllerConfig": {
+                    "target": "com.amazonaws.eks#PodGcControllerConfigRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pod garbage collection controller configuration.</p>"
+                    }
+                },
                 "horizontalPodAutoscalerControllerConfig": {
                     "target": "com.amazonaws.eks#HorizontalPodAutoscalerControllerConfigRequest",
                     "traits": {
@@ -9678,6 +9724,12 @@
         "com.amazonaws.eks#KubeControllerManagerConfigResponse": {
             "type": "structure",
             "members": {
+                "podGcControllerConfig": {
+                    "target": "com.amazonaws.eks#PodGcControllerConfigResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pod garbage collection controller configuration.</p>"
+                    }
+                },
                 "horizontalPodAutoscalerControllerConfig": {
                     "target": "com.amazonaws.eks#HorizontalPodAutoscalerControllerConfigResponse",
                     "traits": {
@@ -9692,6 +9744,12 @@
         "com.amazonaws.eks#KubeControllerManagerVersionConfig": {
             "type": "structure",
             "members": {
+                "podGcControllerConfig": {
+                    "target": "com.amazonaws.eks#PodGcControllerVersionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pod garbage collection controller configuration with default value and constraints.</p>"
+                    }
+                },
                 "horizontalPodAutoscalerControllerConfig": {
                     "target": "com.amazonaws.eks#HorizontalPodAutoscalerControllerVersionConfig",
                     "traits": {
@@ -12315,6 +12373,48 @@
                 }
             }
         },
+        "com.amazonaws.eks#PodGcControllerConfigRequest": {
+            "type": "structure",
+            "members": {
+                "terminatedPodGcThreshold": {
+                    "target": "com.amazonaws.eks#TerminatedPodGcThresholdValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of terminated pods that can exist before the garbage collector starts deleting them.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The pod garbage collection controller configuration for the Kubernetes controller manager.</p>"
+            }
+        },
+        "com.amazonaws.eks#PodGcControllerConfigResponse": {
+            "type": "structure",
+            "members": {
+                "terminatedPodGcThreshold": {
+                    "target": "com.amazonaws.eks#TerminatedPodGcThresholdValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of terminated pods that can exist before the garbage collector starts deleting them.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The pod garbage collection controller configuration for the Kubernetes controller manager.</p>"
+            }
+        },
+        "com.amazonaws.eks#PodGcControllerVersionConfig": {
+            "type": "structure",
+            "members": {
+                "terminatedPodGcThreshold": {
+                    "target": "com.amazonaws.eks#IntegerParameterConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The terminated pod garbage collection threshold configuration with default value and constraints.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The pod garbage collection controller version configuration.</p>"
+            }
+        },
         "com.amazonaws.eks#PodIdentityAssociation": {
             "type": "structure",
             "members": {
@@ -13509,6 +13609,16 @@
                     "traits": {
                         "smithy.api#enumValue": "PREFER_NO_SCHEDULE"
                     }
+                }
+            }
+        },
+        "com.amazonaws.eks#TerminatedPodGcThresholdValue": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "<p>The threshold for the number of terminated pods before garbage collection starts.</p>",
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000000
                 }
             }
         },

@@ -15553,6 +15553,15 @@
                 }
             }
         },
+        "com.amazonaws.ec2#CapacityReservationResourceGroupArnSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ResourceGroupName",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
         "com.amazonaws.ec2#CapacityReservationSet": {
             "type": "list",
             "member": {
@@ -20486,7 +20495,7 @@
                     "target": "com.amazonaws.ec2#InstanceLifecycle",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Lifecycle",
-                        "smithy.api#documentation": "<p>Indicates if the instance that could not be launched was a Spot, On-Demand, Capacity Block,\n         or Interruptible Capacity Reservation instance.</p>",
+                        "smithy.api#documentation": "<p>Indicates if the instance that could not be launched was a Spot, On-Demand, Capacity Block for ML,\n         or interruptible Capacity Reservation instance. If you are using <code>ReservedCapacityOptions</code> with\n         <code>on-demand-capacity-reservation</code> in the <code>ReservationTypes</code> list, the\n         value can also be <code>on-demand-capacity-reservation</code>.</p>",
                         "smithy.api#xmlName": "lifecycle"
                     }
                 },
@@ -20535,7 +20544,7 @@
                     "target": "com.amazonaws.ec2#InstanceLifecycle",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Lifecycle",
-                        "smithy.api#documentation": "<p>Indicates if the instance that was launched is a Spot, On-Demand, Capacity Block,\n         or Interruptible Capacity Reservation instance.</p>",
+                        "smithy.api#documentation": "<p>Indicates if the instance that was launched is a Spot, On-Demand, Capacity Block for ML,\n         or interruptible Capacity Reservation instance.</p>",
                         "smithy.api#xmlName": "lifecycle"
                     }
                 },
@@ -40477,7 +40486,7 @@
                     "target": "com.amazonaws.ec2#InstanceLifecycle",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Lifecycle",
-                        "smithy.api#documentation": "<p>Indicates if the instance that could not be launched was a Spot, On-Demand, Capacity Block,\n         or Interruptible Capacity Reservation instance.</p>",
+                        "smithy.api#documentation": "<p>Indicates if the instance that could not be launched was a Spot, On-Demand, Capacity Block for ML,\n         or interruptible Capacity Reservation instance. If you are using <code>ReservedCapacityOptions</code> with\n         <code>on-demand-capacity-reservation</code> in the <code>ReservationTypes</code> list, the\n         value can also be <code>on-demand-capacity-reservation</code>.</p>",
                         "smithy.api#xmlName": "lifecycle"
                     }
                 },
@@ -40737,7 +40746,7 @@
                     "target": "com.amazonaws.ec2#InstanceLifecycle",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Lifecycle",
-                        "smithy.api#documentation": "<p>Indicates if the instance that was launched is a Spot, On-Demand, Capacity Block,\n         or Interruptible Capacity Reservation instance.</p>",
+                        "smithy.api#documentation": "<p>Indicates if the instance that was launched is a Spot, On-Demand, Capacity Block for ML,\n         or interruptible Capacity Reservation instance.</p>",
                         "smithy.api#xmlName": "lifecycle"
                     }
                 },
@@ -65191,6 +65200,28 @@
                 }
             }
         },
+        "com.amazonaws.ec2#FleetCapacityReservationTargetRequest": {
+            "type": "structure",
+            "members": {
+                "CapacityReservationIds": {
+                    "target": "com.amazonaws.ec2#CapacityReservationIdSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs of the Capacity Reservations in which to launch the instances.</p>",
+                        "smithy.api#xmlName": "CapacityReservationId"
+                    }
+                },
+                "CapacityReservationResourceGroupArns": {
+                    "target": "com.amazonaws.ec2#CapacityReservationResourceGroupArnSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARNs of the Capacity Reservation Resource Groups in which to launch the\n            instances.</p>",
+                        "smithy.api#xmlName": "CapacityReservationResourceGroupArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the target Capacity Reservations or Capacity Reservation Resource Groups for an EC2 Fleet\n            that launches into reserved capacity. You can specify Capacity Reservation IDs or a\n            Capacity Reservation Resource Group ARN, but not both.</p>"
+            }
+        },
         "com.amazonaws.ec2#FleetCapacityReservationTenancy": {
             "type": "enum",
             "members": {
@@ -65969,6 +66000,18 @@
         "com.amazonaws.ec2#FleetReservationType": {
             "type": "enum",
             "members": {
+                "ON_DEMAND_CAPACITY_RESERVATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "on-demand-capacity-reservation"
+                    }
+                },
+                "CAPACITY_BLOCK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "capacity-block"
+                    }
+                },
                 "INTERRUPTIBLE_CAPACITY_RESERVATION": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -101301,6 +101344,12 @@
                     "traits": {
                         "smithy.api#enumValue": "interruptible-capacity-reservation"
                     }
+                },
+                "on_demand": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "on-demand"
+                    }
                 }
             }
         },
@@ -120127,9 +120176,79 @@
                 "smithy.api#documentation": "<p>The cost associated with the Reserved Instance.</p>"
             }
         },
+        "com.amazonaws.ec2#ReservedCapacityAllocationStrategy": {
+            "type": "enum",
+            "members": {
+                "PRIORITIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "prioritized"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#ReservedCapacityFallbackMarketType": {
+            "type": "enum",
+            "members": {
+                "ON_DEMAND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "on-demand"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#ReservedCapacityFallbackMarketTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ReservedCapacityFallbackMarketType",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#ReservedCapacityFallbackOptions": {
+            "type": "structure",
+            "members": {
+                "MarketTypes": {
+                    "target": "com.amazonaws.ec2#ReservedCapacityFallbackMarketTypeList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MarketTypeSet",
+                        "smithy.api#documentation": "<p>The instance purchasing options to fall back to when the reserved capacity is not\n            enough to meet the target capacity. The only supported value is <code>on-demand</code>,\n            which launches On-Demand Instances to fulfill the remaining target capacity.</p>",
+                        "smithy.api#xmlName": "marketTypeSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the fallback behavior for an EC2 Fleet that uses reserved capacity when the\n            reserved capacity is not enough to meet the target capacity. If you don't specify\n            fallback options, EC2 Fleet does not fall back to any other market type after the specified\n            reservation types are exhausted.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ReservedCapacityFallbackOptionsRequest": {
+            "type": "structure",
+            "members": {
+                "MarketTypes": {
+                    "target": "com.amazonaws.ec2#ReservedCapacityFallbackMarketTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance purchasing options to fall back to when the reserved capacity is not\n            enough to meet the target capacity. The only supported value is <code>on-demand</code>,\n            which launches On-Demand Instances to fulfill the remaining target capacity.</p>",
+                        "smithy.api#xmlName": "MarketType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the fallback behavior for an EC2 Fleet that uses reserved capacity when the\n            reserved capacity is not enough to meet the target capacity. If you don't specify\n            fallback options, EC2 Fleet does not fall back to any other market type after the specified\n            reservation types are exhausted.</p>"
+            }
+        },
         "com.amazonaws.ec2#ReservedCapacityOptions": {
             "type": "structure",
             "members": {
+                "AllocationStrategy": {
+                    "target": "com.amazonaws.ec2#ReservedCapacityAllocationStrategy",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AllocationStrategy",
+                        "smithy.api#documentation": "<p>The strategy that determines the order in which EC2 Fleet launches instances across the\n            reservation types that you specify. The only supported value is <code>prioritized</code>,\n            which launches instances in the priority order that you specify in your launch template\n            overrides. If you don't specify an allocation strategy, instances are launched in a\n            random order.</p>",
+                        "smithy.api#xmlName": "allocationStrategy"
+                    }
+                },
                 "ReservationTypes": {
                     "target": "com.amazonaws.ec2#ReservationTypeList",
                     "traits": {
@@ -120137,25 +120256,51 @@
                         "smithy.api#documentation": "<p>The types of Capacity Reservations used for fulfilling the EC2 Fleet request.</p>",
                         "smithy.api#xmlName": "reservationTypeSet"
                     }
+                },
+                "ReservedCapacityFallbackOptions": {
+                    "target": "com.amazonaws.ec2#ReservedCapacityFallbackOptions",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ReservedCapacityFallbackOptions",
+                        "smithy.api#documentation": "<p>The fallback behavior for the EC2 Fleet when there is not enough reserved capacity available\n            to meet the target capacity.</p>",
+                        "smithy.api#xmlName": "reservedCapacityFallbackOptions"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines EC2 Fleet preferences for utilizing reserved capacity when DefaultTargetCapacityType is set to <code>reserved-capacity</code>.</p>"
+                "smithy.api#documentation": "<p>Defines EC2 Fleet preferences for utilizing reserved capacity when <code>DefaultTargetCapacityType</code>\n            is set to <code>reserved-capacity</code>. EC2 Fleet can fulfill reserved capacity using On-Demand Capacity Reservations,\n            Capacity Blocks for ML, and interruptible Capacity Reservations.</p>"
             }
         },
         "com.amazonaws.ec2#ReservedCapacityOptionsRequest": {
             "type": "structure",
             "members": {
+                "AllocationStrategy": {
+                    "target": "com.amazonaws.ec2#ReservedCapacityAllocationStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The strategy that determines the order in which EC2 Fleet launches instances across the\n            reservation types that you specify. The only supported value is <code>prioritized</code>,\n            which launches instances in the priority order that you specify in your launch template\n            overrides. If you don't specify an allocation strategy, instances are launched in a\n            random order.</p>"
+                    }
+                },
                 "ReservationTypes": {
                     "target": "com.amazonaws.ec2#ReservationTypeListRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The types of Capacity Reservations to use for fulfilling the EC2 Fleet request.</p>",
+                        "smithy.api#documentation": "<p>The types of Capacity Reservations to use for fulfilling the EC2 Fleet request. This is an\n            ordered list: EC2 Fleet attempts to launch instances into each Capacity Reservation type in the order\n            that you specify them before moving on to the next type.</p>",
                         "smithy.api#xmlName": "ReservationType"
+                    }
+                },
+                "CapacityReservationTarget": {
+                    "target": "com.amazonaws.ec2#FleetCapacityReservationTargetRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Capacity Reservations or Capacity Reservation Resource Groups to use for fulfilling the EC2 Fleet\n            request. You can specify Capacity Reservation IDs or a Capacity Reservation Resource Group\n            ARN, but not both.</p>"
+                    }
+                },
+                "ReservedCapacityFallbackOptions": {
+                    "target": "com.amazonaws.ec2#ReservedCapacityFallbackOptionsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fallback behavior for the EC2 Fleet when there is not enough reserved capacity available\n            to meet the target capacity. This member takes a\n            <code>ReservedCapacityFallbackOptionsRequest</code> structure, in which you set\n            <code>MarketTypes</code> to the instance purchasing options to fall back to.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines EC2 Fleet preferences for utilizing reserved capacity when DefaultTargetCapacityType is set to <code>reserved-capacity</code>.</p>\n         <note>\n            <p>This configuration can only be used if the EC2 Fleet is of type\n              <code>instant</code>.</p>\n         </note>\n         <p>When you specify <code>ReservedCapacityOptions</code>, you must also set\n           <code>DefaultTargetCapacityType</code> to <code>reserved-capacity</code> in the\n           <code>TargetCapacitySpecification</code>.</p>\n         <p>For more information about Interruptible Capacity Reservations, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-launch-instances-interruptible-cr-walkthrough.html\">Launch\n              instances into an Interruptible Capacity Reservation</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Defines EC2 Fleet preferences for utilizing reserved capacity when <code>DefaultTargetCapacityType</code>\n            is set to <code>reserved-capacity</code>. EC2 Fleet can fulfill reserved capacity using On-Demand Capacity Reservations,\n            Capacity Blocks for ML, and interruptible Capacity Reservations.</p>\n         <note>\n            <p>This configuration can only be used if the EC2 Fleet is of type\n              <code>instant</code>.</p>\n         </note>\n         <p>When you specify <code>ReservedCapacityOptions</code>, you must also set\n           <code>DefaultTargetCapacityType</code> to <code>reserved-capacity</code> in the\n           <code>TargetCapacitySpecification</code>.</p>\n         <p>For more information about interruptible Capacity Reservations, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-launch-instances-interruptible-cr-walkthrough.html\">Launch\n              instances into an interruptible Capacity Reservation</a> in the <i>Amazon EC2 User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#ReservedInstanceIdSet": {
@@ -121326,6 +121471,9 @@
             }
         },
         "com.amazonaws.ec2#ResourceConfigurationArn": {
+            "type": "string"
+        },
+        "com.amazonaws.ec2#ResourceGroupName": {
             "type": "string"
         },
         "com.amazonaws.ec2#ResourceIdList": {
