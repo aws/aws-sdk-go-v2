@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<XmlMapsResponse><myMap><entry><key>key0</key><value><hi>__Hi__</hi></value></entry></myMap></XmlMapsResponse>

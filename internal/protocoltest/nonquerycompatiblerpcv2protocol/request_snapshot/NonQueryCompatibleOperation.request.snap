@@ -1,0 +1,5 @@
+POST /service/NonQueryCompatibleRpcV2Protocol/operation/NonQueryCompatibleOperation
+
+Accept: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+

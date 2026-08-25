@@ -71,9 +71,6 @@ func (c *Client) addOperationDescribeServiceAccessPoliciesMiddlewares(stack *mid
 		return err
 	}
 
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}

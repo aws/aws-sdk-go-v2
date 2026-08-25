@@ -1,0 +1,6 @@
+POST /MalformedBoolean/true?booleanInQuery=true
+
+Booleaninheader: true
+Content-Type: application/json
+
+{"booleanInBody":true}

@@ -79,9 +79,6 @@ func (c *Client) addOperationGetIdMiddlewares(stack *middleware.Stack, options O
 		return err
 	}
 
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}

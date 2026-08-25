@@ -1,0 +1,7 @@
+POST /service/RpcV2Protocol/operation/RpcV2CborUnions
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿hcontents¡kstringValuex#__RpcV2CborUnionMemberStringValue__jotherValuen__OtherValue__ÿ

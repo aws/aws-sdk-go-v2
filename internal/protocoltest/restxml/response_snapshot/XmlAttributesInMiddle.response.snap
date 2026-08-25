@@ -1,0 +1,4 @@
+200
+Content-Type: application/xml
+
+<XmlAttributesInMiddlePayloadResponse test="__Attr__"><baz>__Baz__</baz><foo>__Foo__</foo></XmlAttributesInMiddlePayloadResponse>

@@ -16,7 +16,6 @@ PutBucketCors
 		isExpressUserAgent
 	Build stack step
 		ClientRequestID
-		ComputeContentLength
 		AWSChecksum:RequestMetricsTracking
 		SetCredentialSourceMiddleware
 		UserAgent

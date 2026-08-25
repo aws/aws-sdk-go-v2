@@ -1,0 +1,4 @@
+200
+Content-Type: application/x-www-form-urlencoded
+
+Action=FlattenedXmlMap&Version=2020-01-08&myMap.1.key=key0&myMap.1.value=Foo

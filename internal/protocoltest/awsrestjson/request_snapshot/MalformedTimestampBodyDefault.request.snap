@@ -1,0 +1,5 @@
+POST /MalformedTimestampBodyDefault
+
+Content-Type: application/json
+
+{"timestamp":946684800}

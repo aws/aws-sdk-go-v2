@@ -147,9 +147,6 @@ func (c *Client) addOperationInvokeHarnessMiddlewares(stack *middleware.Stack, o
 	if err = addEventStreamBuild_opInvokeHarnessMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}

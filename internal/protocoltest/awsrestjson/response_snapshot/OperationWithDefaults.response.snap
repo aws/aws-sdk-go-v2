@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"defaultBlob":"YmxvYg==","defaultBoolean":true,"defaultByte":1,"defaultDocumentBoolean":"__Document__","defaultDocumentList":"__Document__","defaultDocumentMap":"__Document__","defaultDocumentString":"__Document__","defaultDouble":1,"defaultEnum":"FOO","defaultFloat":1,"defaultIntEnum":1,"defaultInteger":1,"defaultList":["__Member__","__Member__"],"defaultLong":1,"defaultMap":{"key0":"__Value__"},"defaultNullDocument":"__Document__","defaultShort":1,"defaultString":"__DefaultString__","defaultTimestamp":946684800,"emptyBlob":"YmxvYg==","emptyString":"__EmptyString__","falseBoolean":true,"zeroByte":1,"zeroDouble":1,"zeroFloat":1,"zeroInteger":1,"zeroLong":1,"zeroShort":1}

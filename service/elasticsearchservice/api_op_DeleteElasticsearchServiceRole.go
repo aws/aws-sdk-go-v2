@@ -49,9 +49,6 @@ func (c *Client) addOperationDeleteElasticsearchServiceRoleMiddlewares(stack *mi
 		return err
 	}
 
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}

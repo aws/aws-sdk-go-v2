@@ -16,7 +16,6 @@ GetObject
 		isExpressUserAgent
 	Build stack step
 		ClientRequestID
-		ComputeContentLength
 		AWSChecksum:ResponseMetricsTracking
 		SetCredentialSourceMiddleware
 		UserAgent

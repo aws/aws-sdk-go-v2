@@ -1,0 +1,4 @@
+POST /EndpointWithHostLabelHeaderOperation
+
+X-Amz-Account-Id: AccountId-value
+
