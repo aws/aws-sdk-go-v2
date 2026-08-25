@@ -224,6 +224,13 @@ func awsRestjson1_serializeOpDocumentCreateAgentSpaceInput(v *CreateAgentSpaceIn
 		ok.String(*v.Name)
 	}
 
+	if v.Preferences != nil {
+		ok := object.Key("preferences")
+		if err := awsRestjson1_serializeDocumentAgentSpacePreferences(v.Preferences, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTags(v.Tags, ok); err != nil {
@@ -4392,6 +4399,11 @@ func awsRestjson1_serializeOpDocumentSendMessageInput(v *SendMessageInput, value
 		ok.String(*v.ExecutionId)
 	}
 
+	if v.ModelTier != nil {
+		ok := object.Key("modelTier")
+		ok.String(*v.ModelTier)
+	}
+
 	if v.UserId != nil {
 		ok := object.Key("userId")
 		ok.String(*v.UserId)
@@ -4672,6 +4684,138 @@ func awsRestjson1_serializeOpDocumentUpdateAgentSpaceInput(v *UpdateAgentSpaceIn
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.Preferences != nil {
+		ok := object.Key("preferences")
+		if err := awsRestjson1_serializeDocumentAgentSpacePreferences(v.Preferences, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateApprovalAction struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateApprovalAction) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateApprovalAction) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateApprovalActionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/agents/agent-space/{agentSpaceId}/approvals/{approvalId}/update-action")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateApprovalActionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateApprovalActionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateApprovalActionInput(v *UpdateApprovalActionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AgentSpaceId == nil || len(*v.AgentSpaceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member agentSpaceId must not be empty")}
+	}
+	if v.AgentSpaceId != nil {
+		if err := encoder.SetURI("agentSpaceId").String(*v.AgentSpaceId); err != nil {
+			return err
+		}
+	}
+
+	if v.ApprovalId == nil || len(*v.ApprovalId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member approvalId must not be empty")}
+	}
+	if v.ApprovalId != nil {
+		if err := encoder.SetURI("approvalId").String(*v.ApprovalId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateApprovalActionInput(v *UpdateApprovalActionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Action) > 0 {
+		ok := object.Key("action")
+		ok.String(string(v.Action))
+	}
+
+	if v.FinalPattern != nil {
+		ok := object.Key("finalPattern")
+		if err := awsRestjson1_serializeDocumentApprovalPattern(v.FinalPattern, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Reason != nil {
+		ok := object.Key("reason")
+		ok.String(*v.Reason)
+	}
+
+	if v.SingleUse != nil {
+		ok := object.Key("singleUse")
+		ok.Boolean(*v.SingleUse)
+	}
+
+	if v.TtlSeconds != nil {
+		ok := object.Key("ttlSeconds")
+		ok.Integer(*v.TtlSeconds)
 	}
 
 	return nil
@@ -5730,6 +5874,79 @@ func awsRestjson1_serializeOpHttpBindingsValidateAwsAssociationsInput(v *Validat
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAgentSpacePreferences(v map[string]bool, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.Boolean(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentApprovalAction(v *types.ApprovalAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Action) > 0 {
+		ok := object.Key("action")
+		ok.String(string(v.Action))
+	}
+
+	if v.ApprovalId != nil {
+		ok := object.Key("approvalId")
+		ok.String(*v.ApprovalId)
+	}
+
+	if v.ButtonText != nil {
+		ok := object.Key("buttonText")
+		ok.String(*v.ButtonText)
+	}
+
+	if v.InterruptId != nil {
+		ok := object.Key("interruptId")
+		ok.String(*v.InterruptId)
+	}
+
+	if v.ToolUseId != nil {
+		ok := object.Key("toolUseId")
+		ok.String(*v.ToolUseId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentApprovalArgumentPins(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentApprovalPattern(v *types.ApprovalPattern, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ArgumentPins != nil {
+		ok := object.Key("argumentPins")
+		if err := awsRestjson1_serializeDocumentApprovalArgumentPins(v.ArgumentPins, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tool != nil {
+		ok := object.Key("tool")
+		ok.String(*v.Tool)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAssetContent(v types.AssetContent, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5867,6 +6084,16 @@ func awsRestjson1_serializeDocumentAWSConfiguration(v *types.AWSConfiguration, v
 	if len(v.AccountType) > 0 {
 		ok := object.Key("accountType")
 		ok.String(string(v.AccountType))
+	}
+
+	if v.AgentElevatedRoleArn != nil {
+		ok := object.Key("agentElevatedRoleArn")
+		ok.String(*v.AgentElevatedRoleArn)
+	}
+
+	if len(v.AgentElevatedRoleArnStatus) > 0 {
+		ok := object.Key("agentElevatedRoleArnStatus")
+		ok.String(string(v.AgentElevatedRoleArnStatus))
 	}
 
 	if v.AssumableRoleArn != nil {
@@ -6363,6 +6590,13 @@ func awsRestjson1_serializeDocumentMCPServerConfiguration(v *types.MCPServerConf
 	object := value.Object()
 	defer object.Close()
 
+	if v.ToolDetails != nil {
+		ok := object.Key("toolDetails")
+		if err := awsRestjson1_serializeDocumentMCPToolDetailsList(v.ToolDetails, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tools != nil {
 		ok := object.Key("tools")
 		if err := awsRestjson1_serializeDocumentMCPToolsList(v.Tools, ok); err != nil {
@@ -6376,6 +6610,13 @@ func awsRestjson1_serializeDocumentMCPServerConfiguration(v *types.MCPServerConf
 func awsRestjson1_serializeDocumentMCPServerDatadogConfiguration(v *types.MCPServerDatadogConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.EnabledElevatedTools != nil {
+		ok := object.Key("enabledElevatedTools")
+		if err := awsRestjson1_serializeDocumentMCPToolDetailsList(v.EnabledElevatedTools, ok); err != nil {
+			return err
+		}
+	}
 
 	return nil
 }
@@ -6412,6 +6653,13 @@ func awsRestjson1_serializeDocumentMCPServerDetails(v *types.MCPServerDetails, v
 func awsRestjson1_serializeDocumentMCPServerGrafanaConfiguration(v *types.MCPServerGrafanaConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.EnabledElevatedTools != nil {
+		ok := object.Key("enabledElevatedTools")
+		if err := awsRestjson1_serializeDocumentMCPToolDetailsList(v.EnabledElevatedTools, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Endpoint != nil {
 		ok := object.Key("endpoint")
@@ -6585,6 +6833,13 @@ func awsRestjson1_serializeDocumentMCPServerSigV4Configuration(v *types.MCPServe
 	object := value.Object()
 	defer object.Close()
 
+	if v.ToolDetails != nil {
+		ok := object.Key("toolDetails")
+		if err := awsRestjson1_serializeDocumentMCPToolDetailsList(v.ToolDetails, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tools != nil {
 		ok := object.Key("tools")
 		if err := awsRestjson1_serializeDocumentMCPToolsList(v.Tools, ok); err != nil {
@@ -6628,6 +6883,36 @@ func awsRestjson1_serializeDocumentMCPServerSplunkConfiguration(v *types.MCPServ
 	object := value.Object()
 	defer object.Close()
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMCPToolDetail(v *types.MCPToolDetail, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if len(v.ToolClassification) > 0 {
+		ok := object.Key("toolClassification")
+		ok.String(string(v.ToolClassification))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMCPToolDetailsList(v []types.MCPToolDetail, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentMCPToolDetail(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -7219,6 +7504,13 @@ func awsRestjson1_serializeDocumentSendMessageContext(v *types.SendMessageContex
 	object := value.Object()
 	defer object.Close()
 
+	if v.ApprovalAction != nil {
+		ok := object.Key("approvalAction")
+		if err := awsRestjson1_serializeDocumentApprovalAction(v.ApprovalAction, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CurrentPage != nil {
 		ok := object.Key("currentPage")
 		ok.String(*v.CurrentPage)
@@ -7687,6 +7979,16 @@ func awsRestjson1_serializeDocumentSourceAwsConfiguration(v *types.SourceAwsConf
 	if len(v.AccountType) > 0 {
 		ok := object.Key("accountType")
 		ok.String(string(v.AccountType))
+	}
+
+	if v.AgentElevatedRoleArn != nil {
+		ok := object.Key("agentElevatedRoleArn")
+		ok.String(*v.AgentElevatedRoleArn)
+	}
+
+	if len(v.AgentElevatedRoleArnStatus) > 0 {
+		ok := object.Key("agentElevatedRoleArnStatus")
+		ok.String(string(v.AgentElevatedRoleArnStatus))
 	}
 
 	if v.AssumableRoleArn != nil {

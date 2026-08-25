@@ -17805,6 +17805,112 @@ func awsRestjson1_deserializeDocumentInsightSummary(v **types.InsightSummary, va
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentIntegerConstraints(v **types.IntegerConstraints, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IntegerConstraints
+	if *v == nil {
+		sv = &types.IntegerConstraints{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "max":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Max = ptr.Int32(int32(i64))
+			}
+
+		case "min":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Min = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentIntegerParameterConfig(v **types.IntegerParameterConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IntegerParameterConfig
+	if *v == nil {
+		sv = &types.IntegerParameterConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "constraints":
+			if err := awsRestjson1_deserializeDocumentIntegerConstraints(&sv.Constraints, value); err != nil {
+				return err
+			}
+
+		case "defaultValue":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DefaultValue = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentIntegerRangeConstraint(v **types.IntegerRangeConstraint, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18273,6 +18379,11 @@ func awsRestjson1_deserializeDocumentKubeControllerManagerConfigResponse(v **typ
 				return err
 			}
 
+		case "podGcControllerConfig":
+			if err := awsRestjson1_deserializeDocumentPodGcControllerConfigResponse(&sv.PodGcControllerConfig, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -18306,6 +18417,11 @@ func awsRestjson1_deserializeDocumentKubeControllerManagerVersionConfig(v **type
 		switch key {
 		case "horizontalPodAutoscalerControllerConfig":
 			if err := awsRestjson1_deserializeDocumentHorizontalPodAutoscalerControllerVersionConfig(&sv.HorizontalPodAutoscalerControllerConfig, value); err != nil {
+				return err
+			}
+
+		case "podGcControllerConfig":
+			if err := awsRestjson1_deserializeDocumentPodGcControllerVersionConfig(&sv.PodGcControllerConfig, value); err != nil {
 				return err
 			}
 
@@ -19806,6 +19922,86 @@ func awsRestjson1_deserializeDocumentOutpostConfigResponse(v **types.OutpostConf
 
 		case "outpostArns":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.OutpostArns, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPodGcControllerConfigResponse(v **types.PodGcControllerConfigResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PodGcControllerConfigResponse
+	if *v == nil {
+		sv = &types.PodGcControllerConfigResponse{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "terminatedPodGcThreshold":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TerminatedPodGcThresholdValue to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TerminatedPodGcThreshold = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPodGcControllerVersionConfig(v **types.PodGcControllerVersionConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PodGcControllerVersionConfig
+	if *v == nil {
+		sv = &types.PodGcControllerVersionConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "terminatedPodGcThreshold":
+			if err := awsRestjson1_deserializeDocumentIntegerParameterConfig(&sv.TerminatedPodGcThreshold, value); err != nil {
 				return err
 			}
 

@@ -677,6 +677,20 @@ func TestCheckRequestSnapshot_CreateAutoScalingGroup(t *testing.T) {
 				SpotAllocationStrategy:              ptr.String("__SpotAllocationStrategy__"),
 				SpotInstancePools:                   ptr.Int32(1),
 				SpotMaxPrice:                        ptr.String("__SpotMaxPrice__"),
+				DistributionSegments: []types.DistributionSegment{
+					{
+						TargetCapacityTypes: []types.TargetCapacityType{
+							types.TargetCapacityType("on-demand-capacity-reservation"),
+							types.TargetCapacityType("on-demand-capacity-reservation"),
+						},
+					},
+					{
+						TargetCapacityTypes: []types.TargetCapacityType{
+							types.TargetCapacityType("on-demand-capacity-reservation"),
+							types.TargetCapacityType("on-demand-capacity-reservation"),
+						},
+					},
+				},
 			},
 		},
 		InstanceId:      ptr.String("__InstanceId__"),
@@ -3227,6 +3241,20 @@ func TestCheckRequestSnapshot_StartInstanceRefresh(t *testing.T) {
 					SpotAllocationStrategy:              ptr.String("__SpotAllocationStrategy__"),
 					SpotInstancePools:                   ptr.Int32(1),
 					SpotMaxPrice:                        ptr.String("__SpotMaxPrice__"),
+					DistributionSegments: []types.DistributionSegment{
+						{
+							TargetCapacityTypes: []types.TargetCapacityType{
+								types.TargetCapacityType("on-demand-capacity-reservation"),
+								types.TargetCapacityType("on-demand-capacity-reservation"),
+							},
+						},
+						{
+							TargetCapacityTypes: []types.TargetCapacityType{
+								types.TargetCapacityType("on-demand-capacity-reservation"),
+								types.TargetCapacityType("on-demand-capacity-reservation"),
+							},
+						},
+					},
 				},
 			},
 		},
@@ -3563,6 +3591,20 @@ func TestCheckRequestSnapshot_UpdateAutoScalingGroup(t *testing.T) {
 				SpotAllocationStrategy:              ptr.String("__SpotAllocationStrategy__"),
 				SpotInstancePools:                   ptr.Int32(1),
 				SpotMaxPrice:                        ptr.String("__SpotMaxPrice__"),
+				DistributionSegments: []types.DistributionSegment{
+					{
+						TargetCapacityTypes: []types.TargetCapacityType{
+							types.TargetCapacityType("on-demand-capacity-reservation"),
+							types.TargetCapacityType("on-demand-capacity-reservation"),
+						},
+					},
+					{
+						TargetCapacityTypes: []types.TargetCapacityType{
+							types.TargetCapacityType("on-demand-capacity-reservation"),
+							types.TargetCapacityType("on-demand-capacity-reservation"),
+						},
+					},
+				},
 			},
 		},
 		MinSize:         ptr.Int32(1),
@@ -4140,6 +4182,20 @@ func TestUpdateRequestSnapshot_CreateAutoScalingGroup(t *testing.T) {
 				SpotAllocationStrategy:              ptr.String("__SpotAllocationStrategy__"),
 				SpotInstancePools:                   ptr.Int32(1),
 				SpotMaxPrice:                        ptr.String("__SpotMaxPrice__"),
+				DistributionSegments: []types.DistributionSegment{
+					{
+						TargetCapacityTypes: []types.TargetCapacityType{
+							types.TargetCapacityType("on-demand-capacity-reservation"),
+							types.TargetCapacityType("on-demand-capacity-reservation"),
+						},
+					},
+					{
+						TargetCapacityTypes: []types.TargetCapacityType{
+							types.TargetCapacityType("on-demand-capacity-reservation"),
+							types.TargetCapacityType("on-demand-capacity-reservation"),
+						},
+					},
+				},
 			},
 		},
 		InstanceId:      ptr.String("__InstanceId__"),
@@ -6690,6 +6746,20 @@ func TestUpdateRequestSnapshot_StartInstanceRefresh(t *testing.T) {
 					SpotAllocationStrategy:              ptr.String("__SpotAllocationStrategy__"),
 					SpotInstancePools:                   ptr.Int32(1),
 					SpotMaxPrice:                        ptr.String("__SpotMaxPrice__"),
+					DistributionSegments: []types.DistributionSegment{
+						{
+							TargetCapacityTypes: []types.TargetCapacityType{
+								types.TargetCapacityType("on-demand-capacity-reservation"),
+								types.TargetCapacityType("on-demand-capacity-reservation"),
+							},
+						},
+						{
+							TargetCapacityTypes: []types.TargetCapacityType{
+								types.TargetCapacityType("on-demand-capacity-reservation"),
+								types.TargetCapacityType("on-demand-capacity-reservation"),
+							},
+						},
+					},
 				},
 			},
 		},
@@ -7026,6 +7096,20 @@ func TestUpdateRequestSnapshot_UpdateAutoScalingGroup(t *testing.T) {
 				SpotAllocationStrategy:              ptr.String("__SpotAllocationStrategy__"),
 				SpotInstancePools:                   ptr.Int32(1),
 				SpotMaxPrice:                        ptr.String("__SpotMaxPrice__"),
+				DistributionSegments: []types.DistributionSegment{
+					{
+						TargetCapacityTypes: []types.TargetCapacityType{
+							types.TargetCapacityType("on-demand-capacity-reservation"),
+							types.TargetCapacityType("on-demand-capacity-reservation"),
+						},
+					},
+					{
+						TargetCapacityTypes: []types.TargetCapacityType{
+							types.TargetCapacityType("on-demand-capacity-reservation"),
+							types.TargetCapacityType("on-demand-capacity-reservation"),
+						},
+					},
+				},
 			},
 		},
 		MinSize:         ptr.Int32(1),

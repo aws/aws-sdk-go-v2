@@ -1017,6 +1017,9 @@ func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 				},
 			},
 			KubeControllerManagerConfig: &types.KubeControllerManagerConfigResponse{
+				PodGcControllerConfig: &types.PodGcControllerConfigResponse{
+					TerminatedPodGcThreshold: ptr.Int32(1),
+				},
 				HorizontalPodAutoscalerControllerConfig: &types.HorizontalPodAutoscalerControllerConfigResponse{
 					HorizontalPodAutoscalerSyncPeriod: ptr.String("__HorizontalPodAutoscalerSyncPeriod__"),
 				},
@@ -1199,6 +1202,9 @@ func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 			},
 		},
 		KubeControllerManagerConfig: &types.KubeControllerManagerConfigRequest{
+			PodGcControllerConfig: &types.PodGcControllerConfigRequest{
+				TerminatedPodGcThreshold: ptr.Int32(1),
+			},
 			HorizontalPodAutoscalerControllerConfig: &types.HorizontalPodAutoscalerControllerConfigRequest{
 				HorizontalPodAutoscalerSyncPeriod: ptr.String("__HorizontalPodAutoscalerSyncPeriod__"),
 			},
@@ -2125,6 +2131,9 @@ func TestCheckResponseSnapshot_DeleteCluster(t *testing.T) {
 				},
 			},
 			KubeControllerManagerConfig: &types.KubeControllerManagerConfigResponse{
+				PodGcControllerConfig: &types.PodGcControllerConfigResponse{
+					TerminatedPodGcThreshold: ptr.Int32(1),
+				},
 				HorizontalPodAutoscalerControllerConfig: &types.HorizontalPodAutoscalerControllerConfigResponse{
 					HorizontalPodAutoscalerSyncPeriod: ptr.String("__HorizontalPodAutoscalerSyncPeriod__"),
 				},
@@ -2678,6 +2687,9 @@ func TestCheckResponseSnapshot_DeregisterCluster(t *testing.T) {
 				},
 			},
 			KubeControllerManagerConfig: &types.KubeControllerManagerConfigResponse{
+				PodGcControllerConfig: &types.PodGcControllerConfigResponse{
+					TerminatedPodGcThreshold: ptr.Int32(1),
+				},
 				HorizontalPodAutoscalerControllerConfig: &types.HorizontalPodAutoscalerControllerConfigResponse{
 					HorizontalPodAutoscalerSyncPeriod: ptr.String("__HorizontalPodAutoscalerSyncPeriod__"),
 				},
@@ -3398,6 +3410,9 @@ func TestCheckResponseSnapshot_DescribeCluster(t *testing.T) {
 				},
 			},
 			KubeControllerManagerConfig: &types.KubeControllerManagerConfigResponse{
+				PodGcControllerConfig: &types.PodGcControllerConfigResponse{
+					TerminatedPodGcThreshold: ptr.Int32(1),
+				},
 				HorizontalPodAutoscalerControllerConfig: &types.HorizontalPodAutoscalerControllerConfigResponse{
 					HorizontalPodAutoscalerSyncPeriod: ptr.String("__HorizontalPodAutoscalerSyncPeriod__"),
 				},
@@ -3510,6 +3525,15 @@ func TestCheckResponseSnapshot_DescribeClusterVersions(t *testing.T) {
 								},
 							},
 							KubeControllerManagerConfig: &types.KubeControllerManagerVersionConfig{
+								PodGcControllerConfig: &types.PodGcControllerVersionConfig{
+									TerminatedPodGcThreshold: &types.IntegerParameterConfig{
+										DefaultValue: ptr.Int32(1),
+										Constraints: &types.IntegerConstraints{
+											Min: ptr.Int32(1),
+											Max: ptr.Int32(1),
+										},
+									},
+								},
 								HorizontalPodAutoscalerControllerConfig: &types.HorizontalPodAutoscalerControllerVersionConfig{
 									HorizontalPodAutoscalerSyncPeriod: &types.DurationParameterConfig{
 										DefaultValue: ptr.String("__DefaultValue__"),
@@ -3593,6 +3617,15 @@ func TestCheckResponseSnapshot_DescribeClusterVersions(t *testing.T) {
 								},
 							},
 							KubeControllerManagerConfig: &types.KubeControllerManagerVersionConfig{
+								PodGcControllerConfig: &types.PodGcControllerVersionConfig{
+									TerminatedPodGcThreshold: &types.IntegerParameterConfig{
+										DefaultValue: ptr.Int32(1),
+										Constraints: &types.IntegerConstraints{
+											Min: ptr.Int32(1),
+											Max: ptr.Int32(1),
+										},
+									},
+								},
 								HorizontalPodAutoscalerControllerConfig: &types.HorizontalPodAutoscalerControllerVersionConfig{
 									HorizontalPodAutoscalerSyncPeriod: &types.DurationParameterConfig{
 										DefaultValue: ptr.String("__DefaultValue__"),
@@ -3672,6 +3705,15 @@ func TestCheckResponseSnapshot_DescribeClusterVersions(t *testing.T) {
 						},
 					},
 					KubeControllerManagerConfig: &types.KubeControllerManagerVersionConfig{
+						PodGcControllerConfig: &types.PodGcControllerVersionConfig{
+							TerminatedPodGcThreshold: &types.IntegerParameterConfig{
+								DefaultValue: ptr.Int32(1),
+								Constraints: &types.IntegerConstraints{
+									Min: ptr.Int32(1),
+									Max: ptr.Int32(1),
+								},
+							},
+						},
 						HorizontalPodAutoscalerControllerConfig: &types.HorizontalPodAutoscalerControllerVersionConfig{
 							HorizontalPodAutoscalerSyncPeriod: &types.DurationParameterConfig{
 								DefaultValue: ptr.String("__DefaultValue__"),
@@ -3767,6 +3809,15 @@ func TestCheckResponseSnapshot_DescribeClusterVersions(t *testing.T) {
 								},
 							},
 							KubeControllerManagerConfig: &types.KubeControllerManagerVersionConfig{
+								PodGcControllerConfig: &types.PodGcControllerVersionConfig{
+									TerminatedPodGcThreshold: &types.IntegerParameterConfig{
+										DefaultValue: ptr.Int32(1),
+										Constraints: &types.IntegerConstraints{
+											Min: ptr.Int32(1),
+											Max: ptr.Int32(1),
+										},
+									},
+								},
 								HorizontalPodAutoscalerControllerConfig: &types.HorizontalPodAutoscalerControllerVersionConfig{
 									HorizontalPodAutoscalerSyncPeriod: &types.DurationParameterConfig{
 										DefaultValue: ptr.String("__DefaultValue__"),
@@ -3850,6 +3901,15 @@ func TestCheckResponseSnapshot_DescribeClusterVersions(t *testing.T) {
 								},
 							},
 							KubeControllerManagerConfig: &types.KubeControllerManagerVersionConfig{
+								PodGcControllerConfig: &types.PodGcControllerVersionConfig{
+									TerminatedPodGcThreshold: &types.IntegerParameterConfig{
+										DefaultValue: ptr.Int32(1),
+										Constraints: &types.IntegerConstraints{
+											Min: ptr.Int32(1),
+											Max: ptr.Int32(1),
+										},
+									},
+								},
 								HorizontalPodAutoscalerControllerConfig: &types.HorizontalPodAutoscalerControllerVersionConfig{
 									HorizontalPodAutoscalerSyncPeriod: &types.DurationParameterConfig{
 										DefaultValue: ptr.String("__DefaultValue__"),
@@ -3929,6 +3989,15 @@ func TestCheckResponseSnapshot_DescribeClusterVersions(t *testing.T) {
 						},
 					},
 					KubeControllerManagerConfig: &types.KubeControllerManagerVersionConfig{
+						PodGcControllerConfig: &types.PodGcControllerVersionConfig{
+							TerminatedPodGcThreshold: &types.IntegerParameterConfig{
+								DefaultValue: ptr.Int32(1),
+								Constraints: &types.IntegerConstraints{
+									Min: ptr.Int32(1),
+									Max: ptr.Int32(1),
+								},
+							},
+						},
 						HorizontalPodAutoscalerControllerConfig: &types.HorizontalPodAutoscalerControllerVersionConfig{
 							HorizontalPodAutoscalerSyncPeriod: &types.DurationParameterConfig{
 								DefaultValue: ptr.String("__DefaultValue__"),
@@ -5463,6 +5532,9 @@ func TestCheckResponseSnapshot_RegisterCluster(t *testing.T) {
 				},
 			},
 			KubeControllerManagerConfig: &types.KubeControllerManagerConfigResponse{
+				PodGcControllerConfig: &types.PodGcControllerConfigResponse{
+					TerminatedPodGcThreshold: ptr.Int32(1),
+				},
 				HorizontalPodAutoscalerControllerConfig: &types.HorizontalPodAutoscalerControllerConfigResponse{
 					HorizontalPodAutoscalerSyncPeriod: ptr.String("__HorizontalPodAutoscalerSyncPeriod__"),
 				},
@@ -5997,6 +6069,9 @@ func TestCheckResponseSnapshot_UpdateClusterConfig(t *testing.T) {
 			},
 		},
 		KubeControllerManagerConfig: &types.KubeControllerManagerConfigRequest{
+			PodGcControllerConfig: &types.PodGcControllerConfigRequest{
+				TerminatedPodGcThreshold: ptr.Int32(1),
+			},
 			HorizontalPodAutoscalerControllerConfig: &types.HorizontalPodAutoscalerControllerConfigRequest{
 				HorizontalPodAutoscalerSyncPeriod: ptr.String("__HorizontalPodAutoscalerSyncPeriod__"),
 			},
@@ -7129,6 +7204,9 @@ func TestCheckResponseSnapshot_Error_UnsupportedAvailabilityZoneException(t *tes
 			},
 		},
 		KubeControllerManagerConfig: &types.KubeControllerManagerConfigRequest{
+			PodGcControllerConfig: &types.PodGcControllerConfigRequest{
+				TerminatedPodGcThreshold: ptr.Int32(1),
+			},
 			HorizontalPodAutoscalerControllerConfig: &types.HorizontalPodAutoscalerControllerConfigRequest{
 				HorizontalPodAutoscalerSyncPeriod: ptr.String("__HorizontalPodAutoscalerSyncPeriod__"),
 			},

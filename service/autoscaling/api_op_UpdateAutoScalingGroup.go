@@ -237,6 +237,10 @@ type UpdateAutoScalingGroupInput struct {
 	// The mixed instances policy. For more information, see [Auto Scaling groups with multiple instance types and purchase options] in the Amazon EC2 Auto
 	// Scaling User Guide.
 	//
+	// You can remove the Distribution Segments configuration by specifying
+	// OnDemandBaseCapacity or OnDemandPercentageAboveBaseCapacity . You can also
+	// remove it explicitly by specifying an empty list for DistributionSegments .
+	//
 	// [Auto Scaling groups with multiple instance types and purchase options]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html
 	MixedInstancesPolicy *types.MixedInstancesPolicy
 

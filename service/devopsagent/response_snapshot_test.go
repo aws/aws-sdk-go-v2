@@ -119,10 +119,12 @@ func TestCheckResponseSnapshot_AssociateService(t *testing.T) {
 			ServiceId:     ptr.String("__ServiceId__"),
 			Configuration: &types.ServiceConfigurationMemberSourceAws{
 				Value: types.SourceAwsConfiguration{
-					AccountId:        ptr.String("__AccountId__"),
-					AccountType:      types.SourceAccountType("source"),
-					AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
-					ExternalId:       ptr.String("__ExternalId__"),
+					AccountId:                  ptr.String("__AccountId__"),
+					AccountType:                types.SourceAccountType("source"),
+					AssumableRoleArn:           ptr.String("__AssumableRoleArn__"),
+					ExternalId:                 ptr.String("__ExternalId__"),
+					AgentElevatedRoleArn:       ptr.String("__AgentElevatedRoleArn__"),
+					AgentElevatedRoleArnStatus: types.ValidationStatus("valid"),
 				},
 			},
 			Capabilities: map[string]types.CapabilityConfiguration{
@@ -152,10 +154,12 @@ func TestCheckResponseSnapshot_AssociateService(t *testing.T) {
 		ServiceId:    ptr.String("__ServiceId__"),
 		Configuration: &types.ServiceConfigurationMemberSourceAws{
 			Value: types.SourceAwsConfiguration{
-				AccountId:        ptr.String("__AccountId__"),
-				AccountType:      types.SourceAccountType("source"),
-				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
-				ExternalId:       ptr.String("__ExternalId__"),
+				AccountId:                  ptr.String("__AccountId__"),
+				AccountType:                types.SourceAccountType("source"),
+				AssumableRoleArn:           ptr.String("__AssumableRoleArn__"),
+				ExternalId:                 ptr.String("__ExternalId__"),
+				AgentElevatedRoleArn:       ptr.String("__AgentElevatedRoleArn__"),
+				AgentElevatedRoleArnStatus: types.ValidationStatus("valid"),
 			},
 		},
 		Capabilities: map[string]types.CapabilityConfiguration{
@@ -182,6 +186,9 @@ func TestCheckResponseSnapshot_CreateAgentSpace(t *testing.T) {
 			UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			KmsKeyArn:    ptr.String("__KmsKeyArn__"),
 			AgentSpaceId: ptr.String("__AgentSpaceId__"),
+			Preferences: map[string]bool{
+				"key0": true,
+			},
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
@@ -203,6 +210,9 @@ func TestCheckResponseSnapshot_CreateAgentSpace(t *testing.T) {
 		ClientToken: ptr.String("__ClientToken__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
+		},
+		Preferences: map[string]bool{
+			"key0": true,
 		},
 	})
 	if err != nil {
@@ -795,6 +805,9 @@ func TestCheckResponseSnapshot_GetAgentSpace(t *testing.T) {
 			UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			KmsKeyArn:    ptr.String("__KmsKeyArn__"),
 			AgentSpaceId: ptr.String("__AgentSpaceId__"),
+			Preferences: map[string]bool{
+				"key0": true,
+			},
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
@@ -925,10 +938,12 @@ func TestCheckResponseSnapshot_GetAssociation(t *testing.T) {
 			ServiceId:     ptr.String("__ServiceId__"),
 			Configuration: &types.ServiceConfigurationMemberSourceAws{
 				Value: types.SourceAwsConfiguration{
-					AccountId:        ptr.String("__AccountId__"),
-					AccountType:      types.SourceAccountType("source"),
-					AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
-					ExternalId:       ptr.String("__ExternalId__"),
+					AccountId:                  ptr.String("__AccountId__"),
+					AccountType:                types.SourceAccountType("source"),
+					AssumableRoleArn:           ptr.String("__AssumableRoleArn__"),
+					ExternalId:                 ptr.String("__ExternalId__"),
+					AgentElevatedRoleArn:       ptr.String("__AgentElevatedRoleArn__"),
+					AgentElevatedRoleArnStatus: types.ValidationStatus("valid"),
 				},
 			},
 			Capabilities: map[string]types.CapabilityConfiguration{
@@ -1112,6 +1127,8 @@ func TestCheckResponseSnapshot_GetService(t *testing.T) {
 			},
 			KmsKeyArn:             ptr.String("__KmsKeyArn__"),
 			PrivateConnectionName: ptr.String("__PrivateConnectionName__"),
+			CreatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
@@ -1185,6 +1202,9 @@ func TestCheckResponseSnapshot_ListAgentSpaces(t *testing.T) {
 				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				KmsKeyArn:    ptr.String("__KmsKeyArn__"),
 				AgentSpaceId: ptr.String("__AgentSpaceId__"),
+				Preferences: map[string]bool{
+					"key0": true,
+				},
 			},
 			{
 				Name:         ptr.String("__Name__"),
@@ -1194,6 +1214,9 @@ func TestCheckResponseSnapshot_ListAgentSpaces(t *testing.T) {
 				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				KmsKeyArn:    ptr.String("__KmsKeyArn__"),
 				AgentSpaceId: ptr.String("__AgentSpaceId__"),
+				Preferences: map[string]bool{
+					"key0": true,
+				},
 			},
 		},
 	}
@@ -1391,10 +1414,12 @@ func TestCheckResponseSnapshot_ListAssociations(t *testing.T) {
 				ServiceId:     ptr.String("__ServiceId__"),
 				Configuration: &types.ServiceConfigurationMemberSourceAws{
 					Value: types.SourceAwsConfiguration{
-						AccountId:        ptr.String("__AccountId__"),
-						AccountType:      types.SourceAccountType("source"),
-						AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
-						ExternalId:       ptr.String("__ExternalId__"),
+						AccountId:                  ptr.String("__AccountId__"),
+						AccountType:                types.SourceAccountType("source"),
+						AssumableRoleArn:           ptr.String("__AssumableRoleArn__"),
+						ExternalId:                 ptr.String("__ExternalId__"),
+						AgentElevatedRoleArn:       ptr.String("__AgentElevatedRoleArn__"),
+						AgentElevatedRoleArnStatus: types.ValidationStatus("valid"),
 					},
 				},
 				Capabilities: map[string]types.CapabilityConfiguration{
@@ -1412,10 +1437,12 @@ func TestCheckResponseSnapshot_ListAssociations(t *testing.T) {
 				ServiceId:     ptr.String("__ServiceId__"),
 				Configuration: &types.ServiceConfigurationMemberSourceAws{
 					Value: types.SourceAwsConfiguration{
-						AccountId:        ptr.String("__AccountId__"),
-						AccountType:      types.SourceAccountType("source"),
-						AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
-						ExternalId:       ptr.String("__ExternalId__"),
+						AccountId:                  ptr.String("__AccountId__"),
+						AccountType:                types.SourceAccountType("source"),
+						AssumableRoleArn:           ptr.String("__AssumableRoleArn__"),
+						ExternalId:                 ptr.String("__ExternalId__"),
+						AgentElevatedRoleArn:       ptr.String("__AgentElevatedRoleArn__"),
+						AgentElevatedRoleArnStatus: types.ValidationStatus("valid"),
 					},
 				},
 				Capabilities: map[string]types.CapabilityConfiguration{
@@ -1951,6 +1978,8 @@ func TestCheckResponseSnapshot_ListServices(t *testing.T) {
 				},
 				KmsKeyArn:             ptr.String("__KmsKeyArn__"),
 				PrivateConnectionName: ptr.String("__PrivateConnectionName__"),
+				CreatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
 				ServiceId:   ptr.String("__ServiceId__"),
@@ -1969,6 +1998,8 @@ func TestCheckResponseSnapshot_ListServices(t *testing.T) {
 				},
 				KmsKeyArn:             ptr.String("__KmsKeyArn__"),
 				PrivateConnectionName: ptr.String("__PrivateConnectionName__"),
+				CreatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 	}
@@ -2227,6 +2258,9 @@ func TestCheckResponseSnapshot_UpdateAgentSpace(t *testing.T) {
 			UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			KmsKeyArn:    ptr.String("__KmsKeyArn__"),
 			AgentSpaceId: ptr.String("__AgentSpaceId__"),
+			Preferences: map[string]bool{
+				"key0": true,
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateAgentSpace.response")
@@ -2242,12 +2276,51 @@ func TestCheckResponseSnapshot_UpdateAgentSpace(t *testing.T) {
 		Name:         ptr.String("__Name__"),
 		Description:  ptr.String("__Description__"),
 		Locale:       ptr.String("__Locale__"),
+		Preferences: map[string]bool{
+			"key0": true,
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateAgentSpace.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateApprovalAction(t *testing.T) {
+	want := &UpdateApprovalActionOutput{
+		ApprovalId: ptr.String("__ApprovalId__"),
+		Status:     types.ApprovalStatus("PENDING"),
+		ExpiresAt:  ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateApprovalAction.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateApprovalAction(context.Background(), &UpdateApprovalActionInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		ApprovalId:   ptr.String("__ApprovalId__"),
+		Action:       types.ApprovalActionType("APPROVED"),
+		FinalPattern: &types.ApprovalPattern{
+			Tool: ptr.String("__Tool__"),
+			ArgumentPins: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Reason:     ptr.String("__Reason__"),
+		TtlSeconds: ptr.Int32(1),
+		SingleUse:  ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateApprovalAction.response", err)
 	}
 }
 
@@ -2343,10 +2416,12 @@ func TestCheckResponseSnapshot_UpdateAssociation(t *testing.T) {
 			ServiceId:     ptr.String("__ServiceId__"),
 			Configuration: &types.ServiceConfigurationMemberSourceAws{
 				Value: types.SourceAwsConfiguration{
-					AccountId:        ptr.String("__AccountId__"),
-					AccountType:      types.SourceAccountType("source"),
-					AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
-					ExternalId:       ptr.String("__ExternalId__"),
+					AccountId:                  ptr.String("__AccountId__"),
+					AccountType:                types.SourceAccountType("source"),
+					AssumableRoleArn:           ptr.String("__AssumableRoleArn__"),
+					ExternalId:                 ptr.String("__ExternalId__"),
+					AgentElevatedRoleArn:       ptr.String("__AgentElevatedRoleArn__"),
+					AgentElevatedRoleArnStatus: types.ValidationStatus("valid"),
 				},
 			},
 			Capabilities: map[string]types.CapabilityConfiguration{
@@ -2376,10 +2451,12 @@ func TestCheckResponseSnapshot_UpdateAssociation(t *testing.T) {
 		AssociationId: ptr.String("__AssociationId__"),
 		Configuration: &types.ServiceConfigurationMemberSourceAws{
 			Value: types.SourceAwsConfiguration{
-				AccountId:        ptr.String("__AccountId__"),
-				AccountType:      types.SourceAccountType("source"),
-				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
-				ExternalId:       ptr.String("__ExternalId__"),
+				AccountId:                  ptr.String("__AccountId__"),
+				AccountType:                types.SourceAccountType("source"),
+				AssumableRoleArn:           ptr.String("__AssumableRoleArn__"),
+				ExternalId:                 ptr.String("__ExternalId__"),
+				AgentElevatedRoleArn:       ptr.String("__AgentElevatedRoleArn__"),
+				AgentElevatedRoleArnStatus: types.ValidationStatus("valid"),
 			},
 		},
 		Capabilities: map[string]types.CapabilityConfiguration{
@@ -2682,10 +2759,12 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		ServiceId:    ptr.String("__ServiceId__"),
 		Configuration: &types.ServiceConfigurationMemberSourceAws{
 			Value: types.SourceAwsConfiguration{
-				AccountId:        ptr.String("__AccountId__"),
-				AccountType:      types.SourceAccountType("source"),
-				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
-				ExternalId:       ptr.String("__ExternalId__"),
+				AccountId:                  ptr.String("__AccountId__"),
+				AccountType:                types.SourceAccountType("source"),
+				AssumableRoleArn:           ptr.String("__AssumableRoleArn__"),
+				ExternalId:                 ptr.String("__ExternalId__"),
+				AgentElevatedRoleArn:       ptr.String("__AgentElevatedRoleArn__"),
+				AgentElevatedRoleArnStatus: types.ValidationStatus("valid"),
 			},
 		},
 		Capabilities: map[string]types.CapabilityConfiguration{
@@ -2723,10 +2802,12 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		ServiceId:    ptr.String("__ServiceId__"),
 		Configuration: &types.ServiceConfigurationMemberSourceAws{
 			Value: types.SourceAwsConfiguration{
-				AccountId:        ptr.String("__AccountId__"),
-				AccountType:      types.SourceAccountType("source"),
-				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
-				ExternalId:       ptr.String("__ExternalId__"),
+				AccountId:                  ptr.String("__AccountId__"),
+				AccountType:                types.SourceAccountType("source"),
+				AssumableRoleArn:           ptr.String("__AssumableRoleArn__"),
+				ExternalId:                 ptr.String("__ExternalId__"),
+				AgentElevatedRoleArn:       ptr.String("__AgentElevatedRoleArn__"),
+				AgentElevatedRoleArnStatus: types.ValidationStatus("valid"),
 			},
 		},
 		Capabilities: map[string]types.CapabilityConfiguration{
@@ -2764,10 +2845,12 @@ func TestCheckResponseSnapshot_Error_ContentSizeExceededException(t *testing.T) 
 		ServiceId:    ptr.String("__ServiceId__"),
 		Configuration: &types.ServiceConfigurationMemberSourceAws{
 			Value: types.SourceAwsConfiguration{
-				AccountId:        ptr.String("__AccountId__"),
-				AccountType:      types.SourceAccountType("source"),
-				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
-				ExternalId:       ptr.String("__ExternalId__"),
+				AccountId:                  ptr.String("__AccountId__"),
+				AccountType:                types.SourceAccountType("source"),
+				AssumableRoleArn:           ptr.String("__AssumableRoleArn__"),
+				ExternalId:                 ptr.String("__ExternalId__"),
+				AgentElevatedRoleArn:       ptr.String("__AgentElevatedRoleArn__"),
+				AgentElevatedRoleArnStatus: types.ValidationStatus("valid"),
 			},
 		},
 		Capabilities: map[string]types.CapabilityConfiguration{
@@ -2834,10 +2917,12 @@ func TestCheckResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		ServiceId:    ptr.String("__ServiceId__"),
 		Configuration: &types.ServiceConfigurationMemberSourceAws{
 			Value: types.SourceAwsConfiguration{
-				AccountId:        ptr.String("__AccountId__"),
-				AccountType:      types.SourceAccountType("source"),
-				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
-				ExternalId:       ptr.String("__ExternalId__"),
+				AccountId:                  ptr.String("__AccountId__"),
+				AccountType:                types.SourceAccountType("source"),
+				AssumableRoleArn:           ptr.String("__AssumableRoleArn__"),
+				ExternalId:                 ptr.String("__ExternalId__"),
+				AgentElevatedRoleArn:       ptr.String("__AgentElevatedRoleArn__"),
+				AgentElevatedRoleArnStatus: types.ValidationStatus("valid"),
 			},
 		},
 		Capabilities: map[string]types.CapabilityConfiguration{
@@ -2875,10 +2960,12 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		ServiceId:    ptr.String("__ServiceId__"),
 		Configuration: &types.ServiceConfigurationMemberSourceAws{
 			Value: types.SourceAwsConfiguration{
-				AccountId:        ptr.String("__AccountId__"),
-				AccountType:      types.SourceAccountType("source"),
-				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
-				ExternalId:       ptr.String("__ExternalId__"),
+				AccountId:                  ptr.String("__AccountId__"),
+				AccountType:                types.SourceAccountType("source"),
+				AssumableRoleArn:           ptr.String("__AssumableRoleArn__"),
+				ExternalId:                 ptr.String("__ExternalId__"),
+				AgentElevatedRoleArn:       ptr.String("__AgentElevatedRoleArn__"),
+				AgentElevatedRoleArnStatus: types.ValidationStatus("valid"),
 			},
 		},
 		Capabilities: map[string]types.CapabilityConfiguration{
@@ -2916,10 +3003,12 @@ func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		ServiceId:    ptr.String("__ServiceId__"),
 		Configuration: &types.ServiceConfigurationMemberSourceAws{
 			Value: types.SourceAwsConfiguration{
-				AccountId:        ptr.String("__AccountId__"),
-				AccountType:      types.SourceAccountType("source"),
-				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
-				ExternalId:       ptr.String("__ExternalId__"),
+				AccountId:                  ptr.String("__AccountId__"),
+				AccountType:                types.SourceAccountType("source"),
+				AssumableRoleArn:           ptr.String("__AssumableRoleArn__"),
+				ExternalId:                 ptr.String("__ExternalId__"),
+				AgentElevatedRoleArn:       ptr.String("__AgentElevatedRoleArn__"),
+				AgentElevatedRoleArnStatus: types.ValidationStatus("valid"),
 			},
 		},
 		Capabilities: map[string]types.CapabilityConfiguration{
@@ -2957,10 +3046,12 @@ func TestCheckResponseSnapshot_Error_ServiceQuotaExceededException(t *testing.T)
 		ServiceId:    ptr.String("__ServiceId__"),
 		Configuration: &types.ServiceConfigurationMemberSourceAws{
 			Value: types.SourceAwsConfiguration{
-				AccountId:        ptr.String("__AccountId__"),
-				AccountType:      types.SourceAccountType("source"),
-				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
-				ExternalId:       ptr.String("__ExternalId__"),
+				AccountId:                  ptr.String("__AccountId__"),
+				AccountType:                types.SourceAccountType("source"),
+				AssumableRoleArn:           ptr.String("__AssumableRoleArn__"),
+				ExternalId:                 ptr.String("__ExternalId__"),
+				AgentElevatedRoleArn:       ptr.String("__AgentElevatedRoleArn__"),
+				AgentElevatedRoleArnStatus: types.ValidationStatus("valid"),
 			},
 		},
 		Capabilities: map[string]types.CapabilityConfiguration{
@@ -2998,10 +3089,12 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		ServiceId:    ptr.String("__ServiceId__"),
 		Configuration: &types.ServiceConfigurationMemberSourceAws{
 			Value: types.SourceAwsConfiguration{
-				AccountId:        ptr.String("__AccountId__"),
-				AccountType:      types.SourceAccountType("source"),
-				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
-				ExternalId:       ptr.String("__ExternalId__"),
+				AccountId:                  ptr.String("__AccountId__"),
+				AccountType:                types.SourceAccountType("source"),
+				AssumableRoleArn:           ptr.String("__AssumableRoleArn__"),
+				ExternalId:                 ptr.String("__ExternalId__"),
+				AgentElevatedRoleArn:       ptr.String("__AgentElevatedRoleArn__"),
+				AgentElevatedRoleArnStatus: types.ValidationStatus("valid"),
 			},
 		},
 		Capabilities: map[string]types.CapabilityConfiguration{
@@ -3049,10 +3142,12 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		ServiceId:    ptr.String("__ServiceId__"),
 		Configuration: &types.ServiceConfigurationMemberSourceAws{
 			Value: types.SourceAwsConfiguration{
-				AccountId:        ptr.String("__AccountId__"),
-				AccountType:      types.SourceAccountType("source"),
-				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
-				ExternalId:       ptr.String("__ExternalId__"),
+				AccountId:                  ptr.String("__AccountId__"),
+				AccountType:                types.SourceAccountType("source"),
+				AssumableRoleArn:           ptr.String("__AssumableRoleArn__"),
+				ExternalId:                 ptr.String("__ExternalId__"),
+				AgentElevatedRoleArn:       ptr.String("__AgentElevatedRoleArn__"),
+				AgentElevatedRoleArnStatus: types.ValidationStatus("valid"),
 			},
 		},
 		Capabilities: map[string]types.CapabilityConfiguration{

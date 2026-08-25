@@ -1,0 +1,8 @@
+{
+    "id": "6441320f-5792-4c6c-968f-73e1e4f1dae5",
+    "type": "feature",
+    "description": "This feature would give customers the ability to tune TerminatedPodGcThreshold configuration in an Amazon EKS cluster.",
+    "modules": [
+        "service/eks"
+    ]
+}

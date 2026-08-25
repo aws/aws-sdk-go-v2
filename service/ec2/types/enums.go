@@ -3168,6 +3168,8 @@ type FleetReservationType string
 
 // Enum values for FleetReservationType
 const (
+	FleetReservationTypeOnDemandCapacityReservation      FleetReservationType = "on-demand-capacity-reservation"
+	FleetReservationTypeCapacityBlock                    FleetReservationType = "capacity-block"
 	FleetReservationTypeInterruptibleCapacityReservation FleetReservationType = "interruptible-capacity-reservation"
 )
 
@@ -3177,6 +3179,8 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (FleetReservationType) Values() []FleetReservationType {
 	return []FleetReservationType{
+		"on-demand-capacity-reservation",
+		"capacity-block",
 		"interruptible-capacity-reservation",
 	}
 }
@@ -9035,6 +9039,7 @@ const (
 	MarketTypeSpot                             MarketType = "spot"
 	MarketTypeCapacityBlock                    MarketType = "capacity-block"
 	MarketTypeInterruptibleCapacityReservation MarketType = "interruptible-capacity-reservation"
+	MarketTypeOnDemand                         MarketType = "on-demand"
 )
 
 // Values returns all known values for MarketType. Note that this can be expanded
@@ -9046,6 +9051,7 @@ func (MarketType) Values() []MarketType {
 		"spot",
 		"capacity-block",
 		"interruptible-capacity-reservation",
+		"on-demand",
 	}
 }
 
@@ -10363,6 +10369,42 @@ func (ReservationType) Values() []ReservationType {
 	return []ReservationType{
 		"capacity-block",
 		"odcr",
+	}
+}
+
+type ReservedCapacityAllocationStrategy string
+
+// Enum values for ReservedCapacityAllocationStrategy
+const (
+	ReservedCapacityAllocationStrategyPrioritized ReservedCapacityAllocationStrategy = "prioritized"
+)
+
+// Values returns all known values for ReservedCapacityAllocationStrategy. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReservedCapacityAllocationStrategy) Values() []ReservedCapacityAllocationStrategy {
+	return []ReservedCapacityAllocationStrategy{
+		"prioritized",
+	}
+}
+
+type ReservedCapacityFallbackMarketType string
+
+// Enum values for ReservedCapacityFallbackMarketType
+const (
+	ReservedCapacityFallbackMarketTypeOnDemand ReservedCapacityFallbackMarketType = "on-demand"
+)
+
+// Values returns all known values for ReservedCapacityFallbackMarketType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReservedCapacityFallbackMarketType) Values() []ReservedCapacityFallbackMarketType {
+	return []ReservedCapacityFallbackMarketType{
+		"on-demand",
 	}
 }
 

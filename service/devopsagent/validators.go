@@ -950,6 +950,26 @@ func (m *validateOpUpdateAgentSpace) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateApprovalAction struct {
+}
+
+func (*validateOpUpdateApprovalAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateApprovalAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateApprovalActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateApprovalActionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateAssetFile struct {
 }
 
@@ -1338,6 +1358,10 @@ func addOpUpdateAgentSpaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAgentSpace{}, middleware.After)
 }
 
+func addOpUpdateApprovalActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateApprovalAction{}, middleware.After)
+}
+
 func addOpUpdateAssetFileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAssetFile{}, middleware.After)
 }
@@ -1376,6 +1400,24 @@ func addOpUpdateTriggerValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpValidateAwsAssociationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpValidateAwsAssociations{}, middleware.After)
+}
+
+func validateApprovalPattern(v *types.ApprovalPattern) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ApprovalPattern"}
+	if v.Tool == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tool"))
+	}
+	if v.ArgumentPins == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ArgumentPins"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateAssetContent(v types.AssetContent) error {
@@ -1832,6 +1874,28 @@ func validateMCPServerConfiguration(v *types.MCPServerConfiguration) error {
 	if v.Tools == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tools"))
 	}
+	if v.ToolDetails != nil {
+		if err := validateMCPToolDetailsList(v.ToolDetails); err != nil {
+			invalidParams.AddNested("ToolDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMCPServerDatadogConfiguration(v *types.MCPServerDatadogConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MCPServerDatadogConfiguration"}
+	if v.EnabledElevatedTools != nil {
+		if err := validateMCPToolDetailsList(v.EnabledElevatedTools); err != nil {
+			invalidParams.AddNested("EnabledElevatedTools", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1871,6 +1935,11 @@ func validateMCPServerGrafanaConfiguration(v *types.MCPServerGrafanaConfiguratio
 	invalidParams := smithy.InvalidParamsError{Context: "MCPServerGrafanaConfiguration"}
 	if v.Endpoint == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Endpoint"))
+	}
+	if v.EnabledElevatedTools != nil {
+		if err := validateMCPToolDetailsList(v.EnabledElevatedTools); err != nil {
+			invalidParams.AddNested("EnabledElevatedTools", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1968,6 +2037,11 @@ func validateMCPServerSigV4Configuration(v *types.MCPServerSigV4Configuration) e
 	if v.Tools == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tools"))
 	}
+	if v.ToolDetails != nil {
+		if err := validateMCPToolDetailsList(v.ToolDetails); err != nil {
+			invalidParams.AddNested("ToolDetails", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1991,6 +2065,38 @@ func validateMCPServerSigV4ServiceDetails(v *types.MCPServerSigV4ServiceDetails)
 	} else if v.AuthorizationConfig != nil {
 		if err := validateMCPServerSigV4AuthorizationConfig(v.AuthorizationConfig); err != nil {
 			invalidParams.AddNested("AuthorizationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMCPToolDetail(v *types.MCPToolDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MCPToolDetail"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMCPToolDetailsList(v []types.MCPToolDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MCPToolDetailsList"}
+	for i := range v {
+		if err := validateMCPToolDetail(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2434,6 +2540,11 @@ func validateServiceConfiguration(v types.ServiceConfiguration) error {
 	case *types.ServiceConfigurationMemberMcpserver:
 		if err := validateMCPServerConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[mcpserver]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ServiceConfigurationMemberMcpserverdatadog:
+		if err := validateMCPServerDatadogConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[mcpserverdatadog]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.ServiceConfigurationMemberMcpservergrafana:
@@ -3577,6 +3688,32 @@ func validateOpUpdateAgentSpaceInput(v *UpdateAgentSpaceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateAgentSpaceInput"}
 	if v.AgentSpaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateApprovalActionInput(v *UpdateApprovalActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateApprovalActionInput"}
+	if v.AgentSpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
+	}
+	if v.ApprovalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApprovalId"))
+	}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
+	if v.FinalPattern != nil {
+		if err := validateApprovalPattern(v.FinalPattern); err != nil {
+			invalidParams.AddNested("FinalPattern", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

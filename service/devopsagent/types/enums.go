@@ -2,6 +2,79 @@
 
 package types
 
+type AgentSpacePreferenceKey string
+
+// Enum values for AgentSpacePreferenceKey
+const (
+	AgentSpacePreferenceKeyElevatedActionsEnabled AgentSpacePreferenceKey = "elevatedActionsEnabled"
+)
+
+// Values returns all known values for AgentSpacePreferenceKey. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentSpacePreferenceKey) Values() []AgentSpacePreferenceKey {
+	return []AgentSpacePreferenceKey{
+		"elevatedActionsEnabled",
+	}
+}
+
+type ApprovalActionType string
+
+// Enum values for ApprovalActionType
+const (
+	// The agent's tool invocation is approved; finalPattern and ttlSeconds carry the
+	// finalized scope and lifetime.
+	ApprovalActionTypeApproved ApprovalActionType = "APPROVED"
+	// The agent's tool invocation is rejected; reason optionally carries a free-text
+	// rationale.
+	ApprovalActionTypeRejected ApprovalActionType = "REJECTED"
+)
+
+// Values returns all known values for ApprovalActionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ApprovalActionType) Values() []ApprovalActionType {
+	return []ApprovalActionType{
+		"APPROVED",
+		"REJECTED",
+	}
+}
+
+type ApprovalStatus string
+
+// Enum values for ApprovalStatus
+const (
+	// The approval request is awaiting a decision.
+	ApprovalStatusPending ApprovalStatus = "PENDING"
+	// The action was APPROVED; the approval request is live and may be redeemed via a
+	// credential mint until it is revoked or fully redeemed.
+	ApprovalStatusApproved ApprovalStatus = "APPROVED"
+	// The action was REJECTED; no further redemption is possible.
+	ApprovalStatusRejected ApprovalStatus = "REJECTED"
+	// The approval was administratively invalidated; no further redemption is
+	// possible.
+	ApprovalStatusRevoked ApprovalStatus = "REVOKED"
+	// The approval was consumed by a credential mint at least once. Non-single-use
+	// approvals stay re-redeemable until expiry; single-use approvals are terminal.
+	ApprovalStatusRedeemed ApprovalStatus = "REDEEMED"
+)
+
+// Values returns all known values for ApprovalStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ApprovalStatus) Values() []ApprovalStatus {
+	return []ApprovalStatus{
+		"PENDING",
+		"APPROVED",
+		"REJECTED",
+		"REVOKED",
+		"REDEEMED",
+	}
+}
+
 type AuthFlow string
 
 // Enum values for AuthFlow
@@ -79,6 +152,7 @@ const (
 	ExecutionStatusCanceled ExecutionStatus = "CANCELED"
 	// Unlike in the case of user-initiated Cancelation, a customer won't be billed
 	ExecutionStatusTimedOut ExecutionStatus = "TIMED_OUT"
+	ExecutionStatusWaiting  ExecutionStatus = "WAITING"
 )
 
 // Values returns all known values for ExecutionStatus. Note that this can be
@@ -92,6 +166,7 @@ func (ExecutionStatus) Values() []ExecutionStatus {
 		"STOPPED",
 		"CANCELED",
 		"TIMED_OUT",
+		"WAITING",
 	}
 }
 
@@ -256,6 +331,7 @@ const (
 	NewRelicRegionUs NewRelicRegion = "US"
 	// EU region
 	NewRelicRegionEu NewRelicRegion = "EU"
+	NewRelicRegionJp NewRelicRegion = "JP"
 )
 
 // Values returns all known values for NewRelicRegion. Note that this can be
@@ -266,6 +342,7 @@ func (NewRelicRegion) Values() []NewRelicRegion {
 	return []NewRelicRegion{
 		"US",
 		"EU",
+		"JP",
 	}
 }
 
@@ -685,6 +762,7 @@ const (
 	TaskStatusCanceled TaskStatus = "CANCELED"
 	// Task has been skipped by triage
 	TaskStatusSkipped TaskStatus = "SKIPPED"
+	TaskStatusWaiting TaskStatus = "WAITING"
 )
 
 // Values returns all known values for TaskStatus. Note that this can be expanded
@@ -703,6 +781,7 @@ func (TaskStatus) Values() []TaskStatus {
 		"TIMED_OUT",
 		"CANCELED",
 		"SKIPPED",
+		"WAITING",
 	}
 }
 
@@ -730,6 +809,27 @@ func (TaskType) Values() []TaskType {
 		"EVALUATION",
 		"RELEASE_READINESS_REVIEW",
 		"RELEASE_TESTING",
+	}
+}
+
+type ToolClassification string
+
+// Enum values for ToolClassification
+const (
+	ToolClassificationReadOnly    ToolClassification = "READ_ONLY"
+	ToolClassificationMutative    ToolClassification = "MUTATIVE"
+	ToolClassificationDestructive ToolClassification = "DESTRUCTIVE"
+)
+
+// Values returns all known values for ToolClassification. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ToolClassification) Values() []ToolClassification {
+	return []ToolClassification{
+		"READ_ONLY",
+		"MUTATIVE",
+		"DESTRUCTIVE",
 	}
 }
 

@@ -56796,6 +56796,19 @@ func awsEc2query_serializeDocumentCapacityReservationOptionsRequest(v *types.Cap
 	return nil
 }
 
+func awsEc2query_serializeDocumentCapacityReservationResourceGroupArnSet(v []string, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsEc2query_serializeDocumentCapacityReservationSpecification(v *types.CapacityReservationSpecification, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -58659,6 +58672,27 @@ func awsEc2query_serializeDocumentFleetBlockDeviceMappingRequestList(v []types.F
 			return err
 		}
 	}
+	return nil
+}
+
+func awsEc2query_serializeDocumentFleetCapacityReservationTargetRequest(v *types.FleetCapacityReservationTargetRequest, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CapacityReservationIds != nil {
+		objectKey := object.FlatKey("CapacityReservationId")
+		if err := awsEc2query_serializeDocumentCapacityReservationIdSet(v.CapacityReservationIds, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.CapacityReservationResourceGroupArns != nil {
+		objectKey := object.FlatKey("CapacityReservationResourceGroupArn")
+		if err := awsEc2query_serializeDocumentCapacityReservationResourceGroupArnSet(v.CapacityReservationResourceGroupArns, objectKey); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -64922,13 +64956,59 @@ func awsEc2query_serializeDocumentReservationTypeListRequest(v []types.FleetRese
 	return nil
 }
 
+func awsEc2query_serializeDocumentReservedCapacityFallbackMarketTypeList(v []types.ReservedCapacityFallbackMarketType, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsEc2query_serializeDocumentReservedCapacityFallbackOptionsRequest(v *types.ReservedCapacityFallbackOptionsRequest, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.MarketTypes != nil {
+		objectKey := object.FlatKey("MarketType")
+		if err := awsEc2query_serializeDocumentReservedCapacityFallbackMarketTypeList(v.MarketTypes, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeDocumentReservedCapacityOptionsRequest(v *types.ReservedCapacityOptionsRequest, value query.Value) error {
 	object := value.Object()
 	_ = object
 
+	if len(v.AllocationStrategy) > 0 {
+		objectKey := object.Key("AllocationStrategy")
+		objectKey.String(string(v.AllocationStrategy))
+	}
+
+	if v.CapacityReservationTarget != nil {
+		objectKey := object.Key("CapacityReservationTarget")
+		if err := awsEc2query_serializeDocumentFleetCapacityReservationTargetRequest(v.CapacityReservationTarget, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.ReservationTypes != nil {
 		objectKey := object.FlatKey("ReservationType")
 		if err := awsEc2query_serializeDocumentReservationTypeListRequest(v.ReservationTypes, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.ReservedCapacityFallbackOptions != nil {
+		objectKey := object.Key("ReservedCapacityFallbackOptions")
+		if err := awsEc2query_serializeDocumentReservedCapacityFallbackOptionsRequest(v.ReservedCapacityFallbackOptions, objectKey); err != nil {
 			return err
 		}
 	}

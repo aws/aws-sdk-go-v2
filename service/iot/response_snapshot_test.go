@@ -2539,6 +2539,23 @@ func TestCheckResponseSnapshot_CreateTopicRule(t *testing.T) {
 						Latitude:  ptr.String("__Latitude__"),
 						Longitude: ptr.String("__Longitude__"),
 					},
+					InfluxDB: &types.InfluxDBAction{
+						DestinationArn: ptr.String("__DestinationArn__"),
+						RoleArn:        ptr.String("__RoleArn__"),
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						Organization:   ptr.String("__Organization__"),
+						Tags: map[string]string{
+							"key0": "__Value__",
+						},
+						TimestampUnit: types.InfluxDBTimestampUnit("s"),
+						BatchConfig: &types.InfluxDBBatchConfig{
+							MaxBatchSize:      ptr.Int32(1),
+							MaxBatchOpenMs:    ptr.Int32(1),
+							MaxBatchSizeBytes: ptr.Int32(1),
+							BatchAcrossTopics: true,
+						},
+					},
 				},
 				{
 					DynamoDB: &types.DynamoDBAction{
@@ -2802,6 +2819,23 @@ func TestCheckResponseSnapshot_CreateTopicRule(t *testing.T) {
 						},
 						Latitude:  ptr.String("__Latitude__"),
 						Longitude: ptr.String("__Longitude__"),
+					},
+					InfluxDB: &types.InfluxDBAction{
+						DestinationArn: ptr.String("__DestinationArn__"),
+						RoleArn:        ptr.String("__RoleArn__"),
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						Organization:   ptr.String("__Organization__"),
+						Tags: map[string]string{
+							"key0": "__Value__",
+						},
+						TimestampUnit: types.InfluxDBTimestampUnit("s"),
+						BatchConfig: &types.InfluxDBBatchConfig{
+							MaxBatchSize:      ptr.Int32(1),
+							MaxBatchOpenMs:    ptr.Int32(1),
+							MaxBatchSizeBytes: ptr.Int32(1),
+							BatchAcrossTopics: true,
+						},
 					},
 				},
 			},
@@ -3070,6 +3104,23 @@ func TestCheckResponseSnapshot_CreateTopicRule(t *testing.T) {
 					Latitude:  ptr.String("__Latitude__"),
 					Longitude: ptr.String("__Longitude__"),
 				},
+				InfluxDB: &types.InfluxDBAction{
+					DestinationArn: ptr.String("__DestinationArn__"),
+					RoleArn:        ptr.String("__RoleArn__"),
+					DatabaseName:   ptr.String("__DatabaseName__"),
+					TableName:      ptr.String("__TableName__"),
+					Organization:   ptr.String("__Organization__"),
+					Tags: map[string]string{
+						"key0": "__Value__",
+					},
+					TimestampUnit: types.InfluxDBTimestampUnit("s"),
+					BatchConfig: &types.InfluxDBBatchConfig{
+						MaxBatchSize:      ptr.Int32(1),
+						MaxBatchOpenMs:    ptr.Int32(1),
+						MaxBatchSizeBytes: ptr.Int32(1),
+						BatchAcrossTopics: true,
+					},
+				},
 			},
 		},
 		Tags: ptr.String("__Tags__"),
@@ -3105,6 +3156,13 @@ func TestCheckResponseSnapshot_CreateTopicRuleDestination(t *testing.T) {
 				VpcId:   ptr.String("__VpcId__"),
 				RoleArn: ptr.String("__RoleArn__"),
 			},
+			InfluxDBProperties: &types.InfluxDBDestinationProperties{
+				Endpoint:        ptr.String("__Endpoint__"),
+				InfluxDBVersion: types.InfluxDBVersion("V2"),
+				SecretId:        ptr.String("__SecretId__"),
+				SecretType:      types.InfluxDBSecretType("SecretString"),
+				SecretKey:       ptr.String("__SecretKey__"),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateTopicRuleDestination.response")
@@ -3131,6 +3189,13 @@ func TestCheckResponseSnapshot_CreateTopicRuleDestination(t *testing.T) {
 				},
 				VpcId:   ptr.String("__VpcId__"),
 				RoleArn: ptr.String("__RoleArn__"),
+			},
+			InfluxDBConfiguration: &types.InfluxDBDestinationConfiguration{
+				Endpoint:        ptr.String("__Endpoint__"),
+				InfluxDBVersion: types.InfluxDBVersion("V2"),
+				SecretId:        ptr.String("__SecretId__"),
+				SecretType:      types.InfluxDBSecretType("SecretString"),
+				SecretKey:       ptr.String("__SecretKey__"),
 			},
 		},
 	})
@@ -7167,6 +7232,23 @@ func TestCheckResponseSnapshot_GetTopicRule(t *testing.T) {
 						Latitude:  ptr.String("__Latitude__"),
 						Longitude: ptr.String("__Longitude__"),
 					},
+					InfluxDB: &types.InfluxDBAction{
+						DestinationArn: ptr.String("__DestinationArn__"),
+						RoleArn:        ptr.String("__RoleArn__"),
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						Organization:   ptr.String("__Organization__"),
+						Tags: map[string]string{
+							"key0": "__Value__",
+						},
+						TimestampUnit: types.InfluxDBTimestampUnit("s"),
+						BatchConfig: &types.InfluxDBBatchConfig{
+							MaxBatchSize:      ptr.Int32(1),
+							MaxBatchOpenMs:    ptr.Int32(1),
+							MaxBatchSizeBytes: ptr.Int32(1),
+							BatchAcrossTopics: true,
+						},
+					},
 				},
 				{
 					DynamoDB: &types.DynamoDBAction{
@@ -7430,6 +7512,23 @@ func TestCheckResponseSnapshot_GetTopicRule(t *testing.T) {
 						},
 						Latitude:  ptr.String("__Latitude__"),
 						Longitude: ptr.String("__Longitude__"),
+					},
+					InfluxDB: &types.InfluxDBAction{
+						DestinationArn: ptr.String("__DestinationArn__"),
+						RoleArn:        ptr.String("__RoleArn__"),
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						Organization:   ptr.String("__Organization__"),
+						Tags: map[string]string{
+							"key0": "__Value__",
+						},
+						TimestampUnit: types.InfluxDBTimestampUnit("s"),
+						BatchConfig: &types.InfluxDBBatchConfig{
+							MaxBatchSize:      ptr.Int32(1),
+							MaxBatchOpenMs:    ptr.Int32(1),
+							MaxBatchSizeBytes: ptr.Int32(1),
+							BatchAcrossTopics: true,
+						},
 					},
 				},
 			},
@@ -7698,6 +7797,23 @@ func TestCheckResponseSnapshot_GetTopicRule(t *testing.T) {
 					Latitude:  ptr.String("__Latitude__"),
 					Longitude: ptr.String("__Longitude__"),
 				},
+				InfluxDB: &types.InfluxDBAction{
+					DestinationArn: ptr.String("__DestinationArn__"),
+					RoleArn:        ptr.String("__RoleArn__"),
+					DatabaseName:   ptr.String("__DatabaseName__"),
+					TableName:      ptr.String("__TableName__"),
+					Organization:   ptr.String("__Organization__"),
+					Tags: map[string]string{
+						"key0": "__Value__",
+					},
+					TimestampUnit: types.InfluxDBTimestampUnit("s"),
+					BatchConfig: &types.InfluxDBBatchConfig{
+						MaxBatchSize:      ptr.Int32(1),
+						MaxBatchOpenMs:    ptr.Int32(1),
+						MaxBatchSizeBytes: ptr.Int32(1),
+						BatchAcrossTopics: true,
+					},
+				},
 			},
 		},
 	}
@@ -7742,6 +7858,13 @@ func TestCheckResponseSnapshot_GetTopicRuleDestination(t *testing.T) {
 				},
 				VpcId:   ptr.String("__VpcId__"),
 				RoleArn: ptr.String("__RoleArn__"),
+			},
+			InfluxDBProperties: &types.InfluxDBDestinationProperties{
+				Endpoint:        ptr.String("__Endpoint__"),
+				InfluxDBVersion: types.InfluxDBVersion("V2"),
+				SecretId:        ptr.String("__SecretId__"),
+				SecretType:      types.InfluxDBSecretType("SecretString"),
+				SecretKey:       ptr.String("__SecretKey__"),
 			},
 		},
 	}
@@ -10828,6 +10951,13 @@ func TestCheckResponseSnapshot_ListTopicRuleDestinations(t *testing.T) {
 					VpcId:   ptr.String("__VpcId__"),
 					RoleArn: ptr.String("__RoleArn__"),
 				},
+				InfluxDBSummary: &types.InfluxDBDestinationSummary{
+					Endpoint:        ptr.String("__Endpoint__"),
+					InfluxDBVersion: types.InfluxDBVersion("V2"),
+					SecretId:        ptr.String("__SecretId__"),
+					SecretType:      types.InfluxDBSecretType("SecretString"),
+					SecretKey:       ptr.String("__SecretKey__"),
+				},
 			},
 			{
 				Arn:           ptr.String("__Arn__"),
@@ -10849,6 +10979,13 @@ func TestCheckResponseSnapshot_ListTopicRuleDestinations(t *testing.T) {
 					},
 					VpcId:   ptr.String("__VpcId__"),
 					RoleArn: ptr.String("__RoleArn__"),
+				},
+				InfluxDBSummary: &types.InfluxDBDestinationSummary{
+					Endpoint:        ptr.String("__Endpoint__"),
+					InfluxDBVersion: types.InfluxDBVersion("V2"),
+					SecretId:        ptr.String("__SecretId__"),
+					SecretType:      types.InfluxDBSecretType("SecretString"),
+					SecretKey:       ptr.String("__SecretKey__"),
 				},
 			},
 		},
@@ -11634,6 +11771,23 @@ func TestCheckResponseSnapshot_ReplaceTopicRule(t *testing.T) {
 						Latitude:  ptr.String("__Latitude__"),
 						Longitude: ptr.String("__Longitude__"),
 					},
+					InfluxDB: &types.InfluxDBAction{
+						DestinationArn: ptr.String("__DestinationArn__"),
+						RoleArn:        ptr.String("__RoleArn__"),
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						Organization:   ptr.String("__Organization__"),
+						Tags: map[string]string{
+							"key0": "__Value__",
+						},
+						TimestampUnit: types.InfluxDBTimestampUnit("s"),
+						BatchConfig: &types.InfluxDBBatchConfig{
+							MaxBatchSize:      ptr.Int32(1),
+							MaxBatchOpenMs:    ptr.Int32(1),
+							MaxBatchSizeBytes: ptr.Int32(1),
+							BatchAcrossTopics: true,
+						},
+					},
 				},
 				{
 					DynamoDB: &types.DynamoDBAction{
@@ -11897,6 +12051,23 @@ func TestCheckResponseSnapshot_ReplaceTopicRule(t *testing.T) {
 						},
 						Latitude:  ptr.String("__Latitude__"),
 						Longitude: ptr.String("__Longitude__"),
+					},
+					InfluxDB: &types.InfluxDBAction{
+						DestinationArn: ptr.String("__DestinationArn__"),
+						RoleArn:        ptr.String("__RoleArn__"),
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						Organization:   ptr.String("__Organization__"),
+						Tags: map[string]string{
+							"key0": "__Value__",
+						},
+						TimestampUnit: types.InfluxDBTimestampUnit("s"),
+						BatchConfig: &types.InfluxDBBatchConfig{
+							MaxBatchSize:      ptr.Int32(1),
+							MaxBatchOpenMs:    ptr.Int32(1),
+							MaxBatchSizeBytes: ptr.Int32(1),
+							BatchAcrossTopics: true,
+						},
 					},
 				},
 			},
@@ -12164,6 +12335,23 @@ func TestCheckResponseSnapshot_ReplaceTopicRule(t *testing.T) {
 					},
 					Latitude:  ptr.String("__Latitude__"),
 					Longitude: ptr.String("__Longitude__"),
+				},
+				InfluxDB: &types.InfluxDBAction{
+					DestinationArn: ptr.String("__DestinationArn__"),
+					RoleArn:        ptr.String("__RoleArn__"),
+					DatabaseName:   ptr.String("__DatabaseName__"),
+					TableName:      ptr.String("__TableName__"),
+					Organization:   ptr.String("__Organization__"),
+					Tags: map[string]string{
+						"key0": "__Value__",
+					},
+					TimestampUnit: types.InfluxDBTimestampUnit("s"),
+					BatchConfig: &types.InfluxDBBatchConfig{
+						MaxBatchSize:      ptr.Int32(1),
+						MaxBatchOpenMs:    ptr.Int32(1),
+						MaxBatchSizeBytes: ptr.Int32(1),
+						BatchAcrossTopics: true,
+					},
 				},
 			},
 		},
@@ -15445,6 +15633,23 @@ func TestCheckResponseSnapshot_Error_SqlParseException(t *testing.T) {
 						Latitude:  ptr.String("__Latitude__"),
 						Longitude: ptr.String("__Longitude__"),
 					},
+					InfluxDB: &types.InfluxDBAction{
+						DestinationArn: ptr.String("__DestinationArn__"),
+						RoleArn:        ptr.String("__RoleArn__"),
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						Organization:   ptr.String("__Organization__"),
+						Tags: map[string]string{
+							"key0": "__Value__",
+						},
+						TimestampUnit: types.InfluxDBTimestampUnit("s"),
+						BatchConfig: &types.InfluxDBBatchConfig{
+							MaxBatchSize:      ptr.Int32(1),
+							MaxBatchOpenMs:    ptr.Int32(1),
+							MaxBatchSizeBytes: ptr.Int32(1),
+							BatchAcrossTopics: true,
+						},
+					},
 				},
 				{
 					DynamoDB: &types.DynamoDBAction{
@@ -15708,6 +15913,23 @@ func TestCheckResponseSnapshot_Error_SqlParseException(t *testing.T) {
 						},
 						Latitude:  ptr.String("__Latitude__"),
 						Longitude: ptr.String("__Longitude__"),
+					},
+					InfluxDB: &types.InfluxDBAction{
+						DestinationArn: ptr.String("__DestinationArn__"),
+						RoleArn:        ptr.String("__RoleArn__"),
+						DatabaseName:   ptr.String("__DatabaseName__"),
+						TableName:      ptr.String("__TableName__"),
+						Organization:   ptr.String("__Organization__"),
+						Tags: map[string]string{
+							"key0": "__Value__",
+						},
+						TimestampUnit: types.InfluxDBTimestampUnit("s"),
+						BatchConfig: &types.InfluxDBBatchConfig{
+							MaxBatchSize:      ptr.Int32(1),
+							MaxBatchOpenMs:    ptr.Int32(1),
+							MaxBatchSizeBytes: ptr.Int32(1),
+							BatchAcrossTopics: true,
+						},
 					},
 				},
 			},
@@ -15975,6 +16197,23 @@ func TestCheckResponseSnapshot_Error_SqlParseException(t *testing.T) {
 					},
 					Latitude:  ptr.String("__Latitude__"),
 					Longitude: ptr.String("__Longitude__"),
+				},
+				InfluxDB: &types.InfluxDBAction{
+					DestinationArn: ptr.String("__DestinationArn__"),
+					RoleArn:        ptr.String("__RoleArn__"),
+					DatabaseName:   ptr.String("__DatabaseName__"),
+					TableName:      ptr.String("__TableName__"),
+					Organization:   ptr.String("__Organization__"),
+					Tags: map[string]string{
+						"key0": "__Value__",
+					},
+					TimestampUnit: types.InfluxDBTimestampUnit("s"),
+					BatchConfig: &types.InfluxDBBatchConfig{
+						MaxBatchSize:      ptr.Int32(1),
+						MaxBatchOpenMs:    ptr.Int32(1),
+						MaxBatchSizeBytes: ptr.Int32(1),
+						BatchAcrossTopics: true,
+					},
 				},
 			},
 		},

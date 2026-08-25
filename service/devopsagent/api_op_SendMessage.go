@@ -53,6 +53,10 @@ type SendMessageInput struct {
 	// Optional context for the message
 	Context *types.SendMessageContext
 
+	// Optional model tier selection. Valid values: smart, balanced, fast. Absent or
+	// unrecognized values default to balanced.
+	ModelTier *string
+
 	// User identifier. This field is deprecated and will be ignored — the service
 	// resolves user identity from the authenticated session.
 	//

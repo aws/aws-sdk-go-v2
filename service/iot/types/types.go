@@ -84,6 +84,9 @@ type Action struct {
 	// Send data to an HTTPS endpoint.
 	Http *HttpAction
 
+	// Write data to an InfluxDB database.
+	InfluxDB *InfluxDBAction
+
 	// Sends message data to an IoT Analytics channel.
 	IotAnalytics *IotAnalyticsAction
 
@@ -2223,6 +2226,185 @@ type IndexingFilter struct {
 	//
 	// [Amazon Web Services IoT Device Management Quotas]: https://docs.aws.amazon.com/general/latest/gr/iot_device_management.html#fleet-indexing-limits
 	NamedShadowNames []string
+
+	noSmithyDocumentSerde
+}
+
+// The InfluxDB rule action converts the message payload into InfluxDB line
+// protocol. It writes the result to a table in an InfluxDB database. The database
+// can be an Amazon Timestream for InfluxDB instance or a self-managed InfluxDB
+// cluster.
+//
+// The action connects to InfluxDB through an InfluxDB topic rule destination,
+// which must be in the ENABLED state before the action can write data.
+type InfluxDBAction struct {
+
+	// The name of the InfluxDB database to write to. In InfluxDB 2, this is the name
+	// of the bucket.
+	//
+	// This member is required.
+	DatabaseName *string
+
+	// The ARN of the InfluxDB topic rule destination that identifies the InfluxDB
+	// instance to write to.
+	//
+	// This member is required.
+	DestinationArn *string
+
+	// The ARN of the role that grants permission to retrieve the InfluxDB API token
+	// from Amazon Web Services Secrets Manager.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// The name of the table to write the data point to. This is the measurement name
+	// of the InfluxDB line protocol record.
+	//
+	// Accepts substitution templates.
+	//
+	// This member is required.
+	TableName *string
+
+	// The batching configuration for the action. When present, IoT collects data
+	// points from multiple messages and writes them to InfluxDB in a single request.
+	//
+	// If omitted, each message is written to InfluxDB in its own request.
+	BatchConfig *InfluxDBBatchConfig
+
+	// The name of the InfluxDB organization that owns the database.
+	//
+	// A write to an InfluxDB 2 instance fails if this value isn't set. This value
+	// isn't used when the destination is an InfluxDB 3 instance.
+	Organization *string
+
+	// The set of tags to write with each data point. Tags are the indexed metadata of
+	// an InfluxDB data point.
+	//
+	// Tag names and tag values accept substitution templates. A tag name can't use
+	// the @{...} per-element form. A tag name must resolve to the same value for
+	// every element of an array payload.
+	Tags map[string]string
+
+	// The precision of the timestamp written with each data point. Valid values are s
+	// (seconds), ms (milliseconds), us (microseconds), and ns (nanoseconds).
+	//
+	// If omitted, the topic rule action uses ms .
+	TimestampUnit InfluxDBTimestampUnit
+
+	noSmithyDocumentSerde
+}
+
+// The batching configuration of an InfluxDB rule action. IoT closes a batch and
+// writes it to InfluxDB when the first of the configured limits is reached.
+type InfluxDBBatchConfig struct {
+
+	// Specifies whether to collect data points from different topics into the same
+	// batch.
+	//
+	// If omitted or false , IoT batches data points for each topic separately.
+	BatchAcrossTopics bool
+
+	// The maximum length of time, in milliseconds, to keep a batch open before
+	// writing it to InfluxDB.
+	//
+	// If you don't specify a value, this limit doesn't apply. IoT then closes each
+	// batch when another configured limit is reached.
+	MaxBatchOpenMs *int32
+
+	// The maximum number of data points to collect in a batch.
+	//
+	// If you don't specify a value, this limit doesn't apply. IoT then closes each
+	// batch when another configured limit is reached.
+	MaxBatchSize *int32
+
+	// The maximum size of a batch, in bytes, before IoT writes it to InfluxDB.
+	//
+	// If you don't specify a value, this limit doesn't apply. IoT then closes each
+	// batch when another configured limit is reached.
+	MaxBatchSizeBytes *int32
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of an InfluxDB topic rule destination.
+type InfluxDBDestinationConfiguration struct {
+
+	// The URL of the InfluxDB instance to write to.
+	//
+	// This member is required.
+	Endpoint *string
+
+	// The major version of the InfluxDB instance. Valid values are V2 and V3 .
+	//
+	// This member is required.
+	InfluxDBVersion InfluxDBVersion
+
+	// The ARN or name of the Amazon Web Services Secrets Manager secret that contains
+	// the InfluxDB API token.
+	//
+	// This member is required.
+	SecretId *string
+
+	// The key to read from the secret value when the secret contains a JSON object.
+	// If omitted, IoT uses the entire secret value as the InfluxDB API token.
+	SecretKey *string
+
+	// The type of the secret that contains the InfluxDB API token. Valid values are
+	// SecretString and SecretBinary .
+	//
+	// If omitted, IoT reads the secret as a string.
+	SecretType InfluxDBSecretType
+
+	noSmithyDocumentSerde
+}
+
+// The properties of an existing InfluxDB topic rule destination, as returned by
+// CreateTopicRuleDestination and GetTopicRuleDestination .
+type InfluxDBDestinationProperties struct {
+
+	// The URL of the InfluxDB instance that the destination writes to.
+	Endpoint *string
+
+	// The major version of the InfluxDB instance. Valid values are V2 and V3 .
+	InfluxDBVersion InfluxDBVersion
+
+	// The ARN or name of the Amazon Web Services Secrets Manager secret that contains
+	// the InfluxDB API token.
+	SecretId *string
+
+	// The key that is read from the secret value when the secret contains a JSON
+	// object.
+	SecretKey *string
+
+	// The type of the secret that contains the InfluxDB API token. Valid values are
+	// SecretString and SecretBinary .
+	SecretType InfluxDBSecretType
+
+	noSmithyDocumentSerde
+}
+
+// A summary of an InfluxDB topic rule destination, as returned by
+// ListTopicRuleDestinations . For the full set of destination properties, see
+// InfluxDBDestinationProperties .
+type InfluxDBDestinationSummary struct {
+
+	// The URL of the InfluxDB instance that the destination writes to.
+	Endpoint *string
+
+	// The major version of the InfluxDB instance. Valid values are V2 and V3 .
+	InfluxDBVersion InfluxDBVersion
+
+	// The ARN or name of the Amazon Web Services Secrets Manager secret that contains
+	// the InfluxDB API token.
+	SecretId *string
+
+	// The key that is read from the secret value when the secret contains a JSON
+	// object.
+	SecretKey *string
+
+	// The type of the secret that contains the InfluxDB API token. Valid values are
+	// SecretString and SecretBinary .
+	SecretType InfluxDBSecretType
 
 	noSmithyDocumentSerde
 }
@@ -4943,6 +5125,10 @@ type TopicRuleDestination struct {
 	// Properties of the HTTP URL.
 	HttpUrlProperties *HttpUrlDestinationProperties
 
+	// The properties of an InfluxDB topic rule destination, as returned by
+	// CreateTopicRuleDestination and GetTopicRuleDestination .
+	InfluxDBProperties *InfluxDBDestinationProperties
+
 	// The date and time when the topic rule destination was last updated.
 	LastUpdatedAt *time.Time
 
@@ -4982,6 +5168,10 @@ type TopicRuleDestinationConfiguration struct {
 	// Configuration of the HTTP URL.
 	HttpUrlConfiguration *HttpUrlDestinationConfiguration
 
+	// The configuration of an InfluxDB topic rule destination, which you specify when
+	// you call CreateTopicRuleDestination .
+	InfluxDBConfiguration *InfluxDBDestinationConfiguration
+
 	// Configuration of the virtual private cloud (VPC) connection.
 	VpcConfiguration *VpcDestinationConfiguration
 
@@ -4999,6 +5189,10 @@ type TopicRuleDestinationSummary struct {
 
 	// Information about the HTTP URL.
 	HttpUrlSummary *HttpUrlDestinationSummary
+
+	// A summary of an InfluxDB topic rule destination, as returned by
+	// ListTopicRuleDestinations .
+	InfluxDBSummary *InfluxDBDestinationSummary
 
 	// The date and time when the topic rule destination was last updated.
 	LastUpdatedAt *time.Time

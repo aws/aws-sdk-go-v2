@@ -51,6 +51,10 @@ type CreateAgentSpaceInput struct {
 	// responses.
 	Locale *string
 
+	// The preferences to configure on the agent space. Preferences not provided take
+	// their default values.
+	Preferences map[string]bool
+
 	// Tags to add to the AgentSpace at creation time.
 	Tags map[string]string
 

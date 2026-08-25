@@ -1776,6 +1776,30 @@ type InsightSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Constraints for an integer parameter specifying allowed range.
+type IntegerConstraints struct {
+
+	// The maximum allowed value.
+	Max *int32
+
+	// The minimum allowed value.
+	Min *int32
+
+	noSmithyDocumentSerde
+}
+
+// An integer parameter configuration with default value and constraints.
+type IntegerParameterConfig struct {
+
+	// The constraints for the integer parameter.
+	Constraints *IntegerConstraints
+
+	// The default value for the integer parameter.
+	DefaultValue *int32
+
+	noSmithyDocumentSerde
+}
+
 // An integer range constraint specifying minimum and maximum allowed values.
 type IntegerRangeConstraint struct {
 
@@ -1913,6 +1937,9 @@ type KubeControllerManagerConfigRequest struct {
 	// The horizontal pod autoscaler controller configuration.
 	HorizontalPodAutoscalerControllerConfig *HorizontalPodAutoscalerControllerConfigRequest
 
+	// The pod garbage collection controller configuration.
+	PodGcControllerConfig *PodGcControllerConfigRequest
+
 	noSmithyDocumentSerde
 }
 
@@ -1921,6 +1948,9 @@ type KubeControllerManagerConfigResponse struct {
 
 	// The horizontal pod autoscaler controller configuration.
 	HorizontalPodAutoscalerControllerConfig *HorizontalPodAutoscalerControllerConfigResponse
+
+	// The pod garbage collection controller configuration.
+	PodGcControllerConfig *PodGcControllerConfigResponse
 
 	noSmithyDocumentSerde
 }
@@ -1932,6 +1962,10 @@ type KubeControllerManagerVersionConfig struct {
 	// The horizontal pod autoscaler controller configuration with default value and
 	// constraints.
 	HorizontalPodAutoscalerControllerConfig *HorizontalPodAutoscalerControllerVersionConfig
+
+	// The pod garbage collection controller configuration with default value and
+	// constraints.
+	PodGcControllerConfig *PodGcControllerVersionConfig
 
 	noSmithyDocumentSerde
 }
@@ -2637,6 +2671,38 @@ type OutpostConfigResponse struct {
 	//
 	// [Capacity considerations]: https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html
 	EtcdPlacement *EtcdPlacementResponse
+
+	noSmithyDocumentSerde
+}
+
+// The pod garbage collection controller configuration for the Kubernetes
+// controller manager.
+type PodGcControllerConfigRequest struct {
+
+	// The number of terminated pods that can exist before the garbage collector
+	// starts deleting them.
+	TerminatedPodGcThreshold *int32
+
+	noSmithyDocumentSerde
+}
+
+// The pod garbage collection controller configuration for the Kubernetes
+// controller manager.
+type PodGcControllerConfigResponse struct {
+
+	// The number of terminated pods that can exist before the garbage collector
+	// starts deleting them.
+	TerminatedPodGcThreshold *int32
+
+	noSmithyDocumentSerde
+}
+
+// The pod garbage collection controller version configuration.
+type PodGcControllerVersionConfig struct {
+
+	// The terminated pod garbage collection threshold configuration with default
+	// value and constraints.
+	TerminatedPodGcThreshold *IntegerParameterConfig
 
 	noSmithyDocumentSerde
 }

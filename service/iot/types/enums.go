@@ -1252,6 +1252,67 @@ func (IndexStatus) Values() []IndexStatus {
 	}
 }
 
+type InfluxDBSecretType string
+
+// Enum values for InfluxDBSecretType
+const (
+	InfluxDBSecretTypeSecretString InfluxDBSecretType = "SecretString"
+	InfluxDBSecretTypeSecretBinary InfluxDBSecretType = "SecretBinary"
+)
+
+// Values returns all known values for InfluxDBSecretType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InfluxDBSecretType) Values() []InfluxDBSecretType {
+	return []InfluxDBSecretType{
+		"SecretString",
+		"SecretBinary",
+	}
+}
+
+type InfluxDBTimestampUnit string
+
+// Enum values for InfluxDBTimestampUnit
+const (
+	InfluxDBTimestampUnitSeconds      InfluxDBTimestampUnit = "s"
+	InfluxDBTimestampUnitMilliseconds InfluxDBTimestampUnit = "ms"
+	InfluxDBTimestampUnitMicroseconds InfluxDBTimestampUnit = "us"
+	InfluxDBTimestampUnitNanoseconds  InfluxDBTimestampUnit = "ns"
+)
+
+// Values returns all known values for InfluxDBTimestampUnit. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InfluxDBTimestampUnit) Values() []InfluxDBTimestampUnit {
+	return []InfluxDBTimestampUnit{
+		"s",
+		"ms",
+		"us",
+		"ns",
+	}
+}
+
+type InfluxDBVersion string
+
+// Enum values for InfluxDBVersion
+const (
+	InfluxDBVersionV2 InfluxDBVersion = "V2"
+	InfluxDBVersionV3 InfluxDBVersion = "V3"
+)
+
+// Values returns all known values for InfluxDBVersion. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InfluxDBVersion) Values() []InfluxDBVersion {
+	return []InfluxDBVersion{
+		"V2",
+		"V3",
+	}
+}
+
 type JobEndBehavior string
 
 // Enum values for JobEndBehavior

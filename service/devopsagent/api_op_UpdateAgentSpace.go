@@ -45,6 +45,11 @@ type UpdateAgentSpaceInput struct {
 	// The updated name of the AgentSpace.
 	Name *string
 
+	// The preferences to configure on the agent space. When provided, this replaces
+	// the full set of configured preferences; preferences not included revert to their
+	// default values. When omitted, the current preferences are left unchanged.
+	Preferences map[string]bool
+
 	noSmithyDocumentSerde
 }
 

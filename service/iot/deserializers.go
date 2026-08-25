@@ -45677,6 +45677,11 @@ func awsRestjson1_deserializeDocumentAction(v **types.Action, value interface{})
 				return err
 			}
 
+		case "influxDB":
+			if err := awsRestjson1_deserializeDocumentInfluxDBAction(&sv.InfluxDB, value); err != nil {
+				return err
+			}
+
 		case "iotAnalytics":
 			if err := awsRestjson1_deserializeDocumentIotAnalyticsAction(&sv.IotAnalytics, value); err != nil {
 				return err
@@ -54093,6 +54098,368 @@ func awsRestjson1_deserializeDocumentIndexNotReadyException(v **types.IndexNotRe
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInfluxDBAction(v **types.InfluxDBAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InfluxDBAction
+	if *v == nil {
+		sv = &types.InfluxDBAction{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "batchConfig":
+			if err := awsRestjson1_deserializeDocumentInfluxDBBatchConfig(&sv.BatchConfig, value); err != nil {
+				return err
+			}
+
+		case "databaseName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InfluxDBDatabaseName to be of type string, got %T instead", value)
+				}
+				sv.DatabaseName = ptr.String(jtv)
+			}
+
+		case "destinationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsArn to be of type string, got %T instead", value)
+				}
+				sv.DestinationArn = ptr.String(jtv)
+			}
+
+		case "organization":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InfluxDBOrganization to be of type string, got %T instead", value)
+				}
+				sv.Organization = ptr.String(jtv)
+			}
+
+		case "roleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		case "tableName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InfluxDBTableName to be of type string, got %T instead", value)
+				}
+				sv.TableName = ptr.String(jtv)
+			}
+
+		case "tags":
+			if err := awsRestjson1_deserializeDocumentInfluxDBTagMap(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		case "timestampUnit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InfluxDBTimestampUnit to be of type string, got %T instead", value)
+				}
+				sv.TimestampUnit = types.InfluxDBTimestampUnit(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInfluxDBBatchConfig(v **types.InfluxDBBatchConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InfluxDBBatchConfig
+	if *v == nil {
+		sv = &types.InfluxDBBatchConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "batchAcrossTopics":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected InfluxDBBatchAcrossTopics to be of type *bool, got %T instead", value)
+				}
+				sv.BatchAcrossTopics = jtv
+			}
+
+		case "maxBatchOpenMs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected InfluxDBMaxBatchOpenMs to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxBatchOpenMs = ptr.Int32(int32(i64))
+			}
+
+		case "maxBatchSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected InfluxDBMaxBatchSize to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxBatchSize = ptr.Int32(int32(i64))
+			}
+
+		case "maxBatchSizeBytes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected InfluxDBMaxBatchSizeBytes to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxBatchSizeBytes = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInfluxDBDestinationProperties(v **types.InfluxDBDestinationProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InfluxDBDestinationProperties
+	if *v == nil {
+		sv = &types.InfluxDBDestinationProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "endpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Url to be of type string, got %T instead", value)
+				}
+				sv.Endpoint = ptr.String(jtv)
+			}
+
+		case "influxDBVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InfluxDBVersion to be of type string, got %T instead", value)
+				}
+				sv.InfluxDBVersion = types.InfluxDBVersion(jtv)
+			}
+
+		case "secretId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InfluxDBSecretId to be of type string, got %T instead", value)
+				}
+				sv.SecretId = ptr.String(jtv)
+			}
+
+		case "secretKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InfluxDBSecretKey to be of type string, got %T instead", value)
+				}
+				sv.SecretKey = ptr.String(jtv)
+			}
+
+		case "secretType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InfluxDBSecretType to be of type string, got %T instead", value)
+				}
+				sv.SecretType = types.InfluxDBSecretType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInfluxDBDestinationSummary(v **types.InfluxDBDestinationSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InfluxDBDestinationSummary
+	if *v == nil {
+		sv = &types.InfluxDBDestinationSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "endpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Url to be of type string, got %T instead", value)
+				}
+				sv.Endpoint = ptr.String(jtv)
+			}
+
+		case "influxDBVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InfluxDBVersion to be of type string, got %T instead", value)
+				}
+				sv.InfluxDBVersion = types.InfluxDBVersion(jtv)
+			}
+
+		case "secretId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InfluxDBSecretId to be of type string, got %T instead", value)
+				}
+				sv.SecretId = ptr.String(jtv)
+			}
+
+		case "secretKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InfluxDBSecretKey to be of type string, got %T instead", value)
+				}
+				sv.SecretKey = ptr.String(jtv)
+			}
+
+		case "secretType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InfluxDBSecretType to be of type string, got %T instead", value)
+				}
+				sv.SecretType = types.InfluxDBSecretType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentInfluxDBTagMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected InfluxDBTagValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -65537,6 +65904,11 @@ func awsRestjson1_deserializeDocumentTopicRuleDestination(v **types.TopicRuleDes
 				return err
 			}
 
+		case "influxDBProperties":
+			if err := awsRestjson1_deserializeDocumentInfluxDBDestinationProperties(&sv.InfluxDBProperties, value); err != nil {
+				return err
+			}
+
 		case "lastUpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -65668,6 +66040,11 @@ func awsRestjson1_deserializeDocumentTopicRuleDestinationSummary(v **types.Topic
 
 		case "httpUrlSummary":
 			if err := awsRestjson1_deserializeDocumentHttpUrlDestinationSummary(&sv.HttpUrlSummary, value); err != nil {
+				return err
+			}
+
+		case "influxDBSummary":
+			if err := awsRestjson1_deserializeDocumentInfluxDBDestinationSummary(&sv.InfluxDBSummary, value); err != nil {
 				return err
 			}
 

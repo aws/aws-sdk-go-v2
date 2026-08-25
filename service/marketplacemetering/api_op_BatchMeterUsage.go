@@ -16,7 +16,8 @@ import (
 // CustomerIdentifier ), LicenseArn (instead of ProductCode ) to support this
 // feature. BatchMeterUsage does not support CustomerIdentifier for new
 // integrations. Existing integrations continue to work. Review the new integration
-// for Concurrent Agreements [here].
+// for Concurrent Agreements [here]. For additional implementation details, see [BatchMeterUsage code example with LicenseArn] in the
+// Amazon Web Services Marketplace Seller Guide.
 //
 // To post metering records for customers, SaaS applications call BatchMeterUsage ,
 // which is used for metering SaaS flexible consumption pricing (FCP). Identical
@@ -29,8 +30,10 @@ import (
 // of each billing cycle, a 6-hour grace period applies. We accept usage records
 // for the previous billing month until 06:00 UTC on the first day of the next
 // month. For example, you must submit March usage records before 06:00 UTC on
-// April 1. After this grace period, we return a TimestampOutOfBoundsException
-// error.
+// April 1. On April 1 at 05:00 UTC, you can still submit records for March 31
+// (within the 6-hour grace period). After 06:00 UTC on April 1, March records are
+// rejected regardless of the normal 24-hour submission window. After this grace
+// period, we return a TimestampOutOfBoundsException error.
 //
 // BatchMeterUsage can process up to 25 UsageRecords at a time, and each request
 // must be less than 1 MB in size. Optionally, you can have multiple usage
@@ -47,6 +50,7 @@ import (
 // Seller Guide.
 //
 // [here]: https://catalog.workshops.aws/mpseller/en-US/saas/integration-for-concurrent-agreements
+// [BatchMeterUsage code example with LicenseArn]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-licensearn-example
 // [BatchMeterUsage code example]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-example
 // [BatchMeterUsage Region support]: https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#batchmeterusage-region-support
 func (c *Client) BatchMeterUsage(ctx context.Context, params *BatchMeterUsageInput, optFns ...func(*Options)) (*BatchMeterUsageOutput, error) {
@@ -77,6 +81,16 @@ type BatchMeterUsageInput struct {
 	// Product code is used to uniquely identify a product in Amazon Web Services
 	// Marketplace. The product code should be the same as the one used during the
 	// publishing of a new product.
+	//
+	// ProductCode is required only for legacy integrations that use CustomerIdentifier
+	// . For new integrations using LicenseArn (Concurrent Agreements), do NOT include
+	// ProductCode at the request level. The LicenseArn in each UsageRecord identifies
+	// both the product and the specific agreement.
+	//
+	// Sending metering records with both ProductCode and LicenseArn for the same
+	// customer within the same hour will result in duplicate billing. If you are
+	// migrating from product-based metering to license-based metering, stop sending
+	// ProductCode before you start sending LicenseArn .
 	ProductCode *string
 
 	noSmithyDocumentSerde

@@ -7315,6 +7315,13 @@ func awsRestjson1_serializeDocumentKubeControllerManagerConfigRequest(v *types.K
 		}
 	}
 
+	if v.PodGcControllerConfig != nil {
+		ok := object.Key("podGcControllerConfig")
+		if err := awsRestjson1_serializeDocumentPodGcControllerConfigRequest(v.PodGcControllerConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -7676,6 +7683,18 @@ func awsRestjson1_serializeDocumentOutpostConfigRequest(v *types.OutpostConfigRe
 		if err := awsRestjson1_serializeDocumentStringList(v.OutpostArns, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPodGcControllerConfigRequest(v *types.PodGcControllerConfigRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TerminatedPodGcThreshold != nil {
+		ok := object.Key("terminatedPodGcThreshold")
+		ok.Integer(*v.TerminatedPodGcThreshold)
 	}
 
 	return nil

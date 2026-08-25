@@ -11042,6 +11042,116 @@ func awsAwsquery_deserializeDocumentDesiredConfiguration(v **types.DesiredConfig
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentDistributionSegment(v **types.DistributionSegment, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.DistributionSegment
+	if *v == nil {
+		sv = &types.DistributionSegment{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("TargetCapacityTypes", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentTargetCapacityTypes(&sv.TargetCapacityTypes, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentDistributionSegments(v *[]types.DistributionSegment, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.DistributionSegment
+	if *v == nil {
+		sv = make([]types.DistributionSegment, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.DistributionSegment
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentDistributionSegment(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentDistributionSegmentsUnwrapped(v *[]types.DistributionSegment, decoder smithyxml.NodeDecoder) error {
+	var sv []types.DistributionSegment
+	if *v == nil {
+		sv = make([]types.DistributionSegment, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.DistributionSegment
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentDistributionSegment(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsAwsquery_deserializeDocumentEbs(v **types.Ebs, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13281,6 +13391,12 @@ func awsAwsquery_deserializeDocumentInstancesDistribution(v **types.InstancesDis
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("DistributionSegments", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentDistributionSegments(&sv.DistributionSegments, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("OnDemandAllocationStrategy", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -18995,6 +19111,86 @@ func awsAwsquery_deserializeDocumentTagDescriptionListUnwrapped(v *[]types.TagDe
 			return err
 		}
 		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsAwsquery_deserializeDocumentTargetCapacityTypes(v *[]types.TargetCapacityType, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.TargetCapacityType
+	if *v == nil {
+		sv = make([]types.TargetCapacityType, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		decoder = memberDecoder
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.TargetCapacityType
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				col = types.TargetCapacityType(xtv)
+			}
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentTargetCapacityTypesUnwrapped(v *[]types.TargetCapacityType, decoder smithyxml.NodeDecoder) error {
+	var sv []types.TargetCapacityType
+	if *v == nil {
+		sv = make([]types.TargetCapacityType, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.TargetCapacityType
+		t := decoder.StartEl
+		_ = t
+		val, err := decoder.Value()
+		if err != nil {
+			return err
+		}
+		if val == nil {
+			break
+		}
+		{
+			xtv := string(val)
+			mv = types.TargetCapacityType(xtv)
+		}
 		sv = append(sv, mv)
 	}
 	*v = sv

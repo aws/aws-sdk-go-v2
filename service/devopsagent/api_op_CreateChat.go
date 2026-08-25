@@ -30,8 +30,7 @@ func (c *Client) CreateChat(ctx context.Context, params *CreateChatInput, optFns
 // Request structure for creating a new chat
 type CreateChatInput struct {
 
-	// Unique identifier for an agent space (allows alphanumeric characters and
-	// hyphens; 1-64 characters)
+	// The unique identifier for the agent space where the chat will be created.
 	//
 	// This member is required.
 	AgentSpaceId *string

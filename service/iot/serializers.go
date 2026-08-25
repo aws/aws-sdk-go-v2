@@ -23758,6 +23758,13 @@ func awsRestjson1_serializeDocumentAction(v *types.Action, value smithyjson.Valu
 		}
 	}
 
+	if v.InfluxDB != nil {
+		ok := object.Key("influxDB")
+		if err := awsRestjson1_serializeDocumentInfluxDBAction(v.InfluxDB, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.IotAnalytics != nil {
 		ok := object.Key("iotAnalytics")
 		if err := awsRestjson1_serializeDocumentIotAnalyticsAction(v.IotAnalytics, ok); err != nil {
@@ -25662,6 +25669,127 @@ func awsRestjson1_serializeDocumentIndexingFilter(v *types.IndexingFilter, value
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInfluxDBAction(v *types.InfluxDBAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BatchConfig != nil {
+		ok := object.Key("batchConfig")
+		if err := awsRestjson1_serializeDocumentInfluxDBBatchConfig(v.BatchConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DatabaseName != nil {
+		ok := object.Key("databaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if v.DestinationArn != nil {
+		ok := object.Key("destinationArn")
+		ok.String(*v.DestinationArn)
+	}
+
+	if v.Organization != nil {
+		ok := object.Key("organization")
+		ok.String(*v.Organization)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	if v.TableName != nil {
+		ok := object.Key("tableName")
+		ok.String(*v.TableName)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentInfluxDBTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.TimestampUnit) > 0 {
+		ok := object.Key("timestampUnit")
+		ok.String(string(v.TimestampUnit))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInfluxDBBatchConfig(v *types.InfluxDBBatchConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BatchAcrossTopics {
+		ok := object.Key("batchAcrossTopics")
+		ok.Boolean(v.BatchAcrossTopics)
+	}
+
+	if v.MaxBatchOpenMs != nil {
+		ok := object.Key("maxBatchOpenMs")
+		ok.Integer(*v.MaxBatchOpenMs)
+	}
+
+	if v.MaxBatchSize != nil {
+		ok := object.Key("maxBatchSize")
+		ok.Integer(*v.MaxBatchSize)
+	}
+
+	if v.MaxBatchSizeBytes != nil {
+		ok := object.Key("maxBatchSizeBytes")
+		ok.Integer(*v.MaxBatchSizeBytes)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInfluxDBDestinationConfiguration(v *types.InfluxDBDestinationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Endpoint != nil {
+		ok := object.Key("endpoint")
+		ok.String(*v.Endpoint)
+	}
+
+	if len(v.InfluxDBVersion) > 0 {
+		ok := object.Key("influxDBVersion")
+		ok.String(string(v.InfluxDBVersion))
+	}
+
+	if v.SecretId != nil {
+		ok := object.Key("secretId")
+		ok.String(*v.SecretId)
+	}
+
+	if v.SecretKey != nil {
+		ok := object.Key("secretKey")
+		ok.String(*v.SecretKey)
+	}
+
+	if len(v.SecretType) > 0 {
+		ok := object.Key("secretType")
+		ok.String(string(v.SecretType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInfluxDBTagMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
 	return nil
 }
 
@@ -27696,6 +27824,13 @@ func awsRestjson1_serializeDocumentTopicRuleDestinationConfiguration(v *types.To
 	if v.HttpUrlConfiguration != nil {
 		ok := object.Key("httpUrlConfiguration")
 		if err := awsRestjson1_serializeDocumentHttpUrlDestinationConfiguration(v.HttpUrlConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InfluxDBConfiguration != nil {
+		ok := object.Key("influxDBConfiguration")
+		if err := awsRestjson1_serializeDocumentInfluxDBDestinationConfiguration(v.InfluxDBConfiguration, ok); err != nil {
 			return err
 		}
 	}

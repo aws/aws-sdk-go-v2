@@ -29,8 +29,7 @@ func (c *Client) ListChats(ctx context.Context, params *ListChatsInput, optFns .
 // Request structure for listing chats
 type ListChatsInput struct {
 
-	// Unique identifier for an agent space (allows alphanumeric characters and
-	// hyphens; 1-64 characters)
+	// The unique identifier for the agent space to list chats from.
 	//
 	// This member is required.
 	AgentSpaceId *string

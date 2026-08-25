@@ -590,6 +590,20 @@ func TestCheckResponseSnapshot_CreateAutoScalingGroup(t *testing.T) {
 				SpotAllocationStrategy:              ptr.String("__SpotAllocationStrategy__"),
 				SpotInstancePools:                   ptr.Int32(1),
 				SpotMaxPrice:                        ptr.String("__SpotMaxPrice__"),
+				DistributionSegments: []types.DistributionSegment{
+					{
+						TargetCapacityTypes: []types.TargetCapacityType{
+							types.TargetCapacityType("on-demand-capacity-reservation"),
+							types.TargetCapacityType("on-demand-capacity-reservation"),
+						},
+					},
+					{
+						TargetCapacityTypes: []types.TargetCapacityType{
+							types.TargetCapacityType("on-demand-capacity-reservation"),
+							types.TargetCapacityType("on-demand-capacity-reservation"),
+						},
+					},
+				},
 			},
 		},
 		InstanceId:      ptr.String("__InstanceId__"),
@@ -1301,6 +1315,20 @@ func TestCheckResponseSnapshot_DescribeAutoScalingGroups(t *testing.T) {
 						SpotAllocationStrategy:              ptr.String("__SpotAllocationStrategy__"),
 						SpotInstancePools:                   ptr.Int32(1),
 						SpotMaxPrice:                        ptr.String("__SpotMaxPrice__"),
+						DistributionSegments: []types.DistributionSegment{
+							{
+								TargetCapacityTypes: []types.TargetCapacityType{
+									types.TargetCapacityType("on-demand-capacity-reservation"),
+									types.TargetCapacityType("on-demand-capacity-reservation"),
+								},
+							},
+							{
+								TargetCapacityTypes: []types.TargetCapacityType{
+									types.TargetCapacityType("on-demand-capacity-reservation"),
+									types.TargetCapacityType("on-demand-capacity-reservation"),
+								},
+							},
+						},
 					},
 				},
 				MinSize:           ptr.Int32(1),
@@ -1691,6 +1719,20 @@ func TestCheckResponseSnapshot_DescribeAutoScalingGroups(t *testing.T) {
 						SpotAllocationStrategy:              ptr.String("__SpotAllocationStrategy__"),
 						SpotInstancePools:                   ptr.Int32(1),
 						SpotMaxPrice:                        ptr.String("__SpotMaxPrice__"),
+						DistributionSegments: []types.DistributionSegment{
+							{
+								TargetCapacityTypes: []types.TargetCapacityType{
+									types.TargetCapacityType("on-demand-capacity-reservation"),
+									types.TargetCapacityType("on-demand-capacity-reservation"),
+								},
+							},
+							{
+								TargetCapacityTypes: []types.TargetCapacityType{
+									types.TargetCapacityType("on-demand-capacity-reservation"),
+									types.TargetCapacityType("on-demand-capacity-reservation"),
+								},
+							},
+						},
 					},
 				},
 				MinSize:           ptr.Int32(1),
@@ -2255,6 +2297,20 @@ func TestCheckResponseSnapshot_DescribeInstanceRefreshes(t *testing.T) {
 							SpotAllocationStrategy:              ptr.String("__SpotAllocationStrategy__"),
 							SpotInstancePools:                   ptr.Int32(1),
 							SpotMaxPrice:                        ptr.String("__SpotMaxPrice__"),
+							DistributionSegments: []types.DistributionSegment{
+								{
+									TargetCapacityTypes: []types.TargetCapacityType{
+										types.TargetCapacityType("on-demand-capacity-reservation"),
+										types.TargetCapacityType("on-demand-capacity-reservation"),
+									},
+								},
+								{
+									TargetCapacityTypes: []types.TargetCapacityType{
+										types.TargetCapacityType("on-demand-capacity-reservation"),
+										types.TargetCapacityType("on-demand-capacity-reservation"),
+									},
+								},
+							},
 						},
 					},
 				},
@@ -2537,6 +2593,20 @@ func TestCheckResponseSnapshot_DescribeInstanceRefreshes(t *testing.T) {
 							SpotAllocationStrategy:              ptr.String("__SpotAllocationStrategy__"),
 							SpotInstancePools:                   ptr.Int32(1),
 							SpotMaxPrice:                        ptr.String("__SpotMaxPrice__"),
+							DistributionSegments: []types.DistributionSegment{
+								{
+									TargetCapacityTypes: []types.TargetCapacityType{
+										types.TargetCapacityType("on-demand-capacity-reservation"),
+										types.TargetCapacityType("on-demand-capacity-reservation"),
+									},
+								},
+								{
+									TargetCapacityTypes: []types.TargetCapacityType{
+										types.TargetCapacityType("on-demand-capacity-reservation"),
+										types.TargetCapacityType("on-demand-capacity-reservation"),
+									},
+								},
+							},
 						},
 					},
 				},
@@ -6065,6 +6135,20 @@ func TestCheckResponseSnapshot_StartInstanceRefresh(t *testing.T) {
 					SpotAllocationStrategy:              ptr.String("__SpotAllocationStrategy__"),
 					SpotInstancePools:                   ptr.Int32(1),
 					SpotMaxPrice:                        ptr.String("__SpotMaxPrice__"),
+					DistributionSegments: []types.DistributionSegment{
+						{
+							TargetCapacityTypes: []types.TargetCapacityType{
+								types.TargetCapacityType("on-demand-capacity-reservation"),
+								types.TargetCapacityType("on-demand-capacity-reservation"),
+							},
+						},
+						{
+							TargetCapacityTypes: []types.TargetCapacityType{
+								types.TargetCapacityType("on-demand-capacity-reservation"),
+								types.TargetCapacityType("on-demand-capacity-reservation"),
+							},
+						},
+					},
 				},
 			},
 		},
@@ -6428,6 +6512,20 @@ func TestCheckResponseSnapshot_UpdateAutoScalingGroup(t *testing.T) {
 				SpotAllocationStrategy:              ptr.String("__SpotAllocationStrategy__"),
 				SpotInstancePools:                   ptr.Int32(1),
 				SpotMaxPrice:                        ptr.String("__SpotMaxPrice__"),
+				DistributionSegments: []types.DistributionSegment{
+					{
+						TargetCapacityTypes: []types.TargetCapacityType{
+							types.TargetCapacityType("on-demand-capacity-reservation"),
+							types.TargetCapacityType("on-demand-capacity-reservation"),
+						},
+					},
+					{
+						TargetCapacityTypes: []types.TargetCapacityType{
+							types.TargetCapacityType("on-demand-capacity-reservation"),
+							types.TargetCapacityType("on-demand-capacity-reservation"),
+						},
+					},
+				},
 			},
 		},
 		MinSize:         ptr.Int32(1),

@@ -219,6 +219,69 @@ type AgentSpace struct {
 	// responses.
 	Locale *string
 
+	// The preferences configured on the agent space. Preferences that are not set
+	// take their default values.
+	Preferences map[string]bool
+
+	noSmithyDocumentSerde
+}
+
+// An approval decision supplied when resuming a paused agent execution. When an
+// agent execution pauses to request approval for an elevated action, SendMessage
+// streams an approval request carrying interrupt identifiers. This structure
+// carries the decision back to the service — which paused tool invocation is being
+// resumed, the opaque interrupt identifier that resumes it, the identifier of the
+// approval request being resolved, optional display text of the control the user
+// chose, and the action taken (APPROVED or REJECTED) — so the service can resume
+// the paused execution. All members are optional on the wire; service-side
+// validation is applied against the populated subset.
+type ApprovalAction struct {
+
+	// The action taken on the approval request — APPROVED or REJECTED.
+	Action ApprovalActionType
+
+	// Identifier of the approval request being resolved.
+	ApprovalId *string
+
+	// Optional display text of the UI control the user chose (for example, "Approve
+	// Exact", "Approve Broader", or "Reject"), provided as auxiliary decision context.
+	ButtonText *string
+
+	// An opaque resume identifier issued by the service when an agent execution
+	// pauses for approval. Provide it when resuming so the service can resume the
+	// correct paused execution.
+	InterruptId *string
+
+	// Identifier of the specific paused tool invocation that requested approval.
+	// Correlates the approval decision back to the paused invocation.
+	ToolUseId *string
+
+	noSmithyDocumentSerde
+}
+
+// Tool-invocation pattern primitive used to express both an agent-requested
+// approval and a finalized approval. The primitive is uniform across AWS and
+// third-party tools: a tool identifier plus a map of argument pins that narrow
+// which invocations the pattern matches.
+type ApprovalPattern struct {
+
+	// Argument constraints that narrow which tool invocations the pattern matches.
+	// For AWS tools, the map must include `operation` (the IAM action, e.g.
+	// `ec2:AuthorizeSecurityGroupIngress`) and `resource_arn` (the resource ARN or ARN
+	// glob); additional narrowing arguments go in further pin keys. The same `{tool,
+	// argumentPins}` shape is used uniformly for AWS and third-party tools, with
+	// tool-specific keys for third-party tools. Requests whose argument pins are
+	// collectively too large are rejected with a ValidationException.
+	//
+	// This member is required.
+	ArgumentPins map[string]string
+
+	// Identifier of the tool the pattern applies to (e.g. `use_aws` for AWS actions,
+	// or a third-party tool name).
+	//
+	// This member is required.
+	Tool *string
+
 	noSmithyDocumentSerde
 }
 
@@ -412,7 +475,7 @@ type AssetFileSummary struct {
 // Content for an asset sourced from an external URL.
 type AssetSourceUrlContent struct {
 
-	// The source URL to import asset content from
+	// The source URL to import asset content from.
 	//
 	// This member is required.
 	Url *string
@@ -558,6 +621,17 @@ type AWSConfiguration struct {
 	//
 	// This member is required.
 	AssumableRoleArn *string
+
+	// Optional IAM role ARN to be assumed by AIDevOps for elevated directed actions
+	// on behalf of the customer. Used for mutating operations gated by
+	// elevatedActionsEnabled on the AgentSpace. When not provided, only non-elevated
+	// directed actions are available for this AWS account.
+	AgentElevatedRoleArn *string
+
+	// Validation status of the agentElevatedRoleArn. Updated asynchronously after the
+	// customer registers an elevated role. Possible values: PENDING_CONFIRMATION
+	// (validation in progress), VALID (role validated), INVALID (validation failed).
+	AgentElevatedRoleArnStatus ValidationStatus
 
 	noSmithyDocumentSerde
 }
@@ -847,6 +921,10 @@ type GitHubConfiguration struct {
 
 	// Optional role ARN that AIDevOps assumes at runtime for automatic verification
 	// testing and VPC connectivity on this association.
+	//
+	// Deprecated: Superseded by the ReleaseManagement association. Configure the
+	// runtime role on the ReleaseManagement association and reference it via
+	// releaseManagementAssociationId.
 	RuntimeRoleArn *string
 
 	noSmithyDocumentSerde
@@ -871,6 +949,10 @@ type GitLabConfiguration struct {
 
 	// Optional role ARN that AIDevOps assumes at runtime for automatic verification
 	// testing and VPC connectivity on this association.
+	//
+	// Deprecated: Superseded by the ReleaseManagement association. Configure the
+	// runtime role on the ReleaseManagement association and reference it via
+	// releaseManagementAssociationId.
 	RuntimeRoleArn *string
 
 	noSmithyDocumentSerde
@@ -1270,11 +1352,19 @@ type MCPServerConfiguration struct {
 	// This member is required.
 	Tools []string
 
+	// List of MCP tools with their access categorization. When provided, the tool
+	// names must match those in the tools member.
+	ToolDetails []MCPToolDetail
+
 	noSmithyDocumentSerde
 }
 
 // Mixin for webhook update support.
 type MCPServerDatadogConfiguration struct {
+
+	// The subset of elevated-access tools enabled for this integration.
+	EnabledElevatedTools []MCPToolDetail
+
 	noSmithyDocumentSerde
 }
 
@@ -1310,6 +1400,9 @@ type MCPServerGrafanaConfiguration struct {
 	//
 	// This member is required.
 	Endpoint *string
+
+	// The subset of elevated-access tools enabled for this integration.
+	EnabledElevatedTools []MCPToolDetail
 
 	// The Grafana organization ID that can be used.
 	OrganizationId *string
@@ -1449,6 +1542,10 @@ type MCPServerSigV4Configuration struct {
 	// This member is required.
 	Tools []string
 
+	// List of MCP tools with their access categorization. When provided, the tool
+	// names must match those in the tools member.
+	ToolDetails []MCPToolDetail
+
 	noSmithyDocumentSerde
 }
 
@@ -1478,6 +1575,20 @@ type MCPServerSigV4ServiceDetails struct {
 
 // Mixin for webhook update support.
 type MCPServerSplunkConfiguration struct {
+	noSmithyDocumentSerde
+}
+
+// An MCP tool together with its access categorization.
+type MCPToolDetail struct {
+
+	// The name of the MCP tool.
+	//
+	// This member is required.
+	Name *string
+
+	// The access categorization of the MCP tool.
+	ToolClassification ToolClassification
+
 	noSmithyDocumentSerde
 }
 
@@ -2142,6 +2253,11 @@ type RegisteredRemoteAgentSigV4Details struct {
 // Represents a registered service with its configuration and accessible resources.
 type RegisteredService struct {
 
+	// The timestamp when the service was registered.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
 	// The unique identifier of a service.
 	//
 	// This member is required.
@@ -2151,6 +2267,11 @@ type RegisteredService struct {
 	//
 	// This member is required.
 	ServiceType Service
+
+	// The timestamp when the service was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
 
 	// List of accessible resources for this service.
 	AccessibleResources []document.Interface
@@ -2497,20 +2618,27 @@ type SendMessageContentBlockStopEvent struct {
 // Context object for additional message metadata
 type SendMessageContext struct {
 
+	// An approval decision supplied when resuming a paused agent execution. When an
+	// agent execution pauses to request approval for an elevated action, SendMessage
+	// streams an approval request carrying interrupt identifiers. To resume the paused
+	// execution, call SendMessage again with `userActionResponse` set to
+	// `"APPROVAL_ACTION"` and this member populated with those identifiers and the
+	// decision (APPROVED or REJECTED). Optional; omit it for messages that are not
+	// resuming an approval.
+	ApprovalAction *ApprovalAction
+
 	// The current page or view the user is on
 	CurrentPage *string
 
 	// The ID of the last message in the conversation
 	LastMessage *string
 
-	// Response to a UI prompt (not a text conversation message). Operator App SDK
-	// clients set this to the control-string sentinel `"APPROVAL_ACTION"` when the
-	// request is resuming a paused tool call after an operator approval decision; in
-	// that case the structured decision context lives on the sibling `approvalAction`
-	// member and the chat agent reads from there. Preserved as a String for
-	// back-compat: pre-typed-approval clients still encode arbitrary UI-prompt
-	// responses as JSON in this field, and the chat agent parses them out during the
-	// transition.
+	// Response to a UI prompt (not a text conversation message). Set this to the
+	// sentinel value `"APPROVAL_ACTION"` when the request is resuming a paused
+	// execution after an approval decision; in that case the structured decision is
+	// provided on the sibling `approvalAction` member. Preserved as a String for
+	// backward compatibility: clients that predate the typed approval field may still
+	// encode UI-prompt responses as JSON in this field.
 	UserActionResponse *string
 
 	noSmithyDocumentSerde
@@ -3232,8 +3360,9 @@ type SlackTransmissionTarget struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration for AWS source account integration. Note: passRole check on
-// 'assumableRoleArn' is not supported.
+// Configuration for AWS source account integration. Setting the role ARNs on this
+// configuration requires the caller to have at least the iam:PassRole permission
+// (see assumableRoleArn).
 type SourceAwsConfiguration struct {
 
 	// AWS Account Id corresponding to provided resources.
@@ -3246,10 +3375,28 @@ type SourceAwsConfiguration struct {
 	// This member is required.
 	AccountType SourceAccountType
 
-	// Role ARN to be assumed by AIDevOps to operate on behalf of customer.
+	// Role ARN to be assumed by AIDevOps to operate on behalf of customer. To set
+	// this role ARN on AssociateService or UpdateAssociation, the caller must have at
+	// least the iam:PassRole permission on arn:aws:iam::<account-id>:role/* in the
+	// caller's own account, with the condition iam:PassedToService set to
+	// aidevops.amazonaws.com. A broader iam:PassRole grant also satisfies this
+	// requirement.
 	//
 	// This member is required.
 	AssumableRoleArn *string
+
+	// Optional IAM role ARN to be assumed by AIDevOps for elevated directed actions
+	// on behalf of the customer. Used for mutating operations gated by
+	// elevatedActionsEnabled on the AgentSpace. When not provided, only non-elevated
+	// directed actions are available for this AWS account. Setting this role is
+	// subject to the same minimum iam:PassRole requirement described on
+	// assumableRoleArn.
+	AgentElevatedRoleArn *string
+
+	// Validation status of the agentElevatedRoleArn. Updated asynchronously after the
+	// customer registers an elevated role. Possible values: PENDING_CONFIRMATION
+	// (validation in progress), VALID (role validated), INVALID (validation failed).
+	AgentElevatedRoleArnStatus ValidationStatus
 
 	// External ID for additional security when assuming the role. Used to prevent the
 	// confused deputy problem.

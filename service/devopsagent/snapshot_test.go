@@ -686,6 +686,18 @@ func TestCheckSnapshot_UpdateAgentSpace(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateApprovalAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateApprovalAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateApprovalAction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateAsset(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateAsset(context.Background(), nil, func(o *Options) {
@@ -1422,6 +1434,18 @@ func TestUpdateSnapshot_UpdateAgentSpace(t *testing.T) {
 	_, err := svc.UpdateAgentSpace(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateAgentSpace")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateApprovalAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateApprovalAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateApprovalAction")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

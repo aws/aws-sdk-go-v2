@@ -213,10 +213,12 @@ func TestCheckRequestSnapshot_AssociateService(t *testing.T) {
 		ServiceId:    ptr.String("__ServiceId__"),
 		Configuration: &types.ServiceConfigurationMemberSourceAws{
 			Value: types.SourceAwsConfiguration{
-				AccountId:        ptr.String("__AccountId__"),
-				AccountType:      types.SourceAccountType("source"),
-				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
-				ExternalId:       ptr.String("__ExternalId__"),
+				AccountId:                  ptr.String("__AccountId__"),
+				AccountType:                types.SourceAccountType("source"),
+				AssumableRoleArn:           ptr.String("__AssumableRoleArn__"),
+				ExternalId:                 ptr.String("__ExternalId__"),
+				AgentElevatedRoleArn:       ptr.String("__AgentElevatedRoleArn__"),
+				AgentElevatedRoleArnStatus: types.ValidationStatus("valid"),
 			},
 		},
 		Capabilities: map[string]types.CapabilityConfiguration{
@@ -257,6 +259,9 @@ func TestCheckRequestSnapshot_CreateAgentSpace(t *testing.T) {
 		ClientToken: ptr.String("__ClientToken__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
+		},
+		Preferences: map[string]bool{
+			"key0": true,
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1768,6 +1773,9 @@ func TestCheckRequestSnapshot_UpdateAgentSpace(t *testing.T) {
 		Name:         ptr.String("__Name__"),
 		Description:  ptr.String("__Description__"),
 		Locale:       ptr.String("__Locale__"),
+		Preferences: map[string]bool{
+			"key0": true,
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1788,6 +1796,44 @@ func TestCheckRequestSnapshot_UpdateAgentSpace(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAgentSpace"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_UpdateApprovalAction(t *testing.T) {
+	input := &UpdateApprovalActionInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		ApprovalId:   ptr.String("__ApprovalId__"),
+		Action:       types.ApprovalActionType("APPROVED"),
+		FinalPattern: &types.ApprovalPattern{
+			Tool: ptr.String("__Tool__"),
+			ArgumentPins: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Reason:     ptr.String("__Reason__"),
+		TtlSeconds: ptr.Int32(1),
+		SingleUse:  ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateApprovalAction(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateApprovalAction"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1871,10 +1917,12 @@ func TestCheckRequestSnapshot_UpdateAssociation(t *testing.T) {
 		AssociationId: ptr.String("__AssociationId__"),
 		Configuration: &types.ServiceConfigurationMemberSourceAws{
 			Value: types.SourceAwsConfiguration{
-				AccountId:        ptr.String("__AccountId__"),
-				AccountType:      types.SourceAccountType("source"),
-				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
-				ExternalId:       ptr.String("__ExternalId__"),
+				AccountId:                  ptr.String("__AccountId__"),
+				AccountType:                types.SourceAccountType("source"),
+				AssumableRoleArn:           ptr.String("__AssumableRoleArn__"),
+				ExternalId:                 ptr.String("__ExternalId__"),
+				AgentElevatedRoleArn:       ptr.String("__AgentElevatedRoleArn__"),
+				AgentElevatedRoleArnStatus: types.ValidationStatus("valid"),
 			},
 		},
 		Capabilities: map[string]types.CapabilityConfiguration{
@@ -2117,10 +2165,12 @@ func TestUpdateRequestSnapshot_AssociateService(t *testing.T) {
 		ServiceId:    ptr.String("__ServiceId__"),
 		Configuration: &types.ServiceConfigurationMemberSourceAws{
 			Value: types.SourceAwsConfiguration{
-				AccountId:        ptr.String("__AccountId__"),
-				AccountType:      types.SourceAccountType("source"),
-				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
-				ExternalId:       ptr.String("__ExternalId__"),
+				AccountId:                  ptr.String("__AccountId__"),
+				AccountType:                types.SourceAccountType("source"),
+				AssumableRoleArn:           ptr.String("__AssumableRoleArn__"),
+				ExternalId:                 ptr.String("__ExternalId__"),
+				AgentElevatedRoleArn:       ptr.String("__AgentElevatedRoleArn__"),
+				AgentElevatedRoleArnStatus: types.ValidationStatus("valid"),
 			},
 		},
 		Capabilities: map[string]types.CapabilityConfiguration{
@@ -2161,6 +2211,9 @@ func TestUpdateRequestSnapshot_CreateAgentSpace(t *testing.T) {
 		ClientToken: ptr.String("__ClientToken__"),
 		Tags: map[string]string{
 			"key0": "__Value__",
+		},
+		Preferences: map[string]bool{
+			"key0": true,
 		},
 	}
 	body := &bytes.Buffer{}
@@ -3672,6 +3725,9 @@ func TestUpdateRequestSnapshot_UpdateAgentSpace(t *testing.T) {
 		Name:         ptr.String("__Name__"),
 		Description:  ptr.String("__Description__"),
 		Locale:       ptr.String("__Locale__"),
+		Preferences: map[string]bool{
+			"key0": true,
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3692,6 +3748,44 @@ func TestUpdateRequestSnapshot_UpdateAgentSpace(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAgentSpace"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateApprovalAction(t *testing.T) {
+	input := &UpdateApprovalActionInput{
+		AgentSpaceId: ptr.String("__AgentSpaceId__"),
+		ApprovalId:   ptr.String("__ApprovalId__"),
+		Action:       types.ApprovalActionType("APPROVED"),
+		FinalPattern: &types.ApprovalPattern{
+			Tool: ptr.String("__Tool__"),
+			ArgumentPins: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Reason:     ptr.String("__Reason__"),
+		TtlSeconds: ptr.Int32(1),
+		SingleUse:  ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateApprovalAction(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateApprovalAction"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3775,10 +3869,12 @@ func TestUpdateRequestSnapshot_UpdateAssociation(t *testing.T) {
 		AssociationId: ptr.String("__AssociationId__"),
 		Configuration: &types.ServiceConfigurationMemberSourceAws{
 			Value: types.SourceAwsConfiguration{
-				AccountId:        ptr.String("__AccountId__"),
-				AccountType:      types.SourceAccountType("source"),
-				AssumableRoleArn: ptr.String("__AssumableRoleArn__"),
-				ExternalId:       ptr.String("__ExternalId__"),
+				AccountId:                  ptr.String("__AccountId__"),
+				AccountType:                types.SourceAccountType("source"),
+				AssumableRoleArn:           ptr.String("__AssumableRoleArn__"),
+				ExternalId:                 ptr.String("__ExternalId__"),
+				AgentElevatedRoleArn:       ptr.String("__AgentElevatedRoleArn__"),
+				AgentElevatedRoleArnStatus: types.ValidationStatus("valid"),
 			},
 		},
 		Capabilities: map[string]types.CapabilityConfiguration{

@@ -5844,9 +5844,26 @@ func TestCheckResponseSnapshot_CreateFleet(t *testing.T) {
 			MaxTotalPrice:          ptr.String("__MaxTotalPrice__"),
 		},
 		ReservedCapacityOptions: &types.ReservedCapacityOptionsRequest{
+			AllocationStrategy: types.ReservedCapacityAllocationStrategy("prioritized"),
 			ReservationTypes: []types.FleetReservationType{
-				types.FleetReservationType("interruptible-capacity-reservation"),
-				types.FleetReservationType("interruptible-capacity-reservation"),
+				types.FleetReservationType("on-demand-capacity-reservation"),
+				types.FleetReservationType("on-demand-capacity-reservation"),
+			},
+			CapacityReservationTarget: &types.FleetCapacityReservationTargetRequest{
+				CapacityReservationIds: []string{
+					"__Member__",
+					"__Member__",
+				},
+				CapacityReservationResourceGroupArns: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			ReservedCapacityFallbackOptions: &types.ReservedCapacityFallbackOptionsRequest{
+				MarketTypes: []types.ReservedCapacityFallbackMarketType{
+					types.ReservedCapacityFallbackMarketType("on-demand"),
+					types.ReservedCapacityFallbackMarketType("on-demand"),
+				},
 			},
 		},
 		ExcessCapacityTerminationPolicy: types.FleetExcessCapacityTerminationPolicy("no-termination"),
@@ -26071,9 +26088,16 @@ func TestCheckResponseSnapshot_DescribeFleets(t *testing.T) {
 					MaxTotalPrice:          ptr.String("__MaxTotalPrice__"),
 				},
 				ReservedCapacityOptions: &types.ReservedCapacityOptions{
+					AllocationStrategy: types.ReservedCapacityAllocationStrategy("prioritized"),
 					ReservationTypes: []types.FleetReservationType{
-						types.FleetReservationType("interruptible-capacity-reservation"),
-						types.FleetReservationType("interruptible-capacity-reservation"),
+						types.FleetReservationType("on-demand-capacity-reservation"),
+						types.FleetReservationType("on-demand-capacity-reservation"),
+					},
+					ReservedCapacityFallbackOptions: &types.ReservedCapacityFallbackOptions{
+						MarketTypes: []types.ReservedCapacityFallbackMarketType{
+							types.ReservedCapacityFallbackMarketType("on-demand"),
+							types.ReservedCapacityFallbackMarketType("on-demand"),
+						},
 					},
 				},
 				Tags: []types.Tag{
@@ -27295,9 +27319,16 @@ func TestCheckResponseSnapshot_DescribeFleets(t *testing.T) {
 					MaxTotalPrice:          ptr.String("__MaxTotalPrice__"),
 				},
 				ReservedCapacityOptions: &types.ReservedCapacityOptions{
+					AllocationStrategy: types.ReservedCapacityAllocationStrategy("prioritized"),
 					ReservationTypes: []types.FleetReservationType{
-						types.FleetReservationType("interruptible-capacity-reservation"),
-						types.FleetReservationType("interruptible-capacity-reservation"),
+						types.FleetReservationType("on-demand-capacity-reservation"),
+						types.FleetReservationType("on-demand-capacity-reservation"),
+					},
+					ReservedCapacityFallbackOptions: &types.ReservedCapacityFallbackOptions{
+						MarketTypes: []types.ReservedCapacityFallbackMarketType{
+							types.ReservedCapacityFallbackMarketType("on-demand"),
+							types.ReservedCapacityFallbackMarketType("on-demand"),
+						},
 					},
 				},
 				Tags: []types.Tag{

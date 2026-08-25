@@ -738,6 +738,29 @@ func (StandbyInstances) Values() []StandbyInstances {
 	}
 }
 
+type TargetCapacityType string
+
+// Enum values for TargetCapacityType
+const (
+	TargetCapacityTypeOnDemandCapacityReservation      TargetCapacityType = "on-demand-capacity-reservation"
+	TargetCapacityTypeCapacityBlock                    TargetCapacityType = "capacity-block"
+	TargetCapacityTypeInterruptibleCapacityReservation TargetCapacityType = "interruptible-capacity-reservation"
+	TargetCapacityTypeOnDemand                         TargetCapacityType = "on-demand"
+)
+
+// Values returns all known values for TargetCapacityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TargetCapacityType) Values() []TargetCapacityType {
+	return []TargetCapacityType{
+		"on-demand-capacity-reservation",
+		"capacity-block",
+		"interruptible-capacity-reservation",
+		"on-demand",
+	}
+}
+
 type WarmPoolState string
 
 // Enum values for WarmPoolState

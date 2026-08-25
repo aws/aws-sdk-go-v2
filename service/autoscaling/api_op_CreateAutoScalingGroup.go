@@ -268,9 +268,11 @@ type CreateAutoScalingGroupInput struct {
 	MaxInstanceLifetime *int32
 
 	// The mixed instances policy. For more information, see [Auto Scaling groups with multiple instance types and purchase options] in the Amazon EC2 Auto
-	// Scaling User Guide.
+	// Scaling User Guide. To learn how to prioritize multiple capacity types, see [Use Distribution Segments to target multiple capacity types]in
+	// the Amazon EC2 Auto Scaling User Guide.
 	//
 	// [Auto Scaling groups with multiple instance types and purchase options]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html
+	// [Use Distribution Segments to target multiple capacity types]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/use-distribution-segments.html
 	MixedInstancesPolicy *types.MixedInstancesPolicy
 
 	// Indicates whether newly launched instances are protected from termination by

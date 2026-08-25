@@ -5049,6 +5049,32 @@ func awsAwsquery_serializeDocumentDesiredConfiguration(v *types.DesiredConfigura
 	return nil
 }
 
+func awsAwsquery_serializeDocumentDistributionSegment(v *types.DistributionSegment, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.TargetCapacityTypes != nil {
+		objectKey := object.Key("TargetCapacityTypes")
+		if err := awsAwsquery_serializeDocumentTargetCapacityTypes(v.TargetCapacityTypes, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentDistributionSegments(v []types.DistributionSegment, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentDistributionSegment(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentEbs(v *types.Ebs, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -5410,6 +5436,13 @@ func awsAwsquery_serializeDocumentInstanceReusePolicy(v *types.InstanceReusePoli
 func awsAwsquery_serializeDocumentInstancesDistribution(v *types.InstancesDistribution, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if v.DistributionSegments != nil {
+		objectKey := object.Key("DistributionSegments")
+		if err := awsAwsquery_serializeDocumentDistributionSegments(v.DistributionSegments, objectKey); err != nil {
+			return err
+		}
+	}
 
 	if v.OnDemandAllocationStrategy != nil {
 		objectKey := object.Key("OnDemandAllocationStrategy")
@@ -6459,6 +6492,16 @@ func awsAwsquery_serializeDocumentTags(v []types.Tag, value query.Value) error {
 		if err := awsAwsquery_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentTargetCapacityTypes(v []types.TargetCapacityType, value query.Value) error {
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }

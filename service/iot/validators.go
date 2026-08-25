@@ -5273,6 +5273,11 @@ func validateAction(v *types.Action) error {
 			invalidParams.AddNested("Location", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.InfluxDB != nil {
+		if err := validateInfluxDBAction(v.InfluxDB); err != nil {
+			invalidParams.AddNested("InfluxDB", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -6046,6 +6051,51 @@ func validateHttpUrlDestinationConfiguration(v *types.HttpUrlDestinationConfigur
 	invalidParams := smithy.InvalidParamsError{Context: "HttpUrlDestinationConfiguration"}
 	if v.ConfirmationUrl == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfirmationUrl"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInfluxDBAction(v *types.InfluxDBAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InfluxDBAction"}
+	if v.DestinationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationArn"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInfluxDBDestinationConfiguration(v *types.InfluxDBDestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InfluxDBDestinationConfiguration"}
+	if v.Endpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Endpoint"))
+	}
+	if len(v.InfluxDBVersion) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InfluxDBVersion"))
+	}
+	if v.SecretId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6968,6 +7018,11 @@ func validateTopicRuleDestinationConfiguration(v *types.TopicRuleDestinationConf
 	if v.VpcConfiguration != nil {
 		if err := validateVpcDestinationConfiguration(v.VpcConfiguration); err != nil {
 			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InfluxDBConfiguration != nil {
+		if err := validateInfluxDBDestinationConfiguration(v.InfluxDBConfiguration); err != nil {
+			invalidParams.AddNested("InfluxDBConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

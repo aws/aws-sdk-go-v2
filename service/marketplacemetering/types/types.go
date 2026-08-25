@@ -125,10 +125,13 @@ type UsageRecord struct {
 
 	// The CustomerAWSAccountId parameter specifies the AWS account ID of the buyer.
 	//
-	// For existing integrations, to access your CustomerIdentifier to
-	// CustomerAWSAccountId mapping, see [Account Feeds].
+	// If you have an existing integration and need the CustomerAWSAccountId that
+	// corresponds to a CustomerIdentifier , contact [AWS Marketplace Seller Operations] to obtain the mapping. Do not
+	// request the CustomerAWSAccountId directly from buyers. We cannot verify that a
+	// buyer-provided account ID is authentic, which can result in incorrect metering
+	// or billing.
 	//
-	// [Account Feeds]: https://docs.aws.amazon.com/marketplace/latest/userguide/data-feed-account.html
+	// [AWS Marketplace Seller Operations]: https://aws.amazon.com/marketplace/management/contact-us/
 	CustomerAWSAccountId *string
 
 	// The CustomerIdentifier is obtained through the ResolveCustomer operation and

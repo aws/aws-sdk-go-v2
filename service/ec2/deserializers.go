@@ -152966,6 +152966,128 @@ func awsEc2query_deserializeDocumentReservationValue(v **types.ReservationValue,
 	return nil
 }
 
+func awsEc2query_deserializeDocumentReservedCapacityFallbackMarketTypeList(v *[]types.ReservedCapacityFallbackMarketType, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.ReservedCapacityFallbackMarketType
+	if *v == nil {
+		sv = make([]types.ReservedCapacityFallbackMarketType, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		decoder = memberDecoder
+		switch {
+		case strings.EqualFold("item", t.Name.Local):
+			var col types.ReservedCapacityFallbackMarketType
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				col = types.ReservedCapacityFallbackMarketType(xtv)
+			}
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentReservedCapacityFallbackMarketTypeListUnwrapped(v *[]types.ReservedCapacityFallbackMarketType, decoder smithyxml.NodeDecoder) error {
+	var sv []types.ReservedCapacityFallbackMarketType
+	if *v == nil {
+		sv = make([]types.ReservedCapacityFallbackMarketType, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.ReservedCapacityFallbackMarketType
+		t := decoder.StartEl
+		_ = t
+		val, err := decoder.Value()
+		if err != nil {
+			return err
+		}
+		if val == nil {
+			break
+		}
+		{
+			xtv := string(val)
+			mv = types.ReservedCapacityFallbackMarketType(xtv)
+		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsEc2query_deserializeDocumentReservedCapacityFallbackOptions(v **types.ReservedCapacityFallbackOptions, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ReservedCapacityFallbackOptions
+	if *v == nil {
+		sv = &types.ReservedCapacityFallbackOptions{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("marketTypeSet", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentReservedCapacityFallbackMarketTypeList(&sv.MarketTypes, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsEc2query_deserializeDocumentReservedCapacityOptions(v **types.ReservedCapacityOptions, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -152988,9 +153110,28 @@ func awsEc2query_deserializeDocumentReservedCapacityOptions(v **types.ReservedCa
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("allocationStrategy", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AllocationStrategy = types.ReservedCapacityAllocationStrategy(xtv)
+			}
+
 		case strings.EqualFold("reservationTypeSet", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsEc2query_deserializeDocumentReservationTypeList(&sv.ReservationTypes, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("reservedCapacityFallbackOptions", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentReservedCapacityFallbackOptions(&sv.ReservedCapacityFallbackOptions, nodeDecoder); err != nil {
 				return err
 			}
 

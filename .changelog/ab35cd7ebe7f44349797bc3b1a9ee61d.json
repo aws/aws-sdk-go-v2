@@ -1,0 +1,8 @@
+{
+    "id": "ab35cd7e-be7f-4434-9797-bc3b1a9ee61d",
+    "type": "feature",
+    "description": "Fleet feature to support Capacity Reservation Resource Groups with Amazon EC2 Capacity Blocks and interruptible Capacity Reservations",
+    "modules": [
+        "service/ec2"
+    ]
+}
