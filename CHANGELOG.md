@@ -1,3 +1,22 @@
+# Release (2026-08-26)
+
+## General Highlights
+* **Feature**: Stop registering the `ComputeContentLength` middleware in generated clients. `Content-Length` is now set when the request body is set via `SetStream`.
+* **Dependency Update**: Update to smithy-go v1.28.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/devopsagent`: [v1.12.0](service/devopsagent/CHANGELOG.md#v1120-2026-08-26)
+  * **Feature**: AWS DevOps Agent now supports trigger filter groups for Release Readiness Review, letting you control when the capability auto-triggers based on webhook events and target branches.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.324.0](service/ec2/CHANGELOG.md#v13240-2026-08-26)
+  * **Feature**: Adds deleting state to possible VPC States.
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions`: [v1.25.0](service/licensemanagerusersubscriptions/CHANGELOG.md#v1250-2026-08-26)
+  * **Feature**: Released support for License Expiry field in ListProductSubscriptions API
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.68.0](service/networkfirewall/CHANGELOG.md#v1680-2026-08-26)
+  * **Feature**: Adding new status enum for Firewalls.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.269.0](service/sagemaker/CHANGELOG.md#v12690-2026-08-26)
+  * **Feature**: Amazon SageMaker AI now supports ml.g7 instances for model optimization. You can now run model optimization jobs on ml.g7 instances, in supported AWS Regions.
+
 # Release (2026-08-25)
 
 ## General Highlights

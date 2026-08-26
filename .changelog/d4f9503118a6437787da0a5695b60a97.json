@@ -1,8 +1,0 @@
-{
-    "id": "d4f95031-18a6-4377-87da-0a5695b60a97",
-    "type": "feature",
-    "description": "AWS DevOps Agent now supports trigger filter groups for Release Readiness Review, letting you control when the capability auto-triggers based on webhook events and target branches.",
-    "modules": [
-        "service/devopsagent"
-    ]
-}

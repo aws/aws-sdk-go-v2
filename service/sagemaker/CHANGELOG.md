@@ -1,3 +1,10 @@
+# v1.269.0 (2026-08-26)
+
+* **Feature**: Amazon SageMaker AI now supports ml.g7 instances for model optimization. You can now run model optimization jobs on ml.g7 instances, in supported AWS Regions.
+* **Feature**: Stop registering the `ComputeContentLength` middleware in generated clients. `Content-Length` is now set when the request body is set via `SetStream`.
+* **Dependency Update**: Update to smithy-go v1.28.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.268.1 (2026-08-25)
 
 * **Dependency Update**: Update to smithy-go v1.27.10.

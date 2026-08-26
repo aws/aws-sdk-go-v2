@@ -1,3 +1,9 @@
+# v1.0.0-preview.124 (2026-08-26)
+
+* **Feature**: Stop registering the `ComputeContentLength` middleware in generated clients. `Content-Length` is now set when the request body is set via `SetStream`.
+* **Dependency Update**: Update to smithy-go v1.28.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.0-preview.123 (2026-08-25)
 
 * **Dependency Update**: Update to smithy-go v1.27.10.

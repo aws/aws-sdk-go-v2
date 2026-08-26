@@ -1,8 +1,0 @@
-{
-    "id": "b6373c81-3e9e-44a3-84ed-eb144ffacaca",
-    "type": "feature",
-    "description": "Adding new status enum for Firewalls.",
-    "modules": [
-        "service/networkfirewall"
-    ]
-}

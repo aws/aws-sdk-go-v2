@@ -1,3 +1,10 @@
+# v1.324.0 (2026-08-26)
+
+* **Feature**: Adds deleting state to possible VPC States.
+* **Feature**: Stop registering the `ComputeContentLength` middleware in generated clients. `Content-Length` is now set when the request body is set via `SetStream`.
+* **Dependency Update**: Update to smithy-go v1.28.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.323.0 (2026-08-25)
 
 * **Feature**: Fleet feature to support Capacity Reservation Resource Groups with Amazon EC2 Capacity Blocks and interruptible Capacity Reservations

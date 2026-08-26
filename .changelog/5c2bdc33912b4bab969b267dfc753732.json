@@ -1,8 +1,0 @@
-{
-    "id": "5c2bdc33-912b-4bab-969b-267dfc753732",
-    "type": "feature",
-    "description": "Released support for License Expiry field in ListProductSubscriptions API",
-    "modules": [
-        "service/licensemanagerusersubscriptions"
-    ]
-}

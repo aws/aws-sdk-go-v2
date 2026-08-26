@@ -3,17 +3,17 @@ module github.com/aws/aws-sdk-go-v2/feature/dynamodb/expression
 go 1.24
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.43.8
-	github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue v1.20.63
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.63.5
+	github.com/aws/aws-sdk-go-v2 v1.44.0
+	github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue v1.20.64
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.64.0
 )
 
 require (
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.39 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.39 // indirect
-	github.com/aws/aws-sdk-go-v2/service/dynamodbstreams v1.36.8 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.13.18 // indirect
-	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.12.16 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.40 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.40 // indirect
+	github.com/aws/aws-sdk-go-v2/service/dynamodbstreams v1.37.0 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.13.19 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery v1.12.17 // indirect
 	github.com/aws/smithy-go v1.28.1 // indirect
 )
 
