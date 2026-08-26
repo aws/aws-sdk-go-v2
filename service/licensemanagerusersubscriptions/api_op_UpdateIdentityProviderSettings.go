@@ -49,7 +49,7 @@ type UpdateIdentityProviderSettingsInput struct {
 	// The name of the user-based subscription product.
 	//
 	// Valid values: VISUAL_STUDIO_ENTERPRISE | VISUAL_STUDIO_PROFESSIONAL |
-	// OFFICE_PROFESSIONAL_PLUS | REMOTE_DESKTOP_SERVICES
+	// OFFICE_PROFESSIONAL_PLUS | OFFICE_STANDARD | REMOTE_DESKTOP_SERVICES
 	Product *string
 
 	noSmithyDocumentSerde

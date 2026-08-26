@@ -674,6 +674,11 @@ type CapabilityConfiguration struct {
 	// Whether the capability is enabled.
 	Enabled *bool
 
+	// Optional trigger filter groups. Evaluated only when enabled=true; retained
+	// while the capability is disabled, so re-enabling restores the prior trigger
+	// behavior.
+	TriggerFilterGroups []TriggerFilterGroup
+
 	noSmithyDocumentSerde
 }
 
@@ -1758,6 +1763,18 @@ type PagerDutyOAuthClientCredentialsConfig struct {
 
 	// OAuth token exchange parameters for authenticating with the service.
 	ExchangeParameters map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A regex-based match condition. Passes when the value matches any pattern.
+type PatternFilter struct {
+
+	// Anchored full-match regex patterns. The condition passes when the value matches
+	// at least one pattern.
+	//
+	// This member is required.
+	Patterns []string
 
 	noSmithyDocumentSerde
 }
@@ -3568,6 +3585,20 @@ type TriggerConditionMemberSchedule struct {
 }
 
 func (*TriggerConditionMemberSchedule) isTriggerCondition() {}
+
+// A group of trigger conditions. The group matches when ALL present conditions
+// pass. A group cannot be empty: at least one condition must be present.
+type TriggerFilterGroup struct {
+
+	// Passes when the webhook event is one of the listed events.
+	Events []TriggerEvent
+
+	// Passes when the change request target branch matches. Applicable to
+	// RELEASE_READINESS_REVIEW only.
+	TargetBranches *PatternFilter
+
+	noSmithyDocumentSerde
+}
 
 // Represents a usage metric with its configured limit and current usage value.
 type UsageMetric struct {

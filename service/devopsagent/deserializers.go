@@ -14392,6 +14392,11 @@ func awsRestjson1_deserializeDocumentCapabilityConfiguration(v **types.Capabilit
 				sv.Enabled = ptr.Bool(jtv)
 			}
 
+		case "triggerFilterGroups":
+			if err := awsRestjson1_deserializeDocumentTriggerFilterGroups(&sv.TriggerFilterGroups, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -16527,6 +16532,42 @@ func awsRestjson1_deserializeDocumentPagerDutyServicesList(v *[]string, value in
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPatternFilter(v **types.PatternFilter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PatternFilter
+	if *v == nil {
+		sv = &types.PatternFilter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "patterns":
+			if err := awsRestjson1_deserializeDocumentTriggerRegexPatternList(&sv.Patterns, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -19209,6 +19250,117 @@ loop:
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentTriggerEventList(v *[]types.TriggerEvent, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TriggerEvent
+	if *v == nil {
+		cv = []types.TriggerEvent{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TriggerEvent
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected TriggerEvent to be of type string, got %T instead", value)
+			}
+			col = types.TriggerEvent(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTriggerFilterGroup(v **types.TriggerFilterGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TriggerFilterGroup
+	if *v == nil {
+		sv = &types.TriggerFilterGroup{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "events":
+			if err := awsRestjson1_deserializeDocumentTriggerEventList(&sv.Events, value); err != nil {
+				return err
+			}
+
+		case "targetBranches":
+			if err := awsRestjson1_deserializeDocumentPatternFilter(&sv.TargetBranches, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTriggerFilterGroups(v *[]types.TriggerFilterGroup, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TriggerFilterGroup
+	if *v == nil {
+		cv = []types.TriggerFilterGroup{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TriggerFilterGroup
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentTriggerFilterGroup(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentTriggerList(v *[]types.Trigger, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -19236,6 +19388,42 @@ func awsRestjson1_deserializeDocumentTriggerList(v *[]types.Trigger, value inter
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTriggerRegexPatternList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected TriggerRegexPattern to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
 		cv = append(cv, col)
 
 	}

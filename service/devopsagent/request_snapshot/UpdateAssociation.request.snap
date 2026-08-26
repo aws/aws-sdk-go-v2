@@ -2,4 +2,4 @@ PATCH /v1/agentspaces/__AgentSpaceId__/associations/__AssociationId__
 
 Content-Type: application/json
 
-{"capabilities":{"key0":{"enabled":true}},"configuration":{"sourceAws":{"accountId":"__AccountId__","accountType":"source","agentElevatedRoleArn":"__AgentElevatedRoleArn__","agentElevatedRoleArnStatus":"valid","assumableRoleArn":"__AssumableRoleArn__","externalId":"__ExternalId__"}}}
+{"capabilities":{"key0":{"enabled":true,"triggerFilterGroups":[{"events":["PULL_REQUEST_READY_FOR_REVIEW","PULL_REQUEST_READY_FOR_REVIEW"],"targetBranches":{"patterns":["__Member__","__Member__"]}},{"events":["PULL_REQUEST_READY_FOR_REVIEW","PULL_REQUEST_READY_FOR_REVIEW"],"targetBranches":{"patterns":["__Member__","__Member__"]}}]}},"configuration":{"sourceAws":{"accountId":"__AccountId__","accountType":"source","agentElevatedRoleArn":"__AgentElevatedRoleArn__","agentElevatedRoleArnStatus":"valid","assumableRoleArn":"__AssumableRoleArn__","externalId":"__ExternalId__"}}}

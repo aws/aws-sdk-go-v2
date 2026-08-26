@@ -1,0 +1,8 @@
+{
+    "id": "38aa5d59-7a18-492e-95dc-679748511323",
+    "type": "feature",
+    "description": "Amazon SageMaker AI now supports ml.g7 instances for model optimization. You can now run model optimization jobs on ml.g7 instances, in supported AWS Regions.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

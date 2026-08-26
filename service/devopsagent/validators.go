@@ -1497,6 +1497,24 @@ func validateAssetZipContent(v *types.AssetZipContent) error {
 	}
 }
 
+func validateAssociationCapabilities(v map[string]types.CapabilityConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociationCapabilities"}
+	for key := range v {
+		value := v[key]
+		if err := validateCapabilityConfiguration(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAWSConfiguration(v *types.AWSConfiguration) error {
 	if v == nil {
 		return nil
@@ -1546,6 +1564,23 @@ func validateAzureDevOpsConfiguration(v *types.AzureDevOpsConfiguration) error {
 	}
 	if v.ProjectName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCapabilityConfiguration(v *types.CapabilityConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CapabilityConfiguration"}
+	if v.TriggerFilterGroups != nil {
+		if err := validateTriggerFilterGroups(v.TriggerFilterGroups); err != nil {
+			invalidParams.AddNested("TriggerFilterGroups", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2242,6 +2277,21 @@ func validatePagerDutyOAuthClientCredentialsConfig(v *types.PagerDutyOAuthClient
 	}
 }
 
+func validatePatternFilter(v *types.PatternFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PatternFilter"}
+	if v.Patterns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Patterns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePrivateConnectionMode(v types.PrivateConnectionMode) error {
 	if v == nil {
 		return nil
@@ -2846,6 +2896,40 @@ func validateTriggerCondition(v types.TriggerCondition) error {
 	}
 }
 
+func validateTriggerFilterGroup(v *types.TriggerFilterGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TriggerFilterGroup"}
+	if v.TargetBranches != nil {
+		if err := validatePatternFilter(v.TargetBranches); err != nil {
+			invalidParams.AddNested("TargetBranches", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTriggerFilterGroups(v []types.TriggerFilterGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TriggerFilterGroups"}
+	for i := range v {
+		if err := validateTriggerFilterGroup(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateServiceInput(v *AssociateServiceInput) error {
 	if v == nil {
 		return nil
@@ -2862,6 +2946,11 @@ func validateOpAssociateServiceInput(v *AssociateServiceInput) error {
 	} else if v.Configuration != nil {
 		if err := validateServiceConfiguration(v.Configuration); err != nil {
 			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Capabilities != nil {
+		if err := validateAssociationCapabilities(v.Capabilities); err != nil {
+			invalidParams.AddNested("Capabilities", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3782,6 +3871,11 @@ func validateOpUpdateAssociationInput(v *UpdateAssociationInput) error {
 	} else if v.Configuration != nil {
 		if err := validateServiceConfiguration(v.Configuration); err != nil {
 			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Capabilities != nil {
+		if err := validateAssociationCapabilities(v.Capabilities); err != nil {
+			invalidParams.AddNested("Capabilities", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

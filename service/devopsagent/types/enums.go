@@ -833,6 +833,28 @@ func (ToolClassification) Values() []ToolClassification {
 	}
 }
 
+type TriggerEvent string
+
+// Enum values for TriggerEvent
+const (
+	// A change request is created, updated, or marked ready for review while in a
+	// non-draft state.
+	TriggerEventPullRequestReadyForReview TriggerEvent = "PULL_REQUEST_READY_FOR_REVIEW"
+	// A change request is created or updated while in draft state.
+	TriggerEventPullRequestDraft TriggerEvent = "PULL_REQUEST_DRAFT"
+)
+
+// Values returns all known values for TriggerEvent. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TriggerEvent) Values() []TriggerEvent {
+	return []TriggerEvent{
+		"PULL_REQUEST_READY_FOR_REVIEW",
+		"PULL_REQUEST_DRAFT",
+	}
+}
+
 type UserType string
 
 // Enum values for UserType

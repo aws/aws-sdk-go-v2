@@ -137,6 +137,7 @@ const (
 	FirewallStatusValueProvisioning FirewallStatusValue = "PROVISIONING"
 	FirewallStatusValueDeleting     FirewallStatusValue = "DELETING"
 	FirewallStatusValueReady        FirewallStatusValue = "READY"
+	FirewallStatusValueFailed       FirewallStatusValue = "FAILED"
 )
 
 // Values returns all known values for FirewallStatusValue. Note that this can be
@@ -148,6 +149,7 @@ func (FirewallStatusValue) Values() []FirewallStatusValue {
 		"PROVISIONING",
 		"DELETING",
 		"READY",
+		"FAILED",
 	}
 }
 

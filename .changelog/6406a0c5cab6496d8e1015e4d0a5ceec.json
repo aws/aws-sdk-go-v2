@@ -1,0 +1,8 @@
+{
+    "id": "6406a0c5-cab6-496d-8e10-15e4d0a5ceec",
+    "type": "feature",
+    "description": "Adds deleting state to possible VPC States.",
+    "modules": [
+        "service/ec2"
+    ]
+}

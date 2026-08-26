@@ -6735,6 +6735,12 @@ const (
 	OptimizationJobDeploymentInstanceTypeMlG7e12xlarge    OptimizationJobDeploymentInstanceType = "ml.g7e.12xlarge"
 	OptimizationJobDeploymentInstanceTypeMlG7e24xlarge    OptimizationJobDeploymentInstanceType = "ml.g7e.24xlarge"
 	OptimizationJobDeploymentInstanceTypeMlG7e48xlarge    OptimizationJobDeploymentInstanceType = "ml.g7e.48xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG72xlarge      OptimizationJobDeploymentInstanceType = "ml.g7.2xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG74xlarge      OptimizationJobDeploymentInstanceType = "ml.g7.4xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG78xlarge      OptimizationJobDeploymentInstanceType = "ml.g7.8xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG712xlarge     OptimizationJobDeploymentInstanceType = "ml.g7.12xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG724xlarge     OptimizationJobDeploymentInstanceType = "ml.g7.24xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG748xlarge     OptimizationJobDeploymentInstanceType = "ml.g7.48xlarge"
 )
 
 // Values returns all known values for OptimizationJobDeploymentInstanceType. Note
@@ -6793,6 +6799,12 @@ func (OptimizationJobDeploymentInstanceType) Values() []OptimizationJobDeploymen
 		"ml.g7e.12xlarge",
 		"ml.g7e.24xlarge",
 		"ml.g7e.48xlarge",
+		"ml.g7.2xlarge",
+		"ml.g7.4xlarge",
+		"ml.g7.8xlarge",
+		"ml.g7.12xlarge",
+		"ml.g7.24xlarge",
+		"ml.g7.48xlarge",
 	}
 }
 

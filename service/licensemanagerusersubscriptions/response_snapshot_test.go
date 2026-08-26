@@ -851,6 +851,7 @@ func TestCheckResponseSnapshot_ListProductSubscriptions(t *testing.T) {
 				Domain:                ptr.String("__Domain__"),
 				SubscriptionStartDate: ptr.String("__SubscriptionStartDate__"),
 				SubscriptionEndDate:   ptr.String("__SubscriptionEndDate__"),
+				LicenseExpirationDate: ptr.String("__LicenseExpirationDate__"),
 			},
 			{
 				Username: ptr.String("__Username__"),
@@ -890,6 +891,7 @@ func TestCheckResponseSnapshot_ListProductSubscriptions(t *testing.T) {
 				Domain:                ptr.String("__Domain__"),
 				SubscriptionStartDate: ptr.String("__SubscriptionStartDate__"),
 				SubscriptionEndDate:   ptr.String("__SubscriptionEndDate__"),
+				LicenseExpirationDate: ptr.String("__LicenseExpirationDate__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -1271,6 +1273,7 @@ func TestCheckResponseSnapshot_StartProductSubscription(t *testing.T) {
 			Domain:                ptr.String("__Domain__"),
 			SubscriptionStartDate: ptr.String("__SubscriptionStartDate__"),
 			SubscriptionEndDate:   ptr.String("__SubscriptionEndDate__"),
+			LicenseExpirationDate: ptr.String("__LicenseExpirationDate__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("StartProductSubscription.response")
@@ -1366,6 +1369,7 @@ func TestCheckResponseSnapshot_StopProductSubscription(t *testing.T) {
 			Domain:                ptr.String("__Domain__"),
 			SubscriptionStartDate: ptr.String("__SubscriptionStartDate__"),
 			SubscriptionEndDate:   ptr.String("__SubscriptionEndDate__"),
+			LicenseExpirationDate: ptr.String("__LicenseExpirationDate__"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("StopProductSubscription.response")

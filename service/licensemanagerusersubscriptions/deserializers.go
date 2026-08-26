@@ -4187,6 +4187,15 @@ func awsRestjson1_deserializeDocumentProductUserSummary(v **types.ProductUserSum
 				return err
 			}
 
+		case "LicenseExpirationDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.LicenseExpirationDate = ptr.String(jtv)
+			}
+
 		case "Product":
 			if value != nil {
 				jtv, ok := value.(string)

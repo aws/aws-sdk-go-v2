@@ -4047,6 +4047,7 @@ const (
 	InstanceLifecycleSpot                             InstanceLifecycle = "spot"
 	InstanceLifecycleOnDemand                         InstanceLifecycle = "on-demand"
 	InstanceLifecycleInterruptibleCapacityReservation InstanceLifecycle = "interruptible-capacity-reservation"
+	InstanceLifecycleCapacityBlock                    InstanceLifecycle = "capacity-block"
 )
 
 // Values returns all known values for InstanceLifecycle. Note that this can be
@@ -4058,6 +4059,7 @@ func (InstanceLifecycle) Values() []InstanceLifecycle {
 		"spot",
 		"on-demand",
 		"interruptible-capacity-reservation",
+		"capacity-block",
 	}
 }
 
@@ -13655,6 +13657,7 @@ type VpcState string
 const (
 	VpcStatePending   VpcState = "pending"
 	VpcStateAvailable VpcState = "available"
+	VpcStateDeleting  VpcState = "deleting"
 )
 
 // Values returns all known values for VpcState. Note that this can be expanded in
@@ -13665,6 +13668,7 @@ func (VpcState) Values() []VpcState {
 	return []VpcState{
 		"pending",
 		"available",
+		"deleting",
 	}
 }
 

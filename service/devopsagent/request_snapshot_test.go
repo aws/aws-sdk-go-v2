@@ -224,6 +224,32 @@ func TestCheckRequestSnapshot_AssociateService(t *testing.T) {
 		Capabilities: map[string]types.CapabilityConfiguration{
 			"key0": {
 				Enabled: ptr.Bool(true),
+				TriggerFilterGroups: []types.TriggerFilterGroup{
+					{
+						Events: []types.TriggerEvent{
+							types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+							types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+						},
+						TargetBranches: &types.PatternFilter{
+							Patterns: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					{
+						Events: []types.TriggerEvent{
+							types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+							types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+						},
+						TargetBranches: &types.PatternFilter{
+							Patterns: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
 			},
 		},
 	}
@@ -1928,6 +1954,32 @@ func TestCheckRequestSnapshot_UpdateAssociation(t *testing.T) {
 		Capabilities: map[string]types.CapabilityConfiguration{
 			"key0": {
 				Enabled: ptr.Bool(true),
+				TriggerFilterGroups: []types.TriggerFilterGroup{
+					{
+						Events: []types.TriggerEvent{
+							types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+							types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+						},
+						TargetBranches: &types.PatternFilter{
+							Patterns: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					{
+						Events: []types.TriggerEvent{
+							types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+							types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+						},
+						TargetBranches: &types.PatternFilter{
+							Patterns: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
 			},
 		},
 	}
@@ -2176,6 +2228,32 @@ func TestUpdateRequestSnapshot_AssociateService(t *testing.T) {
 		Capabilities: map[string]types.CapabilityConfiguration{
 			"key0": {
 				Enabled: ptr.Bool(true),
+				TriggerFilterGroups: []types.TriggerFilterGroup{
+					{
+						Events: []types.TriggerEvent{
+							types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+							types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+						},
+						TargetBranches: &types.PatternFilter{
+							Patterns: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					{
+						Events: []types.TriggerEvent{
+							types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+							types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+						},
+						TargetBranches: &types.PatternFilter{
+							Patterns: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
 			},
 		},
 	}
@@ -3880,6 +3958,32 @@ func TestUpdateRequestSnapshot_UpdateAssociation(t *testing.T) {
 		Capabilities: map[string]types.CapabilityConfiguration{
 			"key0": {
 				Enabled: ptr.Bool(true),
+				TriggerFilterGroups: []types.TriggerFilterGroup{
+					{
+						Events: []types.TriggerEvent{
+							types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+							types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+						},
+						TargetBranches: &types.PatternFilter{
+							Patterns: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+					{
+						Events: []types.TriggerEvent{
+							types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+							types.TriggerEvent("PULL_REQUEST_READY_FOR_REVIEW"),
+						},
+						TargetBranches: &types.PatternFilter{
+							Patterns: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
+				},
 			},
 		},
 	}

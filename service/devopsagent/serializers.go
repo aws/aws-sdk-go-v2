@@ -6147,6 +6147,13 @@ func awsRestjson1_serializeDocumentCapabilityConfiguration(v *types.CapabilityCo
 		ok.Boolean(*v.Enabled)
 	}
 
+	if v.TriggerFilterGroups != nil {
+		ok := object.Key("triggerFilterGroups")
+		if err := awsRestjson1_serializeDocumentTriggerFilterGroups(v.TriggerFilterGroups, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -7144,6 +7151,20 @@ func awsRestjson1_serializeDocumentPagerDutyServicesList(v []string, value smith
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPatternFilter(v *types.PatternFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Patterns != nil {
+		ok := object.Key("patterns")
+		if err := awsRestjson1_serializeDocumentTriggerRegexPatternList(v.Patterns, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPortRanges(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -8109,6 +8130,62 @@ func awsRestjson1_serializeDocumentTriggerCondition(v types.TriggerCondition, va
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTriggerEventList(v []types.TriggerEvent, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTriggerFilterGroup(v *types.TriggerFilterGroup, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Events != nil {
+		ok := object.Key("events")
+		if err := awsRestjson1_serializeDocumentTriggerEventList(v.Events, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TargetBranches != nil {
+		ok := object.Key("targetBranches")
+		if err := awsRestjson1_serializeDocumentPatternFilter(v.TargetBranches, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTriggerFilterGroups(v []types.TriggerFilterGroup, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTriggerFilterGroup(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTriggerRegexPatternList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }
