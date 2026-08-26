@@ -5342,6 +5342,12 @@
                     "traits": {
                         "smithy.api#enumValue": "READY"
                     }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
                 }
             }
         },

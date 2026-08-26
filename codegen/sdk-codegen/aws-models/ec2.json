@@ -79578,6 +79578,12 @@
                     "traits": {
                         "smithy.api#enumValue": "interruptible-capacity-reservation"
                     }
+                },
+                "CAPACITY_BLOCK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "capacity-block"
+                    }
                 }
             }
         },
@@ -144391,6 +144397,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "available"
+                    }
+                },
+                "deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "deleting"
                     }
                 }
             }

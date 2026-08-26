@@ -1355,6 +1355,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Whether the capability is enabled.</p>"
                     }
+                },
+                "triggerFilterGroups": {
+                    "target": "com.amazonaws.devopsagent#TriggerFilterGroups",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional trigger filter groups. Evaluated only when enabled=true; retained while the capability is disabled, so re-enabling restores the prior trigger behavior.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1431,7 +1437,11 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "<p>Chat execution identifier — must be a valid UUID</p>",
-                "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                "smithy.api#length": {
+                    "min": 32,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9_-]+$"
             }
         },
         "com.amazonaws.devopsagent#ChatExecutionList": {
@@ -9083,6 +9093,21 @@
                 "smithy.api#documentation": "<p>List of pager duty services available for the association.</p>"
             }
         },
+        "com.amazonaws.devopsagent#PatternFilter": {
+            "type": "structure",
+            "members": {
+                "patterns": {
+                    "target": "com.amazonaws.devopsagent#TriggerRegexPatternList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Anchored full-match regex patterns. The condition passes when the value matches at least one pattern.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A regex-based match condition. Passes when the value matches any pattern.</p>"
+            }
+        },
         "com.amazonaws.devopsagent#PendingMessage": {
             "type": "structure",
             "members": {
@@ -12844,6 +12869,75 @@
                 "smithy.api#documentation": "<p>Defines the firing condition for a Trigger</p>"
             }
         },
+        "com.amazonaws.devopsagent#TriggerEvent": {
+            "type": "enum",
+            "members": {
+                "PULL_REQUEST_READY_FOR_REVIEW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A change request is created, updated, or marked ready for review while in a non-draft state.</p>",
+                        "smithy.api#enumValue": "PULL_REQUEST_READY_FOR_REVIEW"
+                    }
+                },
+                "PULL_REQUEST_DRAFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A change request is created or updated while in draft state.</p>",
+                        "smithy.api#enumValue": "PULL_REQUEST_DRAFT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Webhook events that can auto-trigger a capability. PULL_REQUEST_* events apply to RELEASE_READINESS_REVIEW; WORKFLOW_* events apply to RELEASE_SHEPHERDING.</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#TriggerEventList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsagent#TriggerEvent"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Webhook events that activate a trigger filter group.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.devopsagent#TriggerFilterGroup": {
+            "type": "structure",
+            "members": {
+                "events": {
+                    "target": "com.amazonaws.devopsagent#TriggerEventList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Passes when the webhook event is one of the listed events.</p>"
+                    }
+                },
+                "targetBranches": {
+                    "target": "com.amazonaws.devopsagent#PatternFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Passes when the change request target branch matches. Applicable to RELEASE_READINESS_REVIEW only.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A group of trigger conditions. The group matches when ALL present conditions pass. A group cannot be empty: at least one condition must be present.</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#TriggerFilterGroups": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsagent#TriggerFilterGroup"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filter groups controlling when a capability auto-triggers. The capability triggers when ANY group matches. Absent = default trigger behavior (all applicable events trigger).</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.devopsagent#TriggerList": {
             "type": "list",
             "member": {
@@ -12851,6 +12945,30 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>List of Triggers</p>"
+            }
+        },
+        "com.amazonaws.devopsagent#TriggerRegexPattern": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A regex pattern matched against the entire value. Example: 'main' or 'release/.*'.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[^\\x00-\\x1F\\x7F-\\x9F]+$"
+            }
+        },
+        "com.amazonaws.devopsagent#TriggerRegexPatternList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsagent#TriggerRegexPattern"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of anchored full-match regex patterns.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
             }
         },
         "com.amazonaws.devopsagent#TriggerResource": {
