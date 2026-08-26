@@ -1,3 +1,0 @@
-POST /OmitsSerializingEmptyLists?BooleanList=true&BooleanList=true&DoubleList=1&DoubleList=1&EnumList=Foo&EnumList=Foo&IntegerEnumList=1&IntegerEnumList=1&IntegerList=1&IntegerList=1&StringList=__Member__&StringList=__Member__&TimestampList=2000-01-01T00%3A00%3A00Z&TimestampList=2000-01-01T00%3A00%3A00Z
-
-

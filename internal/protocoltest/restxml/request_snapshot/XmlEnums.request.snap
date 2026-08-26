@@ -1,5 +1,0 @@
-PUT /XmlEnums
-
-Content-Type: application/xml
-
-<XmlEnumsRequest><fooEnum1>Foo</fooEnum1><fooEnum2>Foo</fooEnum2><fooEnum3>Foo</fooEnum3><fooEnumList><member>Foo</member><member>Foo</member></fooEnumList><fooEnumMap><entry><key>key0</key><value>Foo</value></entry></fooEnumMap><fooEnumSet><member>Foo</member><member>Foo</member></fooEnumSet></XmlEnumsRequest>

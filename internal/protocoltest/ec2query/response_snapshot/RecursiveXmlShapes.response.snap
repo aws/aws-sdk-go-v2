@@ -1,4 +1,0 @@
-200
-Content-Type: application/x-www-form-urlencoded
-
-Action=RecursiveXmlShapes&Nested.Foo=__Foo__&Nested.Nested.Bar=__Bar__&Version=2020-01-08

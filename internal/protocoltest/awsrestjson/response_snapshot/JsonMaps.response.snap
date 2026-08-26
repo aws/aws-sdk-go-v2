@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"denseBooleanMap":{"key0":true},"denseNumberMap":{"key0":1},"denseSetMap":{"key0":["__Member__","__Member__"]},"denseStringMap":{"key0":"__Value__"},"denseStructMap":{"key0":{"hi":"__Hi__"}}}

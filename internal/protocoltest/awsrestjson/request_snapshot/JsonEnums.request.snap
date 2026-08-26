@@ -1,5 +1,0 @@
-PUT /JsonEnums
-
-Content-Type: application/json
-
-{"fooEnum1":"Foo","fooEnum2":"Foo","fooEnum3":"Foo","fooEnumList":["Foo","Foo"],"fooEnumMap":{"key0":"Foo"},"fooEnumSet":["Foo","Foo"]}

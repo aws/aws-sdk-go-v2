@@ -1,5 +1,0 @@
-PUT /HttpPayloadWithXmlNamespace
-
-Content-Type: application/xml
-
-<PayloadWithXmlNamespace xmlns="http://foo.com"><name>__Name__</name></PayloadWithXmlNamespace>

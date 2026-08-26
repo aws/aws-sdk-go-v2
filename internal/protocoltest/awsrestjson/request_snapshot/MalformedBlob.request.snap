@@ -1,5 +1,0 @@
-POST /MalformedBlob
-
-Content-Type: application/json
-
-{"blob":"YmxvYg=="}

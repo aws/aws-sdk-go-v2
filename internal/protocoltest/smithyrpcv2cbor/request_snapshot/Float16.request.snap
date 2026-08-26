@@ -1,5 +1,0 @@
-POST /service/RpcV2Protocol/operation/Float16
-
-Accept: application/cbor
-Smithy-Protocol: rpc-v2-cbor
-

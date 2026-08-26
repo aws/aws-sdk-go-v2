@@ -9,7 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.39
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.13.18
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.13.39
-	github.com/aws/smithy-go v1.28.0
+	github.com/aws/smithy-go v1.28.1
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../

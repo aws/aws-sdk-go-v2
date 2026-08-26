@@ -1,5 +1,0 @@
-POST /XmlEmptyMaps
-
-Content-Type: application/xml
-
-<XmlEmptyMapsRequest><myMap><entry><key>key0</key><value><hi>__Hi__</hi></value></entry></myMap></XmlEmptyMapsRequest>

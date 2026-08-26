@@ -1,5 +1,0 @@
-POST /MalformedContentTypeWithGenericString
-
-Content-Type: text/plain
-
-__Payload__

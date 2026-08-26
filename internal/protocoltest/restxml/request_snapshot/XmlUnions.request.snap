@@ -1,5 +1,0 @@
-PUT /XmlUnions
-
-Content-Type: application/xml
-
-<XmlUnionsRequest><unionValue><stringValue>__XmlUnionShapeMemberStringValue__</stringValue></unionValue></XmlUnionsRequest>

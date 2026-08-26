@@ -1,4 +1,0 @@
-200
-Content-Type: application/x-www-form-urlencoded
-
-Action=SimpleScalarXmlProperties&ByteValue=1&DoubleDribble=1&EmptyStringValue=__EmptyStringValue__&FalseBooleanValue=true&FloatValue=1&IgnoreMe=__StringValue__&IntegerValue=1&LongValue=1&ShortValue=1&TrueBooleanValue=true&Version=2020-01-08

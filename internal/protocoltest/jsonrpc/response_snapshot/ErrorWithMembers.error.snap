@@ -1,5 +1,0 @@
-400
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: JsonProtocol.KitchenSinkOperation
-
-{"__type":"ErrorWithMembers","Code":"ErrorWithMembers","ComplexData":{"Blob":"YmxvYg==","Boolean":true,"Double":1,"EmptyStruct":{},"Float":1,"HttpdateTimestamp":"Sat, 01 Jan 2000 00:00:00 GMT","Integer":1,"Iso8601Timestamp":"2000-01-01T00:00:00Z","JsonValue":"__JsonValue__","ListOfLists":[["__Member__","__Member__"],["__Member__","__Member__"]],"ListOfMapsOfStrings":[{"key0":"__Value__"},{"key0":"__Value__"}],"ListOfStrings":["__Member__","__Member__"],"ListOfStructs":[{"Value":"__Value__"},{"Value":"__Value__"}],"Long":1,"MapOfListsOfStrings":{"key0":["__Member__","__Member__"]},"MapOfMaps":{"key0":{"key0":"__Value__"}},"MapOfStrings":{"key0":"__Value__"},"MapOfStructs":{"key0":{"Value":"__Value__"}},"RecursiveList":[{},{}],"RecursiveMap":{"key0":{}},"SimpleStruct":{"Value":"__Value__"},"String":"__String___","StructWithJsonName":{"Value":"__Value__"},"Timestamp":946684800,"UnixTimestamp":946684800},"IntegerField":1,"ListField":["__Member__","__Member__"],"MapField":{"key0":"__Value__"},"Message":"__Message__","StringField":"__StringField__"}
