@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"integerEnum1":1,"integerEnum2":1,"integerEnum3":1,"integerEnumList":[1,1],"integerEnumMap":{"key0":1},"integerEnumSet":[1,1]}

@@ -1,4 +1,0 @@
-200
-Content-Type: application/x-www-form-urlencoded
-
-Action=IgnoresWrappingXmlName&IgnoreMe.Foo=__Foo__&Version=2020-01-08

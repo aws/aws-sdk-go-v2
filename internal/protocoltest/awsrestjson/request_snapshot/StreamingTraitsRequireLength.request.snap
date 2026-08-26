@@ -1,6 +1,0 @@
-POST /StreamingTraitsRequireLength
-
-Content-Type: application/octet-stream
-X-Foo: __Foo__
-
-__Blob__

@@ -1,4 +1,0 @@
-200
-Content-Type: application/json
-
-{"greeting":"__Greeting__","name":"__Name__"}

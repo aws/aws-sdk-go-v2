@@ -1,7 +1,0 @@
-POST /service/RpcV2Protocol/operation/RpcV2CborSparseMaps
-
-Accept: application/cbor
-Content-Type: application/cbor
-Smithy-Protocol: rpc-v2-cbor
-
-¿psparseBooleanMap¿dkey0õÿosparseNumberMap¿dkey0ÿlsparseSetMap¿dkey0Ÿj__Member__j__Member__ÿÿosparseStringMap¿dkey0i__Value__ÿosparseStructMap¿dkey0¿bhif__Hi__ÿÿÿ

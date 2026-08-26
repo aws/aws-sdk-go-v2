@@ -1,5 +1,0 @@
-POST /NestedXmlMapWithXmlName
-
-Content-Type: application/xml
-
-<NestedXmlMapWithXmlNameRequest><nestedXmlMapWithXmlNameMap><entry><OuterKey>key0</OuterKey><value><entry><InnerKey>key0</InnerKey><InnerValue>__Value__</InnerValue></entry></value></entry></nestedXmlMapWithXmlNameMap></NestedXmlMapWithXmlNameRequest>

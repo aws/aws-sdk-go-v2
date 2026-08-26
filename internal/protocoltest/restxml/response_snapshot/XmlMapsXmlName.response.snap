@@ -1,4 +1,0 @@
-200
-Content-Type: application/xml
-
-<XmlMapsXmlNameResponse><myMap><entry><Attribute>key0</Attribute><Setting><hi>__Hi__</hi></Setting></entry></myMap></XmlMapsXmlNameResponse>

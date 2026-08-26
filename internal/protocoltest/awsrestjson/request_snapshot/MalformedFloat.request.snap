@@ -1,6 +1,0 @@
-POST /MalformedFloat/1?floatInQuery=1
-
-Content-Type: application/json
-Floatinheader: 1
-
-{"floatInBody":1}

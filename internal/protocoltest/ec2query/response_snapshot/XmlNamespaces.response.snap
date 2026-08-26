@@ -1,4 +1,0 @@
-200
-Content-Type: application/x-www-form-urlencoded
-
-Action=XmlNamespaces&Nested.Foo=__Foo__&Nested.Values.1=__Member__&Nested.Values.2=__Member__&Version=2020-01-08

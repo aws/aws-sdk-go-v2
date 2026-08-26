@@ -1,3 +1,0 @@
-GET /AllQueryStringTypesInput?Boolean=true&BooleanList=true&BooleanList=true&Byte=1&Double=1&DoubleList=1&DoubleList=1&Enum=Foo&EnumList=Foo&EnumList=Foo&Float=1&Integer=1&IntegerEnum=1&IntegerEnumList=1&IntegerEnumList=1&IntegerList=1&IntegerList=1&IntegerSet=1&IntegerSet=1&Long=1&Short=1&String=__QueryString__&StringList=__Member__&StringList=__Member__&StringSet=__Member__&StringSet=__Member__&Timestamp=2000-01-01T00%3A00%3A00Z&TimestampList=2000-01-01T00%3A00%3A00Z&TimestampList=2000-01-01T00%3A00%3A00Z&key0=__Value__
-
-

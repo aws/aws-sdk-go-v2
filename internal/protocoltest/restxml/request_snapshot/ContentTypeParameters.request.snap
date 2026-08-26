@@ -1,5 +1,0 @@
-PUT /ContentTypeParameters
-
-Content-Type: application/xml
-
-<ContentTypeParametersInput><value>1</value></ContentTypeParametersInput>

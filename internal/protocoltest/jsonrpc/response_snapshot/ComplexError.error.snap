@@ -1,5 +1,0 @@
-400
-Content-Type: application/x-amz-json-1.1
-X-Amz-Target: JsonProtocol.GreetingWithErrors
-
-{"__type":"ComplexError","Nested":{"Foo":"__Foo__"},"TopLevel":"__TopLevel__"}

@@ -1,5 +1,0 @@
-POST /
-
-Content-Type: application/x-www-form-urlencoded
-
-Action=QueryLists&ComplexListArg.member.1.hi=__Hi__&ComplexListArg.member.2.hi=__Hi__&FlattenedListArg.1=__Member__&FlattenedListArg.2=__Member__&Hi.1=__Member__&Hi.2=__Member__&ListArg.member.1=__Member__&ListArg.member.2=__Member__&ListArgWithXmlNameMember.item.1=__Member__&ListArgWithXmlNameMember.item.2=__Member__&NestedWithList.ListArg.member.1=__Member__&NestedWithList.ListArg.member.2=__Member__&Version=2020-01-08

@@ -1,5 +1,0 @@
-POST /service/RpcV2Protocol/operation/FractionalSeconds
-
-Accept: application/cbor
-Smithy-Protocol: rpc-v2-cbor
-
