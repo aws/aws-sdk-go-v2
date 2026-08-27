@@ -682,6 +682,8 @@ public class AddAwsConfigFields implements GoIntegration {
                 SmithyGoDependency.NET_HTTP).build());
         writer.putContext("errorf", SymbolUtils.createPointableSymbolBuilder("Errorf",
                 SmithyGoDependency.FMT).build());
+        writer.putContext("getServiceReadTimeout", SymbolUtils.createValueSymbolBuilder("GetServiceReadTimeout",
+                AwsGoDependency.INTERNAL_TIMEOUTS).build());
 
         writer.write("""
                 func $resolverName:L(o *Options) {
@@ -710,6 +712,12 @@ public class AddAwsConfigFields implements GoIntegration {
                                 transport.TLSHandshakeTimeout = tlsHandshakeTimeout
                             }
                         })
+                    }
+
+                    if _, ok := buildable.GetReadTimeout(); !ok {
+                        if timeout, ok := $getServiceReadTimeout:T(ServiceID); ok {
+                            buildable = buildable.WithReadTimeout(timeout)
+                        }
                     }
 
                     o.$optionName:L = buildable
