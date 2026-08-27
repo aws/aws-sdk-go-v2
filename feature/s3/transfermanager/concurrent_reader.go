@@ -25,6 +25,7 @@ type concurrentReader struct {
 	in      *GetObjectInput
 	getType types.GetObjectType
 
+	bufferThreshold  int64
 	pos              int64
 	partsCount       int32
 	capacity         int32
@@ -223,14 +224,15 @@ func (r *concurrentReader) partRead(p []byte) (int, error) {
 			return written, r.getErr()
 		}
 
+		if written >= cap(p) {
+			return written, nil
+		}
+
 		c, ok := r.buf[i]
 		if !ok {
 			// possible unequal parts' sizes can break all offset read for part GET,
 			// must break and wait for next consecutive part
 			break
-		}
-		if written >= cap(p) {
-			return written, nil
 		}
 
 		n, err := c.body.Read(p[written:])
@@ -242,17 +244,15 @@ func (r *concurrentReader) partRead(p []byte) (int, error) {
 			return written, r.getErr()
 		}
 		if c.cur >= c.length {
+			r.consecutiveIndex++
 			r.readCount++
 			delete(r.buf, i)
 			r.buffered -= c.length
 
-			if r.readCount == atomic.LoadInt32(&r.capacity) {
-				capacity := min(atomic.LoadInt32(&r.capacity)+r.sectionParts, r.partsCount)
-				atomic.StoreInt32(&r.capacity, capacity)
-			}
 			if r.readCount >= r.partsCount {
 				r.setErr(io.EOF)
 			}
+			r.maybeGrowCapacity()
 		}
 	}
 
@@ -267,12 +267,9 @@ func (r *concurrentReader) partRead(p []byte) (int, error) {
 			break
 		}
 		r.receiveCount++
-		if written >= cap(p) {
-			return written, nil
-		}
-		// only directly feed into p if this is the next neighbor part
-		if oc.index == r.consecutiveIndex {
 
+		// only directly feed into p if this is the next neighbor part
+		if oc.index == r.consecutiveIndex && written < cap(p) {
 			n, err := oc.body.Read(p[written:])
 			oc.cur += int64(n)
 			written += n
@@ -281,18 +278,19 @@ func (r *concurrentReader) partRead(p []byte) (int, error) {
 				r.clean()
 				return written, r.getErr()
 			}
-		} else {
-
 		}
 
 		if oc.cur < oc.length {
 			r.buf[oc.index] = &oc
+			r.buffered += oc.length
 		} else {
 			r.readCount++
-			if r.readCount == atomic.LoadInt32(&r.capacity) {
-				capacity := min(atomic.LoadInt32(&r.capacity)+r.sectionParts, r.partsCount)
-				atomic.StoreInt32(&r.capacity, capacity)
-			}
+			r.consecutiveIndex++
+			// Bound memory by throttling how many parts we dispatch (via capacity),
+			// never by abandoning parts already in flight. partRead must drain every
+			// dispatched part; otherwise a download producer blocks forever on a full
+			// r.ch and hangs Read's r.wg.Wait().
+			r.maybeGrowCapacity()
 			if r.readCount >= r.partsCount {
 				r.setErr(io.EOF)
 			}
@@ -300,6 +298,26 @@ func (r *concurrentReader) partRead(p []byte) (int, error) {
 	}
 
 	return written, r.getErr()
+}
+
+// maybeGrowCapacity advances the dispatch ceiling (capacity) to request more
+// parts while the estimated in-memory footprint stays under bufferThreshold. It
+// always keeps the next part to be read dispatched so the stream makes progress
+// even when a single part is larger than the whole budget. capacity only grows
+// and never exceeds partsCount, so partRead always drains every dispatched part
+// (receiveCount reaches capacity), which keeps download producers from blocking
+// on a full r.ch.
+func (r *concurrentReader) maybeGrowCapacity() {
+	c := atomic.LoadInt32(&r.capacity)
+	if c >= r.partsCount {
+		return
+	}
+	// committed = buffered (received, not yet consumed) + an estimate for parts
+	// dispatched but not yet received, using the first part's size per part.
+	committed := r.buffered + int64(c-r.receiveCount)*r.partSize
+	if c <= r.consecutiveIndex || committed < r.bufferThreshold {
+		atomic.StoreInt32(&r.capacity, c+1)
+	}
 }
 
 func (r *concurrentReader) rangeRead(p []byte) (int, error) {

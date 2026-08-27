@@ -614,3 +614,70 @@ func TestGetObject_HeadObjectForwardsRequiredFields(t *testing.T) {
 		})
 	}
 }
+
+// TestGetObjectUnequalParts exercises the full GetObject -> HeadObject ->
+// concurrentReader.partRead path for multipart objects whose parts have unequal
+// sizes (#3526). partRead must reassemble the stream in order regardless of part
+// layout, arrival order, or the memory budget. It also covers a tight
+// GetObjectBufferSize so the byte-throttled dispatch path is exercised end to end.
+func TestGetObjectUnequalParts(t *testing.T) {
+	const mib = 1024 * 1024
+	cases := map[string]struct {
+		sizes       []int
+		concurrency int
+		bufferSize  int64
+	}{
+		"single goroutine":       {sizes: []int{6 * mib, 5 * mib, 1 * mib}, concurrency: 1},
+		"multiple goroutines":    {sizes: []int{6 * mib, 5 * mib, 1 * mib}, concurrency: 5},
+		"largest middle part":    {sizes: []int{2 * mib, 9 * mib, 1 * mib, 4 * mib}, concurrency: 5},
+		"single part":            {sizes: []int{3 * mib}, concurrency: 5},
+		"tight buffer throttles": {sizes: []int{2 * mib, 9 * mib, 1 * mib, 4 * mib}, concurrency: 5, bufferSize: 3 * mib},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			partsData := make([][]byte, len(c.sizes))
+			var expect []byte
+			for i, s := range c.sizes {
+				// distinct byte per part so any misordering corrupts the result
+				b := bytes.Repeat([]byte{byte('A' + i)}, s)
+				partsData[i] = b
+				expect = append(expect, b...)
+			}
+
+			s3Client, _, _, _, _, _ := s3testing.NewDownloadClient()
+			s3Client.Data = expect
+			s3Client.PartsData = partsData
+			s3Client.PartsCount = int32(len(c.sizes))
+			s3Client.GetObjectFn = s3testing.UnequalPartGetObjectFn
+
+			mgr := New(s3Client, func(o *Options) {
+				o.GetObjectType = types.GetObjectParts
+				o.Concurrency = c.concurrency
+				if c.bufferSize != 0 {
+					o.GetObjectBufferSize = c.bufferSize
+				}
+			})
+
+			out, err := mgr.GetObject(context.Background(), &GetObjectInput{
+				Bucket: aws.String("bucket"),
+				Key:    aws.String("key"),
+			})
+			if err != nil {
+				t.Fatalf("expect no error getting object, got %v", err)
+			}
+
+			got, err := io.ReadAll(out.Body)
+			if err != nil {
+				t.Fatalf("expect no error reading body, got %v", err)
+			}
+
+			if e, a := len(expect), len(got); e != a {
+				t.Fatalf("expect %d bytes, got %d", e, a)
+			}
+			if !bytes.Equal(expect, got) {
+				t.Fatalf("expect downloaded object to equal the assembled parts")
+			}
+		})
+	}
+}

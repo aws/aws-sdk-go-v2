@@ -618,12 +618,13 @@ func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 		}}
 
 	r := &concurrentReader{
-		ctx:      ctx,
-		buf:      make(map[int32]*outChunk),
-		partSize: 1,
-		options:  g.options.Copy(),
-		in:       g.in,
-		ch:       make(chan outChunk, g.options.Concurrency),
+		ctx:             ctx,
+		buf:             make(map[int32]*outChunk),
+		partSize:        1,
+		options:         g.options.Copy(),
+		in:              g.in,
+		ch:              make(chan outChunk, g.options.Concurrency),
+		bufferThreshold: g.options.GetObjectBufferSize,
 	}
 
 	output := &GetObjectOutput{}
