@@ -2059,6 +2059,7 @@ func TestCheckResponseSnapshot_CreateDeployment(t *testing.T) {
 		},
 		UpdateOutdatedInstancesOnly: true,
 		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		DeploymentMode:              types.DeploymentMode("STANDARD"),
 		OverrideAlarmConfiguration: &types.AlarmConfiguration{
 			Enabled:                true,
 			IgnorePollAlarmFailure: true,
@@ -4476,6 +4477,7 @@ func TestCheckResponseSnapshot_Error_AlarmsLimitExceededException(t *testing.T) 
 		},
 		UpdateOutdatedInstancesOnly: true,
 		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		DeploymentMode:              types.DeploymentMode("STANDARD"),
 		OverrideAlarmConfiguration: &types.AlarmConfiguration{
 			Enabled:                true,
 			IgnorePollAlarmFailure: true,
@@ -5476,6 +5478,7 @@ func TestCheckResponseSnapshot_Error_DeploymentGroupDoesNotExistException(t *tes
 		},
 		UpdateOutdatedInstancesOnly: true,
 		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		DeploymentMode:              types.DeploymentMode("STANDARD"),
 		OverrideAlarmConfiguration: &types.AlarmConfiguration{
 			Enabled:                true,
 			IgnorePollAlarmFailure: true,
@@ -5940,6 +5943,7 @@ func TestCheckResponseSnapshot_Error_DeploymentLimitExceededException(t *testing
 		},
 		UpdateOutdatedInstancesOnly: true,
 		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		DeploymentMode:              types.DeploymentMode("STANDARD"),
 		OverrideAlarmConfiguration: &types.AlarmConfiguration{
 			Enabled:                true,
 			IgnorePollAlarmFailure: true,
@@ -6184,6 +6188,7 @@ func TestCheckResponseSnapshot_Error_DescriptionTooLongException(t *testing.T) {
 		},
 		UpdateOutdatedInstancesOnly: true,
 		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		DeploymentMode:              types.DeploymentMode("STANDARD"),
 		OverrideAlarmConfiguration: &types.AlarmConfiguration{
 			Enabled:                true,
 			IgnorePollAlarmFailure: true,
@@ -6939,6 +6944,7 @@ func TestCheckResponseSnapshot_Error_InvalidAlarmConfigException(t *testing.T) {
 		},
 		UpdateOutdatedInstancesOnly: true,
 		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		DeploymentMode:              types.DeploymentMode("STANDARD"),
 		OverrideAlarmConfiguration: &types.AlarmConfiguration{
 			Enabled:                true,
 			IgnorePollAlarmFailure: true,
@@ -7160,6 +7166,7 @@ func TestCheckResponseSnapshot_Error_InvalidAutoRollbackConfigException(t *testi
 		},
 		UpdateOutdatedInstancesOnly: true,
 		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		DeploymentMode:              types.DeploymentMode("STANDARD"),
 		OverrideAlarmConfiguration: &types.AlarmConfiguration{
 			Enabled:                true,
 			IgnorePollAlarmFailure: true,
@@ -7280,6 +7287,7 @@ func TestCheckResponseSnapshot_Error_InvalidAutoScalingGroupException(t *testing
 		},
 		UpdateOutdatedInstancesOnly: true,
 		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		DeploymentMode:              types.DeploymentMode("STANDARD"),
 		OverrideAlarmConfiguration: &types.AlarmConfiguration{
 			Enabled:                true,
 			IgnorePollAlarmFailure: true,
@@ -7751,6 +7759,7 @@ func TestCheckResponseSnapshot_Error_InvalidDeploymentConfigNameException(t *tes
 		},
 		UpdateOutdatedInstancesOnly: true,
 		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		DeploymentMode:              types.DeploymentMode("STANDARD"),
 		OverrideAlarmConfiguration: &types.AlarmConfiguration{
 			Enabled:                true,
 			IgnorePollAlarmFailure: true,
@@ -8735,58 +8744,91 @@ func TestCheckResponseSnapshot_Error_InvalidECSServiceException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{
-		ApplicationName:      ptr.String("__ApplicationName__"),
-		DeploymentGroupName:  ptr.String("__DeploymentGroupName__"),
-		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
-		Ec2TagFilters: []types.EC2TagFilter{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-				Type:  types.EC2TagFilterType("KEY_ONLY"),
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+		Revision: &types.RevisionLocation{
+			RevisionType: types.RevisionLocationType("S3"),
+			S3Location: &types.S3Location{
+				Bucket:     ptr.String("__Bucket__"),
+				Key:        ptr.String("__Key__"),
+				BundleType: types.BundleType("tar"),
+				Version:    ptr.String("__Version__"),
+				ETag:       ptr.String("__ETag__"),
 			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			GitHubLocation: &types.GitHubLocation{
+				Repository: ptr.String("__Repository__"),
+				CommitId:   ptr.String("__CommitId__"),
 			},
-		},
-		OnPremisesInstanceTagFilters: []types.TagFilter{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-				Type:  types.TagFilterType("KEY_ONLY"),
+			String_: &types.RawString{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
 			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-				Type:  types.TagFilterType("KEY_ONLY"),
+			AppSpecContent: &types.AppSpecContent{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
 			},
 		},
-		AutoScalingGroups: []string{
-			"__Member__",
-			"__Member__",
-		},
-		ServiceRoleArn: ptr.String("__ServiceRoleArn__"),
-		TriggerConfigurations: []types.TriggerConfig{
-			{
-				TriggerName:      ptr.String("__TriggerName__"),
-				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
-				TriggerEvents: []types.TriggerEventType{
-					types.TriggerEventType("DeploymentStart"),
-					types.TriggerEventType("DeploymentStart"),
+		DeploymentConfigName:          ptr.String("__DeploymentConfigName__"),
+		Description:                   ptr.String("__Description__"),
+		IgnoreApplicationStopFailures: true,
+		TargetInstances: &types.TargetInstances{
+			TagFilters: []types.EC2TagFilter{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
 				},
 			},
-			{
-				TriggerName:      ptr.String("__TriggerName__"),
-				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
-				TriggerEvents: []types.TriggerEventType{
-					types.TriggerEventType("DeploymentStart"),
-					types.TriggerEventType("DeploymentStart"),
+			AutoScalingGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ec2TagSet: &types.EC2TagSet{
+				Ec2TagSetList: [][]types.EC2TagFilter{
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
 				},
 			},
 		},
-		AlarmConfiguration: &types.AlarmConfiguration{
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		UpdateOutdatedInstancesOnly: true,
+		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		DeploymentMode:              types.DeploymentMode("STANDARD"),
+		OverrideAlarmConfiguration: &types.AlarmConfiguration{
 			Enabled:                true,
 			IgnorePollAlarmFailure: true,
 			Alarms: []types.Alarm{
@@ -8798,172 +8840,6 @@ func TestCheckResponseSnapshot_Error_InvalidECSServiceException(t *testing.T) {
 				},
 			},
 		},
-		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
-			Enabled: true,
-			Events: []types.AutoRollbackEvent{
-				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
-				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
-			},
-		},
-		OutdatedInstancesStrategy: types.OutdatedInstancesStrategy("UPDATE"),
-		DeploymentStyle: &types.DeploymentStyle{
-			DeploymentType:   types.DeploymentType("IN_PLACE"),
-			DeploymentOption: types.DeploymentOption("WITH_TRAFFIC_CONTROL"),
-		},
-		BlueGreenDeploymentConfiguration: &types.BlueGreenDeploymentConfiguration{
-			TerminateBlueInstancesOnDeploymentSuccess: &types.BlueInstanceTerminationOption{
-				Action:                       types.InstanceAction("TERMINATE"),
-				TerminationWaitTimeInMinutes: 1,
-			},
-			DeploymentReadyOption: &types.DeploymentReadyOption{
-				ActionOnTimeout:   types.DeploymentReadyAction("CONTINUE_DEPLOYMENT"),
-				WaitTimeInMinutes: 1,
-			},
-			GreenFleetProvisioningOption: &types.GreenFleetProvisioningOption{
-				Action: types.GreenFleetProvisioningAction("DISCOVER_EXISTING"),
-			},
-		},
-		LoadBalancerInfo: &types.LoadBalancerInfo{
-			ElbInfoList: []types.ELBInfo{
-				{
-					Name: ptr.String("__Name__"),
-				},
-				{
-					Name: ptr.String("__Name__"),
-				},
-			},
-			TargetGroupInfoList: []types.TargetGroupInfo{
-				{
-					Name: ptr.String("__Name__"),
-				},
-				{
-					Name: ptr.String("__Name__"),
-				},
-			},
-			TargetGroupPairInfoList: []types.TargetGroupPairInfo{
-				{
-					TargetGroups: []types.TargetGroupInfo{
-						{
-							Name: ptr.String("__Name__"),
-						},
-						{
-							Name: ptr.String("__Name__"),
-						},
-					},
-					ProdTrafficRoute: &types.TrafficRoute{
-						ListenerArns: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					TestTrafficRoute: &types.TrafficRoute{
-						ListenerArns: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-				},
-				{
-					TargetGroups: []types.TargetGroupInfo{
-						{
-							Name: ptr.String("__Name__"),
-						},
-						{
-							Name: ptr.String("__Name__"),
-						},
-					},
-					ProdTrafficRoute: &types.TrafficRoute{
-						ListenerArns: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					TestTrafficRoute: &types.TrafficRoute{
-						ListenerArns: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-				},
-			},
-		},
-		Ec2TagSet: &types.EC2TagSet{
-			Ec2TagSetList: [][]types.EC2TagFilter{
-				{
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-						Type:  types.EC2TagFilterType("KEY_ONLY"),
-					},
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-						Type:  types.EC2TagFilterType("KEY_ONLY"),
-					},
-				},
-				{
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-						Type:  types.EC2TagFilterType("KEY_ONLY"),
-					},
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-						Type:  types.EC2TagFilterType("KEY_ONLY"),
-					},
-				},
-			},
-		},
-		EcsServices: []types.ECSService{
-			{
-				ServiceName: ptr.String("__ServiceName__"),
-				ClusterName: ptr.String("__ClusterName__"),
-			},
-			{
-				ServiceName: ptr.String("__ServiceName__"),
-				ClusterName: ptr.String("__ClusterName__"),
-			},
-		},
-		OnPremisesTagSet: &types.OnPremisesTagSet{
-			OnPremisesTagSetList: [][]types.TagFilter{
-				{
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-						Type:  types.TagFilterType("KEY_ONLY"),
-					},
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-						Type:  types.TagFilterType("KEY_ONLY"),
-					},
-				},
-				{
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-						Type:  types.TagFilterType("KEY_ONLY"),
-					},
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-						Type:  types.TagFilterType("KEY_ONLY"),
-					},
-				},
-			},
-		},
-		Tags: []types.Tag{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-		},
-		TerminationHookEnabled: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -9110,6 +8986,7 @@ func TestCheckResponseSnapshot_Error_InvalidFileExistsBehaviorException(t *testi
 		},
 		UpdateOutdatedInstancesOnly: true,
 		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		DeploymentMode:              types.DeploymentMode("STANDARD"),
 		OverrideAlarmConfiguration: &types.AlarmConfiguration{
 			Enabled:                true,
 			IgnorePollAlarmFailure: true,
@@ -9230,6 +9107,7 @@ func TestCheckResponseSnapshot_Error_InvalidGitHubAccountTokenException(t *testi
 		},
 		UpdateOutdatedInstancesOnly: true,
 		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		DeploymentMode:              types.DeploymentMode("STANDARD"),
 		OverrideAlarmConfiguration: &types.AlarmConfiguration{
 			Enabled:                true,
 			IgnorePollAlarmFailure: true,
@@ -9435,6 +9313,7 @@ func TestCheckResponseSnapshot_Error_InvalidIgnoreApplicationStopFailuresValueEx
 		},
 		UpdateOutdatedInstancesOnly: true,
 		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		DeploymentMode:              types.DeploymentMode("STANDARD"),
 		OverrideAlarmConfiguration: &types.AlarmConfiguration{
 			Enabled:                true,
 			IgnorePollAlarmFailure: true,
@@ -9472,58 +9351,91 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeploymentGroup(context.Background(), &CreateDeploymentGroupInput{
-		ApplicationName:      ptr.String("__ApplicationName__"),
-		DeploymentGroupName:  ptr.String("__DeploymentGroupName__"),
-		DeploymentConfigName: ptr.String("__DeploymentConfigName__"),
-		Ec2TagFilters: []types.EC2TagFilter{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-				Type:  types.EC2TagFilterType("KEY_ONLY"),
+	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
+		ApplicationName:     ptr.String("__ApplicationName__"),
+		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
+		Revision: &types.RevisionLocation{
+			RevisionType: types.RevisionLocationType("S3"),
+			S3Location: &types.S3Location{
+				Bucket:     ptr.String("__Bucket__"),
+				Key:        ptr.String("__Key__"),
+				BundleType: types.BundleType("tar"),
+				Version:    ptr.String("__Version__"),
+				ETag:       ptr.String("__ETag__"),
 			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-				Type:  types.EC2TagFilterType("KEY_ONLY"),
+			GitHubLocation: &types.GitHubLocation{
+				Repository: ptr.String("__Repository__"),
+				CommitId:   ptr.String("__CommitId__"),
 			},
-		},
-		OnPremisesInstanceTagFilters: []types.TagFilter{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-				Type:  types.TagFilterType("KEY_ONLY"),
+			String_: &types.RawString{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
 			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-				Type:  types.TagFilterType("KEY_ONLY"),
+			AppSpecContent: &types.AppSpecContent{
+				Content: ptr.String("__Content__"),
+				Sha256:  ptr.String("__Sha256__"),
 			},
 		},
-		AutoScalingGroups: []string{
-			"__Member__",
-			"__Member__",
-		},
-		ServiceRoleArn: ptr.String("__ServiceRoleArn__"),
-		TriggerConfigurations: []types.TriggerConfig{
-			{
-				TriggerName:      ptr.String("__TriggerName__"),
-				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
-				TriggerEvents: []types.TriggerEventType{
-					types.TriggerEventType("DeploymentStart"),
-					types.TriggerEventType("DeploymentStart"),
+		DeploymentConfigName:          ptr.String("__DeploymentConfigName__"),
+		Description:                   ptr.String("__Description__"),
+		IgnoreApplicationStopFailures: true,
+		TargetInstances: &types.TargetInstances{
+			TagFilters: []types.EC2TagFilter{
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
+				},
+				{
+					Key:   ptr.String("__Key__"),
+					Value: ptr.String("__Value__"),
+					Type:  types.EC2TagFilterType("KEY_ONLY"),
 				},
 			},
-			{
-				TriggerName:      ptr.String("__TriggerName__"),
-				TriggerTargetArn: ptr.String("__TriggerTargetArn__"),
-				TriggerEvents: []types.TriggerEventType{
-					types.TriggerEventType("DeploymentStart"),
-					types.TriggerEventType("DeploymentStart"),
+			AutoScalingGroups: []string{
+				"__Member__",
+				"__Member__",
+			},
+			Ec2TagSet: &types.EC2TagSet{
+				Ec2TagSetList: [][]types.EC2TagFilter{
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
+					{
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+						{
+							Key:   ptr.String("__Key__"),
+							Value: ptr.String("__Value__"),
+							Type:  types.EC2TagFilterType("KEY_ONLY"),
+						},
+					},
 				},
 			},
 		},
-		AlarmConfiguration: &types.AlarmConfiguration{
+		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
+			Enabled: true,
+			Events: []types.AutoRollbackEvent{
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
+			},
+		},
+		UpdateOutdatedInstancesOnly: true,
+		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		DeploymentMode:              types.DeploymentMode("STANDARD"),
+		OverrideAlarmConfiguration: &types.AlarmConfiguration{
 			Enabled:                true,
 			IgnorePollAlarmFailure: true,
 			Alarms: []types.Alarm{
@@ -9535,172 +9447,6 @@ func TestCheckResponseSnapshot_Error_InvalidInputException(t *testing.T) {
 				},
 			},
 		},
-		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
-			Enabled: true,
-			Events: []types.AutoRollbackEvent{
-				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
-				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
-			},
-		},
-		OutdatedInstancesStrategy: types.OutdatedInstancesStrategy("UPDATE"),
-		DeploymentStyle: &types.DeploymentStyle{
-			DeploymentType:   types.DeploymentType("IN_PLACE"),
-			DeploymentOption: types.DeploymentOption("WITH_TRAFFIC_CONTROL"),
-		},
-		BlueGreenDeploymentConfiguration: &types.BlueGreenDeploymentConfiguration{
-			TerminateBlueInstancesOnDeploymentSuccess: &types.BlueInstanceTerminationOption{
-				Action:                       types.InstanceAction("TERMINATE"),
-				TerminationWaitTimeInMinutes: 1,
-			},
-			DeploymentReadyOption: &types.DeploymentReadyOption{
-				ActionOnTimeout:   types.DeploymentReadyAction("CONTINUE_DEPLOYMENT"),
-				WaitTimeInMinutes: 1,
-			},
-			GreenFleetProvisioningOption: &types.GreenFleetProvisioningOption{
-				Action: types.GreenFleetProvisioningAction("DISCOVER_EXISTING"),
-			},
-		},
-		LoadBalancerInfo: &types.LoadBalancerInfo{
-			ElbInfoList: []types.ELBInfo{
-				{
-					Name: ptr.String("__Name__"),
-				},
-				{
-					Name: ptr.String("__Name__"),
-				},
-			},
-			TargetGroupInfoList: []types.TargetGroupInfo{
-				{
-					Name: ptr.String("__Name__"),
-				},
-				{
-					Name: ptr.String("__Name__"),
-				},
-			},
-			TargetGroupPairInfoList: []types.TargetGroupPairInfo{
-				{
-					TargetGroups: []types.TargetGroupInfo{
-						{
-							Name: ptr.String("__Name__"),
-						},
-						{
-							Name: ptr.String("__Name__"),
-						},
-					},
-					ProdTrafficRoute: &types.TrafficRoute{
-						ListenerArns: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					TestTrafficRoute: &types.TrafficRoute{
-						ListenerArns: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-				},
-				{
-					TargetGroups: []types.TargetGroupInfo{
-						{
-							Name: ptr.String("__Name__"),
-						},
-						{
-							Name: ptr.String("__Name__"),
-						},
-					},
-					ProdTrafficRoute: &types.TrafficRoute{
-						ListenerArns: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-					TestTrafficRoute: &types.TrafficRoute{
-						ListenerArns: []string{
-							"__Member__",
-							"__Member__",
-						},
-					},
-				},
-			},
-		},
-		Ec2TagSet: &types.EC2TagSet{
-			Ec2TagSetList: [][]types.EC2TagFilter{
-				{
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-						Type:  types.EC2TagFilterType("KEY_ONLY"),
-					},
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-						Type:  types.EC2TagFilterType("KEY_ONLY"),
-					},
-				},
-				{
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-						Type:  types.EC2TagFilterType("KEY_ONLY"),
-					},
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-						Type:  types.EC2TagFilterType("KEY_ONLY"),
-					},
-				},
-			},
-		},
-		EcsServices: []types.ECSService{
-			{
-				ServiceName: ptr.String("__ServiceName__"),
-				ClusterName: ptr.String("__ClusterName__"),
-			},
-			{
-				ServiceName: ptr.String("__ServiceName__"),
-				ClusterName: ptr.String("__ClusterName__"),
-			},
-		},
-		OnPremisesTagSet: &types.OnPremisesTagSet{
-			OnPremisesTagSetList: [][]types.TagFilter{
-				{
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-						Type:  types.TagFilterType("KEY_ONLY"),
-					},
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-						Type:  types.TagFilterType("KEY_ONLY"),
-					},
-				},
-				{
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-						Type:  types.TagFilterType("KEY_ONLY"),
-					},
-					{
-						Key:   ptr.String("__Key__"),
-						Value: ptr.String("__Value__"),
-						Type:  types.TagFilterType("KEY_ONLY"),
-					},
-				},
-			},
-		},
-		Tags: []types.Tag{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-		},
-		TerminationHookEnabled: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -10012,6 +9758,7 @@ func TestCheckResponseSnapshot_Error_InvalidLoadBalancerInfoException(t *testing
 		},
 		UpdateOutdatedInstancesOnly: true,
 		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		DeploymentMode:              types.DeploymentMode("STANDARD"),
 		OverrideAlarmConfiguration: &types.AlarmConfiguration{
 			Enabled:                true,
 			IgnorePollAlarmFailure: true,
@@ -10610,6 +10357,7 @@ func TestCheckResponseSnapshot_Error_InvalidRoleException(t *testing.T) {
 		},
 		UpdateOutdatedInstancesOnly: true,
 		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		DeploymentMode:              types.DeploymentMode("STANDARD"),
 		OverrideAlarmConfiguration: &types.AlarmConfiguration{
 			Enabled:                true,
 			IgnorePollAlarmFailure: true,
@@ -11204,6 +10952,7 @@ func TestCheckResponseSnapshot_Error_InvalidTargetInstancesException(t *testing.
 		},
 		UpdateOutdatedInstancesOnly: true,
 		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		DeploymentMode:              types.DeploymentMode("STANDARD"),
 		OverrideAlarmConfiguration: &types.AlarmConfiguration{
 			Enabled:                true,
 			IgnorePollAlarmFailure: true,
@@ -11362,6 +11111,7 @@ func TestCheckResponseSnapshot_Error_InvalidTrafficRoutingConfigurationException
 		},
 		UpdateOutdatedInstancesOnly: true,
 		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		DeploymentMode:              types.DeploymentMode("STANDARD"),
 		OverrideAlarmConfiguration: &types.AlarmConfiguration{
 			Enabled:                true,
 			IgnorePollAlarmFailure: true,
@@ -11736,6 +11486,7 @@ func TestCheckResponseSnapshot_Error_InvalidUpdateOutdatedInstancesOnlyValueExce
 		},
 		UpdateOutdatedInstancesOnly: true,
 		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		DeploymentMode:              types.DeploymentMode("STANDARD"),
 		OverrideAlarmConfiguration: &types.AlarmConfiguration{
 			Enabled:                true,
 			IgnorePollAlarmFailure: true,
@@ -12301,6 +12052,7 @@ func TestCheckResponseSnapshot_Error_RevisionDoesNotExistException(t *testing.T)
 		},
 		UpdateOutdatedInstancesOnly: true,
 		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		DeploymentMode:              types.DeploymentMode("STANDARD"),
 		OverrideAlarmConfiguration: &types.AlarmConfiguration{
 			Enabled:                true,
 			IgnorePollAlarmFailure: true,
@@ -12999,99 +12751,17 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDeployment(context.Background(), &CreateDeploymentInput{
-		ApplicationName:     ptr.String("__ApplicationName__"),
-		DeploymentGroupName: ptr.String("__DeploymentGroupName__"),
-		Revision: &types.RevisionLocation{
-			RevisionType: types.RevisionLocationType("S3"),
-			S3Location: &types.S3Location{
-				Bucket:     ptr.String("__Bucket__"),
-				Key:        ptr.String("__Key__"),
-				BundleType: types.BundleType("tar"),
-				Version:    ptr.String("__Version__"),
-				ETag:       ptr.String("__ETag__"),
+	_, opErr := svc.CreateApplication(context.Background(), &CreateApplicationInput{
+		ApplicationName: ptr.String("__ApplicationName__"),
+		ComputePlatform: types.ComputePlatform("Server"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
 			},
-			GitHubLocation: &types.GitHubLocation{
-				Repository: ptr.String("__Repository__"),
-				CommitId:   ptr.String("__CommitId__"),
-			},
-			String_: &types.RawString{
-				Content: ptr.String("__Content__"),
-				Sha256:  ptr.String("__Sha256__"),
-			},
-			AppSpecContent: &types.AppSpecContent{
-				Content: ptr.String("__Content__"),
-				Sha256:  ptr.String("__Sha256__"),
-			},
-		},
-		DeploymentConfigName:          ptr.String("__DeploymentConfigName__"),
-		Description:                   ptr.String("__Description__"),
-		IgnoreApplicationStopFailures: true,
-		TargetInstances: &types.TargetInstances{
-			TagFilters: []types.EC2TagFilter{
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-					Type:  types.EC2TagFilterType("KEY_ONLY"),
-				},
-				{
-					Key:   ptr.String("__Key__"),
-					Value: ptr.String("__Value__"),
-					Type:  types.EC2TagFilterType("KEY_ONLY"),
-				},
-			},
-			AutoScalingGroups: []string{
-				"__Member__",
-				"__Member__",
-			},
-			Ec2TagSet: &types.EC2TagSet{
-				Ec2TagSetList: [][]types.EC2TagFilter{
-					{
-						{
-							Key:   ptr.String("__Key__"),
-							Value: ptr.String("__Value__"),
-							Type:  types.EC2TagFilterType("KEY_ONLY"),
-						},
-						{
-							Key:   ptr.String("__Key__"),
-							Value: ptr.String("__Value__"),
-							Type:  types.EC2TagFilterType("KEY_ONLY"),
-						},
-					},
-					{
-						{
-							Key:   ptr.String("__Key__"),
-							Value: ptr.String("__Value__"),
-							Type:  types.EC2TagFilterType("KEY_ONLY"),
-						},
-						{
-							Key:   ptr.String("__Key__"),
-							Value: ptr.String("__Value__"),
-							Type:  types.EC2TagFilterType("KEY_ONLY"),
-						},
-					},
-				},
-			},
-		},
-		AutoRollbackConfiguration: &types.AutoRollbackConfiguration{
-			Enabled: true,
-			Events: []types.AutoRollbackEvent{
-				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
-				types.AutoRollbackEvent("DEPLOYMENT_FAILURE"),
-			},
-		},
-		UpdateOutdatedInstancesOnly: true,
-		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
-		OverrideAlarmConfiguration: &types.AlarmConfiguration{
-			Enabled:                true,
-			IgnorePollAlarmFailure: true,
-			Alarms: []types.Alarm{
-				{
-					Name: ptr.String("__Name__"),
-				},
-				{
-					Name: ptr.String("__Name__"),
-				},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
 			},
 		},
 	})

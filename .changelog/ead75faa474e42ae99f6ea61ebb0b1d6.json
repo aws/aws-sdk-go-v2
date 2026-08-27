@@ -1,0 +1,8 @@
+{
+    "id": "ead75faa-474e-42ae-99f6-ea61ebb0b1d6",
+    "type": "feature",
+    "description": "Added resultCount to QueryStatistics in GetQueryResults. This field returns the total number of output rows in the final result set, helping customers programmatically determine whether a query produced results after all operations including post-aggregation filters.",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

@@ -40612,6 +40612,23 @@ func awsAwsquery_deserializeDocumentDBSnapshot(v **types.DBSnapshot, decoder smi
 				sv.EngineVersion = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("FullSnapshotSizeInBytes", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.FullSnapshotSizeInBytes = ptr.Int64(i64)
+			}
+
 		case strings.EqualFold("IAMDatabaseAuthenticationEnabled", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

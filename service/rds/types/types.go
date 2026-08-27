@@ -3260,6 +3260,13 @@ type DBSnapshot struct {
 	// Specifies the version of the database engine.
 	EngineVersion *string
 
+	// The full size of the DB snapshot, in bytes.
+	//
+	// This is not the incremental size of the snapshot. This is the full snapshot
+	// size and represents the size of all the blocks that were written to the source
+	// volume at the time the snapshot was created.
+	FullSnapshotSizeInBytes *int64
+
 	// Indicates whether mapping of Amazon Web Services Identity and Access Management
 	// (IAM) accounts to database accounts is enabled.
 	IAMDatabaseAuthenticationEnabled *bool

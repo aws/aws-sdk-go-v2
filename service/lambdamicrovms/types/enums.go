@@ -96,6 +96,29 @@ func (HookState) Values() []HookState {
 	}
 }
 
+type ManagedMicrovmImageVersionStatus string
+
+// Enum values for ManagedMicrovmImageVersionStatus
+const (
+	// The version is available for use.
+	ManagedMicrovmImageVersionStatusAvailable ManagedMicrovmImageVersionStatus = "AVAILABLE"
+	// The version is deprecated. Do not use this version for new MicroVM images.
+	// Existing MicroVM images that use this version will continue to function.
+	ManagedMicrovmImageVersionStatusDeprecated ManagedMicrovmImageVersionStatus = "DEPRECATED"
+)
+
+// Values returns all known values for ManagedMicrovmImageVersionStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ManagedMicrovmImageVersionStatus) Values() []ManagedMicrovmImageVersionStatus {
+	return []ManagedMicrovmImageVersionStatus{
+		"AVAILABLE",
+		"DEPRECATED",
+	}
+}
+
 type MicrovmImageState string
 
 // Enum values for MicrovmImageState

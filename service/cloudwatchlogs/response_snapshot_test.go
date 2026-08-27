@@ -2760,6 +2760,7 @@ func TestCheckResponseSnapshot_GetQueryResults(t *testing.T) {
 			BytesScanned:            1.0,
 			EstimatedBytesSkipped:   1.0,
 			LogGroupsScanned:        1.0,
+			ResultCount:             1.0,
 		},
 		Status:        types.QueryStatus("Scheduled"),
 		EncryptionKey: ptr.String("__EncryptionKey__"),

@@ -13,6 +13,7 @@
         "api_op_AdminAddUserToGroup.go",
         "api_op_AdminConfirmSignUp.go",
         "api_op_AdminCreateUser.go",
+        "api_op_AdminDeleteSoftwareToken.go",
         "api_op_AdminDeleteUser.go",
         "api_op_AdminDeleteUserAttributes.go",
         "api_op_AdminDisableProviderForUser.go",

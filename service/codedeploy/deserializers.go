@@ -1257,6 +1257,9 @@ func awsAwsjson11_deserializeOpErrorCreateApplication(response *smithyhttp.Respo
 	case strings.EqualFold("InvalidTagsToAddException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidTagsToAddException(response, errorBody)
 
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1404,11 +1407,17 @@ func awsAwsjson11_deserializeOpErrorCreateDeployment(response *smithyhttp.Respon
 	case strings.EqualFold("InvalidAutoScalingGroupException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidAutoScalingGroupException(response, errorBody)
 
+	case strings.EqualFold("InvalidComputePlatformException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidComputePlatformException(response, errorBody)
+
 	case strings.EqualFold("InvalidDeploymentConfigNameException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidDeploymentConfigNameException(response, errorBody)
 
 	case strings.EqualFold("InvalidDeploymentGroupNameException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidDeploymentGroupNameException(response, errorBody)
+
+	case strings.EqualFold("InvalidECSServiceException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidECSServiceException(response, errorBody)
 
 	case strings.EqualFold("InvalidFileExistsBehaviorException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidFileExistsBehaviorException(response, errorBody)
@@ -1418,6 +1427,9 @@ func awsAwsjson11_deserializeOpErrorCreateDeployment(response *smithyhttp.Respon
 
 	case strings.EqualFold("InvalidIgnoreApplicationStopFailuresValueException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidIgnoreApplicationStopFailuresValueException(response, errorBody)
+
+	case strings.EqualFold("InvalidInputException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
 
 	case strings.EqualFold("InvalidLoadBalancerInfoException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidLoadBalancerInfoException(response, errorBody)
@@ -4062,8 +4074,14 @@ func awsAwsjson11_deserializeOpErrorListDeploymentInstances(response *smithyhttp
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("ApplicationDoesNotExistException", errorCode):
+		return awsAwsjson11_deserializeErrorApplicationDoesNotExistException(response, errorBody)
+
 	case strings.EqualFold("DeploymentDoesNotExistException", errorCode):
 		return awsAwsjson11_deserializeErrorDeploymentDoesNotExistException(response, errorBody)
+
+	case strings.EqualFold("DeploymentGroupDoesNotExistException", errorCode):
+		return awsAwsjson11_deserializeErrorDeploymentGroupDoesNotExistException(response, errorBody)
 
 	case strings.EqualFold("DeploymentIdRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorDeploymentIdRequiredException(response, errorBody)
@@ -4347,8 +4365,14 @@ func awsAwsjson11_deserializeOpErrorListDeploymentTargets(response *smithyhttp.R
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("ApplicationDoesNotExistException", errorCode):
+		return awsAwsjson11_deserializeErrorApplicationDoesNotExistException(response, errorBody)
+
 	case strings.EqualFold("DeploymentDoesNotExistException", errorCode):
 		return awsAwsjson11_deserializeErrorDeploymentDoesNotExistException(response, errorBody)
+
+	case strings.EqualFold("DeploymentGroupDoesNotExistException", errorCode):
+		return awsAwsjson11_deserializeErrorDeploymentGroupDoesNotExistException(response, errorBody)
 
 	case strings.EqualFold("DeploymentIdRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorDeploymentIdRequiredException(response, errorBody)

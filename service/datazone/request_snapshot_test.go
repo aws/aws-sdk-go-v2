@@ -2396,6 +2396,7 @@ func TestCheckRequestSnapshot_DeleteDomain(t *testing.T) {
 		Identifier:        ptr.String("__Identifier__"),
 		ClientToken:       ptr.String("__ClientToken__"),
 		SkipDeletionCheck: ptr.Bool(true),
+		CascadeDelete:     ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -9583,6 +9584,7 @@ func TestUpdateRequestSnapshot_DeleteDomain(t *testing.T) {
 		Identifier:        ptr.String("__Identifier__"),
 		ClientToken:       ptr.String("__ClientToken__"),
 		SkipDeletionCheck: ptr.Bool(true),
+		CascadeDelete:     ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""

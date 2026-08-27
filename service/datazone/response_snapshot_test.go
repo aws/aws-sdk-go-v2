@@ -3833,6 +3833,7 @@ func TestCheckResponseSnapshot_DeleteDomain(t *testing.T) {
 		Identifier:        ptr.String("__Identifier__"),
 		ClientToken:       ptr.String("__ClientToken__"),
 		SkipDeletionCheck: ptr.Bool(true),
+		CascadeDelete:     ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -5188,6 +5189,19 @@ func TestCheckResponseSnapshot_GetDomain(t *testing.T) {
 		},
 		DomainVersion: types.DomainVersion("V1"),
 		ServiceRole:   ptr.String("__ServiceRole__"),
+		FailureReasons: []types.FailureReason{
+			{
+				Id:      ptr.String("__Id__"),
+				Message: ptr.String("__Message__"),
+			},
+			{
+				Id:      ptr.String("__Id__"),
+				Message: ptr.String("__Message__"),
+			},
+		},
+		DeleteProgress: &types.DeleteProgress{
+			SuccessfullyDeletedProjectCount: ptr.Int32(1),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetDomain.response")
 	if errors.Is(err, fs.ErrNotExist) {

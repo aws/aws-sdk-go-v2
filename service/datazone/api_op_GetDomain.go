@@ -58,11 +58,19 @@ type GetDomainOutput struct {
 	// The timestamp of when the Amazon DataZone domain was created.
 	CreatedAt *time.Time
 
+	// The progress of the current domain deletion, including the number of projects
+	// that Amazon DataZone successfully deleted.
+	DeleteProgress *types.DeleteProgress
+
 	// The description of the Amazon DataZone domain.
 	Description *string
 
 	// The version of the domain.
 	DomainVersion types.DomainVersion
+
+	// The list of failure reasons for resources that Amazon DataZone could not delete
+	// during a cascade deletion of the domain.
+	FailureReasons []types.FailureReason
 
 	// The identifier of the Amazon Web Services Key Management Service (KMS) key that
 	// is used to encrypt the Amazon DataZone domain, metadata, and reporting data.

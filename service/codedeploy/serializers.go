@@ -4254,6 +4254,11 @@ func awsAwsjson11_serializeOpDocumentCreateDeploymentInput(v *CreateDeploymentIn
 		ok.String(*v.DeploymentGroupName)
 	}
 
+	if len(v.DeploymentMode) > 0 {
+		ok := object.Key("deploymentMode")
+		ok.String(string(v.DeploymentMode))
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)

@@ -652,6 +652,7 @@ func TestCheckRequestSnapshot_CreateDeployment(t *testing.T) {
 		},
 		UpdateOutdatedInstancesOnly: true,
 		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		DeploymentMode:              types.DeploymentMode("STANDARD"),
 		OverrideAlarmConfiguration: &types.AlarmConfiguration{
 			Enabled:                true,
 			IgnorePollAlarmFailure: true,
@@ -2704,6 +2705,7 @@ func TestUpdateRequestSnapshot_CreateDeployment(t *testing.T) {
 		},
 		UpdateOutdatedInstancesOnly: true,
 		FileExistsBehavior:          types.FileExistsBehavior("DISALLOW"),
+		DeploymentMode:              types.DeploymentMode("STANDARD"),
 		OverrideAlarmConfiguration: &types.AlarmConfiguration{
 			Enabled:                true,
 			IgnorePollAlarmFailure: true,

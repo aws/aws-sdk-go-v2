@@ -28,7 +28,7 @@ type CodeArtifact interface {
 	isCodeArtifact()
 }
 
-// The URI of the code artifact, such as an Amazon S3 path or Amazon ECR image URI.
+// The URI of the code artifact in Amazon S3.
 type CodeArtifactMemberUri struct {
 	Value string
 
@@ -159,6 +159,11 @@ type ManagedMicrovmImageVersion struct {
 	//
 	// This member is required.
 	ImageVersion *string
+
+	// The lifecycle status of the managed MicroVM image version. Valid values:
+	// AVAILABLE (the version is available for use) or DEPRECATED (the version is
+	// deprecated; do not use it for new MicroVM images).
+	Status ManagedMicrovmImageVersionStatus
 
 	// The timestamp when the version was last updated.
 	UpdatedAt *time.Time

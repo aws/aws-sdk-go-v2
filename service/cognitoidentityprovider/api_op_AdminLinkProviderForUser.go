@@ -69,9 +69,6 @@ type AdminLinkProviderForUserInput struct {
 	//
 	// The ProviderName should be set to Cognito for users in Cognito user pools.
 	//
-	// All attributes in the DestinationUser profile must be mutable. If you have
-	// assigned the user any immutable custom attributes, the operation won't succeed.
-	//
 	// This member is required.
 	DestinationUser *types.ProviderUserIdentifierType
 

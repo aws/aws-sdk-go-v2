@@ -2196,6 +2196,18 @@ type DataSourceSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The progress of a domain deletion, including the number of projects that Amazon
+// DataZone successfully deleted. Amazon DataZone returns this structure in the
+// response to a GetDomain request while a cascade deletion is in progress.
+type DeleteProgress struct {
+
+	// The number of projects that Amazon DataZone successfully deleted during the
+	// domain deletion.
+	SuccessfullyDeletedProjectCount *int32
+
+	noSmithyDocumentSerde
+}
+
 // The details of the last deployment of the environment.
 type Deployment struct {
 
@@ -2890,6 +2902,19 @@ func (*EventSummaryMemberOpenLineageRunEventSummary) isEventSummary() {}
 type FailureCause struct {
 
 	// The description of the error message.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of a resource deletion failure during a cascade deletion of the
+// domain.
+type FailureReason struct {
+
+	// The identifier of the resource that failed to delete.
+	Id *string
+
+	// The error message associated with the resource that failed to delete.
 	Message *string
 
 	noSmithyDocumentSerde

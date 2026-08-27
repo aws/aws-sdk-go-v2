@@ -577,12 +577,14 @@ func TestCheckResponseSnapshot_ListManagedMicrovmImageVersions(t *testing.T) {
 			{
 				ImageArn:     ptr.String("__ImageArn__"),
 				ImageVersion: ptr.String("__ImageVersion__"),
+				Status:       types.ManagedMicrovmImageVersionStatus("AVAILABLE"),
 				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
 				ImageArn:     ptr.String("__ImageArn__"),
 				ImageVersion: ptr.String("__ImageVersion__"),
+				Status:       types.ManagedMicrovmImageVersionStatus("AVAILABLE"),
 				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
@@ -1432,68 +1434,17 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateMicrovmImage(context.Background(), &CreateMicrovmImageInput{
-		BaseImageArn:     ptr.String("__BaseImageArn__"),
-		BaseImageVersion: ptr.String("__BaseImageVersion__"),
-		BuildRoleArn:     ptr.String("__BuildRoleArn__"),
-		Description:      ptr.String("__Description__"),
-		CodeArtifact: &types.CodeArtifactMemberUri{
-			Value: "__CodeArtifactMemberUri__",
-		},
-		Logging: &types.LoggingMemberDisabled{
-			Value: types.LoggingDisabled{},
-		},
-		EgressNetworkConnectors: []string{
-			"__Member__",
-			"__Member__",
-		},
-		CpuConfigurations: []types.CpuConfiguration{
-			{
-				Architecture: types.Architecture("ARM_64"),
+	_, opErr := svc.CreateMicrovmAuthToken(context.Background(), &CreateMicrovmAuthTokenInput{
+		MicrovmIdentifier:   ptr.String("__MicrovmIdentifier__"),
+		ExpirationInMinutes: ptr.Int32(1),
+		AllowedPorts: []types.PortSpecification{
+			&types.PortSpecificationMemberPort{
+				Value: 1,
 			},
-			{
-				Architecture: types.Architecture("ARM_64"),
+			&types.PortSpecificationMemberPort{
+				Value: 1,
 			},
 		},
-		Resources: []types.Resources{
-			{
-				MinimumMemoryInMiB: ptr.Int32(1),
-			},
-			{
-				MinimumMemoryInMiB: ptr.Int32(1),
-			},
-		},
-		AdditionalOsCapabilities: []types.Capability{
-			types.Capability("ALL"),
-			types.Capability("ALL"),
-		},
-		Hooks: &types.Hooks{
-			Port: ptr.Int32(1),
-			MicrovmHooks: &types.MicrovmHooks{
-				Run:                       types.HookState("DISABLED"),
-				RunTimeoutInSeconds:       ptr.Int32(1),
-				Resume:                    types.HookState("DISABLED"),
-				ResumeTimeoutInSeconds:    ptr.Int32(1),
-				Suspend:                   types.HookState("DISABLED"),
-				SuspendTimeoutInSeconds:   ptr.Int32(1),
-				Terminate:                 types.HookState("DISABLED"),
-				TerminateTimeoutInSeconds: ptr.Int32(1),
-			},
-			MicrovmImageHooks: &types.MicrovmImageHooks{
-				Ready:                    types.HookState("DISABLED"),
-				ReadyTimeoutInSeconds:    ptr.Int32(1),
-				Validate:                 types.HookState("DISABLED"),
-				ValidateTimeoutInSeconds: ptr.Int32(1),
-			},
-		},
-		EnvironmentVariables: map[string]string{
-			"key0": "__Value__",
-		},
-		Name: ptr.String("__Name__"),
-		Tags: map[string]string{
-			"key0": "__Value__",
-		},
-		ClientToken: ptr.String("__ClientToken__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1504,6 +1455,54 @@ func TestCheckResponseSnapshot_Error_ConflictException(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ConflictException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_InsufficientCapacityException(t *testing.T) {
+	want := &types.InsufficientCapacityException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("InsufficientCapacityException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.RunMicrovm(context.Background(), &RunMicrovmInput{
+		IngressNetworkConnectors: []string{
+			"__Member__",
+			"__Member__",
+		},
+		EgressNetworkConnectors: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ImageIdentifier:  ptr.String("__ImageIdentifier__"),
+		ImageVersion:     ptr.String("__ImageVersion__"),
+		ExecutionRoleArn: ptr.String("__ExecutionRoleArn__"),
+		IdlePolicy: &types.IdlePolicy{
+			MaxIdleDurationSeconds:   ptr.Int32(1),
+			SuspendedDurationSeconds: ptr.Int32(1),
+			AutoResumeEnabled:        ptr.Bool(true),
+		},
+		Logging: &types.LoggingMemberDisabled{
+			Value: types.LoggingDisabled{},
+		},
+		RunHookPayload:           ptr.String("__RunHookPayload__"),
+		MaximumDurationInSeconds: ptr.Int32(1),
+		ClientToken:              ptr.String("__ClientToken__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.InsufficientCapacityException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.InsufficientCapacityException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "InsufficientCapacityException.error", err)
 	}
 }
 

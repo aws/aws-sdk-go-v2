@@ -1,0 +1,8 @@
+{
+    "id": "280b7803-2ca3-4817-9219-2294f0ea2d0a",
+    "type": "feature",
+    "description": "EC2 allows AMI owners to define compatible instance types on their AMIs, blocking RunInstances calls automatically for launches on non-permitted instance types.",
+    "modules": [
+        "service/ec2"
+    ]
+}

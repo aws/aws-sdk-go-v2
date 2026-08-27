@@ -5460,6 +5460,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDomainInput(v *DeleteDomainInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.CascadeDelete != nil {
+		encoder.SetQuery("cascadeDelete").Boolean(*v.CascadeDelete)
+	}
+
 	if v.ClientToken != nil {
 		encoder.SetQuery("clientToken").String(*v.ClientToken)
 	}

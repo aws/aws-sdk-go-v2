@@ -10310,6 +10310,26 @@ func (m *validateOpReplaceIamInstanceProfileAssociation) HandleInitialize(ctx co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpReplaceImageInstanceTypeSpecification struct {
+}
+
+func (*validateOpReplaceImageInstanceTypeSpecification) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpReplaceImageInstanceTypeSpecification) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ReplaceImageInstanceTypeSpecificationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpReplaceImageInstanceTypeSpecificationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpReplaceNetworkAclAssociation struct {
 }
 
@@ -13268,6 +13288,10 @@ func addOpReleaseIpamPoolAllocationValidationMiddleware(stack *middleware.Stack)
 
 func addOpReplaceIamInstanceProfileAssociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpReplaceIamInstanceProfileAssociation{}, middleware.After)
+}
+
+func addOpReplaceImageInstanceTypeSpecificationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpReplaceImageInstanceTypeSpecification{}, middleware.After)
 }
 
 func addOpReplaceNetworkAclAssociationValidationMiddleware(stack *middleware.Stack) error {
@@ -23119,6 +23143,21 @@ func validateOpReplaceIamInstanceProfileAssociationInput(v *ReplaceIamInstancePr
 	}
 	if v.AssociationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpReplaceImageInstanceTypeSpecificationInput(v *ReplaceImageInstanceTypeSpecificationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReplaceImageInstanceTypeSpecificationInput"}
+	if v.ImageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

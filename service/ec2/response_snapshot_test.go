@@ -29342,6 +29342,24 @@ func TestCheckResponseSnapshot_DescribeImages(t *testing.T) {
 						WatermarkCreationTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					},
 				},
+				InstanceTypeSpecification: &types.InstanceTypeSpecification{
+					SupportedInstanceTypes: []types.InstanceTypeItem{
+						{
+							InstanceType: ptr.String("__InstanceType__"),
+						},
+						{
+							InstanceType: ptr.String("__InstanceType__"),
+						},
+					},
+					UnsupportedInstanceTypes: []types.InstanceTypeItem{
+						{
+							InstanceType: ptr.String("__InstanceType__"),
+						},
+						{
+							InstanceType: ptr.String("__InstanceType__"),
+						},
+					},
+				},
 				ImageId:       ptr.String("__ImageId__"),
 				ImageLocation: ptr.String("__ImageLocation__"),
 				State:         types.ImageState("pending"),
@@ -29458,6 +29476,24 @@ func TestCheckResponseSnapshot_DescribeImages(t *testing.T) {
 						SourceImageId:           ptr.String("__SourceImageId__"),
 						SourceImageCreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						WatermarkCreationTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+				InstanceTypeSpecification: &types.InstanceTypeSpecification{
+					SupportedInstanceTypes: []types.InstanceTypeItem{
+						{
+							InstanceType: ptr.String("__InstanceType__"),
+						},
+						{
+							InstanceType: ptr.String("__InstanceType__"),
+						},
+					},
+					UnsupportedInstanceTypes: []types.InstanceTypeItem{
+						{
+							InstanceType: ptr.String("__InstanceType__"),
+						},
+						{
+							InstanceType: ptr.String("__InstanceType__"),
+						},
 					},
 				},
 				ImageId:       ptr.String("__ImageId__"),
@@ -82018,6 +82054,40 @@ func TestCheckResponseSnapshot_ReplaceImageCriteriaInAllowedImagesSettings(t *te
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ReplaceImageCriteriaInAllowedImagesSettings.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ReplaceImageInstanceTypeSpecification(t *testing.T) {
+	want := &ReplaceImageInstanceTypeSpecificationOutput{
+		ReturnValue: ptr.Bool(true),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ReplaceImageInstanceTypeSpecification.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ReplaceImageInstanceTypeSpecification(context.Background(), &ReplaceImageInstanceTypeSpecificationInput{
+		ImageId: ptr.String("__ImageId__"),
+		InstanceTypeSpecification: &types.InstanceTypeSpecificationRequest{
+			SupportedInstanceTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			UnsupportedInstanceTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+		DryRun: ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ReplaceImageInstanceTypeSpecification.response", err)
 	}
 }
 

@@ -122,6 +122,18 @@ func TestCheckSnapshot_AdminCreateUser(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AdminDeleteSoftwareToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AdminDeleteSoftwareToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AdminDeleteSoftwareToken")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AdminDeleteUser(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AdminDeleteUser(context.Background(), nil, func(o *Options) {
@@ -1662,6 +1674,18 @@ func TestUpdateSnapshot_AdminCreateUser(t *testing.T) {
 	_, err := svc.AdminCreateUser(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AdminCreateUser")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AdminDeleteSoftwareToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AdminDeleteSoftwareToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AdminDeleteSoftwareToken")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

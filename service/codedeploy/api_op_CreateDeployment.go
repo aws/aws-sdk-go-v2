@@ -48,6 +48,12 @@ type CreateDeploymentInput struct {
 	// The name of the deployment group.
 	DeploymentGroupName *string
 
+	// The deployment mode to use for the deployment. When set to STANDARD (the
+	// default), the deployment runs the standard set of deployment lifecycle events.
+	// When set to RESTART, an EC2/On-premises in-place deployment runs a shortened set
+	// of lifecycle events to quickly restart the application on the target instances.
+	DeploymentMode types.DeploymentMode
+
 	// A comment about the deployment.
 	Description *string
 

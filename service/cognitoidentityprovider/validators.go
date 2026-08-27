@@ -110,6 +110,26 @@ func (m *validateOpAdminCreateUser) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAdminDeleteSoftwareToken struct {
+}
+
+func (*validateOpAdminDeleteSoftwareToken) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAdminDeleteSoftwareToken) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AdminDeleteSoftwareTokenInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAdminDeleteSoftwareTokenInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAdminDeleteUserAttributes struct {
 }
 
@@ -2590,6 +2610,10 @@ func addOpAdminCreateUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAdminCreateUser{}, middleware.After)
 }
 
+func addOpAdminDeleteSoftwareTokenValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAdminDeleteSoftwareToken{}, middleware.After)
+}
+
 func addOpAdminDeleteUserAttributesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAdminDeleteUserAttributes{}, middleware.After)
 }
@@ -3804,6 +3828,24 @@ func validateOpAdminCreateUserInput(v *AdminCreateUserInput) error {
 		if err := validateAttributeListType(v.ValidationData); err != nil {
 			invalidParams.AddNested("ValidationData", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAdminDeleteSoftwareTokenInput(v *AdminDeleteSoftwareTokenInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AdminDeleteSoftwareTokenInput"}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

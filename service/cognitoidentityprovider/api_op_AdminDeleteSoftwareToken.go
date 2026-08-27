@@ -4,17 +4,15 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Given a user pool domain name, returns information about the domain
-// configuration.
-//
-// This operation doesn't return results when you query a prefix domain in a
-// secondary Region. Prefix domains are Region-specific and can only be described
-// in the Region where they were created. To describe a prefix domain for a replica
-// user pool, make the request to the primary Region's endpoint.
+// Deletes a user's registered time-based one-time password (TOTP) multi-factor
+// authentication (MFA) factor, also known as a software token. After this
+// operation, the user can no longer sign in with TOTP MFA, and can register a new
+// TOTP factor with AssociateSoftwareToken . Use this operation when a user loses
+// access to their TOTP-generating device, for example, a lost or reset phone, and
+// needs to register a new one.
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -29,50 +27,53 @@ import (
 //
 // [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
 // [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
-func (c *Client) DescribeUserPoolDomain(ctx context.Context, params *DescribeUserPoolDomainInput, optFns ...func(*Options)) (*DescribeUserPoolDomainOutput, error) {
+func (c *Client) AdminDeleteSoftwareToken(ctx context.Context, params *AdminDeleteSoftwareTokenInput, optFns ...func(*Options)) (*AdminDeleteSoftwareTokenOutput, error) {
 	if params == nil {
-		params = &DescribeUserPoolDomainInput{}
+		params = &AdminDeleteSoftwareTokenInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeUserPoolDomain", params, optFns, c.addOperationDescribeUserPoolDomainMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AdminDeleteSoftwareToken", params, optFns, c.addOperationAdminDeleteSoftwareTokenMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DescribeUserPoolDomainOutput)
+	out := result.(*AdminDeleteSoftwareTokenOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DescribeUserPoolDomainInput struct {
+type AdminDeleteSoftwareTokenInput struct {
 
-	// The domain that you want to describe. For custom domains, this is the
-	// fully-qualified domain name, such as auth.example.com . For Amazon Cognito
-	// prefix domains, this is the prefix alone, such as auth .
+	// The ID of the user pool where you want to delete the user's software token.
 	//
 	// This member is required.
-	Domain *string
+	UserPoolId *string
+
+	// The name of the user that you want to query or modify. The value of this
+	// parameter is typically your user's username, but it can be any of their alias
+	// attributes. If username isn't an alias attribute in your user pool, this value
+	// must be the sub of a local user or the username of a user from a third-party
+	// IdP.
+	//
+	// This member is required.
+	Username *string
 
 	noSmithyDocumentSerde
 }
 
-type DescribeUserPoolDomainOutput struct {
-
-	// The details of the requested user pool domain.
-	DomainDescription *types.DomainDescriptionType
-
+type AdminDeleteSoftwareTokenOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDescribeUserPoolDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeUserPoolDomain{}, middleware.After)
+func (c *Client) addOperationAdminDeleteSoftwareTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminDeleteSoftwareToken{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeUserPoolDomain{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminDeleteSoftwareToken{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -89,7 +90,7 @@ func (c *Client) addOperationDescribeUserPoolDomainMiddlewares(stack *middleware
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addOpDescribeUserPoolDomainValidationMiddleware(stack); err != nil {
+	if err = addOpAdminDeleteSoftwareTokenValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

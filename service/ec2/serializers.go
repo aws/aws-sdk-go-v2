@@ -52518,6 +52518,76 @@ func (m *awsEc2query_serializeOpReplaceImageCriteriaInAllowedImagesSettings) Han
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsEc2query_serializeOpReplaceImageInstanceTypeSpecification struct {
+}
+
+func (*awsEc2query_serializeOpReplaceImageInstanceTypeSpecification) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpReplaceImageInstanceTypeSpecification) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ReplaceImageInstanceTypeSpecificationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ReplaceImageInstanceTypeSpecification")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentReplaceImageInstanceTypeSpecificationInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsEc2query_serializeOpReplaceNetworkAclAssociation struct {
 }
 
@@ -60847,6 +60917,27 @@ func awsEc2query_serializeDocumentInstanceTypes(v []string, value query.Value) e
 	return nil
 }
 
+func awsEc2query_serializeDocumentInstanceTypeSpecificationRequest(v *types.InstanceTypeSpecificationRequest, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.SupportedInstanceTypes != nil {
+		objectKey := object.FlatKey("SupportedInstanceType")
+		if err := awsEc2query_serializeDocumentSupportedInstanceTypeRequestSet(v.SupportedInstanceTypes, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.UnsupportedInstanceTypes != nil {
+		objectKey := object.FlatKey("UnsupportedInstanceType")
+		if err := awsEc2query_serializeDocumentUnsupportedInstanceTypeRequestSet(v.UnsupportedInstanceTypes, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsEc2query_serializeDocumentIntegrateServices(v *types.IntegrateServices, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -66786,6 +66877,19 @@ func awsEc2query_serializeDocumentSubnetIdStringList(v []string, value query.Val
 	return nil
 }
 
+func awsEc2query_serializeDocumentSupportedInstanceTypeRequestSet(v []string, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsEc2query_serializeDocumentTag(v *types.Tag, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -67519,6 +67623,19 @@ func awsEc2query_serializeDocumentTransitGatewaySubnetIdList(v []string, value q
 }
 
 func awsEc2query_serializeDocumentTrunkInterfaceAssociationIdList(v []string, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsEc2query_serializeDocumentUnsupportedInstanceTypeRequestSet(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
 	}
@@ -92722,6 +92839,30 @@ func awsEc2query_serializeOpDocumentReplaceImageCriteriaInAllowedImagesSettingsI
 	if v.ImageCriteria != nil {
 		objectKey := object.FlatKey("ImageCriterion")
 		if err := awsEc2query_serializeDocumentImageCriterionRequestList(v.ImageCriteria, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeOpDocumentReplaceImageInstanceTypeSpecificationInput(v *ReplaceImageInstanceTypeSpecificationInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.ImageId != nil {
+		objectKey := object.Key("ImageId")
+		objectKey.String(*v.ImageId)
+	}
+
+	if v.InstanceTypeSpecification != nil {
+		objectKey := object.Key("InstanceTypeSpecification")
+		if err := awsEc2query_serializeDocumentInstanceTypeSpecificationRequest(v.InstanceTypeSpecification, objectKey); err != nil {
 			return err
 		}
 	}

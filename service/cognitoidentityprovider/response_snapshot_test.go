@@ -318,6 +318,28 @@ func TestCheckResponseSnapshot_AdminCreateUser(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_AdminDeleteSoftwareToken(t *testing.T) {
+	want := &AdminDeleteSoftwareTokenOutput{}
+	status, header, body, err := serdeRespReadSnapshot("AdminDeleteSoftwareToken.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.AdminDeleteSoftwareToken(context.Background(), &AdminDeleteSoftwareTokenInput{
+		UserPoolId: ptr.String("__UserPoolId__"),
+		Username:   ptr.String("__Username__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "AdminDeleteSoftwareToken.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_AdminDeleteUser(t *testing.T) {
 	want := &AdminDeleteUserOutput{}
 	status, header, body, err := serdeRespReadSnapshot("AdminDeleteUser.response")
@@ -8627,36 +8649,9 @@ func TestCheckResponseSnapshot_Error_UserNotConfirmedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.AdminInitiateAuth(context.Background(), &AdminInitiateAuthInput{
+	_, opErr := svc.AdminDeleteSoftwareToken(context.Background(), &AdminDeleteSoftwareTokenInput{
 		UserPoolId: ptr.String("__UserPoolId__"),
-		ClientId:   ptr.String("__ClientId__"),
-		AuthFlow:   types.AuthFlowType("USER_SRP_AUTH"),
-		AuthParameters: map[string]string{
-			"key0": "__Value__",
-		},
-		ClientMetadata: map[string]string{
-			"key0": "__Value__",
-		},
-		AnalyticsMetadata: &types.AnalyticsMetadataType{
-			AnalyticsEndpointId: ptr.String("__AnalyticsEndpointId__"),
-		},
-		ContextData: &types.ContextDataType{
-			IpAddress:  ptr.String("__IpAddress__"),
-			ServerName: ptr.String("__ServerName__"),
-			ServerPath: ptr.String("__ServerPath__"),
-			HttpHeaders: []types.HttpHeader{
-				{
-					HeaderName:  ptr.String("__HeaderName__"),
-					HeaderValue: ptr.String("__HeaderValue__"),
-				},
-				{
-					HeaderName:  ptr.String("__HeaderName__"),
-					HeaderValue: ptr.String("__HeaderValue__"),
-				},
-			},
-			EncodedData: ptr.String("__EncodedData__"),
-		},
-		Session: ptr.String("__Session__"),
+		Username:   ptr.String("__Username__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

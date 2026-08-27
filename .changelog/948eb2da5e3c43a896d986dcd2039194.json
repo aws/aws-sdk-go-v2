@@ -1,0 +1,8 @@
+{
+    "id": "948eb2da-5e3c-43a8-96d9-86dcd2039194",
+    "type": "feature",
+    "description": "Adding support for the full snapshot size, in bytes, of DB instance snapshots.",
+    "modules": [
+        "service/rds"
+    ]
+}

@@ -9062,6 +9062,18 @@ func TestCheckSnapshot_ReplaceImageCriteriaInAllowedImagesSettings(t *testing.T)
 	}
 }
 
+func TestCheckSnapshot_ReplaceImageInstanceTypeSpecification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ReplaceImageInstanceTypeSpecification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ReplaceImageInstanceTypeSpecification")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ReplaceNetworkAclAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ReplaceNetworkAclAssociation(context.Background(), nil, func(o *Options) {
@@ -18654,6 +18666,18 @@ func TestUpdateSnapshot_ReplaceImageCriteriaInAllowedImagesSettings(t *testing.T
 	_, err := svc.ReplaceImageCriteriaInAllowedImagesSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ReplaceImageCriteriaInAllowedImagesSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ReplaceImageInstanceTypeSpecification(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ReplaceImageInstanceTypeSpecification(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ReplaceImageInstanceTypeSpecification")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

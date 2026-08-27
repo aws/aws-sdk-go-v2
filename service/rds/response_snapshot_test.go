@@ -639,6 +639,7 @@ func TestCheckResponseSnapshot_CopyDBSnapshot(t *testing.T) {
 				},
 			},
 			SnapshotAvailabilityZone: ptr.String("__SnapshotAvailabilityZone__"),
+			FullSnapshotSizeInBytes:  ptr.Int64(1),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CopyDBSnapshot.response")
@@ -3065,6 +3066,7 @@ func TestCheckResponseSnapshot_CreateDBSnapshot(t *testing.T) {
 				},
 			},
 			SnapshotAvailabilityZone: ptr.String("__SnapshotAvailabilityZone__"),
+			FullSnapshotSizeInBytes:  ptr.Int64(1),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("CreateDBSnapshot.response")
@@ -5027,6 +5029,7 @@ func TestCheckResponseSnapshot_DeleteDBSnapshot(t *testing.T) {
 				},
 			},
 			SnapshotAvailabilityZone: ptr.String("__SnapshotAvailabilityZone__"),
+			FullSnapshotSizeInBytes:  ptr.Int64(1),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DeleteDBSnapshot.response")
@@ -9640,6 +9643,7 @@ func TestCheckResponseSnapshot_DescribeDBSnapshots(t *testing.T) {
 					},
 				},
 				SnapshotAvailabilityZone: ptr.String("__SnapshotAvailabilityZone__"),
+				FullSnapshotSizeInBytes:  ptr.Int64(1),
 			},
 			{
 				DBSnapshotIdentifier:             ptr.String("__DBSnapshotIdentifier__"),
@@ -9718,6 +9722,7 @@ func TestCheckResponseSnapshot_DescribeDBSnapshots(t *testing.T) {
 					},
 				},
 				SnapshotAvailabilityZone: ptr.String("__SnapshotAvailabilityZone__"),
+				FullSnapshotSizeInBytes:  ptr.Int64(1),
 			},
 		},
 	}
@@ -14661,6 +14666,7 @@ func TestCheckResponseSnapshot_ModifyDBSnapshot(t *testing.T) {
 				},
 			},
 			SnapshotAvailabilityZone: ptr.String("__SnapshotAvailabilityZone__"),
+			FullSnapshotSizeInBytes:  ptr.Int64(1),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ModifyDBSnapshot.response")

@@ -16459,6 +16459,11 @@ func awsRestjson1_deserializeOpDocumentGetDomainOutput(v **GetDomainOutput, valu
 				}
 			}
 
+		case "deleteProgress":
+			if err := awsRestjson1_deserializeDocumentDeleteProgress(&sv.DeleteProgress, value); err != nil {
+				return err
+			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16484,6 +16489,11 @@ func awsRestjson1_deserializeOpDocumentGetDomainOutput(v **GetDomainOutput, valu
 					return fmt.Errorf("expected DomainVersion to be of type string, got %T instead", value)
 				}
 				sv.DomainVersion = types.DomainVersion(jtv)
+			}
+
+		case "failureReasons":
+			if err := awsRestjson1_deserializeDocumentFailureReasonsList(&sv.FailureReasons, value); err != nil {
+				return err
 			}
 
 		case "id":
@@ -47218,6 +47228,50 @@ func awsRestjson1_deserializeDocumentDataSourceSummary(v **types.DataSourceSumma
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDeleteProgress(v **types.DeleteProgress, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DeleteProgress
+	if *v == nil {
+		sv = &types.DeleteProgress{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "successfullyDeletedProjectCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SuccessfullyDeletedProjectCount = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDeployment(v **types.Deployment, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -49913,6 +49967,55 @@ func awsRestjson1_deserializeDocumentFailureCause(v **types.FailureCause, value 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFailureReason(v **types.FailureReason, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FailureReason
+	if *v == nil {
+		sv = &types.FailureReason{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFailureReasons(v *[]types.ProjectDeletionError, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -49937,6 +50040,40 @@ func awsRestjson1_deserializeDocumentFailureReasons(v *[]types.ProjectDeletionEr
 		var col types.ProjectDeletionError
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentProjectDeletionError(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFailureReasonsList(v *[]types.FailureReason, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FailureReason
+	if *v == nil {
+		cv = []types.FailureReason{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FailureReason
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentFailureReason(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
