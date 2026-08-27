@@ -23,21 +23,24 @@ type concurrentReader struct {
 	buf     map[int32]*outChunk
 	options Options
 	in      *GetObjectInput
+	getType types.GetObjectType
 
-	pos          int64
-	partsCount   int32
-	capacity     int32
-	sectionParts int32
-	sendCount    int32
-	receiveCount int32
-	readCount    int32
-	totalBytes   int64
-	index        int32
-	done         bool
-	written      int64
-	partSize     int64
-	invocations  int32
-	etag         *string
+	pos              int64
+	partsCount       int32
+	capacity         int32
+	sectionParts     int32
+	sendCount        int32
+	receiveCount     int32
+	readCount        int32
+	consecutiveIndex int32 // the sequential idx marking the next consecutive part being read
+	buffered         int64
+	totalBytes       int64
+	index            int32
+	done             bool
+	written          int64
+	partSize         int64
+	invocations      int32
+	etag             *string
 
 	ctx context.Context
 	m   sync.Mutex
@@ -58,7 +61,7 @@ func (r *concurrentReader) Read(p []byte) (int, error) {
 	clientOptions := []func(*s3.Options){
 		func(o *s3.Options) {
 			o.APIOptions = append(o.APIOptions,
-				middleware.AddSDKAgentKey(middleware.FeatureMetadata, userAgentKey),
+				middleware.AddSDKAgentKeyValue(middleware.FeatureMetadata, userAgentKey, goModuleVersion),
 				addFeatureUserAgent,
 			)
 		}}
@@ -204,6 +207,102 @@ func (r *concurrentReader) read(p []byte) (int, error) {
 		return 0, nil
 	}
 
+	if r.getType == types.GetObjectParts {
+		return r.partRead(p)
+	}
+
+	return r.rangeRead(p)
+}
+
+func (r *concurrentReader) partRead(p []byte) (int, error) {
+	var written int
+
+	for i := r.consecutiveIndex; i < atomic.LoadInt32(&r.capacity); i++ {
+		if e := r.getErr(); e != nil && e != io.EOF {
+			r.clean()
+			return written, r.getErr()
+		}
+
+		c, ok := r.buf[i]
+		if !ok {
+			// possible unequal parts' sizes can break all offset read for part GET,
+			// must break and wait for next consecutive part
+			break
+		}
+		if written >= cap(p) {
+			return written, nil
+		}
+
+		n, err := c.body.Read(p[written:])
+		c.cur += int64(n)
+		written += n
+		if err != nil && err != io.EOF {
+			r.setErr(err)
+			r.clean()
+			return written, r.getErr()
+		}
+		if c.cur >= c.length {
+			r.readCount++
+			delete(r.buf, i)
+			r.buffered -= c.length
+
+			if r.readCount == atomic.LoadInt32(&r.capacity) {
+				capacity := min(atomic.LoadInt32(&r.capacity)+r.sectionParts, r.partsCount)
+				atomic.StoreInt32(&r.capacity, capacity)
+			}
+			if r.readCount >= r.partsCount {
+				r.setErr(io.EOF)
+			}
+		}
+	}
+
+	for r.receiveCount < atomic.LoadInt32(&r.capacity) {
+		if e := r.getErr(); e != nil && e != io.EOF {
+			r.clean()
+			return written, e
+		}
+
+		oc, ok := <-r.ch
+		if !ok {
+			break
+		}
+		r.receiveCount++
+		if written >= cap(p) {
+			return written, nil
+		}
+		// only directly feed into p if this is the next neighbor part
+		if oc.index == r.consecutiveIndex {
+
+			n, err := oc.body.Read(p[written:])
+			oc.cur += int64(n)
+			written += n
+			if err != nil && err != io.EOF {
+				r.setErr(err)
+				r.clean()
+				return written, r.getErr()
+			}
+		} else {
+
+		}
+
+		if oc.cur < oc.length {
+			r.buf[oc.index] = &oc
+		} else {
+			r.readCount++
+			if r.readCount == atomic.LoadInt32(&r.capacity) {
+				capacity := min(atomic.LoadInt32(&r.capacity)+r.sectionParts, r.partsCount)
+				atomic.StoreInt32(&r.capacity, capacity)
+			}
+			if r.readCount >= r.partsCount {
+				r.setErr(io.EOF)
+			}
+		}
+	}
+
+	return written, r.getErr()
+}
+
+func (r *concurrentReader) rangeRead(p []byte) (int, error) {
 	var written int
 
 	partSize := r.partSize
