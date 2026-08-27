@@ -1,8 +1,0 @@
-{
-    "id": "9ccb3ce2-18c5-4094-8928-46a89472281f",
-    "type": "feature",
-    "description": "Adds the AdminDeleteSoftwareToken API operation, enabling administrators to remove a user's registered TOTP (software token) MFA configuration from a user pool.",
-    "modules": [
-        "service/cognitoidentityprovider"
-    ]
-}

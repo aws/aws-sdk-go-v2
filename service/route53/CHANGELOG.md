@@ -1,3 +1,9 @@
+# v1.67.0 (2026-08-27)
+
+* **Feature**: Support connection read timeouts in the SDK. This is currently available on an opt-in basis by setting env `AWS_ENABLE_DEFAULT_SOCKET_TIMEOUT_2026=true`.
+* **Bug Fix**: Forward the original response body's `Closer` in Route53 custom error handling instead of wrapping it in `io.NopCloser`, and close the body on the custom error path, to avoid issues with TCP connection reuse.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.66.0 (2026-08-26)
 
 * **Feature**: Stop registering the `ComputeContentLength` middleware in generated clients. `Content-Length` is now set when the request body is set via `SetStream`.

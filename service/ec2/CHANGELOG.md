@@ -1,3 +1,9 @@
+# v1.325.0 (2026-08-27)
+
+* **Feature**: EC2 allows AMI owners to define compatible instance types on their AMIs, blocking RunInstances calls automatically for launches on non-permitted instance types.
+* **Feature**: Support connection read timeouts in the SDK. This is currently available on an opt-in basis by setting env `AWS_ENABLE_DEFAULT_SOCKET_TIMEOUT_2026=true`.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.324.0 (2026-08-26)
 
 * **Feature**: Adds deleting state to possible VPC States.

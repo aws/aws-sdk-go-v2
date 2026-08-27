@@ -1,3 +1,29 @@
+# Release (2026-08-27)
+
+## General Highlights
+* **Feature**: Support connection read timeouts in the SDK. This is currently available on an opt-in basis by setting env `AWS_ENABLE_DEFAULT_SOCKET_TIMEOUT_2026=true`.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.84.0](service/cloudwatchlogs/CHANGELOG.md#v1840-2026-08-27)
+  * **Feature**: Added resultCount to QueryStatistics in GetQueryResults. This field returns the total number of output rows in the final result set, helping customers programmatically determine whether a query produced results after all operations including post-aggregation filters.
+* `github.com/aws/aws-sdk-go-v2/service/codedeploy`: [v1.40.0](service/codedeploy/CHANGELOG.md#v1400-2026-08-27)
+  * **Feature**: Added a deploymentMode parameter to CreateDeployment. Set it to RESTART to restart an EC2 and on-premises fleet, using the last successful revision, honoring Deployment Configuration.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.69.0](service/cognitoidentityprovider/CHANGELOG.md#v1690-2026-08-27)
+  * **Feature**: Adds the AdminDeleteSoftwareToken API operation, enabling administrators to remove a user's registered TOTP (software token) MFA configuration from a user pool.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.71.0](service/datazone/CHANGELOG.md#v1710-2026-08-27)
+  * **Feature**: Add cascadeDelete to DeleteDomain. When specified, DataZone recursively deletes all projects, environments, subscriptions, and their underlying AWS resources before removing the domain. Deletion progress is reported via deleteProgress and resource failures via failureReasons on GetDomain.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.325.0](service/ec2/CHANGELOG.md#v13250-2026-08-27)
+  * **Feature**: EC2 allows AMI owners to define compatible instance types on their AMIs, blocking RunInstances calls automatically for launches on non-permitted instance types.
+* `github.com/aws/aws-sdk-go-v2/service/lambdamicrovms`: [v1.4.0](service/lambdamicrovms/CHANGELOG.md#v140-2026-08-27)
+  * **Feature**: Added InsufficientCapacityException to RunMicrovm for capacity-related failures. Added lifecycle status field (AVAILABLE, DEPRECATED) to ListManagedMicrovmImageVersions. Added ConflictException to CreateMicrovmAuthToken and CreateMicrovmShellAuthToken for unregistered MicroVMs.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.77.0](service/opensearch/CHANGELOG.md#v1770-2026-08-27)
+  * **Documentation**: Updating SDK and CLI documentation for AttachDataSource API.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.126.0](service/rds/CHANGELOG.md#v11260-2026-08-27)
+  * **Feature**: Adding support for the full snapshot size, in bytes, of DB instance snapshots.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.67.0](service/route53/CHANGELOG.md#v1670-2026-08-27)
+  * **Bug Fix**: Forward the original response body's `Closer` in Route53 custom error handling instead of wrapping it in `io.NopCloser`, and close the body on the custom error path, to avoid issues with TCP connection reuse.
+
 # Release (2026-08-26)
 
 ## General Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "602a396b-4852-45c3-a6d4-1fe69fdbba99",
-    "type": "documentation",
-    "description": "Updating SDK and CLI documentation for AttachDataSource API.",
-    "modules": [
-        "service/opensearch"
-    ]
-}
