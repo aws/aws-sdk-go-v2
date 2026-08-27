@@ -1,0 +1,8 @@
+{
+    "id": "a3cd07bc-a73a-4818-a997-373b0d8812c7",
+    "type": "bugfix",
+    "description": "Fix DownloadObject bug so parts can be read to correct offset regardless of parts sizes change",
+    "modules": [
+        "feature/s3/transfermanager"
+    ]
+}
