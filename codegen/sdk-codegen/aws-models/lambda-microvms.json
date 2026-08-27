@@ -144,7 +144,7 @@
                 "uri": {
                     "target": "com.amazonaws.lambdamicrovms#NonBlankString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URI of the code artifact, such as an Amazon S3 path or Amazon ECR image URI.</p>"
+                        "smithy.api#documentation": "<p>The URI of the code artifact in Amazon S3.</p>"
                     }
                 }
             },
@@ -214,6 +214,9 @@
                     "target": "com.amazonaws.lambdamicrovms#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.lambdamicrovms#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.lambdamicrovms#InternalServerException"
                 },
                 {
@@ -227,6 +230,15 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create an auth token for an AWS Lambda MicroVM",
+                    "relativeDocumentation": "API_CreateMicrovmAuthToken.html",
+                    "resources": {
+                        "required": {
+                            "microvmImage": {}
+                        }
+                    }
+                },
                 "smithy.api#documentation": "<p>Creates an authentication token for accessing a running MicroVM. The token grants access to the specified ports on the MicroVM endpoint.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -312,6 +324,18 @@
                 }
             ],
             "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create an AWS Lambda MicroVM image",
+                    "relativeDocumentation": "API_CreateMicrovmImage.html",
+                    "requiredActions": [
+                        "iam:PassRole",
+                        "lambda:PassNetworkConnector"
+                    ]
+                },
                 "smithy.api#documentation": "<p>Creates a MicroVM image from the specified code artifact and base image. The build is asynchronous — the image transitions from CREATING to CREATED on success, or CREATE_FAILED on failure. Use GetMicrovmImage to poll for completion.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -582,6 +606,9 @@
                     "target": "com.amazonaws.lambdamicrovms#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.lambdamicrovms#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.lambdamicrovms#InternalServerException"
                 },
                 {
@@ -595,6 +622,15 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to create a shell auth token for an AWS Lambda MicroVM",
+                    "relativeDocumentation": "API_CreateMicrovmShellAuthToken.html",
+                    "resources": {
+                        "required": {
+                            "microvmImage": {}
+                        }
+                    }
+                },
                 "smithy.api#documentation": "<p>Creates a shell authentication token for interactive shell access to a running MicroVM. The MicroVM must have been run with the SHELL_INGRESS network connector attached.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -670,6 +706,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete an AWS Lambda MicroVM image",
+                    "relativeDocumentation": "API_DeleteMicrovmImage.html"
+                },
                 "smithy.api#documentation": "<p>Deletes a MicroVM image. This operation is idempotent; deleting an image that has already been deleted succeeds without error.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -746,6 +786,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to delete a version of an AWS Lambda MicroVM image",
+                    "relativeDocumentation": "API_DeleteMicrovmImageVersion.html"
+                },
                 "smithy.api#documentation": "<p>Deletes a specific version of a MicroVM image. This operation is idempotent; deleting a version that has already been deleted succeeds without error.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -838,7 +882,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 4096
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.lambdamicrovms#GetMicrovm": {
@@ -867,6 +912,15 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to view information about an AWS Lambda MicroVM",
+                    "relativeDocumentation": "API_GetMicrovm.html",
+                    "resources": {
+                        "required": {
+                            "microvmImage": {}
+                        }
+                    }
+                },
                 "smithy.api#documentation": "<p>Retrieves the details of a specific MicroVM, including its state, endpoint, image information, and configuration. The state field is eventually consistent — determine readiness by connecting to the endpoint.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -902,6 +956,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to view information about an AWS Lambda MicroVM image",
+                    "relativeDocumentation": "API_GetMicrovmImage.html"
+                },
                 "smithy.api#documentation": "<p>Retrieves the details of a MicroVM image, including its state, versions, and configuration.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -937,6 +995,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to view information about a build of an AWS Lambda MicroVM image version",
+                    "relativeDocumentation": "API_GetMicrovmImageBuild.html"
+                },
                 "smithy.api#documentation": "<p>Retrieves the details of a specific MicroVM image build, including its state, target architecture, and snapshot information.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -1156,6 +1218,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to view information about a version of an AWS Lambda MicroVM image",
+                    "relativeDocumentation": "API_GetMicrovmImageVersion.html"
+                },
                 "smithy.api#documentation": "<p>Retrieves the details of a specific version of a MicroVM image, including its configuration, state, and build information.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -1534,6 +1600,22 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9-_]+$"
             }
         },
+        "com.amazonaws.lambdamicrovms#InsufficientCapacityException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>There is insufficient capacity to fulfill the request. Retry the request later.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
         "com.amazonaws.lambdamicrovms#InternalServerException": {
             "type": "structure",
             "members": {
@@ -1582,34 +1664,7 @@
                     "target": "com.amazonaws.lambdamicrovms#CreateMicrovmImage"
                 },
                 {
-                    "target": "com.amazonaws.lambdamicrovms#DeleteMicrovmImage"
-                },
-                {
-                    "target": "com.amazonaws.lambdamicrovms#DeleteMicrovmImageVersion"
-                },
-                {
-                    "target": "com.amazonaws.lambdamicrovms#GetMicrovmImage"
-                },
-                {
-                    "target": "com.amazonaws.lambdamicrovms#GetMicrovmImageBuild"
-                },
-                {
-                    "target": "com.amazonaws.lambdamicrovms#GetMicrovmImageVersion"
-                },
-                {
                     "target": "com.amazonaws.lambdamicrovms#ListManagedMicrovmImages"
-                },
-                {
-                    "target": "com.amazonaws.lambdamicrovms#ListManagedMicrovmImageVersions"
-                },
-                {
-                    "target": "com.amazonaws.lambdamicrovms#ListMicrovmImageBuilds"
-                },
-                {
-                    "target": "com.amazonaws.lambdamicrovms#ListMicrovmImages"
-                },
-                {
-                    "target": "com.amazonaws.lambdamicrovms#ListMicrovmImageVersions"
                 },
                 {
                     "target": "com.amazonaws.lambdamicrovms#ListTags"
@@ -1619,17 +1674,28 @@
                 },
                 {
                     "target": "com.amazonaws.lambdamicrovms#UntagResource"
-                },
-                {
-                    "target": "com.amazonaws.lambdamicrovms#UpdateMicrovmImage"
-                },
-                {
-                    "target": "com.amazonaws.lambdamicrovms#UpdateMicrovmImageVersion"
                 }
             ],
             "resources": [
                 {
                     "target": "com.amazonaws.lambdamicrovms#Microvm"
+                },
+                {
+                    "target": "com.amazonaws.lambdamicrovms#MicrovmImage"
+                }
+            ],
+            "errors": [
+                {
+                    "target": "com.amazonaws.lambdamicrovms#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lambdamicrovms#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lambdamicrovms#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lambdamicrovms#ValidationException"
                 }
             ],
             "traits": {
@@ -1639,6 +1705,20 @@
                 },
                 "aws.auth#sigv4": {
                     "name": "lambda"
+                },
+                "aws.iam#defineConditionKeys": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "type": "String",
+                        "documentation": "Filters access by the tags associated with the resource"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "type": "String",
+                        "documentation": "Filters access by the tags that are passed in the request"
+                    },
+                    "aws:TagKeys": {
+                        "type": "ArrayOfString",
+                        "documentation": "Filters access by the tag keys that are passed in the request"
+                    }
                 },
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<p>Provides APIs to create, manage, and operate AWS Lambda MicroVMs and their associated MicroVM Image environments.</p>",
@@ -2479,6 +2559,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to retrieve a list of versions for a managed AWS Lambda MicroVM image",
+                    "relativeDocumentation": "API_ListManagedMicrovmImageVersions.html"
+                },
                 "smithy.api#documentation": "<p>Lists versions of a managed MicroVM image. We recommend using pagination to ensure that the operation returns quickly and successfully.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -2572,6 +2656,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to retrieve a list of managed AWS Lambda MicroVM images",
+                    "relativeDocumentation": "API_ListManagedMicrovmImages.html"
+                },
                 "smithy.api#documentation": "<p>Lists AWS managed MicroVM images available for use as base images. We recommend using pagination to ensure that the operation returns quickly and successfully.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -2660,6 +2748,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to retrieve a list of builds for an AWS Lambda MicroVM image version",
+                    "relativeDocumentation": "API_ListMicrovmImageBuilds.html"
+                },
                 "smithy.api#documentation": "<p>Lists builds for a MicroVM image version with optional filtering by architecture and chipset. We recommend using pagination to ensure that the operation returns quickly and successfully.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -2785,6 +2877,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to retrieve a list of versions for an AWS Lambda MicroVM image",
+                    "relativeDocumentation": "API_ListMicrovmImageVersions.html"
+                },
                 "smithy.api#documentation": "<p>Lists versions of a MicroVM image. We recommend using pagination to ensure that the operation returns quickly and successfully.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -2878,6 +2974,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to retrieve a list of AWS Lambda MicroVM images",
+                    "relativeDocumentation": "API_ListMicrovmImages.html"
+                },
                 "smithy.api#documentation": "<p>Lists MicroVM images in the account with optional name filtering. We recommend using pagination to ensure that the operation returns quickly and successfully.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -2973,6 +3073,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to retrieve a list of AWS Lambda MicroVMs",
+                    "relativeDocumentation": "API_ListMicrovms.html"
+                },
                 "smithy.api#documentation": "<p>Lists MicroVMs in the account with optional filtering by image and version. We recommend using pagination to ensure that the operation returns quickly and successfully.</p>",
                 "smithy.api#http": {
                     "method": "GET",
@@ -3205,6 +3309,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "status": {
+                    "target": "com.amazonaws.lambdamicrovms#ManagedMicrovmImageVersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle status of the managed MicroVM image version. Valid values: AVAILABLE (the version is available for use) or DEPRECATED (the version is deprecated; do not use it for new MicroVM images).</p>"
+                    }
+                },
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -3227,6 +3337,28 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.lambdamicrovms#ManagedMicrovmImageVersion"
+            }
+        },
+        "com.amazonaws.lambdamicrovms#ManagedMicrovmImageVersionStatus": {
+            "type": "enum",
+            "members": {
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version is available for use.</p>",
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "DEPRECATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version is deprecated. Do not use this version for new MicroVM images. Existing MicroVM images that use this version will continue to function.</p>",
+                        "smithy.api#enumValue": "DEPRECATED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The lifecycle status of a managed MicroVM image version.</p>"
             }
         },
         "com.amazonaws.lambdamicrovms#Microvm": {
@@ -3261,7 +3393,10 @@
                 {
                     "target": "com.amazonaws.lambdamicrovms#SuspendMicrovm"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.iam#disableConditionKeyInference": {}
+            }
         },
         "com.amazonaws.lambdamicrovms#MicrovmHooks": {
             "type": "structure",
@@ -3353,6 +3488,64 @@
                 }
             }
         },
+        "com.amazonaws.lambdamicrovms#MicrovmImage": {
+            "type": "resource",
+            "identifiers": {
+                "imageIdentifier": {
+                    "target": "com.amazonaws.lambdamicrovms#MicrovmImageIdentifier"
+                }
+            },
+            "read": {
+                "target": "com.amazonaws.lambdamicrovms#GetMicrovmImage"
+            },
+            "delete": {
+                "target": "com.amazonaws.lambdamicrovms#DeleteMicrovmImage"
+            },
+            "list": {
+                "target": "com.amazonaws.lambdamicrovms#ListMicrovmImages"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.lambdamicrovms#DeleteMicrovmImageVersion"
+                },
+                {
+                    "target": "com.amazonaws.lambdamicrovms#GetMicrovmImageBuild"
+                },
+                {
+                    "target": "com.amazonaws.lambdamicrovms#GetMicrovmImageVersion"
+                },
+                {
+                    "target": "com.amazonaws.lambdamicrovms#ListManagedMicrovmImageVersions"
+                },
+                {
+                    "target": "com.amazonaws.lambdamicrovms#ListMicrovmImageBuilds"
+                },
+                {
+                    "target": "com.amazonaws.lambdamicrovms#ListMicrovmImageVersions"
+                },
+                {
+                    "target": "com.amazonaws.lambdamicrovms#UpdateMicrovmImage"
+                },
+                {
+                    "target": "com.amazonaws.lambdamicrovms#UpdateMicrovmImageVersion"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "microvm-image:{imageIdentifier}"
+                },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#disableConditionKeyInference": {},
+                "aws.iam#iamResource": {
+                    "name": "microvmImage"
+                },
+                "smithy.api#suppress": [
+                    "IamResourceTrait"
+                ]
+            }
+        },
         "com.amazonaws.lambdamicrovms#MicrovmImageArn": {
             "type": "string",
             "traits": {
@@ -3360,7 +3553,8 @@
                 "smithy.api#length": {
                     "min": 20,
                     "max": 2048
-                }
+                },
+                "smithy.api#pattern": "^arn:[a-z0-9-]+:lambda:[a-z0-9-]*:[a-z0-9]*:microvm-image:.+$"
             }
         },
         "com.amazonaws.lambdamicrovms#MicrovmImageBuildSummaries": {
@@ -4113,6 +4307,15 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to resume a suspended AWS Lambda MicroVM",
+                    "relativeDocumentation": "API_ResumeMicrovm.html",
+                    "resources": {
+                        "required": {
+                            "microvmImage": {}
+                        }
+                    }
+                },
                 "smithy.api#documentation": "<p>Resumes a suspended MicroVM, restoring it to RUNNING state with all state intact. The MicroVM must be in SUSPENDED state.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -4156,6 +4359,15 @@
                 "smithy.api#pattern": "^arn:aws[a-z\\-]*:iam::[0-9]{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
             }
         },
+        "com.amazonaws.lambdamicrovms#RunHookPayload": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 4096
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.lambdamicrovms#RunMicrovm": {
             "type": "operation",
             "input": {
@@ -4170,6 +4382,9 @@
                 },
                 {
                     "target": "com.amazonaws.lambdamicrovms#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lambdamicrovms#InsufficientCapacityException"
                 },
                 {
                     "target": "com.amazonaws.lambdamicrovms#InternalServerException"
@@ -4188,6 +4403,19 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to run an AWS Lambda MicroVM from a MicroVM image",
+                    "relativeDocumentation": "API_RunMicrovm.html",
+                    "requiredActions": [
+                        "iam:PassRole",
+                        "lambda:PassNetworkConnector"
+                    ],
+                    "resources": {
+                        "required": {
+                            "microvmImage": {}
+                        }
+                    }
+                },
                 "smithy.api#documentation": "<p>Runs a new MicroVM from the specified image. The MicroVM starts in PENDING state and transitions to RUNNING once provisioning completes. To connect, generate an authentication token using CreateMicrovmAuthToken.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -4243,12 +4471,9 @@
                     }
                 },
                 "runHookPayload": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.lambdamicrovms#RunHookPayload",
                     "traits": {
-                        "smithy.api#documentation": "<p>Per-MicroVM initialization data delivered as the request body of the /run lifecycle hook. Use to pass tenant-specific configuration such as session IDs or secret references. Maximum: 16,384 bytes.</p>",
-                        "smithy.api#length": {
-                            "max": 4096
-                        }
+                        "smithy.api#documentation": "<p>Per-MicroVM initialization data delivered as the request body of the /run lifecycle hook. Use to pass tenant-specific configuration such as session IDs or secret references. Maximum: 16,384 bytes.</p>"
                     }
                 },
                 "maximumDurationInSeconds": {
@@ -4488,6 +4713,15 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to suspend an AWS Lambda MicroVM",
+                    "relativeDocumentation": "API_SuspendMicrovm.html",
+                    "resources": {
+                        "required": {
+                            "microvmImage": {}
+                        }
+                    }
+                },
                 "smithy.api#documentation": "<p>Suspends a running MicroVM, preserving its full memory and disk state. The MicroVM transitions through SUSPENDING to SUSPENDED. To restore, call ResumeMicrovm or send traffic to the endpoint if autoResumeEnabled is true.</p>",
                 "smithy.api#http": {
                     "method": "POST",
@@ -4660,6 +4894,15 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to terminate an AWS Lambda MicroVM",
+                    "relativeDocumentation": "API_TerminateMicrovm.html",
+                    "resources": {
+                        "required": {
+                            "microvmImage": {}
+                        }
+                    }
+                },
                 "smithy.api#documentation": "<p>Terminates a MicroVM. This operation is idempotent; terminating a MicroVM that has already been terminated succeeds without error.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
@@ -4857,6 +5100,14 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to update an AWS Lambda MicroVM image",
+                    "relativeDocumentation": "API_UpdateMicrovmImage.html",
+                    "requiredActions": [
+                        "iam:PassRole",
+                        "lambda:PassNetworkConnector"
+                    ]
+                },
                 "smithy.api#documentation": "<p>Updates the configuration of a MicroVM image and triggers a new version build. This operation uses PUT semantics — all required fields (codeArtifact, baseImageArn, buildRoleArn) must be provided with every request.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
@@ -5134,6 +5385,10 @@
                 }
             ],
             "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to update a version of an AWS Lambda MicroVM image",
+                    "relativeDocumentation": "API_UpdateMicrovmImageVersion.html"
+                },
                 "smithy.api#documentation": "<p>Updates the status of a specific MicroVM image version.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",

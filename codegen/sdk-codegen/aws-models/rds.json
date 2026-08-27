@@ -12578,6 +12578,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the name of the Availability Zone where RDS stores the DB snapshot. This value is valid only for snapshots that RDS stores on a Dedicated Local Zone.</p>"
                     }
+                },
+                "FullSnapshotSizeInBytes": {
+                    "target": "com.amazonaws.rds#LongOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full size of the DB snapshot, in bytes.</p> <important> <p>This is not the incremental size of the snapshot. This is the full snapshot size and represents the size of all the blocks that were written to the source volume at the time the snapshot was created.</p> </important>"
+                    }
                 }
             },
             "traits": {

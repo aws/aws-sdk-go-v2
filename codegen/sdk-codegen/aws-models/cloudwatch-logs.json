@@ -14791,6 +14791,13 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of log groups that were scanned by this query.</p>"
                     }
+                },
+                "resultCount": {
+                    "target": "com.amazonaws.cloudwatchlogs#StatsValue",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of rows in the final query result set. This value represents the total number\n      of output rows across all pages. For queries that include post-aggregation filters (such as\n      <code>stats count(*) by field | filter count > threshold</code>), this value might be less\n      than <code>recordsMatched</code>. It reflects only the rows that survived all operations in\n      the query.</p>"
+                    }
                 }
             },
             "traits": {

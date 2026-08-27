@@ -280,7 +280,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
-                }
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9+=,.@_-]*$"
             }
         },
         "com.amazonaws.codedeploy#ApplicationNameRequiredException": {
@@ -2519,6 +2520,9 @@
                 },
                 {
                     "target": "com.amazonaws.codedeploy#InvalidTagsToAddException"
+                },
+                {
+                    "target": "com.amazonaws.codedeploy#ThrottlingException"
                 }
             ],
             "traits": {
@@ -2614,10 +2618,16 @@
                     "target": "com.amazonaws.codedeploy#InvalidAutoScalingGroupException"
                 },
                 {
+                    "target": "com.amazonaws.codedeploy#InvalidComputePlatformException"
+                },
+                {
                     "target": "com.amazonaws.codedeploy#InvalidDeploymentConfigNameException"
                 },
                 {
                     "target": "com.amazonaws.codedeploy#InvalidDeploymentGroupNameException"
+                },
+                {
+                    "target": "com.amazonaws.codedeploy#InvalidECSServiceException"
                 },
                 {
                     "target": "com.amazonaws.codedeploy#InvalidFileExistsBehaviorException"
@@ -2627,6 +2637,9 @@
                 },
                 {
                     "target": "com.amazonaws.codedeploy#InvalidIgnoreApplicationStopFailuresValueException"
+                },
+                {
+                    "target": "com.amazonaws.codedeploy#InvalidInputException"
                 },
                 {
                     "target": "com.amazonaws.codedeploy#InvalidLoadBalancerInfoException"
@@ -3073,6 +3086,12 @@
                         "smithy.api#documentation": "<p>Information about how CodeDeploy handles files that already exist in a\n            deployment target location but weren't part of the previous successful\n            deployment.</p>\n         <p>The <code>fileExistsBehavior</code> parameter takes any of the following\n            values:</p>\n         <ul>\n            <li>\n               <p>DISALLOW: The deployment fails. This is also the default behavior if no option\n                    is specified.</p>\n            </li>\n            <li>\n               <p>OVERWRITE: The version of the file from the application revision currently\n                    being deployed replaces the version already on the instance.</p>\n            </li>\n            <li>\n               <p>RETAIN: The version of the file already on the instance is kept and used as\n                    part of the new deployment.</p>\n            </li>\n         </ul>"
                     }
                 },
+                "deploymentMode": {
+                    "target": "com.amazonaws.codedeploy#DeploymentMode",
+                    "traits": {
+                        "smithy.api#documentation": "The deployment mode to use for the deployment. When set to STANDARD (the default), the deployment runs the standard set of deployment lifecycle events. When set to RESTART, an EC2/On-premises in-place deployment runs a shortened set of lifecycle events to quickly restart the application on the target instances."
+                    }
+                },
                 "overrideAlarmConfiguration": {
                     "target": "com.amazonaws.codedeploy#AlarmConfiguration",
                     "traits": {
@@ -3474,7 +3493,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
-                }
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9+=,.@_-]*$"
             }
         },
         "com.amazonaws.codedeploy#DeploymentConfigNameRequiredException": {
@@ -3773,7 +3793,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
-                }
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9+=,.@_-]*$"
             }
         },
         "com.amazonaws.codedeploy#DeploymentGroupNameRequiredException": {
@@ -4028,6 +4049,23 @@
             "traits": {
                 "smithy.api#documentation": "<p>The number of allowed deployments was exceeded.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.codedeploy#DeploymentMode": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDARD"
+                    }
+                },
+                "RESTART": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESTART"
+                    }
+                }
             }
         },
         "com.amazonaws.codedeploy#DeploymentNotStartedException": {
@@ -7627,7 +7665,13 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.codedeploy#ApplicationDoesNotExistException"
+                },
+                {
                     "target": "com.amazonaws.codedeploy#DeploymentDoesNotExistException"
+                },
+                {
+                    "target": "com.amazonaws.codedeploy#DeploymentGroupDoesNotExistException"
                 },
                 {
                     "target": "com.amazonaws.codedeploy#DeploymentIdRequiredException"
@@ -7734,7 +7778,13 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.codedeploy#ApplicationDoesNotExistException"
+                },
+                {
                     "target": "com.amazonaws.codedeploy#DeploymentDoesNotExistException"
+                },
+                {
+                    "target": "com.amazonaws.codedeploy#DeploymentGroupDoesNotExistException"
                 },
                 {
                     "target": "com.amazonaws.codedeploy#DeploymentIdRequiredException"

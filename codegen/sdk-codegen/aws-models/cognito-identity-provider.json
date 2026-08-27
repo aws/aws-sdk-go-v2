@@ -59,6 +59,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#AdminCreateUser"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#AdminDeleteSoftwareToken"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#AdminDeleteUser"
                 },
                 {
@@ -2562,6 +2565,73 @@
                 }
             }
         },
+        "com.amazonaws.cognitoidentityprovider#AdminDeleteSoftwareToken": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentityprovider#AdminDeleteSoftwareTokenRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentityprovider#AdminDeleteSoftwareTokenResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserNotConfirmedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a user's registered time-based one-time password (TOTP) multi-factor\n            authentication (MFA) factor, also known as a software token. After this operation, the\n            user can no longer sign in with TOTP MFA, and can register a new TOTP factor with\n                <code>AssociateSoftwareToken</code>. Use this operation when a user loses access to\n            their TOTP-generating device, for example, a lost or reset phone, and needs to register\n            a new one.</p>\n         <note>\n            <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you must use IAM credentials to authorize requests, and you must\n    grant yourself the corresponding IAM permission in a policy.</p>\n            <p class=\"title\">\n               <b>Learn more</b>\n            </p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html\">Signing Amazon Web Services API Requests</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>\n                  </p>\n               </li>\n            </ul>\n         </note>"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#AdminDeleteSoftwareTokenRequest": {
+            "type": "structure",
+            "members": {
+                "UserPoolId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user pool where you want to delete the user's software\n            token.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Username": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the user that you want to query or modify. The value of this parameter\n            is typically your user's username, but it can be any of their alias attributes. If\n                <code>username</code> isn't an alias attribute in your user pool, this value\n            must be the <code>sub</code> of a local user or the username of a user from a\n            third-party IdP.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#AdminDeleteSoftwareTokenResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#AdminDeleteUser": {
             "type": "operation",
             "input": {
@@ -3475,7 +3545,7 @@
                 "DestinationUser": {
                     "target": "com.amazonaws.cognitoidentityprovider#ProviderUserIdentifierType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The existing user in the user pool that you want to assign to the external IdP user\n            account. This user can be a local (Username + Password) Amazon Cognito user pools user or a\n            federated user (for example, a SAML or Facebook user). If the user doesn't exist, Amazon Cognito\n            generates an exception. Amazon Cognito returns this user when the new user (with the linked IdP\n            attribute) signs in.</p>\n         <p>For a native username + password user, the <code>ProviderAttributeValue</code> for the\n                <code>DestinationUser</code> should be the username in the user pool. For a\n            federated user, it should be the provider-specific <code>user_id</code>.</p>\n         <p>The <code>ProviderAttributeName</code> of the <code>DestinationUser</code> is\n            ignored.</p>\n         <p>The <code>ProviderName</code> should be set to <code>Cognito</code> for users in\n            Cognito user pools.</p>\n         <important>\n            <p>All attributes in the DestinationUser profile must be mutable. If you have\n                assigned the user any immutable custom attributes, the operation won't\n                succeed.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The existing user in the user pool that you want to assign to the external IdP user\n            account. This user can be a local (Username + Password) Amazon Cognito user pools user or a\n            federated user (for example, a SAML or Facebook user). If the user doesn't exist, Amazon Cognito\n            generates an exception. Amazon Cognito returns this user when the new user (with the linked IdP\n            attribute) signs in.</p>\n         <p>For a native username + password user, the <code>ProviderAttributeValue</code> for the\n                <code>DestinationUser</code> should be the username in the user pool. For a\n            federated user, it should be the provider-specific <code>user_id</code>.</p>\n         <p>The <code>ProviderAttributeName</code> of the <code>DestinationUser</code> is\n            ignored.</p>\n         <p>The <code>ProviderName</code> should be set to <code>Cognito</code> for users in\n            Cognito user pools.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10012,7 +10082,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Given a user pool domain name, returns information about the domain\n            configuration.</p>\n         <note>\n            <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you must use IAM credentials to authorize requests, and you must\n    grant yourself the corresponding IAM permission in a policy.</p>\n            <p class=\"title\">\n               <b>Learn more</b>\n            </p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html\">Signing Amazon Web Services API Requests</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>\n                  </p>\n               </li>\n            </ul>\n         </note>"
+                "smithy.api#documentation": "<p>Given a user pool domain name, returns information about the domain\n            configuration.</p>\n         <note>\n            <p>This operation doesn't return results when you query a prefix domain in a\n                secondary Region. Prefix domains are Region-specific and can only be described in\n                the Region where they were created. To describe a prefix domain for a replica user\n                pool, make the request to the primary Region's endpoint.</p>\n         </note>\n         <note>\n            <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you must use IAM credentials to authorize requests, and you must\n    grant yourself the corresponding IAM permission in a policy.</p>\n            <p class=\"title\">\n               <b>Learn more</b>\n            </p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html\">Signing Amazon Web Services API Requests</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>\n                  </p>\n               </li>\n            </ul>\n         </note>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#DescribeUserPoolDomainRequest": {
