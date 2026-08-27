@@ -1,0 +1,8 @@
+{
+    "id": "abdae269-760b-4530-abbb-6df71465c6f2",
+    "type": "bugfix",
+    "description": "Fix internal timeout gate to not depend on env opt-in.",
+    "modules": [
+        "."
+    ]
+}

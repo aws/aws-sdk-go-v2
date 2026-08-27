@@ -19,8 +19,10 @@ var enableFromEnv = sync.OnceValue(func() bool {
 // GetServiceReadTimeout reports the SDK's default read timeout for a service,
 // and whether one applies.
 func GetServiceReadTimeout(serviceID string) (time.Duration, bool) {
-	if enableReadTimeout2026 && !readTimeout2026Rollout[serviceID] {
-		return 0, false
+	if enableReadTimeout2026 {
+		if !readTimeout2026Rollout[serviceID] {
+			return 0, false
+		}
 	} else if !enableFromEnv() {
 		return 0, false
 	}
