@@ -19,53 +19,81 @@ jobs:
     if: github.event_name == 'issues' && github.event.action == 'opened'
     steps:
       - name: notify
+        uses: actions/github-script@v9
         env:
-          ISSUE_TITLE: ${{ github.event.issue.title }}
-        run: |
-          curl \
-            -X POST \
-            -H 'Content-Type: application/json' \
-            -d '{"type": "issues_opened", "id": "${{ github.event.issue.number }}", "title": "'"$ISSUE_TITLE"'"}' \
-            ${{ secrets.CI_SLACK_WEBHOOK_URL }}
+          WEBHOOK_URL: ${{ secrets.CI_SLACK_WEBHOOK_URL }}
+        with:
+          script: |
+            const resp = await fetch(process.env.WEBHOOK_URL, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                type: 'issues_opened',
+                id: String(context.payload.issue.number),
+                title: context.payload.issue.title,
+              }),
+            });
+            if (!resp.ok) core.setFailed(`Slack webhook returned ${resp.status}`);
 
   on-issue-closed:
     runs-on: ubuntu-latest
     if: github.event_name == 'issues' && github.event.action == 'closed'
     steps:
       - name: notify
+        uses: actions/github-script@v9
         env:
-          ISSUE_TITLE: ${{ github.event.issue.title }}
-        run: |
-          curl \
-            -X POST \
-            -H 'Content-Type: application/json' \
-            -d '{"type": "issues_closed", "id": "${{ github.event.issue.number }}", "title": "'"$ISSUE_TITLE"'"}' \
-            ${{ secrets.CI_SLACK_WEBHOOK_URL }}
+          WEBHOOK_URL: ${{ secrets.CI_SLACK_WEBHOOK_URL }}
+        with:
+          script: |
+            const resp = await fetch(process.env.WEBHOOK_URL, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                type: 'issues_closed',
+                id: String(context.payload.issue.number),
+                title: context.payload.issue.title,
+              }),
+            });
+            if (!resp.ok) core.setFailed(`Slack webhook returned ${resp.status}`);
 
   on-pr-opened:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request' && github.event.action == 'opened'
     steps:
       - name: notify
+        uses: actions/github-script@v9
         env:
-          PR_TITLE: ${{ github.event.pull_request.title }}
-        run: |
-          curl \
-            -X POST \
-            -H 'Content-Type: application/json' \
-            -d '{"type": "pullrequest_opened", "id": "${{ github.event.pull_request.number }}", "title": "'"$PR_TITLE"'"}' \
-            ${{ secrets.CI_SLACK_WEBHOOK_URL }}
+          WEBHOOK_URL: ${{ secrets.CI_SLACK_WEBHOOK_URL }}
+        with:
+          script: |
+            const resp = await fetch(process.env.WEBHOOK_URL, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                type: 'pullrequest_opened',
+                id: String(context.payload.pull_request.number),
+                title: context.payload.pull_request.title,
+              }),
+            });
+            if (!resp.ok) core.setFailed(`Slack webhook returned ${resp.status}`);
 
   on-pr-closed:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     steps:
       - name: notify
+        uses: actions/github-script@v9
         env:
-          PR_TITLE: ${{ github.event.pull_request.title }}
-        run: |
-          curl \
-            -X POST \
-            -H 'Content-Type: application/json' \
-            -d '{"type": "pullrequest_closed", "id": "${{ github.event.pull_request.number }}", "title": "'"$PR_TITLE"'"}' \
-            ${{ secrets.CI_SLACK_WEBHOOK_URL }}
+          WEBHOOK_URL: ${{ secrets.CI_SLACK_WEBHOOK_URL }}
+        with:
+          script: |
+            const resp = await fetch(process.env.WEBHOOK_URL, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                type: 'pullrequest_closed',
+                id: String(context.payload.pull_request.number),
+                title: context.payload.pull_request.title,
+              }),
+            });
+            if (!resp.ok) core.setFailed(`Slack webhook returned ${resp.status}`);
