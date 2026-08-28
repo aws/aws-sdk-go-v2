@@ -1,3 +1,7 @@
+# v1.325.1 (2026-08-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.325.0 (2026-08-27)
 
 * **Feature**: EC2 allows AMI owners to define compatible instance types on their AMIs, blocking RunInstances calls automatically for launches on non-permitted instance types.

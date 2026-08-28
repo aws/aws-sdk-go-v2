@@ -1,3 +1,7 @@
+# v1.69.1 (2026-08-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.69.0 (2026-08-27)
 
 * **Feature**: Adds the AdminDeleteSoftwareToken API operation, enabling administrators to remove a user's registered TOTP (software token) MFA configuration from a user pool.

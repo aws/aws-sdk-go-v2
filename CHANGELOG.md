@@ -1,3 +1,15 @@
+# Release (2026-08-28)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.45.1
+  * **Bug Fix**: Fix internal timeout gate to not depend on env opt-in.
+* `github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager`: [v0.4.1](feature/s3/transfermanager/CHANGELOG.md#v041-2026-08-28)
+  * **Bug Fix**: Fix DownloadObject bug so parts can be read to correct offset regardless of parts sizes change
+  * **Bug Fix**: Fix GetObject bug so object parts can be read to correct offset regardless of parts sizes change
+
 # Release (2026-08-27)
 
 ## General Highlights

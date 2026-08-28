@@ -1,3 +1,7 @@
+# v1.40.1 (2026-08-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.0 (2026-08-27)
 
 * **Feature**: Added a deploymentMode parameter to CreateDeployment. Set it to RESTART to restart an EC2 and on-premises fleet, using the last successful revision, honoring Deployment Configuration.

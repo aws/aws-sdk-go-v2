@@ -1,3 +1,7 @@
+# v1.126.1 (2026-08-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.126.0 (2026-08-27)
 
 * **Feature**: Adding support for the full snapshot size, in bytes, of DB instance snapshots.

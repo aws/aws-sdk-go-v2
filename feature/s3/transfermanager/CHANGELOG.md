@@ -1,3 +1,9 @@
+# v0.4.1 (2026-08-28)
+
+* **Bug Fix**: Fix DownloadObject bug so parts can be read to correct offset regardless of parts sizes change
+* **Bug Fix**: Fix GetObject bug so object parts can be read to correct offset regardless of parts sizes change
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v0.4.0 (2026-08-27)
 
 * **Feature**: Support connection read timeouts in the SDK. This is currently available on an opt-in basis by setting env `AWS_ENABLE_DEFAULT_SOCKET_TIMEOUT_2026=true`.

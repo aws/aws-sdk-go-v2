@@ -1,3 +1,7 @@
+# v1.0.0-preview.126 (2026-08-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.0-preview.125 (2026-08-27)
 
 * **Feature**: Support connection read timeouts in the SDK. This is currently available on an opt-in basis by setting env `AWS_ENABLE_DEFAULT_SOCKET_TIMEOUT_2026=true`.

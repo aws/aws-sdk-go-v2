@@ -1,3 +1,7 @@
+# v1.4.1 (2026-08-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.4.0 (2026-08-27)
 
 * **Feature**: Added InsufficientCapacityException to RunMicrovm for capacity-related failures. Added lifecycle status field (AVAILABLE, DEPRECATED) to ListManagedMicrovmImageVersions. Added ConflictException to CreateMicrovmAuthToken and CreateMicrovmShellAuthToken for unregistered MicroVMs.
