@@ -5,6 +5,8 @@ package glacier
 import (
 	"context"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,21 @@ type DeleteVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVaultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVaultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVaultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DeleteVaultInput_accountId, *v.AccountId)
+	}
+	if v.VaultName != nil {
+		s.WriteString(schemas.DeleteVaultInput_vaultName, *v.VaultName)
+	}
+}
+
 type DeleteVaultOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -74,13 +91,26 @@ type DeleteVaultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVaultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVaultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteVaultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVault, schemas.DeleteVaultInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVault, schemas.DeleteVaultInput, nil), output: &DeleteVaultOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

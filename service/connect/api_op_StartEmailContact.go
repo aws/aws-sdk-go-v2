@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -119,6 +121,55 @@ type StartEmailContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartEmailContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartEmailContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartEmailContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalRecipients != nil {
+		s.WriteStruct(schemas.StartEmailContactRequest_AdditionalRecipients)
+		v.AdditionalRecipients.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEmailAttachments(s, schemas.StartEmailContactRequest_Attachments, v.Attachments)
+	serializeAttributes(s, schemas.StartEmailContactRequest_Attributes, v.Attributes)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartEmailContactRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ContactFlowId != nil {
+		s.WriteString(schemas.StartEmailContactRequest_ContactFlowId, *v.ContactFlowId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.StartEmailContactRequest_Description, *v.Description)
+	}
+	if v.DestinationEmailAddress != nil {
+		s.WriteString(schemas.StartEmailContactRequest_DestinationEmailAddress, *v.DestinationEmailAddress)
+	}
+	if v.EmailMessage != nil {
+		s.WriteStruct(schemas.StartEmailContactRequest_EmailMessage)
+		v.EmailMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FromEmailAddress != nil {
+		s.WriteStruct(schemas.StartEmailContactRequest_FromEmailAddress)
+		v.FromEmailAddress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StartEmailContactRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartEmailContactRequest_Name, *v.Name)
+	}
+	serializeContactReferences(s, schemas.StartEmailContactRequest_References, v.References)
+	if v.RelatedContactId != nil {
+		s.WriteString(schemas.StartEmailContactRequest_RelatedContactId, *v.RelatedContactId)
+	}
+	serializeSegmentAttributes(s, schemas.StartEmailContactRequest_SegmentAttributes, v.SegmentAttributes)
+}
+
 type StartEmailContactOutput struct {
 
 	// The identifier of this contact within the Connect Customer instance.
@@ -130,13 +181,32 @@ type StartEmailContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartEmailContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartEmailContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartEmailContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.StartEmailContactResponse_ContactId, *v.ContactId)
+	}
+}
+func (v *StartEmailContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartEmailContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartEmailContactResponse_ContactId:
+			v.ContactId = new(string)
+			return d.ReadString(schemas.StartEmailContactResponse_ContactId, v.ContactId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartEmailContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartEmailContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartEmailContact, schemas.StartEmailContactRequest, schemas.StartEmailContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartEmailContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartEmailContact, schemas.StartEmailContactRequest, schemas.StartEmailContactResponse), output: &StartEmailContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

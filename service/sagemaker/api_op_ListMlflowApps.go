@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -70,6 +72,45 @@ type ListMlflowAppsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMlflowAppsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMlflowAppsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMlflowAppsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountDefaultStatus != "" {
+		s.WriteString(schemas.ListMlflowAppsRequest_AccountDefaultStatus, string(v.AccountDefaultStatus))
+	}
+	if v.CreatedAfter != nil {
+		s.WriteTime(schemas.ListMlflowAppsRequest_CreatedAfter, *v.CreatedAfter)
+	}
+	if v.CreatedBefore != nil {
+		s.WriteTime(schemas.ListMlflowAppsRequest_CreatedBefore, *v.CreatedBefore)
+	}
+	if v.DefaultForDomainId != nil {
+		s.WriteString(schemas.ListMlflowAppsRequest_DefaultForDomainId, *v.DefaultForDomainId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMlflowAppsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MlflowVersion != nil {
+		s.WriteString(schemas.ListMlflowAppsRequest_MlflowVersion, *v.MlflowVersion)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMlflowAppsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListMlflowAppsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListMlflowAppsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListMlflowAppsRequest_Status, string(v.Status))
+	}
+}
+
 type ListMlflowAppsOutput struct {
 
 	// If the previous response was truncated, you will receive this token. Use it in
@@ -85,13 +126,35 @@ type ListMlflowAppsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMlflowAppsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMlflowAppsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMlflowAppsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMlflowAppsResponse_NextToken, *v.NextToken)
+	}
+	serializeMlflowAppSummaries(s, schemas.ListMlflowAppsResponse_Summaries, v.Summaries)
+}
+func (v *ListMlflowAppsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMlflowAppsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMlflowAppsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMlflowAppsResponse_NextToken, v.NextToken)
+		case schemas.ListMlflowAppsResponse_Summaries:
+			return deserializeMlflowAppSummaries(d, schemas.ListMlflowAppsResponse_Summaries, &v.Summaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMlflowAppsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMlflowApps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMlflowApps, schemas.ListMlflowAppsRequest, schemas.ListMlflowAppsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMlflowApps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMlflowApps, schemas.ListMlflowAppsRequest, schemas.ListMlflowAppsResponse), output: &ListMlflowAppsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

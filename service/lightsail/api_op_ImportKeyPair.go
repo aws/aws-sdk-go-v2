@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ImportKeyPairInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportKeyPairInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportKeyPairRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportKeyPairInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyPairName != nil {
+		s.WriteString(schemas.ImportKeyPairRequest_keyPairName, *v.KeyPairName)
+	}
+	if v.PublicKeyBase64 != nil {
+		s.WriteString(schemas.ImportKeyPairRequest_publicKeyBase64, *v.PublicKeyBase64)
+	}
+}
+
 type ImportKeyPairOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -52,13 +69,34 @@ type ImportKeyPairOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportKeyPairOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportKeyPairResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportKeyPairOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Operation != nil {
+		s.WriteStruct(schemas.ImportKeyPairResult_operation)
+		v.Operation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ImportKeyPairOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportKeyPairResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportKeyPairResult_operation:
+			v.Operation = &types.Operation{}
+			return v.Operation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportKeyPair{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportKeyPair, schemas.ImportKeyPairRequest, schemas.ImportKeyPairResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpImportKeyPair{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportKeyPair, schemas.ImportKeyPairRequest, schemas.ImportKeyPairResult), output: &ImportKeyPairOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

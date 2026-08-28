@@ -4,6 +4,8 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteIdMappingTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIdMappingTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIdMappingTableInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIdMappingTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdMappingTableIdentifier != nil {
+		s.WriteString(schemas.DeleteIdMappingTableInput_idMappingTableIdentifier, *v.IdMappingTableIdentifier)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.DeleteIdMappingTableInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+
 type DeleteIdMappingTableOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type DeleteIdMappingTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIdMappingTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIdMappingTableOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIdMappingTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteIdMappingTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteIdMappingTableOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteIdMappingTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteIdMappingTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIdMappingTable, schemas.DeleteIdMappingTableInput, schemas.DeleteIdMappingTableOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteIdMappingTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIdMappingTable, schemas.DeleteIdMappingTableInput, schemas.DeleteIdMappingTableOutput), output: &DeleteIdMappingTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

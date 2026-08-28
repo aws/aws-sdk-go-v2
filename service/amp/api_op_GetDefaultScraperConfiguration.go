@@ -4,6 +4,8 @@ package amp
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amp/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -29,6 +31,15 @@ type GetDefaultScraperConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDefaultScraperConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDefaultScraperConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDefaultScraperConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 // Represents the output of a GetDefaultScraperConfiguration operation.
 type GetDefaultScraperConfigurationOutput struct {
 
@@ -46,13 +57,31 @@ type GetDefaultScraperConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDefaultScraperConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDefaultScraperConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDefaultScraperConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteBlob(schemas.GetDefaultScraperConfigurationResponse_configuration, v.Configuration)
+	}
+}
+func (v *GetDefaultScraperConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDefaultScraperConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDefaultScraperConfigurationResponse_configuration:
+			return d.ReadBlob(schemas.GetDefaultScraperConfigurationResponse_configuration, &v.Configuration)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDefaultScraperConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDefaultScraperConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDefaultScraperConfiguration, schemas.GetDefaultScraperConfigurationRequest, schemas.GetDefaultScraperConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDefaultScraperConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDefaultScraperConfiguration, schemas.GetDefaultScraperConfigurationRequest, schemas.GetDefaultScraperConfigurationResponse), output: &GetDefaultScraperConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

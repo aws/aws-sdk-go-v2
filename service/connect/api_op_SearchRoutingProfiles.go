@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,34 @@ type SearchRoutingProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchRoutingProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchRoutingProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchRoutingProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SearchRoutingProfilesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchRoutingProfilesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchRoutingProfilesRequest_NextToken, *v.NextToken)
+	}
+	if v.SearchCriteria != nil {
+		s.WriteStruct(schemas.SearchRoutingProfilesRequest_SearchCriteria)
+		v.SearchCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SearchFilter != nil {
+		s.WriteStruct(schemas.SearchRoutingProfilesRequest_SearchFilter)
+		v.SearchFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchRoutingProfilesOutput struct {
 
 	// The total number of routing profiles which matched your search query.
@@ -79,13 +109,41 @@ type SearchRoutingProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchRoutingProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchRoutingProfilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchRoutingProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateTotalCount != nil {
+		s.WriteInt64(schemas.SearchRoutingProfilesResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchRoutingProfilesResponse_NextToken, *v.NextToken)
+	}
+	serializeRoutingProfileList(s, schemas.SearchRoutingProfilesResponse_RoutingProfiles, v.RoutingProfiles)
+}
+func (v *SearchRoutingProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchRoutingProfilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchRoutingProfilesResponse_ApproximateTotalCount:
+			v.ApproximateTotalCount = new(int64)
+			return d.ReadInt64(schemas.SearchRoutingProfilesResponse_ApproximateTotalCount, v.ApproximateTotalCount)
+		case schemas.SearchRoutingProfilesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchRoutingProfilesResponse_NextToken, v.NextToken)
+		case schemas.SearchRoutingProfilesResponse_RoutingProfiles:
+			return deserializeRoutingProfileList(d, schemas.SearchRoutingProfilesResponse_RoutingProfiles, &v.RoutingProfiles)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchRoutingProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchRoutingProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchRoutingProfiles, schemas.SearchRoutingProfilesRequest, schemas.SearchRoutingProfilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchRoutingProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchRoutingProfiles, schemas.SearchRoutingProfilesRequest, schemas.SearchRoutingProfilesResponse), output: &SearchRoutingProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

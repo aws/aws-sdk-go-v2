@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,27 @@ type AttachDiskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachDiskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachDiskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachDiskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoMounting != nil {
+		s.WriteBool(schemas.AttachDiskRequest_autoMounting, *v.AutoMounting)
+	}
+	if v.DiskName != nil {
+		s.WriteString(schemas.AttachDiskRequest_diskName, *v.DiskName)
+	}
+	if v.DiskPath != nil {
+		s.WriteString(schemas.AttachDiskRequest_diskPath, *v.DiskPath)
+	}
+	if v.InstanceName != nil {
+		s.WriteString(schemas.AttachDiskRequest_instanceName, *v.InstanceName)
+	}
+}
+
 type AttachDiskOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -70,13 +93,29 @@ type AttachDiskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachDiskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachDiskResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachDiskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.AttachDiskResult_operations, v.Operations)
+}
+func (v *AttachDiskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttachDiskResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttachDiskResult_operations:
+			return deserializeOperationList(d, schemas.AttachDiskResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAttachDiskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAttachDisk{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachDisk, schemas.AttachDiskRequest, schemas.AttachDiskResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAttachDisk{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachDisk, schemas.AttachDiskRequest, schemas.AttachDiskResult), output: &AttachDiskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

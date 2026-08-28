@@ -5,6 +5,8 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,21 @@ type DeleteProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProfileInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.DeleteProfileInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ProfileArn != nil {
+		s.WriteString(schemas.DeleteProfileInput_ProfileArn, *v.ProfileArn)
+	}
+}
+
 type DeleteProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -65,13 +82,26 @@ type DeleteProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProfile, schemas.DeleteProfileInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProfile, schemas.DeleteProfileInput, nil), output: &DeleteProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

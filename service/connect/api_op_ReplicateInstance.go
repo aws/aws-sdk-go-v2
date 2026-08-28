@@ -5,6 +5,8 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,27 @@ type ReplicateInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReplicateInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicateInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicateInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ReplicateInstanceRequest_ClientToken, *v.ClientToken)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ReplicateInstanceRequest_InstanceId, *v.InstanceId)
+	}
+	if v.ReplicaAlias != nil {
+		s.WriteString(schemas.ReplicateInstanceRequest_ReplicaAlias, *v.ReplicaAlias)
+	}
+	if v.ReplicaRegion != nil {
+		s.WriteString(schemas.ReplicateInstanceRequest_ReplicaRegion, *v.ReplicaRegion)
+	}
+}
+
 type ReplicateInstanceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the replicated instance.
@@ -78,13 +101,38 @@ type ReplicateInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReplicateInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicateInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicateInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ReplicateInstanceResponse_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ReplicateInstanceResponse_Id, *v.Id)
+	}
+}
+func (v *ReplicateInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicateInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicateInstanceResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ReplicateInstanceResponse_Arn, v.Arn)
+		case schemas.ReplicateInstanceResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ReplicateInstanceResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationReplicateInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpReplicateInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReplicateInstance, schemas.ReplicateInstanceRequest, schemas.ReplicateInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpReplicateInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReplicateInstance, schemas.ReplicateInstanceRequest, schemas.ReplicateInstanceResponse), output: &ReplicateInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

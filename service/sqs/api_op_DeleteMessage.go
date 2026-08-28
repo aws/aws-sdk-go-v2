@@ -4,6 +4,8 @@ package sqs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,21 @@ type DeleteMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMessageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMessageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueueUrl != nil {
+		s.WriteString(schemas.DeleteMessageRequest_QueueUrl, *v.QueueUrl)
+	}
+	if v.ReceiptHandle != nil {
+		s.WriteString(schemas.DeleteMessageRequest_ReceiptHandle, *v.ReceiptHandle)
+	}
+}
+
 type DeleteMessageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -67,13 +84,26 @@ type DeleteMessageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMessageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMessageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMessage, schemas.DeleteMessageRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMessage, schemas.DeleteMessageRequest, nil), output: &DeleteMessageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

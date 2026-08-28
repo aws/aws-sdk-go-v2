@@ -5,7 +5,9 @@ package athena
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -86,6 +88,45 @@ type StartQueryExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartQueryExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartQueryExecutionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartQueryExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartQueryExecutionInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.EngineConfiguration != nil {
+		s.WriteStruct(schemas.StartQueryExecutionInput_EngineConfiguration)
+		v.EngineConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeExecutionParameters(s, schemas.StartQueryExecutionInput_ExecutionParameters, v.ExecutionParameters)
+	if v.QueryExecutionContext != nil {
+		s.WriteStruct(schemas.StartQueryExecutionInput_QueryExecutionContext)
+		v.QueryExecutionContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.StartQueryExecutionInput_QueryString, *v.QueryString)
+	}
+	if v.ResultConfiguration != nil {
+		s.WriteStruct(schemas.StartQueryExecutionInput_ResultConfiguration)
+		v.ResultConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResultReuseConfiguration != nil {
+		s.WriteStruct(schemas.StartQueryExecutionInput_ResultReuseConfiguration)
+		v.ResultReuseConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkGroup != nil {
+		s.WriteString(schemas.StartQueryExecutionInput_WorkGroup, *v.WorkGroup)
+	}
+}
+
 type StartQueryExecutionOutput struct {
 
 	// The unique ID of the query that ran as a result of this request.
@@ -97,13 +138,32 @@ type StartQueryExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartQueryExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartQueryExecutionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartQueryExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryExecutionId != nil {
+		s.WriteString(schemas.StartQueryExecutionOutput_QueryExecutionId, *v.QueryExecutionId)
+	}
+}
+func (v *StartQueryExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartQueryExecutionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartQueryExecutionOutput_QueryExecutionId:
+			v.QueryExecutionId = new(string)
+			return d.ReadString(schemas.StartQueryExecutionOutput_QueryExecutionId, v.QueryExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartQueryExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartQueryExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartQueryExecution, schemas.StartQueryExecutionInput, schemas.StartQueryExecutionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartQueryExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartQueryExecution, schemas.StartQueryExecutionInput, schemas.StartQueryExecutionOutput), output: &StartQueryExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

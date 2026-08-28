@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type UpdateTrialInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTrialInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTrialRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTrialInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateTrialRequest_DisplayName, *v.DisplayName)
+	}
+	if v.TrialName != nil {
+		s.WriteString(schemas.UpdateTrialRequest_TrialName, *v.TrialName)
+	}
+}
+
 type UpdateTrialOutput struct {
 
 	// The Amazon Resource Name (ARN) of the trial.
@@ -48,13 +65,32 @@ type UpdateTrialOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTrialOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTrialResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTrialOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrialArn != nil {
+		s.WriteString(schemas.UpdateTrialResponse_TrialArn, *v.TrialArn)
+	}
+}
+func (v *UpdateTrialOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTrialResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTrialResponse_TrialArn:
+			v.TrialArn = new(string)
+			return d.ReadString(schemas.UpdateTrialResponse_TrialArn, v.TrialArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTrialMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateTrial{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTrial, schemas.UpdateTrialRequest, schemas.UpdateTrialResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateTrial{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTrial, schemas.UpdateTrialRequest, schemas.UpdateTrialResponse), output: &UpdateTrialOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

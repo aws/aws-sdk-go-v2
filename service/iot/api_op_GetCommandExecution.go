@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -46,6 +48,24 @@ type GetCommandExecutionInput struct {
 	IncludeResult *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetCommandExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCommandExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCommandExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.GetCommandExecutionRequest_executionId, *v.ExecutionId)
+	}
+	if v.IncludeResult != nil {
+		s.WriteBool(schemas.GetCommandExecutionRequest_includeResult, *v.IncludeResult)
+	}
+	if v.TargetArn != nil {
+		s.WriteString(schemas.GetCommandExecutionRequest_targetArn, *v.TargetArn)
+	}
 }
 
 type GetCommandExecutionOutput struct {
@@ -111,13 +131,104 @@ type GetCommandExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCommandExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCommandExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCommandExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommandArn != nil {
+		s.WriteString(schemas.GetCommandExecutionResponse_commandArn, *v.CommandArn)
+	}
+	if v.CompletedAt != nil {
+		s.WriteTime(schemas.GetCommandExecutionResponse_completedAt, *v.CompletedAt)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetCommandExecutionResponse_createdAt, *v.CreatedAt)
+	}
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.GetCommandExecutionResponse_executionId, *v.ExecutionId)
+	}
+	if v.ExecutionTimeoutSeconds != nil {
+		s.WriteInt64(schemas.GetCommandExecutionResponse_executionTimeoutSeconds, *v.ExecutionTimeoutSeconds)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetCommandExecutionResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	serializeCommandExecutionParameterMap(s, schemas.GetCommandExecutionResponse_parameters, v.Parameters)
+	serializeCommandExecutionResultMap(s, schemas.GetCommandExecutionResponse_result, v.Result)
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.GetCommandExecutionResponse_startedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetCommandExecutionResponse_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteStruct(schemas.GetCommandExecutionResponse_statusReason)
+		v.StatusReason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetArn != nil {
+		s.WriteString(schemas.GetCommandExecutionResponse_targetArn, *v.TargetArn)
+	}
+	if v.TimeToLive != nil {
+		s.WriteTime(schemas.GetCommandExecutionResponse_timeToLive, *v.TimeToLive)
+	}
+}
+func (v *GetCommandExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCommandExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCommandExecutionResponse_commandArn:
+			v.CommandArn = new(string)
+			return d.ReadString(schemas.GetCommandExecutionResponse_commandArn, v.CommandArn)
+		case schemas.GetCommandExecutionResponse_completedAt:
+			v.CompletedAt = new(time.Time)
+			return d.ReadTime(schemas.GetCommandExecutionResponse_completedAt, v.CompletedAt)
+		case schemas.GetCommandExecutionResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetCommandExecutionResponse_createdAt, v.CreatedAt)
+		case schemas.GetCommandExecutionResponse_executionId:
+			v.ExecutionId = new(string)
+			return d.ReadString(schemas.GetCommandExecutionResponse_executionId, v.ExecutionId)
+		case schemas.GetCommandExecutionResponse_executionTimeoutSeconds:
+			v.ExecutionTimeoutSeconds = new(int64)
+			return d.ReadInt64(schemas.GetCommandExecutionResponse_executionTimeoutSeconds, v.ExecutionTimeoutSeconds)
+		case schemas.GetCommandExecutionResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetCommandExecutionResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetCommandExecutionResponse_parameters:
+			return deserializeCommandExecutionParameterMap(d, schemas.GetCommandExecutionResponse_parameters, &v.Parameters)
+		case schemas.GetCommandExecutionResponse_result:
+			return deserializeCommandExecutionResultMap(d, schemas.GetCommandExecutionResponse_result, &v.Result)
+		case schemas.GetCommandExecutionResponse_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetCommandExecutionResponse_startedAt, v.StartedAt)
+		case schemas.GetCommandExecutionResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetCommandExecutionResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CommandExecutionStatus(ev)
+			return nil
+		case schemas.GetCommandExecutionResponse_statusReason:
+			v.StatusReason = &types.StatusReason{}
+			return v.StatusReason.Deserialize(d)
+		case schemas.GetCommandExecutionResponse_targetArn:
+			v.TargetArn = new(string)
+			return d.ReadString(schemas.GetCommandExecutionResponse_targetArn, v.TargetArn)
+		case schemas.GetCommandExecutionResponse_timeToLive:
+			v.TimeToLive = new(time.Time)
+			return d.ReadTime(schemas.GetCommandExecutionResponse_timeToLive, v.TimeToLive)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCommandExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCommandExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCommandExecution, schemas.GetCommandExecutionRequest, schemas.GetCommandExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCommandExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCommandExecution, schemas.GetCommandExecutionRequest, schemas.GetCommandExecutionResponse), output: &GetCommandExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

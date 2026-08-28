@@ -5,6 +5,8 @@ package amp
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/amp/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type DeleteAnomalyDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAnomalyDetectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAnomalyDetectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAnomalyDetectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnomalyDetectorId != nil {
+		s.WriteString(schemas.DeleteAnomalyDetectorRequest_anomalyDetectorId, *v.AnomalyDetectorId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteAnomalyDetectorRequest_clientToken, *v.ClientToken)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DeleteAnomalyDetectorRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+
 type DeleteAnomalyDetectorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +70,26 @@ type DeleteAnomalyDetectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAnomalyDetectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAnomalyDetectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAnomalyDetectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAnomalyDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAnomalyDetector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAnomalyDetector, schemas.DeleteAnomalyDetectorRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAnomalyDetector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAnomalyDetector, schemas.DeleteAnomalyDetectorRequest, nil), output: &DeleteAnomalyDetectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

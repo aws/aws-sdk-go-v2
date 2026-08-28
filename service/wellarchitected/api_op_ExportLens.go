@@ -4,6 +4,8 @@ package wellarchitected
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,21 @@ type ExportLensInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportLensInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportLensInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportLensInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LensAlias != nil {
+		s.WriteString(schemas.ExportLensInput_LensAlias, *v.LensAlias)
+	}
+	if v.LensVersion != nil {
+		s.WriteString(schemas.ExportLensInput_LensVersion, *v.LensVersion)
+	}
+}
+
 type ExportLensOutput struct {
 
 	// The JSON representation of a lens.
@@ -76,13 +93,32 @@ type ExportLensOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportLensOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportLensOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportLensOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LensJSON != nil {
+		s.WriteString(schemas.ExportLensOutput_LensJSON, *v.LensJSON)
+	}
+}
+func (v *ExportLensOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportLensOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportLensOutput_LensJSON:
+			v.LensJSON = new(string)
+			return d.ReadString(schemas.ExportLensOutput_LensJSON, v.LensJSON)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExportLensMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpExportLens{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportLens, schemas.ExportLensInput, schemas.ExportLensOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExportLens{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportLens, schemas.ExportLensInput, schemas.ExportLensOutput), output: &ExportLensOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

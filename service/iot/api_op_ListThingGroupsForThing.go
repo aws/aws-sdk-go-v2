@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type ListThingGroupsForThingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThingGroupsForThingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThingGroupsForThingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThingGroupsForThingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListThingGroupsForThingRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThingGroupsForThingRequest_nextToken, *v.NextToken)
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.ListThingGroupsForThingRequest_thingName, *v.ThingName)
+	}
+}
+
 type ListThingGroupsForThingOutput struct {
 
 	// The token to use to get the next set of results, or null if there are no
@@ -61,13 +81,35 @@ type ListThingGroupsForThingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThingGroupsForThingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThingGroupsForThingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThingGroupsForThingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThingGroupsForThingResponse_nextToken, *v.NextToken)
+	}
+	serializeThingGroupNameAndArnList(s, schemas.ListThingGroupsForThingResponse_thingGroups, v.ThingGroups)
+}
+func (v *ListThingGroupsForThingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListThingGroupsForThingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListThingGroupsForThingResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListThingGroupsForThingResponse_nextToken, v.NextToken)
+		case schemas.ListThingGroupsForThingResponse_thingGroups:
+			return deserializeThingGroupNameAndArnList(d, schemas.ListThingGroupsForThingResponse_thingGroups, &v.ThingGroups)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListThingGroupsForThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListThingGroupsForThing{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThingGroupsForThing, schemas.ListThingGroupsForThingRequest, schemas.ListThingGroupsForThingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListThingGroupsForThing{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThingGroupsForThing, schemas.ListThingGroupsForThingRequest, schemas.ListThingGroupsForThingResponse), output: &ListThingGroupsForThingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

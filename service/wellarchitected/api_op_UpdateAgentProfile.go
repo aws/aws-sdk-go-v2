@@ -5,7 +5,9 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -60,6 +62,38 @@ type UpdateAgentProfileInput struct {
 	Pillars []types.Pillar
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateAgentProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAgentProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAgentProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAggregationConfigurations(s, schemas.UpdateAgentProfileRequest_aggregationConfiguration, v.AggregationConfiguration)
+	if v.BusinessOverview != nil {
+		s.WriteString(schemas.UpdateAgentProfileRequest_businessOverview, *v.BusinessOverview)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateAgentProfileRequest_clientToken, *v.ClientToken)
+	}
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.UpdateAgentProfileRequest_deletionProtection, *v.DeletionProtection)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAgentProfileRequest_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateAgentProfileRequest_displayName, *v.DisplayName)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.UpdateAgentProfileRequest_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	serializePillars(s, schemas.UpdateAgentProfileRequest_pillars, v.Pillars)
+	if v.ProfileArn != nil {
+		s.WriteString(schemas.UpdateAgentProfileRequest_profileArn, *v.ProfileArn)
+	}
 }
 
 type UpdateAgentProfileOutput struct {
@@ -135,13 +169,116 @@ type UpdateAgentProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAgentProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAgentProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAgentProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAggregationConfigurations(s, schemas.UpdateAgentProfileResponse_aggregationConfiguration, v.AggregationConfiguration)
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateAgentProfileResponse_arn, *v.Arn)
+	}
+	if v.BusinessOverview != nil {
+		s.WriteString(schemas.UpdateAgentProfileResponse_businessOverview, *v.BusinessOverview)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateAgentProfileResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.UpdateAgentProfileResponse_createdBy, *v.CreatedBy)
+	}
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.UpdateAgentProfileResponse_deletionProtection, *v.DeletionProtection)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAgentProfileResponse_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateAgentProfileResponse_displayName, *v.DisplayName)
+	}
+	if v.EligibleForArchitectureGeneration != nil {
+		s.WriteBool(schemas.UpdateAgentProfileResponse_eligibleForArchitectureGeneration, *v.EligibleForArchitectureGeneration)
+	}
+	if v.EligibleForScheduledGeneration != nil {
+		s.WriteBool(schemas.UpdateAgentProfileResponse_eligibleForScheduledGeneration, *v.EligibleForScheduledGeneration)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.UpdateAgentProfileResponse_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	serializeFieldErrors(s, schemas.UpdateAgentProfileResponse_fieldErrors, v.FieldErrors)
+	if v.LastModifiedAt != nil {
+		s.WriteTime(schemas.UpdateAgentProfileResponse_lastModifiedAt, *v.LastModifiedAt)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteString(schemas.UpdateAgentProfileResponse_lastModifiedBy, *v.LastModifiedBy)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAgentProfileResponse_name, *v.Name)
+	}
+	serializePillars(s, schemas.UpdateAgentProfileResponse_pillars, v.Pillars)
+	serializeTags(s, schemas.UpdateAgentProfileResponse_tags, v.Tags)
+}
+func (v *UpdateAgentProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAgentProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAgentProfileResponse_aggregationConfiguration:
+			return deserializeAggregationConfigurations(d, schemas.UpdateAgentProfileResponse_aggregationConfiguration, &v.AggregationConfiguration)
+		case schemas.UpdateAgentProfileResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateAgentProfileResponse_arn, v.Arn)
+		case schemas.UpdateAgentProfileResponse_businessOverview:
+			v.BusinessOverview = new(string)
+			return d.ReadString(schemas.UpdateAgentProfileResponse_businessOverview, v.BusinessOverview)
+		case schemas.UpdateAgentProfileResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateAgentProfileResponse_createdAt, v.CreatedAt)
+		case schemas.UpdateAgentProfileResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.UpdateAgentProfileResponse_createdBy, v.CreatedBy)
+		case schemas.UpdateAgentProfileResponse_deletionProtection:
+			v.DeletionProtection = new(bool)
+			return d.ReadBool(schemas.UpdateAgentProfileResponse_deletionProtection, v.DeletionProtection)
+		case schemas.UpdateAgentProfileResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateAgentProfileResponse_description, v.Description)
+		case schemas.UpdateAgentProfileResponse_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.UpdateAgentProfileResponse_displayName, v.DisplayName)
+		case schemas.UpdateAgentProfileResponse_eligibleForArchitectureGeneration:
+			v.EligibleForArchitectureGeneration = new(bool)
+			return d.ReadBool(schemas.UpdateAgentProfileResponse_eligibleForArchitectureGeneration, v.EligibleForArchitectureGeneration)
+		case schemas.UpdateAgentProfileResponse_eligibleForScheduledGeneration:
+			v.EligibleForScheduledGeneration = new(bool)
+			return d.ReadBool(schemas.UpdateAgentProfileResponse_eligibleForScheduledGeneration, v.EligibleForScheduledGeneration)
+		case schemas.UpdateAgentProfileResponse_executionRoleArn:
+			v.ExecutionRoleArn = new(string)
+			return d.ReadString(schemas.UpdateAgentProfileResponse_executionRoleArn, v.ExecutionRoleArn)
+		case schemas.UpdateAgentProfileResponse_fieldErrors:
+			return deserializeFieldErrors(d, schemas.UpdateAgentProfileResponse_fieldErrors, &v.FieldErrors)
+		case schemas.UpdateAgentProfileResponse_lastModifiedAt:
+			v.LastModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateAgentProfileResponse_lastModifiedAt, v.LastModifiedAt)
+		case schemas.UpdateAgentProfileResponse_lastModifiedBy:
+			v.LastModifiedBy = new(string)
+			return d.ReadString(schemas.UpdateAgentProfileResponse_lastModifiedBy, v.LastModifiedBy)
+		case schemas.UpdateAgentProfileResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateAgentProfileResponse_name, v.Name)
+		case schemas.UpdateAgentProfileResponse_pillars:
+			return deserializePillars(d, schemas.UpdateAgentProfileResponse_pillars, &v.Pillars)
+		case schemas.UpdateAgentProfileResponse_tags:
+			return deserializeTags(d, schemas.UpdateAgentProfileResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAgentProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAgentProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgentProfile, schemas.UpdateAgentProfileRequest, schemas.UpdateAgentProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAgentProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgentProfile, schemas.UpdateAgentProfileRequest, schemas.UpdateAgentProfileResponse), output: &UpdateAgentProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

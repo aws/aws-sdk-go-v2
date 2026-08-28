@@ -5,6 +5,8 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type ListApprovedOriginsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApprovedOriginsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApprovedOriginsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApprovedOriginsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListApprovedOriginsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListApprovedOriginsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApprovedOriginsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListApprovedOriginsOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.
@@ -60,13 +80,35 @@ type ListApprovedOriginsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApprovedOriginsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApprovedOriginsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApprovedOriginsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApprovedOriginsResponse_NextToken, *v.NextToken)
+	}
+	serializeOriginsList(s, schemas.ListApprovedOriginsResponse_Origins, v.Origins)
+}
+func (v *ListApprovedOriginsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListApprovedOriginsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListApprovedOriginsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListApprovedOriginsResponse_NextToken, v.NextToken)
+		case schemas.ListApprovedOriginsResponse_Origins:
+			return deserializeOriginsList(d, schemas.ListApprovedOriginsResponse_Origins, &v.Origins)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListApprovedOriginsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListApprovedOrigins{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApprovedOrigins, schemas.ListApprovedOriginsRequest, schemas.ListApprovedOriginsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListApprovedOrigins{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApprovedOrigins, schemas.ListApprovedOriginsRequest, schemas.ListApprovedOriginsResponse), output: &ListApprovedOriginsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

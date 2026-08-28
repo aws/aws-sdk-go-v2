@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,63 @@ type StartProtectedQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartProtectedQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartProtectedQueryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartProtectedQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComputeConfiguration(s, schemas.StartProtectedQueryInput_computeConfiguration, v.ComputeConfiguration)
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.StartProtectedQueryInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.QueryComputePayerAccountId != nil {
+		s.WriteString(schemas.StartProtectedQueryInput_queryComputePayerAccountId, *v.QueryComputePayerAccountId)
+	}
+	if v.ResultConfiguration != nil {
+		s.WriteStruct(schemas.StartProtectedQueryInput_resultConfiguration)
+		v.ResultConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SqlParameters != nil {
+		s.WriteStruct(schemas.StartProtectedQueryInput_sqlParameters)
+		v.SqlParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.StartProtectedQueryInput_type, string(v.Type))
+	}
+}
+func (v *StartProtectedQueryInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartProtectedQueryInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartProtectedQueryInput_computeConfiguration:
+			return deserializeComputeConfiguration(d, schemas.StartProtectedQueryInput_computeConfiguration, &v.ComputeConfiguration)
+		case schemas.StartProtectedQueryInput_membershipIdentifier:
+			v.MembershipIdentifier = new(string)
+			return d.ReadString(schemas.StartProtectedQueryInput_membershipIdentifier, v.MembershipIdentifier)
+		case schemas.StartProtectedQueryInput_queryComputePayerAccountId:
+			v.QueryComputePayerAccountId = new(string)
+			return d.ReadString(schemas.StartProtectedQueryInput_queryComputePayerAccountId, v.QueryComputePayerAccountId)
+		case schemas.StartProtectedQueryInput_resultConfiguration:
+			v.ResultConfiguration = &types.ProtectedQueryResultConfiguration{}
+			return v.ResultConfiguration.Deserialize(d)
+		case schemas.StartProtectedQueryInput_sqlParameters:
+			v.SqlParameters = &types.ProtectedQuerySQLParameters{}
+			return v.SqlParameters.Deserialize(d)
+		case schemas.StartProtectedQueryInput_type:
+			var ev string
+			if err := d.ReadString(schemas.StartProtectedQueryInput_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.ProtectedQueryType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type StartProtectedQueryOutput struct {
 
 	// The protected query.
@@ -67,13 +126,34 @@ type StartProtectedQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartProtectedQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartProtectedQueryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartProtectedQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProtectedQuery != nil {
+		s.WriteStruct(schemas.StartProtectedQueryOutput_protectedQuery)
+		v.ProtectedQuery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartProtectedQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartProtectedQueryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartProtectedQueryOutput_protectedQuery:
+			v.ProtectedQuery = &types.ProtectedQuery{}
+			return v.ProtectedQuery.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartProtectedQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartProtectedQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartProtectedQuery, schemas.StartProtectedQueryInput, schemas.StartProtectedQueryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartProtectedQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartProtectedQuery, schemas.StartProtectedQueryInput, schemas.StartProtectedQueryOutput), output: &StartProtectedQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

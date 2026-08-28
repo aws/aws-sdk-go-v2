@@ -4,6 +4,8 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type DisassociateApplicationFromEntitlementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateApplicationFromEntitlementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateApplicationFromEntitlementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateApplicationFromEntitlementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationIdentifier != nil {
+		s.WriteString(schemas.DisassociateApplicationFromEntitlementRequest_ApplicationIdentifier, *v.ApplicationIdentifier)
+	}
+	if v.EntitlementName != nil {
+		s.WriteString(schemas.DisassociateApplicationFromEntitlementRequest_EntitlementName, *v.EntitlementName)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.DisassociateApplicationFromEntitlementRequest_StackName, *v.StackName)
+	}
+}
+
 type DisassociateApplicationFromEntitlementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +70,26 @@ type DisassociateApplicationFromEntitlementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateApplicationFromEntitlementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateApplicationFromEntitlementResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateApplicationFromEntitlementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateApplicationFromEntitlementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateApplicationFromEntitlementResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateApplicationFromEntitlementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDisassociateApplicationFromEntitlement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateApplicationFromEntitlement, schemas.DisassociateApplicationFromEntitlementRequest, schemas.DisassociateApplicationFromEntitlementResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDisassociateApplicationFromEntitlement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateApplicationFromEntitlement, schemas.DisassociateApplicationFromEntitlementRequest, schemas.DisassociateApplicationFromEntitlementResult), output: &DisassociateApplicationFromEntitlementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

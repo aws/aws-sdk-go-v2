@@ -5,7 +5,9 @@ package emr
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type ListStudiosInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStudiosInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStudiosInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStudiosInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListStudiosInput_Marker, *v.Marker)
+	}
+}
+
 type ListStudiosOutput struct {
 
 	// The pagination token that indicates the next set of results to retrieve.
@@ -49,13 +63,35 @@ type ListStudiosOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStudiosOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStudiosOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStudiosOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListStudiosOutput_Marker, *v.Marker)
+	}
+	serializeStudioSummaryList(s, schemas.ListStudiosOutput_Studios, v.Studios)
+}
+func (v *ListStudiosOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStudiosOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStudiosOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListStudiosOutput_Marker, v.Marker)
+		case schemas.ListStudiosOutput_Studios:
+			return deserializeStudioSummaryList(d, schemas.ListStudiosOutput_Studios, &v.Studios)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStudiosMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListStudios{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStudios, schemas.ListStudiosInput, schemas.ListStudiosOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListStudios{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStudios, schemas.ListStudiosInput, schemas.ListStudiosOutput), output: &ListStudiosOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

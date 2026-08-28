@@ -5,6 +5,8 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,25 @@ type CreatePackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePackageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePackageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePackageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreatePackageRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreatePackageRequest_description, *v.Description)
+	}
+	if v.PackageName != nil {
+		s.WriteString(schemas.CreatePackageRequest_packageName, *v.PackageName)
+	}
+	serializeTagMap(s, schemas.CreatePackageRequest_tags, v.Tags)
+}
+
 type CreatePackageOutput struct {
 
 	// The package description.
@@ -68,13 +89,44 @@ type CreatePackageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePackageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePackageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePackageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreatePackageResponse_description, *v.Description)
+	}
+	if v.PackageArn != nil {
+		s.WriteString(schemas.CreatePackageResponse_packageArn, *v.PackageArn)
+	}
+	if v.PackageName != nil {
+		s.WriteString(schemas.CreatePackageResponse_packageName, *v.PackageName)
+	}
+}
+func (v *CreatePackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePackageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePackageResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreatePackageResponse_description, v.Description)
+		case schemas.CreatePackageResponse_packageArn:
+			v.PackageArn = new(string)
+			return d.ReadString(schemas.CreatePackageResponse_packageArn, v.PackageArn)
+		case schemas.CreatePackageResponse_packageName:
+			v.PackageName = new(string)
+			return d.ReadString(schemas.CreatePackageResponse_packageName, v.PackageName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePackage, schemas.CreatePackageRequest, schemas.CreatePackageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePackage, schemas.CreatePackageRequest, schemas.CreatePackageResponse), output: &CreatePackageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

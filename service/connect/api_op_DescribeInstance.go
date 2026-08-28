@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,18 @@ type DescribeInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeInstanceRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DescribeInstanceOutput struct {
 
 	// The name of the instance.
@@ -64,13 +78,42 @@ type DescribeInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Instance != nil {
+		s.WriteStruct(schemas.DescribeInstanceResponse_Instance)
+		v.Instance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReplicationConfiguration != nil {
+		s.WriteStruct(schemas.DescribeInstanceResponse_ReplicationConfiguration)
+		v.ReplicationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInstanceResponse_Instance:
+			v.Instance = &types.Instance{}
+			return v.Instance.Deserialize(d)
+		case schemas.DescribeInstanceResponse_ReplicationConfiguration:
+			v.ReplicationConfiguration = &types.ReplicationConfiguration{}
+			return v.ReplicationConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstance, schemas.DescribeInstanceRequest, schemas.DescribeInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstance, schemas.DescribeInstanceRequest, schemas.DescribeInstanceResponse), output: &DescribeInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

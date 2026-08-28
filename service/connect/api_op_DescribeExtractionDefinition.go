@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DescribeExtractionDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeExtractionDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExtractionDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExtractionDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExtractionDefinitionId != nil {
+		s.WriteString(schemas.DescribeExtractionDefinitionRequest_ExtractionDefinitionId, *v.ExtractionDefinitionId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeExtractionDefinitionRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DescribeExtractionDefinitionOutput struct {
 
 	// The extraction definition.
@@ -55,13 +72,34 @@ type DescribeExtractionDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeExtractionDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExtractionDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExtractionDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExtractionDefinition != nil {
+		s.WriteStruct(schemas.DescribeExtractionDefinitionResponse_ExtractionDefinition)
+		v.ExtractionDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeExtractionDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeExtractionDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeExtractionDefinitionResponse_ExtractionDefinition:
+			v.ExtractionDefinition = &types.ExtractionDefinition{}
+			return v.ExtractionDefinition.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeExtractionDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeExtractionDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExtractionDefinition, schemas.DescribeExtractionDefinitionRequest, schemas.DescribeExtractionDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeExtractionDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExtractionDefinition, schemas.DescribeExtractionDefinitionRequest, schemas.DescribeExtractionDefinitionResponse), output: &DescribeExtractionDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

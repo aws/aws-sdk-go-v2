@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,23 @@ type PutEventStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEventStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEventStreamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEventStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.PutEventStreamRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.WriteEventStream != nil {
+		s.WriteStruct(schemas.PutEventStreamRequest_WriteEventStream)
+		v.WriteEventStream.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutEventStreamOutput struct {
 
 	// Specifies settings for publishing event data to an Amazon Kinesis data stream
@@ -57,13 +76,34 @@ type PutEventStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEventStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEventStreamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEventStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventStream != nil {
+		s.WriteStruct(schemas.PutEventStreamResponse_EventStream)
+		v.EventStream.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutEventStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutEventStreamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutEventStreamResponse_EventStream:
+			v.EventStream = &types.EventStream{}
+			return v.EventStream.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutEventStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutEventStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEventStream, schemas.PutEventStreamRequest, schemas.PutEventStreamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutEventStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEventStream, schemas.PutEventStreamRequest, schemas.PutEventStreamResponse), output: &PutEventStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

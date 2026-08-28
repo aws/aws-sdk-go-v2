@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,30 @@ type ListInferenceRecommendationsJobStepsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInferenceRecommendationsJobStepsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInferenceRecommendationsJobStepsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInferenceRecommendationsJobStepsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobName != nil {
+		s.WriteString(schemas.ListInferenceRecommendationsJobStepsRequest_JobName, *v.JobName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInferenceRecommendationsJobStepsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInferenceRecommendationsJobStepsRequest_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListInferenceRecommendationsJobStepsRequest_Status, string(v.Status))
+	}
+	if v.StepType != "" {
+		s.WriteString(schemas.ListInferenceRecommendationsJobStepsRequest_StepType, string(v.StepType))
+	}
+}
+
 type ListInferenceRecommendationsJobStepsOutput struct {
 
 	// A token that you can specify in your next request to return more results from
@@ -69,13 +95,35 @@ type ListInferenceRecommendationsJobStepsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInferenceRecommendationsJobStepsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInferenceRecommendationsJobStepsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInferenceRecommendationsJobStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInferenceRecommendationsJobStepsResponse_NextToken, *v.NextToken)
+	}
+	serializeInferenceRecommendationsJobSteps(s, schemas.ListInferenceRecommendationsJobStepsResponse_Steps, v.Steps)
+}
+func (v *ListInferenceRecommendationsJobStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInferenceRecommendationsJobStepsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInferenceRecommendationsJobStepsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInferenceRecommendationsJobStepsResponse_NextToken, v.NextToken)
+		case schemas.ListInferenceRecommendationsJobStepsResponse_Steps:
+			return deserializeInferenceRecommendationsJobSteps(d, schemas.ListInferenceRecommendationsJobStepsResponse_Steps, &v.Steps)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInferenceRecommendationsJobStepsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListInferenceRecommendationsJobSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInferenceRecommendationsJobSteps, schemas.ListInferenceRecommendationsJobStepsRequest, schemas.ListInferenceRecommendationsJobStepsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListInferenceRecommendationsJobSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInferenceRecommendationsJobSteps, schemas.ListInferenceRecommendationsJobStepsRequest, schemas.ListInferenceRecommendationsJobStepsResponse), output: &ListInferenceRecommendationsJobStepsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

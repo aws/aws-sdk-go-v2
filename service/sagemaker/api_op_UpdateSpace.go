@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,29 @@ type UpdateSpaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSpaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSpaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSpaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.UpdateSpaceRequest_DomainId, *v.DomainId)
+	}
+	if v.SpaceDisplayName != nil {
+		s.WriteString(schemas.UpdateSpaceRequest_SpaceDisplayName, *v.SpaceDisplayName)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.UpdateSpaceRequest_SpaceName, *v.SpaceName)
+	}
+	if v.SpaceSettings != nil {
+		s.WriteStruct(schemas.UpdateSpaceRequest_SpaceSettings)
+		v.SpaceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateSpaceOutput struct {
 
 	// The space's Amazon Resource Name (ARN).
@@ -58,13 +83,32 @@ type UpdateSpaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSpaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSpaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSpaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SpaceArn != nil {
+		s.WriteString(schemas.UpdateSpaceResponse_SpaceArn, *v.SpaceArn)
+	}
+}
+func (v *UpdateSpaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSpaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSpaceResponse_SpaceArn:
+			v.SpaceArn = new(string)
+			return d.ReadString(schemas.UpdateSpaceResponse_SpaceArn, v.SpaceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSpaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSpace, schemas.UpdateSpaceRequest, schemas.UpdateSpaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSpace, schemas.UpdateSpaceRequest, schemas.UpdateSpaceResponse), output: &UpdateSpaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

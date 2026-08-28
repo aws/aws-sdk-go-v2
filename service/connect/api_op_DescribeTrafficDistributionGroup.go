@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DescribeTrafficDistributionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTrafficDistributionGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTrafficDistributionGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTrafficDistributionGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrafficDistributionGroupId != nil {
+		s.WriteString(schemas.DescribeTrafficDistributionGroupRequest_TrafficDistributionGroupId, *v.TrafficDistributionGroupId)
+	}
+}
+
 type DescribeTrafficDistributionGroupOutput struct {
 
 	// Information about the traffic distribution group.
@@ -47,13 +61,34 @@ type DescribeTrafficDistributionGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTrafficDistributionGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTrafficDistributionGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTrafficDistributionGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrafficDistributionGroup != nil {
+		s.WriteStruct(schemas.DescribeTrafficDistributionGroupResponse_TrafficDistributionGroup)
+		v.TrafficDistributionGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeTrafficDistributionGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTrafficDistributionGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTrafficDistributionGroupResponse_TrafficDistributionGroup:
+			v.TrafficDistributionGroup = &types.TrafficDistributionGroup{}
+			return v.TrafficDistributionGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTrafficDistributionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeTrafficDistributionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrafficDistributionGroup, schemas.DescribeTrafficDistributionGroupRequest, schemas.DescribeTrafficDistributionGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeTrafficDistributionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrafficDistributionGroup, schemas.DescribeTrafficDistributionGroupRequest, schemas.DescribeTrafficDistributionGroupResponse), output: &DescribeTrafficDistributionGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

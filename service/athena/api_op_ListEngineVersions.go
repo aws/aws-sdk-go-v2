@@ -5,7 +5,9 @@ package athena
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ListEngineVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEngineVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEngineVersionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEngineVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEngineVersionsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEngineVersionsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListEngineVersionsOutput struct {
 
 	// A list of engine versions that are available to choose from.
@@ -55,13 +72,35 @@ type ListEngineVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEngineVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEngineVersionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEngineVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEngineVersionsList(s, schemas.ListEngineVersionsOutput_EngineVersions, v.EngineVersions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEngineVersionsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEngineVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEngineVersionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEngineVersionsOutput_EngineVersions:
+			return deserializeEngineVersionsList(d, schemas.ListEngineVersionsOutput_EngineVersions, &v.EngineVersions)
+		case schemas.ListEngineVersionsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEngineVersionsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEngineVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEngineVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEngineVersions, schemas.ListEngineVersionsInput, schemas.ListEngineVersionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListEngineVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEngineVersions, schemas.ListEngineVersionsInput, schemas.ListEngineVersionsOutput), output: &ListEngineVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,25 @@ type UpdateHubInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateHubInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateHubRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateHubInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HubDescription != nil {
+		s.WriteString(schemas.UpdateHubRequest_HubDescription, *v.HubDescription)
+	}
+	if v.HubDisplayName != nil {
+		s.WriteString(schemas.UpdateHubRequest_HubDisplayName, *v.HubDisplayName)
+	}
+	if v.HubName != nil {
+		s.WriteString(schemas.UpdateHubRequest_HubName, *v.HubName)
+	}
+	serializeHubSearchKeywordList(s, schemas.UpdateHubRequest_HubSearchKeywords, v.HubSearchKeywords)
+}
+
 type UpdateHubOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated hub.
@@ -55,13 +76,32 @@ type UpdateHubOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateHubOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateHubResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateHubOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HubArn != nil {
+		s.WriteString(schemas.UpdateHubResponse_HubArn, *v.HubArn)
+	}
+}
+func (v *UpdateHubOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateHubResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateHubResponse_HubArn:
+			v.HubArn = new(string)
+			return d.ReadString(schemas.UpdateHubResponse_HubArn, v.HubArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateHubMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateHub{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHub, schemas.UpdateHubRequest, schemas.UpdateHubResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateHub{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHub, schemas.UpdateHubRequest, schemas.UpdateHubResponse), output: &UpdateHubOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

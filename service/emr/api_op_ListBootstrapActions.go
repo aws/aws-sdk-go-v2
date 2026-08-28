@@ -5,7 +5,9 @@ package emr
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ListBootstrapActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBootstrapActionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBootstrapActionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBootstrapActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.ListBootstrapActionsInput_ClusterId, *v.ClusterId)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListBootstrapActionsInput_Marker, *v.Marker)
+	}
+}
+
 // This output contains the bootstrap actions detail.
 type ListBootstrapActionsOutput struct {
 
@@ -54,13 +71,35 @@ type ListBootstrapActionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBootstrapActionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBootstrapActionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBootstrapActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCommandList(s, schemas.ListBootstrapActionsOutput_BootstrapActions, v.BootstrapActions)
+	if v.Marker != nil {
+		s.WriteString(schemas.ListBootstrapActionsOutput_Marker, *v.Marker)
+	}
+}
+func (v *ListBootstrapActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBootstrapActionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBootstrapActionsOutput_BootstrapActions:
+			return deserializeCommandList(d, schemas.ListBootstrapActionsOutput_BootstrapActions, &v.BootstrapActions)
+		case schemas.ListBootstrapActionsOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListBootstrapActionsOutput_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBootstrapActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListBootstrapActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBootstrapActions, schemas.ListBootstrapActionsInput, schemas.ListBootstrapActionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListBootstrapActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBootstrapActions, schemas.ListBootstrapActionsInput, schemas.ListBootstrapActionsOutput), output: &ListBootstrapActionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -94,6 +96,43 @@ type CreateMlflowTrackingServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMlflowTrackingServerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMlflowTrackingServerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMlflowTrackingServerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactStoreUri != nil {
+		s.WriteString(schemas.CreateMlflowTrackingServerRequest_ArtifactStoreUri, *v.ArtifactStoreUri)
+	}
+	if v.AutomaticModelRegistration != nil {
+		s.WriteBool(schemas.CreateMlflowTrackingServerRequest_AutomaticModelRegistration, *v.AutomaticModelRegistration)
+	}
+	if v.MlflowVersion != nil {
+		s.WriteString(schemas.CreateMlflowTrackingServerRequest_MlflowVersion, *v.MlflowVersion)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateMlflowTrackingServerRequest_RoleArn, *v.RoleArn)
+	}
+	if v.S3BucketOwnerAccountId != nil {
+		s.WriteString(schemas.CreateMlflowTrackingServerRequest_S3BucketOwnerAccountId, *v.S3BucketOwnerAccountId)
+	}
+	if v.S3BucketOwnerVerification != nil {
+		s.WriteBool(schemas.CreateMlflowTrackingServerRequest_S3BucketOwnerVerification, *v.S3BucketOwnerVerification)
+	}
+	serializeTagList(s, schemas.CreateMlflowTrackingServerRequest_Tags, v.Tags)
+	if v.TrackingServerName != nil {
+		s.WriteString(schemas.CreateMlflowTrackingServerRequest_TrackingServerName, *v.TrackingServerName)
+	}
+	if v.TrackingServerSize != "" {
+		s.WriteString(schemas.CreateMlflowTrackingServerRequest_TrackingServerSize, string(v.TrackingServerSize))
+	}
+	if v.WeeklyMaintenanceWindowStart != nil {
+		s.WriteString(schemas.CreateMlflowTrackingServerRequest_WeeklyMaintenanceWindowStart, *v.WeeklyMaintenanceWindowStart)
+	}
+}
+
 type CreateMlflowTrackingServerOutput struct {
 
 	// The ARN of the tracking server.
@@ -105,13 +144,32 @@ type CreateMlflowTrackingServerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMlflowTrackingServerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMlflowTrackingServerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMlflowTrackingServerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrackingServerArn != nil {
+		s.WriteString(schemas.CreateMlflowTrackingServerResponse_TrackingServerArn, *v.TrackingServerArn)
+	}
+}
+func (v *CreateMlflowTrackingServerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMlflowTrackingServerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMlflowTrackingServerResponse_TrackingServerArn:
+			v.TrackingServerArn = new(string)
+			return d.ReadString(schemas.CreateMlflowTrackingServerResponse_TrackingServerArn, v.TrackingServerArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMlflowTrackingServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateMlflowTrackingServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMlflowTrackingServer, schemas.CreateMlflowTrackingServerRequest, schemas.CreateMlflowTrackingServerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateMlflowTrackingServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMlflowTrackingServer, schemas.CreateMlflowTrackingServerRequest, schemas.CreateMlflowTrackingServerResponse), output: &CreateMlflowTrackingServerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

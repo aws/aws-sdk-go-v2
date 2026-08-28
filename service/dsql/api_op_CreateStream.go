@@ -5,7 +5,9 @@ package dsql
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dsql/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dsql/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -83,6 +85,29 @@ type CreateStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStreamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateStreamInput_clientToken, *v.ClientToken)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.CreateStreamInput_clusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.CreateStreamInput_format, string(v.Format))
+	}
+	if v.Ordering != "" {
+		s.WriteString(schemas.CreateStreamInput_ordering, string(v.Ordering))
+	}
+	serializeTagMap(s, schemas.CreateStreamInput_tags, v.Tags)
+	serializeTargetDefinition(s, schemas.CreateStreamInput_targetDefinition, v.TargetDefinition)
+}
+
 // The output of a created stream.
 type CreateStreamOutput struct {
 
@@ -127,13 +152,80 @@ type CreateStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStreamOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateStreamOutput_arn, *v.Arn)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.CreateStreamOutput_clusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.CreateStreamOutput_creationTime, *v.CreationTime)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.CreateStreamOutput_format, string(v.Format))
+	}
+	if v.Ordering != "" {
+		s.WriteString(schemas.CreateStreamOutput_ordering, string(v.Ordering))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateStreamOutput_status, string(v.Status))
+	}
+	if v.StreamIdentifier != nil {
+		s.WriteString(schemas.CreateStreamOutput_streamIdentifier, *v.StreamIdentifier)
+	}
+}
+func (v *CreateStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStreamOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateStreamOutput_arn, v.Arn)
+		case schemas.CreateStreamOutput_clusterIdentifier:
+			v.ClusterIdentifier = new(string)
+			return d.ReadString(schemas.CreateStreamOutput_clusterIdentifier, v.ClusterIdentifier)
+		case schemas.CreateStreamOutput_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CreateStreamOutput_creationTime, v.CreationTime)
+		case schemas.CreateStreamOutput_format:
+			var ev string
+			if err := d.ReadString(schemas.CreateStreamOutput_format, &ev); err != nil {
+				return err
+			}
+			v.Format = types.StreamFormat(ev)
+			return nil
+		case schemas.CreateStreamOutput_ordering:
+			var ev string
+			if err := d.ReadString(schemas.CreateStreamOutput_ordering, &ev); err != nil {
+				return err
+			}
+			v.Ordering = types.StreamOrdering(ev)
+			return nil
+		case schemas.CreateStreamOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateStreamOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.StreamStatus(ev)
+			return nil
+		case schemas.CreateStreamOutput_streamIdentifier:
+			v.StreamIdentifier = new(string)
+			return d.ReadString(schemas.CreateStreamOutput_streamIdentifier, v.StreamIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStream, schemas.CreateStreamInput, schemas.CreateStreamOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStream, schemas.CreateStreamInput, schemas.CreateStreamOutput), output: &CreateStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

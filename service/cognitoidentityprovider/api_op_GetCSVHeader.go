@@ -4,6 +4,8 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,18 @@ type GetCSVHeaderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCSVHeaderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCSVHeaderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCSVHeaderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.GetCSVHeaderRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 // Represents the response from the server to the request to get the header
 // information of the CSV file for the user import job.
 type GetCSVHeaderOutput struct {
@@ -73,13 +87,35 @@ type GetCSVHeaderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCSVHeaderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCSVHeaderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCSVHeaderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfStringTypes(s, schemas.GetCSVHeaderResponse_CSVHeader, v.CSVHeader)
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.GetCSVHeaderResponse_UserPoolId, *v.UserPoolId)
+	}
+}
+func (v *GetCSVHeaderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCSVHeaderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCSVHeaderResponse_CSVHeader:
+			return deserializeListOfStringTypes(d, schemas.GetCSVHeaderResponse_CSVHeader, &v.CSVHeader)
+		case schemas.GetCSVHeaderResponse_UserPoolId:
+			v.UserPoolId = new(string)
+			return d.ReadString(schemas.GetCSVHeaderResponse_UserPoolId, v.UserPoolId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCSVHeaderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCSVHeader{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCSVHeader, schemas.GetCSVHeaderRequest, schemas.GetCSVHeaderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCSVHeader{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCSVHeader, schemas.GetCSVHeaderRequest, schemas.GetCSVHeaderResponse), output: &GetCSVHeaderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,24 @@ type AdminGetDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminGetDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminGetDeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminGetDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceKey != nil {
+		s.WriteString(schemas.AdminGetDeviceRequest_DeviceKey, *v.DeviceKey)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AdminGetDeviceRequest_UserPoolId, *v.UserPoolId)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.AdminGetDeviceRequest_Username, *v.Username)
+	}
+}
+
 // Gets the device response, as an administrator.
 type AdminGetDeviceOutput struct {
 
@@ -80,13 +100,34 @@ type AdminGetDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminGetDeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminGetDeviceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminGetDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Device != nil {
+		s.WriteStruct(schemas.AdminGetDeviceResponse_Device)
+		v.Device.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AdminGetDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdminGetDeviceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdminGetDeviceResponse_Device:
+			v.Device = &types.DeviceType{}
+			return v.Device.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAdminGetDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminGetDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminGetDevice, schemas.AdminGetDeviceRequest, schemas.AdminGetDeviceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminGetDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminGetDevice, schemas.AdminGetDeviceRequest, schemas.AdminGetDeviceResponse), output: &AdminGetDeviceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package amplify
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,22 @@ type CreateDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.CreateDeploymentRequest_appId, *v.AppId)
+	}
+	if v.BranchName != nil {
+		s.WriteString(schemas.CreateDeploymentRequest_branchName, *v.BranchName)
+	}
+	serializeFileMap(s, schemas.CreateDeploymentRequest_fileMap, v.FileMap)
+}
+
 // The result structure for the create a new deployment request.
 type CreateDeploymentOutput struct {
 
@@ -74,13 +92,41 @@ type CreateDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeploymentResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFileUploadUrls(s, schemas.CreateDeploymentResult_fileUploadUrls, v.FileUploadUrls)
+	if v.JobId != nil {
+		s.WriteString(schemas.CreateDeploymentResult_jobId, *v.JobId)
+	}
+	if v.ZipUploadUrl != nil {
+		s.WriteString(schemas.CreateDeploymentResult_zipUploadUrl, *v.ZipUploadUrl)
+	}
+}
+func (v *CreateDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDeploymentResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDeploymentResult_fileUploadUrls:
+			return deserializeFileUploadUrls(d, schemas.CreateDeploymentResult_fileUploadUrls, &v.FileUploadUrls)
+		case schemas.CreateDeploymentResult_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.CreateDeploymentResult_jobId, v.JobId)
+		case schemas.CreateDeploymentResult_zipUploadUrl:
+			v.ZipUploadUrl = new(string)
+			return d.ReadString(schemas.CreateDeploymentResult_zipUploadUrl, v.ZipUploadUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeployment, schemas.CreateDeploymentRequest, schemas.CreateDeploymentResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeployment, schemas.CreateDeploymentRequest, schemas.CreateDeploymentResult), output: &CreateDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

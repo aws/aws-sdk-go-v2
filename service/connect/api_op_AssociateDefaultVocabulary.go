@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type AssociateDefaultVocabularyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateDefaultVocabularyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateDefaultVocabularyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateDefaultVocabularyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.AssociateDefaultVocabularyRequest_InstanceId, *v.InstanceId)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.AssociateDefaultVocabularyRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.VocabularyId != nil {
+		s.WriteString(schemas.AssociateDefaultVocabularyRequest_VocabularyId, *v.VocabularyId)
+	}
+}
+
 type AssociateDefaultVocabularyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,13 +78,26 @@ type AssociateDefaultVocabularyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateDefaultVocabularyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateDefaultVocabularyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateDefaultVocabularyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateDefaultVocabularyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateDefaultVocabularyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateDefaultVocabularyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateDefaultVocabulary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateDefaultVocabulary, schemas.AssociateDefaultVocabularyRequest, schemas.AssociateDefaultVocabularyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateDefaultVocabulary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateDefaultVocabulary, schemas.AssociateDefaultVocabularyRequest, schemas.AssociateDefaultVocabularyResponse), output: &AssociateDefaultVocabularyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

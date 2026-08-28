@@ -4,6 +4,8 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,19 @@ type AssociateIpGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateIpGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateIpGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateIpGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.AssociateIpGroupsRequest_DirectoryId, *v.DirectoryId)
+	}
+	serializeIpGroupIdList(s, schemas.AssociateIpGroupsRequest_GroupIds, v.GroupIds)
+}
+
 type AssociateIpGroupsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +60,26 @@ type AssociateIpGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateIpGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateIpGroupsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateIpGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateIpGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateIpGroupsResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateIpGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateIpGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateIpGroups, schemas.AssociateIpGroupsRequest, schemas.AssociateIpGroupsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateIpGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateIpGroups, schemas.AssociateIpGroupsRequest, schemas.AssociateIpGroupsResult), output: &AssociateIpGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

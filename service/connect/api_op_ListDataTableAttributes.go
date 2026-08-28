@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,28 @@ type ListDataTableAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataTableAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataTableAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataTableAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeIds(s, schemas.ListDataTableAttributesRequest_AttributeIds, v.AttributeIds)
+	if v.DataTableId != nil {
+		s.WriteString(schemas.ListDataTableAttributesRequest_DataTableId, *v.DataTableId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListDataTableAttributesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataTableAttributesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataTableAttributesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDataTableAttributesOutput struct {
 
 	// A list of data table attributes with their complete configuration and metadata.
@@ -72,13 +96,35 @@ type ListDataTableAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataTableAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataTableAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataTableAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeList(s, schemas.ListDataTableAttributesResponse_Attributes, v.Attributes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataTableAttributesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDataTableAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataTableAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataTableAttributesResponse_Attributes:
+			return deserializeAttributeList(d, schemas.ListDataTableAttributesResponse_Attributes, &v.Attributes)
+		case schemas.ListDataTableAttributesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataTableAttributesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataTableAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataTableAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataTableAttributes, schemas.ListDataTableAttributesRequest, schemas.ListDataTableAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataTableAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataTableAttributes, schemas.ListDataTableAttributesRequest, schemas.ListDataTableAttributesResponse), output: &ListDataTableAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

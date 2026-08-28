@@ -5,6 +5,8 @@ package glacier
 import (
 	"context"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"io"
 )
@@ -91,6 +93,34 @@ type UploadArchiveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UploadArchiveInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UploadArchiveInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UploadArchiveInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.UploadArchiveInput_accountId, *v.AccountId)
+	}
+	if v.ArchiveDescription != nil {
+		s.WriteString(schemas.UploadArchiveInput_archiveDescription, *v.ArchiveDescription)
+	}
+	if v.Checksum != nil {
+		s.WriteString(schemas.UploadArchiveInput_checksum, *v.Checksum)
+	}
+	if v.VaultName != nil {
+		s.WriteString(schemas.UploadArchiveInput_vaultName, *v.VaultName)
+	}
+}
+func (v *UploadArchiveInput) GetPayloadStream() io.Reader { return v.Body }
+
+var _ smithy.StreamingInput = (*UploadArchiveInput)(nil)
+
+func (v *UploadArchiveInput) SetPayloadStream(r io.ReadCloser) { v.Body = r }
+
+var _ smithy.StreamingOutput = (*UploadArchiveInput)(nil)
+
 // Contains the Amazon Glacier response to your request.
 //
 // For information about the underlying REST API, see [Upload Archive]. For conceptual
@@ -115,13 +145,44 @@ type UploadArchiveOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UploadArchiveOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ArchiveCreationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UploadArchiveOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveId != nil {
+		s.WriteString(schemas.ArchiveCreationOutput_archiveId, *v.ArchiveId)
+	}
+	if v.Checksum != nil {
+		s.WriteString(schemas.ArchiveCreationOutput_checksum, *v.Checksum)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.ArchiveCreationOutput_location, *v.Location)
+	}
+}
+func (v *UploadArchiveOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ArchiveCreationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ArchiveCreationOutput_archiveId:
+			v.ArchiveId = new(string)
+			return d.ReadString(schemas.ArchiveCreationOutput_archiveId, v.ArchiveId)
+		case schemas.ArchiveCreationOutput_checksum:
+			v.Checksum = new(string)
+			return d.ReadString(schemas.ArchiveCreationOutput_checksum, v.Checksum)
+		case schemas.ArchiveCreationOutput_location:
+			v.Location = new(string)
+			return d.ReadString(schemas.ArchiveCreationOutput_location, v.Location)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUploadArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUploadArchive{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UploadArchive, schemas.UploadArchiveInput, schemas.ArchiveCreationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUploadArchive{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UploadArchive, schemas.UploadArchiveInput, schemas.ArchiveCreationOutput), output: &UploadArchiveOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

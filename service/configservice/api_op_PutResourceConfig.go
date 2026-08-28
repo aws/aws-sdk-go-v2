@@ -4,6 +4,8 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,31 @@ type PutResourceConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutResourceConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutResourceConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutResourceConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteString(schemas.PutResourceConfigRequest_Configuration, *v.Configuration)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.PutResourceConfigRequest_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.PutResourceConfigRequest_ResourceName, *v.ResourceName)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.PutResourceConfigRequest_ResourceType, *v.ResourceType)
+	}
+	if v.SchemaVersionId != nil {
+		s.WriteString(schemas.PutResourceConfigRequest_SchemaVersionId, *v.SchemaVersionId)
+	}
+	serializeTags(s, schemas.PutResourceConfigRequest_Tags, v.Tags)
+}
+
 type PutResourceConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -87,13 +114,26 @@ type PutResourceConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutResourceConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutResourceConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutResourceConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutResourceConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutResourceConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutResourceConfig, schemas.PutResourceConfigRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutResourceConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutResourceConfig, schemas.PutResourceConfigRequest, nil), output: &PutResourceConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

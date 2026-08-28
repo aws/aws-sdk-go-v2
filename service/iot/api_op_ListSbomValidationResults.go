@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,30 @@ type ListSbomValidationResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSbomValidationResultsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSbomValidationResultsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSbomValidationResultsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSbomValidationResultsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSbomValidationResultsRequest_nextToken, *v.NextToken)
+	}
+	if v.PackageName != nil {
+		s.WriteString(schemas.ListSbomValidationResultsRequest_packageName, *v.PackageName)
+	}
+	if v.ValidationResult != "" {
+		s.WriteString(schemas.ListSbomValidationResultsRequest_validationResult, string(v.ValidationResult))
+	}
+	if v.VersionName != nil {
+		s.WriteString(schemas.ListSbomValidationResultsRequest_versionName, *v.VersionName)
+	}
+}
+
 type ListSbomValidationResultsOutput struct {
 
 	// A token that can be used to retrieve the next set of results, or null if there
@@ -71,13 +97,35 @@ type ListSbomValidationResultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSbomValidationResultsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSbomValidationResultsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSbomValidationResultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSbomValidationResultsResponse_nextToken, *v.NextToken)
+	}
+	serializeSbomValidationResultSummaryList(s, schemas.ListSbomValidationResultsResponse_validationResultSummaries, v.ValidationResultSummaries)
+}
+func (v *ListSbomValidationResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSbomValidationResultsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSbomValidationResultsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSbomValidationResultsResponse_nextToken, v.NextToken)
+		case schemas.ListSbomValidationResultsResponse_validationResultSummaries:
+			return deserializeSbomValidationResultSummaryList(d, schemas.ListSbomValidationResultsResponse_validationResultSummaries, &v.ValidationResultSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSbomValidationResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSbomValidationResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSbomValidationResults, schemas.ListSbomValidationResultsRequest, schemas.ListSbomValidationResultsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSbomValidationResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSbomValidationResults, schemas.ListSbomValidationResultsRequest, schemas.ListSbomValidationResultsResponse), output: &ListSbomValidationResultsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

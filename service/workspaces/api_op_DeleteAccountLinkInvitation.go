@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteAccountLinkInvitationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccountLinkInvitationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccountLinkInvitationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccountLinkInvitationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteAccountLinkInvitationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.DeleteAccountLinkInvitationRequest_LinkId, *v.LinkId)
+	}
+}
+
 type DeleteAccountLinkInvitationOutput struct {
 
 	// Information about the account link.
@@ -49,13 +66,34 @@ type DeleteAccountLinkInvitationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccountLinkInvitationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccountLinkInvitationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccountLinkInvitationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountLink != nil {
+		s.WriteStruct(schemas.DeleteAccountLinkInvitationResult_AccountLink)
+		v.AccountLink.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteAccountLinkInvitationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAccountLinkInvitationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAccountLinkInvitationResult_AccountLink:
+			v.AccountLink = &types.AccountLink{}
+			return v.AccountLink.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAccountLinkInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAccountLinkInvitation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccountLinkInvitation, schemas.DeleteAccountLinkInvitationRequest, schemas.DeleteAccountLinkInvitationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteAccountLinkInvitation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccountLinkInvitation, schemas.DeleteAccountLinkInvitationRequest, schemas.DeleteAccountLinkInvitationResult), output: &DeleteAccountLinkInvitationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

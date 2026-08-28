@@ -5,7 +5,9 @@ package partnercentralselling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,34 @@ type CreateResourceSnapshotJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResourceSnapshotJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResourceSnapshotJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResourceSnapshotJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.CreateResourceSnapshotJobRequest_Catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateResourceSnapshotJobRequest_ClientToken, *v.ClientToken)
+	}
+	if v.EngagementIdentifier != nil {
+		s.WriteString(schemas.CreateResourceSnapshotJobRequest_EngagementIdentifier, *v.EngagementIdentifier)
+	}
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.CreateResourceSnapshotJobRequest_ResourceIdentifier, *v.ResourceIdentifier)
+	}
+	if v.ResourceSnapshotTemplateIdentifier != nil {
+		s.WriteString(schemas.CreateResourceSnapshotJobRequest_ResourceSnapshotTemplateIdentifier, *v.ResourceSnapshotTemplateIdentifier)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.CreateResourceSnapshotJobRequest_ResourceType, string(v.ResourceType))
+	}
+	serializeTagList(s, schemas.CreateResourceSnapshotJobRequest_Tags, v.Tags)
+}
+
 type CreateResourceSnapshotJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created snapshot job.
@@ -86,13 +116,38 @@ type CreateResourceSnapshotJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResourceSnapshotJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResourceSnapshotJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResourceSnapshotJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateResourceSnapshotJobResponse_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateResourceSnapshotJobResponse_Id, *v.Id)
+	}
+}
+func (v *CreateResourceSnapshotJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateResourceSnapshotJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateResourceSnapshotJobResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateResourceSnapshotJobResponse_Arn, v.Arn)
+		case schemas.CreateResourceSnapshotJobResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateResourceSnapshotJobResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateResourceSnapshotJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateResourceSnapshotJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResourceSnapshotJob, schemas.CreateResourceSnapshotJobRequest, schemas.CreateResourceSnapshotJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateResourceSnapshotJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResourceSnapshotJob, schemas.CreateResourceSnapshotJobRequest, schemas.CreateResourceSnapshotJobResponse), output: &CreateResourceSnapshotJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

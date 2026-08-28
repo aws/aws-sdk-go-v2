@@ -4,6 +4,8 @@ package servicequotas
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type DeleteServiceQuotaIncreaseRequestFromTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceQuotaIncreaseRequestFromTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceQuotaIncreaseRequestFromTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceQuotaIncreaseRequestFromTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsRegion != nil {
+		s.WriteString(schemas.DeleteServiceQuotaIncreaseRequestFromTemplateRequest_AwsRegion, *v.AwsRegion)
+	}
+	if v.QuotaCode != nil {
+		s.WriteString(schemas.DeleteServiceQuotaIncreaseRequestFromTemplateRequest_QuotaCode, *v.QuotaCode)
+	}
+	if v.ServiceCode != nil {
+		s.WriteString(schemas.DeleteServiceQuotaIncreaseRequestFromTemplateRequest_ServiceCode, *v.ServiceCode)
+	}
+}
+
 type DeleteServiceQuotaIncreaseRequestFromTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +74,26 @@ type DeleteServiceQuotaIncreaseRequestFromTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteServiceQuotaIncreaseRequestFromTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteServiceQuotaIncreaseRequestFromTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteServiceQuotaIncreaseRequestFromTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteServiceQuotaIncreaseRequestFromTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteServiceQuotaIncreaseRequestFromTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteServiceQuotaIncreaseRequestFromTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteServiceQuotaIncreaseRequestFromTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceQuotaIncreaseRequestFromTemplate, schemas.DeleteServiceQuotaIncreaseRequestFromTemplateRequest, schemas.DeleteServiceQuotaIncreaseRequestFromTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteServiceQuotaIncreaseRequestFromTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteServiceQuotaIncreaseRequestFromTemplate, schemas.DeleteServiceQuotaIncreaseRequestFromTemplateRequest, schemas.DeleteServiceQuotaIncreaseRequestFromTemplateResponse), output: &DeleteServiceQuotaIncreaseRequestFromTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

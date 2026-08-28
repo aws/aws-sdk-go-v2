@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -318,6 +320,64 @@ type CreateImageBuilderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateImageBuilderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateImageBuilderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateImageBuilderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessEndpointList(s, schemas.CreateImageBuilderRequest_AccessEndpoints, v.AccessEndpoints)
+	if v.AppstreamAgentVersion != nil {
+		s.WriteString(schemas.CreateImageBuilderRequest_AppstreamAgentVersion, *v.AppstreamAgentVersion)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateImageBuilderRequest_Description, *v.Description)
+	}
+	if v.DisableIMDSV1 != nil {
+		s.WriteBool(schemas.CreateImageBuilderRequest_DisableIMDSV1, *v.DisableIMDSV1)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateImageBuilderRequest_DisplayName, *v.DisplayName)
+	}
+	if v.DomainJoinInfo != nil {
+		s.WriteStruct(schemas.CreateImageBuilderRequest_DomainJoinInfo)
+		v.DomainJoinInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EnableDefaultInternetAccess != nil {
+		s.WriteBool(schemas.CreateImageBuilderRequest_EnableDefaultInternetAccess, *v.EnableDefaultInternetAccess)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.CreateImageBuilderRequest_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.ImageArn != nil {
+		s.WriteString(schemas.CreateImageBuilderRequest_ImageArn, *v.ImageArn)
+	}
+	if v.ImageName != nil {
+		s.WriteString(schemas.CreateImageBuilderRequest_ImageName, *v.ImageName)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.CreateImageBuilderRequest_InstanceType, *v.InstanceType)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateImageBuilderRequest_Name, *v.Name)
+	}
+	if v.RootVolumeConfig != nil {
+		s.WriteStruct(schemas.CreateImageBuilderRequest_RootVolumeConfig)
+		v.RootVolumeConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStringList(s, schemas.CreateImageBuilderRequest_SoftwaresToInstall, v.SoftwaresToInstall)
+	serializeStringList(s, schemas.CreateImageBuilderRequest_SoftwaresToUninstall, v.SoftwaresToUninstall)
+	serializeTags(s, schemas.CreateImageBuilderRequest_Tags, v.Tags)
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.CreateImageBuilderRequest_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateImageBuilderOutput struct {
 
 	// Information about the image builder.
@@ -329,13 +389,34 @@ type CreateImageBuilderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateImageBuilderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateImageBuilderResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateImageBuilderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageBuilder != nil {
+		s.WriteStruct(schemas.CreateImageBuilderResult_ImageBuilder)
+		v.ImageBuilder.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateImageBuilderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateImageBuilderResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateImageBuilderResult_ImageBuilder:
+			v.ImageBuilder = &types.ImageBuilder{}
+			return v.ImageBuilder.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateImageBuilderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateImageBuilder{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateImageBuilder, schemas.CreateImageBuilderRequest, schemas.CreateImageBuilderResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateImageBuilder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateImageBuilder, schemas.CreateImageBuilderRequest, schemas.CreateImageBuilderResult), output: &CreateImageBuilderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

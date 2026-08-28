@@ -5,7 +5,9 @@ package athena
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type ListApplicationDPUSizesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationDPUSizesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationDPUSizesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationDPUSizesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListApplicationDPUSizesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApplicationDPUSizesInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListApplicationDPUSizesOutput struct {
 
 	// A list of the supported DPU sizes that the application runtime supports.
@@ -54,13 +71,35 @@ type ListApplicationDPUSizesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationDPUSizesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationDPUSizesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationDPUSizesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApplicationDPUSizesList(s, schemas.ListApplicationDPUSizesOutput_ApplicationDPUSizes, v.ApplicationDPUSizes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApplicationDPUSizesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListApplicationDPUSizesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListApplicationDPUSizesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListApplicationDPUSizesOutput_ApplicationDPUSizes:
+			return deserializeApplicationDPUSizesList(d, schemas.ListApplicationDPUSizesOutput_ApplicationDPUSizes, &v.ApplicationDPUSizes)
+		case schemas.ListApplicationDPUSizesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListApplicationDPUSizesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListApplicationDPUSizesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListApplicationDPUSizes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationDPUSizes, schemas.ListApplicationDPUSizesInput, schemas.ListApplicationDPUSizesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListApplicationDPUSizes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationDPUSizes, schemas.ListApplicationDPUSizesInput, schemas.ListApplicationDPUSizesOutput), output: &ListApplicationDPUSizesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

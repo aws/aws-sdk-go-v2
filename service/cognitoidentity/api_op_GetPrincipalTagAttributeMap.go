@@ -4,6 +4,8 @@ package cognitoidentity
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetPrincipalTagAttributeMapInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPrincipalTagAttributeMapInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPrincipalTagAttributeMapInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPrincipalTagAttributeMapInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.GetPrincipalTagAttributeMapInput_IdentityPoolId, *v.IdentityPoolId)
+	}
+	if v.IdentityProviderName != nil {
+		s.WriteString(schemas.GetPrincipalTagAttributeMapInput_IdentityProviderName, *v.IdentityProviderName)
+	}
+}
+
 type GetPrincipalTagAttributeMapOutput struct {
 
 	// You can use this operation to get the ID of the Identity Pool you setup
@@ -62,13 +79,47 @@ type GetPrincipalTagAttributeMapOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPrincipalTagAttributeMapOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPrincipalTagAttributeMapResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPrincipalTagAttributeMapOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.GetPrincipalTagAttributeMapResponse_IdentityPoolId, *v.IdentityPoolId)
+	}
+	if v.IdentityProviderName != nil {
+		s.WriteString(schemas.GetPrincipalTagAttributeMapResponse_IdentityProviderName, *v.IdentityProviderName)
+	}
+	serializePrincipalTags(s, schemas.GetPrincipalTagAttributeMapResponse_PrincipalTags, v.PrincipalTags)
+	if v.UseDefaults != nil {
+		s.WriteBool(schemas.GetPrincipalTagAttributeMapResponse_UseDefaults, *v.UseDefaults)
+	}
+}
+func (v *GetPrincipalTagAttributeMapOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPrincipalTagAttributeMapResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPrincipalTagAttributeMapResponse_IdentityPoolId:
+			v.IdentityPoolId = new(string)
+			return d.ReadString(schemas.GetPrincipalTagAttributeMapResponse_IdentityPoolId, v.IdentityPoolId)
+		case schemas.GetPrincipalTagAttributeMapResponse_IdentityProviderName:
+			v.IdentityProviderName = new(string)
+			return d.ReadString(schemas.GetPrincipalTagAttributeMapResponse_IdentityProviderName, v.IdentityProviderName)
+		case schemas.GetPrincipalTagAttributeMapResponse_PrincipalTags:
+			return deserializePrincipalTags(d, schemas.GetPrincipalTagAttributeMapResponse_PrincipalTags, &v.PrincipalTags)
+		case schemas.GetPrincipalTagAttributeMapResponse_UseDefaults:
+			v.UseDefaults = new(bool)
+			return d.ReadBool(schemas.GetPrincipalTagAttributeMapResponse_UseDefaults, v.UseDefaults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPrincipalTagAttributeMapMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPrincipalTagAttributeMap{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPrincipalTagAttributeMap, schemas.GetPrincipalTagAttributeMapInput, schemas.GetPrincipalTagAttributeMapResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetPrincipalTagAttributeMap{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPrincipalTagAttributeMap, schemas.GetPrincipalTagAttributeMapInput, schemas.GetPrincipalTagAttributeMapResponse), output: &GetPrincipalTagAttributeMapOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

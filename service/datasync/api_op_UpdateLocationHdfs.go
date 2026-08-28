@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -106,6 +108,62 @@ type UpdateLocationHdfsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLocationHdfsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLocationHdfsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLocationHdfsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentArnList(s, schemas.UpdateLocationHdfsRequest_AgentArns, v.AgentArns)
+	if v.AuthenticationType != "" {
+		s.WriteString(schemas.UpdateLocationHdfsRequest_AuthenticationType, string(v.AuthenticationType))
+	}
+	if v.BlockSize != nil {
+		s.WriteInt32(schemas.UpdateLocationHdfsRequest_BlockSize, *v.BlockSize)
+	}
+	if v.CmkSecretConfig != nil {
+		s.WriteStruct(schemas.UpdateLocationHdfsRequest_CmkSecretConfig)
+		v.CmkSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomSecretConfig != nil {
+		s.WriteStruct(schemas.UpdateLocationHdfsRequest_CustomSecretConfig)
+		v.CustomSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KerberosKeytab != nil {
+		s.WriteBlob(schemas.UpdateLocationHdfsRequest_KerberosKeytab, v.KerberosKeytab)
+	}
+	if v.KerberosKrb5Conf != nil {
+		s.WriteBlob(schemas.UpdateLocationHdfsRequest_KerberosKrb5Conf, v.KerberosKrb5Conf)
+	}
+	if v.KerberosPrincipal != nil {
+		s.WriteString(schemas.UpdateLocationHdfsRequest_KerberosPrincipal, *v.KerberosPrincipal)
+	}
+	if v.KmsKeyProviderUri != nil {
+		s.WriteString(schemas.UpdateLocationHdfsRequest_KmsKeyProviderUri, *v.KmsKeyProviderUri)
+	}
+	if v.LocationArn != nil {
+		s.WriteString(schemas.UpdateLocationHdfsRequest_LocationArn, *v.LocationArn)
+	}
+	serializeHdfsNameNodeList(s, schemas.UpdateLocationHdfsRequest_NameNodes, v.NameNodes)
+	if v.QopConfiguration != nil {
+		s.WriteStruct(schemas.UpdateLocationHdfsRequest_QopConfiguration)
+		v.QopConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReplicationFactor != nil {
+		s.WriteInt32(schemas.UpdateLocationHdfsRequest_ReplicationFactor, *v.ReplicationFactor)
+	}
+	if v.SimpleUser != nil {
+		s.WriteString(schemas.UpdateLocationHdfsRequest_SimpleUser, *v.SimpleUser)
+	}
+	if v.Subdirectory != nil {
+		s.WriteString(schemas.UpdateLocationHdfsRequest_Subdirectory, *v.Subdirectory)
+	}
+}
+
 type UpdateLocationHdfsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -113,13 +171,26 @@ type UpdateLocationHdfsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLocationHdfsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLocationHdfsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLocationHdfsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateLocationHdfsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLocationHdfsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLocationHdfsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLocationHdfs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLocationHdfs, schemas.UpdateLocationHdfsRequest, schemas.UpdateLocationHdfsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateLocationHdfs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLocationHdfs, schemas.UpdateLocationHdfsRequest, schemas.UpdateLocationHdfsResponse), output: &UpdateLocationHdfsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

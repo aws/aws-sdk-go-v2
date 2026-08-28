@@ -5,7 +5,9 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,36 @@ type ListImportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImportsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImportsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImportsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListImportsRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.ListImportsRequest_botVersion, *v.BotVersion)
+	}
+	serializeImportFilters(s, schemas.ListImportsRequest_filters, v.Filters)
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListImportsRequest_localeId, *v.LocaleId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListImportsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImportsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != nil {
+		s.WriteStruct(schemas.ListImportsRequest_sortBy)
+		v.SortBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListImportsOutput struct {
 
 	// The unique identifier assigned by Amazon Lex to the bot.
@@ -93,13 +125,53 @@ type ListImportsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImportsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImportsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListImportsResponse_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.ListImportsResponse_botVersion, *v.BotVersion)
+	}
+	serializeImportSummaryList(s, schemas.ListImportsResponse_importSummaries, v.ImportSummaries)
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListImportsResponse_localeId, *v.LocaleId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImportsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListImportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListImportsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListImportsResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.ListImportsResponse_botId, v.BotId)
+		case schemas.ListImportsResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.ListImportsResponse_botVersion, v.BotVersion)
+		case schemas.ListImportsResponse_importSummaries:
+			return deserializeImportSummaryList(d, schemas.ListImportsResponse_importSummaries, &v.ImportSummaries)
+		case schemas.ListImportsResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.ListImportsResponse_localeId, v.LocaleId)
+		case schemas.ListImportsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListImportsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListImportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListImports{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImports, schemas.ListImportsRequest, schemas.ListImportsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListImports{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImports, schemas.ListImportsRequest, schemas.ListImportsResponse), output: &ListImportsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

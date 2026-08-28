@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -53,6 +55,33 @@ type ListExperimentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExperimentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExperimentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExperimentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAfter != nil {
+		s.WriteTime(schemas.ListExperimentsRequest_CreatedAfter, *v.CreatedAfter)
+	}
+	if v.CreatedBefore != nil {
+		s.WriteTime(schemas.ListExperimentsRequest_CreatedBefore, *v.CreatedBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListExperimentsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExperimentsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListExperimentsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListExperimentsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListExperimentsOutput struct {
 
 	// A list of the summaries of your experiments.
@@ -67,13 +96,35 @@ type ListExperimentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExperimentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExperimentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExperimentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExperimentSummaries(s, schemas.ListExperimentsResponse_ExperimentSummaries, v.ExperimentSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExperimentsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListExperimentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListExperimentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListExperimentsResponse_ExperimentSummaries:
+			return deserializeExperimentSummaries(d, schemas.ListExperimentsResponse_ExperimentSummaries, &v.ExperimentSummaries)
+		case schemas.ListExperimentsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListExperimentsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListExperimentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListExperiments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExperiments, schemas.ListExperimentsRequest, schemas.ListExperimentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListExperiments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExperiments, schemas.ListExperimentsRequest, schemas.ListExperimentsResponse), output: &ListExperimentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

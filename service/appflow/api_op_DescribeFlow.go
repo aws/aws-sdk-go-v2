@@ -4,7 +4,9 @@ package appflow
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appflow/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type DescribeFlowInput struct {
 	FlowName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFlowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowName != nil {
+		s.WriteString(schemas.DescribeFlowRequest_flowName, *v.FlowName)
+	}
 }
 
 type DescribeFlowOutput struct {
@@ -120,13 +134,140 @@ type DescribeFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFlowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFlowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DescribeFlowResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.DescribeFlowResponse_createdBy, *v.CreatedBy)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeFlowResponse_description, *v.Description)
+	}
+	serializeDestinationFlowConfigList(s, schemas.DescribeFlowResponse_destinationFlowConfigList, v.DestinationFlowConfigList)
+	if v.FlowArn != nil {
+		s.WriteString(schemas.DescribeFlowResponse_flowArn, *v.FlowArn)
+	}
+	if v.FlowName != nil {
+		s.WriteString(schemas.DescribeFlowResponse_flowName, *v.FlowName)
+	}
+	if v.FlowStatus != "" {
+		s.WriteString(schemas.DescribeFlowResponse_flowStatus, string(v.FlowStatus))
+	}
+	if v.FlowStatusMessage != nil {
+		s.WriteString(schemas.DescribeFlowResponse_flowStatusMessage, *v.FlowStatusMessage)
+	}
+	if v.KmsArn != nil {
+		s.WriteString(schemas.DescribeFlowResponse_kmsArn, *v.KmsArn)
+	}
+	if v.LastRunExecutionDetails != nil {
+		s.WriteStruct(schemas.DescribeFlowResponse_lastRunExecutionDetails)
+		v.LastRunExecutionDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMetadataCatalogDetails(s, schemas.DescribeFlowResponse_lastRunMetadataCatalogDetails, v.LastRunMetadataCatalogDetails)
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.DescribeFlowResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.LastUpdatedBy != nil {
+		s.WriteString(schemas.DescribeFlowResponse_lastUpdatedBy, *v.LastUpdatedBy)
+	}
+	if v.MetadataCatalogConfig != nil {
+		s.WriteStruct(schemas.DescribeFlowResponse_metadataCatalogConfig)
+		v.MetadataCatalogConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchemaVersion != nil {
+		s.WriteInt64(schemas.DescribeFlowResponse_schemaVersion, *v.SchemaVersion)
+	}
+	if v.SourceFlowConfig != nil {
+		s.WriteStruct(schemas.DescribeFlowResponse_sourceFlowConfig)
+		v.SourceFlowConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.DescribeFlowResponse_tags, v.Tags)
+	serializeTasks(s, schemas.DescribeFlowResponse_tasks, v.Tasks)
+	if v.TriggerConfig != nil {
+		s.WriteStruct(schemas.DescribeFlowResponse_triggerConfig)
+		v.TriggerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFlowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFlowResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeFlowResponse_createdAt, v.CreatedAt)
+		case schemas.DescribeFlowResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.DescribeFlowResponse_createdBy, v.CreatedBy)
+		case schemas.DescribeFlowResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeFlowResponse_description, v.Description)
+		case schemas.DescribeFlowResponse_destinationFlowConfigList:
+			return deserializeDestinationFlowConfigList(d, schemas.DescribeFlowResponse_destinationFlowConfigList, &v.DestinationFlowConfigList)
+		case schemas.DescribeFlowResponse_flowArn:
+			v.FlowArn = new(string)
+			return d.ReadString(schemas.DescribeFlowResponse_flowArn, v.FlowArn)
+		case schemas.DescribeFlowResponse_flowName:
+			v.FlowName = new(string)
+			return d.ReadString(schemas.DescribeFlowResponse_flowName, v.FlowName)
+		case schemas.DescribeFlowResponse_flowStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeFlowResponse_flowStatus, &ev); err != nil {
+				return err
+			}
+			v.FlowStatus = types.FlowStatus(ev)
+			return nil
+		case schemas.DescribeFlowResponse_flowStatusMessage:
+			v.FlowStatusMessage = new(string)
+			return d.ReadString(schemas.DescribeFlowResponse_flowStatusMessage, v.FlowStatusMessage)
+		case schemas.DescribeFlowResponse_kmsArn:
+			v.KmsArn = new(string)
+			return d.ReadString(schemas.DescribeFlowResponse_kmsArn, v.KmsArn)
+		case schemas.DescribeFlowResponse_lastRunExecutionDetails:
+			v.LastRunExecutionDetails = &types.ExecutionDetails{}
+			return v.LastRunExecutionDetails.Deserialize(d)
+		case schemas.DescribeFlowResponse_lastRunMetadataCatalogDetails:
+			return deserializeMetadataCatalogDetails(d, schemas.DescribeFlowResponse_lastRunMetadataCatalogDetails, &v.LastRunMetadataCatalogDetails)
+		case schemas.DescribeFlowResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeFlowResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.DescribeFlowResponse_lastUpdatedBy:
+			v.LastUpdatedBy = new(string)
+			return d.ReadString(schemas.DescribeFlowResponse_lastUpdatedBy, v.LastUpdatedBy)
+		case schemas.DescribeFlowResponse_metadataCatalogConfig:
+			v.MetadataCatalogConfig = &types.MetadataCatalogConfig{}
+			return v.MetadataCatalogConfig.Deserialize(d)
+		case schemas.DescribeFlowResponse_schemaVersion:
+			v.SchemaVersion = new(int64)
+			return d.ReadInt64(schemas.DescribeFlowResponse_schemaVersion, v.SchemaVersion)
+		case schemas.DescribeFlowResponse_sourceFlowConfig:
+			v.SourceFlowConfig = &types.SourceFlowConfig{}
+			return v.SourceFlowConfig.Deserialize(d)
+		case schemas.DescribeFlowResponse_tags:
+			return deserializeTagMap(d, schemas.DescribeFlowResponse_tags, &v.Tags)
+		case schemas.DescribeFlowResponse_tasks:
+			return deserializeTasks(d, schemas.DescribeFlowResponse_tasks, &v.Tasks)
+		case schemas.DescribeFlowResponse_triggerConfig:
+			v.TriggerConfig = &types.TriggerConfig{}
+			return v.TriggerConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFlow, schemas.DescribeFlowRequest, schemas.DescribeFlowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFlow, schemas.DescribeFlowRequest, schemas.DescribeFlowResponse), output: &DescribeFlowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,6 +5,8 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type AssociateSecurityKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSecurityKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSecurityKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSecurityKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AssociateSecurityKeyRequest_ClientToken, *v.ClientToken)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.AssociateSecurityKeyRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.AssociateSecurityKeyRequest_Key, *v.Key)
+	}
+}
+
 type AssociateSecurityKeyOutput struct {
 
 	// The existing association identifier that uniquely identifies the resource type
@@ -63,13 +83,32 @@ type AssociateSecurityKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSecurityKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSecurityKeyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSecurityKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.AssociateSecurityKeyResponse_AssociationId, *v.AssociationId)
+	}
+}
+func (v *AssociateSecurityKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateSecurityKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateSecurityKeyResponse_AssociationId:
+			v.AssociationId = new(string)
+			return d.ReadString(schemas.AssociateSecurityKeyResponse_AssociationId, v.AssociationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateSecurityKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateSecurityKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSecurityKey, schemas.AssociateSecurityKeyRequest, schemas.AssociateSecurityKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateSecurityKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSecurityKey, schemas.AssociateSecurityKeyRequest, schemas.AssociateSecurityKeyResponse), output: &AssociateSecurityKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

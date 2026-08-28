@@ -4,7 +4,9 @@ package neptunegraph
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -40,6 +42,20 @@ type DeletePrivateGraphEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePrivateGraphEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePrivateGraphEndpointInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePrivateGraphEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphIdentifier != nil {
+		s.WriteString(schemas.DeletePrivateGraphEndpointInput_graphIdentifier, *v.GraphIdentifier)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.DeletePrivateGraphEndpointInput_vpcId, *v.VpcId)
+	}
+}
 func (in *DeletePrivateGraphEndpointInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ApiType = ptr.String("ControlPlane")
@@ -71,13 +87,51 @@ type DeletePrivateGraphEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePrivateGraphEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePrivateGraphEndpointOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePrivateGraphEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.DeletePrivateGraphEndpointOutput_status, string(v.Status))
+	}
+	serializeSubnetIds(s, schemas.DeletePrivateGraphEndpointOutput_subnetIds, v.SubnetIds)
+	if v.VpcEndpointId != nil {
+		s.WriteString(schemas.DeletePrivateGraphEndpointOutput_vpcEndpointId, *v.VpcEndpointId)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.DeletePrivateGraphEndpointOutput_vpcId, *v.VpcId)
+	}
+}
+func (v *DeletePrivateGraphEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePrivateGraphEndpointOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePrivateGraphEndpointOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.DeletePrivateGraphEndpointOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PrivateGraphEndpointStatus(ev)
+			return nil
+		case schemas.DeletePrivateGraphEndpointOutput_subnetIds:
+			return deserializeSubnetIds(d, schemas.DeletePrivateGraphEndpointOutput_subnetIds, &v.SubnetIds)
+		case schemas.DeletePrivateGraphEndpointOutput_vpcEndpointId:
+			v.VpcEndpointId = new(string)
+			return d.ReadString(schemas.DeletePrivateGraphEndpointOutput_vpcEndpointId, v.VpcEndpointId)
+		case schemas.DeletePrivateGraphEndpointOutput_vpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.DeletePrivateGraphEndpointOutput_vpcId, v.VpcId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePrivateGraphEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePrivateGraphEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePrivateGraphEndpoint, schemas.DeletePrivateGraphEndpointInput, schemas.DeletePrivateGraphEndpointOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePrivateGraphEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePrivateGraphEndpoint, schemas.DeletePrivateGraphEndpointInput, schemas.DeletePrivateGraphEndpointOutput), output: &DeletePrivateGraphEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

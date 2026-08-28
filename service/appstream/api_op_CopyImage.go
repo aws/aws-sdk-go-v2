@@ -4,6 +4,8 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type CopyImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationImageDescription != nil {
+		s.WriteString(schemas.CopyImageRequest_DestinationImageDescription, *v.DestinationImageDescription)
+	}
+	if v.DestinationImageName != nil {
+		s.WriteString(schemas.CopyImageRequest_DestinationImageName, *v.DestinationImageName)
+	}
+	if v.DestinationRegion != nil {
+		s.WriteString(schemas.CopyImageRequest_DestinationRegion, *v.DestinationRegion)
+	}
+	if v.SourceImageName != nil {
+		s.WriteString(schemas.CopyImageRequest_SourceImageName, *v.SourceImageName)
+	}
+}
+
 type CopyImageOutput struct {
 
 	// The name of the destination image.
@@ -59,13 +82,32 @@ type CopyImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyImageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationImageName != nil {
+		s.WriteString(schemas.CopyImageResponse_DestinationImageName, *v.DestinationImageName)
+	}
+}
+func (v *CopyImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopyImageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopyImageResponse_DestinationImageName:
+			v.DestinationImageName = new(string)
+			return d.ReadString(schemas.CopyImageResponse_DestinationImageName, v.DestinationImageName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCopyImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCopyImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyImage, schemas.CopyImageRequest, schemas.CopyImageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCopyImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyImage, schemas.CopyImageRequest, schemas.CopyImageResponse), output: &CopyImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

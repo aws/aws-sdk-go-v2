@@ -5,6 +5,8 @@ package codedeploy
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type ListApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApplicationsInput_nextToken, *v.NextToken)
+	}
+}
+
 // Represents the output of a ListApplications operation.
 type ListApplicationsOutput struct {
 
@@ -51,13 +65,35 @@ type ListApplicationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApplicationsList(s, schemas.ListApplicationsOutput_applications, v.Applications)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApplicationsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListApplicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListApplicationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListApplicationsOutput_applications:
+			return deserializeApplicationsList(d, schemas.ListApplicationsOutput_applications, &v.Applications)
+		case schemas.ListApplicationsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListApplicationsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplications, schemas.ListApplicationsInput, schemas.ListApplicationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplications, schemas.ListApplicationsInput, schemas.ListApplicationsOutput), output: &ListApplicationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

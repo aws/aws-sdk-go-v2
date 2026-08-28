@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type UnpeerVpcInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnpeerVpcInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnpeerVpcRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnpeerVpcInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type UnpeerVpcOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -41,13 +52,34 @@ type UnpeerVpcOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnpeerVpcOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnpeerVpcResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnpeerVpcOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Operation != nil {
+		s.WriteStruct(schemas.UnpeerVpcResult_operation)
+		v.Operation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UnpeerVpcOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnpeerVpcResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnpeerVpcResult_operation:
+			v.Operation = &types.Operation{}
+			return v.Operation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUnpeerVpcMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUnpeerVpc{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UnpeerVpc, schemas.UnpeerVpcRequest, schemas.UnpeerVpcResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUnpeerVpc{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UnpeerVpc, schemas.UnpeerVpcRequest, schemas.UnpeerVpcResult), output: &UnpeerVpcOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

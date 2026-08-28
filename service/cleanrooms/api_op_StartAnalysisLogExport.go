@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -84,6 +86,29 @@ type StartAnalysisLogExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAnalysisLogExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAnalysisLogExportInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAnalysisLogExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisId != nil {
+		s.WriteString(schemas.StartAnalysisLogExportInput_analysisId, *v.AnalysisId)
+	}
+	if v.AnalysisType != "" {
+		s.WriteString(schemas.StartAnalysisLogExportInput_analysisType, string(v.AnalysisType))
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.StartAnalysisLogExportInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.ResultConfiguration != nil {
+		s.WriteStruct(schemas.StartAnalysisLogExportInput_resultConfiguration)
+		v.ResultConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartAnalysisLogExportOutput struct {
 
 	// The analysis log export that was started. The status is IN_PROGRESS .
@@ -97,13 +122,34 @@ type StartAnalysisLogExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAnalysisLogExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAnalysisLogExportOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAnalysisLogExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisLogExport != nil {
+		s.WriteStruct(schemas.StartAnalysisLogExportOutput_analysisLogExport)
+		v.AnalysisLogExport.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartAnalysisLogExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartAnalysisLogExportOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartAnalysisLogExportOutput_analysisLogExport:
+			v.AnalysisLogExport = &types.AnalysisLogExport{}
+			return v.AnalysisLogExport.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartAnalysisLogExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartAnalysisLogExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAnalysisLogExport, schemas.StartAnalysisLogExportInput, schemas.StartAnalysisLogExportOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartAnalysisLogExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAnalysisLogExport, schemas.StartAnalysisLogExportInput, schemas.StartAnalysisLogExportOutput), output: &StartAnalysisLogExportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

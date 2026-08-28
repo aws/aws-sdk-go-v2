@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetCollaborationIdNamespaceAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCollaborationIdNamespaceAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCollaborationIdNamespaceAssociationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCollaborationIdNamespaceAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.GetCollaborationIdNamespaceAssociationInput_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+	if v.IdNamespaceAssociationIdentifier != nil {
+		s.WriteString(schemas.GetCollaborationIdNamespaceAssociationInput_idNamespaceAssociationIdentifier, *v.IdNamespaceAssociationIdentifier)
+	}
+}
+
 type GetCollaborationIdNamespaceAssociationOutput struct {
 
 	// The ID namespace association that you requested.
@@ -53,13 +70,34 @@ type GetCollaborationIdNamespaceAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCollaborationIdNamespaceAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCollaborationIdNamespaceAssociationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCollaborationIdNamespaceAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationIdNamespaceAssociation != nil {
+		s.WriteStruct(schemas.GetCollaborationIdNamespaceAssociationOutput_collaborationIdNamespaceAssociation)
+		v.CollaborationIdNamespaceAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCollaborationIdNamespaceAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCollaborationIdNamespaceAssociationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCollaborationIdNamespaceAssociationOutput_collaborationIdNamespaceAssociation:
+			v.CollaborationIdNamespaceAssociation = &types.CollaborationIdNamespaceAssociation{}
+			return v.CollaborationIdNamespaceAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCollaborationIdNamespaceAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCollaborationIdNamespaceAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCollaborationIdNamespaceAssociation, schemas.GetCollaborationIdNamespaceAssociationInput, schemas.GetCollaborationIdNamespaceAssociationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCollaborationIdNamespaceAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCollaborationIdNamespaceAssociation, schemas.GetCollaborationIdNamespaceAssociationInput, schemas.GetCollaborationIdNamespaceAssociationOutput), output: &GetCollaborationIdNamespaceAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

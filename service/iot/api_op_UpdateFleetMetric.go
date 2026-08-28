@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,47 @@ type UpdateFleetMetricInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFleetMetricInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFleetMetricRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFleetMetricInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationField != nil {
+		s.WriteString(schemas.UpdateFleetMetricRequest_aggregationField, *v.AggregationField)
+	}
+	if v.AggregationType != nil {
+		s.WriteStruct(schemas.UpdateFleetMetricRequest_aggregationType)
+		v.AggregationType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFleetMetricRequest_description, *v.Description)
+	}
+	if v.ExpectedVersion != nil {
+		s.WriteInt64(schemas.UpdateFleetMetricRequest_expectedVersion, *v.ExpectedVersion)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.UpdateFleetMetricRequest_indexName, *v.IndexName)
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.UpdateFleetMetricRequest_metricName, *v.MetricName)
+	}
+	if v.Period != nil {
+		s.WriteInt32(schemas.UpdateFleetMetricRequest_period, *v.Period)
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.UpdateFleetMetricRequest_queryString, *v.QueryString)
+	}
+	if v.QueryVersion != nil {
+		s.WriteString(schemas.UpdateFleetMetricRequest_queryVersion, *v.QueryVersion)
+	}
+	if v.Unit != "" {
+		s.WriteString(schemas.UpdateFleetMetricRequest_unit, string(v.Unit))
+	}
+}
+
 type UpdateFleetMetricOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -78,13 +121,26 @@ type UpdateFleetMetricOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFleetMetricOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFleetMetricOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateFleetMetricOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFleetMetricMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFleetMetric{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFleetMetric, schemas.UpdateFleetMetricRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFleetMetric{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFleetMetric, schemas.UpdateFleetMetricRequest, nil), output: &UpdateFleetMetricOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,20 @@ type PhoneNumberValidateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PhoneNumberValidateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PhoneNumberValidateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PhoneNumberValidateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NumberValidateRequest != nil {
+		s.WriteStruct(schemas.PhoneNumberValidateRequest_NumberValidateRequest)
+		v.NumberValidateRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PhoneNumberValidateOutput struct {
 
 	// Provides information about a phone number.
@@ -47,13 +63,34 @@ type PhoneNumberValidateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PhoneNumberValidateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PhoneNumberValidateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PhoneNumberValidateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NumberValidateResponse != nil {
+		s.WriteStruct(schemas.PhoneNumberValidateResponse_NumberValidateResponse)
+		v.NumberValidateResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PhoneNumberValidateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PhoneNumberValidateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PhoneNumberValidateResponse_NumberValidateResponse:
+			v.NumberValidateResponse = &types.NumberValidateResponse{}
+			return v.NumberValidateResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPhoneNumberValidateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPhoneNumberValidate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PhoneNumberValidate, schemas.PhoneNumberValidateRequest, schemas.PhoneNumberValidateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPhoneNumberValidate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PhoneNumberValidate, schemas.PhoneNumberValidateRequest, schemas.PhoneNumberValidateResponse), output: &PhoneNumberValidateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

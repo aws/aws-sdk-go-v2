@@ -5,7 +5,9 @@ package route53resolver
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -83,6 +85,25 @@ type CreateResolverQueryLogConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResolverQueryLogConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResolverQueryLogConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResolverQueryLogConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.CreateResolverQueryLogConfigRequest_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.DestinationArn != nil {
+		s.WriteString(schemas.CreateResolverQueryLogConfigRequest_DestinationArn, *v.DestinationArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateResolverQueryLogConfigRequest_Name, *v.Name)
+	}
+	serializeTagList(s, schemas.CreateResolverQueryLogConfigRequest_Tags, v.Tags)
+}
+
 type CreateResolverQueryLogConfigOutput struct {
 
 	// Information about the CreateResolverQueryLogConfig request, including the
@@ -95,13 +116,34 @@ type CreateResolverQueryLogConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResolverQueryLogConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResolverQueryLogConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResolverQueryLogConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverQueryLogConfig != nil {
+		s.WriteStruct(schemas.CreateResolverQueryLogConfigResponse_ResolverQueryLogConfig)
+		v.ResolverQueryLogConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateResolverQueryLogConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateResolverQueryLogConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateResolverQueryLogConfigResponse_ResolverQueryLogConfig:
+			v.ResolverQueryLogConfig = &types.ResolverQueryLogConfig{}
+			return v.ResolverQueryLogConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateResolverQueryLogConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateResolverQueryLogConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResolverQueryLogConfig, schemas.CreateResolverQueryLogConfigRequest, schemas.CreateResolverQueryLogConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateResolverQueryLogConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResolverQueryLogConfig, schemas.CreateResolverQueryLogConfigRequest, schemas.CreateResolverQueryLogConfigResponse), output: &CreateResolverQueryLogConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

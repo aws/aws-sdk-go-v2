@@ -4,7 +4,9 @@ package schemas
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/schemas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/schemas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type UpdateDiscovererInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDiscovererInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDiscovererRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDiscovererInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossAccount != nil {
+		s.WriteBool(schemas.UpdateDiscovererRequest_CrossAccount, *v.CrossAccount)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateDiscovererRequest_Description, *v.Description)
+	}
+	if v.DiscovererId != nil {
+		s.WriteString(schemas.UpdateDiscovererRequest_DiscovererId, *v.DiscovererId)
+	}
+}
+
 type UpdateDiscovererOutput struct {
 
 	// The Status if the discoverer will discover schemas from events sent from
@@ -71,13 +91,69 @@ type UpdateDiscovererOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDiscovererOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDiscovererResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDiscovererOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossAccount != nil {
+		s.WriteBool(schemas.UpdateDiscovererResponse_CrossAccount, *v.CrossAccount)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateDiscovererResponse_Description, *v.Description)
+	}
+	if v.DiscovererArn != nil {
+		s.WriteString(schemas.UpdateDiscovererResponse_DiscovererArn, *v.DiscovererArn)
+	}
+	if v.DiscovererId != nil {
+		s.WriteString(schemas.UpdateDiscovererResponse_DiscovererId, *v.DiscovererId)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.UpdateDiscovererResponse_SourceArn, *v.SourceArn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.UpdateDiscovererResponse_State, string(v.State))
+	}
+	serializeTags(s, schemas.UpdateDiscovererResponse_Tags, v.Tags)
+}
+func (v *UpdateDiscovererOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDiscovererResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDiscovererResponse_CrossAccount:
+			v.CrossAccount = new(bool)
+			return d.ReadBool(schemas.UpdateDiscovererResponse_CrossAccount, v.CrossAccount)
+		case schemas.UpdateDiscovererResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateDiscovererResponse_Description, v.Description)
+		case schemas.UpdateDiscovererResponse_DiscovererArn:
+			v.DiscovererArn = new(string)
+			return d.ReadString(schemas.UpdateDiscovererResponse_DiscovererArn, v.DiscovererArn)
+		case schemas.UpdateDiscovererResponse_DiscovererId:
+			v.DiscovererId = new(string)
+			return d.ReadString(schemas.UpdateDiscovererResponse_DiscovererId, v.DiscovererId)
+		case schemas.UpdateDiscovererResponse_SourceArn:
+			v.SourceArn = new(string)
+			return d.ReadString(schemas.UpdateDiscovererResponse_SourceArn, v.SourceArn)
+		case schemas.UpdateDiscovererResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDiscovererResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.DiscovererState(ev)
+			return nil
+		case schemas.UpdateDiscovererResponse_Tags:
+			return deserializeTags(d, schemas.UpdateDiscovererResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDiscovererMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDiscoverer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDiscoverer, schemas.UpdateDiscovererRequest, schemas.UpdateDiscovererResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDiscoverer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDiscoverer, schemas.UpdateDiscovererRequest, schemas.UpdateDiscovererResponse), output: &UpdateDiscovererOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

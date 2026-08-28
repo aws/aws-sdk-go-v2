@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,27 @@ type CreateFunctionDefinitionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFunctionDefinitionVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFunctionDefinitionVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFunctionDefinitionVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmznClientToken != nil {
+		s.WriteString(schemas.CreateFunctionDefinitionVersionRequest_AmznClientToken, *v.AmznClientToken)
+	}
+	if v.DefaultConfig != nil {
+		s.WriteStruct(schemas.CreateFunctionDefinitionVersionRequest_DefaultConfig)
+		v.DefaultConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FunctionDefinitionId != nil {
+		s.WriteString(schemas.CreateFunctionDefinitionVersionRequest_FunctionDefinitionId, *v.FunctionDefinitionId)
+	}
+	serialize__listOfFunction(s, schemas.CreateFunctionDefinitionVersionRequest_Functions, v.Functions)
+}
+
 type CreateFunctionDefinitionVersionOutput struct {
 
 	// The ARN of the version.
@@ -65,13 +88,50 @@ type CreateFunctionDefinitionVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFunctionDefinitionVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFunctionDefinitionVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFunctionDefinitionVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateFunctionDefinitionVersionResponse_Arn, *v.Arn)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteString(schemas.CreateFunctionDefinitionVersionResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateFunctionDefinitionVersionResponse_Id, *v.Id)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.CreateFunctionDefinitionVersionResponse_Version, *v.Version)
+	}
+}
+func (v *CreateFunctionDefinitionVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFunctionDefinitionVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFunctionDefinitionVersionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateFunctionDefinitionVersionResponse_Arn, v.Arn)
+		case schemas.CreateFunctionDefinitionVersionResponse_CreationTimestamp:
+			v.CreationTimestamp = new(string)
+			return d.ReadString(schemas.CreateFunctionDefinitionVersionResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.CreateFunctionDefinitionVersionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateFunctionDefinitionVersionResponse_Id, v.Id)
+		case schemas.CreateFunctionDefinitionVersionResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.CreateFunctionDefinitionVersionResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFunctionDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFunctionDefinitionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFunctionDefinitionVersion, schemas.CreateFunctionDefinitionVersionRequest, schemas.CreateFunctionDefinitionVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateFunctionDefinitionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFunctionDefinitionVersion, schemas.CreateFunctionDefinitionVersionRequest, schemas.CreateFunctionDefinitionVersionResponse), output: &CreateFunctionDefinitionVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package apprunner
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteVpcConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVpcConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVpcConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVpcConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpcConnectorArn != nil {
+		s.WriteString(schemas.DeleteVpcConnectorRequest_VpcConnectorArn, *v.VpcConnectorArn)
+	}
+}
+
 type DeleteVpcConnectorOutput struct {
 
 	// A description of the App Runner VPC connector that this request just deleted.
@@ -51,13 +65,34 @@ type DeleteVpcConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVpcConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVpcConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVpcConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpcConnector != nil {
+		s.WriteStruct(schemas.DeleteVpcConnectorResponse_VpcConnector)
+		v.VpcConnector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteVpcConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVpcConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVpcConnectorResponse_VpcConnector:
+			v.VpcConnector = &types.VpcConnector{}
+			return v.VpcConnector.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVpcConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteVpcConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVpcConnector, schemas.DeleteVpcConnectorRequest, schemas.DeleteVpcConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteVpcConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVpcConnector, schemas.DeleteVpcConnectorRequest, schemas.DeleteVpcConnectorResponse), output: &DeleteVpcConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

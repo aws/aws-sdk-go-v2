@@ -5,7 +5,9 @@ package pipes
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pipes/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pipes/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,36 @@ type ListPipesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPipesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPipesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPipesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentState != "" {
+		s.WriteString(schemas.ListPipesRequest_CurrentState, string(v.CurrentState))
+	}
+	if v.DesiredState != "" {
+		s.WriteString(schemas.ListPipesRequest_DesiredState, string(v.DesiredState))
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListPipesRequest_Limit, *v.Limit)
+	}
+	if v.NamePrefix != nil {
+		s.WriteString(schemas.ListPipesRequest_NamePrefix, *v.NamePrefix)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPipesRequest_NextToken, *v.NextToken)
+	}
+	if v.SourcePrefix != nil {
+		s.WriteString(schemas.ListPipesRequest_SourcePrefix, *v.SourcePrefix)
+	}
+	if v.TargetPrefix != nil {
+		s.WriteString(schemas.ListPipesRequest_TargetPrefix, *v.TargetPrefix)
+	}
+}
+
 type ListPipesOutput struct {
 
 	// If nextToken is returned, there are more results available. The value of
@@ -78,13 +110,35 @@ type ListPipesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPipesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPipesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPipesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPipesResponse_NextToken, *v.NextToken)
+	}
+	serializePipeList(s, schemas.ListPipesResponse_Pipes, v.Pipes)
+}
+func (v *ListPipesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPipesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPipesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPipesResponse_NextToken, v.NextToken)
+		case schemas.ListPipesResponse_Pipes:
+			return deserializePipeList(d, schemas.ListPipesResponse_Pipes, &v.Pipes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPipesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPipes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPipes, schemas.ListPipesRequest, schemas.ListPipesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPipes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPipes, schemas.ListPipesRequest, schemas.ListPipesResponse), output: &ListPipesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

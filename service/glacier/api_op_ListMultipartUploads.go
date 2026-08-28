@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -86,6 +88,27 @@ type ListMultipartUploadsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMultipartUploadsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMultipartUploadsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMultipartUploadsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListMultipartUploadsInput_accountId, *v.AccountId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListMultipartUploadsInput_limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListMultipartUploadsInput_marker, *v.Marker)
+	}
+	if v.VaultName != nil {
+		s.WriteString(schemas.ListMultipartUploadsInput_vaultName, *v.VaultName)
+	}
+}
+
 // Contains the Amazon Glacier response to your request.
 type ListMultipartUploadsOutput struct {
 
@@ -103,13 +126,35 @@ type ListMultipartUploadsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMultipartUploadsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMultipartUploadsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMultipartUploadsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListMultipartUploadsOutput_Marker, *v.Marker)
+	}
+	serializeUploadsList(s, schemas.ListMultipartUploadsOutput_UploadsList, v.UploadsList)
+}
+func (v *ListMultipartUploadsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMultipartUploadsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMultipartUploadsOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListMultipartUploadsOutput_Marker, v.Marker)
+		case schemas.ListMultipartUploadsOutput_UploadsList:
+			return deserializeUploadsList(d, schemas.ListMultipartUploadsOutput_UploadsList, &v.UploadsList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMultipartUploadsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMultipartUploads{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMultipartUploads, schemas.ListMultipartUploadsInput, schemas.ListMultipartUploadsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMultipartUploads{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMultipartUploads, schemas.ListMultipartUploadsInput, schemas.ListMultipartUploadsOutput), output: &ListMultipartUploadsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

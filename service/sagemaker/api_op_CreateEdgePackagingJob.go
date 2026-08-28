@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,39 @@ type CreateEdgePackagingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEdgePackagingJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEdgePackagingJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEdgePackagingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompilationJobName != nil {
+		s.WriteString(schemas.CreateEdgePackagingJobRequest_CompilationJobName, *v.CompilationJobName)
+	}
+	if v.EdgePackagingJobName != nil {
+		s.WriteString(schemas.CreateEdgePackagingJobRequest_EdgePackagingJobName, *v.EdgePackagingJobName)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.CreateEdgePackagingJobRequest_ModelName, *v.ModelName)
+	}
+	if v.ModelVersion != nil {
+		s.WriteString(schemas.CreateEdgePackagingJobRequest_ModelVersion, *v.ModelVersion)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.CreateEdgePackagingJobRequest_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceKey != nil {
+		s.WriteString(schemas.CreateEdgePackagingJobRequest_ResourceKey, *v.ResourceKey)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateEdgePackagingJobRequest_RoleArn, *v.RoleArn)
+	}
+	serializeTagList(s, schemas.CreateEdgePackagingJobRequest_Tags, v.Tags)
+}
+
 type CreateEdgePackagingJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -78,13 +113,26 @@ type CreateEdgePackagingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEdgePackagingJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEdgePackagingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateEdgePackagingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEdgePackagingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEdgePackagingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEdgePackagingJob, schemas.CreateEdgePackagingJobRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateEdgePackagingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEdgePackagingJob, schemas.CreateEdgePackagingJobRequest, nil), output: &CreateEdgePackagingJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

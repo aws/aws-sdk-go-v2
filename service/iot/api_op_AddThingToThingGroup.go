@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,30 @@ type AddThingToThingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddThingToThingGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddThingToThingGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddThingToThingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OverrideDynamicGroups != false {
+		s.WriteBool(schemas.AddThingToThingGroupRequest_overrideDynamicGroups, v.OverrideDynamicGroups)
+	}
+	if v.ThingArn != nil {
+		s.WriteString(schemas.AddThingToThingGroupRequest_thingArn, *v.ThingArn)
+	}
+	if v.ThingGroupArn != nil {
+		s.WriteString(schemas.AddThingToThingGroupRequest_thingGroupArn, *v.ThingGroupArn)
+	}
+	if v.ThingGroupName != nil {
+		s.WriteString(schemas.AddThingToThingGroupRequest_thingGroupName, *v.ThingGroupName)
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.AddThingToThingGroupRequest_thingName, *v.ThingName)
+	}
+}
+
 type AddThingToThingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +83,26 @@ type AddThingToThingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddThingToThingGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddThingToThingGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddThingToThingGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AddThingToThingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddThingToThingGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddThingToThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddThingToThingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddThingToThingGroup, schemas.AddThingToThingGroupRequest, schemas.AddThingToThingGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddThingToThingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddThingToThingGroup, schemas.AddThingToThingGroupRequest, schemas.AddThingToThingGroupResponse), output: &AddThingToThingGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

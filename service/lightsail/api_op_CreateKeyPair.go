@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,19 @@ type CreateKeyPairInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateKeyPairInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateKeyPairRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateKeyPairInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyPairName != nil {
+		s.WriteString(schemas.CreateKeyPairRequest_keyPairName, *v.KeyPairName)
+	}
+	serializeTagList(s, schemas.CreateKeyPairRequest_tags, v.Tags)
+}
+
 type CreateKeyPairOutput struct {
 
 	// An array of key-value pairs containing information about the new key pair you
@@ -72,13 +87,54 @@ type CreateKeyPairOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateKeyPairOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateKeyPairResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateKeyPairOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyPair != nil {
+		s.WriteStruct(schemas.CreateKeyPairResult_keyPair)
+		v.KeyPair.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Operation != nil {
+		s.WriteStruct(schemas.CreateKeyPairResult_operation)
+		v.Operation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PrivateKeyBase64 != nil {
+		s.WriteString(schemas.CreateKeyPairResult_privateKeyBase64, *v.PrivateKeyBase64)
+	}
+	if v.PublicKeyBase64 != nil {
+		s.WriteString(schemas.CreateKeyPairResult_publicKeyBase64, *v.PublicKeyBase64)
+	}
+}
+func (v *CreateKeyPairOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateKeyPairResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateKeyPairResult_keyPair:
+			v.KeyPair = &types.KeyPair{}
+			return v.KeyPair.Deserialize(d)
+		case schemas.CreateKeyPairResult_operation:
+			v.Operation = &types.Operation{}
+			return v.Operation.Deserialize(d)
+		case schemas.CreateKeyPairResult_privateKeyBase64:
+			v.PrivateKeyBase64 = new(string)
+			return d.ReadString(schemas.CreateKeyPairResult_privateKeyBase64, v.PrivateKeyBase64)
+		case schemas.CreateKeyPairResult_publicKeyBase64:
+			v.PublicKeyBase64 = new(string)
+			return d.ReadString(schemas.CreateKeyPairResult_publicKeyBase64, v.PublicKeyBase64)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateKeyPair{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKeyPair, schemas.CreateKeyPairRequest, schemas.CreateKeyPairResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateKeyPair{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKeyPair, schemas.CreateKeyPairRequest, schemas.CreateKeyPairResult), output: &CreateKeyPairOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

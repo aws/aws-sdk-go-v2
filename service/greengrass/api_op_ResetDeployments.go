@@ -4,6 +4,8 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,24 @@ type ResetDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetDeploymentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetDeploymentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmznClientToken != nil {
+		s.WriteString(schemas.ResetDeploymentsRequest_AmznClientToken, *v.AmznClientToken)
+	}
+	if v.Force != nil {
+		s.WriteBool(schemas.ResetDeploymentsRequest_Force, *v.Force)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.ResetDeploymentsRequest_GroupId, *v.GroupId)
+	}
+}
+
 type ResetDeploymentsOutput struct {
 
 	// The ARN of the deployment.
@@ -54,13 +74,38 @@ type ResetDeploymentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetDeploymentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentArn != nil {
+		s.WriteString(schemas.ResetDeploymentsResponse_DeploymentArn, *v.DeploymentArn)
+	}
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.ResetDeploymentsResponse_DeploymentId, *v.DeploymentId)
+	}
+}
+func (v *ResetDeploymentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResetDeploymentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResetDeploymentsResponse_DeploymentArn:
+			v.DeploymentArn = new(string)
+			return d.ReadString(schemas.ResetDeploymentsResponse_DeploymentArn, v.DeploymentArn)
+		case schemas.ResetDeploymentsResponse_DeploymentId:
+			v.DeploymentId = new(string)
+			return d.ReadString(schemas.ResetDeploymentsResponse_DeploymentId, v.DeploymentId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResetDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpResetDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetDeployments, schemas.ResetDeploymentsRequest, schemas.ResetDeploymentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpResetDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetDeployments, schemas.ResetDeploymentsRequest, schemas.ResetDeploymentsResponse), output: &ResetDeploymentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package acm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/acm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -35,6 +37,17 @@ type DeleteAcmeDomainValidationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAcmeDomainValidationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAcmeDomainValidationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAcmeDomainValidationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcmeDomainValidationArn != nil {
+		s.WriteString(schemas.DeleteAcmeDomainValidationRequest_AcmeDomainValidationArn, *v.AcmeDomainValidationArn)
+	}
+}
 func (in *DeleteAcmeDomainValidationInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ServiceType = ptr.String("ACM-ACME")
@@ -47,13 +60,26 @@ type DeleteAcmeDomainValidationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAcmeDomainValidationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAcmeDomainValidationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAcmeDomainValidationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAcmeDomainValidationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAcmeDomainValidation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAcmeDomainValidation, schemas.DeleteAcmeDomainValidationRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteAcmeDomainValidation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAcmeDomainValidation, schemas.DeleteAcmeDomainValidationRequest, nil), output: &DeleteAcmeDomainValidationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

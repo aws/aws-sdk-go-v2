@@ -5,6 +5,10 @@ package cognitoidentityprovider
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +45,18 @@ type StartWebAuthnRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartWebAuthnRegistrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartWebAuthnRegistrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartWebAuthnRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.StartWebAuthnRegistrationRequest_AccessToken, *v.AccessToken)
+	}
+}
+
 type StartWebAuthnRegistrationOutput struct {
 
 	// The information that a user can provide in their request to register with their
@@ -55,13 +71,38 @@ type StartWebAuthnRegistrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartWebAuthnRegistrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartWebAuthnRegistrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartWebAuthnRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CredentialCreationOptions != nil {
+		s.WriteDocument(schemas.StartWebAuthnRegistrationResponse_CredentialCreationOptions, &smithydocument.Opaque{Value: v.CredentialCreationOptions})
+	}
+}
+func (v *StartWebAuthnRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartWebAuthnRegistrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartWebAuthnRegistrationResponse_CredentialCreationOptions:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.StartWebAuthnRegistrationResponse_CredentialCreationOptions, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.CredentialCreationOptions = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartWebAuthnRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartWebAuthnRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartWebAuthnRegistration, schemas.StartWebAuthnRegistrationRequest, schemas.StartWebAuthnRegistrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartWebAuthnRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartWebAuthnRegistration, schemas.StartWebAuthnRegistrationRequest, schemas.StartWebAuthnRegistrationResponse), output: &StartWebAuthnRegistrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

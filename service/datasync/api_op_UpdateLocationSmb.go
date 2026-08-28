@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -139,6 +141,62 @@ type UpdateLocationSmbInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLocationSmbInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLocationSmbRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLocationSmbInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentArnList(s, schemas.UpdateLocationSmbRequest_AgentArns, v.AgentArns)
+	if v.AuthenticationType != "" {
+		s.WriteString(schemas.UpdateLocationSmbRequest_AuthenticationType, string(v.AuthenticationType))
+	}
+	if v.CmkSecretConfig != nil {
+		s.WriteStruct(schemas.UpdateLocationSmbRequest_CmkSecretConfig)
+		v.CmkSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomSecretConfig != nil {
+		s.WriteStruct(schemas.UpdateLocationSmbRequest_CustomSecretConfig)
+		v.CustomSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDnsIpList(s, schemas.UpdateLocationSmbRequest_DnsIpAddresses, v.DnsIpAddresses)
+	if v.Domain != nil {
+		s.WriteString(schemas.UpdateLocationSmbRequest_Domain, *v.Domain)
+	}
+	if v.KerberosKeytab != nil {
+		s.WriteBlob(schemas.UpdateLocationSmbRequest_KerberosKeytab, v.KerberosKeytab)
+	}
+	if v.KerberosKrb5Conf != nil {
+		s.WriteBlob(schemas.UpdateLocationSmbRequest_KerberosKrb5Conf, v.KerberosKrb5Conf)
+	}
+	if v.KerberosPrincipal != nil {
+		s.WriteString(schemas.UpdateLocationSmbRequest_KerberosPrincipal, *v.KerberosPrincipal)
+	}
+	if v.LocationArn != nil {
+		s.WriteString(schemas.UpdateLocationSmbRequest_LocationArn, *v.LocationArn)
+	}
+	if v.MountOptions != nil {
+		s.WriteStruct(schemas.UpdateLocationSmbRequest_MountOptions)
+		v.MountOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.UpdateLocationSmbRequest_Password, *v.Password)
+	}
+	if v.ServerHostname != nil {
+		s.WriteString(schemas.UpdateLocationSmbRequest_ServerHostname, *v.ServerHostname)
+	}
+	if v.Subdirectory != nil {
+		s.WriteString(schemas.UpdateLocationSmbRequest_Subdirectory, *v.Subdirectory)
+	}
+	if v.User != nil {
+		s.WriteString(schemas.UpdateLocationSmbRequest_User, *v.User)
+	}
+}
+
 type UpdateLocationSmbOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -146,13 +204,26 @@ type UpdateLocationSmbOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLocationSmbOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLocationSmbResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLocationSmbOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateLocationSmbOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLocationSmbResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLocationSmbMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLocationSmb{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLocationSmb, schemas.UpdateLocationSmbRequest, schemas.UpdateLocationSmbResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateLocationSmb{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLocationSmb, schemas.UpdateLocationSmbRequest, schemas.UpdateLocationSmbResponse), output: &UpdateLocationSmbOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

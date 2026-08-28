@@ -4,6 +4,8 @@ package appflow
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appflow/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type UnregisterConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnregisterConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnregisterConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnregisterConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorLabel != nil {
+		s.WriteString(schemas.UnregisterConnectorRequest_connectorLabel, *v.ConnectorLabel)
+	}
+	if v.ForceDelete != false {
+		s.WriteBool(schemas.UnregisterConnectorRequest_forceDelete, v.ForceDelete)
+	}
+}
+
 type UnregisterConnectorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type UnregisterConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnregisterConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnregisterConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnregisterConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UnregisterConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnregisterConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUnregisterConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUnregisterConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UnregisterConnector, schemas.UnregisterConnectorRequest, schemas.UnregisterConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUnregisterConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UnregisterConnector, schemas.UnregisterConnectorRequest, schemas.UnregisterConnectorResponse), output: &UnregisterConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

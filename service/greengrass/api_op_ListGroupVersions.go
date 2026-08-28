@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListGroupVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.ListGroupVersionsRequest_GroupId, *v.GroupId)
+	}
+	if v.MaxResults != nil {
+		s.WriteString(schemas.ListGroupVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGroupVersionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListGroupVersionsOutput struct {
 
 	// The token for the next set of results, or ''null'' if there are no additional
@@ -56,13 +76,35 @@ type ListGroupVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGroupVersionsResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfVersionInformation(s, schemas.ListGroupVersionsResponse_Versions, v.Versions)
+}
+func (v *ListGroupVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGroupVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGroupVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGroupVersionsResponse_NextToken, v.NextToken)
+		case schemas.ListGroupVersionsResponse_Versions:
+			return deserialize__listOfVersionInformation(d, schemas.ListGroupVersionsResponse_Versions, &v.Versions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGroupVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGroupVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroupVersions, schemas.ListGroupVersionsRequest, schemas.ListGroupVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGroupVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroupVersions, schemas.ListGroupVersionsRequest, schemas.ListGroupVersionsResponse), output: &ListGroupVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

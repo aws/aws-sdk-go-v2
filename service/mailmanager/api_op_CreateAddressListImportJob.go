@@ -5,7 +5,9 @@ package mailmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,29 @@ type CreateAddressListImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAddressListImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAddressListImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAddressListImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressListId != nil {
+		s.WriteString(schemas.CreateAddressListImportJobRequest_AddressListId, *v.AddressListId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAddressListImportJobRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ImportDataFormat != nil {
+		s.WriteStruct(schemas.CreateAddressListImportJobRequest_ImportDataFormat)
+		v.ImportDataFormat.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAddressListImportJobRequest_Name, *v.Name)
+	}
+}
+
 type CreateAddressListImportJobOutput struct {
 
 	// The identifier of the created import job.
@@ -67,13 +92,38 @@ type CreateAddressListImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAddressListImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAddressListImportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAddressListImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.CreateAddressListImportJobResponse_JobId, *v.JobId)
+	}
+	if v.PreSignedUrl != nil {
+		s.WriteString(schemas.CreateAddressListImportJobResponse_PreSignedUrl, *v.PreSignedUrl)
+	}
+}
+func (v *CreateAddressListImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAddressListImportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAddressListImportJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.CreateAddressListImportJobResponse_JobId, v.JobId)
+		case schemas.CreateAddressListImportJobResponse_PreSignedUrl:
+			v.PreSignedUrl = new(string)
+			return d.ReadString(schemas.CreateAddressListImportJobResponse_PreSignedUrl, v.PreSignedUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAddressListImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateAddressListImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAddressListImportJob, schemas.CreateAddressListImportJobRequest, schemas.CreateAddressListImportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateAddressListImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAddressListImportJob, schemas.CreateAddressListImportJobRequest, schemas.CreateAddressListImportJobResponse), output: &CreateAddressListImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type DescribeSpaceInput struct {
 	SpaceName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeSpaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSpaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSpaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.DescribeSpaceRequest_DomainId, *v.DomainId)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.DescribeSpaceRequest_SpaceName, *v.SpaceName)
+	}
 }
 
 type DescribeSpaceOutput struct {
@@ -100,13 +117,114 @@ type DescribeSpaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSpaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSpaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSpaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeSpaceResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.DescribeSpaceResponse_DomainId, *v.DomainId)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeSpaceResponse_FailureReason, *v.FailureReason)
+	}
+	if v.HomeEfsFileSystemUid != nil {
+		s.WriteString(schemas.DescribeSpaceResponse_HomeEfsFileSystemUid, *v.HomeEfsFileSystemUid)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeSpaceResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.OwnershipSettings != nil {
+		s.WriteStruct(schemas.DescribeSpaceResponse_OwnershipSettings)
+		v.OwnershipSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SpaceArn != nil {
+		s.WriteString(schemas.DescribeSpaceResponse_SpaceArn, *v.SpaceArn)
+	}
+	if v.SpaceDisplayName != nil {
+		s.WriteString(schemas.DescribeSpaceResponse_SpaceDisplayName, *v.SpaceDisplayName)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.DescribeSpaceResponse_SpaceName, *v.SpaceName)
+	}
+	if v.SpaceSettings != nil {
+		s.WriteStruct(schemas.DescribeSpaceResponse_SpaceSettings)
+		v.SpaceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SpaceSharingSettings != nil {
+		s.WriteStruct(schemas.DescribeSpaceResponse_SpaceSharingSettings)
+		v.SpaceSharingSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeSpaceResponse_Status, string(v.Status))
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.DescribeSpaceResponse_Url, *v.Url)
+	}
+}
+func (v *DescribeSpaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSpaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSpaceResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeSpaceResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeSpaceResponse_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.DescribeSpaceResponse_DomainId, v.DomainId)
+		case schemas.DescribeSpaceResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeSpaceResponse_FailureReason, v.FailureReason)
+		case schemas.DescribeSpaceResponse_HomeEfsFileSystemUid:
+			v.HomeEfsFileSystemUid = new(string)
+			return d.ReadString(schemas.DescribeSpaceResponse_HomeEfsFileSystemUid, v.HomeEfsFileSystemUid)
+		case schemas.DescribeSpaceResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeSpaceResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeSpaceResponse_OwnershipSettings:
+			v.OwnershipSettings = &types.OwnershipSettings{}
+			return v.OwnershipSettings.Deserialize(d)
+		case schemas.DescribeSpaceResponse_SpaceArn:
+			v.SpaceArn = new(string)
+			return d.ReadString(schemas.DescribeSpaceResponse_SpaceArn, v.SpaceArn)
+		case schemas.DescribeSpaceResponse_SpaceDisplayName:
+			v.SpaceDisplayName = new(string)
+			return d.ReadString(schemas.DescribeSpaceResponse_SpaceDisplayName, v.SpaceDisplayName)
+		case schemas.DescribeSpaceResponse_SpaceName:
+			v.SpaceName = new(string)
+			return d.ReadString(schemas.DescribeSpaceResponse_SpaceName, v.SpaceName)
+		case schemas.DescribeSpaceResponse_SpaceSettings:
+			v.SpaceSettings = &types.SpaceSettings{}
+			return v.SpaceSettings.Deserialize(d)
+		case schemas.DescribeSpaceResponse_SpaceSharingSettings:
+			v.SpaceSharingSettings = &types.SpaceSharingSettings{}
+			return v.SpaceSharingSettings.Deserialize(d)
+		case schemas.DescribeSpaceResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeSpaceResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SpaceStatus(ev)
+			return nil
+		case schemas.DescribeSpaceResponse_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.DescribeSpaceResponse_Url, v.Url)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSpaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSpace, schemas.DescribeSpaceRequest, schemas.DescribeSpaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSpace, schemas.DescribeSpaceRequest, schemas.DescribeSpaceResponse), output: &DescribeSpaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

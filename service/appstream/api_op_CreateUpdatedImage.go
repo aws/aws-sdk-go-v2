@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,31 @@ type CreateUpdatedImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUpdatedImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUpdatedImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUpdatedImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DryRun != nil {
+		s.WriteBool(schemas.CreateUpdatedImageRequest_dryRun, *v.DryRun)
+	}
+	if v.ExistingImageName != nil {
+		s.WriteString(schemas.CreateUpdatedImageRequest_existingImageName, *v.ExistingImageName)
+	}
+	if v.NewImageDescription != nil {
+		s.WriteString(schemas.CreateUpdatedImageRequest_newImageDescription, *v.NewImageDescription)
+	}
+	if v.NewImageDisplayName != nil {
+		s.WriteString(schemas.CreateUpdatedImageRequest_newImageDisplayName, *v.NewImageDisplayName)
+	}
+	if v.NewImageName != nil {
+		s.WriteString(schemas.CreateUpdatedImageRequest_newImageName, *v.NewImageName)
+	}
+	serializeTags(s, schemas.CreateUpdatedImageRequest_newImageTags, v.NewImageTags)
+}
+
 type CreateUpdatedImageOutput struct {
 
 	// Indicates whether a new image can be created.
@@ -92,13 +119,40 @@ type CreateUpdatedImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUpdatedImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUpdatedImageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUpdatedImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CanUpdateImage != nil {
+		s.WriteBool(schemas.CreateUpdatedImageResult_canUpdateImage, *v.CanUpdateImage)
+	}
+	if v.Image != nil {
+		s.WriteStruct(schemas.CreateUpdatedImageResult_image)
+		v.Image.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateUpdatedImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUpdatedImageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUpdatedImageResult_canUpdateImage:
+			v.CanUpdateImage = new(bool)
+			return d.ReadBool(schemas.CreateUpdatedImageResult_canUpdateImage, v.CanUpdateImage)
+		case schemas.CreateUpdatedImageResult_image:
+			v.Image = &types.Image{}
+			return v.Image.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUpdatedImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateUpdatedImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUpdatedImage, schemas.CreateUpdatedImageRequest, schemas.CreateUpdatedImageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateUpdatedImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUpdatedImage, schemas.CreateUpdatedImageRequest, schemas.CreateUpdatedImageResult), output: &CreateUpdatedImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

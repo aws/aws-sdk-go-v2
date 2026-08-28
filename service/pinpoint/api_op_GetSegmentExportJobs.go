@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type GetSegmentExportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSegmentExportJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSegmentExportJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSegmentExportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetSegmentExportJobsRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.PageSize != nil {
+		s.WriteString(schemas.GetSegmentExportJobsRequest_PageSize, *v.PageSize)
+	}
+	if v.SegmentId != nil {
+		s.WriteString(schemas.GetSegmentExportJobsRequest_SegmentId, *v.SegmentId)
+	}
+	if v.Token != nil {
+		s.WriteString(schemas.GetSegmentExportJobsRequest_Token, *v.Token)
+	}
+}
+
 type GetSegmentExportJobsOutput struct {
 
 	// Provides information about all the export jobs that are associated with an
@@ -64,13 +87,34 @@ type GetSegmentExportJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSegmentExportJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSegmentExportJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSegmentExportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportJobsResponse != nil {
+		s.WriteStruct(schemas.GetSegmentExportJobsResponse_ExportJobsResponse)
+		v.ExportJobsResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSegmentExportJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSegmentExportJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSegmentExportJobsResponse_ExportJobsResponse:
+			v.ExportJobsResponse = &types.ExportJobsResponse{}
+			return v.ExportJobsResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSegmentExportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSegmentExportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSegmentExportJobs, schemas.GetSegmentExportJobsRequest, schemas.GetSegmentExportJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSegmentExportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSegmentExportJobs, schemas.GetSegmentExportJobsRequest, schemas.GetSegmentExportJobsResponse), output: &GetSegmentExportJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

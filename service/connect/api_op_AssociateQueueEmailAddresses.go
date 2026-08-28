@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,25 @@ type AssociateQueueEmailAddressesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateQueueEmailAddressesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateQueueEmailAddressesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateQueueEmailAddressesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AssociateQueueEmailAddressesRequest_ClientToken, *v.ClientToken)
+	}
+	serializeEmailAddressConfigList(s, schemas.AssociateQueueEmailAddressesRequest_EmailAddressesConfig, v.EmailAddressesConfig)
+	if v.InstanceId != nil {
+		s.WriteString(schemas.AssociateQueueEmailAddressesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.AssociateQueueEmailAddressesRequest_QueueId, *v.QueueId)
+	}
+}
+
 type AssociateQueueEmailAddressesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -85,13 +106,26 @@ type AssociateQueueEmailAddressesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateQueueEmailAddressesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateQueueEmailAddressesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateQueueEmailAddressesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateQueueEmailAddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateQueueEmailAddresses{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateQueueEmailAddresses, schemas.AssociateQueueEmailAddressesRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateQueueEmailAddresses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateQueueEmailAddresses, schemas.AssociateQueueEmailAddressesRequest, nil), output: &AssociateQueueEmailAddressesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

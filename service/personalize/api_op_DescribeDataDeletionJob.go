@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DescribeDataDeletionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataDeletionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataDeletionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataDeletionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataDeletionJobArn != nil {
+		s.WriteString(schemas.DescribeDataDeletionJobRequest_dataDeletionJobArn, *v.DataDeletionJobArn)
+	}
+}
+
 type DescribeDataDeletionJobOutput struct {
 
 	// Information about the data deletion job, including the status.
@@ -57,13 +71,34 @@ type DescribeDataDeletionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataDeletionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataDeletionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataDeletionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataDeletionJob != nil {
+		s.WriteStruct(schemas.DescribeDataDeletionJobResponse_dataDeletionJob)
+		v.DataDeletionJob.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeDataDeletionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDataDeletionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDataDeletionJobResponse_dataDeletionJob:
+			v.DataDeletionJob = &types.DataDeletionJob{}
+			return v.DataDeletionJob.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDataDeletionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDataDeletionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataDeletionJob, schemas.DescribeDataDeletionJobRequest, schemas.DescribeDataDeletionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDataDeletionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataDeletionJob, schemas.DescribeDataDeletionJobRequest, schemas.DescribeDataDeletionJobResponse), output: &DescribeDataDeletionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

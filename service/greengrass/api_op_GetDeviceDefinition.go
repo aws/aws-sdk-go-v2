@@ -4,6 +4,8 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -31,6 +33,18 @@ type GetDeviceDefinitionInput struct {
 	DeviceDefinitionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDeviceDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeviceDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeviceDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceDefinitionId != nil {
+		s.WriteString(schemas.GetDeviceDefinitionRequest_DeviceDefinitionId, *v.DeviceDefinitionId)
+	}
 }
 
 type GetDeviceDefinitionOutput struct {
@@ -65,13 +79,71 @@ type GetDeviceDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeviceDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeviceDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeviceDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetDeviceDefinitionResponse_Arn, *v.Arn)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteString(schemas.GetDeviceDefinitionResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetDeviceDefinitionResponse_Id, *v.Id)
+	}
+	if v.LastUpdatedTimestamp != nil {
+		s.WriteString(schemas.GetDeviceDefinitionResponse_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
+	}
+	if v.LatestVersion != nil {
+		s.WriteString(schemas.GetDeviceDefinitionResponse_LatestVersion, *v.LatestVersion)
+	}
+	if v.LatestVersionArn != nil {
+		s.WriteString(schemas.GetDeviceDefinitionResponse_LatestVersionArn, *v.LatestVersionArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetDeviceDefinitionResponse_Name, *v.Name)
+	}
+	serializeTags(s, schemas.GetDeviceDefinitionResponse_tags, v.Tags)
+}
+func (v *GetDeviceDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDeviceDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDeviceDefinitionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetDeviceDefinitionResponse_Arn, v.Arn)
+		case schemas.GetDeviceDefinitionResponse_CreationTimestamp:
+			v.CreationTimestamp = new(string)
+			return d.ReadString(schemas.GetDeviceDefinitionResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.GetDeviceDefinitionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetDeviceDefinitionResponse_Id, v.Id)
+		case schemas.GetDeviceDefinitionResponse_LastUpdatedTimestamp:
+			v.LastUpdatedTimestamp = new(string)
+			return d.ReadString(schemas.GetDeviceDefinitionResponse_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		case schemas.GetDeviceDefinitionResponse_LatestVersion:
+			v.LatestVersion = new(string)
+			return d.ReadString(schemas.GetDeviceDefinitionResponse_LatestVersion, v.LatestVersion)
+		case schemas.GetDeviceDefinitionResponse_LatestVersionArn:
+			v.LatestVersionArn = new(string)
+			return d.ReadString(schemas.GetDeviceDefinitionResponse_LatestVersionArn, v.LatestVersionArn)
+		case schemas.GetDeviceDefinitionResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetDeviceDefinitionResponse_Name, v.Name)
+		case schemas.GetDeviceDefinitionResponse_tags:
+			return deserializeTags(d, schemas.GetDeviceDefinitionResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDeviceDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDeviceDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeviceDefinition, schemas.GetDeviceDefinitionRequest, schemas.GetDeviceDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDeviceDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeviceDefinition, schemas.GetDeviceDefinitionRequest, schemas.GetDeviceDefinitionResponse), output: &GetDeviceDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

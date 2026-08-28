@@ -5,7 +5,9 @@ package partnercentralselling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -63,6 +65,25 @@ type StartProspectingFromEngagementTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartProspectingFromEngagementTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartProspectingFromEngagementTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartProspectingFromEngagementTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.StartProspectingFromEngagementTaskRequest_Catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartProspectingFromEngagementTaskRequest_ClientToken, *v.ClientToken)
+	}
+	serializeEngagementIdentifierList(s, schemas.StartProspectingFromEngagementTaskRequest_Identifiers, v.Identifiers)
+	if v.TaskName != nil {
+		s.WriteString(schemas.StartProspectingFromEngagementTaskRequest_TaskName, *v.TaskName)
+	}
+}
+
 // Represents the response structure returned when a prospecting task is
 // successfully submitted. Contains the task identifier, ARN, and initial status.
 // Uses TaskId with GetProspectingFromEngagementTask to poll for completion.
@@ -117,13 +138,75 @@ type StartProspectingFromEngagementTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartProspectingFromEngagementTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartProspectingFromEngagementTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartProspectingFromEngagementTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEngagementIdentifierList(s, schemas.StartProspectingFromEngagementTaskResponse_Identifiers, v.Identifiers)
+	if v.Message != nil {
+		s.WriteString(schemas.StartProspectingFromEngagementTaskResponse_Message, *v.Message)
+	}
+	if v.ReasonCode != nil {
+		s.WriteString(schemas.StartProspectingFromEngagementTaskResponse_ReasonCode, *v.ReasonCode)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.StartProspectingFromEngagementTaskResponse_StartTime, *v.StartTime)
+	}
+	if v.TaskArn != nil {
+		s.WriteString(schemas.StartProspectingFromEngagementTaskResponse_TaskArn, *v.TaskArn)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.StartProspectingFromEngagementTaskResponse_TaskId, *v.TaskId)
+	}
+	if v.TaskName != nil {
+		s.WriteString(schemas.StartProspectingFromEngagementTaskResponse_TaskName, *v.TaskName)
+	}
+	if v.TaskStatus != "" {
+		s.WriteString(schemas.StartProspectingFromEngagementTaskResponse_TaskStatus, string(v.TaskStatus))
+	}
+}
+func (v *StartProspectingFromEngagementTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartProspectingFromEngagementTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartProspectingFromEngagementTaskResponse_Identifiers:
+			return deserializeEngagementIdentifierList(d, schemas.StartProspectingFromEngagementTaskResponse_Identifiers, &v.Identifiers)
+		case schemas.StartProspectingFromEngagementTaskResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.StartProspectingFromEngagementTaskResponse_Message, v.Message)
+		case schemas.StartProspectingFromEngagementTaskResponse_ReasonCode:
+			v.ReasonCode = new(string)
+			return d.ReadString(schemas.StartProspectingFromEngagementTaskResponse_ReasonCode, v.ReasonCode)
+		case schemas.StartProspectingFromEngagementTaskResponse_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.StartProspectingFromEngagementTaskResponse_StartTime, v.StartTime)
+		case schemas.StartProspectingFromEngagementTaskResponse_TaskArn:
+			v.TaskArn = new(string)
+			return d.ReadString(schemas.StartProspectingFromEngagementTaskResponse_TaskArn, v.TaskArn)
+		case schemas.StartProspectingFromEngagementTaskResponse_TaskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.StartProspectingFromEngagementTaskResponse_TaskId, v.TaskId)
+		case schemas.StartProspectingFromEngagementTaskResponse_TaskName:
+			v.TaskName = new(string)
+			return d.ReadString(schemas.StartProspectingFromEngagementTaskResponse_TaskName, v.TaskName)
+		case schemas.StartProspectingFromEngagementTaskResponse_TaskStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartProspectingFromEngagementTaskResponse_TaskStatus, &ev); err != nil {
+				return err
+			}
+			v.TaskStatus = types.ProspectingTaskStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartProspectingFromEngagementTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartProspectingFromEngagementTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartProspectingFromEngagementTask, schemas.StartProspectingFromEngagementTaskRequest, schemas.StartProspectingFromEngagementTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartProspectingFromEngagementTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartProspectingFromEngagementTask, schemas.StartProspectingFromEngagementTaskRequest, schemas.StartProspectingFromEngagementTaskResponse), output: &StartProspectingFromEngagementTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

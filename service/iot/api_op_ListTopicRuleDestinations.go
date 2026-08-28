@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type ListTopicRuleDestinationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTopicRuleDestinationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTopicRuleDestinationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTopicRuleDestinationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTopicRuleDestinationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTopicRuleDestinationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListTopicRuleDestinationsOutput struct {
 
 	// Information about a topic rule destination.
@@ -56,13 +73,35 @@ type ListTopicRuleDestinationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTopicRuleDestinationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTopicRuleDestinationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTopicRuleDestinationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTopicRuleDestinationSummaries(s, schemas.ListTopicRuleDestinationsResponse_destinationSummaries, v.DestinationSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTopicRuleDestinationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListTopicRuleDestinationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTopicRuleDestinationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTopicRuleDestinationsResponse_destinationSummaries:
+			return deserializeTopicRuleDestinationSummaries(d, schemas.ListTopicRuleDestinationsResponse_destinationSummaries, &v.DestinationSummaries)
+		case schemas.ListTopicRuleDestinationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTopicRuleDestinationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTopicRuleDestinationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTopicRuleDestinations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTopicRuleDestinations, schemas.ListTopicRuleDestinationsRequest, schemas.ListTopicRuleDestinationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTopicRuleDestinations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTopicRuleDestinations, schemas.ListTopicRuleDestinationsRequest, schemas.ListTopicRuleDestinationsResponse), output: &ListTopicRuleDestinationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

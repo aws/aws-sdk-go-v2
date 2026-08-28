@@ -4,6 +4,8 @@ package grafana
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/grafana/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type DeleteWorkspaceServiceAccountTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkspaceServiceAccountTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkspaceServiceAccountTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkspaceServiceAccountTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceAccountId != nil {
+		s.WriteString(schemas.DeleteWorkspaceServiceAccountTokenRequest_serviceAccountId, *v.ServiceAccountId)
+	}
+	if v.TokenId != nil {
+		s.WriteString(schemas.DeleteWorkspaceServiceAccountTokenRequest_tokenId, *v.TokenId)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DeleteWorkspaceServiceAccountTokenRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+
 type DeleteWorkspaceServiceAccountTokenOutput struct {
 
 	// The ID of the service account where the token was deleted.
@@ -73,13 +93,44 @@ type DeleteWorkspaceServiceAccountTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkspaceServiceAccountTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkspaceServiceAccountTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkspaceServiceAccountTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceAccountId != nil {
+		s.WriteString(schemas.DeleteWorkspaceServiceAccountTokenResponse_serviceAccountId, *v.ServiceAccountId)
+	}
+	if v.TokenId != nil {
+		s.WriteString(schemas.DeleteWorkspaceServiceAccountTokenResponse_tokenId, *v.TokenId)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DeleteWorkspaceServiceAccountTokenResponse_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *DeleteWorkspaceServiceAccountTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWorkspaceServiceAccountTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteWorkspaceServiceAccountTokenResponse_serviceAccountId:
+			v.ServiceAccountId = new(string)
+			return d.ReadString(schemas.DeleteWorkspaceServiceAccountTokenResponse_serviceAccountId, v.ServiceAccountId)
+		case schemas.DeleteWorkspaceServiceAccountTokenResponse_tokenId:
+			v.TokenId = new(string)
+			return d.ReadString(schemas.DeleteWorkspaceServiceAccountTokenResponse_tokenId, v.TokenId)
+		case schemas.DeleteWorkspaceServiceAccountTokenResponse_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.DeleteWorkspaceServiceAccountTokenResponse_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWorkspaceServiceAccountTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWorkspaceServiceAccountToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkspaceServiceAccountToken, schemas.DeleteWorkspaceServiceAccountTokenRequest, schemas.DeleteWorkspaceServiceAccountTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteWorkspaceServiceAccountToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkspaceServiceAccountToken, schemas.DeleteWorkspaceServiceAccountTokenRequest, schemas.DeleteWorkspaceServiceAccountTokenResponse), output: &DeleteWorkspaceServiceAccountTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

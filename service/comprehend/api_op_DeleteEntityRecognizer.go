@@ -4,6 +4,8 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type DeleteEntityRecognizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEntityRecognizerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEntityRecognizerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEntityRecognizerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityRecognizerArn != nil {
+		s.WriteString(schemas.DeleteEntityRecognizerRequest_EntityRecognizerArn, *v.EntityRecognizerArn)
+	}
+}
+
 type DeleteEntityRecognizerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +62,26 @@ type DeleteEntityRecognizerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEntityRecognizerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEntityRecognizerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEntityRecognizerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteEntityRecognizerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEntityRecognizerResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEntityRecognizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteEntityRecognizer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEntityRecognizer, schemas.DeleteEntityRecognizerRequest, schemas.DeleteEntityRecognizerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteEntityRecognizer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEntityRecognizer, schemas.DeleteEntityRecognizerRequest, schemas.DeleteEntityRecognizerResponse), output: &DeleteEntityRecognizerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

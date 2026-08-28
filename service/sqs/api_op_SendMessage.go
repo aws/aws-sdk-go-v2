@@ -4,7 +4,9 @@ package sqs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -186,6 +188,32 @@ type SendMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendMessageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendMessageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DelaySeconds != 0 {
+		s.WriteInt32(schemas.SendMessageRequest_DelaySeconds, v.DelaySeconds)
+	}
+	serializeMessageBodyAttributeMap(s, schemas.SendMessageRequest_MessageAttributes, v.MessageAttributes)
+	if v.MessageBody != nil {
+		s.WriteString(schemas.SendMessageRequest_MessageBody, *v.MessageBody)
+	}
+	if v.MessageDeduplicationId != nil {
+		s.WriteString(schemas.SendMessageRequest_MessageDeduplicationId, *v.MessageDeduplicationId)
+	}
+	if v.MessageGroupId != nil {
+		s.WriteString(schemas.SendMessageRequest_MessageGroupId, *v.MessageGroupId)
+	}
+	serializeMessageBodySystemAttributeMap(s, schemas.SendMessageRequest_MessageSystemAttributes, v.MessageSystemAttributes)
+	if v.QueueUrl != nil {
+		s.WriteString(schemas.SendMessageRequest_QueueUrl, *v.QueueUrl)
+	}
+}
+
 // The MD5OfMessageBody and MessageId elements.
 type SendMessageOutput struct {
 
@@ -230,13 +258,56 @@ type SendMessageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendMessageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendMessageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendMessageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MD5OfMessageAttributes != nil {
+		s.WriteString(schemas.SendMessageResult_MD5OfMessageAttributes, *v.MD5OfMessageAttributes)
+	}
+	if v.MD5OfMessageBody != nil {
+		s.WriteString(schemas.SendMessageResult_MD5OfMessageBody, *v.MD5OfMessageBody)
+	}
+	if v.MD5OfMessageSystemAttributes != nil {
+		s.WriteString(schemas.SendMessageResult_MD5OfMessageSystemAttributes, *v.MD5OfMessageSystemAttributes)
+	}
+	if v.MessageId != nil {
+		s.WriteString(schemas.SendMessageResult_MessageId, *v.MessageId)
+	}
+	if v.SequenceNumber != nil {
+		s.WriteString(schemas.SendMessageResult_SequenceNumber, *v.SequenceNumber)
+	}
+}
+func (v *SendMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendMessageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendMessageResult_MD5OfMessageAttributes:
+			v.MD5OfMessageAttributes = new(string)
+			return d.ReadString(schemas.SendMessageResult_MD5OfMessageAttributes, v.MD5OfMessageAttributes)
+		case schemas.SendMessageResult_MD5OfMessageBody:
+			v.MD5OfMessageBody = new(string)
+			return d.ReadString(schemas.SendMessageResult_MD5OfMessageBody, v.MD5OfMessageBody)
+		case schemas.SendMessageResult_MD5OfMessageSystemAttributes:
+			v.MD5OfMessageSystemAttributes = new(string)
+			return d.ReadString(schemas.SendMessageResult_MD5OfMessageSystemAttributes, v.MD5OfMessageSystemAttributes)
+		case schemas.SendMessageResult_MessageId:
+			v.MessageId = new(string)
+			return d.ReadString(schemas.SendMessageResult_MessageId, v.MessageId)
+		case schemas.SendMessageResult_SequenceNumber:
+			v.SequenceNumber = new(string)
+			return d.ReadString(schemas.SendMessageResult_SequenceNumber, v.SequenceNumber)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSendMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendMessage, schemas.SendMessageRequest, schemas.SendMessageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSendMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendMessage, schemas.SendMessageRequest, schemas.SendMessageResult), output: &SendMessageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

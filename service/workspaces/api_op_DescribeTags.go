@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DescribeTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTagsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceId != nil {
+		s.WriteString(schemas.DescribeTagsRequest_ResourceId, *v.ResourceId)
+	}
+}
+
 type DescribeTagsOutput struct {
 
 	// The tags.
@@ -47,13 +61,29 @@ type DescribeTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTagsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTagList(s, schemas.DescribeTagsResult_TagList, v.TagList)
+}
+func (v *DescribeTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTagsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTagsResult_TagList:
+			return deserializeTagList(d, schemas.DescribeTagsResult_TagList, &v.TagList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTags, schemas.DescribeTagsRequest, schemas.DescribeTagsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTags, schemas.DescribeTagsRequest, schemas.DescribeTagsResult), output: &DescribeTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

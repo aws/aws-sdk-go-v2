@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -54,6 +56,27 @@ type DescribeBotResourceGenerationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBotResourceGenerationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBotResourceGenerationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBotResourceGenerationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.DescribeBotResourceGenerationRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.DescribeBotResourceGenerationRequest_botVersion, *v.BotVersion)
+	}
+	if v.GenerationId != nil {
+		s.WriteString(schemas.DescribeBotResourceGenerationRequest_generationId, *v.GenerationId)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.DescribeBotResourceGenerationRequest_localeId, *v.LocaleId)
+	}
+}
+
 type DescribeBotResourceGenerationOutput struct {
 
 	// The unique identifier of the bot for which the generation request was made.
@@ -96,13 +119,93 @@ type DescribeBotResourceGenerationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBotResourceGenerationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBotResourceGenerationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBotResourceGenerationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.DescribeBotResourceGenerationResponse_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.DescribeBotResourceGenerationResponse_botVersion, *v.BotVersion)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.DescribeBotResourceGenerationResponse_creationDateTime, *v.CreationDateTime)
+	}
+	serializeFailureReasons(s, schemas.DescribeBotResourceGenerationResponse_failureReasons, v.FailureReasons)
+	if v.GeneratedBotLocaleUrl != nil {
+		s.WriteString(schemas.DescribeBotResourceGenerationResponse_generatedBotLocaleUrl, *v.GeneratedBotLocaleUrl)
+	}
+	if v.GenerationId != nil {
+		s.WriteString(schemas.DescribeBotResourceGenerationResponse_generationId, *v.GenerationId)
+	}
+	if v.GenerationInputPrompt != nil {
+		s.WriteString(schemas.DescribeBotResourceGenerationResponse_generationInputPrompt, *v.GenerationInputPrompt)
+	}
+	if v.GenerationStatus != "" {
+		s.WriteString(schemas.DescribeBotResourceGenerationResponse_generationStatus, string(v.GenerationStatus))
+	}
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.DescribeBotResourceGenerationResponse_lastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.DescribeBotResourceGenerationResponse_localeId, *v.LocaleId)
+	}
+	if v.ModelArn != nil {
+		s.WriteString(schemas.DescribeBotResourceGenerationResponse_modelArn, *v.ModelArn)
+	}
+}
+func (v *DescribeBotResourceGenerationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeBotResourceGenerationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeBotResourceGenerationResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.DescribeBotResourceGenerationResponse_botId, v.BotId)
+		case schemas.DescribeBotResourceGenerationResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.DescribeBotResourceGenerationResponse_botVersion, v.BotVersion)
+		case schemas.DescribeBotResourceGenerationResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeBotResourceGenerationResponse_creationDateTime, v.CreationDateTime)
+		case schemas.DescribeBotResourceGenerationResponse_failureReasons:
+			return deserializeFailureReasons(d, schemas.DescribeBotResourceGenerationResponse_failureReasons, &v.FailureReasons)
+		case schemas.DescribeBotResourceGenerationResponse_generatedBotLocaleUrl:
+			v.GeneratedBotLocaleUrl = new(string)
+			return d.ReadString(schemas.DescribeBotResourceGenerationResponse_generatedBotLocaleUrl, v.GeneratedBotLocaleUrl)
+		case schemas.DescribeBotResourceGenerationResponse_generationId:
+			v.GenerationId = new(string)
+			return d.ReadString(schemas.DescribeBotResourceGenerationResponse_generationId, v.GenerationId)
+		case schemas.DescribeBotResourceGenerationResponse_generationInputPrompt:
+			v.GenerationInputPrompt = new(string)
+			return d.ReadString(schemas.DescribeBotResourceGenerationResponse_generationInputPrompt, v.GenerationInputPrompt)
+		case schemas.DescribeBotResourceGenerationResponse_generationStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeBotResourceGenerationResponse_generationStatus, &ev); err != nil {
+				return err
+			}
+			v.GenerationStatus = types.GenerationStatus(ev)
+			return nil
+		case schemas.DescribeBotResourceGenerationResponse_lastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeBotResourceGenerationResponse_lastUpdatedDateTime, v.LastUpdatedDateTime)
+		case schemas.DescribeBotResourceGenerationResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.DescribeBotResourceGenerationResponse_localeId, v.LocaleId)
+		case schemas.DescribeBotResourceGenerationResponse_modelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.DescribeBotResourceGenerationResponse_modelArn, v.ModelArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeBotResourceGenerationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeBotResourceGeneration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBotResourceGeneration, schemas.DescribeBotResourceGenerationRequest, schemas.DescribeBotResourceGenerationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeBotResourceGeneration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBotResourceGeneration, schemas.DescribeBotResourceGenerationRequest, schemas.DescribeBotResourceGenerationResponse), output: &DescribeBotResourceGenerationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

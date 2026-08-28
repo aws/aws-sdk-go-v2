@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteModelPackageGroupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteModelPackageGroupPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteModelPackageGroupPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteModelPackageGroupPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelPackageGroupName != nil {
+		s.WriteString(schemas.DeleteModelPackageGroupPolicyInput_ModelPackageGroupName, *v.ModelPackageGroupName)
+	}
+}
+
 type DeleteModelPackageGroupPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteModelPackageGroupPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteModelPackageGroupPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteModelPackageGroupPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteModelPackageGroupPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteModelPackageGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteModelPackageGroupPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteModelPackageGroupPolicy, schemas.DeleteModelPackageGroupPolicyInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteModelPackageGroupPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteModelPackageGroupPolicy, schemas.DeleteModelPackageGroupPolicyInput, nil), output: &DeleteModelPackageGroupPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

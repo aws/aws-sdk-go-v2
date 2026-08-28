@@ -4,6 +4,8 @@ package wellarchitected
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteAgentGoalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAgentGoalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAgentGoalRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAgentGoalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteAgentGoalRequest_id, *v.Id)
+	}
+	if v.ProfileArn != nil {
+		s.WriteString(schemas.DeleteAgentGoalRequest_profileArn, *v.ProfileArn)
+	}
+}
+
 type DeleteAgentGoalOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type DeleteAgentGoalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAgentGoalOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAgentGoalResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAgentGoalOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAgentGoalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAgentGoalResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAgentGoalMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAgentGoal{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAgentGoal, schemas.DeleteAgentGoalRequest, schemas.DeleteAgentGoalResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAgentGoal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAgentGoal, schemas.DeleteAgentGoalRequest, schemas.DeleteAgentGoalResponse), output: &DeleteAgentGoalOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

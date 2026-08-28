@@ -5,7 +5,9 @@ package partnercentralselling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -67,6 +69,30 @@ type StartEngagementFromOpportunityTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartEngagementFromOpportunityTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartEngagementFromOpportunityTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartEngagementFromOpportunityTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsSubmission != nil {
+		s.WriteStruct(schemas.StartEngagementFromOpportunityTaskRequest_AwsSubmission)
+		v.AwsSubmission.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.StartEngagementFromOpportunityTaskRequest_Catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartEngagementFromOpportunityTaskRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.StartEngagementFromOpportunityTaskRequest_Identifier, *v.Identifier)
+	}
+	serializeTagList(s, schemas.StartEngagementFromOpportunityTaskRequest_Tags, v.Tags)
+}
+
 type StartEngagementFromOpportunityTaskOutput struct {
 
 	// The identifier of the newly created Engagement. Only populated if TaskStatus is
@@ -114,13 +140,94 @@ type StartEngagementFromOpportunityTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartEngagementFromOpportunityTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartEngagementFromOpportunityTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartEngagementFromOpportunityTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EngagementId != nil {
+		s.WriteString(schemas.StartEngagementFromOpportunityTaskResponse_EngagementId, *v.EngagementId)
+	}
+	if v.EngagementInvitationId != nil {
+		s.WriteString(schemas.StartEngagementFromOpportunityTaskResponse_EngagementInvitationId, *v.EngagementInvitationId)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.StartEngagementFromOpportunityTaskResponse_Message, *v.Message)
+	}
+	if v.OpportunityId != nil {
+		s.WriteString(schemas.StartEngagementFromOpportunityTaskResponse_OpportunityId, *v.OpportunityId)
+	}
+	if v.ReasonCode != "" {
+		s.WriteString(schemas.StartEngagementFromOpportunityTaskResponse_ReasonCode, string(v.ReasonCode))
+	}
+	if v.ResourceSnapshotJobId != nil {
+		s.WriteString(schemas.StartEngagementFromOpportunityTaskResponse_ResourceSnapshotJobId, *v.ResourceSnapshotJobId)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.StartEngagementFromOpportunityTaskResponse_StartTime, *v.StartTime)
+	}
+	if v.TaskArn != nil {
+		s.WriteString(schemas.StartEngagementFromOpportunityTaskResponse_TaskArn, *v.TaskArn)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.StartEngagementFromOpportunityTaskResponse_TaskId, *v.TaskId)
+	}
+	if v.TaskStatus != "" {
+		s.WriteString(schemas.StartEngagementFromOpportunityTaskResponse_TaskStatus, string(v.TaskStatus))
+	}
+}
+func (v *StartEngagementFromOpportunityTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartEngagementFromOpportunityTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartEngagementFromOpportunityTaskResponse_EngagementId:
+			v.EngagementId = new(string)
+			return d.ReadString(schemas.StartEngagementFromOpportunityTaskResponse_EngagementId, v.EngagementId)
+		case schemas.StartEngagementFromOpportunityTaskResponse_EngagementInvitationId:
+			v.EngagementInvitationId = new(string)
+			return d.ReadString(schemas.StartEngagementFromOpportunityTaskResponse_EngagementInvitationId, v.EngagementInvitationId)
+		case schemas.StartEngagementFromOpportunityTaskResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.StartEngagementFromOpportunityTaskResponse_Message, v.Message)
+		case schemas.StartEngagementFromOpportunityTaskResponse_OpportunityId:
+			v.OpportunityId = new(string)
+			return d.ReadString(schemas.StartEngagementFromOpportunityTaskResponse_OpportunityId, v.OpportunityId)
+		case schemas.StartEngagementFromOpportunityTaskResponse_ReasonCode:
+			var ev string
+			if err := d.ReadString(schemas.StartEngagementFromOpportunityTaskResponse_ReasonCode, &ev); err != nil {
+				return err
+			}
+			v.ReasonCode = types.ReasonCode(ev)
+			return nil
+		case schemas.StartEngagementFromOpportunityTaskResponse_ResourceSnapshotJobId:
+			v.ResourceSnapshotJobId = new(string)
+			return d.ReadString(schemas.StartEngagementFromOpportunityTaskResponse_ResourceSnapshotJobId, v.ResourceSnapshotJobId)
+		case schemas.StartEngagementFromOpportunityTaskResponse_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.StartEngagementFromOpportunityTaskResponse_StartTime, v.StartTime)
+		case schemas.StartEngagementFromOpportunityTaskResponse_TaskArn:
+			v.TaskArn = new(string)
+			return d.ReadString(schemas.StartEngagementFromOpportunityTaskResponse_TaskArn, v.TaskArn)
+		case schemas.StartEngagementFromOpportunityTaskResponse_TaskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.StartEngagementFromOpportunityTaskResponse_TaskId, v.TaskId)
+		case schemas.StartEngagementFromOpportunityTaskResponse_TaskStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartEngagementFromOpportunityTaskResponse_TaskStatus, &ev); err != nil {
+				return err
+			}
+			v.TaskStatus = types.TaskStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartEngagementFromOpportunityTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartEngagementFromOpportunityTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartEngagementFromOpportunityTask, schemas.StartEngagementFromOpportunityTaskRequest, schemas.StartEngagementFromOpportunityTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartEngagementFromOpportunityTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartEngagementFromOpportunityTask, schemas.StartEngagementFromOpportunityTaskRequest, schemas.StartEngagementFromOpportunityTaskResponse), output: &StartEngagementFromOpportunityTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

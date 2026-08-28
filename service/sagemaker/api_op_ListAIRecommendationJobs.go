@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -59,6 +61,39 @@ type ListAIRecommendationJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAIRecommendationJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAIRecommendationJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAIRecommendationJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListAIRecommendationJobsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListAIRecommendationJobsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAIRecommendationJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListAIRecommendationJobsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAIRecommendationJobsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListAIRecommendationJobsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListAIRecommendationJobsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListAIRecommendationJobsRequest_StatusEquals, string(v.StatusEquals))
+	}
+}
+
 type ListAIRecommendationJobsOutput struct {
 
 	// An array of AIRecommendationJobSummary objects, one for each recommendation job
@@ -77,13 +112,35 @@ type ListAIRecommendationJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAIRecommendationJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAIRecommendationJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAIRecommendationJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAIRecommendationJobSummaryList(s, schemas.ListAIRecommendationJobsResponse_AIRecommendationJobs, v.AIRecommendationJobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAIRecommendationJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAIRecommendationJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAIRecommendationJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAIRecommendationJobsResponse_AIRecommendationJobs:
+			return deserializeAIRecommendationJobSummaryList(d, schemas.ListAIRecommendationJobsResponse_AIRecommendationJobs, &v.AIRecommendationJobs)
+		case schemas.ListAIRecommendationJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAIRecommendationJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAIRecommendationJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAIRecommendationJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAIRecommendationJobs, schemas.ListAIRecommendationJobsRequest, schemas.ListAIRecommendationJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAIRecommendationJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAIRecommendationJobs, schemas.ListAIRecommendationJobsRequest, schemas.ListAIRecommendationJobsResponse), output: &ListAIRecommendationJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

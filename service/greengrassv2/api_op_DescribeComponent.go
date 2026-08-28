@@ -4,7 +4,9 @@ package greengrassv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type DescribeComponentInput struct {
 	Arn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeComponentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeComponentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeComponentRequest_arn, *v.Arn)
+	}
 }
 
 type DescribeComponentOutput struct {
@@ -78,13 +92,76 @@ type DescribeComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeComponentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeComponentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeComponentResponse_arn, *v.Arn)
+	}
+	if v.ComponentName != nil {
+		s.WriteString(schemas.DescribeComponentResponse_componentName, *v.ComponentName)
+	}
+	if v.ComponentVersion != nil {
+		s.WriteString(schemas.DescribeComponentResponse_componentVersion, *v.ComponentVersion)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteTime(schemas.DescribeComponentResponse_creationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeComponentResponse_description, *v.Description)
+	}
+	serializeComponentPlatformList(s, schemas.DescribeComponentResponse_platforms, v.Platforms)
+	if v.Publisher != nil {
+		s.WriteString(schemas.DescribeComponentResponse_publisher, *v.Publisher)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.DescribeComponentResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.DescribeComponentResponse_tags, v.Tags)
+}
+func (v *DescribeComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeComponentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeComponentResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeComponentResponse_arn, v.Arn)
+		case schemas.DescribeComponentResponse_componentName:
+			v.ComponentName = new(string)
+			return d.ReadString(schemas.DescribeComponentResponse_componentName, v.ComponentName)
+		case schemas.DescribeComponentResponse_componentVersion:
+			v.ComponentVersion = new(string)
+			return d.ReadString(schemas.DescribeComponentResponse_componentVersion, v.ComponentVersion)
+		case schemas.DescribeComponentResponse_creationTimestamp:
+			v.CreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DescribeComponentResponse_creationTimestamp, v.CreationTimestamp)
+		case schemas.DescribeComponentResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeComponentResponse_description, v.Description)
+		case schemas.DescribeComponentResponse_platforms:
+			return deserializeComponentPlatformList(d, schemas.DescribeComponentResponse_platforms, &v.Platforms)
+		case schemas.DescribeComponentResponse_publisher:
+			v.Publisher = new(string)
+			return d.ReadString(schemas.DescribeComponentResponse_publisher, v.Publisher)
+		case schemas.DescribeComponentResponse_status:
+			v.Status = &types.CloudComponentStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.DescribeComponentResponse_tags:
+			return deserializeTagMap(d, schemas.DescribeComponentResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComponent, schemas.DescribeComponentRequest, schemas.DescribeComponentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComponent, schemas.DescribeComponentRequest, schemas.DescribeComponentResponse), output: &DescribeComponentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DescribeDatasetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDatasetGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDatasetGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDatasetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetGroupArn != nil {
+		s.WriteString(schemas.DescribeDatasetGroupRequest_datasetGroupArn, *v.DatasetGroupArn)
+	}
+}
+
 type DescribeDatasetGroupOutput struct {
 
 	// A listing of the dataset group's properties.
@@ -47,13 +61,34 @@ type DescribeDatasetGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDatasetGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDatasetGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDatasetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetGroup != nil {
+		s.WriteStruct(schemas.DescribeDatasetGroupResponse_datasetGroup)
+		v.DatasetGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeDatasetGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDatasetGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDatasetGroupResponse_datasetGroup:
+			v.DatasetGroup = &types.DatasetGroup{}
+			return v.DatasetGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDatasetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDatasetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDatasetGroup, schemas.DescribeDatasetGroupRequest, schemas.DescribeDatasetGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDatasetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDatasetGroup, schemas.DescribeDatasetGroupRequest, schemas.DescribeDatasetGroupResponse), output: &DescribeDatasetGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

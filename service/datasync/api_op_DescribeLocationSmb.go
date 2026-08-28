@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -36,6 +38,18 @@ type DescribeLocationSmbInput struct {
 	LocationArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeLocationSmbInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLocationSmbRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLocationSmbInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.DescribeLocationSmbRequest_LocationArn, *v.LocationArn)
+	}
 }
 
 // DescribeLocationSmbResponse
@@ -100,13 +114,110 @@ type DescribeLocationSmbOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLocationSmbOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLocationSmbResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLocationSmbOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentArnList(s, schemas.DescribeLocationSmbResponse_AgentArns, v.AgentArns)
+	if v.AuthenticationType != "" {
+		s.WriteString(schemas.DescribeLocationSmbResponse_AuthenticationType, string(v.AuthenticationType))
+	}
+	if v.CmkSecretConfig != nil {
+		s.WriteStruct(schemas.DescribeLocationSmbResponse_CmkSecretConfig)
+		v.CmkSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeLocationSmbResponse_CreationTime, *v.CreationTime)
+	}
+	if v.CustomSecretConfig != nil {
+		s.WriteStruct(schemas.DescribeLocationSmbResponse_CustomSecretConfig)
+		v.CustomSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDnsIpList(s, schemas.DescribeLocationSmbResponse_DnsIpAddresses, v.DnsIpAddresses)
+	if v.Domain != nil {
+		s.WriteString(schemas.DescribeLocationSmbResponse_Domain, *v.Domain)
+	}
+	if v.KerberosPrincipal != nil {
+		s.WriteString(schemas.DescribeLocationSmbResponse_KerberosPrincipal, *v.KerberosPrincipal)
+	}
+	if v.LocationArn != nil {
+		s.WriteString(schemas.DescribeLocationSmbResponse_LocationArn, *v.LocationArn)
+	}
+	if v.LocationUri != nil {
+		s.WriteString(schemas.DescribeLocationSmbResponse_LocationUri, *v.LocationUri)
+	}
+	if v.ManagedSecretConfig != nil {
+		s.WriteStruct(schemas.DescribeLocationSmbResponse_ManagedSecretConfig)
+		v.ManagedSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MountOptions != nil {
+		s.WriteStruct(schemas.DescribeLocationSmbResponse_MountOptions)
+		v.MountOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.User != nil {
+		s.WriteString(schemas.DescribeLocationSmbResponse_User, *v.User)
+	}
+}
+func (v *DescribeLocationSmbOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLocationSmbResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLocationSmbResponse_AgentArns:
+			return deserializeAgentArnList(d, schemas.DescribeLocationSmbResponse_AgentArns, &v.AgentArns)
+		case schemas.DescribeLocationSmbResponse_AuthenticationType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeLocationSmbResponse_AuthenticationType, &ev); err != nil {
+				return err
+			}
+			v.AuthenticationType = types.SmbAuthenticationType(ev)
+			return nil
+		case schemas.DescribeLocationSmbResponse_CmkSecretConfig:
+			v.CmkSecretConfig = &types.CmkSecretConfig{}
+			return v.CmkSecretConfig.Deserialize(d)
+		case schemas.DescribeLocationSmbResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeLocationSmbResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeLocationSmbResponse_CustomSecretConfig:
+			v.CustomSecretConfig = &types.CustomSecretConfig{}
+			return v.CustomSecretConfig.Deserialize(d)
+		case schemas.DescribeLocationSmbResponse_DnsIpAddresses:
+			return deserializeDnsIpList(d, schemas.DescribeLocationSmbResponse_DnsIpAddresses, &v.DnsIpAddresses)
+		case schemas.DescribeLocationSmbResponse_Domain:
+			v.Domain = new(string)
+			return d.ReadString(schemas.DescribeLocationSmbResponse_Domain, v.Domain)
+		case schemas.DescribeLocationSmbResponse_KerberosPrincipal:
+			v.KerberosPrincipal = new(string)
+			return d.ReadString(schemas.DescribeLocationSmbResponse_KerberosPrincipal, v.KerberosPrincipal)
+		case schemas.DescribeLocationSmbResponse_LocationArn:
+			v.LocationArn = new(string)
+			return d.ReadString(schemas.DescribeLocationSmbResponse_LocationArn, v.LocationArn)
+		case schemas.DescribeLocationSmbResponse_LocationUri:
+			v.LocationUri = new(string)
+			return d.ReadString(schemas.DescribeLocationSmbResponse_LocationUri, v.LocationUri)
+		case schemas.DescribeLocationSmbResponse_ManagedSecretConfig:
+			v.ManagedSecretConfig = &types.ManagedSecretConfig{}
+			return v.ManagedSecretConfig.Deserialize(d)
+		case schemas.DescribeLocationSmbResponse_MountOptions:
+			v.MountOptions = &types.SmbMountOptions{}
+			return v.MountOptions.Deserialize(d)
+		case schemas.DescribeLocationSmbResponse_User:
+			v.User = new(string)
+			return d.ReadString(schemas.DescribeLocationSmbResponse_User, v.User)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLocationSmbMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLocationSmb{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLocationSmb, schemas.DescribeLocationSmbRequest, schemas.DescribeLocationSmbResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLocationSmb{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLocationSmb, schemas.DescribeLocationSmbRequest, schemas.DescribeLocationSmbResponse), output: &DescribeLocationSmbOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

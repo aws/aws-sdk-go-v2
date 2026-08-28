@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,29 @@ type UpdateSolutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSolutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSolutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSolutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PerformAutoTraining != nil {
+		s.WriteBool(schemas.UpdateSolutionRequest_performAutoTraining, *v.PerformAutoTraining)
+	}
+	if v.PerformIncrementalUpdate != nil {
+		s.WriteBool(schemas.UpdateSolutionRequest_performIncrementalUpdate, *v.PerformIncrementalUpdate)
+	}
+	if v.SolutionArn != nil {
+		s.WriteString(schemas.UpdateSolutionRequest_solutionArn, *v.SolutionArn)
+	}
+	if v.SolutionUpdateConfig != nil {
+		s.WriteStruct(schemas.UpdateSolutionRequest_solutionUpdateConfig)
+		v.SolutionUpdateConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateSolutionOutput struct {
 
 	// The same solution Amazon Resource Name (ARN) as given in the request.
@@ -85,13 +110,32 @@ type UpdateSolutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSolutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSolutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSolutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SolutionArn != nil {
+		s.WriteString(schemas.UpdateSolutionResponse_solutionArn, *v.SolutionArn)
+	}
+}
+func (v *UpdateSolutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSolutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSolutionResponse_solutionArn:
+			v.SolutionArn = new(string)
+			return d.ReadString(schemas.UpdateSolutionResponse_solutionArn, v.SolutionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSolutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSolution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSolution, schemas.UpdateSolutionRequest, schemas.UpdateSolutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateSolution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSolution, schemas.UpdateSolutionRequest, schemas.UpdateSolutionResponse), output: &UpdateSolutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

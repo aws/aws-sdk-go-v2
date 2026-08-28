@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type DescribeCACertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCACertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCACertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCACertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateId != nil {
+		s.WriteString(schemas.DescribeCACertificateRequest_certificateId, *v.CertificateId)
+	}
+}
+
 // The output from the DescribeCACertificate operation.
 type DescribeCACertificateOutput struct {
 
@@ -54,13 +68,42 @@ type DescribeCACertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCACertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCACertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCACertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateDescription != nil {
+		s.WriteStruct(schemas.DescribeCACertificateResponse_certificateDescription)
+		v.CertificateDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RegistrationConfig != nil {
+		s.WriteStruct(schemas.DescribeCACertificateResponse_registrationConfig)
+		v.RegistrationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeCACertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCACertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCACertificateResponse_certificateDescription:
+			v.CertificateDescription = &types.CACertificateDescription{}
+			return v.CertificateDescription.Deserialize(d)
+		case schemas.DescribeCACertificateResponse_registrationConfig:
+			v.RegistrationConfig = &types.RegistrationConfig{}
+			return v.RegistrationConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCACertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeCACertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCACertificate, schemas.DescribeCACertificateRequest, schemas.DescribeCACertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeCACertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCACertificate, schemas.DescribeCACertificateRequest, schemas.DescribeCACertificateResponse), output: &DescribeCACertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package personalize
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListSolutionVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSolutionVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSolutionVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSolutionVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSolutionVersionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSolutionVersionsRequest_nextToken, *v.NextToken)
+	}
+	if v.SolutionArn != nil {
+		s.WriteString(schemas.ListSolutionVersionsRequest_solutionArn, *v.SolutionArn)
+	}
+}
+
 type ListSolutionVersionsOutput struct {
 
 	// A token for getting the next set of solution versions (if they exist).
@@ -57,13 +77,35 @@ type ListSolutionVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSolutionVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSolutionVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSolutionVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSolutionVersionsResponse_nextToken, *v.NextToken)
+	}
+	serializeSolutionVersions(s, schemas.ListSolutionVersionsResponse_solutionVersions, v.SolutionVersions)
+}
+func (v *ListSolutionVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSolutionVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSolutionVersionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSolutionVersionsResponse_nextToken, v.NextToken)
+		case schemas.ListSolutionVersionsResponse_solutionVersions:
+			return deserializeSolutionVersions(d, schemas.ListSolutionVersionsResponse_solutionVersions, &v.SolutionVersions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSolutionVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSolutionVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSolutionVersions, schemas.ListSolutionVersionsRequest, schemas.ListSolutionVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSolutionVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSolutionVersions, schemas.ListSolutionVersionsRequest, schemas.ListSolutionVersionsResponse), output: &ListSolutionVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

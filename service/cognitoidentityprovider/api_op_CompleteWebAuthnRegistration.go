@@ -5,6 +5,9 @@ package cognitoidentityprovider
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/document"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +49,21 @@ type CompleteWebAuthnRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompleteWebAuthnRegistrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompleteWebAuthnRegistrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompleteWebAuthnRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.CompleteWebAuthnRegistrationRequest_AccessToken, *v.AccessToken)
+	}
+	if v.Credential != nil {
+		s.WriteDocument(schemas.CompleteWebAuthnRegistrationRequest_Credential, &smithydocument.Opaque{Value: v.Credential})
+	}
+}
+
 type CompleteWebAuthnRegistrationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +71,26 @@ type CompleteWebAuthnRegistrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompleteWebAuthnRegistrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompleteWebAuthnRegistrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompleteWebAuthnRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CompleteWebAuthnRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CompleteWebAuthnRegistrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCompleteWebAuthnRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCompleteWebAuthnRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompleteWebAuthnRegistration, schemas.CompleteWebAuthnRegistrationRequest, schemas.CompleteWebAuthnRegistrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCompleteWebAuthnRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompleteWebAuthnRegistration, schemas.CompleteWebAuthnRegistrationRequest, schemas.CompleteWebAuthnRegistrationResponse), output: &CompleteWebAuthnRegistrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

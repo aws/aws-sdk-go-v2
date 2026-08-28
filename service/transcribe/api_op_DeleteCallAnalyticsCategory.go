@@ -4,6 +4,8 @@ package transcribe
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteCallAnalyticsCategoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCallAnalyticsCategoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCallAnalyticsCategoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCallAnalyticsCategoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CategoryName != nil {
+		s.WriteString(schemas.DeleteCallAnalyticsCategoryRequest_CategoryName, *v.CategoryName)
+	}
+}
+
 type DeleteCallAnalyticsCategoryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type DeleteCallAnalyticsCategoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCallAnalyticsCategoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCallAnalyticsCategoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCallAnalyticsCategoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCallAnalyticsCategoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCallAnalyticsCategoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCallAnalyticsCategoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCallAnalyticsCategory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCallAnalyticsCategory, schemas.DeleteCallAnalyticsCategoryRequest, schemas.DeleteCallAnalyticsCategoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteCallAnalyticsCategory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCallAnalyticsCategory, schemas.DeleteCallAnalyticsCategoryRequest, schemas.DeleteCallAnalyticsCategoryResponse), output: &DeleteCallAnalyticsCategoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

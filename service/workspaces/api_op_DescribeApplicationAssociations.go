@@ -5,7 +5,9 @@ package workspaces
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,25 @@ type DescribeApplicationAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApplicationAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicationAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicationAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.DescribeApplicationAssociationsRequest_ApplicationId, *v.ApplicationId)
+	}
+	serializeApplicationAssociatedResourceTypeList(s, schemas.DescribeApplicationAssociationsRequest_AssociatedResourceTypes, v.AssociatedResourceTypes)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeApplicationAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeApplicationAssociationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeApplicationAssociationsOutput struct {
 
 	// List of associations and information about them.
@@ -63,13 +84,35 @@ type DescribeApplicationAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApplicationAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicationAssociationsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicationAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApplicationResourceAssociationList(s, schemas.DescribeApplicationAssociationsResult_Associations, v.Associations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeApplicationAssociationsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeApplicationAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeApplicationAssociationsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeApplicationAssociationsResult_Associations:
+			return deserializeApplicationResourceAssociationList(d, schemas.DescribeApplicationAssociationsResult_Associations, &v.Associations)
+		case schemas.DescribeApplicationAssociationsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeApplicationAssociationsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeApplicationAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeApplicationAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplicationAssociations, schemas.DescribeApplicationAssociationsRequest, schemas.DescribeApplicationAssociationsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeApplicationAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplicationAssociations, schemas.DescribeApplicationAssociationsRequest, schemas.DescribeApplicationAssociationsResult), output: &DescribeApplicationAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

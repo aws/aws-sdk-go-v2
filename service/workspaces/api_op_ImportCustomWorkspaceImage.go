@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -79,6 +81,38 @@ type ImportCustomWorkspaceImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportCustomWorkspaceImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportCustomWorkspaceImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportCustomWorkspaceImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeType != "" {
+		s.WriteString(schemas.ImportCustomWorkspaceImageRequest_ComputeType, string(v.ComputeType))
+	}
+	if v.ImageDescription != nil {
+		s.WriteString(schemas.ImportCustomWorkspaceImageRequest_ImageDescription, *v.ImageDescription)
+	}
+	if v.ImageName != nil {
+		s.WriteString(schemas.ImportCustomWorkspaceImageRequest_ImageName, *v.ImageName)
+	}
+	serializeImageSourceIdentifier(s, schemas.ImportCustomWorkspaceImageRequest_ImageSource, v.ImageSource)
+	if v.InfrastructureConfigurationArn != nil {
+		s.WriteString(schemas.ImportCustomWorkspaceImageRequest_InfrastructureConfigurationArn, *v.InfrastructureConfigurationArn)
+	}
+	if v.OsVersion != "" {
+		s.WriteString(schemas.ImportCustomWorkspaceImageRequest_OsVersion, string(v.OsVersion))
+	}
+	if v.Platform != "" {
+		s.WriteString(schemas.ImportCustomWorkspaceImageRequest_Platform, string(v.Platform))
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.ImportCustomWorkspaceImageRequest_Protocol, string(v.Protocol))
+	}
+	serializeTagList(s, schemas.ImportCustomWorkspaceImageRequest_Tags, v.Tags)
+}
+
 type ImportCustomWorkspaceImageOutput struct {
 
 	// The identifier of the WorkSpace image.
@@ -93,13 +127,42 @@ type ImportCustomWorkspaceImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportCustomWorkspaceImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportCustomWorkspaceImageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportCustomWorkspaceImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageId != nil {
+		s.WriteString(schemas.ImportCustomWorkspaceImageResult_ImageId, *v.ImageId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ImportCustomWorkspaceImageResult_State, string(v.State))
+	}
+}
+func (v *ImportCustomWorkspaceImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportCustomWorkspaceImageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportCustomWorkspaceImageResult_ImageId:
+			v.ImageId = new(string)
+			return d.ReadString(schemas.ImportCustomWorkspaceImageResult_ImageId, v.ImageId)
+		case schemas.ImportCustomWorkspaceImageResult_State:
+			var ev string
+			if err := d.ReadString(schemas.ImportCustomWorkspaceImageResult_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.CustomWorkspaceImageImportState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportCustomWorkspaceImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportCustomWorkspaceImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportCustomWorkspaceImage, schemas.ImportCustomWorkspaceImageRequest, schemas.ImportCustomWorkspaceImageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpImportCustomWorkspaceImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportCustomWorkspaceImage, schemas.ImportCustomWorkspaceImageRequest, schemas.ImportCustomWorkspaceImageResult), output: &ImportCustomWorkspaceImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

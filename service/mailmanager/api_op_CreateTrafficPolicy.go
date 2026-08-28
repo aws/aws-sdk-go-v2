@@ -5,7 +5,9 @@ package mailmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,29 @@ type CreateTrafficPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTrafficPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTrafficPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTrafficPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateTrafficPolicyRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DefaultAction != "" {
+		s.WriteString(schemas.CreateTrafficPolicyRequest_DefaultAction, string(v.DefaultAction))
+	}
+	if v.MaxMessageSizeBytes != nil {
+		s.WriteInt32(schemas.CreateTrafficPolicyRequest_MaxMessageSizeBytes, *v.MaxMessageSizeBytes)
+	}
+	serializePolicyStatementList(s, schemas.CreateTrafficPolicyRequest_PolicyStatements, v.PolicyStatements)
+	serializeTagList(s, schemas.CreateTrafficPolicyRequest_Tags, v.Tags)
+	if v.TrafficPolicyName != nil {
+		s.WriteString(schemas.CreateTrafficPolicyRequest_TrafficPolicyName, *v.TrafficPolicyName)
+	}
+}
+
 type CreateTrafficPolicyOutput struct {
 
 	// The identifier of the traffic policy resource.
@@ -72,13 +97,32 @@ type CreateTrafficPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTrafficPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTrafficPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTrafficPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrafficPolicyId != nil {
+		s.WriteString(schemas.CreateTrafficPolicyResponse_TrafficPolicyId, *v.TrafficPolicyId)
+	}
+}
+func (v *CreateTrafficPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTrafficPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTrafficPolicyResponse_TrafficPolicyId:
+			v.TrafficPolicyId = new(string)
+			return d.ReadString(schemas.CreateTrafficPolicyResponse_TrafficPolicyId, v.TrafficPolicyId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTrafficPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateTrafficPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrafficPolicy, schemas.CreateTrafficPolicyRequest, schemas.CreateTrafficPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateTrafficPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrafficPolicy, schemas.CreateTrafficPolicyRequest, schemas.CreateTrafficPolicyResponse), output: &CreateTrafficPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

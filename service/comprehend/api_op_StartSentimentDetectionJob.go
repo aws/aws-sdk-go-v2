@@ -5,7 +5,9 @@ package comprehend
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -87,6 +89,46 @@ type StartSentimentDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSentimentDetectionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSentimentDetectionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSentimentDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartSentimentDetectionJobRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.StartSentimentDetectionJobRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.StartSentimentDetectionJobRequest_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.StartSentimentDetectionJobRequest_JobName, *v.JobName)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.StartSentimentDetectionJobRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.StartSentimentDetectionJobRequest_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.StartSentimentDetectionJobRequest_Tags, v.Tags)
+	if v.VolumeKmsKeyId != nil {
+		s.WriteString(schemas.StartSentimentDetectionJobRequest_VolumeKmsKeyId, *v.VolumeKmsKeyId)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.StartSentimentDetectionJobRequest_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartSentimentDetectionJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the sentiment detection job. It is a unique,
@@ -122,13 +164,48 @@ type StartSentimentDetectionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSentimentDetectionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSentimentDetectionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSentimentDetectionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobArn != nil {
+		s.WriteString(schemas.StartSentimentDetectionJobResponse_JobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.StartSentimentDetectionJobResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.StartSentimentDetectionJobResponse_JobStatus, string(v.JobStatus))
+	}
+}
+func (v *StartSentimentDetectionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSentimentDetectionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSentimentDetectionJobResponse_JobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.StartSentimentDetectionJobResponse_JobArn, v.JobArn)
+		case schemas.StartSentimentDetectionJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartSentimentDetectionJobResponse_JobId, v.JobId)
+		case schemas.StartSentimentDetectionJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartSentimentDetectionJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSentimentDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartSentimentDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSentimentDetectionJob, schemas.StartSentimentDetectionJobRequest, schemas.StartSentimentDetectionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartSentimentDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSentimentDetectionJob, schemas.StartSentimentDetectionJobRequest, schemas.StartSentimentDetectionJobResponse), output: &StartSentimentDetectionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

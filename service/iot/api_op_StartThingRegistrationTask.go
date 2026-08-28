@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,27 @@ type StartThingRegistrationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartThingRegistrationTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartThingRegistrationTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartThingRegistrationTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputFileBucket != nil {
+		s.WriteString(schemas.StartThingRegistrationTaskRequest_inputFileBucket, *v.InputFileBucket)
+	}
+	if v.InputFileKey != nil {
+		s.WriteString(schemas.StartThingRegistrationTaskRequest_inputFileKey, *v.InputFileKey)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.StartThingRegistrationTaskRequest_roleArn, *v.RoleArn)
+	}
+	if v.TemplateBody != nil {
+		s.WriteString(schemas.StartThingRegistrationTaskRequest_templateBody, *v.TemplateBody)
+	}
+}
+
 type StartThingRegistrationTaskOutput struct {
 
 	// The bulk thing provisioning task ID.
@@ -65,13 +88,32 @@ type StartThingRegistrationTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartThingRegistrationTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartThingRegistrationTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartThingRegistrationTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskId != nil {
+		s.WriteString(schemas.StartThingRegistrationTaskResponse_taskId, *v.TaskId)
+	}
+}
+func (v *StartThingRegistrationTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartThingRegistrationTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartThingRegistrationTaskResponse_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.StartThingRegistrationTaskResponse_taskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartThingRegistrationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartThingRegistrationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartThingRegistrationTask, schemas.StartThingRegistrationTaskRequest, schemas.StartThingRegistrationTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartThingRegistrationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartThingRegistrationTask, schemas.StartThingRegistrationTaskRequest, schemas.StartThingRegistrationTaskResponse), output: &StartThingRegistrationTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

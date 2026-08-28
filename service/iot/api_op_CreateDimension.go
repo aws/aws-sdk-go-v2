@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,26 @@ type CreateDimensionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDimensionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDimensionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDimensionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateDimensionRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDimensionRequest_name, *v.Name)
+	}
+	serializeDimensionStringValues(s, schemas.CreateDimensionRequest_stringValues, v.StringValues)
+	serializeTagList(s, schemas.CreateDimensionRequest_tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateDimensionRequest_type, string(v.Type))
+	}
+}
+
 type CreateDimensionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created dimension.
@@ -87,13 +109,38 @@ type CreateDimensionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDimensionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDimensionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDimensionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateDimensionResponse_arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDimensionResponse_name, *v.Name)
+	}
+}
+func (v *CreateDimensionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDimensionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDimensionResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateDimensionResponse_arn, v.Arn)
+		case schemas.CreateDimensionResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateDimensionResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDimensionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDimension{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDimension, schemas.CreateDimensionRequest, schemas.CreateDimensionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDimension{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDimension, schemas.CreateDimensionRequest, schemas.CreateDimensionResponse), output: &CreateDimensionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

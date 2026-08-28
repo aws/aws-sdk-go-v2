@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,35 @@ type CreatePushNotificationRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePushNotificationRegistrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePushNotificationRegistrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePushNotificationRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreatePushNotificationRegistrationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ContactConfiguration != nil {
+		s.WriteStruct(schemas.CreatePushNotificationRegistrationRequest_ContactConfiguration)
+		v.ContactConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceToken != nil {
+		s.WriteString(schemas.CreatePushNotificationRegistrationRequest_DeviceToken, *v.DeviceToken)
+	}
+	if v.DeviceType != "" {
+		s.WriteString(schemas.CreatePushNotificationRegistrationRequest_DeviceType, string(v.DeviceType))
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreatePushNotificationRegistrationRequest_InstanceId, *v.InstanceId)
+	}
+	if v.PinpointAppArn != nil {
+		s.WriteString(schemas.CreatePushNotificationRegistrationRequest_PinpointAppArn, *v.PinpointAppArn)
+	}
+}
+
 type CreatePushNotificationRegistrationOutput struct {
 
 	// The identifier for the registration.
@@ -82,13 +113,32 @@ type CreatePushNotificationRegistrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePushNotificationRegistrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePushNotificationRegistrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePushNotificationRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.CreatePushNotificationRegistrationResponse_RegistrationId, *v.RegistrationId)
+	}
+}
+func (v *CreatePushNotificationRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePushNotificationRegistrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePushNotificationRegistrationResponse_RegistrationId:
+			v.RegistrationId = new(string)
+			return d.ReadString(schemas.CreatePushNotificationRegistrationResponse_RegistrationId, v.RegistrationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePushNotificationRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePushNotificationRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePushNotificationRegistration, schemas.CreatePushNotificationRegistrationRequest, schemas.CreatePushNotificationRegistrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePushNotificationRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePushNotificationRegistration, schemas.CreatePushNotificationRegistrationRequest, schemas.CreatePushNotificationRegistrationResponse), output: &CreatePushNotificationRegistrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

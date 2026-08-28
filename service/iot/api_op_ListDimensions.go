@@ -5,6 +5,8 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,21 @@ type ListDimensionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDimensionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDimensionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDimensionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDimensionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDimensionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListDimensionsOutput struct {
 
 	// A list of the names of the defined dimensions. Use DescribeDimension to get
@@ -63,13 +80,35 @@ type ListDimensionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDimensionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDimensionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDimensionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDimensionNames(s, schemas.ListDimensionsResponse_dimensionNames, v.DimensionNames)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDimensionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDimensionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDimensionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDimensionsResponse_dimensionNames:
+			return deserializeDimensionNames(d, schemas.ListDimensionsResponse_dimensionNames, &v.DimensionNames)
+		case schemas.ListDimensionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDimensionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDimensionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDimensions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDimensions, schemas.ListDimensionsRequest, schemas.ListDimensionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDimensions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDimensions, schemas.ListDimensionsRequest, schemas.ListDimensionsResponse), output: &ListDimensionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

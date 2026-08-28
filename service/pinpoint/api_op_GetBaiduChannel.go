@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetBaiduChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBaiduChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBaiduChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBaiduChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetBaiduChannelRequest_ApplicationId, *v.ApplicationId)
+	}
+}
+
 type GetBaiduChannelOutput struct {
 
 	// Provides information about the status and settings of the Baidu (Baidu Cloud
@@ -50,13 +64,34 @@ type GetBaiduChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBaiduChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBaiduChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBaiduChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaiduChannelResponse != nil {
+		s.WriteStruct(schemas.GetBaiduChannelResponse_BaiduChannelResponse)
+		v.BaiduChannelResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetBaiduChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBaiduChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBaiduChannelResponse_BaiduChannelResponse:
+			v.BaiduChannelResponse = &types.BaiduChannelResponse{}
+			return v.BaiduChannelResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBaiduChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBaiduChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBaiduChannel, schemas.GetBaiduChannelRequest, schemas.GetBaiduChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBaiduChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBaiduChannel, schemas.GetBaiduChannelRequest, schemas.GetBaiduChannelResponse), output: &GetBaiduChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

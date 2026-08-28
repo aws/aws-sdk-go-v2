@@ -4,7 +4,9 @@ package paymentcryptographydata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -103,6 +105,27 @@ type DecryptDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DecryptDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DecryptDataInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DecryptDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CipherText != nil {
+		s.WriteString(schemas.DecryptDataInput_CipherText, *v.CipherText)
+	}
+	serializeEncryptionDecryptionAttributes(s, schemas.DecryptDataInput_DecryptionAttributes, v.DecryptionAttributes)
+	if v.KeyIdentifier != nil {
+		s.WriteString(schemas.DecryptDataInput_KeyIdentifier, *v.KeyIdentifier)
+	}
+	if v.WrappedKey != nil {
+		s.WriteStruct(schemas.DecryptDataInput_WrappedKey)
+		v.WrappedKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type DecryptDataOutput struct {
 
 	// The keyARN of the encryption key that Amazon Web Services Payment Cryptography
@@ -132,13 +155,44 @@ type DecryptDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DecryptDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DecryptDataOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DecryptDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyArn != nil {
+		s.WriteString(schemas.DecryptDataOutput_KeyArn, *v.KeyArn)
+	}
+	if v.KeyCheckValue != nil {
+		s.WriteString(schemas.DecryptDataOutput_KeyCheckValue, *v.KeyCheckValue)
+	}
+	if v.PlainText != nil {
+		s.WriteString(schemas.DecryptDataOutput_PlainText, *v.PlainText)
+	}
+}
+func (v *DecryptDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DecryptDataOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DecryptDataOutput_KeyArn:
+			v.KeyArn = new(string)
+			return d.ReadString(schemas.DecryptDataOutput_KeyArn, v.KeyArn)
+		case schemas.DecryptDataOutput_KeyCheckValue:
+			v.KeyCheckValue = new(string)
+			return d.ReadString(schemas.DecryptDataOutput_KeyCheckValue, v.KeyCheckValue)
+		case schemas.DecryptDataOutput_PlainText:
+			v.PlainText = new(string)
+			return d.ReadString(schemas.DecryptDataOutput_PlainText, v.PlainText)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDecryptDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDecryptData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DecryptData, schemas.DecryptDataInput, schemas.DecryptDataOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDecryptData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DecryptData, schemas.DecryptDataInput, schemas.DecryptDataOutput), output: &DecryptDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

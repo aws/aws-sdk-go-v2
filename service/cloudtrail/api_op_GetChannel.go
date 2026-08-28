@@ -4,7 +4,9 @@ package cloudtrail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type GetChannelInput struct {
 	Channel *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Channel != nil {
+		s.WriteString(schemas.GetChannelRequest_Channel, *v.Channel)
+	}
 }
 
 type GetChannelOutput struct {
@@ -69,13 +83,63 @@ type GetChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.GetChannelResponse_ChannelArn, *v.ChannelArn)
+	}
+	serializeDestinations(s, schemas.GetChannelResponse_Destinations, v.Destinations)
+	if v.IngestionStatus != nil {
+		s.WriteStruct(schemas.GetChannelResponse_IngestionStatus)
+		v.IngestionStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetChannelResponse_Name, *v.Name)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.GetChannelResponse_Source, *v.Source)
+	}
+	if v.SourceConfig != nil {
+		s.WriteStruct(schemas.GetChannelResponse_SourceConfig)
+		v.SourceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetChannelResponse_ChannelArn:
+			v.ChannelArn = new(string)
+			return d.ReadString(schemas.GetChannelResponse_ChannelArn, v.ChannelArn)
+		case schemas.GetChannelResponse_Destinations:
+			return deserializeDestinations(d, schemas.GetChannelResponse_Destinations, &v.Destinations)
+		case schemas.GetChannelResponse_IngestionStatus:
+			v.IngestionStatus = &types.IngestionStatus{}
+			return v.IngestionStatus.Deserialize(d)
+		case schemas.GetChannelResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetChannelResponse_Name, v.Name)
+		case schemas.GetChannelResponse_Source:
+			v.Source = new(string)
+			return d.ReadString(schemas.GetChannelResponse_Source, v.Source)
+		case schemas.GetChannelResponse_SourceConfig:
+			v.SourceConfig = &types.SourceConfig{}
+			return v.SourceConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChannel, schemas.GetChannelRequest, schemas.GetChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChannel, schemas.GetChannelRequest, schemas.GetChannelResponse), output: &GetChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

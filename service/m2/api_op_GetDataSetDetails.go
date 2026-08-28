@@ -4,7 +4,9 @@ package m2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/m2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/m2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type GetDataSetDetailsInput struct {
 	DataSetName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDataSetDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataSetDetailsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataSetDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetDataSetDetailsRequest_applicationId, *v.ApplicationId)
+	}
+	if v.DataSetName != nil {
+		s.WriteString(schemas.GetDataSetDetailsRequest_dataSetName, *v.DataSetName)
+	}
 }
 
 type GetDataSetDetailsOutput struct {
@@ -77,13 +94,77 @@ type GetDataSetDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataSetDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataSetDetailsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataSetDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Blocksize != nil {
+		s.WriteInt32(schemas.GetDataSetDetailsResponse_blocksize, *v.Blocksize)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetDataSetDetailsResponse_creationTime, *v.CreationTime)
+	}
+	if v.DataSetName != nil {
+		s.WriteString(schemas.GetDataSetDetailsResponse_dataSetName, *v.DataSetName)
+	}
+	serializeDatasetDetailOrgAttributes(s, schemas.GetDataSetDetailsResponse_dataSetOrg, v.DataSetOrg)
+	if v.FileSize != nil {
+		s.WriteInt64(schemas.GetDataSetDetailsResponse_fileSize, *v.FileSize)
+	}
+	if v.LastReferencedTime != nil {
+		s.WriteTime(schemas.GetDataSetDetailsResponse_lastReferencedTime, *v.LastReferencedTime)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.GetDataSetDetailsResponse_lastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.GetDataSetDetailsResponse_location, *v.Location)
+	}
+	if v.RecordLength != nil {
+		s.WriteInt32(schemas.GetDataSetDetailsResponse_recordLength, *v.RecordLength)
+	}
+}
+func (v *GetDataSetDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataSetDetailsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataSetDetailsResponse_blocksize:
+			v.Blocksize = new(int32)
+			return d.ReadInt32(schemas.GetDataSetDetailsResponse_blocksize, v.Blocksize)
+		case schemas.GetDataSetDetailsResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetDataSetDetailsResponse_creationTime, v.CreationTime)
+		case schemas.GetDataSetDetailsResponse_dataSetName:
+			v.DataSetName = new(string)
+			return d.ReadString(schemas.GetDataSetDetailsResponse_dataSetName, v.DataSetName)
+		case schemas.GetDataSetDetailsResponse_dataSetOrg:
+			return deserializeDatasetDetailOrgAttributes(d, schemas.GetDataSetDetailsResponse_dataSetOrg, &v.DataSetOrg)
+		case schemas.GetDataSetDetailsResponse_fileSize:
+			v.FileSize = new(int64)
+			return d.ReadInt64(schemas.GetDataSetDetailsResponse_fileSize, v.FileSize)
+		case schemas.GetDataSetDetailsResponse_lastReferencedTime:
+			v.LastReferencedTime = new(time.Time)
+			return d.ReadTime(schemas.GetDataSetDetailsResponse_lastReferencedTime, v.LastReferencedTime)
+		case schemas.GetDataSetDetailsResponse_lastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.GetDataSetDetailsResponse_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.GetDataSetDetailsResponse_location:
+			v.Location = new(string)
+			return d.ReadString(schemas.GetDataSetDetailsResponse_location, v.Location)
+		case schemas.GetDataSetDetailsResponse_recordLength:
+			v.RecordLength = new(int32)
+			return d.ReadInt32(schemas.GetDataSetDetailsResponse_recordLength, v.RecordLength)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataSetDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataSetDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataSetDetails, schemas.GetDataSetDetailsRequest, schemas.GetDataSetDetailsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataSetDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataSetDetails, schemas.GetDataSetDetailsRequest, schemas.GetDataSetDetailsResponse), output: &GetDataSetDetailsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

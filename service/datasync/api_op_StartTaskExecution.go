@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -104,6 +106,36 @@ type StartTaskExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTaskExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTaskExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTaskExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.StartTaskExecutionRequest_Excludes, v.Excludes)
+	serializeFilterList(s, schemas.StartTaskExecutionRequest_Includes, v.Includes)
+	if v.ManifestConfig != nil {
+		s.WriteStruct(schemas.StartTaskExecutionRequest_ManifestConfig)
+		v.ManifestConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OverrideOptions != nil {
+		s.WriteStruct(schemas.StartTaskExecutionRequest_OverrideOptions)
+		v.OverrideOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeInputTagList(s, schemas.StartTaskExecutionRequest_Tags, v.Tags)
+	if v.TaskArn != nil {
+		s.WriteString(schemas.StartTaskExecutionRequest_TaskArn, *v.TaskArn)
+	}
+	if v.TaskReportConfig != nil {
+		s.WriteStruct(schemas.StartTaskExecutionRequest_TaskReportConfig)
+		v.TaskReportConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // StartTaskExecutionResponse
 type StartTaskExecutionOutput struct {
 
@@ -116,13 +148,32 @@ type StartTaskExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTaskExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTaskExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTaskExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskExecutionArn != nil {
+		s.WriteString(schemas.StartTaskExecutionResponse_TaskExecutionArn, *v.TaskExecutionArn)
+	}
+}
+func (v *StartTaskExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartTaskExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartTaskExecutionResponse_TaskExecutionArn:
+			v.TaskExecutionArn = new(string)
+			return d.ReadString(schemas.StartTaskExecutionResponse_TaskExecutionArn, v.TaskExecutionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartTaskExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartTaskExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTaskExecution, schemas.StartTaskExecutionRequest, schemas.StartTaskExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartTaskExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTaskExecution, schemas.StartTaskExecutionRequest, schemas.StartTaskExecutionResponse), output: &StartTaskExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

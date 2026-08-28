@@ -5,7 +5,9 @@ package amp
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/amp/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amp/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -98,6 +100,31 @@ type CreateScraperInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateScraperInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateScraperRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateScraperInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.CreateScraperRequest_alias, *v.Alias)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateScraperRequest_clientToken, *v.ClientToken)
+	}
+	serializeDestination(s, schemas.CreateScraperRequest_destination, v.Destination)
+	serializeExporterList(s, schemas.CreateScraperRequest_exporters, v.Exporters)
+	if v.RoleConfiguration != nil {
+		s.WriteStruct(schemas.CreateScraperRequest_roleConfiguration)
+		v.RoleConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeScrapeConfiguration(s, schemas.CreateScraperRequest_scrapeConfiguration, v.ScrapeConfiguration)
+	serializeSource(s, schemas.CreateScraperRequest_source, v.Source)
+	serializeTagMap(s, schemas.CreateScraperRequest_tags, v.Tags)
+}
+
 // Represents the output of a CreateScraper operation.
 type CreateScraperOutput struct {
 
@@ -125,13 +152,49 @@ type CreateScraperOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateScraperOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateScraperResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateScraperOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateScraperResponse_arn, *v.Arn)
+	}
+	if v.ScraperId != nil {
+		s.WriteString(schemas.CreateScraperResponse_scraperId, *v.ScraperId)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.CreateScraperResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateScraperResponse_tags, v.Tags)
+}
+func (v *CreateScraperOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateScraperResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateScraperResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateScraperResponse_arn, v.Arn)
+		case schemas.CreateScraperResponse_scraperId:
+			v.ScraperId = new(string)
+			return d.ReadString(schemas.CreateScraperResponse_scraperId, v.ScraperId)
+		case schemas.CreateScraperResponse_status:
+			v.Status = &types.ScraperStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.CreateScraperResponse_tags:
+			return deserializeTagMap(d, schemas.CreateScraperResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateScraperMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateScraper{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateScraper, schemas.CreateScraperRequest, schemas.CreateScraperResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateScraper{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateScraper, schemas.CreateScraperRequest, schemas.CreateScraperResponse), output: &CreateScraperOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

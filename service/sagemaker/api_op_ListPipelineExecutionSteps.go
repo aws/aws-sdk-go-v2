@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,27 @@ type ListPipelineExecutionStepsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPipelineExecutionStepsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPipelineExecutionStepsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPipelineExecutionStepsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPipelineExecutionStepsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPipelineExecutionStepsRequest_NextToken, *v.NextToken)
+	}
+	if v.PipelineExecutionArn != nil {
+		s.WriteString(schemas.ListPipelineExecutionStepsRequest_PipelineExecutionArn, *v.PipelineExecutionArn)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListPipelineExecutionStepsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListPipelineExecutionStepsOutput struct {
 
 	// If the result of the previous ListPipelineExecutionSteps request was truncated,
@@ -63,13 +86,35 @@ type ListPipelineExecutionStepsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPipelineExecutionStepsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPipelineExecutionStepsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPipelineExecutionStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPipelineExecutionStepsResponse_NextToken, *v.NextToken)
+	}
+	serializePipelineExecutionStepList(s, schemas.ListPipelineExecutionStepsResponse_PipelineExecutionSteps, v.PipelineExecutionSteps)
+}
+func (v *ListPipelineExecutionStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPipelineExecutionStepsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPipelineExecutionStepsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPipelineExecutionStepsResponse_NextToken, v.NextToken)
+		case schemas.ListPipelineExecutionStepsResponse_PipelineExecutionSteps:
+			return deserializePipelineExecutionStepList(d, schemas.ListPipelineExecutionStepsResponse_PipelineExecutionSteps, &v.PipelineExecutionSteps)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPipelineExecutionStepsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPipelineExecutionSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPipelineExecutionSteps, schemas.ListPipelineExecutionStepsRequest, schemas.ListPipelineExecutionStepsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPipelineExecutionSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPipelineExecutionSteps, schemas.ListPipelineExecutionStepsRequest, schemas.ListPipelineExecutionStepsResponse), output: &ListPipelineExecutionStepsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

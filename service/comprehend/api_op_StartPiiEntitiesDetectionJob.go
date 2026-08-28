@@ -5,7 +5,9 @@ package comprehend
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,46 @@ type StartPiiEntitiesDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartPiiEntitiesDetectionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartPiiEntitiesDetectionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartPiiEntitiesDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartPiiEntitiesDetectionJobRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.StartPiiEntitiesDetectionJobRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.StartPiiEntitiesDetectionJobRequest_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.StartPiiEntitiesDetectionJobRequest_JobName, *v.JobName)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.StartPiiEntitiesDetectionJobRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.StartPiiEntitiesDetectionJobRequest_Mode, string(v.Mode))
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.StartPiiEntitiesDetectionJobRequest_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RedactionConfig != nil {
+		s.WriteStruct(schemas.StartPiiEntitiesDetectionJobRequest_RedactionConfig)
+		v.RedactionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.StartPiiEntitiesDetectionJobRequest_Tags, v.Tags)
+}
+
 type StartPiiEntitiesDetectionJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the PII entity detection job. It is a unique,
@@ -104,13 +146,48 @@ type StartPiiEntitiesDetectionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartPiiEntitiesDetectionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartPiiEntitiesDetectionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartPiiEntitiesDetectionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobArn != nil {
+		s.WriteString(schemas.StartPiiEntitiesDetectionJobResponse_JobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.StartPiiEntitiesDetectionJobResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.StartPiiEntitiesDetectionJobResponse_JobStatus, string(v.JobStatus))
+	}
+}
+func (v *StartPiiEntitiesDetectionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartPiiEntitiesDetectionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartPiiEntitiesDetectionJobResponse_JobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.StartPiiEntitiesDetectionJobResponse_JobArn, v.JobArn)
+		case schemas.StartPiiEntitiesDetectionJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartPiiEntitiesDetectionJobResponse_JobId, v.JobId)
+		case schemas.StartPiiEntitiesDetectionJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartPiiEntitiesDetectionJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartPiiEntitiesDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartPiiEntitiesDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPiiEntitiesDetectionJob, schemas.StartPiiEntitiesDetectionJobRequest, schemas.StartPiiEntitiesDetectionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartPiiEntitiesDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPiiEntitiesDetectionJob, schemas.StartPiiEntitiesDetectionJobRequest, schemas.StartPiiEntitiesDetectionJobResponse), output: &StartPiiEntitiesDetectionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

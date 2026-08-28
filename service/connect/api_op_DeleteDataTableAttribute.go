@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type DeleteDataTableAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataTableAttributeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataTableAttributeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataTableAttributeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.DeleteDataTableAttributeRequest_AttributeName, *v.AttributeName)
+	}
+	if v.DataTableId != nil {
+		s.WriteString(schemas.DeleteDataTableAttributeRequest_DataTableId, *v.DataTableId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeleteDataTableAttributeRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DeleteDataTableAttributeOutput struct {
 
 	// The updated lock version of the data table.
@@ -57,13 +77,34 @@ type DeleteDataTableAttributeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataTableAttributeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataTableAttributeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataTableAttributeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LockVersion != nil {
+		s.WriteStruct(schemas.DeleteDataTableAttributeResponse_LockVersion)
+		v.LockVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteDataTableAttributeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDataTableAttributeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDataTableAttributeResponse_LockVersion:
+			v.LockVersion = &types.DataTableLockVersion{}
+			return v.LockVersion.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDataTableAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDataTableAttribute{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataTableAttribute, schemas.DeleteDataTableAttributeRequest, schemas.DeleteDataTableAttributeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDataTableAttribute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataTableAttribute, schemas.DeleteDataTableAttributeRequest, schemas.DeleteDataTableAttributeResponse), output: &DeleteDataTableAttributeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

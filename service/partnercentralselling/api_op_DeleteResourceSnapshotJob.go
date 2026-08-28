@@ -4,6 +4,8 @@ package partnercentralselling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DeleteResourceSnapshotJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourceSnapshotJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourceSnapshotJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourceSnapshotJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.DeleteResourceSnapshotJobRequest_Catalog, *v.Catalog)
+	}
+	if v.ResourceSnapshotJobIdentifier != nil {
+		s.WriteString(schemas.DeleteResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier, *v.ResourceSnapshotJobIdentifier)
+	}
+}
+
 type DeleteResourceSnapshotJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +65,26 @@ type DeleteResourceSnapshotJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourceSnapshotJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourceSnapshotJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteResourceSnapshotJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteResourceSnapshotJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteResourceSnapshotJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourceSnapshotJob, schemas.DeleteResourceSnapshotJobRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteResourceSnapshotJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourceSnapshotJob, schemas.DeleteResourceSnapshotJobRequest, nil), output: &DeleteResourceSnapshotJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

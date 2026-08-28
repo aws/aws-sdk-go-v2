@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ModifyAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DedicatedTenancyManagementCidrRange != nil {
+		s.WriteString(schemas.ModifyAccountRequest_DedicatedTenancyManagementCidrRange, *v.DedicatedTenancyManagementCidrRange)
+	}
+	if v.DedicatedTenancySupport != "" {
+		s.WriteString(schemas.ModifyAccountRequest_DedicatedTenancySupport, string(v.DedicatedTenancySupport))
+	}
+}
+
 type ModifyAccountOutput struct {
 
 	// The text message to describe the status of BYOL modification.
@@ -51,13 +68,32 @@ type ModifyAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyAccountResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ModifyAccountResult_Message, *v.Message)
+	}
+}
+func (v *ModifyAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyAccountResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyAccountResult_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ModifyAccountResult_Message, v.Message)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyAccount, schemas.ModifyAccountRequest, schemas.ModifyAccountResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpModifyAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyAccount, schemas.ModifyAccountRequest, schemas.ModifyAccountResult), output: &ModifyAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

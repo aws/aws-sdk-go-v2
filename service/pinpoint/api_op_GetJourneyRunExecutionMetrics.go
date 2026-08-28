@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,30 @@ type GetJourneyRunExecutionMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJourneyRunExecutionMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJourneyRunExecutionMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJourneyRunExecutionMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetJourneyRunExecutionMetricsRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.JourneyId != nil {
+		s.WriteString(schemas.GetJourneyRunExecutionMetricsRequest_JourneyId, *v.JourneyId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetJourneyRunExecutionMetricsRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteString(schemas.GetJourneyRunExecutionMetricsRequest_PageSize, *v.PageSize)
+	}
+	if v.RunId != nil {
+		s.WriteString(schemas.GetJourneyRunExecutionMetricsRequest_RunId, *v.RunId)
+	}
+}
+
 type GetJourneyRunExecutionMetricsOutput struct {
 
 	// Provides the results of a query that retrieved the data for a standard
@@ -70,13 +96,34 @@ type GetJourneyRunExecutionMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJourneyRunExecutionMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJourneyRunExecutionMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJourneyRunExecutionMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JourneyRunExecutionMetricsResponse != nil {
+		s.WriteStruct(schemas.GetJourneyRunExecutionMetricsResponse_JourneyRunExecutionMetricsResponse)
+		v.JourneyRunExecutionMetricsResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetJourneyRunExecutionMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetJourneyRunExecutionMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetJourneyRunExecutionMetricsResponse_JourneyRunExecutionMetricsResponse:
+			v.JourneyRunExecutionMetricsResponse = &types.JourneyRunExecutionMetricsResponse{}
+			return v.JourneyRunExecutionMetricsResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetJourneyRunExecutionMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetJourneyRunExecutionMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJourneyRunExecutionMetrics, schemas.GetJourneyRunExecutionMetricsRequest, schemas.GetJourneyRunExecutionMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetJourneyRunExecutionMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJourneyRunExecutionMetrics, schemas.GetJourneyRunExecutionMetricsRequest, schemas.GetJourneyRunExecutionMetricsResponse), output: &GetJourneyRunExecutionMetricsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

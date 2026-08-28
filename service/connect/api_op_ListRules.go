@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,30 @@ type ListRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventSourceName != "" {
+		s.WriteString(schemas.ListRulesRequest_EventSourceName, string(v.EventSourceName))
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListRulesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRulesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRulesRequest_NextToken, *v.NextToken)
+	}
+	if v.PublishStatus != "" {
+		s.WriteString(schemas.ListRulesRequest_PublishStatus, string(v.PublishStatus))
+	}
+}
+
 type ListRulesOutput struct {
 
 	// Summary information about a rule.
@@ -67,13 +93,35 @@ type ListRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRulesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRulesResponse_NextToken, *v.NextToken)
+	}
+	serializeRuleSummaryList(s, schemas.ListRulesResponse_RuleSummaryList, v.RuleSummaryList)
+}
+func (v *ListRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRulesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRulesResponse_NextToken, v.NextToken)
+		case schemas.ListRulesResponse_RuleSummaryList:
+			return deserializeRuleSummaryList(d, schemas.ListRulesResponse_RuleSummaryList, &v.RuleSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRules, schemas.ListRulesRequest, schemas.ListRulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRules, schemas.ListRulesRequest, schemas.ListRulesResponse), output: &ListRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeEdgePackagingJobInput struct {
 	EdgePackagingJobName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeEdgePackagingJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEdgePackagingJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEdgePackagingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EdgePackagingJobName != nil {
+		s.WriteString(schemas.DescribeEdgePackagingJobRequest_EdgePackagingJobName, *v.EdgePackagingJobName)
+	}
 }
 
 type DescribeEdgePackagingJobOutput struct {
@@ -97,13 +111,124 @@ type DescribeEdgePackagingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEdgePackagingJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEdgePackagingJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEdgePackagingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompilationJobName != nil {
+		s.WriteString(schemas.DescribeEdgePackagingJobResponse_CompilationJobName, *v.CompilationJobName)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeEdgePackagingJobResponse_CreationTime, *v.CreationTime)
+	}
+	if v.EdgePackagingJobArn != nil {
+		s.WriteString(schemas.DescribeEdgePackagingJobResponse_EdgePackagingJobArn, *v.EdgePackagingJobArn)
+	}
+	if v.EdgePackagingJobName != nil {
+		s.WriteString(schemas.DescribeEdgePackagingJobResponse_EdgePackagingJobName, *v.EdgePackagingJobName)
+	}
+	if v.EdgePackagingJobStatus != "" {
+		s.WriteString(schemas.DescribeEdgePackagingJobResponse_EdgePackagingJobStatus, string(v.EdgePackagingJobStatus))
+	}
+	if v.EdgePackagingJobStatusMessage != nil {
+		s.WriteString(schemas.DescribeEdgePackagingJobResponse_EdgePackagingJobStatusMessage, *v.EdgePackagingJobStatusMessage)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeEdgePackagingJobResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.ModelArtifact != nil {
+		s.WriteString(schemas.DescribeEdgePackagingJobResponse_ModelArtifact, *v.ModelArtifact)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.DescribeEdgePackagingJobResponse_ModelName, *v.ModelName)
+	}
+	if v.ModelSignature != nil {
+		s.WriteString(schemas.DescribeEdgePackagingJobResponse_ModelSignature, *v.ModelSignature)
+	}
+	if v.ModelVersion != nil {
+		s.WriteString(schemas.DescribeEdgePackagingJobResponse_ModelVersion, *v.ModelVersion)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.DescribeEdgePackagingJobResponse_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PresetDeploymentOutput != nil {
+		s.WriteStruct(schemas.DescribeEdgePackagingJobResponse_PresetDeploymentOutput)
+		v.PresetDeploymentOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceKey != nil {
+		s.WriteString(schemas.DescribeEdgePackagingJobResponse_ResourceKey, *v.ResourceKey)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeEdgePackagingJobResponse_RoleArn, *v.RoleArn)
+	}
+}
+func (v *DescribeEdgePackagingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEdgePackagingJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEdgePackagingJobResponse_CompilationJobName:
+			v.CompilationJobName = new(string)
+			return d.ReadString(schemas.DescribeEdgePackagingJobResponse_CompilationJobName, v.CompilationJobName)
+		case schemas.DescribeEdgePackagingJobResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeEdgePackagingJobResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeEdgePackagingJobResponse_EdgePackagingJobArn:
+			v.EdgePackagingJobArn = new(string)
+			return d.ReadString(schemas.DescribeEdgePackagingJobResponse_EdgePackagingJobArn, v.EdgePackagingJobArn)
+		case schemas.DescribeEdgePackagingJobResponse_EdgePackagingJobName:
+			v.EdgePackagingJobName = new(string)
+			return d.ReadString(schemas.DescribeEdgePackagingJobResponse_EdgePackagingJobName, v.EdgePackagingJobName)
+		case schemas.DescribeEdgePackagingJobResponse_EdgePackagingJobStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeEdgePackagingJobResponse_EdgePackagingJobStatus, &ev); err != nil {
+				return err
+			}
+			v.EdgePackagingJobStatus = types.EdgePackagingJobStatus(ev)
+			return nil
+		case schemas.DescribeEdgePackagingJobResponse_EdgePackagingJobStatusMessage:
+			v.EdgePackagingJobStatusMessage = new(string)
+			return d.ReadString(schemas.DescribeEdgePackagingJobResponse_EdgePackagingJobStatusMessage, v.EdgePackagingJobStatusMessage)
+		case schemas.DescribeEdgePackagingJobResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeEdgePackagingJobResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeEdgePackagingJobResponse_ModelArtifact:
+			v.ModelArtifact = new(string)
+			return d.ReadString(schemas.DescribeEdgePackagingJobResponse_ModelArtifact, v.ModelArtifact)
+		case schemas.DescribeEdgePackagingJobResponse_ModelName:
+			v.ModelName = new(string)
+			return d.ReadString(schemas.DescribeEdgePackagingJobResponse_ModelName, v.ModelName)
+		case schemas.DescribeEdgePackagingJobResponse_ModelSignature:
+			v.ModelSignature = new(string)
+			return d.ReadString(schemas.DescribeEdgePackagingJobResponse_ModelSignature, v.ModelSignature)
+		case schemas.DescribeEdgePackagingJobResponse_ModelVersion:
+			v.ModelVersion = new(string)
+			return d.ReadString(schemas.DescribeEdgePackagingJobResponse_ModelVersion, v.ModelVersion)
+		case schemas.DescribeEdgePackagingJobResponse_OutputConfig:
+			v.OutputConfig = &types.EdgeOutputConfig{}
+			return v.OutputConfig.Deserialize(d)
+		case schemas.DescribeEdgePackagingJobResponse_PresetDeploymentOutput:
+			v.PresetDeploymentOutput = &types.EdgePresetDeploymentOutput{}
+			return v.PresetDeploymentOutput.Deserialize(d)
+		case schemas.DescribeEdgePackagingJobResponse_ResourceKey:
+			v.ResourceKey = new(string)
+			return d.ReadString(schemas.DescribeEdgePackagingJobResponse_ResourceKey, v.ResourceKey)
+		case schemas.DescribeEdgePackagingJobResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeEdgePackagingJobResponse_RoleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEdgePackagingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEdgePackagingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEdgePackagingJob, schemas.DescribeEdgePackagingJobRequest, schemas.DescribeEdgePackagingJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEdgePackagingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEdgePackagingJob, schemas.DescribeEdgePackagingJobRequest, schemas.DescribeEdgePackagingJobResponse), output: &DescribeEdgePackagingJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

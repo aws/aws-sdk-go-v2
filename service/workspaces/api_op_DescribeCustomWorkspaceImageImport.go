@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type DescribeCustomWorkspaceImageImportInput struct {
 	ImageId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeCustomWorkspaceImageImportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCustomWorkspaceImageImportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCustomWorkspaceImageImportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageId != nil {
+		s.WriteString(schemas.DescribeCustomWorkspaceImageImportRequest_ImageId, *v.ImageId)
+	}
 }
 
 type DescribeCustomWorkspaceImageImportOutput struct {
@@ -76,13 +90,84 @@ type DescribeCustomWorkspaceImageImportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCustomWorkspaceImageImportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCustomWorkspaceImageImportResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCustomWorkspaceImageImportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Created != nil {
+		s.WriteTime(schemas.DescribeCustomWorkspaceImageImportResult_Created, *v.Created)
+	}
+	serializeCustomWorkspaceImageImportErrorDetailsList(s, schemas.DescribeCustomWorkspaceImageImportResult_ErrorDetails, v.ErrorDetails)
+	if v.ImageBuilderInstanceId != nil {
+		s.WriteString(schemas.DescribeCustomWorkspaceImageImportResult_ImageBuilderInstanceId, *v.ImageBuilderInstanceId)
+	}
+	if v.ImageId != nil {
+		s.WriteString(schemas.DescribeCustomWorkspaceImageImportResult_ImageId, *v.ImageId)
+	}
+	serializeImageSourceIdentifier(s, schemas.DescribeCustomWorkspaceImageImportResult_ImageSource, v.ImageSource)
+	if v.InfrastructureConfigurationArn != nil {
+		s.WriteString(schemas.DescribeCustomWorkspaceImageImportResult_InfrastructureConfigurationArn, *v.InfrastructureConfigurationArn)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.DescribeCustomWorkspaceImageImportResult_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.ProgressPercentage != nil {
+		s.WriteInt32(schemas.DescribeCustomWorkspaceImageImportResult_ProgressPercentage, *v.ProgressPercentage)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DescribeCustomWorkspaceImageImportResult_State, string(v.State))
+	}
+	if v.StateMessage != nil {
+		s.WriteString(schemas.DescribeCustomWorkspaceImageImportResult_StateMessage, *v.StateMessage)
+	}
+}
+func (v *DescribeCustomWorkspaceImageImportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCustomWorkspaceImageImportResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCustomWorkspaceImageImportResult_Created:
+			v.Created = new(time.Time)
+			return d.ReadTime(schemas.DescribeCustomWorkspaceImageImportResult_Created, v.Created)
+		case schemas.DescribeCustomWorkspaceImageImportResult_ErrorDetails:
+			return deserializeCustomWorkspaceImageImportErrorDetailsList(d, schemas.DescribeCustomWorkspaceImageImportResult_ErrorDetails, &v.ErrorDetails)
+		case schemas.DescribeCustomWorkspaceImageImportResult_ImageBuilderInstanceId:
+			v.ImageBuilderInstanceId = new(string)
+			return d.ReadString(schemas.DescribeCustomWorkspaceImageImportResult_ImageBuilderInstanceId, v.ImageBuilderInstanceId)
+		case schemas.DescribeCustomWorkspaceImageImportResult_ImageId:
+			v.ImageId = new(string)
+			return d.ReadString(schemas.DescribeCustomWorkspaceImageImportResult_ImageId, v.ImageId)
+		case schemas.DescribeCustomWorkspaceImageImportResult_ImageSource:
+			return deserializeImageSourceIdentifier(d, schemas.DescribeCustomWorkspaceImageImportResult_ImageSource, &v.ImageSource)
+		case schemas.DescribeCustomWorkspaceImageImportResult_InfrastructureConfigurationArn:
+			v.InfrastructureConfigurationArn = new(string)
+			return d.ReadString(schemas.DescribeCustomWorkspaceImageImportResult_InfrastructureConfigurationArn, v.InfrastructureConfigurationArn)
+		case schemas.DescribeCustomWorkspaceImageImportResult_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeCustomWorkspaceImageImportResult_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.DescribeCustomWorkspaceImageImportResult_ProgressPercentage:
+			v.ProgressPercentage = new(int32)
+			return d.ReadInt32(schemas.DescribeCustomWorkspaceImageImportResult_ProgressPercentage, v.ProgressPercentage)
+		case schemas.DescribeCustomWorkspaceImageImportResult_State:
+			var ev string
+			if err := d.ReadString(schemas.DescribeCustomWorkspaceImageImportResult_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.CustomWorkspaceImageImportState(ev)
+			return nil
+		case schemas.DescribeCustomWorkspaceImageImportResult_StateMessage:
+			v.StateMessage = new(string)
+			return d.ReadString(schemas.DescribeCustomWorkspaceImageImportResult_StateMessage, v.StateMessage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCustomWorkspaceImageImportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCustomWorkspaceImageImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCustomWorkspaceImageImport, schemas.DescribeCustomWorkspaceImageImportRequest, schemas.DescribeCustomWorkspaceImageImportResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCustomWorkspaceImageImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCustomWorkspaceImageImport, schemas.DescribeCustomWorkspaceImageImportRequest, schemas.DescribeCustomWorkspaceImageImportResult), output: &DescribeCustomWorkspaceImageImportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

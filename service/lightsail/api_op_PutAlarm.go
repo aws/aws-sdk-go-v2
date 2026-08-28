@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -189,6 +191,45 @@ type PutAlarmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAlarmInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAlarmRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlarmName != nil {
+		s.WriteString(schemas.PutAlarmRequest_alarmName, *v.AlarmName)
+	}
+	if v.ComparisonOperator != "" {
+		s.WriteString(schemas.PutAlarmRequest_comparisonOperator, string(v.ComparisonOperator))
+	}
+	serializeContactProtocolsList(s, schemas.PutAlarmRequest_contactProtocols, v.ContactProtocols)
+	if v.DatapointsToAlarm != nil {
+		s.WriteInt32(schemas.PutAlarmRequest_datapointsToAlarm, *v.DatapointsToAlarm)
+	}
+	if v.EvaluationPeriods != nil {
+		s.WriteInt32(schemas.PutAlarmRequest_evaluationPeriods, *v.EvaluationPeriods)
+	}
+	if v.MetricName != "" {
+		s.WriteString(schemas.PutAlarmRequest_metricName, string(v.MetricName))
+	}
+	if v.MonitoredResourceName != nil {
+		s.WriteString(schemas.PutAlarmRequest_monitoredResourceName, *v.MonitoredResourceName)
+	}
+	if v.NotificationEnabled != nil {
+		s.WriteBool(schemas.PutAlarmRequest_notificationEnabled, *v.NotificationEnabled)
+	}
+	serializeNotificationTriggerList(s, schemas.PutAlarmRequest_notificationTriggers, v.NotificationTriggers)
+	serializeTagList(s, schemas.PutAlarmRequest_tags, v.Tags)
+	if v.Threshold != nil {
+		s.WriteFloat64(schemas.PutAlarmRequest_threshold, *v.Threshold)
+	}
+	if v.TreatMissingData != "" {
+		s.WriteString(schemas.PutAlarmRequest_treatMissingData, string(v.TreatMissingData))
+	}
+}
+
 type PutAlarmOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -202,13 +243,29 @@ type PutAlarmOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAlarmOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAlarmResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAlarmOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.PutAlarmResult_operations, v.Operations)
+}
+func (v *PutAlarmOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAlarmResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAlarmResult_operations:
+			return deserializeOperationList(d, schemas.PutAlarmResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutAlarm{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAlarm, schemas.PutAlarmRequest, schemas.PutAlarmResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutAlarm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAlarm, schemas.PutAlarmRequest, schemas.PutAlarmResult), output: &PutAlarmOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

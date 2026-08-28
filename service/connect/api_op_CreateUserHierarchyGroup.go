@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,25 @@ type CreateUserHierarchyGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserHierarchyGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserHierarchyGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserHierarchyGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateUserHierarchyGroupRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateUserHierarchyGroupRequest_Name, *v.Name)
+	}
+	if v.ParentGroupId != nil {
+		s.WriteString(schemas.CreateUserHierarchyGroupRequest_ParentGroupId, *v.ParentGroupId)
+	}
+	serializeTagMap(s, schemas.CreateUserHierarchyGroupRequest_Tags, v.Tags)
+}
+
 type CreateUserHierarchyGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the hierarchy group.
@@ -63,13 +84,38 @@ type CreateUserHierarchyGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserHierarchyGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserHierarchyGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserHierarchyGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HierarchyGroupArn != nil {
+		s.WriteString(schemas.CreateUserHierarchyGroupResponse_HierarchyGroupArn, *v.HierarchyGroupArn)
+	}
+	if v.HierarchyGroupId != nil {
+		s.WriteString(schemas.CreateUserHierarchyGroupResponse_HierarchyGroupId, *v.HierarchyGroupId)
+	}
+}
+func (v *CreateUserHierarchyGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUserHierarchyGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUserHierarchyGroupResponse_HierarchyGroupArn:
+			v.HierarchyGroupArn = new(string)
+			return d.ReadString(schemas.CreateUserHierarchyGroupResponse_HierarchyGroupArn, v.HierarchyGroupArn)
+		case schemas.CreateUserHierarchyGroupResponse_HierarchyGroupId:
+			v.HierarchyGroupId = new(string)
+			return d.ReadString(schemas.CreateUserHierarchyGroupResponse_HierarchyGroupId, v.HierarchyGroupId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUserHierarchyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateUserHierarchyGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserHierarchyGroup, schemas.CreateUserHierarchyGroupRequest, schemas.CreateUserHierarchyGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateUserHierarchyGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserHierarchyGroup, schemas.CreateUserHierarchyGroupRequest, schemas.CreateUserHierarchyGroupResponse), output: &CreateUserHierarchyGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

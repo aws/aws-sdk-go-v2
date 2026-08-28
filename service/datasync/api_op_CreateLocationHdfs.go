@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -147,6 +149,60 @@ type CreateLocationHdfsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationHdfsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationHdfsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationHdfsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentArnList(s, schemas.CreateLocationHdfsRequest_AgentArns, v.AgentArns)
+	if v.AuthenticationType != "" {
+		s.WriteString(schemas.CreateLocationHdfsRequest_AuthenticationType, string(v.AuthenticationType))
+	}
+	if v.BlockSize != nil {
+		s.WriteInt32(schemas.CreateLocationHdfsRequest_BlockSize, *v.BlockSize)
+	}
+	if v.CmkSecretConfig != nil {
+		s.WriteStruct(schemas.CreateLocationHdfsRequest_CmkSecretConfig)
+		v.CmkSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomSecretConfig != nil {
+		s.WriteStruct(schemas.CreateLocationHdfsRequest_CustomSecretConfig)
+		v.CustomSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KerberosKeytab != nil {
+		s.WriteBlob(schemas.CreateLocationHdfsRequest_KerberosKeytab, v.KerberosKeytab)
+	}
+	if v.KerberosKrb5Conf != nil {
+		s.WriteBlob(schemas.CreateLocationHdfsRequest_KerberosKrb5Conf, v.KerberosKrb5Conf)
+	}
+	if v.KerberosPrincipal != nil {
+		s.WriteString(schemas.CreateLocationHdfsRequest_KerberosPrincipal, *v.KerberosPrincipal)
+	}
+	if v.KmsKeyProviderUri != nil {
+		s.WriteString(schemas.CreateLocationHdfsRequest_KmsKeyProviderUri, *v.KmsKeyProviderUri)
+	}
+	serializeHdfsNameNodeList(s, schemas.CreateLocationHdfsRequest_NameNodes, v.NameNodes)
+	if v.QopConfiguration != nil {
+		s.WriteStruct(schemas.CreateLocationHdfsRequest_QopConfiguration)
+		v.QopConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReplicationFactor != nil {
+		s.WriteInt32(schemas.CreateLocationHdfsRequest_ReplicationFactor, *v.ReplicationFactor)
+	}
+	if v.SimpleUser != nil {
+		s.WriteString(schemas.CreateLocationHdfsRequest_SimpleUser, *v.SimpleUser)
+	}
+	if v.Subdirectory != nil {
+		s.WriteString(schemas.CreateLocationHdfsRequest_Subdirectory, *v.Subdirectory)
+	}
+	serializeInputTagList(s, schemas.CreateLocationHdfsRequest_Tags, v.Tags)
+}
+
 type CreateLocationHdfsOutput struct {
 
 	// The ARN of the source HDFS cluster location that you create.
@@ -158,13 +214,32 @@ type CreateLocationHdfsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationHdfsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationHdfsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationHdfsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.CreateLocationHdfsResponse_LocationArn, *v.LocationArn)
+	}
+}
+func (v *CreateLocationHdfsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLocationHdfsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLocationHdfsResponse_LocationArn:
+			v.LocationArn = new(string)
+			return d.ReadString(schemas.CreateLocationHdfsResponse_LocationArn, v.LocationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLocationHdfsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLocationHdfs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocationHdfs, schemas.CreateLocationHdfsRequest, schemas.CreateLocationHdfsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLocationHdfs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocationHdfs, schemas.CreateLocationHdfsRequest, schemas.CreateLocationHdfsResponse), output: &CreateLocationHdfsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

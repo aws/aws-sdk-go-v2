@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -69,6 +71,45 @@ type ListEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEndpointsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListEndpointsInput_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListEndpointsInput_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.LastModifiedTimeAfter != nil {
+		s.WriteTime(schemas.ListEndpointsInput_LastModifiedTimeAfter, *v.LastModifiedTimeAfter)
+	}
+	if v.LastModifiedTimeBefore != nil {
+		s.WriteTime(schemas.ListEndpointsInput_LastModifiedTimeBefore, *v.LastModifiedTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEndpointsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListEndpointsInput_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEndpointsInput_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListEndpointsInput_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListEndpointsInput_SortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListEndpointsInput_StatusEquals, string(v.StatusEquals))
+	}
+}
+
 type ListEndpointsOutput struct {
 
 	//  An array or endpoint objects.
@@ -86,13 +127,35 @@ type ListEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEndpointsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEndpointSummaryList(s, schemas.ListEndpointsOutput_Endpoints, v.Endpoints)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEndpointsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEndpointsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEndpointsOutput_Endpoints:
+			return deserializeEndpointSummaryList(d, schemas.ListEndpointsOutput_Endpoints, &v.Endpoints)
+		case schemas.ListEndpointsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEndpointsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEndpoints, schemas.ListEndpointsInput, schemas.ListEndpointsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEndpoints, schemas.ListEndpointsInput, schemas.ListEndpointsOutput), output: &ListEndpointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

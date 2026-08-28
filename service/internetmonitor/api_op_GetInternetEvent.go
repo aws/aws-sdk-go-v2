@@ -4,7 +4,9 @@ package internetmonitor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -40,6 +42,18 @@ type GetInternetEventInput struct {
 	EventId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetInternetEventInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInternetEventInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInternetEventInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventId != nil {
+		s.WriteString(schemas.GetInternetEventInput_EventId, *v.EventId)
+	}
 }
 
 type GetInternetEventOutput struct {
@@ -85,13 +99,78 @@ type GetInternetEventOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInternetEventOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInternetEventOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInternetEventOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientLocation != nil {
+		s.WriteStruct(schemas.GetInternetEventOutput_ClientLocation)
+		v.ClientLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.GetInternetEventOutput_EndedAt, *v.EndedAt)
+	}
+	if v.EventArn != nil {
+		s.WriteString(schemas.GetInternetEventOutput_EventArn, *v.EventArn)
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.GetInternetEventOutput_EventId, *v.EventId)
+	}
+	if v.EventStatus != "" {
+		s.WriteString(schemas.GetInternetEventOutput_EventStatus, string(v.EventStatus))
+	}
+	if v.EventType != "" {
+		s.WriteString(schemas.GetInternetEventOutput_EventType, string(v.EventType))
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.GetInternetEventOutput_StartedAt, *v.StartedAt)
+	}
+}
+func (v *GetInternetEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInternetEventOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInternetEventOutput_ClientLocation:
+			v.ClientLocation = &types.ClientLocation{}
+			return v.ClientLocation.Deserialize(d)
+		case schemas.GetInternetEventOutput_EndedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.GetInternetEventOutput_EndedAt, v.EndedAt)
+		case schemas.GetInternetEventOutput_EventArn:
+			v.EventArn = new(string)
+			return d.ReadString(schemas.GetInternetEventOutput_EventArn, v.EventArn)
+		case schemas.GetInternetEventOutput_EventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.GetInternetEventOutput_EventId, v.EventId)
+		case schemas.GetInternetEventOutput_EventStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetInternetEventOutput_EventStatus, &ev); err != nil {
+				return err
+			}
+			v.EventStatus = types.InternetEventStatus(ev)
+			return nil
+		case schemas.GetInternetEventOutput_EventType:
+			var ev string
+			if err := d.ReadString(schemas.GetInternetEventOutput_EventType, &ev); err != nil {
+				return err
+			}
+			v.EventType = types.InternetEventType(ev)
+			return nil
+		case schemas.GetInternetEventOutput_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetInternetEventOutput_StartedAt, v.StartedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInternetEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInternetEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInternetEvent, schemas.GetInternetEventInput, schemas.GetInternetEventOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetInternetEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInternetEvent, schemas.GetInternetEventInput, schemas.GetInternetEventOutput), output: &GetInternetEventOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

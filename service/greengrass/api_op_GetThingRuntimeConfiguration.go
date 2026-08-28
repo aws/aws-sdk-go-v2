@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetThingRuntimeConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetThingRuntimeConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetThingRuntimeConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetThingRuntimeConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ThingName != nil {
+		s.WriteString(schemas.GetThingRuntimeConfigurationRequest_ThingName, *v.ThingName)
+	}
+}
+
 type GetThingRuntimeConfigurationOutput struct {
 
 	// Runtime configuration for a thing.
@@ -45,13 +59,34 @@ type GetThingRuntimeConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetThingRuntimeConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetThingRuntimeConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetThingRuntimeConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuntimeConfiguration != nil {
+		s.WriteStruct(schemas.GetThingRuntimeConfigurationResponse_RuntimeConfiguration)
+		v.RuntimeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetThingRuntimeConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetThingRuntimeConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetThingRuntimeConfigurationResponse_RuntimeConfiguration:
+			v.RuntimeConfiguration = &types.RuntimeConfiguration{}
+			return v.RuntimeConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetThingRuntimeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetThingRuntimeConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetThingRuntimeConfiguration, schemas.GetThingRuntimeConfigurationRequest, schemas.GetThingRuntimeConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetThingRuntimeConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetThingRuntimeConfiguration, schemas.GetThingRuntimeConfigurationRequest, schemas.GetThingRuntimeConfigurationResponse), output: &GetThingRuntimeConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

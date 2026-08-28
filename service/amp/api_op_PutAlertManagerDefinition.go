@@ -5,7 +5,9 @@ package amp
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/amp/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amp/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,39 @@ type PutAlertManagerDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAlertManagerDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAlertManagerDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAlertManagerDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.PutAlertManagerDefinitionRequest_clientToken, *v.ClientToken)
+	}
+	if v.Data != nil {
+		s.WriteBlob(schemas.PutAlertManagerDefinitionRequest_data, v.Data)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.PutAlertManagerDefinitionRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *PutAlertManagerDefinitionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAlertManagerDefinitionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAlertManagerDefinitionRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.PutAlertManagerDefinitionRequest_clientToken, v.ClientToken)
+		case schemas.PutAlertManagerDefinitionRequest_data:
+			return d.ReadBlob(schemas.PutAlertManagerDefinitionRequest_data, &v.Data)
+		case schemas.PutAlertManagerDefinitionRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.PutAlertManagerDefinitionRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a PutAlertManagerDefinition operation.
 type PutAlertManagerDefinitionOutput struct {
 
@@ -66,13 +101,34 @@ type PutAlertManagerDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAlertManagerDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAlertManagerDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAlertManagerDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != nil {
+		s.WriteStruct(schemas.PutAlertManagerDefinitionResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutAlertManagerDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAlertManagerDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAlertManagerDefinitionResponse_status:
+			v.Status = &types.AlertManagerDefinitionStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAlertManagerDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAlertManagerDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAlertManagerDefinition, schemas.PutAlertManagerDefinitionRequest, schemas.PutAlertManagerDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutAlertManagerDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAlertManagerDefinition, schemas.PutAlertManagerDefinitionRequest, schemas.PutAlertManagerDefinitionResponse), output: &PutAlertManagerDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

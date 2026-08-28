@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type DescribeAIWorkloadConfigInput struct {
 	AIWorkloadConfigName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeAIWorkloadConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAIWorkloadConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAIWorkloadConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIWorkloadConfigName != nil {
+		s.WriteString(schemas.DescribeAIWorkloadConfigRequest_AIWorkloadConfigName, *v.AIWorkloadConfigName)
+	}
 }
 
 type DescribeAIWorkloadConfigOutput struct {
@@ -68,13 +82,58 @@ type DescribeAIWorkloadConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAIWorkloadConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAIWorkloadConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAIWorkloadConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIWorkloadConfigArn != nil {
+		s.WriteString(schemas.DescribeAIWorkloadConfigResponse_AIWorkloadConfigArn, *v.AIWorkloadConfigArn)
+	}
+	if v.AIWorkloadConfigName != nil {
+		s.WriteString(schemas.DescribeAIWorkloadConfigResponse_AIWorkloadConfigName, *v.AIWorkloadConfigName)
+	}
+	if v.AIWorkloadConfigs != nil {
+		s.WriteStruct(schemas.DescribeAIWorkloadConfigResponse_AIWorkloadConfigs)
+		v.AIWorkloadConfigs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeAIWorkloadConfigResponse_CreationTime, *v.CreationTime)
+	}
+	serializeAIDatasetConfig(s, schemas.DescribeAIWorkloadConfigResponse_DatasetConfig, v.DatasetConfig)
+	serializeTagList(s, schemas.DescribeAIWorkloadConfigResponse_Tags, v.Tags)
+}
+func (v *DescribeAIWorkloadConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAIWorkloadConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAIWorkloadConfigResponse_AIWorkloadConfigArn:
+			v.AIWorkloadConfigArn = new(string)
+			return d.ReadString(schemas.DescribeAIWorkloadConfigResponse_AIWorkloadConfigArn, v.AIWorkloadConfigArn)
+		case schemas.DescribeAIWorkloadConfigResponse_AIWorkloadConfigName:
+			v.AIWorkloadConfigName = new(string)
+			return d.ReadString(schemas.DescribeAIWorkloadConfigResponse_AIWorkloadConfigName, v.AIWorkloadConfigName)
+		case schemas.DescribeAIWorkloadConfigResponse_AIWorkloadConfigs:
+			v.AIWorkloadConfigs = &types.AIWorkloadConfigs{}
+			return v.AIWorkloadConfigs.Deserialize(d)
+		case schemas.DescribeAIWorkloadConfigResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeAIWorkloadConfigResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeAIWorkloadConfigResponse_DatasetConfig:
+			return deserializeAIDatasetConfig(d, schemas.DescribeAIWorkloadConfigResponse_DatasetConfig, &v.DatasetConfig)
+		case schemas.DescribeAIWorkloadConfigResponse_Tags:
+			return deserializeTagList(d, schemas.DescribeAIWorkloadConfigResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAIWorkloadConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAIWorkloadConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAIWorkloadConfig, schemas.DescribeAIWorkloadConfigRequest, schemas.DescribeAIWorkloadConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAIWorkloadConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAIWorkloadConfig, schemas.DescribeAIWorkloadConfigRequest, schemas.DescribeAIWorkloadConfigResponse), output: &DescribeAIWorkloadConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

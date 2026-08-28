@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type ListContactFlowVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContactFlowVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContactFlowVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContactFlowVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactFlowId != nil {
+		s.WriteString(schemas.ListContactFlowVersionsRequest_ContactFlowId, *v.ContactFlowId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListContactFlowVersionsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListContactFlowVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContactFlowVersionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListContactFlowVersionsOutput struct {
 
 	// A list of flow version summaries.
@@ -63,13 +86,35 @@ type ListContactFlowVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContactFlowVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContactFlowVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContactFlowVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContactFlowVersionSummaryList(s, schemas.ListContactFlowVersionsResponse_ContactFlowVersionSummaryList, v.ContactFlowVersionSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContactFlowVersionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListContactFlowVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListContactFlowVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListContactFlowVersionsResponse_ContactFlowVersionSummaryList:
+			return deserializeContactFlowVersionSummaryList(d, schemas.ListContactFlowVersionsResponse_ContactFlowVersionSummaryList, &v.ContactFlowVersionSummaryList)
+		case schemas.ListContactFlowVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListContactFlowVersionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListContactFlowVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListContactFlowVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContactFlowVersions, schemas.ListContactFlowVersionsRequest, schemas.ListContactFlowVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListContactFlowVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContactFlowVersions, schemas.ListContactFlowVersionsRequest, schemas.ListContactFlowVersionsResponse), output: &ListContactFlowVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

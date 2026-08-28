@@ -5,7 +5,9 @@ package apprunner
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type ListServicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServicesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListServicesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServicesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListServicesOutput struct {
 
 	// A list of service summary information records. In a paginated request, the
@@ -63,13 +80,35 @@ type ListServicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServicesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServicesResponse_NextToken, *v.NextToken)
+	}
+	serializeServiceSummaryList(s, schemas.ListServicesResponse_ServiceSummaryList, v.ServiceSummaryList)
+}
+func (v *ListServicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServicesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServicesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServicesResponse_NextToken, v.NextToken)
+		case schemas.ListServicesResponse_ServiceSummaryList:
+			return deserializeServiceSummaryList(d, schemas.ListServicesResponse_ServiceSummaryList, &v.ServiceSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListServices{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServices, schemas.ListServicesRequest, schemas.ListServicesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListServices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServices, schemas.ListServicesRequest, schemas.ListServicesResponse), output: &ListServicesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

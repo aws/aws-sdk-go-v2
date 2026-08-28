@@ -4,6 +4,8 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,28 @@ type DeleteConfiguredTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConfiguredTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConfiguredTableInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConfiguredTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfiguredTableIdentifier != nil {
+		s.WriteString(schemas.DeleteConfiguredTableInput_configuredTableIdentifier, *v.ConfiguredTableIdentifier)
+	}
+}
+func (v *DeleteConfiguredTableInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteConfiguredTableInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteConfiguredTableInput_configuredTableIdentifier:
+			v.ConfiguredTableIdentifier = new(string)
+			return d.ReadString(schemas.DeleteConfiguredTableInput_configuredTableIdentifier, v.ConfiguredTableIdentifier)
+		}
+		return nil
+	})
+}
+
 // The empty output for a successful deletion.
 type DeleteConfiguredTableOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -41,13 +65,26 @@ type DeleteConfiguredTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConfiguredTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConfiguredTableOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConfiguredTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteConfiguredTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteConfiguredTableOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteConfiguredTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteConfiguredTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConfiguredTable, schemas.DeleteConfiguredTableInput, schemas.DeleteConfiguredTableOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteConfiguredTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConfiguredTable, schemas.DeleteConfiguredTableInput, schemas.DeleteConfiguredTableOutput), output: &DeleteConfiguredTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

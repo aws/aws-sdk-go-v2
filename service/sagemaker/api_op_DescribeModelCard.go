@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -60,6 +62,24 @@ type DescribeModelCardInput struct {
 	ModelCardVersion *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeModelCardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeModelCardRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeModelCardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludedData != "" {
+		s.WriteString(schemas.DescribeModelCardRequest_IncludedData, string(v.IncludedData))
+	}
+	if v.ModelCardName != nil {
+		s.WriteString(schemas.DescribeModelCardRequest_ModelCardName, *v.ModelCardName)
+	}
+	if v.ModelCardVersion != nil {
+		s.WriteInt32(schemas.DescribeModelCardRequest_ModelCardVersion, *v.ModelCardVersion)
+	}
 }
 
 type DescribeModelCardOutput struct {
@@ -161,13 +181,106 @@ type DescribeModelCardOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeModelCardOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeModelCardResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeModelCardOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteString(schemas.DescribeModelCardResponse_Content, *v.Content)
+	}
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.DescribeModelCardResponse_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeModelCardResponse_CreationTime, *v.CreationTime)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteStruct(schemas.DescribeModelCardResponse_LastModifiedBy)
+		v.LastModifiedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeModelCardResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.ModelCardArn != nil {
+		s.WriteString(schemas.DescribeModelCardResponse_ModelCardArn, *v.ModelCardArn)
+	}
+	if v.ModelCardName != nil {
+		s.WriteString(schemas.DescribeModelCardResponse_ModelCardName, *v.ModelCardName)
+	}
+	if v.ModelCardProcessingStatus != "" {
+		s.WriteString(schemas.DescribeModelCardResponse_ModelCardProcessingStatus, string(v.ModelCardProcessingStatus))
+	}
+	if v.ModelCardStatus != "" {
+		s.WriteString(schemas.DescribeModelCardResponse_ModelCardStatus, string(v.ModelCardStatus))
+	}
+	if v.ModelCardVersion != nil {
+		s.WriteInt32(schemas.DescribeModelCardResponse_ModelCardVersion, *v.ModelCardVersion)
+	}
+	if v.SecurityConfig != nil {
+		s.WriteStruct(schemas.DescribeModelCardResponse_SecurityConfig)
+		v.SecurityConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeModelCardOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeModelCardResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeModelCardResponse_Content:
+			v.Content = new(string)
+			return d.ReadString(schemas.DescribeModelCardResponse_Content, v.Content)
+		case schemas.DescribeModelCardResponse_CreatedBy:
+			v.CreatedBy = &types.UserContext{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.DescribeModelCardResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelCardResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeModelCardResponse_LastModifiedBy:
+			v.LastModifiedBy = &types.UserContext{}
+			return v.LastModifiedBy.Deserialize(d)
+		case schemas.DescribeModelCardResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelCardResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeModelCardResponse_ModelCardArn:
+			v.ModelCardArn = new(string)
+			return d.ReadString(schemas.DescribeModelCardResponse_ModelCardArn, v.ModelCardArn)
+		case schemas.DescribeModelCardResponse_ModelCardName:
+			v.ModelCardName = new(string)
+			return d.ReadString(schemas.DescribeModelCardResponse_ModelCardName, v.ModelCardName)
+		case schemas.DescribeModelCardResponse_ModelCardProcessingStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeModelCardResponse_ModelCardProcessingStatus, &ev); err != nil {
+				return err
+			}
+			v.ModelCardProcessingStatus = types.ModelCardProcessingStatus(ev)
+			return nil
+		case schemas.DescribeModelCardResponse_ModelCardStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeModelCardResponse_ModelCardStatus, &ev); err != nil {
+				return err
+			}
+			v.ModelCardStatus = types.ModelCardStatus(ev)
+			return nil
+		case schemas.DescribeModelCardResponse_ModelCardVersion:
+			v.ModelCardVersion = new(int32)
+			return d.ReadInt32(schemas.DescribeModelCardResponse_ModelCardVersion, v.ModelCardVersion)
+		case schemas.DescribeModelCardResponse_SecurityConfig:
+			v.SecurityConfig = &types.ModelCardSecurityConfig{}
+			return v.SecurityConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeModelCardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeModelCard{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeModelCard, schemas.DescribeModelCardRequest, schemas.DescribeModelCardResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeModelCard{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeModelCard, schemas.DescribeModelCardRequest, schemas.DescribeModelCardResponse), output: &DescribeModelCardOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

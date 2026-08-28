@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DescribeBillingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBillingGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBillingGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBillingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingGroupName != nil {
+		s.WriteString(schemas.DescribeBillingGroupRequest_billingGroupName, *v.BillingGroupName)
+	}
+}
+
 type DescribeBillingGroupOutput struct {
 
 	// The ARN of the billing group.
@@ -64,13 +78,65 @@ type DescribeBillingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBillingGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBillingGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBillingGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingGroupArn != nil {
+		s.WriteString(schemas.DescribeBillingGroupResponse_billingGroupArn, *v.BillingGroupArn)
+	}
+	if v.BillingGroupId != nil {
+		s.WriteString(schemas.DescribeBillingGroupResponse_billingGroupId, *v.BillingGroupId)
+	}
+	if v.BillingGroupMetadata != nil {
+		s.WriteStruct(schemas.DescribeBillingGroupResponse_billingGroupMetadata)
+		v.BillingGroupMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BillingGroupName != nil {
+		s.WriteString(schemas.DescribeBillingGroupResponse_billingGroupName, *v.BillingGroupName)
+	}
+	if v.BillingGroupProperties != nil {
+		s.WriteStruct(schemas.DescribeBillingGroupResponse_billingGroupProperties)
+		v.BillingGroupProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Version != 0 {
+		s.WriteInt64(schemas.DescribeBillingGroupResponse_version, v.Version)
+	}
+}
+func (v *DescribeBillingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeBillingGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeBillingGroupResponse_billingGroupArn:
+			v.BillingGroupArn = new(string)
+			return d.ReadString(schemas.DescribeBillingGroupResponse_billingGroupArn, v.BillingGroupArn)
+		case schemas.DescribeBillingGroupResponse_billingGroupId:
+			v.BillingGroupId = new(string)
+			return d.ReadString(schemas.DescribeBillingGroupResponse_billingGroupId, v.BillingGroupId)
+		case schemas.DescribeBillingGroupResponse_billingGroupMetadata:
+			v.BillingGroupMetadata = &types.BillingGroupMetadata{}
+			return v.BillingGroupMetadata.Deserialize(d)
+		case schemas.DescribeBillingGroupResponse_billingGroupName:
+			v.BillingGroupName = new(string)
+			return d.ReadString(schemas.DescribeBillingGroupResponse_billingGroupName, v.BillingGroupName)
+		case schemas.DescribeBillingGroupResponse_billingGroupProperties:
+			v.BillingGroupProperties = &types.BillingGroupProperties{}
+			return v.BillingGroupProperties.Deserialize(d)
+		case schemas.DescribeBillingGroupResponse_version:
+			return d.ReadInt64(schemas.DescribeBillingGroupResponse_version, &v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeBillingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeBillingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBillingGroup, schemas.DescribeBillingGroupRequest, schemas.DescribeBillingGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeBillingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBillingGroup, schemas.DescribeBillingGroupRequest, schemas.DescribeBillingGroupResponse), output: &DescribeBillingGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

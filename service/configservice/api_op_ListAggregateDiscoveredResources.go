@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,32 @@ type ListAggregateDiscoveredResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAggregateDiscoveredResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAggregateDiscoveredResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAggregateDiscoveredResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationAggregatorName != nil {
+		s.WriteString(schemas.ListAggregateDiscoveredResourcesRequest_ConfigurationAggregatorName, *v.ConfigurationAggregatorName)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListAggregateDiscoveredResourcesRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.ListAggregateDiscoveredResourcesRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAggregateDiscoveredResourcesRequest_NextToken, *v.NextToken)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.ListAggregateDiscoveredResourcesRequest_ResourceType, string(v.ResourceType))
+	}
+}
+
 type ListAggregateDiscoveredResourcesOutput struct {
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -75,13 +103,35 @@ type ListAggregateDiscoveredResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAggregateDiscoveredResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAggregateDiscoveredResourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAggregateDiscoveredResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAggregateDiscoveredResourcesResponse_NextToken, *v.NextToken)
+	}
+	serializeDiscoveredResourceIdentifierList(s, schemas.ListAggregateDiscoveredResourcesResponse_ResourceIdentifiers, v.ResourceIdentifiers)
+}
+func (v *ListAggregateDiscoveredResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAggregateDiscoveredResourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAggregateDiscoveredResourcesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAggregateDiscoveredResourcesResponse_NextToken, v.NextToken)
+		case schemas.ListAggregateDiscoveredResourcesResponse_ResourceIdentifiers:
+			return deserializeDiscoveredResourceIdentifierList(d, schemas.ListAggregateDiscoveredResourcesResponse_ResourceIdentifiers, &v.ResourceIdentifiers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAggregateDiscoveredResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAggregateDiscoveredResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAggregateDiscoveredResources, schemas.ListAggregateDiscoveredResourcesRequest, schemas.ListAggregateDiscoveredResourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAggregateDiscoveredResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAggregateDiscoveredResources, schemas.ListAggregateDiscoveredResourcesRequest, schemas.ListAggregateDiscoveredResourcesResponse), output: &ListAggregateDiscoveredResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

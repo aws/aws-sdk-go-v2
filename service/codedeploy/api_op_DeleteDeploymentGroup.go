@@ -4,7 +4,9 @@ package codedeploy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DeleteDeploymentGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDeploymentGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDeploymentGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDeploymentGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.DeleteDeploymentGroupInput_applicationName, *v.ApplicationName)
+	}
+	if v.DeploymentGroupName != nil {
+		s.WriteString(schemas.DeleteDeploymentGroupInput_deploymentGroupName, *v.DeploymentGroupName)
+	}
+}
+
 // Represents the output of a DeleteDeploymentGroup operation.
 type DeleteDeploymentGroupOutput struct {
 
@@ -58,13 +75,29 @@ type DeleteDeploymentGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDeploymentGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDeploymentGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDeploymentGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutoScalingGroupList(s, schemas.DeleteDeploymentGroupOutput_hooksNotCleanedUp, v.HooksNotCleanedUp)
+}
+func (v *DeleteDeploymentGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDeploymentGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDeploymentGroupOutput_hooksNotCleanedUp:
+			return deserializeAutoScalingGroupList(d, schemas.DeleteDeploymentGroupOutput_hooksNotCleanedUp, &v.HooksNotCleanedUp)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDeploymentGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDeploymentGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDeploymentGroup, schemas.DeleteDeploymentGroupInput, schemas.DeleteDeploymentGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteDeploymentGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDeploymentGroup, schemas.DeleteDeploymentGroupInput, schemas.DeleteDeploymentGroupOutput), output: &DeleteDeploymentGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

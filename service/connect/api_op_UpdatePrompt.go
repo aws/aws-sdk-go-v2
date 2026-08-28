@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,30 @@ type UpdatePromptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePromptInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePromptRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePromptInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdatePromptRequest_Description, *v.Description)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdatePromptRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdatePromptRequest_Name, *v.Name)
+	}
+	if v.PromptId != nil {
+		s.WriteString(schemas.UpdatePromptRequest_PromptId, *v.PromptId)
+	}
+	if v.S3Uri != nil {
+		s.WriteString(schemas.UpdatePromptRequest_S3Uri, *v.S3Uri)
+	}
+}
+
 type UpdatePromptOutput struct {
 
 	// The Amazon Resource Name (ARN) of the prompt.
@@ -67,13 +93,38 @@ type UpdatePromptOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePromptOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePromptResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePromptOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PromptARN != nil {
+		s.WriteString(schemas.UpdatePromptResponse_PromptARN, *v.PromptARN)
+	}
+	if v.PromptId != nil {
+		s.WriteString(schemas.UpdatePromptResponse_PromptId, *v.PromptId)
+	}
+}
+func (v *UpdatePromptOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePromptResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePromptResponse_PromptARN:
+			v.PromptARN = new(string)
+			return d.ReadString(schemas.UpdatePromptResponse_PromptARN, v.PromptARN)
+		case schemas.UpdatePromptResponse_PromptId:
+			v.PromptId = new(string)
+			return d.ReadString(schemas.UpdatePromptResponse_PromptId, v.PromptId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePromptMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePrompt{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePrompt, schemas.UpdatePromptRequest, schemas.UpdatePromptResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePrompt{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePrompt, schemas.UpdatePromptRequest, schemas.UpdatePromptResponse), output: &UpdatePromptOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

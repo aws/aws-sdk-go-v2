@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -111,6 +113,83 @@ type UpdateIntentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIntentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIntentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIntentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.UpdateIntentRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.UpdateIntentRequest_botVersion, *v.BotVersion)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateIntentRequest_description, *v.Description)
+	}
+	if v.DialogCodeHook != nil {
+		s.WriteStruct(schemas.UpdateIntentRequest_dialogCodeHook)
+		v.DialogCodeHook.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FulfillmentCodeHook != nil {
+		s.WriteStruct(schemas.UpdateIntentRequest_fulfillmentCodeHook)
+		v.FulfillmentCodeHook.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InitialResponseSetting != nil {
+		s.WriteStruct(schemas.UpdateIntentRequest_initialResponseSetting)
+		v.InitialResponseSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeInputContextsList(s, schemas.UpdateIntentRequest_inputContexts, v.InputContexts)
+	if v.IntentClosingSetting != nil {
+		s.WriteStruct(schemas.UpdateIntentRequest_intentClosingSetting)
+		v.IntentClosingSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IntentConfirmationSetting != nil {
+		s.WriteStruct(schemas.UpdateIntentRequest_intentConfirmationSetting)
+		v.IntentConfirmationSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IntentDisplayName != nil {
+		s.WriteString(schemas.UpdateIntentRequest_intentDisplayName, *v.IntentDisplayName)
+	}
+	if v.IntentId != nil {
+		s.WriteString(schemas.UpdateIntentRequest_intentId, *v.IntentId)
+	}
+	if v.IntentName != nil {
+		s.WriteString(schemas.UpdateIntentRequest_intentName, *v.IntentName)
+	}
+	if v.KendraConfiguration != nil {
+		s.WriteStruct(schemas.UpdateIntentRequest_kendraConfiguration)
+		v.KendraConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.UpdateIntentRequest_localeId, *v.LocaleId)
+	}
+	serializeOutputContextsList(s, schemas.UpdateIntentRequest_outputContexts, v.OutputContexts)
+	if v.ParentIntentSignature != nil {
+		s.WriteString(schemas.UpdateIntentRequest_parentIntentSignature, *v.ParentIntentSignature)
+	}
+	if v.QInConnectIntentConfiguration != nil {
+		s.WriteStruct(schemas.UpdateIntentRequest_qInConnectIntentConfiguration)
+		v.QInConnectIntentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QnAIntentConfiguration != nil {
+		s.WriteStruct(schemas.UpdateIntentRequest_qnAIntentConfiguration)
+		v.QnAIntentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSampleUtterancesList(s, schemas.UpdateIntentRequest_sampleUtterances, v.SampleUtterances)
+	serializeSlotPrioritiesList(s, schemas.UpdateIntentRequest_slotPriorities, v.SlotPriorities)
+}
+
 type UpdateIntentOutput struct {
 
 	// The identifier of the bot that contains the intent.
@@ -192,13 +271,162 @@ type UpdateIntentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIntentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIntentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIntentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.UpdateIntentResponse_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.UpdateIntentResponse_botVersion, *v.BotVersion)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.UpdateIntentResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateIntentResponse_description, *v.Description)
+	}
+	if v.DialogCodeHook != nil {
+		s.WriteStruct(schemas.UpdateIntentResponse_dialogCodeHook)
+		v.DialogCodeHook.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FulfillmentCodeHook != nil {
+		s.WriteStruct(schemas.UpdateIntentResponse_fulfillmentCodeHook)
+		v.FulfillmentCodeHook.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InitialResponseSetting != nil {
+		s.WriteStruct(schemas.UpdateIntentResponse_initialResponseSetting)
+		v.InitialResponseSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeInputContextsList(s, schemas.UpdateIntentResponse_inputContexts, v.InputContexts)
+	if v.IntentClosingSetting != nil {
+		s.WriteStruct(schemas.UpdateIntentResponse_intentClosingSetting)
+		v.IntentClosingSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IntentConfirmationSetting != nil {
+		s.WriteStruct(schemas.UpdateIntentResponse_intentConfirmationSetting)
+		v.IntentConfirmationSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IntentDisplayName != nil {
+		s.WriteString(schemas.UpdateIntentResponse_intentDisplayName, *v.IntentDisplayName)
+	}
+	if v.IntentId != nil {
+		s.WriteString(schemas.UpdateIntentResponse_intentId, *v.IntentId)
+	}
+	if v.IntentName != nil {
+		s.WriteString(schemas.UpdateIntentResponse_intentName, *v.IntentName)
+	}
+	if v.KendraConfiguration != nil {
+		s.WriteStruct(schemas.UpdateIntentResponse_kendraConfiguration)
+		v.KendraConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.UpdateIntentResponse_lastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.UpdateIntentResponse_localeId, *v.LocaleId)
+	}
+	serializeOutputContextsList(s, schemas.UpdateIntentResponse_outputContexts, v.OutputContexts)
+	if v.ParentIntentSignature != nil {
+		s.WriteString(schemas.UpdateIntentResponse_parentIntentSignature, *v.ParentIntentSignature)
+	}
+	if v.QInConnectIntentConfiguration != nil {
+		s.WriteStruct(schemas.UpdateIntentResponse_qInConnectIntentConfiguration)
+		v.QInConnectIntentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QnAIntentConfiguration != nil {
+		s.WriteStruct(schemas.UpdateIntentResponse_qnAIntentConfiguration)
+		v.QnAIntentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSampleUtterancesList(s, schemas.UpdateIntentResponse_sampleUtterances, v.SampleUtterances)
+	serializeSlotPrioritiesList(s, schemas.UpdateIntentResponse_slotPriorities, v.SlotPriorities)
+}
+func (v *UpdateIntentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIntentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIntentResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.UpdateIntentResponse_botId, v.BotId)
+		case schemas.UpdateIntentResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.UpdateIntentResponse_botVersion, v.BotVersion)
+		case schemas.UpdateIntentResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateIntentResponse_creationDateTime, v.CreationDateTime)
+		case schemas.UpdateIntentResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateIntentResponse_description, v.Description)
+		case schemas.UpdateIntentResponse_dialogCodeHook:
+			v.DialogCodeHook = &types.DialogCodeHookSettings{}
+			return v.DialogCodeHook.Deserialize(d)
+		case schemas.UpdateIntentResponse_fulfillmentCodeHook:
+			v.FulfillmentCodeHook = &types.FulfillmentCodeHookSettings{}
+			return v.FulfillmentCodeHook.Deserialize(d)
+		case schemas.UpdateIntentResponse_initialResponseSetting:
+			v.InitialResponseSetting = &types.InitialResponseSetting{}
+			return v.InitialResponseSetting.Deserialize(d)
+		case schemas.UpdateIntentResponse_inputContexts:
+			return deserializeInputContextsList(d, schemas.UpdateIntentResponse_inputContexts, &v.InputContexts)
+		case schemas.UpdateIntentResponse_intentClosingSetting:
+			v.IntentClosingSetting = &types.IntentClosingSetting{}
+			return v.IntentClosingSetting.Deserialize(d)
+		case schemas.UpdateIntentResponse_intentConfirmationSetting:
+			v.IntentConfirmationSetting = &types.IntentConfirmationSetting{}
+			return v.IntentConfirmationSetting.Deserialize(d)
+		case schemas.UpdateIntentResponse_intentDisplayName:
+			v.IntentDisplayName = new(string)
+			return d.ReadString(schemas.UpdateIntentResponse_intentDisplayName, v.IntentDisplayName)
+		case schemas.UpdateIntentResponse_intentId:
+			v.IntentId = new(string)
+			return d.ReadString(schemas.UpdateIntentResponse_intentId, v.IntentId)
+		case schemas.UpdateIntentResponse_intentName:
+			v.IntentName = new(string)
+			return d.ReadString(schemas.UpdateIntentResponse_intentName, v.IntentName)
+		case schemas.UpdateIntentResponse_kendraConfiguration:
+			v.KendraConfiguration = &types.KendraConfiguration{}
+			return v.KendraConfiguration.Deserialize(d)
+		case schemas.UpdateIntentResponse_lastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateIntentResponse_lastUpdatedDateTime, v.LastUpdatedDateTime)
+		case schemas.UpdateIntentResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.UpdateIntentResponse_localeId, v.LocaleId)
+		case schemas.UpdateIntentResponse_outputContexts:
+			return deserializeOutputContextsList(d, schemas.UpdateIntentResponse_outputContexts, &v.OutputContexts)
+		case schemas.UpdateIntentResponse_parentIntentSignature:
+			v.ParentIntentSignature = new(string)
+			return d.ReadString(schemas.UpdateIntentResponse_parentIntentSignature, v.ParentIntentSignature)
+		case schemas.UpdateIntentResponse_qInConnectIntentConfiguration:
+			v.QInConnectIntentConfiguration = &types.QInConnectIntentConfiguration{}
+			return v.QInConnectIntentConfiguration.Deserialize(d)
+		case schemas.UpdateIntentResponse_qnAIntentConfiguration:
+			v.QnAIntentConfiguration = &types.QnAIntentConfiguration{}
+			return v.QnAIntentConfiguration.Deserialize(d)
+		case schemas.UpdateIntentResponse_sampleUtterances:
+			return deserializeSampleUtterancesList(d, schemas.UpdateIntentResponse_sampleUtterances, &v.SampleUtterances)
+		case schemas.UpdateIntentResponse_slotPriorities:
+			return deserializeSlotPrioritiesList(d, schemas.UpdateIntentResponse_slotPriorities, &v.SlotPriorities)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIntentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIntent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIntent, schemas.UpdateIntentRequest, schemas.UpdateIntentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIntent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIntent, schemas.UpdateIntentRequest, schemas.UpdateIntentResponse), output: &UpdateIntentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

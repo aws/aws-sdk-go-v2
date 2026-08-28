@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,24 @@ type UpdateUserPoolReplicaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserPoolReplicaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserPoolReplicaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserPoolReplicaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegionName != nil {
+		s.WriteString(schemas.UpdateUserPoolReplicaRequest_RegionName, *v.RegionName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateUserPoolReplicaRequest_Status, string(v.Status))
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.UpdateUserPoolReplicaRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 type UpdateUserPoolReplicaOutput struct {
 
 	// Information about the updated user pool replica.
@@ -71,13 +91,34 @@ type UpdateUserPoolReplicaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserPoolReplicaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserPoolReplicaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserPoolReplicaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserPoolReplica != nil {
+		s.WriteStruct(schemas.UpdateUserPoolReplicaResponse_UserPoolReplica)
+		v.UserPoolReplica.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateUserPoolReplicaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateUserPoolReplicaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateUserPoolReplicaResponse_UserPoolReplica:
+			v.UserPoolReplica = &types.UserPoolReplicaType{}
+			return v.UserPoolReplica.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateUserPoolReplicaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateUserPoolReplica{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserPoolReplica, schemas.UpdateUserPoolReplicaRequest, schemas.UpdateUserPoolReplicaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateUserPoolReplica{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserPoolReplica, schemas.UpdateUserPoolReplicaRequest, schemas.UpdateUserPoolReplicaResponse), output: &UpdateUserPoolReplicaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type CreateGroupCertificateAuthorityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGroupCertificateAuthorityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGroupCertificateAuthorityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGroupCertificateAuthorityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmznClientToken != nil {
+		s.WriteString(schemas.CreateGroupCertificateAuthorityRequest_AmznClientToken, *v.AmznClientToken)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.CreateGroupCertificateAuthorityRequest_GroupId, *v.GroupId)
+	}
+}
+
 type CreateGroupCertificateAuthorityOutput struct {
 
 	// The ARN of the group certificate authority.
@@ -48,13 +65,32 @@ type CreateGroupCertificateAuthorityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGroupCertificateAuthorityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGroupCertificateAuthorityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGroupCertificateAuthorityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupCertificateAuthorityArn != nil {
+		s.WriteString(schemas.CreateGroupCertificateAuthorityResponse_GroupCertificateAuthorityArn, *v.GroupCertificateAuthorityArn)
+	}
+}
+func (v *CreateGroupCertificateAuthorityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGroupCertificateAuthorityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGroupCertificateAuthorityResponse_GroupCertificateAuthorityArn:
+			v.GroupCertificateAuthorityArn = new(string)
+			return d.ReadString(schemas.CreateGroupCertificateAuthorityResponse_GroupCertificateAuthorityArn, v.GroupCertificateAuthorityArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGroupCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateGroupCertificateAuthority{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGroupCertificateAuthority, schemas.CreateGroupCertificateAuthorityRequest, schemas.CreateGroupCertificateAuthorityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateGroupCertificateAuthority{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGroupCertificateAuthority, schemas.CreateGroupCertificateAuthorityRequest, schemas.CreateGroupCertificateAuthorityResponse), output: &CreateGroupCertificateAuthorityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

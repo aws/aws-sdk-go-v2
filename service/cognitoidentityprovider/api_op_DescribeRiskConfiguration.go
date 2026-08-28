@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,21 @@ type DescribeRiskConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRiskConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRiskConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRiskConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.DescribeRiskConfigurationRequest_ClientId, *v.ClientId)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.DescribeRiskConfigurationRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 type DescribeRiskConfigurationOutput struct {
 
 	// The details of the requested risk configuration.
@@ -63,13 +80,34 @@ type DescribeRiskConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRiskConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRiskConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRiskConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RiskConfiguration != nil {
+		s.WriteStruct(schemas.DescribeRiskConfigurationResponse_RiskConfiguration)
+		v.RiskConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeRiskConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRiskConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRiskConfigurationResponse_RiskConfiguration:
+			v.RiskConfiguration = &types.RiskConfigurationType{}
+			return v.RiskConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRiskConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRiskConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRiskConfiguration, schemas.DescribeRiskConfigurationRequest, schemas.DescribeRiskConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeRiskConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRiskConfiguration, schemas.DescribeRiskConfigurationRequest, schemas.DescribeRiskConfigurationResponse), output: &DescribeRiskConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

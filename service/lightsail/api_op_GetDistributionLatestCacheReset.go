@@ -4,6 +4,8 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -40,6 +42,18 @@ type GetDistributionLatestCacheResetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDistributionLatestCacheResetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDistributionLatestCacheResetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDistributionLatestCacheResetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DistributionName != nil {
+		s.WriteString(schemas.GetDistributionLatestCacheResetRequest_distributionName, *v.DistributionName)
+	}
+}
+
 type GetDistributionLatestCacheResetOutput struct {
 
 	// The timestamp of the last cache reset ( 1479734909.17 ) in Unix time format.
@@ -54,13 +68,38 @@ type GetDistributionLatestCacheResetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDistributionLatestCacheResetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDistributionLatestCacheResetResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDistributionLatestCacheResetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.GetDistributionLatestCacheResetResult_createTime, *v.CreateTime)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.GetDistributionLatestCacheResetResult_status, *v.Status)
+	}
+}
+func (v *GetDistributionLatestCacheResetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDistributionLatestCacheResetResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDistributionLatestCacheResetResult_createTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.GetDistributionLatestCacheResetResult_createTime, v.CreateTime)
+		case schemas.GetDistributionLatestCacheResetResult_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.GetDistributionLatestCacheResetResult_status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDistributionLatestCacheResetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDistributionLatestCacheReset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDistributionLatestCacheReset, schemas.GetDistributionLatestCacheResetRequest, schemas.GetDistributionLatestCacheResetResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDistributionLatestCacheReset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDistributionLatestCacheReset, schemas.GetDistributionLatestCacheResetRequest, schemas.GetDistributionLatestCacheResetResult), output: &GetDistributionLatestCacheResetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

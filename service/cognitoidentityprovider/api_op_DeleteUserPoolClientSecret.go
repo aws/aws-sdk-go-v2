@@ -4,6 +4,8 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type DeleteUserPoolClientSecretInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUserPoolClientSecretInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteUserPoolClientSecretRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUserPoolClientSecretInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.DeleteUserPoolClientSecretRequest_ClientId, *v.ClientId)
+	}
+	if v.ClientSecretId != nil {
+		s.WriteString(schemas.DeleteUserPoolClientSecretRequest_ClientSecretId, *v.ClientSecretId)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.DeleteUserPoolClientSecretRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 // The response from deleting a client secret.
 type DeleteUserPoolClientSecretOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -53,13 +73,26 @@ type DeleteUserPoolClientSecretOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUserPoolClientSecretOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteUserPoolClientSecretResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUserPoolClientSecretOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteUserPoolClientSecretOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteUserPoolClientSecretResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteUserPoolClientSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteUserPoolClientSecret{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUserPoolClientSecret, schemas.DeleteUserPoolClientSecretRequest, schemas.DeleteUserPoolClientSecretResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteUserPoolClientSecret{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUserPoolClientSecret, schemas.DeleteUserPoolClientSecretRequest, schemas.DeleteUserPoolClientSecretResponse), output: &DeleteUserPoolClientSecretOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

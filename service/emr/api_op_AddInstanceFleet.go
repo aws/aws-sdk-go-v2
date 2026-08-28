@@ -4,7 +4,9 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,23 @@ type AddInstanceFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddInstanceFleetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddInstanceFleetInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddInstanceFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.AddInstanceFleetInput_ClusterId, *v.ClusterId)
+	}
+	if v.InstanceFleet != nil {
+		s.WriteStruct(schemas.AddInstanceFleetInput_InstanceFleet)
+		v.InstanceFleet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type AddInstanceFleetOutput struct {
 
 	// The Amazon Resource Name of the cluster.
@@ -59,13 +78,44 @@ type AddInstanceFleetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddInstanceFleetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddInstanceFleetOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddInstanceFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.AddInstanceFleetOutput_ClusterArn, *v.ClusterArn)
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.AddInstanceFleetOutput_ClusterId, *v.ClusterId)
+	}
+	if v.InstanceFleetId != nil {
+		s.WriteString(schemas.AddInstanceFleetOutput_InstanceFleetId, *v.InstanceFleetId)
+	}
+}
+func (v *AddInstanceFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddInstanceFleetOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddInstanceFleetOutput_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.AddInstanceFleetOutput_ClusterArn, v.ClusterArn)
+		case schemas.AddInstanceFleetOutput_ClusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.AddInstanceFleetOutput_ClusterId, v.ClusterId)
+		case schemas.AddInstanceFleetOutput_InstanceFleetId:
+			v.InstanceFleetId = new(string)
+			return d.ReadString(schemas.AddInstanceFleetOutput_InstanceFleetId, v.InstanceFleetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddInstanceFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddInstanceFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddInstanceFleet, schemas.AddInstanceFleetInput, schemas.AddInstanceFleetOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddInstanceFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddInstanceFleet, schemas.AddInstanceFleetInput, schemas.AddInstanceFleetOutput), output: &AddInstanceFleetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

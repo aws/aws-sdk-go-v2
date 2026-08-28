@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -75,6 +77,36 @@ type GetJourneyDateRangeKpiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJourneyDateRangeKpiInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJourneyDateRangeKpiRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJourneyDateRangeKpiInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetJourneyDateRangeKpiRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetJourneyDateRangeKpiRequest_EndTime, *v.EndTime)
+	}
+	if v.JourneyId != nil {
+		s.WriteString(schemas.GetJourneyDateRangeKpiRequest_JourneyId, *v.JourneyId)
+	}
+	if v.KpiName != nil {
+		s.WriteString(schemas.GetJourneyDateRangeKpiRequest_KpiName, *v.KpiName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetJourneyDateRangeKpiRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteString(schemas.GetJourneyDateRangeKpiRequest_PageSize, *v.PageSize)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetJourneyDateRangeKpiRequest_StartTime, *v.StartTime)
+	}
+}
+
 type GetJourneyDateRangeKpiOutput struct {
 
 	// Provides the results of a query that retrieved the data for a standard
@@ -90,13 +122,34 @@ type GetJourneyDateRangeKpiOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJourneyDateRangeKpiOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJourneyDateRangeKpiResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJourneyDateRangeKpiOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JourneyDateRangeKpiResponse != nil {
+		s.WriteStruct(schemas.GetJourneyDateRangeKpiResponse_JourneyDateRangeKpiResponse)
+		v.JourneyDateRangeKpiResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetJourneyDateRangeKpiOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetJourneyDateRangeKpiResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetJourneyDateRangeKpiResponse_JourneyDateRangeKpiResponse:
+			v.JourneyDateRangeKpiResponse = &types.JourneyDateRangeKpiResponse{}
+			return v.JourneyDateRangeKpiResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetJourneyDateRangeKpiMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetJourneyDateRangeKpi{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJourneyDateRangeKpi, schemas.GetJourneyDateRangeKpiRequest, schemas.GetJourneyDateRangeKpiResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetJourneyDateRangeKpi{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJourneyDateRangeKpi, schemas.GetJourneyDateRangeKpiRequest, schemas.GetJourneyDateRangeKpiResponse), output: &GetJourneyDateRangeKpiOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package athena
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetNamedQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNamedQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNamedQueryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNamedQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NamedQueryId != nil {
+		s.WriteString(schemas.GetNamedQueryInput_NamedQueryId, *v.NamedQueryId)
+	}
+}
+
 type GetNamedQueryOutput struct {
 
 	// Information about the query.
@@ -46,13 +60,34 @@ type GetNamedQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNamedQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNamedQueryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNamedQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NamedQuery != nil {
+		s.WriteStruct(schemas.GetNamedQueryOutput_NamedQuery)
+		v.NamedQuery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetNamedQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNamedQueryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNamedQueryOutput_NamedQuery:
+			v.NamedQuery = &types.NamedQuery{}
+			return v.NamedQuery.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetNamedQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetNamedQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNamedQuery, schemas.GetNamedQueryInput, schemas.GetNamedQueryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetNamedQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNamedQuery, schemas.GetNamedQueryInput, schemas.GetNamedQueryOutput), output: &GetNamedQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

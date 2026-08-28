@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,27 @@ type DescribeEntitlementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEntitlementsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEntitlementsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEntitlementsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeEntitlementsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeEntitlementsRequest_Name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEntitlementsRequest_NextToken, *v.NextToken)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.DescribeEntitlementsRequest_StackName, *v.StackName)
+	}
+}
+
 type DescribeEntitlementsOutput struct {
 
 	// The entitlements.
@@ -59,13 +82,35 @@ type DescribeEntitlementsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEntitlementsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEntitlementsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEntitlementsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntitlementList(s, schemas.DescribeEntitlementsResult_Entitlements, v.Entitlements)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEntitlementsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeEntitlementsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEntitlementsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEntitlementsResult_Entitlements:
+			return deserializeEntitlementList(d, schemas.DescribeEntitlementsResult_Entitlements, &v.Entitlements)
+		case schemas.DescribeEntitlementsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeEntitlementsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEntitlementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeEntitlements{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEntitlements, schemas.DescribeEntitlementsRequest, schemas.DescribeEntitlementsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeEntitlements{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEntitlements, schemas.DescribeEntitlementsRequest, schemas.DescribeEntitlementsResult), output: &DescribeEntitlementsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

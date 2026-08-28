@@ -5,6 +5,8 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,27 @@ type UpgradeProfileVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpgradeProfileVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpgradeProfileVersionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpgradeProfileVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpgradeProfileVersionInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.MilestoneName != nil {
+		s.WriteString(schemas.UpgradeProfileVersionInput_MilestoneName, *v.MilestoneName)
+	}
+	if v.ProfileArn != nil {
+		s.WriteString(schemas.UpgradeProfileVersionInput_ProfileArn, *v.ProfileArn)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.UpgradeProfileVersionInput_WorkloadId, *v.WorkloadId)
+	}
+}
+
 type UpgradeProfileVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,13 +89,26 @@ type UpgradeProfileVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpgradeProfileVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpgradeProfileVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpgradeProfileVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpgradeProfileVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpgradeProfileVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpgradeProfileVersion, schemas.UpgradeProfileVersionInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpgradeProfileVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpgradeProfileVersion, schemas.UpgradeProfileVersionInput, nil), output: &UpgradeProfileVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

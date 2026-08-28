@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,21 @@ type DescribeFeatureGroupInput struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeFeatureGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFeatureGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFeatureGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FeatureGroupName != nil {
+		s.WriteString(schemas.DescribeFeatureGroupRequest_FeatureGroupName, *v.FeatureGroupName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFeatureGroupRequest_NextToken, *v.NextToken)
+	}
 }
 
 type DescribeFeatureGroupOutput struct {
@@ -155,13 +172,145 @@ type DescribeFeatureGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFeatureGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFeatureGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFeatureGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeFeatureGroupResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeFeatureGroupResponse_Description, *v.Description)
+	}
+	if v.EventTimeFeatureName != nil {
+		s.WriteString(schemas.DescribeFeatureGroupResponse_EventTimeFeatureName, *v.EventTimeFeatureName)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeFeatureGroupResponse_FailureReason, *v.FailureReason)
+	}
+	serializeFeatureDefinitions(s, schemas.DescribeFeatureGroupResponse_FeatureDefinitions, v.FeatureDefinitions)
+	if v.FeatureGroupArn != nil {
+		s.WriteString(schemas.DescribeFeatureGroupResponse_FeatureGroupArn, *v.FeatureGroupArn)
+	}
+	if v.FeatureGroupName != nil {
+		s.WriteString(schemas.DescribeFeatureGroupResponse_FeatureGroupName, *v.FeatureGroupName)
+	}
+	if v.FeatureGroupStatus != "" {
+		s.WriteString(schemas.DescribeFeatureGroupResponse_FeatureGroupStatus, string(v.FeatureGroupStatus))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeFeatureGroupResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.LastUpdateStatus != nil {
+		s.WriteStruct(schemas.DescribeFeatureGroupResponse_LastUpdateStatus)
+		v.LastUpdateStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFeatureGroupResponse_NextToken, *v.NextToken)
+	}
+	if v.OfflineStoreConfig != nil {
+		s.WriteStruct(schemas.DescribeFeatureGroupResponse_OfflineStoreConfig)
+		v.OfflineStoreConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OfflineStoreStatus != nil {
+		s.WriteStruct(schemas.DescribeFeatureGroupResponse_OfflineStoreStatus)
+		v.OfflineStoreStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OnlineStoreConfig != nil {
+		s.WriteStruct(schemas.DescribeFeatureGroupResponse_OnlineStoreConfig)
+		v.OnlineStoreConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OnlineStoreTotalSizeBytes != nil {
+		s.WriteInt64(schemas.DescribeFeatureGroupResponse_OnlineStoreTotalSizeBytes, *v.OnlineStoreTotalSizeBytes)
+	}
+	if v.RecordIdentifierFeatureName != nil {
+		s.WriteString(schemas.DescribeFeatureGroupResponse_RecordIdentifierFeatureName, *v.RecordIdentifierFeatureName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeFeatureGroupResponse_RoleArn, *v.RoleArn)
+	}
+	if v.ThroughputConfig != nil {
+		s.WriteStruct(schemas.DescribeFeatureGroupResponse_ThroughputConfig)
+		v.ThroughputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeFeatureGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFeatureGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFeatureGroupResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeFeatureGroupResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeFeatureGroupResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeFeatureGroupResponse_Description, v.Description)
+		case schemas.DescribeFeatureGroupResponse_EventTimeFeatureName:
+			v.EventTimeFeatureName = new(string)
+			return d.ReadString(schemas.DescribeFeatureGroupResponse_EventTimeFeatureName, v.EventTimeFeatureName)
+		case schemas.DescribeFeatureGroupResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeFeatureGroupResponse_FailureReason, v.FailureReason)
+		case schemas.DescribeFeatureGroupResponse_FeatureDefinitions:
+			return deserializeFeatureDefinitions(d, schemas.DescribeFeatureGroupResponse_FeatureDefinitions, &v.FeatureDefinitions)
+		case schemas.DescribeFeatureGroupResponse_FeatureGroupArn:
+			v.FeatureGroupArn = new(string)
+			return d.ReadString(schemas.DescribeFeatureGroupResponse_FeatureGroupArn, v.FeatureGroupArn)
+		case schemas.DescribeFeatureGroupResponse_FeatureGroupName:
+			v.FeatureGroupName = new(string)
+			return d.ReadString(schemas.DescribeFeatureGroupResponse_FeatureGroupName, v.FeatureGroupName)
+		case schemas.DescribeFeatureGroupResponse_FeatureGroupStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeFeatureGroupResponse_FeatureGroupStatus, &ev); err != nil {
+				return err
+			}
+			v.FeatureGroupStatus = types.FeatureGroupStatus(ev)
+			return nil
+		case schemas.DescribeFeatureGroupResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeFeatureGroupResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeFeatureGroupResponse_LastUpdateStatus:
+			v.LastUpdateStatus = &types.LastUpdateStatus{}
+			return v.LastUpdateStatus.Deserialize(d)
+		case schemas.DescribeFeatureGroupResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeFeatureGroupResponse_NextToken, v.NextToken)
+		case schemas.DescribeFeatureGroupResponse_OfflineStoreConfig:
+			v.OfflineStoreConfig = &types.OfflineStoreConfig{}
+			return v.OfflineStoreConfig.Deserialize(d)
+		case schemas.DescribeFeatureGroupResponse_OfflineStoreStatus:
+			v.OfflineStoreStatus = &types.OfflineStoreStatus{}
+			return v.OfflineStoreStatus.Deserialize(d)
+		case schemas.DescribeFeatureGroupResponse_OnlineStoreConfig:
+			v.OnlineStoreConfig = &types.OnlineStoreConfig{}
+			return v.OnlineStoreConfig.Deserialize(d)
+		case schemas.DescribeFeatureGroupResponse_OnlineStoreTotalSizeBytes:
+			v.OnlineStoreTotalSizeBytes = new(int64)
+			return d.ReadInt64(schemas.DescribeFeatureGroupResponse_OnlineStoreTotalSizeBytes, v.OnlineStoreTotalSizeBytes)
+		case schemas.DescribeFeatureGroupResponse_RecordIdentifierFeatureName:
+			v.RecordIdentifierFeatureName = new(string)
+			return d.ReadString(schemas.DescribeFeatureGroupResponse_RecordIdentifierFeatureName, v.RecordIdentifierFeatureName)
+		case schemas.DescribeFeatureGroupResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeFeatureGroupResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeFeatureGroupResponse_ThroughputConfig:
+			v.ThroughputConfig = &types.ThroughputConfigDescription{}
+			return v.ThroughputConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFeatureGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFeatureGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFeatureGroup, schemas.DescribeFeatureGroupRequest, schemas.DescribeFeatureGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeFeatureGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFeatureGroup, schemas.DescribeFeatureGroupRequest, schemas.DescribeFeatureGroupResponse), output: &DescribeFeatureGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

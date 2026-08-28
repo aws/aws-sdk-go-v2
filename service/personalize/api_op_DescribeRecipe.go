@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,18 @@ type DescribeRecipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRecipeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRecipeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRecipeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecipeArn != nil {
+		s.WriteString(schemas.DescribeRecipeRequest_recipeArn, *v.RecipeArn)
+	}
+}
+
 type DescribeRecipeOutput struct {
 
 	// An object that describes the recipe.
@@ -62,13 +76,34 @@ type DescribeRecipeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRecipeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRecipeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRecipeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Recipe != nil {
+		s.WriteStruct(schemas.DescribeRecipeResponse_recipe)
+		v.Recipe.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeRecipeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRecipeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRecipeResponse_recipe:
+			v.Recipe = &types.Recipe{}
+			return v.Recipe.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRecipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRecipe, schemas.DescribeRecipeRequest, schemas.DescribeRecipeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeRecipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRecipe, schemas.DescribeRecipeRequest, schemas.DescribeRecipeResponse), output: &DescribeRecipeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

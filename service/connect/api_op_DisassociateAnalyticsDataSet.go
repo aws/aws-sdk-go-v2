@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type DisassociateAnalyticsDataSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateAnalyticsDataSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateAnalyticsDataSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateAnalyticsDataSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSetId != nil {
+		s.WriteString(schemas.DisassociateAnalyticsDataSetRequest_DataSetId, *v.DataSetId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DisassociateAnalyticsDataSetRequest_InstanceId, *v.InstanceId)
+	}
+	if v.TargetAccountId != nil {
+		s.WriteString(schemas.DisassociateAnalyticsDataSetRequest_TargetAccountId, *v.TargetAccountId)
+	}
+}
+
 type DisassociateAnalyticsDataSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +74,26 @@ type DisassociateAnalyticsDataSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateAnalyticsDataSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateAnalyticsDataSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateAnalyticsDataSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateAnalyticsDataSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateAnalyticsDataSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateAnalyticsDataSet, schemas.DisassociateAnalyticsDataSetRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateAnalyticsDataSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateAnalyticsDataSet, schemas.DisassociateAnalyticsDataSetRequest, nil), output: &DisassociateAnalyticsDataSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

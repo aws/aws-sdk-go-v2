@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -42,6 +44,21 @@ type GetPackageVersionInput struct {
 	VersionName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetPackageVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPackageVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPackageVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PackageName != nil {
+		s.WriteString(schemas.GetPackageVersionRequest_packageName, *v.PackageName)
+	}
+	if v.VersionName != nil {
+		s.WriteString(schemas.GetPackageVersionRequest_versionName, *v.VersionName)
+	}
 }
 
 type GetPackageVersionOutput struct {
@@ -96,13 +113,113 @@ type GetPackageVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPackageVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPackageVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPackageVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Artifact != nil {
+		s.WriteStruct(schemas.GetPackageVersionResponse_artifact)
+		v.Artifact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResourceAttributes(s, schemas.GetPackageVersionResponse_attributes, v.Attributes)
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.GetPackageVersionResponse_creationDate, *v.CreationDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetPackageVersionResponse_description, *v.Description)
+	}
+	if v.ErrorReason != nil {
+		s.WriteString(schemas.GetPackageVersionResponse_errorReason, *v.ErrorReason)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.GetPackageVersionResponse_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.PackageName != nil {
+		s.WriteString(schemas.GetPackageVersionResponse_packageName, *v.PackageName)
+	}
+	if v.PackageVersionArn != nil {
+		s.WriteString(schemas.GetPackageVersionResponse_packageVersionArn, *v.PackageVersionArn)
+	}
+	if v.Recipe != nil {
+		s.WriteString(schemas.GetPackageVersionResponse_recipe, *v.Recipe)
+	}
+	if v.Sbom != nil {
+		s.WriteStruct(schemas.GetPackageVersionResponse_sbom)
+		v.Sbom.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SbomValidationStatus != "" {
+		s.WriteString(schemas.GetPackageVersionResponse_sbomValidationStatus, string(v.SbomValidationStatus))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetPackageVersionResponse_status, string(v.Status))
+	}
+	if v.VersionName != nil {
+		s.WriteString(schemas.GetPackageVersionResponse_versionName, *v.VersionName)
+	}
+}
+func (v *GetPackageVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPackageVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPackageVersionResponse_artifact:
+			v.Artifact = &types.PackageVersionArtifact{}
+			return v.Artifact.Deserialize(d)
+		case schemas.GetPackageVersionResponse_attributes:
+			return deserializeResourceAttributes(d, schemas.GetPackageVersionResponse_attributes, &v.Attributes)
+		case schemas.GetPackageVersionResponse_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.GetPackageVersionResponse_creationDate, v.CreationDate)
+		case schemas.GetPackageVersionResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetPackageVersionResponse_description, v.Description)
+		case schemas.GetPackageVersionResponse_errorReason:
+			v.ErrorReason = new(string)
+			return d.ReadString(schemas.GetPackageVersionResponse_errorReason, v.ErrorReason)
+		case schemas.GetPackageVersionResponse_lastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.GetPackageVersionResponse_lastModifiedDate, v.LastModifiedDate)
+		case schemas.GetPackageVersionResponse_packageName:
+			v.PackageName = new(string)
+			return d.ReadString(schemas.GetPackageVersionResponse_packageName, v.PackageName)
+		case schemas.GetPackageVersionResponse_packageVersionArn:
+			v.PackageVersionArn = new(string)
+			return d.ReadString(schemas.GetPackageVersionResponse_packageVersionArn, v.PackageVersionArn)
+		case schemas.GetPackageVersionResponse_recipe:
+			v.Recipe = new(string)
+			return d.ReadString(schemas.GetPackageVersionResponse_recipe, v.Recipe)
+		case schemas.GetPackageVersionResponse_sbom:
+			v.Sbom = &types.Sbom{}
+			return v.Sbom.Deserialize(d)
+		case schemas.GetPackageVersionResponse_sbomValidationStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetPackageVersionResponse_sbomValidationStatus, &ev); err != nil {
+				return err
+			}
+			v.SbomValidationStatus = types.SbomValidationStatus(ev)
+			return nil
+		case schemas.GetPackageVersionResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetPackageVersionResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PackageVersionStatus(ev)
+			return nil
+		case schemas.GetPackageVersionResponse_versionName:
+			v.VersionName = new(string)
+			return d.ReadString(schemas.GetPackageVersionResponse_versionName, v.VersionName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPackageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPackageVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPackageVersion, schemas.GetPackageVersionRequest, schemas.GetPackageVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPackageVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPackageVersion, schemas.GetPackageVersionRequest, schemas.GetPackageVersionResponse), output: &GetPackageVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

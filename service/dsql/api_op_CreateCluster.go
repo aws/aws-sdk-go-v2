@@ -5,7 +5,9 @@ package dsql
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dsql/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dsql/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -108,6 +110,36 @@ type CreateClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BypassPolicyLockoutSafetyCheck != false {
+		s.WriteBool(schemas.CreateClusterInput_bypassPolicyLockoutSafetyCheck, v.BypassPolicyLockoutSafetyCheck)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateClusterInput_clientToken, *v.ClientToken)
+	}
+	if v.DeletionProtectionEnabled != nil {
+		s.WriteBool(schemas.CreateClusterInput_deletionProtectionEnabled, *v.DeletionProtectionEnabled)
+	}
+	if v.KmsEncryptionKey != nil {
+		s.WriteString(schemas.CreateClusterInput_kmsEncryptionKey, *v.KmsEncryptionKey)
+	}
+	if v.MultiRegionProperties != nil {
+		s.WriteStruct(schemas.CreateClusterInput_multiRegionProperties)
+		v.MultiRegionProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.CreateClusterInput_policy, *v.Policy)
+	}
+	serializeTagMap(s, schemas.CreateClusterInput_tags, v.Tags)
+}
+
 // The output of a created cluster.
 type CreateClusterOutput struct {
 
@@ -153,13 +185,82 @@ type CreateClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateClusterOutput_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.CreateClusterOutput_creationTime, *v.CreationTime)
+	}
+	if v.DeletionProtectionEnabled != nil {
+		s.WriteBool(schemas.CreateClusterOutput_deletionProtectionEnabled, *v.DeletionProtectionEnabled)
+	}
+	if v.EncryptionDetails != nil {
+		s.WriteStruct(schemas.CreateClusterOutput_encryptionDetails)
+		v.EncryptionDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Endpoint != nil {
+		s.WriteString(schemas.CreateClusterOutput_endpoint, *v.Endpoint)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.CreateClusterOutput_identifier, *v.Identifier)
+	}
+	if v.MultiRegionProperties != nil {
+		s.WriteStruct(schemas.CreateClusterOutput_multiRegionProperties)
+		v.MultiRegionProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateClusterOutput_status, string(v.Status))
+	}
+}
+func (v *CreateClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateClusterOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateClusterOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateClusterOutput_arn, v.Arn)
+		case schemas.CreateClusterOutput_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CreateClusterOutput_creationTime, v.CreationTime)
+		case schemas.CreateClusterOutput_deletionProtectionEnabled:
+			v.DeletionProtectionEnabled = new(bool)
+			return d.ReadBool(schemas.CreateClusterOutput_deletionProtectionEnabled, v.DeletionProtectionEnabled)
+		case schemas.CreateClusterOutput_encryptionDetails:
+			v.EncryptionDetails = &types.EncryptionDetails{}
+			return v.EncryptionDetails.Deserialize(d)
+		case schemas.CreateClusterOutput_endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.CreateClusterOutput_endpoint, v.Endpoint)
+		case schemas.CreateClusterOutput_identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.CreateClusterOutput_identifier, v.Identifier)
+		case schemas.CreateClusterOutput_multiRegionProperties:
+			v.MultiRegionProperties = &types.MultiRegionProperties{}
+			return v.MultiRegionProperties.Deserialize(d)
+		case schemas.CreateClusterOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateClusterOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ClusterStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCluster, schemas.CreateClusterInput, schemas.CreateClusterOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCluster, schemas.CreateClusterInput, schemas.CreateClusterOutput), output: &CreateClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

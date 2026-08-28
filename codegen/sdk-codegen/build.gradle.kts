@@ -549,14 +549,14 @@ tasks.register("generate-smithy-build") {
         val useLegacySerdeServices = buildList {
             //addAll(w03_awsJson)
             //addAll(w04_awsJson)
-            addAll(w05_awsJson)
+            //addAll(w05_awsJson)
             addAll(w06_awsJson)
             addAll(w07_awsJson)
             addAll(w08_awsJson)
 
             //addAll(w09_restJson1)
             //addAll(w10_restJson1)
-            addAll(w11_restJson1)
+            //addAll(w11_restJson1)
             addAll(w12_restJson1)
             addAll(w13_restJson1)
             addAll(w14_restJson1)

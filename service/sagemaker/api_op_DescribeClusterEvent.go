@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type DescribeClusterEventInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterEventInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClusterEventRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterEventInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.DescribeClusterEventRequest_ClusterName, *v.ClusterName)
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.DescribeClusterEventRequest_EventId, *v.EventId)
+	}
+}
+
 type DescribeClusterEventOutput struct {
 
 	// Detailed information about the requested cluster event, including event
@@ -56,13 +73,34 @@ type DescribeClusterEventOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterEventOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClusterEventResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterEventOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventDetails != nil {
+		s.WriteStruct(schemas.DescribeClusterEventResponse_EventDetails)
+		v.EventDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeClusterEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeClusterEventResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeClusterEventResponse_EventDetails:
+			v.EventDetails = &types.ClusterEventDetail{}
+			return v.EventDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeClusterEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeClusterEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusterEvent, schemas.DescribeClusterEventRequest, schemas.DescribeClusterEventResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeClusterEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClusterEvent, schemas.DescribeClusterEventRequest, schemas.DescribeClusterEventResponse), output: &DescribeClusterEventOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

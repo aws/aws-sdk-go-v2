@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type DeleteIntermediateTableAnalysisRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIntermediateTableAnalysisRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIntermediateTableAnalysisRuleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIntermediateTableAnalysisRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisRuleType != "" {
+		s.WriteString(schemas.DeleteIntermediateTableAnalysisRuleInput_analysisRuleType, string(v.AnalysisRuleType))
+	}
+	if v.IntermediateTableIdentifier != nil {
+		s.WriteString(schemas.DeleteIntermediateTableAnalysisRuleInput_intermediateTableIdentifier, *v.IntermediateTableIdentifier)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.DeleteIntermediateTableAnalysisRuleInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+
 type DeleteIntermediateTableAnalysisRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +74,26 @@ type DeleteIntermediateTableAnalysisRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIntermediateTableAnalysisRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIntermediateTableAnalysisRuleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIntermediateTableAnalysisRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteIntermediateTableAnalysisRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteIntermediateTableAnalysisRuleOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteIntermediateTableAnalysisRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteIntermediateTableAnalysisRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIntermediateTableAnalysisRule, schemas.DeleteIntermediateTableAnalysisRuleInput, schemas.DeleteIntermediateTableAnalysisRuleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteIntermediateTableAnalysisRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIntermediateTableAnalysisRule, schemas.DeleteIntermediateTableAnalysisRuleInput, schemas.DeleteIntermediateTableAnalysisRuleOutput), output: &DeleteIntermediateTableAnalysisRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

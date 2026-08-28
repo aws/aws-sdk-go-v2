@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,36 @@ type UpdateWorkspacePageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkspacePageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkspacePageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkspacePageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputData != nil {
+		s.WriteString(schemas.UpdateWorkspacePageRequest_InputData, *v.InputData)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateWorkspacePageRequest_InstanceId, *v.InstanceId)
+	}
+	if v.NewPage != nil {
+		s.WriteString(schemas.UpdateWorkspacePageRequest_NewPage, *v.NewPage)
+	}
+	if v.Page != nil {
+		s.WriteString(schemas.UpdateWorkspacePageRequest_Page, *v.Page)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.UpdateWorkspacePageRequest_ResourceArn, *v.ResourceArn)
+	}
+	if v.Slug != nil {
+		s.WriteString(schemas.UpdateWorkspacePageRequest_Slug, *v.Slug)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.UpdateWorkspacePageRequest_WorkspaceId, *v.WorkspaceId)
+	}
+}
+
 type UpdateWorkspacePageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,13 +98,26 @@ type UpdateWorkspacePageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkspacePageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkspacePageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkspacePageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateWorkspacePageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkspacePageResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkspacePageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWorkspacePage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkspacePage, schemas.UpdateWorkspacePageRequest, schemas.UpdateWorkspacePageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWorkspacePage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkspacePage, schemas.UpdateWorkspacePageRequest, schemas.UpdateWorkspacePageResponse), output: &UpdateWorkspacePageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

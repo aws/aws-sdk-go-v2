@@ -5,7 +5,9 @@ package route53resolver
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type ListResolverEndpointIpAddressesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResolverEndpointIpAddressesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResolverEndpointIpAddressesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResolverEndpointIpAddressesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResolverEndpointIpAddressesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResolverEndpointIpAddressesRequest_NextToken, *v.NextToken)
+	}
+	if v.ResolverEndpointId != nil {
+		s.WriteString(schemas.ListResolverEndpointIpAddressesRequest_ResolverEndpointId, *v.ResolverEndpointId)
+	}
+}
+
 type ListResolverEndpointIpAddressesOutput struct {
 
 	// Information about the IP addresses in your VPC that DNS queries originate from
@@ -70,13 +90,41 @@ type ListResolverEndpointIpAddressesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResolverEndpointIpAddressesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResolverEndpointIpAddressesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResolverEndpointIpAddressesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIpAddressesResponse(s, schemas.ListResolverEndpointIpAddressesResponse_IpAddresses, v.IpAddresses)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResolverEndpointIpAddressesResponse_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResolverEndpointIpAddressesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListResolverEndpointIpAddressesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResolverEndpointIpAddressesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResolverEndpointIpAddressesResponse_IpAddresses:
+			return deserializeIpAddressesResponse(d, schemas.ListResolverEndpointIpAddressesResponse_IpAddresses, &v.IpAddresses)
+		case schemas.ListResolverEndpointIpAddressesResponse_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListResolverEndpointIpAddressesResponse_MaxResults, v.MaxResults)
+		case schemas.ListResolverEndpointIpAddressesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResolverEndpointIpAddressesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResolverEndpointIpAddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResolverEndpointIpAddresses{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResolverEndpointIpAddresses, schemas.ListResolverEndpointIpAddressesRequest, schemas.ListResolverEndpointIpAddressesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListResolverEndpointIpAddresses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResolverEndpointIpAddresses, schemas.ListResolverEndpointIpAddressesRequest, schemas.ListResolverEndpointIpAddressesResponse), output: &ListResolverEndpointIpAddressesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

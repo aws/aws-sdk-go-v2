@@ -4,7 +4,9 @@ package wellarchitected
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetReviewTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReviewTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReviewTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReviewTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.GetReviewTemplateInput_TemplateArn, *v.TemplateArn)
+	}
+}
+
 type GetReviewTemplateOutput struct {
 
 	// The review template.
@@ -45,13 +59,34 @@ type GetReviewTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReviewTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReviewTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReviewTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReviewTemplate != nil {
+		s.WriteStruct(schemas.GetReviewTemplateOutput_ReviewTemplate)
+		v.ReviewTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetReviewTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetReviewTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetReviewTemplateOutput_ReviewTemplate:
+			v.ReviewTemplate = &types.ReviewTemplate{}
+			return v.ReviewTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetReviewTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetReviewTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReviewTemplate, schemas.GetReviewTemplateInput, schemas.GetReviewTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetReviewTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReviewTemplate, schemas.GetReviewTemplateInput, schemas.GetReviewTemplateOutput), output: &GetReviewTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

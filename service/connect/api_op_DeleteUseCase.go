@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type DeleteUseCaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUseCaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteUseCaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUseCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeleteUseCaseRequest_InstanceId, *v.InstanceId)
+	}
+	if v.IntegrationAssociationId != nil {
+		s.WriteString(schemas.DeleteUseCaseRequest_IntegrationAssociationId, *v.IntegrationAssociationId)
+	}
+	if v.UseCaseId != nil {
+		s.WriteString(schemas.DeleteUseCaseRequest_UseCaseId, *v.UseCaseId)
+	}
+}
+
 type DeleteUseCaseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +73,26 @@ type DeleteUseCaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUseCaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUseCaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteUseCaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteUseCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteUseCase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUseCase, schemas.DeleteUseCaseRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteUseCase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUseCase, schemas.DeleteUseCaseRequest, nil), output: &DeleteUseCaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

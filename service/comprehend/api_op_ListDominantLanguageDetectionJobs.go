@@ -5,7 +5,9 @@ package comprehend
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,26 @@ type ListDominantLanguageDetectionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDominantLanguageDetectionJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDominantLanguageDetectionJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDominantLanguageDetectionJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListDominantLanguageDetectionJobsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDominantLanguageDetectionJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDominantLanguageDetectionJobsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDominantLanguageDetectionJobsOutput struct {
 
 	// A list containing the properties of each job that is returned.
@@ -55,13 +77,35 @@ type ListDominantLanguageDetectionJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDominantLanguageDetectionJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDominantLanguageDetectionJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDominantLanguageDetectionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDominantLanguageDetectionJobPropertiesList(s, schemas.ListDominantLanguageDetectionJobsResponse_DominantLanguageDetectionJobPropertiesList, v.DominantLanguageDetectionJobPropertiesList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDominantLanguageDetectionJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDominantLanguageDetectionJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDominantLanguageDetectionJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDominantLanguageDetectionJobsResponse_DominantLanguageDetectionJobPropertiesList:
+			return deserializeDominantLanguageDetectionJobPropertiesList(d, schemas.ListDominantLanguageDetectionJobsResponse_DominantLanguageDetectionJobPropertiesList, &v.DominantLanguageDetectionJobPropertiesList)
+		case schemas.ListDominantLanguageDetectionJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDominantLanguageDetectionJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDominantLanguageDetectionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDominantLanguageDetectionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDominantLanguageDetectionJobs, schemas.ListDominantLanguageDetectionJobsRequest, schemas.ListDominantLanguageDetectionJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDominantLanguageDetectionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDominantLanguageDetectionJobs, schemas.ListDominantLanguageDetectionJobsRequest, schemas.ListDominantLanguageDetectionJobsResponse), output: &ListDominantLanguageDetectionJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

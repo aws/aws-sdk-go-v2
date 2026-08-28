@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,19 @@ type UpdateEndpointWeightsAndCapacitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEndpointWeightsAndCapacitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEndpointWeightsAndCapacitiesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEndpointWeightsAndCapacitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDesiredWeightAndCapacityList(s, schemas.UpdateEndpointWeightsAndCapacitiesInput_DesiredWeightsAndCapacities, v.DesiredWeightsAndCapacities)
+	if v.EndpointName != nil {
+		s.WriteString(schemas.UpdateEndpointWeightsAndCapacitiesInput_EndpointName, *v.EndpointName)
+	}
+}
+
 type UpdateEndpointWeightsAndCapacitiesOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated endpoint.
@@ -58,13 +73,32 @@ type UpdateEndpointWeightsAndCapacitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEndpointWeightsAndCapacitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEndpointWeightsAndCapacitiesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEndpointWeightsAndCapacitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointArn != nil {
+		s.WriteString(schemas.UpdateEndpointWeightsAndCapacitiesOutput_EndpointArn, *v.EndpointArn)
+	}
+}
+func (v *UpdateEndpointWeightsAndCapacitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEndpointWeightsAndCapacitiesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEndpointWeightsAndCapacitiesOutput_EndpointArn:
+			v.EndpointArn = new(string)
+			return d.ReadString(schemas.UpdateEndpointWeightsAndCapacitiesOutput_EndpointArn, v.EndpointArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEndpointWeightsAndCapacitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateEndpointWeightsAndCapacities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEndpointWeightsAndCapacities, schemas.UpdateEndpointWeightsAndCapacitiesInput, schemas.UpdateEndpointWeightsAndCapacitiesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateEndpointWeightsAndCapacities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEndpointWeightsAndCapacities, schemas.UpdateEndpointWeightsAndCapacitiesInput, schemas.UpdateEndpointWeightsAndCapacitiesOutput), output: &UpdateEndpointWeightsAndCapacitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

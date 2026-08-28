@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,21 @@ type GetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupName != nil {
+		s.WriteString(schemas.GetGroupRequest_GroupName, *v.GroupName)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.GetGroupRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 type GetGroupOutput struct {
 
 	// A container for the requested group. Includes description, precedence, and IAM
@@ -68,13 +85,34 @@ type GetGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Group != nil {
+		s.WriteStruct(schemas.GetGroupResponse_Group)
+		v.Group.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGroupResponse_Group:
+			v.Group = &types.GroupType{}
+			return v.Group.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGroup, schemas.GetGroupRequest, schemas.GetGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGroup, schemas.GetGroupRequest, schemas.GetGroupResponse), output: &GetGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

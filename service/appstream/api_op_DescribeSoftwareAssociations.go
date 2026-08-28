@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type DescribeSoftwareAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSoftwareAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSoftwareAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSoftwareAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedResource != nil {
+		s.WriteString(schemas.DescribeSoftwareAssociationsRequest_AssociatedResource, *v.AssociatedResource)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeSoftwareAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSoftwareAssociationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeSoftwareAssociationsOutput struct {
 
 	// The ARN of the resource to describe software associations.
@@ -68,13 +88,41 @@ type DescribeSoftwareAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSoftwareAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSoftwareAssociationsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSoftwareAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedResource != nil {
+		s.WriteString(schemas.DescribeSoftwareAssociationsResult_AssociatedResource, *v.AssociatedResource)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSoftwareAssociationsResult_NextToken, *v.NextToken)
+	}
+	serializeSoftwareAssociationsList(s, schemas.DescribeSoftwareAssociationsResult_SoftwareAssociations, v.SoftwareAssociations)
+}
+func (v *DescribeSoftwareAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSoftwareAssociationsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSoftwareAssociationsResult_AssociatedResource:
+			v.AssociatedResource = new(string)
+			return d.ReadString(schemas.DescribeSoftwareAssociationsResult_AssociatedResource, v.AssociatedResource)
+		case schemas.DescribeSoftwareAssociationsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeSoftwareAssociationsResult_NextToken, v.NextToken)
+		case schemas.DescribeSoftwareAssociationsResult_SoftwareAssociations:
+			return deserializeSoftwareAssociationsList(d, schemas.DescribeSoftwareAssociationsResult_SoftwareAssociations, &v.SoftwareAssociations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSoftwareAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeSoftwareAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSoftwareAssociations, schemas.DescribeSoftwareAssociationsRequest, schemas.DescribeSoftwareAssociationsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeSoftwareAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSoftwareAssociations, schemas.DescribeSoftwareAssociationsRequest, schemas.DescribeSoftwareAssociationsResult), output: &DescribeSoftwareAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -100,6 +102,41 @@ type CreateModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContainerDefinitionList(s, schemas.CreateModelInput_Containers, v.Containers)
+	if v.EnableNetworkIsolation != nil {
+		s.WriteBool(schemas.CreateModelInput_EnableNetworkIsolation, *v.EnableNetworkIsolation)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.CreateModelInput_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.InferenceExecutionConfig != nil {
+		s.WriteStruct(schemas.CreateModelInput_InferenceExecutionConfig)
+		v.InferenceExecutionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.CreateModelInput_ModelName, *v.ModelName)
+	}
+	if v.PrimaryContainer != nil {
+		s.WriteStruct(schemas.CreateModelInput_PrimaryContainer)
+		v.PrimaryContainer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateModelInput_Tags, v.Tags)
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.CreateModelInput_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateModelOutput struct {
 
 	// The ARN of the model created in SageMaker.
@@ -113,13 +150,32 @@ type CreateModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelArn != nil {
+		s.WriteString(schemas.CreateModelOutput_ModelArn, *v.ModelArn)
+	}
+}
+func (v *CreateModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateModelOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateModelOutput_ModelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.CreateModelOutput_ModelArn, v.ModelArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModel, schemas.CreateModelInput, schemas.CreateModelOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModel, schemas.CreateModelInput, schemas.CreateModelOutput), output: &CreateModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

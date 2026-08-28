@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteSegmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSegmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSegmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSegmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.DeleteSegmentRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.SegmentId != nil {
+		s.WriteString(schemas.DeleteSegmentRequest_SegmentId, *v.SegmentId)
+	}
+}
+
 type DeleteSegmentOutput struct {
 
 	// Provides information about the configuration, dimension, and other settings for
@@ -54,13 +71,34 @@ type DeleteSegmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSegmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSegmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSegmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SegmentResponse != nil {
+		s.WriteStruct(schemas.DeleteSegmentResponse_SegmentResponse)
+		v.SegmentResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteSegmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSegmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSegmentResponse_SegmentResponse:
+			v.SegmentResponse = &types.SegmentResponse{}
+			return v.SegmentResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSegmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSegment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSegment, schemas.DeleteSegmentRequest, schemas.DeleteSegmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSegment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSegment, schemas.DeleteSegmentRequest, schemas.DeleteSegmentResponse), output: &DeleteSegmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

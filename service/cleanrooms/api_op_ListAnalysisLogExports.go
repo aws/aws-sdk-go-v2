@@ -5,7 +5,9 @@ package cleanrooms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,30 @@ type ListAnalysisLogExportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnalysisLogExportsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnalysisLogExportsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnalysisLogExportsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisIdentifier != nil {
+		s.WriteString(schemas.ListAnalysisLogExportsInput_analysisIdentifier, *v.AnalysisIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAnalysisLogExportsInput_maxResults, *v.MaxResults)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.ListAnalysisLogExportsInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnalysisLogExportsInput_nextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListAnalysisLogExportsInput_status, string(v.Status))
+	}
+}
+
 type ListAnalysisLogExportsOutput struct {
 
 	// A list of analysis log exports.
@@ -68,13 +94,35 @@ type ListAnalysisLogExportsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnalysisLogExportsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnalysisLogExportsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnalysisLogExportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalysisLogExportSummaryList(s, schemas.ListAnalysisLogExportsOutput_analysisLogExports, v.AnalysisLogExports)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnalysisLogExportsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAnalysisLogExportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAnalysisLogExportsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAnalysisLogExportsOutput_analysisLogExports:
+			return deserializeAnalysisLogExportSummaryList(d, schemas.ListAnalysisLogExportsOutput_analysisLogExports, &v.AnalysisLogExports)
+		case schemas.ListAnalysisLogExportsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAnalysisLogExportsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAnalysisLogExportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAnalysisLogExports{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnalysisLogExports, schemas.ListAnalysisLogExportsInput, schemas.ListAnalysisLogExportsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAnalysisLogExports{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnalysisLogExports, schemas.ListAnalysisLogExportsInput, schemas.ListAnalysisLogExportsOutput), output: &ListAnalysisLogExportsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

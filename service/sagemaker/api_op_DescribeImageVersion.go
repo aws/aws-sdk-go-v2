@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -44,6 +45,24 @@ type DescribeImageVersionInput struct {
 	Version *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeImageVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImageVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImageVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.DescribeImageVersionRequest_Alias, *v.Alias)
+	}
+	if v.ImageName != nil {
+		s.WriteString(schemas.DescribeImageVersionRequest_ImageName, *v.ImageName)
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.DescribeImageVersionRequest_Version, *v.Version)
+	}
 }
 
 type DescribeImageVersionOutput struct {
@@ -125,13 +144,138 @@ type DescribeImageVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImageVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImageVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImageVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseImage != nil {
+		s.WriteString(schemas.DescribeImageVersionResponse_BaseImage, *v.BaseImage)
+	}
+	if v.ContainerImage != nil {
+		s.WriteString(schemas.DescribeImageVersionResponse_ContainerImage, *v.ContainerImage)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeImageVersionResponse_CreationTime, *v.CreationTime)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeImageVersionResponse_FailureReason, *v.FailureReason)
+	}
+	if v.Horovod != nil {
+		s.WriteBool(schemas.DescribeImageVersionResponse_Horovod, *v.Horovod)
+	}
+	if v.ImageArn != nil {
+		s.WriteString(schemas.DescribeImageVersionResponse_ImageArn, *v.ImageArn)
+	}
+	if v.ImageVersionArn != nil {
+		s.WriteString(schemas.DescribeImageVersionResponse_ImageVersionArn, *v.ImageVersionArn)
+	}
+	if v.ImageVersionStatus != "" {
+		s.WriteString(schemas.DescribeImageVersionResponse_ImageVersionStatus, string(v.ImageVersionStatus))
+	}
+	if v.JobType != "" {
+		s.WriteString(schemas.DescribeImageVersionResponse_JobType, string(v.JobType))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeImageVersionResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.MLFramework != nil {
+		s.WriteString(schemas.DescribeImageVersionResponse_MLFramework, *v.MLFramework)
+	}
+	if v.Processor != "" {
+		s.WriteString(schemas.DescribeImageVersionResponse_Processor, string(v.Processor))
+	}
+	if v.ProgrammingLang != nil {
+		s.WriteString(schemas.DescribeImageVersionResponse_ProgrammingLang, *v.ProgrammingLang)
+	}
+	if v.ReleaseNotes != nil {
+		s.WriteString(schemas.DescribeImageVersionResponse_ReleaseNotes, *v.ReleaseNotes)
+	}
+	if v.VendorGuidance != "" {
+		s.WriteString(schemas.DescribeImageVersionResponse_VendorGuidance, string(v.VendorGuidance))
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.DescribeImageVersionResponse_Version, *v.Version)
+	}
+}
+func (v *DescribeImageVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeImageVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeImageVersionResponse_BaseImage:
+			v.BaseImage = new(string)
+			return d.ReadString(schemas.DescribeImageVersionResponse_BaseImage, v.BaseImage)
+		case schemas.DescribeImageVersionResponse_ContainerImage:
+			v.ContainerImage = new(string)
+			return d.ReadString(schemas.DescribeImageVersionResponse_ContainerImage, v.ContainerImage)
+		case schemas.DescribeImageVersionResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeImageVersionResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeImageVersionResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeImageVersionResponse_FailureReason, v.FailureReason)
+		case schemas.DescribeImageVersionResponse_Horovod:
+			v.Horovod = new(bool)
+			return d.ReadBool(schemas.DescribeImageVersionResponse_Horovod, v.Horovod)
+		case schemas.DescribeImageVersionResponse_ImageArn:
+			v.ImageArn = new(string)
+			return d.ReadString(schemas.DescribeImageVersionResponse_ImageArn, v.ImageArn)
+		case schemas.DescribeImageVersionResponse_ImageVersionArn:
+			v.ImageVersionArn = new(string)
+			return d.ReadString(schemas.DescribeImageVersionResponse_ImageVersionArn, v.ImageVersionArn)
+		case schemas.DescribeImageVersionResponse_ImageVersionStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeImageVersionResponse_ImageVersionStatus, &ev); err != nil {
+				return err
+			}
+			v.ImageVersionStatus = types.ImageVersionStatus(ev)
+			return nil
+		case schemas.DescribeImageVersionResponse_JobType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeImageVersionResponse_JobType, &ev); err != nil {
+				return err
+			}
+			v.JobType = types.JobType(ev)
+			return nil
+		case schemas.DescribeImageVersionResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeImageVersionResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeImageVersionResponse_MLFramework:
+			v.MLFramework = new(string)
+			return d.ReadString(schemas.DescribeImageVersionResponse_MLFramework, v.MLFramework)
+		case schemas.DescribeImageVersionResponse_Processor:
+			var ev string
+			if err := d.ReadString(schemas.DescribeImageVersionResponse_Processor, &ev); err != nil {
+				return err
+			}
+			v.Processor = types.Processor(ev)
+			return nil
+		case schemas.DescribeImageVersionResponse_ProgrammingLang:
+			v.ProgrammingLang = new(string)
+			return d.ReadString(schemas.DescribeImageVersionResponse_ProgrammingLang, v.ProgrammingLang)
+		case schemas.DescribeImageVersionResponse_ReleaseNotes:
+			v.ReleaseNotes = new(string)
+			return d.ReadString(schemas.DescribeImageVersionResponse_ReleaseNotes, v.ReleaseNotes)
+		case schemas.DescribeImageVersionResponse_VendorGuidance:
+			var ev string
+			if err := d.ReadString(schemas.DescribeImageVersionResponse_VendorGuidance, &ev); err != nil {
+				return err
+			}
+			v.VendorGuidance = types.VendorGuidance(ev)
+			return nil
+		case schemas.DescribeImageVersionResponse_Version:
+			v.Version = new(int32)
+			return d.ReadInt32(schemas.DescribeImageVersionResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeImageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeImageVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImageVersion, schemas.DescribeImageVersionRequest, schemas.DescribeImageVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeImageVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImageVersion, schemas.DescribeImageVersionRequest, schemas.DescribeImageVersionResponse), output: &DescribeImageVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

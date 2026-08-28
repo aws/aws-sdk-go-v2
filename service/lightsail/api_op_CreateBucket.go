@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,25 @@ type CreateBucketInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBucketInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBucketRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBucketInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.CreateBucketRequest_bucketName, *v.BucketName)
+	}
+	if v.BundleId != nil {
+		s.WriteString(schemas.CreateBucketRequest_bundleId, *v.BundleId)
+	}
+	if v.EnableObjectVersioning != nil {
+		s.WriteBool(schemas.CreateBucketRequest_enableObjectVersioning, *v.EnableObjectVersioning)
+	}
+	serializeTagList(s, schemas.CreateBucketRequest_tags, v.Tags)
+}
+
 type CreateBucketOutput struct {
 
 	// An object that describes the bucket that is created.
@@ -92,13 +113,37 @@ type CreateBucketOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBucketOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBucketResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBucketOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteStruct(schemas.CreateBucketResult_bucket)
+		v.Bucket.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeOperationList(s, schemas.CreateBucketResult_operations, v.Operations)
+}
+func (v *CreateBucketOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBucketResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBucketResult_bucket:
+			v.Bucket = &types.Bucket{}
+			return v.Bucket.Deserialize(d)
+		case schemas.CreateBucketResult_operations:
+			return deserializeOperationList(d, schemas.CreateBucketResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateBucket{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBucket, schemas.CreateBucketRequest, schemas.CreateBucketResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateBucket{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBucket, schemas.CreateBucketRequest, schemas.CreateBucketResult), output: &CreateBucketOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

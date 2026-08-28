@@ -4,7 +4,9 @@ package wellarchitected
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type GetLensVersionDifferenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLensVersionDifferenceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLensVersionDifferenceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLensVersionDifferenceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseLensVersion != nil {
+		s.WriteString(schemas.GetLensVersionDifferenceInput_BaseLensVersion, *v.BaseLensVersion)
+	}
+	if v.LensAlias != nil {
+		s.WriteString(schemas.GetLensVersionDifferenceInput_LensAlias, *v.LensAlias)
+	}
+	if v.TargetLensVersion != nil {
+		s.WriteString(schemas.GetLensVersionDifferenceInput_TargetLensVersion, *v.TargetLensVersion)
+	}
+}
+
 type GetLensVersionDifferenceOutput struct {
 
 	// The base version of the lens.
@@ -90,13 +110,64 @@ type GetLensVersionDifferenceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLensVersionDifferenceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLensVersionDifferenceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLensVersionDifferenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseLensVersion != nil {
+		s.WriteString(schemas.GetLensVersionDifferenceOutput_BaseLensVersion, *v.BaseLensVersion)
+	}
+	if v.LatestLensVersion != nil {
+		s.WriteString(schemas.GetLensVersionDifferenceOutput_LatestLensVersion, *v.LatestLensVersion)
+	}
+	if v.LensAlias != nil {
+		s.WriteString(schemas.GetLensVersionDifferenceOutput_LensAlias, *v.LensAlias)
+	}
+	if v.LensArn != nil {
+		s.WriteString(schemas.GetLensVersionDifferenceOutput_LensArn, *v.LensArn)
+	}
+	if v.TargetLensVersion != nil {
+		s.WriteString(schemas.GetLensVersionDifferenceOutput_TargetLensVersion, *v.TargetLensVersion)
+	}
+	if v.VersionDifferences != nil {
+		s.WriteStruct(schemas.GetLensVersionDifferenceOutput_VersionDifferences)
+		v.VersionDifferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetLensVersionDifferenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLensVersionDifferenceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLensVersionDifferenceOutput_BaseLensVersion:
+			v.BaseLensVersion = new(string)
+			return d.ReadString(schemas.GetLensVersionDifferenceOutput_BaseLensVersion, v.BaseLensVersion)
+		case schemas.GetLensVersionDifferenceOutput_LatestLensVersion:
+			v.LatestLensVersion = new(string)
+			return d.ReadString(schemas.GetLensVersionDifferenceOutput_LatestLensVersion, v.LatestLensVersion)
+		case schemas.GetLensVersionDifferenceOutput_LensAlias:
+			v.LensAlias = new(string)
+			return d.ReadString(schemas.GetLensVersionDifferenceOutput_LensAlias, v.LensAlias)
+		case schemas.GetLensVersionDifferenceOutput_LensArn:
+			v.LensArn = new(string)
+			return d.ReadString(schemas.GetLensVersionDifferenceOutput_LensArn, v.LensArn)
+		case schemas.GetLensVersionDifferenceOutput_TargetLensVersion:
+			v.TargetLensVersion = new(string)
+			return d.ReadString(schemas.GetLensVersionDifferenceOutput_TargetLensVersion, v.TargetLensVersion)
+		case schemas.GetLensVersionDifferenceOutput_VersionDifferences:
+			v.VersionDifferences = &types.VersionDifferences{}
+			return v.VersionDifferences.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLensVersionDifferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLensVersionDifference{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLensVersionDifference, schemas.GetLensVersionDifferenceInput, schemas.GetLensVersionDifferenceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLensVersionDifference{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLensVersionDifference, schemas.GetLensVersionDifferenceInput, schemas.GetLensVersionDifferenceOutput), output: &GetLensVersionDifferenceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

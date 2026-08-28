@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -74,6 +76,28 @@ type ListIntentPathsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntentPathsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntentPathsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntentPathsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListIntentPathsRequest_botId, *v.BotId)
+	}
+	if v.EndDateTime != nil {
+		s.WriteTime(schemas.ListIntentPathsRequest_endDateTime, *v.EndDateTime)
+	}
+	serializeAnalyticsPathFilters(s, schemas.ListIntentPathsRequest_filters, v.Filters)
+	if v.IntentPath != nil {
+		s.WriteString(schemas.ListIntentPathsRequest_intentPath, *v.IntentPath)
+	}
+	if v.StartDateTime != nil {
+		s.WriteTime(schemas.ListIntentPathsRequest_startDateTime, *v.StartDateTime)
+	}
+}
+
 type ListIntentPathsOutput struct {
 
 	// A list of objects, each of which contains information about a node in the
@@ -86,13 +110,29 @@ type ListIntentPathsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntentPathsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntentPathsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntentPathsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalyticsIntentNodeSummaries(s, schemas.ListIntentPathsResponse_nodeSummaries, v.NodeSummaries)
+}
+func (v *ListIntentPathsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIntentPathsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIntentPathsResponse_nodeSummaries:
+			return deserializeAnalyticsIntentNodeSummaries(d, schemas.ListIntentPathsResponse_nodeSummaries, &v.NodeSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIntentPathsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIntentPaths{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntentPaths, schemas.ListIntentPathsRequest, schemas.ListIntentPathsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIntentPaths{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntentPaths, schemas.ListIntentPathsRequest, schemas.ListIntentPathsResponse), output: &ListIntentPathsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

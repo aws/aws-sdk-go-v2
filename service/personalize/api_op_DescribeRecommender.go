@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,18 @@ type DescribeRecommenderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRecommenderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRecommenderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRecommenderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecommenderArn != nil {
+		s.WriteString(schemas.DescribeRecommenderRequest_recommenderArn, *v.RecommenderArn)
+	}
+}
+
 type DescribeRecommenderOutput struct {
 
 	// The properties of the recommender.
@@ -63,13 +77,34 @@ type DescribeRecommenderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRecommenderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRecommenderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRecommenderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Recommender != nil {
+		s.WriteStruct(schemas.DescribeRecommenderResponse_recommender)
+		v.Recommender.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeRecommenderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRecommenderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRecommenderResponse_recommender:
+			v.Recommender = &types.Recommender{}
+			return v.Recommender.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRecommenderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRecommender{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRecommender, schemas.DescribeRecommenderRequest, schemas.DescribeRecommenderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeRecommender{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRecommender, schemas.DescribeRecommenderRequest, schemas.DescribeRecommenderResponse), output: &DescribeRecommenderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

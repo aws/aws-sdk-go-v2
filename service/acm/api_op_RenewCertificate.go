@@ -4,6 +4,8 @@ package acm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/acm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -46,6 +48,17 @@ type RenewCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RenewCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RenewCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RenewCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.RenewCertificateRequest_CertificateArn, *v.CertificateArn)
+	}
+}
 func (in *RenewCertificateInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ServiceType = ptr.String("ACM")
@@ -58,13 +71,26 @@ type RenewCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RenewCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RenewCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RenewCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRenewCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRenewCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RenewCertificate, schemas.RenewCertificateRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRenewCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RenewCertificate, schemas.RenewCertificateRequest, nil), output: &RenewCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

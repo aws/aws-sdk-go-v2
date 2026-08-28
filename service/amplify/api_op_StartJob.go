@@ -4,7 +4,9 @@ package amplify
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -67,6 +69,39 @@ type StartJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.StartJobRequest_appId, *v.AppId)
+	}
+	if v.BranchName != nil {
+		s.WriteString(schemas.StartJobRequest_branchName, *v.BranchName)
+	}
+	if v.CommitId != nil {
+		s.WriteString(schemas.StartJobRequest_commitId, *v.CommitId)
+	}
+	if v.CommitMessage != nil {
+		s.WriteString(schemas.StartJobRequest_commitMessage, *v.CommitMessage)
+	}
+	if v.CommitTime != nil {
+		s.WriteTime(schemas.StartJobRequest_commitTime, *v.CommitTime)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.StartJobRequest_jobId, *v.JobId)
+	}
+	if v.JobReason != nil {
+		s.WriteString(schemas.StartJobRequest_jobReason, *v.JobReason)
+	}
+	if v.JobType != "" {
+		s.WriteString(schemas.StartJobRequest_jobType, string(v.JobType))
+	}
+}
+
 // The result structure for the run job request.
 type StartJobOutput struct {
 
@@ -81,13 +116,34 @@ type StartJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartJobResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobSummary != nil {
+		s.WriteStruct(schemas.StartJobResult_jobSummary)
+		v.JobSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartJobResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartJobResult_jobSummary:
+			v.JobSummary = &types.JobSummary{}
+			return v.JobSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartJob, schemas.StartJobRequest, schemas.StartJobResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartJob, schemas.StartJobRequest, schemas.StartJobResult), output: &StartJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

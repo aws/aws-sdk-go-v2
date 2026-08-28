@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/amp/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amp/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -40,6 +42,28 @@ type DescribeWorkspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkspaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DescribeWorkspaceRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *DescribeWorkspaceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWorkspaceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWorkspaceRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.DescribeWorkspaceRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a DescribeWorkspace operation.
 type DescribeWorkspaceOutput struct {
 
@@ -54,13 +78,34 @@ type DescribeWorkspaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkspaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Workspace != nil {
+		s.WriteStruct(schemas.DescribeWorkspaceResponse_workspace)
+		v.Workspace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeWorkspaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWorkspaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWorkspaceResponse_workspace:
+			v.Workspace = &types.WorkspaceDescription{}
+			return v.Workspace.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkspace, schemas.DescribeWorkspaceRequest, schemas.DescribeWorkspaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkspace, schemas.DescribeWorkspaceRequest, schemas.DescribeWorkspaceResponse), output: &DescribeWorkspaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

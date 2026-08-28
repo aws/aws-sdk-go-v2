@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type DeleteEvaluationFormInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEvaluationFormInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEvaluationFormRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEvaluationFormInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationFormId != nil {
+		s.WriteString(schemas.DeleteEvaluationFormRequest_EvaluationFormId, *v.EvaluationFormId)
+	}
+	if v.EvaluationFormVersion != nil {
+		s.WriteInt32(schemas.DeleteEvaluationFormRequest_EvaluationFormVersion, *v.EvaluationFormVersion)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeleteEvaluationFormRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DeleteEvaluationFormOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -56,13 +76,26 @@ type DeleteEvaluationFormOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEvaluationFormOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEvaluationFormOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteEvaluationFormOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEvaluationFormMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteEvaluationForm{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEvaluationForm, schemas.DeleteEvaluationFormRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteEvaluationForm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEvaluationForm, schemas.DeleteEvaluationFormRequest, nil), output: &DeleteEvaluationFormOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

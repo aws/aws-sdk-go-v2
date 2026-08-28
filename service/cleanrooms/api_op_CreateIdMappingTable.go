@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,33 @@ type CreateIdMappingTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIdMappingTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIdMappingTableInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIdMappingTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateIdMappingTableInput_description, *v.Description)
+	}
+	if v.InputReferenceConfig != nil {
+		s.WriteStruct(schemas.CreateIdMappingTableInput_inputReferenceConfig)
+		v.InputReferenceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.CreateIdMappingTableInput_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.CreateIdMappingTableInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateIdMappingTableInput_name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateIdMappingTableInput_tags, v.Tags)
+}
+
 type CreateIdMappingTableOutput struct {
 
 	// The ID mapping table that was created.
@@ -70,13 +99,34 @@ type CreateIdMappingTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIdMappingTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIdMappingTableOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIdMappingTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdMappingTable != nil {
+		s.WriteStruct(schemas.CreateIdMappingTableOutput_idMappingTable)
+		v.IdMappingTable.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateIdMappingTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIdMappingTableOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIdMappingTableOutput_idMappingTable:
+			v.IdMappingTable = &types.IdMappingTable{}
+			return v.IdMappingTable.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIdMappingTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIdMappingTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIdMappingTable, schemas.CreateIdMappingTableInput, schemas.CreateIdMappingTableOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateIdMappingTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIdMappingTable, schemas.CreateIdMappingTableInput, schemas.CreateIdMappingTableOutput), output: &CreateIdMappingTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

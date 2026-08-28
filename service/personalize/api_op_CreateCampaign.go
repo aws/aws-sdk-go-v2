@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -130,6 +132,30 @@ type CreateCampaignInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCampaignInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCampaignRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCampaignInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CampaignConfig != nil {
+		s.WriteStruct(schemas.CreateCampaignRequest_campaignConfig)
+		v.CampaignConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MinProvisionedTPS != nil {
+		s.WriteInt32(schemas.CreateCampaignRequest_minProvisionedTPS, *v.MinProvisionedTPS)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCampaignRequest_name, *v.Name)
+	}
+	if v.SolutionVersionArn != nil {
+		s.WriteString(schemas.CreateCampaignRequest_solutionVersionArn, *v.SolutionVersionArn)
+	}
+	serializeTags(s, schemas.CreateCampaignRequest_tags, v.Tags)
+}
+
 type CreateCampaignOutput struct {
 
 	// The Amazon Resource Name (ARN) of the campaign.
@@ -141,13 +167,32 @@ type CreateCampaignOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCampaignOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCampaignResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCampaignOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CampaignArn != nil {
+		s.WriteString(schemas.CreateCampaignResponse_campaignArn, *v.CampaignArn)
+	}
+}
+func (v *CreateCampaignOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCampaignResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCampaignResponse_campaignArn:
+			v.CampaignArn = new(string)
+			return d.ReadString(schemas.CreateCampaignResponse_campaignArn, v.CampaignArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCampaign{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCampaign, schemas.CreateCampaignRequest, schemas.CreateCampaignResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateCampaign{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCampaign, schemas.CreateCampaignRequest, schemas.CreateCampaignResponse), output: &CreateCampaignOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

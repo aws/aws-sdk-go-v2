@@ -5,7 +5,9 @@ package comprehend
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -121,6 +123,50 @@ type CreateEntityRecognizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEntityRecognizerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEntityRecognizerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEntityRecognizerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateEntityRecognizerRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.CreateEntityRecognizerRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.CreateEntityRecognizerRequest_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.CreateEntityRecognizerRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.ModelKmsKeyId != nil {
+		s.WriteString(schemas.CreateEntityRecognizerRequest_ModelKmsKeyId, *v.ModelKmsKeyId)
+	}
+	if v.ModelPolicy != nil {
+		s.WriteString(schemas.CreateEntityRecognizerRequest_ModelPolicy, *v.ModelPolicy)
+	}
+	if v.RecognizerName != nil {
+		s.WriteString(schemas.CreateEntityRecognizerRequest_RecognizerName, *v.RecognizerName)
+	}
+	serializeTagList(s, schemas.CreateEntityRecognizerRequest_Tags, v.Tags)
+	if v.VersionName != nil {
+		s.WriteString(schemas.CreateEntityRecognizerRequest_VersionName, *v.VersionName)
+	}
+	if v.VolumeKmsKeyId != nil {
+		s.WriteString(schemas.CreateEntityRecognizerRequest_VolumeKmsKeyId, *v.VolumeKmsKeyId)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.CreateEntityRecognizerRequest_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateEntityRecognizerOutput struct {
 
 	// The Amazon Resource Name (ARN) that identifies the entity recognizer.
@@ -132,13 +178,32 @@ type CreateEntityRecognizerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEntityRecognizerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEntityRecognizerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEntityRecognizerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityRecognizerArn != nil {
+		s.WriteString(schemas.CreateEntityRecognizerResponse_EntityRecognizerArn, *v.EntityRecognizerArn)
+	}
+}
+func (v *CreateEntityRecognizerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEntityRecognizerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEntityRecognizerResponse_EntityRecognizerArn:
+			v.EntityRecognizerArn = new(string)
+			return d.ReadString(schemas.CreateEntityRecognizerResponse_EntityRecognizerArn, v.EntityRecognizerArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEntityRecognizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEntityRecognizer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEntityRecognizer, schemas.CreateEntityRecognizerRequest, schemas.CreateEntityRecognizerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateEntityRecognizer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEntityRecognizer, schemas.CreateEntityRecognizerRequest, schemas.CreateEntityRecognizerResponse), output: &CreateEntityRecognizerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

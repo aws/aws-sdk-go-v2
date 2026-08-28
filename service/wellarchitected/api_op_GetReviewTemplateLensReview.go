@@ -4,7 +4,9 @@ package wellarchitected
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,21 @@ type GetReviewTemplateLensReviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReviewTemplateLensReviewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReviewTemplateLensReviewInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReviewTemplateLensReviewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LensAlias != nil {
+		s.WriteString(schemas.GetReviewTemplateLensReviewInput_LensAlias, *v.LensAlias)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.GetReviewTemplateLensReviewInput_TemplateArn, *v.TemplateArn)
+	}
+}
+
 type GetReviewTemplateLensReviewOutput struct {
 
 	// A lens review of a question.
@@ -65,13 +82,40 @@ type GetReviewTemplateLensReviewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReviewTemplateLensReviewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReviewTemplateLensReviewOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReviewTemplateLensReviewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LensReview != nil {
+		s.WriteStruct(schemas.GetReviewTemplateLensReviewOutput_LensReview)
+		v.LensReview.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.GetReviewTemplateLensReviewOutput_TemplateArn, *v.TemplateArn)
+	}
+}
+func (v *GetReviewTemplateLensReviewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetReviewTemplateLensReviewOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetReviewTemplateLensReviewOutput_LensReview:
+			v.LensReview = &types.ReviewTemplateLensReview{}
+			return v.LensReview.Deserialize(d)
+		case schemas.GetReviewTemplateLensReviewOutput_TemplateArn:
+			v.TemplateArn = new(string)
+			return d.ReadString(schemas.GetReviewTemplateLensReviewOutput_TemplateArn, v.TemplateArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetReviewTemplateLensReviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetReviewTemplateLensReview{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReviewTemplateLensReview, schemas.GetReviewTemplateLensReviewInput, schemas.GetReviewTemplateLensReviewOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetReviewTemplateLensReview{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReviewTemplateLensReview, schemas.GetReviewTemplateLensReviewInput, schemas.GetReviewTemplateLensReviewOutput), output: &GetReviewTemplateLensReviewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package grafana
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/grafana/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/grafana/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,62 @@ type ListPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.ListPermissionsRequest_groupId, *v.GroupId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPermissionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPermissionsRequest_nextToken, *v.NextToken)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.ListPermissionsRequest_userId, *v.UserId)
+	}
+	if v.UserType != "" {
+		s.WriteString(schemas.ListPermissionsRequest_userType, string(v.UserType))
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.ListPermissionsRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *ListPermissionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPermissionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPermissionsRequest_groupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.ListPermissionsRequest_groupId, v.GroupId)
+		case schemas.ListPermissionsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListPermissionsRequest_maxResults, v.MaxResults)
+		case schemas.ListPermissionsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPermissionsRequest_nextToken, v.NextToken)
+		case schemas.ListPermissionsRequest_userId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.ListPermissionsRequest_userId, v.UserId)
+		case schemas.ListPermissionsRequest_userType:
+			var ev string
+			if err := d.ReadString(schemas.ListPermissionsRequest_userType, &ev); err != nil {
+				return err
+			}
+			v.UserType = types.UserType(ev)
+			return nil
+		case schemas.ListPermissionsRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.ListPermissionsRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type ListPermissionsOutput struct {
 
 	// The permissions returned by the operation.
@@ -74,13 +132,35 @@ type ListPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPermissionsResponse_nextToken, *v.NextToken)
+	}
+	serializePermissionEntryList(s, schemas.ListPermissionsResponse_permissions, v.Permissions)
+}
+func (v *ListPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPermissionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPermissionsResponse_nextToken, v.NextToken)
+		case schemas.ListPermissionsResponse_permissions:
+			return deserializePermissionEntryList(d, schemas.ListPermissionsResponse_permissions, &v.Permissions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPermissions, schemas.ListPermissionsRequest, schemas.ListPermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPermissions, schemas.ListPermissionsRequest, schemas.ListPermissionsResponse), output: &ListPermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

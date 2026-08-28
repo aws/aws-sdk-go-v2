@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,23 @@ type SendUsersMessagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendUsersMessagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendUsersMessagesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendUsersMessagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.SendUsersMessagesRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.SendUsersMessageRequest != nil {
+		s.WriteStruct(schemas.SendUsersMessagesRequest_SendUsersMessageRequest)
+		v.SendUsersMessageRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SendUsersMessagesOutput struct {
 
 	// Provides information about which users and endpoints a message was sent to.
@@ -54,13 +73,34 @@ type SendUsersMessagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendUsersMessagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendUsersMessagesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendUsersMessagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SendUsersMessageResponse != nil {
+		s.WriteStruct(schemas.SendUsersMessagesResponse_SendUsersMessageResponse)
+		v.SendUsersMessageResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SendUsersMessagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendUsersMessagesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendUsersMessagesResponse_SendUsersMessageResponse:
+			v.SendUsersMessageResponse = &types.SendUsersMessageResponse{}
+			return v.SendUsersMessageResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendUsersMessagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendUsersMessages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendUsersMessages, schemas.SendUsersMessagesRequest, schemas.SendUsersMessagesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendUsersMessages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendUsersMessages, schemas.SendUsersMessagesRequest, schemas.SendUsersMessagesResponse), output: &SendUsersMessagesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,28 @@ type CopyWorkspaceImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyWorkspaceImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyWorkspaceImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyWorkspaceImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CopyWorkspaceImageRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CopyWorkspaceImageRequest_Name, *v.Name)
+	}
+	if v.SourceImageId != nil {
+		s.WriteString(schemas.CopyWorkspaceImageRequest_SourceImageId, *v.SourceImageId)
+	}
+	if v.SourceRegion != nil {
+		s.WriteString(schemas.CopyWorkspaceImageRequest_SourceRegion, *v.SourceRegion)
+	}
+	serializeTagList(s, schemas.CopyWorkspaceImageRequest_Tags, v.Tags)
+}
+
 type CopyWorkspaceImageOutput struct {
 
 	// The identifier of the image.
@@ -76,13 +100,32 @@ type CopyWorkspaceImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyWorkspaceImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyWorkspaceImageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyWorkspaceImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageId != nil {
+		s.WriteString(schemas.CopyWorkspaceImageResult_ImageId, *v.ImageId)
+	}
+}
+func (v *CopyWorkspaceImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopyWorkspaceImageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopyWorkspaceImageResult_ImageId:
+			v.ImageId = new(string)
+			return d.ReadString(schemas.CopyWorkspaceImageResult_ImageId, v.ImageId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCopyWorkspaceImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCopyWorkspaceImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyWorkspaceImage, schemas.CopyWorkspaceImageRequest, schemas.CopyWorkspaceImageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCopyWorkspaceImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyWorkspaceImage, schemas.CopyWorkspaceImageRequest, schemas.CopyWorkspaceImageResult), output: &CopyWorkspaceImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

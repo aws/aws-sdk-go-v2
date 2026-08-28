@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteApnsSandboxChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApnsSandboxChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApnsSandboxChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApnsSandboxChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.DeleteApnsSandboxChannelRequest_ApplicationId, *v.ApplicationId)
+	}
+}
+
 type DeleteApnsSandboxChannelOutput struct {
 
 	// Provides information about the status and settings of the APNs (Apple Push
@@ -50,13 +64,34 @@ type DeleteApnsSandboxChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApnsSandboxChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApnsSandboxChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApnsSandboxChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.APNSSandboxChannelResponse != nil {
+		s.WriteStruct(schemas.DeleteApnsSandboxChannelResponse_APNSSandboxChannelResponse)
+		v.APNSSandboxChannelResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteApnsSandboxChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteApnsSandboxChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteApnsSandboxChannelResponse_APNSSandboxChannelResponse:
+			v.APNSSandboxChannelResponse = &types.APNSSandboxChannelResponse{}
+			return v.APNSSandboxChannelResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteApnsSandboxChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteApnsSandboxChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApnsSandboxChannel, schemas.DeleteApnsSandboxChannelRequest, schemas.DeleteApnsSandboxChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteApnsSandboxChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApnsSandboxChannel, schemas.DeleteApnsSandboxChannelRequest, schemas.DeleteApnsSandboxChannelResponse), output: &DeleteApnsSandboxChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

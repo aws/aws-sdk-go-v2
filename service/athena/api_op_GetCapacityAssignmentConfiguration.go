@@ -4,7 +4,9 @@ package athena
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetCapacityAssignmentConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCapacityAssignmentConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCapacityAssignmentConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCapacityAssignmentConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityReservationName != nil {
+		s.WriteString(schemas.GetCapacityAssignmentConfigurationInput_CapacityReservationName, *v.CapacityReservationName)
+	}
+}
+
 type GetCapacityAssignmentConfigurationOutput struct {
 
 	// The requested capacity assignment configuration for the specified capacity
@@ -50,13 +64,34 @@ type GetCapacityAssignmentConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCapacityAssignmentConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCapacityAssignmentConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCapacityAssignmentConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityAssignmentConfiguration != nil {
+		s.WriteStruct(schemas.GetCapacityAssignmentConfigurationOutput_CapacityAssignmentConfiguration)
+		v.CapacityAssignmentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCapacityAssignmentConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCapacityAssignmentConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCapacityAssignmentConfigurationOutput_CapacityAssignmentConfiguration:
+			v.CapacityAssignmentConfiguration = &types.CapacityAssignmentConfiguration{}
+			return v.CapacityAssignmentConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCapacityAssignmentConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCapacityAssignmentConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCapacityAssignmentConfiguration, schemas.GetCapacityAssignmentConfigurationInput, schemas.GetCapacityAssignmentConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCapacityAssignmentConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCapacityAssignmentConfiguration, schemas.GetCapacityAssignmentConfigurationInput, schemas.GetCapacityAssignmentConfigurationOutput), output: &GetCapacityAssignmentConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,74 @@ type CreateSecurityConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSecurityConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSecurityConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSecurityConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateSecurityConfigRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateSecurityConfigRequest_description, *v.Description)
+	}
+	if v.IamFederationOptions != nil {
+		s.WriteStruct(schemas.CreateSecurityConfigRequest_iamFederationOptions)
+		v.IamFederationOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IamIdentityCenterOptions != nil {
+		s.WriteStruct(schemas.CreateSecurityConfigRequest_iamIdentityCenterOptions)
+		v.IamIdentityCenterOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSecurityConfigRequest_name, *v.Name)
+	}
+	if v.SamlOptions != nil {
+		s.WriteStruct(schemas.CreateSecurityConfigRequest_samlOptions)
+		v.SamlOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateSecurityConfigRequest_type, string(v.Type))
+	}
+}
+func (v *CreateSecurityConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSecurityConfigRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSecurityConfigRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateSecurityConfigRequest_clientToken, v.ClientToken)
+		case schemas.CreateSecurityConfigRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateSecurityConfigRequest_description, v.Description)
+		case schemas.CreateSecurityConfigRequest_iamFederationOptions:
+			v.IamFederationOptions = &types.IamFederationConfigOptions{}
+			return v.IamFederationOptions.Deserialize(d)
+		case schemas.CreateSecurityConfigRequest_iamIdentityCenterOptions:
+			v.IamIdentityCenterOptions = &types.CreateIamIdentityCenterConfigOptions{}
+			return v.IamIdentityCenterOptions.Deserialize(d)
+		case schemas.CreateSecurityConfigRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateSecurityConfigRequest_name, v.Name)
+		case schemas.CreateSecurityConfigRequest_samlOptions:
+			v.SamlOptions = &types.SamlConfigOptions{}
+			return v.SamlOptions.Deserialize(d)
+		case schemas.CreateSecurityConfigRequest_type:
+			var ev string
+			if err := d.ReadString(schemas.CreateSecurityConfigRequest_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.SecurityConfigType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type CreateSecurityConfigOutput struct {
 
 	// Details about the created security configuration.
@@ -72,13 +142,34 @@ type CreateSecurityConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSecurityConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSecurityConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSecurityConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecurityConfigDetail != nil {
+		s.WriteStruct(schemas.CreateSecurityConfigResponse_securityConfigDetail)
+		v.SecurityConfigDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateSecurityConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSecurityConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSecurityConfigResponse_securityConfigDetail:
+			v.SecurityConfigDetail = &types.SecurityConfigDetail{}
+			return v.SecurityConfigDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSecurityConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateSecurityConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecurityConfig, schemas.CreateSecurityConfigRequest, schemas.CreateSecurityConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateSecurityConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecurityConfig, schemas.CreateSecurityConfigRequest, schemas.CreateSecurityConfigResponse), output: &CreateSecurityConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

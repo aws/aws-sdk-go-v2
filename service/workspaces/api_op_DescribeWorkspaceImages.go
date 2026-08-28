@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,25 @@ type DescribeWorkspaceImagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkspaceImagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspaceImagesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspaceImagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWorkspaceImageIdList(s, schemas.DescribeWorkspaceImagesRequest_ImageIds, v.ImageIds)
+	if v.ImageType != "" {
+		s.WriteString(schemas.DescribeWorkspaceImagesRequest_ImageType, string(v.ImageType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeWorkspaceImagesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeWorkspaceImagesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeWorkspaceImagesOutput struct {
 
 	// Information about the images.
@@ -58,13 +79,35 @@ type DescribeWorkspaceImagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkspaceImagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspaceImagesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspaceImagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWorkspaceImageList(s, schemas.DescribeWorkspaceImagesResult_Images, v.Images)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeWorkspaceImagesResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeWorkspaceImagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWorkspaceImagesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWorkspaceImagesResult_Images:
+			return deserializeWorkspaceImageList(d, schemas.DescribeWorkspaceImagesResult_Images, &v.Images)
+		case schemas.DescribeWorkspaceImagesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeWorkspaceImagesResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeWorkspaceImagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWorkspaceImages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkspaceImages, schemas.DescribeWorkspaceImagesRequest, schemas.DescribeWorkspaceImagesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeWorkspaceImages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkspaceImages, schemas.DescribeWorkspaceImagesRequest, schemas.DescribeWorkspaceImagesResult), output: &DescribeWorkspaceImagesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

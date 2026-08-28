@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -93,6 +95,33 @@ type CreatePresignedDomainUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePresignedDomainUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePresignedDomainUrlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePresignedDomainUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.CreatePresignedDomainUrlRequest_DomainId, *v.DomainId)
+	}
+	if v.ExpiresInSeconds != nil {
+		s.WriteInt32(schemas.CreatePresignedDomainUrlRequest_ExpiresInSeconds, *v.ExpiresInSeconds)
+	}
+	if v.LandingUri != nil {
+		s.WriteString(schemas.CreatePresignedDomainUrlRequest_LandingUri, *v.LandingUri)
+	}
+	if v.SessionExpirationDurationInSeconds != nil {
+		s.WriteInt32(schemas.CreatePresignedDomainUrlRequest_SessionExpirationDurationInSeconds, *v.SessionExpirationDurationInSeconds)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.CreatePresignedDomainUrlRequest_SpaceName, *v.SpaceName)
+	}
+	if v.UserProfileName != nil {
+		s.WriteString(schemas.CreatePresignedDomainUrlRequest_UserProfileName, *v.UserProfileName)
+	}
+}
+
 type CreatePresignedDomainUrlOutput struct {
 
 	// The presigned URL.
@@ -104,13 +133,32 @@ type CreatePresignedDomainUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePresignedDomainUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePresignedDomainUrlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePresignedDomainUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizedUrl != nil {
+		s.WriteString(schemas.CreatePresignedDomainUrlResponse_AuthorizedUrl, *v.AuthorizedUrl)
+	}
+}
+func (v *CreatePresignedDomainUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePresignedDomainUrlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePresignedDomainUrlResponse_AuthorizedUrl:
+			v.AuthorizedUrl = new(string)
+			return d.ReadString(schemas.CreatePresignedDomainUrlResponse_AuthorizedUrl, v.AuthorizedUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePresignedDomainUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePresignedDomainUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePresignedDomainUrl, schemas.CreatePresignedDomainUrlRequest, schemas.CreatePresignedDomainUrlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePresignedDomainUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePresignedDomainUrl, schemas.CreatePresignedDomainUrlRequest, schemas.CreatePresignedDomainUrlResponse), output: &CreatePresignedDomainUrlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type UpdateContactFlowNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContactFlowNameInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContactFlowNameRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContactFlowNameInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactFlowId != nil {
+		s.WriteString(schemas.UpdateContactFlowNameRequest_ContactFlowId, *v.ContactFlowId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateContactFlowNameRequest_Description, *v.Description)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateContactFlowNameRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateContactFlowNameRequest_Name, *v.Name)
+	}
+}
+
 type UpdateContactFlowNameOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +78,26 @@ type UpdateContactFlowNameOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContactFlowNameOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContactFlowNameResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContactFlowNameOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateContactFlowNameOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateContactFlowNameResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateContactFlowNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateContactFlowName{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContactFlowName, schemas.UpdateContactFlowNameRequest, schemas.UpdateContactFlowNameResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateContactFlowName{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContactFlowName, schemas.UpdateContactFlowNameRequest, schemas.UpdateContactFlowNameResponse), output: &UpdateContactFlowNameOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

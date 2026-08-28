@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -57,6 +59,39 @@ type ListActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListActionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListActionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionType != nil {
+		s.WriteString(schemas.ListActionsRequest_ActionType, *v.ActionType)
+	}
+	if v.CreatedAfter != nil {
+		s.WriteTime(schemas.ListActionsRequest_CreatedAfter, *v.CreatedAfter)
+	}
+	if v.CreatedBefore != nil {
+		s.WriteTime(schemas.ListActionsRequest_CreatedBefore, *v.CreatedBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListActionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListActionsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListActionsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListActionsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.SourceUri != nil {
+		s.WriteString(schemas.ListActionsRequest_SourceUri, *v.SourceUri)
+	}
+}
+
 type ListActionsOutput struct {
 
 	// A list of actions and their properties.
@@ -71,13 +106,35 @@ type ListActionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListActionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListActionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionSummaries(s, schemas.ListActionsResponse_ActionSummaries, v.ActionSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListActionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListActionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListActionsResponse_ActionSummaries:
+			return deserializeActionSummaries(d, schemas.ListActionsResponse_ActionSummaries, &v.ActionSummaries)
+		case schemas.ListActionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListActionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListActions, schemas.ListActionsRequest, schemas.ListActionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListActions, schemas.ListActionsRequest, schemas.ListActionsResponse), output: &ListActionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

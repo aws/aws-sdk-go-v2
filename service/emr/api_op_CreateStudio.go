@@ -4,7 +4,9 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -122,6 +124,62 @@ type CreateStudioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStudioInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStudioInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStudioInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthMode != "" {
+		s.WriteString(schemas.CreateStudioInput_AuthMode, string(v.AuthMode))
+	}
+	if v.DefaultS3Location != nil {
+		s.WriteString(schemas.CreateStudioInput_DefaultS3Location, *v.DefaultS3Location)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateStudioInput_Description, *v.Description)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.CreateStudioInput_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.EngineSecurityGroupId != nil {
+		s.WriteString(schemas.CreateStudioInput_EngineSecurityGroupId, *v.EngineSecurityGroupId)
+	}
+	if v.IdcInstanceArn != nil {
+		s.WriteString(schemas.CreateStudioInput_IdcInstanceArn, *v.IdcInstanceArn)
+	}
+	if v.IdcUserAssignment != "" {
+		s.WriteString(schemas.CreateStudioInput_IdcUserAssignment, string(v.IdcUserAssignment))
+	}
+	if v.IdpAuthUrl != nil {
+		s.WriteString(schemas.CreateStudioInput_IdpAuthUrl, *v.IdpAuthUrl)
+	}
+	if v.IdpRelayStateParameterName != nil {
+		s.WriteString(schemas.CreateStudioInput_IdpRelayStateParameterName, *v.IdpRelayStateParameterName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateStudioInput_Name, *v.Name)
+	}
+	if v.ServiceRole != nil {
+		s.WriteString(schemas.CreateStudioInput_ServiceRole, *v.ServiceRole)
+	}
+	serializeSubnetIdList(s, schemas.CreateStudioInput_SubnetIds, v.SubnetIds)
+	serializeTagList(s, schemas.CreateStudioInput_Tags, v.Tags)
+	if v.TrustedIdentityPropagationEnabled != nil {
+		s.WriteBool(schemas.CreateStudioInput_TrustedIdentityPropagationEnabled, *v.TrustedIdentityPropagationEnabled)
+	}
+	if v.UserRole != nil {
+		s.WriteString(schemas.CreateStudioInput_UserRole, *v.UserRole)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.CreateStudioInput_VpcId, *v.VpcId)
+	}
+	if v.WorkspaceSecurityGroupId != nil {
+		s.WriteString(schemas.CreateStudioInput_WorkspaceSecurityGroupId, *v.WorkspaceSecurityGroupId)
+	}
+}
+
 type CreateStudioOutput struct {
 
 	// The ID of the Amazon EMR Studio.
@@ -136,13 +194,38 @@ type CreateStudioOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStudioOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStudioOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStudioOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StudioId != nil {
+		s.WriteString(schemas.CreateStudioOutput_StudioId, *v.StudioId)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.CreateStudioOutput_Url, *v.Url)
+	}
+}
+func (v *CreateStudioOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStudioOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStudioOutput_StudioId:
+			v.StudioId = new(string)
+			return d.ReadString(schemas.CreateStudioOutput_StudioId, v.StudioId)
+		case schemas.CreateStudioOutput_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.CreateStudioOutput_Url, v.Url)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStudioMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateStudio{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStudio, schemas.CreateStudioInput, schemas.CreateStudioOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateStudio{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStudio, schemas.CreateStudioInput, schemas.CreateStudioOutput), output: &CreateStudioOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

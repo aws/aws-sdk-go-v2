@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,24 @@ type GetAlarmsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAlarmsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAlarmsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAlarmsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlarmName != nil {
+		s.WriteString(schemas.GetAlarmsRequest_alarmName, *v.AlarmName)
+	}
+	if v.MonitoredResourceName != nil {
+		s.WriteString(schemas.GetAlarmsRequest_monitoredResourceName, *v.MonitoredResourceName)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.GetAlarmsRequest_pageToken, *v.PageToken)
+	}
+}
+
 type GetAlarmsOutput struct {
 
 	// An array of objects that describe the alarms.
@@ -75,13 +95,35 @@ type GetAlarmsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAlarmsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAlarmsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAlarmsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAlarmsList(s, schemas.GetAlarmsResult_alarms, v.Alarms)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetAlarmsResult_nextPageToken, *v.NextPageToken)
+	}
+}
+func (v *GetAlarmsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAlarmsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAlarmsResult_alarms:
+			return deserializeAlarmsList(d, schemas.GetAlarmsResult_alarms, &v.Alarms)
+		case schemas.GetAlarmsResult_nextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetAlarmsResult_nextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAlarmsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAlarms{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAlarms, schemas.GetAlarmsRequest, schemas.GetAlarmsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAlarms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAlarms, schemas.GetAlarmsRequest, schemas.GetAlarmsResult), output: &GetAlarmsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

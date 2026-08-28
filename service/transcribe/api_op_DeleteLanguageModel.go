@@ -4,6 +4,8 @@ package transcribe
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteLanguageModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLanguageModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLanguageModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLanguageModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelName != nil {
+		s.WriteString(schemas.DeleteLanguageModelRequest_ModelName, *v.ModelName)
+	}
+}
+
 type DeleteLanguageModelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type DeleteLanguageModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLanguageModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLanguageModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteLanguageModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLanguageModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteLanguageModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLanguageModel, schemas.DeleteLanguageModelRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteLanguageModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLanguageModel, schemas.DeleteLanguageModelRequest, nil), output: &DeleteLanguageModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,29 @@ type CreateParticipantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateParticipantInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateParticipantRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateParticipantInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateParticipantRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ContactId != nil {
+		s.WriteString(schemas.CreateParticipantRequest_ContactId, *v.ContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateParticipantRequest_InstanceId, *v.InstanceId)
+	}
+	if v.ParticipantDetails != nil {
+		s.WriteStruct(schemas.CreateParticipantRequest_ParticipantDetails)
+		v.ParticipantDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateParticipantOutput struct {
 
 	// The token used by the chat participant to call CreateParticipantConnection . The
@@ -81,13 +106,40 @@ type CreateParticipantOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateParticipantOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateParticipantResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateParticipantOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParticipantCredentials != nil {
+		s.WriteStruct(schemas.CreateParticipantResponse_ParticipantCredentials)
+		v.ParticipantCredentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParticipantId != nil {
+		s.WriteString(schemas.CreateParticipantResponse_ParticipantId, *v.ParticipantId)
+	}
+}
+func (v *CreateParticipantOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateParticipantResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateParticipantResponse_ParticipantCredentials:
+			v.ParticipantCredentials = &types.ParticipantTokenCredentials{}
+			return v.ParticipantCredentials.Deserialize(d)
+		case schemas.CreateParticipantResponse_ParticipantId:
+			v.ParticipantId = new(string)
+			return d.ReadString(schemas.CreateParticipantResponse_ParticipantId, v.ParticipantId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateParticipantMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateParticipant{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateParticipant, schemas.CreateParticipantRequest, schemas.CreateParticipantResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateParticipant{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateParticipant, schemas.CreateParticipantRequest, schemas.CreateParticipantResponse), output: &CreateParticipantOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

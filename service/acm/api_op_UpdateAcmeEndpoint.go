@@ -4,7 +4,9 @@ package acm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/acm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/acm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -45,6 +47,24 @@ type UpdateAcmeEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAcmeEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAcmeEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAcmeEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcmeEndpointArn != nil {
+		s.WriteString(schemas.UpdateAcmeEndpointRequest_AcmeEndpointArn, *v.AcmeEndpointArn)
+	}
+	if v.AuthorizationBehavior != "" {
+		s.WriteString(schemas.UpdateAcmeEndpointRequest_AuthorizationBehavior, string(v.AuthorizationBehavior))
+	}
+	serializeCertificateAuthority(s, schemas.UpdateAcmeEndpointRequest_CertificateAuthority, v.CertificateAuthority)
+	if v.Contact != "" {
+		s.WriteString(schemas.UpdateAcmeEndpointRequest_Contact, string(v.Contact))
+	}
+}
 func (in *UpdateAcmeEndpointInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ServiceType = ptr.String("ACM-ACME")
@@ -57,13 +77,26 @@ type UpdateAcmeEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAcmeEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAcmeEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateAcmeEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAcmeEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAcmeEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAcmeEndpoint, schemas.UpdateAcmeEndpointRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateAcmeEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAcmeEndpoint, schemas.UpdateAcmeEndpointRequest, nil), output: &UpdateAcmeEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

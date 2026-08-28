@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListTrafficDistributionGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTrafficDistributionGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTrafficDistributionGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTrafficDistributionGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListTrafficDistributionGroupsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTrafficDistributionGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTrafficDistributionGroupsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListTrafficDistributionGroupsOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.
@@ -57,13 +77,35 @@ type ListTrafficDistributionGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTrafficDistributionGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTrafficDistributionGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTrafficDistributionGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTrafficDistributionGroupsResponse_NextToken, *v.NextToken)
+	}
+	serializeTrafficDistributionGroupSummaryList(s, schemas.ListTrafficDistributionGroupsResponse_TrafficDistributionGroupSummaryList, v.TrafficDistributionGroupSummaryList)
+}
+func (v *ListTrafficDistributionGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTrafficDistributionGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTrafficDistributionGroupsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTrafficDistributionGroupsResponse_NextToken, v.NextToken)
+		case schemas.ListTrafficDistributionGroupsResponse_TrafficDistributionGroupSummaryList:
+			return deserializeTrafficDistributionGroupSummaryList(d, schemas.ListTrafficDistributionGroupsResponse_TrafficDistributionGroupSummaryList, &v.TrafficDistributionGroupSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTrafficDistributionGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTrafficDistributionGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrafficDistributionGroups, schemas.ListTrafficDistributionGroupsRequest, schemas.ListTrafficDistributionGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTrafficDistributionGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrafficDistributionGroups, schemas.ListTrafficDistributionGroupsRequest, schemas.ListTrafficDistributionGroupsResponse), output: &ListTrafficDistributionGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

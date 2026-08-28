@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/acm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/acm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	smithytime "github.com/aws/smithy-go/time"
@@ -41,6 +43,17 @@ type DescribeAcmeEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAcmeEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAcmeEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAcmeEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcmeEndpointArn != nil {
+		s.WriteString(schemas.DescribeAcmeEndpointRequest_AcmeEndpointArn, *v.AcmeEndpointArn)
+	}
+}
 func (in *DescribeAcmeEndpointInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ServiceType = ptr.String("ACM-ACME")
@@ -57,13 +70,34 @@ type DescribeAcmeEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAcmeEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAcmeEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAcmeEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcmeEndpoint != nil {
+		s.WriteStruct(schemas.DescribeAcmeEndpointResponse_AcmeEndpoint)
+		v.AcmeEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAcmeEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAcmeEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAcmeEndpointResponse_AcmeEndpoint:
+			v.AcmeEndpoint = &types.AcmeEndpoint{}
+			return v.AcmeEndpoint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAcmeEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAcmeEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAcmeEndpoint, schemas.DescribeAcmeEndpointRequest, schemas.DescribeAcmeEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAcmeEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAcmeEndpoint, schemas.DescribeAcmeEndpointRequest, schemas.DescribeAcmeEndpointResponse), output: &DescribeAcmeEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

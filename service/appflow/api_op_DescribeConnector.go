@@ -4,7 +4,9 @@ package appflow
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appflow/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DescribeConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorLabel != nil {
+		s.WriteString(schemas.DescribeConnectorRequest_connectorLabel, *v.ConnectorLabel)
+	}
+	if v.ConnectorType != "" {
+		s.WriteString(schemas.DescribeConnectorRequest_connectorType, string(v.ConnectorType))
+	}
+}
+
 type DescribeConnectorOutput struct {
 
 	// Configuration info of all the connectors that the user requested.
@@ -53,13 +70,34 @@ type DescribeConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorConfiguration != nil {
+		s.WriteStruct(schemas.DescribeConnectorResponse_connectorConfiguration)
+		v.ConnectorConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConnectorResponse_connectorConfiguration:
+			v.ConnectorConfiguration = &types.ConnectorConfiguration{}
+			return v.ConnectorConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnector, schemas.DescribeConnectorRequest, schemas.DescribeConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnector, schemas.DescribeConnectorRequest, schemas.DescribeConnectorResponse), output: &DescribeConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

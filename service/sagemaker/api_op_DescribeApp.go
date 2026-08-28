@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -49,6 +51,30 @@ type DescribeAppInput struct {
 	UserProfileName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppName != nil {
+		s.WriteString(schemas.DescribeAppRequest_AppName, *v.AppName)
+	}
+	if v.AppType != "" {
+		s.WriteString(schemas.DescribeAppRequest_AppType, string(v.AppType))
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.DescribeAppRequest_DomainId, *v.DomainId)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.DescribeAppRequest_SpaceName, *v.SpaceName)
+	}
+	if v.UserProfileName != nil {
+		s.WriteString(schemas.DescribeAppRequest_UserProfileName, *v.UserProfileName)
+	}
 }
 
 type DescribeAppOutput struct {
@@ -118,13 +144,130 @@ type DescribeAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.DescribeAppResponse_AppArn, *v.AppArn)
+	}
+	if v.AppName != nil {
+		s.WriteString(schemas.DescribeAppResponse_AppName, *v.AppName)
+	}
+	if v.AppType != "" {
+		s.WriteString(schemas.DescribeAppResponse_AppType, string(v.AppType))
+	}
+	if v.BuiltInLifecycleConfigArn != nil {
+		s.WriteString(schemas.DescribeAppResponse_BuiltInLifecycleConfigArn, *v.BuiltInLifecycleConfigArn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeAppResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.DescribeAppResponse_DomainId, *v.DomainId)
+	}
+	if v.EffectiveTrustedIdentityPropagationStatus != "" {
+		s.WriteString(schemas.DescribeAppResponse_EffectiveTrustedIdentityPropagationStatus, string(v.EffectiveTrustedIdentityPropagationStatus))
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeAppResponse_FailureReason, *v.FailureReason)
+	}
+	if v.LastHealthCheckTimestamp != nil {
+		s.WriteTime(schemas.DescribeAppResponse_LastHealthCheckTimestamp, *v.LastHealthCheckTimestamp)
+	}
+	if v.LastUserActivityTimestamp != nil {
+		s.WriteTime(schemas.DescribeAppResponse_LastUserActivityTimestamp, *v.LastUserActivityTimestamp)
+	}
+	if v.RecoveryMode != nil {
+		s.WriteBool(schemas.DescribeAppResponse_RecoveryMode, *v.RecoveryMode)
+	}
+	if v.ResourceSpec != nil {
+		s.WriteStruct(schemas.DescribeAppResponse_ResourceSpec)
+		v.ResourceSpec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.DescribeAppResponse_SpaceName, *v.SpaceName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeAppResponse_Status, string(v.Status))
+	}
+	if v.UserProfileName != nil {
+		s.WriteString(schemas.DescribeAppResponse_UserProfileName, *v.UserProfileName)
+	}
+}
+func (v *DescribeAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAppResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAppResponse_AppArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.DescribeAppResponse_AppArn, v.AppArn)
+		case schemas.DescribeAppResponse_AppName:
+			v.AppName = new(string)
+			return d.ReadString(schemas.DescribeAppResponse_AppName, v.AppName)
+		case schemas.DescribeAppResponse_AppType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAppResponse_AppType, &ev); err != nil {
+				return err
+			}
+			v.AppType = types.AppType(ev)
+			return nil
+		case schemas.DescribeAppResponse_BuiltInLifecycleConfigArn:
+			v.BuiltInLifecycleConfigArn = new(string)
+			return d.ReadString(schemas.DescribeAppResponse_BuiltInLifecycleConfigArn, v.BuiltInLifecycleConfigArn)
+		case schemas.DescribeAppResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeAppResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeAppResponse_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.DescribeAppResponse_DomainId, v.DomainId)
+		case schemas.DescribeAppResponse_EffectiveTrustedIdentityPropagationStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAppResponse_EffectiveTrustedIdentityPropagationStatus, &ev); err != nil {
+				return err
+			}
+			v.EffectiveTrustedIdentityPropagationStatus = types.FeatureStatus(ev)
+			return nil
+		case schemas.DescribeAppResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeAppResponse_FailureReason, v.FailureReason)
+		case schemas.DescribeAppResponse_LastHealthCheckTimestamp:
+			v.LastHealthCheckTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DescribeAppResponse_LastHealthCheckTimestamp, v.LastHealthCheckTimestamp)
+		case schemas.DescribeAppResponse_LastUserActivityTimestamp:
+			v.LastUserActivityTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DescribeAppResponse_LastUserActivityTimestamp, v.LastUserActivityTimestamp)
+		case schemas.DescribeAppResponse_RecoveryMode:
+			v.RecoveryMode = new(bool)
+			return d.ReadBool(schemas.DescribeAppResponse_RecoveryMode, v.RecoveryMode)
+		case schemas.DescribeAppResponse_ResourceSpec:
+			v.ResourceSpec = &types.ResourceSpec{}
+			return v.ResourceSpec.Deserialize(d)
+		case schemas.DescribeAppResponse_SpaceName:
+			v.SpaceName = new(string)
+			return d.ReadString(schemas.DescribeAppResponse_SpaceName, v.SpaceName)
+		case schemas.DescribeAppResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAppResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AppStatus(ev)
+			return nil
+		case schemas.DescribeAppResponse_UserProfileName:
+			v.UserProfileName = new(string)
+			return d.ReadString(schemas.DescribeAppResponse_UserProfileName, v.UserProfileName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApp, schemas.DescribeAppRequest, schemas.DescribeAppResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApp, schemas.DescribeAppRequest, schemas.DescribeAppResponse), output: &DescribeAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

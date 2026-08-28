@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type DeleteWorkspacePageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkspacePageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkspacePageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkspacePageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeleteWorkspacePageRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Page != nil {
+		s.WriteString(schemas.DeleteWorkspacePageRequest_Page, *v.Page)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DeleteWorkspacePageRequest_WorkspaceId, *v.WorkspaceId)
+	}
+}
+
 type DeleteWorkspacePageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +74,26 @@ type DeleteWorkspacePageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkspacePageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkspacePageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkspacePageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteWorkspacePageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWorkspacePageResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWorkspacePageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWorkspacePage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkspacePage, schemas.DeleteWorkspacePageRequest, schemas.DeleteWorkspacePageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteWorkspacePage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkspacePage, schemas.DeleteWorkspacePageRequest, schemas.DeleteWorkspacePageResponse), output: &DeleteWorkspacePageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,36 @@ type ListCheckSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCheckSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCheckSummariesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCheckSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChoiceId != nil {
+		s.WriteString(schemas.ListCheckSummariesInput_ChoiceId, *v.ChoiceId)
+	}
+	if v.LensArn != nil {
+		s.WriteString(schemas.ListCheckSummariesInput_LensArn, *v.LensArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCheckSummariesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCheckSummariesInput_NextToken, *v.NextToken)
+	}
+	if v.PillarId != nil {
+		s.WriteString(schemas.ListCheckSummariesInput_PillarId, *v.PillarId)
+	}
+	if v.QuestionId != nil {
+		s.WriteString(schemas.ListCheckSummariesInput_QuestionId, *v.QuestionId)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.ListCheckSummariesInput_WorkloadId, *v.WorkloadId)
+	}
+}
+
 type ListCheckSummariesOutput struct {
 
 	// List of Trusted Advisor summaries related to the Well-Architected best practice.
@@ -79,13 +111,35 @@ type ListCheckSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCheckSummariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCheckSummariesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCheckSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCheckSummaries(s, schemas.ListCheckSummariesOutput_CheckSummaries, v.CheckSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCheckSummariesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCheckSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCheckSummariesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCheckSummariesOutput_CheckSummaries:
+			return deserializeCheckSummaries(d, schemas.ListCheckSummariesOutput_CheckSummaries, &v.CheckSummaries)
+		case schemas.ListCheckSummariesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCheckSummariesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCheckSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCheckSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCheckSummaries, schemas.ListCheckSummariesInput, schemas.ListCheckSummariesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCheckSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCheckSummaries, schemas.ListCheckSummariesInput, schemas.ListCheckSummariesOutput), output: &ListCheckSummariesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

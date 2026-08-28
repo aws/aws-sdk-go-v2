@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,34 @@ type SearchQueuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchQueuesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchQueuesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchQueuesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SearchQueuesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchQueuesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchQueuesRequest_NextToken, *v.NextToken)
+	}
+	if v.SearchCriteria != nil {
+		s.WriteStruct(schemas.SearchQueuesRequest_SearchCriteria)
+		v.SearchCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SearchFilter != nil {
+		s.WriteStruct(schemas.SearchQueuesRequest_SearchFilter)
+		v.SearchFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchQueuesOutput struct {
 
 	// The total number of queues which matched your search query.
@@ -72,13 +102,41 @@ type SearchQueuesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchQueuesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchQueuesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchQueuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateTotalCount != nil {
+		s.WriteInt64(schemas.SearchQueuesResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchQueuesResponse_NextToken, *v.NextToken)
+	}
+	serializeQueueSearchSummaryList(s, schemas.SearchQueuesResponse_Queues, v.Queues)
+}
+func (v *SearchQueuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchQueuesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchQueuesResponse_ApproximateTotalCount:
+			v.ApproximateTotalCount = new(int64)
+			return d.ReadInt64(schemas.SearchQueuesResponse_ApproximateTotalCount, v.ApproximateTotalCount)
+		case schemas.SearchQueuesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchQueuesResponse_NextToken, v.NextToken)
+		case schemas.SearchQueuesResponse_Queues:
+			return deserializeQueueSearchSummaryList(d, schemas.SearchQueuesResponse_Queues, &v.Queues)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchQueues{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchQueues, schemas.SearchQueuesRequest, schemas.SearchQueuesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchQueues{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchQueues, schemas.SearchQueuesRequest, schemas.SearchQueuesResponse), output: &SearchQueuesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

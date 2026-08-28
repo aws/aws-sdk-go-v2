@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -67,6 +69,42 @@ type ListClusterSchedulerConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClusterSchedulerConfigsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClusterSchedulerConfigsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClusterSchedulerConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.ListClusterSchedulerConfigsRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.CreatedAfter != nil {
+		s.WriteTime(schemas.ListClusterSchedulerConfigsRequest_CreatedAfter, *v.CreatedAfter)
+	}
+	if v.CreatedBefore != nil {
+		s.WriteTime(schemas.ListClusterSchedulerConfigsRequest_CreatedBefore, *v.CreatedBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListClusterSchedulerConfigsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListClusterSchedulerConfigsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListClusterSchedulerConfigsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListClusterSchedulerConfigsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListClusterSchedulerConfigsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListClusterSchedulerConfigsRequest_Status, string(v.Status))
+	}
+}
+
 type ListClusterSchedulerConfigsOutput struct {
 
 	// Summaries of the cluster policies.
@@ -82,13 +120,35 @@ type ListClusterSchedulerConfigsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClusterSchedulerConfigsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClusterSchedulerConfigsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClusterSchedulerConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClusterSchedulerConfigSummaryList(s, schemas.ListClusterSchedulerConfigsResponse_ClusterSchedulerConfigSummaries, v.ClusterSchedulerConfigSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListClusterSchedulerConfigsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListClusterSchedulerConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListClusterSchedulerConfigsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListClusterSchedulerConfigsResponse_ClusterSchedulerConfigSummaries:
+			return deserializeClusterSchedulerConfigSummaryList(d, schemas.ListClusterSchedulerConfigsResponse_ClusterSchedulerConfigSummaries, &v.ClusterSchedulerConfigSummaries)
+		case schemas.ListClusterSchedulerConfigsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListClusterSchedulerConfigsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListClusterSchedulerConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListClusterSchedulerConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClusterSchedulerConfigs, schemas.ListClusterSchedulerConfigsRequest, schemas.ListClusterSchedulerConfigsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListClusterSchedulerConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClusterSchedulerConfigs, schemas.ListClusterSchedulerConfigsRequest, schemas.ListClusterSchedulerConfigsResponse), output: &ListClusterSchedulerConfigsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

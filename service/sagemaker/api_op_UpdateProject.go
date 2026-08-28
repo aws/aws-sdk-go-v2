@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,28 @@ type UpdateProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProjectInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProjectDescription != nil {
+		s.WriteString(schemas.UpdateProjectInput_ProjectDescription, *v.ProjectDescription)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.UpdateProjectInput_ProjectName, *v.ProjectName)
+	}
+	if v.ServiceCatalogProvisioningUpdateDetails != nil {
+		s.WriteStruct(schemas.UpdateProjectInput_ServiceCatalogProvisioningUpdateDetails)
+		v.ServiceCatalogProvisioningUpdateDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.UpdateProjectInput_Tags, v.Tags)
+	serializeUpdateTemplateProviderList(s, schemas.UpdateProjectInput_TemplateProvidersToUpdate, v.TemplateProvidersToUpdate)
+}
+
 type UpdateProjectOutput struct {
 
 	// The Amazon Resource Name (ARN) of the project.
@@ -76,13 +100,32 @@ type UpdateProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProjectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProjectOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.UpdateProjectOutput_ProjectArn, *v.ProjectArn)
+	}
+}
+func (v *UpdateProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProjectOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProjectOutput_ProjectArn:
+			v.ProjectArn = new(string)
+			return d.ReadString(schemas.UpdateProjectOutput_ProjectArn, v.ProjectArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProject, schemas.UpdateProjectInput, schemas.UpdateProjectOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProject, schemas.UpdateProjectInput, schemas.UpdateProjectOutput), output: &UpdateProjectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,22 @@ type DescribeDirectoryConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDirectoryConfigsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDirectoryConfigsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDirectoryConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDirectoryNameList(s, schemas.DescribeDirectoryConfigsRequest_DirectoryNames, v.DirectoryNames)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeDirectoryConfigsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDirectoryConfigsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeDirectoryConfigsOutput struct {
 
 	// Information about the directory configurations. Note that although the response
@@ -63,13 +81,35 @@ type DescribeDirectoryConfigsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDirectoryConfigsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDirectoryConfigsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDirectoryConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDirectoryConfigList(s, schemas.DescribeDirectoryConfigsResult_DirectoryConfigs, v.DirectoryConfigs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDirectoryConfigsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeDirectoryConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDirectoryConfigsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDirectoryConfigsResult_DirectoryConfigs:
+			return deserializeDirectoryConfigList(d, schemas.DescribeDirectoryConfigsResult_DirectoryConfigs, &v.DirectoryConfigs)
+		case schemas.DescribeDirectoryConfigsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeDirectoryConfigsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDirectoryConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeDirectoryConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDirectoryConfigs, schemas.DescribeDirectoryConfigsRequest, schemas.DescribeDirectoryConfigsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeDirectoryConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDirectoryConfigs, schemas.DescribeDirectoryConfigsRequest, schemas.DescribeDirectoryConfigsResult), output: &DescribeDirectoryConfigsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

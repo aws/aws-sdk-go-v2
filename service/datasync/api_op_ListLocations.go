@@ -5,7 +5,9 @@ package datasync
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,22 @@ type ListLocationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLocationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLocationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLocationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLocationFilters(s, schemas.ListLocationsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLocationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLocationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 // ListLocationsResponse
 type ListLocationsOutput struct {
 
@@ -65,13 +83,35 @@ type ListLocationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLocationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLocationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLocationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLocationList(s, schemas.ListLocationsResponse_Locations, v.Locations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLocationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLocationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLocationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLocationsResponse_Locations:
+			return deserializeLocationList(d, schemas.ListLocationsResponse_Locations, &v.Locations)
+		case schemas.ListLocationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLocationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLocationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLocations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLocations, schemas.ListLocationsRequest, schemas.ListLocationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListLocations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLocations, schemas.ListLocationsRequest, schemas.ListLocationsResponse), output: &ListLocationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -37,6 +39,40 @@ type Application struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Application) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Application)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Application) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringMap(s, schemas.Application_AdditionalInfo, v.AdditionalInfo)
+	serializeStringList(s, schemas.Application_Args, v.Args)
+	if v.Name != nil {
+		s.WriteString(schemas.Application_Name, *v.Name)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.Application_Version, *v.Version)
+	}
+}
+func (v *Application) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Application, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Application_AdditionalInfo:
+			return deserializeStringMap(d, schemas.Application_AdditionalInfo, &v.AdditionalInfo)
+		case schemas.Application_Args:
+			return deserializeStringList(d, schemas.Application_Args, &v.Args)
+		case schemas.Application_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Application_Name, v.Name)
+		case schemas.Application_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.Application_Version, v.Version)
+		}
+		return nil
+	})
+}
+
 // An automatic scaling policy for a core instance group or task instance group in
 // an Amazon EMR cluster. An automatic scaling policy defines how an instance group
 // dynamically adds and terminates Amazon EC2 instances in response to the value of
@@ -56,6 +92,33 @@ type AutoScalingPolicy struct {
 	Rules []ScalingRule
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutoScalingPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoScalingPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoScalingPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Constraints != nil {
+		s.WriteStruct(schemas.AutoScalingPolicy_Constraints)
+		v.Constraints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeScalingRuleList(s, schemas.AutoScalingPolicy_Rules, v.Rules)
+}
+func (v *AutoScalingPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoScalingPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoScalingPolicy_Constraints:
+			v.Constraints = &ScalingConstraints{}
+			return v.Constraints.Deserialize(d)
+		case schemas.AutoScalingPolicy_Rules:
+			return deserializeScalingRuleList(d, schemas.AutoScalingPolicy_Rules, &v.Rules)
+		}
+		return nil
+	})
 }
 
 // An automatic scaling policy for a core instance group or task instance group in
@@ -78,6 +141,41 @@ type AutoScalingPolicyDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutoScalingPolicyDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoScalingPolicyDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoScalingPolicyDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Constraints != nil {
+		s.WriteStruct(schemas.AutoScalingPolicyDescription_Constraints)
+		v.Constraints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeScalingRuleList(s, schemas.AutoScalingPolicyDescription_Rules, v.Rules)
+	if v.Status != nil {
+		s.WriteStruct(schemas.AutoScalingPolicyDescription_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AutoScalingPolicyDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoScalingPolicyDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoScalingPolicyDescription_Constraints:
+			v.Constraints = &ScalingConstraints{}
+			return v.Constraints.Deserialize(d)
+		case schemas.AutoScalingPolicyDescription_Rules:
+			return deserializeScalingRuleList(d, schemas.AutoScalingPolicyDescription_Rules, &v.Rules)
+		case schemas.AutoScalingPolicyDescription_Status:
+			v.Status = &AutoScalingPolicyStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The reason for an AutoScalingPolicyStatus change.
 type AutoScalingPolicyStateChangeReason struct {
 
@@ -94,6 +192,38 @@ type AutoScalingPolicyStateChangeReason struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutoScalingPolicyStateChangeReason) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoScalingPolicyStateChangeReason)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoScalingPolicyStateChangeReason) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.AutoScalingPolicyStateChangeReason_Code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.AutoScalingPolicyStateChangeReason_Message, *v.Message)
+	}
+}
+func (v *AutoScalingPolicyStateChangeReason) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoScalingPolicyStateChangeReason, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoScalingPolicyStateChangeReason_Code:
+			var ev string
+			if err := d.ReadString(schemas.AutoScalingPolicyStateChangeReason_Code, &ev); err != nil {
+				return err
+			}
+			v.Code = AutoScalingPolicyStateChangeReasonCode(ev)
+			return nil
+		case schemas.AutoScalingPolicyStateChangeReason_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AutoScalingPolicyStateChangeReason_Message, v.Message)
+		}
+		return nil
+	})
+}
+
 // The status of an automatic scaling policy.
 type AutoScalingPolicyStatus struct {
 
@@ -104,6 +234,40 @@ type AutoScalingPolicyStatus struct {
 	StateChangeReason *AutoScalingPolicyStateChangeReason
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutoScalingPolicyStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoScalingPolicyStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoScalingPolicyStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.AutoScalingPolicyStatus_State, string(v.State))
+	}
+	if v.StateChangeReason != nil {
+		s.WriteStruct(schemas.AutoScalingPolicyStatus_StateChangeReason)
+		v.StateChangeReason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AutoScalingPolicyStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoScalingPolicyStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoScalingPolicyStatus_State:
+			var ev string
+			if err := d.ReadString(schemas.AutoScalingPolicyStatus_State, &ev); err != nil {
+				return err
+			}
+			v.State = AutoScalingPolicyState(ev)
+			return nil
+		case schemas.AutoScalingPolicyStatus_StateChangeReason:
+			v.StateChangeReason = &AutoScalingPolicyStateChangeReason{}
+			return v.StateChangeReason.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An auto-termination policy for an Amazon EMR cluster. An auto-termination
@@ -119,6 +283,28 @@ type AutoTerminationPolicy struct {
 	IdleTimeout *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutoTerminationPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoTerminationPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoTerminationPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdleTimeout != nil {
+		s.WriteInt64(schemas.AutoTerminationPolicy_IdleTimeout, *v.IdleTimeout)
+	}
+}
+func (v *AutoTerminationPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoTerminationPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoTerminationPolicy_IdleTimeout:
+			v.IdleTimeout = new(int64)
+			return d.ReadInt64(schemas.AutoTerminationPolicy_IdleTimeout, v.IdleTimeout)
+		}
+		return nil
+	})
 }
 
 // A configuration for Amazon EMR block public access. When
@@ -159,6 +345,43 @@ type BlockPublicAccessConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BlockPublicAccessConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BlockPublicAccessConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BlockPublicAccessConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlockPublicSecurityGroupRules != nil {
+		s.WriteBool(schemas.BlockPublicAccessConfiguration_BlockPublicSecurityGroupRules, *v.BlockPublicSecurityGroupRules)
+	}
+	if v.Classification != nil {
+		s.WriteString(schemas.BlockPublicAccessConfiguration_Classification, *v.Classification)
+	}
+	serializeConfigurationList(s, schemas.BlockPublicAccessConfiguration_Configurations, v.Configurations)
+	serializePortRanges(s, schemas.BlockPublicAccessConfiguration_PermittedPublicSecurityGroupRuleRanges, v.PermittedPublicSecurityGroupRuleRanges)
+	serializeStringMap(s, schemas.BlockPublicAccessConfiguration_Properties, v.Properties)
+}
+func (v *BlockPublicAccessConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BlockPublicAccessConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BlockPublicAccessConfiguration_BlockPublicSecurityGroupRules:
+			v.BlockPublicSecurityGroupRules = new(bool)
+			return d.ReadBool(schemas.BlockPublicAccessConfiguration_BlockPublicSecurityGroupRules, v.BlockPublicSecurityGroupRules)
+		case schemas.BlockPublicAccessConfiguration_Classification:
+			v.Classification = new(string)
+			return d.ReadString(schemas.BlockPublicAccessConfiguration_Classification, v.Classification)
+		case schemas.BlockPublicAccessConfiguration_Configurations:
+			return deserializeConfigurationList(d, schemas.BlockPublicAccessConfiguration_Configurations, &v.Configurations)
+		case schemas.BlockPublicAccessConfiguration_PermittedPublicSecurityGroupRuleRanges:
+			return deserializePortRanges(d, schemas.BlockPublicAccessConfiguration_PermittedPublicSecurityGroupRuleRanges, &v.PermittedPublicSecurityGroupRuleRanges)
+		case schemas.BlockPublicAccessConfiguration_Properties:
+			return deserializeStringMap(d, schemas.BlockPublicAccessConfiguration_Properties, &v.Properties)
+		}
+		return nil
+	})
+}
+
 // Properties that describe the Amazon Web Services principal that created the
 // BlockPublicAccessConfiguration using the PutBlockPublicAccessConfiguration
 // action as well as the date and time that the configuration was created. Each
@@ -179,6 +402,34 @@ type BlockPublicAccessConfigurationMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BlockPublicAccessConfigurationMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BlockPublicAccessConfigurationMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BlockPublicAccessConfigurationMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedByArn != nil {
+		s.WriteString(schemas.BlockPublicAccessConfigurationMetadata_CreatedByArn, *v.CreatedByArn)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.BlockPublicAccessConfigurationMetadata_CreationDateTime, *v.CreationDateTime)
+	}
+}
+func (v *BlockPublicAccessConfigurationMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BlockPublicAccessConfigurationMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BlockPublicAccessConfigurationMetadata_CreatedByArn:
+			v.CreatedByArn = new(string)
+			return d.ReadString(schemas.BlockPublicAccessConfigurationMetadata_CreatedByArn, v.CreatedByArn)
+		case schemas.BlockPublicAccessConfigurationMetadata_CreationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.BlockPublicAccessConfigurationMetadata_CreationDateTime, v.CreationDateTime)
+		}
+		return nil
+	})
+}
+
 // Configuration of a bootstrap action.
 type BootstrapActionConfig struct {
 
@@ -195,6 +446,36 @@ type BootstrapActionConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BootstrapActionConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BootstrapActionConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BootstrapActionConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.BootstrapActionConfig_Name, *v.Name)
+	}
+	if v.ScriptBootstrapAction != nil {
+		s.WriteStruct(schemas.BootstrapActionConfig_ScriptBootstrapAction)
+		v.ScriptBootstrapAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BootstrapActionConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BootstrapActionConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BootstrapActionConfig_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.BootstrapActionConfig_Name, v.Name)
+		case schemas.BootstrapActionConfig_ScriptBootstrapAction:
+			v.ScriptBootstrapAction = &ScriptBootstrapActionConfig{}
+			return v.ScriptBootstrapAction.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Reports the configuration of a bootstrap action in a cluster (job flow).
 type BootstrapActionDetail struct {
 
@@ -202,6 +483,30 @@ type BootstrapActionDetail struct {
 	BootstrapActionConfig *BootstrapActionConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *BootstrapActionDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BootstrapActionDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BootstrapActionDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BootstrapActionConfig != nil {
+		s.WriteStruct(schemas.BootstrapActionDetail_BootstrapActionConfig)
+		v.BootstrapActionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BootstrapActionDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BootstrapActionDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BootstrapActionDetail_BootstrapActionConfig:
+			v.BootstrapActionConfig = &BootstrapActionConfig{}
+			return v.BootstrapActionConfig.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specification of the status of a CancelSteps request. Available only in Amazon
@@ -218,6 +523,44 @@ type CancelStepsInfo struct {
 	StepId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CancelStepsInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelStepsInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelStepsInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reason != nil {
+		s.WriteString(schemas.CancelStepsInfo_Reason, *v.Reason)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CancelStepsInfo_Status, string(v.Status))
+	}
+	if v.StepId != nil {
+		s.WriteString(schemas.CancelStepsInfo_StepId, *v.StepId)
+	}
+}
+func (v *CancelStepsInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelStepsInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelStepsInfo_Reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.CancelStepsInfo_Reason, v.Reason)
+		case schemas.CancelStepsInfo_Status:
+			var ev string
+			if err := d.ReadString(schemas.CancelStepsInfo_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = CancelStepsRequestStatus(ev)
+			return nil
+		case schemas.CancelStepsInfo_StepId:
+			v.StepId = new(string)
+			return d.ReadString(schemas.CancelStepsInfo_StepId, v.StepId)
+		}
+		return nil
+	})
 }
 
 // The definition of a CloudWatch metric alarm, which determines when an automatic
@@ -272,6 +615,85 @@ type CloudWatchAlarmDefinition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CloudWatchAlarmDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudWatchAlarmDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudWatchAlarmDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComparisonOperator != "" {
+		s.WriteString(schemas.CloudWatchAlarmDefinition_ComparisonOperator, string(v.ComparisonOperator))
+	}
+	serializeMetricDimensionList(s, schemas.CloudWatchAlarmDefinition_Dimensions, v.Dimensions)
+	if v.EvaluationPeriods != nil {
+		s.WriteInt32(schemas.CloudWatchAlarmDefinition_EvaluationPeriods, *v.EvaluationPeriods)
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.CloudWatchAlarmDefinition_MetricName, *v.MetricName)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.CloudWatchAlarmDefinition_Namespace, *v.Namespace)
+	}
+	if v.Period != nil {
+		s.WriteInt32(schemas.CloudWatchAlarmDefinition_Period, *v.Period)
+	}
+	if v.Statistic != "" {
+		s.WriteString(schemas.CloudWatchAlarmDefinition_Statistic, string(v.Statistic))
+	}
+	if v.Threshold != nil {
+		s.WriteFloat64(schemas.CloudWatchAlarmDefinition_Threshold, *v.Threshold)
+	}
+	if v.Unit != "" {
+		s.WriteString(schemas.CloudWatchAlarmDefinition_Unit, string(v.Unit))
+	}
+}
+func (v *CloudWatchAlarmDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudWatchAlarmDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudWatchAlarmDefinition_ComparisonOperator:
+			var ev string
+			if err := d.ReadString(schemas.CloudWatchAlarmDefinition_ComparisonOperator, &ev); err != nil {
+				return err
+			}
+			v.ComparisonOperator = ComparisonOperator(ev)
+			return nil
+		case schemas.CloudWatchAlarmDefinition_Dimensions:
+			return deserializeMetricDimensionList(d, schemas.CloudWatchAlarmDefinition_Dimensions, &v.Dimensions)
+		case schemas.CloudWatchAlarmDefinition_EvaluationPeriods:
+			v.EvaluationPeriods = new(int32)
+			return d.ReadInt32(schemas.CloudWatchAlarmDefinition_EvaluationPeriods, v.EvaluationPeriods)
+		case schemas.CloudWatchAlarmDefinition_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.CloudWatchAlarmDefinition_MetricName, v.MetricName)
+		case schemas.CloudWatchAlarmDefinition_Namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.CloudWatchAlarmDefinition_Namespace, v.Namespace)
+		case schemas.CloudWatchAlarmDefinition_Period:
+			v.Period = new(int32)
+			return d.ReadInt32(schemas.CloudWatchAlarmDefinition_Period, v.Period)
+		case schemas.CloudWatchAlarmDefinition_Statistic:
+			var ev string
+			if err := d.ReadString(schemas.CloudWatchAlarmDefinition_Statistic, &ev); err != nil {
+				return err
+			}
+			v.Statistic = Statistic(ev)
+			return nil
+		case schemas.CloudWatchAlarmDefinition_Threshold:
+			v.Threshold = new(float64)
+			return d.ReadFloat64(schemas.CloudWatchAlarmDefinition_Threshold, v.Threshold)
+		case schemas.CloudWatchAlarmDefinition_Unit:
+			var ev string
+			if err := d.ReadString(schemas.CloudWatchAlarmDefinition_Unit, &ev); err != nil {
+				return err
+			}
+			v.Unit = Unit(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Holds CloudWatch log configuration settings and metadata that specify settings
 // like log files to monitor and where to send them.
 type CloudWatchLogConfiguration struct {
@@ -297,6 +719,49 @@ type CloudWatchLogConfiguration struct {
 	LogTypes map[string][]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CloudWatchLogConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudWatchLogConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudWatchLogConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.CloudWatchLogConfiguration_Enabled, *v.Enabled)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.CloudWatchLogConfiguration_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.LogGroupName != nil {
+		s.WriteString(schemas.CloudWatchLogConfiguration_LogGroupName, *v.LogGroupName)
+	}
+	if v.LogStreamNamePrefix != nil {
+		s.WriteString(schemas.CloudWatchLogConfiguration_LogStreamNamePrefix, *v.LogStreamNamePrefix)
+	}
+	serializeLogTypesMap(s, schemas.CloudWatchLogConfiguration_LogTypes, v.LogTypes)
+}
+func (v *CloudWatchLogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudWatchLogConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudWatchLogConfiguration_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.CloudWatchLogConfiguration_Enabled, v.Enabled)
+		case schemas.CloudWatchLogConfiguration_EncryptionKeyArn:
+			v.EncryptionKeyArn = new(string)
+			return d.ReadString(schemas.CloudWatchLogConfiguration_EncryptionKeyArn, v.EncryptionKeyArn)
+		case schemas.CloudWatchLogConfiguration_LogGroupName:
+			v.LogGroupName = new(string)
+			return d.ReadString(schemas.CloudWatchLogConfiguration_LogGroupName, v.LogGroupName)
+		case schemas.CloudWatchLogConfiguration_LogStreamNamePrefix:
+			v.LogStreamNamePrefix = new(string)
+			return d.ReadString(schemas.CloudWatchLogConfiguration_LogStreamNamePrefix, v.LogStreamNamePrefix)
+		case schemas.CloudWatchLogConfiguration_LogTypes:
+			return deserializeLogTypesMap(d, schemas.CloudWatchLogConfiguration_LogTypes, &v.LogTypes)
+		}
+		return nil
+	})
 }
 
 // The detailed description of the cluster.
@@ -483,6 +948,252 @@ type Cluster struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Cluster) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Cluster)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Cluster) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApplicationList(s, schemas.Cluster_Applications, v.Applications)
+	if v.AutoScalingRole != nil {
+		s.WriteString(schemas.Cluster_AutoScalingRole, *v.AutoScalingRole)
+	}
+	if v.AutoTerminate != nil {
+		s.WriteBool(schemas.Cluster_AutoTerminate, *v.AutoTerminate)
+	}
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.Cluster_ClusterArn, *v.ClusterArn)
+	}
+	serializeConfigurationList(s, schemas.Cluster_Configurations, v.Configurations)
+	if v.CustomAmiId != nil {
+		s.WriteString(schemas.Cluster_CustomAmiId, *v.CustomAmiId)
+	}
+	if v.EbsRootVolumeIops != nil {
+		s.WriteInt32(schemas.Cluster_EbsRootVolumeIops, *v.EbsRootVolumeIops)
+	}
+	if v.EbsRootVolumeSize != nil {
+		s.WriteInt32(schemas.Cluster_EbsRootVolumeSize, *v.EbsRootVolumeSize)
+	}
+	if v.EbsRootVolumeThroughput != nil {
+		s.WriteInt32(schemas.Cluster_EbsRootVolumeThroughput, *v.EbsRootVolumeThroughput)
+	}
+	if v.Ec2InstanceAttributes != nil {
+		s.WriteStruct(schemas.Cluster_Ec2InstanceAttributes)
+		v.Ec2InstanceAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExtendedSupport != nil {
+		s.WriteBool(schemas.Cluster_ExtendedSupport, *v.ExtendedSupport)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Cluster_Id, *v.Id)
+	}
+	if v.InstanceCollectionType != "" {
+		s.WriteString(schemas.Cluster_InstanceCollectionType, string(v.InstanceCollectionType))
+	}
+	if v.KerberosAttributes != nil {
+		s.WriteStruct(schemas.Cluster_KerberosAttributes)
+		v.KerberosAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LogEncryptionKmsKeyId != nil {
+		s.WriteString(schemas.Cluster_LogEncryptionKmsKeyId, *v.LogEncryptionKmsKeyId)
+	}
+	if v.LogUri != nil {
+		s.WriteString(schemas.Cluster_LogUri, *v.LogUri)
+	}
+	if v.MasterPublicDnsName != nil {
+		s.WriteString(schemas.Cluster_MasterPublicDnsName, *v.MasterPublicDnsName)
+	}
+	if v.MonitoringConfiguration != nil {
+		s.WriteStruct(schemas.Cluster_MonitoringConfiguration)
+		v.MonitoringConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Cluster_Name, *v.Name)
+	}
+	if v.NormalizedInstanceHours != nil {
+		s.WriteInt32(schemas.Cluster_NormalizedInstanceHours, *v.NormalizedInstanceHours)
+	}
+	if v.OSReleaseLabel != nil {
+		s.WriteString(schemas.Cluster_OSReleaseLabel, *v.OSReleaseLabel)
+	}
+	if v.OutpostArn != nil {
+		s.WriteString(schemas.Cluster_OutpostArn, *v.OutpostArn)
+	}
+	serializePlacementGroupConfigList(s, schemas.Cluster_PlacementGroups, v.PlacementGroups)
+	if v.ReleaseLabel != nil {
+		s.WriteString(schemas.Cluster_ReleaseLabel, *v.ReleaseLabel)
+	}
+	if v.RepoUpgradeOnBoot != "" {
+		s.WriteString(schemas.Cluster_RepoUpgradeOnBoot, string(v.RepoUpgradeOnBoot))
+	}
+	if v.RequestedAmiVersion != nil {
+		s.WriteString(schemas.Cluster_RequestedAmiVersion, *v.RequestedAmiVersion)
+	}
+	if v.RunningAmiVersion != nil {
+		s.WriteString(schemas.Cluster_RunningAmiVersion, *v.RunningAmiVersion)
+	}
+	if v.ScaleDownBehavior != "" {
+		s.WriteString(schemas.Cluster_ScaleDownBehavior, string(v.ScaleDownBehavior))
+	}
+	if v.SecurityConfiguration != nil {
+		s.WriteString(schemas.Cluster_SecurityConfiguration, *v.SecurityConfiguration)
+	}
+	if v.ServiceRole != nil {
+		s.WriteString(schemas.Cluster_ServiceRole, *v.ServiceRole)
+	}
+	if v.SessionEnabled != nil {
+		s.WriteBool(schemas.Cluster_SessionEnabled, *v.SessionEnabled)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.Cluster_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StepConcurrencyLevel != nil {
+		s.WriteInt32(schemas.Cluster_StepConcurrencyLevel, *v.StepConcurrencyLevel)
+	}
+	serializeTagList(s, schemas.Cluster_Tags, v.Tags)
+	if v.TerminationProtected != nil {
+		s.WriteBool(schemas.Cluster_TerminationProtected, *v.TerminationProtected)
+	}
+	if v.UnhealthyNodeReplacement != nil {
+		s.WriteBool(schemas.Cluster_UnhealthyNodeReplacement, *v.UnhealthyNodeReplacement)
+	}
+	if v.VisibleToAllUsers != nil {
+		s.WriteBool(schemas.Cluster_VisibleToAllUsers, *v.VisibleToAllUsers)
+	}
+}
+func (v *Cluster) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Cluster, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Cluster_Applications:
+			return deserializeApplicationList(d, schemas.Cluster_Applications, &v.Applications)
+		case schemas.Cluster_AutoScalingRole:
+			v.AutoScalingRole = new(string)
+			return d.ReadString(schemas.Cluster_AutoScalingRole, v.AutoScalingRole)
+		case schemas.Cluster_AutoTerminate:
+			v.AutoTerminate = new(bool)
+			return d.ReadBool(schemas.Cluster_AutoTerminate, v.AutoTerminate)
+		case schemas.Cluster_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.Cluster_ClusterArn, v.ClusterArn)
+		case schemas.Cluster_Configurations:
+			return deserializeConfigurationList(d, schemas.Cluster_Configurations, &v.Configurations)
+		case schemas.Cluster_CustomAmiId:
+			v.CustomAmiId = new(string)
+			return d.ReadString(schemas.Cluster_CustomAmiId, v.CustomAmiId)
+		case schemas.Cluster_EbsRootVolumeIops:
+			v.EbsRootVolumeIops = new(int32)
+			return d.ReadInt32(schemas.Cluster_EbsRootVolumeIops, v.EbsRootVolumeIops)
+		case schemas.Cluster_EbsRootVolumeSize:
+			v.EbsRootVolumeSize = new(int32)
+			return d.ReadInt32(schemas.Cluster_EbsRootVolumeSize, v.EbsRootVolumeSize)
+		case schemas.Cluster_EbsRootVolumeThroughput:
+			v.EbsRootVolumeThroughput = new(int32)
+			return d.ReadInt32(schemas.Cluster_EbsRootVolumeThroughput, v.EbsRootVolumeThroughput)
+		case schemas.Cluster_Ec2InstanceAttributes:
+			v.Ec2InstanceAttributes = &Ec2InstanceAttributes{}
+			return v.Ec2InstanceAttributes.Deserialize(d)
+		case schemas.Cluster_ExtendedSupport:
+			v.ExtendedSupport = new(bool)
+			return d.ReadBool(schemas.Cluster_ExtendedSupport, v.ExtendedSupport)
+		case schemas.Cluster_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Cluster_Id, v.Id)
+		case schemas.Cluster_InstanceCollectionType:
+			var ev string
+			if err := d.ReadString(schemas.Cluster_InstanceCollectionType, &ev); err != nil {
+				return err
+			}
+			v.InstanceCollectionType = InstanceCollectionType(ev)
+			return nil
+		case schemas.Cluster_KerberosAttributes:
+			v.KerberosAttributes = &KerberosAttributes{}
+			return v.KerberosAttributes.Deserialize(d)
+		case schemas.Cluster_LogEncryptionKmsKeyId:
+			v.LogEncryptionKmsKeyId = new(string)
+			return d.ReadString(schemas.Cluster_LogEncryptionKmsKeyId, v.LogEncryptionKmsKeyId)
+		case schemas.Cluster_LogUri:
+			v.LogUri = new(string)
+			return d.ReadString(schemas.Cluster_LogUri, v.LogUri)
+		case schemas.Cluster_MasterPublicDnsName:
+			v.MasterPublicDnsName = new(string)
+			return d.ReadString(schemas.Cluster_MasterPublicDnsName, v.MasterPublicDnsName)
+		case schemas.Cluster_MonitoringConfiguration:
+			v.MonitoringConfiguration = &MonitoringConfiguration{}
+			return v.MonitoringConfiguration.Deserialize(d)
+		case schemas.Cluster_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Cluster_Name, v.Name)
+		case schemas.Cluster_NormalizedInstanceHours:
+			v.NormalizedInstanceHours = new(int32)
+			return d.ReadInt32(schemas.Cluster_NormalizedInstanceHours, v.NormalizedInstanceHours)
+		case schemas.Cluster_OSReleaseLabel:
+			v.OSReleaseLabel = new(string)
+			return d.ReadString(schemas.Cluster_OSReleaseLabel, v.OSReleaseLabel)
+		case schemas.Cluster_OutpostArn:
+			v.OutpostArn = new(string)
+			return d.ReadString(schemas.Cluster_OutpostArn, v.OutpostArn)
+		case schemas.Cluster_PlacementGroups:
+			return deserializePlacementGroupConfigList(d, schemas.Cluster_PlacementGroups, &v.PlacementGroups)
+		case schemas.Cluster_ReleaseLabel:
+			v.ReleaseLabel = new(string)
+			return d.ReadString(schemas.Cluster_ReleaseLabel, v.ReleaseLabel)
+		case schemas.Cluster_RepoUpgradeOnBoot:
+			var ev string
+			if err := d.ReadString(schemas.Cluster_RepoUpgradeOnBoot, &ev); err != nil {
+				return err
+			}
+			v.RepoUpgradeOnBoot = RepoUpgradeOnBoot(ev)
+			return nil
+		case schemas.Cluster_RequestedAmiVersion:
+			v.RequestedAmiVersion = new(string)
+			return d.ReadString(schemas.Cluster_RequestedAmiVersion, v.RequestedAmiVersion)
+		case schemas.Cluster_RunningAmiVersion:
+			v.RunningAmiVersion = new(string)
+			return d.ReadString(schemas.Cluster_RunningAmiVersion, v.RunningAmiVersion)
+		case schemas.Cluster_ScaleDownBehavior:
+			var ev string
+			if err := d.ReadString(schemas.Cluster_ScaleDownBehavior, &ev); err != nil {
+				return err
+			}
+			v.ScaleDownBehavior = ScaleDownBehavior(ev)
+			return nil
+		case schemas.Cluster_SecurityConfiguration:
+			v.SecurityConfiguration = new(string)
+			return d.ReadString(schemas.Cluster_SecurityConfiguration, v.SecurityConfiguration)
+		case schemas.Cluster_ServiceRole:
+			v.ServiceRole = new(string)
+			return d.ReadString(schemas.Cluster_ServiceRole, v.ServiceRole)
+		case schemas.Cluster_SessionEnabled:
+			v.SessionEnabled = new(bool)
+			return d.ReadBool(schemas.Cluster_SessionEnabled, v.SessionEnabled)
+		case schemas.Cluster_Status:
+			v.Status = &ClusterStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.Cluster_StepConcurrencyLevel:
+			v.StepConcurrencyLevel = new(int32)
+			return d.ReadInt32(schemas.Cluster_StepConcurrencyLevel, v.StepConcurrencyLevel)
+		case schemas.Cluster_Tags:
+			return deserializeTagList(d, schemas.Cluster_Tags, &v.Tags)
+		case schemas.Cluster_TerminationProtected:
+			v.TerminationProtected = new(bool)
+			return d.ReadBool(schemas.Cluster_TerminationProtected, v.TerminationProtected)
+		case schemas.Cluster_UnhealthyNodeReplacement:
+			v.UnhealthyNodeReplacement = new(bool)
+			return d.ReadBool(schemas.Cluster_UnhealthyNodeReplacement, v.UnhealthyNodeReplacement)
+		case schemas.Cluster_VisibleToAllUsers:
+			v.VisibleToAllUsers = new(bool)
+			return d.ReadBool(schemas.Cluster_VisibleToAllUsers, v.VisibleToAllUsers)
+		}
+		return nil
+	})
+}
+
 // The reason that the cluster changed to its current state.
 type ClusterStateChangeReason struct {
 
@@ -493,6 +1204,38 @@ type ClusterStateChangeReason struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ClusterStateChangeReason) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterStateChangeReason)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterStateChangeReason) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.ClusterStateChangeReason_Code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ClusterStateChangeReason_Message, *v.Message)
+	}
+}
+func (v *ClusterStateChangeReason) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterStateChangeReason, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterStateChangeReason_Code:
+			var ev string
+			if err := d.ReadString(schemas.ClusterStateChangeReason_Code, &ev); err != nil {
+				return err
+			}
+			v.Code = ClusterStateChangeReasonCode(ev)
+			return nil
+		case schemas.ClusterStateChangeReason_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ClusterStateChangeReason_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // The detailed status of the cluster.
@@ -514,6 +1257,51 @@ type ClusterStatus struct {
 	Timeline *ClusterTimeline
 
 	noSmithyDocumentSerde
+}
+
+func (v *ClusterStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeErrorDetailList(s, schemas.ClusterStatus_ErrorDetails, v.ErrorDetails)
+	if v.State != "" {
+		s.WriteString(schemas.ClusterStatus_State, string(v.State))
+	}
+	if v.StateChangeReason != nil {
+		s.WriteStruct(schemas.ClusterStatus_StateChangeReason)
+		v.StateChangeReason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timeline != nil {
+		s.WriteStruct(schemas.ClusterStatus_Timeline)
+		v.Timeline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ClusterStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterStatus_ErrorDetails:
+			return deserializeErrorDetailList(d, schemas.ClusterStatus_ErrorDetails, &v.ErrorDetails)
+		case schemas.ClusterStatus_State:
+			var ev string
+			if err := d.ReadString(schemas.ClusterStatus_State, &ev); err != nil {
+				return err
+			}
+			v.State = ClusterState(ev)
+			return nil
+		case schemas.ClusterStatus_StateChangeReason:
+			v.StateChangeReason = &ClusterStateChangeReason{}
+			return v.StateChangeReason.Deserialize(d)
+		case schemas.ClusterStatus_Timeline:
+			v.Timeline = &ClusterTimeline{}
+			return v.Timeline.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The summary description of the cluster.
@@ -545,6 +1333,60 @@ type ClusterSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClusterSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.ClusterSummary_ClusterArn, *v.ClusterArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ClusterSummary_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ClusterSummary_Name, *v.Name)
+	}
+	if v.NormalizedInstanceHours != nil {
+		s.WriteInt32(schemas.ClusterSummary_NormalizedInstanceHours, *v.NormalizedInstanceHours)
+	}
+	if v.OutpostArn != nil {
+		s.WriteString(schemas.ClusterSummary_OutpostArn, *v.OutpostArn)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.ClusterSummary_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ClusterSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterSummary_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.ClusterSummary_ClusterArn, v.ClusterArn)
+		case schemas.ClusterSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ClusterSummary_Id, v.Id)
+		case schemas.ClusterSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ClusterSummary_Name, v.Name)
+		case schemas.ClusterSummary_NormalizedInstanceHours:
+			v.NormalizedInstanceHours = new(int32)
+			return d.ReadInt32(schemas.ClusterSummary_NormalizedInstanceHours, v.NormalizedInstanceHours)
+		case schemas.ClusterSummary_OutpostArn:
+			v.OutpostArn = new(string)
+			return d.ReadString(schemas.ClusterSummary_OutpostArn, v.OutpostArn)
+		case schemas.ClusterSummary_Status:
+			v.Status = &ClusterStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Represents the timeline of the cluster's lifecycle.
 type ClusterTimeline struct {
 
@@ -560,6 +1402,40 @@ type ClusterTimeline struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClusterTimeline) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterTimeline)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterTimeline) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.ClusterTimeline_CreationDateTime, *v.CreationDateTime)
+	}
+	if v.EndDateTime != nil {
+		s.WriteTime(schemas.ClusterTimeline_EndDateTime, *v.EndDateTime)
+	}
+	if v.ReadyDateTime != nil {
+		s.WriteTime(schemas.ClusterTimeline_ReadyDateTime, *v.ReadyDateTime)
+	}
+}
+func (v *ClusterTimeline) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterTimeline, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterTimeline_CreationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.ClusterTimeline_CreationDateTime, v.CreationDateTime)
+		case schemas.ClusterTimeline_EndDateTime:
+			v.EndDateTime = new(time.Time)
+			return d.ReadTime(schemas.ClusterTimeline_EndDateTime, v.EndDateTime)
+		case schemas.ClusterTimeline_ReadyDateTime:
+			v.ReadyDateTime = new(time.Time)
+			return d.ReadTime(schemas.ClusterTimeline_ReadyDateTime, v.ReadyDateTime)
+		}
+		return nil
+	})
+}
+
 // An entity describing an executable that runs on a cluster.
 type Command struct {
 
@@ -573,6 +1449,37 @@ type Command struct {
 	ScriptPath *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Command) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Command)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Command) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.Command_Args, v.Args)
+	if v.Name != nil {
+		s.WriteString(schemas.Command_Name, *v.Name)
+	}
+	if v.ScriptPath != nil {
+		s.WriteString(schemas.Command_ScriptPath, *v.ScriptPath)
+	}
+}
+func (v *Command) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Command, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Command_Args:
+			return deserializeStringList(d, schemas.Command_Args, &v.Args)
+		case schemas.Command_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Command_Name, v.Name)
+		case schemas.Command_ScriptPath:
+			v.ScriptPath = new(string)
+			return d.ReadString(schemas.Command_ScriptPath, v.ScriptPath)
+		}
+		return nil
+	})
 }
 
 //	The Amazon EC2 unit limits for a managed scaling policy. The managed scaling
@@ -622,6 +1529,56 @@ type ComputeLimits struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ComputeLimits) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComputeLimits)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComputeLimits) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaximumCapacityUnits != nil {
+		s.WriteInt32(schemas.ComputeLimits_MaximumCapacityUnits, *v.MaximumCapacityUnits)
+	}
+	if v.MaximumCoreCapacityUnits != nil {
+		s.WriteInt32(schemas.ComputeLimits_MaximumCoreCapacityUnits, *v.MaximumCoreCapacityUnits)
+	}
+	if v.MaximumOnDemandCapacityUnits != nil {
+		s.WriteInt32(schemas.ComputeLimits_MaximumOnDemandCapacityUnits, *v.MaximumOnDemandCapacityUnits)
+	}
+	if v.MinimumCapacityUnits != nil {
+		s.WriteInt32(schemas.ComputeLimits_MinimumCapacityUnits, *v.MinimumCapacityUnits)
+	}
+	if v.UnitType != "" {
+		s.WriteString(schemas.ComputeLimits_UnitType, string(v.UnitType))
+	}
+}
+func (v *ComputeLimits) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComputeLimits, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComputeLimits_MaximumCapacityUnits:
+			v.MaximumCapacityUnits = new(int32)
+			return d.ReadInt32(schemas.ComputeLimits_MaximumCapacityUnits, v.MaximumCapacityUnits)
+		case schemas.ComputeLimits_MaximumCoreCapacityUnits:
+			v.MaximumCoreCapacityUnits = new(int32)
+			return d.ReadInt32(schemas.ComputeLimits_MaximumCoreCapacityUnits, v.MaximumCoreCapacityUnits)
+		case schemas.ComputeLimits_MaximumOnDemandCapacityUnits:
+			v.MaximumOnDemandCapacityUnits = new(int32)
+			return d.ReadInt32(schemas.ComputeLimits_MaximumOnDemandCapacityUnits, v.MaximumOnDemandCapacityUnits)
+		case schemas.ComputeLimits_MinimumCapacityUnits:
+			v.MinimumCapacityUnits = new(int32)
+			return d.ReadInt32(schemas.ComputeLimits_MinimumCapacityUnits, v.MinimumCapacityUnits)
+		case schemas.ComputeLimits_UnitType:
+			var ev string
+			if err := d.ReadString(schemas.ComputeLimits_UnitType, &ev); err != nil {
+				return err
+			}
+			v.UnitType = ComputeLimitsUnitType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Amazon EMR releases 4.x or later.
 //
 // An optional configuration specification to be used when provisioning cluster
@@ -646,6 +1603,34 @@ type Configuration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Configuration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Configuration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Configuration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Classification != nil {
+		s.WriteString(schemas.Configuration_Classification, *v.Classification)
+	}
+	serializeConfigurationList(s, schemas.Configuration_Configurations, v.Configurations)
+	serializeStringMap(s, schemas.Configuration_Properties, v.Properties)
+}
+func (v *Configuration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Configuration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Configuration_Classification:
+			v.Classification = new(string)
+			return d.ReadString(schemas.Configuration_Classification, v.Classification)
+		case schemas.Configuration_Configurations:
+			return deserializeConfigurationList(d, schemas.Configuration_Configurations, &v.Configurations)
+		case schemas.Configuration_Properties:
+			return deserializeStringMap(d, schemas.Configuration_Properties, &v.Properties)
+		}
+		return nil
+	})
+}
+
 // The credentials that you can use to connect to cluster endpoints. Credentials
 // consist of a username and a password.
 //
@@ -664,6 +1649,14 @@ type CredentialsMemberUsernamePassword struct {
 }
 
 func (*CredentialsMemberUsernamePassword) isCredentials() {}
+func (v *CredentialsMemberUsernamePassword) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Credentials_UsernamePassword)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CredentialsMemberUsernamePassword) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Configuration of requested EBS block device associated with the instance group.
 type EbsBlockDevice struct {
@@ -677,6 +1670,36 @@ type EbsBlockDevice struct {
 	VolumeSpecification *VolumeSpecification
 
 	noSmithyDocumentSerde
+}
+
+func (v *EbsBlockDevice) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EbsBlockDevice)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EbsBlockDevice) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Device != nil {
+		s.WriteString(schemas.EbsBlockDevice_Device, *v.Device)
+	}
+	if v.VolumeSpecification != nil {
+		s.WriteStruct(schemas.EbsBlockDevice_VolumeSpecification)
+		v.VolumeSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EbsBlockDevice) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EbsBlockDevice, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EbsBlockDevice_Device:
+			v.Device = new(string)
+			return d.ReadString(schemas.EbsBlockDevice_Device, v.Device)
+		case schemas.EbsBlockDevice_VolumeSpecification:
+			v.VolumeSpecification = &VolumeSpecification{}
+			return v.VolumeSpecification.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Configuration of requested EBS block device associated with the instance group
@@ -697,6 +1720,36 @@ type EbsBlockDeviceConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EbsBlockDeviceConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EbsBlockDeviceConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EbsBlockDeviceConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VolumeSpecification != nil {
+		s.WriteStruct(schemas.EbsBlockDeviceConfig_VolumeSpecification)
+		v.VolumeSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VolumesPerInstance != nil {
+		s.WriteInt32(schemas.EbsBlockDeviceConfig_VolumesPerInstance, *v.VolumesPerInstance)
+	}
+}
+func (v *EbsBlockDeviceConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EbsBlockDeviceConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EbsBlockDeviceConfig_VolumeSpecification:
+			v.VolumeSpecification = &VolumeSpecification{}
+			return v.VolumeSpecification.Deserialize(d)
+		case schemas.EbsBlockDeviceConfig_VolumesPerInstance:
+			v.VolumesPerInstance = new(int32)
+			return d.ReadInt32(schemas.EbsBlockDeviceConfig_VolumesPerInstance, v.VolumesPerInstance)
+		}
+		return nil
+	})
+}
+
 // The Amazon EBS configuration of a cluster instance.
 type EbsConfiguration struct {
 
@@ -711,6 +1764,31 @@ type EbsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EbsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EbsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EbsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEbsBlockDeviceConfigList(s, schemas.EbsConfiguration_EbsBlockDeviceConfigs, v.EbsBlockDeviceConfigs)
+	if v.EbsOptimized != nil {
+		s.WriteBool(schemas.EbsConfiguration_EbsOptimized, *v.EbsOptimized)
+	}
+}
+func (v *EbsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EbsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EbsConfiguration_EbsBlockDeviceConfigs:
+			return deserializeEbsBlockDeviceConfigList(d, schemas.EbsConfiguration_EbsBlockDeviceConfigs, &v.EbsBlockDeviceConfigs)
+		case schemas.EbsConfiguration_EbsOptimized:
+			v.EbsOptimized = new(bool)
+			return d.ReadBool(schemas.EbsConfiguration_EbsOptimized, v.EbsOptimized)
+		}
+		return nil
+	})
+}
+
 // EBS block device that's attached to an Amazon EC2 instance.
 type EbsVolume struct {
 
@@ -721,6 +1799,34 @@ type EbsVolume struct {
 	VolumeId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EbsVolume) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EbsVolume)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EbsVolume) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Device != nil {
+		s.WriteString(schemas.EbsVolume_Device, *v.Device)
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.EbsVolume_VolumeId, *v.VolumeId)
+	}
+}
+func (v *EbsVolume) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EbsVolume, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EbsVolume_Device:
+			v.Device = new(string)
+			return d.ReadString(schemas.EbsVolume_Device, v.Device)
+		case schemas.EbsVolume_VolumeId:
+			v.VolumeId = new(string)
+			return d.ReadString(schemas.EbsVolume_VolumeId, v.VolumeId)
+		}
+		return nil
+	})
 }
 
 // Provides information about the Amazon EC2 instances in a cluster grouped by
@@ -785,6 +1891,76 @@ type Ec2InstanceAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Ec2InstanceAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Ec2InstanceAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Ec2InstanceAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.Ec2InstanceAttributes_AdditionalMasterSecurityGroups, v.AdditionalMasterSecurityGroups)
+	serializeStringList(s, schemas.Ec2InstanceAttributes_AdditionalSlaveSecurityGroups, v.AdditionalSlaveSecurityGroups)
+	if v.Ec2AvailabilityZone != nil {
+		s.WriteString(schemas.Ec2InstanceAttributes_Ec2AvailabilityZone, *v.Ec2AvailabilityZone)
+	}
+	if v.Ec2KeyName != nil {
+		s.WriteString(schemas.Ec2InstanceAttributes_Ec2KeyName, *v.Ec2KeyName)
+	}
+	if v.Ec2SubnetId != nil {
+		s.WriteString(schemas.Ec2InstanceAttributes_Ec2SubnetId, *v.Ec2SubnetId)
+	}
+	if v.EmrManagedMasterSecurityGroup != nil {
+		s.WriteString(schemas.Ec2InstanceAttributes_EmrManagedMasterSecurityGroup, *v.EmrManagedMasterSecurityGroup)
+	}
+	if v.EmrManagedSlaveSecurityGroup != nil {
+		s.WriteString(schemas.Ec2InstanceAttributes_EmrManagedSlaveSecurityGroup, *v.EmrManagedSlaveSecurityGroup)
+	}
+	if v.IamInstanceProfile != nil {
+		s.WriteString(schemas.Ec2InstanceAttributes_IamInstanceProfile, *v.IamInstanceProfile)
+	}
+	serializeXmlStringMaxLen256List(s, schemas.Ec2InstanceAttributes_RequestedEc2AvailabilityZones, v.RequestedEc2AvailabilityZones)
+	serializeXmlStringMaxLen256List(s, schemas.Ec2InstanceAttributes_RequestedEc2SubnetIds, v.RequestedEc2SubnetIds)
+	if v.ServiceAccessSecurityGroup != nil {
+		s.WriteString(schemas.Ec2InstanceAttributes_ServiceAccessSecurityGroup, *v.ServiceAccessSecurityGroup)
+	}
+}
+func (v *Ec2InstanceAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Ec2InstanceAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Ec2InstanceAttributes_AdditionalMasterSecurityGroups:
+			return deserializeStringList(d, schemas.Ec2InstanceAttributes_AdditionalMasterSecurityGroups, &v.AdditionalMasterSecurityGroups)
+		case schemas.Ec2InstanceAttributes_AdditionalSlaveSecurityGroups:
+			return deserializeStringList(d, schemas.Ec2InstanceAttributes_AdditionalSlaveSecurityGroups, &v.AdditionalSlaveSecurityGroups)
+		case schemas.Ec2InstanceAttributes_Ec2AvailabilityZone:
+			v.Ec2AvailabilityZone = new(string)
+			return d.ReadString(schemas.Ec2InstanceAttributes_Ec2AvailabilityZone, v.Ec2AvailabilityZone)
+		case schemas.Ec2InstanceAttributes_Ec2KeyName:
+			v.Ec2KeyName = new(string)
+			return d.ReadString(schemas.Ec2InstanceAttributes_Ec2KeyName, v.Ec2KeyName)
+		case schemas.Ec2InstanceAttributes_Ec2SubnetId:
+			v.Ec2SubnetId = new(string)
+			return d.ReadString(schemas.Ec2InstanceAttributes_Ec2SubnetId, v.Ec2SubnetId)
+		case schemas.Ec2InstanceAttributes_EmrManagedMasterSecurityGroup:
+			v.EmrManagedMasterSecurityGroup = new(string)
+			return d.ReadString(schemas.Ec2InstanceAttributes_EmrManagedMasterSecurityGroup, v.EmrManagedMasterSecurityGroup)
+		case schemas.Ec2InstanceAttributes_EmrManagedSlaveSecurityGroup:
+			v.EmrManagedSlaveSecurityGroup = new(string)
+			return d.ReadString(schemas.Ec2InstanceAttributes_EmrManagedSlaveSecurityGroup, v.EmrManagedSlaveSecurityGroup)
+		case schemas.Ec2InstanceAttributes_IamInstanceProfile:
+			v.IamInstanceProfile = new(string)
+			return d.ReadString(schemas.Ec2InstanceAttributes_IamInstanceProfile, v.IamInstanceProfile)
+		case schemas.Ec2InstanceAttributes_RequestedEc2AvailabilityZones:
+			return deserializeXmlStringMaxLen256List(d, schemas.Ec2InstanceAttributes_RequestedEc2AvailabilityZones, &v.RequestedEc2AvailabilityZones)
+		case schemas.Ec2InstanceAttributes_RequestedEc2SubnetIds:
+			return deserializeXmlStringMaxLen256List(d, schemas.Ec2InstanceAttributes_RequestedEc2SubnetIds, &v.RequestedEc2SubnetIds)
+		case schemas.Ec2InstanceAttributes_ServiceAccessSecurityGroup:
+			v.ServiceAccessSecurityGroup = new(string)
+			return d.ReadString(schemas.Ec2InstanceAttributes_ServiceAccessSecurityGroup, v.ServiceAccessSecurityGroup)
+		}
+		return nil
+	})
+}
+
 // The EMR container configuration.
 type EMRContainersConfig struct {
 
@@ -792,6 +1968,28 @@ type EMRContainersConfig struct {
 	JobRunId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EMRContainersConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EMRContainersConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EMRContainersConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobRunId != nil {
+		s.WriteString(schemas.EMRContainersConfig_JobRunId, *v.JobRunId)
+	}
+}
+func (v *EMRContainersConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EMRContainersConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EMRContainersConfig_JobRunId:
+			v.JobRunId = new(string)
+			return d.ReadString(schemas.EMRContainersConfig_JobRunId, v.JobRunId)
+		}
+		return nil
+	})
 }
 
 // A tuple that provides information about an error that caused a cluster to
@@ -809,6 +2007,37 @@ type ErrorDetail struct {
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ErrorDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.ErrorDetail_ErrorCode, *v.ErrorCode)
+	}
+	serializeErrorData(s, schemas.ErrorDetail_ErrorData, v.ErrorData)
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.ErrorDetail_ErrorMessage, *v.ErrorMessage)
+	}
+}
+func (v *ErrorDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ErrorDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ErrorDetail_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.ErrorDetail_ErrorCode, v.ErrorCode)
+		case schemas.ErrorDetail_ErrorData:
+			return deserializeErrorData(d, schemas.ErrorDetail_ErrorData, &v.ErrorData)
+		case schemas.ErrorDetail_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.ErrorDetail_ErrorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
 }
 
 // Specifies the execution engine (cluster) to run the notebook and perform the
@@ -837,6 +2066,50 @@ type ExecutionEngineConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecutionEngineConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutionEngineConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecutionEngineConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.ExecutionEngineConfig_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ExecutionEngineConfig_Id, *v.Id)
+	}
+	if v.MasterInstanceSecurityGroupId != nil {
+		s.WriteString(schemas.ExecutionEngineConfig_MasterInstanceSecurityGroupId, *v.MasterInstanceSecurityGroupId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ExecutionEngineConfig_Type, string(v.Type))
+	}
+}
+func (v *ExecutionEngineConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecutionEngineConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecutionEngineConfig_ExecutionRoleArn:
+			v.ExecutionRoleArn = new(string)
+			return d.ReadString(schemas.ExecutionEngineConfig_ExecutionRoleArn, v.ExecutionRoleArn)
+		case schemas.ExecutionEngineConfig_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ExecutionEngineConfig_Id, v.Id)
+		case schemas.ExecutionEngineConfig_MasterInstanceSecurityGroupId:
+			v.MasterInstanceSecurityGroupId = new(string)
+			return d.ReadString(schemas.ExecutionEngineConfig_MasterInstanceSecurityGroupId, v.MasterInstanceSecurityGroupId)
+		case schemas.ExecutionEngineConfig_Type:
+			var ev string
+			if err := d.ReadString(schemas.ExecutionEngineConfig_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ExecutionEngineType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The details of the step failure. The service attempts to detect the root cause
 // for many common failures.
 type FailureDetails struct {
@@ -856,6 +2129,40 @@ type FailureDetails struct {
 	Reason *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FailureDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailureDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailureDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogFile != nil {
+		s.WriteString(schemas.FailureDetails_LogFile, *v.LogFile)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.FailureDetails_Message, *v.Message)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.FailureDetails_Reason, *v.Reason)
+	}
+}
+func (v *FailureDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailureDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailureDetails_LogFile:
+			v.LogFile = new(string)
+			return d.ReadString(schemas.FailureDetails_LogFile, v.LogFile)
+		case schemas.FailureDetails_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.FailureDetails_Message, v.Message)
+		case schemas.FailureDetails_Reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.FailureDetails_Reason, v.Reason)
+		}
+		return nil
+	})
 }
 
 // A job flow step consisting of a JAR file whose main function will be executed.
@@ -883,6 +2190,40 @@ type HadoopJarStepConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HadoopJarStepConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HadoopJarStepConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HadoopJarStepConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeXmlStringList(s, schemas.HadoopJarStepConfig_Args, v.Args)
+	if v.Jar != nil {
+		s.WriteString(schemas.HadoopJarStepConfig_Jar, *v.Jar)
+	}
+	if v.MainClass != nil {
+		s.WriteString(schemas.HadoopJarStepConfig_MainClass, *v.MainClass)
+	}
+	serializeKeyValueList(s, schemas.HadoopJarStepConfig_Properties, v.Properties)
+}
+func (v *HadoopJarStepConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HadoopJarStepConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HadoopJarStepConfig_Args:
+			return deserializeXmlStringList(d, schemas.HadoopJarStepConfig_Args, &v.Args)
+		case schemas.HadoopJarStepConfig_Jar:
+			v.Jar = new(string)
+			return d.ReadString(schemas.HadoopJarStepConfig_Jar, v.Jar)
+		case schemas.HadoopJarStepConfig_MainClass:
+			v.MainClass = new(string)
+			return d.ReadString(schemas.HadoopJarStepConfig_MainClass, v.MainClass)
+		case schemas.HadoopJarStepConfig_Properties:
+			return deserializeKeyValueList(d, schemas.HadoopJarStepConfig_Properties, &v.Properties)
+		}
+		return nil
+	})
+}
+
 // A cluster step consisting of a JAR file whose main function will be executed.
 // The main function submits a job for Hadoop to execute and waits for the job to
 // finish or fail.
@@ -904,6 +2245,40 @@ type HadoopStepConfig struct {
 	Properties map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HadoopStepConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HadoopStepConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HadoopStepConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.HadoopStepConfig_Args, v.Args)
+	if v.Jar != nil {
+		s.WriteString(schemas.HadoopStepConfig_Jar, *v.Jar)
+	}
+	if v.MainClass != nil {
+		s.WriteString(schemas.HadoopStepConfig_MainClass, *v.MainClass)
+	}
+	serializeStringMap(s, schemas.HadoopStepConfig_Properties, v.Properties)
+}
+func (v *HadoopStepConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HadoopStepConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HadoopStepConfig_Args:
+			return deserializeStringList(d, schemas.HadoopStepConfig_Args, &v.Args)
+		case schemas.HadoopStepConfig_Jar:
+			v.Jar = new(string)
+			return d.ReadString(schemas.HadoopStepConfig_Jar, v.Jar)
+		case schemas.HadoopStepConfig_MainClass:
+			v.MainClass = new(string)
+			return d.ReadString(schemas.HadoopStepConfig_MainClass, v.MainClass)
+		case schemas.HadoopStepConfig_Properties:
+			return deserializeStringMap(d, schemas.HadoopStepConfig_Properties, &v.Properties)
+		}
+		return nil
+	})
 }
 
 // Represents an Amazon EC2 instance provisioned as part of cluster.
@@ -947,6 +2322,97 @@ type Instance struct {
 	Status *InstanceStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *Instance) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Instance)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Instance) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEbsVolumeList(s, schemas.Instance_EbsVolumes, v.EbsVolumes)
+	if v.Ec2InstanceId != nil {
+		s.WriteString(schemas.Instance_Ec2InstanceId, *v.Ec2InstanceId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Instance_Id, *v.Id)
+	}
+	if v.InstanceFleetId != nil {
+		s.WriteString(schemas.Instance_InstanceFleetId, *v.InstanceFleetId)
+	}
+	if v.InstanceGroupId != nil {
+		s.WriteString(schemas.Instance_InstanceGroupId, *v.InstanceGroupId)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.Instance_InstanceType, *v.InstanceType)
+	}
+	if v.Market != "" {
+		s.WriteString(schemas.Instance_Market, string(v.Market))
+	}
+	if v.PrivateDnsName != nil {
+		s.WriteString(schemas.Instance_PrivateDnsName, *v.PrivateDnsName)
+	}
+	if v.PrivateIpAddress != nil {
+		s.WriteString(schemas.Instance_PrivateIpAddress, *v.PrivateIpAddress)
+	}
+	if v.PublicDnsName != nil {
+		s.WriteString(schemas.Instance_PublicDnsName, *v.PublicDnsName)
+	}
+	if v.PublicIpAddress != nil {
+		s.WriteString(schemas.Instance_PublicIpAddress, *v.PublicIpAddress)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.Instance_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Instance) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Instance, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Instance_EbsVolumes:
+			return deserializeEbsVolumeList(d, schemas.Instance_EbsVolumes, &v.EbsVolumes)
+		case schemas.Instance_Ec2InstanceId:
+			v.Ec2InstanceId = new(string)
+			return d.ReadString(schemas.Instance_Ec2InstanceId, v.Ec2InstanceId)
+		case schemas.Instance_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Instance_Id, v.Id)
+		case schemas.Instance_InstanceFleetId:
+			v.InstanceFleetId = new(string)
+			return d.ReadString(schemas.Instance_InstanceFleetId, v.InstanceFleetId)
+		case schemas.Instance_InstanceGroupId:
+			v.InstanceGroupId = new(string)
+			return d.ReadString(schemas.Instance_InstanceGroupId, v.InstanceGroupId)
+		case schemas.Instance_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.Instance_InstanceType, v.InstanceType)
+		case schemas.Instance_Market:
+			var ev string
+			if err := d.ReadString(schemas.Instance_Market, &ev); err != nil {
+				return err
+			}
+			v.Market = MarketType(ev)
+			return nil
+		case schemas.Instance_PrivateDnsName:
+			v.PrivateDnsName = new(string)
+			return d.ReadString(schemas.Instance_PrivateDnsName, v.PrivateDnsName)
+		case schemas.Instance_PrivateIpAddress:
+			v.PrivateIpAddress = new(string)
+			return d.ReadString(schemas.Instance_PrivateIpAddress, v.PrivateIpAddress)
+		case schemas.Instance_PublicDnsName:
+			v.PublicDnsName = new(string)
+			return d.ReadString(schemas.Instance_PublicDnsName, v.PublicDnsName)
+		case schemas.Instance_PublicIpAddress:
+			v.PublicIpAddress = new(string)
+			return d.ReadString(schemas.Instance_PublicIpAddress, v.PublicIpAddress)
+		case schemas.Instance_Status:
+			v.Status = &InstanceStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes an instance fleet, which is a group of Amazon EC2 instances that host
@@ -1035,6 +2501,101 @@ type InstanceFleet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceFleet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceFleet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceFleet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Context != nil {
+		s.WriteString(schemas.InstanceFleet_Context, *v.Context)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.InstanceFleet_Id, *v.Id)
+	}
+	if v.InstanceFleetType != "" {
+		s.WriteString(schemas.InstanceFleet_InstanceFleetType, string(v.InstanceFleetType))
+	}
+	serializeInstanceTypeSpecificationList(s, schemas.InstanceFleet_InstanceTypeSpecifications, v.InstanceTypeSpecifications)
+	if v.LaunchSpecifications != nil {
+		s.WriteStruct(schemas.InstanceFleet_LaunchSpecifications)
+		v.LaunchSpecifications.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.InstanceFleet_Name, *v.Name)
+	}
+	if v.ProvisionedOnDemandCapacity != nil {
+		s.WriteInt32(schemas.InstanceFleet_ProvisionedOnDemandCapacity, *v.ProvisionedOnDemandCapacity)
+	}
+	if v.ProvisionedSpotCapacity != nil {
+		s.WriteInt32(schemas.InstanceFleet_ProvisionedSpotCapacity, *v.ProvisionedSpotCapacity)
+	}
+	if v.ResizeSpecifications != nil {
+		s.WriteStruct(schemas.InstanceFleet_ResizeSpecifications)
+		v.ResizeSpecifications.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.InstanceFleet_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetOnDemandCapacity != nil {
+		s.WriteInt32(schemas.InstanceFleet_TargetOnDemandCapacity, *v.TargetOnDemandCapacity)
+	}
+	if v.TargetSpotCapacity != nil {
+		s.WriteInt32(schemas.InstanceFleet_TargetSpotCapacity, *v.TargetSpotCapacity)
+	}
+}
+func (v *InstanceFleet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceFleet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceFleet_Context:
+			v.Context = new(string)
+			return d.ReadString(schemas.InstanceFleet_Context, v.Context)
+		case schemas.InstanceFleet_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.InstanceFleet_Id, v.Id)
+		case schemas.InstanceFleet_InstanceFleetType:
+			var ev string
+			if err := d.ReadString(schemas.InstanceFleet_InstanceFleetType, &ev); err != nil {
+				return err
+			}
+			v.InstanceFleetType = InstanceFleetType(ev)
+			return nil
+		case schemas.InstanceFleet_InstanceTypeSpecifications:
+			return deserializeInstanceTypeSpecificationList(d, schemas.InstanceFleet_InstanceTypeSpecifications, &v.InstanceTypeSpecifications)
+		case schemas.InstanceFleet_LaunchSpecifications:
+			v.LaunchSpecifications = &InstanceFleetProvisioningSpecifications{}
+			return v.LaunchSpecifications.Deserialize(d)
+		case schemas.InstanceFleet_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.InstanceFleet_Name, v.Name)
+		case schemas.InstanceFleet_ProvisionedOnDemandCapacity:
+			v.ProvisionedOnDemandCapacity = new(int32)
+			return d.ReadInt32(schemas.InstanceFleet_ProvisionedOnDemandCapacity, v.ProvisionedOnDemandCapacity)
+		case schemas.InstanceFleet_ProvisionedSpotCapacity:
+			v.ProvisionedSpotCapacity = new(int32)
+			return d.ReadInt32(schemas.InstanceFleet_ProvisionedSpotCapacity, v.ProvisionedSpotCapacity)
+		case schemas.InstanceFleet_ResizeSpecifications:
+			v.ResizeSpecifications = &InstanceFleetResizingSpecifications{}
+			return v.ResizeSpecifications.Deserialize(d)
+		case schemas.InstanceFleet_Status:
+			v.Status = &InstanceFleetStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.InstanceFleet_TargetOnDemandCapacity:
+			v.TargetOnDemandCapacity = new(int32)
+			return d.ReadInt32(schemas.InstanceFleet_TargetOnDemandCapacity, v.TargetOnDemandCapacity)
+		case schemas.InstanceFleet_TargetSpotCapacity:
+			v.TargetSpotCapacity = new(int32)
+			return d.ReadInt32(schemas.InstanceFleet_TargetSpotCapacity, v.TargetSpotCapacity)
+		}
+		return nil
+	})
+}
+
 // The configuration that defines an instance fleet.
 //
 // The instance fleet configuration is available only in Amazon EMR releases 4.8.0
@@ -1102,6 +2663,75 @@ type InstanceFleetConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceFleetConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceFleetConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceFleetConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Context != nil {
+		s.WriteString(schemas.InstanceFleetConfig_Context, *v.Context)
+	}
+	if v.InstanceFleetType != "" {
+		s.WriteString(schemas.InstanceFleetConfig_InstanceFleetType, string(v.InstanceFleetType))
+	}
+	serializeInstanceTypeConfigList(s, schemas.InstanceFleetConfig_InstanceTypeConfigs, v.InstanceTypeConfigs)
+	if v.LaunchSpecifications != nil {
+		s.WriteStruct(schemas.InstanceFleetConfig_LaunchSpecifications)
+		v.LaunchSpecifications.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.InstanceFleetConfig_Name, *v.Name)
+	}
+	if v.ResizeSpecifications != nil {
+		s.WriteStruct(schemas.InstanceFleetConfig_ResizeSpecifications)
+		v.ResizeSpecifications.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetOnDemandCapacity != nil {
+		s.WriteInt32(schemas.InstanceFleetConfig_TargetOnDemandCapacity, *v.TargetOnDemandCapacity)
+	}
+	if v.TargetSpotCapacity != nil {
+		s.WriteInt32(schemas.InstanceFleetConfig_TargetSpotCapacity, *v.TargetSpotCapacity)
+	}
+}
+func (v *InstanceFleetConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceFleetConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceFleetConfig_Context:
+			v.Context = new(string)
+			return d.ReadString(schemas.InstanceFleetConfig_Context, v.Context)
+		case schemas.InstanceFleetConfig_InstanceFleetType:
+			var ev string
+			if err := d.ReadString(schemas.InstanceFleetConfig_InstanceFleetType, &ev); err != nil {
+				return err
+			}
+			v.InstanceFleetType = InstanceFleetType(ev)
+			return nil
+		case schemas.InstanceFleetConfig_InstanceTypeConfigs:
+			return deserializeInstanceTypeConfigList(d, schemas.InstanceFleetConfig_InstanceTypeConfigs, &v.InstanceTypeConfigs)
+		case schemas.InstanceFleetConfig_LaunchSpecifications:
+			v.LaunchSpecifications = &InstanceFleetProvisioningSpecifications{}
+			return v.LaunchSpecifications.Deserialize(d)
+		case schemas.InstanceFleetConfig_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.InstanceFleetConfig_Name, v.Name)
+		case schemas.InstanceFleetConfig_ResizeSpecifications:
+			v.ResizeSpecifications = &InstanceFleetResizingSpecifications{}
+			return v.ResizeSpecifications.Deserialize(d)
+		case schemas.InstanceFleetConfig_TargetOnDemandCapacity:
+			v.TargetOnDemandCapacity = new(int32)
+			return d.ReadInt32(schemas.InstanceFleetConfig_TargetOnDemandCapacity, v.TargetOnDemandCapacity)
+		case schemas.InstanceFleetConfig_TargetSpotCapacity:
+			v.TargetSpotCapacity = new(int32)
+			return d.ReadInt32(schemas.InstanceFleetConfig_TargetSpotCapacity, v.TargetSpotCapacity)
+		}
+		return nil
+	})
+}
+
 // Configuration parameters for an instance fleet modification request.
 //
 // The instance fleet configuration is available only in Amazon EMR releases 4.8.0
@@ -1137,6 +2767,57 @@ type InstanceFleetModifyConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceFleetModifyConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceFleetModifyConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceFleetModifyConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Context != nil {
+		s.WriteString(schemas.InstanceFleetModifyConfig_Context, *v.Context)
+	}
+	if v.InstanceFleetId != nil {
+		s.WriteString(schemas.InstanceFleetModifyConfig_InstanceFleetId, *v.InstanceFleetId)
+	}
+	serializeInstanceTypeConfigList(s, schemas.InstanceFleetModifyConfig_InstanceTypeConfigs, v.InstanceTypeConfigs)
+	if v.ResizeSpecifications != nil {
+		s.WriteStruct(schemas.InstanceFleetModifyConfig_ResizeSpecifications)
+		v.ResizeSpecifications.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetOnDemandCapacity != nil {
+		s.WriteInt32(schemas.InstanceFleetModifyConfig_TargetOnDemandCapacity, *v.TargetOnDemandCapacity)
+	}
+	if v.TargetSpotCapacity != nil {
+		s.WriteInt32(schemas.InstanceFleetModifyConfig_TargetSpotCapacity, *v.TargetSpotCapacity)
+	}
+}
+func (v *InstanceFleetModifyConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceFleetModifyConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceFleetModifyConfig_Context:
+			v.Context = new(string)
+			return d.ReadString(schemas.InstanceFleetModifyConfig_Context, v.Context)
+		case schemas.InstanceFleetModifyConfig_InstanceFleetId:
+			v.InstanceFleetId = new(string)
+			return d.ReadString(schemas.InstanceFleetModifyConfig_InstanceFleetId, v.InstanceFleetId)
+		case schemas.InstanceFleetModifyConfig_InstanceTypeConfigs:
+			return deserializeInstanceTypeConfigList(d, schemas.InstanceFleetModifyConfig_InstanceTypeConfigs, &v.InstanceTypeConfigs)
+		case schemas.InstanceFleetModifyConfig_ResizeSpecifications:
+			v.ResizeSpecifications = &InstanceFleetResizingSpecifications{}
+			return v.ResizeSpecifications.Deserialize(d)
+		case schemas.InstanceFleetModifyConfig_TargetOnDemandCapacity:
+			v.TargetOnDemandCapacity = new(int32)
+			return d.ReadInt32(schemas.InstanceFleetModifyConfig_TargetOnDemandCapacity, v.TargetOnDemandCapacity)
+		case schemas.InstanceFleetModifyConfig_TargetSpotCapacity:
+			v.TargetSpotCapacity = new(int32)
+			return d.ReadInt32(schemas.InstanceFleetModifyConfig_TargetSpotCapacity, v.TargetSpotCapacity)
+		}
+		return nil
+	})
+}
+
 // The launch specification for On-Demand and Spot Instances in the fleet.
 //
 // The instance fleet configuration is available only in Amazon EMR releases 4.8.0
@@ -1159,6 +2840,38 @@ type InstanceFleetProvisioningSpecifications struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceFleetProvisioningSpecifications) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceFleetProvisioningSpecifications)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceFleetProvisioningSpecifications) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OnDemandSpecification != nil {
+		s.WriteStruct(schemas.InstanceFleetProvisioningSpecifications_OnDemandSpecification)
+		v.OnDemandSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SpotSpecification != nil {
+		s.WriteStruct(schemas.InstanceFleetProvisioningSpecifications_SpotSpecification)
+		v.SpotSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InstanceFleetProvisioningSpecifications) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceFleetProvisioningSpecifications, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceFleetProvisioningSpecifications_OnDemandSpecification:
+			v.OnDemandSpecification = &OnDemandProvisioningSpecification{}
+			return v.OnDemandSpecification.Deserialize(d)
+		case schemas.InstanceFleetProvisioningSpecifications_SpotSpecification:
+			v.SpotSpecification = &SpotProvisioningSpecification{}
+			return v.SpotSpecification.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The resize specification for On-Demand and Spot Instances in the fleet.
 type InstanceFleetResizingSpecifications struct {
 
@@ -1174,6 +2887,38 @@ type InstanceFleetResizingSpecifications struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceFleetResizingSpecifications) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceFleetResizingSpecifications)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceFleetResizingSpecifications) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OnDemandResizeSpecification != nil {
+		s.WriteStruct(schemas.InstanceFleetResizingSpecifications_OnDemandResizeSpecification)
+		v.OnDemandResizeSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SpotResizeSpecification != nil {
+		s.WriteStruct(schemas.InstanceFleetResizingSpecifications_SpotResizeSpecification)
+		v.SpotResizeSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InstanceFleetResizingSpecifications) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceFleetResizingSpecifications, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceFleetResizingSpecifications_OnDemandResizeSpecification:
+			v.OnDemandResizeSpecification = &OnDemandResizingSpecification{}
+			return v.OnDemandResizeSpecification.Deserialize(d)
+		case schemas.InstanceFleetResizingSpecifications_SpotResizeSpecification:
+			v.SpotResizeSpecification = &SpotResizingSpecification{}
+			return v.SpotResizeSpecification.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides status change reason details for the instance fleet.
 //
 // The instance fleet configuration is available only in Amazon EMR releases 4.8.0
@@ -1187,6 +2932,38 @@ type InstanceFleetStateChangeReason struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceFleetStateChangeReason) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceFleetStateChangeReason)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceFleetStateChangeReason) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.InstanceFleetStateChangeReason_Code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InstanceFleetStateChangeReason_Message, *v.Message)
+	}
+}
+func (v *InstanceFleetStateChangeReason) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceFleetStateChangeReason, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceFleetStateChangeReason_Code:
+			var ev string
+			if err := d.ReadString(schemas.InstanceFleetStateChangeReason_Code, &ev); err != nil {
+				return err
+			}
+			v.Code = InstanceFleetStateChangeReasonCode(ev)
+			return nil
+		case schemas.InstanceFleetStateChangeReason_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InstanceFleetStateChangeReason_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // The status of the instance fleet.
@@ -1228,6 +3005,48 @@ type InstanceFleetStatus struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceFleetStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceFleetStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceFleetStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.InstanceFleetStatus_State, string(v.State))
+	}
+	if v.StateChangeReason != nil {
+		s.WriteStruct(schemas.InstanceFleetStatus_StateChangeReason)
+		v.StateChangeReason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timeline != nil {
+		s.WriteStruct(schemas.InstanceFleetStatus_Timeline)
+		v.Timeline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InstanceFleetStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceFleetStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceFleetStatus_State:
+			var ev string
+			if err := d.ReadString(schemas.InstanceFleetStatus_State, &ev); err != nil {
+				return err
+			}
+			v.State = InstanceFleetState(ev)
+			return nil
+		case schemas.InstanceFleetStatus_StateChangeReason:
+			v.StateChangeReason = &InstanceFleetStateChangeReason{}
+			return v.StateChangeReason.Deserialize(d)
+		case schemas.InstanceFleetStatus_Timeline:
+			v.Timeline = &InstanceFleetTimeline{}
+			return v.Timeline.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides historical timestamps for the instance fleet, including the time of
 // creation, the time it became ready to run jobs, and the time of termination.
 //
@@ -1245,6 +3064,40 @@ type InstanceFleetTimeline struct {
 	ReadyDateTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceFleetTimeline) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceFleetTimeline)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceFleetTimeline) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.InstanceFleetTimeline_CreationDateTime, *v.CreationDateTime)
+	}
+	if v.EndDateTime != nil {
+		s.WriteTime(schemas.InstanceFleetTimeline_EndDateTime, *v.EndDateTime)
+	}
+	if v.ReadyDateTime != nil {
+		s.WriteTime(schemas.InstanceFleetTimeline_ReadyDateTime, *v.ReadyDateTime)
+	}
+}
+func (v *InstanceFleetTimeline) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceFleetTimeline, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceFleetTimeline_CreationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.InstanceFleetTimeline_CreationDateTime, v.CreationDateTime)
+		case schemas.InstanceFleetTimeline_EndDateTime:
+			v.EndDateTime = new(time.Time)
+			return d.ReadTime(schemas.InstanceFleetTimeline_EndDateTime, v.EndDateTime)
+		case schemas.InstanceFleetTimeline_ReadyDateTime:
+			v.ReadyDateTime = new(time.Time)
+			return d.ReadTime(schemas.InstanceFleetTimeline_ReadyDateTime, v.ReadyDateTime)
+		}
+		return nil
+	})
 }
 
 // This entity represents an instance group, which is a group of instances that
@@ -1323,6 +3176,135 @@ type InstanceGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingPolicy != nil {
+		s.WriteStruct(schemas.InstanceGroup_AutoScalingPolicy)
+		v.AutoScalingPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BidPrice != nil {
+		s.WriteString(schemas.InstanceGroup_BidPrice, *v.BidPrice)
+	}
+	serializeConfigurationList(s, schemas.InstanceGroup_Configurations, v.Configurations)
+	if v.ConfigurationsVersion != nil {
+		s.WriteInt64(schemas.InstanceGroup_ConfigurationsVersion, *v.ConfigurationsVersion)
+	}
+	if v.CustomAmiId != nil {
+		s.WriteString(schemas.InstanceGroup_CustomAmiId, *v.CustomAmiId)
+	}
+	serializeEbsBlockDeviceList(s, schemas.InstanceGroup_EbsBlockDevices, v.EbsBlockDevices)
+	if v.EbsOptimized != nil {
+		s.WriteBool(schemas.InstanceGroup_EbsOptimized, *v.EbsOptimized)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.InstanceGroup_Id, *v.Id)
+	}
+	if v.InstanceGroupType != "" {
+		s.WriteString(schemas.InstanceGroup_InstanceGroupType, string(v.InstanceGroupType))
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.InstanceGroup_InstanceType, *v.InstanceType)
+	}
+	serializeConfigurationList(s, schemas.InstanceGroup_LastSuccessfullyAppliedConfigurations, v.LastSuccessfullyAppliedConfigurations)
+	if v.LastSuccessfullyAppliedConfigurationsVersion != nil {
+		s.WriteInt64(schemas.InstanceGroup_LastSuccessfullyAppliedConfigurationsVersion, *v.LastSuccessfullyAppliedConfigurationsVersion)
+	}
+	if v.Market != "" {
+		s.WriteString(schemas.InstanceGroup_Market, string(v.Market))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.InstanceGroup_Name, *v.Name)
+	}
+	if v.RequestedInstanceCount != nil {
+		s.WriteInt32(schemas.InstanceGroup_RequestedInstanceCount, *v.RequestedInstanceCount)
+	}
+	if v.RunningInstanceCount != nil {
+		s.WriteInt32(schemas.InstanceGroup_RunningInstanceCount, *v.RunningInstanceCount)
+	}
+	if v.ShrinkPolicy != nil {
+		s.WriteStruct(schemas.InstanceGroup_ShrinkPolicy)
+		v.ShrinkPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.InstanceGroup_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InstanceGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceGroup_AutoScalingPolicy:
+			v.AutoScalingPolicy = &AutoScalingPolicyDescription{}
+			return v.AutoScalingPolicy.Deserialize(d)
+		case schemas.InstanceGroup_BidPrice:
+			v.BidPrice = new(string)
+			return d.ReadString(schemas.InstanceGroup_BidPrice, v.BidPrice)
+		case schemas.InstanceGroup_Configurations:
+			return deserializeConfigurationList(d, schemas.InstanceGroup_Configurations, &v.Configurations)
+		case schemas.InstanceGroup_ConfigurationsVersion:
+			v.ConfigurationsVersion = new(int64)
+			return d.ReadInt64(schemas.InstanceGroup_ConfigurationsVersion, v.ConfigurationsVersion)
+		case schemas.InstanceGroup_CustomAmiId:
+			v.CustomAmiId = new(string)
+			return d.ReadString(schemas.InstanceGroup_CustomAmiId, v.CustomAmiId)
+		case schemas.InstanceGroup_EbsBlockDevices:
+			return deserializeEbsBlockDeviceList(d, schemas.InstanceGroup_EbsBlockDevices, &v.EbsBlockDevices)
+		case schemas.InstanceGroup_EbsOptimized:
+			v.EbsOptimized = new(bool)
+			return d.ReadBool(schemas.InstanceGroup_EbsOptimized, v.EbsOptimized)
+		case schemas.InstanceGroup_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.InstanceGroup_Id, v.Id)
+		case schemas.InstanceGroup_InstanceGroupType:
+			var ev string
+			if err := d.ReadString(schemas.InstanceGroup_InstanceGroupType, &ev); err != nil {
+				return err
+			}
+			v.InstanceGroupType = InstanceGroupType(ev)
+			return nil
+		case schemas.InstanceGroup_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.InstanceGroup_InstanceType, v.InstanceType)
+		case schemas.InstanceGroup_LastSuccessfullyAppliedConfigurations:
+			return deserializeConfigurationList(d, schemas.InstanceGroup_LastSuccessfullyAppliedConfigurations, &v.LastSuccessfullyAppliedConfigurations)
+		case schemas.InstanceGroup_LastSuccessfullyAppliedConfigurationsVersion:
+			v.LastSuccessfullyAppliedConfigurationsVersion = new(int64)
+			return d.ReadInt64(schemas.InstanceGroup_LastSuccessfullyAppliedConfigurationsVersion, v.LastSuccessfullyAppliedConfigurationsVersion)
+		case schemas.InstanceGroup_Market:
+			var ev string
+			if err := d.ReadString(schemas.InstanceGroup_Market, &ev); err != nil {
+				return err
+			}
+			v.Market = MarketType(ev)
+			return nil
+		case schemas.InstanceGroup_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.InstanceGroup_Name, v.Name)
+		case schemas.InstanceGroup_RequestedInstanceCount:
+			v.RequestedInstanceCount = new(int32)
+			return d.ReadInt32(schemas.InstanceGroup_RequestedInstanceCount, v.RequestedInstanceCount)
+		case schemas.InstanceGroup_RunningInstanceCount:
+			v.RunningInstanceCount = new(int32)
+			return d.ReadInt32(schemas.InstanceGroup_RunningInstanceCount, v.RunningInstanceCount)
+		case schemas.InstanceGroup_ShrinkPolicy:
+			v.ShrinkPolicy = &ShrinkPolicy{}
+			return v.ShrinkPolicy.Deserialize(d)
+		case schemas.InstanceGroup_Status:
+			v.Status = &InstanceGroupStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Configuration defining a new instance group.
 type InstanceGroupConfig struct {
 
@@ -1373,6 +3355,91 @@ type InstanceGroupConfig struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceGroupConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceGroupConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceGroupConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingPolicy != nil {
+		s.WriteStruct(schemas.InstanceGroupConfig_AutoScalingPolicy)
+		v.AutoScalingPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BidPrice != nil {
+		s.WriteString(schemas.InstanceGroupConfig_BidPrice, *v.BidPrice)
+	}
+	serializeConfigurationList(s, schemas.InstanceGroupConfig_Configurations, v.Configurations)
+	if v.CustomAmiId != nil {
+		s.WriteString(schemas.InstanceGroupConfig_CustomAmiId, *v.CustomAmiId)
+	}
+	if v.EbsConfiguration != nil {
+		s.WriteStruct(schemas.InstanceGroupConfig_EbsConfiguration)
+		v.EbsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceCount != nil {
+		s.WriteInt32(schemas.InstanceGroupConfig_InstanceCount, *v.InstanceCount)
+	}
+	if v.InstanceRole != "" {
+		s.WriteString(schemas.InstanceGroupConfig_InstanceRole, string(v.InstanceRole))
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.InstanceGroupConfig_InstanceType, *v.InstanceType)
+	}
+	if v.Market != "" {
+		s.WriteString(schemas.InstanceGroupConfig_Market, string(v.Market))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.InstanceGroupConfig_Name, *v.Name)
+	}
+}
+func (v *InstanceGroupConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceGroupConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceGroupConfig_AutoScalingPolicy:
+			v.AutoScalingPolicy = &AutoScalingPolicy{}
+			return v.AutoScalingPolicy.Deserialize(d)
+		case schemas.InstanceGroupConfig_BidPrice:
+			v.BidPrice = new(string)
+			return d.ReadString(schemas.InstanceGroupConfig_BidPrice, v.BidPrice)
+		case schemas.InstanceGroupConfig_Configurations:
+			return deserializeConfigurationList(d, schemas.InstanceGroupConfig_Configurations, &v.Configurations)
+		case schemas.InstanceGroupConfig_CustomAmiId:
+			v.CustomAmiId = new(string)
+			return d.ReadString(schemas.InstanceGroupConfig_CustomAmiId, v.CustomAmiId)
+		case schemas.InstanceGroupConfig_EbsConfiguration:
+			v.EbsConfiguration = &EbsConfiguration{}
+			return v.EbsConfiguration.Deserialize(d)
+		case schemas.InstanceGroupConfig_InstanceCount:
+			v.InstanceCount = new(int32)
+			return d.ReadInt32(schemas.InstanceGroupConfig_InstanceCount, v.InstanceCount)
+		case schemas.InstanceGroupConfig_InstanceRole:
+			var ev string
+			if err := d.ReadString(schemas.InstanceGroupConfig_InstanceRole, &ev); err != nil {
+				return err
+			}
+			v.InstanceRole = InstanceRoleType(ev)
+			return nil
+		case schemas.InstanceGroupConfig_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.InstanceGroupConfig_InstanceType, v.InstanceType)
+		case schemas.InstanceGroupConfig_Market:
+			var ev string
+			if err := d.ReadString(schemas.InstanceGroupConfig_Market, &ev); err != nil {
+				return err
+			}
+			v.Market = MarketType(ev)
+			return nil
+		case schemas.InstanceGroupConfig_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.InstanceGroupConfig_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Detailed information about an instance group.
@@ -1443,6 +3510,124 @@ type InstanceGroupDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceGroupDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceGroupDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceGroupDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BidPrice != nil {
+		s.WriteString(schemas.InstanceGroupDetail_BidPrice, *v.BidPrice)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.InstanceGroupDetail_CreationDateTime, *v.CreationDateTime)
+	}
+	if v.CustomAmiId != nil {
+		s.WriteString(schemas.InstanceGroupDetail_CustomAmiId, *v.CustomAmiId)
+	}
+	if v.EndDateTime != nil {
+		s.WriteTime(schemas.InstanceGroupDetail_EndDateTime, *v.EndDateTime)
+	}
+	if v.InstanceGroupId != nil {
+		s.WriteString(schemas.InstanceGroupDetail_InstanceGroupId, *v.InstanceGroupId)
+	}
+	if v.InstanceRequestCount != nil {
+		s.WriteInt32(schemas.InstanceGroupDetail_InstanceRequestCount, *v.InstanceRequestCount)
+	}
+	if v.InstanceRole != "" {
+		s.WriteString(schemas.InstanceGroupDetail_InstanceRole, string(v.InstanceRole))
+	}
+	if v.InstanceRunningCount != nil {
+		s.WriteInt32(schemas.InstanceGroupDetail_InstanceRunningCount, *v.InstanceRunningCount)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.InstanceGroupDetail_InstanceType, *v.InstanceType)
+	}
+	if v.LastStateChangeReason != nil {
+		s.WriteString(schemas.InstanceGroupDetail_LastStateChangeReason, *v.LastStateChangeReason)
+	}
+	if v.Market != "" {
+		s.WriteString(schemas.InstanceGroupDetail_Market, string(v.Market))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.InstanceGroupDetail_Name, *v.Name)
+	}
+	if v.ReadyDateTime != nil {
+		s.WriteTime(schemas.InstanceGroupDetail_ReadyDateTime, *v.ReadyDateTime)
+	}
+	if v.StartDateTime != nil {
+		s.WriteTime(schemas.InstanceGroupDetail_StartDateTime, *v.StartDateTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.InstanceGroupDetail_State, string(v.State))
+	}
+}
+func (v *InstanceGroupDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceGroupDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceGroupDetail_BidPrice:
+			v.BidPrice = new(string)
+			return d.ReadString(schemas.InstanceGroupDetail_BidPrice, v.BidPrice)
+		case schemas.InstanceGroupDetail_CreationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.InstanceGroupDetail_CreationDateTime, v.CreationDateTime)
+		case schemas.InstanceGroupDetail_CustomAmiId:
+			v.CustomAmiId = new(string)
+			return d.ReadString(schemas.InstanceGroupDetail_CustomAmiId, v.CustomAmiId)
+		case schemas.InstanceGroupDetail_EndDateTime:
+			v.EndDateTime = new(time.Time)
+			return d.ReadTime(schemas.InstanceGroupDetail_EndDateTime, v.EndDateTime)
+		case schemas.InstanceGroupDetail_InstanceGroupId:
+			v.InstanceGroupId = new(string)
+			return d.ReadString(schemas.InstanceGroupDetail_InstanceGroupId, v.InstanceGroupId)
+		case schemas.InstanceGroupDetail_InstanceRequestCount:
+			v.InstanceRequestCount = new(int32)
+			return d.ReadInt32(schemas.InstanceGroupDetail_InstanceRequestCount, v.InstanceRequestCount)
+		case schemas.InstanceGroupDetail_InstanceRole:
+			var ev string
+			if err := d.ReadString(schemas.InstanceGroupDetail_InstanceRole, &ev); err != nil {
+				return err
+			}
+			v.InstanceRole = InstanceRoleType(ev)
+			return nil
+		case schemas.InstanceGroupDetail_InstanceRunningCount:
+			v.InstanceRunningCount = new(int32)
+			return d.ReadInt32(schemas.InstanceGroupDetail_InstanceRunningCount, v.InstanceRunningCount)
+		case schemas.InstanceGroupDetail_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.InstanceGroupDetail_InstanceType, v.InstanceType)
+		case schemas.InstanceGroupDetail_LastStateChangeReason:
+			v.LastStateChangeReason = new(string)
+			return d.ReadString(schemas.InstanceGroupDetail_LastStateChangeReason, v.LastStateChangeReason)
+		case schemas.InstanceGroupDetail_Market:
+			var ev string
+			if err := d.ReadString(schemas.InstanceGroupDetail_Market, &ev); err != nil {
+				return err
+			}
+			v.Market = MarketType(ev)
+			return nil
+		case schemas.InstanceGroupDetail_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.InstanceGroupDetail_Name, v.Name)
+		case schemas.InstanceGroupDetail_ReadyDateTime:
+			v.ReadyDateTime = new(time.Time)
+			return d.ReadTime(schemas.InstanceGroupDetail_ReadyDateTime, v.ReadyDateTime)
+		case schemas.InstanceGroupDetail_StartDateTime:
+			v.StartDateTime = new(time.Time)
+			return d.ReadTime(schemas.InstanceGroupDetail_StartDateTime, v.StartDateTime)
+		case schemas.InstanceGroupDetail_State:
+			var ev string
+			if err := d.ReadString(schemas.InstanceGroupDetail_State, &ev); err != nil {
+				return err
+			}
+			v.State = InstanceGroupState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Modify the size or configurations of an instance group.
 type InstanceGroupModifyConfig struct {
 
@@ -1470,6 +3655,58 @@ type InstanceGroupModifyConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceGroupModifyConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceGroupModifyConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceGroupModifyConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurationList(s, schemas.InstanceGroupModifyConfig_Configurations, v.Configurations)
+	serializeEC2InstanceIdsToTerminateList(s, schemas.InstanceGroupModifyConfig_EC2InstanceIdsToTerminate, v.EC2InstanceIdsToTerminate)
+	if v.InstanceCount != nil {
+		s.WriteInt32(schemas.InstanceGroupModifyConfig_InstanceCount, *v.InstanceCount)
+	}
+	if v.InstanceGroupId != nil {
+		s.WriteString(schemas.InstanceGroupModifyConfig_InstanceGroupId, *v.InstanceGroupId)
+	}
+	if v.ReconfigurationType != "" {
+		s.WriteString(schemas.InstanceGroupModifyConfig_ReconfigurationType, string(v.ReconfigurationType))
+	}
+	if v.ShrinkPolicy != nil {
+		s.WriteStruct(schemas.InstanceGroupModifyConfig_ShrinkPolicy)
+		v.ShrinkPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InstanceGroupModifyConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceGroupModifyConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceGroupModifyConfig_Configurations:
+			return deserializeConfigurationList(d, schemas.InstanceGroupModifyConfig_Configurations, &v.Configurations)
+		case schemas.InstanceGroupModifyConfig_EC2InstanceIdsToTerminate:
+			return deserializeEC2InstanceIdsToTerminateList(d, schemas.InstanceGroupModifyConfig_EC2InstanceIdsToTerminate, &v.EC2InstanceIdsToTerminate)
+		case schemas.InstanceGroupModifyConfig_InstanceCount:
+			v.InstanceCount = new(int32)
+			return d.ReadInt32(schemas.InstanceGroupModifyConfig_InstanceCount, v.InstanceCount)
+		case schemas.InstanceGroupModifyConfig_InstanceGroupId:
+			v.InstanceGroupId = new(string)
+			return d.ReadString(schemas.InstanceGroupModifyConfig_InstanceGroupId, v.InstanceGroupId)
+		case schemas.InstanceGroupModifyConfig_ReconfigurationType:
+			var ev string
+			if err := d.ReadString(schemas.InstanceGroupModifyConfig_ReconfigurationType, &ev); err != nil {
+				return err
+			}
+			v.ReconfigurationType = ReconfigurationType(ev)
+			return nil
+		case schemas.InstanceGroupModifyConfig_ShrinkPolicy:
+			v.ShrinkPolicy = &ShrinkPolicy{}
+			return v.ShrinkPolicy.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The status change reason details for the instance group.
 type InstanceGroupStateChangeReason struct {
 
@@ -1480,6 +3717,38 @@ type InstanceGroupStateChangeReason struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceGroupStateChangeReason) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceGroupStateChangeReason)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceGroupStateChangeReason) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.InstanceGroupStateChangeReason_Code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InstanceGroupStateChangeReason_Message, *v.Message)
+	}
+}
+func (v *InstanceGroupStateChangeReason) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceGroupStateChangeReason, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceGroupStateChangeReason_Code:
+			var ev string
+			if err := d.ReadString(schemas.InstanceGroupStateChangeReason_Code, &ev); err != nil {
+				return err
+			}
+			v.Code = InstanceGroupStateChangeReasonCode(ev)
+			return nil
+		case schemas.InstanceGroupStateChangeReason_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InstanceGroupStateChangeReason_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // The details of the instance group status.
@@ -1497,6 +3766,48 @@ type InstanceGroupStatus struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceGroupStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceGroupStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceGroupStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.InstanceGroupStatus_State, string(v.State))
+	}
+	if v.StateChangeReason != nil {
+		s.WriteStruct(schemas.InstanceGroupStatus_StateChangeReason)
+		v.StateChangeReason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timeline != nil {
+		s.WriteStruct(schemas.InstanceGroupStatus_Timeline)
+		v.Timeline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InstanceGroupStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceGroupStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceGroupStatus_State:
+			var ev string
+			if err := d.ReadString(schemas.InstanceGroupStatus_State, &ev); err != nil {
+				return err
+			}
+			v.State = InstanceGroupState(ev)
+			return nil
+		case schemas.InstanceGroupStatus_StateChangeReason:
+			v.StateChangeReason = &InstanceGroupStateChangeReason{}
+			return v.StateChangeReason.Deserialize(d)
+		case schemas.InstanceGroupStatus_Timeline:
+			v.Timeline = &InstanceGroupTimeline{}
+			return v.Timeline.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The timeline of the instance group lifecycle.
 type InstanceGroupTimeline struct {
 
@@ -1510,6 +3821,40 @@ type InstanceGroupTimeline struct {
 	ReadyDateTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceGroupTimeline) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceGroupTimeline)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceGroupTimeline) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.InstanceGroupTimeline_CreationDateTime, *v.CreationDateTime)
+	}
+	if v.EndDateTime != nil {
+		s.WriteTime(schemas.InstanceGroupTimeline_EndDateTime, *v.EndDateTime)
+	}
+	if v.ReadyDateTime != nil {
+		s.WriteTime(schemas.InstanceGroupTimeline_ReadyDateTime, *v.ReadyDateTime)
+	}
+}
+func (v *InstanceGroupTimeline) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceGroupTimeline, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceGroupTimeline_CreationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.InstanceGroupTimeline_CreationDateTime, v.CreationDateTime)
+		case schemas.InstanceGroupTimeline_EndDateTime:
+			v.EndDateTime = new(time.Time)
+			return d.ReadTime(schemas.InstanceGroupTimeline_EndDateTime, v.EndDateTime)
+		case schemas.InstanceGroupTimeline_ReadyDateTime:
+			v.ReadyDateTime = new(time.Time)
+			return d.ReadTime(schemas.InstanceGroupTimeline_ReadyDateTime, v.ReadyDateTime)
+		}
+		return nil
+	})
 }
 
 // Custom policy for requesting termination protection or termination of specific
@@ -1529,6 +3874,34 @@ type InstanceResizePolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceResizePolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceResizePolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceResizePolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceTerminationTimeout != nil {
+		s.WriteInt32(schemas.InstanceResizePolicy_InstanceTerminationTimeout, *v.InstanceTerminationTimeout)
+	}
+	serializeEC2InstanceIdsList(s, schemas.InstanceResizePolicy_InstancesToProtect, v.InstancesToProtect)
+	serializeEC2InstanceIdsList(s, schemas.InstanceResizePolicy_InstancesToTerminate, v.InstancesToTerminate)
+}
+func (v *InstanceResizePolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceResizePolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceResizePolicy_InstanceTerminationTimeout:
+			v.InstanceTerminationTimeout = new(int32)
+			return d.ReadInt32(schemas.InstanceResizePolicy_InstanceTerminationTimeout, v.InstanceTerminationTimeout)
+		case schemas.InstanceResizePolicy_InstancesToProtect:
+			return deserializeEC2InstanceIdsList(d, schemas.InstanceResizePolicy_InstancesToProtect, &v.InstancesToProtect)
+		case schemas.InstanceResizePolicy_InstancesToTerminate:
+			return deserializeEC2InstanceIdsList(d, schemas.InstanceResizePolicy_InstancesToTerminate, &v.InstancesToTerminate)
+		}
+		return nil
+	})
+}
+
 // The details of the status change reason for the instance.
 type InstanceStateChangeReason struct {
 
@@ -1539,6 +3912,38 @@ type InstanceStateChangeReason struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceStateChangeReason) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceStateChangeReason)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceStateChangeReason) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.InstanceStateChangeReason_Code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InstanceStateChangeReason_Message, *v.Message)
+	}
+}
+func (v *InstanceStateChangeReason) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceStateChangeReason, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceStateChangeReason_Code:
+			var ev string
+			if err := d.ReadString(schemas.InstanceStateChangeReason_Code, &ev); err != nil {
+				return err
+			}
+			v.Code = InstanceStateChangeReasonCode(ev)
+			return nil
+		case schemas.InstanceStateChangeReason_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InstanceStateChangeReason_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // The instance status details.
@@ -1556,6 +3961,48 @@ type InstanceStatus struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.InstanceStatus_State, string(v.State))
+	}
+	if v.StateChangeReason != nil {
+		s.WriteStruct(schemas.InstanceStatus_StateChangeReason)
+		v.StateChangeReason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timeline != nil {
+		s.WriteStruct(schemas.InstanceStatus_Timeline)
+		v.Timeline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InstanceStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceStatus_State:
+			var ev string
+			if err := d.ReadString(schemas.InstanceStatus_State, &ev); err != nil {
+				return err
+			}
+			v.State = InstanceState(ev)
+			return nil
+		case schemas.InstanceStatus_StateChangeReason:
+			v.StateChangeReason = &InstanceStateChangeReason{}
+			return v.StateChangeReason.Deserialize(d)
+		case schemas.InstanceStatus_Timeline:
+			v.Timeline = &InstanceTimeline{}
+			return v.Timeline.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The timeline of the instance lifecycle.
 type InstanceTimeline struct {
 
@@ -1569,6 +4016,40 @@ type InstanceTimeline struct {
 	ReadyDateTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceTimeline) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceTimeline)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceTimeline) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.InstanceTimeline_CreationDateTime, *v.CreationDateTime)
+	}
+	if v.EndDateTime != nil {
+		s.WriteTime(schemas.InstanceTimeline_EndDateTime, *v.EndDateTime)
+	}
+	if v.ReadyDateTime != nil {
+		s.WriteTime(schemas.InstanceTimeline_ReadyDateTime, *v.ReadyDateTime)
+	}
+}
+func (v *InstanceTimeline) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceTimeline, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceTimeline_CreationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.InstanceTimeline_CreationDateTime, v.CreationDateTime)
+		case schemas.InstanceTimeline_EndDateTime:
+			v.EndDateTime = new(time.Time)
+			return d.ReadTime(schemas.InstanceTimeline_EndDateTime, v.EndDateTime)
+		case schemas.InstanceTimeline_ReadyDateTime:
+			v.ReadyDateTime = new(time.Time)
+			return d.ReadTime(schemas.InstanceTimeline_ReadyDateTime, v.ReadyDateTime)
+		}
+		return nil
+	})
 }
 
 // An instance type configuration for each instance type in an instance fleet,
@@ -1627,6 +4108,69 @@ type InstanceTypeConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceTypeConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceTypeConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceTypeConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BidPrice != nil {
+		s.WriteString(schemas.InstanceTypeConfig_BidPrice, *v.BidPrice)
+	}
+	if v.BidPriceAsPercentageOfOnDemandPrice != nil {
+		s.WriteFloat64(schemas.InstanceTypeConfig_BidPriceAsPercentageOfOnDemandPrice, *v.BidPriceAsPercentageOfOnDemandPrice)
+	}
+	serializeConfigurationList(s, schemas.InstanceTypeConfig_Configurations, v.Configurations)
+	if v.CustomAmiId != nil {
+		s.WriteString(schemas.InstanceTypeConfig_CustomAmiId, *v.CustomAmiId)
+	}
+	if v.EbsConfiguration != nil {
+		s.WriteStruct(schemas.InstanceTypeConfig_EbsConfiguration)
+		v.EbsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.InstanceTypeConfig_InstanceType, *v.InstanceType)
+	}
+	if v.Priority != nil {
+		s.WriteFloat64(schemas.InstanceTypeConfig_Priority, *v.Priority)
+	}
+	if v.WeightedCapacity != nil {
+		s.WriteInt32(schemas.InstanceTypeConfig_WeightedCapacity, *v.WeightedCapacity)
+	}
+}
+func (v *InstanceTypeConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceTypeConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceTypeConfig_BidPrice:
+			v.BidPrice = new(string)
+			return d.ReadString(schemas.InstanceTypeConfig_BidPrice, v.BidPrice)
+		case schemas.InstanceTypeConfig_BidPriceAsPercentageOfOnDemandPrice:
+			v.BidPriceAsPercentageOfOnDemandPrice = new(float64)
+			return d.ReadFloat64(schemas.InstanceTypeConfig_BidPriceAsPercentageOfOnDemandPrice, v.BidPriceAsPercentageOfOnDemandPrice)
+		case schemas.InstanceTypeConfig_Configurations:
+			return deserializeConfigurationList(d, schemas.InstanceTypeConfig_Configurations, &v.Configurations)
+		case schemas.InstanceTypeConfig_CustomAmiId:
+			v.CustomAmiId = new(string)
+			return d.ReadString(schemas.InstanceTypeConfig_CustomAmiId, v.CustomAmiId)
+		case schemas.InstanceTypeConfig_EbsConfiguration:
+			v.EbsConfiguration = &EbsConfiguration{}
+			return v.EbsConfiguration.Deserialize(d)
+		case schemas.InstanceTypeConfig_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.InstanceTypeConfig_InstanceType, v.InstanceType)
+		case schemas.InstanceTypeConfig_Priority:
+			v.Priority = new(float64)
+			return d.ReadFloat64(schemas.InstanceTypeConfig_Priority, v.Priority)
+		case schemas.InstanceTypeConfig_WeightedCapacity:
+			v.WeightedCapacity = new(int32)
+			return d.ReadInt32(schemas.InstanceTypeConfig_WeightedCapacity, v.WeightedCapacity)
+		}
+		return nil
+	})
+}
+
 // The configuration specification for each instance type in an instance fleet.
 //
 // The instance fleet configuration is available only in Amazon EMR releases 4.8.0
@@ -1673,6 +4217,70 @@ type InstanceTypeSpecification struct {
 	WeightedCapacity *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceTypeSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceTypeSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceTypeSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BidPrice != nil {
+		s.WriteString(schemas.InstanceTypeSpecification_BidPrice, *v.BidPrice)
+	}
+	if v.BidPriceAsPercentageOfOnDemandPrice != nil {
+		s.WriteFloat64(schemas.InstanceTypeSpecification_BidPriceAsPercentageOfOnDemandPrice, *v.BidPriceAsPercentageOfOnDemandPrice)
+	}
+	serializeConfigurationList(s, schemas.InstanceTypeSpecification_Configurations, v.Configurations)
+	if v.CustomAmiId != nil {
+		s.WriteString(schemas.InstanceTypeSpecification_CustomAmiId, *v.CustomAmiId)
+	}
+	serializeEbsBlockDeviceList(s, schemas.InstanceTypeSpecification_EbsBlockDevices, v.EbsBlockDevices)
+	if v.EbsOptimized != nil {
+		s.WriteBool(schemas.InstanceTypeSpecification_EbsOptimized, *v.EbsOptimized)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.InstanceTypeSpecification_InstanceType, *v.InstanceType)
+	}
+	if v.Priority != nil {
+		s.WriteFloat64(schemas.InstanceTypeSpecification_Priority, *v.Priority)
+	}
+	if v.WeightedCapacity != nil {
+		s.WriteInt32(schemas.InstanceTypeSpecification_WeightedCapacity, *v.WeightedCapacity)
+	}
+}
+func (v *InstanceTypeSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceTypeSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceTypeSpecification_BidPrice:
+			v.BidPrice = new(string)
+			return d.ReadString(schemas.InstanceTypeSpecification_BidPrice, v.BidPrice)
+		case schemas.InstanceTypeSpecification_BidPriceAsPercentageOfOnDemandPrice:
+			v.BidPriceAsPercentageOfOnDemandPrice = new(float64)
+			return d.ReadFloat64(schemas.InstanceTypeSpecification_BidPriceAsPercentageOfOnDemandPrice, v.BidPriceAsPercentageOfOnDemandPrice)
+		case schemas.InstanceTypeSpecification_Configurations:
+			return deserializeConfigurationList(d, schemas.InstanceTypeSpecification_Configurations, &v.Configurations)
+		case schemas.InstanceTypeSpecification_CustomAmiId:
+			v.CustomAmiId = new(string)
+			return d.ReadString(schemas.InstanceTypeSpecification_CustomAmiId, v.CustomAmiId)
+		case schemas.InstanceTypeSpecification_EbsBlockDevices:
+			return deserializeEbsBlockDeviceList(d, schemas.InstanceTypeSpecification_EbsBlockDevices, &v.EbsBlockDevices)
+		case schemas.InstanceTypeSpecification_EbsOptimized:
+			v.EbsOptimized = new(bool)
+			return d.ReadBool(schemas.InstanceTypeSpecification_EbsOptimized, v.EbsOptimized)
+		case schemas.InstanceTypeSpecification_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.InstanceTypeSpecification_InstanceType, v.InstanceType)
+		case schemas.InstanceTypeSpecification_Priority:
+			v.Priority = new(float64)
+			return d.ReadFloat64(schemas.InstanceTypeSpecification_Priority, v.Priority)
+		case schemas.InstanceTypeSpecification_WeightedCapacity:
+			v.WeightedCapacity = new(int32)
+			return d.ReadInt32(schemas.InstanceTypeSpecification_WeightedCapacity, v.WeightedCapacity)
+		}
+		return nil
+	})
 }
 
 // A description of a cluster (job flow).
@@ -1766,6 +4374,111 @@ type JobFlowDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JobFlowDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobFlowDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobFlowDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmiVersion != nil {
+		s.WriteString(schemas.JobFlowDetail_AmiVersion, *v.AmiVersion)
+	}
+	if v.AutoScalingRole != nil {
+		s.WriteString(schemas.JobFlowDetail_AutoScalingRole, *v.AutoScalingRole)
+	}
+	serializeBootstrapActionDetailList(s, schemas.JobFlowDetail_BootstrapActions, v.BootstrapActions)
+	if v.ExecutionStatusDetail != nil {
+		s.WriteStruct(schemas.JobFlowDetail_ExecutionStatusDetail)
+		v.ExecutionStatusDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Instances != nil {
+		s.WriteStruct(schemas.JobFlowDetail_Instances)
+		v.Instances.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobFlowId != nil {
+		s.WriteString(schemas.JobFlowDetail_JobFlowId, *v.JobFlowId)
+	}
+	if v.JobFlowRole != nil {
+		s.WriteString(schemas.JobFlowDetail_JobFlowRole, *v.JobFlowRole)
+	}
+	if v.LogEncryptionKmsKeyId != nil {
+		s.WriteString(schemas.JobFlowDetail_LogEncryptionKmsKeyId, *v.LogEncryptionKmsKeyId)
+	}
+	if v.LogUri != nil {
+		s.WriteString(schemas.JobFlowDetail_LogUri, *v.LogUri)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.JobFlowDetail_Name, *v.Name)
+	}
+	if v.ScaleDownBehavior != "" {
+		s.WriteString(schemas.JobFlowDetail_ScaleDownBehavior, string(v.ScaleDownBehavior))
+	}
+	if v.ServiceRole != nil {
+		s.WriteString(schemas.JobFlowDetail_ServiceRole, *v.ServiceRole)
+	}
+	serializeStepDetailList(s, schemas.JobFlowDetail_Steps, v.Steps)
+	serializeSupportedProductsList(s, schemas.JobFlowDetail_SupportedProducts, v.SupportedProducts)
+	if v.VisibleToAllUsers != nil {
+		s.WriteBool(schemas.JobFlowDetail_VisibleToAllUsers, *v.VisibleToAllUsers)
+	}
+}
+func (v *JobFlowDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobFlowDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobFlowDetail_AmiVersion:
+			v.AmiVersion = new(string)
+			return d.ReadString(schemas.JobFlowDetail_AmiVersion, v.AmiVersion)
+		case schemas.JobFlowDetail_AutoScalingRole:
+			v.AutoScalingRole = new(string)
+			return d.ReadString(schemas.JobFlowDetail_AutoScalingRole, v.AutoScalingRole)
+		case schemas.JobFlowDetail_BootstrapActions:
+			return deserializeBootstrapActionDetailList(d, schemas.JobFlowDetail_BootstrapActions, &v.BootstrapActions)
+		case schemas.JobFlowDetail_ExecutionStatusDetail:
+			v.ExecutionStatusDetail = &JobFlowExecutionStatusDetail{}
+			return v.ExecutionStatusDetail.Deserialize(d)
+		case schemas.JobFlowDetail_Instances:
+			v.Instances = &JobFlowInstancesDetail{}
+			return v.Instances.Deserialize(d)
+		case schemas.JobFlowDetail_JobFlowId:
+			v.JobFlowId = new(string)
+			return d.ReadString(schemas.JobFlowDetail_JobFlowId, v.JobFlowId)
+		case schemas.JobFlowDetail_JobFlowRole:
+			v.JobFlowRole = new(string)
+			return d.ReadString(schemas.JobFlowDetail_JobFlowRole, v.JobFlowRole)
+		case schemas.JobFlowDetail_LogEncryptionKmsKeyId:
+			v.LogEncryptionKmsKeyId = new(string)
+			return d.ReadString(schemas.JobFlowDetail_LogEncryptionKmsKeyId, v.LogEncryptionKmsKeyId)
+		case schemas.JobFlowDetail_LogUri:
+			v.LogUri = new(string)
+			return d.ReadString(schemas.JobFlowDetail_LogUri, v.LogUri)
+		case schemas.JobFlowDetail_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.JobFlowDetail_Name, v.Name)
+		case schemas.JobFlowDetail_ScaleDownBehavior:
+			var ev string
+			if err := d.ReadString(schemas.JobFlowDetail_ScaleDownBehavior, &ev); err != nil {
+				return err
+			}
+			v.ScaleDownBehavior = ScaleDownBehavior(ev)
+			return nil
+		case schemas.JobFlowDetail_ServiceRole:
+			v.ServiceRole = new(string)
+			return d.ReadString(schemas.JobFlowDetail_ServiceRole, v.ServiceRole)
+		case schemas.JobFlowDetail_Steps:
+			return deserializeStepDetailList(d, schemas.JobFlowDetail_Steps, &v.Steps)
+		case schemas.JobFlowDetail_SupportedProducts:
+			return deserializeSupportedProductsList(d, schemas.JobFlowDetail_SupportedProducts, &v.SupportedProducts)
+		case schemas.JobFlowDetail_VisibleToAllUsers:
+			v.VisibleToAllUsers = new(bool)
+			return d.ReadBool(schemas.JobFlowDetail_VisibleToAllUsers, v.VisibleToAllUsers)
+		}
+		return nil
+	})
+}
+
 // Describes the status of the cluster (job flow).
 type JobFlowExecutionStatusDetail struct {
 
@@ -1793,6 +4506,62 @@ type JobFlowExecutionStatusDetail struct {
 	StartDateTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *JobFlowExecutionStatusDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobFlowExecutionStatusDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobFlowExecutionStatusDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.JobFlowExecutionStatusDetail_CreationDateTime, *v.CreationDateTime)
+	}
+	if v.EndDateTime != nil {
+		s.WriteTime(schemas.JobFlowExecutionStatusDetail_EndDateTime, *v.EndDateTime)
+	}
+	if v.LastStateChangeReason != nil {
+		s.WriteString(schemas.JobFlowExecutionStatusDetail_LastStateChangeReason, *v.LastStateChangeReason)
+	}
+	if v.ReadyDateTime != nil {
+		s.WriteTime(schemas.JobFlowExecutionStatusDetail_ReadyDateTime, *v.ReadyDateTime)
+	}
+	if v.StartDateTime != nil {
+		s.WriteTime(schemas.JobFlowExecutionStatusDetail_StartDateTime, *v.StartDateTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.JobFlowExecutionStatusDetail_State, string(v.State))
+	}
+}
+func (v *JobFlowExecutionStatusDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobFlowExecutionStatusDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobFlowExecutionStatusDetail_CreationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.JobFlowExecutionStatusDetail_CreationDateTime, v.CreationDateTime)
+		case schemas.JobFlowExecutionStatusDetail_EndDateTime:
+			v.EndDateTime = new(time.Time)
+			return d.ReadTime(schemas.JobFlowExecutionStatusDetail_EndDateTime, v.EndDateTime)
+		case schemas.JobFlowExecutionStatusDetail_LastStateChangeReason:
+			v.LastStateChangeReason = new(string)
+			return d.ReadString(schemas.JobFlowExecutionStatusDetail_LastStateChangeReason, v.LastStateChangeReason)
+		case schemas.JobFlowExecutionStatusDetail_ReadyDateTime:
+			v.ReadyDateTime = new(time.Time)
+			return d.ReadTime(schemas.JobFlowExecutionStatusDetail_ReadyDateTime, v.ReadyDateTime)
+		case schemas.JobFlowExecutionStatusDetail_StartDateTime:
+			v.StartDateTime = new(time.Time)
+			return d.ReadTime(schemas.JobFlowExecutionStatusDetail_StartDateTime, v.StartDateTime)
+		case schemas.JobFlowExecutionStatusDetail_State:
+			var ev string
+			if err := d.ReadString(schemas.JobFlowExecutionStatusDetail_State, &ev); err != nil {
+				return err
+			}
+			v.State = JobFlowExecutionState(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A description of the Amazon EC2 instance on which the cluster (job flow) runs.
@@ -1890,6 +4659,117 @@ type JobFlowInstancesConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JobFlowInstancesConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobFlowInstancesConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobFlowInstancesConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSecurityGroupsList(s, schemas.JobFlowInstancesConfig_AdditionalMasterSecurityGroups, v.AdditionalMasterSecurityGroups)
+	serializeSecurityGroupsList(s, schemas.JobFlowInstancesConfig_AdditionalSlaveSecurityGroups, v.AdditionalSlaveSecurityGroups)
+	if v.Ec2KeyName != nil {
+		s.WriteString(schemas.JobFlowInstancesConfig_Ec2KeyName, *v.Ec2KeyName)
+	}
+	if v.Ec2SubnetId != nil {
+		s.WriteString(schemas.JobFlowInstancesConfig_Ec2SubnetId, *v.Ec2SubnetId)
+	}
+	serializeXmlStringMaxLen256List(s, schemas.JobFlowInstancesConfig_Ec2SubnetIds, v.Ec2SubnetIds)
+	if v.EmrManagedMasterSecurityGroup != nil {
+		s.WriteString(schemas.JobFlowInstancesConfig_EmrManagedMasterSecurityGroup, *v.EmrManagedMasterSecurityGroup)
+	}
+	if v.EmrManagedSlaveSecurityGroup != nil {
+		s.WriteString(schemas.JobFlowInstancesConfig_EmrManagedSlaveSecurityGroup, *v.EmrManagedSlaveSecurityGroup)
+	}
+	if v.HadoopVersion != nil {
+		s.WriteString(schemas.JobFlowInstancesConfig_HadoopVersion, *v.HadoopVersion)
+	}
+	if v.InstanceCount != nil {
+		s.WriteInt32(schemas.JobFlowInstancesConfig_InstanceCount, *v.InstanceCount)
+	}
+	serializeInstanceFleetConfigList(s, schemas.JobFlowInstancesConfig_InstanceFleets, v.InstanceFleets)
+	serializeInstanceGroupConfigList(s, schemas.JobFlowInstancesConfig_InstanceGroups, v.InstanceGroups)
+	if v.KeepJobFlowAliveWhenNoSteps != nil {
+		s.WriteBool(schemas.JobFlowInstancesConfig_KeepJobFlowAliveWhenNoSteps, *v.KeepJobFlowAliveWhenNoSteps)
+	}
+	if v.MasterInstanceType != nil {
+		s.WriteString(schemas.JobFlowInstancesConfig_MasterInstanceType, *v.MasterInstanceType)
+	}
+	if v.Placement != nil {
+		s.WriteStruct(schemas.JobFlowInstancesConfig_Placement)
+		v.Placement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceAccessSecurityGroup != nil {
+		s.WriteString(schemas.JobFlowInstancesConfig_ServiceAccessSecurityGroup, *v.ServiceAccessSecurityGroup)
+	}
+	if v.SlaveInstanceType != nil {
+		s.WriteString(schemas.JobFlowInstancesConfig_SlaveInstanceType, *v.SlaveInstanceType)
+	}
+	if v.TerminationProtected != nil {
+		s.WriteBool(schemas.JobFlowInstancesConfig_TerminationProtected, *v.TerminationProtected)
+	}
+	if v.UnhealthyNodeReplacement != nil {
+		s.WriteBool(schemas.JobFlowInstancesConfig_UnhealthyNodeReplacement, *v.UnhealthyNodeReplacement)
+	}
+}
+func (v *JobFlowInstancesConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobFlowInstancesConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobFlowInstancesConfig_AdditionalMasterSecurityGroups:
+			return deserializeSecurityGroupsList(d, schemas.JobFlowInstancesConfig_AdditionalMasterSecurityGroups, &v.AdditionalMasterSecurityGroups)
+		case schemas.JobFlowInstancesConfig_AdditionalSlaveSecurityGroups:
+			return deserializeSecurityGroupsList(d, schemas.JobFlowInstancesConfig_AdditionalSlaveSecurityGroups, &v.AdditionalSlaveSecurityGroups)
+		case schemas.JobFlowInstancesConfig_Ec2KeyName:
+			v.Ec2KeyName = new(string)
+			return d.ReadString(schemas.JobFlowInstancesConfig_Ec2KeyName, v.Ec2KeyName)
+		case schemas.JobFlowInstancesConfig_Ec2SubnetId:
+			v.Ec2SubnetId = new(string)
+			return d.ReadString(schemas.JobFlowInstancesConfig_Ec2SubnetId, v.Ec2SubnetId)
+		case schemas.JobFlowInstancesConfig_Ec2SubnetIds:
+			return deserializeXmlStringMaxLen256List(d, schemas.JobFlowInstancesConfig_Ec2SubnetIds, &v.Ec2SubnetIds)
+		case schemas.JobFlowInstancesConfig_EmrManagedMasterSecurityGroup:
+			v.EmrManagedMasterSecurityGroup = new(string)
+			return d.ReadString(schemas.JobFlowInstancesConfig_EmrManagedMasterSecurityGroup, v.EmrManagedMasterSecurityGroup)
+		case schemas.JobFlowInstancesConfig_EmrManagedSlaveSecurityGroup:
+			v.EmrManagedSlaveSecurityGroup = new(string)
+			return d.ReadString(schemas.JobFlowInstancesConfig_EmrManagedSlaveSecurityGroup, v.EmrManagedSlaveSecurityGroup)
+		case schemas.JobFlowInstancesConfig_HadoopVersion:
+			v.HadoopVersion = new(string)
+			return d.ReadString(schemas.JobFlowInstancesConfig_HadoopVersion, v.HadoopVersion)
+		case schemas.JobFlowInstancesConfig_InstanceCount:
+			v.InstanceCount = new(int32)
+			return d.ReadInt32(schemas.JobFlowInstancesConfig_InstanceCount, v.InstanceCount)
+		case schemas.JobFlowInstancesConfig_InstanceFleets:
+			return deserializeInstanceFleetConfigList(d, schemas.JobFlowInstancesConfig_InstanceFleets, &v.InstanceFleets)
+		case schemas.JobFlowInstancesConfig_InstanceGroups:
+			return deserializeInstanceGroupConfigList(d, schemas.JobFlowInstancesConfig_InstanceGroups, &v.InstanceGroups)
+		case schemas.JobFlowInstancesConfig_KeepJobFlowAliveWhenNoSteps:
+			v.KeepJobFlowAliveWhenNoSteps = new(bool)
+			return d.ReadBool(schemas.JobFlowInstancesConfig_KeepJobFlowAliveWhenNoSteps, v.KeepJobFlowAliveWhenNoSteps)
+		case schemas.JobFlowInstancesConfig_MasterInstanceType:
+			v.MasterInstanceType = new(string)
+			return d.ReadString(schemas.JobFlowInstancesConfig_MasterInstanceType, v.MasterInstanceType)
+		case schemas.JobFlowInstancesConfig_Placement:
+			v.Placement = &PlacementType{}
+			return v.Placement.Deserialize(d)
+		case schemas.JobFlowInstancesConfig_ServiceAccessSecurityGroup:
+			v.ServiceAccessSecurityGroup = new(string)
+			return d.ReadString(schemas.JobFlowInstancesConfig_ServiceAccessSecurityGroup, v.ServiceAccessSecurityGroup)
+		case schemas.JobFlowInstancesConfig_SlaveInstanceType:
+			v.SlaveInstanceType = new(string)
+			return d.ReadString(schemas.JobFlowInstancesConfig_SlaveInstanceType, v.SlaveInstanceType)
+		case schemas.JobFlowInstancesConfig_TerminationProtected:
+			v.TerminationProtected = new(bool)
+			return d.ReadBool(schemas.JobFlowInstancesConfig_TerminationProtected, v.TerminationProtected)
+		case schemas.JobFlowInstancesConfig_UnhealthyNodeReplacement:
+			v.UnhealthyNodeReplacement = new(bool)
+			return d.ReadBool(schemas.JobFlowInstancesConfig_UnhealthyNodeReplacement, v.UnhealthyNodeReplacement)
+		}
+		return nil
+	})
+}
+
 // Specify the type of Amazon EC2 instances that the cluster (job flow) runs on.
 type JobFlowInstancesDetail struct {
 
@@ -1959,6 +4839,105 @@ type JobFlowInstancesDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JobFlowInstancesDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobFlowInstancesDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobFlowInstancesDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ec2KeyName != nil {
+		s.WriteString(schemas.JobFlowInstancesDetail_Ec2KeyName, *v.Ec2KeyName)
+	}
+	if v.Ec2SubnetId != nil {
+		s.WriteString(schemas.JobFlowInstancesDetail_Ec2SubnetId, *v.Ec2SubnetId)
+	}
+	if v.HadoopVersion != nil {
+		s.WriteString(schemas.JobFlowInstancesDetail_HadoopVersion, *v.HadoopVersion)
+	}
+	if v.InstanceCount != nil {
+		s.WriteInt32(schemas.JobFlowInstancesDetail_InstanceCount, *v.InstanceCount)
+	}
+	serializeInstanceGroupDetailList(s, schemas.JobFlowInstancesDetail_InstanceGroups, v.InstanceGroups)
+	if v.KeepJobFlowAliveWhenNoSteps != nil {
+		s.WriteBool(schemas.JobFlowInstancesDetail_KeepJobFlowAliveWhenNoSteps, *v.KeepJobFlowAliveWhenNoSteps)
+	}
+	if v.MasterInstanceId != nil {
+		s.WriteString(schemas.JobFlowInstancesDetail_MasterInstanceId, *v.MasterInstanceId)
+	}
+	if v.MasterInstanceType != nil {
+		s.WriteString(schemas.JobFlowInstancesDetail_MasterInstanceType, *v.MasterInstanceType)
+	}
+	if v.MasterPublicDnsName != nil {
+		s.WriteString(schemas.JobFlowInstancesDetail_MasterPublicDnsName, *v.MasterPublicDnsName)
+	}
+	if v.NormalizedInstanceHours != nil {
+		s.WriteInt32(schemas.JobFlowInstancesDetail_NormalizedInstanceHours, *v.NormalizedInstanceHours)
+	}
+	if v.Placement != nil {
+		s.WriteStruct(schemas.JobFlowInstancesDetail_Placement)
+		v.Placement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SlaveInstanceType != nil {
+		s.WriteString(schemas.JobFlowInstancesDetail_SlaveInstanceType, *v.SlaveInstanceType)
+	}
+	if v.TerminationProtected != nil {
+		s.WriteBool(schemas.JobFlowInstancesDetail_TerminationProtected, *v.TerminationProtected)
+	}
+	if v.UnhealthyNodeReplacement != nil {
+		s.WriteBool(schemas.JobFlowInstancesDetail_UnhealthyNodeReplacement, *v.UnhealthyNodeReplacement)
+	}
+}
+func (v *JobFlowInstancesDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobFlowInstancesDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobFlowInstancesDetail_Ec2KeyName:
+			v.Ec2KeyName = new(string)
+			return d.ReadString(schemas.JobFlowInstancesDetail_Ec2KeyName, v.Ec2KeyName)
+		case schemas.JobFlowInstancesDetail_Ec2SubnetId:
+			v.Ec2SubnetId = new(string)
+			return d.ReadString(schemas.JobFlowInstancesDetail_Ec2SubnetId, v.Ec2SubnetId)
+		case schemas.JobFlowInstancesDetail_HadoopVersion:
+			v.HadoopVersion = new(string)
+			return d.ReadString(schemas.JobFlowInstancesDetail_HadoopVersion, v.HadoopVersion)
+		case schemas.JobFlowInstancesDetail_InstanceCount:
+			v.InstanceCount = new(int32)
+			return d.ReadInt32(schemas.JobFlowInstancesDetail_InstanceCount, v.InstanceCount)
+		case schemas.JobFlowInstancesDetail_InstanceGroups:
+			return deserializeInstanceGroupDetailList(d, schemas.JobFlowInstancesDetail_InstanceGroups, &v.InstanceGroups)
+		case schemas.JobFlowInstancesDetail_KeepJobFlowAliveWhenNoSteps:
+			v.KeepJobFlowAliveWhenNoSteps = new(bool)
+			return d.ReadBool(schemas.JobFlowInstancesDetail_KeepJobFlowAliveWhenNoSteps, v.KeepJobFlowAliveWhenNoSteps)
+		case schemas.JobFlowInstancesDetail_MasterInstanceId:
+			v.MasterInstanceId = new(string)
+			return d.ReadString(schemas.JobFlowInstancesDetail_MasterInstanceId, v.MasterInstanceId)
+		case schemas.JobFlowInstancesDetail_MasterInstanceType:
+			v.MasterInstanceType = new(string)
+			return d.ReadString(schemas.JobFlowInstancesDetail_MasterInstanceType, v.MasterInstanceType)
+		case schemas.JobFlowInstancesDetail_MasterPublicDnsName:
+			v.MasterPublicDnsName = new(string)
+			return d.ReadString(schemas.JobFlowInstancesDetail_MasterPublicDnsName, v.MasterPublicDnsName)
+		case schemas.JobFlowInstancesDetail_NormalizedInstanceHours:
+			v.NormalizedInstanceHours = new(int32)
+			return d.ReadInt32(schemas.JobFlowInstancesDetail_NormalizedInstanceHours, v.NormalizedInstanceHours)
+		case schemas.JobFlowInstancesDetail_Placement:
+			v.Placement = &PlacementType{}
+			return v.Placement.Deserialize(d)
+		case schemas.JobFlowInstancesDetail_SlaveInstanceType:
+			v.SlaveInstanceType = new(string)
+			return d.ReadString(schemas.JobFlowInstancesDetail_SlaveInstanceType, v.SlaveInstanceType)
+		case schemas.JobFlowInstancesDetail_TerminationProtected:
+			v.TerminationProtected = new(bool)
+			return d.ReadBool(schemas.JobFlowInstancesDetail_TerminationProtected, v.TerminationProtected)
+		case schemas.JobFlowInstancesDetail_UnhealthyNodeReplacement:
+			v.UnhealthyNodeReplacement = new(bool)
+			return d.ReadBool(schemas.JobFlowInstancesDetail_UnhealthyNodeReplacement, v.UnhealthyNodeReplacement)
+		}
+		return nil
+	})
+}
+
 // Attributes for Kerberos configuration when Kerberos authentication is enabled
 // using a security configuration. For more information see [Use Kerberos Authentication]in the Amazon EMR
 // Management Guide.
@@ -1994,6 +4973,52 @@ type KerberosAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KerberosAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KerberosAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KerberosAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ADDomainJoinPassword != nil {
+		s.WriteString(schemas.KerberosAttributes_ADDomainJoinPassword, *v.ADDomainJoinPassword)
+	}
+	if v.ADDomainJoinUser != nil {
+		s.WriteString(schemas.KerberosAttributes_ADDomainJoinUser, *v.ADDomainJoinUser)
+	}
+	if v.CrossRealmTrustPrincipalPassword != nil {
+		s.WriteString(schemas.KerberosAttributes_CrossRealmTrustPrincipalPassword, *v.CrossRealmTrustPrincipalPassword)
+	}
+	if v.KdcAdminPassword != nil {
+		s.WriteString(schemas.KerberosAttributes_KdcAdminPassword, *v.KdcAdminPassword)
+	}
+	if v.Realm != nil {
+		s.WriteString(schemas.KerberosAttributes_Realm, *v.Realm)
+	}
+}
+func (v *KerberosAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KerberosAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KerberosAttributes_ADDomainJoinPassword:
+			v.ADDomainJoinPassword = new(string)
+			return d.ReadString(schemas.KerberosAttributes_ADDomainJoinPassword, v.ADDomainJoinPassword)
+		case schemas.KerberosAttributes_ADDomainJoinUser:
+			v.ADDomainJoinUser = new(string)
+			return d.ReadString(schemas.KerberosAttributes_ADDomainJoinUser, v.ADDomainJoinUser)
+		case schemas.KerberosAttributes_CrossRealmTrustPrincipalPassword:
+			v.CrossRealmTrustPrincipalPassword = new(string)
+			return d.ReadString(schemas.KerberosAttributes_CrossRealmTrustPrincipalPassword, v.CrossRealmTrustPrincipalPassword)
+		case schemas.KerberosAttributes_KdcAdminPassword:
+			v.KdcAdminPassword = new(string)
+			return d.ReadString(schemas.KerberosAttributes_KdcAdminPassword, v.KdcAdminPassword)
+		case schemas.KerberosAttributes_Realm:
+			v.Realm = new(string)
+			return d.ReadString(schemas.KerberosAttributes_Realm, v.Realm)
+		}
+		return nil
+	})
+}
+
 // A key-value pair.
 type KeyValue struct {
 
@@ -2004,6 +5029,34 @@ type KeyValue struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *KeyValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeyValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeyValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.KeyValue_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.KeyValue_Value, *v.Value)
+	}
+}
+func (v *KeyValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeyValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeyValue_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.KeyValue_Key, v.Key)
+		case schemas.KeyValue_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.KeyValue_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 //	Managed scaling policy for an Amazon EMR cluster. The policy specifies the
@@ -2032,6 +5085,46 @@ type ManagedScalingPolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ManagedScalingPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedScalingPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedScalingPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeLimits != nil {
+		s.WriteStruct(schemas.ManagedScalingPolicy_ComputeLimits)
+		v.ComputeLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScalingStrategy != "" {
+		s.WriteString(schemas.ManagedScalingPolicy_ScalingStrategy, string(v.ScalingStrategy))
+	}
+	if v.UtilizationPerformanceIndex != nil {
+		s.WriteInt32(schemas.ManagedScalingPolicy_UtilizationPerformanceIndex, *v.UtilizationPerformanceIndex)
+	}
+}
+func (v *ManagedScalingPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedScalingPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedScalingPolicy_ComputeLimits:
+			v.ComputeLimits = &ComputeLimits{}
+			return v.ComputeLimits.Deserialize(d)
+		case schemas.ManagedScalingPolicy_ScalingStrategy:
+			var ev string
+			if err := d.ReadString(schemas.ManagedScalingPolicy_ScalingStrategy, &ev); err != nil {
+				return err
+			}
+			v.ScalingStrategy = ScalingStrategy(ev)
+			return nil
+		case schemas.ManagedScalingPolicy_UtilizationPerformanceIndex:
+			v.UtilizationPerformanceIndex = new(int32)
+			return d.ReadInt32(schemas.ManagedScalingPolicy_UtilizationPerformanceIndex, v.UtilizationPerformanceIndex)
+		}
+		return nil
+	})
+}
+
 // A CloudWatch dimension, which is specified using a Key (known as a Name in
 // CloudWatch), Value pair. By default, Amazon EMR uses one dimension whose Key is
 // JobFlowID and Value is a variable representing the cluster ID, which is
@@ -2048,6 +5141,34 @@ type MetricDimension struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetricDimension) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricDimension)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricDimension) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.MetricDimension_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.MetricDimension_Value, *v.Value)
+	}
+}
+func (v *MetricDimension) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricDimension, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricDimension_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.MetricDimension_Key, v.Key)
+		case schemas.MetricDimension_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.MetricDimension_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Contains CloudWatch log configuration and S3 logging configuration metadata and
 // settings.
 type MonitoringConfiguration struct {
@@ -2062,6 +5183,38 @@ type MonitoringConfiguration struct {
 	S3LoggingConfiguration *S3LoggingConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *MonitoringConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MonitoringConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MonitoringConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogConfiguration != nil {
+		s.WriteStruct(schemas.MonitoringConfiguration_CloudWatchLogConfiguration)
+		v.CloudWatchLogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3LoggingConfiguration != nil {
+		s.WriteStruct(schemas.MonitoringConfiguration_S3LoggingConfiguration)
+		v.S3LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MonitoringConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MonitoringConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MonitoringConfiguration_CloudWatchLogConfiguration:
+			v.CloudWatchLogConfiguration = &CloudWatchLogConfiguration{}
+			return v.CloudWatchLogConfiguration.Deserialize(d)
+		case schemas.MonitoringConfiguration_S3LoggingConfiguration:
+			v.S3LoggingConfiguration = &S3LoggingConfiguration{}
+			return v.S3LoggingConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A notebook execution. An execution is a specific instance that an Amazon EMR
@@ -2156,6 +5309,132 @@ type NotebookExecution struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotebookExecution) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotebookExecution)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotebookExecution) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.NotebookExecution_Arn, *v.Arn)
+	}
+	if v.EditorId != nil {
+		s.WriteString(schemas.NotebookExecution_EditorId, *v.EditorId)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.NotebookExecution_EndTime, *v.EndTime)
+	}
+	serializeEnvironmentVariablesMap(s, schemas.NotebookExecution_EnvironmentVariables, v.EnvironmentVariables)
+	if v.ExecutionEngine != nil {
+		s.WriteStruct(schemas.NotebookExecution_ExecutionEngine)
+		v.ExecutionEngine.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastStateChangeReason != nil {
+		s.WriteString(schemas.NotebookExecution_LastStateChangeReason, *v.LastStateChangeReason)
+	}
+	if v.NotebookExecutionId != nil {
+		s.WriteString(schemas.NotebookExecution_NotebookExecutionId, *v.NotebookExecutionId)
+	}
+	if v.NotebookExecutionName != nil {
+		s.WriteString(schemas.NotebookExecution_NotebookExecutionName, *v.NotebookExecutionName)
+	}
+	if v.NotebookInstanceSecurityGroupId != nil {
+		s.WriteString(schemas.NotebookExecution_NotebookInstanceSecurityGroupId, *v.NotebookInstanceSecurityGroupId)
+	}
+	if v.NotebookParams != nil {
+		s.WriteString(schemas.NotebookExecution_NotebookParams, *v.NotebookParams)
+	}
+	if v.NotebookS3Location != nil {
+		s.WriteStruct(schemas.NotebookExecution_NotebookS3Location)
+		v.NotebookS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputNotebookFormat != "" {
+		s.WriteString(schemas.NotebookExecution_OutputNotebookFormat, string(v.OutputNotebookFormat))
+	}
+	if v.OutputNotebookS3Location != nil {
+		s.WriteStruct(schemas.NotebookExecution_OutputNotebookS3Location)
+		v.OutputNotebookS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputNotebookURI != nil {
+		s.WriteString(schemas.NotebookExecution_OutputNotebookURI, *v.OutputNotebookURI)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.NotebookExecution_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.NotebookExecution_Status, string(v.Status))
+	}
+	serializeTagList(s, schemas.NotebookExecution_Tags, v.Tags)
+}
+func (v *NotebookExecution) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotebookExecution, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotebookExecution_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.NotebookExecution_Arn, v.Arn)
+		case schemas.NotebookExecution_EditorId:
+			v.EditorId = new(string)
+			return d.ReadString(schemas.NotebookExecution_EditorId, v.EditorId)
+		case schemas.NotebookExecution_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.NotebookExecution_EndTime, v.EndTime)
+		case schemas.NotebookExecution_EnvironmentVariables:
+			return deserializeEnvironmentVariablesMap(d, schemas.NotebookExecution_EnvironmentVariables, &v.EnvironmentVariables)
+		case schemas.NotebookExecution_ExecutionEngine:
+			v.ExecutionEngine = &ExecutionEngineConfig{}
+			return v.ExecutionEngine.Deserialize(d)
+		case schemas.NotebookExecution_LastStateChangeReason:
+			v.LastStateChangeReason = new(string)
+			return d.ReadString(schemas.NotebookExecution_LastStateChangeReason, v.LastStateChangeReason)
+		case schemas.NotebookExecution_NotebookExecutionId:
+			v.NotebookExecutionId = new(string)
+			return d.ReadString(schemas.NotebookExecution_NotebookExecutionId, v.NotebookExecutionId)
+		case schemas.NotebookExecution_NotebookExecutionName:
+			v.NotebookExecutionName = new(string)
+			return d.ReadString(schemas.NotebookExecution_NotebookExecutionName, v.NotebookExecutionName)
+		case schemas.NotebookExecution_NotebookInstanceSecurityGroupId:
+			v.NotebookInstanceSecurityGroupId = new(string)
+			return d.ReadString(schemas.NotebookExecution_NotebookInstanceSecurityGroupId, v.NotebookInstanceSecurityGroupId)
+		case schemas.NotebookExecution_NotebookParams:
+			v.NotebookParams = new(string)
+			return d.ReadString(schemas.NotebookExecution_NotebookParams, v.NotebookParams)
+		case schemas.NotebookExecution_NotebookS3Location:
+			v.NotebookS3Location = &NotebookS3LocationForOutput{}
+			return v.NotebookS3Location.Deserialize(d)
+		case schemas.NotebookExecution_OutputNotebookFormat:
+			var ev string
+			if err := d.ReadString(schemas.NotebookExecution_OutputNotebookFormat, &ev); err != nil {
+				return err
+			}
+			v.OutputNotebookFormat = OutputNotebookFormat(ev)
+			return nil
+		case schemas.NotebookExecution_OutputNotebookS3Location:
+			v.OutputNotebookS3Location = &OutputNotebookS3LocationForOutput{}
+			return v.OutputNotebookS3Location.Deserialize(d)
+		case schemas.NotebookExecution_OutputNotebookURI:
+			v.OutputNotebookURI = new(string)
+			return d.ReadString(schemas.NotebookExecution_OutputNotebookURI, v.OutputNotebookURI)
+		case schemas.NotebookExecution_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.NotebookExecution_StartTime, v.StartTime)
+		case schemas.NotebookExecution_Status:
+			var ev string
+			if err := d.ReadString(schemas.NotebookExecution_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = NotebookExecutionStatus(ev)
+			return nil
+		case schemas.NotebookExecution_Tags:
+			return deserializeTagList(d, schemas.NotebookExecution_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Details for a notebook execution. The details include information such as the
 // unique ID and status of the notebook execution.
 type NotebookExecutionSummary struct {
@@ -2212,6 +5491,76 @@ type NotebookExecutionSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotebookExecutionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotebookExecutionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotebookExecutionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EditorId != nil {
+		s.WriteString(schemas.NotebookExecutionSummary_EditorId, *v.EditorId)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.NotebookExecutionSummary_EndTime, *v.EndTime)
+	}
+	if v.ExecutionEngineId != nil {
+		s.WriteString(schemas.NotebookExecutionSummary_ExecutionEngineId, *v.ExecutionEngineId)
+	}
+	if v.NotebookExecutionId != nil {
+		s.WriteString(schemas.NotebookExecutionSummary_NotebookExecutionId, *v.NotebookExecutionId)
+	}
+	if v.NotebookExecutionName != nil {
+		s.WriteString(schemas.NotebookExecutionSummary_NotebookExecutionName, *v.NotebookExecutionName)
+	}
+	if v.NotebookS3Location != nil {
+		s.WriteStruct(schemas.NotebookExecutionSummary_NotebookS3Location)
+		v.NotebookS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.NotebookExecutionSummary_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.NotebookExecutionSummary_Status, string(v.Status))
+	}
+}
+func (v *NotebookExecutionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotebookExecutionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotebookExecutionSummary_EditorId:
+			v.EditorId = new(string)
+			return d.ReadString(schemas.NotebookExecutionSummary_EditorId, v.EditorId)
+		case schemas.NotebookExecutionSummary_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.NotebookExecutionSummary_EndTime, v.EndTime)
+		case schemas.NotebookExecutionSummary_ExecutionEngineId:
+			v.ExecutionEngineId = new(string)
+			return d.ReadString(schemas.NotebookExecutionSummary_ExecutionEngineId, v.ExecutionEngineId)
+		case schemas.NotebookExecutionSummary_NotebookExecutionId:
+			v.NotebookExecutionId = new(string)
+			return d.ReadString(schemas.NotebookExecutionSummary_NotebookExecutionId, v.NotebookExecutionId)
+		case schemas.NotebookExecutionSummary_NotebookExecutionName:
+			v.NotebookExecutionName = new(string)
+			return d.ReadString(schemas.NotebookExecutionSummary_NotebookExecutionName, v.NotebookExecutionName)
+		case schemas.NotebookExecutionSummary_NotebookS3Location:
+			v.NotebookS3Location = &NotebookS3LocationForOutput{}
+			return v.NotebookS3Location.Deserialize(d)
+		case schemas.NotebookExecutionSummary_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.NotebookExecutionSummary_StartTime, v.StartTime)
+		case schemas.NotebookExecutionSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.NotebookExecutionSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = NotebookExecutionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The Amazon S3 location that stores the notebook execution input.
 type NotebookS3LocationForOutput struct {
 
@@ -2224,6 +5573,34 @@ type NotebookS3LocationForOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotebookS3LocationForOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotebookS3LocationForOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotebookS3LocationForOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.NotebookS3LocationForOutput_Bucket, *v.Bucket)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.NotebookS3LocationForOutput_Key, *v.Key)
+	}
+}
+func (v *NotebookS3LocationForOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotebookS3LocationForOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotebookS3LocationForOutput_Bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.NotebookS3LocationForOutput_Bucket, v.Bucket)
+		case schemas.NotebookS3LocationForOutput_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.NotebookS3LocationForOutput_Key, v.Key)
+		}
+		return nil
+	})
+}
+
 // The Amazon S3 location that stores the notebook execution input.
 type NotebookS3LocationFromInput struct {
 
@@ -2234,6 +5611,34 @@ type NotebookS3LocationFromInput struct {
 	Key *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NotebookS3LocationFromInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotebookS3LocationFromInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotebookS3LocationFromInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.NotebookS3LocationFromInput_Bucket, *v.Bucket)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.NotebookS3LocationFromInput_Key, *v.Key)
+	}
+}
+func (v *NotebookS3LocationFromInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotebookS3LocationFromInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotebookS3LocationFromInput_Bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.NotebookS3LocationFromInput_Bucket, v.Bucket)
+		case schemas.NotebookS3LocationFromInput_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.NotebookS3LocationFromInput_Key, v.Key)
+		}
+		return nil
+	})
 }
 
 // Describes the strategy for using unused Capacity Reservations for fulfilling
@@ -2271,6 +5676,48 @@ type OnDemandCapacityReservationOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OnDemandCapacityReservationOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OnDemandCapacityReservationOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OnDemandCapacityReservationOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityReservationPreference != "" {
+		s.WriteString(schemas.OnDemandCapacityReservationOptions_CapacityReservationPreference, string(v.CapacityReservationPreference))
+	}
+	if v.CapacityReservationResourceGroupArn != nil {
+		s.WriteString(schemas.OnDemandCapacityReservationOptions_CapacityReservationResourceGroupArn, *v.CapacityReservationResourceGroupArn)
+	}
+	if v.UsageStrategy != "" {
+		s.WriteString(schemas.OnDemandCapacityReservationOptions_UsageStrategy, string(v.UsageStrategy))
+	}
+}
+func (v *OnDemandCapacityReservationOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OnDemandCapacityReservationOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OnDemandCapacityReservationOptions_CapacityReservationPreference:
+			var ev string
+			if err := d.ReadString(schemas.OnDemandCapacityReservationOptions_CapacityReservationPreference, &ev); err != nil {
+				return err
+			}
+			v.CapacityReservationPreference = OnDemandCapacityReservationPreference(ev)
+			return nil
+		case schemas.OnDemandCapacityReservationOptions_CapacityReservationResourceGroupArn:
+			v.CapacityReservationResourceGroupArn = new(string)
+			return d.ReadString(schemas.OnDemandCapacityReservationOptions_CapacityReservationResourceGroupArn, v.CapacityReservationResourceGroupArn)
+		case schemas.OnDemandCapacityReservationOptions_UsageStrategy:
+			var ev string
+			if err := d.ReadString(schemas.OnDemandCapacityReservationOptions_UsageStrategy, &ev); err != nil {
+				return err
+			}
+			v.UsageStrategy = OnDemandCapacityReservationUsageStrategy(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	The launch specification for On-Demand Instances in the instance fleet, which
 //
 // determines the allocation strategy.
@@ -2294,6 +5741,40 @@ type OnDemandProvisioningSpecification struct {
 	CapacityReservationOptions *OnDemandCapacityReservationOptions
 
 	noSmithyDocumentSerde
+}
+
+func (v *OnDemandProvisioningSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OnDemandProvisioningSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OnDemandProvisioningSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocationStrategy != "" {
+		s.WriteString(schemas.OnDemandProvisioningSpecification_AllocationStrategy, string(v.AllocationStrategy))
+	}
+	if v.CapacityReservationOptions != nil {
+		s.WriteStruct(schemas.OnDemandProvisioningSpecification_CapacityReservationOptions)
+		v.CapacityReservationOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OnDemandProvisioningSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OnDemandProvisioningSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OnDemandProvisioningSpecification_AllocationStrategy:
+			var ev string
+			if err := d.ReadString(schemas.OnDemandProvisioningSpecification_AllocationStrategy, &ev); err != nil {
+				return err
+			}
+			v.AllocationStrategy = OnDemandProvisioningAllocationStrategy(ev)
+			return nil
+		case schemas.OnDemandProvisioningSpecification_CapacityReservationOptions:
+			v.CapacityReservationOptions = &OnDemandCapacityReservationOptions{}
+			return v.CapacityReservationOptions.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The resize specification for On-Demand Instances in the instance fleet, which
@@ -2320,6 +5801,46 @@ type OnDemandResizingSpecification struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OnDemandResizingSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OnDemandResizingSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OnDemandResizingSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocationStrategy != "" {
+		s.WriteString(schemas.OnDemandResizingSpecification_AllocationStrategy, string(v.AllocationStrategy))
+	}
+	if v.CapacityReservationOptions != nil {
+		s.WriteStruct(schemas.OnDemandResizingSpecification_CapacityReservationOptions)
+		v.CapacityReservationOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimeoutDurationMinutes != nil {
+		s.WriteInt32(schemas.OnDemandResizingSpecification_TimeoutDurationMinutes, *v.TimeoutDurationMinutes)
+	}
+}
+func (v *OnDemandResizingSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OnDemandResizingSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OnDemandResizingSpecification_AllocationStrategy:
+			var ev string
+			if err := d.ReadString(schemas.OnDemandResizingSpecification_AllocationStrategy, &ev); err != nil {
+				return err
+			}
+			v.AllocationStrategy = OnDemandProvisioningAllocationStrategy(ev)
+			return nil
+		case schemas.OnDemandResizingSpecification_CapacityReservationOptions:
+			v.CapacityReservationOptions = &OnDemandCapacityReservationOptions{}
+			return v.CapacityReservationOptions.Deserialize(d)
+		case schemas.OnDemandResizingSpecification_TimeoutDurationMinutes:
+			v.TimeoutDurationMinutes = new(int32)
+			return d.ReadInt32(schemas.OnDemandResizingSpecification_TimeoutDurationMinutes, v.TimeoutDurationMinutes)
+		}
+		return nil
+	})
+}
+
 // The Amazon Linux release specified for a cluster in the RunJobFlow request.
 type OSRelease struct {
 
@@ -2330,6 +5851,28 @@ type OSRelease struct {
 	Label *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OSRelease) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OSRelease)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OSRelease) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Label != nil {
+		s.WriteString(schemas.OSRelease_Label, *v.Label)
+	}
+}
+func (v *OSRelease) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OSRelease, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OSRelease_Label:
+			v.Label = new(string)
+			return d.ReadString(schemas.OSRelease_Label, v.Label)
+		}
+		return nil
+	})
 }
 
 // The Amazon S3 location that stores the notebook execution output.
@@ -2344,6 +5887,34 @@ type OutputNotebookS3LocationForOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OutputNotebookS3LocationForOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputNotebookS3LocationForOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputNotebookS3LocationForOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.OutputNotebookS3LocationForOutput_Bucket, *v.Bucket)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.OutputNotebookS3LocationForOutput_Key, *v.Key)
+	}
+}
+func (v *OutputNotebookS3LocationForOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputNotebookS3LocationForOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputNotebookS3LocationForOutput_Bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.OutputNotebookS3LocationForOutput_Bucket, v.Bucket)
+		case schemas.OutputNotebookS3LocationForOutput_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.OutputNotebookS3LocationForOutput_Key, v.Key)
+		}
+		return nil
+	})
+}
+
 // The Amazon S3 location that stores the notebook execution output.
 type OutputNotebookS3LocationFromInput struct {
 
@@ -2354,6 +5925,34 @@ type OutputNotebookS3LocationFromInput struct {
 	Key *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OutputNotebookS3LocationFromInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputNotebookS3LocationFromInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputNotebookS3LocationFromInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.OutputNotebookS3LocationFromInput_Bucket, *v.Bucket)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.OutputNotebookS3LocationFromInput_Key, *v.Key)
+	}
+}
+func (v *OutputNotebookS3LocationFromInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputNotebookS3LocationFromInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputNotebookS3LocationFromInput_Bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.OutputNotebookS3LocationFromInput_Bucket, v.Bucket)
+		case schemas.OutputNotebookS3LocationFromInput_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.OutputNotebookS3LocationFromInput_Key, v.Key)
+		}
+		return nil
+	})
 }
 
 // Holds persistent application user interface information. Applications installed
@@ -2390,6 +5989,64 @@ type PersistentAppUI struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PersistentAppUI) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PersistentAppUI)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PersistentAppUI) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorId != nil {
+		s.WriteString(schemas.PersistentAppUI_AuthorId, *v.AuthorId)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.PersistentAppUI_CreationTime, *v.CreationTime)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.PersistentAppUI_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.LastStateChangeReason != nil {
+		s.WriteString(schemas.PersistentAppUI_LastStateChangeReason, *v.LastStateChangeReason)
+	}
+	if v.PersistentAppUIId != nil {
+		s.WriteString(schemas.PersistentAppUI_PersistentAppUIId, *v.PersistentAppUIId)
+	}
+	if v.PersistentAppUIStatus != nil {
+		s.WriteString(schemas.PersistentAppUI_PersistentAppUIStatus, *v.PersistentAppUIStatus)
+	}
+	serializePersistentAppUITypeList(s, schemas.PersistentAppUI_PersistentAppUITypeList, v.PersistentAppUITypeList)
+	serializeTagList(s, schemas.PersistentAppUI_Tags, v.Tags)
+}
+func (v *PersistentAppUI) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PersistentAppUI, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PersistentAppUI_AuthorId:
+			v.AuthorId = new(string)
+			return d.ReadString(schemas.PersistentAppUI_AuthorId, v.AuthorId)
+		case schemas.PersistentAppUI_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.PersistentAppUI_CreationTime, v.CreationTime)
+		case schemas.PersistentAppUI_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.PersistentAppUI_LastModifiedTime, v.LastModifiedTime)
+		case schemas.PersistentAppUI_LastStateChangeReason:
+			v.LastStateChangeReason = new(string)
+			return d.ReadString(schemas.PersistentAppUI_LastStateChangeReason, v.LastStateChangeReason)
+		case schemas.PersistentAppUI_PersistentAppUIId:
+			v.PersistentAppUIId = new(string)
+			return d.ReadString(schemas.PersistentAppUI_PersistentAppUIId, v.PersistentAppUIId)
+		case schemas.PersistentAppUI_PersistentAppUIStatus:
+			v.PersistentAppUIStatus = new(string)
+			return d.ReadString(schemas.PersistentAppUI_PersistentAppUIStatus, v.PersistentAppUIStatus)
+		case schemas.PersistentAppUI_PersistentAppUITypeList:
+			return deserializePersistentAppUITypeList(d, schemas.PersistentAppUI_PersistentAppUITypeList, &v.PersistentAppUITypeList)
+		case schemas.PersistentAppUI_Tags:
+			return deserializeTagList(d, schemas.PersistentAppUI_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Placement group configuration for an Amazon EMR cluster. The configuration
 // specifies the placement strategy that can be applied to instance roles during
 // cluster creation.
@@ -2415,6 +6072,42 @@ type PlacementGroupConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PlacementGroupConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlacementGroupConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlacementGroupConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceRole != "" {
+		s.WriteString(schemas.PlacementGroupConfig_InstanceRole, string(v.InstanceRole))
+	}
+	if v.PlacementStrategy != "" {
+		s.WriteString(schemas.PlacementGroupConfig_PlacementStrategy, string(v.PlacementStrategy))
+	}
+}
+func (v *PlacementGroupConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlacementGroupConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlacementGroupConfig_InstanceRole:
+			var ev string
+			if err := d.ReadString(schemas.PlacementGroupConfig_InstanceRole, &ev); err != nil {
+				return err
+			}
+			v.InstanceRole = InstanceRoleType(ev)
+			return nil
+		case schemas.PlacementGroupConfig_PlacementStrategy:
+			var ev string
+			if err := d.ReadString(schemas.PlacementGroupConfig_PlacementStrategy, &ev); err != nil {
+				return err
+			}
+			v.PlacementStrategy = PlacementGroupStrategy(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The Amazon EC2 Availability Zone configuration of the cluster (job flow).
 type PlacementType struct {
 
@@ -2435,6 +6128,31 @@ type PlacementType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PlacementType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlacementType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlacementType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.PlacementType_AvailabilityZone, *v.AvailabilityZone)
+	}
+	serializeXmlStringMaxLen256List(s, schemas.PlacementType_AvailabilityZones, v.AvailabilityZones)
+}
+func (v *PlacementType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlacementType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlacementType_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.PlacementType_AvailabilityZone, v.AvailabilityZone)
+		case schemas.PlacementType_AvailabilityZones:
+			return deserializeXmlStringMaxLen256List(d, schemas.PlacementType_AvailabilityZones, &v.AvailabilityZones)
+		}
+		return nil
+	})
+}
+
 // A list of port ranges that are permitted to allow inbound traffic from all
 // public IP addresses. To specify a single port, use the same value for MinRange
 // and MaxRange .
@@ -2451,6 +6169,34 @@ type PortRange struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PortRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PortRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PortRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxRange != nil {
+		s.WriteInt32(schemas.PortRange_MaxRange, *v.MaxRange)
+	}
+	if v.MinRange != nil {
+		s.WriteInt32(schemas.PortRange_MinRange, *v.MinRange)
+	}
+}
+func (v *PortRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PortRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PortRange_MaxRange:
+			v.MaxRange = new(int32)
+			return d.ReadInt32(schemas.PortRange_MaxRange, v.MaxRange)
+		case schemas.PortRange_MinRange:
+			v.MinRange = new(int32)
+			return d.ReadInt32(schemas.PortRange_MinRange, v.MinRange)
+		}
+		return nil
+	})
+}
+
 // The release label filters by application or version prefix.
 type ReleaseLabelFilter struct {
 
@@ -2461,6 +6207,34 @@ type ReleaseLabelFilter struct {
 	Prefix *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReleaseLabelFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReleaseLabelFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReleaseLabelFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Application != nil {
+		s.WriteString(schemas.ReleaseLabelFilter_Application, *v.Application)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.ReleaseLabelFilter_Prefix, *v.Prefix)
+	}
+}
+func (v *ReleaseLabelFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReleaseLabelFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReleaseLabelFilter_Application:
+			v.Application = new(string)
+			return d.ReadString(schemas.ReleaseLabelFilter_Application, v.Application)
+		case schemas.ReleaseLabelFilter_Prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.ReleaseLabelFilter_Prefix, v.Prefix)
+		}
+		return nil
+	})
 }
 
 // Configuration for S3 logging behavior in EMR clusters. Defines how different
@@ -2498,6 +6272,25 @@ type S3LoggingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3LoggingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3LoggingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3LoggingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLogTypeMap(s, schemas.S3LoggingConfiguration_LogTypeUploadPolicy, v.LogTypeUploadPolicy)
+}
+func (v *S3LoggingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3LoggingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3LoggingConfiguration_LogTypeUploadPolicy:
+			return deserializeLogTypeMap(d, schemas.S3LoggingConfiguration_LogTypeUploadPolicy, &v.LogTypeUploadPolicy)
+		}
+		return nil
+	})
+}
+
 // The Amazon S3 configuration for monitoring log publishing. You can configure
 // your step to send log information to Amazon S3. When it's specified, it takes
 // precedence over the cluster's logging configuration. If you don't specify this
@@ -2515,6 +6308,34 @@ type S3MonitoringConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3MonitoringConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3MonitoringConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3MonitoringConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.S3MonitoringConfiguration_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.LogUri != nil {
+		s.WriteString(schemas.S3MonitoringConfiguration_LogUri, *v.LogUri)
+	}
+}
+func (v *S3MonitoringConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3MonitoringConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3MonitoringConfiguration_EncryptionKeyArn:
+			v.EncryptionKeyArn = new(string)
+			return d.ReadString(schemas.S3MonitoringConfiguration_EncryptionKeyArn, v.EncryptionKeyArn)
+		case schemas.S3MonitoringConfiguration_LogUri:
+			v.LogUri = new(string)
+			return d.ReadString(schemas.S3MonitoringConfiguration_LogUri, v.LogUri)
+		}
+		return nil
+	})
+}
+
 // The type of adjustment the automatic scaling activity makes when triggered, and
 // the periodicity of the adjustment.
 type ScalingAction struct {
@@ -2530,6 +6351,40 @@ type ScalingAction struct {
 	Market MarketType
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScalingAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScalingAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScalingAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Market != "" {
+		s.WriteString(schemas.ScalingAction_Market, string(v.Market))
+	}
+	if v.SimpleScalingPolicyConfiguration != nil {
+		s.WriteStruct(schemas.ScalingAction_SimpleScalingPolicyConfiguration)
+		v.SimpleScalingPolicyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ScalingAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScalingAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScalingAction_Market:
+			var ev string
+			if err := d.ReadString(schemas.ScalingAction_Market, &ev); err != nil {
+				return err
+			}
+			v.Market = MarketType(ev)
+			return nil
+		case schemas.ScalingAction_SimpleScalingPolicyConfiguration:
+			v.SimpleScalingPolicyConfiguration = &SimpleScalingPolicyConfiguration{}
+			return v.SimpleScalingPolicyConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The upper and lower Amazon EC2 instance limits for an automatic scaling policy.
@@ -2552,6 +6407,34 @@ type ScalingConstraints struct {
 	MinCapacity *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScalingConstraints) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScalingConstraints)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScalingConstraints) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxCapacity != nil {
+		s.WriteInt32(schemas.ScalingConstraints_MaxCapacity, *v.MaxCapacity)
+	}
+	if v.MinCapacity != nil {
+		s.WriteInt32(schemas.ScalingConstraints_MinCapacity, *v.MinCapacity)
+	}
+}
+func (v *ScalingConstraints) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScalingConstraints, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScalingConstraints_MaxCapacity:
+			v.MaxCapacity = new(int32)
+			return d.ReadInt32(schemas.ScalingConstraints_MaxCapacity, v.MaxCapacity)
+		case schemas.ScalingConstraints_MinCapacity:
+			v.MinCapacity = new(int32)
+			return d.ReadInt32(schemas.ScalingConstraints_MinCapacity, v.MinCapacity)
+		}
+		return nil
+	})
 }
 
 // A scale-in or scale-out rule that defines scaling activity, including the
@@ -2583,6 +6466,50 @@ type ScalingRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScalingRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScalingRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScalingRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteStruct(schemas.ScalingRule_Action)
+		v.Action.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ScalingRule_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ScalingRule_Name, *v.Name)
+	}
+	if v.Trigger != nil {
+		s.WriteStruct(schemas.ScalingRule_Trigger)
+		v.Trigger.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ScalingRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScalingRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScalingRule_Action:
+			v.Action = &ScalingAction{}
+			return v.Action.Deserialize(d)
+		case schemas.ScalingRule_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ScalingRule_Description, v.Description)
+		case schemas.ScalingRule_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ScalingRule_Name, v.Name)
+		case schemas.ScalingRule_Trigger:
+			v.Trigger = &ScalingTrigger{}
+			return v.Trigger.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The conditions that trigger an automatic scaling activity.
 type ScalingTrigger struct {
 
@@ -2593,6 +6520,30 @@ type ScalingTrigger struct {
 	CloudWatchAlarmDefinition *CloudWatchAlarmDefinition
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScalingTrigger) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScalingTrigger)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScalingTrigger) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchAlarmDefinition != nil {
+		s.WriteStruct(schemas.ScalingTrigger_CloudWatchAlarmDefinition)
+		v.CloudWatchAlarmDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ScalingTrigger) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScalingTrigger, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScalingTrigger_CloudWatchAlarmDefinition:
+			v.CloudWatchAlarmDefinition = &CloudWatchAlarmDefinition{}
+			return v.CloudWatchAlarmDefinition.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Configuration of the script to run during a bootstrap action.
@@ -2609,6 +6560,31 @@ type ScriptBootstrapActionConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScriptBootstrapActionConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScriptBootstrapActionConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScriptBootstrapActionConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeXmlStringList(s, schemas.ScriptBootstrapActionConfig_Args, v.Args)
+	if v.Path != nil {
+		s.WriteString(schemas.ScriptBootstrapActionConfig_Path, *v.Path)
+	}
+}
+func (v *ScriptBootstrapActionConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScriptBootstrapActionConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScriptBootstrapActionConfig_Args:
+			return deserializeXmlStringList(d, schemas.ScriptBootstrapActionConfig_Args, &v.Args)
+		case schemas.ScriptBootstrapActionConfig_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.ScriptBootstrapActionConfig_Path, v.Path)
+		}
+		return nil
+	})
+}
+
 // The creation date and time, and name, of a security configuration.
 type SecurityConfigurationSummary struct {
 
@@ -2619,6 +6595,34 @@ type SecurityConfigurationSummary struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SecurityConfigurationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SecurityConfigurationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SecurityConfigurationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.SecurityConfigurationSummary_CreationDateTime, *v.CreationDateTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SecurityConfigurationSummary_Name, *v.Name)
+	}
+}
+func (v *SecurityConfigurationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SecurityConfigurationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SecurityConfigurationSummary_CreationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.SecurityConfigurationSummary_CreationDateTime, v.CreationDateTime)
+		case schemas.SecurityConfigurationSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SecurityConfigurationSummary_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Detailed information about a Spark Connect session.
@@ -2698,6 +6702,136 @@ type Session struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Session) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Session)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Session) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.Session_AccountId, *v.AccountId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.Session_Arn, *v.Arn)
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.Session_ClusterId, *v.ClusterId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Session_CreatedAt, *v.CreatedAt)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.Session_EndedAt, *v.EndedAt)
+	}
+	serializeConfigurationList(s, schemas.Session_EngineConfigurations, v.EngineConfigurations)
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.Session_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Session_Id, *v.Id)
+	}
+	if v.IdleSince != nil {
+		s.WriteTime(schemas.Session_IdleSince, *v.IdleSince)
+	}
+	if v.MonitoringConfiguration != nil {
+		s.WriteStruct(schemas.Session_MonitoringConfiguration)
+		v.MonitoringConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Session_Name, *v.Name)
+	}
+	if v.ReleaseLabel != nil {
+		s.WriteString(schemas.Session_ReleaseLabel, *v.ReleaseLabel)
+	}
+	if v.ServerUrl != nil {
+		s.WriteString(schemas.Session_ServerUrl, *v.ServerUrl)
+	}
+	if v.SessionIdleTimeoutInMinutes != nil {
+		s.WriteInt64(schemas.Session_SessionIdleTimeoutInMinutes, *v.SessionIdleTimeoutInMinutes)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.Session_StartedAt, *v.StartedAt)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Session_State, string(v.State))
+	}
+	if v.StateChangeReason != nil {
+		s.WriteString(schemas.Session_StateChangeReason, *v.StateChangeReason)
+	}
+	serializeTagList(s, schemas.Session_Tags, v.Tags)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.Session_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *Session) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Session, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Session_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.Session_AccountId, v.AccountId)
+		case schemas.Session_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Session_Arn, v.Arn)
+		case schemas.Session_ClusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.Session_ClusterId, v.ClusterId)
+		case schemas.Session_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Session_CreatedAt, v.CreatedAt)
+		case schemas.Session_EndedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.Session_EndedAt, v.EndedAt)
+		case schemas.Session_EngineConfigurations:
+			return deserializeConfigurationList(d, schemas.Session_EngineConfigurations, &v.EngineConfigurations)
+		case schemas.Session_ExecutionRoleArn:
+			v.ExecutionRoleArn = new(string)
+			return d.ReadString(schemas.Session_ExecutionRoleArn, v.ExecutionRoleArn)
+		case schemas.Session_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Session_Id, v.Id)
+		case schemas.Session_IdleSince:
+			v.IdleSince = new(time.Time)
+			return d.ReadTime(schemas.Session_IdleSince, v.IdleSince)
+		case schemas.Session_MonitoringConfiguration:
+			v.MonitoringConfiguration = &SessionMonitoringConfiguration{}
+			return v.MonitoringConfiguration.Deserialize(d)
+		case schemas.Session_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Session_Name, v.Name)
+		case schemas.Session_ReleaseLabel:
+			v.ReleaseLabel = new(string)
+			return d.ReadString(schemas.Session_ReleaseLabel, v.ReleaseLabel)
+		case schemas.Session_ServerUrl:
+			v.ServerUrl = new(string)
+			return d.ReadString(schemas.Session_ServerUrl, v.ServerUrl)
+		case schemas.Session_SessionIdleTimeoutInMinutes:
+			v.SessionIdleTimeoutInMinutes = new(int64)
+			return d.ReadInt64(schemas.Session_SessionIdleTimeoutInMinutes, v.SessionIdleTimeoutInMinutes)
+		case schemas.Session_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.Session_StartedAt, v.StartedAt)
+		case schemas.Session_State:
+			var ev string
+			if err := d.ReadString(schemas.Session_State, &ev); err != nil {
+				return err
+			}
+			v.State = SessionState(ev)
+			return nil
+		case schemas.Session_StateChangeReason:
+			v.StateChangeReason = new(string)
+			return d.ReadString(schemas.Session_StateChangeReason, v.StateChangeReason)
+		case schemas.Session_Tags:
+			return deserializeTagList(d, schemas.Session_Tags, &v.Tags)
+		case schemas.Session_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.Session_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // The CloudWatch Logs configuration for a session.
 type SessionCloudWatchLoggingConfiguration struct {
 
@@ -2722,6 +6856,49 @@ type SessionCloudWatchLoggingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SessionCloudWatchLoggingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SessionCloudWatchLoggingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SessionCloudWatchLoggingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.SessionCloudWatchLoggingConfiguration_Enabled, *v.Enabled)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.SessionCloudWatchLoggingConfiguration_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.LogGroup != nil {
+		s.WriteString(schemas.SessionCloudWatchLoggingConfiguration_LogGroup, *v.LogGroup)
+	}
+	if v.LogStreamNamePrefix != nil {
+		s.WriteString(schemas.SessionCloudWatchLoggingConfiguration_LogStreamNamePrefix, *v.LogStreamNamePrefix)
+	}
+	serializeLogTypesMap(s, schemas.SessionCloudWatchLoggingConfiguration_LogTypes, v.LogTypes)
+}
+func (v *SessionCloudWatchLoggingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SessionCloudWatchLoggingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SessionCloudWatchLoggingConfiguration_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.SessionCloudWatchLoggingConfiguration_Enabled, v.Enabled)
+		case schemas.SessionCloudWatchLoggingConfiguration_EncryptionKeyArn:
+			v.EncryptionKeyArn = new(string)
+			return d.ReadString(schemas.SessionCloudWatchLoggingConfiguration_EncryptionKeyArn, v.EncryptionKeyArn)
+		case schemas.SessionCloudWatchLoggingConfiguration_LogGroup:
+			v.LogGroup = new(string)
+			return d.ReadString(schemas.SessionCloudWatchLoggingConfiguration_LogGroup, v.LogGroup)
+		case schemas.SessionCloudWatchLoggingConfiguration_LogStreamNamePrefix:
+			v.LogStreamNamePrefix = new(string)
+			return d.ReadString(schemas.SessionCloudWatchLoggingConfiguration_LogStreamNamePrefix, v.LogStreamNamePrefix)
+		case schemas.SessionCloudWatchLoggingConfiguration_LogTypes:
+			return deserializeLogTypesMap(d, schemas.SessionCloudWatchLoggingConfiguration_LogTypes, &v.LogTypes)
+		}
+		return nil
+	})
+}
+
 // The Amazon EMR-managed logging configuration for a session.
 type SessionManagedLoggingConfiguration struct {
 
@@ -2732,6 +6909,34 @@ type SessionManagedLoggingConfiguration struct {
 	EncryptionKeyArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SessionManagedLoggingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SessionManagedLoggingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SessionManagedLoggingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.SessionManagedLoggingConfiguration_Enabled, *v.Enabled)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.SessionManagedLoggingConfiguration_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+}
+func (v *SessionManagedLoggingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SessionManagedLoggingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SessionManagedLoggingConfiguration_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.SessionManagedLoggingConfiguration_Enabled, v.Enabled)
+		case schemas.SessionManagedLoggingConfiguration_EncryptionKeyArn:
+			v.EncryptionKeyArn = new(string)
+			return d.ReadString(schemas.SessionManagedLoggingConfiguration_EncryptionKeyArn, v.EncryptionKeyArn)
+		}
+		return nil
+	})
 }
 
 // Details for an Amazon EMR Studio session mapping including creation time, user
@@ -2768,6 +6973,68 @@ type SessionMappingDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SessionMappingDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SessionMappingDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SessionMappingDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.SessionMappingDetail_CreationTime, *v.CreationTime)
+	}
+	if v.IdentityId != nil {
+		s.WriteString(schemas.SessionMappingDetail_IdentityId, *v.IdentityId)
+	}
+	if v.IdentityName != nil {
+		s.WriteString(schemas.SessionMappingDetail_IdentityName, *v.IdentityName)
+	}
+	if v.IdentityType != "" {
+		s.WriteString(schemas.SessionMappingDetail_IdentityType, string(v.IdentityType))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.SessionMappingDetail_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.SessionPolicyArn != nil {
+		s.WriteString(schemas.SessionMappingDetail_SessionPolicyArn, *v.SessionPolicyArn)
+	}
+	if v.StudioId != nil {
+		s.WriteString(schemas.SessionMappingDetail_StudioId, *v.StudioId)
+	}
+}
+func (v *SessionMappingDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SessionMappingDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SessionMappingDetail_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.SessionMappingDetail_CreationTime, v.CreationTime)
+		case schemas.SessionMappingDetail_IdentityId:
+			v.IdentityId = new(string)
+			return d.ReadString(schemas.SessionMappingDetail_IdentityId, v.IdentityId)
+		case schemas.SessionMappingDetail_IdentityName:
+			v.IdentityName = new(string)
+			return d.ReadString(schemas.SessionMappingDetail_IdentityName, v.IdentityName)
+		case schemas.SessionMappingDetail_IdentityType:
+			var ev string
+			if err := d.ReadString(schemas.SessionMappingDetail_IdentityType, &ev); err != nil {
+				return err
+			}
+			v.IdentityType = IdentityType(ev)
+			return nil
+		case schemas.SessionMappingDetail_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.SessionMappingDetail_LastModifiedTime, v.LastModifiedTime)
+		case schemas.SessionMappingDetail_SessionPolicyArn:
+			v.SessionPolicyArn = new(string)
+			return d.ReadString(schemas.SessionMappingDetail_SessionPolicyArn, v.SessionPolicyArn)
+		case schemas.SessionMappingDetail_StudioId:
+			v.StudioId = new(string)
+			return d.ReadString(schemas.SessionMappingDetail_StudioId, v.StudioId)
+		}
+		return nil
+	})
+}
+
 // Details for an Amazon EMR Studio session mapping. The details do not include
 // the time the session mapping was last modified.
 type SessionMappingSummary struct {
@@ -2800,6 +7067,62 @@ type SessionMappingSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SessionMappingSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SessionMappingSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SessionMappingSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.SessionMappingSummary_CreationTime, *v.CreationTime)
+	}
+	if v.IdentityId != nil {
+		s.WriteString(schemas.SessionMappingSummary_IdentityId, *v.IdentityId)
+	}
+	if v.IdentityName != nil {
+		s.WriteString(schemas.SessionMappingSummary_IdentityName, *v.IdentityName)
+	}
+	if v.IdentityType != "" {
+		s.WriteString(schemas.SessionMappingSummary_IdentityType, string(v.IdentityType))
+	}
+	if v.SessionPolicyArn != nil {
+		s.WriteString(schemas.SessionMappingSummary_SessionPolicyArn, *v.SessionPolicyArn)
+	}
+	if v.StudioId != nil {
+		s.WriteString(schemas.SessionMappingSummary_StudioId, *v.StudioId)
+	}
+}
+func (v *SessionMappingSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SessionMappingSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SessionMappingSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.SessionMappingSummary_CreationTime, v.CreationTime)
+		case schemas.SessionMappingSummary_IdentityId:
+			v.IdentityId = new(string)
+			return d.ReadString(schemas.SessionMappingSummary_IdentityId, v.IdentityId)
+		case schemas.SessionMappingSummary_IdentityName:
+			v.IdentityName = new(string)
+			return d.ReadString(schemas.SessionMappingSummary_IdentityName, v.IdentityName)
+		case schemas.SessionMappingSummary_IdentityType:
+			var ev string
+			if err := d.ReadString(schemas.SessionMappingSummary_IdentityType, &ev); err != nil {
+				return err
+			}
+			v.IdentityType = IdentityType(ev)
+			return nil
+		case schemas.SessionMappingSummary_SessionPolicyArn:
+			v.SessionPolicyArn = new(string)
+			return d.ReadString(schemas.SessionMappingSummary_SessionPolicyArn, v.SessionPolicyArn)
+		case schemas.SessionMappingSummary_StudioId:
+			v.StudioId = new(string)
+			return d.ReadString(schemas.SessionMappingSummary_StudioId, v.StudioId)
+		}
+		return nil
+	})
+}
+
 // The monitoring configuration for a session. Controls where session logs are
 // published.
 type SessionMonitoringConfiguration struct {
@@ -2814,6 +7137,46 @@ type SessionMonitoringConfiguration struct {
 	S3LoggingConfiguration *SessionS3LoggingConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *SessionMonitoringConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SessionMonitoringConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SessionMonitoringConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLoggingConfiguration != nil {
+		s.WriteStruct(schemas.SessionMonitoringConfiguration_CloudWatchLoggingConfiguration)
+		v.CloudWatchLoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ManagedLoggingConfiguration != nil {
+		s.WriteStruct(schemas.SessionMonitoringConfiguration_ManagedLoggingConfiguration)
+		v.ManagedLoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3LoggingConfiguration != nil {
+		s.WriteStruct(schemas.SessionMonitoringConfiguration_S3LoggingConfiguration)
+		v.S3LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SessionMonitoringConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SessionMonitoringConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SessionMonitoringConfiguration_CloudWatchLoggingConfiguration:
+			v.CloudWatchLoggingConfiguration = &SessionCloudWatchLoggingConfiguration{}
+			return v.CloudWatchLoggingConfiguration.Deserialize(d)
+		case schemas.SessionMonitoringConfiguration_ManagedLoggingConfiguration:
+			v.ManagedLoggingConfiguration = &SessionManagedLoggingConfiguration{}
+			return v.ManagedLoggingConfiguration.Deserialize(d)
+		case schemas.SessionMonitoringConfiguration_S3LoggingConfiguration:
+			v.S3LoggingConfiguration = &SessionS3LoggingConfiguration{}
+			return v.S3LoggingConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The Amazon S3 logging configuration for a session.
@@ -2837,6 +7200,43 @@ type SessionS3LoggingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SessionS3LoggingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SessionS3LoggingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SessionS3LoggingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.SessionS3LoggingConfiguration_Enabled, *v.Enabled)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.SessionS3LoggingConfiguration_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	serializeLogTypesMap(s, schemas.SessionS3LoggingConfiguration_LogTypes, v.LogTypes)
+	if v.LogUri != nil {
+		s.WriteString(schemas.SessionS3LoggingConfiguration_LogUri, *v.LogUri)
+	}
+}
+func (v *SessionS3LoggingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SessionS3LoggingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SessionS3LoggingConfiguration_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.SessionS3LoggingConfiguration_Enabled, v.Enabled)
+		case schemas.SessionS3LoggingConfiguration_EncryptionKeyArn:
+			v.EncryptionKeyArn = new(string)
+			return d.ReadString(schemas.SessionS3LoggingConfiguration_EncryptionKeyArn, v.EncryptionKeyArn)
+		case schemas.SessionS3LoggingConfiguration_LogTypes:
+			return deserializeLogTypesMap(d, schemas.SessionS3LoggingConfiguration_LogTypes, &v.LogTypes)
+		case schemas.SessionS3LoggingConfiguration_LogUri:
+			v.LogUri = new(string)
+			return d.ReadString(schemas.SessionS3LoggingConfiguration_LogUri, v.LogUri)
+		}
+		return nil
+	})
+}
+
 // Policy for customizing shrink operations. Allows configuration of
 // decommissioning timeout and targeted instance shrinking.
 type ShrinkPolicy struct {
@@ -2850,6 +7250,36 @@ type ShrinkPolicy struct {
 	InstanceResizePolicy *InstanceResizePolicy
 
 	noSmithyDocumentSerde
+}
+
+func (v *ShrinkPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ShrinkPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ShrinkPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DecommissionTimeout != nil {
+		s.WriteInt32(schemas.ShrinkPolicy_DecommissionTimeout, *v.DecommissionTimeout)
+	}
+	if v.InstanceResizePolicy != nil {
+		s.WriteStruct(schemas.ShrinkPolicy_InstanceResizePolicy)
+		v.InstanceResizePolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ShrinkPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ShrinkPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ShrinkPolicy_DecommissionTimeout:
+			v.DecommissionTimeout = new(int32)
+			return d.ReadInt32(schemas.ShrinkPolicy_DecommissionTimeout, v.DecommissionTimeout)
+		case schemas.ShrinkPolicy_InstanceResizePolicy:
+			v.InstanceResizePolicy = &InstanceResizePolicy{}
+			return v.InstanceResizePolicy.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An automatic scaling configuration, which describes how the policy adds or
@@ -2888,6 +7318,44 @@ type SimpleScalingPolicyConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SimpleScalingPolicyConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SimpleScalingPolicyConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SimpleScalingPolicyConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdjustmentType != "" {
+		s.WriteString(schemas.SimpleScalingPolicyConfiguration_AdjustmentType, string(v.AdjustmentType))
+	}
+	if v.CoolDown != nil {
+		s.WriteInt32(schemas.SimpleScalingPolicyConfiguration_CoolDown, *v.CoolDown)
+	}
+	if v.ScalingAdjustment != nil {
+		s.WriteInt32(schemas.SimpleScalingPolicyConfiguration_ScalingAdjustment, *v.ScalingAdjustment)
+	}
+}
+func (v *SimpleScalingPolicyConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SimpleScalingPolicyConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SimpleScalingPolicyConfiguration_AdjustmentType:
+			var ev string
+			if err := d.ReadString(schemas.SimpleScalingPolicyConfiguration_AdjustmentType, &ev); err != nil {
+				return err
+			}
+			v.AdjustmentType = AdjustmentType(ev)
+			return nil
+		case schemas.SimpleScalingPolicyConfiguration_CoolDown:
+			v.CoolDown = new(int32)
+			return d.ReadInt32(schemas.SimpleScalingPolicyConfiguration_CoolDown, v.CoolDown)
+		case schemas.SimpleScalingPolicyConfiguration_ScalingAdjustment:
+			v.ScalingAdjustment = new(int32)
+			return d.ReadInt32(schemas.SimpleScalingPolicyConfiguration_ScalingAdjustment, v.ScalingAdjustment)
+		}
+		return nil
+	})
+}
+
 // The returned release label application names or versions.
 type SimplifiedApplication struct {
 
@@ -2898,6 +7366,34 @@ type SimplifiedApplication struct {
 	Version *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SimplifiedApplication) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SimplifiedApplication)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SimplifiedApplication) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.SimplifiedApplication_Name, *v.Name)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.SimplifiedApplication_Version, *v.Version)
+	}
+}
+func (v *SimplifiedApplication) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SimplifiedApplication, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SimplifiedApplication_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SimplifiedApplication_Name, v.Name)
+		case schemas.SimplifiedApplication_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.SimplifiedApplication_Version, v.Version)
+		}
+		return nil
+	})
 }
 
 // The launch specification for Spot Instances in the instance fleet, which
@@ -2961,6 +7457,54 @@ type SpotProvisioningSpecification struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SpotProvisioningSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SpotProvisioningSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SpotProvisioningSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocationStrategy != "" {
+		s.WriteString(schemas.SpotProvisioningSpecification_AllocationStrategy, string(v.AllocationStrategy))
+	}
+	if v.BlockDurationMinutes != nil {
+		s.WriteInt32(schemas.SpotProvisioningSpecification_BlockDurationMinutes, *v.BlockDurationMinutes)
+	}
+	if v.TimeoutAction != "" {
+		s.WriteString(schemas.SpotProvisioningSpecification_TimeoutAction, string(v.TimeoutAction))
+	}
+	if v.TimeoutDurationMinutes != nil {
+		s.WriteInt32(schemas.SpotProvisioningSpecification_TimeoutDurationMinutes, *v.TimeoutDurationMinutes)
+	}
+}
+func (v *SpotProvisioningSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SpotProvisioningSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SpotProvisioningSpecification_AllocationStrategy:
+			var ev string
+			if err := d.ReadString(schemas.SpotProvisioningSpecification_AllocationStrategy, &ev); err != nil {
+				return err
+			}
+			v.AllocationStrategy = SpotProvisioningAllocationStrategy(ev)
+			return nil
+		case schemas.SpotProvisioningSpecification_BlockDurationMinutes:
+			v.BlockDurationMinutes = new(int32)
+			return d.ReadInt32(schemas.SpotProvisioningSpecification_BlockDurationMinutes, v.BlockDurationMinutes)
+		case schemas.SpotProvisioningSpecification_TimeoutAction:
+			var ev string
+			if err := d.ReadString(schemas.SpotProvisioningSpecification_TimeoutAction, &ev); err != nil {
+				return err
+			}
+			v.TimeoutAction = SpotProvisioningTimeoutAction(ev)
+			return nil
+		case schemas.SpotProvisioningSpecification_TimeoutDurationMinutes:
+			v.TimeoutDurationMinutes = new(int32)
+			return d.ReadInt32(schemas.SpotProvisioningSpecification_TimeoutDurationMinutes, v.TimeoutDurationMinutes)
+		}
+		return nil
+	})
+}
+
 // The resize specification for Spot Instances in the instance fleet, which
 // contains the resize timeout period.
 type SpotResizingSpecification struct {
@@ -2981,6 +7525,38 @@ type SpotResizingSpecification struct {
 	TimeoutDurationMinutes *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *SpotResizingSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SpotResizingSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SpotResizingSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocationStrategy != "" {
+		s.WriteString(schemas.SpotResizingSpecification_AllocationStrategy, string(v.AllocationStrategy))
+	}
+	if v.TimeoutDurationMinutes != nil {
+		s.WriteInt32(schemas.SpotResizingSpecification_TimeoutDurationMinutes, *v.TimeoutDurationMinutes)
+	}
+}
+func (v *SpotResizingSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SpotResizingSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SpotResizingSpecification_AllocationStrategy:
+			var ev string
+			if err := d.ReadString(schemas.SpotResizingSpecification_AllocationStrategy, &ev); err != nil {
+				return err
+			}
+			v.AllocationStrategy = SpotProvisioningAllocationStrategy(ev)
+			return nil
+		case schemas.SpotResizingSpecification_TimeoutDurationMinutes:
+			v.TimeoutDurationMinutes = new(int32)
+			return d.ReadInt32(schemas.SpotResizingSpecification_TimeoutDurationMinutes, v.TimeoutDurationMinutes)
+		}
+		return nil
+	})
 }
 
 // This represents a step in a cluster.
@@ -3034,6 +7610,78 @@ type Step struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Step) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Step)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Step) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionOnFailure != "" {
+		s.WriteString(schemas.Step_ActionOnFailure, string(v.ActionOnFailure))
+	}
+	if v.Config != nil {
+		s.WriteStruct(schemas.Step_Config)
+		v.Config.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.Step_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.Step_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Step_Id, *v.Id)
+	}
+	if v.LogUri != nil {
+		s.WriteString(schemas.Step_LogUri, *v.LogUri)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Step_Name, *v.Name)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.Step_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Step) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Step, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Step_ActionOnFailure:
+			var ev string
+			if err := d.ReadString(schemas.Step_ActionOnFailure, &ev); err != nil {
+				return err
+			}
+			v.ActionOnFailure = ActionOnFailure(ev)
+			return nil
+		case schemas.Step_Config:
+			v.Config = &HadoopStepConfig{}
+			return v.Config.Deserialize(d)
+		case schemas.Step_EncryptionKeyArn:
+			v.EncryptionKeyArn = new(string)
+			return d.ReadString(schemas.Step_EncryptionKeyArn, v.EncryptionKeyArn)
+		case schemas.Step_ExecutionRoleArn:
+			v.ExecutionRoleArn = new(string)
+			return d.ReadString(schemas.Step_ExecutionRoleArn, v.ExecutionRoleArn)
+		case schemas.Step_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Step_Id, v.Id)
+		case schemas.Step_LogUri:
+			v.LogUri = new(string)
+			return d.ReadString(schemas.Step_LogUri, v.LogUri)
+		case schemas.Step_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Step_Name, v.Name)
+		case schemas.Step_Status:
+			v.Status = &StepStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specification for a cluster (job flow) step.
 type StepConfig struct {
 
@@ -3077,6 +7725,54 @@ type StepConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StepConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StepConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StepConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionOnFailure != "" {
+		s.WriteString(schemas.StepConfig_ActionOnFailure, string(v.ActionOnFailure))
+	}
+	if v.HadoopJarStep != nil {
+		s.WriteStruct(schemas.StepConfig_HadoopJarStep)
+		v.HadoopJarStep.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StepConfig_Name, *v.Name)
+	}
+	if v.StepMonitoringConfiguration != nil {
+		s.WriteStruct(schemas.StepConfig_StepMonitoringConfiguration)
+		v.StepMonitoringConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StepConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StepConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StepConfig_ActionOnFailure:
+			var ev string
+			if err := d.ReadString(schemas.StepConfig_ActionOnFailure, &ev); err != nil {
+				return err
+			}
+			v.ActionOnFailure = ActionOnFailure(ev)
+			return nil
+		case schemas.StepConfig_HadoopJarStep:
+			v.HadoopJarStep = &HadoopJarStepConfig{}
+			return v.HadoopJarStep.Deserialize(d)
+		case schemas.StepConfig_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StepConfig_Name, v.Name)
+		case schemas.StepConfig_StepMonitoringConfiguration:
+			v.StepMonitoringConfiguration = &StepMonitoringConfiguration{}
+			return v.StepMonitoringConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Combines the execution state and configuration of a step.
 type StepDetail struct {
 
@@ -3091,6 +7787,38 @@ type StepDetail struct {
 	StepConfig *StepConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *StepDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StepDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StepDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionStatusDetail != nil {
+		s.WriteStruct(schemas.StepDetail_ExecutionStatusDetail)
+		v.ExecutionStatusDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StepConfig != nil {
+		s.WriteStruct(schemas.StepDetail_StepConfig)
+		v.StepConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StepDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StepDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StepDetail_ExecutionStatusDetail:
+			v.ExecutionStatusDetail = &StepExecutionStatusDetail{}
+			return v.ExecutionStatusDetail.Deserialize(d)
+		case schemas.StepDetail_StepConfig:
+			v.StepConfig = &StepConfig{}
+			return v.StepConfig.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The execution state of a step.
@@ -3118,6 +7846,56 @@ type StepExecutionStatusDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StepExecutionStatusDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StepExecutionStatusDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StepExecutionStatusDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.StepExecutionStatusDetail_CreationDateTime, *v.CreationDateTime)
+	}
+	if v.EndDateTime != nil {
+		s.WriteTime(schemas.StepExecutionStatusDetail_EndDateTime, *v.EndDateTime)
+	}
+	if v.LastStateChangeReason != nil {
+		s.WriteString(schemas.StepExecutionStatusDetail_LastStateChangeReason, *v.LastStateChangeReason)
+	}
+	if v.StartDateTime != nil {
+		s.WriteTime(schemas.StepExecutionStatusDetail_StartDateTime, *v.StartDateTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.StepExecutionStatusDetail_State, string(v.State))
+	}
+}
+func (v *StepExecutionStatusDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StepExecutionStatusDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StepExecutionStatusDetail_CreationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.StepExecutionStatusDetail_CreationDateTime, v.CreationDateTime)
+		case schemas.StepExecutionStatusDetail_EndDateTime:
+			v.EndDateTime = new(time.Time)
+			return d.ReadTime(schemas.StepExecutionStatusDetail_EndDateTime, v.EndDateTime)
+		case schemas.StepExecutionStatusDetail_LastStateChangeReason:
+			v.LastStateChangeReason = new(string)
+			return d.ReadString(schemas.StepExecutionStatusDetail_LastStateChangeReason, v.LastStateChangeReason)
+		case schemas.StepExecutionStatusDetail_StartDateTime:
+			v.StartDateTime = new(time.Time)
+			return d.ReadTime(schemas.StepExecutionStatusDetail_StartDateTime, v.StartDateTime)
+		case schemas.StepExecutionStatusDetail_State:
+			var ev string
+			if err := d.ReadString(schemas.StepExecutionStatusDetail_State, &ev); err != nil {
+				return err
+			}
+			v.State = StepExecutionState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Object that holds configuration properties for logging.
 type StepMonitoringConfiguration struct {
 
@@ -3131,6 +7909,30 @@ type StepMonitoringConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StepMonitoringConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StepMonitoringConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StepMonitoringConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3MonitoringConfiguration != nil {
+		s.WriteStruct(schemas.StepMonitoringConfiguration_S3MonitoringConfiguration)
+		v.S3MonitoringConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StepMonitoringConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StepMonitoringConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StepMonitoringConfiguration_S3MonitoringConfiguration:
+			v.S3MonitoringConfiguration = &S3MonitoringConfiguration{}
+			return v.S3MonitoringConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The details of the step state change reason.
 type StepStateChangeReason struct {
 
@@ -3142,6 +7944,38 @@ type StepStateChangeReason struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StepStateChangeReason) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StepStateChangeReason)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StepStateChangeReason) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.StepStateChangeReason_Code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.StepStateChangeReason_Message, *v.Message)
+	}
+}
+func (v *StepStateChangeReason) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StepStateChangeReason, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StepStateChangeReason_Code:
+			var ev string
+			if err := d.ReadString(schemas.StepStateChangeReason_Code, &ev); err != nil {
+				return err
+			}
+			v.Code = StepStateChangeReasonCode(ev)
+			return nil
+		case schemas.StepStateChangeReason_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.StepStateChangeReason_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // The execution status details of the cluster step.
@@ -3161,6 +7995,56 @@ type StepStatus struct {
 	Timeline *StepTimeline
 
 	noSmithyDocumentSerde
+}
+
+func (v *StepStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StepStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StepStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureDetails != nil {
+		s.WriteStruct(schemas.StepStatus_FailureDetails)
+		v.FailureDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != "" {
+		s.WriteString(schemas.StepStatus_State, string(v.State))
+	}
+	if v.StateChangeReason != nil {
+		s.WriteStruct(schemas.StepStatus_StateChangeReason)
+		v.StateChangeReason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timeline != nil {
+		s.WriteStruct(schemas.StepStatus_Timeline)
+		v.Timeline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StepStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StepStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StepStatus_FailureDetails:
+			v.FailureDetails = &FailureDetails{}
+			return v.FailureDetails.Deserialize(d)
+		case schemas.StepStatus_State:
+			var ev string
+			if err := d.ReadString(schemas.StepStatus_State, &ev); err != nil {
+				return err
+			}
+			v.State = StepState(ev)
+			return nil
+		case schemas.StepStatus_StateChangeReason:
+			v.StateChangeReason = &StepStateChangeReason{}
+			return v.StateChangeReason.Deserialize(d)
+		case schemas.StepStatus_Timeline:
+			v.Timeline = &StepTimeline{}
+			return v.Timeline.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The summary of the cluster step.
@@ -3193,6 +8077,72 @@ type StepSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StepSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StepSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StepSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionOnFailure != "" {
+		s.WriteString(schemas.StepSummary_ActionOnFailure, string(v.ActionOnFailure))
+	}
+	if v.Config != nil {
+		s.WriteStruct(schemas.StepSummary_Config)
+		v.Config.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.StepSummary_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.StepSummary_Id, *v.Id)
+	}
+	if v.LogUri != nil {
+		s.WriteString(schemas.StepSummary_LogUri, *v.LogUri)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StepSummary_Name, *v.Name)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.StepSummary_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StepSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StepSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StepSummary_ActionOnFailure:
+			var ev string
+			if err := d.ReadString(schemas.StepSummary_ActionOnFailure, &ev); err != nil {
+				return err
+			}
+			v.ActionOnFailure = ActionOnFailure(ev)
+			return nil
+		case schemas.StepSummary_Config:
+			v.Config = &HadoopStepConfig{}
+			return v.Config.Deserialize(d)
+		case schemas.StepSummary_EncryptionKeyArn:
+			v.EncryptionKeyArn = new(string)
+			return d.ReadString(schemas.StepSummary_EncryptionKeyArn, v.EncryptionKeyArn)
+		case schemas.StepSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StepSummary_Id, v.Id)
+		case schemas.StepSummary_LogUri:
+			v.LogUri = new(string)
+			return d.ReadString(schemas.StepSummary_LogUri, v.LogUri)
+		case schemas.StepSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StepSummary_Name, v.Name)
+		case schemas.StepSummary_Status:
+			v.Status = &StepStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The timeline of the cluster step lifecycle.
 type StepTimeline struct {
 
@@ -3206,6 +8156,40 @@ type StepTimeline struct {
 	StartDateTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *StepTimeline) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StepTimeline)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StepTimeline) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.StepTimeline_CreationDateTime, *v.CreationDateTime)
+	}
+	if v.EndDateTime != nil {
+		s.WriteTime(schemas.StepTimeline_EndDateTime, *v.EndDateTime)
+	}
+	if v.StartDateTime != nil {
+		s.WriteTime(schemas.StepTimeline_StartDateTime, *v.StartDateTime)
+	}
+}
+func (v *StepTimeline) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StepTimeline, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StepTimeline_CreationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.StepTimeline_CreationDateTime, v.CreationDateTime)
+		case schemas.StepTimeline_EndDateTime:
+			v.EndDateTime = new(time.Time)
+			return d.ReadTime(schemas.StepTimeline_EndDateTime, v.EndDateTime)
+		case schemas.StepTimeline_StartDateTime:
+			v.StartDateTime = new(time.Time)
+			return d.ReadTime(schemas.StepTimeline_StartDateTime, v.StartDateTime)
+		}
+		return nil
+	})
 }
 
 // Details for an Amazon EMR Studio including ID, creation time, name, and so on.
@@ -3290,6 +8274,150 @@ type Studio struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Studio) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Studio)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Studio) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthMode != "" {
+		s.WriteString(schemas.Studio_AuthMode, string(v.AuthMode))
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.Studio_CreationTime, *v.CreationTime)
+	}
+	if v.DefaultS3Location != nil {
+		s.WriteString(schemas.Studio_DefaultS3Location, *v.DefaultS3Location)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Studio_Description, *v.Description)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.Studio_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.EngineSecurityGroupId != nil {
+		s.WriteString(schemas.Studio_EngineSecurityGroupId, *v.EngineSecurityGroupId)
+	}
+	if v.IdcInstanceArn != nil {
+		s.WriteString(schemas.Studio_IdcInstanceArn, *v.IdcInstanceArn)
+	}
+	if v.IdcUserAssignment != "" {
+		s.WriteString(schemas.Studio_IdcUserAssignment, string(v.IdcUserAssignment))
+	}
+	if v.IdpAuthUrl != nil {
+		s.WriteString(schemas.Studio_IdpAuthUrl, *v.IdpAuthUrl)
+	}
+	if v.IdpRelayStateParameterName != nil {
+		s.WriteString(schemas.Studio_IdpRelayStateParameterName, *v.IdpRelayStateParameterName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Studio_Name, *v.Name)
+	}
+	if v.ServiceRole != nil {
+		s.WriteString(schemas.Studio_ServiceRole, *v.ServiceRole)
+	}
+	if v.StudioArn != nil {
+		s.WriteString(schemas.Studio_StudioArn, *v.StudioArn)
+	}
+	if v.StudioId != nil {
+		s.WriteString(schemas.Studio_StudioId, *v.StudioId)
+	}
+	serializeSubnetIdList(s, schemas.Studio_SubnetIds, v.SubnetIds)
+	serializeTagList(s, schemas.Studio_Tags, v.Tags)
+	if v.TrustedIdentityPropagationEnabled != nil {
+		s.WriteBool(schemas.Studio_TrustedIdentityPropagationEnabled, *v.TrustedIdentityPropagationEnabled)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.Studio_Url, *v.Url)
+	}
+	if v.UserRole != nil {
+		s.WriteString(schemas.Studio_UserRole, *v.UserRole)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.Studio_VpcId, *v.VpcId)
+	}
+	if v.WorkspaceSecurityGroupId != nil {
+		s.WriteString(schemas.Studio_WorkspaceSecurityGroupId, *v.WorkspaceSecurityGroupId)
+	}
+}
+func (v *Studio) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Studio, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Studio_AuthMode:
+			var ev string
+			if err := d.ReadString(schemas.Studio_AuthMode, &ev); err != nil {
+				return err
+			}
+			v.AuthMode = AuthMode(ev)
+			return nil
+		case schemas.Studio_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.Studio_CreationTime, v.CreationTime)
+		case schemas.Studio_DefaultS3Location:
+			v.DefaultS3Location = new(string)
+			return d.ReadString(schemas.Studio_DefaultS3Location, v.DefaultS3Location)
+		case schemas.Studio_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Studio_Description, v.Description)
+		case schemas.Studio_EncryptionKeyArn:
+			v.EncryptionKeyArn = new(string)
+			return d.ReadString(schemas.Studio_EncryptionKeyArn, v.EncryptionKeyArn)
+		case schemas.Studio_EngineSecurityGroupId:
+			v.EngineSecurityGroupId = new(string)
+			return d.ReadString(schemas.Studio_EngineSecurityGroupId, v.EngineSecurityGroupId)
+		case schemas.Studio_IdcInstanceArn:
+			v.IdcInstanceArn = new(string)
+			return d.ReadString(schemas.Studio_IdcInstanceArn, v.IdcInstanceArn)
+		case schemas.Studio_IdcUserAssignment:
+			var ev string
+			if err := d.ReadString(schemas.Studio_IdcUserAssignment, &ev); err != nil {
+				return err
+			}
+			v.IdcUserAssignment = IdcUserAssignment(ev)
+			return nil
+		case schemas.Studio_IdpAuthUrl:
+			v.IdpAuthUrl = new(string)
+			return d.ReadString(schemas.Studio_IdpAuthUrl, v.IdpAuthUrl)
+		case schemas.Studio_IdpRelayStateParameterName:
+			v.IdpRelayStateParameterName = new(string)
+			return d.ReadString(schemas.Studio_IdpRelayStateParameterName, v.IdpRelayStateParameterName)
+		case schemas.Studio_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Studio_Name, v.Name)
+		case schemas.Studio_ServiceRole:
+			v.ServiceRole = new(string)
+			return d.ReadString(schemas.Studio_ServiceRole, v.ServiceRole)
+		case schemas.Studio_StudioArn:
+			v.StudioArn = new(string)
+			return d.ReadString(schemas.Studio_StudioArn, v.StudioArn)
+		case schemas.Studio_StudioId:
+			v.StudioId = new(string)
+			return d.ReadString(schemas.Studio_StudioId, v.StudioId)
+		case schemas.Studio_SubnetIds:
+			return deserializeSubnetIdList(d, schemas.Studio_SubnetIds, &v.SubnetIds)
+		case schemas.Studio_Tags:
+			return deserializeTagList(d, schemas.Studio_Tags, &v.Tags)
+		case schemas.Studio_TrustedIdentityPropagationEnabled:
+			v.TrustedIdentityPropagationEnabled = new(bool)
+			return d.ReadBool(schemas.Studio_TrustedIdentityPropagationEnabled, v.TrustedIdentityPropagationEnabled)
+		case schemas.Studio_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.Studio_Url, v.Url)
+		case schemas.Studio_UserRole:
+			v.UserRole = new(string)
+			return d.ReadString(schemas.Studio_UserRole, v.UserRole)
+		case schemas.Studio_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.Studio_VpcId, v.VpcId)
+		case schemas.Studio_WorkspaceSecurityGroupId:
+			v.WorkspaceSecurityGroupId = new(string)
+			return d.ReadString(schemas.Studio_WorkspaceSecurityGroupId, v.WorkspaceSecurityGroupId)
+		}
+		return nil
+	})
+}
+
 // Details for an Amazon EMR Studio, including ID, Name, VPC, and Description. To
 // fetch additional details such as subnets, IAM roles, security groups, and tags
 // for the Studio, use the DescribeStudioAPI.
@@ -3319,6 +8447,68 @@ type StudioSummary struct {
 	VpcId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StudioSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StudioSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StudioSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthMode != "" {
+		s.WriteString(schemas.StudioSummary_AuthMode, string(v.AuthMode))
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.StudioSummary_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.StudioSummary_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StudioSummary_Name, *v.Name)
+	}
+	if v.StudioId != nil {
+		s.WriteString(schemas.StudioSummary_StudioId, *v.StudioId)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.StudioSummary_Url, *v.Url)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.StudioSummary_VpcId, *v.VpcId)
+	}
+}
+func (v *StudioSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StudioSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StudioSummary_AuthMode:
+			var ev string
+			if err := d.ReadString(schemas.StudioSummary_AuthMode, &ev); err != nil {
+				return err
+			}
+			v.AuthMode = AuthMode(ev)
+			return nil
+		case schemas.StudioSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.StudioSummary_CreationTime, v.CreationTime)
+		case schemas.StudioSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.StudioSummary_Description, v.Description)
+		case schemas.StudioSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StudioSummary_Name, v.Name)
+		case schemas.StudioSummary_StudioId:
+			v.StudioId = new(string)
+			return d.ReadString(schemas.StudioSummary_StudioId, v.StudioId)
+		case schemas.StudioSummary_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.StudioSummary_Url, v.Url)
+		case schemas.StudioSummary_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.StudioSummary_VpcId, v.VpcId)
+		}
+		return nil
+	})
 }
 
 // An instance type that the specified Amazon EMR release supports.
@@ -3367,6 +8557,88 @@ type SupportedInstanceType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SupportedInstanceType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SupportedInstanceType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SupportedInstanceType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Architecture != nil {
+		s.WriteString(schemas.SupportedInstanceType_Architecture, *v.Architecture)
+	}
+	if v.EbsOptimizedAvailable != nil {
+		s.WriteBool(schemas.SupportedInstanceType_EbsOptimizedAvailable, *v.EbsOptimizedAvailable)
+	}
+	if v.EbsOptimizedByDefault != nil {
+		s.WriteBool(schemas.SupportedInstanceType_EbsOptimizedByDefault, *v.EbsOptimizedByDefault)
+	}
+	if v.EbsStorageOnly != nil {
+		s.WriteBool(schemas.SupportedInstanceType_EbsStorageOnly, *v.EbsStorageOnly)
+	}
+	if v.InstanceFamilyId != nil {
+		s.WriteString(schemas.SupportedInstanceType_InstanceFamilyId, *v.InstanceFamilyId)
+	}
+	if v.Is64BitsOnly != nil {
+		s.WriteBool(schemas.SupportedInstanceType_Is64BitsOnly, *v.Is64BitsOnly)
+	}
+	if v.MemoryGB != nil {
+		s.WriteFloat32(schemas.SupportedInstanceType_MemoryGB, *v.MemoryGB)
+	}
+	if v.NumberOfDisks != nil {
+		s.WriteInt32(schemas.SupportedInstanceType_NumberOfDisks, *v.NumberOfDisks)
+	}
+	if v.StorageGB != nil {
+		s.WriteInt32(schemas.SupportedInstanceType_StorageGB, *v.StorageGB)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.SupportedInstanceType_Type, *v.Type)
+	}
+	if v.VCPU != nil {
+		s.WriteInt32(schemas.SupportedInstanceType_VCPU, *v.VCPU)
+	}
+}
+func (v *SupportedInstanceType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SupportedInstanceType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SupportedInstanceType_Architecture:
+			v.Architecture = new(string)
+			return d.ReadString(schemas.SupportedInstanceType_Architecture, v.Architecture)
+		case schemas.SupportedInstanceType_EbsOptimizedAvailable:
+			v.EbsOptimizedAvailable = new(bool)
+			return d.ReadBool(schemas.SupportedInstanceType_EbsOptimizedAvailable, v.EbsOptimizedAvailable)
+		case schemas.SupportedInstanceType_EbsOptimizedByDefault:
+			v.EbsOptimizedByDefault = new(bool)
+			return d.ReadBool(schemas.SupportedInstanceType_EbsOptimizedByDefault, v.EbsOptimizedByDefault)
+		case schemas.SupportedInstanceType_EbsStorageOnly:
+			v.EbsStorageOnly = new(bool)
+			return d.ReadBool(schemas.SupportedInstanceType_EbsStorageOnly, v.EbsStorageOnly)
+		case schemas.SupportedInstanceType_InstanceFamilyId:
+			v.InstanceFamilyId = new(string)
+			return d.ReadString(schemas.SupportedInstanceType_InstanceFamilyId, v.InstanceFamilyId)
+		case schemas.SupportedInstanceType_Is64BitsOnly:
+			v.Is64BitsOnly = new(bool)
+			return d.ReadBool(schemas.SupportedInstanceType_Is64BitsOnly, v.Is64BitsOnly)
+		case schemas.SupportedInstanceType_MemoryGB:
+			v.MemoryGB = new(float32)
+			return d.ReadFloat32(schemas.SupportedInstanceType_MemoryGB, v.MemoryGB)
+		case schemas.SupportedInstanceType_NumberOfDisks:
+			v.NumberOfDisks = new(int32)
+			return d.ReadInt32(schemas.SupportedInstanceType_NumberOfDisks, v.NumberOfDisks)
+		case schemas.SupportedInstanceType_StorageGB:
+			v.StorageGB = new(int32)
+			return d.ReadInt32(schemas.SupportedInstanceType_StorageGB, v.StorageGB)
+		case schemas.SupportedInstanceType_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.SupportedInstanceType_Type, v.Type)
+		case schemas.SupportedInstanceType_VCPU:
+			v.VCPU = new(int32)
+			return d.ReadInt32(schemas.SupportedInstanceType_VCPU, v.VCPU)
+		}
+		return nil
+	})
+}
+
 // The list of supported product configurations that allow user-supplied
 // arguments. Amazon EMR accepts these arguments and forwards them to the
 // corresponding installation script as bootstrap action arguments.
@@ -3379,6 +8651,31 @@ type SupportedProductConfig struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SupportedProductConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SupportedProductConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SupportedProductConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeXmlStringList(s, schemas.SupportedProductConfig_Args, v.Args)
+	if v.Name != nil {
+		s.WriteString(schemas.SupportedProductConfig_Name, *v.Name)
+	}
+}
+func (v *SupportedProductConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SupportedProductConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SupportedProductConfig_Args:
+			return deserializeXmlStringList(d, schemas.SupportedProductConfig_Args, &v.Args)
+		case schemas.SupportedProductConfig_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SupportedProductConfig_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // A key-value pair containing user-defined metadata that you can associate with
@@ -3403,6 +8700,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // The username and password that you use to connect to cluster endpoints.
 type UsernamePassword struct {
 
@@ -3415,6 +8740,34 @@ type UsernamePassword struct {
 	Username *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UsernamePassword) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UsernamePassword)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UsernamePassword) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Password != nil {
+		s.WriteString(schemas.UsernamePassword_Password, *v.Password)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.UsernamePassword_Username, *v.Username)
+	}
+}
+func (v *UsernamePassword) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UsernamePassword, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UsernamePassword_Password:
+			v.Password = new(string)
+			return d.ReadString(schemas.UsernamePassword_Password, v.Password)
+		case schemas.UsernamePassword_Username:
+			v.Username = new(string)
+			return d.ReadString(schemas.UsernamePassword_Username, v.Username)
+		}
+		return nil
+	})
 }
 
 // EBS volume specifications such as volume type, IOPS, size (GiB) and throughput
@@ -3442,6 +8795,46 @@ type VolumeSpecification struct {
 	Throughput *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *VolumeSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VolumeSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VolumeSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Iops != nil {
+		s.WriteInt32(schemas.VolumeSpecification_Iops, *v.Iops)
+	}
+	if v.SizeInGB != nil {
+		s.WriteInt32(schemas.VolumeSpecification_SizeInGB, *v.SizeInGB)
+	}
+	if v.Throughput != nil {
+		s.WriteInt32(schemas.VolumeSpecification_Throughput, *v.Throughput)
+	}
+	if v.VolumeType != nil {
+		s.WriteString(schemas.VolumeSpecification_VolumeType, *v.VolumeType)
+	}
+}
+func (v *VolumeSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VolumeSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VolumeSpecification_Iops:
+			v.Iops = new(int32)
+			return d.ReadInt32(schemas.VolumeSpecification_Iops, v.Iops)
+		case schemas.VolumeSpecification_SizeInGB:
+			v.SizeInGB = new(int32)
+			return d.ReadInt32(schemas.VolumeSpecification_SizeInGB, v.SizeInGB)
+		case schemas.VolumeSpecification_Throughput:
+			v.Throughput = new(int32)
+			return d.ReadInt32(schemas.VolumeSpecification_Throughput, v.Throughput)
+		case schemas.VolumeSpecification_VolumeType:
+			v.VolumeType = new(string)
+			return d.ReadString(schemas.VolumeSpecification_VolumeType, v.VolumeType)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

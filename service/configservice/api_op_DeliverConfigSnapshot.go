@@ -4,6 +4,8 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,18 @@ type DeliverConfigSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeliverConfigSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeliverConfigSnapshotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeliverConfigSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryChannelName != nil {
+		s.WriteString(schemas.DeliverConfigSnapshotRequest_deliveryChannelName, *v.DeliveryChannelName)
+	}
+}
+
 // The output for the DeliverConfigSnapshot action, in JSON format.
 type DeliverConfigSnapshotOutput struct {
 
@@ -55,13 +69,32 @@ type DeliverConfigSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeliverConfigSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeliverConfigSnapshotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeliverConfigSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigSnapshotId != nil {
+		s.WriteString(schemas.DeliverConfigSnapshotResponse_configSnapshotId, *v.ConfigSnapshotId)
+	}
+}
+func (v *DeliverConfigSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeliverConfigSnapshotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeliverConfigSnapshotResponse_configSnapshotId:
+			v.ConfigSnapshotId = new(string)
+			return d.ReadString(schemas.DeliverConfigSnapshotResponse_configSnapshotId, v.ConfigSnapshotId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeliverConfigSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeliverConfigSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeliverConfigSnapshot, schemas.DeliverConfigSnapshotRequest, schemas.DeliverConfigSnapshotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeliverConfigSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeliverConfigSnapshot, schemas.DeliverConfigSnapshotRequest, schemas.DeliverConfigSnapshotResponse), output: &DeliverConfigSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

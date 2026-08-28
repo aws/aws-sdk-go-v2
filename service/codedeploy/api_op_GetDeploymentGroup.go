@@ -4,7 +4,9 @@ package codedeploy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type GetDeploymentGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeploymentGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeploymentGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeploymentGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.GetDeploymentGroupInput_applicationName, *v.ApplicationName)
+	}
+	if v.DeploymentGroupName != nil {
+		s.WriteString(schemas.GetDeploymentGroupInput_deploymentGroupName, *v.DeploymentGroupName)
+	}
+}
+
 // Represents the output of a GetDeploymentGroup operation.
 type GetDeploymentGroupOutput struct {
 
@@ -53,13 +70,34 @@ type GetDeploymentGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeploymentGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeploymentGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeploymentGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentGroupInfo != nil {
+		s.WriteStruct(schemas.GetDeploymentGroupOutput_deploymentGroupInfo)
+		v.DeploymentGroupInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetDeploymentGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDeploymentGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDeploymentGroupOutput_deploymentGroupInfo:
+			v.DeploymentGroupInfo = &types.DeploymentGroupInfo{}
+			return v.DeploymentGroupInfo.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDeploymentGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDeploymentGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeploymentGroup, schemas.GetDeploymentGroupInput, schemas.GetDeploymentGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDeploymentGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeploymentGroup, schemas.GetDeploymentGroupInput, schemas.GetDeploymentGroupOutput), output: &GetDeploymentGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

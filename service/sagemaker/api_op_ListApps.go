@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,36 @@ type ListAppsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdEquals != nil {
+		s.WriteString(schemas.ListAppsRequest_DomainIdEquals, *v.DomainIdEquals)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAppsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListAppsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListAppsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.SpaceNameEquals != nil {
+		s.WriteString(schemas.ListAppsRequest_SpaceNameEquals, *v.SpaceNameEquals)
+	}
+	if v.UserProfileNameEquals != nil {
+		s.WriteString(schemas.ListAppsRequest_UserProfileNameEquals, *v.UserProfileNameEquals)
+	}
+}
+
 type ListAppsOutput struct {
 
 	// The list of apps.
@@ -74,13 +106,35 @@ type ListAppsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAppList(s, schemas.ListAppsResponse_Apps, v.Apps)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAppsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppsResponse_Apps:
+			return deserializeAppList(d, schemas.ListAppsResponse_Apps, &v.Apps)
+		case schemas.ListAppsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAppsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListApps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApps, schemas.ListAppsRequest, schemas.ListAppsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListApps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApps, schemas.ListAppsRequest, schemas.ListAppsResponse), output: &ListAppsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,19 @@ type AuthorizeIpRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AuthorizeIpRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuthorizeIpRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuthorizeIpRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.AuthorizeIpRulesRequest_GroupId, *v.GroupId)
+	}
+	serializeIpRuleList(s, schemas.AuthorizeIpRulesRequest_UserRules, v.UserRules)
+}
+
 type AuthorizeIpRulesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +64,26 @@ type AuthorizeIpRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AuthorizeIpRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuthorizeIpRulesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuthorizeIpRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AuthorizeIpRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AuthorizeIpRulesResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAuthorizeIpRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAuthorizeIpRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AuthorizeIpRules, schemas.AuthorizeIpRulesRequest, schemas.AuthorizeIpRulesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAuthorizeIpRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AuthorizeIpRules, schemas.AuthorizeIpRulesRequest, schemas.AuthorizeIpRulesResult), output: &AuthorizeIpRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package athena
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListCapacityReservationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCapacityReservationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCapacityReservationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCapacityReservationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCapacityReservationsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCapacityReservationsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListCapacityReservationsOutput struct {
 
 	// The capacity reservations for the current account.
@@ -55,13 +72,35 @@ type ListCapacityReservationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCapacityReservationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCapacityReservationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCapacityReservationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCapacityReservationsList(s, schemas.ListCapacityReservationsOutput_CapacityReservations, v.CapacityReservations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCapacityReservationsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCapacityReservationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCapacityReservationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCapacityReservationsOutput_CapacityReservations:
+			return deserializeCapacityReservationsList(d, schemas.ListCapacityReservationsOutput_CapacityReservations, &v.CapacityReservations)
+		case schemas.ListCapacityReservationsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCapacityReservationsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCapacityReservationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCapacityReservations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCapacityReservations, schemas.ListCapacityReservationsInput, schemas.ListCapacityReservationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCapacityReservations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCapacityReservations, schemas.ListCapacityReservationsInput, schemas.ListCapacityReservationsOutput), output: &ListCapacityReservationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package connectparticipant
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectparticipant/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,21 @@ type CancelParticipantAuthenticationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelParticipantAuthenticationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelParticipantAuthenticationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelParticipantAuthenticationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionToken != nil {
+		s.WriteString(schemas.CancelParticipantAuthenticationRequest_ConnectionToken, *v.ConnectionToken)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.CancelParticipantAuthenticationRequest_SessionId, *v.SessionId)
+	}
+}
+
 type CancelParticipantAuthenticationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +72,26 @@ type CancelParticipantAuthenticationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelParticipantAuthenticationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelParticipantAuthenticationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelParticipantAuthenticationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelParticipantAuthenticationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelParticipantAuthenticationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelParticipantAuthenticationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelParticipantAuthentication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelParticipantAuthentication, schemas.CancelParticipantAuthenticationRequest, schemas.CancelParticipantAuthenticationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelParticipantAuthentication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelParticipantAuthentication, schemas.CancelParticipantAuthenticationRequest, schemas.CancelParticipantAuthenticationResponse), output: &CancelParticipantAuthenticationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

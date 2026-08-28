@@ -4,6 +4,8 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type GetGroupCertificateConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGroupCertificateConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGroupCertificateConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGroupCertificateConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.GetGroupCertificateConfigurationRequest_GroupId, *v.GroupId)
+	}
+}
+
 type GetGroupCertificateConfigurationOutput struct {
 
 	// The amount of time remaining before the certificate authority expires, in
@@ -51,13 +65,44 @@ type GetGroupCertificateConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGroupCertificateConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGroupCertificateConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGroupCertificateConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateAuthorityExpiryInMilliseconds != nil {
+		s.WriteString(schemas.GetGroupCertificateConfigurationResponse_CertificateAuthorityExpiryInMilliseconds, *v.CertificateAuthorityExpiryInMilliseconds)
+	}
+	if v.CertificateExpiryInMilliseconds != nil {
+		s.WriteString(schemas.GetGroupCertificateConfigurationResponse_CertificateExpiryInMilliseconds, *v.CertificateExpiryInMilliseconds)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.GetGroupCertificateConfigurationResponse_GroupId, *v.GroupId)
+	}
+}
+func (v *GetGroupCertificateConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGroupCertificateConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGroupCertificateConfigurationResponse_CertificateAuthorityExpiryInMilliseconds:
+			v.CertificateAuthorityExpiryInMilliseconds = new(string)
+			return d.ReadString(schemas.GetGroupCertificateConfigurationResponse_CertificateAuthorityExpiryInMilliseconds, v.CertificateAuthorityExpiryInMilliseconds)
+		case schemas.GetGroupCertificateConfigurationResponse_CertificateExpiryInMilliseconds:
+			v.CertificateExpiryInMilliseconds = new(string)
+			return d.ReadString(schemas.GetGroupCertificateConfigurationResponse_CertificateExpiryInMilliseconds, v.CertificateExpiryInMilliseconds)
+		case schemas.GetGroupCertificateConfigurationResponse_GroupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.GetGroupCertificateConfigurationResponse_GroupId, v.GroupId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGroupCertificateConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGroupCertificateConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGroupCertificateConfiguration, schemas.GetGroupCertificateConfigurationRequest, schemas.GetGroupCertificateConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGroupCertificateConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGroupCertificateConfiguration, schemas.GetGroupCertificateConfigurationRequest, schemas.GetGroupCertificateConfigurationResponse), output: &GetGroupCertificateConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package apprunner
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,21 @@ type DisassociateCustomDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateCustomDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateCustomDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateCustomDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DisassociateCustomDomainRequest_DomainName, *v.DomainName)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.DisassociateCustomDomainRequest_ServiceArn, *v.ServiceArn)
+	}
+}
+
 type DisassociateCustomDomainOutput struct {
 
 	// A description of the domain name that's being disassociated.
@@ -77,13 +94,49 @@ type DisassociateCustomDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateCustomDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateCustomDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateCustomDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomDomain != nil {
+		s.WriteStruct(schemas.DisassociateCustomDomainResponse_CustomDomain)
+		v.CustomDomain.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DNSTarget != nil {
+		s.WriteString(schemas.DisassociateCustomDomainResponse_DNSTarget, *v.DNSTarget)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.DisassociateCustomDomainResponse_ServiceArn, *v.ServiceArn)
+	}
+	serializeVpcDNSTargetList(s, schemas.DisassociateCustomDomainResponse_VpcDNSTargets, v.VpcDNSTargets)
+}
+func (v *DisassociateCustomDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateCustomDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateCustomDomainResponse_CustomDomain:
+			v.CustomDomain = &types.CustomDomain{}
+			return v.CustomDomain.Deserialize(d)
+		case schemas.DisassociateCustomDomainResponse_DNSTarget:
+			v.DNSTarget = new(string)
+			return d.ReadString(schemas.DisassociateCustomDomainResponse_DNSTarget, v.DNSTarget)
+		case schemas.DisassociateCustomDomainResponse_ServiceArn:
+			v.ServiceArn = new(string)
+			return d.ReadString(schemas.DisassociateCustomDomainResponse_ServiceArn, v.ServiceArn)
+		case schemas.DisassociateCustomDomainResponse_VpcDNSTargets:
+			return deserializeVpcDNSTargetList(d, schemas.DisassociateCustomDomainResponse_VpcDNSTargets, &v.VpcDNSTargets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateCustomDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDisassociateCustomDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateCustomDomain, schemas.DisassociateCustomDomainRequest, schemas.DisassociateCustomDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDisassociateCustomDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateCustomDomain, schemas.DisassociateCustomDomainRequest, schemas.DisassociateCustomDomainResponse), output: &DisassociateCustomDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package acm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/acm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/acm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -44,6 +46,23 @@ type ListAcmeAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAcmeAccountsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAcmeAccountsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAcmeAccountsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcmeEndpointArn != nil {
+		s.WriteString(schemas.ListAcmeAccountsRequest_AcmeEndpointArn, *v.AcmeEndpointArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAcmeAccountsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAcmeAccountsRequest_NextToken, *v.NextToken)
+	}
+}
 func (in *ListAcmeAccountsInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ServiceType = ptr.String("ACM-ACME")
@@ -63,13 +82,35 @@ type ListAcmeAccountsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAcmeAccountsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAcmeAccountsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAcmeAccountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAcmeAccountList(s, schemas.ListAcmeAccountsResponse_AcmeAccounts, v.AcmeAccounts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAcmeAccountsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAcmeAccountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAcmeAccountsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAcmeAccountsResponse_AcmeAccounts:
+			return deserializeAcmeAccountList(d, schemas.ListAcmeAccountsResponse_AcmeAccounts, &v.AcmeAccounts)
+		case schemas.ListAcmeAccountsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAcmeAccountsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAcmeAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAcmeAccounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAcmeAccounts, schemas.ListAcmeAccountsRequest, schemas.ListAcmeAccountsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAcmeAccounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAcmeAccounts, schemas.ListAcmeAccountsRequest, schemas.ListAcmeAccountsResponse), output: &ListAcmeAccountsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

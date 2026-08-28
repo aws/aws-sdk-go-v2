@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DescribeUserHierarchyStructureInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUserHierarchyStructureInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUserHierarchyStructureRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUserHierarchyStructureInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeUserHierarchyStructureRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DescribeUserHierarchyStructureOutput struct {
 
 	// Information about the hierarchy structure.
@@ -48,13 +62,34 @@ type DescribeUserHierarchyStructureOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUserHierarchyStructureOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUserHierarchyStructureResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUserHierarchyStructureOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HierarchyStructure != nil {
+		s.WriteStruct(schemas.DescribeUserHierarchyStructureResponse_HierarchyStructure)
+		v.HierarchyStructure.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeUserHierarchyStructureOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeUserHierarchyStructureResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeUserHierarchyStructureResponse_HierarchyStructure:
+			v.HierarchyStructure = &types.HierarchyStructure{}
+			return v.HierarchyStructure.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeUserHierarchyStructureMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeUserHierarchyStructure{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUserHierarchyStructure, schemas.DescribeUserHierarchyStructureRequest, schemas.DescribeUserHierarchyStructureResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeUserHierarchyStructure{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUserHierarchyStructure, schemas.DescribeUserHierarchyStructureRequest, schemas.DescribeUserHierarchyStructureResponse), output: &DescribeUserHierarchyStructureOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

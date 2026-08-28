@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,30 @@ type DescribeUserStackAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUserStackAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUserStackAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUserStackAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationType != "" {
+		s.WriteString(schemas.DescribeUserStackAssociationsRequest_AuthenticationType, string(v.AuthenticationType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeUserStackAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeUserStackAssociationsRequest_NextToken, *v.NextToken)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.DescribeUserStackAssociationsRequest_StackName, *v.StackName)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.DescribeUserStackAssociationsRequest_UserName, *v.UserName)
+	}
+}
+
 type DescribeUserStackAssociationsOutput struct {
 
 	// The pagination token to use to retrieve the next page of results for this
@@ -69,13 +95,35 @@ type DescribeUserStackAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUserStackAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUserStackAssociationsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUserStackAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeUserStackAssociationsResult_NextToken, *v.NextToken)
+	}
+	serializeUserStackAssociationList(s, schemas.DescribeUserStackAssociationsResult_UserStackAssociations, v.UserStackAssociations)
+}
+func (v *DescribeUserStackAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeUserStackAssociationsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeUserStackAssociationsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeUserStackAssociationsResult_NextToken, v.NextToken)
+		case schemas.DescribeUserStackAssociationsResult_UserStackAssociations:
+			return deserializeUserStackAssociationList(d, schemas.DescribeUserStackAssociationsResult_UserStackAssociations, &v.UserStackAssociations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeUserStackAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeUserStackAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUserStackAssociations, schemas.DescribeUserStackAssociationsRequest, schemas.DescribeUserStackAssociationsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeUserStackAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUserStackAssociations, schemas.DescribeUserStackAssociationsRequest, schemas.DescribeUserStackAssociationsResult), output: &DescribeUserStackAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

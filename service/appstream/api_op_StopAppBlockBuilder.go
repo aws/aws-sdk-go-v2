@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type StopAppBlockBuilderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopAppBlockBuilderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopAppBlockBuilderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopAppBlockBuilderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.StopAppBlockBuilderRequest_Name, *v.Name)
+	}
+}
+
 type StopAppBlockBuilderOutput struct {
 
 	// Describes an app block builder.
@@ -48,13 +62,34 @@ type StopAppBlockBuilderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopAppBlockBuilderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopAppBlockBuilderResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopAppBlockBuilderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppBlockBuilder != nil {
+		s.WriteStruct(schemas.StopAppBlockBuilderResult_AppBlockBuilder)
+		v.AppBlockBuilder.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StopAppBlockBuilderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopAppBlockBuilderResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopAppBlockBuilderResult_AppBlockBuilder:
+			v.AppBlockBuilder = &types.AppBlockBuilder{}
+			return v.AppBlockBuilder.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopAppBlockBuilderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStopAppBlockBuilder{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopAppBlockBuilder, schemas.StopAppBlockBuilderRequest, schemas.StopAppBlockBuilderResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStopAppBlockBuilder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopAppBlockBuilder, schemas.StopAppBlockBuilderRequest, schemas.StopAppBlockBuilderResult), output: &StopAppBlockBuilderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

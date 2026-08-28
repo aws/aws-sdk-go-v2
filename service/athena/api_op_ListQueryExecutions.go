@@ -5,6 +5,8 @@ package athena
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListQueryExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueryExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueryExecutionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueryExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListQueryExecutionsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueryExecutionsInput_NextToken, *v.NextToken)
+	}
+	if v.WorkGroup != nil {
+		s.WriteString(schemas.ListQueryExecutionsInput_WorkGroup, *v.WorkGroup)
+	}
+}
+
 type ListQueryExecutionsOutput struct {
 
 	// A token to be used by the next request if this request is truncated.
@@ -59,13 +79,35 @@ type ListQueryExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueryExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueryExecutionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueryExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueryExecutionsOutput_NextToken, *v.NextToken)
+	}
+	serializeQueryExecutionIdList(s, schemas.ListQueryExecutionsOutput_QueryExecutionIds, v.QueryExecutionIds)
+}
+func (v *ListQueryExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListQueryExecutionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListQueryExecutionsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListQueryExecutionsOutput_NextToken, v.NextToken)
+		case schemas.ListQueryExecutionsOutput_QueryExecutionIds:
+			return deserializeQueryExecutionIdList(d, schemas.ListQueryExecutionsOutput_QueryExecutionIds, &v.QueryExecutionIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListQueryExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListQueryExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueryExecutions, schemas.ListQueryExecutionsInput, schemas.ListQueryExecutionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListQueryExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueryExecutions, schemas.ListQueryExecutionsInput, schemas.ListQueryExecutionsOutput), output: &ListQueryExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

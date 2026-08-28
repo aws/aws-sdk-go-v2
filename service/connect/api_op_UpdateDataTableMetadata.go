@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,33 @@ type UpdateDataTableMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataTableMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataTableMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataTableMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataTableId != nil {
+		s.WriteString(schemas.UpdateDataTableMetadataRequest_DataTableId, *v.DataTableId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateDataTableMetadataRequest_Description, *v.Description)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateDataTableMetadataRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDataTableMetadataRequest_Name, *v.Name)
+	}
+	if v.TimeZone != nil {
+		s.WriteString(schemas.UpdateDataTableMetadataRequest_TimeZone, *v.TimeZone)
+	}
+	if v.ValueLockLevel != "" {
+		s.WriteString(schemas.UpdateDataTableMetadataRequest_ValueLockLevel, string(v.ValueLockLevel))
+	}
+}
+
 type UpdateDataTableMetadataOutput struct {
 
 	// The new lock version for the data table after the update.
@@ -82,13 +111,34 @@ type UpdateDataTableMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataTableMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataTableMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataTableMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LockVersion != nil {
+		s.WriteStruct(schemas.UpdateDataTableMetadataResponse_LockVersion)
+		v.LockVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateDataTableMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataTableMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDataTableMetadataResponse_LockVersion:
+			v.LockVersion = &types.DataTableLockVersion{}
+			return v.LockVersion.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDataTableMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataTableMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataTableMetadata, schemas.UpdateDataTableMetadataRequest, schemas.UpdateDataTableMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataTableMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataTableMetadata, schemas.UpdateDataTableMetadataRequest, schemas.UpdateDataTableMetadataResponse), output: &UpdateDataTableMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

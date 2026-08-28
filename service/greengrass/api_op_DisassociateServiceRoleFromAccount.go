@@ -4,6 +4,8 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type DisassociateServiceRoleFromAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateServiceRoleFromAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateServiceRoleFromAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateServiceRoleFromAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DisassociateServiceRoleFromAccountOutput struct {
 
 	// The time when the service role was disassociated from the account.
@@ -39,13 +50,32 @@ type DisassociateServiceRoleFromAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateServiceRoleFromAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateServiceRoleFromAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateServiceRoleFromAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisassociatedAt != nil {
+		s.WriteString(schemas.DisassociateServiceRoleFromAccountResponse_DisassociatedAt, *v.DisassociatedAt)
+	}
+}
+func (v *DisassociateServiceRoleFromAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateServiceRoleFromAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateServiceRoleFromAccountResponse_DisassociatedAt:
+			v.DisassociatedAt = new(string)
+			return d.ReadString(schemas.DisassociateServiceRoleFromAccountResponse_DisassociatedAt, v.DisassociatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateServiceRoleFromAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateServiceRoleFromAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateServiceRoleFromAccount, schemas.DisassociateServiceRoleFromAccountRequest, schemas.DisassociateServiceRoleFromAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateServiceRoleFromAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateServiceRoleFromAccount, schemas.DisassociateServiceRoleFromAccountRequest, schemas.DisassociateServiceRoleFromAccountResponse), output: &DisassociateServiceRoleFromAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

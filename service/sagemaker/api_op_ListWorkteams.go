@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,30 @@ type ListWorkteamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkteamsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkteamsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkteamsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWorkteamsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListWorkteamsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkteamsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListWorkteamsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListWorkteamsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListWorkteamsOutput struct {
 
 	// An array of Workteam objects, each describing a work team.
@@ -67,13 +93,35 @@ type ListWorkteamsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkteamsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkteamsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkteamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkteamsResponse_NextToken, *v.NextToken)
+	}
+	serializeWorkteams(s, schemas.ListWorkteamsResponse_Workteams, v.Workteams)
+}
+func (v *ListWorkteamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkteamsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkteamsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkteamsResponse_NextToken, v.NextToken)
+		case schemas.ListWorkteamsResponse_Workteams:
+			return deserializeWorkteams(d, schemas.ListWorkteamsResponse_Workteams, &v.Workteams)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkteamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListWorkteams{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkteams, schemas.ListWorkteamsRequest, schemas.ListWorkteamsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListWorkteams{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkteams, schemas.ListWorkteamsRequest, schemas.ListWorkteamsResponse), output: &ListWorkteamsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

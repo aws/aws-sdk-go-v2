@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type PeerVpcInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PeerVpcInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PeerVpcRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PeerVpcInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type PeerVpcOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -41,13 +52,34 @@ type PeerVpcOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PeerVpcOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PeerVpcResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PeerVpcOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Operation != nil {
+		s.WriteStruct(schemas.PeerVpcResult_operation)
+		v.Operation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PeerVpcOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PeerVpcResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PeerVpcResult_operation:
+			v.Operation = &types.Operation{}
+			return v.Operation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPeerVpcMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPeerVpc{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PeerVpc, schemas.PeerVpcRequest, schemas.PeerVpcResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPeerVpc{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PeerVpc, schemas.PeerVpcRequest, schemas.PeerVpcResult), output: &PeerVpcOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

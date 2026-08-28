@@ -4,6 +4,8 @@ package transcribe
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteMedicalTranscriptionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMedicalTranscriptionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMedicalTranscriptionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMedicalTranscriptionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MedicalTranscriptionJobName != nil {
+		s.WriteString(schemas.DeleteMedicalTranscriptionJobRequest_MedicalTranscriptionJobName, *v.MedicalTranscriptionJobName)
+	}
+}
+
 type DeleteMedicalTranscriptionJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type DeleteMedicalTranscriptionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMedicalTranscriptionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMedicalTranscriptionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteMedicalTranscriptionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMedicalTranscriptionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteMedicalTranscriptionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMedicalTranscriptionJob, schemas.DeleteMedicalTranscriptionJobRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteMedicalTranscriptionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMedicalTranscriptionJob, schemas.DeleteMedicalTranscriptionJobRequest, nil), output: &DeleteMedicalTranscriptionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

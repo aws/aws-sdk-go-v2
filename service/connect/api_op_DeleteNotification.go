@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DeleteNotificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteNotificationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteNotificationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNotificationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeleteNotificationRequest_InstanceId, *v.InstanceId)
+	}
+	if v.NotificationId != nil {
+		s.WriteString(schemas.DeleteNotificationRequest_NotificationId, *v.NotificationId)
+	}
+}
+
 // The response from deleting a notification.
 type DeleteNotificationOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -50,13 +67,26 @@ type DeleteNotificationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteNotificationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteNotificationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNotificationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteNotificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteNotificationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteNotification{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNotification, schemas.DeleteNotificationRequest, schemas.DeleteNotificationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteNotification{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNotification, schemas.DeleteNotificationRequest, schemas.DeleteNotificationResponse), output: &DeleteNotificationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type DeleteHoursOfOperationOverrideInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteHoursOfOperationOverrideInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteHoursOfOperationOverrideRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteHoursOfOperationOverrideInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HoursOfOperationId != nil {
+		s.WriteString(schemas.DeleteHoursOfOperationOverrideRequest_HoursOfOperationId, *v.HoursOfOperationId)
+	}
+	if v.HoursOfOperationOverrideId != nil {
+		s.WriteString(schemas.DeleteHoursOfOperationOverrideRequest_HoursOfOperationOverrideId, *v.HoursOfOperationOverrideId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeleteHoursOfOperationOverrideRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DeleteHoursOfOperationOverrideOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +71,26 @@ type DeleteHoursOfOperationOverrideOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteHoursOfOperationOverrideOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteHoursOfOperationOverrideOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteHoursOfOperationOverrideOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteHoursOfOperationOverrideMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteHoursOfOperationOverride{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHoursOfOperationOverride, schemas.DeleteHoursOfOperationOverrideRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteHoursOfOperationOverride{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHoursOfOperationOverride, schemas.DeleteHoursOfOperationOverrideRequest, nil), output: &DeleteHoursOfOperationOverrideOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package personalize
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,27 @@ type ListRecipesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecipesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecipesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecipesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != "" {
+		s.WriteString(schemas.ListRecipesRequest_domain, string(v.Domain))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRecipesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecipesRequest_nextToken, *v.NextToken)
+	}
+	if v.RecipeProvider != "" {
+		s.WriteString(schemas.ListRecipesRequest_recipeProvider, string(v.RecipeProvider))
+	}
+}
+
 type ListRecipesOutput struct {
 
 	// A token for getting the next set of recipes.
@@ -60,13 +83,35 @@ type ListRecipesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecipesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecipesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecipesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecipesResponse_nextToken, *v.NextToken)
+	}
+	serializeRecipes(s, schemas.ListRecipesResponse_recipes, v.Recipes)
+}
+func (v *ListRecipesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecipesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecipesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecipesResponse_nextToken, v.NextToken)
+		case schemas.ListRecipesResponse_recipes:
+			return deserializeRecipes(d, schemas.ListRecipesResponse_recipes, &v.Recipes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecipesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRecipes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecipes, schemas.ListRecipesRequest, schemas.ListRecipesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListRecipes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecipes, schemas.ListRecipesRequest, schemas.ListRecipesResponse), output: &ListRecipesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -148,6 +150,46 @@ type CreateInstancesFromSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInstancesFromSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInstancesFromSnapshotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInstancesFromSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAddOnRequestList(s, schemas.CreateInstancesFromSnapshotRequest_addOns, v.AddOns)
+	serializeAttachedDiskMap(s, schemas.CreateInstancesFromSnapshotRequest_attachedDiskMapping, v.AttachedDiskMapping)
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.CreateInstancesFromSnapshotRequest_availabilityZone, *v.AvailabilityZone)
+	}
+	if v.BundleId != nil {
+		s.WriteString(schemas.CreateInstancesFromSnapshotRequest_bundleId, *v.BundleId)
+	}
+	serializeStringList(s, schemas.CreateInstancesFromSnapshotRequest_instanceNames, v.InstanceNames)
+	if v.InstanceSnapshotName != nil {
+		s.WriteString(schemas.CreateInstancesFromSnapshotRequest_instanceSnapshotName, *v.InstanceSnapshotName)
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.CreateInstancesFromSnapshotRequest_ipAddressType, string(v.IpAddressType))
+	}
+	if v.KeyPairName != nil {
+		s.WriteString(schemas.CreateInstancesFromSnapshotRequest_keyPairName, *v.KeyPairName)
+	}
+	if v.RestoreDate != nil {
+		s.WriteString(schemas.CreateInstancesFromSnapshotRequest_restoreDate, *v.RestoreDate)
+	}
+	if v.SourceInstanceName != nil {
+		s.WriteString(schemas.CreateInstancesFromSnapshotRequest_sourceInstanceName, *v.SourceInstanceName)
+	}
+	serializeTagList(s, schemas.CreateInstancesFromSnapshotRequest_tags, v.Tags)
+	if v.UseLatestRestorableAutoSnapshot != nil {
+		s.WriteBool(schemas.CreateInstancesFromSnapshotRequest_useLatestRestorableAutoSnapshot, *v.UseLatestRestorableAutoSnapshot)
+	}
+	if v.UserData != nil {
+		s.WriteString(schemas.CreateInstancesFromSnapshotRequest_userData, *v.UserData)
+	}
+}
+
 type CreateInstancesFromSnapshotOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -161,13 +203,29 @@ type CreateInstancesFromSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInstancesFromSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInstancesFromSnapshotResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInstancesFromSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.CreateInstancesFromSnapshotResult_operations, v.Operations)
+}
+func (v *CreateInstancesFromSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateInstancesFromSnapshotResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateInstancesFromSnapshotResult_operations:
+			return deserializeOperationList(d, schemas.CreateInstancesFromSnapshotResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateInstancesFromSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateInstancesFromSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInstancesFromSnapshot, schemas.CreateInstancesFromSnapshotRequest, schemas.CreateInstancesFromSnapshotResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateInstancesFromSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInstancesFromSnapshot, schemas.CreateInstancesFromSnapshotRequest, schemas.CreateInstancesFromSnapshotResult), output: &CreateInstancesFromSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

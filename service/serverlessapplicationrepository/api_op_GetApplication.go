@@ -4,7 +4,9 @@ package serverlessapplicationrepository
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,21 @@ type GetApplicationInput struct {
 	SemanticVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetApplicationRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.GetApplicationRequest_SemanticVersion, *v.SemanticVersion)
+	}
 }
 
 type GetApplicationOutput struct {
@@ -109,13 +126,103 @@ type GetApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetApplicationResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.Author != nil {
+		s.WriteString(schemas.GetApplicationResponse_Author, *v.Author)
+	}
+	if v.CreationTime != nil {
+		s.WriteString(schemas.GetApplicationResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetApplicationResponse_Description, *v.Description)
+	}
+	if v.HomePageUrl != nil {
+		s.WriteString(schemas.GetApplicationResponse_HomePageUrl, *v.HomePageUrl)
+	}
+	if v.IsVerifiedAuthor != nil {
+		s.WriteBool(schemas.GetApplicationResponse_IsVerifiedAuthor, *v.IsVerifiedAuthor)
+	}
+	serialize__listOf__string(s, schemas.GetApplicationResponse_Labels, v.Labels)
+	if v.LicenseUrl != nil {
+		s.WriteString(schemas.GetApplicationResponse_LicenseUrl, *v.LicenseUrl)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetApplicationResponse_Name, *v.Name)
+	}
+	if v.ReadmeUrl != nil {
+		s.WriteString(schemas.GetApplicationResponse_ReadmeUrl, *v.ReadmeUrl)
+	}
+	if v.SpdxLicenseId != nil {
+		s.WriteString(schemas.GetApplicationResponse_SpdxLicenseId, *v.SpdxLicenseId)
+	}
+	if v.VerifiedAuthorUrl != nil {
+		s.WriteString(schemas.GetApplicationResponse_VerifiedAuthorUrl, *v.VerifiedAuthorUrl)
+	}
+	if v.Version != nil {
+		s.WriteStruct(schemas.GetApplicationResponse_Version)
+		v.Version.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApplicationResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.GetApplicationResponse_ApplicationId, v.ApplicationId)
+		case schemas.GetApplicationResponse_Author:
+			v.Author = new(string)
+			return d.ReadString(schemas.GetApplicationResponse_Author, v.Author)
+		case schemas.GetApplicationResponse_CreationTime:
+			v.CreationTime = new(string)
+			return d.ReadString(schemas.GetApplicationResponse_CreationTime, v.CreationTime)
+		case schemas.GetApplicationResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetApplicationResponse_Description, v.Description)
+		case schemas.GetApplicationResponse_HomePageUrl:
+			v.HomePageUrl = new(string)
+			return d.ReadString(schemas.GetApplicationResponse_HomePageUrl, v.HomePageUrl)
+		case schemas.GetApplicationResponse_IsVerifiedAuthor:
+			v.IsVerifiedAuthor = new(bool)
+			return d.ReadBool(schemas.GetApplicationResponse_IsVerifiedAuthor, v.IsVerifiedAuthor)
+		case schemas.GetApplicationResponse_Labels:
+			return deserialize__listOf__string(d, schemas.GetApplicationResponse_Labels, &v.Labels)
+		case schemas.GetApplicationResponse_LicenseUrl:
+			v.LicenseUrl = new(string)
+			return d.ReadString(schemas.GetApplicationResponse_LicenseUrl, v.LicenseUrl)
+		case schemas.GetApplicationResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetApplicationResponse_Name, v.Name)
+		case schemas.GetApplicationResponse_ReadmeUrl:
+			v.ReadmeUrl = new(string)
+			return d.ReadString(schemas.GetApplicationResponse_ReadmeUrl, v.ReadmeUrl)
+		case schemas.GetApplicationResponse_SpdxLicenseId:
+			v.SpdxLicenseId = new(string)
+			return d.ReadString(schemas.GetApplicationResponse_SpdxLicenseId, v.SpdxLicenseId)
+		case schemas.GetApplicationResponse_VerifiedAuthorUrl:
+			v.VerifiedAuthorUrl = new(string)
+			return d.ReadString(schemas.GetApplicationResponse_VerifiedAuthorUrl, v.VerifiedAuthorUrl)
+		case schemas.GetApplicationResponse_Version:
+			v.Version = &types.Version{}
+			return v.Version.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplication, schemas.GetApplicationRequest, schemas.GetApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplication, schemas.GetApplicationRequest, schemas.GetApplicationResponse), output: &GetApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

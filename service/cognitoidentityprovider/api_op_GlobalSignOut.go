@@ -4,6 +4,8 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,18 @@ type GlobalSignOutInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GlobalSignOutInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GlobalSignOutRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GlobalSignOutInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.GlobalSignOutRequest_AccessToken, *v.AccessToken)
+	}
+}
+
 // The response to the request to sign out all devices.
 type GlobalSignOutOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -81,13 +95,26 @@ type GlobalSignOutOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GlobalSignOutOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GlobalSignOutResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GlobalSignOutOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GlobalSignOutOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GlobalSignOutResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGlobalSignOutMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGlobalSignOut{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GlobalSignOut, schemas.GlobalSignOutRequest, schemas.GlobalSignOutResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGlobalSignOut{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GlobalSignOut, schemas.GlobalSignOutRequest, schemas.GlobalSignOutResponse), output: &GlobalSignOutOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

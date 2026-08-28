@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,29 @@ type GetOrganizationConformancePackDetailedStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOrganizationConformancePackDetailedStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOrganizationConformancePackDetailedStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOrganizationConformancePackDetailedStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.GetOrganizationConformancePackDetailedStatusRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.GetOrganizationConformancePackDetailedStatusRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetOrganizationConformancePackDetailedStatusRequest_NextToken, *v.NextToken)
+	}
+	if v.OrganizationConformancePackName != nil {
+		s.WriteString(schemas.GetOrganizationConformancePackDetailedStatusRequest_OrganizationConformancePackName, *v.OrganizationConformancePackName)
+	}
+}
+
 type GetOrganizationConformancePackDetailedStatusOutput struct {
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -64,13 +89,35 @@ type GetOrganizationConformancePackDetailedStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOrganizationConformancePackDetailedStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOrganizationConformancePackDetailedStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOrganizationConformancePackDetailedStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetOrganizationConformancePackDetailedStatusResponse_NextToken, *v.NextToken)
+	}
+	serializeOrganizationConformancePackDetailedStatuses(s, schemas.GetOrganizationConformancePackDetailedStatusResponse_OrganizationConformancePackDetailedStatuses, v.OrganizationConformancePackDetailedStatuses)
+}
+func (v *GetOrganizationConformancePackDetailedStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOrganizationConformancePackDetailedStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOrganizationConformancePackDetailedStatusResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetOrganizationConformancePackDetailedStatusResponse_NextToken, v.NextToken)
+		case schemas.GetOrganizationConformancePackDetailedStatusResponse_OrganizationConformancePackDetailedStatuses:
+			return deserializeOrganizationConformancePackDetailedStatuses(d, schemas.GetOrganizationConformancePackDetailedStatusResponse_OrganizationConformancePackDetailedStatuses, &v.OrganizationConformancePackDetailedStatuses)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOrganizationConformancePackDetailedStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetOrganizationConformancePackDetailedStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOrganizationConformancePackDetailedStatus, schemas.GetOrganizationConformancePackDetailedStatusRequest, schemas.GetOrganizationConformancePackDetailedStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetOrganizationConformancePackDetailedStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOrganizationConformancePackDetailedStatus, schemas.GetOrganizationConformancePackDetailedStatusRequest, schemas.GetOrganizationConformancePackDetailedStatusResponse), output: &GetOrganizationConformancePackDetailedStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

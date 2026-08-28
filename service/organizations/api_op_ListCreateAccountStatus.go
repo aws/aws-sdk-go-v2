@@ -5,7 +5,9 @@ package organizations
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,22 @@ type ListCreateAccountStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCreateAccountStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCreateAccountStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCreateAccountStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCreateAccountStatusRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCreateAccountStatusRequest_NextToken, *v.NextToken)
+	}
+	serializeCreateAccountStates(s, schemas.ListCreateAccountStatusRequest_States, v.States)
+}
+
 type ListCreateAccountStatusOutput struct {
 
 	// A list of objects with details about the requests. Certain elements, such as
@@ -74,13 +92,35 @@ type ListCreateAccountStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCreateAccountStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCreateAccountStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCreateAccountStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCreateAccountStatuses(s, schemas.ListCreateAccountStatusResponse_CreateAccountStatuses, v.CreateAccountStatuses)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCreateAccountStatusResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCreateAccountStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCreateAccountStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCreateAccountStatusResponse_CreateAccountStatuses:
+			return deserializeCreateAccountStatuses(d, schemas.ListCreateAccountStatusResponse_CreateAccountStatuses, &v.CreateAccountStatuses)
+		case schemas.ListCreateAccountStatusResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCreateAccountStatusResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCreateAccountStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCreateAccountStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCreateAccountStatus, schemas.ListCreateAccountStatusRequest, schemas.ListCreateAccountStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCreateAccountStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCreateAccountStatus, schemas.ListCreateAccountStatusRequest, schemas.ListCreateAccountStatusResponse), output: &ListCreateAccountStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

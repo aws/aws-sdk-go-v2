@@ -5,6 +5,8 @@ package athena
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteNamedQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteNamedQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteNamedQueryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNamedQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NamedQueryId != nil {
+		s.WriteString(schemas.DeleteNamedQueryInput_NamedQueryId, *v.NamedQueryId)
+	}
+}
+
 type DeleteNamedQueryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type DeleteNamedQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteNamedQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteNamedQueryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNamedQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteNamedQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteNamedQueryOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteNamedQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteNamedQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNamedQuery, schemas.DeleteNamedQueryInput, schemas.DeleteNamedQueryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteNamedQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNamedQuery, schemas.DeleteNamedQueryInput, schemas.DeleteNamedQueryOutput), output: &DeleteNamedQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

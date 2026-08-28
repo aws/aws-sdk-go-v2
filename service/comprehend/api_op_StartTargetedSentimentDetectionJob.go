@@ -5,7 +5,9 @@ package comprehend
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -86,6 +88,46 @@ type StartTargetedSentimentDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTargetedSentimentDetectionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTargetedSentimentDetectionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTargetedSentimentDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartTargetedSentimentDetectionJobRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.StartTargetedSentimentDetectionJobRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.StartTargetedSentimentDetectionJobRequest_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.StartTargetedSentimentDetectionJobRequest_JobName, *v.JobName)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.StartTargetedSentimentDetectionJobRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.StartTargetedSentimentDetectionJobRequest_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.StartTargetedSentimentDetectionJobRequest_Tags, v.Tags)
+	if v.VolumeKmsKeyId != nil {
+		s.WriteString(schemas.StartTargetedSentimentDetectionJobRequest_VolumeKmsKeyId, *v.VolumeKmsKeyId)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.StartTargetedSentimentDetectionJobRequest_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartTargetedSentimentDetectionJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the targeted sentiment detection job. It is a
@@ -122,13 +164,48 @@ type StartTargetedSentimentDetectionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTargetedSentimentDetectionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTargetedSentimentDetectionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTargetedSentimentDetectionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobArn != nil {
+		s.WriteString(schemas.StartTargetedSentimentDetectionJobResponse_JobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.StartTargetedSentimentDetectionJobResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.StartTargetedSentimentDetectionJobResponse_JobStatus, string(v.JobStatus))
+	}
+}
+func (v *StartTargetedSentimentDetectionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartTargetedSentimentDetectionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartTargetedSentimentDetectionJobResponse_JobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.StartTargetedSentimentDetectionJobResponse_JobArn, v.JobArn)
+		case schemas.StartTargetedSentimentDetectionJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartTargetedSentimentDetectionJobResponse_JobId, v.JobId)
+		case schemas.StartTargetedSentimentDetectionJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartTargetedSentimentDetectionJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartTargetedSentimentDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartTargetedSentimentDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTargetedSentimentDetectionJob, schemas.StartTargetedSentimentDetectionJobRequest, schemas.StartTargetedSentimentDetectionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartTargetedSentimentDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTargetedSentimentDetectionJob, schemas.StartTargetedSentimentDetectionJobRequest, schemas.StartTargetedSentimentDetectionJobResponse), output: &StartTargetedSentimentDetectionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

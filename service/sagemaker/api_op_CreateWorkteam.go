@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -87,6 +89,36 @@ type CreateWorkteamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkteamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkteamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkteamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateWorkteamRequest_Description, *v.Description)
+	}
+	serializeMemberDefinitions(s, schemas.CreateWorkteamRequest_MemberDefinitions, v.MemberDefinitions)
+	if v.NotificationConfiguration != nil {
+		s.WriteStruct(schemas.CreateWorkteamRequest_NotificationConfiguration)
+		v.NotificationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateWorkteamRequest_Tags, v.Tags)
+	if v.WorkerAccessConfiguration != nil {
+		s.WriteStruct(schemas.CreateWorkteamRequest_WorkerAccessConfiguration)
+		v.WorkerAccessConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkforceName != nil {
+		s.WriteString(schemas.CreateWorkteamRequest_WorkforceName, *v.WorkforceName)
+	}
+	if v.WorkteamName != nil {
+		s.WriteString(schemas.CreateWorkteamRequest_WorkteamName, *v.WorkteamName)
+	}
+}
+
 type CreateWorkteamOutput struct {
 
 	// The Amazon Resource Name (ARN) of the work team. You can use this ARN to
@@ -99,13 +131,32 @@ type CreateWorkteamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkteamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkteamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkteamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkteamArn != nil {
+		s.WriteString(schemas.CreateWorkteamResponse_WorkteamArn, *v.WorkteamArn)
+	}
+}
+func (v *CreateWorkteamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkteamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkteamResponse_WorkteamArn:
+			v.WorkteamArn = new(string)
+			return d.ReadString(schemas.CreateWorkteamResponse_WorkteamArn, v.WorkteamArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWorkteamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateWorkteam{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkteam, schemas.CreateWorkteamRequest, schemas.CreateWorkteamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateWorkteam{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkteam, schemas.CreateWorkteamRequest, schemas.CreateWorkteamResponse), output: &CreateWorkteamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

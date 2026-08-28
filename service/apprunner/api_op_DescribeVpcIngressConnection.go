@@ -4,7 +4,9 @@ package apprunner
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DescribeVpcIngressConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVpcIngressConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVpcIngressConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVpcIngressConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpcIngressConnectionArn != nil {
+		s.WriteString(schemas.DescribeVpcIngressConnectionRequest_VpcIngressConnectionArn, *v.VpcIngressConnectionArn)
+	}
+}
+
 type DescribeVpcIngressConnectionOutput struct {
 
 	// A description of the App Runner VPC Ingress Connection that you specified in
@@ -49,13 +63,34 @@ type DescribeVpcIngressConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVpcIngressConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVpcIngressConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVpcIngressConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpcIngressConnection != nil {
+		s.WriteStruct(schemas.DescribeVpcIngressConnectionResponse_VpcIngressConnection)
+		v.VpcIngressConnection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeVpcIngressConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVpcIngressConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVpcIngressConnectionResponse_VpcIngressConnection:
+			v.VpcIngressConnection = &types.VpcIngressConnection{}
+			return v.VpcIngressConnection.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeVpcIngressConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeVpcIngressConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVpcIngressConnection, schemas.DescribeVpcIngressConnectionRequest, schemas.DescribeVpcIngressConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeVpcIngressConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVpcIngressConnection, schemas.DescribeVpcIngressConnectionRequest, schemas.DescribeVpcIngressConnectionResponse), output: &DescribeVpcIngressConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package ecrpublic
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecrpublic/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecrpublic/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type DeleteRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRepositoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRepositoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRepositoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Force != false {
+		s.WriteBool(schemas.DeleteRepositoryRequest_force, v.Force)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.DeleteRepositoryRequest_registryId, *v.RegistryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.DeleteRepositoryRequest_repositoryName, *v.RepositoryName)
+	}
+}
+
 type DeleteRepositoryOutput struct {
 
 	// The repository that was deleted.
@@ -57,13 +77,34 @@ type DeleteRepositoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRepositoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRepositoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRepositoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Repository != nil {
+		s.WriteStruct(schemas.DeleteRepositoryResponse_repository)
+		v.Repository.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteRepositoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRepositoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRepositoryResponse_repository:
+			v.Repository = &types.Repository{}
+			return v.Repository.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRepository, schemas.DeleteRepositoryRequest, schemas.DeleteRepositoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRepository, schemas.DeleteRepositoryRequest, schemas.DeleteRepositoryResponse), output: &DeleteRepositoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

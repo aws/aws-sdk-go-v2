@@ -4,6 +4,8 @@ package transcribe
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteVocabularyFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVocabularyFilterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVocabularyFilterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVocabularyFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VocabularyFilterName != nil {
+		s.WriteString(schemas.DeleteVocabularyFilterRequest_VocabularyFilterName, *v.VocabularyFilterName)
+	}
+}
+
 type DeleteVocabularyFilterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type DeleteVocabularyFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVocabularyFilterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVocabularyFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteVocabularyFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVocabularyFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteVocabularyFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVocabularyFilter, schemas.DeleteVocabularyFilterRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteVocabularyFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVocabularyFilter, schemas.DeleteVocabularyFilterRequest, nil), output: &DeleteVocabularyFilterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package managedblockchain
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,29 @@ type CreateMemberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMemberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMemberInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMemberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateMemberInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.InvitationId != nil {
+		s.WriteString(schemas.CreateMemberInput_InvitationId, *v.InvitationId)
+	}
+	if v.MemberConfiguration != nil {
+		s.WriteStruct(schemas.CreateMemberInput_MemberConfiguration)
+		v.MemberConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.CreateMemberInput_NetworkId, *v.NetworkId)
+	}
+}
+
 type CreateMemberOutput struct {
 
 	// The unique identifier of the member.
@@ -68,13 +93,32 @@ type CreateMemberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMemberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMemberOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMemberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MemberId != nil {
+		s.WriteString(schemas.CreateMemberOutput_MemberId, *v.MemberId)
+	}
+}
+func (v *CreateMemberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMemberOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMemberOutput_MemberId:
+			v.MemberId = new(string)
+			return d.ReadString(schemas.CreateMemberOutput_MemberId, v.MemberId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMember{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMember, schemas.CreateMemberInput, schemas.CreateMemberOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMember{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMember, schemas.CreateMemberInput, schemas.CreateMemberOutput), output: &CreateMemberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,26 @@ type StopContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.StopContactRequest_ContactId, *v.ContactId)
+	}
+	if v.DisconnectReason != nil {
+		s.WriteStruct(schemas.StopContactRequest_DisconnectReason)
+		v.DisconnectReason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StopContactRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type StopContactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -71,13 +93,26 @@ type StopContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopContact, schemas.StopContactRequest, schemas.StopContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopContact, schemas.StopContactRequest, schemas.StopContactResponse), output: &StopContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

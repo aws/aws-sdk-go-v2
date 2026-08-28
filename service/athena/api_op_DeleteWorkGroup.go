@@ -4,6 +4,8 @@ package athena
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteWorkGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecursiveDeleteOption != nil {
+		s.WriteBool(schemas.DeleteWorkGroupInput_RecursiveDeleteOption, *v.RecursiveDeleteOption)
+	}
+	if v.WorkGroup != nil {
+		s.WriteString(schemas.DeleteWorkGroupInput_WorkGroup, *v.WorkGroup)
+	}
+}
+
 type DeleteWorkGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type DeleteWorkGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteWorkGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWorkGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWorkGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteWorkGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkGroup, schemas.DeleteWorkGroupInput, schemas.DeleteWorkGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteWorkGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkGroup, schemas.DeleteWorkGroupInput, schemas.DeleteWorkGroupOutput), output: &DeleteWorkGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

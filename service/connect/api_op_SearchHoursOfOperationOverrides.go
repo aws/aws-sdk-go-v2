@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,34 @@ type SearchHoursOfOperationOverridesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchHoursOfOperationOverridesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchHoursOfOperationOverridesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchHoursOfOperationOverridesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SearchHoursOfOperationOverridesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchHoursOfOperationOverridesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchHoursOfOperationOverridesRequest_NextToken, *v.NextToken)
+	}
+	if v.SearchCriteria != nil {
+		s.WriteStruct(schemas.SearchHoursOfOperationOverridesRequest_SearchCriteria)
+		v.SearchCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SearchFilter != nil {
+		s.WriteStruct(schemas.SearchHoursOfOperationOverridesRequest_SearchFilter)
+		v.SearchFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchHoursOfOperationOverridesOutput struct {
 
 	// The total number of hours of operations which matched your search query.
@@ -66,13 +96,41 @@ type SearchHoursOfOperationOverridesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchHoursOfOperationOverridesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchHoursOfOperationOverridesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchHoursOfOperationOverridesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateTotalCount != nil {
+		s.WriteInt64(schemas.SearchHoursOfOperationOverridesResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
+	}
+	serializeHoursOfOperationOverrideList(s, schemas.SearchHoursOfOperationOverridesResponse_HoursOfOperationOverrides, v.HoursOfOperationOverrides)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchHoursOfOperationOverridesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *SearchHoursOfOperationOverridesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchHoursOfOperationOverridesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchHoursOfOperationOverridesResponse_ApproximateTotalCount:
+			v.ApproximateTotalCount = new(int64)
+			return d.ReadInt64(schemas.SearchHoursOfOperationOverridesResponse_ApproximateTotalCount, v.ApproximateTotalCount)
+		case schemas.SearchHoursOfOperationOverridesResponse_HoursOfOperationOverrides:
+			return deserializeHoursOfOperationOverrideList(d, schemas.SearchHoursOfOperationOverridesResponse_HoursOfOperationOverrides, &v.HoursOfOperationOverrides)
+		case schemas.SearchHoursOfOperationOverridesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchHoursOfOperationOverridesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchHoursOfOperationOverridesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchHoursOfOperationOverrides{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchHoursOfOperationOverrides, schemas.SearchHoursOfOperationOverridesRequest, schemas.SearchHoursOfOperationOverridesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchHoursOfOperationOverrides{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchHoursOfOperationOverrides, schemas.SearchHoursOfOperationOverridesRequest, schemas.SearchHoursOfOperationOverridesResponse), output: &SearchHoursOfOperationOverridesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

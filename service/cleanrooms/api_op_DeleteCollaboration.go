@@ -4,6 +4,8 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,28 @@ type DeleteCollaborationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCollaborationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCollaborationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCollaborationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.DeleteCollaborationInput_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+}
+func (v *DeleteCollaborationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCollaborationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteCollaborationInput_collaborationIdentifier:
+			v.CollaborationIdentifier = new(string)
+			return d.ReadString(schemas.DeleteCollaborationInput_collaborationIdentifier, v.CollaborationIdentifier)
+		}
+		return nil
+	})
+}
+
 type DeleteCollaborationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +64,26 @@ type DeleteCollaborationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCollaborationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCollaborationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCollaborationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCollaborationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCollaborationOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCollaborationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCollaboration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCollaboration, schemas.DeleteCollaborationInput, schemas.DeleteCollaborationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCollaboration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCollaboration, schemas.DeleteCollaborationInput, schemas.DeleteCollaborationOutput), output: &DeleteCollaborationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

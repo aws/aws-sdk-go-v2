@@ -4,6 +4,8 @@ package cloudtrail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,18 @@ type StopLoggingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopLoggingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopLoggingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopLoggingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.StopLoggingRequest_Name, *v.Name)
+	}
+}
+
 // Returns the objects or data listed below if successful. Otherwise, returns an
 // error.
 type StopLoggingOutput struct {
@@ -55,13 +69,26 @@ type StopLoggingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopLoggingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopLoggingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopLoggingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopLoggingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopLoggingResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopLoggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopLogging{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopLogging, schemas.StopLoggingRequest, schemas.StopLoggingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopLogging{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopLogging, schemas.StopLoggingRequest, schemas.StopLoggingResponse), output: &StopLoggingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

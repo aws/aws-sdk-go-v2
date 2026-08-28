@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -113,6 +115,50 @@ type UpdateLocationObjectStorageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLocationObjectStorageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLocationObjectStorageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLocationObjectStorageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessKey != nil {
+		s.WriteString(schemas.UpdateLocationObjectStorageRequest_AccessKey, *v.AccessKey)
+	}
+	serializeAgentArnList(s, schemas.UpdateLocationObjectStorageRequest_AgentArns, v.AgentArns)
+	if v.CmkSecretConfig != nil {
+		s.WriteStruct(schemas.UpdateLocationObjectStorageRequest_CmkSecretConfig)
+		v.CmkSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomSecretConfig != nil {
+		s.WriteStruct(schemas.UpdateLocationObjectStorageRequest_CustomSecretConfig)
+		v.CustomSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LocationArn != nil {
+		s.WriteString(schemas.UpdateLocationObjectStorageRequest_LocationArn, *v.LocationArn)
+	}
+	if v.SecretKey != nil {
+		s.WriteString(schemas.UpdateLocationObjectStorageRequest_SecretKey, *v.SecretKey)
+	}
+	if v.ServerCertificate != nil {
+		s.WriteBlob(schemas.UpdateLocationObjectStorageRequest_ServerCertificate, v.ServerCertificate)
+	}
+	if v.ServerHostname != nil {
+		s.WriteString(schemas.UpdateLocationObjectStorageRequest_ServerHostname, *v.ServerHostname)
+	}
+	if v.ServerPort != nil {
+		s.WriteInt32(schemas.UpdateLocationObjectStorageRequest_ServerPort, *v.ServerPort)
+	}
+	if v.ServerProtocol != "" {
+		s.WriteString(schemas.UpdateLocationObjectStorageRequest_ServerProtocol, string(v.ServerProtocol))
+	}
+	if v.Subdirectory != nil {
+		s.WriteString(schemas.UpdateLocationObjectStorageRequest_Subdirectory, *v.Subdirectory)
+	}
+}
+
 type UpdateLocationObjectStorageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -120,13 +166,26 @@ type UpdateLocationObjectStorageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLocationObjectStorageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLocationObjectStorageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLocationObjectStorageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateLocationObjectStorageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLocationObjectStorageResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLocationObjectStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLocationObjectStorage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLocationObjectStorage, schemas.UpdateLocationObjectStorageRequest, schemas.UpdateLocationObjectStorageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateLocationObjectStorage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLocationObjectStorage, schemas.UpdateLocationObjectStorageRequest, schemas.UpdateLocationObjectStorageResponse), output: &UpdateLocationObjectStorageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

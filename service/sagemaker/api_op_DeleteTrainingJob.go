@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type DeleteTrainingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTrainingJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTrainingJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTrainingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrainingJobName != nil {
+		s.WriteString(schemas.DeleteTrainingJobRequest_TrainingJobName, *v.TrainingJobName)
+	}
+}
+
 type DeleteTrainingJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +61,26 @@ type DeleteTrainingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTrainingJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTrainingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteTrainingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTrainingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteTrainingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTrainingJob, schemas.DeleteTrainingJobRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteTrainingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTrainingJob, schemas.DeleteTrainingJobRequest, nil), output: &DeleteTrainingJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

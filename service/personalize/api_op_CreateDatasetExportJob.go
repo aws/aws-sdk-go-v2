@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,33 @@ type CreateDatasetExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDatasetExportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDatasetExportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDatasetExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.CreateDatasetExportJobRequest_datasetArn, *v.DatasetArn)
+	}
+	if v.IngestionMode != "" {
+		s.WriteString(schemas.CreateDatasetExportJobRequest_ingestionMode, string(v.IngestionMode))
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.CreateDatasetExportJobRequest_jobName, *v.JobName)
+	}
+	if v.JobOutput != nil {
+		s.WriteStruct(schemas.CreateDatasetExportJobRequest_jobOutput)
+		v.JobOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateDatasetExportJobRequest_roleArn, *v.RoleArn)
+	}
+	serializeTags(s, schemas.CreateDatasetExportJobRequest_tags, v.Tags)
+}
+
 type CreateDatasetExportJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dataset export job.
@@ -91,13 +120,32 @@ type CreateDatasetExportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDatasetExportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDatasetExportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDatasetExportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetExportJobArn != nil {
+		s.WriteString(schemas.CreateDatasetExportJobResponse_datasetExportJobArn, *v.DatasetExportJobArn)
+	}
+}
+func (v *CreateDatasetExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDatasetExportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDatasetExportJobResponse_datasetExportJobArn:
+			v.DatasetExportJobArn = new(string)
+			return d.ReadString(schemas.CreateDatasetExportJobResponse_datasetExportJobArn, v.DatasetExportJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDatasetExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDatasetExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDatasetExportJob, schemas.CreateDatasetExportJobRequest, schemas.CreateDatasetExportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDatasetExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDatasetExportJob, schemas.CreateDatasetExportJobRequest, schemas.CreateDatasetExportJobResponse), output: &CreateDatasetExportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

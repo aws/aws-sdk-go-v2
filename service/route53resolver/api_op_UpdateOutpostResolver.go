@@ -4,7 +4,9 @@ package route53resolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,27 @@ type UpdateOutpostResolverInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateOutpostResolverInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOutpostResolverRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOutpostResolverInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateOutpostResolverRequest_Id, *v.Id)
+	}
+	if v.InstanceCount != nil {
+		s.WriteInt32(schemas.UpdateOutpostResolverRequest_InstanceCount, *v.InstanceCount)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateOutpostResolverRequest_Name, *v.Name)
+	}
+	if v.PreferredInstanceType != nil {
+		s.WriteString(schemas.UpdateOutpostResolverRequest_PreferredInstanceType, *v.PreferredInstanceType)
+	}
+}
+
 type UpdateOutpostResolverOutput struct {
 
 	// The response to an UpdateOutpostResolver request.
@@ -55,13 +78,34 @@ type UpdateOutpostResolverOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateOutpostResolverOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOutpostResolverResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOutpostResolverOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutpostResolver != nil {
+		s.WriteStruct(schemas.UpdateOutpostResolverResponse_OutpostResolver)
+		v.OutpostResolver.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateOutpostResolverOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateOutpostResolverResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateOutpostResolverResponse_OutpostResolver:
+			v.OutpostResolver = &types.OutpostResolver{}
+			return v.OutpostResolver.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateOutpostResolverMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateOutpostResolver{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOutpostResolver, schemas.UpdateOutpostResolverRequest, schemas.UpdateOutpostResolverResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateOutpostResolver{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOutpostResolver, schemas.UpdateOutpostResolverRequest, schemas.UpdateOutpostResolverResponse), output: &UpdateOutpostResolverOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

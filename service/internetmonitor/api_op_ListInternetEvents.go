@@ -5,7 +5,9 @@ package internetmonitor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -63,6 +65,33 @@ type ListInternetEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInternetEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInternetEventsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInternetEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListInternetEventsInput_EndTime, *v.EndTime)
+	}
+	if v.EventStatus != nil {
+		s.WriteString(schemas.ListInternetEventsInput_EventStatus, *v.EventStatus)
+	}
+	if v.EventType != nil {
+		s.WriteString(schemas.ListInternetEventsInput_EventType, *v.EventType)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInternetEventsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInternetEventsInput_NextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListInternetEventsInput_StartTime, *v.StartTime)
+	}
+}
+
 type ListInternetEventsOutput struct {
 
 	// A set of internet events returned for the list operation.
@@ -80,13 +109,35 @@ type ListInternetEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInternetEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInternetEventsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInternetEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInternetEventsList(s, schemas.ListInternetEventsOutput_InternetEvents, v.InternetEvents)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInternetEventsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListInternetEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInternetEventsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInternetEventsOutput_InternetEvents:
+			return deserializeInternetEventsList(d, schemas.ListInternetEventsOutput_InternetEvents, &v.InternetEvents)
+		case schemas.ListInternetEventsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInternetEventsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInternetEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInternetEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInternetEvents, schemas.ListInternetEventsInput, schemas.ListInternetEventsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListInternetEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInternetEvents, schemas.ListInternetEventsInput, schemas.ListInternetEventsOutput), output: &ListInternetEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

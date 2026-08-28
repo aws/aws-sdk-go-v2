@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -89,6 +91,34 @@ type CreateRoutingProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRoutingProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRoutingProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRoutingProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentAvailabilityTimer != "" {
+		s.WriteString(schemas.CreateRoutingProfileRequest_AgentAvailabilityTimer, string(v.AgentAvailabilityTimer))
+	}
+	if v.DefaultOutboundQueueId != nil {
+		s.WriteString(schemas.CreateRoutingProfileRequest_DefaultOutboundQueueId, *v.DefaultOutboundQueueId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateRoutingProfileRequest_Description, *v.Description)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateRoutingProfileRequest_InstanceId, *v.InstanceId)
+	}
+	serializeRoutingProfileManualAssignmentQueueConfigList(s, schemas.CreateRoutingProfileRequest_ManualAssignmentQueueConfigs, v.ManualAssignmentQueueConfigs)
+	serializeMediaConcurrencies(s, schemas.CreateRoutingProfileRequest_MediaConcurrencies, v.MediaConcurrencies)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRoutingProfileRequest_Name, *v.Name)
+	}
+	serializeRoutingProfileQueueConfigList(s, schemas.CreateRoutingProfileRequest_QueueConfigs, v.QueueConfigs)
+	serializeTagMap(s, schemas.CreateRoutingProfileRequest_Tags, v.Tags)
+}
+
 type CreateRoutingProfileOutput struct {
 
 	// The Amazon Resource Name (ARN) of the routing profile.
@@ -103,13 +133,38 @@ type CreateRoutingProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRoutingProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRoutingProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRoutingProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoutingProfileArn != nil {
+		s.WriteString(schemas.CreateRoutingProfileResponse_RoutingProfileArn, *v.RoutingProfileArn)
+	}
+	if v.RoutingProfileId != nil {
+		s.WriteString(schemas.CreateRoutingProfileResponse_RoutingProfileId, *v.RoutingProfileId)
+	}
+}
+func (v *CreateRoutingProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRoutingProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRoutingProfileResponse_RoutingProfileArn:
+			v.RoutingProfileArn = new(string)
+			return d.ReadString(schemas.CreateRoutingProfileResponse_RoutingProfileArn, v.RoutingProfileArn)
+		case schemas.CreateRoutingProfileResponse_RoutingProfileId:
+			v.RoutingProfileId = new(string)
+			return d.ReadString(schemas.CreateRoutingProfileResponse_RoutingProfileId, v.RoutingProfileId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRoutingProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRoutingProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRoutingProfile, schemas.CreateRoutingProfileRequest, schemas.CreateRoutingProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRoutingProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRoutingProfile, schemas.CreateRoutingProfileRequest, schemas.CreateRoutingProfileResponse), output: &CreateRoutingProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

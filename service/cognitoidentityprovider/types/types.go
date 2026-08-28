@@ -4,6 +4,9 @@ package types
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -22,6 +25,25 @@ type AccountRecoverySettingType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AccountRecoverySettingType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountRecoverySettingType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountRecoverySettingType) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRecoveryMechanismsType(s, schemas.AccountRecoverySettingType_RecoveryMechanisms, v.RecoveryMechanisms)
+}
+func (v *AccountRecoverySettingType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountRecoverySettingType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountRecoverySettingType_RecoveryMechanisms:
+			return deserializeRecoveryMechanismsType(d, schemas.AccountRecoverySettingType_RecoveryMechanisms, &v.RecoveryMechanisms)
+		}
+		return nil
+	})
+}
+
 // A list of account-takeover actions for each level of risk that Amazon Cognito
 // might assess with threat protection features.
 type AccountTakeoverActionsType struct {
@@ -36,6 +58,46 @@ type AccountTakeoverActionsType struct {
 	MediumAction *AccountTakeoverActionType
 
 	noSmithyDocumentSerde
+}
+
+func (v *AccountTakeoverActionsType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountTakeoverActionsType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountTakeoverActionsType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HighAction != nil {
+		s.WriteStruct(schemas.AccountTakeoverActionsType_HighAction)
+		v.HighAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LowAction != nil {
+		s.WriteStruct(schemas.AccountTakeoverActionsType_LowAction)
+		v.LowAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MediumAction != nil {
+		s.WriteStruct(schemas.AccountTakeoverActionsType_MediumAction)
+		v.MediumAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AccountTakeoverActionsType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountTakeoverActionsType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountTakeoverActionsType_HighAction:
+			v.HighAction = &AccountTakeoverActionType{}
+			return v.HighAction.Deserialize(d)
+		case schemas.AccountTakeoverActionsType_LowAction:
+			v.LowAction = &AccountTakeoverActionType{}
+			return v.LowAction.Deserialize(d)
+		case schemas.AccountTakeoverActionsType_MediumAction:
+			v.MediumAction = &AccountTakeoverActionType{}
+			return v.MediumAction.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The automated response to a risk level for adaptive authentication in
@@ -72,6 +134,35 @@ type AccountTakeoverActionType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AccountTakeoverActionType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountTakeoverActionType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountTakeoverActionType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventAction != "" {
+		s.WriteString(schemas.AccountTakeoverActionType_EventAction, string(v.EventAction))
+	}
+	s.WriteBool(schemas.AccountTakeoverActionType_Notify, v.Notify)
+}
+func (v *AccountTakeoverActionType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountTakeoverActionType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountTakeoverActionType_EventAction:
+			var ev string
+			if err := d.ReadString(schemas.AccountTakeoverActionType_EventAction, &ev); err != nil {
+				return err
+			}
+			v.EventAction = AccountTakeoverEventActionType(ev)
+			return nil
+		case schemas.AccountTakeoverActionType_Notify:
+			return d.ReadBool(schemas.AccountTakeoverActionType_Notify, &v.Notify)
+		}
+		return nil
+	})
+}
+
 // The settings for automated responses and notification templates for adaptive
 // authentication with threat protection features.
 type AccountTakeoverRiskConfigurationType struct {
@@ -89,6 +180,38 @@ type AccountTakeoverRiskConfigurationType struct {
 	NotifyConfiguration *NotifyConfigurationType
 
 	noSmithyDocumentSerde
+}
+
+func (v *AccountTakeoverRiskConfigurationType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountTakeoverRiskConfigurationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountTakeoverRiskConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Actions != nil {
+		s.WriteStruct(schemas.AccountTakeoverRiskConfigurationType_Actions)
+		v.Actions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NotifyConfiguration != nil {
+		s.WriteStruct(schemas.AccountTakeoverRiskConfigurationType_NotifyConfiguration)
+		v.NotifyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AccountTakeoverRiskConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountTakeoverRiskConfigurationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountTakeoverRiskConfigurationType_Actions:
+			v.Actions = &AccountTakeoverActionsType{}
+			return v.Actions.Deserialize(d)
+		case schemas.AccountTakeoverRiskConfigurationType_NotifyConfiguration:
+			v.NotifyConfiguration = &NotifyConfigurationType{}
+			return v.NotifyConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The settings for administrator creation of users in a user pool. Contains
@@ -123,6 +246,40 @@ type AdminCreateUserConfigType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminCreateUserConfigType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminCreateUserConfigType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminCreateUserConfigType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowAdminCreateUserOnly != false {
+		s.WriteBool(schemas.AdminCreateUserConfigType_AllowAdminCreateUserOnly, v.AllowAdminCreateUserOnly)
+	}
+	if v.InviteMessageTemplate != nil {
+		s.WriteStruct(schemas.AdminCreateUserConfigType_InviteMessageTemplate)
+		v.InviteMessageTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UnusedAccountValidityDays != 0 {
+		s.WriteInt32(schemas.AdminCreateUserConfigType_UnusedAccountValidityDays, v.UnusedAccountValidityDays)
+	}
+}
+func (v *AdminCreateUserConfigType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdminCreateUserConfigType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdminCreateUserConfigType_AllowAdminCreateUserOnly:
+			return d.ReadBool(schemas.AdminCreateUserConfigType_AllowAdminCreateUserOnly, &v.AllowAdminCreateUserOnly)
+		case schemas.AdminCreateUserConfigType_InviteMessageTemplate:
+			v.InviteMessageTemplate = &MessageTemplateType{}
+			return v.InviteMessageTemplate.Deserialize(d)
+		case schemas.AdminCreateUserConfigType_UnusedAccountValidityDays:
+			return d.ReadInt32(schemas.AdminCreateUserConfigType_UnusedAccountValidityDays, &v.UnusedAccountValidityDays)
+		}
+		return nil
+	})
+}
+
 // Threat protection configuration options for additional authentication types in
 // your user pool, including custom authentication.
 type AdvancedSecurityAdditionalFlowsType struct {
@@ -133,6 +290,32 @@ type AdvancedSecurityAdditionalFlowsType struct {
 	CustomAuthMode AdvancedSecurityEnabledModeType
 
 	noSmithyDocumentSerde
+}
+
+func (v *AdvancedSecurityAdditionalFlowsType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdvancedSecurityAdditionalFlowsType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdvancedSecurityAdditionalFlowsType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomAuthMode != "" {
+		s.WriteString(schemas.AdvancedSecurityAdditionalFlowsType_CustomAuthMode, string(v.CustomAuthMode))
+	}
+}
+func (v *AdvancedSecurityAdditionalFlowsType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdvancedSecurityAdditionalFlowsType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdvancedSecurityAdditionalFlowsType_CustomAuthMode:
+			var ev string
+			if err := d.ReadString(schemas.AdvancedSecurityAdditionalFlowsType_CustomAuthMode, &ev); err != nil {
+				return err
+			}
+			v.CustomAuthMode = AdvancedSecurityEnabledModeType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The settings for Amazon Pinpoint analytics configuration. With an analytics
@@ -173,6 +356,51 @@ type AnalyticsConfigurationType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AnalyticsConfigurationType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnalyticsConfigurationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnalyticsConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.AnalyticsConfigurationType_ApplicationArn, *v.ApplicationArn)
+	}
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.AnalyticsConfigurationType_ApplicationId, *v.ApplicationId)
+	}
+	if v.ExternalId != nil {
+		s.WriteString(schemas.AnalyticsConfigurationType_ExternalId, *v.ExternalId)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.AnalyticsConfigurationType_RoleArn, *v.RoleArn)
+	}
+	if v.UserDataShared != false {
+		s.WriteBool(schemas.AnalyticsConfigurationType_UserDataShared, v.UserDataShared)
+	}
+}
+func (v *AnalyticsConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnalyticsConfigurationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnalyticsConfigurationType_ApplicationArn:
+			v.ApplicationArn = new(string)
+			return d.ReadString(schemas.AnalyticsConfigurationType_ApplicationArn, v.ApplicationArn)
+		case schemas.AnalyticsConfigurationType_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.AnalyticsConfigurationType_ApplicationId, v.ApplicationId)
+		case schemas.AnalyticsConfigurationType_ExternalId:
+			v.ExternalId = new(string)
+			return d.ReadString(schemas.AnalyticsConfigurationType_ExternalId, v.ExternalId)
+		case schemas.AnalyticsConfigurationType_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.AnalyticsConfigurationType_RoleArn, v.RoleArn)
+		case schemas.AnalyticsConfigurationType_UserDataShared:
+			return d.ReadBool(schemas.AnalyticsConfigurationType_UserDataShared, &v.UserDataShared)
+		}
+		return nil
+	})
+}
+
 // Information that your application adds to authentication requests. Applies an
 // endpoint ID to the analytics data that your user pool sends to Amazon Pinpoint.
 //
@@ -189,6 +417,28 @@ type AnalyticsMetadataType struct {
 	AnalyticsEndpointId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AnalyticsMetadataType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnalyticsMetadataType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnalyticsMetadataType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyticsEndpointId != nil {
+		s.WriteString(schemas.AnalyticsMetadataType_AnalyticsEndpointId, *v.AnalyticsEndpointId)
+	}
+}
+func (v *AnalyticsMetadataType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnalyticsMetadataType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnalyticsMetadataType_AnalyticsEndpointId:
+			v.AnalyticsEndpointId = new(string)
+			return d.ReadString(schemas.AnalyticsMetadataType_AnalyticsEndpointId, v.AnalyticsEndpointId)
+		}
+		return nil
+	})
 }
 
 // An image file from a managed login branding style in a user pool.
@@ -223,6 +473,63 @@ type AssetType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssetType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssetType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssetType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bytes != nil {
+		s.WriteBlob(schemas.AssetType_Bytes, v.Bytes)
+	}
+	if v.Category != "" {
+		s.WriteString(schemas.AssetType_Category, string(v.Category))
+	}
+	if v.ColorMode != "" {
+		s.WriteString(schemas.AssetType_ColorMode, string(v.ColorMode))
+	}
+	if v.Extension != "" {
+		s.WriteString(schemas.AssetType_Extension, string(v.Extension))
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.AssetType_ResourceId, *v.ResourceId)
+	}
+}
+func (v *AssetType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssetType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssetType_Bytes:
+			return d.ReadBlob(schemas.AssetType_Bytes, &v.Bytes)
+		case schemas.AssetType_Category:
+			var ev string
+			if err := d.ReadString(schemas.AssetType_Category, &ev); err != nil {
+				return err
+			}
+			v.Category = AssetCategoryType(ev)
+			return nil
+		case schemas.AssetType_ColorMode:
+			var ev string
+			if err := d.ReadString(schemas.AssetType_ColorMode, &ev); err != nil {
+				return err
+			}
+			v.ColorMode = ColorSchemeModeType(ev)
+			return nil
+		case schemas.AssetType_Extension:
+			var ev string
+			if err := d.ReadString(schemas.AssetType_Extension, &ev); err != nil {
+				return err
+			}
+			v.Extension = AssetExtensionType(ev)
+			return nil
+		case schemas.AssetType_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.AssetType_ResourceId, v.ResourceId)
+		}
+		return nil
+	})
+}
+
 // The name and value of a user attribute.
 type AttributeType struct {
 
@@ -244,6 +551,34 @@ type AttributeType struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AttributeType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttributeType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttributeType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.AttributeType_Name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.AttributeType_Value, *v.Value)
+	}
+}
+func (v *AttributeType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttributeType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttributeType_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AttributeType_Name, v.Name)
+		case schemas.AttributeType_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.AttributeType_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // The object that your application receives after authentication. Contains tokens
@@ -269,6 +604,59 @@ type AuthenticationResultType struct {
 	TokenType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AuthenticationResultType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuthenticationResultType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuthenticationResultType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.AuthenticationResultType_AccessToken, *v.AccessToken)
+	}
+	if v.ExpiresIn != 0 {
+		s.WriteInt32(schemas.AuthenticationResultType_ExpiresIn, v.ExpiresIn)
+	}
+	if v.IdToken != nil {
+		s.WriteString(schemas.AuthenticationResultType_IdToken, *v.IdToken)
+	}
+	if v.NewDeviceMetadata != nil {
+		s.WriteStruct(schemas.AuthenticationResultType_NewDeviceMetadata)
+		v.NewDeviceMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RefreshToken != nil {
+		s.WriteString(schemas.AuthenticationResultType_RefreshToken, *v.RefreshToken)
+	}
+	if v.TokenType != nil {
+		s.WriteString(schemas.AuthenticationResultType_TokenType, *v.TokenType)
+	}
+}
+func (v *AuthenticationResultType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AuthenticationResultType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AuthenticationResultType_AccessToken:
+			v.AccessToken = new(string)
+			return d.ReadString(schemas.AuthenticationResultType_AccessToken, v.AccessToken)
+		case schemas.AuthenticationResultType_ExpiresIn:
+			return d.ReadInt32(schemas.AuthenticationResultType_ExpiresIn, &v.ExpiresIn)
+		case schemas.AuthenticationResultType_IdToken:
+			v.IdToken = new(string)
+			return d.ReadString(schemas.AuthenticationResultType_IdToken, v.IdToken)
+		case schemas.AuthenticationResultType_NewDeviceMetadata:
+			v.NewDeviceMetadata = &NewDeviceMetadataType{}
+			return v.NewDeviceMetadata.Deserialize(d)
+		case schemas.AuthenticationResultType_RefreshToken:
+			v.RefreshToken = new(string)
+			return d.ReadString(schemas.AuthenticationResultType_RefreshToken, v.RefreshToken)
+		case schemas.AuthenticationResultType_TokenType:
+			v.TokenType = new(string)
+			return d.ReadString(schemas.AuthenticationResultType_TokenType, v.TokenType)
+		}
+		return nil
+	})
 }
 
 // One authentication event that Amazon Cognito logged in a user pool with threat
@@ -313,6 +701,81 @@ type AuthEventType struct {
 	EventType EventType
 
 	noSmithyDocumentSerde
+}
+
+func (v *AuthEventType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuthEventType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuthEventType) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChallengeResponseListType(s, schemas.AuthEventType_ChallengeResponses, v.ChallengeResponses)
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.AuthEventType_CreationDate, *v.CreationDate)
+	}
+	if v.EventContextData != nil {
+		s.WriteStruct(schemas.AuthEventType_EventContextData)
+		v.EventContextData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventFeedback != nil {
+		s.WriteStruct(schemas.AuthEventType_EventFeedback)
+		v.EventFeedback.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.AuthEventType_EventId, *v.EventId)
+	}
+	if v.EventResponse != "" {
+		s.WriteString(schemas.AuthEventType_EventResponse, string(v.EventResponse))
+	}
+	if v.EventRisk != nil {
+		s.WriteStruct(schemas.AuthEventType_EventRisk)
+		v.EventRisk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventType != "" {
+		s.WriteString(schemas.AuthEventType_EventType, string(v.EventType))
+	}
+}
+func (v *AuthEventType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AuthEventType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AuthEventType_ChallengeResponses:
+			return deserializeChallengeResponseListType(d, schemas.AuthEventType_ChallengeResponses, &v.ChallengeResponses)
+		case schemas.AuthEventType_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.AuthEventType_CreationDate, v.CreationDate)
+		case schemas.AuthEventType_EventContextData:
+			v.EventContextData = &EventContextDataType{}
+			return v.EventContextData.Deserialize(d)
+		case schemas.AuthEventType_EventFeedback:
+			v.EventFeedback = &EventFeedbackType{}
+			return v.EventFeedback.Deserialize(d)
+		case schemas.AuthEventType_EventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.AuthEventType_EventId, v.EventId)
+		case schemas.AuthEventType_EventResponse:
+			var ev string
+			if err := d.ReadString(schemas.AuthEventType_EventResponse, &ev); err != nil {
+				return err
+			}
+			v.EventResponse = EventResponseType(ev)
+			return nil
+		case schemas.AuthEventType_EventRisk:
+			v.EventRisk = &EventRiskType{}
+			return v.EventRisk.Deserialize(d)
+		case schemas.AuthEventType_EventType:
+			var ev string
+			if err := d.ReadString(schemas.AuthEventType_EventType, &ev); err != nil {
+				return err
+			}
+			v.EventType = EventType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The responses to the challenge that you received in the previous request. Each
@@ -435,6 +898,42 @@ type ChallengeResponseType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChallengeResponseType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChallengeResponseType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChallengeResponseType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChallengeName != "" {
+		s.WriteString(schemas.ChallengeResponseType_ChallengeName, string(v.ChallengeName))
+	}
+	if v.ChallengeResponse != "" {
+		s.WriteString(schemas.ChallengeResponseType_ChallengeResponse, string(v.ChallengeResponse))
+	}
+}
+func (v *ChallengeResponseType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChallengeResponseType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChallengeResponseType_ChallengeName:
+			var ev string
+			if err := d.ReadString(schemas.ChallengeResponseType_ChallengeName, &ev); err != nil {
+				return err
+			}
+			v.ChallengeName = ChallengeName(ev)
+			return nil
+		case schemas.ChallengeResponseType_ChallengeResponse:
+			var ev string
+			if err := d.ReadString(schemas.ChallengeResponseType_ChallengeResponse, &ev); err != nil {
+				return err
+			}
+			v.ChallengeResponse = ChallengeResponse(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The access token and its metadata from a machine-to-machine (M2M) client
 // credentials grant.
 type ClientAuthenticationResultType struct {
@@ -450,6 +949,39 @@ type ClientAuthenticationResultType struct {
 	TokenType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ClientAuthenticationResultType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientAuthenticationResultType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClientAuthenticationResultType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.ClientAuthenticationResultType_AccessToken, *v.AccessToken)
+	}
+	if v.ExpiresIn != 0 {
+		s.WriteInt32(schemas.ClientAuthenticationResultType_ExpiresIn, v.ExpiresIn)
+	}
+	if v.TokenType != nil {
+		s.WriteString(schemas.ClientAuthenticationResultType_TokenType, *v.TokenType)
+	}
+}
+func (v *ClientAuthenticationResultType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientAuthenticationResultType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientAuthenticationResultType_AccessToken:
+			v.AccessToken = new(string)
+			return d.ReadString(schemas.ClientAuthenticationResultType_AccessToken, v.AccessToken)
+		case schemas.ClientAuthenticationResultType_ExpiresIn:
+			return d.ReadInt32(schemas.ClientAuthenticationResultType_ExpiresIn, &v.ExpiresIn)
+		case schemas.ClientAuthenticationResultType_TokenType:
+			v.TokenType = new(string)
+			return d.ReadString(schemas.ClientAuthenticationResultType_TokenType, v.TokenType)
+		}
+		return nil
+	})
 }
 
 // Contains information about a client secret, including its unique identifier,
@@ -471,6 +1003,40 @@ type ClientSecretDescriptorType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClientSecretDescriptorType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientSecretDescriptorType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClientSecretDescriptorType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientSecretCreateDate != nil {
+		s.WriteTime(schemas.ClientSecretDescriptorType_ClientSecretCreateDate, *v.ClientSecretCreateDate)
+	}
+	if v.ClientSecretId != nil {
+		s.WriteString(schemas.ClientSecretDescriptorType_ClientSecretId, *v.ClientSecretId)
+	}
+	if v.ClientSecretValue != nil {
+		s.WriteString(schemas.ClientSecretDescriptorType_ClientSecretValue, *v.ClientSecretValue)
+	}
+}
+func (v *ClientSecretDescriptorType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientSecretDescriptorType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientSecretDescriptorType_ClientSecretCreateDate:
+			v.ClientSecretCreateDate = new(time.Time)
+			return d.ReadTime(schemas.ClientSecretDescriptorType_ClientSecretCreateDate, v.ClientSecretCreateDate)
+		case schemas.ClientSecretDescriptorType_ClientSecretId:
+			v.ClientSecretId = new(string)
+			return d.ReadString(schemas.ClientSecretDescriptorType_ClientSecretId, v.ClientSecretId)
+		case schemas.ClientSecretDescriptorType_ClientSecretValue:
+			v.ClientSecretValue = new(string)
+			return d.ReadString(schemas.ClientSecretDescriptorType_ClientSecretValue, v.ClientSecretValue)
+		}
+		return nil
+	})
+}
+
 // Configuration for the CloudWatch log group destination of user pool detailed
 // activity logging, or of user activity log export with threat protection.
 type CloudWatchLogsConfigurationType struct {
@@ -487,6 +1053,28 @@ type CloudWatchLogsConfigurationType struct {
 	LogGroupArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CloudWatchLogsConfigurationType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudWatchLogsConfigurationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudWatchLogsConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogGroupArn != nil {
+		s.WriteString(schemas.CloudWatchLogsConfigurationType_LogGroupArn, *v.LogGroupArn)
+	}
+}
+func (v *CloudWatchLogsConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudWatchLogsConfigurationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudWatchLogsConfigurationType_LogGroupArn:
+			v.LogGroupArn = new(string)
+			return d.ReadString(schemas.CloudWatchLogsConfigurationType_LogGroupArn, v.LogGroupArn)
+		}
+		return nil
+	})
 }
 
 // The delivery details for an email or SMS message that Amazon Cognito sent for
@@ -506,6 +1094,44 @@ type CodeDeliveryDetailsType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CodeDeliveryDetailsType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CodeDeliveryDetailsType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CodeDeliveryDetailsType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.CodeDeliveryDetailsType_AttributeName, *v.AttributeName)
+	}
+	if v.DeliveryMedium != "" {
+		s.WriteString(schemas.CodeDeliveryDetailsType_DeliveryMedium, string(v.DeliveryMedium))
+	}
+	if v.Destination != nil {
+		s.WriteString(schemas.CodeDeliveryDetailsType_Destination, *v.Destination)
+	}
+}
+func (v *CodeDeliveryDetailsType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CodeDeliveryDetailsType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CodeDeliveryDetailsType_AttributeName:
+			v.AttributeName = new(string)
+			return d.ReadString(schemas.CodeDeliveryDetailsType_AttributeName, v.AttributeName)
+		case schemas.CodeDeliveryDetailsType_DeliveryMedium:
+			var ev string
+			if err := d.ReadString(schemas.CodeDeliveryDetailsType_DeliveryMedium, &ev); err != nil {
+				return err
+			}
+			v.DeliveryMedium = DeliveryMediumType(ev)
+			return nil
+		case schemas.CodeDeliveryDetailsType_Destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.CodeDeliveryDetailsType_Destination, v.Destination)
+		}
+		return nil
+	})
+}
+
 // Settings for user pool actions when Amazon Cognito detects compromised
 // credentials with threat protection in full-function ENFORCED mode.
 type CompromisedCredentialsActionsType struct {
@@ -516,6 +1142,32 @@ type CompromisedCredentialsActionsType struct {
 	EventAction CompromisedCredentialsEventActionType
 
 	noSmithyDocumentSerde
+}
+
+func (v *CompromisedCredentialsActionsType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompromisedCredentialsActionsType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompromisedCredentialsActionsType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventAction != "" {
+		s.WriteString(schemas.CompromisedCredentialsActionsType_EventAction, string(v.EventAction))
+	}
+}
+func (v *CompromisedCredentialsActionsType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CompromisedCredentialsActionsType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CompromisedCredentialsActionsType_EventAction:
+			var ev string
+			if err := d.ReadString(schemas.CompromisedCredentialsActionsType_EventAction, &ev); err != nil {
+				return err
+			}
+			v.EventAction = CompromisedCredentialsEventActionType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Settings for compromised-credentials actions and authentication-event sources
@@ -533,6 +1185,33 @@ type CompromisedCredentialsRiskConfigurationType struct {
 	EventFilter []EventFilterType
 
 	noSmithyDocumentSerde
+}
+
+func (v *CompromisedCredentialsRiskConfigurationType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompromisedCredentialsRiskConfigurationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompromisedCredentialsRiskConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Actions != nil {
+		s.WriteStruct(schemas.CompromisedCredentialsRiskConfigurationType_Actions)
+		v.Actions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEventFiltersType(s, schemas.CompromisedCredentialsRiskConfigurationType_EventFilter, v.EventFilter)
+}
+func (v *CompromisedCredentialsRiskConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CompromisedCredentialsRiskConfigurationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CompromisedCredentialsRiskConfigurationType_Actions:
+			v.Actions = &CompromisedCredentialsActionsType{}
+			return v.Actions.Deserialize(d)
+		case schemas.CompromisedCredentialsRiskConfigurationType_EventFilter:
+			return deserializeEventFiltersType(d, schemas.CompromisedCredentialsRiskConfigurationType_EventFilter, &v.EventFilter)
+		}
+		return nil
+	})
 }
 
 // Contextual user data used for evaluating the risk of an authentication event by
@@ -566,6 +1245,49 @@ type ContextDataType struct {
 	EncodedData *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ContextDataType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContextDataType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContextDataType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncodedData != nil {
+		s.WriteString(schemas.ContextDataType_EncodedData, *v.EncodedData)
+	}
+	serializeHttpHeaderList(s, schemas.ContextDataType_HttpHeaders, v.HttpHeaders)
+	if v.IpAddress != nil {
+		s.WriteString(schemas.ContextDataType_IpAddress, *v.IpAddress)
+	}
+	if v.ServerName != nil {
+		s.WriteString(schemas.ContextDataType_ServerName, *v.ServerName)
+	}
+	if v.ServerPath != nil {
+		s.WriteString(schemas.ContextDataType_ServerPath, *v.ServerPath)
+	}
+}
+func (v *ContextDataType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContextDataType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContextDataType_EncodedData:
+			v.EncodedData = new(string)
+			return d.ReadString(schemas.ContextDataType_EncodedData, v.EncodedData)
+		case schemas.ContextDataType_HttpHeaders:
+			return deserializeHttpHeaderList(d, schemas.ContextDataType_HttpHeaders, &v.HttpHeaders)
+		case schemas.ContextDataType_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.ContextDataType_IpAddress, v.IpAddress)
+		case schemas.ContextDataType_ServerName:
+			v.ServerName = new(string)
+			return d.ReadString(schemas.ContextDataType_ServerName, v.ServerName)
+		case schemas.ContextDataType_ServerPath:
+			v.ServerPath = new(string)
+			return d.ReadString(schemas.ContextDataType_ServerPath, v.ServerPath)
+		}
+		return nil
+	})
 }
 
 // The configuration for a custom domain, including the SSL certificate and TLS
@@ -605,6 +1327,38 @@ type CustomDomainConfigType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomDomainConfigType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomDomainConfigType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomDomainConfigType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.CustomDomainConfigType_CertificateArn, *v.CertificateArn)
+	}
+	if v.SecurityPolicy != "" {
+		s.WriteString(schemas.CustomDomainConfigType_SecurityPolicy, string(v.SecurityPolicy))
+	}
+}
+func (v *CustomDomainConfigType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomDomainConfigType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomDomainConfigType_CertificateArn:
+			v.CertificateArn = new(string)
+			return d.ReadString(schemas.CustomDomainConfigType_CertificateArn, v.CertificateArn)
+		case schemas.CustomDomainConfigType_SecurityPolicy:
+			var ev string
+			if err := d.ReadString(schemas.CustomDomainConfigType_SecurityPolicy, &ev); err != nil {
+				return err
+			}
+			v.SecurityPolicy = SecurityPolicyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The properties of a custom email sender Lambda trigger.
 type CustomEmailLambdaVersionConfigType struct {
 
@@ -625,6 +1379,38 @@ type CustomEmailLambdaVersionConfigType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomEmailLambdaVersionConfigType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomEmailLambdaVersionConfigType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomEmailLambdaVersionConfigType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LambdaArn != nil {
+		s.WriteString(schemas.CustomEmailLambdaVersionConfigType_LambdaArn, *v.LambdaArn)
+	}
+	if v.LambdaVersion != "" {
+		s.WriteString(schemas.CustomEmailLambdaVersionConfigType_LambdaVersion, string(v.LambdaVersion))
+	}
+}
+func (v *CustomEmailLambdaVersionConfigType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomEmailLambdaVersionConfigType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomEmailLambdaVersionConfigType_LambdaArn:
+			v.LambdaArn = new(string)
+			return d.ReadString(schemas.CustomEmailLambdaVersionConfigType_LambdaArn, v.LambdaArn)
+		case schemas.CustomEmailLambdaVersionConfigType_LambdaVersion:
+			var ev string
+			if err := d.ReadString(schemas.CustomEmailLambdaVersionConfigType_LambdaVersion, &ev); err != nil {
+				return err
+			}
+			v.LambdaVersion = CustomEmailSenderLambdaVersionType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The properties of a custom SMS sender Lambda trigger.
 type CustomSMSLambdaVersionConfigType struct {
 
@@ -643,6 +1429,38 @@ type CustomSMSLambdaVersionConfigType struct {
 	LambdaVersion CustomSMSSenderLambdaVersionType
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomSMSLambdaVersionConfigType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomSMSLambdaVersionConfigType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomSMSLambdaVersionConfigType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LambdaArn != nil {
+		s.WriteString(schemas.CustomSMSLambdaVersionConfigType_LambdaArn, *v.LambdaArn)
+	}
+	if v.LambdaVersion != "" {
+		s.WriteString(schemas.CustomSMSLambdaVersionConfigType_LambdaVersion, string(v.LambdaVersion))
+	}
+}
+func (v *CustomSMSLambdaVersionConfigType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomSMSLambdaVersionConfigType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomSMSLambdaVersionConfigType_LambdaArn:
+			v.LambdaArn = new(string)
+			return d.ReadString(schemas.CustomSMSLambdaVersionConfigType_LambdaArn, v.LambdaArn)
+		case schemas.CustomSMSLambdaVersionConfigType_LambdaVersion:
+			var ev string
+			if err := d.ReadString(schemas.CustomSMSLambdaVersionConfigType_LambdaVersion, &ev); err != nil {
+				return err
+			}
+			v.LambdaVersion = CustomSMSSenderLambdaVersionType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The device-remembering configuration for a user pool.
@@ -672,6 +1490,32 @@ type DeviceConfigurationType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeviceConfigurationType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeviceConfigurationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeviceConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChallengeRequiredOnNewDevice != false {
+		s.WriteBool(schemas.DeviceConfigurationType_ChallengeRequiredOnNewDevice, v.ChallengeRequiredOnNewDevice)
+	}
+	if v.DeviceOnlyRememberedOnUserPrompt != false {
+		s.WriteBool(schemas.DeviceConfigurationType_DeviceOnlyRememberedOnUserPrompt, v.DeviceOnlyRememberedOnUserPrompt)
+	}
+}
+func (v *DeviceConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeviceConfigurationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeviceConfigurationType_ChallengeRequiredOnNewDevice:
+			return d.ReadBool(schemas.DeviceConfigurationType_ChallengeRequiredOnNewDevice, &v.ChallengeRequiredOnNewDevice)
+		case schemas.DeviceConfigurationType_DeviceOnlyRememberedOnUserPrompt:
+			return d.ReadBool(schemas.DeviceConfigurationType_DeviceOnlyRememberedOnUserPrompt, &v.DeviceOnlyRememberedOnUserPrompt)
+		}
+		return nil
+	})
+}
+
 // A Secure Remote Password (SRP) value that your application generates when you
 // register a user's device. For more information, see [Getting a device key].
 //
@@ -685,6 +1529,34 @@ type DeviceSecretVerifierConfigType struct {
 	Salt *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeviceSecretVerifierConfigType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeviceSecretVerifierConfigType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeviceSecretVerifierConfigType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PasswordVerifier != nil {
+		s.WriteString(schemas.DeviceSecretVerifierConfigType_PasswordVerifier, *v.PasswordVerifier)
+	}
+	if v.Salt != nil {
+		s.WriteString(schemas.DeviceSecretVerifierConfigType_Salt, *v.Salt)
+	}
+}
+func (v *DeviceSecretVerifierConfigType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeviceSecretVerifierConfigType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeviceSecretVerifierConfigType_PasswordVerifier:
+			v.PasswordVerifier = new(string)
+			return d.ReadString(schemas.DeviceSecretVerifierConfigType_PasswordVerifier, v.PasswordVerifier)
+		case schemas.DeviceSecretVerifierConfigType_Salt:
+			v.Salt = new(string)
+			return d.ReadString(schemas.DeviceSecretVerifierConfigType_Salt, v.Salt)
+		}
+		return nil
+	})
 }
 
 // Information about a user's device that they've registered for device SRP
@@ -714,6 +1586,49 @@ type DeviceType struct {
 	DeviceLastModifiedDate *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeviceType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeviceType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeviceType) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeListType(s, schemas.DeviceType_DeviceAttributes, v.DeviceAttributes)
+	if v.DeviceCreateDate != nil {
+		s.WriteTime(schemas.DeviceType_DeviceCreateDate, *v.DeviceCreateDate)
+	}
+	if v.DeviceKey != nil {
+		s.WriteString(schemas.DeviceType_DeviceKey, *v.DeviceKey)
+	}
+	if v.DeviceLastAuthenticatedDate != nil {
+		s.WriteTime(schemas.DeviceType_DeviceLastAuthenticatedDate, *v.DeviceLastAuthenticatedDate)
+	}
+	if v.DeviceLastModifiedDate != nil {
+		s.WriteTime(schemas.DeviceType_DeviceLastModifiedDate, *v.DeviceLastModifiedDate)
+	}
+}
+func (v *DeviceType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeviceType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeviceType_DeviceAttributes:
+			return deserializeAttributeListType(d, schemas.DeviceType_DeviceAttributes, &v.DeviceAttributes)
+		case schemas.DeviceType_DeviceCreateDate:
+			v.DeviceCreateDate = new(time.Time)
+			return d.ReadTime(schemas.DeviceType_DeviceCreateDate, v.DeviceCreateDate)
+		case schemas.DeviceType_DeviceKey:
+			v.DeviceKey = new(string)
+			return d.ReadString(schemas.DeviceType_DeviceKey, v.DeviceKey)
+		case schemas.DeviceType_DeviceLastAuthenticatedDate:
+			v.DeviceLastAuthenticatedDate = new(time.Time)
+			return d.ReadTime(schemas.DeviceType_DeviceLastAuthenticatedDate, v.DeviceLastAuthenticatedDate)
+		case schemas.DeviceType_DeviceLastModifiedDate:
+			v.DeviceLastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.DeviceType_DeviceLastModifiedDate, v.DeviceLastModifiedDate)
+		}
+		return nil
+	})
 }
 
 // A container for information about the user pool domain associated with the
@@ -762,6 +1677,90 @@ type DomainDescriptionType struct {
 	Version *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DomainDescriptionType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainDescriptionType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainDescriptionType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AWSAccountId != nil {
+		s.WriteString(schemas.DomainDescriptionType_AWSAccountId, *v.AWSAccountId)
+	}
+	if v.CloudFrontDistribution != nil {
+		s.WriteString(schemas.DomainDescriptionType_CloudFrontDistribution, *v.CloudFrontDistribution)
+	}
+	if v.CustomDomainConfig != nil {
+		s.WriteStruct(schemas.DomainDescriptionType_CustomDomainConfig)
+		v.CustomDomainConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.DomainDescriptionType_Domain, *v.Domain)
+	}
+	if v.ManagedLoginVersion != nil {
+		s.WriteInt32(schemas.DomainDescriptionType_ManagedLoginVersion, *v.ManagedLoginVersion)
+	}
+	if v.Routing != nil {
+		s.WriteStruct(schemas.DomainDescriptionType_Routing)
+		v.Routing.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3Bucket != nil {
+		s.WriteString(schemas.DomainDescriptionType_S3Bucket, *v.S3Bucket)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DomainDescriptionType_Status, string(v.Status))
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.DomainDescriptionType_UserPoolId, *v.UserPoolId)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.DomainDescriptionType_Version, *v.Version)
+	}
+}
+func (v *DomainDescriptionType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainDescriptionType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainDescriptionType_AWSAccountId:
+			v.AWSAccountId = new(string)
+			return d.ReadString(schemas.DomainDescriptionType_AWSAccountId, v.AWSAccountId)
+		case schemas.DomainDescriptionType_CloudFrontDistribution:
+			v.CloudFrontDistribution = new(string)
+			return d.ReadString(schemas.DomainDescriptionType_CloudFrontDistribution, v.CloudFrontDistribution)
+		case schemas.DomainDescriptionType_CustomDomainConfig:
+			v.CustomDomainConfig = &CustomDomainConfigType{}
+			return v.CustomDomainConfig.Deserialize(d)
+		case schemas.DomainDescriptionType_Domain:
+			v.Domain = new(string)
+			return d.ReadString(schemas.DomainDescriptionType_Domain, v.Domain)
+		case schemas.DomainDescriptionType_ManagedLoginVersion:
+			v.ManagedLoginVersion = new(int32)
+			return d.ReadInt32(schemas.DomainDescriptionType_ManagedLoginVersion, v.ManagedLoginVersion)
+		case schemas.DomainDescriptionType_Routing:
+			v.Routing = &RoutingType{}
+			return v.Routing.Deserialize(d)
+		case schemas.DomainDescriptionType_S3Bucket:
+			v.S3Bucket = new(string)
+			return d.ReadString(schemas.DomainDescriptionType_S3Bucket, v.S3Bucket)
+		case schemas.DomainDescriptionType_Status:
+			var ev string
+			if err := d.ReadString(schemas.DomainDescriptionType_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = DomainStatusType(ev)
+			return nil
+		case schemas.DomainDescriptionType_UserPoolId:
+			v.UserPoolId = new(string)
+			return d.ReadString(schemas.DomainDescriptionType_UserPoolId, v.UserPoolId)
+		case schemas.DomainDescriptionType_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.DomainDescriptionType_Version, v.Version)
+		}
+		return nil
+	})
 }
 
 // The email configuration of your user pool. The email configuration type sets
@@ -863,6 +1862,56 @@ type EmailConfigurationType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EmailConfigurationType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EmailConfigurationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EmailConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSet != nil {
+		s.WriteString(schemas.EmailConfigurationType_ConfigurationSet, *v.ConfigurationSet)
+	}
+	if v.EmailSendingAccount != "" {
+		s.WriteString(schemas.EmailConfigurationType_EmailSendingAccount, string(v.EmailSendingAccount))
+	}
+	if v.From != nil {
+		s.WriteString(schemas.EmailConfigurationType_From, *v.From)
+	}
+	if v.ReplyToEmailAddress != nil {
+		s.WriteString(schemas.EmailConfigurationType_ReplyToEmailAddress, *v.ReplyToEmailAddress)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.EmailConfigurationType_SourceArn, *v.SourceArn)
+	}
+}
+func (v *EmailConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EmailConfigurationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EmailConfigurationType_ConfigurationSet:
+			v.ConfigurationSet = new(string)
+			return d.ReadString(schemas.EmailConfigurationType_ConfigurationSet, v.ConfigurationSet)
+		case schemas.EmailConfigurationType_EmailSendingAccount:
+			var ev string
+			if err := d.ReadString(schemas.EmailConfigurationType_EmailSendingAccount, &ev); err != nil {
+				return err
+			}
+			v.EmailSendingAccount = EmailSendingAccountType(ev)
+			return nil
+		case schemas.EmailConfigurationType_From:
+			v.From = new(string)
+			return d.ReadString(schemas.EmailConfigurationType_From, v.From)
+		case schemas.EmailConfigurationType_ReplyToEmailAddress:
+			v.ReplyToEmailAddress = new(string)
+			return d.ReadString(schemas.EmailConfigurationType_ReplyToEmailAddress, v.ReplyToEmailAddress)
+		case schemas.EmailConfigurationType_SourceArn:
+			v.SourceArn = new(string)
+			return d.ReadString(schemas.EmailConfigurationType_SourceArn, v.SourceArn)
+		}
+		return nil
+	})
+}
+
 // Sets or shows configuration for user pool email message MFA and sign-in with
 // one-time passwords (OTPs). Includes the subject and body of the email message
 // template for sign-in and MFA messages. To activate this setting, your user pool
@@ -885,6 +1934,34 @@ type EmailMfaConfigType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EmailMfaConfigType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EmailMfaConfigType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EmailMfaConfigType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EmailMfaConfigType_Message, *v.Message)
+	}
+	if v.Subject != nil {
+		s.WriteString(schemas.EmailMfaConfigType_Subject, *v.Subject)
+	}
+}
+func (v *EmailMfaConfigType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EmailMfaConfigType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EmailMfaConfigType_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EmailMfaConfigType_Message, v.Message)
+		case schemas.EmailMfaConfigType_Subject:
+			v.Subject = new(string)
+			return d.ReadString(schemas.EmailMfaConfigType_Subject, v.Subject)
+		}
+		return nil
+	})
+}
+
 // User preferences for multi-factor authentication with email messages. Activates
 // or deactivates email MFA and sets it as the preferred MFA method when multiple
 // methods are available. To activate this setting, your user pool must be in the [Essentials tier]
@@ -902,6 +1979,32 @@ type EmailMfaSettingsType struct {
 	PreferredMfa bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *EmailMfaSettingsType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EmailMfaSettingsType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EmailMfaSettingsType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != false {
+		s.WriteBool(schemas.EmailMfaSettingsType_Enabled, v.Enabled)
+	}
+	if v.PreferredMfa != false {
+		s.WriteBool(schemas.EmailMfaSettingsType_PreferredMfa, v.PreferredMfa)
+	}
+}
+func (v *EmailMfaSettingsType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EmailMfaSettingsType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EmailMfaSettingsType_Enabled:
+			return d.ReadBool(schemas.EmailMfaSettingsType_Enabled, &v.Enabled)
+		case schemas.EmailMfaSettingsType_PreferredMfa:
+			return d.ReadBool(schemas.EmailMfaSettingsType_PreferredMfa, &v.PreferredMfa)
+		}
+		return nil
+	})
 }
 
 // The configuration that Amazon Cognito uses to send SMS messages through Amazon
@@ -974,6 +2077,64 @@ type EumsSmsConfigurationType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EumsSmsConfigurationType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EumsSmsConfigurationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EumsSmsConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallerArn != nil {
+		s.WriteString(schemas.EumsSmsConfigurationType_CallerArn, *v.CallerArn)
+	}
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.EumsSmsConfigurationType_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.ExternalId != nil {
+		s.WriteString(schemas.EumsSmsConfigurationType_ExternalId, *v.ExternalId)
+	}
+	if v.InEntityId != nil {
+		s.WriteString(schemas.EumsSmsConfigurationType_InEntityId, *v.InEntityId)
+	}
+	if v.InTemplateId != nil {
+		s.WriteString(schemas.EumsSmsConfigurationType_InTemplateId, *v.InTemplateId)
+	}
+	if v.OriginationIdentity != nil {
+		s.WriteString(schemas.EumsSmsConfigurationType_OriginationIdentity, *v.OriginationIdentity)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.EumsSmsConfigurationType_Region, *v.Region)
+	}
+}
+func (v *EumsSmsConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EumsSmsConfigurationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EumsSmsConfigurationType_CallerArn:
+			v.CallerArn = new(string)
+			return d.ReadString(schemas.EumsSmsConfigurationType_CallerArn, v.CallerArn)
+		case schemas.EumsSmsConfigurationType_ConfigurationSetName:
+			v.ConfigurationSetName = new(string)
+			return d.ReadString(schemas.EumsSmsConfigurationType_ConfigurationSetName, v.ConfigurationSetName)
+		case schemas.EumsSmsConfigurationType_ExternalId:
+			v.ExternalId = new(string)
+			return d.ReadString(schemas.EumsSmsConfigurationType_ExternalId, v.ExternalId)
+		case schemas.EumsSmsConfigurationType_InEntityId:
+			v.InEntityId = new(string)
+			return d.ReadString(schemas.EumsSmsConfigurationType_InEntityId, v.InEntityId)
+		case schemas.EumsSmsConfigurationType_InTemplateId:
+			v.InTemplateId = new(string)
+			return d.ReadString(schemas.EumsSmsConfigurationType_InTemplateId, v.InTemplateId)
+		case schemas.EumsSmsConfigurationType_OriginationIdentity:
+			v.OriginationIdentity = new(string)
+			return d.ReadString(schemas.EumsSmsConfigurationType_OriginationIdentity, v.OriginationIdentity)
+		case schemas.EumsSmsConfigurationType_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.EumsSmsConfigurationType_Region, v.Region)
+		}
+		return nil
+	})
+}
+
 // The context data that your application submitted in an authentication request
 // with threat protection, as displayed in an AdminListUserAuthEvents response.
 type EventContextDataType struct {
@@ -994,6 +2155,52 @@ type EventContextDataType struct {
 	Timezone *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EventContextDataType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventContextDataType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventContextDataType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.City != nil {
+		s.WriteString(schemas.EventContextDataType_City, *v.City)
+	}
+	if v.Country != nil {
+		s.WriteString(schemas.EventContextDataType_Country, *v.Country)
+	}
+	if v.DeviceName != nil {
+		s.WriteString(schemas.EventContextDataType_DeviceName, *v.DeviceName)
+	}
+	if v.IpAddress != nil {
+		s.WriteString(schemas.EventContextDataType_IpAddress, *v.IpAddress)
+	}
+	if v.Timezone != nil {
+		s.WriteString(schemas.EventContextDataType_Timezone, *v.Timezone)
+	}
+}
+func (v *EventContextDataType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventContextDataType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventContextDataType_City:
+			v.City = new(string)
+			return d.ReadString(schemas.EventContextDataType_City, v.City)
+		case schemas.EventContextDataType_Country:
+			v.Country = new(string)
+			return d.ReadString(schemas.EventContextDataType_Country, v.Country)
+		case schemas.EventContextDataType_DeviceName:
+			v.DeviceName = new(string)
+			return d.ReadString(schemas.EventContextDataType_DeviceName, v.DeviceName)
+		case schemas.EventContextDataType_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.EventContextDataType_IpAddress, v.IpAddress)
+		case schemas.EventContextDataType_Timezone:
+			v.Timezone = new(string)
+			return d.ReadString(schemas.EventContextDataType_Timezone, v.Timezone)
+		}
+		return nil
+	})
 }
 
 // The feedback that your application submitted to a threat protection event log,
@@ -1022,6 +2229,44 @@ type EventFeedbackType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EventFeedbackType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventFeedbackType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventFeedbackType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FeedbackDate != nil {
+		s.WriteTime(schemas.EventFeedbackType_FeedbackDate, *v.FeedbackDate)
+	}
+	if v.FeedbackValue != "" {
+		s.WriteString(schemas.EventFeedbackType_FeedbackValue, string(v.FeedbackValue))
+	}
+	if v.Provider != nil {
+		s.WriteString(schemas.EventFeedbackType_Provider, *v.Provider)
+	}
+}
+func (v *EventFeedbackType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventFeedbackType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventFeedbackType_FeedbackDate:
+			v.FeedbackDate = new(time.Time)
+			return d.ReadTime(schemas.EventFeedbackType_FeedbackDate, v.FeedbackDate)
+		case schemas.EventFeedbackType_FeedbackValue:
+			var ev string
+			if err := d.ReadString(schemas.EventFeedbackType_FeedbackValue, &ev); err != nil {
+				return err
+			}
+			v.FeedbackValue = FeedbackValueType(ev)
+			return nil
+		case schemas.EventFeedbackType_Provider:
+			v.Provider = new(string)
+			return d.ReadString(schemas.EventFeedbackType_Provider, v.Provider)
+		}
+		return nil
+	})
+}
+
 // The risk evaluation by adaptive authentication, as displayed in an
 // AdminListUserAuthEvents response. Contains evaluations of
 // compromised-credentials detection and assessed risk level and action taken by
@@ -1045,6 +2290,48 @@ type EventRiskType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EventRiskType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventRiskType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventRiskType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompromisedCredentialsDetected != nil {
+		s.WriteBool(schemas.EventRiskType_CompromisedCredentialsDetected, *v.CompromisedCredentialsDetected)
+	}
+	if v.RiskDecision != "" {
+		s.WriteString(schemas.EventRiskType_RiskDecision, string(v.RiskDecision))
+	}
+	if v.RiskLevel != "" {
+		s.WriteString(schemas.EventRiskType_RiskLevel, string(v.RiskLevel))
+	}
+}
+func (v *EventRiskType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventRiskType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventRiskType_CompromisedCredentialsDetected:
+			v.CompromisedCredentialsDetected = new(bool)
+			return d.ReadBool(schemas.EventRiskType_CompromisedCredentialsDetected, v.CompromisedCredentialsDetected)
+		case schemas.EventRiskType_RiskDecision:
+			var ev string
+			if err := d.ReadString(schemas.EventRiskType_RiskDecision, &ev); err != nil {
+				return err
+			}
+			v.RiskDecision = RiskDecisionType(ev)
+			return nil
+		case schemas.EventRiskType_RiskLevel:
+			var ev string
+			if err := d.ReadString(schemas.EventRiskType_RiskLevel, &ev); err != nil {
+				return err
+			}
+			v.RiskLevel = RiskLevelType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies failover configuration for multi-region user pool domains. Contains
 // settings for the secondary region and health check configuration.
 type FailoverType struct {
@@ -1065,6 +2352,34 @@ type FailoverType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FailoverType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailoverType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailoverType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PrimaryRoute53HealthCheckId != nil {
+		s.WriteString(schemas.FailoverType_PrimaryRoute53HealthCheckId, *v.PrimaryRoute53HealthCheckId)
+	}
+	if v.SecondaryRegion != nil {
+		s.WriteString(schemas.FailoverType_SecondaryRegion, *v.SecondaryRegion)
+	}
+}
+func (v *FailoverType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailoverType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailoverType_PrimaryRoute53HealthCheckId:
+			v.PrimaryRoute53HealthCheckId = new(string)
+			return d.ReadString(schemas.FailoverType_PrimaryRoute53HealthCheckId, v.PrimaryRoute53HealthCheckId)
+		case schemas.FailoverType_SecondaryRegion:
+			v.SecondaryRegion = new(string)
+			return d.ReadString(schemas.FailoverType_SecondaryRegion, v.SecondaryRegion)
+		}
+		return nil
+	})
+}
+
 // Configuration for the Amazon Data Firehose stream destination of user activity
 // log export with threat protection.
 type FirehoseConfigurationType struct {
@@ -1074,6 +2389,28 @@ type FirehoseConfigurationType struct {
 	StreamArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FirehoseConfigurationType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirehoseConfigurationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirehoseConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamArn != nil {
+		s.WriteString(schemas.FirehoseConfigurationType_StreamArn, *v.StreamArn)
+	}
+}
+func (v *FirehoseConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirehoseConfigurationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirehoseConfigurationType_StreamArn:
+			v.StreamArn = new(string)
+			return d.ReadString(schemas.FirehoseConfigurationType_StreamArn, v.StreamArn)
+		}
+		return nil
+	})
 }
 
 // A user pool group. Contains details about the group and the way that it
@@ -1126,6 +2463,64 @@ type GroupType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GroupType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GroupType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GroupType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.GroupType_CreationDate, *v.CreationDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GroupType_Description, *v.Description)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.GroupType_GroupName, *v.GroupName)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.GroupType_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Precedence != nil {
+		s.WriteInt32(schemas.GroupType_Precedence, *v.Precedence)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GroupType_RoleArn, *v.RoleArn)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.GroupType_UserPoolId, *v.UserPoolId)
+	}
+}
+func (v *GroupType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GroupType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GroupType_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.GroupType_CreationDate, v.CreationDate)
+		case schemas.GroupType_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GroupType_Description, v.Description)
+		case schemas.GroupType_GroupName:
+			v.GroupName = new(string)
+			return d.ReadString(schemas.GroupType_GroupName, v.GroupName)
+		case schemas.GroupType_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.GroupType_LastModifiedDate, v.LastModifiedDate)
+		case schemas.GroupType_Precedence:
+			v.Precedence = new(int32)
+			return d.ReadInt32(schemas.GroupType_Precedence, v.Precedence)
+		case schemas.GroupType_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GroupType_RoleArn, v.RoleArn)
+		case schemas.GroupType_UserPoolId:
+			v.UserPoolId = new(string)
+			return d.ReadString(schemas.GroupType_UserPoolId, v.UserPoolId)
+		}
+		return nil
+	})
+}
+
 // The HTTP header in the ContextData parameter.
 type HttpHeader struct {
 
@@ -1136,6 +2531,34 @@ type HttpHeader struct {
 	HeaderValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HttpHeader) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpHeader)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpHeader) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HeaderName != nil {
+		s.WriteString(schemas.HttpHeader_headerName, *v.HeaderName)
+	}
+	if v.HeaderValue != nil {
+		s.WriteString(schemas.HttpHeader_headerValue, *v.HeaderValue)
+	}
+}
+func (v *HttpHeader) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpHeader, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpHeader_headerName:
+			v.HeaderName = new(string)
+			return d.ReadString(schemas.HttpHeader_headerName, v.HeaderName)
+		case schemas.HttpHeader_headerValue:
+			v.HeaderValue = new(string)
+			return d.ReadString(schemas.HttpHeader_headerValue, v.HeaderValue)
+		}
+		return nil
+	})
 }
 
 // A user pool identity provider (IdP). Contains information about a third-party
@@ -1272,6 +2695,65 @@ type IdentityProviderType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IdentityProviderType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdentityProviderType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IdentityProviderType) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeMappingType(s, schemas.IdentityProviderType_AttributeMapping, v.AttributeMapping)
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.IdentityProviderType_CreationDate, *v.CreationDate)
+	}
+	serializeIdpIdentifiersListType(s, schemas.IdentityProviderType_IdpIdentifiers, v.IdpIdentifiers)
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.IdentityProviderType_LastModifiedDate, *v.LastModifiedDate)
+	}
+	serializeProviderDetailsType(s, schemas.IdentityProviderType_ProviderDetails, v.ProviderDetails)
+	if v.ProviderName != nil {
+		s.WriteString(schemas.IdentityProviderType_ProviderName, *v.ProviderName)
+	}
+	if v.ProviderType != "" {
+		s.WriteString(schemas.IdentityProviderType_ProviderType, string(v.ProviderType))
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.IdentityProviderType_UserPoolId, *v.UserPoolId)
+	}
+}
+func (v *IdentityProviderType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdentityProviderType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdentityProviderType_AttributeMapping:
+			return deserializeAttributeMappingType(d, schemas.IdentityProviderType_AttributeMapping, &v.AttributeMapping)
+		case schemas.IdentityProviderType_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.IdentityProviderType_CreationDate, v.CreationDate)
+		case schemas.IdentityProviderType_IdpIdentifiers:
+			return deserializeIdpIdentifiersListType(d, schemas.IdentityProviderType_IdpIdentifiers, &v.IdpIdentifiers)
+		case schemas.IdentityProviderType_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.IdentityProviderType_LastModifiedDate, v.LastModifiedDate)
+		case schemas.IdentityProviderType_ProviderDetails:
+			return deserializeProviderDetailsType(d, schemas.IdentityProviderType_ProviderDetails, &v.ProviderDetails)
+		case schemas.IdentityProviderType_ProviderName:
+			v.ProviderName = new(string)
+			return d.ReadString(schemas.IdentityProviderType_ProviderName, v.ProviderName)
+		case schemas.IdentityProviderType_ProviderType:
+			var ev string
+			if err := d.ReadString(schemas.IdentityProviderType_ProviderType, &ev); err != nil {
+				return err
+			}
+			v.ProviderType = IdentityProviderTypeType(ev)
+			return nil
+		case schemas.IdentityProviderType_UserPoolId:
+			v.UserPoolId = new(string)
+			return d.ReadString(schemas.IdentityProviderType_UserPoolId, v.UserPoolId)
+		}
+		return nil
+	})
+}
+
 // The properties of an inbound federation Lambda trigger.
 type InboundFederationLambdaType struct {
 
@@ -1290,6 +2772,38 @@ type InboundFederationLambdaType struct {
 	LambdaVersion InboundFederationLambdaVersionType
 
 	noSmithyDocumentSerde
+}
+
+func (v *InboundFederationLambdaType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InboundFederationLambdaType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InboundFederationLambdaType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LambdaArn != nil {
+		s.WriteString(schemas.InboundFederationLambdaType_LambdaArn, *v.LambdaArn)
+	}
+	if v.LambdaVersion != "" {
+		s.WriteString(schemas.InboundFederationLambdaType_LambdaVersion, string(v.LambdaVersion))
+	}
+}
+func (v *InboundFederationLambdaType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InboundFederationLambdaType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InboundFederationLambdaType_LambdaArn:
+			v.LambdaArn = new(string)
+			return d.ReadString(schemas.InboundFederationLambdaType_LambdaArn, v.LambdaArn)
+		case schemas.InboundFederationLambdaType_LambdaVersion:
+			var ev string
+			if err := d.ReadString(schemas.InboundFederationLambdaType_LambdaVersion, &ev); err != nil {
+				return err
+			}
+			v.LambdaVersion = InboundFederationLambdaVersionType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Specifies the issuer configuration for a user pool. Contains settings that
@@ -1318,6 +2832,32 @@ type IssuerConfigurationType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IssuerConfigurationType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IssuerConfigurationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IssuerConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.IssuerConfigurationType_Type, string(v.Type))
+	}
+}
+func (v *IssuerConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IssuerConfigurationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IssuerConfigurationType_Type:
+			var ev string
+			if err := d.ReadString(schemas.IssuerConfigurationType_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = IssuerType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies the key configuration for a user pool. Contains settings for
 // encryption keys used to secure user pool data.
 type KeyConfigurationType struct {
@@ -1336,6 +2876,38 @@ type KeyConfigurationType struct {
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *KeyConfigurationType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeyConfigurationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeyConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyType != "" {
+		s.WriteString(schemas.KeyConfigurationType_KeyType, string(v.KeyType))
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.KeyConfigurationType_KmsKeyArn, *v.KmsKeyArn)
+	}
+}
+func (v *KeyConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeyConfigurationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeyConfigurationType_KeyType:
+			var ev string
+			if err := d.ReadString(schemas.KeyConfigurationType_KeyType, &ev); err != nil {
+				return err
+			}
+			v.KeyType = EncryptionKeyType(ev)
+			return nil
+		case schemas.KeyConfigurationType_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.KeyConfigurationType_KmsKeyArn, v.KmsKeyArn)
+		}
+		return nil
+	})
 }
 
 // A collection of user pool Lambda triggers. Amazon Cognito invokes triggers at
@@ -1441,6 +3013,120 @@ type LambdaConfigType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LambdaConfigType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaConfigType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaConfigType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateAuthChallenge != nil {
+		s.WriteString(schemas.LambdaConfigType_CreateAuthChallenge, *v.CreateAuthChallenge)
+	}
+	if v.CustomEmailSender != nil {
+		s.WriteStruct(schemas.LambdaConfigType_CustomEmailSender)
+		v.CustomEmailSender.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomMessage != nil {
+		s.WriteString(schemas.LambdaConfigType_CustomMessage, *v.CustomMessage)
+	}
+	if v.CustomSMSSender != nil {
+		s.WriteStruct(schemas.LambdaConfigType_CustomSMSSender)
+		v.CustomSMSSender.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefineAuthChallenge != nil {
+		s.WriteString(schemas.LambdaConfigType_DefineAuthChallenge, *v.DefineAuthChallenge)
+	}
+	if v.InboundFederation != nil {
+		s.WriteStruct(schemas.LambdaConfigType_InboundFederation)
+		v.InboundFederation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KMSKeyID != nil {
+		s.WriteString(schemas.LambdaConfigType_KMSKeyID, *v.KMSKeyID)
+	}
+	if v.PostAuthentication != nil {
+		s.WriteString(schemas.LambdaConfigType_PostAuthentication, *v.PostAuthentication)
+	}
+	if v.PostConfirmation != nil {
+		s.WriteString(schemas.LambdaConfigType_PostConfirmation, *v.PostConfirmation)
+	}
+	if v.PreAuthentication != nil {
+		s.WriteString(schemas.LambdaConfigType_PreAuthentication, *v.PreAuthentication)
+	}
+	if v.PreSignUp != nil {
+		s.WriteString(schemas.LambdaConfigType_PreSignUp, *v.PreSignUp)
+	}
+	if v.PreTokenGeneration != nil {
+		s.WriteString(schemas.LambdaConfigType_PreTokenGeneration, *v.PreTokenGeneration)
+	}
+	if v.PreTokenGenerationConfig != nil {
+		s.WriteStruct(schemas.LambdaConfigType_PreTokenGenerationConfig)
+		v.PreTokenGenerationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserMigration != nil {
+		s.WriteString(schemas.LambdaConfigType_UserMigration, *v.UserMigration)
+	}
+	if v.VerifyAuthChallengeResponse != nil {
+		s.WriteString(schemas.LambdaConfigType_VerifyAuthChallengeResponse, *v.VerifyAuthChallengeResponse)
+	}
+}
+func (v *LambdaConfigType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaConfigType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaConfigType_CreateAuthChallenge:
+			v.CreateAuthChallenge = new(string)
+			return d.ReadString(schemas.LambdaConfigType_CreateAuthChallenge, v.CreateAuthChallenge)
+		case schemas.LambdaConfigType_CustomEmailSender:
+			v.CustomEmailSender = &CustomEmailLambdaVersionConfigType{}
+			return v.CustomEmailSender.Deserialize(d)
+		case schemas.LambdaConfigType_CustomMessage:
+			v.CustomMessage = new(string)
+			return d.ReadString(schemas.LambdaConfigType_CustomMessage, v.CustomMessage)
+		case schemas.LambdaConfigType_CustomSMSSender:
+			v.CustomSMSSender = &CustomSMSLambdaVersionConfigType{}
+			return v.CustomSMSSender.Deserialize(d)
+		case schemas.LambdaConfigType_DefineAuthChallenge:
+			v.DefineAuthChallenge = new(string)
+			return d.ReadString(schemas.LambdaConfigType_DefineAuthChallenge, v.DefineAuthChallenge)
+		case schemas.LambdaConfigType_InboundFederation:
+			v.InboundFederation = &InboundFederationLambdaType{}
+			return v.InboundFederation.Deserialize(d)
+		case schemas.LambdaConfigType_KMSKeyID:
+			v.KMSKeyID = new(string)
+			return d.ReadString(schemas.LambdaConfigType_KMSKeyID, v.KMSKeyID)
+		case schemas.LambdaConfigType_PostAuthentication:
+			v.PostAuthentication = new(string)
+			return d.ReadString(schemas.LambdaConfigType_PostAuthentication, v.PostAuthentication)
+		case schemas.LambdaConfigType_PostConfirmation:
+			v.PostConfirmation = new(string)
+			return d.ReadString(schemas.LambdaConfigType_PostConfirmation, v.PostConfirmation)
+		case schemas.LambdaConfigType_PreAuthentication:
+			v.PreAuthentication = new(string)
+			return d.ReadString(schemas.LambdaConfigType_PreAuthentication, v.PreAuthentication)
+		case schemas.LambdaConfigType_PreSignUp:
+			v.PreSignUp = new(string)
+			return d.ReadString(schemas.LambdaConfigType_PreSignUp, v.PreSignUp)
+		case schemas.LambdaConfigType_PreTokenGeneration:
+			v.PreTokenGeneration = new(string)
+			return d.ReadString(schemas.LambdaConfigType_PreTokenGeneration, v.PreTokenGeneration)
+		case schemas.LambdaConfigType_PreTokenGenerationConfig:
+			v.PreTokenGenerationConfig = &PreTokenGenerationVersionConfigType{}
+			return v.PreTokenGenerationConfig.Deserialize(d)
+		case schemas.LambdaConfigType_UserMigration:
+			v.UserMigration = new(string)
+			return d.ReadString(schemas.LambdaConfigType_UserMigration, v.UserMigration)
+		case schemas.LambdaConfigType_VerifyAuthChallengeResponse:
+			v.VerifyAuthChallengeResponse = new(string)
+			return d.ReadString(schemas.LambdaConfigType_VerifyAuthChallengeResponse, v.VerifyAuthChallengeResponse)
+		}
+		return nil
+	})
+}
+
 // The class and attributes that identify a specific limit at the account level.
 type LimitDefinitionType struct {
 
@@ -1456,6 +3142,35 @@ type LimitDefinitionType struct {
 	LimitClass LimitClass
 
 	noSmithyDocumentSerde
+}
+
+func (v *LimitDefinitionType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitDefinitionType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitDefinitionType) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringToStringMapType(s, schemas.LimitDefinitionType_Attributes, v.Attributes)
+	if v.LimitClass != "" {
+		s.WriteString(schemas.LimitDefinitionType_LimitClass, string(v.LimitClass))
+	}
+}
+func (v *LimitDefinitionType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitDefinitionType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitDefinitionType_Attributes:
+			return deserializeStringToStringMapType(d, schemas.LimitDefinitionType_Attributes, &v.Attributes)
+		case schemas.LimitDefinitionType_LimitClass:
+			var ev string
+			if err := d.ReadString(schemas.LimitDefinitionType_LimitClass, &ev); err != nil {
+				return err
+			}
+			v.LimitClass = LimitClass(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The limit definition and current limit values for a provisioned limit.
@@ -1479,6 +3194,36 @@ type LimitType struct {
 	ProvisionedLimitValue int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *LimitType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitType) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.LimitType_FreeLimitValue, v.FreeLimitValue)
+	if v.LimitDefinition != nil {
+		s.WriteStruct(schemas.LimitType_LimitDefinition)
+		v.LimitDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.WriteInt32(schemas.LimitType_ProvisionedLimitValue, v.ProvisionedLimitValue)
+}
+func (v *LimitType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitType_FreeLimitValue:
+			return d.ReadInt32(schemas.LimitType_FreeLimitValue, &v.FreeLimitValue)
+		case schemas.LimitType_LimitDefinition:
+			v.LimitDefinition = &LimitDefinitionType{}
+			return v.LimitDefinition.Deserialize(d)
+		case schemas.LimitType_ProvisionedLimitValue:
+			return d.ReadInt32(schemas.LimitType_ProvisionedLimitValue, &v.ProvisionedLimitValue)
+		}
+		return nil
+	})
 }
 
 // The configuration of user event logs to an external Amazon Web Services service
@@ -1523,6 +3268,66 @@ type LogConfigurationType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LogConfigurationType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LogConfigurationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LogConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogsConfiguration != nil {
+		s.WriteStruct(schemas.LogConfigurationType_CloudWatchLogsConfiguration)
+		v.CloudWatchLogsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventSource != "" {
+		s.WriteString(schemas.LogConfigurationType_EventSource, string(v.EventSource))
+	}
+	if v.FirehoseConfiguration != nil {
+		s.WriteStruct(schemas.LogConfigurationType_FirehoseConfiguration)
+		v.FirehoseConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LogLevel != "" {
+		s.WriteString(schemas.LogConfigurationType_LogLevel, string(v.LogLevel))
+	}
+	if v.S3Configuration != nil {
+		s.WriteStruct(schemas.LogConfigurationType_S3Configuration)
+		v.S3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LogConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LogConfigurationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LogConfigurationType_CloudWatchLogsConfiguration:
+			v.CloudWatchLogsConfiguration = &CloudWatchLogsConfigurationType{}
+			return v.CloudWatchLogsConfiguration.Deserialize(d)
+		case schemas.LogConfigurationType_EventSource:
+			var ev string
+			if err := d.ReadString(schemas.LogConfigurationType_EventSource, &ev); err != nil {
+				return err
+			}
+			v.EventSource = EventSourceName(ev)
+			return nil
+		case schemas.LogConfigurationType_FirehoseConfiguration:
+			v.FirehoseConfiguration = &FirehoseConfigurationType{}
+			return v.FirehoseConfiguration.Deserialize(d)
+		case schemas.LogConfigurationType_LogLevel:
+			var ev string
+			if err := d.ReadString(schemas.LogConfigurationType_LogLevel, &ev); err != nil {
+				return err
+			}
+			v.LogLevel = LogLevel(ev)
+			return nil
+		case schemas.LogConfigurationType_S3Configuration:
+			v.S3Configuration = &S3ConfigurationType{}
+			return v.S3Configuration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The logging parameters of a user pool, as returned in the response to a
 // GetLogDeliveryConfiguration request.
 type LogDeliveryConfigurationType struct {
@@ -1539,6 +3344,31 @@ type LogDeliveryConfigurationType struct {
 	UserPoolId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LogDeliveryConfigurationType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LogDeliveryConfigurationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LogDeliveryConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLogConfigurationListType(s, schemas.LogDeliveryConfigurationType_LogConfigurations, v.LogConfigurations)
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.LogDeliveryConfigurationType_UserPoolId, *v.UserPoolId)
+	}
+}
+func (v *LogDeliveryConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LogDeliveryConfigurationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LogDeliveryConfigurationType_LogConfigurations:
+			return deserializeLogConfigurationListType(d, schemas.LogDeliveryConfigurationType_LogConfigurations, &v.LogConfigurations)
+		case schemas.LogDeliveryConfigurationType_UserPoolId:
+			v.UserPoolId = new(string)
+			return d.ReadString(schemas.LogDeliveryConfigurationType_UserPoolId, v.UserPoolId)
+		}
+		return nil
+	})
 }
 
 // A managed login branding style that's assigned to a user pool app client.
@@ -1593,6 +3423,66 @@ type ManagedLoginBrandingType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ManagedLoginBrandingType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedLoginBrandingType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedLoginBrandingType) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssetListType(s, schemas.ManagedLoginBrandingType_Assets, v.Assets)
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.ManagedLoginBrandingType_CreationDate, *v.CreationDate)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.ManagedLoginBrandingType_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.ManagedLoginBrandingId != nil {
+		s.WriteString(schemas.ManagedLoginBrandingType_ManagedLoginBrandingId, *v.ManagedLoginBrandingId)
+	}
+	if v.Settings != nil {
+		s.WriteDocument(schemas.ManagedLoginBrandingType_Settings, &smithydocument.Opaque{Value: v.Settings})
+	}
+	if v.UseCognitoProvidedValues != false {
+		s.WriteBool(schemas.ManagedLoginBrandingType_UseCognitoProvidedValues, v.UseCognitoProvidedValues)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.ManagedLoginBrandingType_UserPoolId, *v.UserPoolId)
+	}
+}
+func (v *ManagedLoginBrandingType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedLoginBrandingType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedLoginBrandingType_Assets:
+			return deserializeAssetListType(d, schemas.ManagedLoginBrandingType_Assets, &v.Assets)
+		case schemas.ManagedLoginBrandingType_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.ManagedLoginBrandingType_CreationDate, v.CreationDate)
+		case schemas.ManagedLoginBrandingType_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.ManagedLoginBrandingType_LastModifiedDate, v.LastModifiedDate)
+		case schemas.ManagedLoginBrandingType_ManagedLoginBrandingId:
+			v.ManagedLoginBrandingId = new(string)
+			return d.ReadString(schemas.ManagedLoginBrandingType_ManagedLoginBrandingId, v.ManagedLoginBrandingId)
+		case schemas.ManagedLoginBrandingType_Settings:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.ManagedLoginBrandingType_Settings, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Settings = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.ManagedLoginBrandingType_UseCognitoProvidedValues:
+			return d.ReadBool(schemas.ManagedLoginBrandingType_UseCognitoProvidedValues, &v.UseCognitoProvidedValues)
+		case schemas.ManagedLoginBrandingType_UserPoolId:
+			v.UserPoolId = new(string)
+			return d.ReadString(schemas.ManagedLoginBrandingType_UserPoolId, v.UserPoolId)
+		}
+		return nil
+	})
+}
+
 // The message template structure.
 type MessageTemplateType struct {
 
@@ -1614,6 +3504,40 @@ type MessageTemplateType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MessageTemplateType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MessageTemplateType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MessageTemplateType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailMessage != nil {
+		s.WriteString(schemas.MessageTemplateType_EmailMessage, *v.EmailMessage)
+	}
+	if v.EmailSubject != nil {
+		s.WriteString(schemas.MessageTemplateType_EmailSubject, *v.EmailSubject)
+	}
+	if v.SMSMessage != nil {
+		s.WriteString(schemas.MessageTemplateType_SMSMessage, *v.SMSMessage)
+	}
+}
+func (v *MessageTemplateType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MessageTemplateType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MessageTemplateType_EmailMessage:
+			v.EmailMessage = new(string)
+			return d.ReadString(schemas.MessageTemplateType_EmailMessage, v.EmailMessage)
+		case schemas.MessageTemplateType_EmailSubject:
+			v.EmailSubject = new(string)
+			return d.ReadString(schemas.MessageTemplateType_EmailSubject, v.EmailSubject)
+		case schemas.MessageTemplateType_SMSMessage:
+			v.SMSMessage = new(string)
+			return d.ReadString(schemas.MessageTemplateType_SMSMessage, v.SMSMessage)
+		}
+		return nil
+	})
+}
+
 //	This data type is no longer supported. Applies only to SMS multi-factor
 //
 // authentication (MFA) configurations. Does not apply to time-based one-time
@@ -1628,6 +3552,38 @@ type MFAOptionType struct {
 	DeliveryMedium DeliveryMediumType
 
 	noSmithyDocumentSerde
+}
+
+func (v *MFAOptionType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MFAOptionType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MFAOptionType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.MFAOptionType_AttributeName, *v.AttributeName)
+	}
+	if v.DeliveryMedium != "" {
+		s.WriteString(schemas.MFAOptionType_DeliveryMedium, string(v.DeliveryMedium))
+	}
+}
+func (v *MFAOptionType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MFAOptionType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MFAOptionType_AttributeName:
+			v.AttributeName = new(string)
+			return d.ReadString(schemas.MFAOptionType_AttributeName, v.AttributeName)
+		case schemas.MFAOptionType_DeliveryMedium:
+			var ev string
+			if err := d.ReadString(schemas.MFAOptionType_DeliveryMedium, &ev); err != nil {
+				return err
+			}
+			v.DeliveryMedium = DeliveryMediumType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Information that your user pool responds with in AuthenticationResult when you
@@ -1647,6 +3603,34 @@ type NewDeviceMetadataType struct {
 	DeviceKey *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NewDeviceMetadataType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NewDeviceMetadataType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NewDeviceMetadataType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceGroupKey != nil {
+		s.WriteString(schemas.NewDeviceMetadataType_DeviceGroupKey, *v.DeviceGroupKey)
+	}
+	if v.DeviceKey != nil {
+		s.WriteString(schemas.NewDeviceMetadataType_DeviceKey, *v.DeviceKey)
+	}
+}
+func (v *NewDeviceMetadataType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NewDeviceMetadataType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NewDeviceMetadataType_DeviceGroupKey:
+			v.DeviceGroupKey = new(string)
+			return d.ReadString(schemas.NewDeviceMetadataType_DeviceGroupKey, v.DeviceGroupKey)
+		case schemas.NewDeviceMetadataType_DeviceKey:
+			v.DeviceKey = new(string)
+			return d.ReadString(schemas.NewDeviceMetadataType_DeviceKey, v.DeviceKey)
+		}
+		return nil
+	})
 }
 
 // The configuration for Amazon SES email messages that threat protection sends to
@@ -1684,6 +3668,64 @@ type NotifyConfigurationType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotifyConfigurationType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotifyConfigurationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotifyConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlockEmail != nil {
+		s.WriteStruct(schemas.NotifyConfigurationType_BlockEmail)
+		v.BlockEmail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.From != nil {
+		s.WriteString(schemas.NotifyConfigurationType_From, *v.From)
+	}
+	if v.MfaEmail != nil {
+		s.WriteStruct(schemas.NotifyConfigurationType_MfaEmail)
+		v.MfaEmail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NoActionEmail != nil {
+		s.WriteStruct(schemas.NotifyConfigurationType_NoActionEmail)
+		v.NoActionEmail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReplyTo != nil {
+		s.WriteString(schemas.NotifyConfigurationType_ReplyTo, *v.ReplyTo)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.NotifyConfigurationType_SourceArn, *v.SourceArn)
+	}
+}
+func (v *NotifyConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotifyConfigurationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotifyConfigurationType_BlockEmail:
+			v.BlockEmail = &NotifyEmailType{}
+			return v.BlockEmail.Deserialize(d)
+		case schemas.NotifyConfigurationType_From:
+			v.From = new(string)
+			return d.ReadString(schemas.NotifyConfigurationType_From, v.From)
+		case schemas.NotifyConfigurationType_MfaEmail:
+			v.MfaEmail = &NotifyEmailType{}
+			return v.MfaEmail.Deserialize(d)
+		case schemas.NotifyConfigurationType_NoActionEmail:
+			v.NoActionEmail = &NotifyEmailType{}
+			return v.NoActionEmail.Deserialize(d)
+		case schemas.NotifyConfigurationType_ReplyTo:
+			v.ReplyTo = new(string)
+			return d.ReadString(schemas.NotifyConfigurationType_ReplyTo, v.ReplyTo)
+		case schemas.NotifyConfigurationType_SourceArn:
+			v.SourceArn = new(string)
+			return d.ReadString(schemas.NotifyConfigurationType_SourceArn, v.SourceArn)
+		}
+		return nil
+	})
+}
+
 // The template for email messages that threat protection sends to a user when
 // your threat protection automated response has a Notify action.
 type NotifyEmailType struct {
@@ -1704,6 +3746,40 @@ type NotifyEmailType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotifyEmailType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotifyEmailType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotifyEmailType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HtmlBody != nil {
+		s.WriteString(schemas.NotifyEmailType_HtmlBody, *v.HtmlBody)
+	}
+	if v.Subject != nil {
+		s.WriteString(schemas.NotifyEmailType_Subject, *v.Subject)
+	}
+	if v.TextBody != nil {
+		s.WriteString(schemas.NotifyEmailType_TextBody, *v.TextBody)
+	}
+}
+func (v *NotifyEmailType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotifyEmailType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotifyEmailType_HtmlBody:
+			v.HtmlBody = new(string)
+			return d.ReadString(schemas.NotifyEmailType_HtmlBody, v.HtmlBody)
+		case schemas.NotifyEmailType_Subject:
+			v.Subject = new(string)
+			return d.ReadString(schemas.NotifyEmailType_Subject, v.Subject)
+		case schemas.NotifyEmailType_TextBody:
+			v.TextBody = new(string)
+			return d.ReadString(schemas.NotifyEmailType_TextBody, v.TextBody)
+		}
+		return nil
+	})
+}
+
 // The minimum and maximum values of an attribute that is of the number type, for
 // example custom:age .
 type NumberAttributeConstraintsType struct {
@@ -1717,6 +3793,34 @@ type NumberAttributeConstraintsType struct {
 	MinValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NumberAttributeConstraintsType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NumberAttributeConstraintsType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NumberAttributeConstraintsType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxValue != nil {
+		s.WriteString(schemas.NumberAttributeConstraintsType_MaxValue, *v.MaxValue)
+	}
+	if v.MinValue != nil {
+		s.WriteString(schemas.NumberAttributeConstraintsType_MinValue, *v.MinValue)
+	}
+}
+func (v *NumberAttributeConstraintsType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NumberAttributeConstraintsType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NumberAttributeConstraintsType_MaxValue:
+			v.MaxValue = new(string)
+			return d.ReadString(schemas.NumberAttributeConstraintsType_MaxValue, v.MaxValue)
+		case schemas.NumberAttributeConstraintsType_MinValue:
+			v.MinValue = new(string)
+			return d.ReadString(schemas.NumberAttributeConstraintsType_MinValue, v.MinValue)
+		}
+		return nil
+	})
 }
 
 // The password policy settings for a user pool, including complexity, history,
@@ -1761,6 +3865,59 @@ type PasswordPolicyType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PasswordPolicyType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PasswordPolicyType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PasswordPolicyType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MinimumLength != nil {
+		s.WriteInt32(schemas.PasswordPolicyType_MinimumLength, *v.MinimumLength)
+	}
+	if v.PasswordHistorySize != nil {
+		s.WriteInt32(schemas.PasswordPolicyType_PasswordHistorySize, *v.PasswordHistorySize)
+	}
+	if v.RequireLowercase != false {
+		s.WriteBool(schemas.PasswordPolicyType_RequireLowercase, v.RequireLowercase)
+	}
+	if v.RequireNumbers != false {
+		s.WriteBool(schemas.PasswordPolicyType_RequireNumbers, v.RequireNumbers)
+	}
+	if v.RequireSymbols != false {
+		s.WriteBool(schemas.PasswordPolicyType_RequireSymbols, v.RequireSymbols)
+	}
+	if v.RequireUppercase != false {
+		s.WriteBool(schemas.PasswordPolicyType_RequireUppercase, v.RequireUppercase)
+	}
+	if v.TemporaryPasswordValidityDays != 0 {
+		s.WriteInt32(schemas.PasswordPolicyType_TemporaryPasswordValidityDays, v.TemporaryPasswordValidityDays)
+	}
+}
+func (v *PasswordPolicyType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PasswordPolicyType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PasswordPolicyType_MinimumLength:
+			v.MinimumLength = new(int32)
+			return d.ReadInt32(schemas.PasswordPolicyType_MinimumLength, v.MinimumLength)
+		case schemas.PasswordPolicyType_PasswordHistorySize:
+			v.PasswordHistorySize = new(int32)
+			return d.ReadInt32(schemas.PasswordPolicyType_PasswordHistorySize, v.PasswordHistorySize)
+		case schemas.PasswordPolicyType_RequireLowercase:
+			return d.ReadBool(schemas.PasswordPolicyType_RequireLowercase, &v.RequireLowercase)
+		case schemas.PasswordPolicyType_RequireNumbers:
+			return d.ReadBool(schemas.PasswordPolicyType_RequireNumbers, &v.RequireNumbers)
+		case schemas.PasswordPolicyType_RequireSymbols:
+			return d.ReadBool(schemas.PasswordPolicyType_RequireSymbols, &v.RequireSymbols)
+		case schemas.PasswordPolicyType_RequireUppercase:
+			return d.ReadBool(schemas.PasswordPolicyType_RequireUppercase, &v.RequireUppercase)
+		case schemas.PasswordPolicyType_TemporaryPasswordValidityDays:
+			return d.ReadInt32(schemas.PasswordPolicyType_TemporaryPasswordValidityDays, &v.TemporaryPasswordValidityDays)
+		}
+		return nil
+	})
+}
+
 // The properties of a pre token generation Lambda trigger.
 type PreTokenGenerationVersionConfigType struct {
 
@@ -1780,6 +3937,38 @@ type PreTokenGenerationVersionConfigType struct {
 	LambdaVersion PreTokenGenerationLambdaVersionType
 
 	noSmithyDocumentSerde
+}
+
+func (v *PreTokenGenerationVersionConfigType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PreTokenGenerationVersionConfigType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PreTokenGenerationVersionConfigType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LambdaArn != nil {
+		s.WriteString(schemas.PreTokenGenerationVersionConfigType_LambdaArn, *v.LambdaArn)
+	}
+	if v.LambdaVersion != "" {
+		s.WriteString(schemas.PreTokenGenerationVersionConfigType_LambdaVersion, string(v.LambdaVersion))
+	}
+}
+func (v *PreTokenGenerationVersionConfigType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PreTokenGenerationVersionConfigType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PreTokenGenerationVersionConfigType_LambdaArn:
+			v.LambdaArn = new(string)
+			return d.ReadString(schemas.PreTokenGenerationVersionConfigType_LambdaArn, v.LambdaArn)
+		case schemas.PreTokenGenerationVersionConfigType_LambdaVersion:
+			var ev string
+			if err := d.ReadString(schemas.PreTokenGenerationVersionConfigType_LambdaVersion, &ev); err != nil {
+				return err
+			}
+			v.LambdaVersion = PreTokenGenerationLambdaVersionType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The details of a user pool identity provider (IdP), including name and type.
@@ -1806,6 +3995,50 @@ type ProviderDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProviderDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProviderDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProviderDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.ProviderDescription_CreationDate, *v.CreationDate)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.ProviderDescription_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.ProviderName != nil {
+		s.WriteString(schemas.ProviderDescription_ProviderName, *v.ProviderName)
+	}
+	if v.ProviderType != "" {
+		s.WriteString(schemas.ProviderDescription_ProviderType, string(v.ProviderType))
+	}
+}
+func (v *ProviderDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProviderDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProviderDescription_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.ProviderDescription_CreationDate, v.CreationDate)
+		case schemas.ProviderDescription_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.ProviderDescription_LastModifiedDate, v.LastModifiedDate)
+		case schemas.ProviderDescription_ProviderName:
+			v.ProviderName = new(string)
+			return d.ReadString(schemas.ProviderDescription_ProviderName, v.ProviderName)
+		case schemas.ProviderDescription_ProviderType:
+			var ev string
+			if err := d.ReadString(schemas.ProviderDescription_ProviderType, &ev); err != nil {
+				return err
+			}
+			v.ProviderType = IdentityProviderTypeType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The characteristics of a source or destination user for linking a federated
 // user profile to a local user profile.
 type ProviderUserIdentifierType struct {
@@ -1820,6 +4053,40 @@ type ProviderUserIdentifierType struct {
 	ProviderName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProviderUserIdentifierType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProviderUserIdentifierType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProviderUserIdentifierType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProviderAttributeName != nil {
+		s.WriteString(schemas.ProviderUserIdentifierType_ProviderAttributeName, *v.ProviderAttributeName)
+	}
+	if v.ProviderAttributeValue != nil {
+		s.WriteString(schemas.ProviderUserIdentifierType_ProviderAttributeValue, *v.ProviderAttributeValue)
+	}
+	if v.ProviderName != nil {
+		s.WriteString(schemas.ProviderUserIdentifierType_ProviderName, *v.ProviderName)
+	}
+}
+func (v *ProviderUserIdentifierType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProviderUserIdentifierType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProviderUserIdentifierType_ProviderAttributeName:
+			v.ProviderAttributeName = new(string)
+			return d.ReadString(schemas.ProviderUserIdentifierType_ProviderAttributeName, v.ProviderAttributeName)
+		case schemas.ProviderUserIdentifierType_ProviderAttributeValue:
+			v.ProviderAttributeValue = new(string)
+			return d.ReadString(schemas.ProviderUserIdentifierType_ProviderAttributeValue, v.ProviderAttributeValue)
+		case schemas.ProviderUserIdentifierType_ProviderName:
+			v.ProviderName = new(string)
+			return d.ReadString(schemas.ProviderUserIdentifierType_ProviderName, v.ProviderName)
+		}
+		return nil
+	})
 }
 
 // A recovery option for a user. The AccountRecoverySettingType data type is an
@@ -1847,6 +4114,38 @@ type RecoveryOptionType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecoveryOptionType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecoveryOptionType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecoveryOptionType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.RecoveryOptionType_Name, string(v.Name))
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.RecoveryOptionType_Priority, *v.Priority)
+	}
+}
+func (v *RecoveryOptionType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecoveryOptionType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecoveryOptionType_Name:
+			var ev string
+			if err := d.ReadString(schemas.RecoveryOptionType_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = RecoveryOptionNameType(ev)
+			return nil
+		case schemas.RecoveryOptionType_Priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.RecoveryOptionType_Priority, v.Priority)
+		}
+		return nil
+	})
+}
+
 // The configuration of your app client for refresh token rotation. When enabled,
 // your app client issues new ID, access, and refresh tokens when users renew their
 // sessions with refresh tokens. When disabled, token refresh issues only ID and
@@ -1866,6 +4165,38 @@ type RefreshTokenRotationType struct {
 	RetryGracePeriodSeconds *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *RefreshTokenRotationType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RefreshTokenRotationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RefreshTokenRotationType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Feature != "" {
+		s.WriteString(schemas.RefreshTokenRotationType_Feature, string(v.Feature))
+	}
+	if v.RetryGracePeriodSeconds != nil {
+		s.WriteInt32(schemas.RefreshTokenRotationType_RetryGracePeriodSeconds, *v.RetryGracePeriodSeconds)
+	}
+}
+func (v *RefreshTokenRotationType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RefreshTokenRotationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RefreshTokenRotationType_Feature:
+			var ev string
+			if err := d.ReadString(schemas.RefreshTokenRotationType_Feature, &ev); err != nil {
+				return err
+			}
+			v.Feature = FeatureType(ev)
+			return nil
+		case schemas.RefreshTokenRotationType_RetryGracePeriodSeconds:
+			v.RetryGracePeriodSeconds = new(int32)
+			return d.ReadInt32(schemas.RefreshTokenRotationType_RetryGracePeriodSeconds, v.RetryGracePeriodSeconds)
+		}
+		return nil
+	})
 }
 
 // One custom scope associated with a user pool resource server. This data type is
@@ -1888,6 +4219,34 @@ type ResourceServerScopeType struct {
 	ScopeName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceServerScopeType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceServerScopeType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceServerScopeType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScopeDescription != nil {
+		s.WriteString(schemas.ResourceServerScopeType_ScopeDescription, *v.ScopeDescription)
+	}
+	if v.ScopeName != nil {
+		s.WriteString(schemas.ResourceServerScopeType_ScopeName, *v.ScopeName)
+	}
+}
+func (v *ResourceServerScopeType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceServerScopeType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceServerScopeType_ScopeDescription:
+			v.ScopeDescription = new(string)
+			return d.ReadString(schemas.ResourceServerScopeType_ScopeDescription, v.ScopeDescription)
+		case schemas.ResourceServerScopeType_ScopeName:
+			v.ScopeName = new(string)
+			return d.ReadString(schemas.ResourceServerScopeType_ScopeName, v.ScopeName)
+		}
+		return nil
+	})
 }
 
 // The details of a resource server configuration and associated custom scopes in
@@ -1913,6 +4272,43 @@ type ResourceServerType struct {
 	UserPoolId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceServerType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceServerType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceServerType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.ResourceServerType_Identifier, *v.Identifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ResourceServerType_Name, *v.Name)
+	}
+	serializeResourceServerScopeListType(s, schemas.ResourceServerType_Scopes, v.Scopes)
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.ResourceServerType_UserPoolId, *v.UserPoolId)
+	}
+}
+func (v *ResourceServerType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceServerType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceServerType_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.ResourceServerType_Identifier, v.Identifier)
+		case schemas.ResourceServerType_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ResourceServerType_Name, v.Name)
+		case schemas.ResourceServerType_Scopes:
+			return deserializeResourceServerScopeListType(d, schemas.ResourceServerType_Scopes, &v.Scopes)
+		case schemas.ResourceServerType_UserPoolId:
+			v.UserPoolId = new(string)
+			return d.ReadString(schemas.ResourceServerType_UserPoolId, v.UserPoolId)
+		}
+		return nil
+	})
 }
 
 // The settings of risk configuration for threat protection with threat protection
@@ -1947,6 +4343,64 @@ type RiskConfigurationType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RiskConfigurationType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RiskConfigurationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RiskConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountTakeoverRiskConfiguration != nil {
+		s.WriteStruct(schemas.RiskConfigurationType_AccountTakeoverRiskConfiguration)
+		v.AccountTakeoverRiskConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientId != nil {
+		s.WriteString(schemas.RiskConfigurationType_ClientId, *v.ClientId)
+	}
+	if v.CompromisedCredentialsRiskConfiguration != nil {
+		s.WriteStruct(schemas.RiskConfigurationType_CompromisedCredentialsRiskConfiguration)
+		v.CompromisedCredentialsRiskConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.RiskConfigurationType_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.RiskExceptionConfiguration != nil {
+		s.WriteStruct(schemas.RiskConfigurationType_RiskExceptionConfiguration)
+		v.RiskExceptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.RiskConfigurationType_UserPoolId, *v.UserPoolId)
+	}
+}
+func (v *RiskConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RiskConfigurationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RiskConfigurationType_AccountTakeoverRiskConfiguration:
+			v.AccountTakeoverRiskConfiguration = &AccountTakeoverRiskConfigurationType{}
+			return v.AccountTakeoverRiskConfiguration.Deserialize(d)
+		case schemas.RiskConfigurationType_ClientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.RiskConfigurationType_ClientId, v.ClientId)
+		case schemas.RiskConfigurationType_CompromisedCredentialsRiskConfiguration:
+			v.CompromisedCredentialsRiskConfiguration = &CompromisedCredentialsRiskConfigurationType{}
+			return v.CompromisedCredentialsRiskConfiguration.Deserialize(d)
+		case schemas.RiskConfigurationType_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.RiskConfigurationType_LastModifiedDate, v.LastModifiedDate)
+		case schemas.RiskConfigurationType_RiskExceptionConfiguration:
+			v.RiskExceptionConfiguration = &RiskExceptionConfigurationType{}
+			return v.RiskExceptionConfiguration.Deserialize(d)
+		case schemas.RiskConfigurationType_UserPoolId:
+			v.UserPoolId = new(string)
+			return d.ReadString(schemas.RiskConfigurationType_UserPoolId, v.UserPoolId)
+		}
+		return nil
+	})
+}
+
 // Exceptions to the risk evaluation configuration, including always-allow and
 // always-block IP address ranges.
 type RiskExceptionConfigurationType struct {
@@ -1963,6 +4417,28 @@ type RiskExceptionConfigurationType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RiskExceptionConfigurationType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RiskExceptionConfigurationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RiskExceptionConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBlockedIPRangeListType(s, schemas.RiskExceptionConfigurationType_BlockedIPRangeList, v.BlockedIPRangeList)
+	serializeSkippedIPRangeListType(s, schemas.RiskExceptionConfigurationType_SkippedIPRangeList, v.SkippedIPRangeList)
+}
+func (v *RiskExceptionConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RiskExceptionConfigurationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RiskExceptionConfigurationType_BlockedIPRangeList:
+			return deserializeBlockedIPRangeListType(d, schemas.RiskExceptionConfigurationType_BlockedIPRangeList, &v.BlockedIPRangeList)
+		case schemas.RiskExceptionConfigurationType_SkippedIPRangeList:
+			return deserializeSkippedIPRangeListType(d, schemas.RiskExceptionConfigurationType_SkippedIPRangeList, &v.SkippedIPRangeList)
+		}
+		return nil
+	})
+}
+
 // Specifies routing configuration for user pool domains. Contains failover
 // settings for multi-region deployments.
 type RoutingType struct {
@@ -1974,6 +4450,30 @@ type RoutingType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RoutingType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RoutingType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RoutingType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Failover != nil {
+		s.WriteStruct(schemas.RoutingType_Failover)
+		v.Failover.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RoutingType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RoutingType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RoutingType_Failover:
+			v.Failover = &FailoverType{}
+			return v.Failover.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Configuration for the Amazon S3 bucket destination of user activity log export
 // with threat protection.
 type S3ConfigurationType struct {
@@ -1983,6 +4483,28 @@ type S3ConfigurationType struct {
 	BucketArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3ConfigurationType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3ConfigurationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3ConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketArn != nil {
+		s.WriteString(schemas.S3ConfigurationType_BucketArn, *v.BucketArn)
+	}
+}
+func (v *S3ConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3ConfigurationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3ConfigurationType_BucketArn:
+			v.BucketArn = new(string)
+			return d.ReadString(schemas.S3ConfigurationType_BucketArn, v.BucketArn)
+		}
+		return nil
+	})
 }
 
 // A list of the user attributes and their properties in your user pool. The
@@ -2049,6 +4571,72 @@ type SchemaAttributeType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SchemaAttributeType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SchemaAttributeType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SchemaAttributeType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeDataType != "" {
+		s.WriteString(schemas.SchemaAttributeType_AttributeDataType, string(v.AttributeDataType))
+	}
+	if v.DeveloperOnlyAttribute != nil {
+		s.WriteBool(schemas.SchemaAttributeType_DeveloperOnlyAttribute, *v.DeveloperOnlyAttribute)
+	}
+	if v.Mutable != nil {
+		s.WriteBool(schemas.SchemaAttributeType_Mutable, *v.Mutable)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SchemaAttributeType_Name, *v.Name)
+	}
+	if v.NumberAttributeConstraints != nil {
+		s.WriteStruct(schemas.SchemaAttributeType_NumberAttributeConstraints)
+		v.NumberAttributeConstraints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Required != nil {
+		s.WriteBool(schemas.SchemaAttributeType_Required, *v.Required)
+	}
+	if v.StringAttributeConstraints != nil {
+		s.WriteStruct(schemas.SchemaAttributeType_StringAttributeConstraints)
+		v.StringAttributeConstraints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SchemaAttributeType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SchemaAttributeType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SchemaAttributeType_AttributeDataType:
+			var ev string
+			if err := d.ReadString(schemas.SchemaAttributeType_AttributeDataType, &ev); err != nil {
+				return err
+			}
+			v.AttributeDataType = AttributeDataType(ev)
+			return nil
+		case schemas.SchemaAttributeType_DeveloperOnlyAttribute:
+			v.DeveloperOnlyAttribute = new(bool)
+			return d.ReadBool(schemas.SchemaAttributeType_DeveloperOnlyAttribute, v.DeveloperOnlyAttribute)
+		case schemas.SchemaAttributeType_Mutable:
+			v.Mutable = new(bool)
+			return d.ReadBool(schemas.SchemaAttributeType_Mutable, v.Mutable)
+		case schemas.SchemaAttributeType_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SchemaAttributeType_Name, v.Name)
+		case schemas.SchemaAttributeType_NumberAttributeConstraints:
+			v.NumberAttributeConstraints = &NumberAttributeConstraintsType{}
+			return v.NumberAttributeConstraints.Deserialize(d)
+		case schemas.SchemaAttributeType_Required:
+			v.Required = new(bool)
+			return d.ReadBool(schemas.SchemaAttributeType_Required, v.Required)
+		case schemas.SchemaAttributeType_StringAttributeConstraints:
+			v.StringAttributeConstraints = &StringAttributeConstraintsType{}
+			return v.StringAttributeConstraints.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The policy for allowed types of authentication in a user pool. To activate this
 // setting, your user pool must be in the [Essentials tier]or higher.
 //
@@ -2064,6 +4652,25 @@ type SignInPolicyType struct {
 	AllowedFirstAuthFactors []AuthFactorType
 
 	noSmithyDocumentSerde
+}
+
+func (v *SignInPolicyType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SignInPolicyType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignInPolicyType) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAllowedFirstAuthFactorsListType(s, schemas.SignInPolicyType_AllowedFirstAuthFactors, v.AllowedFirstAuthFactors)
+}
+func (v *SignInPolicyType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SignInPolicyType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SignInPolicyType_AllowedFirstAuthFactors:
+			return deserializeAllowedFirstAuthFactorsListType(d, schemas.SignInPolicyType_AllowedFirstAuthFactors, &v.AllowedFirstAuthFactors)
+		}
+		return nil
+	})
 }
 
 // User pool configuration for delivery of SMS messages with Amazon Simple
@@ -2115,6 +4722,48 @@ type SmsConfigurationType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SmsConfigurationType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SmsConfigurationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SmsConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EumsSms != nil {
+		s.WriteStruct(schemas.SmsConfigurationType_EumsSms)
+		v.EumsSms.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExternalId != nil {
+		s.WriteString(schemas.SmsConfigurationType_ExternalId, *v.ExternalId)
+	}
+	if v.SnsCallerArn != nil {
+		s.WriteString(schemas.SmsConfigurationType_SnsCallerArn, *v.SnsCallerArn)
+	}
+	if v.SnsRegion != nil {
+		s.WriteString(schemas.SmsConfigurationType_SnsRegion, *v.SnsRegion)
+	}
+}
+func (v *SmsConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmsConfigurationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SmsConfigurationType_EumsSms:
+			v.EumsSms = &EumsSmsConfigurationType{}
+			return v.EumsSms.Deserialize(d)
+		case schemas.SmsConfigurationType_ExternalId:
+			v.ExternalId = new(string)
+			return d.ReadString(schemas.SmsConfigurationType_ExternalId, v.ExternalId)
+		case schemas.SmsConfigurationType_SnsCallerArn:
+			v.SnsCallerArn = new(string)
+			return d.ReadString(schemas.SmsConfigurationType_SnsCallerArn, v.SnsCallerArn)
+		case schemas.SmsConfigurationType_SnsRegion:
+			v.SnsRegion = new(string)
+			return d.ReadString(schemas.SmsConfigurationType_SnsRegion, v.SnsRegion)
+		}
+		return nil
+	})
+}
+
 // The configuration of multi-factor authentication (MFA) with SMS messages in a
 // user pool.
 type SmsMfaConfigType struct {
@@ -2137,6 +4786,36 @@ type SmsMfaConfigType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SmsMfaConfigType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SmsMfaConfigType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SmsMfaConfigType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SmsAuthenticationMessage != nil {
+		s.WriteString(schemas.SmsMfaConfigType_SmsAuthenticationMessage, *v.SmsAuthenticationMessage)
+	}
+	if v.SmsConfiguration != nil {
+		s.WriteStruct(schemas.SmsMfaConfigType_SmsConfiguration)
+		v.SmsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SmsMfaConfigType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmsMfaConfigType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SmsMfaConfigType_SmsAuthenticationMessage:
+			v.SmsAuthenticationMessage = new(string)
+			return d.ReadString(schemas.SmsMfaConfigType_SmsAuthenticationMessage, v.SmsAuthenticationMessage)
+		case schemas.SmsMfaConfigType_SmsConfiguration:
+			v.SmsConfiguration = &SmsConfigurationType{}
+			return v.SmsConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A user's preference for using SMS message multi-factor authentication (MFA).
 // Turns SMS MFA on and off, and can set SMS as preferred when other MFA options
 // are available. You can't turn off SMS MFA for any of your users when MFA is
@@ -2156,6 +4835,32 @@ type SMSMfaSettingsType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SMSMfaSettingsType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SMSMfaSettingsType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SMSMfaSettingsType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != false {
+		s.WriteBool(schemas.SMSMfaSettingsType_Enabled, v.Enabled)
+	}
+	if v.PreferredMfa != false {
+		s.WriteBool(schemas.SMSMfaSettingsType_PreferredMfa, v.PreferredMfa)
+	}
+}
+func (v *SMSMfaSettingsType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SMSMfaSettingsType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SMSMfaSettingsType_Enabled:
+			return d.ReadBool(schemas.SMSMfaSettingsType_Enabled, &v.Enabled)
+		case schemas.SMSMfaSettingsType_PreferredMfa:
+			return d.ReadBool(schemas.SMSMfaSettingsType_PreferredMfa, &v.PreferredMfa)
+		}
+		return nil
+	})
+}
+
 // Settings for time-based one-time password (TOTP) multi-factor authentication
 // (MFA) in a user pool. Enables and disables availability of this feature.
 type SoftwareTokenMfaConfigType struct {
@@ -2164,6 +4869,27 @@ type SoftwareTokenMfaConfigType struct {
 	Enabled bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *SoftwareTokenMfaConfigType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SoftwareTokenMfaConfigType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SoftwareTokenMfaConfigType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != false {
+		s.WriteBool(schemas.SoftwareTokenMfaConfigType_Enabled, v.Enabled)
+	}
+}
+func (v *SoftwareTokenMfaConfigType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SoftwareTokenMfaConfigType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SoftwareTokenMfaConfigType_Enabled:
+			return d.ReadBool(schemas.SoftwareTokenMfaConfigType_Enabled, &v.Enabled)
+		}
+		return nil
+	})
 }
 
 // A user's preference for using time-based one-time password (TOTP) multi-factor
@@ -2184,6 +4910,32 @@ type SoftwareTokenMfaSettingsType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SoftwareTokenMfaSettingsType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SoftwareTokenMfaSettingsType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SoftwareTokenMfaSettingsType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != false {
+		s.WriteBool(schemas.SoftwareTokenMfaSettingsType_Enabled, v.Enabled)
+	}
+	if v.PreferredMfa != false {
+		s.WriteBool(schemas.SoftwareTokenMfaSettingsType_PreferredMfa, v.PreferredMfa)
+	}
+}
+func (v *SoftwareTokenMfaSettingsType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SoftwareTokenMfaSettingsType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SoftwareTokenMfaSettingsType_Enabled:
+			return d.ReadBool(schemas.SoftwareTokenMfaSettingsType_Enabled, &v.Enabled)
+		case schemas.SoftwareTokenMfaSettingsType_PreferredMfa:
+			return d.ReadBool(schemas.SoftwareTokenMfaSettingsType_PreferredMfa, &v.PreferredMfa)
+		}
+		return nil
+	})
+}
+
 // The minimum and maximum length values of an attribute that is of the string
 // type, for example custom:department .
 type StringAttributeConstraintsType struct {
@@ -2197,6 +4949,34 @@ type StringAttributeConstraintsType struct {
 	MinLength *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StringAttributeConstraintsType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StringAttributeConstraintsType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StringAttributeConstraintsType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxLength != nil {
+		s.WriteString(schemas.StringAttributeConstraintsType_MaxLength, *v.MaxLength)
+	}
+	if v.MinLength != nil {
+		s.WriteString(schemas.StringAttributeConstraintsType_MinLength, *v.MinLength)
+	}
+}
+func (v *StringAttributeConstraintsType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StringAttributeConstraintsType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StringAttributeConstraintsType_MaxLength:
+			v.MaxLength = new(string)
+			return d.ReadString(schemas.StringAttributeConstraintsType_MaxLength, v.MaxLength)
+		case schemas.StringAttributeConstraintsType_MinLength:
+			v.MinLength = new(string)
+			return d.ReadString(schemas.StringAttributeConstraintsType_MinLength, v.MinLength)
+		}
+		return nil
+	})
 }
 
 // The details of a set of terms documents. For more information, see [Terms documents].
@@ -2234,6 +5014,56 @@ type TermsDescriptionType struct {
 	TermsName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TermsDescriptionType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TermsDescriptionType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TermsDescriptionType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.TermsDescriptionType_CreationDate, *v.CreationDate)
+	}
+	if v.Enforcement != "" {
+		s.WriteString(schemas.TermsDescriptionType_Enforcement, string(v.Enforcement))
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.TermsDescriptionType_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.TermsId != nil {
+		s.WriteString(schemas.TermsDescriptionType_TermsId, *v.TermsId)
+	}
+	if v.TermsName != nil {
+		s.WriteString(schemas.TermsDescriptionType_TermsName, *v.TermsName)
+	}
+}
+func (v *TermsDescriptionType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TermsDescriptionType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TermsDescriptionType_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.TermsDescriptionType_CreationDate, v.CreationDate)
+		case schemas.TermsDescriptionType_Enforcement:
+			var ev string
+			if err := d.ReadString(schemas.TermsDescriptionType_Enforcement, &ev); err != nil {
+				return err
+			}
+			v.Enforcement = TermsEnforcementType(ev)
+			return nil
+		case schemas.TermsDescriptionType_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.TermsDescriptionType_LastModifiedDate, v.LastModifiedDate)
+		case schemas.TermsDescriptionType_TermsId:
+			v.TermsId = new(string)
+			return d.ReadString(schemas.TermsDescriptionType_TermsId, v.TermsId)
+		case schemas.TermsDescriptionType_TermsName:
+			v.TermsName = new(string)
+			return d.ReadString(schemas.TermsDescriptionType_TermsName, v.TermsName)
+		}
+		return nil
+	})
 }
 
 // The details of a set of terms documents. For more information, see [Terms documents].
@@ -2298,6 +5128,81 @@ type TermsType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TermsType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TermsType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TermsType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.TermsType_ClientId, *v.ClientId)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.TermsType_CreationDate, *v.CreationDate)
+	}
+	if v.Enforcement != "" {
+		s.WriteString(schemas.TermsType_Enforcement, string(v.Enforcement))
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.TermsType_LastModifiedDate, *v.LastModifiedDate)
+	}
+	serializeLinksType(s, schemas.TermsType_Links, v.Links)
+	if v.TermsId != nil {
+		s.WriteString(schemas.TermsType_TermsId, *v.TermsId)
+	}
+	if v.TermsName != nil {
+		s.WriteString(schemas.TermsType_TermsName, *v.TermsName)
+	}
+	if v.TermsSource != "" {
+		s.WriteString(schemas.TermsType_TermsSource, string(v.TermsSource))
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.TermsType_UserPoolId, *v.UserPoolId)
+	}
+}
+func (v *TermsType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TermsType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TermsType_ClientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.TermsType_ClientId, v.ClientId)
+		case schemas.TermsType_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.TermsType_CreationDate, v.CreationDate)
+		case schemas.TermsType_Enforcement:
+			var ev string
+			if err := d.ReadString(schemas.TermsType_Enforcement, &ev); err != nil {
+				return err
+			}
+			v.Enforcement = TermsEnforcementType(ev)
+			return nil
+		case schemas.TermsType_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.TermsType_LastModifiedDate, v.LastModifiedDate)
+		case schemas.TermsType_Links:
+			return deserializeLinksType(d, schemas.TermsType_Links, &v.Links)
+		case schemas.TermsType_TermsId:
+			v.TermsId = new(string)
+			return d.ReadString(schemas.TermsType_TermsId, v.TermsId)
+		case schemas.TermsType_TermsName:
+			v.TermsName = new(string)
+			return d.ReadString(schemas.TermsType_TermsName, v.TermsName)
+		case schemas.TermsType_TermsSource:
+			var ev string
+			if err := d.ReadString(schemas.TermsType_TermsSource, &ev); err != nil {
+				return err
+			}
+			v.TermsSource = TermsSourceType(ev)
+			return nil
+		case schemas.TermsType_UserPoolId:
+			v.UserPoolId = new(string)
+			return d.ReadString(schemas.TermsType_UserPoolId, v.UserPoolId)
+		}
+		return nil
+	})
+}
+
 // The time units that, with IdTokenValidity , AccessTokenValidity , and
 // RefreshTokenValidity , set and display the duration of ID, access, and refresh
 // tokens for an app client. You can assign a separate token validity unit to each
@@ -2320,6 +5225,52 @@ type TokenValidityUnitsType struct {
 	RefreshToken TimeUnitsType
 
 	noSmithyDocumentSerde
+}
+
+func (v *TokenValidityUnitsType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TokenValidityUnitsType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TokenValidityUnitsType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != "" {
+		s.WriteString(schemas.TokenValidityUnitsType_AccessToken, string(v.AccessToken))
+	}
+	if v.IdToken != "" {
+		s.WriteString(schemas.TokenValidityUnitsType_IdToken, string(v.IdToken))
+	}
+	if v.RefreshToken != "" {
+		s.WriteString(schemas.TokenValidityUnitsType_RefreshToken, string(v.RefreshToken))
+	}
+}
+func (v *TokenValidityUnitsType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TokenValidityUnitsType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TokenValidityUnitsType_AccessToken:
+			var ev string
+			if err := d.ReadString(schemas.TokenValidityUnitsType_AccessToken, &ev); err != nil {
+				return err
+			}
+			v.AccessToken = TimeUnitsType(ev)
+			return nil
+		case schemas.TokenValidityUnitsType_IdToken:
+			var ev string
+			if err := d.ReadString(schemas.TokenValidityUnitsType_IdToken, &ev); err != nil {
+				return err
+			}
+			v.IdToken = TimeUnitsType(ev)
+			return nil
+		case schemas.TokenValidityUnitsType_RefreshToken:
+			var ev string
+			if err := d.ReadString(schemas.TokenValidityUnitsType_RefreshToken, &ev); err != nil {
+				return err
+			}
+			v.RefreshToken = TimeUnitsType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A container for the UI customization information for the hosted UI in a user
@@ -2356,6 +5307,64 @@ type UICustomizationType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UICustomizationType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UICustomizationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UICustomizationType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CSS != nil {
+		s.WriteString(schemas.UICustomizationType_CSS, *v.CSS)
+	}
+	if v.CSSVersion != nil {
+		s.WriteString(schemas.UICustomizationType_CSSVersion, *v.CSSVersion)
+	}
+	if v.ClientId != nil {
+		s.WriteString(schemas.UICustomizationType_ClientId, *v.ClientId)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.UICustomizationType_CreationDate, *v.CreationDate)
+	}
+	if v.ImageUrl != nil {
+		s.WriteString(schemas.UICustomizationType_ImageUrl, *v.ImageUrl)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.UICustomizationType_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.UICustomizationType_UserPoolId, *v.UserPoolId)
+	}
+}
+func (v *UICustomizationType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UICustomizationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UICustomizationType_CSS:
+			v.CSS = new(string)
+			return d.ReadString(schemas.UICustomizationType_CSS, v.CSS)
+		case schemas.UICustomizationType_CSSVersion:
+			v.CSSVersion = new(string)
+			return d.ReadString(schemas.UICustomizationType_CSSVersion, v.CSSVersion)
+		case schemas.UICustomizationType_ClientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.UICustomizationType_ClientId, v.ClientId)
+		case schemas.UICustomizationType_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.UICustomizationType_CreationDate, v.CreationDate)
+		case schemas.UICustomizationType_ImageUrl:
+			v.ImageUrl = new(string)
+			return d.ReadString(schemas.UICustomizationType_ImageUrl, v.ImageUrl)
+		case schemas.UICustomizationType_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.UICustomizationType_LastModifiedDate, v.LastModifiedDate)
+		case schemas.UICustomizationType_UserPoolId:
+			v.UserPoolId = new(string)
+			return d.ReadString(schemas.UICustomizationType_UserPoolId, v.UserPoolId)
+		}
+		return nil
+	})
+}
+
 // The settings for updates to user attributes. These settings include the
 // property AttributesRequireVerificationBeforeUpdate , a user-pool setting that
 // tells Amazon Cognito how to handle changes to the value of your users' email
@@ -2381,6 +5390,25 @@ type UserAttributeUpdateSettingsType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UserAttributeUpdateSettingsType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserAttributeUpdateSettingsType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserAttributeUpdateSettingsType) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributesRequireVerificationBeforeUpdateType(s, schemas.UserAttributeUpdateSettingsType_AttributesRequireVerificationBeforeUpdate, v.AttributesRequireVerificationBeforeUpdate)
+}
+func (v *UserAttributeUpdateSettingsType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserAttributeUpdateSettingsType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserAttributeUpdateSettingsType_AttributesRequireVerificationBeforeUpdate:
+			return deserializeAttributesRequireVerificationBeforeUpdateType(d, schemas.UserAttributeUpdateSettingsType_AttributesRequireVerificationBeforeUpdate, &v.AttributesRequireVerificationBeforeUpdate)
+		}
+		return nil
+	})
+}
+
 // Contextual data, such as the user's device fingerprint, IP address, or
 // location, used for evaluating the risk of an unexpected event by Amazon Cognito
 // threat protection.
@@ -2396,6 +5424,34 @@ type UserContextDataType struct {
 	IpAddress *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UserContextDataType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserContextDataType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserContextDataType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncodedData != nil {
+		s.WriteString(schemas.UserContextDataType_EncodedData, *v.EncodedData)
+	}
+	if v.IpAddress != nil {
+		s.WriteString(schemas.UserContextDataType_IpAddress, *v.IpAddress)
+	}
+}
+func (v *UserContextDataType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserContextDataType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserContextDataType_EncodedData:
+			v.EncodedData = new(string)
+			return d.ReadString(schemas.UserContextDataType_EncodedData, v.EncodedData)
+		case schemas.UserContextDataType_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.UserContextDataType_IpAddress, v.IpAddress)
+		}
+		return nil
+	})
 }
 
 // A user import job in a user pool. Describes the status of user import with a
@@ -2475,6 +5531,111 @@ type UserImportJobType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UserImportJobType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserImportJobType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserImportJobType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogsRoleArn != nil {
+		s.WriteString(schemas.UserImportJobType_CloudWatchLogsRoleArn, *v.CloudWatchLogsRoleArn)
+	}
+	if v.CompletionDate != nil {
+		s.WriteTime(schemas.UserImportJobType_CompletionDate, *v.CompletionDate)
+	}
+	if v.CompletionMessage != nil {
+		s.WriteString(schemas.UserImportJobType_CompletionMessage, *v.CompletionMessage)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.UserImportJobType_CreationDate, *v.CreationDate)
+	}
+	if v.FailedUsers != 0 {
+		s.WriteInt64(schemas.UserImportJobType_FailedUsers, v.FailedUsers)
+	}
+	if v.ImportedUsers != 0 {
+		s.WriteInt64(schemas.UserImportJobType_ImportedUsers, v.ImportedUsers)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.UserImportJobType_JobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.UserImportJobType_JobName, *v.JobName)
+	}
+	if v.PasswordHashingAlgorithm != "" {
+		s.WriteString(schemas.UserImportJobType_PasswordHashingAlgorithm, string(v.PasswordHashingAlgorithm))
+	}
+	if v.PreSignedUrl != nil {
+		s.WriteString(schemas.UserImportJobType_PreSignedUrl, *v.PreSignedUrl)
+	}
+	if v.SkippedUsers != 0 {
+		s.WriteInt64(schemas.UserImportJobType_SkippedUsers, v.SkippedUsers)
+	}
+	if v.StartDate != nil {
+		s.WriteTime(schemas.UserImportJobType_StartDate, *v.StartDate)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UserImportJobType_Status, string(v.Status))
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.UserImportJobType_UserPoolId, *v.UserPoolId)
+	}
+}
+func (v *UserImportJobType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserImportJobType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserImportJobType_CloudWatchLogsRoleArn:
+			v.CloudWatchLogsRoleArn = new(string)
+			return d.ReadString(schemas.UserImportJobType_CloudWatchLogsRoleArn, v.CloudWatchLogsRoleArn)
+		case schemas.UserImportJobType_CompletionDate:
+			v.CompletionDate = new(time.Time)
+			return d.ReadTime(schemas.UserImportJobType_CompletionDate, v.CompletionDate)
+		case schemas.UserImportJobType_CompletionMessage:
+			v.CompletionMessage = new(string)
+			return d.ReadString(schemas.UserImportJobType_CompletionMessage, v.CompletionMessage)
+		case schemas.UserImportJobType_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.UserImportJobType_CreationDate, v.CreationDate)
+		case schemas.UserImportJobType_FailedUsers:
+			return d.ReadInt64(schemas.UserImportJobType_FailedUsers, &v.FailedUsers)
+		case schemas.UserImportJobType_ImportedUsers:
+			return d.ReadInt64(schemas.UserImportJobType_ImportedUsers, &v.ImportedUsers)
+		case schemas.UserImportJobType_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.UserImportJobType_JobId, v.JobId)
+		case schemas.UserImportJobType_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.UserImportJobType_JobName, v.JobName)
+		case schemas.UserImportJobType_PasswordHashingAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.UserImportJobType_PasswordHashingAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.PasswordHashingAlgorithm = PasswordHashingAlgorithmType(ev)
+			return nil
+		case schemas.UserImportJobType_PreSignedUrl:
+			v.PreSignedUrl = new(string)
+			return d.ReadString(schemas.UserImportJobType_PreSignedUrl, v.PreSignedUrl)
+		case schemas.UserImportJobType_SkippedUsers:
+			return d.ReadInt64(schemas.UserImportJobType_SkippedUsers, &v.SkippedUsers)
+		case schemas.UserImportJobType_StartDate:
+			v.StartDate = new(time.Time)
+			return d.ReadTime(schemas.UserImportJobType_StartDate, v.StartDate)
+		case schemas.UserImportJobType_Status:
+			var ev string
+			if err := d.ReadString(schemas.UserImportJobType_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = UserImportJobStatusType(ev)
+			return nil
+		case schemas.UserImportJobType_UserPoolId:
+			v.UserPoolId = new(string)
+			return d.ReadString(schemas.UserImportJobType_UserPoolId, v.UserPoolId)
+		}
+		return nil
+	})
+}
+
 // The configuration of a user pool for username case sensitivity.
 type UsernameConfigurationType struct {
 
@@ -2499,6 +5660,28 @@ type UsernameConfigurationType struct {
 	CaseSensitive *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *UsernameConfigurationType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UsernameConfigurationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UsernameConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseSensitive != nil {
+		s.WriteBool(schemas.UsernameConfigurationType_CaseSensitive, *v.CaseSensitive)
+	}
+}
+func (v *UsernameConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UsernameConfigurationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UsernameConfigurationType_CaseSensitive:
+			v.CaseSensitive = new(bool)
+			return d.ReadBool(schemas.UsernameConfigurationType_CaseSensitive, v.CaseSensitive)
+		}
+		return nil
+	})
 }
 
 // Contains settings for activation of threat protection, including the operating
@@ -2527,6 +5710,40 @@ type UserPoolAddOnsType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UserPoolAddOnsType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserPoolAddOnsType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserPoolAddOnsType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdvancedSecurityAdditionalFlows != nil {
+		s.WriteStruct(schemas.UserPoolAddOnsType_AdvancedSecurityAdditionalFlows)
+		v.AdvancedSecurityAdditionalFlows.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AdvancedSecurityMode != "" {
+		s.WriteString(schemas.UserPoolAddOnsType_AdvancedSecurityMode, string(v.AdvancedSecurityMode))
+	}
+}
+func (v *UserPoolAddOnsType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserPoolAddOnsType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserPoolAddOnsType_AdvancedSecurityAdditionalFlows:
+			v.AdvancedSecurityAdditionalFlows = &AdvancedSecurityAdditionalFlowsType{}
+			return v.AdvancedSecurityAdditionalFlows.Deserialize(d)
+		case schemas.UserPoolAddOnsType_AdvancedSecurityMode:
+			var ev string
+			if err := d.ReadString(schemas.UserPoolAddOnsType_AdvancedSecurityMode, &ev); err != nil {
+				return err
+			}
+			v.AdvancedSecurityMode = AdvancedSecurityModeType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A short description of a user pool app client.
 type UserPoolClientDescription struct {
 
@@ -2540,6 +5757,40 @@ type UserPoolClientDescription struct {
 	UserPoolId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UserPoolClientDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserPoolClientDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserPoolClientDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.UserPoolClientDescription_ClientId, *v.ClientId)
+	}
+	if v.ClientName != nil {
+		s.WriteString(schemas.UserPoolClientDescription_ClientName, *v.ClientName)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.UserPoolClientDescription_UserPoolId, *v.UserPoolId)
+	}
+}
+func (v *UserPoolClientDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserPoolClientDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserPoolClientDescription_ClientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.UserPoolClientDescription_ClientId, v.ClientId)
+		case schemas.UserPoolClientDescription_ClientName:
+			v.ClientName = new(string)
+			return d.ReadString(schemas.UserPoolClientDescription_ClientName, v.ClientName)
+		case schemas.UserPoolClientDescription_UserPoolId:
+			v.UserPoolId = new(string)
+			return d.ReadString(schemas.UserPoolClientDescription_UserPoolId, v.UserPoolId)
+		}
+		return nil
+	})
 }
 
 // The configuration of a user pool client.
@@ -2864,6 +6115,163 @@ type UserPoolClientType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UserPoolClientType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserPoolClientType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserPoolClientType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessTokenValidity != nil {
+		s.WriteInt32(schemas.UserPoolClientType_AccessTokenValidity, *v.AccessTokenValidity)
+	}
+	serializeOAuthFlowsType(s, schemas.UserPoolClientType_AllowedOAuthFlows, v.AllowedOAuthFlows)
+	if v.AllowedOAuthFlowsUserPoolClient != nil {
+		s.WriteBool(schemas.UserPoolClientType_AllowedOAuthFlowsUserPoolClient, *v.AllowedOAuthFlowsUserPoolClient)
+	}
+	serializeScopeListType(s, schemas.UserPoolClientType_AllowedOAuthScopes, v.AllowedOAuthScopes)
+	if v.AnalyticsConfiguration != nil {
+		s.WriteStruct(schemas.UserPoolClientType_AnalyticsConfiguration)
+		v.AnalyticsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AuthSessionValidity != nil {
+		s.WriteInt32(schemas.UserPoolClientType_AuthSessionValidity, *v.AuthSessionValidity)
+	}
+	serializeCallbackURLsListType(s, schemas.UserPoolClientType_CallbackURLs, v.CallbackURLs)
+	if v.ClientId != nil {
+		s.WriteString(schemas.UserPoolClientType_ClientId, *v.ClientId)
+	}
+	if v.ClientName != nil {
+		s.WriteString(schemas.UserPoolClientType_ClientName, *v.ClientName)
+	}
+	if v.ClientSecret != nil {
+		s.WriteString(schemas.UserPoolClientType_ClientSecret, *v.ClientSecret)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.UserPoolClientType_CreationDate, *v.CreationDate)
+	}
+	if v.DefaultRedirectURI != nil {
+		s.WriteString(schemas.UserPoolClientType_DefaultRedirectURI, *v.DefaultRedirectURI)
+	}
+	if v.EnablePropagateAdditionalUserContextData != nil {
+		s.WriteBool(schemas.UserPoolClientType_EnablePropagateAdditionalUserContextData, *v.EnablePropagateAdditionalUserContextData)
+	}
+	if v.EnableTokenRevocation != nil {
+		s.WriteBool(schemas.UserPoolClientType_EnableTokenRevocation, *v.EnableTokenRevocation)
+	}
+	serializeExplicitAuthFlowsListType(s, schemas.UserPoolClientType_ExplicitAuthFlows, v.ExplicitAuthFlows)
+	if v.IdTokenValidity != nil {
+		s.WriteInt32(schemas.UserPoolClientType_IdTokenValidity, *v.IdTokenValidity)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.UserPoolClientType_LastModifiedDate, *v.LastModifiedDate)
+	}
+	serializeLogoutURLsListType(s, schemas.UserPoolClientType_LogoutURLs, v.LogoutURLs)
+	if v.PreventUserExistenceErrors != "" {
+		s.WriteString(schemas.UserPoolClientType_PreventUserExistenceErrors, string(v.PreventUserExistenceErrors))
+	}
+	serializeClientPermissionListType(s, schemas.UserPoolClientType_ReadAttributes, v.ReadAttributes)
+	if v.RefreshTokenRotation != nil {
+		s.WriteStruct(schemas.UserPoolClientType_RefreshTokenRotation)
+		v.RefreshTokenRotation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RefreshTokenValidity != 0 {
+		s.WriteInt32(schemas.UserPoolClientType_RefreshTokenValidity, v.RefreshTokenValidity)
+	}
+	serializeSupportedIdentityProvidersListType(s, schemas.UserPoolClientType_SupportedIdentityProviders, v.SupportedIdentityProviders)
+	if v.TokenValidityUnits != nil {
+		s.WriteStruct(schemas.UserPoolClientType_TokenValidityUnits)
+		v.TokenValidityUnits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.UserPoolClientType_UserPoolId, *v.UserPoolId)
+	}
+	serializeClientPermissionListType(s, schemas.UserPoolClientType_WriteAttributes, v.WriteAttributes)
+}
+func (v *UserPoolClientType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserPoolClientType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserPoolClientType_AccessTokenValidity:
+			v.AccessTokenValidity = new(int32)
+			return d.ReadInt32(schemas.UserPoolClientType_AccessTokenValidity, v.AccessTokenValidity)
+		case schemas.UserPoolClientType_AllowedOAuthFlows:
+			return deserializeOAuthFlowsType(d, schemas.UserPoolClientType_AllowedOAuthFlows, &v.AllowedOAuthFlows)
+		case schemas.UserPoolClientType_AllowedOAuthFlowsUserPoolClient:
+			v.AllowedOAuthFlowsUserPoolClient = new(bool)
+			return d.ReadBool(schemas.UserPoolClientType_AllowedOAuthFlowsUserPoolClient, v.AllowedOAuthFlowsUserPoolClient)
+		case schemas.UserPoolClientType_AllowedOAuthScopes:
+			return deserializeScopeListType(d, schemas.UserPoolClientType_AllowedOAuthScopes, &v.AllowedOAuthScopes)
+		case schemas.UserPoolClientType_AnalyticsConfiguration:
+			v.AnalyticsConfiguration = &AnalyticsConfigurationType{}
+			return v.AnalyticsConfiguration.Deserialize(d)
+		case schemas.UserPoolClientType_AuthSessionValidity:
+			v.AuthSessionValidity = new(int32)
+			return d.ReadInt32(schemas.UserPoolClientType_AuthSessionValidity, v.AuthSessionValidity)
+		case schemas.UserPoolClientType_CallbackURLs:
+			return deserializeCallbackURLsListType(d, schemas.UserPoolClientType_CallbackURLs, &v.CallbackURLs)
+		case schemas.UserPoolClientType_ClientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.UserPoolClientType_ClientId, v.ClientId)
+		case schemas.UserPoolClientType_ClientName:
+			v.ClientName = new(string)
+			return d.ReadString(schemas.UserPoolClientType_ClientName, v.ClientName)
+		case schemas.UserPoolClientType_ClientSecret:
+			v.ClientSecret = new(string)
+			return d.ReadString(schemas.UserPoolClientType_ClientSecret, v.ClientSecret)
+		case schemas.UserPoolClientType_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.UserPoolClientType_CreationDate, v.CreationDate)
+		case schemas.UserPoolClientType_DefaultRedirectURI:
+			v.DefaultRedirectURI = new(string)
+			return d.ReadString(schemas.UserPoolClientType_DefaultRedirectURI, v.DefaultRedirectURI)
+		case schemas.UserPoolClientType_EnablePropagateAdditionalUserContextData:
+			v.EnablePropagateAdditionalUserContextData = new(bool)
+			return d.ReadBool(schemas.UserPoolClientType_EnablePropagateAdditionalUserContextData, v.EnablePropagateAdditionalUserContextData)
+		case schemas.UserPoolClientType_EnableTokenRevocation:
+			v.EnableTokenRevocation = new(bool)
+			return d.ReadBool(schemas.UserPoolClientType_EnableTokenRevocation, v.EnableTokenRevocation)
+		case schemas.UserPoolClientType_ExplicitAuthFlows:
+			return deserializeExplicitAuthFlowsListType(d, schemas.UserPoolClientType_ExplicitAuthFlows, &v.ExplicitAuthFlows)
+		case schemas.UserPoolClientType_IdTokenValidity:
+			v.IdTokenValidity = new(int32)
+			return d.ReadInt32(schemas.UserPoolClientType_IdTokenValidity, v.IdTokenValidity)
+		case schemas.UserPoolClientType_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.UserPoolClientType_LastModifiedDate, v.LastModifiedDate)
+		case schemas.UserPoolClientType_LogoutURLs:
+			return deserializeLogoutURLsListType(d, schemas.UserPoolClientType_LogoutURLs, &v.LogoutURLs)
+		case schemas.UserPoolClientType_PreventUserExistenceErrors:
+			var ev string
+			if err := d.ReadString(schemas.UserPoolClientType_PreventUserExistenceErrors, &ev); err != nil {
+				return err
+			}
+			v.PreventUserExistenceErrors = PreventUserExistenceErrorTypes(ev)
+			return nil
+		case schemas.UserPoolClientType_ReadAttributes:
+			return deserializeClientPermissionListType(d, schemas.UserPoolClientType_ReadAttributes, &v.ReadAttributes)
+		case schemas.UserPoolClientType_RefreshTokenRotation:
+			v.RefreshTokenRotation = &RefreshTokenRotationType{}
+			return v.RefreshTokenRotation.Deserialize(d)
+		case schemas.UserPoolClientType_RefreshTokenValidity:
+			return d.ReadInt32(schemas.UserPoolClientType_RefreshTokenValidity, &v.RefreshTokenValidity)
+		case schemas.UserPoolClientType_SupportedIdentityProviders:
+			return deserializeSupportedIdentityProvidersListType(d, schemas.UserPoolClientType_SupportedIdentityProviders, &v.SupportedIdentityProviders)
+		case schemas.UserPoolClientType_TokenValidityUnits:
+			v.TokenValidityUnits = &TokenValidityUnitsType{}
+			return v.TokenValidityUnits.Deserialize(d)
+		case schemas.UserPoolClientType_UserPoolId:
+			v.UserPoolId = new(string)
+			return d.ReadString(schemas.UserPoolClientType_UserPoolId, v.UserPoolId)
+		case schemas.UserPoolClientType_WriteAttributes:
+			return deserializeClientPermissionListType(d, schemas.UserPoolClientType_WriteAttributes, &v.WriteAttributes)
+		}
+		return nil
+	})
+}
+
 // A short description of a user pool.
 type UserPoolDescriptionType struct {
 
@@ -2899,6 +6307,67 @@ type UserPoolDescriptionType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UserPoolDescriptionType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserPoolDescriptionType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserPoolDescriptionType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.UserPoolDescriptionType_CreationDate, *v.CreationDate)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UserPoolDescriptionType_Id, *v.Id)
+	}
+	if v.LambdaConfig != nil {
+		s.WriteStruct(schemas.UserPoolDescriptionType_LambdaConfig)
+		v.LambdaConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.UserPoolDescriptionType_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UserPoolDescriptionType_Name, *v.Name)
+	}
+	serializeReplicaRegionsType(s, schemas.UserPoolDescriptionType_ReplicaRegions, v.ReplicaRegions)
+	if v.Status != "" {
+		s.WriteString(schemas.UserPoolDescriptionType_Status, string(v.Status))
+	}
+}
+func (v *UserPoolDescriptionType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserPoolDescriptionType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserPoolDescriptionType_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.UserPoolDescriptionType_CreationDate, v.CreationDate)
+		case schemas.UserPoolDescriptionType_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UserPoolDescriptionType_Id, v.Id)
+		case schemas.UserPoolDescriptionType_LambdaConfig:
+			v.LambdaConfig = &LambdaConfigType{}
+			return v.LambdaConfig.Deserialize(d)
+		case schemas.UserPoolDescriptionType_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.UserPoolDescriptionType_LastModifiedDate, v.LastModifiedDate)
+		case schemas.UserPoolDescriptionType_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UserPoolDescriptionType_Name, v.Name)
+		case schemas.UserPoolDescriptionType_ReplicaRegions:
+			return deserializeReplicaRegionsType(d, schemas.UserPoolDescriptionType_ReplicaRegions, &v.ReplicaRegions)
+		case schemas.UserPoolDescriptionType_Status:
+			var ev string
+			if err := d.ReadString(schemas.UserPoolDescriptionType_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = StatusType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A list of user pool policies. Contains the policy that sets password-complexity
 // requirements.
 type UserPoolPolicyType struct {
@@ -2911,6 +6380,38 @@ type UserPoolPolicyType struct {
 	SignInPolicy *SignInPolicyType
 
 	noSmithyDocumentSerde
+}
+
+func (v *UserPoolPolicyType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserPoolPolicyType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserPoolPolicyType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PasswordPolicy != nil {
+		s.WriteStruct(schemas.UserPoolPolicyType_PasswordPolicy)
+		v.PasswordPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SignInPolicy != nil {
+		s.WriteStruct(schemas.UserPoolPolicyType_SignInPolicy)
+		v.SignInPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UserPoolPolicyType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserPoolPolicyType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserPoolPolicyType_PasswordPolicy:
+			v.PasswordPolicy = &PasswordPolicyType{}
+			return v.PasswordPolicy.Deserialize(d)
+		case schemas.UserPoolPolicyType_SignInPolicy:
+			v.SignInPolicy = &SignInPolicyType{}
+			return v.SignInPolicy.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Contains information about a replica user pool, including Region, status, role,
@@ -2947,6 +6448,54 @@ type UserPoolReplicaType struct {
 	UserPoolArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UserPoolReplicaType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserPoolReplicaType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserPoolReplicaType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegionName != nil {
+		s.WriteString(schemas.UserPoolReplicaType_RegionName, *v.RegionName)
+	}
+	if v.Role != "" {
+		s.WriteString(schemas.UserPoolReplicaType_Role, string(v.Role))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UserPoolReplicaType_Status, string(v.Status))
+	}
+	if v.UserPoolArn != nil {
+		s.WriteString(schemas.UserPoolReplicaType_UserPoolArn, *v.UserPoolArn)
+	}
+}
+func (v *UserPoolReplicaType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserPoolReplicaType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserPoolReplicaType_RegionName:
+			v.RegionName = new(string)
+			return d.ReadString(schemas.UserPoolReplicaType_RegionName, v.RegionName)
+		case schemas.UserPoolReplicaType_Role:
+			var ev string
+			if err := d.ReadString(schemas.UserPoolReplicaType_Role, &ev); err != nil {
+				return err
+			}
+			v.Role = ReplicaRoleType(ev)
+			return nil
+		case schemas.UserPoolReplicaType_Status:
+			var ev string
+			if err := d.ReadString(schemas.UserPoolReplicaType_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ReplicaStatusType(ev)
+			return nil
+		case schemas.UserPoolReplicaType_UserPoolArn:
+			v.UserPoolArn = new(string)
+			return d.ReadString(schemas.UserPoolReplicaType_UserPoolArn, v.UserPoolArn)
+		}
+		return nil
+	})
 }
 
 // The configuration of a user pool.
@@ -3165,6 +6714,264 @@ type UserPoolType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UserPoolType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserPoolType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserPoolType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountRecoverySetting != nil {
+		s.WriteStruct(schemas.UserPoolType_AccountRecoverySetting)
+		v.AccountRecoverySetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AdminCreateUserConfig != nil {
+		s.WriteStruct(schemas.UserPoolType_AdminCreateUserConfig)
+		v.AdminCreateUserConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAliasAttributesListType(s, schemas.UserPoolType_AliasAttributes, v.AliasAttributes)
+	if v.Arn != nil {
+		s.WriteString(schemas.UserPoolType_Arn, *v.Arn)
+	}
+	serializeVerifiedAttributesListType(s, schemas.UserPoolType_AutoVerifiedAttributes, v.AutoVerifiedAttributes)
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.UserPoolType_CreationDate, *v.CreationDate)
+	}
+	if v.CustomDomain != nil {
+		s.WriteString(schemas.UserPoolType_CustomDomain, *v.CustomDomain)
+	}
+	if v.DeletionProtection != "" {
+		s.WriteString(schemas.UserPoolType_DeletionProtection, string(v.DeletionProtection))
+	}
+	if v.DeviceConfiguration != nil {
+		s.WriteStruct(schemas.UserPoolType_DeviceConfiguration)
+		v.DeviceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.UserPoolType_Domain, *v.Domain)
+	}
+	if v.EmailConfiguration != nil {
+		s.WriteStruct(schemas.UserPoolType_EmailConfiguration)
+		v.EmailConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EmailConfigurationFailure != nil {
+		s.WriteString(schemas.UserPoolType_EmailConfigurationFailure, *v.EmailConfigurationFailure)
+	}
+	if v.EmailVerificationMessage != nil {
+		s.WriteString(schemas.UserPoolType_EmailVerificationMessage, *v.EmailVerificationMessage)
+	}
+	if v.EmailVerificationSubject != nil {
+		s.WriteString(schemas.UserPoolType_EmailVerificationSubject, *v.EmailVerificationSubject)
+	}
+	if v.EstimatedNumberOfUsers != 0 {
+		s.WriteInt32(schemas.UserPoolType_EstimatedNumberOfUsers, v.EstimatedNumberOfUsers)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UserPoolType_Id, *v.Id)
+	}
+	if v.IssuerConfiguration != nil {
+		s.WriteStruct(schemas.UserPoolType_IssuerConfiguration)
+		v.IssuerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KeyConfiguration != nil {
+		s.WriteStruct(schemas.UserPoolType_KeyConfiguration)
+		v.KeyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaConfig != nil {
+		s.WriteStruct(schemas.UserPoolType_LambdaConfig)
+		v.LambdaConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.UserPoolType_LastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.MfaConfiguration != "" {
+		s.WriteString(schemas.UserPoolType_MfaConfiguration, string(v.MfaConfiguration))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UserPoolType_Name, *v.Name)
+	}
+	if v.Policies != nil {
+		s.WriteStruct(schemas.UserPoolType_Policies)
+		v.Policies.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSchemaAttributesListType(s, schemas.UserPoolType_SchemaAttributes, v.SchemaAttributes)
+	if v.SmsAuthenticationMessage != nil {
+		s.WriteString(schemas.UserPoolType_SmsAuthenticationMessage, *v.SmsAuthenticationMessage)
+	}
+	if v.SmsConfiguration != nil {
+		s.WriteStruct(schemas.UserPoolType_SmsConfiguration)
+		v.SmsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SmsConfigurationFailure != nil {
+		s.WriteString(schemas.UserPoolType_SmsConfigurationFailure, *v.SmsConfigurationFailure)
+	}
+	if v.SmsVerificationMessage != nil {
+		s.WriteString(schemas.UserPoolType_SmsVerificationMessage, *v.SmsVerificationMessage)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UserPoolType_Status, string(v.Status))
+	}
+	if v.UserAttributeUpdateSettings != nil {
+		s.WriteStruct(schemas.UserPoolType_UserAttributeUpdateSettings)
+		v.UserAttributeUpdateSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserPoolAddOns != nil {
+		s.WriteStruct(schemas.UserPoolType_UserPoolAddOns)
+		v.UserPoolAddOns.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeUserPoolTagsType(s, schemas.UserPoolType_UserPoolTags, v.UserPoolTags)
+	if v.UserPoolTier != "" {
+		s.WriteString(schemas.UserPoolType_UserPoolTier, string(v.UserPoolTier))
+	}
+	serializeUsernameAttributesListType(s, schemas.UserPoolType_UsernameAttributes, v.UsernameAttributes)
+	if v.UsernameConfiguration != nil {
+		s.WriteStruct(schemas.UserPoolType_UsernameConfiguration)
+		v.UsernameConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VerificationMessageTemplate != nil {
+		s.WriteStruct(schemas.UserPoolType_VerificationMessageTemplate)
+		v.VerificationMessageTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UserPoolType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserPoolType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserPoolType_AccountRecoverySetting:
+			v.AccountRecoverySetting = &AccountRecoverySettingType{}
+			return v.AccountRecoverySetting.Deserialize(d)
+		case schemas.UserPoolType_AdminCreateUserConfig:
+			v.AdminCreateUserConfig = &AdminCreateUserConfigType{}
+			return v.AdminCreateUserConfig.Deserialize(d)
+		case schemas.UserPoolType_AliasAttributes:
+			return deserializeAliasAttributesListType(d, schemas.UserPoolType_AliasAttributes, &v.AliasAttributes)
+		case schemas.UserPoolType_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UserPoolType_Arn, v.Arn)
+		case schemas.UserPoolType_AutoVerifiedAttributes:
+			return deserializeVerifiedAttributesListType(d, schemas.UserPoolType_AutoVerifiedAttributes, &v.AutoVerifiedAttributes)
+		case schemas.UserPoolType_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.UserPoolType_CreationDate, v.CreationDate)
+		case schemas.UserPoolType_CustomDomain:
+			v.CustomDomain = new(string)
+			return d.ReadString(schemas.UserPoolType_CustomDomain, v.CustomDomain)
+		case schemas.UserPoolType_DeletionProtection:
+			var ev string
+			if err := d.ReadString(schemas.UserPoolType_DeletionProtection, &ev); err != nil {
+				return err
+			}
+			v.DeletionProtection = DeletionProtectionType(ev)
+			return nil
+		case schemas.UserPoolType_DeviceConfiguration:
+			v.DeviceConfiguration = &DeviceConfigurationType{}
+			return v.DeviceConfiguration.Deserialize(d)
+		case schemas.UserPoolType_Domain:
+			v.Domain = new(string)
+			return d.ReadString(schemas.UserPoolType_Domain, v.Domain)
+		case schemas.UserPoolType_EmailConfiguration:
+			v.EmailConfiguration = &EmailConfigurationType{}
+			return v.EmailConfiguration.Deserialize(d)
+		case schemas.UserPoolType_EmailConfigurationFailure:
+			v.EmailConfigurationFailure = new(string)
+			return d.ReadString(schemas.UserPoolType_EmailConfigurationFailure, v.EmailConfigurationFailure)
+		case schemas.UserPoolType_EmailVerificationMessage:
+			v.EmailVerificationMessage = new(string)
+			return d.ReadString(schemas.UserPoolType_EmailVerificationMessage, v.EmailVerificationMessage)
+		case schemas.UserPoolType_EmailVerificationSubject:
+			v.EmailVerificationSubject = new(string)
+			return d.ReadString(schemas.UserPoolType_EmailVerificationSubject, v.EmailVerificationSubject)
+		case schemas.UserPoolType_EstimatedNumberOfUsers:
+			return d.ReadInt32(schemas.UserPoolType_EstimatedNumberOfUsers, &v.EstimatedNumberOfUsers)
+		case schemas.UserPoolType_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UserPoolType_Id, v.Id)
+		case schemas.UserPoolType_IssuerConfiguration:
+			v.IssuerConfiguration = &IssuerConfigurationType{}
+			return v.IssuerConfiguration.Deserialize(d)
+		case schemas.UserPoolType_KeyConfiguration:
+			v.KeyConfiguration = &KeyConfigurationType{}
+			return v.KeyConfiguration.Deserialize(d)
+		case schemas.UserPoolType_LambdaConfig:
+			v.LambdaConfig = &LambdaConfigType{}
+			return v.LambdaConfig.Deserialize(d)
+		case schemas.UserPoolType_LastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.UserPoolType_LastModifiedDate, v.LastModifiedDate)
+		case schemas.UserPoolType_MfaConfiguration:
+			var ev string
+			if err := d.ReadString(schemas.UserPoolType_MfaConfiguration, &ev); err != nil {
+				return err
+			}
+			v.MfaConfiguration = UserPoolMfaType(ev)
+			return nil
+		case schemas.UserPoolType_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UserPoolType_Name, v.Name)
+		case schemas.UserPoolType_Policies:
+			v.Policies = &UserPoolPolicyType{}
+			return v.Policies.Deserialize(d)
+		case schemas.UserPoolType_SchemaAttributes:
+			return deserializeSchemaAttributesListType(d, schemas.UserPoolType_SchemaAttributes, &v.SchemaAttributes)
+		case schemas.UserPoolType_SmsAuthenticationMessage:
+			v.SmsAuthenticationMessage = new(string)
+			return d.ReadString(schemas.UserPoolType_SmsAuthenticationMessage, v.SmsAuthenticationMessage)
+		case schemas.UserPoolType_SmsConfiguration:
+			v.SmsConfiguration = &SmsConfigurationType{}
+			return v.SmsConfiguration.Deserialize(d)
+		case schemas.UserPoolType_SmsConfigurationFailure:
+			v.SmsConfigurationFailure = new(string)
+			return d.ReadString(schemas.UserPoolType_SmsConfigurationFailure, v.SmsConfigurationFailure)
+		case schemas.UserPoolType_SmsVerificationMessage:
+			v.SmsVerificationMessage = new(string)
+			return d.ReadString(schemas.UserPoolType_SmsVerificationMessage, v.SmsVerificationMessage)
+		case schemas.UserPoolType_Status:
+			var ev string
+			if err := d.ReadString(schemas.UserPoolType_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = StatusType(ev)
+			return nil
+		case schemas.UserPoolType_UserAttributeUpdateSettings:
+			v.UserAttributeUpdateSettings = &UserAttributeUpdateSettingsType{}
+			return v.UserAttributeUpdateSettings.Deserialize(d)
+		case schemas.UserPoolType_UserPoolAddOns:
+			v.UserPoolAddOns = &UserPoolAddOnsType{}
+			return v.UserPoolAddOns.Deserialize(d)
+		case schemas.UserPoolType_UserPoolTags:
+			return deserializeUserPoolTagsType(d, schemas.UserPoolType_UserPoolTags, &v.UserPoolTags)
+		case schemas.UserPoolType_UserPoolTier:
+			var ev string
+			if err := d.ReadString(schemas.UserPoolType_UserPoolTier, &ev); err != nil {
+				return err
+			}
+			v.UserPoolTier = UserPoolTierType(ev)
+			return nil
+		case schemas.UserPoolType_UsernameAttributes:
+			return deserializeUsernameAttributesListType(d, schemas.UserPoolType_UsernameAttributes, &v.UsernameAttributes)
+		case schemas.UserPoolType_UsernameConfiguration:
+			v.UsernameConfiguration = &UsernameConfigurationType{}
+			return v.UsernameConfiguration.Deserialize(d)
+		case schemas.UserPoolType_VerificationMessageTemplate:
+			v.VerificationMessageTemplate = &VerificationMessageTemplateType{}
+			return v.VerificationMessageTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A user profile in a Amazon Cognito user pool.
 type UserType struct {
 
@@ -3209,6 +7016,61 @@ type UserType struct {
 	Username *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UserType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserType) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeListType(s, schemas.UserType_Attributes, v.Attributes)
+	if v.Enabled != false {
+		s.WriteBool(schemas.UserType_Enabled, v.Enabled)
+	}
+	serializeMFAOptionListType(s, schemas.UserType_MFAOptions, v.MFAOptions)
+	if v.UserCreateDate != nil {
+		s.WriteTime(schemas.UserType_UserCreateDate, *v.UserCreateDate)
+	}
+	if v.UserLastModifiedDate != nil {
+		s.WriteTime(schemas.UserType_UserLastModifiedDate, *v.UserLastModifiedDate)
+	}
+	if v.UserStatus != "" {
+		s.WriteString(schemas.UserType_UserStatus, string(v.UserStatus))
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.UserType_Username, *v.Username)
+	}
+}
+func (v *UserType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserType_Attributes:
+			return deserializeAttributeListType(d, schemas.UserType_Attributes, &v.Attributes)
+		case schemas.UserType_Enabled:
+			return d.ReadBool(schemas.UserType_Enabled, &v.Enabled)
+		case schemas.UserType_MFAOptions:
+			return deserializeMFAOptionListType(d, schemas.UserType_MFAOptions, &v.MFAOptions)
+		case schemas.UserType_UserCreateDate:
+			v.UserCreateDate = new(time.Time)
+			return d.ReadTime(schemas.UserType_UserCreateDate, v.UserCreateDate)
+		case schemas.UserType_UserLastModifiedDate:
+			v.UserLastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.UserType_UserLastModifiedDate, v.UserLastModifiedDate)
+		case schemas.UserType_UserStatus:
+			var ev string
+			if err := d.ReadString(schemas.UserType_UserStatus, &ev); err != nil {
+				return err
+			}
+			v.UserStatus = UserStatusType(ev)
+			return nil
+		case schemas.UserType_Username:
+			v.Username = new(string)
+			return d.ReadString(schemas.UserType_Username, v.Username)
+		}
+		return nil
+	})
 }
 
 // The template for the verification message that your user pool delivers to users
@@ -3260,6 +7122,62 @@ type VerificationMessageTemplateType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerificationMessageTemplateType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerificationMessageTemplateType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerificationMessageTemplateType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultEmailOption != "" {
+		s.WriteString(schemas.VerificationMessageTemplateType_DefaultEmailOption, string(v.DefaultEmailOption))
+	}
+	if v.EmailMessage != nil {
+		s.WriteString(schemas.VerificationMessageTemplateType_EmailMessage, *v.EmailMessage)
+	}
+	if v.EmailMessageByLink != nil {
+		s.WriteString(schemas.VerificationMessageTemplateType_EmailMessageByLink, *v.EmailMessageByLink)
+	}
+	if v.EmailSubject != nil {
+		s.WriteString(schemas.VerificationMessageTemplateType_EmailSubject, *v.EmailSubject)
+	}
+	if v.EmailSubjectByLink != nil {
+		s.WriteString(schemas.VerificationMessageTemplateType_EmailSubjectByLink, *v.EmailSubjectByLink)
+	}
+	if v.SmsMessage != nil {
+		s.WriteString(schemas.VerificationMessageTemplateType_SmsMessage, *v.SmsMessage)
+	}
+}
+func (v *VerificationMessageTemplateType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VerificationMessageTemplateType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VerificationMessageTemplateType_DefaultEmailOption:
+			var ev string
+			if err := d.ReadString(schemas.VerificationMessageTemplateType_DefaultEmailOption, &ev); err != nil {
+				return err
+			}
+			v.DefaultEmailOption = DefaultEmailOptionType(ev)
+			return nil
+		case schemas.VerificationMessageTemplateType_EmailMessage:
+			v.EmailMessage = new(string)
+			return d.ReadString(schemas.VerificationMessageTemplateType_EmailMessage, v.EmailMessage)
+		case schemas.VerificationMessageTemplateType_EmailMessageByLink:
+			v.EmailMessageByLink = new(string)
+			return d.ReadString(schemas.VerificationMessageTemplateType_EmailMessageByLink, v.EmailMessageByLink)
+		case schemas.VerificationMessageTemplateType_EmailSubject:
+			v.EmailSubject = new(string)
+			return d.ReadString(schemas.VerificationMessageTemplateType_EmailSubject, v.EmailSubject)
+		case schemas.VerificationMessageTemplateType_EmailSubjectByLink:
+			v.EmailSubjectByLink = new(string)
+			return d.ReadString(schemas.VerificationMessageTemplateType_EmailSubjectByLink, v.EmailSubjectByLink)
+		case schemas.VerificationMessageTemplateType_SmsMessage:
+			v.SmsMessage = new(string)
+			return d.ReadString(schemas.VerificationMessageTemplateType_SmsMessage, v.SmsMessage)
+		}
+		return nil
+	})
+}
+
 // Settings for authentication (MFA) with passkey, or webauthN, biometric and
 // security-key devices in a user pool. Configures the following:
 //
@@ -3306,6 +7224,48 @@ type WebAuthnConfigurationType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WebAuthnConfigurationType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WebAuthnConfigurationType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WebAuthnConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FactorConfiguration != "" {
+		s.WriteString(schemas.WebAuthnConfigurationType_FactorConfiguration, string(v.FactorConfiguration))
+	}
+	if v.RelyingPartyId != nil {
+		s.WriteString(schemas.WebAuthnConfigurationType_RelyingPartyId, *v.RelyingPartyId)
+	}
+	if v.UserVerification != "" {
+		s.WriteString(schemas.WebAuthnConfigurationType_UserVerification, string(v.UserVerification))
+	}
+}
+func (v *WebAuthnConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WebAuthnConfigurationType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WebAuthnConfigurationType_FactorConfiguration:
+			var ev string
+			if err := d.ReadString(schemas.WebAuthnConfigurationType_FactorConfiguration, &ev); err != nil {
+				return err
+			}
+			v.FactorConfiguration = WebAuthnFactorConfigurationType(ev)
+			return nil
+		case schemas.WebAuthnConfigurationType_RelyingPartyId:
+			v.RelyingPartyId = new(string)
+			return d.ReadString(schemas.WebAuthnConfigurationType_RelyingPartyId, v.RelyingPartyId)
+		case schemas.WebAuthnConfigurationType_UserVerification:
+			var ev string
+			if err := d.ReadString(schemas.WebAuthnConfigurationType_UserVerification, &ev); err != nil {
+				return err
+			}
+			v.UserVerification = UserVerificationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The details of a passkey, or webauthN, biometric or security-key authentication
 // factor for a user.
 type WebAuthnCredentialDescription struct {
@@ -3346,6 +7306,55 @@ type WebAuthnCredentialDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WebAuthnCredentialDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WebAuthnCredentialDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WebAuthnCredentialDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticatorAttachment != nil {
+		s.WriteString(schemas.WebAuthnCredentialDescription_AuthenticatorAttachment, *v.AuthenticatorAttachment)
+	}
+	serializeWebAuthnAuthenticatorTransportsList(s, schemas.WebAuthnCredentialDescription_AuthenticatorTransports, v.AuthenticatorTransports)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.WebAuthnCredentialDescription_CreatedAt, *v.CreatedAt)
+	}
+	if v.CredentialId != nil {
+		s.WriteString(schemas.WebAuthnCredentialDescription_CredentialId, *v.CredentialId)
+	}
+	if v.FriendlyCredentialName != nil {
+		s.WriteString(schemas.WebAuthnCredentialDescription_FriendlyCredentialName, *v.FriendlyCredentialName)
+	}
+	if v.RelyingPartyId != nil {
+		s.WriteString(schemas.WebAuthnCredentialDescription_RelyingPartyId, *v.RelyingPartyId)
+	}
+}
+func (v *WebAuthnCredentialDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WebAuthnCredentialDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WebAuthnCredentialDescription_AuthenticatorAttachment:
+			v.AuthenticatorAttachment = new(string)
+			return d.ReadString(schemas.WebAuthnCredentialDescription_AuthenticatorAttachment, v.AuthenticatorAttachment)
+		case schemas.WebAuthnCredentialDescription_AuthenticatorTransports:
+			return deserializeWebAuthnAuthenticatorTransportsList(d, schemas.WebAuthnCredentialDescription_AuthenticatorTransports, &v.AuthenticatorTransports)
+		case schemas.WebAuthnCredentialDescription_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.WebAuthnCredentialDescription_CreatedAt, v.CreatedAt)
+		case schemas.WebAuthnCredentialDescription_CredentialId:
+			v.CredentialId = new(string)
+			return d.ReadString(schemas.WebAuthnCredentialDescription_CredentialId, v.CredentialId)
+		case schemas.WebAuthnCredentialDescription_FriendlyCredentialName:
+			v.FriendlyCredentialName = new(string)
+			return d.ReadString(schemas.WebAuthnCredentialDescription_FriendlyCredentialName, v.FriendlyCredentialName)
+		case schemas.WebAuthnCredentialDescription_RelyingPartyId:
+			v.RelyingPartyId = new(string)
+			return d.ReadString(schemas.WebAuthnCredentialDescription_RelyingPartyId, v.RelyingPartyId)
+		}
+		return nil
+	})
+}
+
 // A user's preference for using passkey, or WebAuthn, multi-factor authentication
 // (MFA). Turns passkey MFA on and off for the user. Unlike other MFA settings
 // types, this type doesn't include a PreferredMfa option because passkey MFA
@@ -3359,6 +7368,27 @@ type WebAuthnMfaSettingsType struct {
 	Enabled bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *WebAuthnMfaSettingsType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WebAuthnMfaSettingsType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WebAuthnMfaSettingsType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != false {
+		s.WriteBool(schemas.WebAuthnMfaSettingsType_Enabled, v.Enabled)
+	}
+}
+func (v *WebAuthnMfaSettingsType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WebAuthnMfaSettingsType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WebAuthnMfaSettingsType_Enabled:
+			return d.ReadBool(schemas.WebAuthnMfaSettingsType_Enabled, &v.Enabled)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

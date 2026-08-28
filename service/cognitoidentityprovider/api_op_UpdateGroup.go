@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -81,6 +83,30 @@ type UpdateGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateGroupRequest_Description, *v.Description)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.UpdateGroupRequest_GroupName, *v.GroupName)
+	}
+	if v.Precedence != nil {
+		s.WriteInt32(schemas.UpdateGroupRequest_Precedence, *v.Precedence)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateGroupRequest_RoleArn, *v.RoleArn)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.UpdateGroupRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 type UpdateGroupOutput struct {
 
 	// Contains the updated details of the group, including precedence, IAM role, and
@@ -93,13 +119,34 @@ type UpdateGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Group != nil {
+		s.WriteStruct(schemas.UpdateGroupResponse_Group)
+		v.Group.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGroupResponse_Group:
+			v.Group = &types.GroupType{}
+			return v.Group.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGroup, schemas.UpdateGroupRequest, schemas.UpdateGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGroup, schemas.UpdateGroupRequest, schemas.UpdateGroupResponse), output: &UpdateGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

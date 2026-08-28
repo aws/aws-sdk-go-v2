@@ -5,7 +5,9 @@ package mailmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,22 @@ type CreateAddressListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAddressListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAddressListRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAddressListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressListName != nil {
+		s.WriteString(schemas.CreateAddressListRequest_AddressListName, *v.AddressListName)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAddressListRequest_ClientToken, *v.ClientToken)
+	}
+	serializeTagList(s, schemas.CreateAddressListRequest_Tags, v.Tags)
+}
+
 type CreateAddressListOutput struct {
 
 	// The identifier of the created address list.
@@ -56,13 +74,32 @@ type CreateAddressListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAddressListOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAddressListResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAddressListOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressListId != nil {
+		s.WriteString(schemas.CreateAddressListResponse_AddressListId, *v.AddressListId)
+	}
+}
+func (v *CreateAddressListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAddressListResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAddressListResponse_AddressListId:
+			v.AddressListId = new(string)
+			return d.ReadString(schemas.CreateAddressListResponse_AddressListId, v.AddressListId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAddressListMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateAddressList{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAddressList, schemas.CreateAddressListRequest, schemas.CreateAddressListResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateAddressList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAddressList, schemas.CreateAddressListRequest, schemas.CreateAddressListResponse), output: &CreateAddressListOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

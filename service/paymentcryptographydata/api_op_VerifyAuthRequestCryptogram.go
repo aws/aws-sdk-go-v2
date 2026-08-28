@@ -4,7 +4,9 @@ package paymentcryptographydata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -101,6 +103,29 @@ type VerifyAuthRequestCryptogramInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyAuthRequestCryptogramInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyAuthRequestCryptogramInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyAuthRequestCryptogramInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthRequestCryptogram != nil {
+		s.WriteString(schemas.VerifyAuthRequestCryptogramInput_AuthRequestCryptogram, *v.AuthRequestCryptogram)
+	}
+	serializeCryptogramAuthResponse(s, schemas.VerifyAuthRequestCryptogramInput_AuthResponseAttributes, v.AuthResponseAttributes)
+	if v.KeyIdentifier != nil {
+		s.WriteString(schemas.VerifyAuthRequestCryptogramInput_KeyIdentifier, *v.KeyIdentifier)
+	}
+	if v.MajorKeyDerivationMode != "" {
+		s.WriteString(schemas.VerifyAuthRequestCryptogramInput_MajorKeyDerivationMode, string(v.MajorKeyDerivationMode))
+	}
+	serializeSessionKeyDerivation(s, schemas.VerifyAuthRequestCryptogramInput_SessionKeyDerivationAttributes, v.SessionKeyDerivationAttributes)
+	if v.TransactionData != nil {
+		s.WriteString(schemas.VerifyAuthRequestCryptogramInput_TransactionData, *v.TransactionData)
+	}
+}
+
 type VerifyAuthRequestCryptogramOutput struct {
 
 	// The keyARN of the major encryption key that Amazon Web Services Payment
@@ -129,13 +154,44 @@ type VerifyAuthRequestCryptogramOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyAuthRequestCryptogramOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyAuthRequestCryptogramOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyAuthRequestCryptogramOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthResponseValue != nil {
+		s.WriteString(schemas.VerifyAuthRequestCryptogramOutput_AuthResponseValue, *v.AuthResponseValue)
+	}
+	if v.KeyArn != nil {
+		s.WriteString(schemas.VerifyAuthRequestCryptogramOutput_KeyArn, *v.KeyArn)
+	}
+	if v.KeyCheckValue != nil {
+		s.WriteString(schemas.VerifyAuthRequestCryptogramOutput_KeyCheckValue, *v.KeyCheckValue)
+	}
+}
+func (v *VerifyAuthRequestCryptogramOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VerifyAuthRequestCryptogramOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VerifyAuthRequestCryptogramOutput_AuthResponseValue:
+			v.AuthResponseValue = new(string)
+			return d.ReadString(schemas.VerifyAuthRequestCryptogramOutput_AuthResponseValue, v.AuthResponseValue)
+		case schemas.VerifyAuthRequestCryptogramOutput_KeyArn:
+			v.KeyArn = new(string)
+			return d.ReadString(schemas.VerifyAuthRequestCryptogramOutput_KeyArn, v.KeyArn)
+		case schemas.VerifyAuthRequestCryptogramOutput_KeyCheckValue:
+			v.KeyCheckValue = new(string)
+			return d.ReadString(schemas.VerifyAuthRequestCryptogramOutput_KeyCheckValue, v.KeyCheckValue)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationVerifyAuthRequestCryptogramMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpVerifyAuthRequestCryptogram{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyAuthRequestCryptogram, schemas.VerifyAuthRequestCryptogramInput, schemas.VerifyAuthRequestCryptogramOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpVerifyAuthRequestCryptogram{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyAuthRequestCryptogram, schemas.VerifyAuthRequestCryptogramInput, schemas.VerifyAuthRequestCryptogramOutput), output: &VerifyAuthRequestCryptogramOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

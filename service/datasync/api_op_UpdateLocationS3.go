@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -79,6 +81,29 @@ type UpdateLocationS3Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLocationS3Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLocationS3Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLocationS3Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.UpdateLocationS3Request_LocationArn, *v.LocationArn)
+	}
+	if v.S3Config != nil {
+		s.WriteStruct(schemas.UpdateLocationS3Request_S3Config)
+		v.S3Config.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3StorageClass != "" {
+		s.WriteString(schemas.UpdateLocationS3Request_S3StorageClass, string(v.S3StorageClass))
+	}
+	if v.Subdirectory != nil {
+		s.WriteString(schemas.UpdateLocationS3Request_Subdirectory, *v.Subdirectory)
+	}
+}
+
 type UpdateLocationS3Output struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -86,13 +111,26 @@ type UpdateLocationS3Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLocationS3Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLocationS3Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLocationS3Output) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateLocationS3Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLocationS3Response, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLocationS3Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLocationS3{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLocationS3, schemas.UpdateLocationS3Request, schemas.UpdateLocationS3Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateLocationS3{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLocationS3, schemas.UpdateLocationS3Request, schemas.UpdateLocationS3Response), output: &UpdateLocationS3Output{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package appstream
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,26 @@ type DescribeImagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImagesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeArnList(s, schemas.DescribeImagesRequest_Arns, v.Arns)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeImagesRequest_MaxResults, *v.MaxResults)
+	}
+	serializeStringList(s, schemas.DescribeImagesRequest_Names, v.Names)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeImagesRequest_NextToken, *v.NextToken)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DescribeImagesRequest_Type, string(v.Type))
+	}
+}
+
 type DescribeImagesOutput struct {
 
 	// Information about the images.
@@ -63,13 +85,35 @@ type DescribeImagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImagesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImageList(s, schemas.DescribeImagesResult_Images, v.Images)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeImagesResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeImagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeImagesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeImagesResult_Images:
+			return deserializeImageList(d, schemas.DescribeImagesResult_Images, &v.Images)
+		case schemas.DescribeImagesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeImagesResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeImagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeImages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImages, schemas.DescribeImagesRequest, schemas.DescribeImagesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeImages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImages, schemas.DescribeImagesRequest, schemas.DescribeImagesResult), output: &DescribeImagesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

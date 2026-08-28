@@ -5,6 +5,8 @@ package amp
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/amp/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,34 @@ type DeleteAlertManagerDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAlertManagerDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAlertManagerDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAlertManagerDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteAlertManagerDefinitionRequest_clientToken, *v.ClientToken)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DeleteAlertManagerDefinitionRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *DeleteAlertManagerDefinitionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAlertManagerDefinitionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAlertManagerDefinitionRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DeleteAlertManagerDefinitionRequest_clientToken, v.ClientToken)
+		case schemas.DeleteAlertManagerDefinitionRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.DeleteAlertManagerDefinitionRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type DeleteAlertManagerDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +76,26 @@ type DeleteAlertManagerDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAlertManagerDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAlertManagerDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAlertManagerDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAlertManagerDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAlertManagerDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAlertManagerDefinition, schemas.DeleteAlertManagerDefinitionRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAlertManagerDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAlertManagerDefinition, schemas.DeleteAlertManagerDefinitionRequest, nil), output: &DeleteAlertManagerDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

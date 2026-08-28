@@ -4,6 +4,8 @@ package ecrpublic
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecrpublic/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,27 @@ type SetRepositoryPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetRepositoryPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetRepositoryPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetRepositoryPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Force != false {
+		s.WriteBool(schemas.SetRepositoryPolicyRequest_force, v.Force)
+	}
+	if v.PolicyText != nil {
+		s.WriteString(schemas.SetRepositoryPolicyRequest_policyText, *v.PolicyText)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.SetRepositoryPolicyRequest_registryId, *v.RegistryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.SetRepositoryPolicyRequest_repositoryName, *v.RepositoryName)
+	}
+}
+
 type SetRepositoryPolicyOutput struct {
 
 	// The JSON repository policy text that's applied to the repository.
@@ -72,13 +95,44 @@ type SetRepositoryPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetRepositoryPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetRepositoryPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetRepositoryPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyText != nil {
+		s.WriteString(schemas.SetRepositoryPolicyResponse_policyText, *v.PolicyText)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.SetRepositoryPolicyResponse_registryId, *v.RegistryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.SetRepositoryPolicyResponse_repositoryName, *v.RepositoryName)
+	}
+}
+func (v *SetRepositoryPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetRepositoryPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetRepositoryPolicyResponse_policyText:
+			v.PolicyText = new(string)
+			return d.ReadString(schemas.SetRepositoryPolicyResponse_policyText, v.PolicyText)
+		case schemas.SetRepositoryPolicyResponse_registryId:
+			v.RegistryId = new(string)
+			return d.ReadString(schemas.SetRepositoryPolicyResponse_registryId, v.RegistryId)
+		case schemas.SetRepositoryPolicyResponse_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.SetRepositoryPolicyResponse_repositoryName, v.RepositoryName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetRepositoryPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetRepositoryPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetRepositoryPolicy, schemas.SetRepositoryPolicyRequest, schemas.SetRepositoryPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSetRepositoryPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetRepositoryPolicy, schemas.SetRepositoryPolicyRequest, schemas.SetRepositoryPolicyResponse), output: &SetRepositoryPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

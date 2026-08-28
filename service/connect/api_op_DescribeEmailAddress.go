@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DescribeEmailAddressInput struct {
 	InstanceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeEmailAddressInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEmailAddressRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEmailAddressInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailAddressId != nil {
+		s.WriteString(schemas.DescribeEmailAddressRequest_EmailAddressId, *v.EmailAddressId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeEmailAddressRequest_InstanceId, *v.InstanceId)
+	}
 }
 
 type DescribeEmailAddressOutput struct {
@@ -80,13 +97,74 @@ type DescribeEmailAddressOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEmailAddressOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEmailAddressResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEmailAddressOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAliasConfigurationList(s, schemas.DescribeEmailAddressResponse_AliasConfigurations, v.AliasConfigurations)
+	if v.CreateTimestamp != nil {
+		s.WriteString(schemas.DescribeEmailAddressResponse_CreateTimestamp, *v.CreateTimestamp)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeEmailAddressResponse_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.DescribeEmailAddressResponse_DisplayName, *v.DisplayName)
+	}
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.DescribeEmailAddressResponse_EmailAddress, *v.EmailAddress)
+	}
+	if v.EmailAddressArn != nil {
+		s.WriteString(schemas.DescribeEmailAddressResponse_EmailAddressArn, *v.EmailAddressArn)
+	}
+	if v.EmailAddressId != nil {
+		s.WriteString(schemas.DescribeEmailAddressResponse_EmailAddressId, *v.EmailAddressId)
+	}
+	if v.ModifiedTimestamp != nil {
+		s.WriteString(schemas.DescribeEmailAddressResponse_ModifiedTimestamp, *v.ModifiedTimestamp)
+	}
+	serializeTagMap(s, schemas.DescribeEmailAddressResponse_Tags, v.Tags)
+}
+func (v *DescribeEmailAddressOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEmailAddressResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEmailAddressResponse_AliasConfigurations:
+			return deserializeAliasConfigurationList(d, schemas.DescribeEmailAddressResponse_AliasConfigurations, &v.AliasConfigurations)
+		case schemas.DescribeEmailAddressResponse_CreateTimestamp:
+			v.CreateTimestamp = new(string)
+			return d.ReadString(schemas.DescribeEmailAddressResponse_CreateTimestamp, v.CreateTimestamp)
+		case schemas.DescribeEmailAddressResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeEmailAddressResponse_Description, v.Description)
+		case schemas.DescribeEmailAddressResponse_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.DescribeEmailAddressResponse_DisplayName, v.DisplayName)
+		case schemas.DescribeEmailAddressResponse_EmailAddress:
+			v.EmailAddress = new(string)
+			return d.ReadString(schemas.DescribeEmailAddressResponse_EmailAddress, v.EmailAddress)
+		case schemas.DescribeEmailAddressResponse_EmailAddressArn:
+			v.EmailAddressArn = new(string)
+			return d.ReadString(schemas.DescribeEmailAddressResponse_EmailAddressArn, v.EmailAddressArn)
+		case schemas.DescribeEmailAddressResponse_EmailAddressId:
+			v.EmailAddressId = new(string)
+			return d.ReadString(schemas.DescribeEmailAddressResponse_EmailAddressId, v.EmailAddressId)
+		case schemas.DescribeEmailAddressResponse_ModifiedTimestamp:
+			v.ModifiedTimestamp = new(string)
+			return d.ReadString(schemas.DescribeEmailAddressResponse_ModifiedTimestamp, v.ModifiedTimestamp)
+		case schemas.DescribeEmailAddressResponse_Tags:
+			return deserializeTagMap(d, schemas.DescribeEmailAddressResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEmailAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeEmailAddress{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEmailAddress, schemas.DescribeEmailAddressRequest, schemas.DescribeEmailAddressResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeEmailAddress{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEmailAddress, schemas.DescribeEmailAddressRequest, schemas.DescribeEmailAddressResponse), output: &DescribeEmailAddressOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

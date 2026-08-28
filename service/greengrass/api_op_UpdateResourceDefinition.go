@@ -4,6 +4,8 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type UpdateResourceDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResourceDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResourceDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResourceDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateResourceDefinitionRequest_Name, *v.Name)
+	}
+	if v.ResourceDefinitionId != nil {
+		s.WriteString(schemas.UpdateResourceDefinitionRequest_ResourceDefinitionId, *v.ResourceDefinitionId)
+	}
+}
+
 type UpdateResourceDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +60,26 @@ type UpdateResourceDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResourceDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResourceDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResourceDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateResourceDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateResourceDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateResourceDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateResourceDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResourceDefinition, schemas.UpdateResourceDefinitionRequest, schemas.UpdateResourceDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateResourceDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResourceDefinition, schemas.UpdateResourceDefinitionRequest, schemas.UpdateResourceDefinitionResponse), output: &UpdateResourceDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

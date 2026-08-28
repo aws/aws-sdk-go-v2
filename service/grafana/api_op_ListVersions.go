@@ -5,6 +5,8 @@ package grafana
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/grafana/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListVersionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVersionsRequest_nextToken, *v.NextToken)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.ListVersionsRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+
 type ListVersionsOutput struct {
 
 	// The Grafana versions available to create. If a workspace ID is included in the
@@ -58,13 +78,35 @@ type ListVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGrafanaVersionList(s, schemas.ListVersionsResponse_grafanaVersions, v.GrafanaVersions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVersionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVersionsResponse_grafanaVersions:
+			return deserializeGrafanaVersionList(d, schemas.ListVersionsResponse_grafanaVersions, &v.GrafanaVersions)
+		case schemas.ListVersionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVersionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVersions, schemas.ListVersionsRequest, schemas.ListVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVersions, schemas.ListVersionsRequest, schemas.ListVersionsResponse), output: &ListVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

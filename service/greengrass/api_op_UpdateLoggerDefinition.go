@@ -4,6 +4,8 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type UpdateLoggerDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLoggerDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLoggerDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLoggerDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoggerDefinitionId != nil {
+		s.WriteString(schemas.UpdateLoggerDefinitionRequest_LoggerDefinitionId, *v.LoggerDefinitionId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateLoggerDefinitionRequest_Name, *v.Name)
+	}
+}
+
 type UpdateLoggerDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +60,26 @@ type UpdateLoggerDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLoggerDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLoggerDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLoggerDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateLoggerDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLoggerDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLoggerDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateLoggerDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLoggerDefinition, schemas.UpdateLoggerDefinitionRequest, schemas.UpdateLoggerDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateLoggerDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLoggerDefinition, schemas.UpdateLoggerDefinitionRequest, schemas.UpdateLoggerDefinitionResponse), output: &UpdateLoggerDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

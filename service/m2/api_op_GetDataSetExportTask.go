@@ -4,7 +4,9 @@ package m2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/m2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/m2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type GetDataSetExportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataSetExportTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataSetExportTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataSetExportTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetDataSetExportTaskRequest_applicationId, *v.ApplicationId)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.GetDataSetExportTaskRequest_taskId, *v.TaskId)
+	}
+}
+
 type GetDataSetExportTaskOutput struct {
 
 	// The status of the task.
@@ -66,13 +83,62 @@ type GetDataSetExportTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataSetExportTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataSetExportTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataSetExportTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.GetDataSetExportTaskResponse_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetDataSetExportTaskResponse_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.GetDataSetExportTaskResponse_statusReason, *v.StatusReason)
+	}
+	if v.Summary != nil {
+		s.WriteStruct(schemas.GetDataSetExportTaskResponse_summary)
+		v.Summary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.GetDataSetExportTaskResponse_taskId, *v.TaskId)
+	}
+}
+func (v *GetDataSetExportTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataSetExportTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataSetExportTaskResponse_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.GetDataSetExportTaskResponse_kmsKeyArn, v.KmsKeyArn)
+		case schemas.GetDataSetExportTaskResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetDataSetExportTaskResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DataSetTaskLifecycle(ev)
+			return nil
+		case schemas.GetDataSetExportTaskResponse_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.GetDataSetExportTaskResponse_statusReason, v.StatusReason)
+		case schemas.GetDataSetExportTaskResponse_summary:
+			v.Summary = &types.DataSetExportSummary{}
+			return v.Summary.Deserialize(d)
+		case schemas.GetDataSetExportTaskResponse_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.GetDataSetExportTaskResponse_taskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataSetExportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataSetExportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataSetExportTask, schemas.GetDataSetExportTaskRequest, schemas.GetDataSetExportTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataSetExportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataSetExportTask, schemas.GetDataSetExportTaskRequest, schemas.GetDataSetExportTaskResponse), output: &GetDataSetExportTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

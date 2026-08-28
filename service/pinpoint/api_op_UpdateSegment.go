@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,26 @@ type UpdateSegmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSegmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSegmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSegmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.UpdateSegmentRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.SegmentId != nil {
+		s.WriteString(schemas.UpdateSegmentRequest_SegmentId, *v.SegmentId)
+	}
+	if v.WriteSegmentRequest != nil {
+		s.WriteStruct(schemas.UpdateSegmentRequest_WriteSegmentRequest)
+		v.WriteSegmentRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateSegmentOutput struct {
 
 	// Provides information about the configuration, dimension, and other settings for
@@ -63,13 +85,34 @@ type UpdateSegmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSegmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSegmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSegmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SegmentResponse != nil {
+		s.WriteStruct(schemas.UpdateSegmentResponse_SegmentResponse)
+		v.SegmentResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateSegmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSegmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSegmentResponse_SegmentResponse:
+			v.SegmentResponse = &types.SegmentResponse{}
+			return v.SegmentResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSegmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSegment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSegment, schemas.UpdateSegmentRequest, schemas.UpdateSegmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSegment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSegment, schemas.UpdateSegmentRequest, schemas.UpdateSegmentResponse), output: &UpdateSegmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

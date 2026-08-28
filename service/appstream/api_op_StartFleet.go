@@ -4,6 +4,8 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type StartFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFleetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFleetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.StartFleetRequest_Name, *v.Name)
+	}
+}
+
 type StartFleetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type StartFleetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFleetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFleetResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartFleetResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStartFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFleet, schemas.StartFleetRequest, schemas.StartFleetResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStartFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFleet, schemas.StartFleetRequest, schemas.StartFleetResult), output: &StartFleetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

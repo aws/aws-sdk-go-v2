@@ -5,7 +5,9 @@ package partnercentralselling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,33 @@ type ListEngagementByAcceptingInvitationTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEngagementByAcceptingInvitationTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEngagementByAcceptingInvitationTasksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEngagementByAcceptingInvitationTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.ListEngagementByAcceptingInvitationTasksRequest_Catalog, *v.Catalog)
+	}
+	serializeEngagementInvitationIdentifiers(s, schemas.ListEngagementByAcceptingInvitationTasksRequest_EngagementInvitationIdentifier, v.EngagementInvitationIdentifier)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEngagementByAcceptingInvitationTasksRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEngagementByAcceptingInvitationTasksRequest_NextToken, *v.NextToken)
+	}
+	serializeOpportunityIdentifiers(s, schemas.ListEngagementByAcceptingInvitationTasksRequest_OpportunityIdentifier, v.OpportunityIdentifier)
+	if v.Sort != nil {
+		s.WriteStruct(schemas.ListEngagementByAcceptingInvitationTasksRequest_Sort)
+		v.Sort.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTaskIdentifiers(s, schemas.ListEngagementByAcceptingInvitationTasksRequest_TaskIdentifier, v.TaskIdentifier)
+	serializeTaskStatuses(s, schemas.ListEngagementByAcceptingInvitationTasksRequest_TaskStatus, v.TaskStatus)
+}
+
 type ListEngagementByAcceptingInvitationTasksOutput struct {
 
 	//  A token used for pagination to retrieve the next page of results.If there are
@@ -91,13 +120,35 @@ type ListEngagementByAcceptingInvitationTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEngagementByAcceptingInvitationTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEngagementByAcceptingInvitationTasksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEngagementByAcceptingInvitationTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEngagementByAcceptingInvitationTasksResponse_NextToken, *v.NextToken)
+	}
+	serializeListEngagementByAcceptingInvitationTaskSummaries(s, schemas.ListEngagementByAcceptingInvitationTasksResponse_TaskSummaries, v.TaskSummaries)
+}
+func (v *ListEngagementByAcceptingInvitationTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEngagementByAcceptingInvitationTasksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEngagementByAcceptingInvitationTasksResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEngagementByAcceptingInvitationTasksResponse_NextToken, v.NextToken)
+		case schemas.ListEngagementByAcceptingInvitationTasksResponse_TaskSummaries:
+			return deserializeListEngagementByAcceptingInvitationTaskSummaries(d, schemas.ListEngagementByAcceptingInvitationTasksResponse_TaskSummaries, &v.TaskSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEngagementByAcceptingInvitationTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListEngagementByAcceptingInvitationTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEngagementByAcceptingInvitationTasks, schemas.ListEngagementByAcceptingInvitationTasksRequest, schemas.ListEngagementByAcceptingInvitationTasksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListEngagementByAcceptingInvitationTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEngagementByAcceptingInvitationTasks, schemas.ListEngagementByAcceptingInvitationTasksRequest, schemas.ListEngagementByAcceptingInvitationTasksResponse), output: &ListEngagementByAcceptingInvitationTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,26 @@ type UpdateLocationFsxOntapInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLocationFsxOntapInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLocationFsxOntapRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLocationFsxOntapInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.UpdateLocationFsxOntapRequest_LocationArn, *v.LocationArn)
+	}
+	if v.Protocol != nil {
+		s.WriteStruct(schemas.UpdateLocationFsxOntapRequest_Protocol)
+		v.Protocol.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Subdirectory != nil {
+		s.WriteString(schemas.UpdateLocationFsxOntapRequest_Subdirectory, *v.Subdirectory)
+	}
+}
+
 type UpdateLocationFsxOntapOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -64,13 +86,26 @@ type UpdateLocationFsxOntapOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLocationFsxOntapOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLocationFsxOntapResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLocationFsxOntapOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateLocationFsxOntapOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLocationFsxOntapResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLocationFsxOntapMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLocationFsxOntap{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLocationFsxOntap, schemas.UpdateLocationFsxOntapRequest, schemas.UpdateLocationFsxOntapResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateLocationFsxOntap{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLocationFsxOntap, schemas.UpdateLocationFsxOntapRequest, schemas.UpdateLocationFsxOntapResponse), output: &UpdateLocationFsxOntapOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,28 @@ type GetMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMembershipInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.GetMembershipInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+func (v *GetMembershipInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMembershipInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMembershipInput_membershipIdentifier:
+			v.MembershipIdentifier = new(string)
+			return d.ReadString(schemas.GetMembershipInput_membershipIdentifier, v.MembershipIdentifier)
+		}
+		return nil
+	})
+}
+
 type GetMembershipOutput struct {
 
 	// The membership retrieved for the provided identifier.
@@ -47,13 +71,34 @@ type GetMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMembershipOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Membership != nil {
+		s.WriteStruct(schemas.GetMembershipOutput_membership)
+		v.Membership.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMembershipOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMembershipOutput_membership:
+			v.Membership = &types.Membership{}
+			return v.Membership.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMembership, schemas.GetMembershipInput, schemas.GetMembershipOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMembership, schemas.GetMembershipInput, schemas.GetMembershipOutput), output: &GetMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

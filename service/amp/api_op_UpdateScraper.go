@@ -5,7 +5,9 @@ package amp
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/amp/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amp/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,32 @@ type UpdateScraperInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateScraperInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateScraperRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateScraperInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.UpdateScraperRequest_alias, *v.Alias)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateScraperRequest_clientToken, *v.ClientToken)
+	}
+	serializeDestination(s, schemas.UpdateScraperRequest_destination, v.Destination)
+	serializeExporterList(s, schemas.UpdateScraperRequest_exporters, v.Exporters)
+	if v.RoleConfiguration != nil {
+		s.WriteStruct(schemas.UpdateScraperRequest_roleConfiguration)
+		v.RoleConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeScrapeConfiguration(s, schemas.UpdateScraperRequest_scrapeConfiguration, v.ScrapeConfiguration)
+	if v.ScraperId != nil {
+		s.WriteString(schemas.UpdateScraperRequest_scraperId, *v.ScraperId)
+	}
+}
+
 type UpdateScraperOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated scraper.
@@ -93,13 +121,49 @@ type UpdateScraperOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateScraperOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateScraperResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateScraperOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateScraperResponse_arn, *v.Arn)
+	}
+	if v.ScraperId != nil {
+		s.WriteString(schemas.UpdateScraperResponse_scraperId, *v.ScraperId)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.UpdateScraperResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.UpdateScraperResponse_tags, v.Tags)
+}
+func (v *UpdateScraperOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateScraperResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateScraperResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateScraperResponse_arn, v.Arn)
+		case schemas.UpdateScraperResponse_scraperId:
+			v.ScraperId = new(string)
+			return d.ReadString(schemas.UpdateScraperResponse_scraperId, v.ScraperId)
+		case schemas.UpdateScraperResponse_status:
+			v.Status = &types.ScraperStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.UpdateScraperResponse_tags:
+			return deserializeTagMap(d, schemas.UpdateScraperResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateScraperMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateScraper{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScraper, schemas.UpdateScraperRequest, schemas.UpdateScraperResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateScraper{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScraper, schemas.UpdateScraperRequest, schemas.UpdateScraperResponse), output: &UpdateScraperOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

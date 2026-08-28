@@ -4,6 +4,8 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DisassociateAppBlockBuilderAppBlockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateAppBlockBuilderAppBlockInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateAppBlockBuilderAppBlockRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateAppBlockBuilderAppBlockInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppBlockArn != nil {
+		s.WriteString(schemas.DisassociateAppBlockBuilderAppBlockRequest_AppBlockArn, *v.AppBlockArn)
+	}
+	if v.AppBlockBuilderName != nil {
+		s.WriteString(schemas.DisassociateAppBlockBuilderAppBlockRequest_AppBlockBuilderName, *v.AppBlockBuilderName)
+	}
+}
+
 type DisassociateAppBlockBuilderAppBlockOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type DisassociateAppBlockBuilderAppBlockOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateAppBlockBuilderAppBlockOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateAppBlockBuilderAppBlockResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateAppBlockBuilderAppBlockOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateAppBlockBuilderAppBlockOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateAppBlockBuilderAppBlockResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateAppBlockBuilderAppBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDisassociateAppBlockBuilderAppBlock{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateAppBlockBuilderAppBlock, schemas.DisassociateAppBlockBuilderAppBlockRequest, schemas.DisassociateAppBlockBuilderAppBlockResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDisassociateAppBlockBuilderAppBlock{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateAppBlockBuilderAppBlock, schemas.DisassociateAppBlockBuilderAppBlockRequest, schemas.DisassociateAppBlockBuilderAppBlockResult), output: &DisassociateAppBlockBuilderAppBlockOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

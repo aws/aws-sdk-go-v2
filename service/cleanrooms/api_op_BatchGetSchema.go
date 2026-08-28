@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,31 @@ type BatchGetSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetSchemaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetSchemaInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.BatchGetSchemaInput_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+	serializeTableAliasList(s, schemas.BatchGetSchemaInput_names, v.Names)
+}
+func (v *BatchGetSchemaInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetSchemaInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetSchemaInput_collaborationIdentifier:
+			v.CollaborationIdentifier = new(string)
+			return d.ReadString(schemas.BatchGetSchemaInput_collaborationIdentifier, v.CollaborationIdentifier)
+		case schemas.BatchGetSchemaInput_names:
+			return deserializeTableAliasList(d, schemas.BatchGetSchemaInput_names, &v.Names)
+		}
+		return nil
+	})
+}
+
 type BatchGetSchemaOutput struct {
 
 	// Error reasons for schemas that could not be retrieved. One error is returned
@@ -59,13 +86,32 @@ type BatchGetSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetSchemaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetSchemaOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetSchemaErrorList(s, schemas.BatchGetSchemaOutput_errors, v.Errors)
+	serializeSchemaList(s, schemas.BatchGetSchemaOutput_schemas, v.Schemas)
+}
+func (v *BatchGetSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetSchemaOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetSchemaOutput_errors:
+			return deserializeBatchGetSchemaErrorList(d, schemas.BatchGetSchemaOutput_errors, &v.Errors)
+		case schemas.BatchGetSchemaOutput_schemas:
+			return deserializeSchemaList(d, schemas.BatchGetSchemaOutput_schemas, &v.Schemas)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetSchema, schemas.BatchGetSchemaInput, schemas.BatchGetSchemaOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetSchema, schemas.BatchGetSchemaInput, schemas.BatchGetSchemaOutput), output: &BatchGetSchemaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

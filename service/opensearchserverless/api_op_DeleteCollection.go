@@ -5,7 +5,9 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,34 @@ type DeleteCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCollectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCollectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCollectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteCollectionRequest_clientToken, *v.ClientToken)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteCollectionRequest_id, *v.Id)
+	}
+}
+func (v *DeleteCollectionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCollectionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteCollectionRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DeleteCollectionRequest_clientToken, v.ClientToken)
+		case schemas.DeleteCollectionRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteCollectionRequest_id, v.Id)
+		}
+		return nil
+	})
+}
+
 type DeleteCollectionOutput struct {
 
 	// Details of the deleted collection.
@@ -54,13 +84,34 @@ type DeleteCollectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCollectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCollectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCollectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeleteCollectionDetail != nil {
+		s.WriteStruct(schemas.DeleteCollectionResponse_deleteCollectionDetail)
+		v.DeleteCollectionDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteCollectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCollectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteCollectionResponse_deleteCollectionDetail:
+			v.DeleteCollectionDetail = &types.DeleteCollectionDetail{}
+			return v.DeleteCollectionDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCollection, schemas.DeleteCollectionRequest, schemas.DeleteCollectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCollection, schemas.DeleteCollectionRequest, schemas.DeleteCollectionResponse), output: &DeleteCollectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

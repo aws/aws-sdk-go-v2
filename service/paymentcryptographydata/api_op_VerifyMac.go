@@ -4,7 +4,9 @@ package paymentcryptographydata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,28 @@ type VerifyMacInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyMacInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyMacInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyMacInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyIdentifier != nil {
+		s.WriteString(schemas.VerifyMacInput_KeyIdentifier, *v.KeyIdentifier)
+	}
+	if v.Mac != nil {
+		s.WriteString(schemas.VerifyMacInput_Mac, *v.Mac)
+	}
+	if v.MacLength != nil {
+		s.WriteInt32(schemas.VerifyMacInput_MacLength, *v.MacLength)
+	}
+	if v.MessageData != nil {
+		s.WriteString(schemas.VerifyMacInput_MessageData, *v.MessageData)
+	}
+	serializeMacAttributes(s, schemas.VerifyMacInput_VerificationAttributes, v.VerificationAttributes)
+}
+
 type VerifyMacOutput struct {
 
 	// The keyARN of the encryption key that Amazon Web Services Payment Cryptography
@@ -98,13 +122,38 @@ type VerifyMacOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyMacOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyMacOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyMacOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyArn != nil {
+		s.WriteString(schemas.VerifyMacOutput_KeyArn, *v.KeyArn)
+	}
+	if v.KeyCheckValue != nil {
+		s.WriteString(schemas.VerifyMacOutput_KeyCheckValue, *v.KeyCheckValue)
+	}
+}
+func (v *VerifyMacOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VerifyMacOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VerifyMacOutput_KeyArn:
+			v.KeyArn = new(string)
+			return d.ReadString(schemas.VerifyMacOutput_KeyArn, v.KeyArn)
+		case schemas.VerifyMacOutput_KeyCheckValue:
+			v.KeyCheckValue = new(string)
+			return d.ReadString(schemas.VerifyMacOutput_KeyCheckValue, v.KeyCheckValue)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationVerifyMacMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpVerifyMac{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyMac, schemas.VerifyMacInput, schemas.VerifyMacOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpVerifyMac{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyMac, schemas.VerifyMacInput, schemas.VerifyMacOutput), output: &VerifyMacOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

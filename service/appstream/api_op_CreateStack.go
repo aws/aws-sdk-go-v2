@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -100,6 +102,55 @@ type CreateStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessEndpointList(s, schemas.CreateStackRequest_AccessEndpoints, v.AccessEndpoints)
+	if v.AgentAccessConfig != nil {
+		s.WriteStruct(schemas.CreateStackRequest_AgentAccessConfig)
+		v.AgentAccessConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationSettings != nil {
+		s.WriteStruct(schemas.CreateStackRequest_ApplicationSettings)
+		v.ApplicationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContentRedirection != nil {
+		s.WriteStruct(schemas.CreateStackRequest_ContentRedirection)
+		v.ContentRedirection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateStackRequest_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateStackRequest_DisplayName, *v.DisplayName)
+	}
+	serializeEmbedHostDomains(s, schemas.CreateStackRequest_EmbedHostDomains, v.EmbedHostDomains)
+	if v.FeedbackURL != nil {
+		s.WriteString(schemas.CreateStackRequest_FeedbackURL, *v.FeedbackURL)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateStackRequest_Name, *v.Name)
+	}
+	if v.RedirectURL != nil {
+		s.WriteString(schemas.CreateStackRequest_RedirectURL, *v.RedirectURL)
+	}
+	serializeStorageConnectorList(s, schemas.CreateStackRequest_StorageConnectors, v.StorageConnectors)
+	if v.StreamingExperienceSettings != nil {
+		s.WriteStruct(schemas.CreateStackRequest_StreamingExperienceSettings)
+		v.StreamingExperienceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateStackRequest_Tags, v.Tags)
+	serializeUserSettingList(s, schemas.CreateStackRequest_UserSettings, v.UserSettings)
+}
+
 type CreateStackOutput struct {
 
 	// Information about the stack.
@@ -111,13 +162,34 @@ type CreateStackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStackResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Stack != nil {
+		s.WriteStruct(schemas.CreateStackResult_Stack)
+		v.Stack.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateStackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStackResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStackResult_Stack:
+			v.Stack = &types.Stack{}
+			return v.Stack.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStack, schemas.CreateStackRequest, schemas.CreateStackResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStack, schemas.CreateStackRequest, schemas.CreateStackResult), output: &CreateStackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

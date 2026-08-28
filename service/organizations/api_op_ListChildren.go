@@ -5,7 +5,9 @@ package organizations
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,27 @@ type ListChildrenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChildrenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListChildrenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListChildrenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChildType != "" {
+		s.WriteString(schemas.ListChildrenRequest_ChildType, string(v.ChildType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListChildrenRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListChildrenRequest_NextToken, *v.NextToken)
+	}
+	if v.ParentId != nil {
+		s.WriteString(schemas.ListChildrenRequest_ParentId, *v.ParentId)
+	}
+}
+
 type ListChildrenOutput struct {
 
 	// The list of children of the specified parent container.
@@ -92,13 +115,35 @@ type ListChildrenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChildrenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListChildrenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListChildrenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChildren(s, schemas.ListChildrenResponse_Children, v.Children)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListChildrenResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListChildrenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListChildrenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListChildrenResponse_Children:
+			return deserializeChildren(d, schemas.ListChildrenResponse_Children, &v.Children)
+		case schemas.ListChildrenResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListChildrenResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListChildrenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListChildren{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChildren, schemas.ListChildrenRequest, schemas.ListChildrenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListChildren{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChildren, schemas.ListChildrenRequest, schemas.ListChildrenResponse), output: &ListChildrenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

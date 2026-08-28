@@ -4,6 +4,8 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,24 @@ type AdminRemoveUserFromGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminRemoveUserFromGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminRemoveUserFromGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminRemoveUserFromGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupName != nil {
+		s.WriteString(schemas.AdminRemoveUserFromGroupRequest_GroupName, *v.GroupName)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AdminRemoveUserFromGroupRequest_UserPoolId, *v.UserPoolId)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.AdminRemoveUserFromGroupRequest_Username, *v.Username)
+	}
+}
+
 type AdminRemoveUserFromGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -74,13 +94,26 @@ type AdminRemoveUserFromGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminRemoveUserFromGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminRemoveUserFromGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AdminRemoveUserFromGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAdminRemoveUserFromGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminRemoveUserFromGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminRemoveUserFromGroup, schemas.AdminRemoveUserFromGroupRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminRemoveUserFromGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminRemoveUserFromGroup, schemas.AdminRemoveUserFromGroupRequest, nil), output: &AdminRemoveUserFromGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

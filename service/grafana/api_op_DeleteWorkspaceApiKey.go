@@ -4,6 +4,8 @@ package grafana
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/grafana/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,34 @@ type DeleteWorkspaceApiKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkspaceApiKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkspaceApiKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkspaceApiKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyName != nil {
+		s.WriteString(schemas.DeleteWorkspaceApiKeyRequest_keyName, *v.KeyName)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DeleteWorkspaceApiKeyRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *DeleteWorkspaceApiKeyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWorkspaceApiKeyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteWorkspaceApiKeyRequest_keyName:
+			v.KeyName = new(string)
+			return d.ReadString(schemas.DeleteWorkspaceApiKeyRequest_keyName, v.KeyName)
+		case schemas.DeleteWorkspaceApiKeyRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.DeleteWorkspaceApiKeyRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type DeleteWorkspaceApiKeyOutput struct {
 
 	// The name of the key that was deleted.
@@ -59,13 +89,38 @@ type DeleteWorkspaceApiKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkspaceApiKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkspaceApiKeyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkspaceApiKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyName != nil {
+		s.WriteString(schemas.DeleteWorkspaceApiKeyResponse_keyName, *v.KeyName)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DeleteWorkspaceApiKeyResponse_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *DeleteWorkspaceApiKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWorkspaceApiKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteWorkspaceApiKeyResponse_keyName:
+			v.KeyName = new(string)
+			return d.ReadString(schemas.DeleteWorkspaceApiKeyResponse_keyName, v.KeyName)
+		case schemas.DeleteWorkspaceApiKeyResponse_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.DeleteWorkspaceApiKeyResponse_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWorkspaceApiKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWorkspaceApiKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkspaceApiKey, schemas.DeleteWorkspaceApiKeyRequest, schemas.DeleteWorkspaceApiKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteWorkspaceApiKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkspaceApiKey, schemas.DeleteWorkspaceApiKeyRequest, schemas.DeleteWorkspaceApiKeyResponse), output: &DeleteWorkspaceApiKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

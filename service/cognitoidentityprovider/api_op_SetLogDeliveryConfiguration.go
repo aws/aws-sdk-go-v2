@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,19 @@ type SetLogDeliveryConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetLogDeliveryConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetLogDeliveryConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetLogDeliveryConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLogConfigurationListType(s, schemas.SetLogDeliveryConfigurationRequest_LogConfigurations, v.LogConfigurations)
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.SetLogDeliveryConfigurationRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 type SetLogDeliveryConfigurationOutput struct {
 
 	// The logging configuration that you applied to the requested user pool.
@@ -54,13 +69,34 @@ type SetLogDeliveryConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetLogDeliveryConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetLogDeliveryConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetLogDeliveryConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogDeliveryConfiguration != nil {
+		s.WriteStruct(schemas.SetLogDeliveryConfigurationResponse_LogDeliveryConfiguration)
+		v.LogDeliveryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SetLogDeliveryConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetLogDeliveryConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetLogDeliveryConfigurationResponse_LogDeliveryConfiguration:
+			v.LogDeliveryConfiguration = &types.LogDeliveryConfigurationType{}
+			return v.LogDeliveryConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetLogDeliveryConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetLogDeliveryConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetLogDeliveryConfiguration, schemas.SetLogDeliveryConfigurationRequest, schemas.SetLogDeliveryConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSetLogDeliveryConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetLogDeliveryConfiguration, schemas.SetLogDeliveryConfigurationRequest, schemas.SetLogDeliveryConfigurationResponse), output: &SetLogDeliveryConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

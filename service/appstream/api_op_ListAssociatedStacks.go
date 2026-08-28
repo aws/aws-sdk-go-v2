@@ -4,6 +4,8 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListAssociatedStacksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssociatedStacksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssociatedStacksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssociatedStacksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetName != nil {
+		s.WriteString(schemas.ListAssociatedStacksRequest_FleetName, *v.FleetName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssociatedStacksRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAssociatedStacksOutput struct {
 
 	// The name of the stack.
@@ -52,13 +69,35 @@ type ListAssociatedStacksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssociatedStacksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssociatedStacksResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssociatedStacksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.ListAssociatedStacksResult_Names, v.Names)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssociatedStacksResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAssociatedStacksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssociatedStacksResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssociatedStacksResult_Names:
+			return deserializeStringList(d, schemas.ListAssociatedStacksResult_Names, &v.Names)
+		case schemas.ListAssociatedStacksResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssociatedStacksResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssociatedStacksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListAssociatedStacks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociatedStacks, schemas.ListAssociatedStacksRequest, schemas.ListAssociatedStacksResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListAssociatedStacks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociatedStacks, schemas.ListAssociatedStacksRequest, schemas.ListAssociatedStacksResult), output: &ListAssociatedStacksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

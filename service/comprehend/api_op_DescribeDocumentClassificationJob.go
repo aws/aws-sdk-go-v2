@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DescribeDocumentClassificationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDocumentClassificationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDocumentClassificationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDocumentClassificationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeDocumentClassificationJobRequest_JobId, *v.JobId)
+	}
+}
+
 type DescribeDocumentClassificationJobOutput struct {
 
 	// An object that describes the properties associated with the document
@@ -48,13 +62,34 @@ type DescribeDocumentClassificationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDocumentClassificationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDocumentClassificationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDocumentClassificationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentClassificationJobProperties != nil {
+		s.WriteStruct(schemas.DescribeDocumentClassificationJobResponse_DocumentClassificationJobProperties)
+		v.DocumentClassificationJobProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeDocumentClassificationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDocumentClassificationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDocumentClassificationJobResponse_DocumentClassificationJobProperties:
+			v.DocumentClassificationJobProperties = &types.DocumentClassificationJobProperties{}
+			return v.DocumentClassificationJobProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDocumentClassificationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDocumentClassificationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDocumentClassificationJob, schemas.DescribeDocumentClassificationJobRequest, schemas.DescribeDocumentClassificationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDocumentClassificationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDocumentClassificationJob, schemas.DescribeDocumentClassificationJobRequest, schemas.DescribeDocumentClassificationJobResponse), output: &DescribeDocumentClassificationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

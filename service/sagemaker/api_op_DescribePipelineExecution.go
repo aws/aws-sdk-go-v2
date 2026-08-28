@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribePipelineExecutionInput struct {
 	PipelineExecutionArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribePipelineExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePipelineExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePipelineExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineExecutionArn != nil {
+		s.WriteString(schemas.DescribePipelineExecutionRequest_PipelineExecutionArn, *v.PipelineExecutionArn)
+	}
 }
 
 type DescribePipelineExecutionOutput struct {
@@ -88,13 +102,132 @@ type DescribePipelineExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePipelineExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePipelineExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePipelineExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.DescribePipelineExecutionResponse_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribePipelineExecutionResponse_CreationTime, *v.CreationTime)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribePipelineExecutionResponse_FailureReason, *v.FailureReason)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteStruct(schemas.DescribePipelineExecutionResponse_LastModifiedBy)
+		v.LastModifiedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribePipelineExecutionResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.MLflowConfig != nil {
+		s.WriteStruct(schemas.DescribePipelineExecutionResponse_MLflowConfig)
+		v.MLflowConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParallelismConfiguration != nil {
+		s.WriteStruct(schemas.DescribePipelineExecutionResponse_ParallelismConfiguration)
+		v.ParallelismConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PipelineArn != nil {
+		s.WriteString(schemas.DescribePipelineExecutionResponse_PipelineArn, *v.PipelineArn)
+	}
+	if v.PipelineExecutionArn != nil {
+		s.WriteString(schemas.DescribePipelineExecutionResponse_PipelineExecutionArn, *v.PipelineExecutionArn)
+	}
+	if v.PipelineExecutionDescription != nil {
+		s.WriteString(schemas.DescribePipelineExecutionResponse_PipelineExecutionDescription, *v.PipelineExecutionDescription)
+	}
+	if v.PipelineExecutionDisplayName != nil {
+		s.WriteString(schemas.DescribePipelineExecutionResponse_PipelineExecutionDisplayName, *v.PipelineExecutionDisplayName)
+	}
+	if v.PipelineExecutionStatus != "" {
+		s.WriteString(schemas.DescribePipelineExecutionResponse_PipelineExecutionStatus, string(v.PipelineExecutionStatus))
+	}
+	if v.PipelineExperimentConfig != nil {
+		s.WriteStruct(schemas.DescribePipelineExecutionResponse_PipelineExperimentConfig)
+		v.PipelineExperimentConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PipelineVersionId != nil {
+		s.WriteInt64(schemas.DescribePipelineExecutionResponse_PipelineVersionId, *v.PipelineVersionId)
+	}
+	if v.SelectiveExecutionConfig != nil {
+		s.WriteStruct(schemas.DescribePipelineExecutionResponse_SelectiveExecutionConfig)
+		v.SelectiveExecutionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribePipelineExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePipelineExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePipelineExecutionResponse_CreatedBy:
+			v.CreatedBy = &types.UserContext{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.DescribePipelineExecutionResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribePipelineExecutionResponse_CreationTime, v.CreationTime)
+		case schemas.DescribePipelineExecutionResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribePipelineExecutionResponse_FailureReason, v.FailureReason)
+		case schemas.DescribePipelineExecutionResponse_LastModifiedBy:
+			v.LastModifiedBy = &types.UserContext{}
+			return v.LastModifiedBy.Deserialize(d)
+		case schemas.DescribePipelineExecutionResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribePipelineExecutionResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribePipelineExecutionResponse_MLflowConfig:
+			v.MLflowConfig = &types.MLflowConfiguration{}
+			return v.MLflowConfig.Deserialize(d)
+		case schemas.DescribePipelineExecutionResponse_ParallelismConfiguration:
+			v.ParallelismConfiguration = &types.ParallelismConfiguration{}
+			return v.ParallelismConfiguration.Deserialize(d)
+		case schemas.DescribePipelineExecutionResponse_PipelineArn:
+			v.PipelineArn = new(string)
+			return d.ReadString(schemas.DescribePipelineExecutionResponse_PipelineArn, v.PipelineArn)
+		case schemas.DescribePipelineExecutionResponse_PipelineExecutionArn:
+			v.PipelineExecutionArn = new(string)
+			return d.ReadString(schemas.DescribePipelineExecutionResponse_PipelineExecutionArn, v.PipelineExecutionArn)
+		case schemas.DescribePipelineExecutionResponse_PipelineExecutionDescription:
+			v.PipelineExecutionDescription = new(string)
+			return d.ReadString(schemas.DescribePipelineExecutionResponse_PipelineExecutionDescription, v.PipelineExecutionDescription)
+		case schemas.DescribePipelineExecutionResponse_PipelineExecutionDisplayName:
+			v.PipelineExecutionDisplayName = new(string)
+			return d.ReadString(schemas.DescribePipelineExecutionResponse_PipelineExecutionDisplayName, v.PipelineExecutionDisplayName)
+		case schemas.DescribePipelineExecutionResponse_PipelineExecutionStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribePipelineExecutionResponse_PipelineExecutionStatus, &ev); err != nil {
+				return err
+			}
+			v.PipelineExecutionStatus = types.PipelineExecutionStatus(ev)
+			return nil
+		case schemas.DescribePipelineExecutionResponse_PipelineExperimentConfig:
+			v.PipelineExperimentConfig = &types.PipelineExperimentConfig{}
+			return v.PipelineExperimentConfig.Deserialize(d)
+		case schemas.DescribePipelineExecutionResponse_PipelineVersionId:
+			v.PipelineVersionId = new(int64)
+			return d.ReadInt64(schemas.DescribePipelineExecutionResponse_PipelineVersionId, v.PipelineVersionId)
+		case schemas.DescribePipelineExecutionResponse_SelectiveExecutionConfig:
+			v.SelectiveExecutionConfig = &types.SelectiveExecutionConfig{}
+			return v.SelectiveExecutionConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePipelineExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePipelineExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePipelineExecution, schemas.DescribePipelineExecutionRequest, schemas.DescribePipelineExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePipelineExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePipelineExecution, schemas.DescribePipelineExecutionRequest, schemas.DescribePipelineExecutionResponse), output: &DescribePipelineExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

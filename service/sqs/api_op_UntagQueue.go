@@ -4,6 +4,8 @@ package sqs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,19 @@ type UntagQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UntagQueueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UntagQueueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UntagQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueueUrl != nil {
+		s.WriteString(schemas.UntagQueueRequest_QueueUrl, *v.QueueUrl)
+	}
+	serializeTagKeyList(s, schemas.UntagQueueRequest_TagKeys, v.TagKeys)
+}
+
 type UntagQueueOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +67,26 @@ type UntagQueueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UntagQueueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UntagQueueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UntagQueueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUntagQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUntagQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UntagQueue, schemas.UntagQueueRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUntagQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UntagQueue, schemas.UntagQueueRequest, nil), output: &UntagQueueOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package comprehend
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -90,6 +92,44 @@ type CreateFlywheelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFlywheelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFlywheelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFlywheelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveModelArn != nil {
+		s.WriteString(schemas.CreateFlywheelRequest_ActiveModelArn, *v.ActiveModelArn)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateFlywheelRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.CreateFlywheelRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.DataLakeS3Uri != nil {
+		s.WriteString(schemas.CreateFlywheelRequest_DataLakeS3Uri, *v.DataLakeS3Uri)
+	}
+	if v.DataSecurityConfig != nil {
+		s.WriteStruct(schemas.CreateFlywheelRequest_DataSecurityConfig)
+		v.DataSecurityConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FlywheelName != nil {
+		s.WriteString(schemas.CreateFlywheelRequest_FlywheelName, *v.FlywheelName)
+	}
+	if v.ModelType != "" {
+		s.WriteString(schemas.CreateFlywheelRequest_ModelType, string(v.ModelType))
+	}
+	serializeTagList(s, schemas.CreateFlywheelRequest_Tags, v.Tags)
+	if v.TaskConfig != nil {
+		s.WriteStruct(schemas.CreateFlywheelRequest_TaskConfig)
+		v.TaskConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateFlywheelOutput struct {
 
 	// The Amazon Resource Number (ARN) of the active model version.
@@ -104,13 +144,38 @@ type CreateFlywheelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFlywheelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFlywheelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFlywheelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveModelArn != nil {
+		s.WriteString(schemas.CreateFlywheelResponse_ActiveModelArn, *v.ActiveModelArn)
+	}
+	if v.FlywheelArn != nil {
+		s.WriteString(schemas.CreateFlywheelResponse_FlywheelArn, *v.FlywheelArn)
+	}
+}
+func (v *CreateFlywheelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFlywheelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFlywheelResponse_ActiveModelArn:
+			v.ActiveModelArn = new(string)
+			return d.ReadString(schemas.CreateFlywheelResponse_ActiveModelArn, v.ActiveModelArn)
+		case schemas.CreateFlywheelResponse_FlywheelArn:
+			v.FlywheelArn = new(string)
+			return d.ReadString(schemas.CreateFlywheelResponse_FlywheelArn, v.FlywheelArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFlywheelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateFlywheel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFlywheel, schemas.CreateFlywheelRequest, schemas.CreateFlywheelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateFlywheel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFlywheel, schemas.CreateFlywheelRequest, schemas.CreateFlywheelResponse), output: &CreateFlywheelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

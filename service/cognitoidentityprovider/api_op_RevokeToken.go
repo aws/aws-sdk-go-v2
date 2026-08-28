@@ -4,6 +4,8 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type RevokeTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.RevokeTokenRequest_ClientId, *v.ClientId)
+	}
+	if v.ClientSecret != nil {
+		s.WriteString(schemas.RevokeTokenRequest_ClientSecret, *v.ClientSecret)
+	}
+	if v.Token != nil {
+		s.WriteString(schemas.RevokeTokenRequest_Token, *v.Token)
+	}
+}
+
 type RevokeTokenOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,13 +79,26 @@ type RevokeTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RevokeTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RevokeTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRevokeTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRevokeToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeToken, schemas.RevokeTokenRequest, schemas.RevokeTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRevokeToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeToken, schemas.RevokeTokenRequest, schemas.RevokeTokenResponse), output: &RevokeTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

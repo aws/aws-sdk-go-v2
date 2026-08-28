@@ -4,7 +4,9 @@ package athena
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetCapacityReservationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCapacityReservationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCapacityReservationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCapacityReservationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetCapacityReservationInput_Name, *v.Name)
+	}
+}
+
 type GetCapacityReservationOutput struct {
 
 	// The requested capacity reservation structure.
@@ -47,13 +61,34 @@ type GetCapacityReservationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCapacityReservationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCapacityReservationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCapacityReservationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityReservation != nil {
+		s.WriteStruct(schemas.GetCapacityReservationOutput_CapacityReservation)
+		v.CapacityReservation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCapacityReservationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCapacityReservationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCapacityReservationOutput_CapacityReservation:
+			v.CapacityReservation = &types.CapacityReservation{}
+			return v.CapacityReservation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCapacityReservationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCapacityReservation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCapacityReservation, schemas.GetCapacityReservationInput, schemas.GetCapacityReservationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCapacityReservation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCapacityReservation, schemas.GetCapacityReservationInput, schemas.GetCapacityReservationOutput), output: &GetCapacityReservationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

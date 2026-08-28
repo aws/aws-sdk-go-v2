@@ -4,7 +4,9 @@ package cloudtrail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -75,6 +77,30 @@ type StartImportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartImportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartImportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartImportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImportDestinations(s, schemas.StartImportRequest_Destinations, v.Destinations)
+	if v.EndEventTime != nil {
+		s.WriteTime(schemas.StartImportRequest_EndEventTime, *v.EndEventTime)
+	}
+	if v.ImportId != nil {
+		s.WriteString(schemas.StartImportRequest_ImportId, *v.ImportId)
+	}
+	if v.ImportSource != nil {
+		s.WriteStruct(schemas.StartImportRequest_ImportSource)
+		v.ImportSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartEventTime != nil {
+		s.WriteTime(schemas.StartImportRequest_StartEventTime, *v.StartEventTime)
+	}
+}
+
 type StartImportOutput struct {
 
 	//  The timestamp for the import's creation.
@@ -111,13 +137,77 @@ type StartImportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartImportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartImportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartImportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.StartImportResponse_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	serializeImportDestinations(s, schemas.StartImportResponse_Destinations, v.Destinations)
+	if v.EndEventTime != nil {
+		s.WriteTime(schemas.StartImportResponse_EndEventTime, *v.EndEventTime)
+	}
+	if v.ImportId != nil {
+		s.WriteString(schemas.StartImportResponse_ImportId, *v.ImportId)
+	}
+	if v.ImportSource != nil {
+		s.WriteStruct(schemas.StartImportResponse_ImportSource)
+		v.ImportSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImportStatus != "" {
+		s.WriteString(schemas.StartImportResponse_ImportStatus, string(v.ImportStatus))
+	}
+	if v.StartEventTime != nil {
+		s.WriteTime(schemas.StartImportResponse_StartEventTime, *v.StartEventTime)
+	}
+	if v.UpdatedTimestamp != nil {
+		s.WriteTime(schemas.StartImportResponse_UpdatedTimestamp, *v.UpdatedTimestamp)
+	}
+}
+func (v *StartImportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartImportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartImportResponse_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.StartImportResponse_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.StartImportResponse_Destinations:
+			return deserializeImportDestinations(d, schemas.StartImportResponse_Destinations, &v.Destinations)
+		case schemas.StartImportResponse_EndEventTime:
+			v.EndEventTime = new(time.Time)
+			return d.ReadTime(schemas.StartImportResponse_EndEventTime, v.EndEventTime)
+		case schemas.StartImportResponse_ImportId:
+			v.ImportId = new(string)
+			return d.ReadString(schemas.StartImportResponse_ImportId, v.ImportId)
+		case schemas.StartImportResponse_ImportSource:
+			v.ImportSource = &types.ImportSource{}
+			return v.ImportSource.Deserialize(d)
+		case schemas.StartImportResponse_ImportStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartImportResponse_ImportStatus, &ev); err != nil {
+				return err
+			}
+			v.ImportStatus = types.ImportStatus(ev)
+			return nil
+		case schemas.StartImportResponse_StartEventTime:
+			v.StartEventTime = new(time.Time)
+			return d.ReadTime(schemas.StartImportResponse_StartEventTime, v.StartEventTime)
+		case schemas.StartImportResponse_UpdatedTimestamp:
+			v.UpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.StartImportResponse_UpdatedTimestamp, v.UpdatedTimestamp)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartImportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartImport, schemas.StartImportRequest, schemas.StartImportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartImport, schemas.StartImportRequest, schemas.StartImportResponse), output: &StartImportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

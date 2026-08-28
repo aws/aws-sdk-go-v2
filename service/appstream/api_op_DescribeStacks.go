@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,19 @@ type DescribeStacksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStacksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStacksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStacksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.DescribeStacksRequest_Names, v.Names)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeStacksRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeStacksOutput struct {
 
 	// The pagination token to use to retrieve the next page of results for this
@@ -52,13 +67,35 @@ type DescribeStacksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStacksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStacksResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStacksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeStacksResult_NextToken, *v.NextToken)
+	}
+	serializeStackList(s, schemas.DescribeStacksResult_Stacks, v.Stacks)
+}
+func (v *DescribeStacksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeStacksResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeStacksResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeStacksResult_NextToken, v.NextToken)
+		case schemas.DescribeStacksResult_Stacks:
+			return deserializeStackList(d, schemas.DescribeStacksResult_Stacks, &v.Stacks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeStacksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeStacks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStacks, schemas.DescribeStacksRequest, schemas.DescribeStacksResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeStacks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStacks, schemas.DescribeStacksRequest, schemas.DescribeStacksResult), output: &DescribeStacksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

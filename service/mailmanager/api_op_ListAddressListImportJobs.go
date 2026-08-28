@@ -5,7 +5,9 @@ package mailmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListAddressListImportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAddressListImportJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAddressListImportJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAddressListImportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressListId != nil {
+		s.WriteString(schemas.ListAddressListImportJobsRequest_AddressListId, *v.AddressListId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAddressListImportJobsRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListAddressListImportJobsRequest_PageSize, *v.PageSize)
+	}
+}
+
 type ListAddressListImportJobsOutput struct {
 
 	// The list of import jobs.
@@ -61,13 +81,35 @@ type ListAddressListImportJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAddressListImportJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAddressListImportJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAddressListImportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImportJobs(s, schemas.ListAddressListImportJobsResponse_ImportJobs, v.ImportJobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAddressListImportJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAddressListImportJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAddressListImportJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAddressListImportJobsResponse_ImportJobs:
+			return deserializeImportJobs(d, schemas.ListAddressListImportJobsResponse_ImportJobs, &v.ImportJobs)
+		case schemas.ListAddressListImportJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAddressListImportJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAddressListImportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListAddressListImportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAddressListImportJobs, schemas.ListAddressListImportJobsRequest, schemas.ListAddressListImportJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListAddressListImportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAddressListImportJobs, schemas.ListAddressListImportJobsRequest, schemas.ListAddressListImportJobsResponse), output: &ListAddressListImportJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

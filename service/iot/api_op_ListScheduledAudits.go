@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ListScheduledAuditsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListScheduledAuditsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListScheduledAuditsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListScheduledAuditsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListScheduledAuditsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListScheduledAuditsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListScheduledAuditsOutput struct {
 
 	// A token that can be used to retrieve the next set of results, or null if there
@@ -55,13 +72,35 @@ type ListScheduledAuditsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListScheduledAuditsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListScheduledAuditsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListScheduledAuditsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListScheduledAuditsResponse_nextToken, *v.NextToken)
+	}
+	serializeScheduledAuditMetadataList(s, schemas.ListScheduledAuditsResponse_scheduledAudits, v.ScheduledAudits)
+}
+func (v *ListScheduledAuditsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListScheduledAuditsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListScheduledAuditsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListScheduledAuditsResponse_nextToken, v.NextToken)
+		case schemas.ListScheduledAuditsResponse_scheduledAudits:
+			return deserializeScheduledAuditMetadataList(d, schemas.ListScheduledAuditsResponse_scheduledAudits, &v.ScheduledAudits)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListScheduledAuditsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListScheduledAudits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListScheduledAudits, schemas.ListScheduledAuditsRequest, schemas.ListScheduledAuditsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListScheduledAudits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListScheduledAudits, schemas.ListScheduledAuditsRequest, schemas.ListScheduledAuditsResponse), output: &ListScheduledAuditsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,16 @@ type DescribeDeliveryChannelStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDeliveryChannelStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDeliveryChannelStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDeliveryChannelStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeliveryChannelNameList(s, schemas.DescribeDeliveryChannelStatusRequest_DeliveryChannelNames, v.DeliveryChannelNames)
+}
+
 // The output for the DescribeDeliveryChannelStatus action.
 type DescribeDeliveryChannelStatusOutput struct {
 
@@ -49,13 +61,29 @@ type DescribeDeliveryChannelStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDeliveryChannelStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDeliveryChannelStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDeliveryChannelStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeliveryChannelStatusList(s, schemas.DescribeDeliveryChannelStatusResponse_DeliveryChannelsStatus, v.DeliveryChannelsStatus)
+}
+func (v *DescribeDeliveryChannelStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDeliveryChannelStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDeliveryChannelStatusResponse_DeliveryChannelsStatus:
+			return deserializeDeliveryChannelStatusList(d, schemas.DescribeDeliveryChannelStatusResponse_DeliveryChannelsStatus, &v.DeliveryChannelsStatus)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDeliveryChannelStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDeliveryChannelStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDeliveryChannelStatus, schemas.DescribeDeliveryChannelStatusRequest, schemas.DescribeDeliveryChannelStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDeliveryChannelStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDeliveryChannelStatus, schemas.DescribeDeliveryChannelStatusRequest, schemas.DescribeDeliveryChannelStatusResponse), output: &DescribeDeliveryChannelStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

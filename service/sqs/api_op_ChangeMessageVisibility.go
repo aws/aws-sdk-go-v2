@@ -4,6 +4,8 @@ package sqs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -102,6 +104,22 @@ type ChangeMessageVisibilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChangeMessageVisibilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChangeMessageVisibilityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChangeMessageVisibilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueueUrl != nil {
+		s.WriteString(schemas.ChangeMessageVisibilityRequest_QueueUrl, *v.QueueUrl)
+	}
+	if v.ReceiptHandle != nil {
+		s.WriteString(schemas.ChangeMessageVisibilityRequest_ReceiptHandle, *v.ReceiptHandle)
+	}
+	s.WriteInt32(schemas.ChangeMessageVisibilityRequest_VisibilityTimeout, v.VisibilityTimeout)
+}
+
 type ChangeMessageVisibilityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -109,13 +127,26 @@ type ChangeMessageVisibilityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChangeMessageVisibilityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChangeMessageVisibilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ChangeMessageVisibilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationChangeMessageVisibilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpChangeMessageVisibility{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ChangeMessageVisibility, schemas.ChangeMessageVisibilityRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpChangeMessageVisibility{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ChangeMessageVisibility, schemas.ChangeMessageVisibilityRequest, nil), output: &ChangeMessageVisibilityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

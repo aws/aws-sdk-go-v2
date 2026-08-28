@@ -4,7 +4,9 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,19 @@ type StartRemediationExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRemediationExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRemediationExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRemediationExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigRuleName != nil {
+		s.WriteString(schemas.StartRemediationExecutionRequest_ConfigRuleName, *v.ConfigRuleName)
+	}
+	serializeResourceKeys(s, schemas.StartRemediationExecutionRequest_ResourceKeys, v.ResourceKeys)
+}
+
 type StartRemediationExecutionOutput struct {
 
 	// For resources that have failed to start execution, the API returns a resource
@@ -62,13 +77,35 @@ type StartRemediationExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRemediationExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRemediationExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRemediationExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceKeys(s, schemas.StartRemediationExecutionResponse_FailedItems, v.FailedItems)
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.StartRemediationExecutionResponse_FailureMessage, *v.FailureMessage)
+	}
+}
+func (v *StartRemediationExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartRemediationExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartRemediationExecutionResponse_FailedItems:
+			return deserializeResourceKeys(d, schemas.StartRemediationExecutionResponse_FailedItems, &v.FailedItems)
+		case schemas.StartRemediationExecutionResponse_FailureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.StartRemediationExecutionResponse_FailureMessage, v.FailureMessage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartRemediationExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartRemediationExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRemediationExecution, schemas.StartRemediationExecutionRequest, schemas.StartRemediationExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartRemediationExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRemediationExecution, schemas.StartRemediationExecutionRequest, schemas.StartRemediationExecutionResponse), output: &StartRemediationExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

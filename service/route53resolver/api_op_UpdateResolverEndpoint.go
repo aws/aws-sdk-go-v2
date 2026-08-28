@@ -4,7 +4,9 @@ package route53resolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -131,6 +133,38 @@ type UpdateResolverEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResolverEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResolverEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResolverEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Dns64Enabled != nil {
+		s.WriteBool(schemas.UpdateResolverEndpointRequest_Dns64Enabled, *v.Dns64Enabled)
+	}
+	if v.Ipv6InternetAccessEnabled != nil {
+		s.WriteBool(schemas.UpdateResolverEndpointRequest_Ipv6InternetAccessEnabled, *v.Ipv6InternetAccessEnabled)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateResolverEndpointRequest_Name, *v.Name)
+	}
+	serializeProtocolList(s, schemas.UpdateResolverEndpointRequest_Protocols, v.Protocols)
+	if v.ResolverEndpointId != nil {
+		s.WriteString(schemas.UpdateResolverEndpointRequest_ResolverEndpointId, *v.ResolverEndpointId)
+	}
+	if v.ResolverEndpointType != "" {
+		s.WriteString(schemas.UpdateResolverEndpointRequest_ResolverEndpointType, string(v.ResolverEndpointType))
+	}
+	if v.RniEnhancedMetricsEnabled != nil {
+		s.WriteBool(schemas.UpdateResolverEndpointRequest_RniEnhancedMetricsEnabled, *v.RniEnhancedMetricsEnabled)
+	}
+	if v.TargetNameServerMetricsEnabled != nil {
+		s.WriteBool(schemas.UpdateResolverEndpointRequest_TargetNameServerMetricsEnabled, *v.TargetNameServerMetricsEnabled)
+	}
+	serializeUpdateIpAddresses(s, schemas.UpdateResolverEndpointRequest_UpdateIpAddresses, v.UpdateIpAddresses)
+}
+
 type UpdateResolverEndpointOutput struct {
 
 	// The response to an UpdateResolverEndpoint request.
@@ -142,13 +176,34 @@ type UpdateResolverEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResolverEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResolverEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResolverEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverEndpoint != nil {
+		s.WriteStruct(schemas.UpdateResolverEndpointResponse_ResolverEndpoint)
+		v.ResolverEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateResolverEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateResolverEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateResolverEndpointResponse_ResolverEndpoint:
+			v.ResolverEndpoint = &types.ResolverEndpoint{}
+			return v.ResolverEndpoint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateResolverEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateResolverEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResolverEndpoint, schemas.UpdateResolverEndpointRequest, schemas.UpdateResolverEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateResolverEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResolverEndpoint, schemas.UpdateResolverEndpointRequest, schemas.UpdateResolverEndpointResponse), output: &UpdateResolverEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

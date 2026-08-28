@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,25 @@ type CreateResourceServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResourceServerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResourceServerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResourceServerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.CreateResourceServerRequest_Identifier, *v.Identifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateResourceServerRequest_Name, *v.Name)
+	}
+	serializeResourceServerScopeListType(s, schemas.CreateResourceServerRequest_Scopes, v.Scopes)
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.CreateResourceServerRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 type CreateResourceServerOutput struct {
 
 	// The details of the new resource server.
@@ -86,13 +107,34 @@ type CreateResourceServerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResourceServerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResourceServerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResourceServerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceServer != nil {
+		s.WriteStruct(schemas.CreateResourceServerResponse_ResourceServer)
+		v.ResourceServer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateResourceServerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateResourceServerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateResourceServerResponse_ResourceServer:
+			v.ResourceServer = &types.ResourceServerType{}
+			return v.ResourceServer.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateResourceServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateResourceServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResourceServer, schemas.CreateResourceServerRequest, schemas.CreateResourceServerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateResourceServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResourceServer, schemas.CreateResourceServerRequest, schemas.CreateResourceServerResponse), output: &CreateResourceServerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

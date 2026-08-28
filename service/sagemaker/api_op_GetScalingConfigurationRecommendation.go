@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,32 @@ type GetScalingConfigurationRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetScalingConfigurationRecommendationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetScalingConfigurationRecommendationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetScalingConfigurationRecommendationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointName != nil {
+		s.WriteString(schemas.GetScalingConfigurationRecommendationRequest_EndpointName, *v.EndpointName)
+	}
+	if v.InferenceRecommendationsJobName != nil {
+		s.WriteString(schemas.GetScalingConfigurationRecommendationRequest_InferenceRecommendationsJobName, *v.InferenceRecommendationsJobName)
+	}
+	if v.RecommendationId != nil {
+		s.WriteString(schemas.GetScalingConfigurationRecommendationRequest_RecommendationId, *v.RecommendationId)
+	}
+	if v.ScalingPolicyObjective != nil {
+		s.WriteStruct(schemas.GetScalingConfigurationRecommendationRequest_ScalingPolicyObjective)
+		v.ScalingPolicyObjective.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetCpuUtilizationPerCore != nil {
+		s.WriteInt32(schemas.GetScalingConfigurationRecommendationRequest_TargetCpuUtilizationPerCore, *v.TargetCpuUtilizationPerCore)
+	}
+}
+
 type GetScalingConfigurationRecommendationOutput struct {
 
 	// An object with the recommended values for you to specify when creating an
@@ -91,13 +119,74 @@ type GetScalingConfigurationRecommendationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetScalingConfigurationRecommendationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetScalingConfigurationRecommendationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetScalingConfigurationRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DynamicScalingConfiguration != nil {
+		s.WriteStruct(schemas.GetScalingConfigurationRecommendationResponse_DynamicScalingConfiguration)
+		v.DynamicScalingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointName != nil {
+		s.WriteString(schemas.GetScalingConfigurationRecommendationResponse_EndpointName, *v.EndpointName)
+	}
+	if v.InferenceRecommendationsJobName != nil {
+		s.WriteString(schemas.GetScalingConfigurationRecommendationResponse_InferenceRecommendationsJobName, *v.InferenceRecommendationsJobName)
+	}
+	if v.Metric != nil {
+		s.WriteStruct(schemas.GetScalingConfigurationRecommendationResponse_Metric)
+		v.Metric.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RecommendationId != nil {
+		s.WriteString(schemas.GetScalingConfigurationRecommendationResponse_RecommendationId, *v.RecommendationId)
+	}
+	if v.ScalingPolicyObjective != nil {
+		s.WriteStruct(schemas.GetScalingConfigurationRecommendationResponse_ScalingPolicyObjective)
+		v.ScalingPolicyObjective.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetCpuUtilizationPerCore != nil {
+		s.WriteInt32(schemas.GetScalingConfigurationRecommendationResponse_TargetCpuUtilizationPerCore, *v.TargetCpuUtilizationPerCore)
+	}
+}
+func (v *GetScalingConfigurationRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetScalingConfigurationRecommendationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetScalingConfigurationRecommendationResponse_DynamicScalingConfiguration:
+			v.DynamicScalingConfiguration = &types.DynamicScalingConfiguration{}
+			return v.DynamicScalingConfiguration.Deserialize(d)
+		case schemas.GetScalingConfigurationRecommendationResponse_EndpointName:
+			v.EndpointName = new(string)
+			return d.ReadString(schemas.GetScalingConfigurationRecommendationResponse_EndpointName, v.EndpointName)
+		case schemas.GetScalingConfigurationRecommendationResponse_InferenceRecommendationsJobName:
+			v.InferenceRecommendationsJobName = new(string)
+			return d.ReadString(schemas.GetScalingConfigurationRecommendationResponse_InferenceRecommendationsJobName, v.InferenceRecommendationsJobName)
+		case schemas.GetScalingConfigurationRecommendationResponse_Metric:
+			v.Metric = &types.ScalingPolicyMetric{}
+			return v.Metric.Deserialize(d)
+		case schemas.GetScalingConfigurationRecommendationResponse_RecommendationId:
+			v.RecommendationId = new(string)
+			return d.ReadString(schemas.GetScalingConfigurationRecommendationResponse_RecommendationId, v.RecommendationId)
+		case schemas.GetScalingConfigurationRecommendationResponse_ScalingPolicyObjective:
+			v.ScalingPolicyObjective = &types.ScalingPolicyObjective{}
+			return v.ScalingPolicyObjective.Deserialize(d)
+		case schemas.GetScalingConfigurationRecommendationResponse_TargetCpuUtilizationPerCore:
+			v.TargetCpuUtilizationPerCore = new(int32)
+			return d.ReadInt32(schemas.GetScalingConfigurationRecommendationResponse_TargetCpuUtilizationPerCore, v.TargetCpuUtilizationPerCore)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetScalingConfigurationRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetScalingConfigurationRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetScalingConfigurationRecommendation, schemas.GetScalingConfigurationRecommendationRequest, schemas.GetScalingConfigurationRecommendationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetScalingConfigurationRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetScalingConfigurationRecommendation, schemas.GetScalingConfigurationRecommendationRequest, schemas.GetScalingConfigurationRecommendationResponse), output: &GetScalingConfigurationRecommendationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

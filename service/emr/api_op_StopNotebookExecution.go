@@ -4,6 +4,8 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type StopNotebookExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopNotebookExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopNotebookExecutionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopNotebookExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotebookExecutionId != nil {
+		s.WriteString(schemas.StopNotebookExecutionInput_NotebookExecutionId, *v.NotebookExecutionId)
+	}
+}
+
 type StopNotebookExecutionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type StopNotebookExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopNotebookExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopNotebookExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopNotebookExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopNotebookExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopNotebookExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopNotebookExecution, schemas.StopNotebookExecutionInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopNotebookExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopNotebookExecution, schemas.StopNotebookExecutionInput, nil), output: &StopNotebookExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

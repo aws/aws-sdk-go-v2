@@ -4,7 +4,9 @@ package neptunegraph
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -65,6 +67,38 @@ type StartExportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartExportTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartExportTaskInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartExportTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteString(schemas.StartExportTaskInput_destination, *v.Destination)
+	}
+	if v.ExportFilter != nil {
+		s.WriteStruct(schemas.StartExportTaskInput_exportFilter)
+		v.ExportFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.StartExportTaskInput_format, string(v.Format))
+	}
+	if v.GraphIdentifier != nil {
+		s.WriteString(schemas.StartExportTaskInput_graphIdentifier, *v.GraphIdentifier)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.StartExportTaskInput_kmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.ParquetType != "" {
+		s.WriteString(schemas.StartExportTaskInput_parquetType, string(v.ParquetType))
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.StartExportTaskInput_roleArn, *v.RoleArn)
+	}
+	serializeTagMap(s, schemas.StartExportTaskInput_tags, v.Tags)
+}
 func (in *StartExportTaskInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ApiType = ptr.String("ControlPlane")
@@ -122,13 +156,100 @@ type StartExportTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartExportTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartExportTaskOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartExportTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteString(schemas.StartExportTaskOutput_destination, *v.Destination)
+	}
+	if v.ExportFilter != nil {
+		s.WriteStruct(schemas.StartExportTaskOutput_exportFilter)
+		v.ExportFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.StartExportTaskOutput_format, string(v.Format))
+	}
+	if v.GraphId != nil {
+		s.WriteString(schemas.StartExportTaskOutput_graphId, *v.GraphId)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.StartExportTaskOutput_kmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.ParquetType != "" {
+		s.WriteString(schemas.StartExportTaskOutput_parquetType, string(v.ParquetType))
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.StartExportTaskOutput_roleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartExportTaskOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.StartExportTaskOutput_statusReason, *v.StatusReason)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.StartExportTaskOutput_taskId, *v.TaskId)
+	}
+}
+func (v *StartExportTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartExportTaskOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartExportTaskOutput_destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.StartExportTaskOutput_destination, v.Destination)
+		case schemas.StartExportTaskOutput_exportFilter:
+			v.ExportFilter = &types.ExportFilter{}
+			return v.ExportFilter.Deserialize(d)
+		case schemas.StartExportTaskOutput_format:
+			var ev string
+			if err := d.ReadString(schemas.StartExportTaskOutput_format, &ev); err != nil {
+				return err
+			}
+			v.Format = types.ExportFormat(ev)
+			return nil
+		case schemas.StartExportTaskOutput_graphId:
+			v.GraphId = new(string)
+			return d.ReadString(schemas.StartExportTaskOutput_graphId, v.GraphId)
+		case schemas.StartExportTaskOutput_kmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.StartExportTaskOutput_kmsKeyIdentifier, v.KmsKeyIdentifier)
+		case schemas.StartExportTaskOutput_parquetType:
+			var ev string
+			if err := d.ReadString(schemas.StartExportTaskOutput_parquetType, &ev); err != nil {
+				return err
+			}
+			v.ParquetType = types.ParquetType(ev)
+			return nil
+		case schemas.StartExportTaskOutput_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.StartExportTaskOutput_roleArn, v.RoleArn)
+		case schemas.StartExportTaskOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.StartExportTaskOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ExportTaskStatus(ev)
+			return nil
+		case schemas.StartExportTaskOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.StartExportTaskOutput_statusReason, v.StatusReason)
+		case schemas.StartExportTaskOutput_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.StartExportTaskOutput_taskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartExportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartExportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartExportTask, schemas.StartExportTaskInput, schemas.StartExportTaskOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartExportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartExportTask, schemas.StartExportTaskInput, schemas.StartExportTaskOutput), output: &StartExportTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

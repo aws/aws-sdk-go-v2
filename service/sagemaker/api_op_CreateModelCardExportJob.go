@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,29 @@ type CreateModelCardExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelCardExportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelCardExportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelCardExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelCardExportJobName != nil {
+		s.WriteString(schemas.CreateModelCardExportJobRequest_ModelCardExportJobName, *v.ModelCardExportJobName)
+	}
+	if v.ModelCardName != nil {
+		s.WriteString(schemas.CreateModelCardExportJobRequest_ModelCardName, *v.ModelCardName)
+	}
+	if v.ModelCardVersion != nil {
+		s.WriteInt32(schemas.CreateModelCardExportJobRequest_ModelCardVersion, *v.ModelCardVersion)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.CreateModelCardExportJobRequest_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateModelCardExportJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model card export job.
@@ -62,13 +87,32 @@ type CreateModelCardExportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelCardExportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelCardExportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelCardExportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelCardExportJobArn != nil {
+		s.WriteString(schemas.CreateModelCardExportJobResponse_ModelCardExportJobArn, *v.ModelCardExportJobArn)
+	}
+}
+func (v *CreateModelCardExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateModelCardExportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateModelCardExportJobResponse_ModelCardExportJobArn:
+			v.ModelCardExportJobArn = new(string)
+			return d.ReadString(schemas.CreateModelCardExportJobResponse_ModelCardExportJobArn, v.ModelCardExportJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateModelCardExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateModelCardExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelCardExportJob, schemas.CreateModelCardExportJobRequest, schemas.CreateModelCardExportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateModelCardExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelCardExportJob, schemas.CreateModelCardExportJobRequest, schemas.CreateModelCardExportJobResponse), output: &CreateModelCardExportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

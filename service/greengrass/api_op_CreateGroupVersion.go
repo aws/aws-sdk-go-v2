@@ -4,6 +4,8 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,42 @@ type CreateGroupVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGroupVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGroupVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGroupVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmznClientToken != nil {
+		s.WriteString(schemas.CreateGroupVersionRequest_AmznClientToken, *v.AmznClientToken)
+	}
+	if v.ConnectorDefinitionVersionArn != nil {
+		s.WriteString(schemas.CreateGroupVersionRequest_ConnectorDefinitionVersionArn, *v.ConnectorDefinitionVersionArn)
+	}
+	if v.CoreDefinitionVersionArn != nil {
+		s.WriteString(schemas.CreateGroupVersionRequest_CoreDefinitionVersionArn, *v.CoreDefinitionVersionArn)
+	}
+	if v.DeviceDefinitionVersionArn != nil {
+		s.WriteString(schemas.CreateGroupVersionRequest_DeviceDefinitionVersionArn, *v.DeviceDefinitionVersionArn)
+	}
+	if v.FunctionDefinitionVersionArn != nil {
+		s.WriteString(schemas.CreateGroupVersionRequest_FunctionDefinitionVersionArn, *v.FunctionDefinitionVersionArn)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.CreateGroupVersionRequest_GroupId, *v.GroupId)
+	}
+	if v.LoggerDefinitionVersionArn != nil {
+		s.WriteString(schemas.CreateGroupVersionRequest_LoggerDefinitionVersionArn, *v.LoggerDefinitionVersionArn)
+	}
+	if v.ResourceDefinitionVersionArn != nil {
+		s.WriteString(schemas.CreateGroupVersionRequest_ResourceDefinitionVersionArn, *v.ResourceDefinitionVersionArn)
+	}
+	if v.SubscriptionDefinitionVersionArn != nil {
+		s.WriteString(schemas.CreateGroupVersionRequest_SubscriptionDefinitionVersionArn, *v.SubscriptionDefinitionVersionArn)
+	}
+}
+
 type CreateGroupVersionOutput struct {
 
 	// The ARN of the version.
@@ -77,13 +115,50 @@ type CreateGroupVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGroupVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGroupVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGroupVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateGroupVersionResponse_Arn, *v.Arn)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteString(schemas.CreateGroupVersionResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateGroupVersionResponse_Id, *v.Id)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.CreateGroupVersionResponse_Version, *v.Version)
+	}
+}
+func (v *CreateGroupVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGroupVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGroupVersionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateGroupVersionResponse_Arn, v.Arn)
+		case schemas.CreateGroupVersionResponse_CreationTimestamp:
+			v.CreationTimestamp = new(string)
+			return d.ReadString(schemas.CreateGroupVersionResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.CreateGroupVersionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateGroupVersionResponse_Id, v.Id)
+		case schemas.CreateGroupVersionResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.CreateGroupVersionResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGroupVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateGroupVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGroupVersion, schemas.CreateGroupVersionRequest, schemas.CreateGroupVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateGroupVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGroupVersion, schemas.CreateGroupVersionRequest, schemas.CreateGroupVersionResponse), output: &CreateGroupVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

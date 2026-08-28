@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type DeleteOTAUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOTAUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteOTAUpdateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteOTAUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeleteStream != false {
+		s.WriteBool(schemas.DeleteOTAUpdateRequest_deleteStream, v.DeleteStream)
+	}
+	if v.ForceDeleteAWSJob != false {
+		s.WriteBool(schemas.DeleteOTAUpdateRequest_forceDeleteAWSJob, v.ForceDeleteAWSJob)
+	}
+	if v.OtaUpdateId != nil {
+		s.WriteString(schemas.DeleteOTAUpdateRequest_otaUpdateId, *v.OtaUpdateId)
+	}
+}
+
 type DeleteOTAUpdateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +74,26 @@ type DeleteOTAUpdateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOTAUpdateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteOTAUpdateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteOTAUpdateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteOTAUpdateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteOTAUpdateResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteOTAUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteOTAUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOTAUpdate, schemas.DeleteOTAUpdateRequest, schemas.DeleteOTAUpdateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteOTAUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOTAUpdate, schemas.DeleteOTAUpdateRequest, schemas.DeleteOTAUpdateResponse), output: &DeleteOTAUpdateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package grafana
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/grafana/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/grafana/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,28 @@ type DeleteWorkspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkspaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkspaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DeleteWorkspaceRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *DeleteWorkspaceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWorkspaceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteWorkspaceRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.DeleteWorkspaceRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type DeleteWorkspaceOutput struct {
 
 	// A structure containing information about the workspace that was deleted.
@@ -47,13 +71,34 @@ type DeleteWorkspaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkspaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkspaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkspaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Workspace != nil {
+		s.WriteStruct(schemas.DeleteWorkspaceResponse_workspace)
+		v.Workspace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteWorkspaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWorkspaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteWorkspaceResponse_workspace:
+			v.Workspace = &types.WorkspaceDescription{}
+			return v.Workspace.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkspace, schemas.DeleteWorkspaceRequest, schemas.DeleteWorkspaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkspace, schemas.DeleteWorkspaceRequest, schemas.DeleteWorkspaceResponse), output: &DeleteWorkspaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

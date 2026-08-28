@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DescribeQuickConnectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeQuickConnectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeQuickConnectRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeQuickConnectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeQuickConnectRequest_InstanceId, *v.InstanceId)
+	}
+	if v.QuickConnectId != nil {
+		s.WriteString(schemas.DescribeQuickConnectRequest_QuickConnectId, *v.QuickConnectId)
+	}
+}
+
 type DescribeQuickConnectOutput struct {
 
 	// Information about the quick connect.
@@ -53,13 +70,34 @@ type DescribeQuickConnectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeQuickConnectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeQuickConnectResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeQuickConnectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QuickConnect != nil {
+		s.WriteStruct(schemas.DescribeQuickConnectResponse_QuickConnect)
+		v.QuickConnect.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeQuickConnectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeQuickConnectResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeQuickConnectResponse_QuickConnect:
+			v.QuickConnect = &types.QuickConnect{}
+			return v.QuickConnect.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeQuickConnectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeQuickConnect{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQuickConnect, schemas.DescribeQuickConnectRequest, schemas.DescribeQuickConnectResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeQuickConnect{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQuickConnect, schemas.DescribeQuickConnectRequest, schemas.DescribeQuickConnectResponse), output: &DescribeQuickConnectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

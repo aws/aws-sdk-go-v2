@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,34 @@ type CreateDataTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataTableRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDataTableRequest_Description, *v.Description)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateDataTableRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDataTableRequest_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateDataTableRequest_Status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.CreateDataTableRequest_Tags, v.Tags)
+	if v.TimeZone != nil {
+		s.WriteString(schemas.CreateDataTableRequest_TimeZone, *v.TimeZone)
+	}
+	if v.ValueLockLevel != "" {
+		s.WriteString(schemas.CreateDataTableRequest_ValueLockLevel, string(v.ValueLockLevel))
+	}
+}
+
 type CreateDataTableOutput struct {
 
 	// The Amazon Resource Name (ARN) for the created data table. Does not include the
@@ -102,13 +132,46 @@ type CreateDataTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataTableResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateDataTableResponse_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateDataTableResponse_Id, *v.Id)
+	}
+	if v.LockVersion != nil {
+		s.WriteStruct(schemas.CreateDataTableResponse_LockVersion)
+		v.LockVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateDataTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataTableResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDataTableResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateDataTableResponse_Arn, v.Arn)
+		case schemas.CreateDataTableResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateDataTableResponse_Id, v.Id)
+		case schemas.CreateDataTableResponse_LockVersion:
+			v.LockVersion = &types.DataTableLockVersion{}
+			return v.LockVersion.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDataTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataTable, schemas.CreateDataTableRequest, schemas.CreateDataTableResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataTable, schemas.CreateDataTableRequest, schemas.CreateDataTableResponse), output: &CreateDataTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

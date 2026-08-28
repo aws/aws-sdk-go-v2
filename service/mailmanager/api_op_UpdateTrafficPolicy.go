@@ -4,7 +4,9 @@ package mailmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,28 @@ type UpdateTrafficPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTrafficPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTrafficPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTrafficPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultAction != "" {
+		s.WriteString(schemas.UpdateTrafficPolicyRequest_DefaultAction, string(v.DefaultAction))
+	}
+	if v.MaxMessageSizeBytes != nil {
+		s.WriteInt32(schemas.UpdateTrafficPolicyRequest_MaxMessageSizeBytes, *v.MaxMessageSizeBytes)
+	}
+	serializePolicyStatementList(s, schemas.UpdateTrafficPolicyRequest_PolicyStatements, v.PolicyStatements)
+	if v.TrafficPolicyId != nil {
+		s.WriteString(schemas.UpdateTrafficPolicyRequest_TrafficPolicyId, *v.TrafficPolicyId)
+	}
+	if v.TrafficPolicyName != nil {
+		s.WriteString(schemas.UpdateTrafficPolicyRequest_TrafficPolicyName, *v.TrafficPolicyName)
+	}
+}
+
 type UpdateTrafficPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -56,13 +80,26 @@ type UpdateTrafficPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTrafficPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTrafficPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTrafficPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateTrafficPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTrafficPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTrafficPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateTrafficPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTrafficPolicy, schemas.UpdateTrafficPolicyRequest, schemas.UpdateTrafficPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateTrafficPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTrafficPolicy, schemas.UpdateTrafficPolicyRequest, schemas.UpdateTrafficPolicyResponse), output: &UpdateTrafficPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

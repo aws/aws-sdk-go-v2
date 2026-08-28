@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,25 @@ type SetupInstanceHttpsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetupInstanceHttpsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetupInstanceHttpsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetupInstanceHttpsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateProvider != "" {
+		s.WriteString(schemas.SetupInstanceHttpsRequest_certificateProvider, string(v.CertificateProvider))
+	}
+	serializeSetupDomainNameList(s, schemas.SetupInstanceHttpsRequest_domainNames, v.DomainNames)
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.SetupInstanceHttpsRequest_emailAddress, *v.EmailAddress)
+	}
+	if v.InstanceName != nil {
+		s.WriteString(schemas.SetupInstanceHttpsRequest_instanceName, *v.InstanceName)
+	}
+}
+
 type SetupInstanceHttpsOutput struct {
 
 	// The available API operations for SetupInstanceHttps .
@@ -66,13 +87,29 @@ type SetupInstanceHttpsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetupInstanceHttpsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetupInstanceHttpsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetupInstanceHttpsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.SetupInstanceHttpsResult_operations, v.Operations)
+}
+func (v *SetupInstanceHttpsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetupInstanceHttpsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetupInstanceHttpsResult_operations:
+			return deserializeOperationList(d, schemas.SetupInstanceHttpsResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetupInstanceHttpsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetupInstanceHttps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetupInstanceHttps, schemas.SetupInstanceHttpsRequest, schemas.SetupInstanceHttpsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSetupInstanceHttps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetupInstanceHttps, schemas.SetupInstanceHttpsRequest, schemas.SetupInstanceHttpsResult), output: &SetupInstanceHttpsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

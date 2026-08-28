@@ -4,6 +4,8 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteIdNamespaceAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIdNamespaceAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIdNamespaceAssociationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIdNamespaceAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdNamespaceAssociationIdentifier != nil {
+		s.WriteString(schemas.DeleteIdNamespaceAssociationInput_idNamespaceAssociationIdentifier, *v.IdNamespaceAssociationIdentifier)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.DeleteIdNamespaceAssociationInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+
 type DeleteIdNamespaceAssociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type DeleteIdNamespaceAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIdNamespaceAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIdNamespaceAssociationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIdNamespaceAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteIdNamespaceAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteIdNamespaceAssociationOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteIdNamespaceAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteIdNamespaceAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIdNamespaceAssociation, schemas.DeleteIdNamespaceAssociationInput, schemas.DeleteIdNamespaceAssociationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteIdNamespaceAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIdNamespaceAssociation, schemas.DeleteIdNamespaceAssociationInput, schemas.DeleteIdNamespaceAssociationOutput), output: &DeleteIdNamespaceAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

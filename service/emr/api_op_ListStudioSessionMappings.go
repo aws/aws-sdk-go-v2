@@ -5,7 +5,9 @@ package emr
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListStudioSessionMappingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStudioSessionMappingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStudioSessionMappingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStudioSessionMappingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityType != "" {
+		s.WriteString(schemas.ListStudioSessionMappingsInput_IdentityType, string(v.IdentityType))
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListStudioSessionMappingsInput_Marker, *v.Marker)
+	}
+	if v.StudioId != nil {
+		s.WriteString(schemas.ListStudioSessionMappingsInput_StudioId, *v.StudioId)
+	}
+}
+
 type ListStudioSessionMappingsOutput struct {
 
 	// The pagination token that indicates the next set of results to retrieve.
@@ -58,13 +78,35 @@ type ListStudioSessionMappingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStudioSessionMappingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStudioSessionMappingsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStudioSessionMappingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListStudioSessionMappingsOutput_Marker, *v.Marker)
+	}
+	serializeSessionMappingSummaryList(s, schemas.ListStudioSessionMappingsOutput_SessionMappings, v.SessionMappings)
+}
+func (v *ListStudioSessionMappingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStudioSessionMappingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStudioSessionMappingsOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListStudioSessionMappingsOutput_Marker, v.Marker)
+		case schemas.ListStudioSessionMappingsOutput_SessionMappings:
+			return deserializeSessionMappingSummaryList(d, schemas.ListStudioSessionMappingsOutput_SessionMappings, &v.SessionMappings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStudioSessionMappingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListStudioSessionMappings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStudioSessionMappings, schemas.ListStudioSessionMappingsInput, schemas.ListStudioSessionMappingsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListStudioSessionMappings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStudioSessionMappings, schemas.ListStudioSessionMappingsInput, schemas.ListStudioSessionMappingsOutput), output: &ListStudioSessionMappingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

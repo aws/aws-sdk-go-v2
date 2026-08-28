@@ -4,7 +4,9 @@ package athena
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteDataCatalogInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataCatalogInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataCatalogInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataCatalogInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeleteCatalogOnly != false {
+		s.WriteBool(schemas.DeleteDataCatalogInput_DeleteCatalogOnly, v.DeleteCatalogOnly)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteDataCatalogInput_Name, *v.Name)
+	}
+}
+
 type DeleteDataCatalogOutput struct {
 
 	// Contains information about a data catalog in an Amazon Web Services account.
@@ -54,13 +71,34 @@ type DeleteDataCatalogOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataCatalogOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataCatalogOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataCatalogOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataCatalog != nil {
+		s.WriteStruct(schemas.DeleteDataCatalogOutput_DataCatalog)
+		v.DataCatalog.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteDataCatalogOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDataCatalogOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDataCatalogOutput_DataCatalog:
+			v.DataCatalog = &types.DataCatalog{}
+			return v.DataCatalog.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDataCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDataCatalog{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataCatalog, schemas.DeleteDataCatalogInput, schemas.DeleteDataCatalogOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteDataCatalog{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataCatalog, schemas.DeleteDataCatalogInput, schemas.DeleteDataCatalogOutput), output: &DeleteDataCatalogOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

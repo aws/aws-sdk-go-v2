@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,21 @@ type CreateNotebookInstanceLifecycleConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNotebookInstanceLifecycleConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNotebookInstanceLifecycleConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNotebookInstanceLifecycleConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotebookInstanceLifecycleConfigName != nil {
+		s.WriteString(schemas.CreateNotebookInstanceLifecycleConfigInput_NotebookInstanceLifecycleConfigName, *v.NotebookInstanceLifecycleConfigName)
+	}
+	serializeNotebookInstanceLifecycleConfigList(s, schemas.CreateNotebookInstanceLifecycleConfigInput_OnCreate, v.OnCreate)
+	serializeNotebookInstanceLifecycleConfigList(s, schemas.CreateNotebookInstanceLifecycleConfigInput_OnStart, v.OnStart)
+	serializeTagList(s, schemas.CreateNotebookInstanceLifecycleConfigInput_Tags, v.Tags)
+}
+
 type CreateNotebookInstanceLifecycleConfigOutput struct {
 
 	// The Amazon Resource Name (ARN) of the lifecycle configuration.
@@ -85,13 +102,32 @@ type CreateNotebookInstanceLifecycleConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNotebookInstanceLifecycleConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNotebookInstanceLifecycleConfigOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNotebookInstanceLifecycleConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotebookInstanceLifecycleConfigArn != nil {
+		s.WriteString(schemas.CreateNotebookInstanceLifecycleConfigOutput_NotebookInstanceLifecycleConfigArn, *v.NotebookInstanceLifecycleConfigArn)
+	}
+}
+func (v *CreateNotebookInstanceLifecycleConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateNotebookInstanceLifecycleConfigOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateNotebookInstanceLifecycleConfigOutput_NotebookInstanceLifecycleConfigArn:
+			v.NotebookInstanceLifecycleConfigArn = new(string)
+			return d.ReadString(schemas.CreateNotebookInstanceLifecycleConfigOutput_NotebookInstanceLifecycleConfigArn, v.NotebookInstanceLifecycleConfigArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateNotebookInstanceLifecycleConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateNotebookInstanceLifecycleConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNotebookInstanceLifecycleConfig, schemas.CreateNotebookInstanceLifecycleConfigInput, schemas.CreateNotebookInstanceLifecycleConfigOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateNotebookInstanceLifecycleConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNotebookInstanceLifecycleConfig, schemas.CreateNotebookInstanceLifecycleConfigInput, schemas.CreateNotebookInstanceLifecycleConfigOutput), output: &CreateNotebookInstanceLifecycleConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

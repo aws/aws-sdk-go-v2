@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,21 @@ type CreatePresignedNotebookInstanceUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePresignedNotebookInstanceUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePresignedNotebookInstanceUrlInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePresignedNotebookInstanceUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotebookInstanceName != nil {
+		s.WriteString(schemas.CreatePresignedNotebookInstanceUrlInput_NotebookInstanceName, *v.NotebookInstanceName)
+	}
+	if v.SessionExpirationDurationInSeconds != nil {
+		s.WriteInt32(schemas.CreatePresignedNotebookInstanceUrlInput_SessionExpirationDurationInSeconds, *v.SessionExpirationDurationInSeconds)
+	}
+}
+
 type CreatePresignedNotebookInstanceUrlOutput struct {
 
 	// A JSON object that contains the URL string.
@@ -69,13 +86,32 @@ type CreatePresignedNotebookInstanceUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePresignedNotebookInstanceUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePresignedNotebookInstanceUrlOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePresignedNotebookInstanceUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizedUrl != nil {
+		s.WriteString(schemas.CreatePresignedNotebookInstanceUrlOutput_AuthorizedUrl, *v.AuthorizedUrl)
+	}
+}
+func (v *CreatePresignedNotebookInstanceUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePresignedNotebookInstanceUrlOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePresignedNotebookInstanceUrlOutput_AuthorizedUrl:
+			v.AuthorizedUrl = new(string)
+			return d.ReadString(schemas.CreatePresignedNotebookInstanceUrlOutput_AuthorizedUrl, v.AuthorizedUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePresignedNotebookInstanceUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePresignedNotebookInstanceUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePresignedNotebookInstanceUrl, schemas.CreatePresignedNotebookInstanceUrlInput, schemas.CreatePresignedNotebookInstanceUrlOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePresignedNotebookInstanceUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePresignedNotebookInstanceUrl, schemas.CreatePresignedNotebookInstanceUrlInput, schemas.CreatePresignedNotebookInstanceUrlOutput), output: &CreatePresignedNotebookInstanceUrlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

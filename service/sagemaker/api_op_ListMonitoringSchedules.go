@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -77,6 +79,54 @@ type ListMonitoringSchedulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMonitoringSchedulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMonitoringSchedulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMonitoringSchedulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListMonitoringSchedulesRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListMonitoringSchedulesRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.EndpointName != nil {
+		s.WriteString(schemas.ListMonitoringSchedulesRequest_EndpointName, *v.EndpointName)
+	}
+	if v.LastModifiedTimeAfter != nil {
+		s.WriteTime(schemas.ListMonitoringSchedulesRequest_LastModifiedTimeAfter, *v.LastModifiedTimeAfter)
+	}
+	if v.LastModifiedTimeBefore != nil {
+		s.WriteTime(schemas.ListMonitoringSchedulesRequest_LastModifiedTimeBefore, *v.LastModifiedTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMonitoringSchedulesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MonitoringJobDefinitionName != nil {
+		s.WriteString(schemas.ListMonitoringSchedulesRequest_MonitoringJobDefinitionName, *v.MonitoringJobDefinitionName)
+	}
+	if v.MonitoringTypeEquals != "" {
+		s.WriteString(schemas.ListMonitoringSchedulesRequest_MonitoringTypeEquals, string(v.MonitoringTypeEquals))
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListMonitoringSchedulesRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMonitoringSchedulesRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListMonitoringSchedulesRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListMonitoringSchedulesRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListMonitoringSchedulesRequest_StatusEquals, string(v.StatusEquals))
+	}
+}
+
 type ListMonitoringSchedulesOutput struct {
 
 	// A JSON array in which each element is a summary for a monitoring schedule.
@@ -94,13 +144,35 @@ type ListMonitoringSchedulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMonitoringSchedulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMonitoringSchedulesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMonitoringSchedulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMonitoringScheduleSummaryList(s, schemas.ListMonitoringSchedulesResponse_MonitoringScheduleSummaries, v.MonitoringScheduleSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMonitoringSchedulesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListMonitoringSchedulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMonitoringSchedulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMonitoringSchedulesResponse_MonitoringScheduleSummaries:
+			return deserializeMonitoringScheduleSummaryList(d, schemas.ListMonitoringSchedulesResponse_MonitoringScheduleSummaries, &v.MonitoringScheduleSummaries)
+		case schemas.ListMonitoringSchedulesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMonitoringSchedulesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMonitoringSchedulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMonitoringSchedules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMonitoringSchedules, schemas.ListMonitoringSchedulesRequest, schemas.ListMonitoringSchedulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMonitoringSchedules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMonitoringSchedules, schemas.ListMonitoringSchedulesRequest, schemas.ListMonitoringSchedulesResponse), output: &ListMonitoringSchedulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

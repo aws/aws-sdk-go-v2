@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -85,6 +87,31 @@ type UpdateTermsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTermsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTermsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTermsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enforcement != "" {
+		s.WriteString(schemas.UpdateTermsRequest_Enforcement, string(v.Enforcement))
+	}
+	serializeLinksType(s, schemas.UpdateTermsRequest_Links, v.Links)
+	if v.TermsId != nil {
+		s.WriteString(schemas.UpdateTermsRequest_TermsId, *v.TermsId)
+	}
+	if v.TermsName != nil {
+		s.WriteString(schemas.UpdateTermsRequest_TermsName, *v.TermsName)
+	}
+	if v.TermsSource != "" {
+		s.WriteString(schemas.UpdateTermsRequest_TermsSource, string(v.TermsSource))
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.UpdateTermsRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 type UpdateTermsOutput struct {
 
 	// A summary of the updates to your terms documents.
@@ -96,13 +123,34 @@ type UpdateTermsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTermsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTermsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTermsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Terms != nil {
+		s.WriteStruct(schemas.UpdateTermsResponse_Terms)
+		v.Terms.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateTermsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTermsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTermsResponse_Terms:
+			v.Terms = &types.TermsType{}
+			return v.Terms.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTermsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateTerms{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTerms, schemas.UpdateTermsRequest, schemas.UpdateTermsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateTerms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTerms, schemas.UpdateTermsRequest, schemas.UpdateTermsResponse), output: &UpdateTermsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

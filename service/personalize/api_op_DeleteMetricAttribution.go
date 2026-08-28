@@ -4,6 +4,8 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteMetricAttributionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMetricAttributionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMetricAttributionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMetricAttributionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricAttributionArn != nil {
+		s.WriteString(schemas.DeleteMetricAttributionRequest_metricAttributionArn, *v.MetricAttributionArn)
+	}
+}
+
 type DeleteMetricAttributionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteMetricAttributionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMetricAttributionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMetricAttributionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteMetricAttributionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMetricAttributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteMetricAttribution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMetricAttribution, schemas.DeleteMetricAttributionRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteMetricAttribution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMetricAttribution, schemas.DeleteMetricAttributionRequest, nil), output: &DeleteMetricAttributionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

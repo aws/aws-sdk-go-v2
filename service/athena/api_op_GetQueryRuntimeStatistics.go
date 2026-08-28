@@ -4,7 +4,9 @@ package athena
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type GetQueryRuntimeStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueryRuntimeStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueryRuntimeStatisticsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueryRuntimeStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryExecutionId != nil {
+		s.WriteString(schemas.GetQueryRuntimeStatisticsInput_QueryExecutionId, *v.QueryExecutionId)
+	}
+}
+
 type GetQueryRuntimeStatisticsOutput struct {
 
 	// Runtime statistics about the query execution.
@@ -52,13 +66,34 @@ type GetQueryRuntimeStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueryRuntimeStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueryRuntimeStatisticsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueryRuntimeStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryRuntimeStatistics != nil {
+		s.WriteStruct(schemas.GetQueryRuntimeStatisticsOutput_QueryRuntimeStatistics)
+		v.QueryRuntimeStatistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetQueryRuntimeStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetQueryRuntimeStatisticsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetQueryRuntimeStatisticsOutput_QueryRuntimeStatistics:
+			v.QueryRuntimeStatistics = &types.QueryRuntimeStatistics{}
+			return v.QueryRuntimeStatistics.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetQueryRuntimeStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetQueryRuntimeStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryRuntimeStatistics, schemas.GetQueryRuntimeStatisticsInput, schemas.GetQueryRuntimeStatisticsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetQueryRuntimeStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryRuntimeStatistics, schemas.GetQueryRuntimeStatisticsInput, schemas.GetQueryRuntimeStatisticsOutput), output: &GetQueryRuntimeStatisticsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

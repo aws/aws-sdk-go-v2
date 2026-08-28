@@ -5,7 +5,9 @@ package comprehend
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,39 @@ type StartEventsDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartEventsDetectionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartEventsDetectionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartEventsDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartEventsDetectionJobRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.StartEventsDetectionJobRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.StartEventsDetectionJobRequest_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.StartEventsDetectionJobRequest_JobName, *v.JobName)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.StartEventsDetectionJobRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.StartEventsDetectionJobRequest_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.StartEventsDetectionJobRequest_Tags, v.Tags)
+	serializeTargetEventTypes(s, schemas.StartEventsDetectionJobRequest_TargetEventTypes, v.TargetEventTypes)
+}
+
 type StartEventsDetectionJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the events detection job. It is a unique,
@@ -96,13 +131,48 @@ type StartEventsDetectionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartEventsDetectionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartEventsDetectionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartEventsDetectionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobArn != nil {
+		s.WriteString(schemas.StartEventsDetectionJobResponse_JobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.StartEventsDetectionJobResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.StartEventsDetectionJobResponse_JobStatus, string(v.JobStatus))
+	}
+}
+func (v *StartEventsDetectionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartEventsDetectionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartEventsDetectionJobResponse_JobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.StartEventsDetectionJobResponse_JobArn, v.JobArn)
+		case schemas.StartEventsDetectionJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartEventsDetectionJobResponse_JobId, v.JobId)
+		case schemas.StartEventsDetectionJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartEventsDetectionJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartEventsDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartEventsDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartEventsDetectionJob, schemas.StartEventsDetectionJobRequest, schemas.StartEventsDetectionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartEventsDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartEventsDetectionJob, schemas.StartEventsDetectionJobRequest, schemas.StartEventsDetectionJobResponse), output: &StartEventsDetectionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

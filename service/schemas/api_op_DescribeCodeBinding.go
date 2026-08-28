@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/schemas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/schemas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -52,6 +54,27 @@ type DescribeCodeBindingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCodeBindingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCodeBindingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCodeBindingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Language != nil {
+		s.WriteString(schemas.DescribeCodeBindingRequest_Language, *v.Language)
+	}
+	if v.RegistryName != nil {
+		s.WriteString(schemas.DescribeCodeBindingRequest_RegistryName, *v.RegistryName)
+	}
+	if v.SchemaName != nil {
+		s.WriteString(schemas.DescribeCodeBindingRequest_SchemaName, *v.SchemaName)
+	}
+	if v.SchemaVersion != nil {
+		s.WriteString(schemas.DescribeCodeBindingRequest_SchemaVersion, *v.SchemaVersion)
+	}
+}
+
 type DescribeCodeBindingOutput struct {
 
 	// The time and date that the code binding was created.
@@ -72,13 +95,54 @@ type DescribeCodeBindingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCodeBindingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCodeBindingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCodeBindingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.DescribeCodeBindingResponse_CreationDate, *v.CreationDate)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.DescribeCodeBindingResponse_LastModified, *v.LastModified)
+	}
+	if v.SchemaVersion != nil {
+		s.WriteString(schemas.DescribeCodeBindingResponse_SchemaVersion, *v.SchemaVersion)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeCodeBindingResponse_Status, string(v.Status))
+	}
+}
+func (v *DescribeCodeBindingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCodeBindingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCodeBindingResponse_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeCodeBindingResponse_CreationDate, v.CreationDate)
+		case schemas.DescribeCodeBindingResponse_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.DescribeCodeBindingResponse_LastModified, v.LastModified)
+		case schemas.DescribeCodeBindingResponse_SchemaVersion:
+			v.SchemaVersion = new(string)
+			return d.ReadString(schemas.DescribeCodeBindingResponse_SchemaVersion, v.SchemaVersion)
+		case schemas.DescribeCodeBindingResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeCodeBindingResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CodeGenerationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCodeBindingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeCodeBinding{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCodeBinding, schemas.DescribeCodeBindingRequest, schemas.DescribeCodeBindingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeCodeBinding{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCodeBinding, schemas.DescribeCodeBindingRequest, schemas.DescribeCodeBindingResponse), output: &DescribeCodeBindingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

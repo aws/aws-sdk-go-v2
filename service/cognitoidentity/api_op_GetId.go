@@ -4,6 +4,8 @@ package cognitoidentity
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,22 @@ type GetIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetIdInput_AccountId, *v.AccountId)
+	}
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.GetIdInput_IdentityPoolId, *v.IdentityPoolId)
+	}
+	serializeLoginsMap(s, schemas.GetIdInput_Logins, v.Logins)
+}
+
 // Returned in response to a GetId request.
 type GetIdOutput struct {
 
@@ -69,13 +87,32 @@ type GetIdOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityId != nil {
+		s.WriteString(schemas.GetIdResponse_IdentityId, *v.IdentityId)
+	}
+}
+func (v *GetIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIdResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIdResponse_IdentityId:
+			v.IdentityId = new(string)
+			return d.ReadString(schemas.GetIdResponse_IdentityId, v.IdentityId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetId{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetId, schemas.GetIdInput, schemas.GetIdResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetId{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetId, schemas.GetIdInput, schemas.GetIdResponse), output: &GetIdOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

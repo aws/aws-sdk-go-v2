@@ -4,6 +4,8 @@ package codedeploy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DeleteResourcesByExternalIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourcesByExternalIdInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourcesByExternalIdInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourcesByExternalIdInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExternalId != nil {
+		s.WriteString(schemas.DeleteResourcesByExternalIdInput_externalId, *v.ExternalId)
+	}
+}
+
 type DeleteResourcesByExternalIdOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +59,26 @@ type DeleteResourcesByExternalIdOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourcesByExternalIdOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourcesByExternalIdOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourcesByExternalIdOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteResourcesByExternalIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteResourcesByExternalIdOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteResourcesByExternalIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteResourcesByExternalId{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourcesByExternalId, schemas.DeleteResourcesByExternalIdInput, schemas.DeleteResourcesByExternalIdOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteResourcesByExternalId{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourcesByExternalId, schemas.DeleteResourcesByExternalIdInput, schemas.DeleteResourcesByExternalIdOutput), output: &DeleteResourcesByExternalIdOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

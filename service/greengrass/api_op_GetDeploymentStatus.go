@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type GetDeploymentStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeploymentStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeploymentStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeploymentStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.GetDeploymentStatusRequest_DeploymentId, *v.DeploymentId)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.GetDeploymentStatusRequest_GroupId, *v.GroupId)
+	}
+}
+
 type GetDeploymentStatusOutput struct {
 
 	// The status of the deployment: ''InProgress'', ''Building'', ''Success'', or
@@ -64,13 +81,57 @@ type GetDeploymentStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeploymentStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeploymentStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeploymentStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentStatus != nil {
+		s.WriteString(schemas.GetDeploymentStatusResponse_DeploymentStatus, *v.DeploymentStatus)
+	}
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.GetDeploymentStatusResponse_DeploymentType, string(v.DeploymentType))
+	}
+	serializeErrorDetails(s, schemas.GetDeploymentStatusResponse_ErrorDetails, v.ErrorDetails)
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.GetDeploymentStatusResponse_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteString(schemas.GetDeploymentStatusResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetDeploymentStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDeploymentStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDeploymentStatusResponse_DeploymentStatus:
+			v.DeploymentStatus = new(string)
+			return d.ReadString(schemas.GetDeploymentStatusResponse_DeploymentStatus, v.DeploymentStatus)
+		case schemas.GetDeploymentStatusResponse_DeploymentType:
+			var ev string
+			if err := d.ReadString(schemas.GetDeploymentStatusResponse_DeploymentType, &ev); err != nil {
+				return err
+			}
+			v.DeploymentType = types.DeploymentType(ev)
+			return nil
+		case schemas.GetDeploymentStatusResponse_ErrorDetails:
+			return deserializeErrorDetails(d, schemas.GetDeploymentStatusResponse_ErrorDetails, &v.ErrorDetails)
+		case schemas.GetDeploymentStatusResponse_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.GetDeploymentStatusResponse_ErrorMessage, v.ErrorMessage)
+		case schemas.GetDeploymentStatusResponse_UpdatedAt:
+			v.UpdatedAt = new(string)
+			return d.ReadString(schemas.GetDeploymentStatusResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDeploymentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDeploymentStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeploymentStatus, schemas.GetDeploymentStatusRequest, schemas.GetDeploymentStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDeploymentStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeploymentStatus, schemas.GetDeploymentStatusRequest, schemas.GetDeploymentStatusResponse), output: &GetDeploymentStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

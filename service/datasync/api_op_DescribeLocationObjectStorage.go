@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type DescribeLocationObjectStorageInput struct {
 	LocationArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeLocationObjectStorageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLocationObjectStorageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLocationObjectStorageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.DescribeLocationObjectStorageRequest_LocationArn, *v.LocationArn)
+	}
 }
 
 // DescribeLocationObjectStorageResponse
@@ -91,13 +105,98 @@ type DescribeLocationObjectStorageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLocationObjectStorageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLocationObjectStorageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLocationObjectStorageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessKey != nil {
+		s.WriteString(schemas.DescribeLocationObjectStorageResponse_AccessKey, *v.AccessKey)
+	}
+	serializeAgentArnList(s, schemas.DescribeLocationObjectStorageResponse_AgentArns, v.AgentArns)
+	if v.CmkSecretConfig != nil {
+		s.WriteStruct(schemas.DescribeLocationObjectStorageResponse_CmkSecretConfig)
+		v.CmkSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeLocationObjectStorageResponse_CreationTime, *v.CreationTime)
+	}
+	if v.CustomSecretConfig != nil {
+		s.WriteStruct(schemas.DescribeLocationObjectStorageResponse_CustomSecretConfig)
+		v.CustomSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LocationArn != nil {
+		s.WriteString(schemas.DescribeLocationObjectStorageResponse_LocationArn, *v.LocationArn)
+	}
+	if v.LocationUri != nil {
+		s.WriteString(schemas.DescribeLocationObjectStorageResponse_LocationUri, *v.LocationUri)
+	}
+	if v.ManagedSecretConfig != nil {
+		s.WriteStruct(schemas.DescribeLocationObjectStorageResponse_ManagedSecretConfig)
+		v.ManagedSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServerCertificate != nil {
+		s.WriteBlob(schemas.DescribeLocationObjectStorageResponse_ServerCertificate, v.ServerCertificate)
+	}
+	if v.ServerPort != nil {
+		s.WriteInt32(schemas.DescribeLocationObjectStorageResponse_ServerPort, *v.ServerPort)
+	}
+	if v.ServerProtocol != "" {
+		s.WriteString(schemas.DescribeLocationObjectStorageResponse_ServerProtocol, string(v.ServerProtocol))
+	}
+}
+func (v *DescribeLocationObjectStorageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLocationObjectStorageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLocationObjectStorageResponse_AccessKey:
+			v.AccessKey = new(string)
+			return d.ReadString(schemas.DescribeLocationObjectStorageResponse_AccessKey, v.AccessKey)
+		case schemas.DescribeLocationObjectStorageResponse_AgentArns:
+			return deserializeAgentArnList(d, schemas.DescribeLocationObjectStorageResponse_AgentArns, &v.AgentArns)
+		case schemas.DescribeLocationObjectStorageResponse_CmkSecretConfig:
+			v.CmkSecretConfig = &types.CmkSecretConfig{}
+			return v.CmkSecretConfig.Deserialize(d)
+		case schemas.DescribeLocationObjectStorageResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeLocationObjectStorageResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeLocationObjectStorageResponse_CustomSecretConfig:
+			v.CustomSecretConfig = &types.CustomSecretConfig{}
+			return v.CustomSecretConfig.Deserialize(d)
+		case schemas.DescribeLocationObjectStorageResponse_LocationArn:
+			v.LocationArn = new(string)
+			return d.ReadString(schemas.DescribeLocationObjectStorageResponse_LocationArn, v.LocationArn)
+		case schemas.DescribeLocationObjectStorageResponse_LocationUri:
+			v.LocationUri = new(string)
+			return d.ReadString(schemas.DescribeLocationObjectStorageResponse_LocationUri, v.LocationUri)
+		case schemas.DescribeLocationObjectStorageResponse_ManagedSecretConfig:
+			v.ManagedSecretConfig = &types.ManagedSecretConfig{}
+			return v.ManagedSecretConfig.Deserialize(d)
+		case schemas.DescribeLocationObjectStorageResponse_ServerCertificate:
+			return d.ReadBlob(schemas.DescribeLocationObjectStorageResponse_ServerCertificate, &v.ServerCertificate)
+		case schemas.DescribeLocationObjectStorageResponse_ServerPort:
+			v.ServerPort = new(int32)
+			return d.ReadInt32(schemas.DescribeLocationObjectStorageResponse_ServerPort, v.ServerPort)
+		case schemas.DescribeLocationObjectStorageResponse_ServerProtocol:
+			var ev string
+			if err := d.ReadString(schemas.DescribeLocationObjectStorageResponse_ServerProtocol, &ev); err != nil {
+				return err
+			}
+			v.ServerProtocol = types.ObjectStorageServerProtocol(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLocationObjectStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLocationObjectStorage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLocationObjectStorage, schemas.DescribeLocationObjectStorageRequest, schemas.DescribeLocationObjectStorageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLocationObjectStorage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLocationObjectStorage, schemas.DescribeLocationObjectStorageRequest, schemas.DescribeLocationObjectStorageResponse), output: &DescribeLocationObjectStorageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

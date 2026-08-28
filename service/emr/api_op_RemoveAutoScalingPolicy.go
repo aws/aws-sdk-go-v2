@@ -4,6 +4,8 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type RemoveAutoScalingPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveAutoScalingPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveAutoScalingPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveAutoScalingPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.RemoveAutoScalingPolicyInput_ClusterId, *v.ClusterId)
+	}
+	if v.InstanceGroupId != nil {
+		s.WriteString(schemas.RemoveAutoScalingPolicyInput_InstanceGroupId, *v.InstanceGroupId)
+	}
+}
+
 type RemoveAutoScalingPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +64,26 @@ type RemoveAutoScalingPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveAutoScalingPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveAutoScalingPolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveAutoScalingPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RemoveAutoScalingPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveAutoScalingPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveAutoScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveAutoScalingPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveAutoScalingPolicy, schemas.RemoveAutoScalingPolicyInput, schemas.RemoveAutoScalingPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRemoveAutoScalingPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveAutoScalingPolicy, schemas.RemoveAutoScalingPolicyInput, schemas.RemoveAutoScalingPolicyOutput), output: &RemoveAutoScalingPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

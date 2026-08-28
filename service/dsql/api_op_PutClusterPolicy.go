@@ -5,6 +5,8 @@ package dsql
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dsql/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,30 @@ type PutClusterPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutClusterPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutClusterPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutClusterPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BypassPolicyLockoutSafetyCheck != false {
+		s.WriteBool(schemas.PutClusterPolicyInput_bypassPolicyLockoutSafetyCheck, v.BypassPolicyLockoutSafetyCheck)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.PutClusterPolicyInput_clientToken, *v.ClientToken)
+	}
+	if v.ExpectedPolicyVersion != nil {
+		s.WriteString(schemas.PutClusterPolicyInput_expectedPolicyVersion, *v.ExpectedPolicyVersion)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.PutClusterPolicyInput_identifier, *v.Identifier)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.PutClusterPolicyInput_policy, *v.Policy)
+	}
+}
+
 type PutClusterPolicyOutput struct {
 
 	// The version of the policy after it has been updated or created.
@@ -68,13 +94,32 @@ type PutClusterPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutClusterPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutClusterPolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutClusterPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyVersion != nil {
+		s.WriteString(schemas.PutClusterPolicyOutput_policyVersion, *v.PolicyVersion)
+	}
+}
+func (v *PutClusterPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutClusterPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutClusterPolicyOutput_policyVersion:
+			v.PolicyVersion = new(string)
+			return d.ReadString(schemas.PutClusterPolicyOutput_policyVersion, v.PolicyVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutClusterPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutClusterPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutClusterPolicy, schemas.PutClusterPolicyInput, schemas.PutClusterPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutClusterPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutClusterPolicy, schemas.PutClusterPolicyInput, schemas.PutClusterPolicyOutput), output: &PutClusterPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

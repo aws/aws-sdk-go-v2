@@ -5,7 +5,9 @@ package amplify
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type ListJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.ListJobsRequest_appId, *v.AppId)
+	}
+	if v.BranchName != nil {
+		s.WriteString(schemas.ListJobsRequest_branchName, *v.BranchName)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListJobsRequest_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListJobsRequest_nextToken, *v.NextToken)
+	}
+}
+
 // The maximum number of records to list in a single response.
 type ListJobsOutput struct {
 
@@ -67,13 +90,35 @@ type ListJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeJobSummaries(s, schemas.ListJobsResult_jobSummaries, v.JobSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListJobsResult_nextToken, *v.NextToken)
+	}
+}
+func (v *ListJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListJobsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListJobsResult_jobSummaries:
+			return deserializeJobSummaries(d, schemas.ListJobsResult_jobSummaries, &v.JobSummaries)
+		case schemas.ListJobsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListJobsResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobs, schemas.ListJobsRequest, schemas.ListJobsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobs, schemas.ListJobsRequest, schemas.ListJobsResult), output: &ListJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

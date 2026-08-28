@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -90,6 +92,40 @@ type CreateAlgorithmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAlgorithmInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAlgorithmInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAlgorithmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlgorithmDescription != nil {
+		s.WriteString(schemas.CreateAlgorithmInput_AlgorithmDescription, *v.AlgorithmDescription)
+	}
+	if v.AlgorithmName != nil {
+		s.WriteString(schemas.CreateAlgorithmInput_AlgorithmName, *v.AlgorithmName)
+	}
+	if v.CertifyForMarketplace != nil {
+		s.WriteBool(schemas.CreateAlgorithmInput_CertifyForMarketplace, *v.CertifyForMarketplace)
+	}
+	if v.InferenceSpecification != nil {
+		s.WriteStruct(schemas.CreateAlgorithmInput_InferenceSpecification)
+		v.InferenceSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateAlgorithmInput_Tags, v.Tags)
+	if v.TrainingSpecification != nil {
+		s.WriteStruct(schemas.CreateAlgorithmInput_TrainingSpecification)
+		v.TrainingSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ValidationSpecification != nil {
+		s.WriteStruct(schemas.CreateAlgorithmInput_ValidationSpecification)
+		v.ValidationSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateAlgorithmOutput struct {
 
 	// The Amazon Resource Name (ARN) of the new algorithm.
@@ -103,13 +139,32 @@ type CreateAlgorithmOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAlgorithmOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAlgorithmOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAlgorithmOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlgorithmArn != nil {
+		s.WriteString(schemas.CreateAlgorithmOutput_AlgorithmArn, *v.AlgorithmArn)
+	}
+}
+func (v *CreateAlgorithmOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAlgorithmOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAlgorithmOutput_AlgorithmArn:
+			v.AlgorithmArn = new(string)
+			return d.ReadString(schemas.CreateAlgorithmOutput_AlgorithmArn, v.AlgorithmArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAlgorithmMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAlgorithm{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAlgorithm, schemas.CreateAlgorithmInput, schemas.CreateAlgorithmOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAlgorithm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAlgorithm, schemas.CreateAlgorithmInput, schemas.CreateAlgorithmOutput), output: &CreateAlgorithmOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

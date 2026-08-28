@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,37 @@ type SearchAssociatedTranscriptsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchAssociatedTranscriptsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchAssociatedTranscriptsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchAssociatedTranscriptsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.SearchAssociatedTranscriptsRequest_botId, *v.BotId)
+	}
+	if v.BotRecommendationId != nil {
+		s.WriteString(schemas.SearchAssociatedTranscriptsRequest_botRecommendationId, *v.BotRecommendationId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.SearchAssociatedTranscriptsRequest_botVersion, *v.BotVersion)
+	}
+	serializeAssociatedTranscriptFilters(s, schemas.SearchAssociatedTranscriptsRequest_filters, v.Filters)
+	if v.LocaleId != nil {
+		s.WriteString(schemas.SearchAssociatedTranscriptsRequest_localeId, *v.LocaleId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchAssociatedTranscriptsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextIndex != nil {
+		s.WriteInt32(schemas.SearchAssociatedTranscriptsRequest_nextIndex, *v.NextIndex)
+	}
+	if v.SearchOrder != "" {
+		s.WriteString(schemas.SearchAssociatedTranscriptsRequest_searchOrder, string(v.SearchOrder))
+	}
+}
+
 type SearchAssociatedTranscriptsOutput struct {
 
 	// The object that contains the associated transcript that meet the criteria you
@@ -112,13 +145,65 @@ type SearchAssociatedTranscriptsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchAssociatedTranscriptsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchAssociatedTranscriptsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchAssociatedTranscriptsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssociatedTranscriptList(s, schemas.SearchAssociatedTranscriptsResponse_associatedTranscripts, v.AssociatedTranscripts)
+	if v.BotId != nil {
+		s.WriteString(schemas.SearchAssociatedTranscriptsResponse_botId, *v.BotId)
+	}
+	if v.BotRecommendationId != nil {
+		s.WriteString(schemas.SearchAssociatedTranscriptsResponse_botRecommendationId, *v.BotRecommendationId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.SearchAssociatedTranscriptsResponse_botVersion, *v.BotVersion)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.SearchAssociatedTranscriptsResponse_localeId, *v.LocaleId)
+	}
+	if v.NextIndex != nil {
+		s.WriteInt32(schemas.SearchAssociatedTranscriptsResponse_nextIndex, *v.NextIndex)
+	}
+	if v.TotalResults != nil {
+		s.WriteInt32(schemas.SearchAssociatedTranscriptsResponse_totalResults, *v.TotalResults)
+	}
+}
+func (v *SearchAssociatedTranscriptsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchAssociatedTranscriptsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchAssociatedTranscriptsResponse_associatedTranscripts:
+			return deserializeAssociatedTranscriptList(d, schemas.SearchAssociatedTranscriptsResponse_associatedTranscripts, &v.AssociatedTranscripts)
+		case schemas.SearchAssociatedTranscriptsResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.SearchAssociatedTranscriptsResponse_botId, v.BotId)
+		case schemas.SearchAssociatedTranscriptsResponse_botRecommendationId:
+			v.BotRecommendationId = new(string)
+			return d.ReadString(schemas.SearchAssociatedTranscriptsResponse_botRecommendationId, v.BotRecommendationId)
+		case schemas.SearchAssociatedTranscriptsResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.SearchAssociatedTranscriptsResponse_botVersion, v.BotVersion)
+		case schemas.SearchAssociatedTranscriptsResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.SearchAssociatedTranscriptsResponse_localeId, v.LocaleId)
+		case schemas.SearchAssociatedTranscriptsResponse_nextIndex:
+			v.NextIndex = new(int32)
+			return d.ReadInt32(schemas.SearchAssociatedTranscriptsResponse_nextIndex, v.NextIndex)
+		case schemas.SearchAssociatedTranscriptsResponse_totalResults:
+			v.TotalResults = new(int32)
+			return d.ReadInt32(schemas.SearchAssociatedTranscriptsResponse_totalResults, v.TotalResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchAssociatedTranscriptsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchAssociatedTranscripts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchAssociatedTranscripts, schemas.SearchAssociatedTranscriptsRequest, schemas.SearchAssociatedTranscriptsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchAssociatedTranscripts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchAssociatedTranscripts, schemas.SearchAssociatedTranscriptsRequest, schemas.SearchAssociatedTranscriptsResponse), output: &SearchAssociatedTranscriptsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

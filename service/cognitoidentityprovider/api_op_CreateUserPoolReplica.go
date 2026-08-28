@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,22 @@ type CreateUserPoolReplicaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserPoolReplicaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserPoolReplicaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserPoolReplicaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegionName != nil {
+		s.WriteString(schemas.CreateUserPoolReplicaRequest_RegionName, *v.RegionName)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.CreateUserPoolReplicaRequest_UserPoolId, *v.UserPoolId)
+	}
+	serializeUserPoolTagsType(s, schemas.CreateUserPoolReplicaRequest_UserPoolTags, v.UserPoolTags)
+}
+
 type CreateUserPoolReplicaOutput struct {
 
 	// Information about the created user pool replica, including its status and role.
@@ -72,13 +90,34 @@ type CreateUserPoolReplicaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserPoolReplicaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserPoolReplicaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserPoolReplicaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserPoolReplica != nil {
+		s.WriteStruct(schemas.CreateUserPoolReplicaResponse_UserPoolReplica)
+		v.UserPoolReplica.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateUserPoolReplicaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUserPoolReplicaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUserPoolReplicaResponse_UserPoolReplica:
+			v.UserPoolReplica = &types.UserPoolReplicaType{}
+			return v.UserPoolReplica.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUserPoolReplicaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateUserPoolReplica{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserPoolReplica, schemas.CreateUserPoolReplicaRequest, schemas.CreateUserPoolReplicaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateUserPoolReplica{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserPoolReplica, schemas.CreateUserPoolReplicaRequest, schemas.CreateUserPoolReplicaResponse), output: &CreateUserPoolReplicaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

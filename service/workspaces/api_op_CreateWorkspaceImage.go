@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -50,6 +52,25 @@ type CreateWorkspaceImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkspaceImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkspaceImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkspaceImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateWorkspaceImageRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateWorkspaceImageRequest_Name, *v.Name)
+	}
+	serializeTagList(s, schemas.CreateWorkspaceImageRequest_Tags, v.Tags)
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.CreateWorkspaceImageRequest_WorkspaceId, *v.WorkspaceId)
+	}
+}
+
 type CreateWorkspaceImageOutput struct {
 
 	// The date when the image was created.
@@ -86,13 +107,84 @@ type CreateWorkspaceImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkspaceImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkspaceImageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkspaceImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Created != nil {
+		s.WriteTime(schemas.CreateWorkspaceImageResult_Created, *v.Created)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateWorkspaceImageResult_Description, *v.Description)
+	}
+	if v.ImageId != nil {
+		s.WriteString(schemas.CreateWorkspaceImageResult_ImageId, *v.ImageId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateWorkspaceImageResult_Name, *v.Name)
+	}
+	if v.OperatingSystem != nil {
+		s.WriteStruct(schemas.CreateWorkspaceImageResult_OperatingSystem)
+		v.OperatingSystem.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.CreateWorkspaceImageResult_OwnerAccountId, *v.OwnerAccountId)
+	}
+	if v.RequiredTenancy != "" {
+		s.WriteString(schemas.CreateWorkspaceImageResult_RequiredTenancy, string(v.RequiredTenancy))
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CreateWorkspaceImageResult_State, string(v.State))
+	}
+}
+func (v *CreateWorkspaceImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkspaceImageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkspaceImageResult_Created:
+			v.Created = new(time.Time)
+			return d.ReadTime(schemas.CreateWorkspaceImageResult_Created, v.Created)
+		case schemas.CreateWorkspaceImageResult_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateWorkspaceImageResult_Description, v.Description)
+		case schemas.CreateWorkspaceImageResult_ImageId:
+			v.ImageId = new(string)
+			return d.ReadString(schemas.CreateWorkspaceImageResult_ImageId, v.ImageId)
+		case schemas.CreateWorkspaceImageResult_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateWorkspaceImageResult_Name, v.Name)
+		case schemas.CreateWorkspaceImageResult_OperatingSystem:
+			v.OperatingSystem = &types.OperatingSystem{}
+			return v.OperatingSystem.Deserialize(d)
+		case schemas.CreateWorkspaceImageResult_OwnerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.CreateWorkspaceImageResult_OwnerAccountId, v.OwnerAccountId)
+		case schemas.CreateWorkspaceImageResult_RequiredTenancy:
+			var ev string
+			if err := d.ReadString(schemas.CreateWorkspaceImageResult_RequiredTenancy, &ev); err != nil {
+				return err
+			}
+			v.RequiredTenancy = types.WorkspaceImageRequiredTenancy(ev)
+			return nil
+		case schemas.CreateWorkspaceImageResult_State:
+			var ev string
+			if err := d.ReadString(schemas.CreateWorkspaceImageResult_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.WorkspaceImageState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWorkspaceImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateWorkspaceImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkspaceImage, schemas.CreateWorkspaceImageRequest, schemas.CreateWorkspaceImageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateWorkspaceImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkspaceImage, schemas.CreateWorkspaceImageRequest, schemas.CreateWorkspaceImageResult), output: &CreateWorkspaceImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

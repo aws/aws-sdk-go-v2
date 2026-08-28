@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	smithytime "github.com/aws/smithy-go/time"
@@ -41,6 +43,17 @@ type GetGraphSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGraphSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGraphSnapshotInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGraphSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnapshotIdentifier != nil {
+		s.WriteString(schemas.GetGraphSnapshotInput_snapshotIdentifier, *v.SnapshotIdentifier)
+	}
+}
 func (in *GetGraphSnapshotInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ApiType = ptr.String("ControlPlane")
@@ -85,13 +98,72 @@ type GetGraphSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGraphSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGraphSnapshotOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGraphSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetGraphSnapshotOutput_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetGraphSnapshotOutput_id, *v.Id)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.GetGraphSnapshotOutput_kmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetGraphSnapshotOutput_name, *v.Name)
+	}
+	if v.SnapshotCreateTime != nil {
+		s.WriteTime(schemas.GetGraphSnapshotOutput_snapshotCreateTime, *v.SnapshotCreateTime)
+	}
+	if v.SourceGraphId != nil {
+		s.WriteString(schemas.GetGraphSnapshotOutput_sourceGraphId, *v.SourceGraphId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetGraphSnapshotOutput_status, string(v.Status))
+	}
+}
+func (v *GetGraphSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGraphSnapshotOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGraphSnapshotOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetGraphSnapshotOutput_arn, v.Arn)
+		case schemas.GetGraphSnapshotOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetGraphSnapshotOutput_id, v.Id)
+		case schemas.GetGraphSnapshotOutput_kmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.GetGraphSnapshotOutput_kmsKeyIdentifier, v.KmsKeyIdentifier)
+		case schemas.GetGraphSnapshotOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetGraphSnapshotOutput_name, v.Name)
+		case schemas.GetGraphSnapshotOutput_snapshotCreateTime:
+			v.SnapshotCreateTime = new(time.Time)
+			return d.ReadTime(schemas.GetGraphSnapshotOutput_snapshotCreateTime, v.SnapshotCreateTime)
+		case schemas.GetGraphSnapshotOutput_sourceGraphId:
+			v.SourceGraphId = new(string)
+			return d.ReadString(schemas.GetGraphSnapshotOutput_sourceGraphId, v.SourceGraphId)
+		case schemas.GetGraphSnapshotOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetGraphSnapshotOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SnapshotStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGraphSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGraphSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGraphSnapshot, schemas.GetGraphSnapshotInput, schemas.GetGraphSnapshotOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGraphSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGraphSnapshot, schemas.GetGraphSnapshotInput, schemas.GetGraphSnapshotOutput), output: &GetGraphSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,25 @@ type CreateUseCaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUseCaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUseCaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUseCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateUseCaseRequest_InstanceId, *v.InstanceId)
+	}
+	if v.IntegrationAssociationId != nil {
+		s.WriteString(schemas.CreateUseCaseRequest_IntegrationAssociationId, *v.IntegrationAssociationId)
+	}
+	serializeTagMap(s, schemas.CreateUseCaseRequest_Tags, v.Tags)
+	if v.UseCaseType != "" {
+		s.WriteString(schemas.CreateUseCaseRequest_UseCaseType, string(v.UseCaseType))
+	}
+}
+
 type CreateUseCaseOutput struct {
 
 	// The Amazon Resource Name (ARN) for the use case.
@@ -66,13 +87,38 @@ type CreateUseCaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUseCaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUseCaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUseCaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UseCaseArn != nil {
+		s.WriteString(schemas.CreateUseCaseResponse_UseCaseArn, *v.UseCaseArn)
+	}
+	if v.UseCaseId != nil {
+		s.WriteString(schemas.CreateUseCaseResponse_UseCaseId, *v.UseCaseId)
+	}
+}
+func (v *CreateUseCaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUseCaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUseCaseResponse_UseCaseArn:
+			v.UseCaseArn = new(string)
+			return d.ReadString(schemas.CreateUseCaseResponse_UseCaseArn, v.UseCaseArn)
+		case schemas.CreateUseCaseResponse_UseCaseId:
+			v.UseCaseId = new(string)
+			return d.ReadString(schemas.CreateUseCaseResponse_UseCaseId, v.UseCaseId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUseCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateUseCase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUseCase, schemas.CreateUseCaseRequest, schemas.CreateUseCaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateUseCase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUseCase, schemas.CreateUseCaseRequest, schemas.CreateUseCaseResponse), output: &CreateUseCaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

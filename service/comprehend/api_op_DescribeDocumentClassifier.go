@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DescribeDocumentClassifierInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDocumentClassifierInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDocumentClassifierRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDocumentClassifierInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentClassifierArn != nil {
+		s.WriteString(schemas.DescribeDocumentClassifierRequest_DocumentClassifierArn, *v.DocumentClassifierArn)
+	}
+}
+
 type DescribeDocumentClassifierOutput struct {
 
 	// An object that contains the properties associated with a document classifier.
@@ -46,13 +60,34 @@ type DescribeDocumentClassifierOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDocumentClassifierOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDocumentClassifierResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDocumentClassifierOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentClassifierProperties != nil {
+		s.WriteStruct(schemas.DescribeDocumentClassifierResponse_DocumentClassifierProperties)
+		v.DocumentClassifierProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeDocumentClassifierOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDocumentClassifierResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDocumentClassifierResponse_DocumentClassifierProperties:
+			v.DocumentClassifierProperties = &types.DocumentClassifierProperties{}
+			return v.DocumentClassifierProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDocumentClassifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDocumentClassifier{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDocumentClassifier, schemas.DescribeDocumentClassifierRequest, schemas.DescribeDocumentClassifierResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDocumentClassifier{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDocumentClassifier, schemas.DescribeDocumentClassifierRequest, schemas.DescribeDocumentClassifierResponse), output: &DescribeDocumentClassifierOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

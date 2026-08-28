@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -43,6 +45,23 @@ type DescribeAuditSuppressionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAuditSuppressionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAuditSuppressionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAuditSuppressionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CheckName != nil {
+		s.WriteString(schemas.DescribeAuditSuppressionRequest_checkName, *v.CheckName)
+	}
+	if v.ResourceIdentifier != nil {
+		s.WriteStruct(schemas.DescribeAuditSuppressionRequest_resourceIdentifier)
+		v.ResourceIdentifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type DescribeAuditSuppressionOutput struct {
 
 	// An audit check name. Checks must be enabled for your account. (Use
@@ -69,13 +88,58 @@ type DescribeAuditSuppressionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAuditSuppressionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAuditSuppressionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAuditSuppressionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CheckName != nil {
+		s.WriteString(schemas.DescribeAuditSuppressionResponse_checkName, *v.CheckName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeAuditSuppressionResponse_description, *v.Description)
+	}
+	if v.ExpirationDate != nil {
+		s.WriteTime(schemas.DescribeAuditSuppressionResponse_expirationDate, *v.ExpirationDate)
+	}
+	if v.ResourceIdentifier != nil {
+		s.WriteStruct(schemas.DescribeAuditSuppressionResponse_resourceIdentifier)
+		v.ResourceIdentifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SuppressIndefinitely != nil {
+		s.WriteBool(schemas.DescribeAuditSuppressionResponse_suppressIndefinitely, *v.SuppressIndefinitely)
+	}
+}
+func (v *DescribeAuditSuppressionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAuditSuppressionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAuditSuppressionResponse_checkName:
+			v.CheckName = new(string)
+			return d.ReadString(schemas.DescribeAuditSuppressionResponse_checkName, v.CheckName)
+		case schemas.DescribeAuditSuppressionResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeAuditSuppressionResponse_description, v.Description)
+		case schemas.DescribeAuditSuppressionResponse_expirationDate:
+			v.ExpirationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeAuditSuppressionResponse_expirationDate, v.ExpirationDate)
+		case schemas.DescribeAuditSuppressionResponse_resourceIdentifier:
+			v.ResourceIdentifier = &types.ResourceIdentifier{}
+			return v.ResourceIdentifier.Deserialize(d)
+		case schemas.DescribeAuditSuppressionResponse_suppressIndefinitely:
+			v.SuppressIndefinitely = new(bool)
+			return d.ReadBool(schemas.DescribeAuditSuppressionResponse_suppressIndefinitely, v.SuppressIndefinitely)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAuditSuppressionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAuditSuppression{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAuditSuppression, schemas.DescribeAuditSuppressionRequest, schemas.DescribeAuditSuppressionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAuditSuppression{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAuditSuppression, schemas.DescribeAuditSuppressionRequest, schemas.DescribeAuditSuppressionResponse), output: &DescribeAuditSuppressionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

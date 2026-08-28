@@ -5,7 +5,9 @@ package appflow
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appflow/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -96,6 +98,45 @@ type CreateFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFlowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateFlowRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateFlowRequest_description, *v.Description)
+	}
+	serializeDestinationFlowConfigList(s, schemas.CreateFlowRequest_destinationFlowConfigList, v.DestinationFlowConfigList)
+	if v.FlowName != nil {
+		s.WriteString(schemas.CreateFlowRequest_flowName, *v.FlowName)
+	}
+	if v.KmsArn != nil {
+		s.WriteString(schemas.CreateFlowRequest_kmsArn, *v.KmsArn)
+	}
+	if v.MetadataCatalogConfig != nil {
+		s.WriteStruct(schemas.CreateFlowRequest_metadataCatalogConfig)
+		v.MetadataCatalogConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceFlowConfig != nil {
+		s.WriteStruct(schemas.CreateFlowRequest_sourceFlowConfig)
+		v.SourceFlowConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateFlowRequest_tags, v.Tags)
+	serializeTasks(s, schemas.CreateFlowRequest_tasks, v.Tasks)
+	if v.TriggerConfig != nil {
+		s.WriteStruct(schemas.CreateFlowRequest_triggerConfig)
+		v.TriggerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateFlowOutput struct {
 
 	//  The flow's Amazon Resource Name (ARN).
@@ -110,13 +151,42 @@ type CreateFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFlowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFlowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowArn != nil {
+		s.WriteString(schemas.CreateFlowResponse_flowArn, *v.FlowArn)
+	}
+	if v.FlowStatus != "" {
+		s.WriteString(schemas.CreateFlowResponse_flowStatus, string(v.FlowStatus))
+	}
+}
+func (v *CreateFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFlowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFlowResponse_flowArn:
+			v.FlowArn = new(string)
+			return d.ReadString(schemas.CreateFlowResponse_flowArn, v.FlowArn)
+		case schemas.CreateFlowResponse_flowStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateFlowResponse_flowStatus, &ev); err != nil {
+				return err
+			}
+			v.FlowStatus = types.FlowStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFlow, schemas.CreateFlowRequest, schemas.CreateFlowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFlow, schemas.CreateFlowRequest, schemas.CreateFlowResponse), output: &CreateFlowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

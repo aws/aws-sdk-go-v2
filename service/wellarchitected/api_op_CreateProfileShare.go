@@ -5,6 +5,8 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,24 @@ type CreateProfileShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProfileShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProfileShareInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProfileShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateProfileShareInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ProfileArn != nil {
+		s.WriteString(schemas.CreateProfileShareInput_ProfileArn, *v.ProfileArn)
+	}
+	if v.SharedWith != nil {
+		s.WriteString(schemas.CreateProfileShareInput_SharedWith, *v.SharedWith)
+	}
+}
+
 type CreateProfileShareOutput struct {
 
 	// The profile ARN.
@@ -70,13 +90,38 @@ type CreateProfileShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProfileShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProfileShareOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProfileShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfileArn != nil {
+		s.WriteString(schemas.CreateProfileShareOutput_ProfileArn, *v.ProfileArn)
+	}
+	if v.ShareId != nil {
+		s.WriteString(schemas.CreateProfileShareOutput_ShareId, *v.ShareId)
+	}
+}
+func (v *CreateProfileShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProfileShareOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProfileShareOutput_ProfileArn:
+			v.ProfileArn = new(string)
+			return d.ReadString(schemas.CreateProfileShareOutput_ProfileArn, v.ProfileArn)
+		case schemas.CreateProfileShareOutput_ShareId:
+			v.ShareId = new(string)
+			return d.ReadString(schemas.CreateProfileShareOutput_ShareId, v.ShareId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProfileShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProfileShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProfileShare, schemas.CreateProfileShareInput, schemas.CreateProfileShareOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateProfileShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProfileShare, schemas.CreateProfileShareInput, schemas.CreateProfileShareOutput), output: &CreateProfileShareOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

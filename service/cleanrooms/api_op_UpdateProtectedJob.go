@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type UpdateProtectedJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProtectedJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProtectedJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProtectedJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.UpdateProtectedJobInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.ProtectedJobIdentifier != nil {
+		s.WriteString(schemas.UpdateProtectedJobInput_protectedJobIdentifier, *v.ProtectedJobIdentifier)
+	}
+	if v.TargetStatus != "" {
+		s.WriteString(schemas.UpdateProtectedJobInput_targetStatus, string(v.TargetStatus))
+	}
+}
+
 type UpdateProtectedJobOutput struct {
 
 	// The protected job output.
@@ -58,13 +78,34 @@ type UpdateProtectedJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProtectedJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProtectedJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProtectedJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProtectedJob != nil {
+		s.WriteStruct(schemas.UpdateProtectedJobOutput_protectedJob)
+		v.ProtectedJob.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateProtectedJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProtectedJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProtectedJobOutput_protectedJob:
+			v.ProtectedJob = &types.ProtectedJob{}
+			return v.ProtectedJob.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProtectedJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateProtectedJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProtectedJob, schemas.UpdateProtectedJobInput, schemas.UpdateProtectedJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateProtectedJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProtectedJob, schemas.UpdateProtectedJobInput, schemas.UpdateProtectedJobOutput), output: &UpdateProtectedJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

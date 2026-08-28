@@ -4,7 +4,9 @@ package greengrassv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,27 @@ type GetComponentVersionArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComponentVersionArtifactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComponentVersionArtifactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComponentVersionArtifactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetComponentVersionArtifactRequest_arn, *v.Arn)
+	}
+	if v.ArtifactName != nil {
+		s.WriteString(schemas.GetComponentVersionArtifactRequest_artifactName, *v.ArtifactName)
+	}
+	if v.IotEndpointType != "" {
+		s.WriteString(schemas.GetComponentVersionArtifactRequest_iotEndpointType, string(v.IotEndpointType))
+	}
+	if v.S3EndpointType != "" {
+		s.WriteString(schemas.GetComponentVersionArtifactRequest_s3EndpointType, string(v.S3EndpointType))
+	}
+}
+
 type GetComponentVersionArtifactOutput struct {
 
 	// The URL of the artifact.
@@ -76,13 +99,32 @@ type GetComponentVersionArtifactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComponentVersionArtifactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComponentVersionArtifactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComponentVersionArtifactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PreSignedUrl != nil {
+		s.WriteString(schemas.GetComponentVersionArtifactResponse_preSignedUrl, *v.PreSignedUrl)
+	}
+}
+func (v *GetComponentVersionArtifactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetComponentVersionArtifactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetComponentVersionArtifactResponse_preSignedUrl:
+			v.PreSignedUrl = new(string)
+			return d.ReadString(schemas.GetComponentVersionArtifactResponse_preSignedUrl, v.PreSignedUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetComponentVersionArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetComponentVersionArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComponentVersionArtifact, schemas.GetComponentVersionArtifactRequest, schemas.GetComponentVersionArtifactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetComponentVersionArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComponentVersionArtifact, schemas.GetComponentVersionArtifactRequest, schemas.GetComponentVersionArtifactResponse), output: &GetComponentVersionArtifactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

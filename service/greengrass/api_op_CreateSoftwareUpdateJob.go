@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,34 @@ type CreateSoftwareUpdateJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSoftwareUpdateJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSoftwareUpdateJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSoftwareUpdateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmznClientToken != nil {
+		s.WriteString(schemas.CreateSoftwareUpdateJobRequest_AmznClientToken, *v.AmznClientToken)
+	}
+	if v.S3UrlSignerRole != nil {
+		s.WriteString(schemas.CreateSoftwareUpdateJobRequest_S3UrlSignerRole, *v.S3UrlSignerRole)
+	}
+	if v.SoftwareToUpdate != "" {
+		s.WriteString(schemas.CreateSoftwareUpdateJobRequest_SoftwareToUpdate, string(v.SoftwareToUpdate))
+	}
+	if v.UpdateAgentLogLevel != "" {
+		s.WriteString(schemas.CreateSoftwareUpdateJobRequest_UpdateAgentLogLevel, string(v.UpdateAgentLogLevel))
+	}
+	serializeUpdateTargets(s, schemas.CreateSoftwareUpdateJobRequest_UpdateTargets, v.UpdateTargets)
+	if v.UpdateTargetsArchitecture != "" {
+		s.WriteString(schemas.CreateSoftwareUpdateJobRequest_UpdateTargetsArchitecture, string(v.UpdateTargetsArchitecture))
+	}
+	if v.UpdateTargetsOperatingSystem != "" {
+		s.WriteString(schemas.CreateSoftwareUpdateJobRequest_UpdateTargetsOperatingSystem, string(v.UpdateTargetsOperatingSystem))
+	}
+}
+
 type CreateSoftwareUpdateJobOutput struct {
 
 	// The IoT Job ARN corresponding to this update.
@@ -83,13 +113,44 @@ type CreateSoftwareUpdateJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSoftwareUpdateJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSoftwareUpdateJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSoftwareUpdateJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IotJobArn != nil {
+		s.WriteString(schemas.CreateSoftwareUpdateJobResponse_IotJobArn, *v.IotJobArn)
+	}
+	if v.IotJobId != nil {
+		s.WriteString(schemas.CreateSoftwareUpdateJobResponse_IotJobId, *v.IotJobId)
+	}
+	if v.PlatformSoftwareVersion != nil {
+		s.WriteString(schemas.CreateSoftwareUpdateJobResponse_PlatformSoftwareVersion, *v.PlatformSoftwareVersion)
+	}
+}
+func (v *CreateSoftwareUpdateJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSoftwareUpdateJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSoftwareUpdateJobResponse_IotJobArn:
+			v.IotJobArn = new(string)
+			return d.ReadString(schemas.CreateSoftwareUpdateJobResponse_IotJobArn, v.IotJobArn)
+		case schemas.CreateSoftwareUpdateJobResponse_IotJobId:
+			v.IotJobId = new(string)
+			return d.ReadString(schemas.CreateSoftwareUpdateJobResponse_IotJobId, v.IotJobId)
+		case schemas.CreateSoftwareUpdateJobResponse_PlatformSoftwareVersion:
+			v.PlatformSoftwareVersion = new(string)
+			return d.ReadString(schemas.CreateSoftwareUpdateJobResponse_PlatformSoftwareVersion, v.PlatformSoftwareVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSoftwareUpdateJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSoftwareUpdateJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSoftwareUpdateJob, schemas.CreateSoftwareUpdateJobRequest, schemas.CreateSoftwareUpdateJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSoftwareUpdateJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSoftwareUpdateJob, schemas.CreateSoftwareUpdateJobRequest, schemas.CreateSoftwareUpdateJobResponse), output: &CreateSoftwareUpdateJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

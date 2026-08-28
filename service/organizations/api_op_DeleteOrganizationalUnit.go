@@ -4,6 +4,8 @@ package organizations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,18 @@ type DeleteOrganizationalUnitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOrganizationalUnitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteOrganizationalUnitRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteOrganizationalUnitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationalUnitId != nil {
+		s.WriteString(schemas.DeleteOrganizationalUnitRequest_OrganizationalUnitId, *v.OrganizationalUnitId)
+	}
+}
+
 type DeleteOrganizationalUnitOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +65,26 @@ type DeleteOrganizationalUnitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOrganizationalUnitOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteOrganizationalUnitOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteOrganizationalUnitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteOrganizationalUnitMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteOrganizationalUnit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOrganizationalUnit, schemas.DeleteOrganizationalUnitRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteOrganizationalUnit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOrganizationalUnit, schemas.DeleteOrganizationalUnitRequest, nil), output: &DeleteOrganizationalUnitOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,30 @@ type ListWorkloadSharesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkloadSharesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkloadSharesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkloadSharesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWorkloadSharesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkloadSharesInput_NextToken, *v.NextToken)
+	}
+	if v.SharedWithPrefix != nil {
+		s.WriteString(schemas.ListWorkloadSharesInput_SharedWithPrefix, *v.SharedWithPrefix)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListWorkloadSharesInput_Status, string(v.Status))
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.ListWorkloadSharesInput_WorkloadId, *v.WorkloadId)
+	}
+}
+
 // Input for List Workload Share
 type ListWorkloadSharesOutput struct {
 
@@ -69,13 +95,41 @@ type ListWorkloadSharesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkloadSharesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkloadSharesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkloadSharesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkloadSharesOutput_NextToken, *v.NextToken)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.ListWorkloadSharesOutput_WorkloadId, *v.WorkloadId)
+	}
+	serializeWorkloadShareSummaries(s, schemas.ListWorkloadSharesOutput_WorkloadShareSummaries, v.WorkloadShareSummaries)
+}
+func (v *ListWorkloadSharesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkloadSharesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkloadSharesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkloadSharesOutput_NextToken, v.NextToken)
+		case schemas.ListWorkloadSharesOutput_WorkloadId:
+			v.WorkloadId = new(string)
+			return d.ReadString(schemas.ListWorkloadSharesOutput_WorkloadId, v.WorkloadId)
+		case schemas.ListWorkloadSharesOutput_WorkloadShareSummaries:
+			return deserializeWorkloadShareSummaries(d, schemas.ListWorkloadSharesOutput_WorkloadShareSummaries, &v.WorkloadShareSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkloadSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWorkloadShares{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkloadShares, schemas.ListWorkloadSharesInput, schemas.ListWorkloadSharesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWorkloadShares{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkloadShares, schemas.ListWorkloadSharesInput, schemas.ListWorkloadSharesOutput), output: &ListWorkloadSharesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,22 @@ type DescribeIpGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIpGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIpGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIpGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIpGroupIdList(s, schemas.DescribeIpGroupsRequest_GroupIds, v.GroupIds)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeIpGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeIpGroupsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeIpGroupsOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when
@@ -54,13 +72,35 @@ type DescribeIpGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIpGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIpGroupsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIpGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeIpGroupsResult_NextToken, *v.NextToken)
+	}
+	serializeWorkspacesIpGroupsList(s, schemas.DescribeIpGroupsResult_Result, v.Result)
+}
+func (v *DescribeIpGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeIpGroupsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeIpGroupsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeIpGroupsResult_NextToken, v.NextToken)
+		case schemas.DescribeIpGroupsResult_Result:
+			return deserializeWorkspacesIpGroupsList(d, schemas.DescribeIpGroupsResult_Result, &v.Result)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeIpGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeIpGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIpGroups, schemas.DescribeIpGroupsRequest, schemas.DescribeIpGroupsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeIpGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIpGroups, schemas.DescribeIpGroupsRequest, schemas.DescribeIpGroupsResult), output: &DescribeIpGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

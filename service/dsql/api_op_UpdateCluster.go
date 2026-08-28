@@ -5,7 +5,9 @@ package dsql
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dsql/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dsql/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -116,6 +118,32 @@ type UpdateClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateClusterInput_clientToken, *v.ClientToken)
+	}
+	if v.DeletionProtectionEnabled != nil {
+		s.WriteBool(schemas.UpdateClusterInput_deletionProtectionEnabled, *v.DeletionProtectionEnabled)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateClusterInput_identifier, *v.Identifier)
+	}
+	if v.KmsEncryptionKey != nil {
+		s.WriteString(schemas.UpdateClusterInput_kmsEncryptionKey, *v.KmsEncryptionKey)
+	}
+	if v.MultiRegionProperties != nil {
+		s.WriteStruct(schemas.UpdateClusterInput_multiRegionProperties)
+		v.MultiRegionProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The details of the cluster after it has been updated.
 type UpdateClusterOutput struct {
 
@@ -145,13 +173,54 @@ type UpdateClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateClusterOutput_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.UpdateClusterOutput_creationTime, *v.CreationTime)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateClusterOutput_identifier, *v.Identifier)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateClusterOutput_status, string(v.Status))
+	}
+}
+func (v *UpdateClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateClusterOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateClusterOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateClusterOutput_arn, v.Arn)
+		case schemas.UpdateClusterOutput_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateClusterOutput_creationTime, v.CreationTime)
+		case schemas.UpdateClusterOutput_identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.UpdateClusterOutput_identifier, v.Identifier)
+		case schemas.UpdateClusterOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateClusterOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ClusterStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCluster, schemas.UpdateClusterInput, schemas.UpdateClusterOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCluster, schemas.UpdateClusterInput, schemas.UpdateClusterOutput), output: &UpdateClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribePersistentAppUIInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePersistentAppUIInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePersistentAppUIInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePersistentAppUIInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PersistentAppUIId != nil {
+		s.WriteString(schemas.DescribePersistentAppUIInput_PersistentAppUIId, *v.PersistentAppUIId)
+	}
+}
+
 type DescribePersistentAppUIOutput struct {
 
 	// The persistent application user interface.
@@ -45,13 +59,34 @@ type DescribePersistentAppUIOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePersistentAppUIOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePersistentAppUIOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePersistentAppUIOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PersistentAppUI != nil {
+		s.WriteStruct(schemas.DescribePersistentAppUIOutput_PersistentAppUI)
+		v.PersistentAppUI.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribePersistentAppUIOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePersistentAppUIOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePersistentAppUIOutput_PersistentAppUI:
+			v.PersistentAppUI = &types.PersistentAppUI{}
+			return v.PersistentAppUI.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePersistentAppUIMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePersistentAppUI{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePersistentAppUI, schemas.DescribePersistentAppUIInput, schemas.DescribePersistentAppUIOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePersistentAppUI{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePersistentAppUI, schemas.DescribePersistentAppUIInput, schemas.DescribePersistentAppUIOutput), output: &DescribePersistentAppUIOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -76,6 +78,42 @@ type ListViolationEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListViolationEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListViolationEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListViolationEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BehaviorCriteriaType != "" {
+		s.WriteString(schemas.ListViolationEventsRequest_behaviorCriteriaType, string(v.BehaviorCriteriaType))
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListViolationEventsRequest_endTime, *v.EndTime)
+	}
+	if v.ListSuppressedAlerts != nil {
+		s.WriteBool(schemas.ListViolationEventsRequest_listSuppressedAlerts, *v.ListSuppressedAlerts)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListViolationEventsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListViolationEventsRequest_nextToken, *v.NextToken)
+	}
+	if v.SecurityProfileName != nil {
+		s.WriteString(schemas.ListViolationEventsRequest_securityProfileName, *v.SecurityProfileName)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListViolationEventsRequest_startTime, *v.StartTime)
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.ListViolationEventsRequest_thingName, *v.ThingName)
+	}
+	if v.VerificationState != "" {
+		s.WriteString(schemas.ListViolationEventsRequest_verificationState, string(v.VerificationState))
+	}
+}
+
 type ListViolationEventsOutput struct {
 
 	// A token that can be used to retrieve the next set of results, or null if there
@@ -93,13 +131,35 @@ type ListViolationEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListViolationEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListViolationEventsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListViolationEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListViolationEventsResponse_nextToken, *v.NextToken)
+	}
+	serializeViolationEvents(s, schemas.ListViolationEventsResponse_violationEvents, v.ViolationEvents)
+}
+func (v *ListViolationEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListViolationEventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListViolationEventsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListViolationEventsResponse_nextToken, v.NextToken)
+		case schemas.ListViolationEventsResponse_violationEvents:
+			return deserializeViolationEvents(d, schemas.ListViolationEventsResponse_violationEvents, &v.ViolationEvents)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListViolationEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListViolationEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListViolationEvents, schemas.ListViolationEventsRequest, schemas.ListViolationEventsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListViolationEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListViolationEvents, schemas.ListViolationEventsRequest, schemas.ListViolationEventsResponse), output: &ListViolationEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

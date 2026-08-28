@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeFlowDefinitionInput struct {
 	FlowDefinitionName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeFlowDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFlowDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFlowDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowDefinitionName != nil {
+		s.WriteString(schemas.DescribeFlowDefinitionRequest_FlowDefinitionName, *v.FlowDefinitionName)
+	}
 }
 
 type DescribeFlowDefinitionOutput struct {
@@ -88,13 +102,98 @@ type DescribeFlowDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFlowDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFlowDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFlowDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeFlowDefinitionResponse_CreationTime, *v.CreationTime)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeFlowDefinitionResponse_FailureReason, *v.FailureReason)
+	}
+	if v.FlowDefinitionArn != nil {
+		s.WriteString(schemas.DescribeFlowDefinitionResponse_FlowDefinitionArn, *v.FlowDefinitionArn)
+	}
+	if v.FlowDefinitionName != nil {
+		s.WriteString(schemas.DescribeFlowDefinitionResponse_FlowDefinitionName, *v.FlowDefinitionName)
+	}
+	if v.FlowDefinitionStatus != "" {
+		s.WriteString(schemas.DescribeFlowDefinitionResponse_FlowDefinitionStatus, string(v.FlowDefinitionStatus))
+	}
+	if v.HumanLoopActivationConfig != nil {
+		s.WriteStruct(schemas.DescribeFlowDefinitionResponse_HumanLoopActivationConfig)
+		v.HumanLoopActivationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HumanLoopConfig != nil {
+		s.WriteStruct(schemas.DescribeFlowDefinitionResponse_HumanLoopConfig)
+		v.HumanLoopConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HumanLoopRequestSource != nil {
+		s.WriteStruct(schemas.DescribeFlowDefinitionResponse_HumanLoopRequestSource)
+		v.HumanLoopRequestSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.DescribeFlowDefinitionResponse_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeFlowDefinitionResponse_RoleArn, *v.RoleArn)
+	}
+}
+func (v *DescribeFlowDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFlowDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFlowDefinitionResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeFlowDefinitionResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeFlowDefinitionResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeFlowDefinitionResponse_FailureReason, v.FailureReason)
+		case schemas.DescribeFlowDefinitionResponse_FlowDefinitionArn:
+			v.FlowDefinitionArn = new(string)
+			return d.ReadString(schemas.DescribeFlowDefinitionResponse_FlowDefinitionArn, v.FlowDefinitionArn)
+		case schemas.DescribeFlowDefinitionResponse_FlowDefinitionName:
+			v.FlowDefinitionName = new(string)
+			return d.ReadString(schemas.DescribeFlowDefinitionResponse_FlowDefinitionName, v.FlowDefinitionName)
+		case schemas.DescribeFlowDefinitionResponse_FlowDefinitionStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeFlowDefinitionResponse_FlowDefinitionStatus, &ev); err != nil {
+				return err
+			}
+			v.FlowDefinitionStatus = types.FlowDefinitionStatus(ev)
+			return nil
+		case schemas.DescribeFlowDefinitionResponse_HumanLoopActivationConfig:
+			v.HumanLoopActivationConfig = &types.HumanLoopActivationConfig{}
+			return v.HumanLoopActivationConfig.Deserialize(d)
+		case schemas.DescribeFlowDefinitionResponse_HumanLoopConfig:
+			v.HumanLoopConfig = &types.HumanLoopConfig{}
+			return v.HumanLoopConfig.Deserialize(d)
+		case schemas.DescribeFlowDefinitionResponse_HumanLoopRequestSource:
+			v.HumanLoopRequestSource = &types.HumanLoopRequestSource{}
+			return v.HumanLoopRequestSource.Deserialize(d)
+		case schemas.DescribeFlowDefinitionResponse_OutputConfig:
+			v.OutputConfig = &types.FlowDefinitionOutputConfig{}
+			return v.OutputConfig.Deserialize(d)
+		case schemas.DescribeFlowDefinitionResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeFlowDefinitionResponse_RoleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFlowDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFlowDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFlowDefinition, schemas.DescribeFlowDefinitionRequest, schemas.DescribeFlowDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeFlowDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFlowDefinition, schemas.DescribeFlowDefinitionRequest, schemas.DescribeFlowDefinitionResponse), output: &DescribeFlowDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

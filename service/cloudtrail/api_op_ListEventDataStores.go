@@ -5,7 +5,9 @@ package cloudtrail
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListEventDataStoresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventDataStoresInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventDataStoresRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventDataStoresInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEventDataStoresRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventDataStoresRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListEventDataStoresOutput struct {
 
 	// Contains information about event data stores in the account, in the current
@@ -52,13 +69,35 @@ type ListEventDataStoresOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventDataStoresOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventDataStoresResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventDataStoresOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventDataStores(s, schemas.ListEventDataStoresResponse_EventDataStores, v.EventDataStores)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventDataStoresResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEventDataStoresOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEventDataStoresResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEventDataStoresResponse_EventDataStores:
+			return deserializeEventDataStores(d, schemas.ListEventDataStoresResponse_EventDataStores, &v.EventDataStores)
+		case schemas.ListEventDataStoresResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEventDataStoresResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEventDataStoresMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEventDataStores{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventDataStores, schemas.ListEventDataStoresRequest, schemas.ListEventDataStoresResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListEventDataStores{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventDataStores, schemas.ListEventDataStoresRequest, schemas.ListEventDataStoresResponse), output: &ListEventDataStoresOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

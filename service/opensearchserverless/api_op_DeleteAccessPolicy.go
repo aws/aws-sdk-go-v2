@@ -5,7 +5,9 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,44 @@ type DeleteAccessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccessPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccessPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccessPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteAccessPolicyRequest_clientToken, *v.ClientToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteAccessPolicyRequest_name, *v.Name)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DeleteAccessPolicyRequest_type, string(v.Type))
+	}
+}
+func (v *DeleteAccessPolicyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAccessPolicyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAccessPolicyRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DeleteAccessPolicyRequest_clientToken, v.ClientToken)
+		case schemas.DeleteAccessPolicyRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteAccessPolicyRequest_name, v.Name)
+		case schemas.DeleteAccessPolicyRequest_type:
+			var ev string
+			if err := d.ReadString(schemas.DeleteAccessPolicyRequest_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.AccessPolicyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type DeleteAccessPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +92,26 @@ type DeleteAccessPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccessPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccessPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccessPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAccessPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAccessPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteAccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccessPolicy, schemas.DeleteAccessPolicyRequest, schemas.DeleteAccessPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteAccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccessPolicy, schemas.DeleteAccessPolicyRequest, schemas.DeleteAccessPolicyResponse), output: &DeleteAccessPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

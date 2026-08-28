@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -86,6 +88,30 @@ type UpdateAuthEventFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAuthEventFeedbackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAuthEventFeedbackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAuthEventFeedbackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventId != nil {
+		s.WriteString(schemas.UpdateAuthEventFeedbackRequest_EventId, *v.EventId)
+	}
+	if v.FeedbackToken != nil {
+		s.WriteString(schemas.UpdateAuthEventFeedbackRequest_FeedbackToken, *v.FeedbackToken)
+	}
+	if v.FeedbackValue != "" {
+		s.WriteString(schemas.UpdateAuthEventFeedbackRequest_FeedbackValue, string(v.FeedbackValue))
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.UpdateAuthEventFeedbackRequest_UserPoolId, *v.UserPoolId)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.UpdateAuthEventFeedbackRequest_Username, *v.Username)
+	}
+}
+
 type UpdateAuthEventFeedbackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -93,13 +119,26 @@ type UpdateAuthEventFeedbackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAuthEventFeedbackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAuthEventFeedbackResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAuthEventFeedbackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateAuthEventFeedbackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAuthEventFeedbackResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAuthEventFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAuthEventFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAuthEventFeedback, schemas.UpdateAuthEventFeedbackRequest, schemas.UpdateAuthEventFeedbackResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateAuthEventFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAuthEventFeedback, schemas.UpdateAuthEventFeedbackRequest, schemas.UpdateAuthEventFeedbackResponse), output: &UpdateAuthEventFeedbackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

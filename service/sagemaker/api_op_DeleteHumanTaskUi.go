@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type DeleteHumanTaskUiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteHumanTaskUiInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteHumanTaskUiRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteHumanTaskUiInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HumanTaskUiName != nil {
+		s.WriteString(schemas.DeleteHumanTaskUiRequest_HumanTaskUiName, *v.HumanTaskUiName)
+	}
+}
+
 type DeleteHumanTaskUiOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +61,26 @@ type DeleteHumanTaskUiOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteHumanTaskUiOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteHumanTaskUiResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteHumanTaskUiOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteHumanTaskUiOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteHumanTaskUiResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteHumanTaskUiMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteHumanTaskUi{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHumanTaskUi, schemas.DeleteHumanTaskUiRequest, schemas.DeleteHumanTaskUiResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteHumanTaskUi{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHumanTaskUi, schemas.DeleteHumanTaskUiRequest, schemas.DeleteHumanTaskUiResponse), output: &DeleteHumanTaskUiOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

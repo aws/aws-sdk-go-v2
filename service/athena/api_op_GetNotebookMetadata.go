@@ -4,7 +4,9 @@ package athena
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetNotebookMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNotebookMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNotebookMetadataInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNotebookMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotebookId != nil {
+		s.WriteString(schemas.GetNotebookMetadataInput_NotebookId, *v.NotebookId)
+	}
+}
+
 type GetNotebookMetadataOutput struct {
 
 	// The metadata that is returned for the specified notebook ID.
@@ -45,13 +59,34 @@ type GetNotebookMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNotebookMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNotebookMetadataOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNotebookMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotebookMetadata != nil {
+		s.WriteStruct(schemas.GetNotebookMetadataOutput_NotebookMetadata)
+		v.NotebookMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetNotebookMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNotebookMetadataOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNotebookMetadataOutput_NotebookMetadata:
+			v.NotebookMetadata = &types.NotebookMetadata{}
+			return v.NotebookMetadata.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetNotebookMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetNotebookMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNotebookMetadata, schemas.GetNotebookMetadataInput, schemas.GetNotebookMetadataOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetNotebookMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNotebookMetadata, schemas.GetNotebookMetadataInput, schemas.GetNotebookMetadataOutput), output: &GetNotebookMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

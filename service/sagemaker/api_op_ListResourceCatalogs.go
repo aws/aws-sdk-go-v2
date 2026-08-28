@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -57,6 +59,36 @@ type ListResourceCatalogsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceCatalogsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceCatalogsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceCatalogsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListResourceCatalogsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListResourceCatalogsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResourceCatalogsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListResourceCatalogsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceCatalogsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListResourceCatalogsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListResourceCatalogsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListResourceCatalogsOutput struct {
 
 	//  A token to resume pagination of ListResourceCatalogs results.
@@ -71,13 +103,35 @@ type ListResourceCatalogsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceCatalogsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceCatalogsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceCatalogsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceCatalogsResponse_NextToken, *v.NextToken)
+	}
+	serializeResourceCatalogList(s, schemas.ListResourceCatalogsResponse_ResourceCatalogs, v.ResourceCatalogs)
+}
+func (v *ListResourceCatalogsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourceCatalogsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourceCatalogsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResourceCatalogsResponse_NextToken, v.NextToken)
+		case schemas.ListResourceCatalogsResponse_ResourceCatalogs:
+			return deserializeResourceCatalogList(d, schemas.ListResourceCatalogsResponse_ResourceCatalogs, &v.ResourceCatalogs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResourceCatalogsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResourceCatalogs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceCatalogs, schemas.ListResourceCatalogsRequest, schemas.ListResourceCatalogsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListResourceCatalogs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceCatalogs, schemas.ListResourceCatalogsRequest, schemas.ListResourceCatalogsResponse), output: &ListResourceCatalogsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

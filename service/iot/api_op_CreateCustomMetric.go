@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,28 @@ type CreateCustomMetricInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomMetricInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomMetricRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomMetricInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateCustomMetricRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateCustomMetricRequest_displayName, *v.DisplayName)
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.CreateCustomMetricRequest_metricName, *v.MetricName)
+	}
+	if v.MetricType != "" {
+		s.WriteString(schemas.CreateCustomMetricRequest_metricType, string(v.MetricType))
+	}
+	serializeTagList(s, schemas.CreateCustomMetricRequest_tags, v.Tags)
+}
+
 type CreateCustomMetricOutput struct {
 
 	//  The Amazon Resource Number (ARN) of the custom metric. For example,
@@ -89,13 +113,38 @@ type CreateCustomMetricOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomMetricOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomMetricResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomMetricOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricArn != nil {
+		s.WriteString(schemas.CreateCustomMetricResponse_metricArn, *v.MetricArn)
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.CreateCustomMetricResponse_metricName, *v.MetricName)
+	}
+}
+func (v *CreateCustomMetricOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCustomMetricResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCustomMetricResponse_metricArn:
+			v.MetricArn = new(string)
+			return d.ReadString(schemas.CreateCustomMetricResponse_metricArn, v.MetricArn)
+		case schemas.CreateCustomMetricResponse_metricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.CreateCustomMetricResponse_metricName, v.MetricName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCustomMetricMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCustomMetric{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomMetric, schemas.CreateCustomMetricRequest, schemas.CreateCustomMetricResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCustomMetric{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomMetric, schemas.CreateCustomMetricRequest, schemas.CreateCustomMetricResponse), output: &CreateCustomMetricOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

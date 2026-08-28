@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,28 @@ type CreateHubContentReferenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHubContentReferenceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHubContentReferenceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHubContentReferenceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HubContentName != nil {
+		s.WriteString(schemas.CreateHubContentReferenceRequest_HubContentName, *v.HubContentName)
+	}
+	if v.HubName != nil {
+		s.WriteString(schemas.CreateHubContentReferenceRequest_HubName, *v.HubName)
+	}
+	if v.MinVersion != nil {
+		s.WriteString(schemas.CreateHubContentReferenceRequest_MinVersion, *v.MinVersion)
+	}
+	if v.SageMakerPublicHubContentArn != nil {
+		s.WriteString(schemas.CreateHubContentReferenceRequest_SageMakerPublicHubContentArn, *v.SageMakerPublicHubContentArn)
+	}
+	serializeTagList(s, schemas.CreateHubContentReferenceRequest_Tags, v.Tags)
+}
+
 type CreateHubContentReferenceOutput struct {
 
 	// The ARN of the hub that the hub content reference was added to.
@@ -67,13 +91,38 @@ type CreateHubContentReferenceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHubContentReferenceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHubContentReferenceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHubContentReferenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HubArn != nil {
+		s.WriteString(schemas.CreateHubContentReferenceResponse_HubArn, *v.HubArn)
+	}
+	if v.HubContentArn != nil {
+		s.WriteString(schemas.CreateHubContentReferenceResponse_HubContentArn, *v.HubContentArn)
+	}
+}
+func (v *CreateHubContentReferenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateHubContentReferenceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateHubContentReferenceResponse_HubArn:
+			v.HubArn = new(string)
+			return d.ReadString(schemas.CreateHubContentReferenceResponse_HubArn, v.HubArn)
+		case schemas.CreateHubContentReferenceResponse_HubContentArn:
+			v.HubContentArn = new(string)
+			return d.ReadString(schemas.CreateHubContentReferenceResponse_HubContentArn, v.HubContentArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateHubContentReferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateHubContentReference{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHubContentReference, schemas.CreateHubContentReferenceRequest, schemas.CreateHubContentReferenceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateHubContentReference{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHubContentReference, schemas.CreateHubContentReferenceRequest, schemas.CreateHubContentReferenceResponse), output: &CreateHubContentReferenceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

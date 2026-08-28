@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -135,6 +137,53 @@ type CreateTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogGroupArn != nil {
+		s.WriteString(schemas.CreateTaskRequest_CloudWatchLogGroupArn, *v.CloudWatchLogGroupArn)
+	}
+	if v.DestinationLocationArn != nil {
+		s.WriteString(schemas.CreateTaskRequest_DestinationLocationArn, *v.DestinationLocationArn)
+	}
+	serializeFilterList(s, schemas.CreateTaskRequest_Excludes, v.Excludes)
+	serializeFilterList(s, schemas.CreateTaskRequest_Includes, v.Includes)
+	if v.ManifestConfig != nil {
+		s.WriteStruct(schemas.CreateTaskRequest_ManifestConfig)
+		v.ManifestConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateTaskRequest_Name, *v.Name)
+	}
+	if v.Options != nil {
+		s.WriteStruct(schemas.CreateTaskRequest_Options)
+		v.Options.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Schedule != nil {
+		s.WriteStruct(schemas.CreateTaskRequest_Schedule)
+		v.Schedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceLocationArn != nil {
+		s.WriteString(schemas.CreateTaskRequest_SourceLocationArn, *v.SourceLocationArn)
+	}
+	serializeInputTagList(s, schemas.CreateTaskRequest_Tags, v.Tags)
+	if v.TaskMode != "" {
+		s.WriteString(schemas.CreateTaskRequest_TaskMode, string(v.TaskMode))
+	}
+	if v.TaskReportConfig != nil {
+		s.WriteStruct(schemas.CreateTaskRequest_TaskReportConfig)
+		v.TaskReportConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // CreateTaskResponse
 type CreateTaskOutput struct {
 
@@ -147,13 +196,32 @@ type CreateTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskArn != nil {
+		s.WriteString(schemas.CreateTaskResponse_TaskArn, *v.TaskArn)
+	}
+}
+func (v *CreateTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTaskResponse_TaskArn:
+			v.TaskArn = new(string)
+			return d.ReadString(schemas.CreateTaskResponse_TaskArn, v.TaskArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTask, schemas.CreateTaskRequest, schemas.CreateTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTask, schemas.CreateTaskRequest, schemas.CreateTaskResponse), output: &CreateTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

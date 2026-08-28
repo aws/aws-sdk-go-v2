@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,29 @@ type DescribeConformancePackComplianceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConformancePackComplianceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConformancePackComplianceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConformancePackComplianceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConformancePackName != nil {
+		s.WriteString(schemas.DescribeConformancePackComplianceRequest_ConformancePackName, *v.ConformancePackName)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.DescribeConformancePackComplianceRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.DescribeConformancePackComplianceRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeConformancePackComplianceRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeConformancePackComplianceOutput struct {
 
 	// Name of the conformance pack.
@@ -70,13 +95,41 @@ type DescribeConformancePackComplianceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConformancePackComplianceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConformancePackComplianceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConformancePackComplianceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConformancePackName != nil {
+		s.WriteString(schemas.DescribeConformancePackComplianceResponse_ConformancePackName, *v.ConformancePackName)
+	}
+	serializeConformancePackRuleComplianceList(s, schemas.DescribeConformancePackComplianceResponse_ConformancePackRuleComplianceList, v.ConformancePackRuleComplianceList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeConformancePackComplianceResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeConformancePackComplianceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConformancePackComplianceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConformancePackComplianceResponse_ConformancePackName:
+			v.ConformancePackName = new(string)
+			return d.ReadString(schemas.DescribeConformancePackComplianceResponse_ConformancePackName, v.ConformancePackName)
+		case schemas.DescribeConformancePackComplianceResponse_ConformancePackRuleComplianceList:
+			return deserializeConformancePackRuleComplianceList(d, schemas.DescribeConformancePackComplianceResponse_ConformancePackRuleComplianceList, &v.ConformancePackRuleComplianceList)
+		case schemas.DescribeConformancePackComplianceResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeConformancePackComplianceResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConformancePackComplianceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConformancePackCompliance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConformancePackCompliance, schemas.DescribeConformancePackComplianceRequest, schemas.DescribeConformancePackComplianceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeConformancePackCompliance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConformancePackCompliance, schemas.DescribeConformancePackComplianceRequest, schemas.DescribeConformancePackComplianceResponse), output: &DescribeConformancePackComplianceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

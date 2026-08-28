@@ -4,6 +4,8 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type GetAssociatedRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssociatedRoleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssociatedRoleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssociatedRoleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.GetAssociatedRoleRequest_GroupId, *v.GroupId)
+	}
+}
+
 type GetAssociatedRoleOutput struct {
 
 	// The time when the role was associated with the group.
@@ -47,13 +61,38 @@ type GetAssociatedRoleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssociatedRoleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssociatedRoleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssociatedRoleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedAt != nil {
+		s.WriteString(schemas.GetAssociatedRoleResponse_AssociatedAt, *v.AssociatedAt)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetAssociatedRoleResponse_RoleArn, *v.RoleArn)
+	}
+}
+func (v *GetAssociatedRoleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAssociatedRoleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAssociatedRoleResponse_AssociatedAt:
+			v.AssociatedAt = new(string)
+			return d.ReadString(schemas.GetAssociatedRoleResponse_AssociatedAt, v.AssociatedAt)
+		case schemas.GetAssociatedRoleResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetAssociatedRoleResponse_RoleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAssociatedRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAssociatedRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssociatedRole, schemas.GetAssociatedRoleRequest, schemas.GetAssociatedRoleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAssociatedRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssociatedRole, schemas.GetAssociatedRoleRequest, schemas.GetAssociatedRoleResponse), output: &GetAssociatedRoleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

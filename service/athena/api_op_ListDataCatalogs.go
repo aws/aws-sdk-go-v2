@@ -5,7 +5,9 @@ package athena
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListDataCatalogsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataCatalogsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataCatalogsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataCatalogsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataCatalogsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataCatalogsInput_NextToken, *v.NextToken)
+	}
+	if v.WorkGroup != nil {
+		s.WriteString(schemas.ListDataCatalogsInput_WorkGroup, *v.WorkGroup)
+	}
+}
+
 type ListDataCatalogsOutput struct {
 
 	// A summary list of data catalogs.
@@ -60,13 +80,35 @@ type ListDataCatalogsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataCatalogsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataCatalogsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataCatalogsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataCatalogSummaryList(s, schemas.ListDataCatalogsOutput_DataCatalogsSummary, v.DataCatalogsSummary)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataCatalogsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDataCatalogsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataCatalogsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataCatalogsOutput_DataCatalogsSummary:
+			return deserializeDataCatalogSummaryList(d, schemas.ListDataCatalogsOutput_DataCatalogsSummary, &v.DataCatalogsSummary)
+		case schemas.ListDataCatalogsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataCatalogsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataCatalogsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDataCatalogs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataCatalogs, schemas.ListDataCatalogsInput, schemas.ListDataCatalogsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDataCatalogs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataCatalogs, schemas.ListDataCatalogsInput, schemas.ListDataCatalogsOutput), output: &ListDataCatalogsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

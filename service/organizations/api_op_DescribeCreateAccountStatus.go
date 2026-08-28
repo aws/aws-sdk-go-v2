@@ -4,7 +4,9 @@ package organizations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,18 @@ type DescribeCreateAccountStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCreateAccountStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCreateAccountStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCreateAccountStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateAccountRequestId != nil {
+		s.WriteString(schemas.DescribeCreateAccountStatusRequest_CreateAccountRequestId, *v.CreateAccountRequestId)
+	}
+}
+
 type DescribeCreateAccountStatusOutput struct {
 
 	// A structure that contains the current status of an account creation request.
@@ -55,13 +69,34 @@ type DescribeCreateAccountStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCreateAccountStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCreateAccountStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCreateAccountStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateAccountStatus != nil {
+		s.WriteStruct(schemas.DescribeCreateAccountStatusResponse_CreateAccountStatus)
+		v.CreateAccountStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeCreateAccountStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCreateAccountStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCreateAccountStatusResponse_CreateAccountStatus:
+			v.CreateAccountStatus = &types.CreateAccountStatus{}
+			return v.CreateAccountStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCreateAccountStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCreateAccountStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCreateAccountStatus, schemas.DescribeCreateAccountStatusRequest, schemas.DescribeCreateAccountStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCreateAccountStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCreateAccountStatus, schemas.DescribeCreateAccountStatusRequest, schemas.DescribeCreateAccountStatusResponse), output: &DescribeCreateAccountStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,20 @@ type UpdateNotebookInstanceLifecycleConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNotebookInstanceLifecycleConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNotebookInstanceLifecycleConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNotebookInstanceLifecycleConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotebookInstanceLifecycleConfigName != nil {
+		s.WriteString(schemas.UpdateNotebookInstanceLifecycleConfigInput_NotebookInstanceLifecycleConfigName, *v.NotebookInstanceLifecycleConfigName)
+	}
+	serializeNotebookInstanceLifecycleConfigList(s, schemas.UpdateNotebookInstanceLifecycleConfigInput_OnCreate, v.OnCreate)
+	serializeNotebookInstanceLifecycleConfigList(s, schemas.UpdateNotebookInstanceLifecycleConfigInput_OnStart, v.OnStart)
+}
+
 type UpdateNotebookInstanceLifecycleConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,13 +75,26 @@ type UpdateNotebookInstanceLifecycleConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNotebookInstanceLifecycleConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNotebookInstanceLifecycleConfigOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNotebookInstanceLifecycleConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateNotebookInstanceLifecycleConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateNotebookInstanceLifecycleConfigOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateNotebookInstanceLifecycleConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateNotebookInstanceLifecycleConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNotebookInstanceLifecycleConfig, schemas.UpdateNotebookInstanceLifecycleConfigInput, schemas.UpdateNotebookInstanceLifecycleConfigOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateNotebookInstanceLifecycleConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNotebookInstanceLifecycleConfig, schemas.UpdateNotebookInstanceLifecycleConfigInput, schemas.UpdateNotebookInstanceLifecycleConfigOutput), output: &UpdateNotebookInstanceLifecycleConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

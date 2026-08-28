@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,27 @@ type CreateThingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateThingGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateThingGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateThingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParentGroupName != nil {
+		s.WriteString(schemas.CreateThingGroupRequest_parentGroupName, *v.ParentGroupName)
+	}
+	serializeTagList(s, schemas.CreateThingGroupRequest_tags, v.Tags)
+	if v.ThingGroupName != nil {
+		s.WriteString(schemas.CreateThingGroupRequest_thingGroupName, *v.ThingGroupName)
+	}
+	if v.ThingGroupProperties != nil {
+		s.WriteStruct(schemas.CreateThingGroupRequest_thingGroupProperties)
+		v.ThingGroupProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateThingGroupOutput struct {
 
 	// The thing group ARN.
@@ -71,13 +94,44 @@ type CreateThingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateThingGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateThingGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateThingGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ThingGroupArn != nil {
+		s.WriteString(schemas.CreateThingGroupResponse_thingGroupArn, *v.ThingGroupArn)
+	}
+	if v.ThingGroupId != nil {
+		s.WriteString(schemas.CreateThingGroupResponse_thingGroupId, *v.ThingGroupId)
+	}
+	if v.ThingGroupName != nil {
+		s.WriteString(schemas.CreateThingGroupResponse_thingGroupName, *v.ThingGroupName)
+	}
+}
+func (v *CreateThingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateThingGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateThingGroupResponse_thingGroupArn:
+			v.ThingGroupArn = new(string)
+			return d.ReadString(schemas.CreateThingGroupResponse_thingGroupArn, v.ThingGroupArn)
+		case schemas.CreateThingGroupResponse_thingGroupId:
+			v.ThingGroupId = new(string)
+			return d.ReadString(schemas.CreateThingGroupResponse_thingGroupId, v.ThingGroupId)
+		case schemas.CreateThingGroupResponse_thingGroupName:
+			v.ThingGroupName = new(string)
+			return d.ReadString(schemas.CreateThingGroupResponse_thingGroupName, v.ThingGroupName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateThingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateThingGroup, schemas.CreateThingGroupRequest, schemas.CreateThingGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateThingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateThingGroup, schemas.CreateThingGroupRequest, schemas.CreateThingGroupResponse), output: &CreateThingGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

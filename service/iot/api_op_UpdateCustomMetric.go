@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -53,6 +55,21 @@ type UpdateCustomMetricInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCustomMetricInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCustomMetricRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCustomMetricInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateCustomMetricRequest_displayName, *v.DisplayName)
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.UpdateCustomMetricRequest_metricName, *v.MetricName)
+	}
+}
+
 type UpdateCustomMetricOutput struct {
 
 	//  The creation date of the custom metric in milliseconds since epoch.
@@ -83,13 +100,66 @@ type UpdateCustomMetricOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCustomMetricOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCustomMetricResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCustomMetricOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.UpdateCustomMetricResponse_creationDate, *v.CreationDate)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateCustomMetricResponse_displayName, *v.DisplayName)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.UpdateCustomMetricResponse_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.MetricArn != nil {
+		s.WriteString(schemas.UpdateCustomMetricResponse_metricArn, *v.MetricArn)
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.UpdateCustomMetricResponse_metricName, *v.MetricName)
+	}
+	if v.MetricType != "" {
+		s.WriteString(schemas.UpdateCustomMetricResponse_metricType, string(v.MetricType))
+	}
+}
+func (v *UpdateCustomMetricOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCustomMetricResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCustomMetricResponse_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.UpdateCustomMetricResponse_creationDate, v.CreationDate)
+		case schemas.UpdateCustomMetricResponse_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.UpdateCustomMetricResponse_displayName, v.DisplayName)
+		case schemas.UpdateCustomMetricResponse_lastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.UpdateCustomMetricResponse_lastModifiedDate, v.LastModifiedDate)
+		case schemas.UpdateCustomMetricResponse_metricArn:
+			v.MetricArn = new(string)
+			return d.ReadString(schemas.UpdateCustomMetricResponse_metricArn, v.MetricArn)
+		case schemas.UpdateCustomMetricResponse_metricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.UpdateCustomMetricResponse_metricName, v.MetricName)
+		case schemas.UpdateCustomMetricResponse_metricType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateCustomMetricResponse_metricType, &ev); err != nil {
+				return err
+			}
+			v.MetricType = types.CustomMetricType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCustomMetricMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCustomMetric{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCustomMetric, schemas.UpdateCustomMetricRequest, schemas.UpdateCustomMetricResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCustomMetric{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCustomMetric, schemas.UpdateCustomMetricRequest, schemas.UpdateCustomMetricResponse), output: &UpdateCustomMetricOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

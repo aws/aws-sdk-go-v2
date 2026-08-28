@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,35 @@ type StartProtectedJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartProtectedJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartProtectedJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartProtectedJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeProtectedJobComputeConfiguration(s, schemas.StartProtectedJobInput_computeConfiguration, v.ComputeConfiguration)
+	if v.JobComputePayerAccountId != nil {
+		s.WriteString(schemas.StartProtectedJobInput_jobComputePayerAccountId, *v.JobComputePayerAccountId)
+	}
+	if v.JobParameters != nil {
+		s.WriteStruct(schemas.StartProtectedJobInput_jobParameters)
+		v.JobParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.StartProtectedJobInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.ResultConfiguration != nil {
+		s.WriteStruct(schemas.StartProtectedJobInput_resultConfiguration)
+		v.ResultConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.StartProtectedJobInput_type, string(v.Type))
+	}
+}
+
 type StartProtectedJobOutput struct {
 
 	//  The protected job.
@@ -67,13 +98,34 @@ type StartProtectedJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartProtectedJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartProtectedJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartProtectedJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProtectedJob != nil {
+		s.WriteStruct(schemas.StartProtectedJobOutput_protectedJob)
+		v.ProtectedJob.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartProtectedJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartProtectedJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartProtectedJobOutput_protectedJob:
+			v.ProtectedJob = &types.ProtectedJob{}
+			return v.ProtectedJob.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartProtectedJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartProtectedJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartProtectedJob, schemas.StartProtectedJobInput, schemas.StartProtectedJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartProtectedJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartProtectedJob, schemas.StartProtectedJobInput, schemas.StartProtectedJobOutput), output: &StartProtectedJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

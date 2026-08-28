@@ -4,7 +4,9 @@ package greengrassv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,19 @@ type BatchDisassociateClientDeviceFromCoreDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDisassociateClientDeviceFromCoreDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDisassociateClientDeviceFromCoreDeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDisassociateClientDeviceFromCoreDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreDeviceThingName != nil {
+		s.WriteString(schemas.BatchDisassociateClientDeviceFromCoreDeviceRequest_coreDeviceThingName, *v.CoreDeviceThingName)
+	}
+	serializeDisassociateClientDeviceFromCoreDeviceEntryList(s, schemas.BatchDisassociateClientDeviceFromCoreDeviceRequest_entries, v.Entries)
+}
+
 type BatchDisassociateClientDeviceFromCoreDeviceOutput struct {
 
 	// The list of any errors for the entries in the request. Each error entry
@@ -52,13 +67,29 @@ type BatchDisassociateClientDeviceFromCoreDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDisassociateClientDeviceFromCoreDeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDisassociateClientDeviceFromCoreDeviceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDisassociateClientDeviceFromCoreDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDisassociateClientDeviceFromCoreDeviceErrorList(s, schemas.BatchDisassociateClientDeviceFromCoreDeviceResponse_errorEntries, v.ErrorEntries)
+}
+func (v *BatchDisassociateClientDeviceFromCoreDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDisassociateClientDeviceFromCoreDeviceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDisassociateClientDeviceFromCoreDeviceResponse_errorEntries:
+			return deserializeDisassociateClientDeviceFromCoreDeviceErrorList(d, schemas.BatchDisassociateClientDeviceFromCoreDeviceResponse_errorEntries, &v.ErrorEntries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDisassociateClientDeviceFromCoreDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDisassociateClientDeviceFromCoreDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDisassociateClientDeviceFromCoreDevice, schemas.BatchDisassociateClientDeviceFromCoreDeviceRequest, schemas.BatchDisassociateClientDeviceFromCoreDeviceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDisassociateClientDeviceFromCoreDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDisassociateClientDeviceFromCoreDevice, schemas.BatchDisassociateClientDeviceFromCoreDeviceRequest, schemas.BatchDisassociateClientDeviceFromCoreDeviceResponse), output: &BatchDisassociateClientDeviceFromCoreDeviceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

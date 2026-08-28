@@ -5,7 +5,9 @@ package route53resolver
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -108,6 +110,28 @@ type ListResolverQueryLogConfigAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResolverQueryLogConfigAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResolverQueryLogConfigAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResolverQueryLogConfigAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilters(s, schemas.ListResolverQueryLogConfigAssociationsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResolverQueryLogConfigAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResolverQueryLogConfigAssociationsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != nil {
+		s.WriteString(schemas.ListResolverQueryLogConfigAssociationsRequest_SortBy, *v.SortBy)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListResolverQueryLogConfigAssociationsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListResolverQueryLogConfigAssociationsOutput struct {
 
 	// If there are more than MaxResults query logging associations, you can submit
@@ -139,13 +163,45 @@ type ListResolverQueryLogConfigAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResolverQueryLogConfigAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResolverQueryLogConfigAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResolverQueryLogConfigAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResolverQueryLogConfigAssociationsResponse_NextToken, *v.NextToken)
+	}
+	serializeResolverQueryLogConfigAssociationList(s, schemas.ListResolverQueryLogConfigAssociationsResponse_ResolverQueryLogConfigAssociations, v.ResolverQueryLogConfigAssociations)
+	if v.TotalCount != 0 {
+		s.WriteInt32(schemas.ListResolverQueryLogConfigAssociationsResponse_TotalCount, v.TotalCount)
+	}
+	if v.TotalFilteredCount != 0 {
+		s.WriteInt32(schemas.ListResolverQueryLogConfigAssociationsResponse_TotalFilteredCount, v.TotalFilteredCount)
+	}
+}
+func (v *ListResolverQueryLogConfigAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResolverQueryLogConfigAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResolverQueryLogConfigAssociationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResolverQueryLogConfigAssociationsResponse_NextToken, v.NextToken)
+		case schemas.ListResolverQueryLogConfigAssociationsResponse_ResolverQueryLogConfigAssociations:
+			return deserializeResolverQueryLogConfigAssociationList(d, schemas.ListResolverQueryLogConfigAssociationsResponse_ResolverQueryLogConfigAssociations, &v.ResolverQueryLogConfigAssociations)
+		case schemas.ListResolverQueryLogConfigAssociationsResponse_TotalCount:
+			return d.ReadInt32(schemas.ListResolverQueryLogConfigAssociationsResponse_TotalCount, &v.TotalCount)
+		case schemas.ListResolverQueryLogConfigAssociationsResponse_TotalFilteredCount:
+			return d.ReadInt32(schemas.ListResolverQueryLogConfigAssociationsResponse_TotalFilteredCount, &v.TotalFilteredCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResolverQueryLogConfigAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResolverQueryLogConfigAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResolverQueryLogConfigAssociations, schemas.ListResolverQueryLogConfigAssociationsRequest, schemas.ListResolverQueryLogConfigAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListResolverQueryLogConfigAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResolverQueryLogConfigAssociations, schemas.ListResolverQueryLogConfigAssociationsRequest, schemas.ListResolverQueryLogConfigAssociationsResponse), output: &ListResolverQueryLogConfigAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

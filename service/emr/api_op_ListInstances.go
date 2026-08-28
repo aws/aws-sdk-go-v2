@@ -5,7 +5,9 @@ package emr
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,32 @@ type ListInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInstancesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.ListInstancesInput_ClusterId, *v.ClusterId)
+	}
+	if v.InstanceFleetId != nil {
+		s.WriteString(schemas.ListInstancesInput_InstanceFleetId, *v.InstanceFleetId)
+	}
+	if v.InstanceFleetType != "" {
+		s.WriteString(schemas.ListInstancesInput_InstanceFleetType, string(v.InstanceFleetType))
+	}
+	if v.InstanceGroupId != nil {
+		s.WriteString(schemas.ListInstancesInput_InstanceGroupId, *v.InstanceGroupId)
+	}
+	serializeInstanceGroupTypeList(s, schemas.ListInstancesInput_InstanceGroupTypes, v.InstanceGroupTypes)
+	serializeInstanceStateList(s, schemas.ListInstancesInput_InstanceStates, v.InstanceStates)
+	if v.Marker != nil {
+		s.WriteString(schemas.ListInstancesInput_Marker, *v.Marker)
+	}
+}
+
 // This output contains the list of instances.
 type ListInstancesOutput struct {
 
@@ -73,13 +101,35 @@ type ListInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInstancesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstanceList(s, schemas.ListInstancesOutput_Instances, v.Instances)
+	if v.Marker != nil {
+		s.WriteString(schemas.ListInstancesOutput_Marker, *v.Marker)
+	}
+}
+func (v *ListInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInstancesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInstancesOutput_Instances:
+			return deserializeInstanceList(d, schemas.ListInstancesOutput_Instances, &v.Instances)
+		case schemas.ListInstancesOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListInstancesOutput_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstances, schemas.ListInstancesInput, schemas.ListInstancesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstances, schemas.ListInstancesInput, schemas.ListInstancesOutput), output: &ListInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

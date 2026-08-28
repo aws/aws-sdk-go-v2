@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -81,6 +83,19 @@ type AddCustomAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddCustomAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddCustomAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddCustomAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomAttributesListType(s, schemas.AddCustomAttributesRequest_CustomAttributes, v.CustomAttributes)
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AddCustomAttributesRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 // Represents the response from the server for the request to add custom
 // attributes.
 type AddCustomAttributesOutput struct {
@@ -90,13 +105,26 @@ type AddCustomAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddCustomAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddCustomAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddCustomAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AddCustomAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddCustomAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddCustomAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddCustomAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddCustomAttributes, schemas.AddCustomAttributesRequest, schemas.AddCustomAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddCustomAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddCustomAttributes, schemas.AddCustomAttributesRequest, schemas.AddCustomAttributesResponse), output: &AddCustomAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

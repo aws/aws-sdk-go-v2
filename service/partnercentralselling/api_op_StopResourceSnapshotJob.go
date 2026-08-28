@@ -4,6 +4,8 @@ package partnercentralselling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type StopResourceSnapshotJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopResourceSnapshotJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopResourceSnapshotJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopResourceSnapshotJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.StopResourceSnapshotJobRequest_Catalog, *v.Catalog)
+	}
+	if v.ResourceSnapshotJobIdentifier != nil {
+		s.WriteString(schemas.StopResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier, *v.ResourceSnapshotJobIdentifier)
+	}
+}
+
 type StopResourceSnapshotJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +67,26 @@ type StopResourceSnapshotJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopResourceSnapshotJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopResourceSnapshotJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopResourceSnapshotJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopResourceSnapshotJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStopResourceSnapshotJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopResourceSnapshotJob, schemas.StopResourceSnapshotJobRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStopResourceSnapshotJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopResourceSnapshotJob, schemas.StopResourceSnapshotJobRequest, nil), output: &StopResourceSnapshotJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

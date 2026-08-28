@@ -5,7 +5,9 @@ package appflow
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appflow/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,28 @@ type DescribeConnectorProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConnectorProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectorProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectorProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorLabel != nil {
+		s.WriteString(schemas.DescribeConnectorProfilesRequest_connectorLabel, *v.ConnectorLabel)
+	}
+	serializeConnectorProfileNameList(s, schemas.DescribeConnectorProfilesRequest_connectorProfileNames, v.ConnectorProfileNames)
+	if v.ConnectorType != "" {
+		s.WriteString(schemas.DescribeConnectorProfilesRequest_connectorType, string(v.ConnectorType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeConnectorProfilesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeConnectorProfilesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type DescribeConnectorProfilesOutput struct {
 
 	//  Returns information about the connector profiles associated with the flow.
@@ -70,13 +94,35 @@ type DescribeConnectorProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConnectorProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectorProfilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectorProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectorProfileDetailList(s, schemas.DescribeConnectorProfilesResponse_connectorProfileDetails, v.ConnectorProfileDetails)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeConnectorProfilesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeConnectorProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConnectorProfilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConnectorProfilesResponse_connectorProfileDetails:
+			return deserializeConnectorProfileDetailList(d, schemas.DescribeConnectorProfilesResponse_connectorProfileDetails, &v.ConnectorProfileDetails)
+		case schemas.DescribeConnectorProfilesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeConnectorProfilesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConnectorProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeConnectorProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnectorProfiles, schemas.DescribeConnectorProfilesRequest, schemas.DescribeConnectorProfilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeConnectorProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnectorProfiles, schemas.DescribeConnectorProfilesRequest, schemas.DescribeConnectorProfilesResponse), output: &DescribeConnectorProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

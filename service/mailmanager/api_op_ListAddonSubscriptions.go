@@ -5,7 +5,9 @@ package mailmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type ListAddonSubscriptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAddonSubscriptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAddonSubscriptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAddonSubscriptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAddonSubscriptionsRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListAddonSubscriptionsRequest_PageSize, *v.PageSize)
+	}
+}
+
 type ListAddonSubscriptionsOutput struct {
 
 	// The list of ingress endpoints.
@@ -54,13 +71,35 @@ type ListAddonSubscriptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAddonSubscriptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAddonSubscriptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAddonSubscriptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAddonSubscriptions(s, schemas.ListAddonSubscriptionsResponse_AddonSubscriptions, v.AddonSubscriptions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAddonSubscriptionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAddonSubscriptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAddonSubscriptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAddonSubscriptionsResponse_AddonSubscriptions:
+			return deserializeAddonSubscriptions(d, schemas.ListAddonSubscriptionsResponse_AddonSubscriptions, &v.AddonSubscriptions)
+		case schemas.ListAddonSubscriptionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAddonSubscriptionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAddonSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListAddonSubscriptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAddonSubscriptions, schemas.ListAddonSubscriptionsRequest, schemas.ListAddonSubscriptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListAddonSubscriptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAddonSubscriptions, schemas.ListAddonSubscriptionsRequest, schemas.ListAddonSubscriptionsResponse), output: &ListAddonSubscriptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -116,6 +118,55 @@ type CreateDomainConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDomainConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDomainConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDomainConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationProtocol != "" {
+		s.WriteString(schemas.CreateDomainConfigurationRequest_applicationProtocol, string(v.ApplicationProtocol))
+	}
+	if v.AuthenticationType != "" {
+		s.WriteString(schemas.CreateDomainConfigurationRequest_authenticationType, string(v.AuthenticationType))
+	}
+	if v.AuthorizerConfig != nil {
+		s.WriteStruct(schemas.CreateDomainConfigurationRequest_authorizerConfig)
+		v.AuthorizerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientCertificateConfig != nil {
+		s.WriteStruct(schemas.CreateDomainConfigurationRequest_clientCertificateConfig)
+		v.ClientCertificateConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainConfigurationName != nil {
+		s.WriteString(schemas.CreateDomainConfigurationRequest_domainConfigurationName, *v.DomainConfigurationName)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.CreateDomainConfigurationRequest_domainName, *v.DomainName)
+	}
+	serializeServerCertificateArns(s, schemas.CreateDomainConfigurationRequest_serverCertificateArns, v.ServerCertificateArns)
+	if v.ServerCertificateConfig != nil {
+		s.WriteStruct(schemas.CreateDomainConfigurationRequest_serverCertificateConfig)
+		v.ServerCertificateConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceType != "" {
+		s.WriteString(schemas.CreateDomainConfigurationRequest_serviceType, string(v.ServiceType))
+	}
+	serializeTagList(s, schemas.CreateDomainConfigurationRequest_tags, v.Tags)
+	if v.TlsConfig != nil {
+		s.WriteStruct(schemas.CreateDomainConfigurationRequest_tlsConfig)
+		v.TlsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ValidationCertificateArn != nil {
+		s.WriteString(schemas.CreateDomainConfigurationRequest_validationCertificateArn, *v.ValidationCertificateArn)
+	}
+}
+
 type CreateDomainConfigurationOutput struct {
 
 	// The ARN of the domain configuration.
@@ -130,13 +181,38 @@ type CreateDomainConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDomainConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDomainConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDomainConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainConfigurationArn != nil {
+		s.WriteString(schemas.CreateDomainConfigurationResponse_domainConfigurationArn, *v.DomainConfigurationArn)
+	}
+	if v.DomainConfigurationName != nil {
+		s.WriteString(schemas.CreateDomainConfigurationResponse_domainConfigurationName, *v.DomainConfigurationName)
+	}
+}
+func (v *CreateDomainConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDomainConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDomainConfigurationResponse_domainConfigurationArn:
+			v.DomainConfigurationArn = new(string)
+			return d.ReadString(schemas.CreateDomainConfigurationResponse_domainConfigurationArn, v.DomainConfigurationArn)
+		case schemas.CreateDomainConfigurationResponse_domainConfigurationName:
+			v.DomainConfigurationName = new(string)
+			return d.ReadString(schemas.CreateDomainConfigurationResponse_domainConfigurationName, v.DomainConfigurationName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDomainConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDomainConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomainConfiguration, schemas.CreateDomainConfigurationRequest, schemas.CreateDomainConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDomainConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomainConfiguration, schemas.CreateDomainConfigurationRequest, schemas.CreateDomainConfigurationResponse), output: &CreateDomainConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

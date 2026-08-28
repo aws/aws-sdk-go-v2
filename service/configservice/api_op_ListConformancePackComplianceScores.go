@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,32 @@ type ListConformancePackComplianceScoresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConformancePackComplianceScoresInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConformancePackComplianceScoresRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConformancePackComplianceScoresInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListConformancePackComplianceScoresRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.ListConformancePackComplianceScoresRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConformancePackComplianceScoresRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListConformancePackComplianceScoresRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListConformancePackComplianceScoresRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListConformancePackComplianceScoresOutput struct {
 
 	// A list of ConformancePackComplianceScore objects.
@@ -88,13 +116,35 @@ type ListConformancePackComplianceScoresOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConformancePackComplianceScoresOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConformancePackComplianceScoresResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConformancePackComplianceScoresOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConformancePackComplianceScores(s, schemas.ListConformancePackComplianceScoresResponse_ConformancePackComplianceScores, v.ConformancePackComplianceScores)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConformancePackComplianceScoresResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListConformancePackComplianceScoresOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConformancePackComplianceScoresResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConformancePackComplianceScoresResponse_ConformancePackComplianceScores:
+			return deserializeConformancePackComplianceScores(d, schemas.ListConformancePackComplianceScoresResponse_ConformancePackComplianceScores, &v.ConformancePackComplianceScores)
+		case schemas.ListConformancePackComplianceScoresResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConformancePackComplianceScoresResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConformancePackComplianceScoresMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListConformancePackComplianceScores{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConformancePackComplianceScores, schemas.ListConformancePackComplianceScoresRequest, schemas.ListConformancePackComplianceScoresResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListConformancePackComplianceScores{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConformancePackComplianceScores, schemas.ListConformancePackComplianceScoresRequest, schemas.ListConformancePackComplianceScoresResponse), output: &ListConformancePackComplianceScoresOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

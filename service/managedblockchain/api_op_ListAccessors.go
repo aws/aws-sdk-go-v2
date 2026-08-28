@@ -5,7 +5,9 @@ package managedblockchain
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListAccessorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccessorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccessorsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccessorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAccessorsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.ListAccessorsInput_NetworkType, string(v.NetworkType))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccessorsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListAccessorsOutput struct {
 
 	// An array of AccessorSummary objects that contain configuration properties for
@@ -59,13 +79,35 @@ type ListAccessorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccessorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccessorsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccessorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessorSummaryList(s, schemas.ListAccessorsOutput_Accessors, v.Accessors)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccessorsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAccessorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccessorsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccessorsOutput_Accessors:
+			return deserializeAccessorSummaryList(d, schemas.ListAccessorsOutput_Accessors, &v.Accessors)
+		case schemas.ListAccessorsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAccessorsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAccessorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAccessors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessors, schemas.ListAccessorsInput, schemas.ListAccessorsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAccessors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessors, schemas.ListAccessorsInput, schemas.ListAccessorsOutput), output: &ListAccessorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

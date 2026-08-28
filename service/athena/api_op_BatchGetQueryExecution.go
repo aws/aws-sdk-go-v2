@@ -4,7 +4,9 @@ package athena
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,16 @@ type BatchGetQueryExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetQueryExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetQueryExecutionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetQueryExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeQueryExecutionIdList(s, schemas.BatchGetQueryExecutionInput_QueryExecutionIds, v.QueryExecutionIds)
+}
+
 type BatchGetQueryExecutionOutput struct {
 
 	// Information about a query execution.
@@ -53,13 +65,32 @@ type BatchGetQueryExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetQueryExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetQueryExecutionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetQueryExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeQueryExecutionList(s, schemas.BatchGetQueryExecutionOutput_QueryExecutions, v.QueryExecutions)
+	serializeUnprocessedQueryExecutionIdList(s, schemas.BatchGetQueryExecutionOutput_UnprocessedQueryExecutionIds, v.UnprocessedQueryExecutionIds)
+}
+func (v *BatchGetQueryExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetQueryExecutionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetQueryExecutionOutput_QueryExecutions:
+			return deserializeQueryExecutionList(d, schemas.BatchGetQueryExecutionOutput_QueryExecutions, &v.QueryExecutions)
+		case schemas.BatchGetQueryExecutionOutput_UnprocessedQueryExecutionIds:
+			return deserializeUnprocessedQueryExecutionIdList(d, schemas.BatchGetQueryExecutionOutput_UnprocessedQueryExecutionIds, &v.UnprocessedQueryExecutionIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetQueryExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetQueryExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetQueryExecution, schemas.BatchGetQueryExecutionInput, schemas.BatchGetQueryExecutionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetQueryExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetQueryExecution, schemas.BatchGetQueryExecutionInput, schemas.BatchGetQueryExecutionOutput), output: &BatchGetQueryExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

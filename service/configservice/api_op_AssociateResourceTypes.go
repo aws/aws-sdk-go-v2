@@ -4,7 +4,9 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,19 @@ type AssociateResourceTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateResourceTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateResourceTypesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateResourceTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationRecorderArn != nil {
+		s.WriteString(schemas.AssociateResourceTypesRequest_ConfigurationRecorderArn, *v.ConfigurationRecorderArn)
+	}
+	serializeResourceTypeList(s, schemas.AssociateResourceTypesRequest_ResourceTypes, v.ResourceTypes)
+}
+
 type AssociateResourceTypesOutput struct {
 
 	// Records configuration changes to the resource types in scope.
@@ -66,13 +81,34 @@ type AssociateResourceTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateResourceTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateResourceTypesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateResourceTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationRecorder != nil {
+		s.WriteStruct(schemas.AssociateResourceTypesResponse_ConfigurationRecorder)
+		v.ConfigurationRecorder.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateResourceTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateResourceTypesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateResourceTypesResponse_ConfigurationRecorder:
+			v.ConfigurationRecorder = &types.ConfigurationRecorder{}
+			return v.ConfigurationRecorder.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateResourceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateResourceTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateResourceTypes, schemas.AssociateResourceTypesRequest, schemas.AssociateResourceTypesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateResourceTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateResourceTypes, schemas.AssociateResourceTypesRequest, schemas.AssociateResourceTypesResponse), output: &AssociateResourceTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

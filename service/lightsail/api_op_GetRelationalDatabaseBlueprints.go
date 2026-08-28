@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type GetRelationalDatabaseBlueprintsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRelationalDatabaseBlueprintsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRelationalDatabaseBlueprintsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRelationalDatabaseBlueprintsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PageToken != nil {
+		s.WriteString(schemas.GetRelationalDatabaseBlueprintsRequest_pageToken, *v.PageToken)
+	}
+}
+
 type GetRelationalDatabaseBlueprintsOutput struct {
 
 	// An object describing the result of your get relational database blueprints
@@ -60,13 +74,35 @@ type GetRelationalDatabaseBlueprintsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRelationalDatabaseBlueprintsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRelationalDatabaseBlueprintsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRelationalDatabaseBlueprintsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRelationalDatabaseBlueprintList(s, schemas.GetRelationalDatabaseBlueprintsResult_blueprints, v.Blueprints)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetRelationalDatabaseBlueprintsResult_nextPageToken, *v.NextPageToken)
+	}
+}
+func (v *GetRelationalDatabaseBlueprintsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRelationalDatabaseBlueprintsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRelationalDatabaseBlueprintsResult_blueprints:
+			return deserializeRelationalDatabaseBlueprintList(d, schemas.GetRelationalDatabaseBlueprintsResult_blueprints, &v.Blueprints)
+		case schemas.GetRelationalDatabaseBlueprintsResult_nextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetRelationalDatabaseBlueprintsResult_nextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRelationalDatabaseBlueprintsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRelationalDatabaseBlueprints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRelationalDatabaseBlueprints, schemas.GetRelationalDatabaseBlueprintsRequest, schemas.GetRelationalDatabaseBlueprintsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRelationalDatabaseBlueprints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRelationalDatabaseBlueprints, schemas.GetRelationalDatabaseBlueprintsRequest, schemas.GetRelationalDatabaseBlueprintsResult), output: &GetRelationalDatabaseBlueprintsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

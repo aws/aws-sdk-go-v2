@@ -4,7 +4,9 @@ package athena
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetCalculationExecutionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCalculationExecutionStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCalculationExecutionStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCalculationExecutionStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CalculationExecutionId != nil {
+		s.WriteString(schemas.GetCalculationExecutionStatusRequest_CalculationExecutionId, *v.CalculationExecutionId)
+	}
+}
+
 type GetCalculationExecutionStatusOutput struct {
 
 	// Contains information about the DPU execution time and progress.
@@ -48,13 +62,42 @@ type GetCalculationExecutionStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCalculationExecutionStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCalculationExecutionStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCalculationExecutionStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Statistics != nil {
+		s.WriteStruct(schemas.GetCalculationExecutionStatusResponse_Statistics)
+		v.Statistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.GetCalculationExecutionStatusResponse_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCalculationExecutionStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCalculationExecutionStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCalculationExecutionStatusResponse_Statistics:
+			v.Statistics = &types.CalculationStatistics{}
+			return v.Statistics.Deserialize(d)
+		case schemas.GetCalculationExecutionStatusResponse_Status:
+			v.Status = &types.CalculationStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCalculationExecutionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCalculationExecutionStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCalculationExecutionStatus, schemas.GetCalculationExecutionStatusRequest, schemas.GetCalculationExecutionStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCalculationExecutionStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCalculationExecutionStatus, schemas.GetCalculationExecutionStatusRequest, schemas.GetCalculationExecutionStatusResponse), output: &GetCalculationExecutionStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

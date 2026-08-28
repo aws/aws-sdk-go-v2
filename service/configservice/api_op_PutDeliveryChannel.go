@@ -4,7 +4,9 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,20 @@ type PutDeliveryChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDeliveryChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutDeliveryChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutDeliveryChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryChannel != nil {
+		s.WriteStruct(schemas.PutDeliveryChannelRequest_DeliveryChannel)
+		v.DeliveryChannel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutDeliveryChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -56,13 +72,26 @@ type PutDeliveryChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDeliveryChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutDeliveryChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutDeliveryChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutDeliveryChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutDeliveryChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDeliveryChannel, schemas.PutDeliveryChannelRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutDeliveryChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDeliveryChannel, schemas.PutDeliveryChannelRequest, nil), output: &PutDeliveryChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

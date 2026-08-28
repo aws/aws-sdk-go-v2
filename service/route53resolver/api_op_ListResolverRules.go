@@ -5,7 +5,9 @@ package route53resolver
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,22 @@ type ListResolverRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResolverRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResolverRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResolverRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilters(s, schemas.ListResolverRulesRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResolverRulesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResolverRulesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListResolverRulesOutput struct {
 
 	// The value that you specified for MaxResults in the request.
@@ -71,13 +89,41 @@ type ListResolverRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResolverRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResolverRulesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResolverRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResolverRulesResponse_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResolverRulesResponse_NextToken, *v.NextToken)
+	}
+	serializeResolverRules(s, schemas.ListResolverRulesResponse_ResolverRules, v.ResolverRules)
+}
+func (v *ListResolverRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResolverRulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResolverRulesResponse_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListResolverRulesResponse_MaxResults, v.MaxResults)
+		case schemas.ListResolverRulesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResolverRulesResponse_NextToken, v.NextToken)
+		case schemas.ListResolverRulesResponse_ResolverRules:
+			return deserializeResolverRules(d, schemas.ListResolverRulesResponse_ResolverRules, &v.ResolverRules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResolverRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResolverRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResolverRules, schemas.ListResolverRulesRequest, schemas.ListResolverRulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListResolverRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResolverRules, schemas.ListResolverRulesRequest, schemas.ListResolverRulesResponse), output: &ListResolverRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

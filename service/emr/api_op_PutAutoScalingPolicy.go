@@ -4,7 +4,9 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,26 @@ type PutAutoScalingPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAutoScalingPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAutoScalingPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAutoScalingPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingPolicy != nil {
+		s.WriteStruct(schemas.PutAutoScalingPolicyInput_AutoScalingPolicy)
+		v.AutoScalingPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.PutAutoScalingPolicyInput_ClusterId, *v.ClusterId)
+	}
+	if v.InstanceGroupId != nil {
+		s.WriteString(schemas.PutAutoScalingPolicyInput_InstanceGroupId, *v.InstanceGroupId)
+	}
+}
+
 type PutAutoScalingPolicyOutput struct {
 
 	// The automatic scaling policy definition.
@@ -70,13 +92,52 @@ type PutAutoScalingPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAutoScalingPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAutoScalingPolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAutoScalingPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingPolicy != nil {
+		s.WriteStruct(schemas.PutAutoScalingPolicyOutput_AutoScalingPolicy)
+		v.AutoScalingPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.PutAutoScalingPolicyOutput_ClusterArn, *v.ClusterArn)
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.PutAutoScalingPolicyOutput_ClusterId, *v.ClusterId)
+	}
+	if v.InstanceGroupId != nil {
+		s.WriteString(schemas.PutAutoScalingPolicyOutput_InstanceGroupId, *v.InstanceGroupId)
+	}
+}
+func (v *PutAutoScalingPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAutoScalingPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAutoScalingPolicyOutput_AutoScalingPolicy:
+			v.AutoScalingPolicy = &types.AutoScalingPolicyDescription{}
+			return v.AutoScalingPolicy.Deserialize(d)
+		case schemas.PutAutoScalingPolicyOutput_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.PutAutoScalingPolicyOutput_ClusterArn, v.ClusterArn)
+		case schemas.PutAutoScalingPolicyOutput_ClusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.PutAutoScalingPolicyOutput_ClusterId, v.ClusterId)
+		case schemas.PutAutoScalingPolicyOutput_InstanceGroupId:
+			v.InstanceGroupId = new(string)
+			return d.ReadString(schemas.PutAutoScalingPolicyOutput_InstanceGroupId, v.InstanceGroupId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAutoScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutAutoScalingPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAutoScalingPolicy, schemas.PutAutoScalingPolicyInput, schemas.PutAutoScalingPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutAutoScalingPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAutoScalingPolicy, schemas.PutAutoScalingPolicyInput, schemas.PutAutoScalingPolicyOutput), output: &PutAutoScalingPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

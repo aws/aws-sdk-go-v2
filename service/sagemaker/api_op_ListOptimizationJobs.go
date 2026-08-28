@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -74,6 +76,48 @@ type ListOptimizationJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOptimizationJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOptimizationJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOptimizationJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListOptimizationJobsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListOptimizationJobsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.LastModifiedTimeAfter != nil {
+		s.WriteTime(schemas.ListOptimizationJobsRequest_LastModifiedTimeAfter, *v.LastModifiedTimeAfter)
+	}
+	if v.LastModifiedTimeBefore != nil {
+		s.WriteTime(schemas.ListOptimizationJobsRequest_LastModifiedTimeBefore, *v.LastModifiedTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOptimizationJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListOptimizationJobsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOptimizationJobsRequest_NextToken, *v.NextToken)
+	}
+	if v.OptimizationContains != nil {
+		s.WriteString(schemas.ListOptimizationJobsRequest_OptimizationContains, *v.OptimizationContains)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListOptimizationJobsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListOptimizationJobsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListOptimizationJobsRequest_StatusEquals, string(v.StatusEquals))
+	}
+}
+
 type ListOptimizationJobsOutput struct {
 
 	// A list of optimization jobs and their properties that matches any of the
@@ -92,13 +136,35 @@ type ListOptimizationJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOptimizationJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOptimizationJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOptimizationJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOptimizationJobsResponse_NextToken, *v.NextToken)
+	}
+	serializeOptimizationJobSummaries(s, schemas.ListOptimizationJobsResponse_OptimizationJobSummaries, v.OptimizationJobSummaries)
+}
+func (v *ListOptimizationJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOptimizationJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOptimizationJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOptimizationJobsResponse_NextToken, v.NextToken)
+		case schemas.ListOptimizationJobsResponse_OptimizationJobSummaries:
+			return deserializeOptimizationJobSummaries(d, schemas.ListOptimizationJobsResponse_OptimizationJobSummaries, &v.OptimizationJobSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOptimizationJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListOptimizationJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOptimizationJobs, schemas.ListOptimizationJobsRequest, schemas.ListOptimizationJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListOptimizationJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOptimizationJobs, schemas.ListOptimizationJobsRequest, schemas.ListOptimizationJobsResponse), output: &ListOptimizationJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

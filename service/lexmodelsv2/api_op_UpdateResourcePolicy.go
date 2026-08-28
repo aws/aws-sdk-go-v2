@@ -4,6 +4,8 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,24 @@ type UpdateResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResourcePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResourcePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResourcePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpectedRevisionId != nil {
+		s.WriteString(schemas.UpdateResourcePolicyRequest_expectedRevisionId, *v.ExpectedRevisionId)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.UpdateResourcePolicyRequest_policy, *v.Policy)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.UpdateResourcePolicyRequest_resourceArn, *v.ResourceArn)
+	}
+}
+
 type UpdateResourcePolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy
@@ -71,13 +91,38 @@ type UpdateResourcePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResourcePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResourcePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResourcePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.UpdateResourcePolicyResponse_resourceArn, *v.ResourceArn)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.UpdateResourcePolicyResponse_revisionId, *v.RevisionId)
+	}
+}
+func (v *UpdateResourcePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateResourcePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateResourcePolicyResponse_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.UpdateResourcePolicyResponse_resourceArn, v.ResourceArn)
+		case schemas.UpdateResourcePolicyResponse_revisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.UpdateResourcePolicyResponse_revisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResourcePolicy, schemas.UpdateResourcePolicyRequest, schemas.UpdateResourcePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResourcePolicy, schemas.UpdateResourcePolicyRequest, schemas.UpdateResourcePolicyResponse), output: &UpdateResourcePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

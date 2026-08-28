@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,27 @@ type SuspendContactRecordingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SuspendContactRecordingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SuspendContactRecordingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuspendContactRecordingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.SuspendContactRecordingRequest_ContactId, *v.ContactId)
+	}
+	if v.ContactRecordingType != "" {
+		s.WriteString(schemas.SuspendContactRecordingRequest_ContactRecordingType, string(v.ContactRecordingType))
+	}
+	if v.InitialContactId != nil {
+		s.WriteString(schemas.SuspendContactRecordingRequest_InitialContactId, *v.InitialContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SuspendContactRecordingRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type SuspendContactRecordingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -70,13 +93,26 @@ type SuspendContactRecordingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SuspendContactRecordingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SuspendContactRecordingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuspendContactRecordingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SuspendContactRecordingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SuspendContactRecordingResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSuspendContactRecordingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSuspendContactRecording{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SuspendContactRecording, schemas.SuspendContactRecordingRequest, schemas.SuspendContactRecordingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSuspendContactRecording{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SuspendContactRecording, schemas.SuspendContactRecordingRequest, schemas.SuspendContactRecordingResponse), output: &SuspendContactRecordingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

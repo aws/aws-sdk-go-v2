@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,28 @@ type CreateLocationFsxOntapInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationFsxOntapInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationFsxOntapRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationFsxOntapInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Protocol != nil {
+		s.WriteStruct(schemas.CreateLocationFsxOntapRequest_Protocol)
+		v.Protocol.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEc2SecurityGroupArnList(s, schemas.CreateLocationFsxOntapRequest_SecurityGroupArns, v.SecurityGroupArns)
+	if v.StorageVirtualMachineArn != nil {
+		s.WriteString(schemas.CreateLocationFsxOntapRequest_StorageVirtualMachineArn, *v.StorageVirtualMachineArn)
+	}
+	if v.Subdirectory != nil {
+		s.WriteString(schemas.CreateLocationFsxOntapRequest_Subdirectory, *v.Subdirectory)
+	}
+	serializeInputTagList(s, schemas.CreateLocationFsxOntapRequest_Tags, v.Tags)
+}
+
 type CreateLocationFsxOntapOutput struct {
 
 	// Specifies the ARN of the FSx for ONTAP file system location that you create.
@@ -91,13 +115,32 @@ type CreateLocationFsxOntapOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationFsxOntapOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationFsxOntapResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationFsxOntapOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.CreateLocationFsxOntapResponse_LocationArn, *v.LocationArn)
+	}
+}
+func (v *CreateLocationFsxOntapOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLocationFsxOntapResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLocationFsxOntapResponse_LocationArn:
+			v.LocationArn = new(string)
+			return d.ReadString(schemas.CreateLocationFsxOntapResponse_LocationArn, v.LocationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLocationFsxOntapMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLocationFsxOntap{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocationFsxOntap, schemas.CreateLocationFsxOntapRequest, schemas.CreateLocationFsxOntapResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLocationFsxOntap{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocationFsxOntap, schemas.CreateLocationFsxOntapRequest, schemas.CreateLocationFsxOntapResponse), output: &CreateLocationFsxOntapOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

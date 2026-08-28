@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -59,6 +61,42 @@ type ListHubsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHubsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHubsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHubsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListHubsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListHubsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.LastModifiedTimeAfter != nil {
+		s.WriteTime(schemas.ListHubsRequest_LastModifiedTimeAfter, *v.LastModifiedTimeAfter)
+	}
+	if v.LastModifiedTimeBefore != nil {
+		s.WriteTime(schemas.ListHubsRequest_LastModifiedTimeBefore, *v.LastModifiedTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListHubsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListHubsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHubsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListHubsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListHubsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListHubsOutput struct {
 
 	// The summaries of the listed hubs.
@@ -76,13 +114,35 @@ type ListHubsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHubsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHubsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHubsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHubInfoList(s, schemas.ListHubsResponse_HubSummaries, v.HubSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHubsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListHubsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListHubsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListHubsResponse_HubSummaries:
+			return deserializeHubInfoList(d, schemas.ListHubsResponse_HubSummaries, &v.HubSummaries)
+		case schemas.ListHubsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListHubsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListHubsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListHubs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHubs, schemas.ListHubsRequest, schemas.ListHubsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListHubs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHubs, schemas.ListHubsRequest, schemas.ListHubsResponse), output: &ListHubsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

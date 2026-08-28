@@ -5,7 +5,9 @@ package schemas
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/schemas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/schemas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -55,6 +57,33 @@ type UpdateSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSchemaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSchemaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientTokenId != nil {
+		s.WriteString(schemas.UpdateSchemaRequest_ClientTokenId, *v.ClientTokenId)
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.UpdateSchemaRequest_Content, *v.Content)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSchemaRequest_Description, *v.Description)
+	}
+	if v.RegistryName != nil {
+		s.WriteString(schemas.UpdateSchemaRequest_RegistryName, *v.RegistryName)
+	}
+	if v.SchemaName != nil {
+		s.WriteString(schemas.UpdateSchemaRequest_SchemaName, *v.SchemaName)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateSchemaRequest_Type, string(v.Type))
+	}
+}
+
 type UpdateSchemaOutput struct {
 
 	// The description of the schema.
@@ -87,13 +116,71 @@ type UpdateSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSchemaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSchemaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSchemaResponse_Description, *v.Description)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.UpdateSchemaResponse_LastModified, *v.LastModified)
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.UpdateSchemaResponse_SchemaArn, *v.SchemaArn)
+	}
+	if v.SchemaName != nil {
+		s.WriteString(schemas.UpdateSchemaResponse_SchemaName, *v.SchemaName)
+	}
+	if v.SchemaVersion != nil {
+		s.WriteString(schemas.UpdateSchemaResponse_SchemaVersion, *v.SchemaVersion)
+	}
+	serializeTags(s, schemas.UpdateSchemaResponse_Tags, v.Tags)
+	if v.Type != nil {
+		s.WriteString(schemas.UpdateSchemaResponse_Type, *v.Type)
+	}
+	if v.VersionCreatedDate != nil {
+		s.WriteTime(schemas.UpdateSchemaResponse_VersionCreatedDate, *v.VersionCreatedDate)
+	}
+}
+func (v *UpdateSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSchemaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSchemaResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateSchemaResponse_Description, v.Description)
+		case schemas.UpdateSchemaResponse_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.UpdateSchemaResponse_LastModified, v.LastModified)
+		case schemas.UpdateSchemaResponse_SchemaArn:
+			v.SchemaArn = new(string)
+			return d.ReadString(schemas.UpdateSchemaResponse_SchemaArn, v.SchemaArn)
+		case schemas.UpdateSchemaResponse_SchemaName:
+			v.SchemaName = new(string)
+			return d.ReadString(schemas.UpdateSchemaResponse_SchemaName, v.SchemaName)
+		case schemas.UpdateSchemaResponse_SchemaVersion:
+			v.SchemaVersion = new(string)
+			return d.ReadString(schemas.UpdateSchemaResponse_SchemaVersion, v.SchemaVersion)
+		case schemas.UpdateSchemaResponse_Tags:
+			return deserializeTags(d, schemas.UpdateSchemaResponse_Tags, &v.Tags)
+		case schemas.UpdateSchemaResponse_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.UpdateSchemaResponse_Type, v.Type)
+		case schemas.UpdateSchemaResponse_VersionCreatedDate:
+			v.VersionCreatedDate = new(time.Time)
+			return d.ReadTime(schemas.UpdateSchemaResponse_VersionCreatedDate, v.VersionCreatedDate)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSchema, schemas.UpdateSchemaRequest, schemas.UpdateSchemaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSchema, schemas.UpdateSchemaRequest, schemas.UpdateSchemaResponse), output: &UpdateSchemaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

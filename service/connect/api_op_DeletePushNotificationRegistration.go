@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type DeletePushNotificationRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePushNotificationRegistrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePushNotificationRegistrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePushNotificationRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.DeletePushNotificationRegistrationRequest_ContactId, *v.ContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeletePushNotificationRegistrationRequest_InstanceId, *v.InstanceId)
+	}
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.DeletePushNotificationRegistrationRequest_RegistrationId, *v.RegistrationId)
+	}
+}
+
 type DeletePushNotificationRegistrationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +73,26 @@ type DeletePushNotificationRegistrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePushNotificationRegistrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePushNotificationRegistrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePushNotificationRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeletePushNotificationRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePushNotificationRegistrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePushNotificationRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePushNotificationRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePushNotificationRegistration, schemas.DeletePushNotificationRegistrationRequest, schemas.DeletePushNotificationRegistrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePushNotificationRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePushNotificationRegistration, schemas.DeletePushNotificationRegistrationRequest, schemas.DeletePushNotificationRegistrationResponse), output: &DeletePushNotificationRegistrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

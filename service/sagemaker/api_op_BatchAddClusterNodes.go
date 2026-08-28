@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,22 @@ type BatchAddClusterNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAddClusterNodesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAddClusterNodesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAddClusterNodesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.BatchAddClusterNodesRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.BatchAddClusterNodesRequest_ClusterName, *v.ClusterName)
+	}
+	serializeAddClusterNodeSpecificationList(s, schemas.BatchAddClusterNodesRequest_NodesToAdd, v.NodesToAdd)
+}
+
 type BatchAddClusterNodesOutput struct {
 
 	// A list of errors that occurred during the node addition operation. Each entry
@@ -79,13 +97,32 @@ type BatchAddClusterNodesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAddClusterNodesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAddClusterNodesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAddClusterNodesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchAddClusterNodesErrorList(s, schemas.BatchAddClusterNodesResponse_Failed, v.Failed)
+	serializeNodeAdditionResultList(s, schemas.BatchAddClusterNodesResponse_Successful, v.Successful)
+}
+func (v *BatchAddClusterNodesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAddClusterNodesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAddClusterNodesResponse_Failed:
+			return deserializeBatchAddClusterNodesErrorList(d, schemas.BatchAddClusterNodesResponse_Failed, &v.Failed)
+		case schemas.BatchAddClusterNodesResponse_Successful:
+			return deserializeNodeAdditionResultList(d, schemas.BatchAddClusterNodesResponse_Successful, &v.Successful)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchAddClusterNodesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchAddClusterNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAddClusterNodes, schemas.BatchAddClusterNodesRequest, schemas.BatchAddClusterNodesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchAddClusterNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAddClusterNodes, schemas.BatchAddClusterNodesRequest, schemas.BatchAddClusterNodesResponse), output: &BatchAddClusterNodesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

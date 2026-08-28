@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -46,6 +48,24 @@ type DescribeCustomVocabularyMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCustomVocabularyMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCustomVocabularyMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCustomVocabularyMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.DescribeCustomVocabularyMetadataRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.DescribeCustomVocabularyMetadataRequest_botVersion, *v.BotVersion)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.DescribeCustomVocabularyMetadataRequest_localeId, *v.LocaleId)
+	}
+}
+
 type DescribeCustomVocabularyMetadataOutput struct {
 
 	// The identifier of the bot that contains the custom vocabulary.
@@ -73,13 +93,66 @@ type DescribeCustomVocabularyMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCustomVocabularyMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCustomVocabularyMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCustomVocabularyMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.DescribeCustomVocabularyMetadataResponse_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.DescribeCustomVocabularyMetadataResponse_botVersion, *v.BotVersion)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.DescribeCustomVocabularyMetadataResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.CustomVocabularyStatus != "" {
+		s.WriteString(schemas.DescribeCustomVocabularyMetadataResponse_customVocabularyStatus, string(v.CustomVocabularyStatus))
+	}
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.DescribeCustomVocabularyMetadataResponse_lastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.DescribeCustomVocabularyMetadataResponse_localeId, *v.LocaleId)
+	}
+}
+func (v *DescribeCustomVocabularyMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCustomVocabularyMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCustomVocabularyMetadataResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.DescribeCustomVocabularyMetadataResponse_botId, v.BotId)
+		case schemas.DescribeCustomVocabularyMetadataResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.DescribeCustomVocabularyMetadataResponse_botVersion, v.BotVersion)
+		case schemas.DescribeCustomVocabularyMetadataResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeCustomVocabularyMetadataResponse_creationDateTime, v.CreationDateTime)
+		case schemas.DescribeCustomVocabularyMetadataResponse_customVocabularyStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeCustomVocabularyMetadataResponse_customVocabularyStatus, &ev); err != nil {
+				return err
+			}
+			v.CustomVocabularyStatus = types.CustomVocabularyStatus(ev)
+			return nil
+		case schemas.DescribeCustomVocabularyMetadataResponse_lastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeCustomVocabularyMetadataResponse_lastUpdatedDateTime, v.LastUpdatedDateTime)
+		case schemas.DescribeCustomVocabularyMetadataResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.DescribeCustomVocabularyMetadataResponse_localeId, v.LocaleId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCustomVocabularyMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeCustomVocabularyMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCustomVocabularyMetadata, schemas.DescribeCustomVocabularyMetadataRequest, schemas.DescribeCustomVocabularyMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeCustomVocabularyMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCustomVocabularyMetadata, schemas.DescribeCustomVocabularyMetadataRequest, schemas.DescribeCustomVocabularyMetadataResponse), output: &DescribeCustomVocabularyMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

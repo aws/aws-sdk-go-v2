@@ -5,7 +5,9 @@ package comprehend
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,26 @@ type ListTargetedSentimentDetectionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTargetedSentimentDetectionJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTargetedSentimentDetectionJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTargetedSentimentDetectionJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListTargetedSentimentDetectionJobsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTargetedSentimentDetectionJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTargetedSentimentDetectionJobsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListTargetedSentimentDetectionJobsOutput struct {
 
 	// Identifies the next page of results to return.
@@ -55,13 +77,35 @@ type ListTargetedSentimentDetectionJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTargetedSentimentDetectionJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTargetedSentimentDetectionJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTargetedSentimentDetectionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTargetedSentimentDetectionJobsResponse_NextToken, *v.NextToken)
+	}
+	serializeTargetedSentimentDetectionJobPropertiesList(s, schemas.ListTargetedSentimentDetectionJobsResponse_TargetedSentimentDetectionJobPropertiesList, v.TargetedSentimentDetectionJobPropertiesList)
+}
+func (v *ListTargetedSentimentDetectionJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTargetedSentimentDetectionJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTargetedSentimentDetectionJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTargetedSentimentDetectionJobsResponse_NextToken, v.NextToken)
+		case schemas.ListTargetedSentimentDetectionJobsResponse_TargetedSentimentDetectionJobPropertiesList:
+			return deserializeTargetedSentimentDetectionJobPropertiesList(d, schemas.ListTargetedSentimentDetectionJobsResponse_TargetedSentimentDetectionJobPropertiesList, &v.TargetedSentimentDetectionJobPropertiesList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTargetedSentimentDetectionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTargetedSentimentDetectionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTargetedSentimentDetectionJobs, schemas.ListTargetedSentimentDetectionJobsRequest, schemas.ListTargetedSentimentDetectionJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTargetedSentimentDetectionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTargetedSentimentDetectionJobs, schemas.ListTargetedSentimentDetectionJobsRequest, schemas.ListTargetedSentimentDetectionJobsResponse), output: &ListTargetedSentimentDetectionJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,16 @@ type CreateCloudFormationStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCloudFormationStackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCloudFormationStackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCloudFormationStackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstanceEntryList(s, schemas.CreateCloudFormationStackRequest_instances, v.Instances)
+}
+
 type CreateCloudFormationStackOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -57,13 +69,29 @@ type CreateCloudFormationStackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCloudFormationStackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCloudFormationStackResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCloudFormationStackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.CreateCloudFormationStackResult_operations, v.Operations)
+}
+func (v *CreateCloudFormationStackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCloudFormationStackResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCloudFormationStackResult_operations:
+			return deserializeOperationList(d, schemas.CreateCloudFormationStackResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCloudFormationStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCloudFormationStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCloudFormationStack, schemas.CreateCloudFormationStackRequest, schemas.CreateCloudFormationStackResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateCloudFormationStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCloudFormationStack, schemas.CreateCloudFormationStackRequest, schemas.CreateCloudFormationStackResult), output: &CreateCloudFormationStackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

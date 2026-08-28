@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -38,6 +39,18 @@ type DescribeNotebookInstanceInput struct {
 	NotebookInstanceName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeNotebookInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNotebookInstanceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNotebookInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotebookInstanceName != nil {
+		s.WriteString(schemas.DescribeNotebookInstanceInput_NotebookInstanceName, *v.NotebookInstanceName)
+	}
 }
 
 type DescribeNotebookInstanceOutput struct {
@@ -156,13 +169,177 @@ type DescribeNotebookInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNotebookInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNotebookInstanceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNotebookInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNotebookInstanceAcceleratorTypes(s, schemas.DescribeNotebookInstanceOutput_AcceleratorTypes, v.AcceleratorTypes)
+	serializeAdditionalCodeRepositoryNamesOrUrls(s, schemas.DescribeNotebookInstanceOutput_AdditionalCodeRepositories, v.AdditionalCodeRepositories)
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeNotebookInstanceOutput_CreationTime, *v.CreationTime)
+	}
+	if v.DefaultCodeRepository != nil {
+		s.WriteString(schemas.DescribeNotebookInstanceOutput_DefaultCodeRepository, *v.DefaultCodeRepository)
+	}
+	if v.DirectInternetAccess != "" {
+		s.WriteString(schemas.DescribeNotebookInstanceOutput_DirectInternetAccess, string(v.DirectInternetAccess))
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeNotebookInstanceOutput_FailureReason, *v.FailureReason)
+	}
+	if v.InstanceMetadataServiceConfiguration != nil {
+		s.WriteStruct(schemas.DescribeNotebookInstanceOutput_InstanceMetadataServiceConfiguration)
+		v.InstanceMetadataServiceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceType != "" {
+		s.WriteString(schemas.DescribeNotebookInstanceOutput_InstanceType, string(v.InstanceType))
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.DescribeNotebookInstanceOutput_IpAddressType, string(v.IpAddressType))
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.DescribeNotebookInstanceOutput_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeNotebookInstanceOutput_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.NetworkInterfaceId != nil {
+		s.WriteString(schemas.DescribeNotebookInstanceOutput_NetworkInterfaceId, *v.NetworkInterfaceId)
+	}
+	if v.NotebookInstanceArn != nil {
+		s.WriteString(schemas.DescribeNotebookInstanceOutput_NotebookInstanceArn, *v.NotebookInstanceArn)
+	}
+	if v.NotebookInstanceLifecycleConfigName != nil {
+		s.WriteString(schemas.DescribeNotebookInstanceOutput_NotebookInstanceLifecycleConfigName, *v.NotebookInstanceLifecycleConfigName)
+	}
+	if v.NotebookInstanceName != nil {
+		s.WriteString(schemas.DescribeNotebookInstanceOutput_NotebookInstanceName, *v.NotebookInstanceName)
+	}
+	if v.NotebookInstanceStatus != "" {
+		s.WriteString(schemas.DescribeNotebookInstanceOutput_NotebookInstanceStatus, string(v.NotebookInstanceStatus))
+	}
+	if v.PlatformIdentifier != nil {
+		s.WriteString(schemas.DescribeNotebookInstanceOutput_PlatformIdentifier, *v.PlatformIdentifier)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeNotebookInstanceOutput_RoleArn, *v.RoleArn)
+	}
+	if v.RootAccess != "" {
+		s.WriteString(schemas.DescribeNotebookInstanceOutput_RootAccess, string(v.RootAccess))
+	}
+	serializeSecurityGroupIds(s, schemas.DescribeNotebookInstanceOutput_SecurityGroups, v.SecurityGroups)
+	if v.SubnetId != nil {
+		s.WriteString(schemas.DescribeNotebookInstanceOutput_SubnetId, *v.SubnetId)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.DescribeNotebookInstanceOutput_Url, *v.Url)
+	}
+	if v.VolumeSizeInGB != nil {
+		s.WriteInt32(schemas.DescribeNotebookInstanceOutput_VolumeSizeInGB, *v.VolumeSizeInGB)
+	}
+}
+func (v *DescribeNotebookInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeNotebookInstanceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeNotebookInstanceOutput_AcceleratorTypes:
+			return deserializeNotebookInstanceAcceleratorTypes(d, schemas.DescribeNotebookInstanceOutput_AcceleratorTypes, &v.AcceleratorTypes)
+		case schemas.DescribeNotebookInstanceOutput_AdditionalCodeRepositories:
+			return deserializeAdditionalCodeRepositoryNamesOrUrls(d, schemas.DescribeNotebookInstanceOutput_AdditionalCodeRepositories, &v.AdditionalCodeRepositories)
+		case schemas.DescribeNotebookInstanceOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeNotebookInstanceOutput_CreationTime, v.CreationTime)
+		case schemas.DescribeNotebookInstanceOutput_DefaultCodeRepository:
+			v.DefaultCodeRepository = new(string)
+			return d.ReadString(schemas.DescribeNotebookInstanceOutput_DefaultCodeRepository, v.DefaultCodeRepository)
+		case schemas.DescribeNotebookInstanceOutput_DirectInternetAccess:
+			var ev string
+			if err := d.ReadString(schemas.DescribeNotebookInstanceOutput_DirectInternetAccess, &ev); err != nil {
+				return err
+			}
+			v.DirectInternetAccess = types.DirectInternetAccess(ev)
+			return nil
+		case schemas.DescribeNotebookInstanceOutput_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeNotebookInstanceOutput_FailureReason, v.FailureReason)
+		case schemas.DescribeNotebookInstanceOutput_InstanceMetadataServiceConfiguration:
+			v.InstanceMetadataServiceConfiguration = &types.InstanceMetadataServiceConfiguration{}
+			return v.InstanceMetadataServiceConfiguration.Deserialize(d)
+		case schemas.DescribeNotebookInstanceOutput_InstanceType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeNotebookInstanceOutput_InstanceType, &ev); err != nil {
+				return err
+			}
+			v.InstanceType = types.InstanceType(ev)
+			return nil
+		case schemas.DescribeNotebookInstanceOutput_IpAddressType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeNotebookInstanceOutput_IpAddressType, &ev); err != nil {
+				return err
+			}
+			v.IpAddressType = types.IPAddressType(ev)
+			return nil
+		case schemas.DescribeNotebookInstanceOutput_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.DescribeNotebookInstanceOutput_KmsKeyId, v.KmsKeyId)
+		case schemas.DescribeNotebookInstanceOutput_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeNotebookInstanceOutput_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeNotebookInstanceOutput_NetworkInterfaceId:
+			v.NetworkInterfaceId = new(string)
+			return d.ReadString(schemas.DescribeNotebookInstanceOutput_NetworkInterfaceId, v.NetworkInterfaceId)
+		case schemas.DescribeNotebookInstanceOutput_NotebookInstanceArn:
+			v.NotebookInstanceArn = new(string)
+			return d.ReadString(schemas.DescribeNotebookInstanceOutput_NotebookInstanceArn, v.NotebookInstanceArn)
+		case schemas.DescribeNotebookInstanceOutput_NotebookInstanceLifecycleConfigName:
+			v.NotebookInstanceLifecycleConfigName = new(string)
+			return d.ReadString(schemas.DescribeNotebookInstanceOutput_NotebookInstanceLifecycleConfigName, v.NotebookInstanceLifecycleConfigName)
+		case schemas.DescribeNotebookInstanceOutput_NotebookInstanceName:
+			v.NotebookInstanceName = new(string)
+			return d.ReadString(schemas.DescribeNotebookInstanceOutput_NotebookInstanceName, v.NotebookInstanceName)
+		case schemas.DescribeNotebookInstanceOutput_NotebookInstanceStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeNotebookInstanceOutput_NotebookInstanceStatus, &ev); err != nil {
+				return err
+			}
+			v.NotebookInstanceStatus = types.NotebookInstanceStatus(ev)
+			return nil
+		case schemas.DescribeNotebookInstanceOutput_PlatformIdentifier:
+			v.PlatformIdentifier = new(string)
+			return d.ReadString(schemas.DescribeNotebookInstanceOutput_PlatformIdentifier, v.PlatformIdentifier)
+		case schemas.DescribeNotebookInstanceOutput_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeNotebookInstanceOutput_RoleArn, v.RoleArn)
+		case schemas.DescribeNotebookInstanceOutput_RootAccess:
+			var ev string
+			if err := d.ReadString(schemas.DescribeNotebookInstanceOutput_RootAccess, &ev); err != nil {
+				return err
+			}
+			v.RootAccess = types.RootAccess(ev)
+			return nil
+		case schemas.DescribeNotebookInstanceOutput_SecurityGroups:
+			return deserializeSecurityGroupIds(d, schemas.DescribeNotebookInstanceOutput_SecurityGroups, &v.SecurityGroups)
+		case schemas.DescribeNotebookInstanceOutput_SubnetId:
+			v.SubnetId = new(string)
+			return d.ReadString(schemas.DescribeNotebookInstanceOutput_SubnetId, v.SubnetId)
+		case schemas.DescribeNotebookInstanceOutput_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.DescribeNotebookInstanceOutput_Url, v.Url)
+		case schemas.DescribeNotebookInstanceOutput_VolumeSizeInGB:
+			v.VolumeSizeInGB = new(int32)
+			return d.ReadInt32(schemas.DescribeNotebookInstanceOutput_VolumeSizeInGB, v.VolumeSizeInGB)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeNotebookInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeNotebookInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNotebookInstance, schemas.DescribeNotebookInstanceInput, schemas.DescribeNotebookInstanceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeNotebookInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNotebookInstance, schemas.DescribeNotebookInstanceInput, schemas.DescribeNotebookInstanceOutput), output: &DescribeNotebookInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

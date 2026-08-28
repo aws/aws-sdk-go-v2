@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,48 @@ type ImportClientBrandingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportClientBrandingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportClientBrandingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportClientBrandingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceTypeAndroid != nil {
+		s.WriteStruct(schemas.ImportClientBrandingRequest_DeviceTypeAndroid)
+		v.DeviceTypeAndroid.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceTypeIos != nil {
+		s.WriteStruct(schemas.ImportClientBrandingRequest_DeviceTypeIos)
+		v.DeviceTypeIos.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceTypeLinux != nil {
+		s.WriteStruct(schemas.ImportClientBrandingRequest_DeviceTypeLinux)
+		v.DeviceTypeLinux.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceTypeOsx != nil {
+		s.WriteStruct(schemas.ImportClientBrandingRequest_DeviceTypeOsx)
+		v.DeviceTypeOsx.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceTypeWeb != nil {
+		s.WriteStruct(schemas.ImportClientBrandingRequest_DeviceTypeWeb)
+		v.DeviceTypeWeb.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceTypeWindows != nil {
+		s.WriteStruct(schemas.ImportClientBrandingRequest_DeviceTypeWindows)
+		v.DeviceTypeWindows.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.ImportClientBrandingRequest_ResourceId, *v.ResourceId)
+	}
+}
+
 type ImportClientBrandingOutput struct {
 
 	// The branding information configured for Android devices.
@@ -97,13 +141,74 @@ type ImportClientBrandingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportClientBrandingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportClientBrandingResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportClientBrandingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceTypeAndroid != nil {
+		s.WriteStruct(schemas.ImportClientBrandingResult_DeviceTypeAndroid)
+		v.DeviceTypeAndroid.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceTypeIos != nil {
+		s.WriteStruct(schemas.ImportClientBrandingResult_DeviceTypeIos)
+		v.DeviceTypeIos.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceTypeLinux != nil {
+		s.WriteStruct(schemas.ImportClientBrandingResult_DeviceTypeLinux)
+		v.DeviceTypeLinux.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceTypeOsx != nil {
+		s.WriteStruct(schemas.ImportClientBrandingResult_DeviceTypeOsx)
+		v.DeviceTypeOsx.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceTypeWeb != nil {
+		s.WriteStruct(schemas.ImportClientBrandingResult_DeviceTypeWeb)
+		v.DeviceTypeWeb.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceTypeWindows != nil {
+		s.WriteStruct(schemas.ImportClientBrandingResult_DeviceTypeWindows)
+		v.DeviceTypeWindows.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ImportClientBrandingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportClientBrandingResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportClientBrandingResult_DeviceTypeAndroid:
+			v.DeviceTypeAndroid = &types.DefaultClientBrandingAttributes{}
+			return v.DeviceTypeAndroid.Deserialize(d)
+		case schemas.ImportClientBrandingResult_DeviceTypeIos:
+			v.DeviceTypeIos = &types.IosClientBrandingAttributes{}
+			return v.DeviceTypeIos.Deserialize(d)
+		case schemas.ImportClientBrandingResult_DeviceTypeLinux:
+			v.DeviceTypeLinux = &types.DefaultClientBrandingAttributes{}
+			return v.DeviceTypeLinux.Deserialize(d)
+		case schemas.ImportClientBrandingResult_DeviceTypeOsx:
+			v.DeviceTypeOsx = &types.DefaultClientBrandingAttributes{}
+			return v.DeviceTypeOsx.Deserialize(d)
+		case schemas.ImportClientBrandingResult_DeviceTypeWeb:
+			v.DeviceTypeWeb = &types.DefaultClientBrandingAttributes{}
+			return v.DeviceTypeWeb.Deserialize(d)
+		case schemas.ImportClientBrandingResult_DeviceTypeWindows:
+			v.DeviceTypeWindows = &types.DefaultClientBrandingAttributes{}
+			return v.DeviceTypeWindows.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportClientBrandingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportClientBranding{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportClientBranding, schemas.ImportClientBrandingRequest, schemas.ImportClientBrandingResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpImportClientBranding{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportClientBranding, schemas.ImportClientBrandingRequest, schemas.ImportClientBrandingResult), output: &ImportClientBrandingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

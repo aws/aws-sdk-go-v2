@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -155,6 +157,59 @@ type CreateDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppNetworkAccessType != "" {
+		s.WriteString(schemas.CreateDomainRequest_AppNetworkAccessType, string(v.AppNetworkAccessType))
+	}
+	if v.AppSecurityGroupManagement != "" {
+		s.WriteString(schemas.CreateDomainRequest_AppSecurityGroupManagement, string(v.AppSecurityGroupManagement))
+	}
+	if v.AuthMode != "" {
+		s.WriteString(schemas.CreateDomainRequest_AuthMode, string(v.AuthMode))
+	}
+	if v.DefaultSpaceSettings != nil {
+		s.WriteStruct(schemas.CreateDomainRequest_DefaultSpaceSettings)
+		v.DefaultSpaceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultUserSettings != nil {
+		s.WriteStruct(schemas.CreateDomainRequest_DefaultUserSettings)
+		v.DefaultUserSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.CreateDomainRequest_DomainName, *v.DomainName)
+	}
+	if v.DomainSettings != nil {
+		s.WriteStruct(schemas.CreateDomainRequest_DomainSettings)
+		v.DomainSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HomeEfsFileSystemCreation != "" {
+		s.WriteString(schemas.CreateDomainRequest_HomeEfsFileSystemCreation, string(v.HomeEfsFileSystemCreation))
+	}
+	if v.HomeEfsFileSystemKmsKeyId != nil {
+		s.WriteString(schemas.CreateDomainRequest_HomeEfsFileSystemKmsKeyId, *v.HomeEfsFileSystemKmsKeyId)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateDomainRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	serializeSubnets(s, schemas.CreateDomainRequest_SubnetIds, v.SubnetIds)
+	if v.TagPropagation != "" {
+		s.WriteString(schemas.CreateDomainRequest_TagPropagation, string(v.TagPropagation))
+	}
+	serializeTagList(s, schemas.CreateDomainRequest_Tags, v.Tags)
+	if v.VpcId != nil {
+		s.WriteString(schemas.CreateDomainRequest_VpcId, *v.VpcId)
+	}
+}
+
 type CreateDomainOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created domain.
@@ -172,13 +227,44 @@ type CreateDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainArn != nil {
+		s.WriteString(schemas.CreateDomainResponse_DomainArn, *v.DomainArn)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.CreateDomainResponse_DomainId, *v.DomainId)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.CreateDomainResponse_Url, *v.Url)
+	}
+}
+func (v *CreateDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDomainResponse_DomainArn:
+			v.DomainArn = new(string)
+			return d.ReadString(schemas.CreateDomainResponse_DomainArn, v.DomainArn)
+		case schemas.CreateDomainResponse_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.CreateDomainResponse_DomainId, v.DomainId)
+		case schemas.CreateDomainResponse_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.CreateDomainResponse_Url, v.Url)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomain, schemas.CreateDomainRequest, schemas.CreateDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomain, schemas.CreateDomainRequest, schemas.CreateDomainResponse), output: &CreateDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

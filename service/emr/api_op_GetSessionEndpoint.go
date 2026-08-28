@@ -4,7 +4,9 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -44,6 +46,21 @@ type GetSessionEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSessionEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionEndpointInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.GetSessionEndpointInput_ClusterId, *v.ClusterId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetSessionEndpointInput_SessionId, *v.SessionId)
+	}
+}
+
 // Output of the GetSessionEndpoint operation.
 type GetSessionEndpointOutput struct {
 
@@ -70,13 +87,47 @@ type GetSessionEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSessionEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionEndpointOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthToken != nil {
+		s.WriteString(schemas.GetSessionEndpointOutput_AuthToken, *v.AuthToken)
+	}
+	if v.AuthTokenExpirationTime != nil {
+		s.WriteTime(schemas.GetSessionEndpointOutput_AuthTokenExpirationTime, *v.AuthTokenExpirationTime)
+	}
+	serializeCredentials(s, schemas.GetSessionEndpointOutput_Credentials, v.Credentials)
+	if v.Endpoint != nil {
+		s.WriteString(schemas.GetSessionEndpointOutput_Endpoint, *v.Endpoint)
+	}
+}
+func (v *GetSessionEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSessionEndpointOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSessionEndpointOutput_AuthToken:
+			v.AuthToken = new(string)
+			return d.ReadString(schemas.GetSessionEndpointOutput_AuthToken, v.AuthToken)
+		case schemas.GetSessionEndpointOutput_AuthTokenExpirationTime:
+			v.AuthTokenExpirationTime = new(time.Time)
+			return d.ReadTime(schemas.GetSessionEndpointOutput_AuthTokenExpirationTime, v.AuthTokenExpirationTime)
+		case schemas.GetSessionEndpointOutput_Credentials:
+			return deserializeCredentials(d, schemas.GetSessionEndpointOutput_Credentials, &v.Credentials)
+		case schemas.GetSessionEndpointOutput_Endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.GetSessionEndpointOutput_Endpoint, v.Endpoint)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSessionEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSessionEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSessionEndpoint, schemas.GetSessionEndpointInput, schemas.GetSessionEndpointOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSessionEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSessionEndpoint, schemas.GetSessionEndpointInput, schemas.GetSessionEndpointOutput), output: &GetSessionEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

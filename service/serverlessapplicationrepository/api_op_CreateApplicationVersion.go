@@ -4,7 +4,9 @@ package serverlessapplicationrepository
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,33 @@ type CreateApplicationVersionInput struct {
 	TemplateUrl *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateApplicationVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApplicationVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CreateApplicationVersionRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.CreateApplicationVersionRequest_SemanticVersion, *v.SemanticVersion)
+	}
+	if v.SourceCodeArchiveUrl != nil {
+		s.WriteString(schemas.CreateApplicationVersionRequest_SourceCodeArchiveUrl, *v.SourceCodeArchiveUrl)
+	}
+	if v.SourceCodeUrl != nil {
+		s.WriteString(schemas.CreateApplicationVersionRequest_SourceCodeUrl, *v.SourceCodeUrl)
+	}
+	if v.TemplateBody != nil {
+		s.WriteString(schemas.CreateApplicationVersionRequest_TemplateBody, *v.TemplateBody)
+	}
+	if v.TemplateUrl != nil {
+		s.WriteString(schemas.CreateApplicationVersionRequest_TemplateUrl, *v.TemplateUrl)
+	}
 }
 
 type CreateApplicationVersionOutput struct {
@@ -134,13 +163,74 @@ type CreateApplicationVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApplicationVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApplicationVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CreateApplicationVersionResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.CreationTime != nil {
+		s.WriteString(schemas.CreateApplicationVersionResponse_CreationTime, *v.CreationTime)
+	}
+	serialize__listOfParameterDefinition(s, schemas.CreateApplicationVersionResponse_ParameterDefinitions, v.ParameterDefinitions)
+	serialize__listOfCapability(s, schemas.CreateApplicationVersionResponse_RequiredCapabilities, v.RequiredCapabilities)
+	if v.ResourcesSupported != nil {
+		s.WriteBool(schemas.CreateApplicationVersionResponse_ResourcesSupported, *v.ResourcesSupported)
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.CreateApplicationVersionResponse_SemanticVersion, *v.SemanticVersion)
+	}
+	if v.SourceCodeArchiveUrl != nil {
+		s.WriteString(schemas.CreateApplicationVersionResponse_SourceCodeArchiveUrl, *v.SourceCodeArchiveUrl)
+	}
+	if v.SourceCodeUrl != nil {
+		s.WriteString(schemas.CreateApplicationVersionResponse_SourceCodeUrl, *v.SourceCodeUrl)
+	}
+	if v.TemplateUrl != nil {
+		s.WriteString(schemas.CreateApplicationVersionResponse_TemplateUrl, *v.TemplateUrl)
+	}
+}
+func (v *CreateApplicationVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateApplicationVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateApplicationVersionResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.CreateApplicationVersionResponse_ApplicationId, v.ApplicationId)
+		case schemas.CreateApplicationVersionResponse_CreationTime:
+			v.CreationTime = new(string)
+			return d.ReadString(schemas.CreateApplicationVersionResponse_CreationTime, v.CreationTime)
+		case schemas.CreateApplicationVersionResponse_ParameterDefinitions:
+			return deserialize__listOfParameterDefinition(d, schemas.CreateApplicationVersionResponse_ParameterDefinitions, &v.ParameterDefinitions)
+		case schemas.CreateApplicationVersionResponse_RequiredCapabilities:
+			return deserialize__listOfCapability(d, schemas.CreateApplicationVersionResponse_RequiredCapabilities, &v.RequiredCapabilities)
+		case schemas.CreateApplicationVersionResponse_ResourcesSupported:
+			v.ResourcesSupported = new(bool)
+			return d.ReadBool(schemas.CreateApplicationVersionResponse_ResourcesSupported, v.ResourcesSupported)
+		case schemas.CreateApplicationVersionResponse_SemanticVersion:
+			v.SemanticVersion = new(string)
+			return d.ReadString(schemas.CreateApplicationVersionResponse_SemanticVersion, v.SemanticVersion)
+		case schemas.CreateApplicationVersionResponse_SourceCodeArchiveUrl:
+			v.SourceCodeArchiveUrl = new(string)
+			return d.ReadString(schemas.CreateApplicationVersionResponse_SourceCodeArchiveUrl, v.SourceCodeArchiveUrl)
+		case schemas.CreateApplicationVersionResponse_SourceCodeUrl:
+			v.SourceCodeUrl = new(string)
+			return d.ReadString(schemas.CreateApplicationVersionResponse_SourceCodeUrl, v.SourceCodeUrl)
+		case schemas.CreateApplicationVersionResponse_TemplateUrl:
+			v.TemplateUrl = new(string)
+			return d.ReadString(schemas.CreateApplicationVersionResponse_TemplateUrl, v.TemplateUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateApplicationVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplicationVersion, schemas.CreateApplicationVersionRequest, schemas.CreateApplicationVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateApplicationVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplicationVersion, schemas.CreateApplicationVersionRequest, schemas.CreateApplicationVersionResponse), output: &CreateApplicationVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

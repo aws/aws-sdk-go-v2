@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -38,6 +39,18 @@ type DescribeTransformJobInput struct {
 	TransformJobName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeTransformJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTransformJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTransformJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransformJobName != nil {
+		s.WriteString(schemas.DescribeTransformJobRequest_TransformJobName, *v.TransformJobName)
+	}
 }
 
 type DescribeTransformJobOutput struct {
@@ -163,13 +176,171 @@ type DescribeTransformJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTransformJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTransformJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTransformJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoMLJobArn != nil {
+		s.WriteString(schemas.DescribeTransformJobResponse_AutoMLJobArn, *v.AutoMLJobArn)
+	}
+	if v.BatchStrategy != "" {
+		s.WriteString(schemas.DescribeTransformJobResponse_BatchStrategy, string(v.BatchStrategy))
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeTransformJobResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DataCaptureConfig != nil {
+		s.WriteStruct(schemas.DescribeTransformJobResponse_DataCaptureConfig)
+		v.DataCaptureConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataProcessing != nil {
+		s.WriteStruct(schemas.DescribeTransformJobResponse_DataProcessing)
+		v.DataProcessing.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTransformEnvironmentMap(s, schemas.DescribeTransformJobResponse_Environment, v.Environment)
+	if v.ExperimentConfig != nil {
+		s.WriteStruct(schemas.DescribeTransformJobResponse_ExperimentConfig)
+		v.ExperimentConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeTransformJobResponse_FailureReason, *v.FailureReason)
+	}
+	if v.LabelingJobArn != nil {
+		s.WriteString(schemas.DescribeTransformJobResponse_LabelingJobArn, *v.LabelingJobArn)
+	}
+	if v.MaxConcurrentTransforms != nil {
+		s.WriteInt32(schemas.DescribeTransformJobResponse_MaxConcurrentTransforms, *v.MaxConcurrentTransforms)
+	}
+	if v.MaxPayloadInMB != nil {
+		s.WriteInt32(schemas.DescribeTransformJobResponse_MaxPayloadInMB, *v.MaxPayloadInMB)
+	}
+	if v.ModelClientConfig != nil {
+		s.WriteStruct(schemas.DescribeTransformJobResponse_ModelClientConfig)
+		v.ModelClientConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.DescribeTransformJobResponse_ModelName, *v.ModelName)
+	}
+	if v.TransformEndTime != nil {
+		s.WriteTime(schemas.DescribeTransformJobResponse_TransformEndTime, *v.TransformEndTime)
+	}
+	if v.TransformInput != nil {
+		s.WriteStruct(schemas.DescribeTransformJobResponse_TransformInput)
+		v.TransformInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TransformJobArn != nil {
+		s.WriteString(schemas.DescribeTransformJobResponse_TransformJobArn, *v.TransformJobArn)
+	}
+	if v.TransformJobName != nil {
+		s.WriteString(schemas.DescribeTransformJobResponse_TransformJobName, *v.TransformJobName)
+	}
+	if v.TransformJobStatus != "" {
+		s.WriteString(schemas.DescribeTransformJobResponse_TransformJobStatus, string(v.TransformJobStatus))
+	}
+	if v.TransformOutput != nil {
+		s.WriteStruct(schemas.DescribeTransformJobResponse_TransformOutput)
+		v.TransformOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TransformResources != nil {
+		s.WriteStruct(schemas.DescribeTransformJobResponse_TransformResources)
+		v.TransformResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TransformStartTime != nil {
+		s.WriteTime(schemas.DescribeTransformJobResponse_TransformStartTime, *v.TransformStartTime)
+	}
+}
+func (v *DescribeTransformJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTransformJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTransformJobResponse_AutoMLJobArn:
+			v.AutoMLJobArn = new(string)
+			return d.ReadString(schemas.DescribeTransformJobResponse_AutoMLJobArn, v.AutoMLJobArn)
+		case schemas.DescribeTransformJobResponse_BatchStrategy:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTransformJobResponse_BatchStrategy, &ev); err != nil {
+				return err
+			}
+			v.BatchStrategy = types.BatchStrategy(ev)
+			return nil
+		case schemas.DescribeTransformJobResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTransformJobResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeTransformJobResponse_DataCaptureConfig:
+			v.DataCaptureConfig = &types.BatchDataCaptureConfig{}
+			return v.DataCaptureConfig.Deserialize(d)
+		case schemas.DescribeTransformJobResponse_DataProcessing:
+			v.DataProcessing = &types.DataProcessing{}
+			return v.DataProcessing.Deserialize(d)
+		case schemas.DescribeTransformJobResponse_Environment:
+			return deserializeTransformEnvironmentMap(d, schemas.DescribeTransformJobResponse_Environment, &v.Environment)
+		case schemas.DescribeTransformJobResponse_ExperimentConfig:
+			v.ExperimentConfig = &types.ExperimentConfig{}
+			return v.ExperimentConfig.Deserialize(d)
+		case schemas.DescribeTransformJobResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeTransformJobResponse_FailureReason, v.FailureReason)
+		case schemas.DescribeTransformJobResponse_LabelingJobArn:
+			v.LabelingJobArn = new(string)
+			return d.ReadString(schemas.DescribeTransformJobResponse_LabelingJobArn, v.LabelingJobArn)
+		case schemas.DescribeTransformJobResponse_MaxConcurrentTransforms:
+			v.MaxConcurrentTransforms = new(int32)
+			return d.ReadInt32(schemas.DescribeTransformJobResponse_MaxConcurrentTransforms, v.MaxConcurrentTransforms)
+		case schemas.DescribeTransformJobResponse_MaxPayloadInMB:
+			v.MaxPayloadInMB = new(int32)
+			return d.ReadInt32(schemas.DescribeTransformJobResponse_MaxPayloadInMB, v.MaxPayloadInMB)
+		case schemas.DescribeTransformJobResponse_ModelClientConfig:
+			v.ModelClientConfig = &types.ModelClientConfig{}
+			return v.ModelClientConfig.Deserialize(d)
+		case schemas.DescribeTransformJobResponse_ModelName:
+			v.ModelName = new(string)
+			return d.ReadString(schemas.DescribeTransformJobResponse_ModelName, v.ModelName)
+		case schemas.DescribeTransformJobResponse_TransformEndTime:
+			v.TransformEndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTransformJobResponse_TransformEndTime, v.TransformEndTime)
+		case schemas.DescribeTransformJobResponse_TransformInput:
+			v.TransformInput = &types.TransformInput{}
+			return v.TransformInput.Deserialize(d)
+		case schemas.DescribeTransformJobResponse_TransformJobArn:
+			v.TransformJobArn = new(string)
+			return d.ReadString(schemas.DescribeTransformJobResponse_TransformJobArn, v.TransformJobArn)
+		case schemas.DescribeTransformJobResponse_TransformJobName:
+			v.TransformJobName = new(string)
+			return d.ReadString(schemas.DescribeTransformJobResponse_TransformJobName, v.TransformJobName)
+		case schemas.DescribeTransformJobResponse_TransformJobStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTransformJobResponse_TransformJobStatus, &ev); err != nil {
+				return err
+			}
+			v.TransformJobStatus = types.TransformJobStatus(ev)
+			return nil
+		case schemas.DescribeTransformJobResponse_TransformOutput:
+			v.TransformOutput = &types.TransformOutput{}
+			return v.TransformOutput.Deserialize(d)
+		case schemas.DescribeTransformJobResponse_TransformResources:
+			v.TransformResources = &types.TransformResources{}
+			return v.TransformResources.Deserialize(d)
+		case schemas.DescribeTransformJobResponse_TransformStartTime:
+			v.TransformStartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTransformJobResponse_TransformStartTime, v.TransformStartTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTransformJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTransformJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTransformJob, schemas.DescribeTransformJobRequest, schemas.DescribeTransformJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTransformJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTransformJob, schemas.DescribeTransformJobRequest, schemas.DescribeTransformJobResponse), output: &DescribeTransformJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,29 @@ type UpdateSmsTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSmsTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSmsTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSmsTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateNewVersion != nil {
+		s.WriteBool(schemas.UpdateSmsTemplateRequest_CreateNewVersion, *v.CreateNewVersion)
+	}
+	if v.SMSTemplateRequest != nil {
+		s.WriteStruct(schemas.UpdateSmsTemplateRequest_SMSTemplateRequest)
+		v.SMSTemplateRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.UpdateSmsTemplateRequest_TemplateName, *v.TemplateName)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.UpdateSmsTemplateRequest_Version, *v.Version)
+	}
+}
+
 type UpdateSmsTemplateOutput struct {
 
 	// Provides information about an API request or response.
@@ -91,13 +116,34 @@ type UpdateSmsTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSmsTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSmsTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSmsTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageBody != nil {
+		s.WriteStruct(schemas.UpdateSmsTemplateResponse_MessageBody)
+		v.MessageBody.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateSmsTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSmsTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSmsTemplateResponse_MessageBody:
+			v.MessageBody = &types.MessageBody{}
+			return v.MessageBody.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSmsTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSmsTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSmsTemplate, schemas.UpdateSmsTemplateRequest, schemas.UpdateSmsTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSmsTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSmsTemplate, schemas.UpdateSmsTemplateRequest, schemas.UpdateSmsTemplateResponse), output: &UpdateSmsTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

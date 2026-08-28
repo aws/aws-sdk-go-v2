@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,29 @@ type StartContactStreamingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartContactStreamingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartContactStreamingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartContactStreamingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChatStreamingConfiguration != nil {
+		s.WriteStruct(schemas.StartContactStreamingRequest_ChatStreamingConfiguration)
+		v.ChatStreamingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartContactStreamingRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ContactId != nil {
+		s.WriteString(schemas.StartContactStreamingRequest_ContactId, *v.ContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StartContactStreamingRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type StartContactStreamingOutput struct {
 
 	// The identifier of the streaming configuration enabled.
@@ -85,13 +110,32 @@ type StartContactStreamingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartContactStreamingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartContactStreamingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartContactStreamingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamingId != nil {
+		s.WriteString(schemas.StartContactStreamingResponse_StreamingId, *v.StreamingId)
+	}
+}
+func (v *StartContactStreamingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartContactStreamingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartContactStreamingResponse_StreamingId:
+			v.StreamingId = new(string)
+			return d.ReadString(schemas.StartContactStreamingResponse_StreamingId, v.StreamingId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartContactStreamingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartContactStreaming{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartContactStreaming, schemas.StartContactStreamingRequest, schemas.StartContactStreamingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartContactStreaming{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartContactStreaming, schemas.StartContactStreamingRequest, schemas.StartContactStreamingResponse), output: &StartContactStreamingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

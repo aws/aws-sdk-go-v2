@@ -4,7 +4,9 @@ package serverlessapplicationrepository
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,19 @@ type PutApplicationPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutApplicationPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutApplicationPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutApplicationPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.PutApplicationPolicyRequest_ApplicationId, *v.ApplicationId)
+	}
+	serialize__listOfApplicationPolicyStatement(s, schemas.PutApplicationPolicyRequest_Statements, v.Statements)
+}
+
 type PutApplicationPolicyOutput struct {
 
 	// An array of policy statements applied to the application.
@@ -53,13 +68,29 @@ type PutApplicationPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutApplicationPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutApplicationPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutApplicationPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfApplicationPolicyStatement(s, schemas.PutApplicationPolicyResponse_Statements, v.Statements)
+}
+func (v *PutApplicationPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutApplicationPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutApplicationPolicyResponse_Statements:
+			return deserialize__listOfApplicationPolicyStatement(d, schemas.PutApplicationPolicyResponse_Statements, &v.Statements)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutApplicationPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutApplicationPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutApplicationPolicy, schemas.PutApplicationPolicyRequest, schemas.PutApplicationPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutApplicationPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutApplicationPolicy, schemas.PutApplicationPolicyRequest, schemas.PutApplicationPolicyResponse), output: &PutApplicationPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

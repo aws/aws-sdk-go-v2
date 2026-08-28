@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -63,6 +65,39 @@ type ListLabelingJobsForWorkteamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLabelingJobsForWorkteamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLabelingJobsForWorkteamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLabelingJobsForWorkteamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListLabelingJobsForWorkteamRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListLabelingJobsForWorkteamRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.JobReferenceCodeContains != nil {
+		s.WriteString(schemas.ListLabelingJobsForWorkteamRequest_JobReferenceCodeContains, *v.JobReferenceCodeContains)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLabelingJobsForWorkteamRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLabelingJobsForWorkteamRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListLabelingJobsForWorkteamRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListLabelingJobsForWorkteamRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.WorkteamArn != nil {
+		s.WriteString(schemas.ListLabelingJobsForWorkteamRequest_WorkteamArn, *v.WorkteamArn)
+	}
+}
+
 type ListLabelingJobsForWorkteamOutput struct {
 
 	// An array of LabelingJobSummary objects, each describing a labeling job.
@@ -80,13 +115,35 @@ type ListLabelingJobsForWorkteamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLabelingJobsForWorkteamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLabelingJobsForWorkteamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLabelingJobsForWorkteamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLabelingJobForWorkteamSummaryList(s, schemas.ListLabelingJobsForWorkteamResponse_LabelingJobSummaryList, v.LabelingJobSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLabelingJobsForWorkteamResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLabelingJobsForWorkteamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLabelingJobsForWorkteamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLabelingJobsForWorkteamResponse_LabelingJobSummaryList:
+			return deserializeLabelingJobForWorkteamSummaryList(d, schemas.ListLabelingJobsForWorkteamResponse_LabelingJobSummaryList, &v.LabelingJobSummaryList)
+		case schemas.ListLabelingJobsForWorkteamResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLabelingJobsForWorkteamResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLabelingJobsForWorkteamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLabelingJobsForWorkteam{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLabelingJobsForWorkteam, schemas.ListLabelingJobsForWorkteamRequest, schemas.ListLabelingJobsForWorkteamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListLabelingJobsForWorkteam{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLabelingJobsForWorkteam, schemas.ListLabelingJobsForWorkteamRequest, schemas.ListLabelingJobsForWorkteamResponse), output: &ListLabelingJobsForWorkteamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

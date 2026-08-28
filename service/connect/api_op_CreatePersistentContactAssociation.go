@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -120,6 +122,30 @@ type CreatePersistentContactAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePersistentContactAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePersistentContactAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePersistentContactAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreatePersistentContactAssociationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.InitialContactId != nil {
+		s.WriteString(schemas.CreatePersistentContactAssociationRequest_InitialContactId, *v.InitialContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreatePersistentContactAssociationRequest_InstanceId, *v.InstanceId)
+	}
+	if v.RehydrationType != "" {
+		s.WriteString(schemas.CreatePersistentContactAssociationRequest_RehydrationType, string(v.RehydrationType))
+	}
+	if v.SourceContactId != nil {
+		s.WriteString(schemas.CreatePersistentContactAssociationRequest_SourceContactId, *v.SourceContactId)
+	}
+}
+
 type CreatePersistentContactAssociationOutput struct {
 
 	// The contactId from which a persistent chat session is started. This field is
@@ -132,13 +158,32 @@ type CreatePersistentContactAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePersistentContactAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePersistentContactAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePersistentContactAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContinuedFromContactId != nil {
+		s.WriteString(schemas.CreatePersistentContactAssociationResponse_ContinuedFromContactId, *v.ContinuedFromContactId)
+	}
+}
+func (v *CreatePersistentContactAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePersistentContactAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePersistentContactAssociationResponse_ContinuedFromContactId:
+			v.ContinuedFromContactId = new(string)
+			return d.ReadString(schemas.CreatePersistentContactAssociationResponse_ContinuedFromContactId, v.ContinuedFromContactId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePersistentContactAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePersistentContactAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePersistentContactAssociation, schemas.CreatePersistentContactAssociationRequest, schemas.CreatePersistentContactAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePersistentContactAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePersistentContactAssociation, schemas.CreatePersistentContactAssociationRequest, schemas.CreatePersistentContactAssociationResponse), output: &CreatePersistentContactAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

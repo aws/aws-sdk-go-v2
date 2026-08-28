@@ -5,7 +5,9 @@ package emr
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,26 @@ type ListReleaseLabelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReleaseLabelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReleaseLabelsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReleaseLabelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListReleaseLabelsInput_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListReleaseLabelsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReleaseLabelsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListReleaseLabelsOutput struct {
 
 	// Used to paginate the next page of results if specified in the next
@@ -63,13 +85,35 @@ type ListReleaseLabelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReleaseLabelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReleaseLabelsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReleaseLabelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReleaseLabelsOutput_NextToken, *v.NextToken)
+	}
+	serializeStringList(s, schemas.ListReleaseLabelsOutput_ReleaseLabels, v.ReleaseLabels)
+}
+func (v *ListReleaseLabelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReleaseLabelsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReleaseLabelsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReleaseLabelsOutput_NextToken, v.NextToken)
+		case schemas.ListReleaseLabelsOutput_ReleaseLabels:
+			return deserializeStringList(d, schemas.ListReleaseLabelsOutput_ReleaseLabels, &v.ReleaseLabels)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReleaseLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListReleaseLabels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReleaseLabels, schemas.ListReleaseLabelsInput, schemas.ListReleaseLabelsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListReleaseLabels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReleaseLabels, schemas.ListReleaseLabelsInput, schemas.ListReleaseLabelsOutput), output: &ListReleaseLabelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

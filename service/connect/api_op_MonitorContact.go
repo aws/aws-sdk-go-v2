@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,28 @@ type MonitorContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MonitorContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MonitorContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MonitorContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAllowedMonitorCapabilities(s, schemas.MonitorContactRequest_AllowedMonitorCapabilities, v.AllowedMonitorCapabilities)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.MonitorContactRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ContactId != nil {
+		s.WriteString(schemas.MonitorContactRequest_ContactId, *v.ContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.MonitorContactRequest_InstanceId, *v.InstanceId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.MonitorContactRequest_UserId, *v.UserId)
+	}
+}
+
 type MonitorContactOutput struct {
 
 	// The ARN of the contact.
@@ -74,13 +98,38 @@ type MonitorContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MonitorContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MonitorContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MonitorContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactArn != nil {
+		s.WriteString(schemas.MonitorContactResponse_ContactArn, *v.ContactArn)
+	}
+	if v.ContactId != nil {
+		s.WriteString(schemas.MonitorContactResponse_ContactId, *v.ContactId)
+	}
+}
+func (v *MonitorContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MonitorContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MonitorContactResponse_ContactArn:
+			v.ContactArn = new(string)
+			return d.ReadString(schemas.MonitorContactResponse_ContactArn, v.ContactArn)
+		case schemas.MonitorContactResponse_ContactId:
+			v.ContactId = new(string)
+			return d.ReadString(schemas.MonitorContactResponse_ContactId, v.ContactId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMonitorContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpMonitorContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MonitorContact, schemas.MonitorContactRequest, schemas.MonitorContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpMonitorContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MonitorContact, schemas.MonitorContactRequest, schemas.MonitorContactResponse), output: &MonitorContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

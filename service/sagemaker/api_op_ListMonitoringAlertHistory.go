@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -61,6 +63,42 @@ type ListMonitoringAlertHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMonitoringAlertHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMonitoringAlertHistoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMonitoringAlertHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListMonitoringAlertHistoryRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListMonitoringAlertHistoryRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMonitoringAlertHistoryRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MonitoringAlertName != nil {
+		s.WriteString(schemas.ListMonitoringAlertHistoryRequest_MonitoringAlertName, *v.MonitoringAlertName)
+	}
+	if v.MonitoringScheduleName != nil {
+		s.WriteString(schemas.ListMonitoringAlertHistoryRequest_MonitoringScheduleName, *v.MonitoringScheduleName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMonitoringAlertHistoryRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListMonitoringAlertHistoryRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListMonitoringAlertHistoryRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListMonitoringAlertHistoryRequest_StatusEquals, string(v.StatusEquals))
+	}
+}
+
 type ListMonitoringAlertHistoryOutput struct {
 
 	// An alert history for a model monitoring schedule.
@@ -76,13 +114,35 @@ type ListMonitoringAlertHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMonitoringAlertHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMonitoringAlertHistoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMonitoringAlertHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMonitoringAlertHistoryList(s, schemas.ListMonitoringAlertHistoryResponse_MonitoringAlertHistory, v.MonitoringAlertHistory)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMonitoringAlertHistoryResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListMonitoringAlertHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMonitoringAlertHistoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMonitoringAlertHistoryResponse_MonitoringAlertHistory:
+			return deserializeMonitoringAlertHistoryList(d, schemas.ListMonitoringAlertHistoryResponse_MonitoringAlertHistory, &v.MonitoringAlertHistory)
+		case schemas.ListMonitoringAlertHistoryResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMonitoringAlertHistoryResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMonitoringAlertHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMonitoringAlertHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMonitoringAlertHistory, schemas.ListMonitoringAlertHistoryRequest, schemas.ListMonitoringAlertHistoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMonitoringAlertHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMonitoringAlertHistory, schemas.ListMonitoringAlertHistoryRequest, schemas.ListMonitoringAlertHistoryResponse), output: &ListMonitoringAlertHistoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

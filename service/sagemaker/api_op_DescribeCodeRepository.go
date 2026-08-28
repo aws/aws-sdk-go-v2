@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeCodeRepositoryInput struct {
 	CodeRepositoryName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeCodeRepositoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCodeRepositoryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCodeRepositoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeRepositoryName != nil {
+		s.WriteString(schemas.DescribeCodeRepositoryInput_CodeRepositoryName, *v.CodeRepositoryName)
+	}
 }
 
 type DescribeCodeRepositoryOutput struct {
@@ -69,13 +83,58 @@ type DescribeCodeRepositoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCodeRepositoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCodeRepositoryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCodeRepositoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeRepositoryArn != nil {
+		s.WriteString(schemas.DescribeCodeRepositoryOutput_CodeRepositoryArn, *v.CodeRepositoryArn)
+	}
+	if v.CodeRepositoryName != nil {
+		s.WriteString(schemas.DescribeCodeRepositoryOutput_CodeRepositoryName, *v.CodeRepositoryName)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeCodeRepositoryOutput_CreationTime, *v.CreationTime)
+	}
+	if v.GitConfig != nil {
+		s.WriteStruct(schemas.DescribeCodeRepositoryOutput_GitConfig)
+		v.GitConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeCodeRepositoryOutput_LastModifiedTime, *v.LastModifiedTime)
+	}
+}
+func (v *DescribeCodeRepositoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCodeRepositoryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCodeRepositoryOutput_CodeRepositoryArn:
+			v.CodeRepositoryArn = new(string)
+			return d.ReadString(schemas.DescribeCodeRepositoryOutput_CodeRepositoryArn, v.CodeRepositoryArn)
+		case schemas.DescribeCodeRepositoryOutput_CodeRepositoryName:
+			v.CodeRepositoryName = new(string)
+			return d.ReadString(schemas.DescribeCodeRepositoryOutput_CodeRepositoryName, v.CodeRepositoryName)
+		case schemas.DescribeCodeRepositoryOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeCodeRepositoryOutput_CreationTime, v.CreationTime)
+		case schemas.DescribeCodeRepositoryOutput_GitConfig:
+			v.GitConfig = &types.GitConfig{}
+			return v.GitConfig.Deserialize(d)
+		case schemas.DescribeCodeRepositoryOutput_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeCodeRepositoryOutput_LastModifiedTime, v.LastModifiedTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCodeRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCodeRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCodeRepository, schemas.DescribeCodeRepositoryInput, schemas.DescribeCodeRepositoryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCodeRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCodeRepository, schemas.DescribeCodeRepositoryInput, schemas.DescribeCodeRepositoryOutput), output: &DescribeCodeRepositoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

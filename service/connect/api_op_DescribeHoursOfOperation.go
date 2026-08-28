@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DescribeHoursOfOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeHoursOfOperationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHoursOfOperationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHoursOfOperationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HoursOfOperationId != nil {
+		s.WriteString(schemas.DescribeHoursOfOperationRequest_HoursOfOperationId, *v.HoursOfOperationId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeHoursOfOperationRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DescribeHoursOfOperationOutput struct {
 
 	// The hours of operation.
@@ -53,13 +70,34 @@ type DescribeHoursOfOperationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeHoursOfOperationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHoursOfOperationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHoursOfOperationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HoursOfOperation != nil {
+		s.WriteStruct(schemas.DescribeHoursOfOperationResponse_HoursOfOperation)
+		v.HoursOfOperation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeHoursOfOperationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeHoursOfOperationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeHoursOfOperationResponse_HoursOfOperation:
+			v.HoursOfOperation = &types.HoursOfOperation{}
+			return v.HoursOfOperation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeHoursOfOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeHoursOfOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHoursOfOperation, schemas.DescribeHoursOfOperationRequest, schemas.DescribeHoursOfOperationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeHoursOfOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHoursOfOperation, schemas.DescribeHoursOfOperationRequest, schemas.DescribeHoursOfOperationResponse), output: &DescribeHoursOfOperationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

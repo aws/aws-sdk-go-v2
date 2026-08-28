@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -82,6 +84,33 @@ type GetRelationalDatabaseLogEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRelationalDatabaseLogEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRelationalDatabaseLogEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRelationalDatabaseLogEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetRelationalDatabaseLogEventsRequest_endTime, *v.EndTime)
+	}
+	if v.LogStreamName != nil {
+		s.WriteString(schemas.GetRelationalDatabaseLogEventsRequest_logStreamName, *v.LogStreamName)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.GetRelationalDatabaseLogEventsRequest_pageToken, *v.PageToken)
+	}
+	if v.RelationalDatabaseName != nil {
+		s.WriteString(schemas.GetRelationalDatabaseLogEventsRequest_relationalDatabaseName, *v.RelationalDatabaseName)
+	}
+	if v.StartFromHead != nil {
+		s.WriteBool(schemas.GetRelationalDatabaseLogEventsRequest_startFromHead, *v.StartFromHead)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetRelationalDatabaseLogEventsRequest_startTime, *v.StartTime)
+	}
+}
+
 type GetRelationalDatabaseLogEventsOutput struct {
 
 	// A token used for advancing to the previous page of results from your get
@@ -102,13 +131,41 @@ type GetRelationalDatabaseLogEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRelationalDatabaseLogEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRelationalDatabaseLogEventsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRelationalDatabaseLogEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextBackwardToken != nil {
+		s.WriteString(schemas.GetRelationalDatabaseLogEventsResult_nextBackwardToken, *v.NextBackwardToken)
+	}
+	if v.NextForwardToken != nil {
+		s.WriteString(schemas.GetRelationalDatabaseLogEventsResult_nextForwardToken, *v.NextForwardToken)
+	}
+	serializeLogEventList(s, schemas.GetRelationalDatabaseLogEventsResult_resourceLogEvents, v.ResourceLogEvents)
+}
+func (v *GetRelationalDatabaseLogEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRelationalDatabaseLogEventsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRelationalDatabaseLogEventsResult_nextBackwardToken:
+			v.NextBackwardToken = new(string)
+			return d.ReadString(schemas.GetRelationalDatabaseLogEventsResult_nextBackwardToken, v.NextBackwardToken)
+		case schemas.GetRelationalDatabaseLogEventsResult_nextForwardToken:
+			v.NextForwardToken = new(string)
+			return d.ReadString(schemas.GetRelationalDatabaseLogEventsResult_nextForwardToken, v.NextForwardToken)
+		case schemas.GetRelationalDatabaseLogEventsResult_resourceLogEvents:
+			return deserializeLogEventList(d, schemas.GetRelationalDatabaseLogEventsResult_resourceLogEvents, &v.ResourceLogEvents)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRelationalDatabaseLogEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRelationalDatabaseLogEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRelationalDatabaseLogEvents, schemas.GetRelationalDatabaseLogEventsRequest, schemas.GetRelationalDatabaseLogEventsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRelationalDatabaseLogEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRelationalDatabaseLogEvents, schemas.GetRelationalDatabaseLogEventsRequest, schemas.GetRelationalDatabaseLogEventsResult), output: &GetRelationalDatabaseLogEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

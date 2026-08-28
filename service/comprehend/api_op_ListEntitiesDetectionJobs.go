@@ -5,7 +5,9 @@ package comprehend
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,26 @@ type ListEntitiesDetectionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEntitiesDetectionJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEntitiesDetectionJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEntitiesDetectionJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListEntitiesDetectionJobsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEntitiesDetectionJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEntitiesDetectionJobsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListEntitiesDetectionJobsOutput struct {
 
 	// A list containing the properties of each job that is returned.
@@ -55,13 +77,35 @@ type ListEntitiesDetectionJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEntitiesDetectionJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEntitiesDetectionJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEntitiesDetectionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntitiesDetectionJobPropertiesList(s, schemas.ListEntitiesDetectionJobsResponse_EntitiesDetectionJobPropertiesList, v.EntitiesDetectionJobPropertiesList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEntitiesDetectionJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEntitiesDetectionJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEntitiesDetectionJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEntitiesDetectionJobsResponse_EntitiesDetectionJobPropertiesList:
+			return deserializeEntitiesDetectionJobPropertiesList(d, schemas.ListEntitiesDetectionJobsResponse_EntitiesDetectionJobPropertiesList, &v.EntitiesDetectionJobPropertiesList)
+		case schemas.ListEntitiesDetectionJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEntitiesDetectionJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEntitiesDetectionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEntitiesDetectionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntitiesDetectionJobs, schemas.ListEntitiesDetectionJobsRequest, schemas.ListEntitiesDetectionJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListEntitiesDetectionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntitiesDetectionJobs, schemas.ListEntitiesDetectionJobsRequest, schemas.ListEntitiesDetectionJobsResponse), output: &ListEntitiesDetectionJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

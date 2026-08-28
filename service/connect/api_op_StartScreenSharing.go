@@ -5,6 +5,8 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type StartScreenSharingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartScreenSharingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartScreenSharingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartScreenSharingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartScreenSharingRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ContactId != nil {
+		s.WriteString(schemas.StartScreenSharingRequest_ContactId, *v.ContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StartScreenSharingRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type StartScreenSharingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,13 +79,26 @@ type StartScreenSharingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartScreenSharingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartScreenSharingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartScreenSharingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartScreenSharingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartScreenSharingResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartScreenSharingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartScreenSharing{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartScreenSharing, schemas.StartScreenSharingRequest, schemas.StartScreenSharingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartScreenSharing{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartScreenSharing, schemas.StartScreenSharingRequest, schemas.StartScreenSharingResponse), output: &StartScreenSharingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

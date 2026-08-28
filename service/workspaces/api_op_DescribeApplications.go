@@ -5,7 +5,9 @@ package workspaces
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,30 @@ type DescribeApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApplicationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWorkSpaceApplicationIdList(s, schemas.DescribeApplicationsRequest_ApplicationIds, v.ApplicationIds)
+	serializeComputeList(s, schemas.DescribeApplicationsRequest_ComputeTypeNames, v.ComputeTypeNames)
+	if v.LicenseType != "" {
+		s.WriteString(schemas.DescribeApplicationsRequest_LicenseType, string(v.LicenseType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeApplicationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeApplicationsRequest_NextToken, *v.NextToken)
+	}
+	serializeOperatingSystemNameList(s, schemas.DescribeApplicationsRequest_OperatingSystemNames, v.OperatingSystemNames)
+	if v.Owner != nil {
+		s.WriteString(schemas.DescribeApplicationsRequest_Owner, *v.Owner)
+	}
+}
+
 type DescribeApplicationsOutput struct {
 
 	// List of information about the specified applications.
@@ -68,13 +94,35 @@ type DescribeApplicationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicationsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWorkSpaceApplicationList(s, schemas.DescribeApplicationsResult_Applications, v.Applications)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeApplicationsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeApplicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeApplicationsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeApplicationsResult_Applications:
+			return deserializeWorkSpaceApplicationList(d, schemas.DescribeApplicationsResult_Applications, &v.Applications)
+		case schemas.DescribeApplicationsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeApplicationsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplications, schemas.DescribeApplicationsRequest, schemas.DescribeApplicationsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplications, schemas.DescribeApplicationsRequest, schemas.DescribeApplicationsResult), output: &DescribeApplicationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package appflow
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appflow/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -85,6 +87,38 @@ type CreateConnectorProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectorProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectorProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectorProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateConnectorProfileRequest_clientToken, *v.ClientToken)
+	}
+	if v.ConnectionMode != "" {
+		s.WriteString(schemas.CreateConnectorProfileRequest_connectionMode, string(v.ConnectionMode))
+	}
+	if v.ConnectorLabel != nil {
+		s.WriteString(schemas.CreateConnectorProfileRequest_connectorLabel, *v.ConnectorLabel)
+	}
+	if v.ConnectorProfileConfig != nil {
+		s.WriteStruct(schemas.CreateConnectorProfileRequest_connectorProfileConfig)
+		v.ConnectorProfileConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConnectorProfileName != nil {
+		s.WriteString(schemas.CreateConnectorProfileRequest_connectorProfileName, *v.ConnectorProfileName)
+	}
+	if v.ConnectorType != "" {
+		s.WriteString(schemas.CreateConnectorProfileRequest_connectorType, string(v.ConnectorType))
+	}
+	if v.KmsArn != nil {
+		s.WriteString(schemas.CreateConnectorProfileRequest_kmsArn, *v.KmsArn)
+	}
+}
+
 type CreateConnectorProfileOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the connector profile.
@@ -96,13 +130,32 @@ type CreateConnectorProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectorProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectorProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectorProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorProfileArn != nil {
+		s.WriteString(schemas.CreateConnectorProfileResponse_connectorProfileArn, *v.ConnectorProfileArn)
+	}
+}
+func (v *CreateConnectorProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConnectorProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConnectorProfileResponse_connectorProfileArn:
+			v.ConnectorProfileArn = new(string)
+			return d.ReadString(schemas.CreateConnectorProfileResponse_connectorProfileArn, v.ConnectorProfileArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConnectorProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConnectorProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnectorProfile, schemas.CreateConnectorProfileRequest, schemas.CreateConnectorProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConnectorProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnectorProfile, schemas.CreateConnectorProfileRequest, schemas.CreateConnectorProfileResponse), output: &CreateConnectorProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -73,6 +75,39 @@ type CreateBotAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBotAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBotAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBotAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBotAliasLocaleSettingsMap(s, schemas.CreateBotAliasRequest_botAliasLocaleSettings, v.BotAliasLocaleSettings)
+	if v.BotAliasName != nil {
+		s.WriteString(schemas.CreateBotAliasRequest_botAliasName, *v.BotAliasName)
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.CreateBotAliasRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.CreateBotAliasRequest_botVersion, *v.BotVersion)
+	}
+	if v.ConversationLogSettings != nil {
+		s.WriteStruct(schemas.CreateBotAliasRequest_conversationLogSettings)
+		v.ConversationLogSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateBotAliasRequest_description, *v.Description)
+	}
+	if v.SentimentAnalysisSettings != nil {
+		s.WriteStruct(schemas.CreateBotAliasRequest_sentimentAnalysisSettings)
+		v.SentimentAnalysisSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateBotAliasRequest_tags, v.Tags)
+}
+
 type CreateBotAliasOutput struct {
 
 	// The unique identifier of the bot alias.
@@ -117,13 +152,94 @@ type CreateBotAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBotAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBotAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBotAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotAliasId != nil {
+		s.WriteString(schemas.CreateBotAliasResponse_botAliasId, *v.BotAliasId)
+	}
+	serializeBotAliasLocaleSettingsMap(s, schemas.CreateBotAliasResponse_botAliasLocaleSettings, v.BotAliasLocaleSettings)
+	if v.BotAliasName != nil {
+		s.WriteString(schemas.CreateBotAliasResponse_botAliasName, *v.BotAliasName)
+	}
+	if v.BotAliasStatus != "" {
+		s.WriteString(schemas.CreateBotAliasResponse_botAliasStatus, string(v.BotAliasStatus))
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.CreateBotAliasResponse_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.CreateBotAliasResponse_botVersion, *v.BotVersion)
+	}
+	if v.ConversationLogSettings != nil {
+		s.WriteStruct(schemas.CreateBotAliasResponse_conversationLogSettings)
+		v.ConversationLogSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.CreateBotAliasResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateBotAliasResponse_description, *v.Description)
+	}
+	if v.SentimentAnalysisSettings != nil {
+		s.WriteStruct(schemas.CreateBotAliasResponse_sentimentAnalysisSettings)
+		v.SentimentAnalysisSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateBotAliasResponse_tags, v.Tags)
+}
+func (v *CreateBotAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBotAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBotAliasResponse_botAliasId:
+			v.BotAliasId = new(string)
+			return d.ReadString(schemas.CreateBotAliasResponse_botAliasId, v.BotAliasId)
+		case schemas.CreateBotAliasResponse_botAliasLocaleSettings:
+			return deserializeBotAliasLocaleSettingsMap(d, schemas.CreateBotAliasResponse_botAliasLocaleSettings, &v.BotAliasLocaleSettings)
+		case schemas.CreateBotAliasResponse_botAliasName:
+			v.BotAliasName = new(string)
+			return d.ReadString(schemas.CreateBotAliasResponse_botAliasName, v.BotAliasName)
+		case schemas.CreateBotAliasResponse_botAliasStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateBotAliasResponse_botAliasStatus, &ev); err != nil {
+				return err
+			}
+			v.BotAliasStatus = types.BotAliasStatus(ev)
+			return nil
+		case schemas.CreateBotAliasResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.CreateBotAliasResponse_botId, v.BotId)
+		case schemas.CreateBotAliasResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.CreateBotAliasResponse_botVersion, v.BotVersion)
+		case schemas.CreateBotAliasResponse_conversationLogSettings:
+			v.ConversationLogSettings = &types.ConversationLogSettings{}
+			return v.ConversationLogSettings.Deserialize(d)
+		case schemas.CreateBotAliasResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.CreateBotAliasResponse_creationDateTime, v.CreationDateTime)
+		case schemas.CreateBotAliasResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateBotAliasResponse_description, v.Description)
+		case schemas.CreateBotAliasResponse_sentimentAnalysisSettings:
+			v.SentimentAnalysisSettings = &types.SentimentAnalysisSettings{}
+			return v.SentimentAnalysisSettings.Deserialize(d)
+		case schemas.CreateBotAliasResponse_tags:
+			return deserializeTagMap(d, schemas.CreateBotAliasResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBotAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBotAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBotAlias, schemas.CreateBotAliasRequest, schemas.CreateBotAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateBotAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBotAlias, schemas.CreateBotAliasRequest, schemas.CreateBotAliasResponse), output: &CreateBotAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

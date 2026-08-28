@@ -5,7 +5,9 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,39 @@ type ListSlotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSlotsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSlotsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSlotsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListSlotsRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.ListSlotsRequest_botVersion, *v.BotVersion)
+	}
+	serializeSlotFilters(s, schemas.ListSlotsRequest_filters, v.Filters)
+	if v.IntentId != nil {
+		s.WriteString(schemas.ListSlotsRequest_intentId, *v.IntentId)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListSlotsRequest_localeId, *v.LocaleId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSlotsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSlotsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != nil {
+		s.WriteStruct(schemas.ListSlotsRequest_sortBy)
+		v.SortBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListSlotsOutput struct {
 
 	// The identifier of the bot that contains the slots.
@@ -105,13 +140,59 @@ type ListSlotsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSlotsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSlotsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSlotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListSlotsResponse_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.ListSlotsResponse_botVersion, *v.BotVersion)
+	}
+	if v.IntentId != nil {
+		s.WriteString(schemas.ListSlotsResponse_intentId, *v.IntentId)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListSlotsResponse_localeId, *v.LocaleId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSlotsResponse_nextToken, *v.NextToken)
+	}
+	serializeSlotSummaryList(s, schemas.ListSlotsResponse_slotSummaries, v.SlotSummaries)
+}
+func (v *ListSlotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSlotsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSlotsResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.ListSlotsResponse_botId, v.BotId)
+		case schemas.ListSlotsResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.ListSlotsResponse_botVersion, v.BotVersion)
+		case schemas.ListSlotsResponse_intentId:
+			v.IntentId = new(string)
+			return d.ReadString(schemas.ListSlotsResponse_intentId, v.IntentId)
+		case schemas.ListSlotsResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.ListSlotsResponse_localeId, v.LocaleId)
+		case schemas.ListSlotsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSlotsResponse_nextToken, v.NextToken)
+		case schemas.ListSlotsResponse_slotSummaries:
+			return deserializeSlotSummaryList(d, schemas.ListSlotsResponse_slotSummaries, &v.SlotSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSlotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSlots{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSlots, schemas.ListSlotsRequest, schemas.ListSlotsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSlots{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSlots, schemas.ListSlotsRequest, schemas.ListSlotsResponse), output: &ListSlotsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

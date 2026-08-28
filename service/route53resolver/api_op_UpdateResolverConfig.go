@@ -4,7 +4,9 @@ package route53resolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,21 @@ type UpdateResolverConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResolverConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResolverConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResolverConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutodefinedReverseFlag != "" {
+		s.WriteString(schemas.UpdateResolverConfigRequest_AutodefinedReverseFlag, string(v.AutodefinedReverseFlag))
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.UpdateResolverConfigRequest_ResourceId, *v.ResourceId)
+	}
+}
+
 type UpdateResolverConfigOutput struct {
 
 	// An array that contains settings for the specified Resolver configuration.
@@ -65,13 +82,34 @@ type UpdateResolverConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResolverConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResolverConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResolverConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverConfig != nil {
+		s.WriteStruct(schemas.UpdateResolverConfigResponse_ResolverConfig)
+		v.ResolverConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateResolverConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateResolverConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateResolverConfigResponse_ResolverConfig:
+			v.ResolverConfig = &types.ResolverConfig{}
+			return v.ResolverConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateResolverConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateResolverConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResolverConfig, schemas.UpdateResolverConfigRequest, schemas.UpdateResolverConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateResolverConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResolverConfig, schemas.UpdateResolverConfigRequest, schemas.UpdateResolverConfigResponse), output: &UpdateResolverConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

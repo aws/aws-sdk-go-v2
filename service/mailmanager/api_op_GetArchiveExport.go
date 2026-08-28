@@ -4,7 +4,9 @@ package mailmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type GetArchiveExportInput struct {
 	ExportId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetArchiveExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetArchiveExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetArchiveExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportId != nil {
+		s.WriteString(schemas.GetArchiveExportRequest_ExportId, *v.ExportId)
+	}
 }
 
 // The response containing details of the specified archive export job.
@@ -66,13 +80,69 @@ type GetArchiveExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetArchiveExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetArchiveExportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetArchiveExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveId != nil {
+		s.WriteString(schemas.GetArchiveExportResponse_ArchiveId, *v.ArchiveId)
+	}
+	serializeExportDestinationConfiguration(s, schemas.GetArchiveExportResponse_ExportDestinationConfiguration, v.ExportDestinationConfiguration)
+	if v.Filters != nil {
+		s.WriteStruct(schemas.GetArchiveExportResponse_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FromTimestamp != nil {
+		s.WriteTime(schemas.GetArchiveExportResponse_FromTimestamp, *v.FromTimestamp)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetArchiveExportResponse_MaxResults, *v.MaxResults)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.GetArchiveExportResponse_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ToTimestamp != nil {
+		s.WriteTime(schemas.GetArchiveExportResponse_ToTimestamp, *v.ToTimestamp)
+	}
+}
+func (v *GetArchiveExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetArchiveExportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetArchiveExportResponse_ArchiveId:
+			v.ArchiveId = new(string)
+			return d.ReadString(schemas.GetArchiveExportResponse_ArchiveId, v.ArchiveId)
+		case schemas.GetArchiveExportResponse_ExportDestinationConfiguration:
+			return deserializeExportDestinationConfiguration(d, schemas.GetArchiveExportResponse_ExportDestinationConfiguration, &v.ExportDestinationConfiguration)
+		case schemas.GetArchiveExportResponse_Filters:
+			v.Filters = &types.ArchiveFilters{}
+			return v.Filters.Deserialize(d)
+		case schemas.GetArchiveExportResponse_FromTimestamp:
+			v.FromTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetArchiveExportResponse_FromTimestamp, v.FromTimestamp)
+		case schemas.GetArchiveExportResponse_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.GetArchiveExportResponse_MaxResults, v.MaxResults)
+		case schemas.GetArchiveExportResponse_Status:
+			v.Status = &types.ExportStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.GetArchiveExportResponse_ToTimestamp:
+			v.ToTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetArchiveExportResponse_ToTimestamp, v.ToTimestamp)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetArchiveExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetArchiveExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetArchiveExport, schemas.GetArchiveExportRequest, schemas.GetArchiveExportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetArchiveExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetArchiveExport, schemas.GetArchiveExportRequest, schemas.GetArchiveExportResponse), output: &GetArchiveExportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

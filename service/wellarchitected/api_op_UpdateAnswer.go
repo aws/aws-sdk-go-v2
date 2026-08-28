@@ -4,7 +4,9 @@ package wellarchitected
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -79,6 +81,35 @@ type UpdateAnswerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAnswerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAnswerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAnswerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChoiceUpdates(s, schemas.UpdateAnswerInput_ChoiceUpdates, v.ChoiceUpdates)
+	if v.IsApplicable != nil {
+		s.WriteBool(schemas.UpdateAnswerInput_IsApplicable, *v.IsApplicable)
+	}
+	if v.LensAlias != nil {
+		s.WriteString(schemas.UpdateAnswerInput_LensAlias, *v.LensAlias)
+	}
+	if v.Notes != nil {
+		s.WriteString(schemas.UpdateAnswerInput_Notes, *v.Notes)
+	}
+	if v.QuestionId != nil {
+		s.WriteString(schemas.UpdateAnswerInput_QuestionId, *v.QuestionId)
+	}
+	if v.Reason != "" {
+		s.WriteString(schemas.UpdateAnswerInput_Reason, string(v.Reason))
+	}
+	serializeSelectedChoices(s, schemas.UpdateAnswerInput_SelectedChoices, v.SelectedChoices)
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.UpdateAnswerInput_WorkloadId, *v.WorkloadId)
+	}
+}
+
 // Output of a update answer call.
 type UpdateAnswerOutput struct {
 
@@ -113,13 +144,52 @@ type UpdateAnswerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAnswerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAnswerOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAnswerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Answer != nil {
+		s.WriteStruct(schemas.UpdateAnswerOutput_Answer)
+		v.Answer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LensAlias != nil {
+		s.WriteString(schemas.UpdateAnswerOutput_LensAlias, *v.LensAlias)
+	}
+	if v.LensArn != nil {
+		s.WriteString(schemas.UpdateAnswerOutput_LensArn, *v.LensArn)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.UpdateAnswerOutput_WorkloadId, *v.WorkloadId)
+	}
+}
+func (v *UpdateAnswerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAnswerOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAnswerOutput_Answer:
+			v.Answer = &types.Answer{}
+			return v.Answer.Deserialize(d)
+		case schemas.UpdateAnswerOutput_LensAlias:
+			v.LensAlias = new(string)
+			return d.ReadString(schemas.UpdateAnswerOutput_LensAlias, v.LensAlias)
+		case schemas.UpdateAnswerOutput_LensArn:
+			v.LensArn = new(string)
+			return d.ReadString(schemas.UpdateAnswerOutput_LensArn, v.LensArn)
+		case schemas.UpdateAnswerOutput_WorkloadId:
+			v.WorkloadId = new(string)
+			return d.ReadString(schemas.UpdateAnswerOutput_WorkloadId, v.WorkloadId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAnswerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAnswer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAnswer, schemas.UpdateAnswerInput, schemas.UpdateAnswerOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAnswer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAnswer, schemas.UpdateAnswerInput, schemas.UpdateAnswerOutput), output: &UpdateAnswerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

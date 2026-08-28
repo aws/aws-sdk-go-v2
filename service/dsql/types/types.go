@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/dsql/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -21,6 +23,34 @@ type ClusterSummary struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ClusterSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ClusterSummary_arn, *v.Arn)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.ClusterSummary_identifier, *v.Identifier)
+	}
+}
+func (v *ClusterSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ClusterSummary_arn, v.Arn)
+		case schemas.ClusterSummary_identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.ClusterSummary_identifier, v.Identifier)
+		}
+		return nil
+	})
 }
 
 // Configuration details about encryption for the cluster including the KMS key
@@ -43,6 +73,48 @@ type EncryptionDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EncryptionDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EncryptionDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionStatus != "" {
+		s.WriteString(schemas.EncryptionDetails_encryptionStatus, string(v.EncryptionStatus))
+	}
+	if v.EncryptionType != "" {
+		s.WriteString(schemas.EncryptionDetails_encryptionType, string(v.EncryptionType))
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.EncryptionDetails_kmsKeyArn, *v.KmsKeyArn)
+	}
+}
+func (v *EncryptionDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EncryptionDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EncryptionDetails_encryptionStatus:
+			var ev string
+			if err := d.ReadString(schemas.EncryptionDetails_encryptionStatus, &ev); err != nil {
+				return err
+			}
+			v.EncryptionStatus = EncryptionStatus(ev)
+			return nil
+		case schemas.EncryptionDetails_encryptionType:
+			var ev string
+			if err := d.ReadString(schemas.EncryptionDetails_encryptionType, &ev); err != nil {
+				return err
+			}
+			v.EncryptionType = EncryptionType(ev)
+			return nil
+		case schemas.EncryptionDetails_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.EncryptionDetails_kmsKeyArn, v.KmsKeyArn)
+		}
+		return nil
+	})
+}
+
 // Kinesis stream target configuration.
 type KinesisTargetDefinition struct {
 
@@ -62,6 +134,34 @@ type KinesisTargetDefinition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KinesisTargetDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisTargetDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisTargetDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoleArn != nil {
+		s.WriteString(schemas.KinesisTargetDefinition_roleArn, *v.RoleArn)
+	}
+	if v.StreamArn != nil {
+		s.WriteString(schemas.KinesisTargetDefinition_streamArn, *v.StreamArn)
+	}
+}
+func (v *KinesisTargetDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisTargetDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisTargetDefinition_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.KinesisTargetDefinition_roleArn, v.RoleArn)
+		case schemas.KinesisTargetDefinition_streamArn:
+			v.StreamArn = new(string)
+			return d.ReadString(schemas.KinesisTargetDefinition_streamArn, v.StreamArn)
+		}
+		return nil
+	})
+}
+
 // Defines the structure for multi-Region cluster configurations, containing the
 // witness region and linked cluster settings.
 type MultiRegionProperties struct {
@@ -75,6 +175,31 @@ type MultiRegionProperties struct {
 	WitnessRegion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MultiRegionProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MultiRegionProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MultiRegionProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClusterArnList(s, schemas.MultiRegionProperties_clusters, v.Clusters)
+	if v.WitnessRegion != nil {
+		s.WriteString(schemas.MultiRegionProperties_witnessRegion, *v.WitnessRegion)
+	}
+}
+func (v *MultiRegionProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MultiRegionProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MultiRegionProperties_clusters:
+			return deserializeClusterArnList(d, schemas.MultiRegionProperties_clusters, &v.Clusters)
+		case schemas.MultiRegionProperties_witnessRegion:
+			v.WitnessRegion = new(string)
+			return d.ReadString(schemas.MultiRegionProperties_witnessRegion, v.WitnessRegion)
+		}
+		return nil
+	})
 }
 
 // Stream status reason with error and timestamp.
@@ -91,6 +216,38 @@ type StatusReason struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *StatusReason) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StatusReason)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StatusReason) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Error != "" {
+		s.WriteString(schemas.StatusReason_error, string(v.Error))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.StatusReason_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *StatusReason) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StatusReason, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StatusReason_error:
+			var ev string
+			if err := d.ReadString(schemas.StatusReason_error, &ev); err != nil {
+				return err
+			}
+			v.Error = StreamFailureErrorCode(ev)
+			return nil
+		case schemas.StatusReason_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.StatusReason_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
 }
 
 // Summary information about a stream.
@@ -124,6 +281,56 @@ type StreamSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StreamSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StreamSummary_arn, *v.Arn)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.StreamSummary_clusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.StreamSummary_creationTime, *v.CreationTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StreamSummary_status, string(v.Status))
+	}
+	if v.StreamIdentifier != nil {
+		s.WriteString(schemas.StreamSummary_streamIdentifier, *v.StreamIdentifier)
+	}
+}
+func (v *StreamSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StreamSummary_arn, v.Arn)
+		case schemas.StreamSummary_clusterIdentifier:
+			v.ClusterIdentifier = new(string)
+			return d.ReadString(schemas.StreamSummary_clusterIdentifier, v.ClusterIdentifier)
+		case schemas.StreamSummary_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.StreamSummary_creationTime, v.CreationTime)
+		case schemas.StreamSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.StreamSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = StreamStatus(ev)
+			return nil
+		case schemas.StreamSummary_streamIdentifier:
+			v.StreamIdentifier = new(string)
+			return d.ReadString(schemas.StreamSummary_streamIdentifier, v.StreamIdentifier)
+		}
+		return nil
+	})
+}
+
 // Target definition for stream destination.
 //
 // The following types satisfy this interface:
@@ -141,6 +348,14 @@ type TargetDefinitionMemberKinesis struct {
 }
 
 func (*TargetDefinitionMemberKinesis) isTargetDefinition() {}
+func (v *TargetDefinitionMemberKinesis) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetDefinition_kinesis)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TargetDefinitionMemberKinesis) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Stores information about a field passed inside a request that resulted in an
 // validation error.
@@ -157,6 +372,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
+		case schemas.ValidationExceptionField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

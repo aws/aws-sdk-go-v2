@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -19,6 +21,38 @@ type AccessEndpoint struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AccessEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessEndpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessEndpointType != "" {
+		s.WriteString(schemas.AccessEndpoint_AccessEndpointType, string(v.AccessEndpointType))
+	}
+	if v.VpcEndpointId != nil {
+		s.WriteString(schemas.AccessEndpoint_VpcEndpointId, *v.VpcEndpointId)
+	}
+}
+func (v *AccessEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessEndpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessEndpoint_AccessEndpointType:
+			var ev string
+			if err := d.ReadString(schemas.AccessEndpoint_AccessEndpointType, &ev); err != nil {
+				return err
+			}
+			v.AccessEndpointType = AccessEndpointType(ev)
+			return nil
+		case schemas.AccessEndpoint_VpcEndpointId:
+			v.VpcEndpointId = new(string)
+			return d.ReadString(schemas.AccessEndpoint_VpcEndpointId, v.VpcEndpointId)
+		}
+		return nil
+	})
+}
+
 // Describes the access endpoint configuration for a WorkSpace.
 type AccessEndpointConfig struct {
 
@@ -32,6 +66,28 @@ type AccessEndpointConfig struct {
 	InternetFallbackProtocols []InternetFallbackProtocol
 
 	noSmithyDocumentSerde
+}
+
+func (v *AccessEndpointConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessEndpointConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessEndpointConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessEndpointList(s, schemas.AccessEndpointConfig_AccessEndpoints, v.AccessEndpoints)
+	serializeInternetFallbackProtocolList(s, schemas.AccessEndpointConfig_InternetFallbackProtocols, v.InternetFallbackProtocols)
+}
+func (v *AccessEndpointConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessEndpointConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessEndpointConfig_AccessEndpoints:
+			return deserializeAccessEndpointList(d, schemas.AccessEndpointConfig_AccessEndpoints, &v.AccessEndpoints)
+		case schemas.AccessEndpointConfig_InternetFallbackProtocols:
+			return deserializeInternetFallbackProtocolList(d, schemas.AccessEndpointConfig_InternetFallbackProtocols, &v.InternetFallbackProtocols)
+		}
+		return nil
+	})
 }
 
 // Information about about the account link.
@@ -50,6 +106,50 @@ type AccountLink struct {
 	TargetAccountId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AccountLink) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountLink)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountLink) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountLinkId != nil {
+		s.WriteString(schemas.AccountLink_AccountLinkId, *v.AccountLinkId)
+	}
+	if v.AccountLinkStatus != "" {
+		s.WriteString(schemas.AccountLink_AccountLinkStatus, string(v.AccountLinkStatus))
+	}
+	if v.SourceAccountId != nil {
+		s.WriteString(schemas.AccountLink_SourceAccountId, *v.SourceAccountId)
+	}
+	if v.TargetAccountId != nil {
+		s.WriteString(schemas.AccountLink_TargetAccountId, *v.TargetAccountId)
+	}
+}
+func (v *AccountLink) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountLink, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountLink_AccountLinkId:
+			v.AccountLinkId = new(string)
+			return d.ReadString(schemas.AccountLink_AccountLinkId, v.AccountLinkId)
+		case schemas.AccountLink_AccountLinkStatus:
+			var ev string
+			if err := d.ReadString(schemas.AccountLink_AccountLinkStatus, &ev); err != nil {
+				return err
+			}
+			v.AccountLinkStatus = AccountLinkStatusEnum(ev)
+			return nil
+		case schemas.AccountLink_SourceAccountId:
+			v.SourceAccountId = new(string)
+			return d.ReadString(schemas.AccountLink_SourceAccountId, v.SourceAccountId)
+		case schemas.AccountLink_TargetAccountId:
+			v.TargetAccountId = new(string)
+			return d.ReadString(schemas.AccountLink_TargetAccountId, v.TargetAccountId)
+		}
+		return nil
+	})
 }
 
 // Describes a modification to the configuration of Bring Your Own License (BYOL)
@@ -79,6 +179,66 @@ type AccountModification struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AccountModification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountModification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountModification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DedicatedTenancyManagementCidrRange != nil {
+		s.WriteString(schemas.AccountModification_DedicatedTenancyManagementCidrRange, *v.DedicatedTenancyManagementCidrRange)
+	}
+	if v.DedicatedTenancySupport != "" {
+		s.WriteString(schemas.AccountModification_DedicatedTenancySupport, string(v.DedicatedTenancySupport))
+	}
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.AccountModification_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.AccountModification_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.ModificationState != "" {
+		s.WriteString(schemas.AccountModification_ModificationState, string(v.ModificationState))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.AccountModification_StartTime, *v.StartTime)
+	}
+}
+func (v *AccountModification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountModification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountModification_DedicatedTenancyManagementCidrRange:
+			v.DedicatedTenancyManagementCidrRange = new(string)
+			return d.ReadString(schemas.AccountModification_DedicatedTenancyManagementCidrRange, v.DedicatedTenancyManagementCidrRange)
+		case schemas.AccountModification_DedicatedTenancySupport:
+			var ev string
+			if err := d.ReadString(schemas.AccountModification_DedicatedTenancySupport, &ev); err != nil {
+				return err
+			}
+			v.DedicatedTenancySupport = DedicatedTenancySupportResultEnum(ev)
+			return nil
+		case schemas.AccountModification_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.AccountModification_ErrorCode, v.ErrorCode)
+		case schemas.AccountModification_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.AccountModification_ErrorMessage, v.ErrorMessage)
+		case schemas.AccountModification_ModificationState:
+			var ev string
+			if err := d.ReadString(schemas.AccountModification_ModificationState, &ev); err != nil {
+				return err
+			}
+			v.ModificationState = DedicatedTenancyModificationStateEnum(ev)
+			return nil
+		case schemas.AccountModification_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.AccountModification_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 // Information about the Active Directory config.
 type ActiveDirectoryConfig struct {
 
@@ -93,6 +253,34 @@ type ActiveDirectoryConfig struct {
 	ServiceAccountSecretArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ActiveDirectoryConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActiveDirectoryConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActiveDirectoryConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ActiveDirectoryConfig_DomainName, *v.DomainName)
+	}
+	if v.ServiceAccountSecretArn != nil {
+		s.WriteString(schemas.ActiveDirectoryConfig_ServiceAccountSecretArn, *v.ServiceAccountSecretArn)
+	}
+}
+func (v *ActiveDirectoryConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActiveDirectoryConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActiveDirectoryConfig_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.ActiveDirectoryConfig_DomainName, v.DomainName)
+		case schemas.ActiveDirectoryConfig_ServiceAccountSecretArn:
+			v.ServiceAccountSecretArn = new(string)
+			return d.ReadString(schemas.ActiveDirectoryConfig_ServiceAccountSecretArn, v.ServiceAccountSecretArn)
+		}
+		return nil
+	})
 }
 
 // Describes the association between an application and an application resource.
@@ -122,6 +310,74 @@ type ApplicationResourceAssociation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationResourceAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationResourceAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationResourceAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ApplicationResourceAssociation_ApplicationId, *v.ApplicationId)
+	}
+	if v.AssociatedResourceId != nil {
+		s.WriteString(schemas.ApplicationResourceAssociation_AssociatedResourceId, *v.AssociatedResourceId)
+	}
+	if v.AssociatedResourceType != "" {
+		s.WriteString(schemas.ApplicationResourceAssociation_AssociatedResourceType, string(v.AssociatedResourceType))
+	}
+	if v.Created != nil {
+		s.WriteTime(schemas.ApplicationResourceAssociation_Created, *v.Created)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.ApplicationResourceAssociation_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ApplicationResourceAssociation_State, string(v.State))
+	}
+	if v.StateReason != nil {
+		s.WriteStruct(schemas.ApplicationResourceAssociation_StateReason)
+		v.StateReason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ApplicationResourceAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationResourceAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationResourceAssociation_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.ApplicationResourceAssociation_ApplicationId, v.ApplicationId)
+		case schemas.ApplicationResourceAssociation_AssociatedResourceId:
+			v.AssociatedResourceId = new(string)
+			return d.ReadString(schemas.ApplicationResourceAssociation_AssociatedResourceId, v.AssociatedResourceId)
+		case schemas.ApplicationResourceAssociation_AssociatedResourceType:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationResourceAssociation_AssociatedResourceType, &ev); err != nil {
+				return err
+			}
+			v.AssociatedResourceType = ApplicationAssociatedResourceType(ev)
+			return nil
+		case schemas.ApplicationResourceAssociation_Created:
+			v.Created = new(time.Time)
+			return d.ReadTime(schemas.ApplicationResourceAssociation_Created, v.Created)
+		case schemas.ApplicationResourceAssociation_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.ApplicationResourceAssociation_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.ApplicationResourceAssociation_State:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationResourceAssociation_State, &ev); err != nil {
+				return err
+			}
+			v.State = AssociationState(ev)
+			return nil
+		case schemas.ApplicationResourceAssociation_StateReason:
+			v.StateReason = &AssociationStateReason{}
+			return v.StateReason.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The persistent application settings for WorkSpaces Pools users.
 type ApplicationSettingsRequest struct {
 
@@ -137,6 +393,38 @@ type ApplicationSettingsRequest struct {
 	SettingsGroup *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApplicationSettingsRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationSettingsRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SettingsGroup != nil {
+		s.WriteString(schemas.ApplicationSettingsRequest_SettingsGroup, *v.SettingsGroup)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ApplicationSettingsRequest_Status, string(v.Status))
+	}
+}
+func (v *ApplicationSettingsRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationSettingsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationSettingsRequest_SettingsGroup:
+			v.SettingsGroup = new(string)
+			return d.ReadString(schemas.ApplicationSettingsRequest_SettingsGroup, v.SettingsGroup)
+		case schemas.ApplicationSettingsRequest_Status:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationSettingsRequest_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ApplicationSettingsStatusEnum(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes the persistent application settings for WorkSpaces Pools users.
@@ -161,6 +449,44 @@ type ApplicationSettingsResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationSettingsResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationSettingsResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3BucketName != nil {
+		s.WriteString(schemas.ApplicationSettingsResponse_S3BucketName, *v.S3BucketName)
+	}
+	if v.SettingsGroup != nil {
+		s.WriteString(schemas.ApplicationSettingsResponse_SettingsGroup, *v.SettingsGroup)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ApplicationSettingsResponse_Status, string(v.Status))
+	}
+}
+func (v *ApplicationSettingsResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationSettingsResponse_S3BucketName:
+			v.S3BucketName = new(string)
+			return d.ReadString(schemas.ApplicationSettingsResponse_S3BucketName, v.S3BucketName)
+		case schemas.ApplicationSettingsResponse_SettingsGroup:
+			v.SettingsGroup = new(string)
+			return d.ReadString(schemas.ApplicationSettingsResponse_SettingsGroup, v.SettingsGroup)
+		case schemas.ApplicationSettingsResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationSettingsResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ApplicationSettingsStatusEnum(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Indicates the reason that the association deployment failed, including the
 // error code and error message.
 type AssociationStateReason struct {
@@ -172,6 +498,38 @@ type AssociationStateReason struct {
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssociationStateReason) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociationStateReason)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociationStateReason) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.AssociationStateReason_ErrorCode, string(v.ErrorCode))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.AssociationStateReason_ErrorMessage, *v.ErrorMessage)
+	}
+}
+func (v *AssociationStateReason) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociationStateReason, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociationStateReason_ErrorCode:
+			var ev string
+			if err := d.ReadString(schemas.AssociationStateReason_ErrorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode = AssociationErrorCode(ev)
+			return nil
+		case schemas.AssociationStateReason_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.AssociationStateReason_ErrorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
 }
 
 // Describes the association between an application and a bundle resource.
@@ -201,6 +559,74 @@ type BundleResourceAssociation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BundleResourceAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BundleResourceAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BundleResourceAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedResourceId != nil {
+		s.WriteString(schemas.BundleResourceAssociation_AssociatedResourceId, *v.AssociatedResourceId)
+	}
+	if v.AssociatedResourceType != "" {
+		s.WriteString(schemas.BundleResourceAssociation_AssociatedResourceType, string(v.AssociatedResourceType))
+	}
+	if v.BundleId != nil {
+		s.WriteString(schemas.BundleResourceAssociation_BundleId, *v.BundleId)
+	}
+	if v.Created != nil {
+		s.WriteTime(schemas.BundleResourceAssociation_Created, *v.Created)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.BundleResourceAssociation_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.BundleResourceAssociation_State, string(v.State))
+	}
+	if v.StateReason != nil {
+		s.WriteStruct(schemas.BundleResourceAssociation_StateReason)
+		v.StateReason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BundleResourceAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BundleResourceAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BundleResourceAssociation_AssociatedResourceId:
+			v.AssociatedResourceId = new(string)
+			return d.ReadString(schemas.BundleResourceAssociation_AssociatedResourceId, v.AssociatedResourceId)
+		case schemas.BundleResourceAssociation_AssociatedResourceType:
+			var ev string
+			if err := d.ReadString(schemas.BundleResourceAssociation_AssociatedResourceType, &ev); err != nil {
+				return err
+			}
+			v.AssociatedResourceType = BundleAssociatedResourceType(ev)
+			return nil
+		case schemas.BundleResourceAssociation_BundleId:
+			v.BundleId = new(string)
+			return d.ReadString(schemas.BundleResourceAssociation_BundleId, v.BundleId)
+		case schemas.BundleResourceAssociation_Created:
+			v.Created = new(time.Time)
+			return d.ReadTime(schemas.BundleResourceAssociation_Created, v.Created)
+		case schemas.BundleResourceAssociation_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.BundleResourceAssociation_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.BundleResourceAssociation_State:
+			var ev string
+			if err := d.ReadString(schemas.BundleResourceAssociation_State, &ev); err != nil {
+				return err
+			}
+			v.State = AssociationState(ev)
+			return nil
+		case schemas.BundleResourceAssociation_StateReason:
+			v.StateReason = &AssociationStateReason{}
+			return v.StateReason.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes the user capacity for a pool of WorkSpaces.
 type Capacity struct {
 
@@ -210,6 +636,28 @@ type Capacity struct {
 	DesiredUserSessions *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *Capacity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Capacity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Capacity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DesiredUserSessions != nil {
+		s.WriteInt32(schemas.Capacity_DesiredUserSessions, *v.DesiredUserSessions)
+	}
+}
+func (v *Capacity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Capacity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Capacity_DesiredUserSessions:
+			v.DesiredUserSessions = new(int32)
+			return d.ReadInt32(schemas.Capacity_DesiredUserSessions, v.DesiredUserSessions)
+		}
+		return nil
+	})
 }
 
 // Describes the capacity status for a pool of WorkSpaces.
@@ -245,6 +693,46 @@ type CapacityStatus struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CapacityStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacityStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapacityStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveUserSessions != nil {
+		s.WriteInt32(schemas.CapacityStatus_ActiveUserSessions, *v.ActiveUserSessions)
+	}
+	if v.ActualUserSessions != nil {
+		s.WriteInt32(schemas.CapacityStatus_ActualUserSessions, *v.ActualUserSessions)
+	}
+	if v.AvailableUserSessions != nil {
+		s.WriteInt32(schemas.CapacityStatus_AvailableUserSessions, *v.AvailableUserSessions)
+	}
+	if v.DesiredUserSessions != nil {
+		s.WriteInt32(schemas.CapacityStatus_DesiredUserSessions, *v.DesiredUserSessions)
+	}
+}
+func (v *CapacityStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapacityStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapacityStatus_ActiveUserSessions:
+			v.ActiveUserSessions = new(int32)
+			return d.ReadInt32(schemas.CapacityStatus_ActiveUserSessions, v.ActiveUserSessions)
+		case schemas.CapacityStatus_ActualUserSessions:
+			v.ActualUserSessions = new(int32)
+			return d.ReadInt32(schemas.CapacityStatus_ActualUserSessions, v.ActualUserSessions)
+		case schemas.CapacityStatus_AvailableUserSessions:
+			v.AvailableUserSessions = new(int32)
+			return d.ReadInt32(schemas.CapacityStatus_AvailableUserSessions, v.AvailableUserSessions)
+		case schemas.CapacityStatus_DesiredUserSessions:
+			v.DesiredUserSessions = new(int32)
+			return d.ReadInt32(schemas.CapacityStatus_DesiredUserSessions, v.DesiredUserSessions)
+		}
+		return nil
+	})
+}
+
 // Describes the properties of the certificate-based authentication you want to
 // use with your WorkSpaces.
 type CertificateBasedAuthProperties struct {
@@ -257,6 +745,38 @@ type CertificateBasedAuthProperties struct {
 	Status CertificateBasedAuthStatusEnum
 
 	noSmithyDocumentSerde
+}
+
+func (v *CertificateBasedAuthProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CertificateBasedAuthProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CertificateBasedAuthProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateAuthorityArn != nil {
+		s.WriteString(schemas.CertificateBasedAuthProperties_CertificateAuthorityArn, *v.CertificateAuthorityArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CertificateBasedAuthProperties_Status, string(v.Status))
+	}
+}
+func (v *CertificateBasedAuthProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CertificateBasedAuthProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CertificateBasedAuthProperties_CertificateAuthorityArn:
+			v.CertificateAuthorityArn = new(string)
+			return d.ReadString(schemas.CertificateBasedAuthProperties_CertificateAuthorityArn, v.CertificateAuthorityArn)
+		case schemas.CertificateBasedAuthProperties_Status:
+			var ev string
+			if err := d.ReadString(schemas.CertificateBasedAuthProperties_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = CertificateBasedAuthStatusEnum(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes an Amazon WorkSpaces client.
@@ -282,6 +802,48 @@ type ClientProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClientProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClientProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientExperiencePolicy != nil {
+		s.WriteString(schemas.ClientProperties_ClientExperiencePolicy, *v.ClientExperiencePolicy)
+	}
+	if v.LogUploadEnabled != "" {
+		s.WriteString(schemas.ClientProperties_LogUploadEnabled, string(v.LogUploadEnabled))
+	}
+	if v.ReconnectEnabled != "" {
+		s.WriteString(schemas.ClientProperties_ReconnectEnabled, string(v.ReconnectEnabled))
+	}
+}
+func (v *ClientProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientProperties_ClientExperiencePolicy:
+			v.ClientExperiencePolicy = new(string)
+			return d.ReadString(schemas.ClientProperties_ClientExperiencePolicy, v.ClientExperiencePolicy)
+		case schemas.ClientProperties_LogUploadEnabled:
+			var ev string
+			if err := d.ReadString(schemas.ClientProperties_LogUploadEnabled, &ev); err != nil {
+				return err
+			}
+			v.LogUploadEnabled = LogUploadEnum(ev)
+			return nil
+		case schemas.ClientProperties_ReconnectEnabled:
+			var ev string
+			if err := d.ReadString(schemas.ClientProperties_ReconnectEnabled, &ev); err != nil {
+				return err
+			}
+			v.ReconnectEnabled = ReconnectEnum(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information about the Amazon WorkSpaces client.
 type ClientPropertiesResult struct {
 
@@ -294,6 +856,36 @@ type ClientPropertiesResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClientPropertiesResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientPropertiesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClientPropertiesResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientProperties != nil {
+		s.WriteStruct(schemas.ClientPropertiesResult_ClientProperties)
+		v.ClientProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.ClientPropertiesResult_ResourceId, *v.ResourceId)
+	}
+}
+func (v *ClientPropertiesResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientPropertiesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientPropertiesResult_ClientProperties:
+			v.ClientProperties = &ClientProperties{}
+			return v.ClientProperties.Deserialize(d)
+		case schemas.ClientPropertiesResult_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.ClientPropertiesResult_ResourceId, v.ResourceId)
+		}
+		return nil
+	})
+}
+
 // Describes the compute type of the bundle.
 type ComputeType struct {
 
@@ -301,6 +893,32 @@ type ComputeType struct {
 	Name Compute
 
 	noSmithyDocumentSerde
+}
+
+func (v *ComputeType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComputeType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComputeType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.ComputeType_Name, string(v.Name))
+	}
+}
+func (v *ComputeType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComputeType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComputeType_Name:
+			var ev string
+			if err := d.ReadString(schemas.ComputeType_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = Compute(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes an Connect Customer client add-in.
@@ -319,6 +937,46 @@ type ConnectClientAddIn struct {
 	URL *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConnectClientAddIn) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectClientAddIn)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectClientAddIn) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddInId != nil {
+		s.WriteString(schemas.ConnectClientAddIn_AddInId, *v.AddInId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ConnectClientAddIn_Name, *v.Name)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.ConnectClientAddIn_ResourceId, *v.ResourceId)
+	}
+	if v.URL != nil {
+		s.WriteString(schemas.ConnectClientAddIn_URL, *v.URL)
+	}
+}
+func (v *ConnectClientAddIn) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectClientAddIn, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectClientAddIn_AddInId:
+			v.AddInId = new(string)
+			return d.ReadString(schemas.ConnectClientAddIn_AddInId, v.AddInId)
+		case schemas.ConnectClientAddIn_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ConnectClientAddIn_Name, v.Name)
+		case schemas.ConnectClientAddIn_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.ConnectClientAddIn_ResourceId, v.ResourceId)
+		case schemas.ConnectClientAddIn_URL:
+			v.URL = new(string)
+			return d.ReadString(schemas.ConnectClientAddIn_URL, v.URL)
+		}
+		return nil
+	})
 }
 
 // Describes a connection alias. Connection aliases are used for cross-Region
@@ -348,6 +1006,53 @@ type ConnectionAlias struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectionAlias) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectionAlias)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectionAlias) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasId != nil {
+		s.WriteString(schemas.ConnectionAlias_AliasId, *v.AliasId)
+	}
+	serializeConnectionAliasAssociationList(s, schemas.ConnectionAlias_Associations, v.Associations)
+	if v.ConnectionString != nil {
+		s.WriteString(schemas.ConnectionAlias_ConnectionString, *v.ConnectionString)
+	}
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.ConnectionAlias_OwnerAccountId, *v.OwnerAccountId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ConnectionAlias_State, string(v.State))
+	}
+}
+func (v *ConnectionAlias) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectionAlias, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectionAlias_AliasId:
+			v.AliasId = new(string)
+			return d.ReadString(schemas.ConnectionAlias_AliasId, v.AliasId)
+		case schemas.ConnectionAlias_Associations:
+			return deserializeConnectionAliasAssociationList(d, schemas.ConnectionAlias_Associations, &v.Associations)
+		case schemas.ConnectionAlias_ConnectionString:
+			v.ConnectionString = new(string)
+			return d.ReadString(schemas.ConnectionAlias_ConnectionString, v.ConnectionString)
+		case schemas.ConnectionAlias_OwnerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.ConnectionAlias_OwnerAccountId, v.OwnerAccountId)
+		case schemas.ConnectionAlias_State:
+			var ev string
+			if err := d.ReadString(schemas.ConnectionAlias_State, &ev); err != nil {
+				return err
+			}
+			v.State = ConnectionAliasState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes a connection alias association that is used for cross-Region
 // redirection. For more information, see [Cross-Region Redirection for Amazon WorkSpaces].
 //
@@ -372,6 +1077,50 @@ type ConnectionAliasAssociation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectionAliasAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectionAliasAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectionAliasAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedAccountId != nil {
+		s.WriteString(schemas.ConnectionAliasAssociation_AssociatedAccountId, *v.AssociatedAccountId)
+	}
+	if v.AssociationStatus != "" {
+		s.WriteString(schemas.ConnectionAliasAssociation_AssociationStatus, string(v.AssociationStatus))
+	}
+	if v.ConnectionIdentifier != nil {
+		s.WriteString(schemas.ConnectionAliasAssociation_ConnectionIdentifier, *v.ConnectionIdentifier)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.ConnectionAliasAssociation_ResourceId, *v.ResourceId)
+	}
+}
+func (v *ConnectionAliasAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectionAliasAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectionAliasAssociation_AssociatedAccountId:
+			v.AssociatedAccountId = new(string)
+			return d.ReadString(schemas.ConnectionAliasAssociation_AssociatedAccountId, v.AssociatedAccountId)
+		case schemas.ConnectionAliasAssociation_AssociationStatus:
+			var ev string
+			if err := d.ReadString(schemas.ConnectionAliasAssociation_AssociationStatus, &ev); err != nil {
+				return err
+			}
+			v.AssociationStatus = AssociationStatus(ev)
+			return nil
+		case schemas.ConnectionAliasAssociation_ConnectionIdentifier:
+			v.ConnectionIdentifier = new(string)
+			return d.ReadString(schemas.ConnectionAliasAssociation_ConnectionIdentifier, v.ConnectionIdentifier)
+		case schemas.ConnectionAliasAssociation_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.ConnectionAliasAssociation_ResourceId, v.ResourceId)
+		}
+		return nil
+	})
+}
+
 // Describes the permissions for a connection alias. Connection aliases are used
 // for cross-Region redirection. For more information, see [Cross-Region Redirection for Amazon WorkSpaces].
 //
@@ -393,6 +1142,34 @@ type ConnectionAliasPermission struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectionAliasPermission) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectionAliasPermission)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectionAliasPermission) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowAssociation != nil {
+		s.WriteBool(schemas.ConnectionAliasPermission_AllowAssociation, *v.AllowAssociation)
+	}
+	if v.SharedAccountId != nil {
+		s.WriteString(schemas.ConnectionAliasPermission_SharedAccountId, *v.SharedAccountId)
+	}
+}
+func (v *ConnectionAliasPermission) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectionAliasPermission, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectionAliasPermission_AllowAssociation:
+			v.AllowAssociation = new(bool)
+			return d.ReadBool(schemas.ConnectionAliasPermission_AllowAssociation, v.AllowAssociation)
+		case schemas.ConnectionAliasPermission_SharedAccountId:
+			v.SharedAccountId = new(string)
+			return d.ReadString(schemas.ConnectionAliasPermission_SharedAccountId, v.SharedAccountId)
+		}
+		return nil
+	})
+}
+
 // Describes in-depth details about the error. These details include the possible
 // causes of the error and troubleshooting information.
 type CustomWorkspaceImageImportErrorDetails struct {
@@ -404,6 +1181,34 @@ type CustomWorkspaceImageImportErrorDetails struct {
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomWorkspaceImageImportErrorDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomWorkspaceImageImportErrorDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomWorkspaceImageImportErrorDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.CustomWorkspaceImageImportErrorDetails_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.CustomWorkspaceImageImportErrorDetails_ErrorMessage, *v.ErrorMessage)
+	}
+}
+func (v *CustomWorkspaceImageImportErrorDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomWorkspaceImageImportErrorDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomWorkspaceImageImportErrorDetails_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.CustomWorkspaceImageImportErrorDetails_ErrorCode, v.ErrorCode)
+		case schemas.CustomWorkspaceImageImportErrorDetails_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.CustomWorkspaceImageImportErrorDetails_ErrorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
 }
 
 // Describes the data replication settings.
@@ -418,6 +1223,38 @@ type DataReplicationSettings struct {
 	RecoverySnapshotTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataReplicationSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataReplicationSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataReplicationSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataReplication != "" {
+		s.WriteString(schemas.DataReplicationSettings_DataReplication, string(v.DataReplication))
+	}
+	if v.RecoverySnapshotTime != nil {
+		s.WriteTime(schemas.DataReplicationSettings_RecoverySnapshotTime, *v.RecoverySnapshotTime)
+	}
+}
+func (v *DataReplicationSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataReplicationSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataReplicationSettings_DataReplication:
+			var ev string
+			if err := d.ReadString(schemas.DataReplicationSettings_DataReplication, &ev); err != nil {
+				return err
+			}
+			v.DataReplication = DataReplication(ev)
+			return nil
+		case schemas.DataReplicationSettings_RecoverySnapshotTime:
+			v.RecoverySnapshotTime = new(time.Time)
+			return d.ReadTime(schemas.DataReplicationSettings_RecoverySnapshotTime, v.RecoverySnapshotTime)
+		}
+		return nil
+	})
 }
 
 // Returns default client branding attributes that were imported. These attributes
@@ -464,6 +1301,49 @@ type DefaultClientBrandingAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DefaultClientBrandingAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DefaultClientBrandingAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DefaultClientBrandingAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ForgotPasswordLink != nil {
+		s.WriteString(schemas.DefaultClientBrandingAttributes_ForgotPasswordLink, *v.ForgotPasswordLink)
+	}
+	serializeLoginMessage(s, schemas.DefaultClientBrandingAttributes_LoginMessage, v.LoginMessage)
+	if v.LogoUrl != nil {
+		s.WriteString(schemas.DefaultClientBrandingAttributes_LogoUrl, *v.LogoUrl)
+	}
+	if v.SupportEmail != nil {
+		s.WriteString(schemas.DefaultClientBrandingAttributes_SupportEmail, *v.SupportEmail)
+	}
+	if v.SupportLink != nil {
+		s.WriteString(schemas.DefaultClientBrandingAttributes_SupportLink, *v.SupportLink)
+	}
+}
+func (v *DefaultClientBrandingAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DefaultClientBrandingAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DefaultClientBrandingAttributes_ForgotPasswordLink:
+			v.ForgotPasswordLink = new(string)
+			return d.ReadString(schemas.DefaultClientBrandingAttributes_ForgotPasswordLink, v.ForgotPasswordLink)
+		case schemas.DefaultClientBrandingAttributes_LoginMessage:
+			return deserializeLoginMessage(d, schemas.DefaultClientBrandingAttributes_LoginMessage, &v.LoginMessage)
+		case schemas.DefaultClientBrandingAttributes_LogoUrl:
+			v.LogoUrl = new(string)
+			return d.ReadString(schemas.DefaultClientBrandingAttributes_LogoUrl, v.LogoUrl)
+		case schemas.DefaultClientBrandingAttributes_SupportEmail:
+			v.SupportEmail = new(string)
+			return d.ReadString(schemas.DefaultClientBrandingAttributes_SupportEmail, v.SupportEmail)
+		case schemas.DefaultClientBrandingAttributes_SupportLink:
+			v.SupportLink = new(string)
+			return d.ReadString(schemas.DefaultClientBrandingAttributes_SupportLink, v.SupportLink)
+		}
+		return nil
+	})
+}
+
 // The default client branding attributes to be imported. These attributes display
 // on the client login screen.
 //
@@ -506,6 +1386,48 @@ type DefaultImportClientBrandingAttributes struct {
 	SupportLink *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DefaultImportClientBrandingAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DefaultImportClientBrandingAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DefaultImportClientBrandingAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ForgotPasswordLink != nil {
+		s.WriteString(schemas.DefaultImportClientBrandingAttributes_ForgotPasswordLink, *v.ForgotPasswordLink)
+	}
+	serializeLoginMessage(s, schemas.DefaultImportClientBrandingAttributes_LoginMessage, v.LoginMessage)
+	if v.Logo != nil {
+		s.WriteBlob(schemas.DefaultImportClientBrandingAttributes_Logo, v.Logo)
+	}
+	if v.SupportEmail != nil {
+		s.WriteString(schemas.DefaultImportClientBrandingAttributes_SupportEmail, *v.SupportEmail)
+	}
+	if v.SupportLink != nil {
+		s.WriteString(schemas.DefaultImportClientBrandingAttributes_SupportLink, *v.SupportLink)
+	}
+}
+func (v *DefaultImportClientBrandingAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DefaultImportClientBrandingAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DefaultImportClientBrandingAttributes_ForgotPasswordLink:
+			v.ForgotPasswordLink = new(string)
+			return d.ReadString(schemas.DefaultImportClientBrandingAttributes_ForgotPasswordLink, v.ForgotPasswordLink)
+		case schemas.DefaultImportClientBrandingAttributes_LoginMessage:
+			return deserializeLoginMessage(d, schemas.DefaultImportClientBrandingAttributes_LoginMessage, &v.LoginMessage)
+		case schemas.DefaultImportClientBrandingAttributes_Logo:
+			return d.ReadBlob(schemas.DefaultImportClientBrandingAttributes_Logo, &v.Logo)
+		case schemas.DefaultImportClientBrandingAttributes_SupportEmail:
+			v.SupportEmail = new(string)
+			return d.ReadString(schemas.DefaultImportClientBrandingAttributes_SupportEmail, v.SupportEmail)
+		case schemas.DefaultImportClientBrandingAttributes_SupportLink:
+			v.SupportLink = new(string)
+			return d.ReadString(schemas.DefaultImportClientBrandingAttributes_SupportLink, v.SupportLink)
+		}
+		return nil
+	})
 }
 
 // Describes the default values that are used to create WorkSpaces. For more
@@ -552,6 +1474,58 @@ type DefaultWorkspaceCreationProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DefaultWorkspaceCreationProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DefaultWorkspaceCreationProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DefaultWorkspaceCreationProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomSecurityGroupId != nil {
+		s.WriteString(schemas.DefaultWorkspaceCreationProperties_CustomSecurityGroupId, *v.CustomSecurityGroupId)
+	}
+	if v.DefaultOu != nil {
+		s.WriteString(schemas.DefaultWorkspaceCreationProperties_DefaultOu, *v.DefaultOu)
+	}
+	if v.EnableInternetAccess != nil {
+		s.WriteBool(schemas.DefaultWorkspaceCreationProperties_EnableInternetAccess, *v.EnableInternetAccess)
+	}
+	if v.EnableMaintenanceMode != nil {
+		s.WriteBool(schemas.DefaultWorkspaceCreationProperties_EnableMaintenanceMode, *v.EnableMaintenanceMode)
+	}
+	if v.InstanceIamRoleArn != nil {
+		s.WriteString(schemas.DefaultWorkspaceCreationProperties_InstanceIamRoleArn, *v.InstanceIamRoleArn)
+	}
+	if v.UserEnabledAsLocalAdministrator != nil {
+		s.WriteBool(schemas.DefaultWorkspaceCreationProperties_UserEnabledAsLocalAdministrator, *v.UserEnabledAsLocalAdministrator)
+	}
+}
+func (v *DefaultWorkspaceCreationProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DefaultWorkspaceCreationProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DefaultWorkspaceCreationProperties_CustomSecurityGroupId:
+			v.CustomSecurityGroupId = new(string)
+			return d.ReadString(schemas.DefaultWorkspaceCreationProperties_CustomSecurityGroupId, v.CustomSecurityGroupId)
+		case schemas.DefaultWorkspaceCreationProperties_DefaultOu:
+			v.DefaultOu = new(string)
+			return d.ReadString(schemas.DefaultWorkspaceCreationProperties_DefaultOu, v.DefaultOu)
+		case schemas.DefaultWorkspaceCreationProperties_EnableInternetAccess:
+			v.EnableInternetAccess = new(bool)
+			return d.ReadBool(schemas.DefaultWorkspaceCreationProperties_EnableInternetAccess, v.EnableInternetAccess)
+		case schemas.DefaultWorkspaceCreationProperties_EnableMaintenanceMode:
+			v.EnableMaintenanceMode = new(bool)
+			return d.ReadBool(schemas.DefaultWorkspaceCreationProperties_EnableMaintenanceMode, v.EnableMaintenanceMode)
+		case schemas.DefaultWorkspaceCreationProperties_InstanceIamRoleArn:
+			v.InstanceIamRoleArn = new(string)
+			return d.ReadString(schemas.DefaultWorkspaceCreationProperties_InstanceIamRoleArn, v.InstanceIamRoleArn)
+		case schemas.DefaultWorkspaceCreationProperties_UserEnabledAsLocalAdministrator:
+			v.UserEnabledAsLocalAdministrator = new(bool)
+			return d.ReadBool(schemas.DefaultWorkspaceCreationProperties_UserEnabledAsLocalAdministrator, v.UserEnabledAsLocalAdministrator)
+		}
+		return nil
+	})
+}
+
 // Describes the filter conditions for the WorkSpaces to return.
 type DescribeWorkspaceDirectoriesFilter struct {
 
@@ -566,6 +1540,35 @@ type DescribeWorkspaceDirectoriesFilter struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeWorkspaceDirectoriesFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspaceDirectoriesFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspaceDirectoriesFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.DescribeWorkspaceDirectoriesFilter_Name, string(v.Name))
+	}
+	serializeDescribeWorkspaceDirectoriesFilterValues(s, schemas.DescribeWorkspaceDirectoriesFilter_Values, v.Values)
+}
+func (v *DescribeWorkspaceDirectoriesFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWorkspaceDirectoriesFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWorkspaceDirectoriesFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.DescribeWorkspaceDirectoriesFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = DescribeWorkspaceDirectoriesFilterName(ev)
+			return nil
+		case schemas.DescribeWorkspaceDirectoriesFilter_Values:
+			return deserializeDescribeWorkspaceDirectoriesFilterValues(d, schemas.DescribeWorkspaceDirectoriesFilter_Values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // Describes the filter conditions for WorkSpaces Pools to return.
@@ -589,6 +1592,45 @@ type DescribeWorkspacesPoolsFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkspacesPoolsFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspacesPoolsFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspacesPoolsFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.DescribeWorkspacesPoolsFilter_Name, string(v.Name))
+	}
+	if v.Operator != "" {
+		s.WriteString(schemas.DescribeWorkspacesPoolsFilter_Operator, string(v.Operator))
+	}
+	serializeDescribeWorkspacesPoolsFilterValues(s, schemas.DescribeWorkspacesPoolsFilter_Values, v.Values)
+}
+func (v *DescribeWorkspacesPoolsFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWorkspacesPoolsFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWorkspacesPoolsFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.DescribeWorkspacesPoolsFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = DescribeWorkspacesPoolsFilterName(ev)
+			return nil
+		case schemas.DescribeWorkspacesPoolsFilter_Operator:
+			var ev string
+			if err := d.ReadString(schemas.DescribeWorkspacesPoolsFilter_Operator, &ev); err != nil {
+				return err
+			}
+			v.Operator = DescribeWorkspacesPoolsFilterOperator(ev)
+			return nil
+		case schemas.DescribeWorkspacesPoolsFilter_Values:
+			return deserializeDescribeWorkspacesPoolsFilterValues(d, schemas.DescribeWorkspacesPoolsFilter_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Describes in-depth details about the error. These details include the possible
 // causes of the error and troubleshooting information.
 type ErrorDetails struct {
@@ -600,6 +1642,38 @@ type ErrorDetails struct {
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ErrorDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.ErrorDetails_ErrorCode, string(v.ErrorCode))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.ErrorDetails_ErrorMessage, *v.ErrorMessage)
+	}
+}
+func (v *ErrorDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ErrorDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ErrorDetails_ErrorCode:
+			var ev string
+			if err := d.ReadString(schemas.ErrorDetails_ErrorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode = WorkspaceImageErrorDetailCode(ev)
+			return nil
+		case schemas.ErrorDetails_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.ErrorDetails_ErrorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
 }
 
 // Describes the standby WorkSpace that could not be created.
@@ -618,6 +1692,42 @@ type FailedCreateStandbyWorkspacesRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FailedCreateStandbyWorkspacesRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailedCreateStandbyWorkspacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailedCreateStandbyWorkspacesRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.FailedCreateStandbyWorkspacesRequest_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.FailedCreateStandbyWorkspacesRequest_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.StandbyWorkspaceRequest != nil {
+		s.WriteStruct(schemas.FailedCreateStandbyWorkspacesRequest_StandbyWorkspaceRequest)
+		v.StandbyWorkspaceRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FailedCreateStandbyWorkspacesRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailedCreateStandbyWorkspacesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailedCreateStandbyWorkspacesRequest_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.FailedCreateStandbyWorkspacesRequest_ErrorCode, v.ErrorCode)
+		case schemas.FailedCreateStandbyWorkspacesRequest_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.FailedCreateStandbyWorkspacesRequest_ErrorMessage, v.ErrorMessage)
+		case schemas.FailedCreateStandbyWorkspacesRequest_StandbyWorkspaceRequest:
+			v.StandbyWorkspaceRequest = &StandbyWorkspace{}
+			return v.StandbyWorkspaceRequest.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes a WorkSpace that cannot be created.
 type FailedCreateWorkspaceRequest struct {
 
@@ -632,6 +1742,42 @@ type FailedCreateWorkspaceRequest struct {
 	WorkspaceRequest *WorkspaceRequest
 
 	noSmithyDocumentSerde
+}
+
+func (v *FailedCreateWorkspaceRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailedCreateWorkspaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailedCreateWorkspaceRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.FailedCreateWorkspaceRequest_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.FailedCreateWorkspaceRequest_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.WorkspaceRequest != nil {
+		s.WriteStruct(schemas.FailedCreateWorkspaceRequest_WorkspaceRequest)
+		v.WorkspaceRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FailedCreateWorkspaceRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailedCreateWorkspaceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailedCreateWorkspaceRequest_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.FailedCreateWorkspaceRequest_ErrorCode, v.ErrorCode)
+		case schemas.FailedCreateWorkspaceRequest_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.FailedCreateWorkspaceRequest_ErrorMessage, v.ErrorMessage)
+		case schemas.FailedCreateWorkspaceRequest_WorkspaceRequest:
+			v.WorkspaceRequest = &WorkspaceRequest{}
+			return v.WorkspaceRequest.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes a WorkSpace that could not be rebooted. (RebootWorkspaces ), rebuilt (RebuildWorkspaces ), restored (RestoreWorkspace
@@ -651,6 +1797,40 @@ type FailedWorkspaceChangeRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FailedWorkspaceChangeRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailedWorkspaceChangeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailedWorkspaceChangeRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.FailedWorkspaceChangeRequest_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.FailedWorkspaceChangeRequest_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.FailedWorkspaceChangeRequest_WorkspaceId, *v.WorkspaceId)
+	}
+}
+func (v *FailedWorkspaceChangeRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailedWorkspaceChangeRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailedWorkspaceChangeRequest_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.FailedWorkspaceChangeRequest_ErrorCode, v.ErrorCode)
+		case schemas.FailedWorkspaceChangeRequest_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.FailedWorkspaceChangeRequest_ErrorMessage, v.ErrorMessage)
+		case schemas.FailedWorkspaceChangeRequest_WorkspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.FailedWorkspaceChangeRequest_WorkspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 // Describes the Global Accelerator for directory
 type GlobalAcceleratorForDirectory struct {
 
@@ -663,6 +1843,42 @@ type GlobalAcceleratorForDirectory struct {
 	PreferredProtocol AGAPreferredProtocolForDirectory
 
 	noSmithyDocumentSerde
+}
+
+func (v *GlobalAcceleratorForDirectory) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GlobalAcceleratorForDirectory)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GlobalAcceleratorForDirectory) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mode != "" {
+		s.WriteString(schemas.GlobalAcceleratorForDirectory_Mode, string(v.Mode))
+	}
+	if v.PreferredProtocol != "" {
+		s.WriteString(schemas.GlobalAcceleratorForDirectory_PreferredProtocol, string(v.PreferredProtocol))
+	}
+}
+func (v *GlobalAcceleratorForDirectory) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GlobalAcceleratorForDirectory, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GlobalAcceleratorForDirectory_Mode:
+			var ev string
+			if err := d.ReadString(schemas.GlobalAcceleratorForDirectory_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = AGAModeForDirectoryEnum(ev)
+			return nil
+		case schemas.GlobalAcceleratorForDirectory_PreferredProtocol:
+			var ev string
+			if err := d.ReadString(schemas.GlobalAcceleratorForDirectory_PreferredProtocol, &ev); err != nil {
+				return err
+			}
+			v.PreferredProtocol = AGAPreferredProtocolForDirectory(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes the Global Accelerator for WorkSpaces.
@@ -680,6 +1896,42 @@ type GlobalAcceleratorForWorkSpace struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GlobalAcceleratorForWorkSpace) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GlobalAcceleratorForWorkSpace)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GlobalAcceleratorForWorkSpace) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mode != "" {
+		s.WriteString(schemas.GlobalAcceleratorForWorkSpace_Mode, string(v.Mode))
+	}
+	if v.PreferredProtocol != "" {
+		s.WriteString(schemas.GlobalAcceleratorForWorkSpace_PreferredProtocol, string(v.PreferredProtocol))
+	}
+}
+func (v *GlobalAcceleratorForWorkSpace) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GlobalAcceleratorForWorkSpace, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GlobalAcceleratorForWorkSpace_Mode:
+			var ev string
+			if err := d.ReadString(schemas.GlobalAcceleratorForWorkSpace_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = AGAModeForWorkSpaceEnum(ev)
+			return nil
+		case schemas.GlobalAcceleratorForWorkSpace_PreferredProtocol:
+			var ev string
+			if err := d.ReadString(schemas.GlobalAcceleratorForWorkSpace_PreferredProtocol, &ev); err != nil {
+				return err
+			}
+			v.PreferredProtocol = AGAPreferredProtocolForWorkSpace(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies the configurations of the identity center.
 type IDCConfig struct {
 
@@ -690,6 +1942,34 @@ type IDCConfig struct {
 	InstanceArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *IDCConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IDCConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IDCConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.IDCConfig_ApplicationArn, *v.ApplicationArn)
+	}
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.IDCConfig_InstanceArn, *v.InstanceArn)
+	}
+}
+func (v *IDCConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IDCConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IDCConfig_ApplicationArn:
+			v.ApplicationArn = new(string)
+			return d.ReadString(schemas.IDCConfig_ApplicationArn, v.ApplicationArn)
+		case schemas.IDCConfig_InstanceArn:
+			v.InstanceArn = new(string)
+			return d.ReadString(schemas.IDCConfig_InstanceArn, v.InstanceArn)
+		}
+		return nil
+	})
 }
 
 // Describes the Amazon Web Services accounts that have been granted permission to
@@ -703,6 +1983,28 @@ type ImagePermission struct {
 	SharedAccountId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImagePermission) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImagePermission)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImagePermission) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SharedAccountId != nil {
+		s.WriteString(schemas.ImagePermission_SharedAccountId, *v.SharedAccountId)
+	}
+}
+func (v *ImagePermission) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImagePermission, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImagePermission_SharedAccountId:
+			v.SharedAccountId = new(string)
+			return d.ReadString(schemas.ImagePermission_SharedAccountId, v.SharedAccountId)
+		}
+		return nil
+	})
 }
 
 // Describes the association between an application and an image resource.
@@ -732,6 +2034,74 @@ type ImageResourceAssociation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImageResourceAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImageResourceAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImageResourceAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedResourceId != nil {
+		s.WriteString(schemas.ImageResourceAssociation_AssociatedResourceId, *v.AssociatedResourceId)
+	}
+	if v.AssociatedResourceType != "" {
+		s.WriteString(schemas.ImageResourceAssociation_AssociatedResourceType, string(v.AssociatedResourceType))
+	}
+	if v.Created != nil {
+		s.WriteTime(schemas.ImageResourceAssociation_Created, *v.Created)
+	}
+	if v.ImageId != nil {
+		s.WriteString(schemas.ImageResourceAssociation_ImageId, *v.ImageId)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.ImageResourceAssociation_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ImageResourceAssociation_State, string(v.State))
+	}
+	if v.StateReason != nil {
+		s.WriteStruct(schemas.ImageResourceAssociation_StateReason)
+		v.StateReason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ImageResourceAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImageResourceAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImageResourceAssociation_AssociatedResourceId:
+			v.AssociatedResourceId = new(string)
+			return d.ReadString(schemas.ImageResourceAssociation_AssociatedResourceId, v.AssociatedResourceId)
+		case schemas.ImageResourceAssociation_AssociatedResourceType:
+			var ev string
+			if err := d.ReadString(schemas.ImageResourceAssociation_AssociatedResourceType, &ev); err != nil {
+				return err
+			}
+			v.AssociatedResourceType = ImageAssociatedResourceType(ev)
+			return nil
+		case schemas.ImageResourceAssociation_Created:
+			v.Created = new(time.Time)
+			return d.ReadTime(schemas.ImageResourceAssociation_Created, v.Created)
+		case schemas.ImageResourceAssociation_ImageId:
+			v.ImageId = new(string)
+			return d.ReadString(schemas.ImageResourceAssociation_ImageId, v.ImageId)
+		case schemas.ImageResourceAssociation_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.ImageResourceAssociation_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.ImageResourceAssociation_State:
+			var ev string
+			if err := d.ReadString(schemas.ImageResourceAssociation_State, &ev); err != nil {
+				return err
+			}
+			v.State = AssociationState(ev)
+			return nil
+		case schemas.ImageResourceAssociation_StateReason:
+			v.StateReason = &AssociationStateReason{}
+			return v.StateReason.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes the image import source.
 //
 // The following types satisfy this interface:
@@ -751,6 +2121,12 @@ type ImageSourceIdentifierMemberEc2ImageId struct {
 }
 
 func (*ImageSourceIdentifierMemberEc2ImageId) isImageSourceIdentifier() {}
+func (v *ImageSourceIdentifierMemberEc2ImageId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.ImageSourceIdentifier_Ec2ImageId, v.Value)
+}
+func (v *ImageSourceIdentifierMemberEc2ImageId) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.ImageSourceIdentifier_Ec2ImageId, &v.Value)
+}
 
 // The EC2 import task ID to import the image from the Amazon EC2 VM import
 // process.
@@ -761,6 +2137,12 @@ type ImageSourceIdentifierMemberEc2ImportTaskId struct {
 }
 
 func (*ImageSourceIdentifierMemberEc2ImportTaskId) isImageSourceIdentifier() {}
+func (v *ImageSourceIdentifierMemberEc2ImportTaskId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.ImageSourceIdentifier_Ec2ImportTaskId, v.Value)
+}
+func (v *ImageSourceIdentifierMemberEc2ImportTaskId) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.ImageSourceIdentifier_Ec2ImportTaskId, &v.Value)
+}
 
 // The ARN of the EC2 Image Builder image.
 type ImageSourceIdentifierMemberImageBuildVersionArn struct {
@@ -770,6 +2152,12 @@ type ImageSourceIdentifierMemberImageBuildVersionArn struct {
 }
 
 func (*ImageSourceIdentifierMemberImageBuildVersionArn) isImageSourceIdentifier() {}
+func (v *ImageSourceIdentifierMemberImageBuildVersionArn) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.ImageSourceIdentifier_ImageBuildVersionArn, v.Value)
+}
+func (v *ImageSourceIdentifierMemberImageBuildVersionArn) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.ImageSourceIdentifier_ImageBuildVersionArn, &v.Value)
+}
 
 // The client branding attributes for iOS device types. These attributes are
 // displayed on the iOS client login screen only.
@@ -834,6 +2222,61 @@ type IosClientBrandingAttributes struct {
 	SupportLink *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *IosClientBrandingAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IosClientBrandingAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IosClientBrandingAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ForgotPasswordLink != nil {
+		s.WriteString(schemas.IosClientBrandingAttributes_ForgotPasswordLink, *v.ForgotPasswordLink)
+	}
+	serializeLoginMessage(s, schemas.IosClientBrandingAttributes_LoginMessage, v.LoginMessage)
+	if v.Logo2xUrl != nil {
+		s.WriteString(schemas.IosClientBrandingAttributes_Logo2xUrl, *v.Logo2xUrl)
+	}
+	if v.Logo3xUrl != nil {
+		s.WriteString(schemas.IosClientBrandingAttributes_Logo3xUrl, *v.Logo3xUrl)
+	}
+	if v.LogoUrl != nil {
+		s.WriteString(schemas.IosClientBrandingAttributes_LogoUrl, *v.LogoUrl)
+	}
+	if v.SupportEmail != nil {
+		s.WriteString(schemas.IosClientBrandingAttributes_SupportEmail, *v.SupportEmail)
+	}
+	if v.SupportLink != nil {
+		s.WriteString(schemas.IosClientBrandingAttributes_SupportLink, *v.SupportLink)
+	}
+}
+func (v *IosClientBrandingAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IosClientBrandingAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IosClientBrandingAttributes_ForgotPasswordLink:
+			v.ForgotPasswordLink = new(string)
+			return d.ReadString(schemas.IosClientBrandingAttributes_ForgotPasswordLink, v.ForgotPasswordLink)
+		case schemas.IosClientBrandingAttributes_LoginMessage:
+			return deserializeLoginMessage(d, schemas.IosClientBrandingAttributes_LoginMessage, &v.LoginMessage)
+		case schemas.IosClientBrandingAttributes_Logo2xUrl:
+			v.Logo2xUrl = new(string)
+			return d.ReadString(schemas.IosClientBrandingAttributes_Logo2xUrl, v.Logo2xUrl)
+		case schemas.IosClientBrandingAttributes_Logo3xUrl:
+			v.Logo3xUrl = new(string)
+			return d.ReadString(schemas.IosClientBrandingAttributes_Logo3xUrl, v.Logo3xUrl)
+		case schemas.IosClientBrandingAttributes_LogoUrl:
+			v.LogoUrl = new(string)
+			return d.ReadString(schemas.IosClientBrandingAttributes_LogoUrl, v.LogoUrl)
+		case schemas.IosClientBrandingAttributes_SupportEmail:
+			v.SupportEmail = new(string)
+			return d.ReadString(schemas.IosClientBrandingAttributes_SupportEmail, v.SupportEmail)
+		case schemas.IosClientBrandingAttributes_SupportLink:
+			v.SupportLink = new(string)
+			return d.ReadString(schemas.IosClientBrandingAttributes_SupportLink, v.SupportLink)
+		}
+		return nil
+	})
 }
 
 // The client branding attributes to import for iOS device types. These attributes
@@ -901,6 +2344,58 @@ type IosImportClientBrandingAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IosImportClientBrandingAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IosImportClientBrandingAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IosImportClientBrandingAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ForgotPasswordLink != nil {
+		s.WriteString(schemas.IosImportClientBrandingAttributes_ForgotPasswordLink, *v.ForgotPasswordLink)
+	}
+	serializeLoginMessage(s, schemas.IosImportClientBrandingAttributes_LoginMessage, v.LoginMessage)
+	if v.Logo != nil {
+		s.WriteBlob(schemas.IosImportClientBrandingAttributes_Logo, v.Logo)
+	}
+	if v.Logo2x != nil {
+		s.WriteBlob(schemas.IosImportClientBrandingAttributes_Logo2x, v.Logo2x)
+	}
+	if v.Logo3x != nil {
+		s.WriteBlob(schemas.IosImportClientBrandingAttributes_Logo3x, v.Logo3x)
+	}
+	if v.SupportEmail != nil {
+		s.WriteString(schemas.IosImportClientBrandingAttributes_SupportEmail, *v.SupportEmail)
+	}
+	if v.SupportLink != nil {
+		s.WriteString(schemas.IosImportClientBrandingAttributes_SupportLink, *v.SupportLink)
+	}
+}
+func (v *IosImportClientBrandingAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IosImportClientBrandingAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IosImportClientBrandingAttributes_ForgotPasswordLink:
+			v.ForgotPasswordLink = new(string)
+			return d.ReadString(schemas.IosImportClientBrandingAttributes_ForgotPasswordLink, v.ForgotPasswordLink)
+		case schemas.IosImportClientBrandingAttributes_LoginMessage:
+			return deserializeLoginMessage(d, schemas.IosImportClientBrandingAttributes_LoginMessage, &v.LoginMessage)
+		case schemas.IosImportClientBrandingAttributes_Logo:
+			return d.ReadBlob(schemas.IosImportClientBrandingAttributes_Logo, &v.Logo)
+		case schemas.IosImportClientBrandingAttributes_Logo2x:
+			return d.ReadBlob(schemas.IosImportClientBrandingAttributes_Logo2x, &v.Logo2x)
+		case schemas.IosImportClientBrandingAttributes_Logo3x:
+			return d.ReadBlob(schemas.IosImportClientBrandingAttributes_Logo3x, &v.Logo3x)
+		case schemas.IosImportClientBrandingAttributes_SupportEmail:
+			v.SupportEmail = new(string)
+			return d.ReadString(schemas.IosImportClientBrandingAttributes_SupportEmail, v.SupportEmail)
+		case schemas.IosImportClientBrandingAttributes_SupportLink:
+			v.SupportLink = new(string)
+			return d.ReadString(schemas.IosImportClientBrandingAttributes_SupportLink, v.SupportLink)
+		}
+		return nil
+	})
+}
+
 // Describes a rule for an IP access control group.
 type IpRuleItem struct {
 
@@ -911,6 +2406,34 @@ type IpRuleItem struct {
 	RuleDesc *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *IpRuleItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IpRuleItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IpRuleItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpRule != nil {
+		s.WriteString(schemas.IpRuleItem_ipRule, *v.IpRule)
+	}
+	if v.RuleDesc != nil {
+		s.WriteString(schemas.IpRuleItem_ruleDesc, *v.RuleDesc)
+	}
+}
+func (v *IpRuleItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IpRuleItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IpRuleItem_ipRule:
+			v.IpRule = new(string)
+			return d.ReadString(schemas.IpRuleItem_ipRule, v.IpRule)
+		case schemas.IpRuleItem_ruleDesc:
+			v.RuleDesc = new(string)
+			return d.ReadString(schemas.IpRuleItem_ruleDesc, v.RuleDesc)
+		}
+		return nil
+	})
 }
 
 // Specifies the configurations of the Microsoft Entra.
@@ -925,6 +2448,34 @@ type MicrosoftEntraConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MicrosoftEntraConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MicrosoftEntraConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MicrosoftEntraConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationConfigSecretArn != nil {
+		s.WriteString(schemas.MicrosoftEntraConfig_ApplicationConfigSecretArn, *v.ApplicationConfigSecretArn)
+	}
+	if v.TenantId != nil {
+		s.WriteString(schemas.MicrosoftEntraConfig_TenantId, *v.TenantId)
+	}
+}
+func (v *MicrosoftEntraConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MicrosoftEntraConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MicrosoftEntraConfig_ApplicationConfigSecretArn:
+			v.ApplicationConfigSecretArn = new(string)
+			return d.ReadString(schemas.MicrosoftEntraConfig_ApplicationConfigSecretArn, v.ApplicationConfigSecretArn)
+		case schemas.MicrosoftEntraConfig_TenantId:
+			v.TenantId = new(string)
+			return d.ReadString(schemas.MicrosoftEntraConfig_TenantId, v.TenantId)
+		}
+		return nil
+	})
+}
+
 // Describes a WorkSpace modification.
 type ModificationState struct {
 
@@ -935,6 +2486,42 @@ type ModificationState struct {
 	State ModificationStateEnum
 
 	noSmithyDocumentSerde
+}
+
+func (v *ModificationState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModificationState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModificationState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Resource != "" {
+		s.WriteString(schemas.ModificationState_Resource, string(v.Resource))
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ModificationState_State, string(v.State))
+	}
+}
+func (v *ModificationState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModificationState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModificationState_Resource:
+			var ev string
+			if err := d.ReadString(schemas.ModificationState_Resource, &ev); err != nil {
+				return err
+			}
+			v.Resource = ModificationResourceEnum(ev)
+			return nil
+		case schemas.ModificationState_State:
+			var ev string
+			if err := d.ReadString(schemas.ModificationState_State, &ev); err != nil {
+				return err
+			}
+			v.State = ModificationStateEnum(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes the network details of a WorkSpaces Pool.
@@ -952,6 +2539,34 @@ type NetworkAccessConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NetworkAccessConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkAccessConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkAccessConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EniId != nil {
+		s.WriteString(schemas.NetworkAccessConfiguration_EniId, *v.EniId)
+	}
+	if v.EniPrivateIpAddress != nil {
+		s.WriteString(schemas.NetworkAccessConfiguration_EniPrivateIpAddress, *v.EniPrivateIpAddress)
+	}
+}
+func (v *NetworkAccessConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkAccessConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkAccessConfiguration_EniId:
+			v.EniId = new(string)
+			return d.ReadString(schemas.NetworkAccessConfiguration_EniId, v.EniId)
+		case schemas.NetworkAccessConfiguration_EniPrivateIpAddress:
+			v.EniPrivateIpAddress = new(string)
+			return d.ReadString(schemas.NetworkAccessConfiguration_EniPrivateIpAddress, v.EniPrivateIpAddress)
+		}
+		return nil
+	})
+}
+
 // The operating system that the image is running.
 type OperatingSystem struct {
 
@@ -959,6 +2574,32 @@ type OperatingSystem struct {
 	Type OperatingSystemType
 
 	noSmithyDocumentSerde
+}
+
+func (v *OperatingSystem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperatingSystem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OperatingSystem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.OperatingSystem_Type, string(v.Type))
+	}
+}
+func (v *OperatingSystem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OperatingSystem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OperatingSystem_Type:
+			var ev string
+			if err := d.ReadString(schemas.OperatingSystem_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = OperatingSystemType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Information about the standby WorkSpace.
@@ -985,6 +2626,50 @@ type PendingCreateStandbyWorkspacesRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PendingCreateStandbyWorkspacesRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PendingCreateStandbyWorkspacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PendingCreateStandbyWorkspacesRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.PendingCreateStandbyWorkspacesRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.PendingCreateStandbyWorkspacesRequest_State, string(v.State))
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.PendingCreateStandbyWorkspacesRequest_UserName, *v.UserName)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.PendingCreateStandbyWorkspacesRequest_WorkspaceId, *v.WorkspaceId)
+	}
+}
+func (v *PendingCreateStandbyWorkspacesRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PendingCreateStandbyWorkspacesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PendingCreateStandbyWorkspacesRequest_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.PendingCreateStandbyWorkspacesRequest_DirectoryId, v.DirectoryId)
+		case schemas.PendingCreateStandbyWorkspacesRequest_State:
+			var ev string
+			if err := d.ReadString(schemas.PendingCreateStandbyWorkspacesRequest_State, &ev); err != nil {
+				return err
+			}
+			v.State = WorkspaceState(ev)
+			return nil
+		case schemas.PendingCreateStandbyWorkspacesRequest_UserName:
+			v.UserName = new(string)
+			return d.ReadString(schemas.PendingCreateStandbyWorkspacesRequest_UserName, v.UserName)
+		case schemas.PendingCreateStandbyWorkspacesRequest_WorkspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.PendingCreateStandbyWorkspacesRequest_WorkspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 // Describes the information used to reboot a WorkSpace.
 type RebootRequest struct {
 
@@ -996,6 +2681,28 @@ type RebootRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.RebootRequest_WorkspaceId, *v.WorkspaceId)
+	}
+}
+func (v *RebootRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RebootRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RebootRequest_WorkspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.RebootRequest_WorkspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 // Describes the information used to rebuild a WorkSpace.
 type RebuildRequest struct {
 
@@ -1005,6 +2712,28 @@ type RebuildRequest struct {
 	WorkspaceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RebuildRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebuildRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebuildRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.RebuildRequest_WorkspaceId, *v.WorkspaceId)
+	}
+}
+func (v *RebuildRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RebuildRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RebuildRequest_WorkspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.RebuildRequest_WorkspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
 }
 
 // Describes the related WorkSpace. The related WorkSpace could be a standby
@@ -1026,6 +2755,54 @@ type RelatedWorkspaceProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RelatedWorkspaceProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RelatedWorkspaceProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RelatedWorkspaceProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Region != nil {
+		s.WriteString(schemas.RelatedWorkspaceProperties_Region, *v.Region)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.RelatedWorkspaceProperties_State, string(v.State))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.RelatedWorkspaceProperties_Type, string(v.Type))
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.RelatedWorkspaceProperties_WorkspaceId, *v.WorkspaceId)
+	}
+}
+func (v *RelatedWorkspaceProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RelatedWorkspaceProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RelatedWorkspaceProperties_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.RelatedWorkspaceProperties_Region, v.Region)
+		case schemas.RelatedWorkspaceProperties_State:
+			var ev string
+			if err := d.ReadString(schemas.RelatedWorkspaceProperties_State, &ev); err != nil {
+				return err
+			}
+			v.State = WorkspaceState(ev)
+			return nil
+		case schemas.RelatedWorkspaceProperties_Type:
+			var ev string
+			if err := d.ReadString(schemas.RelatedWorkspaceProperties_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = StandbyWorkspaceRelationshipType(ev)
+			return nil
+		case schemas.RelatedWorkspaceProperties_WorkspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.RelatedWorkspaceProperties_WorkspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 // Describes the root volume for a WorkSpace bundle.
 type RootStorage struct {
 
@@ -1035,6 +2812,28 @@ type RootStorage struct {
 	Capacity *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RootStorage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RootStorage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RootStorage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Capacity != nil {
+		s.WriteString(schemas.RootStorage_Capacity, *v.Capacity)
+	}
+}
+func (v *RootStorage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RootStorage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RootStorage_Capacity:
+			v.Capacity = new(string)
+			return d.ReadString(schemas.RootStorage_Capacity, v.Capacity)
+		}
+		return nil
+	})
 }
 
 // Describes the enablement status, user access URL, and relay state parameter
@@ -1077,6 +2876,44 @@ type SamlProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SamlProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SamlProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SamlProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RelayStateParameterName != nil {
+		s.WriteString(schemas.SamlProperties_RelayStateParameterName, *v.RelayStateParameterName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.SamlProperties_Status, string(v.Status))
+	}
+	if v.UserAccessUrl != nil {
+		s.WriteString(schemas.SamlProperties_UserAccessUrl, *v.UserAccessUrl)
+	}
+}
+func (v *SamlProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SamlProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SamlProperties_RelayStateParameterName:
+			v.RelayStateParameterName = new(string)
+			return d.ReadString(schemas.SamlProperties_RelayStateParameterName, v.RelayStateParameterName)
+		case schemas.SamlProperties_Status:
+			var ev string
+			if err := d.ReadString(schemas.SamlProperties_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = SamlStatusEnum(ev)
+			return nil
+		case schemas.SamlProperties_UserAccessUrl:
+			v.UserAccessUrl = new(string)
+			return d.ReadString(schemas.SamlProperties_UserAccessUrl, v.UserAccessUrl)
+		}
+		return nil
+	})
+}
+
 // Describes the self-service permissions for a directory. For more information,
 // see [Enable Self-Service WorkSpace Management Capabilities for Your Users].
 //
@@ -1104,6 +2941,72 @@ type SelfservicePermissions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SelfservicePermissions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SelfservicePermissions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SelfservicePermissions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeComputeType != "" {
+		s.WriteString(schemas.SelfservicePermissions_ChangeComputeType, string(v.ChangeComputeType))
+	}
+	if v.IncreaseVolumeSize != "" {
+		s.WriteString(schemas.SelfservicePermissions_IncreaseVolumeSize, string(v.IncreaseVolumeSize))
+	}
+	if v.RebuildWorkspace != "" {
+		s.WriteString(schemas.SelfservicePermissions_RebuildWorkspace, string(v.RebuildWorkspace))
+	}
+	if v.RestartWorkspace != "" {
+		s.WriteString(schemas.SelfservicePermissions_RestartWorkspace, string(v.RestartWorkspace))
+	}
+	if v.SwitchRunningMode != "" {
+		s.WriteString(schemas.SelfservicePermissions_SwitchRunningMode, string(v.SwitchRunningMode))
+	}
+}
+func (v *SelfservicePermissions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SelfservicePermissions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SelfservicePermissions_ChangeComputeType:
+			var ev string
+			if err := d.ReadString(schemas.SelfservicePermissions_ChangeComputeType, &ev); err != nil {
+				return err
+			}
+			v.ChangeComputeType = ReconnectEnum(ev)
+			return nil
+		case schemas.SelfservicePermissions_IncreaseVolumeSize:
+			var ev string
+			if err := d.ReadString(schemas.SelfservicePermissions_IncreaseVolumeSize, &ev); err != nil {
+				return err
+			}
+			v.IncreaseVolumeSize = ReconnectEnum(ev)
+			return nil
+		case schemas.SelfservicePermissions_RebuildWorkspace:
+			var ev string
+			if err := d.ReadString(schemas.SelfservicePermissions_RebuildWorkspace, &ev); err != nil {
+				return err
+			}
+			v.RebuildWorkspace = ReconnectEnum(ev)
+			return nil
+		case schemas.SelfservicePermissions_RestartWorkspace:
+			var ev string
+			if err := d.ReadString(schemas.SelfservicePermissions_RestartWorkspace, &ev); err != nil {
+				return err
+			}
+			v.RestartWorkspace = ReconnectEnum(ev)
+			return nil
+		case schemas.SelfservicePermissions_SwitchRunningMode:
+			var ev string
+			if err := d.ReadString(schemas.SelfservicePermissions_SwitchRunningMode, &ev); err != nil {
+				return err
+			}
+			v.SwitchRunningMode = ReconnectEnum(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes a snapshot.
 type Snapshot struct {
 
@@ -1111,6 +3014,28 @@ type Snapshot struct {
 	SnapshotTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *Snapshot) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Snapshot)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Snapshot) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnapshotTime != nil {
+		s.WriteTime(schemas.Snapshot_SnapshotTime, *v.SnapshotTime)
+	}
+}
+func (v *Snapshot) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Snapshot, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Snapshot_SnapshotTime:
+			v.SnapshotTime = new(time.Time)
+			return d.ReadTime(schemas.Snapshot_SnapshotTime, v.SnapshotTime)
+		}
+		return nil
+	})
 }
 
 // Describes a standby WorkSpace.
@@ -1139,6 +3064,53 @@ type StandbyWorkspace struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StandbyWorkspace) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StandbyWorkspace)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StandbyWorkspace) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataReplication != "" {
+		s.WriteString(schemas.StandbyWorkspace_DataReplication, string(v.DataReplication))
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.StandbyWorkspace_DirectoryId, *v.DirectoryId)
+	}
+	if v.PrimaryWorkspaceId != nil {
+		s.WriteString(schemas.StandbyWorkspace_PrimaryWorkspaceId, *v.PrimaryWorkspaceId)
+	}
+	serializeTagList(s, schemas.StandbyWorkspace_Tags, v.Tags)
+	if v.VolumeEncryptionKey != nil {
+		s.WriteString(schemas.StandbyWorkspace_VolumeEncryptionKey, *v.VolumeEncryptionKey)
+	}
+}
+func (v *StandbyWorkspace) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StandbyWorkspace, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StandbyWorkspace_DataReplication:
+			var ev string
+			if err := d.ReadString(schemas.StandbyWorkspace_DataReplication, &ev); err != nil {
+				return err
+			}
+			v.DataReplication = DataReplication(ev)
+			return nil
+		case schemas.StandbyWorkspace_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.StandbyWorkspace_DirectoryId, v.DirectoryId)
+		case schemas.StandbyWorkspace_PrimaryWorkspaceId:
+			v.PrimaryWorkspaceId = new(string)
+			return d.ReadString(schemas.StandbyWorkspace_PrimaryWorkspaceId, v.PrimaryWorkspaceId)
+		case schemas.StandbyWorkspace_Tags:
+			return deserializeTagList(d, schemas.StandbyWorkspace_Tags, &v.Tags)
+		case schemas.StandbyWorkspace_VolumeEncryptionKey:
+			v.VolumeEncryptionKey = new(string)
+			return d.ReadString(schemas.StandbyWorkspace_VolumeEncryptionKey, v.VolumeEncryptionKey)
+		}
+		return nil
+	})
+}
+
 // Describes the properties of the related standby WorkSpaces.
 type StandbyWorkspacesProperties struct {
 
@@ -1156,6 +3128,44 @@ type StandbyWorkspacesProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StandbyWorkspacesProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StandbyWorkspacesProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StandbyWorkspacesProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataReplication != "" {
+		s.WriteString(schemas.StandbyWorkspacesProperties_DataReplication, string(v.DataReplication))
+	}
+	if v.RecoverySnapshotTime != nil {
+		s.WriteTime(schemas.StandbyWorkspacesProperties_RecoverySnapshotTime, *v.RecoverySnapshotTime)
+	}
+	if v.StandbyWorkspaceId != nil {
+		s.WriteString(schemas.StandbyWorkspacesProperties_StandbyWorkspaceId, *v.StandbyWorkspaceId)
+	}
+}
+func (v *StandbyWorkspacesProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StandbyWorkspacesProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StandbyWorkspacesProperties_DataReplication:
+			var ev string
+			if err := d.ReadString(schemas.StandbyWorkspacesProperties_DataReplication, &ev); err != nil {
+				return err
+			}
+			v.DataReplication = DataReplication(ev)
+			return nil
+		case schemas.StandbyWorkspacesProperties_RecoverySnapshotTime:
+			v.RecoverySnapshotTime = new(time.Time)
+			return d.ReadTime(schemas.StandbyWorkspacesProperties_RecoverySnapshotTime, v.RecoverySnapshotTime)
+		case schemas.StandbyWorkspacesProperties_StandbyWorkspaceId:
+			v.StandbyWorkspaceId = new(string)
+			return d.ReadString(schemas.StandbyWorkspacesProperties_StandbyWorkspaceId, v.StandbyWorkspaceId)
+		}
+		return nil
+	})
+}
+
 // Information used to start a WorkSpace.
 type StartRequest struct {
 
@@ -1165,6 +3175,28 @@ type StartRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.StartRequest_WorkspaceId, *v.WorkspaceId)
+	}
+}
+func (v *StartRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartRequest_WorkspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.StartRequest_WorkspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 // Describes the information used to stop a WorkSpace.
 type StopRequest struct {
 
@@ -1172,6 +3204,28 @@ type StopRequest struct {
 	WorkspaceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StopRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.StopRequest_WorkspaceId, *v.WorkspaceId)
+	}
+}
+func (v *StopRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopRequest_WorkspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.StopRequest_WorkspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
 }
 
 // Describes the storage connector.
@@ -1188,6 +3242,42 @@ type StorageConnector struct {
 	Status StorageConnectorStatusEnum
 
 	noSmithyDocumentSerde
+}
+
+func (v *StorageConnector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StorageConnector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StorageConnector) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorType != "" {
+		s.WriteString(schemas.StorageConnector_ConnectorType, string(v.ConnectorType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StorageConnector_Status, string(v.Status))
+	}
+}
+func (v *StorageConnector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StorageConnector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StorageConnector_ConnectorType:
+			var ev string
+			if err := d.ReadString(schemas.StorageConnector_ConnectorType, &ev); err != nil {
+				return err
+			}
+			v.ConnectorType = StorageConnectorTypeEnum(ev)
+			return nil
+		case schemas.StorageConnector_Status:
+			var ev string
+			if err := d.ReadString(schemas.StorageConnector_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = StorageConnectorStatusEnum(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes the streaming properties.
@@ -1208,6 +3298,46 @@ type StreamingProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StreamingProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamingProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamingProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalAccelerator != nil {
+		s.WriteStruct(schemas.StreamingProperties_GlobalAccelerator)
+		v.GlobalAccelerator.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStorageConnectors(s, schemas.StreamingProperties_StorageConnectors, v.StorageConnectors)
+	if v.StreamingExperiencePreferredProtocol != "" {
+		s.WriteString(schemas.StreamingProperties_StreamingExperiencePreferredProtocol, string(v.StreamingExperiencePreferredProtocol))
+	}
+	serializeUserSettings(s, schemas.StreamingProperties_UserSettings, v.UserSettings)
+}
+func (v *StreamingProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamingProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamingProperties_GlobalAccelerator:
+			v.GlobalAccelerator = &GlobalAcceleratorForDirectory{}
+			return v.GlobalAccelerator.Deserialize(d)
+		case schemas.StreamingProperties_StorageConnectors:
+			return deserializeStorageConnectors(d, schemas.StreamingProperties_StorageConnectors, &v.StorageConnectors)
+		case schemas.StreamingProperties_StreamingExperiencePreferredProtocol:
+			var ev string
+			if err := d.ReadString(schemas.StreamingProperties_StreamingExperiencePreferredProtocol, &ev); err != nil {
+				return err
+			}
+			v.StreamingExperiencePreferredProtocol = StreamingExperiencePreferredProtocolEnum(ev)
+			return nil
+		case schemas.StreamingProperties_UserSettings:
+			return deserializeUserSettings(d, schemas.StreamingProperties_UserSettings, &v.UserSettings)
+		}
+		return nil
+	})
+}
+
 // Describes a tag.
 type Tag struct {
 
@@ -1222,6 +3352,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Describes the information used to terminate a WorkSpace.
 type TerminateRequest struct {
 
@@ -1231,6 +3389,28 @@ type TerminateRequest struct {
 	WorkspaceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TerminateRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.TerminateRequest_WorkspaceId, *v.WorkspaceId)
+	}
+}
+func (v *TerminateRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TerminateRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TerminateRequest_WorkspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.TerminateRequest_WorkspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
 }
 
 // Describes the timeout settings for a pool of WorkSpaces.
@@ -1256,6 +3436,40 @@ type TimeoutSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TimeoutSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimeoutSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimeoutSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisconnectTimeoutInSeconds != nil {
+		s.WriteInt32(schemas.TimeoutSettings_DisconnectTimeoutInSeconds, *v.DisconnectTimeoutInSeconds)
+	}
+	if v.IdleDisconnectTimeoutInSeconds != nil {
+		s.WriteInt32(schemas.TimeoutSettings_IdleDisconnectTimeoutInSeconds, *v.IdleDisconnectTimeoutInSeconds)
+	}
+	if v.MaxUserDurationInSeconds != nil {
+		s.WriteInt32(schemas.TimeoutSettings_MaxUserDurationInSeconds, *v.MaxUserDurationInSeconds)
+	}
+}
+func (v *TimeoutSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimeoutSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimeoutSettings_DisconnectTimeoutInSeconds:
+			v.DisconnectTimeoutInSeconds = new(int32)
+			return d.ReadInt32(schemas.TimeoutSettings_DisconnectTimeoutInSeconds, v.DisconnectTimeoutInSeconds)
+		case schemas.TimeoutSettings_IdleDisconnectTimeoutInSeconds:
+			v.IdleDisconnectTimeoutInSeconds = new(int32)
+			return d.ReadInt32(schemas.TimeoutSettings_IdleDisconnectTimeoutInSeconds, v.IdleDisconnectTimeoutInSeconds)
+		case schemas.TimeoutSettings_MaxUserDurationInSeconds:
+			v.MaxUserDurationInSeconds = new(int32)
+			return d.ReadInt32(schemas.TimeoutSettings_MaxUserDurationInSeconds, v.MaxUserDurationInSeconds)
+		}
+		return nil
+	})
+}
+
 // Describes whether a WorkSpace image needs to be updated with the latest drivers
 // and other components required by Amazon WorkSpaces.
 //
@@ -1271,6 +3485,34 @@ type UpdateResult struct {
 	UpdateAvailable *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateResult_Description, *v.Description)
+	}
+	if v.UpdateAvailable != nil {
+		s.WriteBool(schemas.UpdateResult_UpdateAvailable, *v.UpdateAvailable)
+	}
+}
+func (v *UpdateResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateResult_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateResult_Description, v.Description)
+		case schemas.UpdateResult_UpdateAvailable:
+			v.UpdateAvailable = new(bool)
+			return d.ReadBool(schemas.UpdateResult_UpdateAvailable, v.UpdateAvailable)
+		}
+		return nil
+	})
 }
 
 // Information about the user's permission settings.
@@ -1292,6 +3534,48 @@ type UserSetting struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UserSetting) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserSetting)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserSetting) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.UserSetting_Action, string(v.Action))
+	}
+	if v.MaximumLength != nil {
+		s.WriteInt32(schemas.UserSetting_MaximumLength, *v.MaximumLength)
+	}
+	if v.Permission != "" {
+		s.WriteString(schemas.UserSetting_Permission, string(v.Permission))
+	}
+}
+func (v *UserSetting) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserSetting, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserSetting_Action:
+			var ev string
+			if err := d.ReadString(schemas.UserSetting_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = UserSettingActionEnum(ev)
+			return nil
+		case schemas.UserSetting_MaximumLength:
+			v.MaximumLength = new(int32)
+			return d.ReadInt32(schemas.UserSetting_MaximumLength, v.MaximumLength)
+		case schemas.UserSetting_Permission:
+			var ev string
+			if err := d.ReadString(schemas.UserSetting_Permission, &ev); err != nil {
+				return err
+			}
+			v.Permission = UserSettingPermissionEnum(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes the user volume for a WorkSpace bundle.
 type UserStorage struct {
 
@@ -1301,6 +3585,28 @@ type UserStorage struct {
 	Capacity *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UserStorage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserStorage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserStorage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Capacity != nil {
+		s.WriteString(schemas.UserStorage_Capacity, *v.Capacity)
+	}
+}
+func (v *UserStorage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserStorage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserStorage_Capacity:
+			v.Capacity = new(string)
+			return d.ReadString(schemas.UserStorage_Capacity, v.Capacity)
+		}
+		return nil
+	})
 }
 
 // Describes a WorkSpace.
@@ -1420,6 +3726,141 @@ type Workspace struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Workspace) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Workspace)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Workspace) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BundleId != nil {
+		s.WriteString(schemas.Workspace_BundleId, *v.BundleId)
+	}
+	if v.ComputerName != nil {
+		s.WriteString(schemas.Workspace_ComputerName, *v.ComputerName)
+	}
+	if v.DataReplicationSettings != nil {
+		s.WriteStruct(schemas.Workspace_DataReplicationSettings)
+		v.DataReplicationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.Workspace_DirectoryId, *v.DirectoryId)
+	}
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.Workspace_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.Workspace_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.IpAddress != nil {
+		s.WriteString(schemas.Workspace_IpAddress, *v.IpAddress)
+	}
+	if v.Ipv6Address != nil {
+		s.WriteString(schemas.Workspace_Ipv6Address, *v.Ipv6Address)
+	}
+	serializeModificationStateList(s, schemas.Workspace_ModificationStates, v.ModificationStates)
+	serializeRelatedWorkspaces(s, schemas.Workspace_RelatedWorkspaces, v.RelatedWorkspaces)
+	if v.RootVolumeEncryptionEnabled != nil {
+		s.WriteBool(schemas.Workspace_RootVolumeEncryptionEnabled, *v.RootVolumeEncryptionEnabled)
+	}
+	serializeStandbyWorkspacesPropertiesList(s, schemas.Workspace_StandbyWorkspacesProperties, v.StandbyWorkspacesProperties)
+	if v.State != "" {
+		s.WriteString(schemas.Workspace_State, string(v.State))
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.Workspace_SubnetId, *v.SubnetId)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.Workspace_UserName, *v.UserName)
+	}
+	if v.UserVolumeEncryptionEnabled != nil {
+		s.WriteBool(schemas.Workspace_UserVolumeEncryptionEnabled, *v.UserVolumeEncryptionEnabled)
+	}
+	if v.VolumeEncryptionKey != nil {
+		s.WriteString(schemas.Workspace_VolumeEncryptionKey, *v.VolumeEncryptionKey)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.Workspace_WorkspaceId, *v.WorkspaceId)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.Workspace_WorkspaceName, *v.WorkspaceName)
+	}
+	if v.WorkspaceProperties != nil {
+		s.WriteStruct(schemas.Workspace_WorkspaceProperties)
+		v.WorkspaceProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Workspace) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Workspace, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Workspace_BundleId:
+			v.BundleId = new(string)
+			return d.ReadString(schemas.Workspace_BundleId, v.BundleId)
+		case schemas.Workspace_ComputerName:
+			v.ComputerName = new(string)
+			return d.ReadString(schemas.Workspace_ComputerName, v.ComputerName)
+		case schemas.Workspace_DataReplicationSettings:
+			v.DataReplicationSettings = &DataReplicationSettings{}
+			return v.DataReplicationSettings.Deserialize(d)
+		case schemas.Workspace_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.Workspace_DirectoryId, v.DirectoryId)
+		case schemas.Workspace_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.Workspace_ErrorCode, v.ErrorCode)
+		case schemas.Workspace_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.Workspace_ErrorMessage, v.ErrorMessage)
+		case schemas.Workspace_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.Workspace_IpAddress, v.IpAddress)
+		case schemas.Workspace_Ipv6Address:
+			v.Ipv6Address = new(string)
+			return d.ReadString(schemas.Workspace_Ipv6Address, v.Ipv6Address)
+		case schemas.Workspace_ModificationStates:
+			return deserializeModificationStateList(d, schemas.Workspace_ModificationStates, &v.ModificationStates)
+		case schemas.Workspace_RelatedWorkspaces:
+			return deserializeRelatedWorkspaces(d, schemas.Workspace_RelatedWorkspaces, &v.RelatedWorkspaces)
+		case schemas.Workspace_RootVolumeEncryptionEnabled:
+			v.RootVolumeEncryptionEnabled = new(bool)
+			return d.ReadBool(schemas.Workspace_RootVolumeEncryptionEnabled, v.RootVolumeEncryptionEnabled)
+		case schemas.Workspace_StandbyWorkspacesProperties:
+			return deserializeStandbyWorkspacesPropertiesList(d, schemas.Workspace_StandbyWorkspacesProperties, &v.StandbyWorkspacesProperties)
+		case schemas.Workspace_State:
+			var ev string
+			if err := d.ReadString(schemas.Workspace_State, &ev); err != nil {
+				return err
+			}
+			v.State = WorkspaceState(ev)
+			return nil
+		case schemas.Workspace_SubnetId:
+			v.SubnetId = new(string)
+			return d.ReadString(schemas.Workspace_SubnetId, v.SubnetId)
+		case schemas.Workspace_UserName:
+			v.UserName = new(string)
+			return d.ReadString(schemas.Workspace_UserName, v.UserName)
+		case schemas.Workspace_UserVolumeEncryptionEnabled:
+			v.UserVolumeEncryptionEnabled = new(bool)
+			return d.ReadBool(schemas.Workspace_UserVolumeEncryptionEnabled, v.UserVolumeEncryptionEnabled)
+		case schemas.Workspace_VolumeEncryptionKey:
+			v.VolumeEncryptionKey = new(string)
+			return d.ReadString(schemas.Workspace_VolumeEncryptionKey, v.VolumeEncryptionKey)
+		case schemas.Workspace_WorkspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.Workspace_WorkspaceId, v.WorkspaceId)
+		case schemas.Workspace_WorkspaceName:
+			v.WorkspaceName = new(string)
+			return d.ReadString(schemas.Workspace_WorkspaceName, v.WorkspaceName)
+		case schemas.Workspace_WorkspaceProperties:
+			v.WorkspaceProperties = &WorkspaceProperties{}
+			return v.WorkspaceProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The device types and operating systems that can be used to access a WorkSpace.
 // For more information, see [Amazon WorkSpaces Client Network Requirements].
 //
@@ -1461,6 +3902,120 @@ type WorkspaceAccessProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkspaceAccessProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkspaceAccessProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkspaceAccessProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessEndpointConfig != nil {
+		s.WriteStruct(schemas.WorkspaceAccessProperties_AccessEndpointConfig)
+		v.AccessEndpointConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceTypeAndroid != "" {
+		s.WriteString(schemas.WorkspaceAccessProperties_DeviceTypeAndroid, string(v.DeviceTypeAndroid))
+	}
+	if v.DeviceTypeChromeOs != "" {
+		s.WriteString(schemas.WorkspaceAccessProperties_DeviceTypeChromeOs, string(v.DeviceTypeChromeOs))
+	}
+	if v.DeviceTypeIos != "" {
+		s.WriteString(schemas.WorkspaceAccessProperties_DeviceTypeIos, string(v.DeviceTypeIos))
+	}
+	if v.DeviceTypeLinux != "" {
+		s.WriteString(schemas.WorkspaceAccessProperties_DeviceTypeLinux, string(v.DeviceTypeLinux))
+	}
+	if v.DeviceTypeOsx != "" {
+		s.WriteString(schemas.WorkspaceAccessProperties_DeviceTypeOsx, string(v.DeviceTypeOsx))
+	}
+	if v.DeviceTypeWeb != "" {
+		s.WriteString(schemas.WorkspaceAccessProperties_DeviceTypeWeb, string(v.DeviceTypeWeb))
+	}
+	if v.DeviceTypeWindows != "" {
+		s.WriteString(schemas.WorkspaceAccessProperties_DeviceTypeWindows, string(v.DeviceTypeWindows))
+	}
+	if v.DeviceTypeWorkSpacesThinClient != "" {
+		s.WriteString(schemas.WorkspaceAccessProperties_DeviceTypeWorkSpacesThinClient, string(v.DeviceTypeWorkSpacesThinClient))
+	}
+	if v.DeviceTypeZeroClient != "" {
+		s.WriteString(schemas.WorkspaceAccessProperties_DeviceTypeZeroClient, string(v.DeviceTypeZeroClient))
+	}
+}
+func (v *WorkspaceAccessProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkspaceAccessProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkspaceAccessProperties_AccessEndpointConfig:
+			v.AccessEndpointConfig = &AccessEndpointConfig{}
+			return v.AccessEndpointConfig.Deserialize(d)
+		case schemas.WorkspaceAccessProperties_DeviceTypeAndroid:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceAccessProperties_DeviceTypeAndroid, &ev); err != nil {
+				return err
+			}
+			v.DeviceTypeAndroid = AccessPropertyValue(ev)
+			return nil
+		case schemas.WorkspaceAccessProperties_DeviceTypeChromeOs:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceAccessProperties_DeviceTypeChromeOs, &ev); err != nil {
+				return err
+			}
+			v.DeviceTypeChromeOs = AccessPropertyValue(ev)
+			return nil
+		case schemas.WorkspaceAccessProperties_DeviceTypeIos:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceAccessProperties_DeviceTypeIos, &ev); err != nil {
+				return err
+			}
+			v.DeviceTypeIos = AccessPropertyValue(ev)
+			return nil
+		case schemas.WorkspaceAccessProperties_DeviceTypeLinux:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceAccessProperties_DeviceTypeLinux, &ev); err != nil {
+				return err
+			}
+			v.DeviceTypeLinux = AccessPropertyValue(ev)
+			return nil
+		case schemas.WorkspaceAccessProperties_DeviceTypeOsx:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceAccessProperties_DeviceTypeOsx, &ev); err != nil {
+				return err
+			}
+			v.DeviceTypeOsx = AccessPropertyValue(ev)
+			return nil
+		case schemas.WorkspaceAccessProperties_DeviceTypeWeb:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceAccessProperties_DeviceTypeWeb, &ev); err != nil {
+				return err
+			}
+			v.DeviceTypeWeb = AccessPropertyValue(ev)
+			return nil
+		case schemas.WorkspaceAccessProperties_DeviceTypeWindows:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceAccessProperties_DeviceTypeWindows, &ev); err != nil {
+				return err
+			}
+			v.DeviceTypeWindows = AccessPropertyValue(ev)
+			return nil
+		case schemas.WorkspaceAccessProperties_DeviceTypeWorkSpacesThinClient:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceAccessProperties_DeviceTypeWorkSpacesThinClient, &ev); err != nil {
+				return err
+			}
+			v.DeviceTypeWorkSpacesThinClient = AccessPropertyValue(ev)
+			return nil
+		case schemas.WorkspaceAccessProperties_DeviceTypeZeroClient:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceAccessProperties_DeviceTypeZeroClient, &ev); err != nil {
+				return err
+			}
+			v.DeviceTypeZeroClient = AccessPropertyValue(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes the WorkSpace application.
 type WorkSpaceApplication struct {
 
@@ -1494,6 +4049,78 @@ type WorkSpaceApplication struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkSpaceApplication) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkSpaceApplication)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkSpaceApplication) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.WorkSpaceApplication_ApplicationId, *v.ApplicationId)
+	}
+	if v.Created != nil {
+		s.WriteTime(schemas.WorkSpaceApplication_Created, *v.Created)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.WorkSpaceApplication_Description, *v.Description)
+	}
+	if v.LicenseType != "" {
+		s.WriteString(schemas.WorkSpaceApplication_LicenseType, string(v.LicenseType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.WorkSpaceApplication_Name, *v.Name)
+	}
+	if v.Owner != nil {
+		s.WriteString(schemas.WorkSpaceApplication_Owner, *v.Owner)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.WorkSpaceApplication_State, string(v.State))
+	}
+	serializeComputeList(s, schemas.WorkSpaceApplication_SupportedComputeTypeNames, v.SupportedComputeTypeNames)
+	serializeOperatingSystemNameList(s, schemas.WorkSpaceApplication_SupportedOperatingSystemNames, v.SupportedOperatingSystemNames)
+}
+func (v *WorkSpaceApplication) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkSpaceApplication, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkSpaceApplication_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.WorkSpaceApplication_ApplicationId, v.ApplicationId)
+		case schemas.WorkSpaceApplication_Created:
+			v.Created = new(time.Time)
+			return d.ReadTime(schemas.WorkSpaceApplication_Created, v.Created)
+		case schemas.WorkSpaceApplication_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.WorkSpaceApplication_Description, v.Description)
+		case schemas.WorkSpaceApplication_LicenseType:
+			var ev string
+			if err := d.ReadString(schemas.WorkSpaceApplication_LicenseType, &ev); err != nil {
+				return err
+			}
+			v.LicenseType = WorkSpaceApplicationLicenseType(ev)
+			return nil
+		case schemas.WorkSpaceApplication_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.WorkSpaceApplication_Name, v.Name)
+		case schemas.WorkSpaceApplication_Owner:
+			v.Owner = new(string)
+			return d.ReadString(schemas.WorkSpaceApplication_Owner, v.Owner)
+		case schemas.WorkSpaceApplication_State:
+			var ev string
+			if err := d.ReadString(schemas.WorkSpaceApplication_State, &ev); err != nil {
+				return err
+			}
+			v.State = WorkSpaceApplicationState(ev)
+			return nil
+		case schemas.WorkSpaceApplication_SupportedComputeTypeNames:
+			return deserializeComputeList(d, schemas.WorkSpaceApplication_SupportedComputeTypeNames, &v.SupportedComputeTypeNames)
+		case schemas.WorkSpaceApplication_SupportedOperatingSystemNames:
+			return deserializeOperatingSystemNameList(d, schemas.WorkSpaceApplication_SupportedOperatingSystemNames, &v.SupportedOperatingSystemNames)
+		}
+		return nil
+	})
+}
+
 // Describes the WorkSpace application deployment.
 type WorkSpaceApplicationDeployment struct {
 
@@ -1501,6 +4128,25 @@ type WorkSpaceApplicationDeployment struct {
 	Associations []WorkspaceResourceAssociation
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkSpaceApplicationDeployment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkSpaceApplicationDeployment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkSpaceApplicationDeployment) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWorkspaceResourceAssociationList(s, schemas.WorkSpaceApplicationDeployment_Associations, v.Associations)
+}
+func (v *WorkSpaceApplicationDeployment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkSpaceApplicationDeployment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkSpaceApplicationDeployment_Associations:
+			return deserializeWorkspaceResourceAssociationList(d, schemas.WorkSpaceApplicationDeployment_Associations, &v.Associations)
+		}
+		return nil
+	})
 }
 
 // Describes a WorkSpace bundle.
@@ -1548,6 +4194,108 @@ type WorkspaceBundle struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkspaceBundle) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkspaceBundle)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkspaceBundle) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BundleId != nil {
+		s.WriteString(schemas.WorkspaceBundle_BundleId, *v.BundleId)
+	}
+	if v.BundleType != "" {
+		s.WriteString(schemas.WorkspaceBundle_BundleType, string(v.BundleType))
+	}
+	if v.ComputeType != nil {
+		s.WriteStruct(schemas.WorkspaceBundle_ComputeType)
+		v.ComputeType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.WorkspaceBundle_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.WorkspaceBundle_Description, *v.Description)
+	}
+	if v.ImageId != nil {
+		s.WriteString(schemas.WorkspaceBundle_ImageId, *v.ImageId)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.WorkspaceBundle_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.WorkspaceBundle_Name, *v.Name)
+	}
+	if v.Owner != nil {
+		s.WriteString(schemas.WorkspaceBundle_Owner, *v.Owner)
+	}
+	if v.RootStorage != nil {
+		s.WriteStruct(schemas.WorkspaceBundle_RootStorage)
+		v.RootStorage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != "" {
+		s.WriteString(schemas.WorkspaceBundle_State, string(v.State))
+	}
+	if v.UserStorage != nil {
+		s.WriteStruct(schemas.WorkspaceBundle_UserStorage)
+		v.UserStorage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *WorkspaceBundle) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkspaceBundle, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkspaceBundle_BundleId:
+			v.BundleId = new(string)
+			return d.ReadString(schemas.WorkspaceBundle_BundleId, v.BundleId)
+		case schemas.WorkspaceBundle_BundleType:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceBundle_BundleType, &ev); err != nil {
+				return err
+			}
+			v.BundleType = BundleType(ev)
+			return nil
+		case schemas.WorkspaceBundle_ComputeType:
+			v.ComputeType = &ComputeType{}
+			return v.ComputeType.Deserialize(d)
+		case schemas.WorkspaceBundle_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.WorkspaceBundle_CreationTime, v.CreationTime)
+		case schemas.WorkspaceBundle_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.WorkspaceBundle_Description, v.Description)
+		case schemas.WorkspaceBundle_ImageId:
+			v.ImageId = new(string)
+			return d.ReadString(schemas.WorkspaceBundle_ImageId, v.ImageId)
+		case schemas.WorkspaceBundle_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.WorkspaceBundle_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.WorkspaceBundle_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.WorkspaceBundle_Name, v.Name)
+		case schemas.WorkspaceBundle_Owner:
+			v.Owner = new(string)
+			return d.ReadString(schemas.WorkspaceBundle_Owner, v.Owner)
+		case schemas.WorkspaceBundle_RootStorage:
+			v.RootStorage = &RootStorage{}
+			return v.RootStorage.Deserialize(d)
+		case schemas.WorkspaceBundle_State:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceBundle_State, &ev); err != nil {
+				return err
+			}
+			v.State = WorkspaceBundleState(ev)
+			return nil
+		case schemas.WorkspaceBundle_UserStorage:
+			v.UserStorage = &UserStorage{}
+			return v.UserStorage.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes the connection status of a WorkSpace.
 type WorkspaceConnectionStatus struct {
 
@@ -1565,6 +4313,50 @@ type WorkspaceConnectionStatus struct {
 	WorkspaceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkspaceConnectionStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkspaceConnectionStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkspaceConnectionStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionState != "" {
+		s.WriteString(schemas.WorkspaceConnectionStatus_ConnectionState, string(v.ConnectionState))
+	}
+	if v.ConnectionStateCheckTimestamp != nil {
+		s.WriteTime(schemas.WorkspaceConnectionStatus_ConnectionStateCheckTimestamp, *v.ConnectionStateCheckTimestamp)
+	}
+	if v.LastKnownUserConnectionTimestamp != nil {
+		s.WriteTime(schemas.WorkspaceConnectionStatus_LastKnownUserConnectionTimestamp, *v.LastKnownUserConnectionTimestamp)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.WorkspaceConnectionStatus_WorkspaceId, *v.WorkspaceId)
+	}
+}
+func (v *WorkspaceConnectionStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkspaceConnectionStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkspaceConnectionStatus_ConnectionState:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceConnectionStatus_ConnectionState, &ev); err != nil {
+				return err
+			}
+			v.ConnectionState = ConnectionState(ev)
+			return nil
+		case schemas.WorkspaceConnectionStatus_ConnectionStateCheckTimestamp:
+			v.ConnectionStateCheckTimestamp = new(time.Time)
+			return d.ReadTime(schemas.WorkspaceConnectionStatus_ConnectionStateCheckTimestamp, v.ConnectionStateCheckTimestamp)
+		case schemas.WorkspaceConnectionStatus_LastKnownUserConnectionTimestamp:
+			v.LastKnownUserConnectionTimestamp = new(time.Time)
+			return d.ReadTime(schemas.WorkspaceConnectionStatus_LastKnownUserConnectionTimestamp, v.LastKnownUserConnectionTimestamp)
+		case schemas.WorkspaceConnectionStatus_WorkspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.WorkspaceConnectionStatus_WorkspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
 }
 
 // Describes the default properties that are used for creating WorkSpaces. For
@@ -1607,6 +4399,58 @@ type WorkspaceCreationProperties struct {
 	UserEnabledAsLocalAdministrator *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkspaceCreationProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkspaceCreationProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkspaceCreationProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomSecurityGroupId != nil {
+		s.WriteString(schemas.WorkspaceCreationProperties_CustomSecurityGroupId, *v.CustomSecurityGroupId)
+	}
+	if v.DefaultOu != nil {
+		s.WriteString(schemas.WorkspaceCreationProperties_DefaultOu, *v.DefaultOu)
+	}
+	if v.EnableInternetAccess != nil {
+		s.WriteBool(schemas.WorkspaceCreationProperties_EnableInternetAccess, *v.EnableInternetAccess)
+	}
+	if v.EnableMaintenanceMode != nil {
+		s.WriteBool(schemas.WorkspaceCreationProperties_EnableMaintenanceMode, *v.EnableMaintenanceMode)
+	}
+	if v.InstanceIamRoleArn != nil {
+		s.WriteString(schemas.WorkspaceCreationProperties_InstanceIamRoleArn, *v.InstanceIamRoleArn)
+	}
+	if v.UserEnabledAsLocalAdministrator != nil {
+		s.WriteBool(schemas.WorkspaceCreationProperties_UserEnabledAsLocalAdministrator, *v.UserEnabledAsLocalAdministrator)
+	}
+}
+func (v *WorkspaceCreationProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkspaceCreationProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkspaceCreationProperties_CustomSecurityGroupId:
+			v.CustomSecurityGroupId = new(string)
+			return d.ReadString(schemas.WorkspaceCreationProperties_CustomSecurityGroupId, v.CustomSecurityGroupId)
+		case schemas.WorkspaceCreationProperties_DefaultOu:
+			v.DefaultOu = new(string)
+			return d.ReadString(schemas.WorkspaceCreationProperties_DefaultOu, v.DefaultOu)
+		case schemas.WorkspaceCreationProperties_EnableInternetAccess:
+			v.EnableInternetAccess = new(bool)
+			return d.ReadBool(schemas.WorkspaceCreationProperties_EnableInternetAccess, v.EnableInternetAccess)
+		case schemas.WorkspaceCreationProperties_EnableMaintenanceMode:
+			v.EnableMaintenanceMode = new(bool)
+			return d.ReadBool(schemas.WorkspaceCreationProperties_EnableMaintenanceMode, v.EnableMaintenanceMode)
+		case schemas.WorkspaceCreationProperties_InstanceIamRoleArn:
+			v.InstanceIamRoleArn = new(string)
+			return d.ReadString(schemas.WorkspaceCreationProperties_InstanceIamRoleArn, v.InstanceIamRoleArn)
+		case schemas.WorkspaceCreationProperties_UserEnabledAsLocalAdministrator:
+			v.UserEnabledAsLocalAdministrator = new(bool)
+			return d.ReadBool(schemas.WorkspaceCreationProperties_UserEnabledAsLocalAdministrator, v.UserEnabledAsLocalAdministrator)
+		}
+		return nil
+	})
 }
 
 // Describes a directory that is used with Amazon WorkSpaces.
@@ -1720,6 +4564,226 @@ type WorkspaceDirectory struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkspaceDirectory) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkspaceDirectory)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkspaceDirectory) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveDirectoryConfig != nil {
+		s.WriteStruct(schemas.WorkspaceDirectory_ActiveDirectoryConfig)
+		v.ActiveDirectoryConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Alias != nil {
+		s.WriteString(schemas.WorkspaceDirectory_Alias, *v.Alias)
+	}
+	if v.CertificateBasedAuthProperties != nil {
+		s.WriteStruct(schemas.WorkspaceDirectory_CertificateBasedAuthProperties)
+		v.CertificateBasedAuthProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomerUserName != nil {
+		s.WriteString(schemas.WorkspaceDirectory_CustomerUserName, *v.CustomerUserName)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.WorkspaceDirectory_DirectoryId, *v.DirectoryId)
+	}
+	if v.DirectoryName != nil {
+		s.WriteString(schemas.WorkspaceDirectory_DirectoryName, *v.DirectoryName)
+	}
+	if v.DirectoryType != "" {
+		s.WriteString(schemas.WorkspaceDirectory_DirectoryType, string(v.DirectoryType))
+	}
+	serializeDnsIpAddresses(s, schemas.WorkspaceDirectory_DnsIpAddresses, v.DnsIpAddresses)
+	serializeDnsIpv6Addresses(s, schemas.WorkspaceDirectory_DnsIpv6Addresses, v.DnsIpv6Addresses)
+	if v.EndpointEncryptionMode != "" {
+		s.WriteString(schemas.WorkspaceDirectory_EndpointEncryptionMode, string(v.EndpointEncryptionMode))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.WorkspaceDirectory_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.IDCConfig != nil {
+		s.WriteStruct(schemas.WorkspaceDirectory_IDCConfig)
+		v.IDCConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IamRoleId != nil {
+		s.WriteString(schemas.WorkspaceDirectory_IamRoleId, *v.IamRoleId)
+	}
+	if v.MicrosoftEntraConfig != nil {
+		s.WriteStruct(schemas.WorkspaceDirectory_MicrosoftEntraConfig)
+		v.MicrosoftEntraConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RegistrationCode != nil {
+		s.WriteString(schemas.WorkspaceDirectory_RegistrationCode, *v.RegistrationCode)
+	}
+	if v.SamlProperties != nil {
+		s.WriteStruct(schemas.WorkspaceDirectory_SamlProperties)
+		v.SamlProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SelfservicePermissions != nil {
+		s.WriteStruct(schemas.WorkspaceDirectory_SelfservicePermissions)
+		v.SelfservicePermissions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != "" {
+		s.WriteString(schemas.WorkspaceDirectory_State, string(v.State))
+	}
+	if v.StreamingProperties != nil {
+		s.WriteStruct(schemas.WorkspaceDirectory_StreamingProperties)
+		v.StreamingProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSubnetIds(s, schemas.WorkspaceDirectory_SubnetIds, v.SubnetIds)
+	if v.Tenancy != "" {
+		s.WriteString(schemas.WorkspaceDirectory_Tenancy, string(v.Tenancy))
+	}
+	if v.UserIdentityType != "" {
+		s.WriteString(schemas.WorkspaceDirectory_UserIdentityType, string(v.UserIdentityType))
+	}
+	if v.WorkspaceAccessProperties != nil {
+		s.WriteStruct(schemas.WorkspaceDirectory_WorkspaceAccessProperties)
+		v.WorkspaceAccessProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkspaceCreationProperties != nil {
+		s.WriteStruct(schemas.WorkspaceDirectory_WorkspaceCreationProperties)
+		v.WorkspaceCreationProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkspaceDirectoryDescription != nil {
+		s.WriteString(schemas.WorkspaceDirectory_WorkspaceDirectoryDescription, *v.WorkspaceDirectoryDescription)
+	}
+	if v.WorkspaceDirectoryName != nil {
+		s.WriteString(schemas.WorkspaceDirectory_WorkspaceDirectoryName, *v.WorkspaceDirectoryName)
+	}
+	if v.WorkspaceSecurityGroupId != nil {
+		s.WriteString(schemas.WorkspaceDirectory_WorkspaceSecurityGroupId, *v.WorkspaceSecurityGroupId)
+	}
+	if v.WorkspaceType != "" {
+		s.WriteString(schemas.WorkspaceDirectory_WorkspaceType, string(v.WorkspaceType))
+	}
+	serializeIpGroupIdList(s, schemas.WorkspaceDirectory_ipGroupIds, v.IpGroupIds)
+}
+func (v *WorkspaceDirectory) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkspaceDirectory, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkspaceDirectory_ActiveDirectoryConfig:
+			v.ActiveDirectoryConfig = &ActiveDirectoryConfig{}
+			return v.ActiveDirectoryConfig.Deserialize(d)
+		case schemas.WorkspaceDirectory_Alias:
+			v.Alias = new(string)
+			return d.ReadString(schemas.WorkspaceDirectory_Alias, v.Alias)
+		case schemas.WorkspaceDirectory_CertificateBasedAuthProperties:
+			v.CertificateBasedAuthProperties = &CertificateBasedAuthProperties{}
+			return v.CertificateBasedAuthProperties.Deserialize(d)
+		case schemas.WorkspaceDirectory_CustomerUserName:
+			v.CustomerUserName = new(string)
+			return d.ReadString(schemas.WorkspaceDirectory_CustomerUserName, v.CustomerUserName)
+		case schemas.WorkspaceDirectory_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.WorkspaceDirectory_DirectoryId, v.DirectoryId)
+		case schemas.WorkspaceDirectory_DirectoryName:
+			v.DirectoryName = new(string)
+			return d.ReadString(schemas.WorkspaceDirectory_DirectoryName, v.DirectoryName)
+		case schemas.WorkspaceDirectory_DirectoryType:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceDirectory_DirectoryType, &ev); err != nil {
+				return err
+			}
+			v.DirectoryType = WorkspaceDirectoryType(ev)
+			return nil
+		case schemas.WorkspaceDirectory_DnsIpAddresses:
+			return deserializeDnsIpAddresses(d, schemas.WorkspaceDirectory_DnsIpAddresses, &v.DnsIpAddresses)
+		case schemas.WorkspaceDirectory_DnsIpv6Addresses:
+			return deserializeDnsIpv6Addresses(d, schemas.WorkspaceDirectory_DnsIpv6Addresses, &v.DnsIpv6Addresses)
+		case schemas.WorkspaceDirectory_EndpointEncryptionMode:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceDirectory_EndpointEncryptionMode, &ev); err != nil {
+				return err
+			}
+			v.EndpointEncryptionMode = EndpointEncryptionMode(ev)
+			return nil
+		case schemas.WorkspaceDirectory_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.WorkspaceDirectory_ErrorMessage, v.ErrorMessage)
+		case schemas.WorkspaceDirectory_IDCConfig:
+			v.IDCConfig = &IDCConfig{}
+			return v.IDCConfig.Deserialize(d)
+		case schemas.WorkspaceDirectory_IamRoleId:
+			v.IamRoleId = new(string)
+			return d.ReadString(schemas.WorkspaceDirectory_IamRoleId, v.IamRoleId)
+		case schemas.WorkspaceDirectory_MicrosoftEntraConfig:
+			v.MicrosoftEntraConfig = &MicrosoftEntraConfig{}
+			return v.MicrosoftEntraConfig.Deserialize(d)
+		case schemas.WorkspaceDirectory_RegistrationCode:
+			v.RegistrationCode = new(string)
+			return d.ReadString(schemas.WorkspaceDirectory_RegistrationCode, v.RegistrationCode)
+		case schemas.WorkspaceDirectory_SamlProperties:
+			v.SamlProperties = &SamlProperties{}
+			return v.SamlProperties.Deserialize(d)
+		case schemas.WorkspaceDirectory_SelfservicePermissions:
+			v.SelfservicePermissions = &SelfservicePermissions{}
+			return v.SelfservicePermissions.Deserialize(d)
+		case schemas.WorkspaceDirectory_State:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceDirectory_State, &ev); err != nil {
+				return err
+			}
+			v.State = WorkspaceDirectoryState(ev)
+			return nil
+		case schemas.WorkspaceDirectory_StreamingProperties:
+			v.StreamingProperties = &StreamingProperties{}
+			return v.StreamingProperties.Deserialize(d)
+		case schemas.WorkspaceDirectory_SubnetIds:
+			return deserializeSubnetIds(d, schemas.WorkspaceDirectory_SubnetIds, &v.SubnetIds)
+		case schemas.WorkspaceDirectory_Tenancy:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceDirectory_Tenancy, &ev); err != nil {
+				return err
+			}
+			v.Tenancy = Tenancy(ev)
+			return nil
+		case schemas.WorkspaceDirectory_UserIdentityType:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceDirectory_UserIdentityType, &ev); err != nil {
+				return err
+			}
+			v.UserIdentityType = UserIdentityType(ev)
+			return nil
+		case schemas.WorkspaceDirectory_WorkspaceAccessProperties:
+			v.WorkspaceAccessProperties = &WorkspaceAccessProperties{}
+			return v.WorkspaceAccessProperties.Deserialize(d)
+		case schemas.WorkspaceDirectory_WorkspaceCreationProperties:
+			v.WorkspaceCreationProperties = &DefaultWorkspaceCreationProperties{}
+			return v.WorkspaceCreationProperties.Deserialize(d)
+		case schemas.WorkspaceDirectory_WorkspaceDirectoryDescription:
+			v.WorkspaceDirectoryDescription = new(string)
+			return d.ReadString(schemas.WorkspaceDirectory_WorkspaceDirectoryDescription, v.WorkspaceDirectoryDescription)
+		case schemas.WorkspaceDirectory_WorkspaceDirectoryName:
+			v.WorkspaceDirectoryName = new(string)
+			return d.ReadString(schemas.WorkspaceDirectory_WorkspaceDirectoryName, v.WorkspaceDirectoryName)
+		case schemas.WorkspaceDirectory_WorkspaceSecurityGroupId:
+			v.WorkspaceSecurityGroupId = new(string)
+			return d.ReadString(schemas.WorkspaceDirectory_WorkspaceSecurityGroupId, v.WorkspaceSecurityGroupId)
+		case schemas.WorkspaceDirectory_WorkspaceType:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceDirectory_WorkspaceType, &ev); err != nil {
+				return err
+			}
+			v.WorkspaceType = WorkspaceType(ev)
+			return nil
+		case schemas.WorkspaceDirectory_ipGroupIds:
+			return deserializeIpGroupIdList(d, schemas.WorkspaceDirectory_ipGroupIds, &v.IpGroupIds)
+		}
+		return nil
+	})
+}
+
 // Describes a WorkSpace image.
 type WorkspaceImage struct {
 
@@ -1767,6 +4831,103 @@ type WorkspaceImage struct {
 	Updates *UpdateResult
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkspaceImage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkspaceImage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkspaceImage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Created != nil {
+		s.WriteTime(schemas.WorkspaceImage_Created, *v.Created)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.WorkspaceImage_Description, *v.Description)
+	}
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.WorkspaceImage_ErrorCode, *v.ErrorCode)
+	}
+	serializeErrorDetailsList(s, schemas.WorkspaceImage_ErrorDetails, v.ErrorDetails)
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.WorkspaceImage_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.ImageId != nil {
+		s.WriteString(schemas.WorkspaceImage_ImageId, *v.ImageId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.WorkspaceImage_Name, *v.Name)
+	}
+	if v.OperatingSystem != nil {
+		s.WriteStruct(schemas.WorkspaceImage_OperatingSystem)
+		v.OperatingSystem.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.WorkspaceImage_OwnerAccountId, *v.OwnerAccountId)
+	}
+	if v.RequiredTenancy != "" {
+		s.WriteString(schemas.WorkspaceImage_RequiredTenancy, string(v.RequiredTenancy))
+	}
+	if v.State != "" {
+		s.WriteString(schemas.WorkspaceImage_State, string(v.State))
+	}
+	if v.Updates != nil {
+		s.WriteStruct(schemas.WorkspaceImage_Updates)
+		v.Updates.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *WorkspaceImage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkspaceImage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkspaceImage_Created:
+			v.Created = new(time.Time)
+			return d.ReadTime(schemas.WorkspaceImage_Created, v.Created)
+		case schemas.WorkspaceImage_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.WorkspaceImage_Description, v.Description)
+		case schemas.WorkspaceImage_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.WorkspaceImage_ErrorCode, v.ErrorCode)
+		case schemas.WorkspaceImage_ErrorDetails:
+			return deserializeErrorDetailsList(d, schemas.WorkspaceImage_ErrorDetails, &v.ErrorDetails)
+		case schemas.WorkspaceImage_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.WorkspaceImage_ErrorMessage, v.ErrorMessage)
+		case schemas.WorkspaceImage_ImageId:
+			v.ImageId = new(string)
+			return d.ReadString(schemas.WorkspaceImage_ImageId, v.ImageId)
+		case schemas.WorkspaceImage_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.WorkspaceImage_Name, v.Name)
+		case schemas.WorkspaceImage_OperatingSystem:
+			v.OperatingSystem = &OperatingSystem{}
+			return v.OperatingSystem.Deserialize(d)
+		case schemas.WorkspaceImage_OwnerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.WorkspaceImage_OwnerAccountId, v.OwnerAccountId)
+		case schemas.WorkspaceImage_RequiredTenancy:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceImage_RequiredTenancy, &ev); err != nil {
+				return err
+			}
+			v.RequiredTenancy = WorkspaceImageRequiredTenancy(ev)
+			return nil
+		case schemas.WorkspaceImage_State:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceImage_State, &ev); err != nil {
+				return err
+			}
+			v.State = WorkspaceImageState(ev)
+			return nil
+		case schemas.WorkspaceImage_Updates:
+			v.Updates = &UpdateResult{}
+			return v.Updates.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes a WorkSpace.
@@ -1835,6 +4996,87 @@ type WorkspaceProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkspaceProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkspaceProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkspaceProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeTypeName != "" {
+		s.WriteString(schemas.WorkspaceProperties_ComputeTypeName, string(v.ComputeTypeName))
+	}
+	if v.GlobalAccelerator != nil {
+		s.WriteStruct(schemas.WorkspaceProperties_GlobalAccelerator)
+		v.GlobalAccelerator.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NestedVirtualizationEnabled != nil {
+		s.WriteBool(schemas.WorkspaceProperties_NestedVirtualizationEnabled, *v.NestedVirtualizationEnabled)
+	}
+	if v.OperatingSystemName != "" {
+		s.WriteString(schemas.WorkspaceProperties_OperatingSystemName, string(v.OperatingSystemName))
+	}
+	serializeProtocolList(s, schemas.WorkspaceProperties_Protocols, v.Protocols)
+	if v.RootVolumeSizeGib != nil {
+		s.WriteInt32(schemas.WorkspaceProperties_RootVolumeSizeGib, *v.RootVolumeSizeGib)
+	}
+	if v.RunningMode != "" {
+		s.WriteString(schemas.WorkspaceProperties_RunningMode, string(v.RunningMode))
+	}
+	if v.RunningModeAutoStopTimeoutInMinutes != nil {
+		s.WriteInt32(schemas.WorkspaceProperties_RunningModeAutoStopTimeoutInMinutes, *v.RunningModeAutoStopTimeoutInMinutes)
+	}
+	if v.UserVolumeSizeGib != nil {
+		s.WriteInt32(schemas.WorkspaceProperties_UserVolumeSizeGib, *v.UserVolumeSizeGib)
+	}
+}
+func (v *WorkspaceProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkspaceProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkspaceProperties_ComputeTypeName:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceProperties_ComputeTypeName, &ev); err != nil {
+				return err
+			}
+			v.ComputeTypeName = Compute(ev)
+			return nil
+		case schemas.WorkspaceProperties_GlobalAccelerator:
+			v.GlobalAccelerator = &GlobalAcceleratorForWorkSpace{}
+			return v.GlobalAccelerator.Deserialize(d)
+		case schemas.WorkspaceProperties_NestedVirtualizationEnabled:
+			v.NestedVirtualizationEnabled = new(bool)
+			return d.ReadBool(schemas.WorkspaceProperties_NestedVirtualizationEnabled, v.NestedVirtualizationEnabled)
+		case schemas.WorkspaceProperties_OperatingSystemName:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceProperties_OperatingSystemName, &ev); err != nil {
+				return err
+			}
+			v.OperatingSystemName = OperatingSystemName(ev)
+			return nil
+		case schemas.WorkspaceProperties_Protocols:
+			return deserializeProtocolList(d, schemas.WorkspaceProperties_Protocols, &v.Protocols)
+		case schemas.WorkspaceProperties_RootVolumeSizeGib:
+			v.RootVolumeSizeGib = new(int32)
+			return d.ReadInt32(schemas.WorkspaceProperties_RootVolumeSizeGib, v.RootVolumeSizeGib)
+		case schemas.WorkspaceProperties_RunningMode:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceProperties_RunningMode, &ev); err != nil {
+				return err
+			}
+			v.RunningMode = RunningMode(ev)
+			return nil
+		case schemas.WorkspaceProperties_RunningModeAutoStopTimeoutInMinutes:
+			v.RunningModeAutoStopTimeoutInMinutes = new(int32)
+			return d.ReadInt32(schemas.WorkspaceProperties_RunningModeAutoStopTimeoutInMinutes, v.RunningModeAutoStopTimeoutInMinutes)
+		case schemas.WorkspaceProperties_UserVolumeSizeGib:
+			v.UserVolumeSizeGib = new(int32)
+			return d.ReadInt32(schemas.WorkspaceProperties_UserVolumeSizeGib, v.UserVolumeSizeGib)
+		}
+		return nil
+	})
+}
+
 // Describes the information used to create a WorkSpace.
 type WorkspaceRequest struct {
 
@@ -1891,6 +5133,81 @@ type WorkspaceRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkspaceRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkspaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkspaceRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BundleId != nil {
+		s.WriteString(schemas.WorkspaceRequest_BundleId, *v.BundleId)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.WorkspaceRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.Ipv6Address != nil {
+		s.WriteString(schemas.WorkspaceRequest_Ipv6Address, *v.Ipv6Address)
+	}
+	if v.RootVolumeEncryptionEnabled != nil {
+		s.WriteBool(schemas.WorkspaceRequest_RootVolumeEncryptionEnabled, *v.RootVolumeEncryptionEnabled)
+	}
+	serializeTagList(s, schemas.WorkspaceRequest_Tags, v.Tags)
+	if v.UserName != nil {
+		s.WriteString(schemas.WorkspaceRequest_UserName, *v.UserName)
+	}
+	if v.UserVolumeEncryptionEnabled != nil {
+		s.WriteBool(schemas.WorkspaceRequest_UserVolumeEncryptionEnabled, *v.UserVolumeEncryptionEnabled)
+	}
+	if v.VolumeEncryptionKey != nil {
+		s.WriteString(schemas.WorkspaceRequest_VolumeEncryptionKey, *v.VolumeEncryptionKey)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.WorkspaceRequest_WorkspaceName, *v.WorkspaceName)
+	}
+	if v.WorkspaceProperties != nil {
+		s.WriteStruct(schemas.WorkspaceRequest_WorkspaceProperties)
+		v.WorkspaceProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *WorkspaceRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkspaceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkspaceRequest_BundleId:
+			v.BundleId = new(string)
+			return d.ReadString(schemas.WorkspaceRequest_BundleId, v.BundleId)
+		case schemas.WorkspaceRequest_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.WorkspaceRequest_DirectoryId, v.DirectoryId)
+		case schemas.WorkspaceRequest_Ipv6Address:
+			v.Ipv6Address = new(string)
+			return d.ReadString(schemas.WorkspaceRequest_Ipv6Address, v.Ipv6Address)
+		case schemas.WorkspaceRequest_RootVolumeEncryptionEnabled:
+			v.RootVolumeEncryptionEnabled = new(bool)
+			return d.ReadBool(schemas.WorkspaceRequest_RootVolumeEncryptionEnabled, v.RootVolumeEncryptionEnabled)
+		case schemas.WorkspaceRequest_Tags:
+			return deserializeTagList(d, schemas.WorkspaceRequest_Tags, &v.Tags)
+		case schemas.WorkspaceRequest_UserName:
+			v.UserName = new(string)
+			return d.ReadString(schemas.WorkspaceRequest_UserName, v.UserName)
+		case schemas.WorkspaceRequest_UserVolumeEncryptionEnabled:
+			v.UserVolumeEncryptionEnabled = new(bool)
+			return d.ReadBool(schemas.WorkspaceRequest_UserVolumeEncryptionEnabled, v.UserVolumeEncryptionEnabled)
+		case schemas.WorkspaceRequest_VolumeEncryptionKey:
+			v.VolumeEncryptionKey = new(string)
+			return d.ReadString(schemas.WorkspaceRequest_VolumeEncryptionKey, v.VolumeEncryptionKey)
+		case schemas.WorkspaceRequest_WorkspaceName:
+			v.WorkspaceName = new(string)
+			return d.ReadString(schemas.WorkspaceRequest_WorkspaceName, v.WorkspaceName)
+		case schemas.WorkspaceRequest_WorkspaceProperties:
+			v.WorkspaceProperties = &WorkspaceProperties{}
+			return v.WorkspaceProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes the association between an application and a WorkSpace resource.
 type WorkspaceResourceAssociation struct {
 
@@ -1918,6 +5235,74 @@ type WorkspaceResourceAssociation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkspaceResourceAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkspaceResourceAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkspaceResourceAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedResourceId != nil {
+		s.WriteString(schemas.WorkspaceResourceAssociation_AssociatedResourceId, *v.AssociatedResourceId)
+	}
+	if v.AssociatedResourceType != "" {
+		s.WriteString(schemas.WorkspaceResourceAssociation_AssociatedResourceType, string(v.AssociatedResourceType))
+	}
+	if v.Created != nil {
+		s.WriteTime(schemas.WorkspaceResourceAssociation_Created, *v.Created)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.WorkspaceResourceAssociation_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.WorkspaceResourceAssociation_State, string(v.State))
+	}
+	if v.StateReason != nil {
+		s.WriteStruct(schemas.WorkspaceResourceAssociation_StateReason)
+		v.StateReason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.WorkspaceResourceAssociation_WorkspaceId, *v.WorkspaceId)
+	}
+}
+func (v *WorkspaceResourceAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkspaceResourceAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkspaceResourceAssociation_AssociatedResourceId:
+			v.AssociatedResourceId = new(string)
+			return d.ReadString(schemas.WorkspaceResourceAssociation_AssociatedResourceId, v.AssociatedResourceId)
+		case schemas.WorkspaceResourceAssociation_AssociatedResourceType:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceResourceAssociation_AssociatedResourceType, &ev); err != nil {
+				return err
+			}
+			v.AssociatedResourceType = WorkSpaceAssociatedResourceType(ev)
+			return nil
+		case schemas.WorkspaceResourceAssociation_Created:
+			v.Created = new(time.Time)
+			return d.ReadTime(schemas.WorkspaceResourceAssociation_Created, v.Created)
+		case schemas.WorkspaceResourceAssociation_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.WorkspaceResourceAssociation_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.WorkspaceResourceAssociation_State:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceResourceAssociation_State, &ev); err != nil {
+				return err
+			}
+			v.State = AssociationState(ev)
+			return nil
+		case schemas.WorkspaceResourceAssociation_StateReason:
+			v.StateReason = &AssociationStateReason{}
+			return v.StateReason.Deserialize(d)
+		case schemas.WorkspaceResourceAssociation_WorkspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.WorkspaceResourceAssociation_WorkspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 // Describes an IP access control group.
 type WorkspacesIpGroup struct {
 
@@ -1934,6 +5319,43 @@ type WorkspacesIpGroup struct {
 	UserRules []IpRuleItem
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkspacesIpGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkspacesIpGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkspacesIpGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupDesc != nil {
+		s.WriteString(schemas.WorkspacesIpGroup_groupDesc, *v.GroupDesc)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.WorkspacesIpGroup_groupId, *v.GroupId)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.WorkspacesIpGroup_groupName, *v.GroupName)
+	}
+	serializeIpRuleList(s, schemas.WorkspacesIpGroup_userRules, v.UserRules)
+}
+func (v *WorkspacesIpGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkspacesIpGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkspacesIpGroup_groupDesc:
+			v.GroupDesc = new(string)
+			return d.ReadString(schemas.WorkspacesIpGroup_groupDesc, v.GroupDesc)
+		case schemas.WorkspacesIpGroup_groupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.WorkspacesIpGroup_groupId, v.GroupId)
+		case schemas.WorkspacesIpGroup_groupName:
+			v.GroupName = new(string)
+			return d.ReadString(schemas.WorkspacesIpGroup_groupName, v.GroupName)
+		case schemas.WorkspacesIpGroup_userRules:
+			return deserializeIpRuleList(d, schemas.WorkspacesIpGroup_userRules, &v.UserRules)
+		}
+		return nil
+	})
 }
 
 // Describes a pool of WorkSpaces.
@@ -2003,6 +5425,111 @@ type WorkspacesPool struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkspacesPool) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkspacesPool)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkspacesPool) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationSettings != nil {
+		s.WriteStruct(schemas.WorkspacesPool_ApplicationSettings)
+		v.ApplicationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BundleId != nil {
+		s.WriteString(schemas.WorkspacesPool_BundleId, *v.BundleId)
+	}
+	if v.CapacityStatus != nil {
+		s.WriteStruct(schemas.WorkspacesPool_CapacityStatus)
+		v.CapacityStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.WorkspacesPool_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.WorkspacesPool_Description, *v.Description)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.WorkspacesPool_DirectoryId, *v.DirectoryId)
+	}
+	serializeWorkspacesPoolErrors(s, schemas.WorkspacesPool_Errors, v.Errors)
+	if v.PoolArn != nil {
+		s.WriteString(schemas.WorkspacesPool_PoolArn, *v.PoolArn)
+	}
+	if v.PoolId != nil {
+		s.WriteString(schemas.WorkspacesPool_PoolId, *v.PoolId)
+	}
+	if v.PoolName != nil {
+		s.WriteString(schemas.WorkspacesPool_PoolName, *v.PoolName)
+	}
+	if v.RunningMode != "" {
+		s.WriteString(schemas.WorkspacesPool_RunningMode, string(v.RunningMode))
+	}
+	if v.State != "" {
+		s.WriteString(schemas.WorkspacesPool_State, string(v.State))
+	}
+	if v.TimeoutSettings != nil {
+		s.WriteStruct(schemas.WorkspacesPool_TimeoutSettings)
+		v.TimeoutSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *WorkspacesPool) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkspacesPool, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkspacesPool_ApplicationSettings:
+			v.ApplicationSettings = &ApplicationSettingsResponse{}
+			return v.ApplicationSettings.Deserialize(d)
+		case schemas.WorkspacesPool_BundleId:
+			v.BundleId = new(string)
+			return d.ReadString(schemas.WorkspacesPool_BundleId, v.BundleId)
+		case schemas.WorkspacesPool_CapacityStatus:
+			v.CapacityStatus = &CapacityStatus{}
+			return v.CapacityStatus.Deserialize(d)
+		case schemas.WorkspacesPool_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.WorkspacesPool_CreatedAt, v.CreatedAt)
+		case schemas.WorkspacesPool_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.WorkspacesPool_Description, v.Description)
+		case schemas.WorkspacesPool_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.WorkspacesPool_DirectoryId, v.DirectoryId)
+		case schemas.WorkspacesPool_Errors:
+			return deserializeWorkspacesPoolErrors(d, schemas.WorkspacesPool_Errors, &v.Errors)
+		case schemas.WorkspacesPool_PoolArn:
+			v.PoolArn = new(string)
+			return d.ReadString(schemas.WorkspacesPool_PoolArn, v.PoolArn)
+		case schemas.WorkspacesPool_PoolId:
+			v.PoolId = new(string)
+			return d.ReadString(schemas.WorkspacesPool_PoolId, v.PoolId)
+		case schemas.WorkspacesPool_PoolName:
+			v.PoolName = new(string)
+			return d.ReadString(schemas.WorkspacesPool_PoolName, v.PoolName)
+		case schemas.WorkspacesPool_RunningMode:
+			var ev string
+			if err := d.ReadString(schemas.WorkspacesPool_RunningMode, &ev); err != nil {
+				return err
+			}
+			v.RunningMode = PoolsRunningMode(ev)
+			return nil
+		case schemas.WorkspacesPool_State:
+			var ev string
+			if err := d.ReadString(schemas.WorkspacesPool_State, &ev); err != nil {
+				return err
+			}
+			v.State = WorkspacesPoolState(ev)
+			return nil
+		case schemas.WorkspacesPool_TimeoutSettings:
+			v.TimeoutSettings = &TimeoutSettings{}
+			return v.TimeoutSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes a pool error.
 type WorkspacesPoolError struct {
 
@@ -2013,6 +5540,38 @@ type WorkspacesPoolError struct {
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkspacesPoolError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkspacesPoolError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkspacesPoolError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.WorkspacesPoolError_ErrorCode, string(v.ErrorCode))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.WorkspacesPoolError_ErrorMessage, *v.ErrorMessage)
+	}
+}
+func (v *WorkspacesPoolError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkspacesPoolError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkspacesPoolError_ErrorCode:
+			var ev string
+			if err := d.ReadString(schemas.WorkspacesPoolError_ErrorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode = WorkspacesPoolErrorCode(ev)
+			return nil
+		case schemas.WorkspacesPoolError_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.WorkspacesPoolError_ErrorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
 }
 
 // Describes a pool session.
@@ -2053,6 +5612,86 @@ type WorkspacesPoolSession struct {
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkspacesPoolSession) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkspacesPoolSession)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkspacesPoolSession) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationType != "" {
+		s.WriteString(schemas.WorkspacesPoolSession_AuthenticationType, string(v.AuthenticationType))
+	}
+	if v.ConnectionState != "" {
+		s.WriteString(schemas.WorkspacesPoolSession_ConnectionState, string(v.ConnectionState))
+	}
+	if v.ExpirationTime != nil {
+		s.WriteTime(schemas.WorkspacesPoolSession_ExpirationTime, *v.ExpirationTime)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.WorkspacesPoolSession_InstanceId, *v.InstanceId)
+	}
+	if v.NetworkAccessConfiguration != nil {
+		s.WriteStruct(schemas.WorkspacesPoolSession_NetworkAccessConfiguration)
+		v.NetworkAccessConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PoolId != nil {
+		s.WriteString(schemas.WorkspacesPoolSession_PoolId, *v.PoolId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.WorkspacesPoolSession_SessionId, *v.SessionId)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.WorkspacesPoolSession_StartTime, *v.StartTime)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.WorkspacesPoolSession_UserId, *v.UserId)
+	}
+}
+func (v *WorkspacesPoolSession) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkspacesPoolSession, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkspacesPoolSession_AuthenticationType:
+			var ev string
+			if err := d.ReadString(schemas.WorkspacesPoolSession_AuthenticationType, &ev); err != nil {
+				return err
+			}
+			v.AuthenticationType = AuthenticationType(ev)
+			return nil
+		case schemas.WorkspacesPoolSession_ConnectionState:
+			var ev string
+			if err := d.ReadString(schemas.WorkspacesPoolSession_ConnectionState, &ev); err != nil {
+				return err
+			}
+			v.ConnectionState = SessionConnectionState(ev)
+			return nil
+		case schemas.WorkspacesPoolSession_ExpirationTime:
+			v.ExpirationTime = new(time.Time)
+			return d.ReadTime(schemas.WorkspacesPoolSession_ExpirationTime, v.ExpirationTime)
+		case schemas.WorkspacesPoolSession_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.WorkspacesPoolSession_InstanceId, v.InstanceId)
+		case schemas.WorkspacesPoolSession_NetworkAccessConfiguration:
+			v.NetworkAccessConfiguration = &NetworkAccessConfiguration{}
+			return v.NetworkAccessConfiguration.Deserialize(d)
+		case schemas.WorkspacesPoolSession_PoolId:
+			v.PoolId = new(string)
+			return d.ReadString(schemas.WorkspacesPoolSession_PoolId, v.PoolId)
+		case schemas.WorkspacesPoolSession_SessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.WorkspacesPoolSession_SessionId, v.SessionId)
+		case schemas.WorkspacesPoolSession_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.WorkspacesPoolSession_StartTime, v.StartTime)
+		case schemas.WorkspacesPoolSession_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.WorkspacesPoolSession_UserId, v.UserId)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

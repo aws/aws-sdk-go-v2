@@ -5,7 +5,9 @@ package route53resolver
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,22 @@ type ListResolverEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResolverEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResolverEndpointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResolverEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilters(s, schemas.ListResolverEndpointsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResolverEndpointsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResolverEndpointsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListResolverEndpointsOutput struct {
 
 	// The value that you specified for MaxResults in the request.
@@ -71,13 +89,41 @@ type ListResolverEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResolverEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResolverEndpointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResolverEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResolverEndpointsResponse_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResolverEndpointsResponse_NextToken, *v.NextToken)
+	}
+	serializeResolverEndpoints(s, schemas.ListResolverEndpointsResponse_ResolverEndpoints, v.ResolverEndpoints)
+}
+func (v *ListResolverEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResolverEndpointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResolverEndpointsResponse_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListResolverEndpointsResponse_MaxResults, v.MaxResults)
+		case schemas.ListResolverEndpointsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResolverEndpointsResponse_NextToken, v.NextToken)
+		case schemas.ListResolverEndpointsResponse_ResolverEndpoints:
+			return deserializeResolverEndpoints(d, schemas.ListResolverEndpointsResponse_ResolverEndpoints, &v.ResolverEndpoints)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResolverEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResolverEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResolverEndpoints, schemas.ListResolverEndpointsRequest, schemas.ListResolverEndpointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListResolverEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResolverEndpoints, schemas.ListResolverEndpointsRequest, schemas.ListResolverEndpointsResponse), output: &ListResolverEndpointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,16 @@ type BatchAssociateUserStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateUserStackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateUserStackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateUserStackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUserStackAssociationList(s, schemas.BatchAssociateUserStackRequest_UserStackAssociations, v.UserStackAssociations)
+}
+
 type BatchAssociateUserStackOutput struct {
 
 	// The list of UserStackAssociationError objects.
@@ -47,13 +59,29 @@ type BatchAssociateUserStackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateUserStackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateUserStackResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateUserStackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUserStackAssociationErrorList(s, schemas.BatchAssociateUserStackResult_errors, v.Errors)
+}
+func (v *BatchAssociateUserStackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAssociateUserStackResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAssociateUserStackResult_errors:
+			return deserializeUserStackAssociationErrorList(d, schemas.BatchAssociateUserStackResult_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchAssociateUserStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpBatchAssociateUserStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateUserStack, schemas.BatchAssociateUserStackRequest, schemas.BatchAssociateUserStackResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpBatchAssociateUserStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateUserStack, schemas.BatchAssociateUserStackRequest, schemas.BatchAssociateUserStackResult), output: &BatchAssociateUserStackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

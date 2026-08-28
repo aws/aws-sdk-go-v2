@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,36 @@ type SearchAvailablePhoneNumbersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchAvailablePhoneNumbersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchAvailablePhoneNumbersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchAvailablePhoneNumbersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SearchAvailablePhoneNumbersRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchAvailablePhoneNumbersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchAvailablePhoneNumbersRequest_NextToken, *v.NextToken)
+	}
+	if v.PhoneNumberCountryCode != "" {
+		s.WriteString(schemas.SearchAvailablePhoneNumbersRequest_PhoneNumberCountryCode, string(v.PhoneNumberCountryCode))
+	}
+	if v.PhoneNumberPrefix != nil {
+		s.WriteString(schemas.SearchAvailablePhoneNumbersRequest_PhoneNumberPrefix, *v.PhoneNumberPrefix)
+	}
+	if v.PhoneNumberType != "" {
+		s.WriteString(schemas.SearchAvailablePhoneNumbersRequest_PhoneNumberType, string(v.PhoneNumberType))
+	}
+	if v.TargetArn != nil {
+		s.WriteString(schemas.SearchAvailablePhoneNumbersRequest_TargetArn, *v.TargetArn)
+	}
+}
+
 type SearchAvailablePhoneNumbersOutput struct {
 
 	// A list of available phone numbers that you can claim to your Connect Customer
@@ -81,13 +113,35 @@ type SearchAvailablePhoneNumbersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchAvailablePhoneNumbersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchAvailablePhoneNumbersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchAvailablePhoneNumbersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAvailableNumbersList(s, schemas.SearchAvailablePhoneNumbersResponse_AvailableNumbersList, v.AvailableNumbersList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchAvailablePhoneNumbersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *SearchAvailablePhoneNumbersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchAvailablePhoneNumbersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchAvailablePhoneNumbersResponse_AvailableNumbersList:
+			return deserializeAvailableNumbersList(d, schemas.SearchAvailablePhoneNumbersResponse_AvailableNumbersList, &v.AvailableNumbersList)
+		case schemas.SearchAvailablePhoneNumbersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchAvailablePhoneNumbersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchAvailablePhoneNumbersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchAvailablePhoneNumbers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchAvailablePhoneNumbers, schemas.SearchAvailablePhoneNumbersRequest, schemas.SearchAvailablePhoneNumbersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchAvailablePhoneNumbers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchAvailablePhoneNumbers, schemas.SearchAvailablePhoneNumbersRequest, schemas.SearchAvailablePhoneNumbersResponse), output: &SearchAvailablePhoneNumbersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

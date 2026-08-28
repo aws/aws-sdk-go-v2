@@ -4,7 +4,9 @@ package athena
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,32 @@ type StartCalculationExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCalculationExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCalculationExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCalculationExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CalculationConfiguration != nil {
+		s.WriteStruct(schemas.StartCalculationExecutionRequest_CalculationConfiguration)
+		v.CalculationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartCalculationExecutionRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.CodeBlock != nil {
+		s.WriteString(schemas.StartCalculationExecutionRequest_CodeBlock, *v.CodeBlock)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.StartCalculationExecutionRequest_Description, *v.Description)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.StartCalculationExecutionRequest_SessionId, *v.SessionId)
+	}
+}
+
 type StartCalculationExecutionOutput struct {
 
 	// The calculation execution UUID.
@@ -92,13 +120,42 @@ type StartCalculationExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCalculationExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCalculationExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCalculationExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CalculationExecutionId != nil {
+		s.WriteString(schemas.StartCalculationExecutionResponse_CalculationExecutionId, *v.CalculationExecutionId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.StartCalculationExecutionResponse_State, string(v.State))
+	}
+}
+func (v *StartCalculationExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartCalculationExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartCalculationExecutionResponse_CalculationExecutionId:
+			v.CalculationExecutionId = new(string)
+			return d.ReadString(schemas.StartCalculationExecutionResponse_CalculationExecutionId, v.CalculationExecutionId)
+		case schemas.StartCalculationExecutionResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.StartCalculationExecutionResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.CalculationExecutionState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartCalculationExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartCalculationExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCalculationExecution, schemas.StartCalculationExecutionRequest, schemas.StartCalculationExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartCalculationExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCalculationExecution, schemas.StartCalculationExecutionRequest, schemas.StartCalculationExecutionResponse), output: &StartCalculationExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

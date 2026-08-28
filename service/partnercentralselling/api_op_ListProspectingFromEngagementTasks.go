@@ -5,7 +5,9 @@ package partnercentralselling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -75,6 +77,37 @@ type ListProspectingFromEngagementTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProspectingFromEngagementTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProspectingFromEngagementTasksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProspectingFromEngagementTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.ListProspectingFromEngagementTasksRequest_Catalog, *v.Catalog)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProspectingFromEngagementTasksRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProspectingFromEngagementTasksRequest_NextToken, *v.NextToken)
+	}
+	if v.Sort != nil {
+		s.WriteStruct(schemas.ListProspectingFromEngagementTasksRequest_Sort)
+		v.Sort.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartAfter != nil {
+		s.WriteTime(schemas.ListProspectingFromEngagementTasksRequest_StartAfter, *v.StartAfter)
+	}
+	if v.StartBefore != nil {
+		s.WriteTime(schemas.ListProspectingFromEngagementTasksRequest_StartBefore, *v.StartBefore)
+	}
+	serializeTaskIdentifierList(s, schemas.ListProspectingFromEngagementTasksRequest_TaskIdentifier, v.TaskIdentifier)
+	serializeTaskNameList(s, schemas.ListProspectingFromEngagementTasksRequest_TaskName, v.TaskName)
+}
+
 // Represents the response structure containing a paginated list of prospecting
 // task summaries matching the request filters. Indicates through NextToken when
 // additional results are available.
@@ -98,13 +131,35 @@ type ListProspectingFromEngagementTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProspectingFromEngagementTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProspectingFromEngagementTasksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProspectingFromEngagementTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProspectingFromEngagementTasksResponse_NextToken, *v.NextToken)
+	}
+	serializeProspectingTaskSummaryList(s, schemas.ListProspectingFromEngagementTasksResponse_TaskSummaries, v.TaskSummaries)
+}
+func (v *ListProspectingFromEngagementTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProspectingFromEngagementTasksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProspectingFromEngagementTasksResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProspectingFromEngagementTasksResponse_NextToken, v.NextToken)
+		case schemas.ListProspectingFromEngagementTasksResponse_TaskSummaries:
+			return deserializeProspectingTaskSummaryList(d, schemas.ListProspectingFromEngagementTasksResponse_TaskSummaries, &v.TaskSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProspectingFromEngagementTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListProspectingFromEngagementTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProspectingFromEngagementTasks, schemas.ListProspectingFromEngagementTasksRequest, schemas.ListProspectingFromEngagementTasksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListProspectingFromEngagementTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProspectingFromEngagementTasks, schemas.ListProspectingFromEngagementTasksRequest, schemas.ListProspectingFromEngagementTasksResponse), output: &ListProspectingFromEngagementTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

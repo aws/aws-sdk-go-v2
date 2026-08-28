@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DescribeBatchInferenceJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBatchInferenceJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBatchInferenceJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBatchInferenceJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchInferenceJobArn != nil {
+		s.WriteString(schemas.DescribeBatchInferenceJobRequest_batchInferenceJobArn, *v.BatchInferenceJobArn)
+	}
+}
+
 type DescribeBatchInferenceJobOutput struct {
 
 	// Information on the specified batch inference job.
@@ -47,13 +61,34 @@ type DescribeBatchInferenceJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBatchInferenceJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBatchInferenceJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBatchInferenceJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchInferenceJob != nil {
+		s.WriteStruct(schemas.DescribeBatchInferenceJobResponse_batchInferenceJob)
+		v.BatchInferenceJob.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeBatchInferenceJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeBatchInferenceJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeBatchInferenceJobResponse_batchInferenceJob:
+			v.BatchInferenceJob = &types.BatchInferenceJob{}
+			return v.BatchInferenceJob.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeBatchInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeBatchInferenceJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBatchInferenceJob, schemas.DescribeBatchInferenceJobRequest, schemas.DescribeBatchInferenceJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeBatchInferenceJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBatchInferenceJob, schemas.DescribeBatchInferenceJobRequest, schemas.DescribeBatchInferenceJobResponse), output: &DescribeBatchInferenceJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

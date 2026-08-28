@@ -4,7 +4,9 @@ package m2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/m2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/m2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,43 @@ type UpdateApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.UpdateApplicationRequest_applicationId, *v.ApplicationId)
+	}
+	if v.CurrentApplicationVersion != nil {
+		s.WriteInt32(schemas.UpdateApplicationRequest_currentApplicationVersion, *v.CurrentApplicationVersion)
+	}
+	serializeDefinition(s, schemas.UpdateApplicationRequest_definition, v.Definition)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateApplicationRequest_description, *v.Description)
+	}
+}
+func (v *UpdateApplicationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateApplicationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateApplicationRequest_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.UpdateApplicationRequest_applicationId, v.ApplicationId)
+		case schemas.UpdateApplicationRequest_currentApplicationVersion:
+			v.CurrentApplicationVersion = new(int32)
+			return d.ReadInt32(schemas.UpdateApplicationRequest_currentApplicationVersion, v.CurrentApplicationVersion)
+		case schemas.UpdateApplicationRequest_definition:
+			return deserializeDefinition(d, schemas.UpdateApplicationRequest_definition, &v.Definition)
+		case schemas.UpdateApplicationRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateApplicationRequest_description, v.Description)
+		}
+		return nil
+	})
+}
+
 type UpdateApplicationOutput struct {
 
 	// The new version of the application.
@@ -59,13 +98,32 @@ type UpdateApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationVersion != nil {
+		s.WriteInt32(schemas.UpdateApplicationResponse_applicationVersion, *v.ApplicationVersion)
+	}
+}
+func (v *UpdateApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateApplicationResponse_applicationVersion:
+			v.ApplicationVersion = new(int32)
+			return d.ReadInt32(schemas.UpdateApplicationResponse_applicationVersion, v.ApplicationVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplication, schemas.UpdateApplicationRequest, schemas.UpdateApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplication, schemas.UpdateApplicationRequest, schemas.UpdateApplicationResponse), output: &UpdateApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

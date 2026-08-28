@@ -4,6 +4,8 @@ package cognitoidentity
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,19 @@ type GetOpenIdTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOpenIdTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOpenIdTokenInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOpenIdTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityId != nil {
+		s.WriteString(schemas.GetOpenIdTokenInput_IdentityId, *v.IdentityId)
+	}
+	serializeLoginsMap(s, schemas.GetOpenIdTokenInput_Logins, v.Logins)
+}
+
 // Returned in response to a successful GetOpenIdToken request.
 type GetOpenIdTokenOutput struct {
 
@@ -63,13 +78,38 @@ type GetOpenIdTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOpenIdTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOpenIdTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOpenIdTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityId != nil {
+		s.WriteString(schemas.GetOpenIdTokenResponse_IdentityId, *v.IdentityId)
+	}
+	if v.Token != nil {
+		s.WriteString(schemas.GetOpenIdTokenResponse_Token, *v.Token)
+	}
+}
+func (v *GetOpenIdTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOpenIdTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOpenIdTokenResponse_IdentityId:
+			v.IdentityId = new(string)
+			return d.ReadString(schemas.GetOpenIdTokenResponse_IdentityId, v.IdentityId)
+		case schemas.GetOpenIdTokenResponse_Token:
+			v.Token = new(string)
+			return d.ReadString(schemas.GetOpenIdTokenResponse_Token, v.Token)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOpenIdTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetOpenIdToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOpenIdToken, schemas.GetOpenIdTokenInput, schemas.GetOpenIdTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetOpenIdToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOpenIdToken, schemas.GetOpenIdTokenInput, schemas.GetOpenIdTokenResponse), output: &GetOpenIdTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

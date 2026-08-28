@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,27 @@ type StopBotRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopBotRecommendationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopBotRecommendationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopBotRecommendationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.StopBotRecommendationRequest_botId, *v.BotId)
+	}
+	if v.BotRecommendationId != nil {
+		s.WriteString(schemas.StopBotRecommendationRequest_botRecommendationId, *v.BotRecommendationId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.StopBotRecommendationRequest_botVersion, *v.BotVersion)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.StopBotRecommendationRequest_localeId, *v.LocaleId)
+	}
+}
+
 type StopBotRecommendationOutput struct {
 
 	// The unique identifier of the bot containing the bot recommendation that is
@@ -81,13 +104,60 @@ type StopBotRecommendationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopBotRecommendationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopBotRecommendationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopBotRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.StopBotRecommendationResponse_botId, *v.BotId)
+	}
+	if v.BotRecommendationId != nil {
+		s.WriteString(schemas.StopBotRecommendationResponse_botRecommendationId, *v.BotRecommendationId)
+	}
+	if v.BotRecommendationStatus != "" {
+		s.WriteString(schemas.StopBotRecommendationResponse_botRecommendationStatus, string(v.BotRecommendationStatus))
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.StopBotRecommendationResponse_botVersion, *v.BotVersion)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.StopBotRecommendationResponse_localeId, *v.LocaleId)
+	}
+}
+func (v *StopBotRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopBotRecommendationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopBotRecommendationResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.StopBotRecommendationResponse_botId, v.BotId)
+		case schemas.StopBotRecommendationResponse_botRecommendationId:
+			v.BotRecommendationId = new(string)
+			return d.ReadString(schemas.StopBotRecommendationResponse_botRecommendationId, v.BotRecommendationId)
+		case schemas.StopBotRecommendationResponse_botRecommendationStatus:
+			var ev string
+			if err := d.ReadString(schemas.StopBotRecommendationResponse_botRecommendationStatus, &ev); err != nil {
+				return err
+			}
+			v.BotRecommendationStatus = types.BotRecommendationStatus(ev)
+			return nil
+		case schemas.StopBotRecommendationResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.StopBotRecommendationResponse_botVersion, v.BotVersion)
+		case schemas.StopBotRecommendationResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.StopBotRecommendationResponse_localeId, v.LocaleId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopBotRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopBotRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopBotRecommendation, schemas.StopBotRecommendationRequest, schemas.StopBotRecommendationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopBotRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopBotRecommendation, schemas.StopBotRecommendationRequest, schemas.StopBotRecommendationResponse), output: &StopBotRecommendationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

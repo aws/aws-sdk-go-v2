@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,21 @@ type DescribeContactFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeContactFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeContactFlowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeContactFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactFlowId != nil {
+		s.WriteString(schemas.DescribeContactFlowRequest_ContactFlowId, *v.ContactFlowId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeContactFlowRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DescribeContactFlowOutput struct {
 
 	// Information about the flow.
@@ -65,13 +82,34 @@ type DescribeContactFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeContactFlowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeContactFlowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeContactFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactFlow != nil {
+		s.WriteStruct(schemas.DescribeContactFlowResponse_ContactFlow)
+		v.ContactFlow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeContactFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeContactFlowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeContactFlowResponse_ContactFlow:
+			v.ContactFlow = &types.ContactFlow{}
+			return v.ContactFlow.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeContactFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeContactFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeContactFlow, schemas.DescribeContactFlowRequest, schemas.DescribeContactFlowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeContactFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeContactFlow, schemas.DescribeContactFlowRequest, schemas.DescribeContactFlowResponse), output: &DescribeContactFlowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

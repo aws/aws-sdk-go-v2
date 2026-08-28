@@ -5,7 +5,9 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,26 @@ type CreateProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProfileInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateProfileInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ProfileDescription != nil {
+		s.WriteString(schemas.CreateProfileInput_ProfileDescription, *v.ProfileDescription)
+	}
+	if v.ProfileName != nil {
+		s.WriteString(schemas.CreateProfileInput_ProfileName, *v.ProfileName)
+	}
+	serializeProfileQuestionUpdates(s, schemas.CreateProfileInput_ProfileQuestions, v.ProfileQuestions)
+	serializeTagMap(s, schemas.CreateProfileInput_Tags, v.Tags)
+}
+
 type CreateProfileOutput struct {
 
 	// The profile ARN.
@@ -78,13 +100,38 @@ type CreateProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProfileOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfileArn != nil {
+		s.WriteString(schemas.CreateProfileOutput_ProfileArn, *v.ProfileArn)
+	}
+	if v.ProfileVersion != nil {
+		s.WriteString(schemas.CreateProfileOutput_ProfileVersion, *v.ProfileVersion)
+	}
+}
+func (v *CreateProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProfileOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProfileOutput_ProfileArn:
+			v.ProfileArn = new(string)
+			return d.ReadString(schemas.CreateProfileOutput_ProfileArn, v.ProfileArn)
+		case schemas.CreateProfileOutput_ProfileVersion:
+			v.ProfileVersion = new(string)
+			return d.ReadString(schemas.CreateProfileOutput_ProfileVersion, v.ProfileVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProfile, schemas.CreateProfileInput, schemas.CreateProfileOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProfile, schemas.CreateProfileInput, schemas.CreateProfileOutput), output: &CreateProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

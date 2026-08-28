@@ -5,7 +5,9 @@ package ecrpublic
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ecrpublic/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecrpublic/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,25 @@ type DescribeRepositoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRepositoriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRepositoriesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRepositoriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeRepositoriesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRepositoriesRequest_nextToken, *v.NextToken)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.DescribeRepositoriesRequest_registryId, *v.RegistryId)
+	}
+	serializeRepositoryNameList(s, schemas.DescribeRepositoriesRequest_repositoryNames, v.RepositoryNames)
+}
+
 type DescribeRepositoriesOutput struct {
 
 	// The nextToken value to include in a future DescribeRepositories request. When
@@ -78,13 +99,35 @@ type DescribeRepositoriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRepositoriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRepositoriesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRepositoriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRepositoriesResponse_nextToken, *v.NextToken)
+	}
+	serializeRepositoryList(s, schemas.DescribeRepositoriesResponse_repositories, v.Repositories)
+}
+func (v *DescribeRepositoriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRepositoriesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRepositoriesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeRepositoriesResponse_nextToken, v.NextToken)
+		case schemas.DescribeRepositoriesResponse_repositories:
+			return deserializeRepositoryList(d, schemas.DescribeRepositoriesResponse_repositories, &v.Repositories)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRepositoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRepositories{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRepositories, schemas.DescribeRepositoriesRequest, schemas.DescribeRepositoriesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeRepositories{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRepositories, schemas.DescribeRepositoriesRequest, schemas.DescribeRepositoriesResponse), output: &DescribeRepositoriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

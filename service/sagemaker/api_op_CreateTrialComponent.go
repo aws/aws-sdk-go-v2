@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -90,6 +92,41 @@ type CreateTrialComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTrialComponentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTrialComponentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTrialComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateTrialComponentRequest_DisplayName, *v.DisplayName)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.CreateTrialComponentRequest_EndTime, *v.EndTime)
+	}
+	serializeTrialComponentArtifacts(s, schemas.CreateTrialComponentRequest_InputArtifacts, v.InputArtifacts)
+	if v.MetadataProperties != nil {
+		s.WriteStruct(schemas.CreateTrialComponentRequest_MetadataProperties)
+		v.MetadataProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTrialComponentArtifacts(s, schemas.CreateTrialComponentRequest_OutputArtifacts, v.OutputArtifacts)
+	serializeTrialComponentParameters(s, schemas.CreateTrialComponentRequest_Parameters, v.Parameters)
+	if v.StartTime != nil {
+		s.WriteTime(schemas.CreateTrialComponentRequest_StartTime, *v.StartTime)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.CreateTrialComponentRequest_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateTrialComponentRequest_Tags, v.Tags)
+	if v.TrialComponentName != nil {
+		s.WriteString(schemas.CreateTrialComponentRequest_TrialComponentName, *v.TrialComponentName)
+	}
+}
+
 type CreateTrialComponentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the trial component.
@@ -101,13 +138,32 @@ type CreateTrialComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTrialComponentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTrialComponentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTrialComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrialComponentArn != nil {
+		s.WriteString(schemas.CreateTrialComponentResponse_TrialComponentArn, *v.TrialComponentArn)
+	}
+}
+func (v *CreateTrialComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTrialComponentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTrialComponentResponse_TrialComponentArn:
+			v.TrialComponentArn = new(string)
+			return d.ReadString(schemas.CreateTrialComponentResponse_TrialComponentArn, v.TrialComponentArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTrialComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTrialComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrialComponent, schemas.CreateTrialComponentRequest, schemas.CreateTrialComponentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateTrialComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrialComponent, schemas.CreateTrialComponentRequest, schemas.CreateTrialComponentResponse), output: &CreateTrialComponentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

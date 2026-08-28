@@ -4,7 +4,9 @@ package paymentcryptographydata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -83,6 +85,20 @@ type TranslateKeyMaterialInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TranslateKeyMaterialInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TranslateKeyMaterialInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TranslateKeyMaterialInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIncomingKeyMaterial(s, schemas.TranslateKeyMaterialInput_IncomingKeyMaterial, v.IncomingKeyMaterial)
+	if v.KeyCheckValueAlgorithm != "" {
+		s.WriteString(schemas.TranslateKeyMaterialInput_KeyCheckValueAlgorithm, string(v.KeyCheckValueAlgorithm))
+	}
+	serializeOutgoingKeyMaterial(s, schemas.TranslateKeyMaterialInput_OutgoingKeyMaterial, v.OutgoingKeyMaterial)
+}
+
 type TranslateKeyMaterialOutput struct {
 
 	// The outgoing KEK wrapped TR31WrappedKeyBlock.
@@ -96,13 +112,34 @@ type TranslateKeyMaterialOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TranslateKeyMaterialOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TranslateKeyMaterialOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TranslateKeyMaterialOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WrappedKey != nil {
+		s.WriteStruct(schemas.TranslateKeyMaterialOutput_WrappedKey)
+		v.WrappedKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TranslateKeyMaterialOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TranslateKeyMaterialOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TranslateKeyMaterialOutput_WrappedKey:
+			v.WrappedKey = &types.WrappedWorkingKey{}
+			return v.WrappedKey.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTranslateKeyMaterialMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTranslateKeyMaterial{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TranslateKeyMaterial, schemas.TranslateKeyMaterialInput, schemas.TranslateKeyMaterialOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTranslateKeyMaterial{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TranslateKeyMaterial, schemas.TranslateKeyMaterialInput, schemas.TranslateKeyMaterialOutput), output: &TranslateKeyMaterialOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

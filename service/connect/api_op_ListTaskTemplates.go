@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,30 @@ type ListTaskTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTaskTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTaskTemplatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTaskTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListTaskTemplatesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTaskTemplatesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListTaskTemplatesRequest_Name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTaskTemplatesRequest_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListTaskTemplatesRequest_Status, string(v.Status))
+	}
+}
+
 type ListTaskTemplatesOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.
@@ -74,13 +100,35 @@ type ListTaskTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTaskTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTaskTemplatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTaskTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTaskTemplatesResponse_NextToken, *v.NextToken)
+	}
+	serializeTaskTemplateList(s, schemas.ListTaskTemplatesResponse_TaskTemplates, v.TaskTemplates)
+}
+func (v *ListTaskTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTaskTemplatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTaskTemplatesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTaskTemplatesResponse_NextToken, v.NextToken)
+		case schemas.ListTaskTemplatesResponse_TaskTemplates:
+			return deserializeTaskTemplateList(d, schemas.ListTaskTemplatesResponse_TaskTemplates, &v.TaskTemplates)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTaskTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTaskTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTaskTemplates, schemas.ListTaskTemplatesRequest, schemas.ListTaskTemplatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTaskTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTaskTemplates, schemas.ListTaskTemplatesRequest, schemas.ListTaskTemplatesResponse), output: &ListTaskTemplatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

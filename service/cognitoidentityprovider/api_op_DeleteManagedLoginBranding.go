@@ -4,6 +4,8 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,21 @@ type DeleteManagedLoginBrandingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteManagedLoginBrandingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteManagedLoginBrandingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteManagedLoginBrandingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagedLoginBrandingId != nil {
+		s.WriteString(schemas.DeleteManagedLoginBrandingRequest_ManagedLoginBrandingId, *v.ManagedLoginBrandingId)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.DeleteManagedLoginBrandingRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 type DeleteManagedLoginBrandingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -63,13 +80,26 @@ type DeleteManagedLoginBrandingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteManagedLoginBrandingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteManagedLoginBrandingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteManagedLoginBrandingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteManagedLoginBrandingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteManagedLoginBranding{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteManagedLoginBranding, schemas.DeleteManagedLoginBrandingRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteManagedLoginBranding{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteManagedLoginBranding, schemas.DeleteManagedLoginBrandingRequest, nil), output: &DeleteManagedLoginBrandingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

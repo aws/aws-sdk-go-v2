@@ -4,7 +4,9 @@ package servicequotas
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -30,6 +32,15 @@ func (c *Client) GetAutoManagementConfiguration(ctx context.Context, params *Get
 
 type GetAutoManagementConfigurationInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *GetAutoManagementConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutoManagementConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutoManagementConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type GetAutoManagementConfigurationOutput struct {
@@ -61,13 +72,65 @@ type GetAutoManagementConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAutoManagementConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAutoManagementConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAutoManagementConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExclusionQuotaList(s, schemas.GetAutoManagementConfigurationResponse_ExclusionList, v.ExclusionList)
+	if v.NotificationArn != nil {
+		s.WriteString(schemas.GetAutoManagementConfigurationResponse_NotificationArn, *v.NotificationArn)
+	}
+	if v.OptInLevel != "" {
+		s.WriteString(schemas.GetAutoManagementConfigurationResponse_OptInLevel, string(v.OptInLevel))
+	}
+	if v.OptInStatus != "" {
+		s.WriteString(schemas.GetAutoManagementConfigurationResponse_OptInStatus, string(v.OptInStatus))
+	}
+	if v.OptInType != "" {
+		s.WriteString(schemas.GetAutoManagementConfigurationResponse_OptInType, string(v.OptInType))
+	}
+}
+func (v *GetAutoManagementConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAutoManagementConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAutoManagementConfigurationResponse_ExclusionList:
+			return deserializeExclusionQuotaList(d, schemas.GetAutoManagementConfigurationResponse_ExclusionList, &v.ExclusionList)
+		case schemas.GetAutoManagementConfigurationResponse_NotificationArn:
+			v.NotificationArn = new(string)
+			return d.ReadString(schemas.GetAutoManagementConfigurationResponse_NotificationArn, v.NotificationArn)
+		case schemas.GetAutoManagementConfigurationResponse_OptInLevel:
+			var ev string
+			if err := d.ReadString(schemas.GetAutoManagementConfigurationResponse_OptInLevel, &ev); err != nil {
+				return err
+			}
+			v.OptInLevel = types.OptInLevel(ev)
+			return nil
+		case schemas.GetAutoManagementConfigurationResponse_OptInStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetAutoManagementConfigurationResponse_OptInStatus, &ev); err != nil {
+				return err
+			}
+			v.OptInStatus = types.OptInStatus(ev)
+			return nil
+		case schemas.GetAutoManagementConfigurationResponse_OptInType:
+			var ev string
+			if err := d.ReadString(schemas.GetAutoManagementConfigurationResponse_OptInType, &ev); err != nil {
+				return err
+			}
+			v.OptInType = types.OptInType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAutoManagementConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAutoManagementConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutoManagementConfiguration, schemas.GetAutoManagementConfigurationRequest, schemas.GetAutoManagementConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAutoManagementConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAutoManagementConfiguration, schemas.GetAutoManagementConfigurationRequest, schemas.GetAutoManagementConfigurationResponse), output: &GetAutoManagementConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

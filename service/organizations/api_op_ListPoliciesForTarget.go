@@ -5,7 +5,9 @@ package organizations
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -118,6 +120,27 @@ type ListPoliciesForTargetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPoliciesForTargetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPoliciesForTargetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPoliciesForTargetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != "" {
+		s.WriteString(schemas.ListPoliciesForTargetRequest_Filter, string(v.Filter))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPoliciesForTargetRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPoliciesForTargetRequest_NextToken, *v.NextToken)
+	}
+	if v.TargetId != nil {
+		s.WriteString(schemas.ListPoliciesForTargetRequest_TargetId, *v.TargetId)
+	}
+}
+
 type ListPoliciesForTargetOutput struct {
 
 	// If present, indicates that more output is available than is included in the
@@ -135,13 +158,35 @@ type ListPoliciesForTargetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPoliciesForTargetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPoliciesForTargetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPoliciesForTargetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPoliciesForTargetResponse_NextToken, *v.NextToken)
+	}
+	serializePolicies(s, schemas.ListPoliciesForTargetResponse_Policies, v.Policies)
+}
+func (v *ListPoliciesForTargetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPoliciesForTargetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPoliciesForTargetResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPoliciesForTargetResponse_NextToken, v.NextToken)
+		case schemas.ListPoliciesForTargetResponse_Policies:
+			return deserializePolicies(d, schemas.ListPoliciesForTargetResponse_Policies, &v.Policies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPoliciesForTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPoliciesForTarget{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPoliciesForTarget, schemas.ListPoliciesForTargetRequest, schemas.ListPoliciesForTargetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPoliciesForTarget{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPoliciesForTarget, schemas.ListPoliciesForTargetRequest, schemas.ListPoliciesForTargetResponse), output: &ListPoliciesForTargetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

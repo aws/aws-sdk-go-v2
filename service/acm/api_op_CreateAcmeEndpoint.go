@@ -5,7 +5,9 @@ package acm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/acm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/acm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -57,6 +59,26 @@ type CreateAcmeEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAcmeEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAcmeEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAcmeEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizationBehavior != "" {
+		s.WriteString(schemas.CreateAcmeEndpointRequest_AuthorizationBehavior, string(v.AuthorizationBehavior))
+	}
+	serializeCertificateAuthority(s, schemas.CreateAcmeEndpointRequest_CertificateAuthority, v.CertificateAuthority)
+	serializeTagList(s, schemas.CreateAcmeEndpointRequest_CertificateTags, v.CertificateTags)
+	if v.Contact != "" {
+		s.WriteString(schemas.CreateAcmeEndpointRequest_Contact, string(v.Contact))
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.CreateAcmeEndpointRequest_IdempotencyToken, *v.IdempotencyToken)
+	}
+	serializeTagList(s, schemas.CreateAcmeEndpointRequest_Tags, v.Tags)
+}
 func (in *CreateAcmeEndpointInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ServiceType = ptr.String("ACM-ACME")
@@ -73,13 +95,32 @@ type CreateAcmeEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAcmeEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAcmeEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAcmeEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcmeEndpointArn != nil {
+		s.WriteString(schemas.CreateAcmeEndpointResponse_AcmeEndpointArn, *v.AcmeEndpointArn)
+	}
+}
+func (v *CreateAcmeEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAcmeEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAcmeEndpointResponse_AcmeEndpointArn:
+			v.AcmeEndpointArn = new(string)
+			return d.ReadString(schemas.CreateAcmeEndpointResponse_AcmeEndpointArn, v.AcmeEndpointArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAcmeEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAcmeEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAcmeEndpoint, schemas.CreateAcmeEndpointRequest, schemas.CreateAcmeEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAcmeEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAcmeEndpoint, schemas.CreateAcmeEndpointRequest, schemas.CreateAcmeEndpointResponse), output: &CreateAcmeEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

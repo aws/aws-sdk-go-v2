@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,22 @@ type DeleteContactDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContactDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContactDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContactDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContactFields(s, schemas.DeleteContactDataRequest_ContactFields, v.ContactFields)
+	if v.ContactId != nil {
+		s.WriteString(schemas.DeleteContactDataRequest_ContactId, *v.ContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeleteContactDataRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DeleteContactDataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -73,13 +91,26 @@ type DeleteContactDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContactDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContactDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContactDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteContactDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteContactDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteContactDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteContactData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContactData, schemas.DeleteContactDataRequest, schemas.DeleteContactDataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteContactData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContactData, schemas.DeleteContactDataRequest, schemas.DeleteContactDataResponse), output: &DeleteContactDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

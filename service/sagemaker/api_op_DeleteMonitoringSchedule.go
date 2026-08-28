@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteMonitoringScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMonitoringScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMonitoringScheduleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMonitoringScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonitoringScheduleName != nil {
+		s.WriteString(schemas.DeleteMonitoringScheduleRequest_MonitoringScheduleName, *v.MonitoringScheduleName)
+	}
+}
+
 type DeleteMonitoringScheduleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type DeleteMonitoringScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMonitoringScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMonitoringScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteMonitoringScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMonitoringScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteMonitoringSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMonitoringSchedule, schemas.DeleteMonitoringScheduleRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteMonitoringSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMonitoringSchedule, schemas.DeleteMonitoringScheduleRequest, nil), output: &DeleteMonitoringScheduleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

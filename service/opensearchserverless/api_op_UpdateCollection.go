@@ -5,7 +5,9 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,58 @@ type UpdateCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCollectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCollectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCollectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateCollectionRequest_clientToken, *v.ClientToken)
+	}
+	if v.DeletionProtection != "" {
+		s.WriteString(schemas.UpdateCollectionRequest_deletionProtection, string(v.DeletionProtection))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateCollectionRequest_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateCollectionRequest_id, *v.Id)
+	}
+	if v.VectorOptions != nil {
+		s.WriteStruct(schemas.UpdateCollectionRequest_vectorOptions)
+		v.VectorOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateCollectionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCollectionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCollectionRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.UpdateCollectionRequest_clientToken, v.ClientToken)
+		case schemas.UpdateCollectionRequest_deletionProtection:
+			var ev string
+			if err := d.ReadString(schemas.UpdateCollectionRequest_deletionProtection, &ev); err != nil {
+				return err
+			}
+			v.DeletionProtection = types.DeletionProtection(ev)
+			return nil
+		case schemas.UpdateCollectionRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateCollectionRequest_description, v.Description)
+		case schemas.UpdateCollectionRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateCollectionRequest_id, v.Id)
+		case schemas.UpdateCollectionRequest_vectorOptions:
+			v.VectorOptions = &types.VectorOptions{}
+			return v.VectorOptions.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type UpdateCollectionOutput struct {
 
 	// Details about the updated collection.
@@ -59,13 +113,34 @@ type UpdateCollectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCollectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCollectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCollectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UpdateCollectionDetail != nil {
+		s.WriteStruct(schemas.UpdateCollectionResponse_updateCollectionDetail)
+		v.UpdateCollectionDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateCollectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCollectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCollectionResponse_updateCollectionDetail:
+			v.UpdateCollectionDetail = &types.UpdateCollectionDetail{}
+			return v.UpdateCollectionDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCollection, schemas.UpdateCollectionRequest, schemas.UpdateCollectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCollection, schemas.UpdateCollectionRequest, schemas.UpdateCollectionResponse), output: &UpdateCollectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

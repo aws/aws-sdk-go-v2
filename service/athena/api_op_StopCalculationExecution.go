@@ -4,7 +4,9 @@ package athena
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type StopCalculationExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopCalculationExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopCalculationExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopCalculationExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CalculationExecutionId != nil {
+		s.WriteString(schemas.StopCalculationExecutionRequest_CalculationExecutionId, *v.CalculationExecutionId)
+	}
+}
+
 type StopCalculationExecutionOutput struct {
 
 	// CREATING - The calculation is in the process of being created.
@@ -68,13 +82,36 @@ type StopCalculationExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopCalculationExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopCalculationExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopCalculationExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.StopCalculationExecutionResponse_State, string(v.State))
+	}
+}
+func (v *StopCalculationExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopCalculationExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopCalculationExecutionResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.StopCalculationExecutionResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.CalculationExecutionState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopCalculationExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopCalculationExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopCalculationExecution, schemas.StopCalculationExecutionRequest, schemas.StopCalculationExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopCalculationExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopCalculationExecution, schemas.StopCalculationExecutionRequest, schemas.StopCalculationExecutionResponse), output: &StopCalculationExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

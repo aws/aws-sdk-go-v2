@@ -4,7 +4,9 @@ package ecrpublic
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecrpublic/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecrpublic/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,22 @@ type BatchDeleteImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImageIdentifierList(s, schemas.BatchDeleteImageRequest_imageIds, v.ImageIds)
+	if v.RegistryId != nil {
+		s.WriteString(schemas.BatchDeleteImageRequest_registryId, *v.RegistryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.BatchDeleteImageRequest_repositoryName, *v.RepositoryName)
+	}
+}
+
 type BatchDeleteImageOutput struct {
 
 	// Any failures associated with the call.
@@ -67,13 +85,32 @@ type BatchDeleteImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteImageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImageFailureList(s, schemas.BatchDeleteImageResponse_failures, v.Failures)
+	serializeImageIdentifierList(s, schemas.BatchDeleteImageResponse_imageIds, v.ImageIds)
+}
+func (v *BatchDeleteImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteImageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteImageResponse_failures:
+			return deserializeImageFailureList(d, schemas.BatchDeleteImageResponse_failures, &v.Failures)
+		case schemas.BatchDeleteImageResponse_imageIds:
+			return deserializeImageIdentifierList(d, schemas.BatchDeleteImageResponse_imageIds, &v.ImageIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDeleteImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteImage, schemas.BatchDeleteImageRequest, schemas.BatchDeleteImageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchDeleteImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteImage, schemas.BatchDeleteImageRequest, schemas.BatchDeleteImageResponse), output: &BatchDeleteImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

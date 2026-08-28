@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,16 @@ type DescribeClientPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClientPropertiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClientPropertiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClientPropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceIdList(s, schemas.DescribeClientPropertiesRequest_ResourceIds, v.ResourceIds)
+}
+
 type DescribeClientPropertiesOutput struct {
 
 	// Information about the specified Amazon WorkSpaces clients.
@@ -45,13 +57,29 @@ type DescribeClientPropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClientPropertiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClientPropertiesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClientPropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClientPropertiesList(s, schemas.DescribeClientPropertiesResult_ClientPropertiesList, v.ClientPropertiesList)
+}
+func (v *DescribeClientPropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeClientPropertiesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeClientPropertiesResult_ClientPropertiesList:
+			return deserializeClientPropertiesList(d, schemas.DescribeClientPropertiesResult_ClientPropertiesList, &v.ClientPropertiesList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeClientPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeClientProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClientProperties, schemas.DescribeClientPropertiesRequest, schemas.DescribeClientPropertiesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeClientProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClientProperties, schemas.DescribeClientPropertiesRequest, schemas.DescribeClientPropertiesResult), output: &DescribeClientPropertiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

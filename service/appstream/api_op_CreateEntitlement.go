@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,28 @@ type CreateEntitlementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEntitlementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEntitlementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEntitlementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppVisibility != "" {
+		s.WriteString(schemas.CreateEntitlementRequest_AppVisibility, string(v.AppVisibility))
+	}
+	serializeEntitlementAttributeList(s, schemas.CreateEntitlementRequest_Attributes, v.Attributes)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateEntitlementRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateEntitlementRequest_Name, *v.Name)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.CreateEntitlementRequest_StackName, *v.StackName)
+	}
+}
+
 type CreateEntitlementOutput struct {
 
 	// The entitlement.
@@ -68,13 +92,34 @@ type CreateEntitlementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEntitlementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEntitlementResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEntitlementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Entitlement != nil {
+		s.WriteStruct(schemas.CreateEntitlementResult_Entitlement)
+		v.Entitlement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateEntitlementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEntitlementResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEntitlementResult_Entitlement:
+			v.Entitlement = &types.Entitlement{}
+			return v.Entitlement.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEntitlementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateEntitlement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEntitlement, schemas.CreateEntitlementRequest, schemas.CreateEntitlementResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateEntitlement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEntitlement, schemas.CreateEntitlementRequest, schemas.CreateEntitlementResult), output: &CreateEntitlementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

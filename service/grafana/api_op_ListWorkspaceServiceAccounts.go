@@ -5,7 +5,9 @@ package grafana
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/grafana/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/grafana/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListWorkspaceServiceAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkspaceServiceAccountsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkspaceServiceAccountsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkspaceServiceAccountsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWorkspaceServiceAccountsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkspaceServiceAccountsRequest_nextToken, *v.NextToken)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.ListWorkspaceServiceAccountsRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+
 type ListWorkspaceServiceAccountsOutput struct {
 
 	// An array of structures containing information about the service accounts.
@@ -66,13 +86,41 @@ type ListWorkspaceServiceAccountsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkspaceServiceAccountsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkspaceServiceAccountsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkspaceServiceAccountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkspaceServiceAccountsResponse_nextToken, *v.NextToken)
+	}
+	serializeServiceAccountList(s, schemas.ListWorkspaceServiceAccountsResponse_serviceAccounts, v.ServiceAccounts)
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.ListWorkspaceServiceAccountsResponse_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *ListWorkspaceServiceAccountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkspaceServiceAccountsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkspaceServiceAccountsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkspaceServiceAccountsResponse_nextToken, v.NextToken)
+		case schemas.ListWorkspaceServiceAccountsResponse_serviceAccounts:
+			return deserializeServiceAccountList(d, schemas.ListWorkspaceServiceAccountsResponse_serviceAccounts, &v.ServiceAccounts)
+		case schemas.ListWorkspaceServiceAccountsResponse_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.ListWorkspaceServiceAccountsResponse_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkspaceServiceAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWorkspaceServiceAccounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkspaceServiceAccounts, schemas.ListWorkspaceServiceAccountsRequest, schemas.ListWorkspaceServiceAccountsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWorkspaceServiceAccounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkspaceServiceAccounts, schemas.ListWorkspaceServiceAccountsRequest, schemas.ListWorkspaceServiceAccountsResponse), output: &ListWorkspaceServiceAccountsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

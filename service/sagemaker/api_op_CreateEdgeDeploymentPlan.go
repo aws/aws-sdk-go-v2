@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type CreateEdgeDeploymentPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEdgeDeploymentPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEdgeDeploymentPlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEdgeDeploymentPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceFleetName != nil {
+		s.WriteString(schemas.CreateEdgeDeploymentPlanRequest_DeviceFleetName, *v.DeviceFleetName)
+	}
+	if v.EdgeDeploymentPlanName != nil {
+		s.WriteString(schemas.CreateEdgeDeploymentPlanRequest_EdgeDeploymentPlanName, *v.EdgeDeploymentPlanName)
+	}
+	serializeEdgeDeploymentModelConfigs(s, schemas.CreateEdgeDeploymentPlanRequest_ModelConfigs, v.ModelConfigs)
+	serializeDeploymentStages(s, schemas.CreateEdgeDeploymentPlanRequest_Stages, v.Stages)
+	serializeTagList(s, schemas.CreateEdgeDeploymentPlanRequest_Tags, v.Tags)
+}
+
 type CreateEdgeDeploymentPlanOutput struct {
 
 	// The ARN of the edge deployment plan.
@@ -65,13 +85,32 @@ type CreateEdgeDeploymentPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEdgeDeploymentPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEdgeDeploymentPlanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEdgeDeploymentPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EdgeDeploymentPlanArn != nil {
+		s.WriteString(schemas.CreateEdgeDeploymentPlanResponse_EdgeDeploymentPlanArn, *v.EdgeDeploymentPlanArn)
+	}
+}
+func (v *CreateEdgeDeploymentPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEdgeDeploymentPlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEdgeDeploymentPlanResponse_EdgeDeploymentPlanArn:
+			v.EdgeDeploymentPlanArn = new(string)
+			return d.ReadString(schemas.CreateEdgeDeploymentPlanResponse_EdgeDeploymentPlanArn, v.EdgeDeploymentPlanArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEdgeDeploymentPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEdgeDeploymentPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEdgeDeploymentPlan, schemas.CreateEdgeDeploymentPlanRequest, schemas.CreateEdgeDeploymentPlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateEdgeDeploymentPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEdgeDeploymentPlan, schemas.CreateEdgeDeploymentPlanRequest, schemas.CreateEdgeDeploymentPlanResponse), output: &CreateEdgeDeploymentPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

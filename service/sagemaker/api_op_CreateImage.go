@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,28 @@ type CreateImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateImageRequest_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateImageRequest_DisplayName, *v.DisplayName)
+	}
+	if v.ImageName != nil {
+		s.WriteString(schemas.CreateImageRequest_ImageName, *v.ImageName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateImageRequest_RoleArn, *v.RoleArn)
+	}
+	serializeTagList(s, schemas.CreateImageRequest_Tags, v.Tags)
+}
+
 type CreateImageOutput struct {
 
 	// The ARN of the image.
@@ -64,13 +88,32 @@ type CreateImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateImageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageArn != nil {
+		s.WriteString(schemas.CreateImageResponse_ImageArn, *v.ImageArn)
+	}
+}
+func (v *CreateImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateImageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateImageResponse_ImageArn:
+			v.ImageArn = new(string)
+			return d.ReadString(schemas.CreateImageResponse_ImageArn, v.ImageArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateImage, schemas.CreateImageRequest, schemas.CreateImageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateImage, schemas.CreateImageRequest, schemas.CreateImageResponse), output: &CreateImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

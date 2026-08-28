@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,19 @@ type DetectToxicContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectToxicContentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectToxicContentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectToxicContentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.DetectToxicContentRequest_LanguageCode, string(v.LanguageCode))
+	}
+	serializeListOfTextSegments(s, schemas.DetectToxicContentRequest_TextSegments, v.TextSegments)
+}
+
 type DetectToxicContentOutput struct {
 
 	// Results of the content moderation analysis. Each entry in the results list
@@ -60,13 +75,29 @@ type DetectToxicContentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectToxicContentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectToxicContentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectToxicContentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfToxicLabels(s, schemas.DetectToxicContentResponse_ResultList, v.ResultList)
+}
+func (v *DetectToxicContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectToxicContentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectToxicContentResponse_ResultList:
+			return deserializeListOfToxicLabels(d, schemas.DetectToxicContentResponse_ResultList, &v.ResultList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetectToxicContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectToxicContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectToxicContent, schemas.DetectToxicContentRequest, schemas.DetectToxicContentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetectToxicContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectToxicContent, schemas.DetectToxicContentRequest, schemas.DetectToxicContentResponse), output: &DetectToxicContentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

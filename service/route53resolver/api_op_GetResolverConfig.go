@@ -4,7 +4,9 @@ package route53resolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetResolverConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResolverConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResolverConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResolverConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceId != nil {
+		s.WriteString(schemas.GetResolverConfigRequest_ResourceId, *v.ResourceId)
+	}
+}
+
 type GetResolverConfigOutput struct {
 
 	// Information about the behavior configuration of Route 53 Resolver behavior for
@@ -47,13 +61,34 @@ type GetResolverConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResolverConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResolverConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResolverConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverConfig != nil {
+		s.WriteStruct(schemas.GetResolverConfigResponse_ResolverConfig)
+		v.ResolverConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetResolverConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResolverConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResolverConfigResponse_ResolverConfig:
+			v.ResolverConfig = &types.ResolverConfig{}
+			return v.ResolverConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResolverConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetResolverConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResolverConfig, schemas.GetResolverConfigRequest, schemas.GetResolverConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetResolverConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResolverConfig, schemas.GetResolverConfigRequest, schemas.GetResolverConfigResponse), output: &GetResolverConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

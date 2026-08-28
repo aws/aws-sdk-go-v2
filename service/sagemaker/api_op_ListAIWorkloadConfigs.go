@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -57,6 +59,36 @@ type ListAIWorkloadConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAIWorkloadConfigsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAIWorkloadConfigsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAIWorkloadConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListAIWorkloadConfigsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListAIWorkloadConfigsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAIWorkloadConfigsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListAIWorkloadConfigsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAIWorkloadConfigsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListAIWorkloadConfigsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListAIWorkloadConfigsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListAIWorkloadConfigsOutput struct {
 
 	// An array of AIWorkloadConfigSummary objects, one for each AI workload
@@ -75,13 +107,35 @@ type ListAIWorkloadConfigsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAIWorkloadConfigsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAIWorkloadConfigsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAIWorkloadConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAIWorkloadConfigSummaryList(s, schemas.ListAIWorkloadConfigsResponse_AIWorkloadConfigs, v.AIWorkloadConfigs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAIWorkloadConfigsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAIWorkloadConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAIWorkloadConfigsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAIWorkloadConfigsResponse_AIWorkloadConfigs:
+			return deserializeAIWorkloadConfigSummaryList(d, schemas.ListAIWorkloadConfigsResponse_AIWorkloadConfigs, &v.AIWorkloadConfigs)
+		case schemas.ListAIWorkloadConfigsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAIWorkloadConfigsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAIWorkloadConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAIWorkloadConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAIWorkloadConfigs, schemas.ListAIWorkloadConfigsRequest, schemas.ListAIWorkloadConfigsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAIWorkloadConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAIWorkloadConfigs, schemas.ListAIWorkloadConfigsRequest, schemas.ListAIWorkloadConfigsResponse), output: &ListAIWorkloadConfigsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

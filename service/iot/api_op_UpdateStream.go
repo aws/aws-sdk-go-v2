@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,25 @@ type UpdateStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStreamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateStreamRequest_description, *v.Description)
+	}
+	serializeStreamFiles(s, schemas.UpdateStreamRequest_files, v.Files)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateStreamRequest_roleArn, *v.RoleArn)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.UpdateStreamRequest_streamId, *v.StreamId)
+	}
+}
+
 type UpdateStreamOutput struct {
 
 	// A description of the stream.
@@ -68,13 +89,50 @@ type UpdateStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStreamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateStreamResponse_description, *v.Description)
+	}
+	if v.StreamArn != nil {
+		s.WriteString(schemas.UpdateStreamResponse_streamArn, *v.StreamArn)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.UpdateStreamResponse_streamId, *v.StreamId)
+	}
+	if v.StreamVersion != nil {
+		s.WriteInt32(schemas.UpdateStreamResponse_streamVersion, *v.StreamVersion)
+	}
+}
+func (v *UpdateStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateStreamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateStreamResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateStreamResponse_description, v.Description)
+		case schemas.UpdateStreamResponse_streamArn:
+			v.StreamArn = new(string)
+			return d.ReadString(schemas.UpdateStreamResponse_streamArn, v.StreamArn)
+		case schemas.UpdateStreamResponse_streamId:
+			v.StreamId = new(string)
+			return d.ReadString(schemas.UpdateStreamResponse_streamId, v.StreamId)
+		case schemas.UpdateStreamResponse_streamVersion:
+			v.StreamVersion = new(int32)
+			return d.ReadInt32(schemas.UpdateStreamResponse_streamVersion, v.StreamVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStream, schemas.UpdateStreamRequest, schemas.UpdateStreamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStream, schemas.UpdateStreamRequest, schemas.UpdateStreamResponse), output: &UpdateStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

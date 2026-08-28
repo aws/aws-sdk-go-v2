@@ -4,6 +4,8 @@ package cloudtrail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -46,6 +48,18 @@ type GetTrailStatusInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetTrailStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTrailStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTrailStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetTrailStatusRequest_Name, *v.Name)
+	}
 }
 
 // Returns the objects or data listed below if successful. Otherwise, returns an
@@ -139,13 +153,128 @@ type GetTrailStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTrailStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTrailStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTrailStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsLogging != nil {
+		s.WriteBool(schemas.GetTrailStatusResponse_IsLogging, *v.IsLogging)
+	}
+	if v.LatestCloudWatchLogsDeliveryError != nil {
+		s.WriteString(schemas.GetTrailStatusResponse_LatestCloudWatchLogsDeliveryError, *v.LatestCloudWatchLogsDeliveryError)
+	}
+	if v.LatestCloudWatchLogsDeliveryTime != nil {
+		s.WriteTime(schemas.GetTrailStatusResponse_LatestCloudWatchLogsDeliveryTime, *v.LatestCloudWatchLogsDeliveryTime)
+	}
+	if v.LatestDeliveryAttemptSucceeded != nil {
+		s.WriteString(schemas.GetTrailStatusResponse_LatestDeliveryAttemptSucceeded, *v.LatestDeliveryAttemptSucceeded)
+	}
+	if v.LatestDeliveryAttemptTime != nil {
+		s.WriteString(schemas.GetTrailStatusResponse_LatestDeliveryAttemptTime, *v.LatestDeliveryAttemptTime)
+	}
+	if v.LatestDeliveryError != nil {
+		s.WriteString(schemas.GetTrailStatusResponse_LatestDeliveryError, *v.LatestDeliveryError)
+	}
+	if v.LatestDeliveryTime != nil {
+		s.WriteTime(schemas.GetTrailStatusResponse_LatestDeliveryTime, *v.LatestDeliveryTime)
+	}
+	if v.LatestDigestDeliveryError != nil {
+		s.WriteString(schemas.GetTrailStatusResponse_LatestDigestDeliveryError, *v.LatestDigestDeliveryError)
+	}
+	if v.LatestDigestDeliveryTime != nil {
+		s.WriteTime(schemas.GetTrailStatusResponse_LatestDigestDeliveryTime, *v.LatestDigestDeliveryTime)
+	}
+	if v.LatestNotificationAttemptSucceeded != nil {
+		s.WriteString(schemas.GetTrailStatusResponse_LatestNotificationAttemptSucceeded, *v.LatestNotificationAttemptSucceeded)
+	}
+	if v.LatestNotificationAttemptTime != nil {
+		s.WriteString(schemas.GetTrailStatusResponse_LatestNotificationAttemptTime, *v.LatestNotificationAttemptTime)
+	}
+	if v.LatestNotificationError != nil {
+		s.WriteString(schemas.GetTrailStatusResponse_LatestNotificationError, *v.LatestNotificationError)
+	}
+	if v.LatestNotificationTime != nil {
+		s.WriteTime(schemas.GetTrailStatusResponse_LatestNotificationTime, *v.LatestNotificationTime)
+	}
+	if v.StartLoggingTime != nil {
+		s.WriteTime(schemas.GetTrailStatusResponse_StartLoggingTime, *v.StartLoggingTime)
+	}
+	if v.StopLoggingTime != nil {
+		s.WriteTime(schemas.GetTrailStatusResponse_StopLoggingTime, *v.StopLoggingTime)
+	}
+	if v.TimeLoggingStarted != nil {
+		s.WriteString(schemas.GetTrailStatusResponse_TimeLoggingStarted, *v.TimeLoggingStarted)
+	}
+	if v.TimeLoggingStopped != nil {
+		s.WriteString(schemas.GetTrailStatusResponse_TimeLoggingStopped, *v.TimeLoggingStopped)
+	}
+}
+func (v *GetTrailStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTrailStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTrailStatusResponse_IsLogging:
+			v.IsLogging = new(bool)
+			return d.ReadBool(schemas.GetTrailStatusResponse_IsLogging, v.IsLogging)
+		case schemas.GetTrailStatusResponse_LatestCloudWatchLogsDeliveryError:
+			v.LatestCloudWatchLogsDeliveryError = new(string)
+			return d.ReadString(schemas.GetTrailStatusResponse_LatestCloudWatchLogsDeliveryError, v.LatestCloudWatchLogsDeliveryError)
+		case schemas.GetTrailStatusResponse_LatestCloudWatchLogsDeliveryTime:
+			v.LatestCloudWatchLogsDeliveryTime = new(time.Time)
+			return d.ReadTime(schemas.GetTrailStatusResponse_LatestCloudWatchLogsDeliveryTime, v.LatestCloudWatchLogsDeliveryTime)
+		case schemas.GetTrailStatusResponse_LatestDeliveryAttemptSucceeded:
+			v.LatestDeliveryAttemptSucceeded = new(string)
+			return d.ReadString(schemas.GetTrailStatusResponse_LatestDeliveryAttemptSucceeded, v.LatestDeliveryAttemptSucceeded)
+		case schemas.GetTrailStatusResponse_LatestDeliveryAttemptTime:
+			v.LatestDeliveryAttemptTime = new(string)
+			return d.ReadString(schemas.GetTrailStatusResponse_LatestDeliveryAttemptTime, v.LatestDeliveryAttemptTime)
+		case schemas.GetTrailStatusResponse_LatestDeliveryError:
+			v.LatestDeliveryError = new(string)
+			return d.ReadString(schemas.GetTrailStatusResponse_LatestDeliveryError, v.LatestDeliveryError)
+		case schemas.GetTrailStatusResponse_LatestDeliveryTime:
+			v.LatestDeliveryTime = new(time.Time)
+			return d.ReadTime(schemas.GetTrailStatusResponse_LatestDeliveryTime, v.LatestDeliveryTime)
+		case schemas.GetTrailStatusResponse_LatestDigestDeliveryError:
+			v.LatestDigestDeliveryError = new(string)
+			return d.ReadString(schemas.GetTrailStatusResponse_LatestDigestDeliveryError, v.LatestDigestDeliveryError)
+		case schemas.GetTrailStatusResponse_LatestDigestDeliveryTime:
+			v.LatestDigestDeliveryTime = new(time.Time)
+			return d.ReadTime(schemas.GetTrailStatusResponse_LatestDigestDeliveryTime, v.LatestDigestDeliveryTime)
+		case schemas.GetTrailStatusResponse_LatestNotificationAttemptSucceeded:
+			v.LatestNotificationAttemptSucceeded = new(string)
+			return d.ReadString(schemas.GetTrailStatusResponse_LatestNotificationAttemptSucceeded, v.LatestNotificationAttemptSucceeded)
+		case schemas.GetTrailStatusResponse_LatestNotificationAttemptTime:
+			v.LatestNotificationAttemptTime = new(string)
+			return d.ReadString(schemas.GetTrailStatusResponse_LatestNotificationAttemptTime, v.LatestNotificationAttemptTime)
+		case schemas.GetTrailStatusResponse_LatestNotificationError:
+			v.LatestNotificationError = new(string)
+			return d.ReadString(schemas.GetTrailStatusResponse_LatestNotificationError, v.LatestNotificationError)
+		case schemas.GetTrailStatusResponse_LatestNotificationTime:
+			v.LatestNotificationTime = new(time.Time)
+			return d.ReadTime(schemas.GetTrailStatusResponse_LatestNotificationTime, v.LatestNotificationTime)
+		case schemas.GetTrailStatusResponse_StartLoggingTime:
+			v.StartLoggingTime = new(time.Time)
+			return d.ReadTime(schemas.GetTrailStatusResponse_StartLoggingTime, v.StartLoggingTime)
+		case schemas.GetTrailStatusResponse_StopLoggingTime:
+			v.StopLoggingTime = new(time.Time)
+			return d.ReadTime(schemas.GetTrailStatusResponse_StopLoggingTime, v.StopLoggingTime)
+		case schemas.GetTrailStatusResponse_TimeLoggingStarted:
+			v.TimeLoggingStarted = new(string)
+			return d.ReadString(schemas.GetTrailStatusResponse_TimeLoggingStarted, v.TimeLoggingStarted)
+		case schemas.GetTrailStatusResponse_TimeLoggingStopped:
+			v.TimeLoggingStopped = new(string)
+			return d.ReadString(schemas.GetTrailStatusResponse_TimeLoggingStopped, v.TimeLoggingStopped)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTrailStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTrailStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrailStatus, schemas.GetTrailStatusRequest, schemas.GetTrailStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTrailStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrailStatus, schemas.GetTrailStatusRequest, schemas.GetTrailStatusResponse), output: &GetTrailStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

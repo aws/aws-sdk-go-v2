@@ -4,7 +4,9 @@ package organizations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,18 @@ type DescribeAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DescribeAccountRequest_AccountId, *v.AccountId)
+	}
+}
+
 type DescribeAccountOutput struct {
 
 	// A structure that contains information about the requested account.
@@ -59,13 +73,34 @@ type DescribeAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Account != nil {
+		s.WriteStruct(schemas.DescribeAccountResponse_Account)
+		v.Account.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAccountResponse_Account:
+			v.Account = &types.Account{}
+			return v.Account.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccount, schemas.DescribeAccountRequest, schemas.DescribeAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccount, schemas.DescribeAccountRequest, schemas.DescribeAccountResponse), output: &DescribeAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

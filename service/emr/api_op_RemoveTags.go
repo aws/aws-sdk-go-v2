@@ -4,6 +4,8 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,22 @@ type RemoveTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveTagsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.RemoveTagsInput_ClusterId, *v.ClusterId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.RemoveTagsInput_ResourceId, *v.ResourceId)
+	}
+	serializeStringList(s, schemas.RemoveTagsInput_TagKeys, v.TagKeys)
+}
+
 // This output indicates the result of removing tags from the resource.
 type RemoveTagsOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -59,13 +77,26 @@ type RemoveTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveTagsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RemoveTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveTagsOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveTags, schemas.RemoveTagsInput, schemas.RemoveTagsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRemoveTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveTags, schemas.RemoveTagsInput, schemas.RemoveTagsOutput), output: &RemoveTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -74,6 +76,24 @@ type GetCostEstimateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCostEstimateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCostEstimateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCostEstimateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetCostEstimateRequest_endTime, *v.EndTime)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.GetCostEstimateRequest_resourceName, *v.ResourceName)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetCostEstimateRequest_startTime, *v.StartTime)
+	}
+}
+
 type GetCostEstimateOutput struct {
 
 	// Returns the estimate's forecasted cost or usage.
@@ -85,13 +105,29 @@ type GetCostEstimateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCostEstimateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCostEstimateResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCostEstimateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourcesBudgetEstimate(s, schemas.GetCostEstimateResult_resourcesBudgetEstimate, v.ResourcesBudgetEstimate)
+}
+func (v *GetCostEstimateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCostEstimateResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCostEstimateResult_resourcesBudgetEstimate:
+			return deserializeResourcesBudgetEstimate(d, schemas.GetCostEstimateResult_resourcesBudgetEstimate, &v.ResourcesBudgetEstimate)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCostEstimateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCostEstimate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCostEstimate, schemas.GetCostEstimateRequest, schemas.GetCostEstimateResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCostEstimate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCostEstimate, schemas.GetCostEstimateRequest, schemas.GetCostEstimateResult), output: &GetCostEstimateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

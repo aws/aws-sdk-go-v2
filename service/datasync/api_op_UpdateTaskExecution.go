@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,23 @@ type UpdateTaskExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTaskExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTaskExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTaskExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Options != nil {
+		s.WriteStruct(schemas.UpdateTaskExecutionRequest_Options)
+		v.Options.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskExecutionArn != nil {
+		s.WriteString(schemas.UpdateTaskExecutionRequest_TaskExecutionArn, *v.TaskExecutionArn)
+	}
+}
+
 type UpdateTaskExecutionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -63,13 +82,26 @@ type UpdateTaskExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTaskExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTaskExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTaskExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateTaskExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTaskExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTaskExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateTaskExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTaskExecution, schemas.UpdateTaskExecutionRequest, schemas.UpdateTaskExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateTaskExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTaskExecution, schemas.UpdateTaskExecutionRequest, schemas.UpdateTaskExecutionResponse), output: &UpdateTaskExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

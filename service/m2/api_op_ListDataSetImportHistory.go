@@ -5,7 +5,9 @@ package m2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/m2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/m2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListDataSetImportHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataSetImportHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataSetImportHistoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataSetImportHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ListDataSetImportHistoryRequest_applicationId, *v.ApplicationId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataSetImportHistoryRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataSetImportHistoryRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListDataSetImportHistoryOutput struct {
 
 	// The data set import tasks.
@@ -60,13 +80,35 @@ type ListDataSetImportHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataSetImportHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataSetImportHistoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataSetImportHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataSetImportTaskList(s, schemas.ListDataSetImportHistoryResponse_dataSetImportTasks, v.DataSetImportTasks)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataSetImportHistoryResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDataSetImportHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataSetImportHistoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataSetImportHistoryResponse_dataSetImportTasks:
+			return deserializeDataSetImportTaskList(d, schemas.ListDataSetImportHistoryResponse_dataSetImportTasks, &v.DataSetImportTasks)
+		case schemas.ListDataSetImportHistoryResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataSetImportHistoryResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataSetImportHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataSetImportHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataSetImportHistory, schemas.ListDataSetImportHistoryRequest, schemas.ListDataSetImportHistoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataSetImportHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataSetImportHistory, schemas.ListDataSetImportHistoryRequest, schemas.ListDataSetImportHistoryResponse), output: &ListDataSetImportHistoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,37 @@ type UpdateExtractionDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExtractionDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExtractionDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExtractionDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateExtractionDefinitionRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Display != nil {
+		s.WriteStruct(schemas.UpdateExtractionDefinitionRequest_Display)
+		v.Display.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExtractionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateExtractionDefinitionRequest_ExtractionConfiguration)
+		v.ExtractionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExtractionDefinitionId != nil {
+		s.WriteString(schemas.UpdateExtractionDefinitionRequest_ExtractionDefinitionId, *v.ExtractionDefinitionId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateExtractionDefinitionRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateExtractionDefinitionRequest_Name, *v.Name)
+	}
+}
+
 type UpdateExtractionDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -69,13 +102,26 @@ type UpdateExtractionDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExtractionDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExtractionDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExtractionDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateExtractionDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateExtractionDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateExtractionDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateExtractionDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExtractionDefinition, schemas.UpdateExtractionDefinitionRequest, schemas.UpdateExtractionDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateExtractionDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExtractionDefinition, schemas.UpdateExtractionDefinitionRequest, schemas.UpdateExtractionDefinitionResponse), output: &UpdateExtractionDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -81,6 +83,39 @@ type SearchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossAccountFilterOption != "" {
+		s.WriteString(schemas.SearchRequest_CrossAccountFilterOption, string(v.CrossAccountFilterOption))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchRequest_NextToken, *v.NextToken)
+	}
+	if v.Resource != "" {
+		s.WriteString(schemas.SearchRequest_Resource, string(v.Resource))
+	}
+	if v.SearchExpression != nil {
+		s.WriteStruct(schemas.SearchRequest_SearchExpression)
+		v.SearchExpression.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SortBy != nil {
+		s.WriteString(schemas.SearchRequest_SortBy, *v.SortBy)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.SearchRequest_SortOrder, string(v.SortOrder))
+	}
+	serializeVisibilityConditionsList(s, schemas.SearchRequest_VisibilityConditions, v.VisibilityConditions)
+}
+
 type SearchOutput struct {
 
 	// If the result of the previous Search request was truncated, the response
@@ -100,13 +135,43 @@ type SearchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchResponse_NextToken, *v.NextToken)
+	}
+	serializeSearchResultsList(s, schemas.SearchResponse_Results, v.Results)
+	if v.TotalHits != nil {
+		s.WriteStruct(schemas.SearchResponse_TotalHits)
+		v.TotalHits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SearchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchResponse_NextToken, v.NextToken)
+		case schemas.SearchResponse_Results:
+			return deserializeSearchResultsList(d, schemas.SearchResponse_Results, &v.Results)
+		case schemas.SearchResponse_TotalHits:
+			v.TotalHits = &types.TotalHits{}
+			return v.TotalHits.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Search, schemas.SearchRequest, schemas.SearchResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSearch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Search, schemas.SearchRequest, schemas.SearchResponse), output: &SearchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

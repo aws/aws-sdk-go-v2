@@ -4,7 +4,9 @@ package wellarchitected
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,35 @@ type UpdateReviewTemplateAnswerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateReviewTemplateAnswerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateReviewTemplateAnswerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateReviewTemplateAnswerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChoiceUpdates(s, schemas.UpdateReviewTemplateAnswerInput_ChoiceUpdates, v.ChoiceUpdates)
+	if v.IsApplicable != nil {
+		s.WriteBool(schemas.UpdateReviewTemplateAnswerInput_IsApplicable, *v.IsApplicable)
+	}
+	if v.LensAlias != nil {
+		s.WriteString(schemas.UpdateReviewTemplateAnswerInput_LensAlias, *v.LensAlias)
+	}
+	if v.Notes != nil {
+		s.WriteString(schemas.UpdateReviewTemplateAnswerInput_Notes, *v.Notes)
+	}
+	if v.QuestionId != nil {
+		s.WriteString(schemas.UpdateReviewTemplateAnswerInput_QuestionId, *v.QuestionId)
+	}
+	if v.Reason != "" {
+		s.WriteString(schemas.UpdateReviewTemplateAnswerInput_Reason, string(v.Reason))
+	}
+	serializeSelectedChoices(s, schemas.UpdateReviewTemplateAnswerInput_SelectedChoices, v.SelectedChoices)
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.UpdateReviewTemplateAnswerInput_TemplateArn, *v.TemplateArn)
+	}
+}
+
 type UpdateReviewTemplateAnswerOutput struct {
 
 	// An answer of the question.
@@ -105,13 +136,46 @@ type UpdateReviewTemplateAnswerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateReviewTemplateAnswerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateReviewTemplateAnswerOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateReviewTemplateAnswerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Answer != nil {
+		s.WriteStruct(schemas.UpdateReviewTemplateAnswerOutput_Answer)
+		v.Answer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LensAlias != nil {
+		s.WriteString(schemas.UpdateReviewTemplateAnswerOutput_LensAlias, *v.LensAlias)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.UpdateReviewTemplateAnswerOutput_TemplateArn, *v.TemplateArn)
+	}
+}
+func (v *UpdateReviewTemplateAnswerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateReviewTemplateAnswerOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateReviewTemplateAnswerOutput_Answer:
+			v.Answer = &types.ReviewTemplateAnswer{}
+			return v.Answer.Deserialize(d)
+		case schemas.UpdateReviewTemplateAnswerOutput_LensAlias:
+			v.LensAlias = new(string)
+			return d.ReadString(schemas.UpdateReviewTemplateAnswerOutput_LensAlias, v.LensAlias)
+		case schemas.UpdateReviewTemplateAnswerOutput_TemplateArn:
+			v.TemplateArn = new(string)
+			return d.ReadString(schemas.UpdateReviewTemplateAnswerOutput_TemplateArn, v.TemplateArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateReviewTemplateAnswerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateReviewTemplateAnswer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateReviewTemplateAnswer, schemas.UpdateReviewTemplateAnswerInput, schemas.UpdateReviewTemplateAnswerOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateReviewTemplateAnswer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateReviewTemplateAnswer, schemas.UpdateReviewTemplateAnswerInput, schemas.UpdateReviewTemplateAnswerOutput), output: &UpdateReviewTemplateAnswerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

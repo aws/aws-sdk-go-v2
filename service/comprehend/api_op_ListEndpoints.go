@@ -5,7 +5,9 @@ package comprehend
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,26 @@ type ListEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEndpointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListEndpointsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEndpointsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEndpointsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListEndpointsOutput struct {
 
 	// Displays a list of endpoint properties being retrieved by the service in
@@ -59,13 +81,35 @@ type ListEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEndpointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEndpointPropertiesList(s, schemas.ListEndpointsResponse_EndpointPropertiesList, v.EndpointPropertiesList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEndpointsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEndpointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEndpointsResponse_EndpointPropertiesList:
+			return deserializeEndpointPropertiesList(d, schemas.ListEndpointsResponse_EndpointPropertiesList, &v.EndpointPropertiesList)
+		case schemas.ListEndpointsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEndpointsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEndpoints, schemas.ListEndpointsRequest, schemas.ListEndpointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEndpoints, schemas.ListEndpointsRequest, schemas.ListEndpointsResponse), output: &ListEndpointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

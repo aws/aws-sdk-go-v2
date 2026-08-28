@@ -7,7 +7,9 @@ import (
 	"errors"
 	"fmt"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -70,6 +72,21 @@ type DescribeVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVaultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVaultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVaultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DescribeVaultInput_accountId, *v.AccountId)
+	}
+	if v.VaultName != nil {
+		s.WriteString(schemas.DescribeVaultInput_vaultName, *v.VaultName)
+	}
+}
+
 // Contains the Amazon Glacier response to your request.
 type DescribeVaultOutput struct {
 
@@ -105,13 +122,60 @@ type DescribeVaultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVaultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVaultOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVaultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteString(schemas.DescribeVaultOutput_CreationDate, *v.CreationDate)
+	}
+	if v.LastInventoryDate != nil {
+		s.WriteString(schemas.DescribeVaultOutput_LastInventoryDate, *v.LastInventoryDate)
+	}
+	if v.NumberOfArchives != 0 {
+		s.WriteInt64(schemas.DescribeVaultOutput_NumberOfArchives, v.NumberOfArchives)
+	}
+	if v.SizeInBytes != 0 {
+		s.WriteInt64(schemas.DescribeVaultOutput_SizeInBytes, v.SizeInBytes)
+	}
+	if v.VaultARN != nil {
+		s.WriteString(schemas.DescribeVaultOutput_VaultARN, *v.VaultARN)
+	}
+	if v.VaultName != nil {
+		s.WriteString(schemas.DescribeVaultOutput_VaultName, *v.VaultName)
+	}
+}
+func (v *DescribeVaultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVaultOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVaultOutput_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.DescribeVaultOutput_CreationDate, v.CreationDate)
+		case schemas.DescribeVaultOutput_LastInventoryDate:
+			v.LastInventoryDate = new(string)
+			return d.ReadString(schemas.DescribeVaultOutput_LastInventoryDate, v.LastInventoryDate)
+		case schemas.DescribeVaultOutput_NumberOfArchives:
+			return d.ReadInt64(schemas.DescribeVaultOutput_NumberOfArchives, &v.NumberOfArchives)
+		case schemas.DescribeVaultOutput_SizeInBytes:
+			return d.ReadInt64(schemas.DescribeVaultOutput_SizeInBytes, &v.SizeInBytes)
+		case schemas.DescribeVaultOutput_VaultARN:
+			v.VaultARN = new(string)
+			return d.ReadString(schemas.DescribeVaultOutput_VaultARN, v.VaultARN)
+		case schemas.DescribeVaultOutput_VaultName:
+			v.VaultName = new(string)
+			return d.ReadString(schemas.DescribeVaultOutput_VaultName, v.VaultName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVault, schemas.DescribeVaultInput, schemas.DescribeVaultOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVault, schemas.DescribeVaultInput, schemas.DescribeVaultOutput), output: &DescribeVaultOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

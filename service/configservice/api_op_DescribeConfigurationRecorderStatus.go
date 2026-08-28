@@ -4,7 +4,9 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,22 @@ type DescribeConfigurationRecorderStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigurationRecorderStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigurationRecorderStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationRecorderStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeConfigurationRecorderStatusRequest_Arn, *v.Arn)
+	}
+	serializeConfigurationRecorderNameList(s, schemas.DescribeConfigurationRecorderStatusRequest_ConfigurationRecorderNames, v.ConfigurationRecorderNames)
+	if v.ServicePrincipal != nil {
+		s.WriteString(schemas.DescribeConfigurationRecorderStatusRequest_ServicePrincipal, *v.ServicePrincipal)
+	}
+}
+
 // The output for the DescribeConfigurationRecorderStatus action, in JSON format.
 type DescribeConfigurationRecorderStatusOutput struct {
 
@@ -71,13 +89,29 @@ type DescribeConfigurationRecorderStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigurationRecorderStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigurationRecorderStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationRecorderStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurationRecorderStatusList(s, schemas.DescribeConfigurationRecorderStatusResponse_ConfigurationRecordersStatus, v.ConfigurationRecordersStatus)
+}
+func (v *DescribeConfigurationRecorderStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConfigurationRecorderStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConfigurationRecorderStatusResponse_ConfigurationRecordersStatus:
+			return deserializeConfigurationRecorderStatusList(d, schemas.DescribeConfigurationRecorderStatusResponse_ConfigurationRecordersStatus, &v.ConfigurationRecordersStatus)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConfigurationRecorderStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConfigurationRecorderStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigurationRecorderStatus, schemas.DescribeConfigurationRecorderStatusRequest, schemas.DescribeConfigurationRecorderStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeConfigurationRecorderStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigurationRecorderStatus, schemas.DescribeConfigurationRecorderStatusRequest, schemas.DescribeConfigurationRecorderStatusResponse), output: &DescribeConfigurationRecorderStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

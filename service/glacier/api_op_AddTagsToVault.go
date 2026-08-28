@@ -5,6 +5,8 @@ package glacier
 import (
 	"context"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,22 @@ type AddTagsToVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddTagsToVaultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddTagsToVaultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddTagsToVaultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTagMap(s, schemas.AddTagsToVaultInput_Tags, v.Tags)
+	if v.AccountId != nil {
+		s.WriteString(schemas.AddTagsToVaultInput_accountId, *v.AccountId)
+	}
+	if v.VaultName != nil {
+		s.WriteString(schemas.AddTagsToVaultInput_vaultName, *v.VaultName)
+	}
+}
+
 type AddTagsToVaultOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,13 +80,26 @@ type AddTagsToVaultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddTagsToVaultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddTagsToVaultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AddTagsToVaultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddTagsToVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddTagsToVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddTagsToVault, schemas.AddTagsToVaultInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddTagsToVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddTagsToVault, schemas.AddTagsToVaultInput, nil), output: &AddTagsToVaultOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

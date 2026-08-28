@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -65,6 +67,42 @@ type ListCodeRepositoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCodeRepositoriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCodeRepositoriesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCodeRepositoriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListCodeRepositoriesInput_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListCodeRepositoriesInput_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.LastModifiedTimeAfter != nil {
+		s.WriteTime(schemas.ListCodeRepositoriesInput_LastModifiedTimeAfter, *v.LastModifiedTimeAfter)
+	}
+	if v.LastModifiedTimeBefore != nil {
+		s.WriteTime(schemas.ListCodeRepositoriesInput_LastModifiedTimeBefore, *v.LastModifiedTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCodeRepositoriesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListCodeRepositoriesInput_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCodeRepositoriesInput_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListCodeRepositoriesInput_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListCodeRepositoriesInput_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListCodeRepositoriesOutput struct {
 
 	// Gets a list of summaries of the Git repositories. Each summary specifies the
@@ -96,13 +134,35 @@ type ListCodeRepositoriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCodeRepositoriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCodeRepositoriesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCodeRepositoriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCodeRepositorySummaryList(s, schemas.ListCodeRepositoriesOutput_CodeRepositorySummaryList, v.CodeRepositorySummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCodeRepositoriesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCodeRepositoriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCodeRepositoriesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCodeRepositoriesOutput_CodeRepositorySummaryList:
+			return deserializeCodeRepositorySummaryList(d, schemas.ListCodeRepositoriesOutput_CodeRepositorySummaryList, &v.CodeRepositorySummaryList)
+		case schemas.ListCodeRepositoriesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCodeRepositoriesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCodeRepositoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCodeRepositories{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCodeRepositories, schemas.ListCodeRepositoriesInput, schemas.ListCodeRepositoriesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCodeRepositories{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCodeRepositories, schemas.ListCodeRepositoriesInput, schemas.ListCodeRepositoriesOutput), output: &ListCodeRepositoriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

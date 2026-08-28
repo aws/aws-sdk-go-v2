@@ -5,7 +5,9 @@ package schemas
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/schemas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/schemas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,27 @@ type ListDiscoverersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDiscoverersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDiscoverersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDiscoverersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DiscovererIdPrefix != nil {
+		s.WriteString(schemas.ListDiscoverersRequest_DiscovererIdPrefix, *v.DiscovererIdPrefix)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListDiscoverersRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDiscoverersRequest_NextToken, *v.NextToken)
+	}
+	if v.SourceArnPrefix != nil {
+		s.WriteString(schemas.ListDiscoverersRequest_SourceArnPrefix, *v.SourceArnPrefix)
+	}
+}
+
 type ListDiscoverersOutput struct {
 
 	// An array of DiscovererSummary information.
@@ -61,13 +84,35 @@ type ListDiscoverersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDiscoverersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDiscoverersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDiscoverersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfDiscovererSummary(s, schemas.ListDiscoverersResponse_Discoverers, v.Discoverers)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDiscoverersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDiscoverersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDiscoverersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDiscoverersResponse_Discoverers:
+			return deserialize__listOfDiscovererSummary(d, schemas.ListDiscoverersResponse_Discoverers, &v.Discoverers)
+		case schemas.ListDiscoverersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDiscoverersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDiscoverersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDiscoverers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDiscoverers, schemas.ListDiscoverersRequest, schemas.ListDiscoverersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDiscoverers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDiscoverers, schemas.ListDiscoverersRequest, schemas.ListDiscoverersResponse), output: &ListDiscoverersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

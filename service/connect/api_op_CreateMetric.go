@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,42 @@ type CreateMetricInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMetricInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMetricRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMetricInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateMetricRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateMetricRequest_Description, *v.Description)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateMetricRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MetricCalculation != nil {
+		s.WriteStruct(schemas.CreateMetricRequest_MetricCalculation)
+		v.MetricCalculation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateMetricRequest_Name, *v.Name)
+	}
+	if v.PositiveTrendIndicator != "" {
+		s.WriteString(schemas.CreateMetricRequest_PositiveTrendIndicator, string(v.PositiveTrendIndicator))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateMetricRequest_Status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.CreateMetricRequest_Tags, v.Tags)
+	if v.Unit != "" {
+		s.WriteString(schemas.CreateMetricRequest_Unit, string(v.Unit))
+	}
+}
+
 type CreateMetricOutput struct {
 
 	// The Amazon Resource Name (ARN) of the metric.
@@ -96,13 +134,38 @@ type CreateMetricOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMetricOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMetricResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMetricOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricArn != nil {
+		s.WriteString(schemas.CreateMetricResponse_MetricArn, *v.MetricArn)
+	}
+	if v.MetricId != nil {
+		s.WriteString(schemas.CreateMetricResponse_MetricId, *v.MetricId)
+	}
+}
+func (v *CreateMetricOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMetricResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMetricResponse_MetricArn:
+			v.MetricArn = new(string)
+			return d.ReadString(schemas.CreateMetricResponse_MetricArn, v.MetricArn)
+		case schemas.CreateMetricResponse_MetricId:
+			v.MetricId = new(string)
+			return d.ReadString(schemas.CreateMetricResponse_MetricId, v.MetricId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMetricMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMetric{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMetric, schemas.CreateMetricRequest, schemas.CreateMetricResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMetric{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMetric, schemas.CreateMetricRequest, schemas.CreateMetricResponse), output: &CreateMetricOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

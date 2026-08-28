@@ -4,6 +4,8 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,27 @@ type UpdateConnectClientAddInInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectClientAddInInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectClientAddInRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectClientAddInInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddInId != nil {
+		s.WriteString(schemas.UpdateConnectClientAddInRequest_AddInId, *v.AddInId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateConnectClientAddInRequest_Name, *v.Name)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.UpdateConnectClientAddInRequest_ResourceId, *v.ResourceId)
+	}
+	if v.URL != nil {
+		s.WriteString(schemas.UpdateConnectClientAddInRequest_URL, *v.URL)
+	}
+}
+
 type UpdateConnectClientAddInOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +75,26 @@ type UpdateConnectClientAddInOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectClientAddInOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectClientAddInResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectClientAddInOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateConnectClientAddInOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConnectClientAddInResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConnectClientAddInMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateConnectClientAddIn{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnectClientAddIn, schemas.UpdateConnectClientAddInRequest, schemas.UpdateConnectClientAddInResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateConnectClientAddIn{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnectClientAddIn, schemas.UpdateConnectClientAddInRequest, schemas.UpdateConnectClientAddInResult), output: &UpdateConnectClientAddInOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

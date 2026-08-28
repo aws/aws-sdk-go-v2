@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,29 @@ type DescribeAggregateComplianceByConformancePacksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAggregateComplianceByConformancePacksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAggregateComplianceByConformancePacksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAggregateComplianceByConformancePacksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationAggregatorName != nil {
+		s.WriteString(schemas.DescribeAggregateComplianceByConformancePacksRequest_ConfigurationAggregatorName, *v.ConfigurationAggregatorName)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.DescribeAggregateComplianceByConformancePacksRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.DescribeAggregateComplianceByConformancePacksRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAggregateComplianceByConformancePacksRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeAggregateComplianceByConformancePacksOutput struct {
 
 	// Returns the AggregateComplianceByConformancePack object.
@@ -68,13 +93,35 @@ type DescribeAggregateComplianceByConformancePacksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAggregateComplianceByConformancePacksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAggregateComplianceByConformancePacksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAggregateComplianceByConformancePacksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAggregateComplianceByConformancePackList(s, schemas.DescribeAggregateComplianceByConformancePacksResponse_AggregateComplianceByConformancePacks, v.AggregateComplianceByConformancePacks)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAggregateComplianceByConformancePacksResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAggregateComplianceByConformancePacksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAggregateComplianceByConformancePacksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAggregateComplianceByConformancePacksResponse_AggregateComplianceByConformancePacks:
+			return deserializeAggregateComplianceByConformancePackList(d, schemas.DescribeAggregateComplianceByConformancePacksResponse_AggregateComplianceByConformancePacks, &v.AggregateComplianceByConformancePacks)
+		case schemas.DescribeAggregateComplianceByConformancePacksResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAggregateComplianceByConformancePacksResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAggregateComplianceByConformancePacksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAggregateComplianceByConformancePacks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAggregateComplianceByConformancePacks, schemas.DescribeAggregateComplianceByConformancePacksRequest, schemas.DescribeAggregateComplianceByConformancePacksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAggregateComplianceByConformancePacks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAggregateComplianceByConformancePacks, schemas.DescribeAggregateComplianceByConformancePacksRequest, schemas.DescribeAggregateComplianceByConformancePacksResponse), output: &DescribeAggregateComplianceByConformancePacksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

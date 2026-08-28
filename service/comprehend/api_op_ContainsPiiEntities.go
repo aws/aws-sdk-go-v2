@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type ContainsPiiEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContainsPiiEntitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainsPiiEntitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainsPiiEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.ContainsPiiEntitiesRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.ContainsPiiEntitiesRequest_Text, *v.Text)
+	}
+}
+
 type ContainsPiiEntitiesOutput struct {
 
 	// The labels used in the document being analyzed. Individual labels represent
@@ -53,13 +70,29 @@ type ContainsPiiEntitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContainsPiiEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainsPiiEntitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainsPiiEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfEntityLabels(s, schemas.ContainsPiiEntitiesResponse_Labels, v.Labels)
+}
+func (v *ContainsPiiEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainsPiiEntitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainsPiiEntitiesResponse_Labels:
+			return deserializeListOfEntityLabels(d, schemas.ContainsPiiEntitiesResponse_Labels, &v.Labels)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationContainsPiiEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpContainsPiiEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ContainsPiiEntities, schemas.ContainsPiiEntitiesRequest, schemas.ContainsPiiEntitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpContainsPiiEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ContainsPiiEntities, schemas.ContainsPiiEntitiesRequest, schemas.ContainsPiiEntitiesResponse), output: &ContainsPiiEntitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

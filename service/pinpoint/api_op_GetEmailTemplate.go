@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,21 @@ type GetEmailTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEmailTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEmailTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEmailTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateName != nil {
+		s.WriteString(schemas.GetEmailTemplateRequest_TemplateName, *v.TemplateName)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.GetEmailTemplateRequest_Version, *v.Version)
+	}
+}
+
 type GetEmailTemplateOutput struct {
 
 	// Provides information about the content and settings for a message template that
@@ -76,13 +93,34 @@ type GetEmailTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEmailTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEmailTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEmailTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailTemplateResponse != nil {
+		s.WriteStruct(schemas.GetEmailTemplateResponse_EmailTemplateResponse)
+		v.EmailTemplateResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetEmailTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEmailTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEmailTemplateResponse_EmailTemplateResponse:
+			v.EmailTemplateResponse = &types.EmailTemplateResponse{}
+			return v.EmailTemplateResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEmailTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEmailTemplate, schemas.GetEmailTemplateRequest, schemas.GetEmailTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEmailTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEmailTemplate, schemas.GetEmailTemplateRequest, schemas.GetEmailTemplateResponse), output: &GetEmailTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

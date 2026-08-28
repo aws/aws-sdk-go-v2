@@ -5,6 +5,8 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -57,6 +59,27 @@ type ListSecurityProfilePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityProfilePermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityProfilePermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityProfilePermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListSecurityProfilePermissionsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSecurityProfilePermissionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityProfilePermissionsRequest_NextToken, *v.NextToken)
+	}
+	if v.SecurityProfileId != nil {
+		s.WriteString(schemas.ListSecurityProfilePermissionsRequest_SecurityProfileId, *v.SecurityProfileId)
+	}
+}
+
 type ListSecurityProfilePermissionsOutput struct {
 
 	// The Amazon Web Services Region where this resource was last modified.
@@ -80,13 +103,47 @@ type ListSecurityProfilePermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityProfilePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityProfilePermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityProfilePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.ListSecurityProfilePermissionsResponse_LastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ListSecurityProfilePermissionsResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityProfilePermissionsResponse_NextToken, *v.NextToken)
+	}
+	serializePermissionsList(s, schemas.ListSecurityProfilePermissionsResponse_Permissions, v.Permissions)
+}
+func (v *ListSecurityProfilePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSecurityProfilePermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSecurityProfilePermissionsResponse_LastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.ListSecurityProfilePermissionsResponse_LastModifiedRegion, v.LastModifiedRegion)
+		case schemas.ListSecurityProfilePermissionsResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ListSecurityProfilePermissionsResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.ListSecurityProfilePermissionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSecurityProfilePermissionsResponse_NextToken, v.NextToken)
+		case schemas.ListSecurityProfilePermissionsResponse_Permissions:
+			return deserializePermissionsList(d, schemas.ListSecurityProfilePermissionsResponse_Permissions, &v.Permissions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSecurityProfilePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSecurityProfilePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityProfilePermissions, schemas.ListSecurityProfilePermissionsRequest, schemas.ListSecurityProfilePermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSecurityProfilePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityProfilePermissions, schemas.ListSecurityProfilePermissionsRequest, schemas.ListSecurityProfilePermissionsResponse), output: &ListSecurityProfilePermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

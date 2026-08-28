@@ -4,6 +4,8 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,22 @@ type AdminDeleteUserAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminDeleteUserAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminDeleteUserAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminDeleteUserAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeNameListType(s, schemas.AdminDeleteUserAttributesRequest_UserAttributeNames, v.UserAttributeNames)
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AdminDeleteUserAttributesRequest_UserPoolId, *v.UserPoolId)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.AdminDeleteUserAttributesRequest_Username, *v.Username)
+	}
+}
+
 // Represents the response received from the server for a request to delete user
 // attributes.
 type AdminDeleteUserAttributesOutput struct {
@@ -76,13 +94,26 @@ type AdminDeleteUserAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminDeleteUserAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminDeleteUserAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminDeleteUserAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AdminDeleteUserAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdminDeleteUserAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAdminDeleteUserAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminDeleteUserAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminDeleteUserAttributes, schemas.AdminDeleteUserAttributesRequest, schemas.AdminDeleteUserAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminDeleteUserAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminDeleteUserAttributes, schemas.AdminDeleteUserAttributesRequest, schemas.AdminDeleteUserAttributesResponse), output: &AdminDeleteUserAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

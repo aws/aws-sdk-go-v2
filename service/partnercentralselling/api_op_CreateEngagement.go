@@ -5,7 +5,9 @@ package partnercentralselling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -69,6 +71,28 @@ type CreateEngagementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEngagementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEngagementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEngagementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.CreateEngagementRequest_Catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateEngagementRequest_ClientToken, *v.ClientToken)
+	}
+	serializeEngagementContexts(s, schemas.CreateEngagementRequest_Contexts, v.Contexts)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateEngagementRequest_Description, *v.Description)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.CreateEngagementRequest_Title, *v.Title)
+	}
+}
+
 type CreateEngagementOutput struct {
 
 	// The Amazon Resource Name (ARN) that identifies the engagement.
@@ -88,13 +112,44 @@ type CreateEngagementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEngagementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEngagementResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEngagementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateEngagementResponse_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateEngagementResponse_Id, *v.Id)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.CreateEngagementResponse_ModifiedAt, *v.ModifiedAt)
+	}
+}
+func (v *CreateEngagementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEngagementResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEngagementResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateEngagementResponse_Arn, v.Arn)
+		case schemas.CreateEngagementResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateEngagementResponse_Id, v.Id)
+		case schemas.CreateEngagementResponse_ModifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateEngagementResponse_ModifiedAt, v.ModifiedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEngagementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateEngagement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEngagement, schemas.CreateEngagementRequest, schemas.CreateEngagementResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateEngagement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEngagement, schemas.CreateEngagementRequest, schemas.CreateEngagementResponse), output: &CreateEngagementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

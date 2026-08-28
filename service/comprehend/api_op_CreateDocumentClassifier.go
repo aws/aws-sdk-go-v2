@@ -5,7 +5,9 @@ package comprehend
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -130,6 +132,58 @@ type CreateDocumentClassifierInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDocumentClassifierInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDocumentClassifierRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDocumentClassifierInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateDocumentClassifierRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.CreateDocumentClassifierRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.DocumentClassifierName != nil {
+		s.WriteString(schemas.CreateDocumentClassifierRequest_DocumentClassifierName, *v.DocumentClassifierName)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.CreateDocumentClassifierRequest_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.CreateDocumentClassifierRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.CreateDocumentClassifierRequest_Mode, string(v.Mode))
+	}
+	if v.ModelKmsKeyId != nil {
+		s.WriteString(schemas.CreateDocumentClassifierRequest_ModelKmsKeyId, *v.ModelKmsKeyId)
+	}
+	if v.ModelPolicy != nil {
+		s.WriteString(schemas.CreateDocumentClassifierRequest_ModelPolicy, *v.ModelPolicy)
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.CreateDocumentClassifierRequest_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateDocumentClassifierRequest_Tags, v.Tags)
+	if v.VersionName != nil {
+		s.WriteString(schemas.CreateDocumentClassifierRequest_VersionName, *v.VersionName)
+	}
+	if v.VolumeKmsKeyId != nil {
+		s.WriteString(schemas.CreateDocumentClassifierRequest_VolumeKmsKeyId, *v.VolumeKmsKeyId)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.CreateDocumentClassifierRequest_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateDocumentClassifierOutput struct {
 
 	// The Amazon Resource Name (ARN) that identifies the document classifier.
@@ -141,13 +195,32 @@ type CreateDocumentClassifierOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDocumentClassifierOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDocumentClassifierResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDocumentClassifierOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentClassifierArn != nil {
+		s.WriteString(schemas.CreateDocumentClassifierResponse_DocumentClassifierArn, *v.DocumentClassifierArn)
+	}
+}
+func (v *CreateDocumentClassifierOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDocumentClassifierResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDocumentClassifierResponse_DocumentClassifierArn:
+			v.DocumentClassifierArn = new(string)
+			return d.ReadString(schemas.CreateDocumentClassifierResponse_DocumentClassifierArn, v.DocumentClassifierArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDocumentClassifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDocumentClassifier{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDocumentClassifier, schemas.CreateDocumentClassifierRequest, schemas.CreateDocumentClassifierResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDocumentClassifier{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDocumentClassifier, schemas.CreateDocumentClassifierRequest, schemas.CreateDocumentClassifierResponse), output: &CreateDocumentClassifierOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

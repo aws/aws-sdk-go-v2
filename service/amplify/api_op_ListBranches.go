@@ -5,7 +5,9 @@ package amplify
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListBranchesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBranchesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBranchesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBranchesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.ListBranchesRequest_appId, *v.AppId)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListBranchesRequest_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBranchesRequest_nextToken, *v.NextToken)
+	}
+}
+
 // The result structure for the list branches request.
 type ListBranchesOutput struct {
 
@@ -62,13 +82,35 @@ type ListBranchesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBranchesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBranchesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBranchesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBranches(s, schemas.ListBranchesResult_branches, v.Branches)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBranchesResult_nextToken, *v.NextToken)
+	}
+}
+func (v *ListBranchesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBranchesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBranchesResult_branches:
+			return deserializeBranches(d, schemas.ListBranchesResult_branches, &v.Branches)
+		case schemas.ListBranchesResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBranchesResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBranchesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBranches{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBranches, schemas.ListBranchesRequest, schemas.ListBranchesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBranches{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBranches, schemas.ListBranchesRequest, schemas.ListBranchesResult), output: &ListBranchesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

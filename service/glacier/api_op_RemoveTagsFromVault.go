@@ -5,6 +5,8 @@ package glacier
 import (
 	"context"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,22 @@ type RemoveTagsFromVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveTagsFromVaultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveTagsFromVaultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveTagsFromVaultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTagKeyList(s, schemas.RemoveTagsFromVaultInput_TagKeys, v.TagKeys)
+	if v.AccountId != nil {
+		s.WriteString(schemas.RemoveTagsFromVaultInput_accountId, *v.AccountId)
+	}
+	if v.VaultName != nil {
+		s.WriteString(schemas.RemoveTagsFromVaultInput_vaultName, *v.VaultName)
+	}
+}
+
 type RemoveTagsFromVaultOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,13 +76,26 @@ type RemoveTagsFromVaultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveTagsFromVaultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveTagsFromVaultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RemoveTagsFromVaultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveTagsFromVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveTagsFromVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveTagsFromVault, schemas.RemoveTagsFromVaultInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveTagsFromVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveTagsFromVault, schemas.RemoveTagsFromVaultInput, nil), output: &RemoveTagsFromVaultOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

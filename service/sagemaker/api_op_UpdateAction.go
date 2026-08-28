@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,26 @@ type UpdateActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionName != nil {
+		s.WriteString(schemas.UpdateActionRequest_ActionName, *v.ActionName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateActionRequest_Description, *v.Description)
+	}
+	serializeLineageEntityParameters(s, schemas.UpdateActionRequest_Properties, v.Properties)
+	serializeListLineageEntityParameterKey(s, schemas.UpdateActionRequest_PropertiesToRemove, v.PropertiesToRemove)
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateActionRequest_Status, string(v.Status))
+	}
+}
+
 type UpdateActionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the action.
@@ -57,13 +79,32 @@ type UpdateActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateActionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionArn != nil {
+		s.WriteString(schemas.UpdateActionResponse_ActionArn, *v.ActionArn)
+	}
+}
+func (v *UpdateActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateActionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateActionResponse_ActionArn:
+			v.ActionArn = new(string)
+			return d.ReadString(schemas.UpdateActionResponse_ActionArn, v.ActionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAction, schemas.UpdateActionRequest, schemas.UpdateActionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAction, schemas.UpdateActionRequest, schemas.UpdateActionResponse), output: &UpdateActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

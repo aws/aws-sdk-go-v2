@@ -4,7 +4,9 @@ package pipes
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pipes/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pipes/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -36,6 +38,18 @@ type DescribePipeInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribePipeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePipeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePipeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DescribePipeRequest_Name, *v.Name)
+	}
 }
 
 type DescribePipeOutput struct {
@@ -112,13 +126,147 @@ type DescribePipeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePipeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePipeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePipeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribePipeResponse_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribePipeResponse_CreationTime, *v.CreationTime)
+	}
+	if v.CurrentState != "" {
+		s.WriteString(schemas.DescribePipeResponse_CurrentState, string(v.CurrentState))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribePipeResponse_Description, *v.Description)
+	}
+	if v.DesiredState != "" {
+		s.WriteString(schemas.DescribePipeResponse_DesiredState, string(v.DesiredState))
+	}
+	if v.Enrichment != nil {
+		s.WriteString(schemas.DescribePipeResponse_Enrichment, *v.Enrichment)
+	}
+	if v.EnrichmentParameters != nil {
+		s.WriteStruct(schemas.DescribePipeResponse_EnrichmentParameters)
+		v.EnrichmentParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.DescribePipeResponse_KmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribePipeResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.LogConfiguration != nil {
+		s.WriteStruct(schemas.DescribePipeResponse_LogConfiguration)
+		v.LogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribePipeResponse_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribePipeResponse_RoleArn, *v.RoleArn)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.DescribePipeResponse_Source, *v.Source)
+	}
+	if v.SourceParameters != nil {
+		s.WriteStruct(schemas.DescribePipeResponse_SourceParameters)
+		v.SourceParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.DescribePipeResponse_StateReason, *v.StateReason)
+	}
+	serializeTagMap(s, schemas.DescribePipeResponse_Tags, v.Tags)
+	if v.Target != nil {
+		s.WriteString(schemas.DescribePipeResponse_Target, *v.Target)
+	}
+	if v.TargetParameters != nil {
+		s.WriteStruct(schemas.DescribePipeResponse_TargetParameters)
+		v.TargetParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribePipeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePipeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePipeResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribePipeResponse_Arn, v.Arn)
+		case schemas.DescribePipeResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribePipeResponse_CreationTime, v.CreationTime)
+		case schemas.DescribePipeResponse_CurrentState:
+			var ev string
+			if err := d.ReadString(schemas.DescribePipeResponse_CurrentState, &ev); err != nil {
+				return err
+			}
+			v.CurrentState = types.PipeState(ev)
+			return nil
+		case schemas.DescribePipeResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribePipeResponse_Description, v.Description)
+		case schemas.DescribePipeResponse_DesiredState:
+			var ev string
+			if err := d.ReadString(schemas.DescribePipeResponse_DesiredState, &ev); err != nil {
+				return err
+			}
+			v.DesiredState = types.RequestedPipeStateDescribeResponse(ev)
+			return nil
+		case schemas.DescribePipeResponse_Enrichment:
+			v.Enrichment = new(string)
+			return d.ReadString(schemas.DescribePipeResponse_Enrichment, v.Enrichment)
+		case schemas.DescribePipeResponse_EnrichmentParameters:
+			v.EnrichmentParameters = &types.PipeEnrichmentParameters{}
+			return v.EnrichmentParameters.Deserialize(d)
+		case schemas.DescribePipeResponse_KmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.DescribePipeResponse_KmsKeyIdentifier, v.KmsKeyIdentifier)
+		case schemas.DescribePipeResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribePipeResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribePipeResponse_LogConfiguration:
+			v.LogConfiguration = &types.PipeLogConfiguration{}
+			return v.LogConfiguration.Deserialize(d)
+		case schemas.DescribePipeResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribePipeResponse_Name, v.Name)
+		case schemas.DescribePipeResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribePipeResponse_RoleArn, v.RoleArn)
+		case schemas.DescribePipeResponse_Source:
+			v.Source = new(string)
+			return d.ReadString(schemas.DescribePipeResponse_Source, v.Source)
+		case schemas.DescribePipeResponse_SourceParameters:
+			v.SourceParameters = &types.PipeSourceParameters{}
+			return v.SourceParameters.Deserialize(d)
+		case schemas.DescribePipeResponse_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.DescribePipeResponse_StateReason, v.StateReason)
+		case schemas.DescribePipeResponse_Tags:
+			return deserializeTagMap(d, schemas.DescribePipeResponse_Tags, &v.Tags)
+		case schemas.DescribePipeResponse_Target:
+			v.Target = new(string)
+			return d.ReadString(schemas.DescribePipeResponse_Target, v.Target)
+		case schemas.DescribePipeResponse_TargetParameters:
+			v.TargetParameters = &types.PipeTargetParameters{}
+			return v.TargetParameters.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribePipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePipe, schemas.DescribePipeRequest, schemas.DescribePipeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribePipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePipe, schemas.DescribePipeRequest, schemas.DescribePipeResponse), output: &DescribePipeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

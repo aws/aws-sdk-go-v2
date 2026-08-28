@@ -4,6 +4,8 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type GetSolutionMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSolutionMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSolutionMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSolutionMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SolutionVersionArn != nil {
+		s.WriteString(schemas.GetSolutionMetricsRequest_solutionVersionArn, *v.SolutionVersionArn)
+	}
+}
+
 type GetSolutionMetricsOutput struct {
 
 	// The metrics for the solution version. For more information, see [Evaluating a solution version with metrics].
@@ -49,13 +63,35 @@ type GetSolutionMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSolutionMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSolutionMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSolutionMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetrics(s, schemas.GetSolutionMetricsResponse_metrics, v.Metrics)
+	if v.SolutionVersionArn != nil {
+		s.WriteString(schemas.GetSolutionMetricsResponse_solutionVersionArn, *v.SolutionVersionArn)
+	}
+}
+func (v *GetSolutionMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSolutionMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSolutionMetricsResponse_metrics:
+			return deserializeMetrics(d, schemas.GetSolutionMetricsResponse_metrics, &v.Metrics)
+		case schemas.GetSolutionMetricsResponse_solutionVersionArn:
+			v.SolutionVersionArn = new(string)
+			return d.ReadString(schemas.GetSolutionMetricsResponse_solutionVersionArn, v.SolutionVersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSolutionMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSolutionMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSolutionMetrics, schemas.GetSolutionMetricsRequest, schemas.GetSolutionMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSolutionMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSolutionMetrics, schemas.GetSolutionMetricsRequest, schemas.GetSolutionMetricsResponse), output: &GetSolutionMetricsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

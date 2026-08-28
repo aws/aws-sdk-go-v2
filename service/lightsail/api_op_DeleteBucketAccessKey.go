@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,21 @@ type DeleteBucketAccessKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBucketAccessKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBucketAccessKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBucketAccessKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessKeyId != nil {
+		s.WriteString(schemas.DeleteBucketAccessKeyRequest_accessKeyId, *v.AccessKeyId)
+	}
+	if v.BucketName != nil {
+		s.WriteString(schemas.DeleteBucketAccessKeyRequest_bucketName, *v.BucketName)
+	}
+}
+
 type DeleteBucketAccessKeyOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -64,13 +81,29 @@ type DeleteBucketAccessKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBucketAccessKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBucketAccessKeyResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBucketAccessKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.DeleteBucketAccessKeyResult_operations, v.Operations)
+}
+func (v *DeleteBucketAccessKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBucketAccessKeyResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBucketAccessKeyResult_operations:
+			return deserializeOperationList(d, schemas.DeleteBucketAccessKeyResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBucketAccessKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteBucketAccessKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBucketAccessKey, schemas.DeleteBucketAccessKeyRequest, schemas.DeleteBucketAccessKeyResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteBucketAccessKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBucketAccessKey, schemas.DeleteBucketAccessKeyRequest, schemas.DeleteBucketAccessKeyResult), output: &DeleteBucketAccessKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

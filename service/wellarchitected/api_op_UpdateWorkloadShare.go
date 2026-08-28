@@ -4,7 +4,9 @@ package wellarchitected
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type UpdateWorkloadShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkloadShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkloadShareInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkloadShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PermissionType != "" {
+		s.WriteString(schemas.UpdateWorkloadShareInput_PermissionType, string(v.PermissionType))
+	}
+	if v.ShareId != nil {
+		s.WriteString(schemas.UpdateWorkloadShareInput_ShareId, *v.ShareId)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.UpdateWorkloadShareInput_WorkloadId, *v.WorkloadId)
+	}
+}
+
 // Input for Update Workload Share
 type UpdateWorkloadShareOutput struct {
 
@@ -62,13 +82,40 @@ type UpdateWorkloadShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkloadShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkloadShareOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkloadShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.UpdateWorkloadShareOutput_WorkloadId, *v.WorkloadId)
+	}
+	if v.WorkloadShare != nil {
+		s.WriteStruct(schemas.UpdateWorkloadShareOutput_WorkloadShare)
+		v.WorkloadShare.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateWorkloadShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkloadShareOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWorkloadShareOutput_WorkloadId:
+			v.WorkloadId = new(string)
+			return d.ReadString(schemas.UpdateWorkloadShareOutput_WorkloadId, v.WorkloadId)
+		case schemas.UpdateWorkloadShareOutput_WorkloadShare:
+			v.WorkloadShare = &types.WorkloadShare{}
+			return v.WorkloadShare.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkloadShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWorkloadShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkloadShare, schemas.UpdateWorkloadShareInput, schemas.UpdateWorkloadShareOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWorkloadShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkloadShare, schemas.UpdateWorkloadShareInput, schemas.UpdateWorkloadShareOutput), output: &UpdateWorkloadShareOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

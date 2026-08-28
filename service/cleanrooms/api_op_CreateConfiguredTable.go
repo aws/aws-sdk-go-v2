@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,56 @@ type CreateConfiguredTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConfiguredTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConfiguredTableInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConfiguredTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAllowedColumnList(s, schemas.CreateConfiguredTableInput_allowedColumns, v.AllowedColumns)
+	if v.AnalysisMethod != "" {
+		s.WriteString(schemas.CreateConfiguredTableInput_analysisMethod, string(v.AnalysisMethod))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateConfiguredTableInput_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateConfiguredTableInput_name, *v.Name)
+	}
+	serializeSelectedAnalysisMethods(s, schemas.CreateConfiguredTableInput_selectedAnalysisMethods, v.SelectedAnalysisMethods)
+	serializeTableReference(s, schemas.CreateConfiguredTableInput_tableReference, v.TableReference)
+	serializeTagMap(s, schemas.CreateConfiguredTableInput_tags, v.Tags)
+}
+func (v *CreateConfiguredTableInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConfiguredTableInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConfiguredTableInput_allowedColumns:
+			return deserializeAllowedColumnList(d, schemas.CreateConfiguredTableInput_allowedColumns, &v.AllowedColumns)
+		case schemas.CreateConfiguredTableInput_analysisMethod:
+			var ev string
+			if err := d.ReadString(schemas.CreateConfiguredTableInput_analysisMethod, &ev); err != nil {
+				return err
+			}
+			v.AnalysisMethod = types.AnalysisMethod(ev)
+			return nil
+		case schemas.CreateConfiguredTableInput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateConfiguredTableInput_description, v.Description)
+		case schemas.CreateConfiguredTableInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateConfiguredTableInput_name, v.Name)
+		case schemas.CreateConfiguredTableInput_selectedAnalysisMethods:
+			return deserializeSelectedAnalysisMethods(d, schemas.CreateConfiguredTableInput_selectedAnalysisMethods, &v.SelectedAnalysisMethods)
+		case schemas.CreateConfiguredTableInput_tableReference:
+			return deserializeTableReference(d, schemas.CreateConfiguredTableInput_tableReference, &v.TableReference)
+		case schemas.CreateConfiguredTableInput_tags:
+			return deserializeTagMap(d, schemas.CreateConfiguredTableInput_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateConfiguredTableOutput struct {
 
 	// The created configured table.
@@ -83,13 +135,34 @@ type CreateConfiguredTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConfiguredTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConfiguredTableOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConfiguredTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfiguredTable != nil {
+		s.WriteStruct(schemas.CreateConfiguredTableOutput_configuredTable)
+		v.ConfiguredTable.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateConfiguredTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConfiguredTableOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConfiguredTableOutput_configuredTable:
+			v.ConfiguredTable = &types.ConfiguredTable{}
+			return v.ConfiguredTable.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConfiguredTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConfiguredTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfiguredTable, schemas.CreateConfiguredTableInput, schemas.CreateConfiguredTableOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConfiguredTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfiguredTable, schemas.CreateConfiguredTableInput, schemas.CreateConfiguredTableOutput), output: &CreateConfiguredTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

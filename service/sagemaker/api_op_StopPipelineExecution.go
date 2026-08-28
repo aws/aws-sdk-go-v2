@@ -5,6 +5,8 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,21 @@ type StopPipelineExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopPipelineExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopPipelineExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopPipelineExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StopPipelineExecutionRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.PipelineExecutionArn != nil {
+		s.WriteString(schemas.StopPipelineExecutionRequest_PipelineExecutionArn, *v.PipelineExecutionArn)
+	}
+}
+
 type StopPipelineExecutionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the pipeline execution.
@@ -76,13 +93,32 @@ type StopPipelineExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopPipelineExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopPipelineExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopPipelineExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineExecutionArn != nil {
+		s.WriteString(schemas.StopPipelineExecutionResponse_PipelineExecutionArn, *v.PipelineExecutionArn)
+	}
+}
+func (v *StopPipelineExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopPipelineExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopPipelineExecutionResponse_PipelineExecutionArn:
+			v.PipelineExecutionArn = new(string)
+			return d.ReadString(schemas.StopPipelineExecutionResponse_PipelineExecutionArn, v.PipelineExecutionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopPipelineExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopPipelineExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopPipelineExecution, schemas.StopPipelineExecutionRequest, schemas.StopPipelineExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopPipelineExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopPipelineExecution, schemas.StopPipelineExecutionRequest, schemas.StopPipelineExecutionResponse), output: &StopPipelineExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

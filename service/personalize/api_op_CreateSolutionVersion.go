@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -109,6 +111,25 @@ type CreateSolutionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSolutionVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSolutionVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSolutionVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSolutionVersionRequest_name, *v.Name)
+	}
+	if v.SolutionArn != nil {
+		s.WriteString(schemas.CreateSolutionVersionRequest_solutionArn, *v.SolutionArn)
+	}
+	serializeTags(s, schemas.CreateSolutionVersionRequest_tags, v.Tags)
+	if v.TrainingMode != "" {
+		s.WriteString(schemas.CreateSolutionVersionRequest_trainingMode, string(v.TrainingMode))
+	}
+}
+
 type CreateSolutionVersionOutput struct {
 
 	// The ARN of the new solution version.
@@ -120,13 +141,32 @@ type CreateSolutionVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSolutionVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSolutionVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSolutionVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SolutionVersionArn != nil {
+		s.WriteString(schemas.CreateSolutionVersionResponse_solutionVersionArn, *v.SolutionVersionArn)
+	}
+}
+func (v *CreateSolutionVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSolutionVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSolutionVersionResponse_solutionVersionArn:
+			v.SolutionVersionArn = new(string)
+			return d.ReadString(schemas.CreateSolutionVersionResponse_solutionVersionArn, v.SolutionVersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSolutionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSolutionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSolutionVersion, schemas.CreateSolutionVersionRequest, schemas.CreateSolutionVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateSolutionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSolutionVersion, schemas.CreateSolutionVersionRequest, schemas.CreateSolutionVersionResponse), output: &CreateSolutionVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

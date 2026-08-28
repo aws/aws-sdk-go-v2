@@ -5,7 +5,9 @@ package cloudtrail
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -104,6 +106,31 @@ type LookupEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LookupEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LookupEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LookupEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.LookupEventsRequest_EndTime, *v.EndTime)
+	}
+	if v.EventCategory != "" {
+		s.WriteString(schemas.LookupEventsRequest_EventCategory, string(v.EventCategory))
+	}
+	serializeLookupAttributesList(s, schemas.LookupEventsRequest_LookupAttributes, v.LookupAttributes)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.LookupEventsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.LookupEventsRequest_NextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.LookupEventsRequest_StartTime, *v.StartTime)
+	}
+}
+
 // Contains a response to a LookupEvents action.
 type LookupEventsOutput struct {
 
@@ -125,13 +152,35 @@ type LookupEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LookupEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LookupEventsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LookupEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventsList(s, schemas.LookupEventsResponse_Events, v.Events)
+	if v.NextToken != nil {
+		s.WriteString(schemas.LookupEventsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *LookupEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LookupEventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LookupEventsResponse_Events:
+			return deserializeEventsList(d, schemas.LookupEventsResponse_Events, &v.Events)
+		case schemas.LookupEventsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.LookupEventsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationLookupEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpLookupEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.LookupEvents, schemas.LookupEventsRequest, schemas.LookupEventsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpLookupEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.LookupEvents, schemas.LookupEventsRequest, schemas.LookupEventsResponse), output: &LookupEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

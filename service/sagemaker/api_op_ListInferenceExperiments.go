@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -71,6 +73,48 @@ type ListInferenceExperimentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInferenceExperimentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInferenceExperimentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInferenceExperimentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListInferenceExperimentsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListInferenceExperimentsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.LastModifiedTimeAfter != nil {
+		s.WriteTime(schemas.ListInferenceExperimentsRequest_LastModifiedTimeAfter, *v.LastModifiedTimeAfter)
+	}
+	if v.LastModifiedTimeBefore != nil {
+		s.WriteTime(schemas.ListInferenceExperimentsRequest_LastModifiedTimeBefore, *v.LastModifiedTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInferenceExperimentsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListInferenceExperimentsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInferenceExperimentsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListInferenceExperimentsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListInferenceExperimentsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListInferenceExperimentsRequest_StatusEquals, string(v.StatusEquals))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListInferenceExperimentsRequest_Type, string(v.Type))
+	}
+}
+
 type ListInferenceExperimentsOutput struct {
 
 	// List of inference experiments.
@@ -85,13 +129,35 @@ type ListInferenceExperimentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInferenceExperimentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInferenceExperimentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInferenceExperimentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInferenceExperimentList(s, schemas.ListInferenceExperimentsResponse_InferenceExperiments, v.InferenceExperiments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInferenceExperimentsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListInferenceExperimentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInferenceExperimentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInferenceExperimentsResponse_InferenceExperiments:
+			return deserializeInferenceExperimentList(d, schemas.ListInferenceExperimentsResponse_InferenceExperiments, &v.InferenceExperiments)
+		case schemas.ListInferenceExperimentsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInferenceExperimentsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInferenceExperimentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListInferenceExperiments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInferenceExperiments, schemas.ListInferenceExperimentsRequest, schemas.ListInferenceExperimentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListInferenceExperiments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInferenceExperiments, schemas.ListInferenceExperimentsRequest, schemas.ListInferenceExperimentsResponse), output: &ListInferenceExperimentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

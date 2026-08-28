@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,30 @@ type StartContactConversationalAnalyticsJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartContactConversationalAnalyticsJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartContactConversationalAnalyticsJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartContactConversationalAnalyticsJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyticsConfiguration != nil {
+		s.WriteStruct(schemas.StartContactConversationalAnalyticsJobRequest_AnalyticsConfiguration)
+		v.AnalyticsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAnalyticsModes(s, schemas.StartContactConversationalAnalyticsJobRequest_AnalyticsModes, v.AnalyticsModes)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartContactConversationalAnalyticsJobRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ContactId != nil {
+		s.WriteString(schemas.StartContactConversationalAnalyticsJobRequest_ContactId, *v.ContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StartContactConversationalAnalyticsJobRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type StartContactConversationalAnalyticsJobOutput struct {
 
 	// The identifier of the contact.
@@ -84,13 +110,38 @@ type StartContactConversationalAnalyticsJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartContactConversationalAnalyticsJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartContactConversationalAnalyticsJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartContactConversationalAnalyticsJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.StartContactConversationalAnalyticsJobResponse_ContactId, *v.ContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StartContactConversationalAnalyticsJobResponse_InstanceId, *v.InstanceId)
+	}
+}
+func (v *StartContactConversationalAnalyticsJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartContactConversationalAnalyticsJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartContactConversationalAnalyticsJobResponse_ContactId:
+			v.ContactId = new(string)
+			return d.ReadString(schemas.StartContactConversationalAnalyticsJobResponse_ContactId, v.ContactId)
+		case schemas.StartContactConversationalAnalyticsJobResponse_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.StartContactConversationalAnalyticsJobResponse_InstanceId, v.InstanceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartContactConversationalAnalyticsJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartContactConversationalAnalyticsJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartContactConversationalAnalyticsJob, schemas.StartContactConversationalAnalyticsJobRequest, schemas.StartContactConversationalAnalyticsJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartContactConversationalAnalyticsJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartContactConversationalAnalyticsJob, schemas.StartContactConversationalAnalyticsJobRequest, schemas.StartContactConversationalAnalyticsJobResponse), output: &StartContactConversationalAnalyticsJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,30 @@ type CreatePersistentAppUIInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePersistentAppUIInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePersistentAppUIInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePersistentAppUIInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EMRContainersConfig != nil {
+		s.WriteStruct(schemas.CreatePersistentAppUIInput_EMRContainersConfig)
+		v.EMRContainersConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProfilerType != "" {
+		s.WriteString(schemas.CreatePersistentAppUIInput_ProfilerType, string(v.ProfilerType))
+	}
+	serializeTagList(s, schemas.CreatePersistentAppUIInput_Tags, v.Tags)
+	if v.TargetResourceArn != nil {
+		s.WriteString(schemas.CreatePersistentAppUIInput_TargetResourceArn, *v.TargetResourceArn)
+	}
+	if v.XReferer != nil {
+		s.WriteString(schemas.CreatePersistentAppUIInput_XReferer, *v.XReferer)
+	}
+}
+
 type CreatePersistentAppUIOutput struct {
 
 	// The persistent application user interface identifier.
@@ -61,13 +87,38 @@ type CreatePersistentAppUIOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePersistentAppUIOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePersistentAppUIOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePersistentAppUIOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PersistentAppUIId != nil {
+		s.WriteString(schemas.CreatePersistentAppUIOutput_PersistentAppUIId, *v.PersistentAppUIId)
+	}
+	if v.RuntimeRoleEnabledCluster != nil {
+		s.WriteBool(schemas.CreatePersistentAppUIOutput_RuntimeRoleEnabledCluster, *v.RuntimeRoleEnabledCluster)
+	}
+}
+func (v *CreatePersistentAppUIOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePersistentAppUIOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePersistentAppUIOutput_PersistentAppUIId:
+			v.PersistentAppUIId = new(string)
+			return d.ReadString(schemas.CreatePersistentAppUIOutput_PersistentAppUIId, v.PersistentAppUIId)
+		case schemas.CreatePersistentAppUIOutput_RuntimeRoleEnabledCluster:
+			v.RuntimeRoleEnabledCluster = new(bool)
+			return d.ReadBool(schemas.CreatePersistentAppUIOutput_RuntimeRoleEnabledCluster, v.RuntimeRoleEnabledCluster)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePersistentAppUIMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePersistentAppUI{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePersistentAppUI, schemas.CreatePersistentAppUIInput, schemas.CreatePersistentAppUIOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePersistentAppUI{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePersistentAppUI, schemas.CreatePersistentAppUIInput, schemas.CreatePersistentAppUIOutput), output: &CreatePersistentAppUIOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

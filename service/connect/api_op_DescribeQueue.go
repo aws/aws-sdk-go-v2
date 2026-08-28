@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DescribeQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeQueueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeQueueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeQueueRequest_InstanceId, *v.InstanceId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.DescribeQueueRequest_QueueId, *v.QueueId)
+	}
+}
+
 type DescribeQueueOutput struct {
 
 	// The name of the queue.
@@ -53,13 +70,34 @@ type DescribeQueueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeQueueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeQueueResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeQueueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Queue != nil {
+		s.WriteStruct(schemas.DescribeQueueResponse_Queue)
+		v.Queue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeQueueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeQueueResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeQueueResponse_Queue:
+			v.Queue = &types.Queue{}
+			return v.Queue.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQueue, schemas.DescribeQueueRequest, schemas.DescribeQueueResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQueue, schemas.DescribeQueueRequest, schemas.DescribeQueueResponse), output: &DescribeQueueOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

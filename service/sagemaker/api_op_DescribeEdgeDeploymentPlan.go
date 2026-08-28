@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -40,6 +42,24 @@ type DescribeEdgeDeploymentPlanInput struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeEdgeDeploymentPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEdgeDeploymentPlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEdgeDeploymentPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EdgeDeploymentPlanName != nil {
+		s.WriteString(schemas.DescribeEdgeDeploymentPlanRequest_EdgeDeploymentPlanName, *v.EdgeDeploymentPlanName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeEdgeDeploymentPlanRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEdgeDeploymentPlanRequest_NextToken, *v.NextToken)
+	}
 }
 
 type DescribeEdgeDeploymentPlanOutput struct {
@@ -93,13 +113,86 @@ type DescribeEdgeDeploymentPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEdgeDeploymentPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEdgeDeploymentPlanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEdgeDeploymentPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeEdgeDeploymentPlanResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DeviceFleetName != nil {
+		s.WriteString(schemas.DescribeEdgeDeploymentPlanResponse_DeviceFleetName, *v.DeviceFleetName)
+	}
+	if v.EdgeDeploymentFailed != nil {
+		s.WriteInt32(schemas.DescribeEdgeDeploymentPlanResponse_EdgeDeploymentFailed, *v.EdgeDeploymentFailed)
+	}
+	if v.EdgeDeploymentPending != nil {
+		s.WriteInt32(schemas.DescribeEdgeDeploymentPlanResponse_EdgeDeploymentPending, *v.EdgeDeploymentPending)
+	}
+	if v.EdgeDeploymentPlanArn != nil {
+		s.WriteString(schemas.DescribeEdgeDeploymentPlanResponse_EdgeDeploymentPlanArn, *v.EdgeDeploymentPlanArn)
+	}
+	if v.EdgeDeploymentPlanName != nil {
+		s.WriteString(schemas.DescribeEdgeDeploymentPlanResponse_EdgeDeploymentPlanName, *v.EdgeDeploymentPlanName)
+	}
+	if v.EdgeDeploymentSuccess != nil {
+		s.WriteInt32(schemas.DescribeEdgeDeploymentPlanResponse_EdgeDeploymentSuccess, *v.EdgeDeploymentSuccess)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeEdgeDeploymentPlanResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	serializeEdgeDeploymentModelConfigs(s, schemas.DescribeEdgeDeploymentPlanResponse_ModelConfigs, v.ModelConfigs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeEdgeDeploymentPlanResponse_NextToken, *v.NextToken)
+	}
+	serializeDeploymentStageStatusSummaries(s, schemas.DescribeEdgeDeploymentPlanResponse_Stages, v.Stages)
+}
+func (v *DescribeEdgeDeploymentPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEdgeDeploymentPlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEdgeDeploymentPlanResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeEdgeDeploymentPlanResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeEdgeDeploymentPlanResponse_DeviceFleetName:
+			v.DeviceFleetName = new(string)
+			return d.ReadString(schemas.DescribeEdgeDeploymentPlanResponse_DeviceFleetName, v.DeviceFleetName)
+		case schemas.DescribeEdgeDeploymentPlanResponse_EdgeDeploymentFailed:
+			v.EdgeDeploymentFailed = new(int32)
+			return d.ReadInt32(schemas.DescribeEdgeDeploymentPlanResponse_EdgeDeploymentFailed, v.EdgeDeploymentFailed)
+		case schemas.DescribeEdgeDeploymentPlanResponse_EdgeDeploymentPending:
+			v.EdgeDeploymentPending = new(int32)
+			return d.ReadInt32(schemas.DescribeEdgeDeploymentPlanResponse_EdgeDeploymentPending, v.EdgeDeploymentPending)
+		case schemas.DescribeEdgeDeploymentPlanResponse_EdgeDeploymentPlanArn:
+			v.EdgeDeploymentPlanArn = new(string)
+			return d.ReadString(schemas.DescribeEdgeDeploymentPlanResponse_EdgeDeploymentPlanArn, v.EdgeDeploymentPlanArn)
+		case schemas.DescribeEdgeDeploymentPlanResponse_EdgeDeploymentPlanName:
+			v.EdgeDeploymentPlanName = new(string)
+			return d.ReadString(schemas.DescribeEdgeDeploymentPlanResponse_EdgeDeploymentPlanName, v.EdgeDeploymentPlanName)
+		case schemas.DescribeEdgeDeploymentPlanResponse_EdgeDeploymentSuccess:
+			v.EdgeDeploymentSuccess = new(int32)
+			return d.ReadInt32(schemas.DescribeEdgeDeploymentPlanResponse_EdgeDeploymentSuccess, v.EdgeDeploymentSuccess)
+		case schemas.DescribeEdgeDeploymentPlanResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeEdgeDeploymentPlanResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeEdgeDeploymentPlanResponse_ModelConfigs:
+			return deserializeEdgeDeploymentModelConfigs(d, schemas.DescribeEdgeDeploymentPlanResponse_ModelConfigs, &v.ModelConfigs)
+		case schemas.DescribeEdgeDeploymentPlanResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeEdgeDeploymentPlanResponse_NextToken, v.NextToken)
+		case schemas.DescribeEdgeDeploymentPlanResponse_Stages:
+			return deserializeDeploymentStageStatusSummaries(d, schemas.DescribeEdgeDeploymentPlanResponse_Stages, &v.Stages)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEdgeDeploymentPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEdgeDeploymentPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEdgeDeploymentPlan, schemas.DescribeEdgeDeploymentPlanRequest, schemas.DescribeEdgeDeploymentPlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEdgeDeploymentPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEdgeDeploymentPlan, schemas.DescribeEdgeDeploymentPlanRequest, schemas.DescribeEdgeDeploymentPlanResponse), output: &DescribeEdgeDeploymentPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

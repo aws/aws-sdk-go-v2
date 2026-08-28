@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -37,6 +38,45 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccessDeniedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessDeniedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessDeniedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.AccessDeniedException_code, *v.Code)
+	}
+	if v.Docs != nil {
+		s.WriteString(schemas.AccessDeniedException_docs, *v.Docs)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.AccessDeniedException_message, *v.Message)
+	}
+	if v.Tip != nil {
+		s.WriteString(schemas.AccessDeniedException_tip, *v.Tip)
+	}
+}
+func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessDeniedException_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.AccessDeniedException_code, v.Code)
+		case schemas.AccessDeniedException_docs:
+			v.Docs = new(string)
+			return d.ReadString(schemas.AccessDeniedException_docs, v.Docs)
+		case schemas.AccessDeniedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccessDeniedException_message, v.Message)
+		case schemas.AccessDeniedException_tip:
+			v.Tip = new(string)
+			return d.ReadString(schemas.AccessDeniedException_tip, v.Tip)
+		}
+		return nil
+	})
+}
 
 // Lightsail throws this exception when an account is still in the setup in
 // progress state.
@@ -68,6 +108,45 @@ func (e *AccountSetupInProgressException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccountSetupInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccountSetupInProgressException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountSetupInProgressException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountSetupInProgressException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.AccountSetupInProgressException_code, *v.Code)
+	}
+	if v.Docs != nil {
+		s.WriteString(schemas.AccountSetupInProgressException_docs, *v.Docs)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.AccountSetupInProgressException_message, *v.Message)
+	}
+	if v.Tip != nil {
+		s.WriteString(schemas.AccountSetupInProgressException_tip, *v.Tip)
+	}
+}
+func (v *AccountSetupInProgressException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountSetupInProgressException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountSetupInProgressException_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.AccountSetupInProgressException_code, v.Code)
+		case schemas.AccountSetupInProgressException_docs:
+			v.Docs = new(string)
+			return d.ReadString(schemas.AccountSetupInProgressException_docs, v.Docs)
+		case schemas.AccountSetupInProgressException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccountSetupInProgressException_message, v.Message)
+		case schemas.AccountSetupInProgressException_tip:
+			v.Tip = new(string)
+			return d.ReadString(schemas.AccountSetupInProgressException_tip, v.Tip)
+		}
+		return nil
+	})
+}
 
 // Lightsail throws this exception when user input does not conform to the
 // validation rules of an input field.
@@ -103,6 +182,45 @@ func (e *InvalidInputException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidInputException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidInputException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidInputException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.InvalidInputException_code, *v.Code)
+	}
+	if v.Docs != nil {
+		s.WriteString(schemas.InvalidInputException_docs, *v.Docs)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidInputException_message, *v.Message)
+	}
+	if v.Tip != nil {
+		s.WriteString(schemas.InvalidInputException_tip, *v.Tip)
+	}
+}
+func (v *InvalidInputException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidInputException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidInputException_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.InvalidInputException_code, v.Code)
+		case schemas.InvalidInputException_docs:
+			v.Docs = new(string)
+			return d.ReadString(schemas.InvalidInputException_docs, v.Docs)
+		case schemas.InvalidInputException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidInputException_message, v.Message)
+		case schemas.InvalidInputException_tip:
+			v.Tip = new(string)
+			return d.ReadString(schemas.InvalidInputException_tip, v.Tip)
+		}
+		return nil
+	})
+}
 
 // Lightsail throws this exception when it cannot find a resource.
 type NotFoundException struct {
@@ -133,6 +251,45 @@ func (e *NotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.NotFoundException_code, *v.Code)
+	}
+	if v.Docs != nil {
+		s.WriteString(schemas.NotFoundException_docs, *v.Docs)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.NotFoundException_message, *v.Message)
+	}
+	if v.Tip != nil {
+		s.WriteString(schemas.NotFoundException_tip, *v.Tip)
+	}
+}
+func (v *NotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotFoundException_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.NotFoundException_code, v.Code)
+		case schemas.NotFoundException_docs:
+			v.Docs = new(string)
+			return d.ReadString(schemas.NotFoundException_docs, v.Docs)
+		case schemas.NotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NotFoundException_message, v.Message)
+		case schemas.NotFoundException_tip:
+			v.Tip = new(string)
+			return d.ReadString(schemas.NotFoundException_tip, v.Tip)
+		}
+		return nil
+	})
+}
 
 // Lightsail throws this exception when an operation fails to execute.
 type OperationFailureException struct {
@@ -163,6 +320,45 @@ func (e *OperationFailureException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *OperationFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *OperationFailureException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperationFailureException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OperationFailureException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.OperationFailureException_code, *v.Code)
+	}
+	if v.Docs != nil {
+		s.WriteString(schemas.OperationFailureException_docs, *v.Docs)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.OperationFailureException_message, *v.Message)
+	}
+	if v.Tip != nil {
+		s.WriteString(schemas.OperationFailureException_tip, *v.Tip)
+	}
+}
+func (v *OperationFailureException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OperationFailureException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OperationFailureException_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.OperationFailureException_code, v.Code)
+		case schemas.OperationFailureException_docs:
+			v.Docs = new(string)
+			return d.ReadString(schemas.OperationFailureException_docs, v.Docs)
+		case schemas.OperationFailureException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.OperationFailureException_message, v.Message)
+		case schemas.OperationFailureException_tip:
+			v.Tip = new(string)
+			return d.ReadString(schemas.OperationFailureException_tip, v.Tip)
+		}
+		return nil
+	})
+}
 
 // Lightsail throws this exception when an operation is performed on resources in
 // an opt-in Region that is currently being set up.
@@ -194,6 +390,45 @@ func (e *RegionSetupInProgressException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *RegionSetupInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *RegionSetupInProgressException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegionSetupInProgressException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegionSetupInProgressException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.RegionSetupInProgressException_code, *v.Code)
+	}
+	if v.Docs != nil {
+		s.WriteString(schemas.RegionSetupInProgressException_docs, *v.Docs)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.RegionSetupInProgressException_message, *v.Message)
+	}
+	if v.Tip != nil {
+		s.WriteString(schemas.RegionSetupInProgressException_tip, *v.Tip)
+	}
+}
+func (v *RegionSetupInProgressException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegionSetupInProgressException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegionSetupInProgressException_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.RegionSetupInProgressException_code, v.Code)
+		case schemas.RegionSetupInProgressException_docs:
+			v.Docs = new(string)
+			return d.ReadString(schemas.RegionSetupInProgressException_docs, v.Docs)
+		case schemas.RegionSetupInProgressException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RegionSetupInProgressException_message, v.Message)
+		case schemas.RegionSetupInProgressException_tip:
+			v.Tip = new(string)
+			return d.ReadString(schemas.RegionSetupInProgressException_tip, v.Tip)
+		}
+		return nil
+	})
+}
 
 // A general service exception.
 type ServiceException struct {
@@ -224,6 +459,45 @@ func (e *ServiceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ServiceException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ServiceException_code, *v.Code)
+	}
+	if v.Docs != nil {
+		s.WriteString(schemas.ServiceException_docs, *v.Docs)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceException_message, *v.Message)
+	}
+	if v.Tip != nil {
+		s.WriteString(schemas.ServiceException_tip, *v.Tip)
+	}
+}
+func (v *ServiceException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceException_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ServiceException_code, v.Code)
+		case schemas.ServiceException_docs:
+			v.Docs = new(string)
+			return d.ReadString(schemas.ServiceException_docs, v.Docs)
+		case schemas.ServiceException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceException_message, v.Message)
+		case schemas.ServiceException_tip:
+			v.Tip = new(string)
+			return d.ReadString(schemas.ServiceException_tip, v.Tip)
+		}
+		return nil
+	})
+}
 
 // Lightsail throws this exception when the user has not been authenticated.
 type UnauthenticatedException struct {
@@ -254,3 +528,42 @@ func (e *UnauthenticatedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnauthenticatedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnauthenticatedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnauthenticatedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnauthenticatedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.UnauthenticatedException_code, *v.Code)
+	}
+	if v.Docs != nil {
+		s.WriteString(schemas.UnauthenticatedException_docs, *v.Docs)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.UnauthenticatedException_message, *v.Message)
+	}
+	if v.Tip != nil {
+		s.WriteString(schemas.UnauthenticatedException_tip, *v.Tip)
+	}
+}
+func (v *UnauthenticatedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnauthenticatedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnauthenticatedException_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.UnauthenticatedException_code, v.Code)
+		case schemas.UnauthenticatedException_docs:
+			v.Docs = new(string)
+			return d.ReadString(schemas.UnauthenticatedException_docs, v.Docs)
+		case schemas.UnauthenticatedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnauthenticatedException_message, v.Message)
+		case schemas.UnauthenticatedException_tip:
+			v.Tip = new(string)
+			return d.ReadString(schemas.UnauthenticatedException_tip, v.Tip)
+		}
+		return nil
+	})
+}

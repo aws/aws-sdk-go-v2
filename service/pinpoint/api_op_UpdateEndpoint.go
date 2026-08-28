@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,26 @@ type UpdateEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.UpdateEndpointRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.EndpointId != nil {
+		s.WriteString(schemas.UpdateEndpointRequest_EndpointId, *v.EndpointId)
+	}
+	if v.EndpointRequest != nil {
+		s.WriteStruct(schemas.UpdateEndpointRequest_EndpointRequest)
+		v.EndpointRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateEndpointOutput struct {
 
 	// Provides information about an API request or response.
@@ -63,13 +85,34 @@ type UpdateEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageBody != nil {
+		s.WriteStruct(schemas.UpdateEndpointResponse_MessageBody)
+		v.MessageBody.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEndpointResponse_MessageBody:
+			v.MessageBody = &types.MessageBody{}
+			return v.MessageBody.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEndpoint, schemas.UpdateEndpointRequest, schemas.UpdateEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEndpoint, schemas.UpdateEndpointRequest, schemas.UpdateEndpointResponse), output: &UpdateEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,36 @@ type ListAnswersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnswersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnswersInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnswersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LensAlias != nil {
+		s.WriteString(schemas.ListAnswersInput_LensAlias, *v.LensAlias)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAnswersInput_MaxResults, *v.MaxResults)
+	}
+	if v.MilestoneNumber != nil {
+		s.WriteInt32(schemas.ListAnswersInput_MilestoneNumber, *v.MilestoneNumber)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnswersInput_NextToken, *v.NextToken)
+	}
+	if v.PillarId != nil {
+		s.WriteString(schemas.ListAnswersInput_PillarId, *v.PillarId)
+	}
+	if v.QuestionPriority != "" {
+		s.WriteString(schemas.ListAnswersInput_QuestionPriority, string(v.QuestionPriority))
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.ListAnswersInput_WorkloadId, *v.WorkloadId)
+	}
+}
+
 // Output of a list answers call.
 type ListAnswersOutput struct {
 
@@ -115,13 +147,59 @@ type ListAnswersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnswersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnswersOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnswersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnswerSummaries(s, schemas.ListAnswersOutput_AnswerSummaries, v.AnswerSummaries)
+	if v.LensAlias != nil {
+		s.WriteString(schemas.ListAnswersOutput_LensAlias, *v.LensAlias)
+	}
+	if v.LensArn != nil {
+		s.WriteString(schemas.ListAnswersOutput_LensArn, *v.LensArn)
+	}
+	if v.MilestoneNumber != nil {
+		s.WriteInt32(schemas.ListAnswersOutput_MilestoneNumber, *v.MilestoneNumber)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnswersOutput_NextToken, *v.NextToken)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.ListAnswersOutput_WorkloadId, *v.WorkloadId)
+	}
+}
+func (v *ListAnswersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAnswersOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAnswersOutput_AnswerSummaries:
+			return deserializeAnswerSummaries(d, schemas.ListAnswersOutput_AnswerSummaries, &v.AnswerSummaries)
+		case schemas.ListAnswersOutput_LensAlias:
+			v.LensAlias = new(string)
+			return d.ReadString(schemas.ListAnswersOutput_LensAlias, v.LensAlias)
+		case schemas.ListAnswersOutput_LensArn:
+			v.LensArn = new(string)
+			return d.ReadString(schemas.ListAnswersOutput_LensArn, v.LensArn)
+		case schemas.ListAnswersOutput_MilestoneNumber:
+			v.MilestoneNumber = new(int32)
+			return d.ReadInt32(schemas.ListAnswersOutput_MilestoneNumber, v.MilestoneNumber)
+		case schemas.ListAnswersOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAnswersOutput_NextToken, v.NextToken)
+		case schemas.ListAnswersOutput_WorkloadId:
+			v.WorkloadId = new(string)
+			return d.ReadString(schemas.ListAnswersOutput_WorkloadId, v.WorkloadId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAnswersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAnswers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnswers, schemas.ListAnswersInput, schemas.ListAnswersOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAnswers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnswers, schemas.ListAnswersInput, schemas.ListAnswersOutput), output: &ListAnswersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

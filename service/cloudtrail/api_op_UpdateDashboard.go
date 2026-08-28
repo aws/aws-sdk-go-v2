@@ -4,7 +4,9 @@ package cloudtrail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -69,6 +71,27 @@ type UpdateDashboardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDashboardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDashboardRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardId != nil {
+		s.WriteString(schemas.UpdateDashboardRequest_DashboardId, *v.DashboardId)
+	}
+	if v.RefreshSchedule != nil {
+		s.WriteStruct(schemas.UpdateDashboardRequest_RefreshSchedule)
+		v.RefreshSchedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TerminationProtectionEnabled != nil {
+		s.WriteBool(schemas.UpdateDashboardRequest_TerminationProtectionEnabled, *v.TerminationProtectionEnabled)
+	}
+	serializeRequestWidgetList(s, schemas.UpdateDashboardRequest_Widgets, v.Widgets)
+}
+
 type UpdateDashboardOutput struct {
 
 	//  The timestamp that shows when the dashboard was created.
@@ -101,13 +124,77 @@ type UpdateDashboardOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDashboardOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDashboardResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDashboardOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.UpdateDashboardResponse_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.DashboardArn != nil {
+		s.WriteString(schemas.UpdateDashboardResponse_DashboardArn, *v.DashboardArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDashboardResponse_Name, *v.Name)
+	}
+	if v.RefreshSchedule != nil {
+		s.WriteStruct(schemas.UpdateDashboardResponse_RefreshSchedule)
+		v.RefreshSchedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TerminationProtectionEnabled != nil {
+		s.WriteBool(schemas.UpdateDashboardResponse_TerminationProtectionEnabled, *v.TerminationProtectionEnabled)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateDashboardResponse_Type, string(v.Type))
+	}
+	if v.UpdatedTimestamp != nil {
+		s.WriteTime(schemas.UpdateDashboardResponse_UpdatedTimestamp, *v.UpdatedTimestamp)
+	}
+	serializeWidgetList(s, schemas.UpdateDashboardResponse_Widgets, v.Widgets)
+}
+func (v *UpdateDashboardOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDashboardResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDashboardResponse_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.UpdateDashboardResponse_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.UpdateDashboardResponse_DashboardArn:
+			v.DashboardArn = new(string)
+			return d.ReadString(schemas.UpdateDashboardResponse_DashboardArn, v.DashboardArn)
+		case schemas.UpdateDashboardResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateDashboardResponse_Name, v.Name)
+		case schemas.UpdateDashboardResponse_RefreshSchedule:
+			v.RefreshSchedule = &types.RefreshSchedule{}
+			return v.RefreshSchedule.Deserialize(d)
+		case schemas.UpdateDashboardResponse_TerminationProtectionEnabled:
+			v.TerminationProtectionEnabled = new(bool)
+			return d.ReadBool(schemas.UpdateDashboardResponse_TerminationProtectionEnabled, v.TerminationProtectionEnabled)
+		case schemas.UpdateDashboardResponse_Type:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDashboardResponse_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.DashboardType(ev)
+			return nil
+		case schemas.UpdateDashboardResponse_UpdatedTimestamp:
+			v.UpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.UpdateDashboardResponse_UpdatedTimestamp, v.UpdatedTimestamp)
+		case schemas.UpdateDashboardResponse_Widgets:
+			return deserializeWidgetList(d, schemas.UpdateDashboardResponse_Widgets, &v.Widgets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDashboard{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDashboard, schemas.UpdateDashboardRequest, schemas.UpdateDashboardResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDashboard{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDashboard, schemas.UpdateDashboardRequest, schemas.UpdateDashboardResponse), output: &UpdateDashboardOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

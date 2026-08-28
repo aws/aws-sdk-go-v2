@@ -4,7 +4,9 @@ package amplify
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetWebhookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWebhookInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWebhookRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWebhookInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WebhookId != nil {
+		s.WriteString(schemas.GetWebhookRequest_webhookId, *v.WebhookId)
+	}
+}
+
 // The result structure for the get webhook request.
 type GetWebhookOutput struct {
 
@@ -49,13 +63,34 @@ type GetWebhookOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWebhookOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWebhookResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWebhookOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Webhook != nil {
+		s.WriteStruct(schemas.GetWebhookResult_webhook)
+		v.Webhook.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetWebhookOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWebhookResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWebhookResult_webhook:
+			v.Webhook = &types.Webhook{}
+			return v.Webhook.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWebhookMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWebhook{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWebhook, schemas.GetWebhookRequest, schemas.GetWebhookResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWebhook{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWebhook, schemas.GetWebhookRequest, schemas.GetWebhookResult), output: &GetWebhookOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

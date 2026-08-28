@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeployWorkspaceApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeployWorkspaceApplicationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeployWorkspaceApplicationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeployWorkspaceApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Force != nil {
+		s.WriteBool(schemas.DeployWorkspaceApplicationsRequest_Force, *v.Force)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DeployWorkspaceApplicationsRequest_WorkspaceId, *v.WorkspaceId)
+	}
+}
+
 type DeployWorkspaceApplicationsOutput struct {
 
 	// The list of deployed associations and information about them.
@@ -50,13 +67,34 @@ type DeployWorkspaceApplicationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeployWorkspaceApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeployWorkspaceApplicationsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeployWorkspaceApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Deployment != nil {
+		s.WriteStruct(schemas.DeployWorkspaceApplicationsResult_Deployment)
+		v.Deployment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeployWorkspaceApplicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeployWorkspaceApplicationsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeployWorkspaceApplicationsResult_Deployment:
+			v.Deployment = &types.WorkSpaceApplicationDeployment{}
+			return v.Deployment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeployWorkspaceApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeployWorkspaceApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeployWorkspaceApplications, schemas.DeployWorkspaceApplicationsRequest, schemas.DeployWorkspaceApplicationsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeployWorkspaceApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeployWorkspaceApplications, schemas.DeployWorkspaceApplicationsRequest, schemas.DeployWorkspaceApplicationsResult), output: &DeployWorkspaceApplicationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

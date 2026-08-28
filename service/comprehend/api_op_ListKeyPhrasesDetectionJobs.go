@@ -5,7 +5,9 @@ package comprehend
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,26 @@ type ListKeyPhrasesDetectionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListKeyPhrasesDetectionJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListKeyPhrasesDetectionJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListKeyPhrasesDetectionJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListKeyPhrasesDetectionJobsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListKeyPhrasesDetectionJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListKeyPhrasesDetectionJobsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListKeyPhrasesDetectionJobsOutput struct {
 
 	// A list containing the properties of each job that is returned.
@@ -55,13 +77,35 @@ type ListKeyPhrasesDetectionJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListKeyPhrasesDetectionJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListKeyPhrasesDetectionJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListKeyPhrasesDetectionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeKeyPhrasesDetectionJobPropertiesList(s, schemas.ListKeyPhrasesDetectionJobsResponse_KeyPhrasesDetectionJobPropertiesList, v.KeyPhrasesDetectionJobPropertiesList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListKeyPhrasesDetectionJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListKeyPhrasesDetectionJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListKeyPhrasesDetectionJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListKeyPhrasesDetectionJobsResponse_KeyPhrasesDetectionJobPropertiesList:
+			return deserializeKeyPhrasesDetectionJobPropertiesList(d, schemas.ListKeyPhrasesDetectionJobsResponse_KeyPhrasesDetectionJobPropertiesList, &v.KeyPhrasesDetectionJobPropertiesList)
+		case schemas.ListKeyPhrasesDetectionJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListKeyPhrasesDetectionJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListKeyPhrasesDetectionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListKeyPhrasesDetectionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKeyPhrasesDetectionJobs, schemas.ListKeyPhrasesDetectionJobsRequest, schemas.ListKeyPhrasesDetectionJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListKeyPhrasesDetectionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKeyPhrasesDetectionJobs, schemas.ListKeyPhrasesDetectionJobsRequest, schemas.ListKeyPhrasesDetectionJobsResponse), output: &ListKeyPhrasesDetectionJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

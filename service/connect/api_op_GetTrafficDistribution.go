@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type GetTrafficDistributionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTrafficDistributionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTrafficDistributionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTrafficDistributionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetTrafficDistributionRequest_Id, *v.Id)
+	}
+}
+
 type GetTrafficDistributionOutput struct {
 
 	// The distribution of agents between the instance and its replica(s).
@@ -63,13 +77,62 @@ type GetTrafficDistributionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTrafficDistributionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTrafficDistributionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTrafficDistributionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentConfig != nil {
+		s.WriteStruct(schemas.GetTrafficDistributionResponse_AgentConfig)
+		v.AgentConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.GetTrafficDistributionResponse_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetTrafficDistributionResponse_Id, *v.Id)
+	}
+	if v.SignInConfig != nil {
+		s.WriteStruct(schemas.GetTrafficDistributionResponse_SignInConfig)
+		v.SignInConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TelephonyConfig != nil {
+		s.WriteStruct(schemas.GetTrafficDistributionResponse_TelephonyConfig)
+		v.TelephonyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTrafficDistributionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTrafficDistributionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTrafficDistributionResponse_AgentConfig:
+			v.AgentConfig = &types.AgentConfig{}
+			return v.AgentConfig.Deserialize(d)
+		case schemas.GetTrafficDistributionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetTrafficDistributionResponse_Arn, v.Arn)
+		case schemas.GetTrafficDistributionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetTrafficDistributionResponse_Id, v.Id)
+		case schemas.GetTrafficDistributionResponse_SignInConfig:
+			v.SignInConfig = &types.SignInConfig{}
+			return v.SignInConfig.Deserialize(d)
+		case schemas.GetTrafficDistributionResponse_TelephonyConfig:
+			v.TelephonyConfig = &types.TelephonyConfig{}
+			return v.TelephonyConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTrafficDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTrafficDistribution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrafficDistribution, schemas.GetTrafficDistributionRequest, schemas.GetTrafficDistributionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTrafficDistribution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrafficDistribution, schemas.GetTrafficDistributionRequest, schemas.GetTrafficDistributionResponse), output: &GetTrafficDistributionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

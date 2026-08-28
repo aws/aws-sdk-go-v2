@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -59,6 +61,42 @@ type ListDeviceFleetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDeviceFleetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDeviceFleetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDeviceFleetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListDeviceFleetsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListDeviceFleetsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.LastModifiedTimeAfter != nil {
+		s.WriteTime(schemas.ListDeviceFleetsRequest_LastModifiedTimeAfter, *v.LastModifiedTimeAfter)
+	}
+	if v.LastModifiedTimeBefore != nil {
+		s.WriteTime(schemas.ListDeviceFleetsRequest_LastModifiedTimeBefore, *v.LastModifiedTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDeviceFleetsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListDeviceFleetsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDeviceFleetsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListDeviceFleetsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListDeviceFleetsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListDeviceFleetsOutput struct {
 
 	// Summary of the device fleet.
@@ -76,13 +114,35 @@ type ListDeviceFleetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDeviceFleetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDeviceFleetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDeviceFleetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeviceFleetSummaries(s, schemas.ListDeviceFleetsResponse_DeviceFleetSummaries, v.DeviceFleetSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDeviceFleetsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDeviceFleetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDeviceFleetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDeviceFleetsResponse_DeviceFleetSummaries:
+			return deserializeDeviceFleetSummaries(d, schemas.ListDeviceFleetsResponse_DeviceFleetSummaries, &v.DeviceFleetSummaries)
+		case schemas.ListDeviceFleetsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDeviceFleetsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDeviceFleetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDeviceFleets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeviceFleets, schemas.ListDeviceFleetsRequest, schemas.ListDeviceFleetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDeviceFleets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeviceFleets, schemas.ListDeviceFleetsRequest, schemas.ListDeviceFleetsResponse), output: &ListDeviceFleetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

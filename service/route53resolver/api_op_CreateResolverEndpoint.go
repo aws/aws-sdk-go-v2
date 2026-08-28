@@ -4,7 +4,9 @@ package route53resolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -180,6 +182,49 @@ type CreateResolverEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResolverEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResolverEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResolverEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.CreateResolverEndpointRequest_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.Direction != "" {
+		s.WriteString(schemas.CreateResolverEndpointRequest_Direction, string(v.Direction))
+	}
+	if v.Dns64Enabled != nil {
+		s.WriteBool(schemas.CreateResolverEndpointRequest_Dns64Enabled, *v.Dns64Enabled)
+	}
+	serializeIpAddressesRequest(s, schemas.CreateResolverEndpointRequest_IpAddresses, v.IpAddresses)
+	if v.Ipv6InternetAccessEnabled != nil {
+		s.WriteBool(schemas.CreateResolverEndpointRequest_Ipv6InternetAccessEnabled, *v.Ipv6InternetAccessEnabled)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateResolverEndpointRequest_Name, *v.Name)
+	}
+	if v.OutpostArn != nil {
+		s.WriteString(schemas.CreateResolverEndpointRequest_OutpostArn, *v.OutpostArn)
+	}
+	if v.PreferredInstanceType != nil {
+		s.WriteString(schemas.CreateResolverEndpointRequest_PreferredInstanceType, *v.PreferredInstanceType)
+	}
+	serializeProtocolList(s, schemas.CreateResolverEndpointRequest_Protocols, v.Protocols)
+	if v.ResolverEndpointType != "" {
+		s.WriteString(schemas.CreateResolverEndpointRequest_ResolverEndpointType, string(v.ResolverEndpointType))
+	}
+	if v.RniEnhancedMetricsEnabled != nil {
+		s.WriteBool(schemas.CreateResolverEndpointRequest_RniEnhancedMetricsEnabled, *v.RniEnhancedMetricsEnabled)
+	}
+	serializeSecurityGroupIds(s, schemas.CreateResolverEndpointRequest_SecurityGroupIds, v.SecurityGroupIds)
+	serializeTagList(s, schemas.CreateResolverEndpointRequest_Tags, v.Tags)
+	if v.TargetNameServerMetricsEnabled != nil {
+		s.WriteBool(schemas.CreateResolverEndpointRequest_TargetNameServerMetricsEnabled, *v.TargetNameServerMetricsEnabled)
+	}
+}
+
 type CreateResolverEndpointOutput struct {
 
 	// Information about the CreateResolverEndpoint request, including the status of
@@ -192,13 +237,34 @@ type CreateResolverEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResolverEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResolverEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResolverEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverEndpoint != nil {
+		s.WriteStruct(schemas.CreateResolverEndpointResponse_ResolverEndpoint)
+		v.ResolverEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateResolverEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateResolverEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateResolverEndpointResponse_ResolverEndpoint:
+			v.ResolverEndpoint = &types.ResolverEndpoint{}
+			return v.ResolverEndpoint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateResolverEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateResolverEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResolverEndpoint, schemas.CreateResolverEndpointRequest, schemas.CreateResolverEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateResolverEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResolverEndpoint, schemas.CreateResolverEndpointRequest, schemas.CreateResolverEndpointResponse), output: &CreateResolverEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

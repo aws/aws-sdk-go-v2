@@ -5,6 +5,8 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListTargetsForPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTargetsForPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTargetsForPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTargetsForPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListTargetsForPolicyRequest_marker, *v.Marker)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListTargetsForPolicyRequest_pageSize, *v.PageSize)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.ListTargetsForPolicyRequest_policyName, *v.PolicyName)
+	}
+}
+
 type ListTargetsForPolicyOutput struct {
 
 	// A marker used to get the next set of results.
@@ -58,13 +78,35 @@ type ListTargetsForPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTargetsForPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTargetsForPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTargetsForPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListTargetsForPolicyResponse_nextMarker, *v.NextMarker)
+	}
+	serializePolicyTargets(s, schemas.ListTargetsForPolicyResponse_targets, v.Targets)
+}
+func (v *ListTargetsForPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTargetsForPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTargetsForPolicyResponse_nextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListTargetsForPolicyResponse_nextMarker, v.NextMarker)
+		case schemas.ListTargetsForPolicyResponse_targets:
+			return deserializePolicyTargets(d, schemas.ListTargetsForPolicyResponse_targets, &v.Targets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTargetsForPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTargetsForPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTargetsForPolicy, schemas.ListTargetsForPolicyRequest, schemas.ListTargetsForPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTargetsForPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTargetsForPolicy, schemas.ListTargetsForPolicyRequest, schemas.ListTargetsForPolicyResponse), output: &ListTargetsForPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

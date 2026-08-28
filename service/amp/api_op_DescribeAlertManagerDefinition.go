@@ -4,7 +4,9 @@ package amp
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amp/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amp/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,28 @@ type DescribeAlertManagerDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAlertManagerDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAlertManagerDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAlertManagerDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DescribeAlertManagerDefinitionRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *DescribeAlertManagerDefinitionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAlertManagerDefinitionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAlertManagerDefinitionRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.DescribeAlertManagerDefinitionRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a DescribeAlertManagerDefinition operation.
 type DescribeAlertManagerDefinitionOutput struct {
 
@@ -50,13 +74,34 @@ type DescribeAlertManagerDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAlertManagerDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAlertManagerDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAlertManagerDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlertManagerDefinition != nil {
+		s.WriteStruct(schemas.DescribeAlertManagerDefinitionResponse_alertManagerDefinition)
+		v.AlertManagerDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAlertManagerDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAlertManagerDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAlertManagerDefinitionResponse_alertManagerDefinition:
+			v.AlertManagerDefinition = &types.AlertManagerDefinitionDescription{}
+			return v.AlertManagerDefinition.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAlertManagerDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAlertManagerDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAlertManagerDefinition, schemas.DescribeAlertManagerDefinitionRequest, schemas.DescribeAlertManagerDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAlertManagerDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAlertManagerDefinition, schemas.DescribeAlertManagerDefinitionRequest, schemas.DescribeAlertManagerDefinitionResponse), output: &DescribeAlertManagerDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

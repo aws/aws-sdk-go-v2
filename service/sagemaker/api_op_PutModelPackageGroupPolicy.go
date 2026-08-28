@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type PutModelPackageGroupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutModelPackageGroupPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutModelPackageGroupPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutModelPackageGroupPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelPackageGroupName != nil {
+		s.WriteString(schemas.PutModelPackageGroupPolicyInput_ModelPackageGroupName, *v.ModelPackageGroupName)
+	}
+	if v.ResourcePolicy != nil {
+		s.WriteString(schemas.PutModelPackageGroupPolicyInput_ResourcePolicy, *v.ResourcePolicy)
+	}
+}
+
 type PutModelPackageGroupPolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model package group.
@@ -55,13 +72,32 @@ type PutModelPackageGroupPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutModelPackageGroupPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutModelPackageGroupPolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutModelPackageGroupPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelPackageGroupArn != nil {
+		s.WriteString(schemas.PutModelPackageGroupPolicyOutput_ModelPackageGroupArn, *v.ModelPackageGroupArn)
+	}
+}
+func (v *PutModelPackageGroupPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutModelPackageGroupPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutModelPackageGroupPolicyOutput_ModelPackageGroupArn:
+			v.ModelPackageGroupArn = new(string)
+			return d.ReadString(schemas.PutModelPackageGroupPolicyOutput_ModelPackageGroupArn, v.ModelPackageGroupArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutModelPackageGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutModelPackageGroupPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutModelPackageGroupPolicy, schemas.PutModelPackageGroupPolicyInput, schemas.PutModelPackageGroupPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutModelPackageGroupPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutModelPackageGroupPolicy, schemas.PutModelPackageGroupPolicyInput, schemas.PutModelPackageGroupPolicyOutput), output: &PutModelPackageGroupPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

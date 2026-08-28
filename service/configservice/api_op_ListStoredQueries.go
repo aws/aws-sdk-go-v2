@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type ListStoredQueriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStoredQueriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStoredQueriesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStoredQueriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListStoredQueriesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStoredQueriesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListStoredQueriesOutput struct {
 
 	// If the previous paginated request didn't return all of the remaining results,
@@ -56,13 +73,35 @@ type ListStoredQueriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStoredQueriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStoredQueriesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStoredQueriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStoredQueriesResponse_NextToken, *v.NextToken)
+	}
+	serializeStoredQueryMetadataList(s, schemas.ListStoredQueriesResponse_StoredQueryMetadata, v.StoredQueryMetadata)
+}
+func (v *ListStoredQueriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStoredQueriesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStoredQueriesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStoredQueriesResponse_NextToken, v.NextToken)
+		case schemas.ListStoredQueriesResponse_StoredQueryMetadata:
+			return deserializeStoredQueryMetadataList(d, schemas.ListStoredQueriesResponse_StoredQueryMetadata, &v.StoredQueryMetadata)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStoredQueriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListStoredQueries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStoredQueries, schemas.ListStoredQueriesRequest, schemas.ListStoredQueriesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListStoredQueries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStoredQueries, schemas.ListStoredQueriesRequest, schemas.ListStoredQueriesResponse), output: &ListStoredQueriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

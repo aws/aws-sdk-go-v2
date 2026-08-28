@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type GetSetupHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSetupHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSetupHistoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSetupHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PageToken != nil {
+		s.WriteString(schemas.GetSetupHistoryRequest_pageToken, *v.PageToken)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.GetSetupHistoryRequest_resourceName, *v.ResourceName)
+	}
+}
+
 type GetSetupHistoryOutput struct {
 
 	// The token to advance to the next page of results from your request.
@@ -61,13 +78,35 @@ type GetSetupHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSetupHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSetupHistoryResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSetupHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetSetupHistoryResult_nextPageToken, *v.NextPageToken)
+	}
+	serializesetupHistoryList(s, schemas.GetSetupHistoryResult_setupHistory, v.SetupHistory)
+}
+func (v *GetSetupHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSetupHistoryResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSetupHistoryResult_nextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetSetupHistoryResult_nextPageToken, v.NextPageToken)
+		case schemas.GetSetupHistoryResult_setupHistory:
+			return deserializesetupHistoryList(d, schemas.GetSetupHistoryResult_setupHistory, &v.SetupHistory)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSetupHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSetupHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSetupHistory, schemas.GetSetupHistoryRequest, schemas.GetSetupHistoryResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSetupHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSetupHistory, schemas.GetSetupHistoryRequest, schemas.GetSetupHistoryResult), output: &GetSetupHistoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

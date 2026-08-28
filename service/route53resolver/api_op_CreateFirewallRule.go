@@ -5,7 +5,9 @@ package route53resolver
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -229,6 +231,62 @@ type CreateFirewallRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFirewallRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFirewallRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFirewallRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.CreateFirewallRuleRequest_Action, string(v.Action))
+	}
+	if v.BlockOverrideDnsType != "" {
+		s.WriteString(schemas.CreateFirewallRuleRequest_BlockOverrideDnsType, string(v.BlockOverrideDnsType))
+	}
+	if v.BlockOverrideDomain != nil {
+		s.WriteString(schemas.CreateFirewallRuleRequest_BlockOverrideDomain, *v.BlockOverrideDomain)
+	}
+	if v.BlockOverrideTtl != nil {
+		s.WriteInt32(schemas.CreateFirewallRuleRequest_BlockOverrideTtl, *v.BlockOverrideTtl)
+	}
+	if v.BlockResponse != "" {
+		s.WriteString(schemas.CreateFirewallRuleRequest_BlockResponse, string(v.BlockResponse))
+	}
+	if v.ConfidenceThreshold != "" {
+		s.WriteString(schemas.CreateFirewallRuleRequest_ConfidenceThreshold, string(v.ConfidenceThreshold))
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.CreateFirewallRuleRequest_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.DnsThreatProtection != "" {
+		s.WriteString(schemas.CreateFirewallRuleRequest_DnsThreatProtection, string(v.DnsThreatProtection))
+	}
+	if v.FirewallDomainListId != nil {
+		s.WriteString(schemas.CreateFirewallRuleRequest_FirewallDomainListId, *v.FirewallDomainListId)
+	}
+	if v.FirewallDomainRedirectionAction != "" {
+		s.WriteString(schemas.CreateFirewallRuleRequest_FirewallDomainRedirectionAction, string(v.FirewallDomainRedirectionAction))
+	}
+	if v.FirewallRuleGroupId != nil {
+		s.WriteString(schemas.CreateFirewallRuleRequest_FirewallRuleGroupId, *v.FirewallRuleGroupId)
+	}
+	if v.FirewallRuleType != nil {
+		s.WriteStruct(schemas.CreateFirewallRuleRequest_FirewallRuleType)
+		v.FirewallRuleType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateFirewallRuleRequest_Name, *v.Name)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.CreateFirewallRuleRequest_Priority, *v.Priority)
+	}
+	if v.Qtype != nil {
+		s.WriteString(schemas.CreateFirewallRuleRequest_Qtype, *v.Qtype)
+	}
+}
+
 type CreateFirewallRuleOutput struct {
 
 	// The firewall rule that you just created.
@@ -240,13 +298,34 @@ type CreateFirewallRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFirewallRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFirewallRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFirewallRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallRule != nil {
+		s.WriteStruct(schemas.CreateFirewallRuleResponse_FirewallRule)
+		v.FirewallRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateFirewallRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFirewallRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFirewallRuleResponse_FirewallRule:
+			v.FirewallRule = &types.FirewallRule{}
+			return v.FirewallRule.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFirewallRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateFirewallRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFirewallRule, schemas.CreateFirewallRuleRequest, schemas.CreateFirewallRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateFirewallRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFirewallRule, schemas.CreateFirewallRuleRequest, schemas.CreateFirewallRuleResponse), output: &CreateFirewallRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,40 @@ type UpdateAnalysisTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAnalysisTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAnalysisTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAnalysisTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisTemplateIdentifier != nil {
+		s.WriteString(schemas.UpdateAnalysisTemplateInput_analysisTemplateIdentifier, *v.AnalysisTemplateIdentifier)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAnalysisTemplateInput_description, *v.Description)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.UpdateAnalysisTemplateInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+func (v *UpdateAnalysisTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAnalysisTemplateInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAnalysisTemplateInput_analysisTemplateIdentifier:
+			v.AnalysisTemplateIdentifier = new(string)
+			return d.ReadString(schemas.UpdateAnalysisTemplateInput_analysisTemplateIdentifier, v.AnalysisTemplateIdentifier)
+		case schemas.UpdateAnalysisTemplateInput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateAnalysisTemplateInput_description, v.Description)
+		case schemas.UpdateAnalysisTemplateInput_membershipIdentifier:
+			v.MembershipIdentifier = new(string)
+			return d.ReadString(schemas.UpdateAnalysisTemplateInput_membershipIdentifier, v.MembershipIdentifier)
+		}
+		return nil
+	})
+}
+
 type UpdateAnalysisTemplateOutput struct {
 
 	// The analysis template.
@@ -55,13 +91,34 @@ type UpdateAnalysisTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAnalysisTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAnalysisTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAnalysisTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisTemplate != nil {
+		s.WriteStruct(schemas.UpdateAnalysisTemplateOutput_analysisTemplate)
+		v.AnalysisTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAnalysisTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAnalysisTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAnalysisTemplateOutput_analysisTemplate:
+			v.AnalysisTemplate = &types.AnalysisTemplate{}
+			return v.AnalysisTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAnalysisTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAnalysisTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAnalysisTemplate, schemas.UpdateAnalysisTemplateInput, schemas.UpdateAnalysisTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAnalysisTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAnalysisTemplate, schemas.UpdateAnalysisTemplateInput, schemas.UpdateAnalysisTemplateOutput), output: &UpdateAnalysisTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

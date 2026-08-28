@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,21 @@ type StopRelationalDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopRelationalDatabaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopRelationalDatabaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopRelationalDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RelationalDatabaseName != nil {
+		s.WriteString(schemas.StopRelationalDatabaseRequest_relationalDatabaseName, *v.RelationalDatabaseName)
+	}
+	if v.RelationalDatabaseSnapshotName != nil {
+		s.WriteString(schemas.StopRelationalDatabaseRequest_relationalDatabaseSnapshotName, *v.RelationalDatabaseSnapshotName)
+	}
+}
+
 type StopRelationalDatabaseOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -62,13 +79,29 @@ type StopRelationalDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopRelationalDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopRelationalDatabaseResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopRelationalDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.StopRelationalDatabaseResult_operations, v.Operations)
+}
+func (v *StopRelationalDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopRelationalDatabaseResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopRelationalDatabaseResult_operations:
+			return deserializeOperationList(d, schemas.StopRelationalDatabaseResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopRelationalDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopRelationalDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopRelationalDatabase, schemas.StopRelationalDatabaseRequest, schemas.StopRelationalDatabaseResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopRelationalDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopRelationalDatabase, schemas.StopRelationalDatabaseRequest, schemas.StopRelationalDatabaseResult), output: &StopRelationalDatabaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

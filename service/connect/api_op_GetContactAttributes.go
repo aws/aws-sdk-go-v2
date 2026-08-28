@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type GetContactAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContactAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContactAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContactAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InitialContactId != nil {
+		s.WriteString(schemas.GetContactAttributesRequest_InitialContactId, *v.InitialContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.GetContactAttributesRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type GetContactAttributesOutput struct {
 
 	// Information about the attributes.
@@ -49,13 +66,29 @@ type GetContactAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContactAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContactAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContactAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.GetContactAttributesResponse_Attributes, v.Attributes)
+}
+func (v *GetContactAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetContactAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetContactAttributesResponse_Attributes:
+			return deserializeAttributes(d, schemas.GetContactAttributesResponse_Attributes, &v.Attributes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetContactAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetContactAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContactAttributes, schemas.GetContactAttributesRequest, schemas.GetContactAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetContactAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContactAttributes, schemas.GetContactAttributesRequest, schemas.GetContactAttributesResponse), output: &GetContactAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

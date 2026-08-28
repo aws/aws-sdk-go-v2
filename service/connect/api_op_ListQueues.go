@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,25 @@ type ListQueuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueuesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueuesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueuesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListQueuesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListQueuesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueuesRequest_NextToken, *v.NextToken)
+	}
+	serializeQueueTypes(s, schemas.ListQueuesRequest_QueueTypes, v.QueueTypes)
+}
+
 type ListQueuesOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.
@@ -74,13 +95,35 @@ type ListQueuesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueuesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueuesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueuesResponse_NextToken, *v.NextToken)
+	}
+	serializeQueueSummaryList(s, schemas.ListQueuesResponse_QueueSummaryList, v.QueueSummaryList)
+}
+func (v *ListQueuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListQueuesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListQueuesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListQueuesResponse_NextToken, v.NextToken)
+		case schemas.ListQueuesResponse_QueueSummaryList:
+			return deserializeQueueSummaryList(d, schemas.ListQueuesResponse_QueueSummaryList, &v.QueueSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListQueues{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueues, schemas.ListQueuesRequest, schemas.ListQueuesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListQueues{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueues, schemas.ListQueuesRequest, schemas.ListQueuesResponse), output: &ListQueuesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package m2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/m2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/m2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,40 @@ type StartBatchJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartBatchJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartBatchJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartBatchJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.StartBatchJobRequest_applicationId, *v.ApplicationId)
+	}
+	if v.AuthSecretsManagerArn != nil {
+		s.WriteString(schemas.StartBatchJobRequest_authSecretsManagerArn, *v.AuthSecretsManagerArn)
+	}
+	serializeBatchJobIdentifier(s, schemas.StartBatchJobRequest_batchJobIdentifier, v.BatchJobIdentifier)
+	serializeBatchJobParametersMap(s, schemas.StartBatchJobRequest_jobParams, v.JobParams)
+}
+func (v *StartBatchJobInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartBatchJobRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartBatchJobRequest_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.StartBatchJobRequest_applicationId, v.ApplicationId)
+		case schemas.StartBatchJobRequest_authSecretsManagerArn:
+			v.AuthSecretsManagerArn = new(string)
+			return d.ReadString(schemas.StartBatchJobRequest_authSecretsManagerArn, v.AuthSecretsManagerArn)
+		case schemas.StartBatchJobRequest_batchJobIdentifier:
+			return deserializeBatchJobIdentifier(d, schemas.StartBatchJobRequest_batchJobIdentifier, &v.BatchJobIdentifier)
+		case schemas.StartBatchJobRequest_jobParams:
+			return deserializeBatchJobParametersMap(d, schemas.StartBatchJobRequest_jobParams, &v.JobParams)
+		}
+		return nil
+	})
+}
+
 type StartBatchJobOutput struct {
 
 	// The unique identifier of this execution of the batch job.
@@ -64,13 +100,32 @@ type StartBatchJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartBatchJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartBatchJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartBatchJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.StartBatchJobResponse_executionId, *v.ExecutionId)
+	}
+}
+func (v *StartBatchJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartBatchJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartBatchJobResponse_executionId:
+			v.ExecutionId = new(string)
+			return d.ReadString(schemas.StartBatchJobResponse_executionId, v.ExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartBatchJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartBatchJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartBatchJob, schemas.StartBatchJobRequest, schemas.StartBatchJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartBatchJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartBatchJob, schemas.StartBatchJobRequest, schemas.StartBatchJobResponse), output: &StartBatchJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

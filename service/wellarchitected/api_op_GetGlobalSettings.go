@@ -4,7 +4,9 @@ package wellarchitected
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,22 @@ type GetGlobalSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGlobalSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGlobalSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetGlobalSettingsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type GetGlobalSettingsOutput struct {
 
 	// Discovery integration status.
@@ -45,13 +63,54 @@ type GetGlobalSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGlobalSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGlobalSettingsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGlobalSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DiscoveryIntegrationStatus != "" {
+		s.WriteString(schemas.GetGlobalSettingsOutput_DiscoveryIntegrationStatus, string(v.DiscoveryIntegrationStatus))
+	}
+	if v.JiraConfiguration != nil {
+		s.WriteStruct(schemas.GetGlobalSettingsOutput_JiraConfiguration)
+		v.JiraConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrganizationSharingStatus != "" {
+		s.WriteString(schemas.GetGlobalSettingsOutput_OrganizationSharingStatus, string(v.OrganizationSharingStatus))
+	}
+}
+func (v *GetGlobalSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGlobalSettingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGlobalSettingsOutput_DiscoveryIntegrationStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetGlobalSettingsOutput_DiscoveryIntegrationStatus, &ev); err != nil {
+				return err
+			}
+			v.DiscoveryIntegrationStatus = types.DiscoveryIntegrationStatus(ev)
+			return nil
+		case schemas.GetGlobalSettingsOutput_JiraConfiguration:
+			v.JiraConfiguration = &types.AccountJiraConfigurationOutput{}
+			return v.JiraConfiguration.Deserialize(d)
+		case schemas.GetGlobalSettingsOutput_OrganizationSharingStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetGlobalSettingsOutput_OrganizationSharingStatus, &ev); err != nil {
+				return err
+			}
+			v.OrganizationSharingStatus = types.OrganizationSharingStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGlobalSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGlobalSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGlobalSettings, nil, schemas.GetGlobalSettingsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGlobalSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGlobalSettings, nil, schemas.GetGlobalSettingsOutput), output: &GetGlobalSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,50 @@ type UpdateCollaborationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCollaborationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCollaborationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCollaborationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyticsEngine != "" {
+		s.WriteString(schemas.UpdateCollaborationInput_analyticsEngine, string(v.AnalyticsEngine))
+	}
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.UpdateCollaborationInput_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateCollaborationInput_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateCollaborationInput_name, *v.Name)
+	}
+}
+func (v *UpdateCollaborationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCollaborationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCollaborationInput_analyticsEngine:
+			var ev string
+			if err := d.ReadString(schemas.UpdateCollaborationInput_analyticsEngine, &ev); err != nil {
+				return err
+			}
+			v.AnalyticsEngine = types.AnalyticsEngine(ev)
+			return nil
+		case schemas.UpdateCollaborationInput_collaborationIdentifier:
+			v.CollaborationIdentifier = new(string)
+			return d.ReadString(schemas.UpdateCollaborationInput_collaborationIdentifier, v.CollaborationIdentifier)
+		case schemas.UpdateCollaborationInput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateCollaborationInput_description, v.Description)
+		case schemas.UpdateCollaborationInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateCollaborationInput_name, v.Name)
+		}
+		return nil
+	})
+}
+
 type UpdateCollaborationOutput struct {
 
 	// The entire collaboration that has been updated.
@@ -60,13 +106,34 @@ type UpdateCollaborationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCollaborationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCollaborationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCollaborationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Collaboration != nil {
+		s.WriteStruct(schemas.UpdateCollaborationOutput_collaboration)
+		v.Collaboration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateCollaborationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCollaborationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCollaborationOutput_collaboration:
+			v.Collaboration = &types.Collaboration{}
+			return v.Collaboration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCollaborationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCollaboration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCollaboration, schemas.UpdateCollaborationInput, schemas.UpdateCollaborationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCollaboration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCollaboration, schemas.UpdateCollaborationInput, schemas.UpdateCollaborationOutput), output: &UpdateCollaborationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

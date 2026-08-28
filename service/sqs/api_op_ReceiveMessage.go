@@ -4,7 +4,9 @@ package sqs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sqs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -293,6 +295,33 @@ type ReceiveMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReceiveMessageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReceiveMessageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReceiveMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeNameList(s, schemas.ReceiveMessageRequest_AttributeNames, v.AttributeNames)
+	if v.MaxNumberOfMessages != 0 {
+		s.WriteInt32(schemas.ReceiveMessageRequest_MaxNumberOfMessages, v.MaxNumberOfMessages)
+	}
+	serializeMessageAttributeNameList(s, schemas.ReceiveMessageRequest_MessageAttributeNames, v.MessageAttributeNames)
+	serializeMessageSystemAttributeList(s, schemas.ReceiveMessageRequest_MessageSystemAttributeNames, v.MessageSystemAttributeNames)
+	if v.QueueUrl != nil {
+		s.WriteString(schemas.ReceiveMessageRequest_QueueUrl, *v.QueueUrl)
+	}
+	if v.ReceiveRequestAttemptId != nil {
+		s.WriteString(schemas.ReceiveMessageRequest_ReceiveRequestAttemptId, *v.ReceiveRequestAttemptId)
+	}
+	if v.VisibilityTimeout != 0 {
+		s.WriteInt32(schemas.ReceiveMessageRequest_VisibilityTimeout, v.VisibilityTimeout)
+	}
+	if v.WaitTimeSeconds != 0 {
+		s.WriteInt32(schemas.ReceiveMessageRequest_WaitTimeSeconds, v.WaitTimeSeconds)
+	}
+}
+
 // A list of received messages.
 type ReceiveMessageOutput struct {
 
@@ -305,13 +334,29 @@ type ReceiveMessageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReceiveMessageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReceiveMessageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReceiveMessageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMessageList(s, schemas.ReceiveMessageResult_Messages, v.Messages)
+}
+func (v *ReceiveMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReceiveMessageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReceiveMessageResult_Messages:
+			return deserializeMessageList(d, schemas.ReceiveMessageResult_Messages, &v.Messages)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationReceiveMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpReceiveMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReceiveMessage, schemas.ReceiveMessageRequest, schemas.ReceiveMessageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpReceiveMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReceiveMessage, schemas.ReceiveMessageRequest, schemas.ReceiveMessageResult), output: &ReceiveMessageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

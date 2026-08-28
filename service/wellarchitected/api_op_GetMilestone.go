@@ -4,7 +4,9 @@ package wellarchitected
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type GetMilestoneInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMilestoneInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMilestoneInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMilestoneInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MilestoneNumber != nil {
+		s.WriteInt32(schemas.GetMilestoneInput_MilestoneNumber, *v.MilestoneNumber)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.GetMilestoneInput_WorkloadId, *v.WorkloadId)
+	}
+}
+
 // Output of a get milestone call.
 type GetMilestoneOutput struct {
 
@@ -59,13 +76,40 @@ type GetMilestoneOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMilestoneOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMilestoneOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMilestoneOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Milestone != nil {
+		s.WriteStruct(schemas.GetMilestoneOutput_Milestone)
+		v.Milestone.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.GetMilestoneOutput_WorkloadId, *v.WorkloadId)
+	}
+}
+func (v *GetMilestoneOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMilestoneOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMilestoneOutput_Milestone:
+			v.Milestone = &types.Milestone{}
+			return v.Milestone.Deserialize(d)
+		case schemas.GetMilestoneOutput_WorkloadId:
+			v.WorkloadId = new(string)
+			return d.ReadString(schemas.GetMilestoneOutput_WorkloadId, v.WorkloadId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMilestoneMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMilestone{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMilestone, schemas.GetMilestoneInput, schemas.GetMilestoneOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMilestone{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMilestone, schemas.GetMilestoneInput, schemas.GetMilestoneOutput), output: &GetMilestoneOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

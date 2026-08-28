@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,23 @@ type UpdateEmailChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEmailChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEmailChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEmailChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.UpdateEmailChannelRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.EmailChannelRequest != nil {
+		s.WriteStruct(schemas.UpdateEmailChannelRequest_EmailChannelRequest)
+		v.EmailChannelRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateEmailChannelOutput struct {
 
 	// Provides information about the status and settings of the email channel for an
@@ -55,13 +74,34 @@ type UpdateEmailChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEmailChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEmailChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEmailChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailChannelResponse != nil {
+		s.WriteStruct(schemas.UpdateEmailChannelResponse_EmailChannelResponse)
+		v.EmailChannelResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateEmailChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEmailChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEmailChannelResponse_EmailChannelResponse:
+			v.EmailChannelResponse = &types.EmailChannelResponse{}
+			return v.EmailChannelResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEmailChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEmailChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEmailChannel, schemas.UpdateEmailChannelRequest, schemas.UpdateEmailChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateEmailChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEmailChannel, schemas.UpdateEmailChannelRequest, schemas.UpdateEmailChannelResponse), output: &UpdateEmailChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

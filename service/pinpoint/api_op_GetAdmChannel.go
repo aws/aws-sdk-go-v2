@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetAdmChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAdmChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAdmChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAdmChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetAdmChannelRequest_ApplicationId, *v.ApplicationId)
+	}
+}
+
 type GetAdmChannelOutput struct {
 
 	// Provides information about the status and settings of the ADM (Amazon Device
@@ -50,13 +64,34 @@ type GetAdmChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAdmChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAdmChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAdmChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ADMChannelResponse != nil {
+		s.WriteStruct(schemas.GetAdmChannelResponse_ADMChannelResponse)
+		v.ADMChannelResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAdmChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAdmChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAdmChannelResponse_ADMChannelResponse:
+			v.ADMChannelResponse = &types.ADMChannelResponse{}
+			return v.ADMChannelResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAdmChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAdmChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAdmChannel, schemas.GetAdmChannelRequest, schemas.GetAdmChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAdmChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAdmChannel, schemas.GetAdmChannelRequest, schemas.GetAdmChannelResponse), output: &GetAdmChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

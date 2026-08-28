@@ -5,7 +5,9 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,30 @@ type CreateLifecyclePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLifecyclePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLifecyclePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLifecyclePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateLifecyclePolicyRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateLifecyclePolicyRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateLifecyclePolicyRequest_name, *v.Name)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.CreateLifecyclePolicyRequest_policy, *v.Policy)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateLifecyclePolicyRequest_type, string(v.Type))
+	}
+}
+
 type CreateLifecyclePolicyOutput struct {
 
 	// Details about the created lifecycle policy.
@@ -66,13 +92,34 @@ type CreateLifecyclePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLifecyclePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLifecyclePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLifecyclePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LifecyclePolicyDetail != nil {
+		s.WriteStruct(schemas.CreateLifecyclePolicyResponse_lifecyclePolicyDetail)
+		v.LifecyclePolicyDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateLifecyclePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLifecyclePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLifecyclePolicyResponse_lifecyclePolicyDetail:
+			v.LifecyclePolicyDetail = &types.LifecyclePolicyDetail{}
+			return v.LifecyclePolicyDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLifecyclePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateLifecyclePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLifecyclePolicy, schemas.CreateLifecyclePolicyRequest, schemas.CreateLifecyclePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateLifecyclePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLifecyclePolicy, schemas.CreateLifecyclePolicyRequest, schemas.CreateLifecyclePolicyResponse), output: &CreateLifecyclePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

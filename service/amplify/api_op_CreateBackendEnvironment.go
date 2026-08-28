@@ -4,7 +4,9 @@ package amplify
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,27 @@ type CreateBackendEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBackendEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBackendEnvironmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBackendEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.CreateBackendEnvironmentRequest_appId, *v.AppId)
+	}
+	if v.DeploymentArtifacts != nil {
+		s.WriteString(schemas.CreateBackendEnvironmentRequest_deploymentArtifacts, *v.DeploymentArtifacts)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.CreateBackendEnvironmentRequest_environmentName, *v.EnvironmentName)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.CreateBackendEnvironmentRequest_stackName, *v.StackName)
+	}
+}
+
 // The result structure for the create backend environment request.
 type CreateBackendEnvironmentOutput struct {
 
@@ -66,13 +89,34 @@ type CreateBackendEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBackendEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBackendEnvironmentResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBackendEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackendEnvironment != nil {
+		s.WriteStruct(schemas.CreateBackendEnvironmentResult_backendEnvironment)
+		v.BackendEnvironment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateBackendEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBackendEnvironmentResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBackendEnvironmentResult_backendEnvironment:
+			v.BackendEnvironment = &types.BackendEnvironment{}
+			return v.BackendEnvironment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBackendEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBackendEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBackendEnvironment, schemas.CreateBackendEnvironmentRequest, schemas.CreateBackendEnvironmentResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateBackendEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBackendEnvironment, schemas.CreateBackendEnvironmentRequest, schemas.CreateBackendEnvironmentResult), output: &CreateBackendEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

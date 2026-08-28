@@ -4,6 +4,8 @@ package schemas
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/schemas/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,27 @@ type ExportSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportSchemaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportSchemaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistryName != nil {
+		s.WriteString(schemas.ExportSchemaRequest_RegistryName, *v.RegistryName)
+	}
+	if v.SchemaName != nil {
+		s.WriteString(schemas.ExportSchemaRequest_SchemaName, *v.SchemaName)
+	}
+	if v.SchemaVersion != nil {
+		s.WriteString(schemas.ExportSchemaRequest_SchemaVersion, *v.SchemaVersion)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.ExportSchemaRequest_Type, *v.Type)
+	}
+}
+
 type ExportSchemaOutput struct {
 	Content *string
 
@@ -60,13 +83,56 @@ type ExportSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportSchemaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportSchemaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteString(schemas.ExportSchemaResponse_Content, *v.Content)
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.ExportSchemaResponse_SchemaArn, *v.SchemaArn)
+	}
+	if v.SchemaName != nil {
+		s.WriteString(schemas.ExportSchemaResponse_SchemaName, *v.SchemaName)
+	}
+	if v.SchemaVersion != nil {
+		s.WriteString(schemas.ExportSchemaResponse_SchemaVersion, *v.SchemaVersion)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.ExportSchemaResponse_Type, *v.Type)
+	}
+}
+func (v *ExportSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportSchemaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportSchemaResponse_Content:
+			v.Content = new(string)
+			return d.ReadString(schemas.ExportSchemaResponse_Content, v.Content)
+		case schemas.ExportSchemaResponse_SchemaArn:
+			v.SchemaArn = new(string)
+			return d.ReadString(schemas.ExportSchemaResponse_SchemaArn, v.SchemaArn)
+		case schemas.ExportSchemaResponse_SchemaName:
+			v.SchemaName = new(string)
+			return d.ReadString(schemas.ExportSchemaResponse_SchemaName, v.SchemaName)
+		case schemas.ExportSchemaResponse_SchemaVersion:
+			v.SchemaVersion = new(string)
+			return d.ReadString(schemas.ExportSchemaResponse_SchemaVersion, v.SchemaVersion)
+		case schemas.ExportSchemaResponse_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ExportSchemaResponse_Type, v.Type)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExportSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpExportSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportSchema, schemas.ExportSchemaRequest, schemas.ExportSchemaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExportSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportSchema, schemas.ExportSchemaRequest, schemas.ExportSchemaResponse), output: &ExportSchemaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

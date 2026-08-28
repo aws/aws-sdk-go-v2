@@ -4,7 +4,9 @@ package route53resolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -83,6 +85,27 @@ type DeleteFirewallRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFirewallRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFirewallRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFirewallRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallDomainListId != nil {
+		s.WriteString(schemas.DeleteFirewallRuleRequest_FirewallDomainListId, *v.FirewallDomainListId)
+	}
+	if v.FirewallRuleGroupId != nil {
+		s.WriteString(schemas.DeleteFirewallRuleRequest_FirewallRuleGroupId, *v.FirewallRuleGroupId)
+	}
+	if v.FirewallThreatProtectionId != nil {
+		s.WriteString(schemas.DeleteFirewallRuleRequest_FirewallThreatProtectionId, *v.FirewallThreatProtectionId)
+	}
+	if v.Qtype != nil {
+		s.WriteString(schemas.DeleteFirewallRuleRequest_Qtype, *v.Qtype)
+	}
+}
+
 type DeleteFirewallRuleOutput struct {
 
 	// The specification for the firewall rule that you just deleted.
@@ -94,13 +117,34 @@ type DeleteFirewallRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFirewallRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFirewallRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFirewallRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallRule != nil {
+		s.WriteStruct(schemas.DeleteFirewallRuleResponse_FirewallRule)
+		v.FirewallRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteFirewallRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFirewallRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFirewallRuleResponse_FirewallRule:
+			v.FirewallRule = &types.FirewallRule{}
+			return v.FirewallRule.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFirewallRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteFirewallRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFirewallRule, schemas.DeleteFirewallRuleRequest, schemas.DeleteFirewallRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteFirewallRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFirewallRule, schemas.DeleteFirewallRuleRequest, schemas.DeleteFirewallRuleResponse), output: &DeleteFirewallRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

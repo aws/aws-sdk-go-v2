@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,27 @@ type SetUICustomizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetUICustomizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetUICustomizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetUICustomizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CSS != nil {
+		s.WriteString(schemas.SetUICustomizationRequest_CSS, *v.CSS)
+	}
+	if v.ClientId != nil {
+		s.WriteString(schemas.SetUICustomizationRequest_ClientId, *v.ClientId)
+	}
+	if v.ImageFile != nil {
+		s.WriteBlob(schemas.SetUICustomizationRequest_ImageFile, v.ImageFile)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.SetUICustomizationRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 type SetUICustomizationOutput struct {
 
 	// Information about the hosted UI branding that you applied.
@@ -82,13 +105,34 @@ type SetUICustomizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetUICustomizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetUICustomizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetUICustomizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UICustomization != nil {
+		s.WriteStruct(schemas.SetUICustomizationResponse_UICustomization)
+		v.UICustomization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SetUICustomizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetUICustomizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetUICustomizationResponse_UICustomization:
+			v.UICustomization = &types.UICustomizationType{}
+			return v.UICustomization.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetUICustomizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetUICustomization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetUICustomization, schemas.SetUICustomizationRequest, schemas.SetUICustomizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSetUICustomization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetUICustomization, schemas.SetUICustomizationRequest, schemas.SetUICustomizationResponse), output: &SetUICustomizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

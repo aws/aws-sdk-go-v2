@@ -4,6 +4,8 @@ package sqs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type ListQueueTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueueTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueueTagsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueueTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueueUrl != nil {
+		s.WriteString(schemas.ListQueueTagsRequest_QueueUrl, *v.QueueUrl)
+	}
+}
+
 type ListQueueTagsOutput struct {
 
 	// The list of all tags added to the specified queue.
@@ -51,13 +65,29 @@ type ListQueueTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueueTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueueTagsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueueTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTagMap(s, schemas.ListQueueTagsResult_Tags, v.Tags)
+}
+func (v *ListQueueTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListQueueTagsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListQueueTagsResult_Tags:
+			return deserializeTagMap(d, schemas.ListQueueTagsResult_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListQueueTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListQueueTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueueTags, schemas.ListQueueTagsRequest, schemas.ListQueueTagsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListQueueTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueueTags, schemas.ListQueueTagsRequest, schemas.ListQueueTagsResult), output: &ListQueueTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

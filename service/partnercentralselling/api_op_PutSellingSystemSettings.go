@@ -4,6 +4,8 @@ package partnercentralselling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type PutSellingSystemSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSellingSystemSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutSellingSystemSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutSellingSystemSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.PutSellingSystemSettingsRequest_Catalog, *v.Catalog)
+	}
+	if v.ResourceSnapshotJobRoleIdentifier != nil {
+		s.WriteString(schemas.PutSellingSystemSettingsRequest_ResourceSnapshotJobRoleIdentifier, *v.ResourceSnapshotJobRoleIdentifier)
+	}
+}
+
 type PutSellingSystemSettingsOutput struct {
 
 	// Specifies the catalog in which the settings are defined. Acceptable values
@@ -55,13 +72,38 @@ type PutSellingSystemSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSellingSystemSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutSellingSystemSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutSellingSystemSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.PutSellingSystemSettingsResponse_Catalog, *v.Catalog)
+	}
+	if v.ResourceSnapshotJobRoleArn != nil {
+		s.WriteString(schemas.PutSellingSystemSettingsResponse_ResourceSnapshotJobRoleArn, *v.ResourceSnapshotJobRoleArn)
+	}
+}
+func (v *PutSellingSystemSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutSellingSystemSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutSellingSystemSettingsResponse_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.PutSellingSystemSettingsResponse_Catalog, v.Catalog)
+		case schemas.PutSellingSystemSettingsResponse_ResourceSnapshotJobRoleArn:
+			v.ResourceSnapshotJobRoleArn = new(string)
+			return d.ReadString(schemas.PutSellingSystemSettingsResponse_ResourceSnapshotJobRoleArn, v.ResourceSnapshotJobRoleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutSellingSystemSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPutSellingSystemSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSellingSystemSettings, schemas.PutSellingSystemSettingsRequest, schemas.PutSellingSystemSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpPutSellingSystemSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSellingSystemSettings, schemas.PutSellingSystemSettingsRequest, schemas.PutSellingSystemSettingsResponse), output: &PutSellingSystemSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

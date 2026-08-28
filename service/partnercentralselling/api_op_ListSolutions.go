@@ -5,7 +5,9 @@ package partnercentralselling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,33 @@ type ListSolutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSolutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSolutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSolutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAwsMarketplaceSolutionArnList(s, schemas.ListSolutionsRequest_AwsMarketplaceSolutionArn, v.AwsMarketplaceSolutionArn)
+	if v.Catalog != nil {
+		s.WriteString(schemas.ListSolutionsRequest_Catalog, *v.Catalog)
+	}
+	serializeStringList(s, schemas.ListSolutionsRequest_Category, v.Category)
+	serializeSolutionIdentifiers(s, schemas.ListSolutionsRequest_Identifier, v.Identifier)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSolutionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSolutionsRequest_NextToken, *v.NextToken)
+	}
+	if v.Sort != nil {
+		s.WriteStruct(schemas.ListSolutionsRequest_Sort)
+		v.Sort.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFilterStatus(s, schemas.ListSolutionsRequest_Status, v.Status)
+}
+
 type ListSolutionsOutput struct {
 
 	// An array with minimal details for solutions matching the request criteria.
@@ -91,13 +120,35 @@ type ListSolutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSolutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSolutionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSolutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSolutionsResponse_NextToken, *v.NextToken)
+	}
+	serializeSolutionList(s, schemas.ListSolutionsResponse_SolutionSummaries, v.SolutionSummaries)
+}
+func (v *ListSolutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSolutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSolutionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSolutionsResponse_NextToken, v.NextToken)
+		case schemas.ListSolutionsResponse_SolutionSummaries:
+			return deserializeSolutionList(d, schemas.ListSolutionsResponse_SolutionSummaries, &v.SolutionSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSolutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListSolutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSolutions, schemas.ListSolutionsRequest, schemas.ListSolutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListSolutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSolutions, schemas.ListSolutionsRequest, schemas.ListSolutionsResponse), output: &ListSolutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package codedeploy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,19 @@ type BatchGetDeploymentInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetDeploymentInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetDeploymentInstancesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetDeploymentInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.BatchGetDeploymentInstancesInput_deploymentId, *v.DeploymentId)
+	}
+	serializeInstancesList(s, schemas.BatchGetDeploymentInstancesInput_instanceIds, v.InstanceIds)
+}
+
 // Represents the output of a BatchGetDeploymentInstances operation.
 type BatchGetDeploymentInstancesOutput struct {
 
@@ -63,13 +78,35 @@ type BatchGetDeploymentInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetDeploymentInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetDeploymentInstancesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetDeploymentInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.BatchGetDeploymentInstancesOutput_errorMessage, *v.ErrorMessage)
+	}
+	serializeInstanceSummaryList(s, schemas.BatchGetDeploymentInstancesOutput_instancesSummary, v.InstancesSummary)
+}
+func (v *BatchGetDeploymentInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetDeploymentInstancesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetDeploymentInstancesOutput_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.BatchGetDeploymentInstancesOutput_errorMessage, v.ErrorMessage)
+		case schemas.BatchGetDeploymentInstancesOutput_instancesSummary:
+			return deserializeInstanceSummaryList(d, schemas.BatchGetDeploymentInstancesOutput_instancesSummary, &v.InstancesSummary)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetDeploymentInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetDeploymentInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetDeploymentInstances, schemas.BatchGetDeploymentInstancesInput, schemas.BatchGetDeploymentInstancesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetDeploymentInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetDeploymentInstances, schemas.BatchGetDeploymentInstancesInput, schemas.BatchGetDeploymentInstancesOutput), output: &BatchGetDeploymentInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

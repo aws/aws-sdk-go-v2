@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,16 @@ type BatchDisassociateUserStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDisassociateUserStackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDisassociateUserStackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDisassociateUserStackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUserStackAssociationList(s, schemas.BatchDisassociateUserStackRequest_UserStackAssociations, v.UserStackAssociations)
+}
+
 type BatchDisassociateUserStackOutput struct {
 
 	// The list of UserStackAssociationError objects.
@@ -45,13 +57,29 @@ type BatchDisassociateUserStackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDisassociateUserStackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDisassociateUserStackResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDisassociateUserStackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUserStackAssociationErrorList(s, schemas.BatchDisassociateUserStackResult_errors, v.Errors)
+}
+func (v *BatchDisassociateUserStackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDisassociateUserStackResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDisassociateUserStackResult_errors:
+			return deserializeUserStackAssociationErrorList(d, schemas.BatchDisassociateUserStackResult_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDisassociateUserStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpBatchDisassociateUserStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDisassociateUserStack, schemas.BatchDisassociateUserStackRequest, schemas.BatchDisassociateUserStackResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpBatchDisassociateUserStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDisassociateUserStack, schemas.BatchDisassociateUserStackRequest, schemas.BatchDisassociateUserStackResult), output: &BatchDisassociateUserStackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

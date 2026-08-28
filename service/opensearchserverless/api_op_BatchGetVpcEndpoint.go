@@ -4,7 +4,9 @@ package opensearchserverless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,25 @@ type BatchGetVpcEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetVpcEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetVpcEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetVpcEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVpcEndpointIds(s, schemas.BatchGetVpcEndpointRequest_ids, v.Ids)
+}
+func (v *BatchGetVpcEndpointInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetVpcEndpointRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetVpcEndpointRequest_ids:
+			return deserializeVpcEndpointIds(d, schemas.BatchGetVpcEndpointRequest_ids, &v.Ids)
+		}
+		return nil
+	})
+}
+
 type BatchGetVpcEndpointOutput struct {
 
 	// Details about the specified VPC endpoint.
@@ -51,13 +72,32 @@ type BatchGetVpcEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetVpcEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetVpcEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetVpcEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVpcEndpointDetails(s, schemas.BatchGetVpcEndpointResponse_vpcEndpointDetails, v.VpcEndpointDetails)
+	serializeVpcEndpointErrorDetails(s, schemas.BatchGetVpcEndpointResponse_vpcEndpointErrorDetails, v.VpcEndpointErrorDetails)
+}
+func (v *BatchGetVpcEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetVpcEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetVpcEndpointResponse_vpcEndpointDetails:
+			return deserializeVpcEndpointDetails(d, schemas.BatchGetVpcEndpointResponse_vpcEndpointDetails, &v.VpcEndpointDetails)
+		case schemas.BatchGetVpcEndpointResponse_vpcEndpointErrorDetails:
+			return deserializeVpcEndpointErrorDetails(d, schemas.BatchGetVpcEndpointResponse_vpcEndpointErrorDetails, &v.VpcEndpointErrorDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetVpcEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchGetVpcEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetVpcEndpoint, schemas.BatchGetVpcEndpointRequest, schemas.BatchGetVpcEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchGetVpcEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetVpcEndpoint, schemas.BatchGetVpcEndpointRequest, schemas.BatchGetVpcEndpointResponse), output: &BatchGetVpcEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

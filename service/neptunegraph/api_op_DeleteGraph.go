@@ -4,7 +4,9 @@ package neptunegraph
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	"time"
@@ -44,6 +46,20 @@ type DeleteGraphInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGraphInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGraphInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGraphInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphIdentifier != nil {
+		s.WriteString(schemas.DeleteGraphInput_graphIdentifier, *v.GraphIdentifier)
+	}
+	if v.SkipSnapshot != nil {
+		s.WriteBool(schemas.DeleteGraphInput_skipSnapshot, *v.SkipSnapshot)
+	}
+}
 func (in *DeleteGraphInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ApiType = ptr.String("ControlPlane")
@@ -111,13 +127,122 @@ type DeleteGraphOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGraphOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGraphOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGraphOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteGraphOutput_arn, *v.Arn)
+	}
+	if v.BuildNumber != nil {
+		s.WriteString(schemas.DeleteGraphOutput_buildNumber, *v.BuildNumber)
+	}
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.DeleteGraphOutput_createTime, *v.CreateTime)
+	}
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.DeleteGraphOutput_deletionProtection, *v.DeletionProtection)
+	}
+	if v.Endpoint != nil {
+		s.WriteString(schemas.DeleteGraphOutput_endpoint, *v.Endpoint)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteGraphOutput_id, *v.Id)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.DeleteGraphOutput_kmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteGraphOutput_name, *v.Name)
+	}
+	if v.ProvisionedMemory != nil {
+		s.WriteInt32(schemas.DeleteGraphOutput_provisionedMemory, *v.ProvisionedMemory)
+	}
+	if v.PublicConnectivity != nil {
+		s.WriteBool(schemas.DeleteGraphOutput_publicConnectivity, *v.PublicConnectivity)
+	}
+	if v.ReplicaCount != nil {
+		s.WriteInt32(schemas.DeleteGraphOutput_replicaCount, *v.ReplicaCount)
+	}
+	if v.SourceSnapshotId != nil {
+		s.WriteString(schemas.DeleteGraphOutput_sourceSnapshotId, *v.SourceSnapshotId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteGraphOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.DeleteGraphOutput_statusReason, *v.StatusReason)
+	}
+	if v.VectorSearchConfiguration != nil {
+		s.WriteStruct(schemas.DeleteGraphOutput_vectorSearchConfiguration)
+		v.VectorSearchConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteGraphOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteGraphOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteGraphOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteGraphOutput_arn, v.Arn)
+		case schemas.DeleteGraphOutput_buildNumber:
+			v.BuildNumber = new(string)
+			return d.ReadString(schemas.DeleteGraphOutput_buildNumber, v.BuildNumber)
+		case schemas.DeleteGraphOutput_createTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.DeleteGraphOutput_createTime, v.CreateTime)
+		case schemas.DeleteGraphOutput_deletionProtection:
+			v.DeletionProtection = new(bool)
+			return d.ReadBool(schemas.DeleteGraphOutput_deletionProtection, v.DeletionProtection)
+		case schemas.DeleteGraphOutput_endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.DeleteGraphOutput_endpoint, v.Endpoint)
+		case schemas.DeleteGraphOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteGraphOutput_id, v.Id)
+		case schemas.DeleteGraphOutput_kmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.DeleteGraphOutput_kmsKeyIdentifier, v.KmsKeyIdentifier)
+		case schemas.DeleteGraphOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteGraphOutput_name, v.Name)
+		case schemas.DeleteGraphOutput_provisionedMemory:
+			v.ProvisionedMemory = new(int32)
+			return d.ReadInt32(schemas.DeleteGraphOutput_provisionedMemory, v.ProvisionedMemory)
+		case schemas.DeleteGraphOutput_publicConnectivity:
+			v.PublicConnectivity = new(bool)
+			return d.ReadBool(schemas.DeleteGraphOutput_publicConnectivity, v.PublicConnectivity)
+		case schemas.DeleteGraphOutput_replicaCount:
+			v.ReplicaCount = new(int32)
+			return d.ReadInt32(schemas.DeleteGraphOutput_replicaCount, v.ReplicaCount)
+		case schemas.DeleteGraphOutput_sourceSnapshotId:
+			v.SourceSnapshotId = new(string)
+			return d.ReadString(schemas.DeleteGraphOutput_sourceSnapshotId, v.SourceSnapshotId)
+		case schemas.DeleteGraphOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteGraphOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.GraphStatus(ev)
+			return nil
+		case schemas.DeleteGraphOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.DeleteGraphOutput_statusReason, v.StatusReason)
+		case schemas.DeleteGraphOutput_vectorSearchConfiguration:
+			v.VectorSearchConfiguration = &types.VectorSearchConfiguration{}
+			return v.VectorSearchConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteGraph{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGraph, schemas.DeleteGraphInput, schemas.DeleteGraphOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteGraph{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGraph, schemas.DeleteGraphInput, schemas.DeleteGraphOutput), output: &DeleteGraphOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribeResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeResourcePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeResourcePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeResourcePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DescribeResourcePolicyRequest_resourceArn, *v.ResourceArn)
+	}
+}
+
 type DescribeResourcePolicyOutput struct {
 
 	// The JSON structure that contains the resource policy. For more information
@@ -57,13 +71,44 @@ type DescribeResourcePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeResourcePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeResourcePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeResourcePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteString(schemas.DescribeResourcePolicyResponse_policy, *v.Policy)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DescribeResourcePolicyResponse_resourceArn, *v.ResourceArn)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.DescribeResourcePolicyResponse_revisionId, *v.RevisionId)
+	}
+}
+func (v *DescribeResourcePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeResourcePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeResourcePolicyResponse_policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.DescribeResourcePolicyResponse_policy, v.Policy)
+		case schemas.DescribeResourcePolicyResponse_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.DescribeResourcePolicyResponse_resourceArn, v.ResourceArn)
+		case schemas.DescribeResourcePolicyResponse_revisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.DescribeResourcePolicyResponse_revisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeResourcePolicy, schemas.DescribeResourcePolicyRequest, schemas.DescribeResourcePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeResourcePolicy, schemas.DescribeResourcePolicyRequest, schemas.DescribeResourcePolicyResponse), output: &DescribeResourcePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

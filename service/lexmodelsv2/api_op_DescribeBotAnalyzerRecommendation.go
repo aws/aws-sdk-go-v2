@@ -5,7 +5,9 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -54,6 +56,27 @@ type DescribeBotAnalyzerRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBotAnalyzerRecommendationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBotAnalyzerRecommendationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBotAnalyzerRecommendationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotAnalyzerRequestId != nil {
+		s.WriteString(schemas.DescribeBotAnalyzerRecommendationRequest_botAnalyzerRequestId, *v.BotAnalyzerRequestId)
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.DescribeBotAnalyzerRecommendationRequest_botId, *v.BotId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeBotAnalyzerRecommendationRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeBotAnalyzerRecommendationRequest_nextToken, *v.NextToken)
+	}
+}
+
 type DescribeBotAnalyzerRecommendationOutput struct {
 
 	// A list of recommendations for optimizing your bot configuration. Each
@@ -88,13 +111,69 @@ type DescribeBotAnalyzerRecommendationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBotAnalyzerRecommendationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBotAnalyzerRecommendationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBotAnalyzerRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBotAnalyzerRecommendationList(s, schemas.DescribeBotAnalyzerRecommendationResponse_botAnalyzerRecommendationList, v.BotAnalyzerRecommendationList)
+	if v.BotAnalyzerStatus != "" {
+		s.WriteString(schemas.DescribeBotAnalyzerRecommendationResponse_botAnalyzerStatus, string(v.BotAnalyzerStatus))
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.DescribeBotAnalyzerRecommendationResponse_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.DescribeBotAnalyzerRecommendationResponse_botVersion, *v.BotVersion)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.DescribeBotAnalyzerRecommendationResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.DescribeBotAnalyzerRecommendationResponse_localeId, *v.LocaleId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeBotAnalyzerRecommendationResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeBotAnalyzerRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeBotAnalyzerRecommendationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeBotAnalyzerRecommendationResponse_botAnalyzerRecommendationList:
+			return deserializeBotAnalyzerRecommendationList(d, schemas.DescribeBotAnalyzerRecommendationResponse_botAnalyzerRecommendationList, &v.BotAnalyzerRecommendationList)
+		case schemas.DescribeBotAnalyzerRecommendationResponse_botAnalyzerStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeBotAnalyzerRecommendationResponse_botAnalyzerStatus, &ev); err != nil {
+				return err
+			}
+			v.BotAnalyzerStatus = types.BotAnalyzerStatus(ev)
+			return nil
+		case schemas.DescribeBotAnalyzerRecommendationResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.DescribeBotAnalyzerRecommendationResponse_botId, v.BotId)
+		case schemas.DescribeBotAnalyzerRecommendationResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.DescribeBotAnalyzerRecommendationResponse_botVersion, v.BotVersion)
+		case schemas.DescribeBotAnalyzerRecommendationResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeBotAnalyzerRecommendationResponse_creationDateTime, v.CreationDateTime)
+		case schemas.DescribeBotAnalyzerRecommendationResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.DescribeBotAnalyzerRecommendationResponse_localeId, v.LocaleId)
+		case schemas.DescribeBotAnalyzerRecommendationResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeBotAnalyzerRecommendationResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeBotAnalyzerRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeBotAnalyzerRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBotAnalyzerRecommendation, schemas.DescribeBotAnalyzerRecommendationRequest, schemas.DescribeBotAnalyzerRecommendationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeBotAnalyzerRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBotAnalyzerRecommendation, schemas.DescribeBotAnalyzerRecommendationRequest, schemas.DescribeBotAnalyzerRecommendationResponse), output: &DescribeBotAnalyzerRecommendationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -68,6 +70,40 @@ type AvailabilityMeasurement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AvailabilityMeasurement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AvailabilityMeasurement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AvailabilityMeasurement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExperienceScore != nil {
+		s.WriteFloat64(schemas.AvailabilityMeasurement_ExperienceScore, *v.ExperienceScore)
+	}
+	if v.PercentOfClientLocationImpacted != nil {
+		s.WriteFloat64(schemas.AvailabilityMeasurement_PercentOfClientLocationImpacted, *v.PercentOfClientLocationImpacted)
+	}
+	if v.PercentOfTotalTrafficImpacted != nil {
+		s.WriteFloat64(schemas.AvailabilityMeasurement_PercentOfTotalTrafficImpacted, *v.PercentOfTotalTrafficImpacted)
+	}
+}
+func (v *AvailabilityMeasurement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AvailabilityMeasurement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AvailabilityMeasurement_ExperienceScore:
+			v.ExperienceScore = new(float64)
+			return d.ReadFloat64(schemas.AvailabilityMeasurement_ExperienceScore, v.ExperienceScore)
+		case schemas.AvailabilityMeasurement_PercentOfClientLocationImpacted:
+			v.PercentOfClientLocationImpacted = new(float64)
+			return d.ReadFloat64(schemas.AvailabilityMeasurement_PercentOfClientLocationImpacted, v.PercentOfClientLocationImpacted)
+		case schemas.AvailabilityMeasurement_PercentOfTotalTrafficImpacted:
+			v.PercentOfTotalTrafficImpacted = new(float64)
+			return d.ReadFloat64(schemas.AvailabilityMeasurement_PercentOfTotalTrafficImpacted, v.PercentOfTotalTrafficImpacted)
+		}
+		return nil
+	})
+}
+
 // The impacted location, such as a city, that Amazon Web Services clients access
 // application resources from.
 type ClientLocation struct {
@@ -119,6 +155,70 @@ type ClientLocation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClientLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientLocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClientLocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ASName != nil {
+		s.WriteString(schemas.ClientLocation_ASName, *v.ASName)
+	}
+	if v.ASNumber != nil {
+		s.WriteInt64(schemas.ClientLocation_ASNumber, *v.ASNumber)
+	}
+	if v.City != nil {
+		s.WriteString(schemas.ClientLocation_City, *v.City)
+	}
+	if v.Country != nil {
+		s.WriteString(schemas.ClientLocation_Country, *v.Country)
+	}
+	if v.Latitude != nil {
+		s.WriteFloat64(schemas.ClientLocation_Latitude, *v.Latitude)
+	}
+	if v.Longitude != nil {
+		s.WriteFloat64(schemas.ClientLocation_Longitude, *v.Longitude)
+	}
+	if v.Metro != nil {
+		s.WriteString(schemas.ClientLocation_Metro, *v.Metro)
+	}
+	if v.Subdivision != nil {
+		s.WriteString(schemas.ClientLocation_Subdivision, *v.Subdivision)
+	}
+}
+func (v *ClientLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientLocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientLocation_ASName:
+			v.ASName = new(string)
+			return d.ReadString(schemas.ClientLocation_ASName, v.ASName)
+		case schemas.ClientLocation_ASNumber:
+			v.ASNumber = new(int64)
+			return d.ReadInt64(schemas.ClientLocation_ASNumber, v.ASNumber)
+		case schemas.ClientLocation_City:
+			v.City = new(string)
+			return d.ReadString(schemas.ClientLocation_City, v.City)
+		case schemas.ClientLocation_Country:
+			v.Country = new(string)
+			return d.ReadString(schemas.ClientLocation_Country, v.Country)
+		case schemas.ClientLocation_Latitude:
+			v.Latitude = new(float64)
+			return d.ReadFloat64(schemas.ClientLocation_Latitude, v.Latitude)
+		case schemas.ClientLocation_Longitude:
+			v.Longitude = new(float64)
+			return d.ReadFloat64(schemas.ClientLocation_Longitude, v.Longitude)
+		case schemas.ClientLocation_Metro:
+			v.Metro = new(string)
+			return d.ReadString(schemas.ClientLocation_Metro, v.Metro)
+		case schemas.ClientLocation_Subdivision:
+			v.Subdivision = new(string)
+			return d.ReadString(schemas.ClientLocation_Subdivision, v.Subdivision)
+		}
+		return nil
+	})
+}
+
 // A filter that you use with the results of a Amazon CloudWatch Internet Monitor
 // query that you created and ran. The query sets up a repository of data that is a
 // subset of your application's Internet Monitor data. FilterParameter is a string
@@ -154,6 +254,41 @@ type FilterParameter struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FilterParameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FilterParameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FilterParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Field != nil {
+		s.WriteString(schemas.FilterParameter_Field, *v.Field)
+	}
+	if v.Operator != "" {
+		s.WriteString(schemas.FilterParameter_Operator, string(v.Operator))
+	}
+	serializeFilterList(s, schemas.FilterParameter_Values, v.Values)
+}
+func (v *FilterParameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FilterParameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FilterParameter_Field:
+			v.Field = new(string)
+			return d.ReadString(schemas.FilterParameter_Field, v.Field)
+		case schemas.FilterParameter_Operator:
+			var ev string
+			if err := d.ReadString(schemas.FilterParameter_Operator, &ev); err != nil {
+				return err
+			}
+			v.Operator = Operator(ev)
+			return nil
+		case schemas.FilterParameter_Values:
+			return deserializeFilterList(d, schemas.FilterParameter_Values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // Information about a health event created in a monitor in Amazon CloudWatch
@@ -217,6 +352,92 @@ type HealthEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HealthEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HealthEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HealthEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.HealthEvent_CreatedAt, *v.CreatedAt)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.HealthEvent_EndedAt, *v.EndedAt)
+	}
+	if v.EventArn != nil {
+		s.WriteString(schemas.HealthEvent_EventArn, *v.EventArn)
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.HealthEvent_EventId, *v.EventId)
+	}
+	if v.HealthScoreThreshold != 0 {
+		s.WriteFloat64(schemas.HealthEvent_HealthScoreThreshold, v.HealthScoreThreshold)
+	}
+	if v.ImpactType != "" {
+		s.WriteString(schemas.HealthEvent_ImpactType, string(v.ImpactType))
+	}
+	serializeImpactedLocationsList(s, schemas.HealthEvent_ImpactedLocations, v.ImpactedLocations)
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.HealthEvent_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.PercentOfTotalTrafficImpacted != nil {
+		s.WriteFloat64(schemas.HealthEvent_PercentOfTotalTrafficImpacted, *v.PercentOfTotalTrafficImpacted)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.HealthEvent_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.HealthEvent_Status, string(v.Status))
+	}
+}
+func (v *HealthEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HealthEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HealthEvent_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.HealthEvent_CreatedAt, v.CreatedAt)
+		case schemas.HealthEvent_EndedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.HealthEvent_EndedAt, v.EndedAt)
+		case schemas.HealthEvent_EventArn:
+			v.EventArn = new(string)
+			return d.ReadString(schemas.HealthEvent_EventArn, v.EventArn)
+		case schemas.HealthEvent_EventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.HealthEvent_EventId, v.EventId)
+		case schemas.HealthEvent_HealthScoreThreshold:
+			return d.ReadFloat64(schemas.HealthEvent_HealthScoreThreshold, &v.HealthScoreThreshold)
+		case schemas.HealthEvent_ImpactType:
+			var ev string
+			if err := d.ReadString(schemas.HealthEvent_ImpactType, &ev); err != nil {
+				return err
+			}
+			v.ImpactType = HealthEventImpactType(ev)
+			return nil
+		case schemas.HealthEvent_ImpactedLocations:
+			return deserializeImpactedLocationsList(d, schemas.HealthEvent_ImpactedLocations, &v.ImpactedLocations)
+		case schemas.HealthEvent_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.HealthEvent_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.HealthEvent_PercentOfTotalTrafficImpacted:
+			v.PercentOfTotalTrafficImpacted = new(float64)
+			return d.ReadFloat64(schemas.HealthEvent_PercentOfTotalTrafficImpacted, v.PercentOfTotalTrafficImpacted)
+		case schemas.HealthEvent_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.HealthEvent_StartedAt, v.StartedAt)
+		case schemas.HealthEvent_Status:
+			var ev string
+			if err := d.ReadString(schemas.HealthEvent_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = HealthEventStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A complex type with the configuration information that determines the threshold
 // and other conditions for when Internet Monitor creates a health event for an
 // overall performance or availability issue, across an application's geographies.
@@ -259,6 +480,48 @@ type HealthEventsConfig struct {
 	PerformanceScoreThreshold float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *HealthEventsConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HealthEventsConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HealthEventsConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityLocalHealthEventsConfig != nil {
+		s.WriteStruct(schemas.HealthEventsConfig_AvailabilityLocalHealthEventsConfig)
+		v.AvailabilityLocalHealthEventsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AvailabilityScoreThreshold != 0 {
+		s.WriteFloat64(schemas.HealthEventsConfig_AvailabilityScoreThreshold, v.AvailabilityScoreThreshold)
+	}
+	if v.PerformanceLocalHealthEventsConfig != nil {
+		s.WriteStruct(schemas.HealthEventsConfig_PerformanceLocalHealthEventsConfig)
+		v.PerformanceLocalHealthEventsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PerformanceScoreThreshold != 0 {
+		s.WriteFloat64(schemas.HealthEventsConfig_PerformanceScoreThreshold, v.PerformanceScoreThreshold)
+	}
+}
+func (v *HealthEventsConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HealthEventsConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HealthEventsConfig_AvailabilityLocalHealthEventsConfig:
+			v.AvailabilityLocalHealthEventsConfig = &LocalHealthEventsConfig{}
+			return v.AvailabilityLocalHealthEventsConfig.Deserialize(d)
+		case schemas.HealthEventsConfig_AvailabilityScoreThreshold:
+			return d.ReadFloat64(schemas.HealthEventsConfig_AvailabilityScoreThreshold, &v.AvailabilityScoreThreshold)
+		case schemas.HealthEventsConfig_PerformanceLocalHealthEventsConfig:
+			v.PerformanceLocalHealthEventsConfig = &LocalHealthEventsConfig{}
+			return v.PerformanceLocalHealthEventsConfig.Deserialize(d)
+		case schemas.HealthEventsConfig_PerformanceScoreThreshold:
+			return d.ReadFloat64(schemas.HealthEventsConfig_PerformanceScoreThreshold, &v.PerformanceScoreThreshold)
+		}
+		return nil
+	})
 }
 
 // Information about a location impacted by a health event in Amazon CloudWatch
@@ -337,6 +600,117 @@ type ImpactedLocation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImpactedLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImpactedLocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImpactedLocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ASName != nil {
+		s.WriteString(schemas.ImpactedLocation_ASName, *v.ASName)
+	}
+	if v.ASNumber != nil {
+		s.WriteInt64(schemas.ImpactedLocation_ASNumber, *v.ASNumber)
+	}
+	if v.CausedBy != nil {
+		s.WriteStruct(schemas.ImpactedLocation_CausedBy)
+		v.CausedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.City != nil {
+		s.WriteString(schemas.ImpactedLocation_City, *v.City)
+	}
+	if v.Country != nil {
+		s.WriteString(schemas.ImpactedLocation_Country, *v.Country)
+	}
+	if v.CountryCode != nil {
+		s.WriteString(schemas.ImpactedLocation_CountryCode, *v.CountryCode)
+	}
+	if v.InternetHealth != nil {
+		s.WriteStruct(schemas.ImpactedLocation_InternetHealth)
+		v.InternetHealth.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIpv4PrefixList(s, schemas.ImpactedLocation_Ipv4Prefixes, v.Ipv4Prefixes)
+	if v.Latitude != nil {
+		s.WriteFloat64(schemas.ImpactedLocation_Latitude, *v.Latitude)
+	}
+	if v.Longitude != nil {
+		s.WriteFloat64(schemas.ImpactedLocation_Longitude, *v.Longitude)
+	}
+	if v.Metro != nil {
+		s.WriteString(schemas.ImpactedLocation_Metro, *v.Metro)
+	}
+	if v.ServiceLocation != nil {
+		s.WriteString(schemas.ImpactedLocation_ServiceLocation, *v.ServiceLocation)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ImpactedLocation_Status, string(v.Status))
+	}
+	if v.Subdivision != nil {
+		s.WriteString(schemas.ImpactedLocation_Subdivision, *v.Subdivision)
+	}
+	if v.SubdivisionCode != nil {
+		s.WriteString(schemas.ImpactedLocation_SubdivisionCode, *v.SubdivisionCode)
+	}
+}
+func (v *ImpactedLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImpactedLocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImpactedLocation_ASName:
+			v.ASName = new(string)
+			return d.ReadString(schemas.ImpactedLocation_ASName, v.ASName)
+		case schemas.ImpactedLocation_ASNumber:
+			v.ASNumber = new(int64)
+			return d.ReadInt64(schemas.ImpactedLocation_ASNumber, v.ASNumber)
+		case schemas.ImpactedLocation_CausedBy:
+			v.CausedBy = &NetworkImpairment{}
+			return v.CausedBy.Deserialize(d)
+		case schemas.ImpactedLocation_City:
+			v.City = new(string)
+			return d.ReadString(schemas.ImpactedLocation_City, v.City)
+		case schemas.ImpactedLocation_Country:
+			v.Country = new(string)
+			return d.ReadString(schemas.ImpactedLocation_Country, v.Country)
+		case schemas.ImpactedLocation_CountryCode:
+			v.CountryCode = new(string)
+			return d.ReadString(schemas.ImpactedLocation_CountryCode, v.CountryCode)
+		case schemas.ImpactedLocation_InternetHealth:
+			v.InternetHealth = &InternetHealth{}
+			return v.InternetHealth.Deserialize(d)
+		case schemas.ImpactedLocation_Ipv4Prefixes:
+			return deserializeIpv4PrefixList(d, schemas.ImpactedLocation_Ipv4Prefixes, &v.Ipv4Prefixes)
+		case schemas.ImpactedLocation_Latitude:
+			v.Latitude = new(float64)
+			return d.ReadFloat64(schemas.ImpactedLocation_Latitude, v.Latitude)
+		case schemas.ImpactedLocation_Longitude:
+			v.Longitude = new(float64)
+			return d.ReadFloat64(schemas.ImpactedLocation_Longitude, v.Longitude)
+		case schemas.ImpactedLocation_Metro:
+			v.Metro = new(string)
+			return d.ReadString(schemas.ImpactedLocation_Metro, v.Metro)
+		case schemas.ImpactedLocation_ServiceLocation:
+			v.ServiceLocation = new(string)
+			return d.ReadString(schemas.ImpactedLocation_ServiceLocation, v.ServiceLocation)
+		case schemas.ImpactedLocation_Status:
+			var ev string
+			if err := d.ReadString(schemas.ImpactedLocation_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = HealthEventStatus(ev)
+			return nil
+		case schemas.ImpactedLocation_Subdivision:
+			v.Subdivision = new(string)
+			return d.ReadString(schemas.ImpactedLocation_Subdivision, v.Subdivision)
+		case schemas.ImpactedLocation_SubdivisionCode:
+			v.SubdivisionCode = new(string)
+			return d.ReadString(schemas.ImpactedLocation_SubdivisionCode, v.SubdivisionCode)
+		}
+		return nil
+	})
+}
+
 // A summary of information about an internet event in Amazon CloudWatch Internet
 // Monitor. Internet events are issues that cause performance degradation or
 // availability problems for impacted Amazon Web Services client locations.
@@ -383,6 +757,74 @@ type InternetEventSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InternetEventSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternetEventSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternetEventSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientLocation != nil {
+		s.WriteStruct(schemas.InternetEventSummary_ClientLocation)
+		v.ClientLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.InternetEventSummary_EndedAt, *v.EndedAt)
+	}
+	if v.EventArn != nil {
+		s.WriteString(schemas.InternetEventSummary_EventArn, *v.EventArn)
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.InternetEventSummary_EventId, *v.EventId)
+	}
+	if v.EventStatus != "" {
+		s.WriteString(schemas.InternetEventSummary_EventStatus, string(v.EventStatus))
+	}
+	if v.EventType != "" {
+		s.WriteString(schemas.InternetEventSummary_EventType, string(v.EventType))
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.InternetEventSummary_StartedAt, *v.StartedAt)
+	}
+}
+func (v *InternetEventSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternetEventSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternetEventSummary_ClientLocation:
+			v.ClientLocation = &ClientLocation{}
+			return v.ClientLocation.Deserialize(d)
+		case schemas.InternetEventSummary_EndedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.InternetEventSummary_EndedAt, v.EndedAt)
+		case schemas.InternetEventSummary_EventArn:
+			v.EventArn = new(string)
+			return d.ReadString(schemas.InternetEventSummary_EventArn, v.EventArn)
+		case schemas.InternetEventSummary_EventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.InternetEventSummary_EventId, v.EventId)
+		case schemas.InternetEventSummary_EventStatus:
+			var ev string
+			if err := d.ReadString(schemas.InternetEventSummary_EventStatus, &ev); err != nil {
+				return err
+			}
+			v.EventStatus = InternetEventStatus(ev)
+			return nil
+		case schemas.InternetEventSummary_EventType:
+			var ev string
+			if err := d.ReadString(schemas.InternetEventSummary_EventType, &ev); err != nil {
+				return err
+			}
+			v.EventType = InternetEventType(ev)
+			return nil
+		case schemas.InternetEventSummary_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.InternetEventSummary_StartedAt, v.StartedAt)
+		}
+		return nil
+	})
+}
+
 // Internet health includes measurements calculated by Amazon CloudWatch Internet
 // Monitor about the performance and availability for your application on the
 // internet. Amazon Web Services has substantial historical data about internet
@@ -420,6 +862,38 @@ type InternetHealth struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InternetHealth) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternetHealth)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternetHealth) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Availability != nil {
+		s.WriteStruct(schemas.InternetHealth_Availability)
+		v.Availability.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Performance != nil {
+		s.WriteStruct(schemas.InternetHealth_Performance)
+		v.Performance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InternetHealth) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternetHealth, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternetHealth_Availability:
+			v.Availability = &AvailabilityMeasurement{}
+			return v.Availability.Deserialize(d)
+		case schemas.InternetHealth_Performance:
+			v.Performance = &PerformanceMeasurement{}
+			return v.Performance.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Publish internet measurements to an Amazon S3 bucket in addition to CloudWatch
 // Logs.
 type InternetMeasurementsLogDelivery struct {
@@ -432,6 +906,30 @@ type InternetMeasurementsLogDelivery struct {
 	S3Config *S3Config
 
 	noSmithyDocumentSerde
+}
+
+func (v *InternetMeasurementsLogDelivery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternetMeasurementsLogDelivery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternetMeasurementsLogDelivery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Config != nil {
+		s.WriteStruct(schemas.InternetMeasurementsLogDelivery_S3Config)
+		v.S3Config.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InternetMeasurementsLogDelivery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternetMeasurementsLogDelivery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternetMeasurementsLogDelivery_S3Config:
+			v.S3Config = &S3Config{}
+			return v.S3Config.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A complex type with the configuration information that determines the threshold
@@ -472,6 +970,42 @@ type LocalHealthEventsConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LocalHealthEventsConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LocalHealthEventsConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LocalHealthEventsConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HealthScoreThreshold != 0 {
+		s.WriteFloat64(schemas.LocalHealthEventsConfig_HealthScoreThreshold, v.HealthScoreThreshold)
+	}
+	if v.MinTrafficImpact != 0 {
+		s.WriteFloat64(schemas.LocalHealthEventsConfig_MinTrafficImpact, v.MinTrafficImpact)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.LocalHealthEventsConfig_Status, string(v.Status))
+	}
+}
+func (v *LocalHealthEventsConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LocalHealthEventsConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LocalHealthEventsConfig_HealthScoreThreshold:
+			return d.ReadFloat64(schemas.LocalHealthEventsConfig_HealthScoreThreshold, &v.HealthScoreThreshold)
+		case schemas.LocalHealthEventsConfig_MinTrafficImpact:
+			return d.ReadFloat64(schemas.LocalHealthEventsConfig_MinTrafficImpact, &v.MinTrafficImpact)
+		case schemas.LocalHealthEventsConfig_Status:
+			var ev string
+			if err := d.ReadString(schemas.LocalHealthEventsConfig_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = LocalHealthEventsConfigStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The description of and information about a monitor in Amazon CloudWatch
 // Internet Monitor.
 type Monitor struct {
@@ -497,6 +1031,54 @@ type Monitor struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Monitor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Monitor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Monitor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonitorArn != nil {
+		s.WriteString(schemas.Monitor_MonitorArn, *v.MonitorArn)
+	}
+	if v.MonitorName != nil {
+		s.WriteString(schemas.Monitor_MonitorName, *v.MonitorName)
+	}
+	if v.ProcessingStatus != "" {
+		s.WriteString(schemas.Monitor_ProcessingStatus, string(v.ProcessingStatus))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Monitor_Status, string(v.Status))
+	}
+}
+func (v *Monitor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Monitor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Monitor_MonitorArn:
+			v.MonitorArn = new(string)
+			return d.ReadString(schemas.Monitor_MonitorArn, v.MonitorArn)
+		case schemas.Monitor_MonitorName:
+			v.MonitorName = new(string)
+			return d.ReadString(schemas.Monitor_MonitorName, v.MonitorName)
+		case schemas.Monitor_ProcessingStatus:
+			var ev string
+			if err := d.ReadString(schemas.Monitor_ProcessingStatus, &ev); err != nil {
+				return err
+			}
+			v.ProcessingStatus = MonitorProcessingStatusCode(ev)
+			return nil
+		case schemas.Monitor_Status:
+			var ev string
+			if err := d.ReadString(schemas.Monitor_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = MonitorConfigState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // An internet service provider (ISP) or network (ASN) in Amazon CloudWatch
 // Internet Monitor.
 type Network struct {
@@ -512,6 +1094,34 @@ type Network struct {
 	ASNumber *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *Network) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Network)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Network) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ASName != nil {
+		s.WriteString(schemas.Network_ASName, *v.ASName)
+	}
+	if v.ASNumber != nil {
+		s.WriteInt64(schemas.Network_ASNumber, *v.ASNumber)
+	}
+}
+func (v *Network) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Network, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Network_ASName:
+			v.ASName = new(string)
+			return d.ReadString(schemas.Network_ASName, v.ASName)
+		case schemas.Network_ASNumber:
+			v.ASNumber = new(int64)
+			return d.ReadInt64(schemas.Network_ASNumber, v.ASNumber)
+		}
+		return nil
+	})
 }
 
 // Information about the network impairment for a specific network measured by
@@ -535,6 +1145,38 @@ type NetworkImpairment struct {
 	Networks []Network
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkImpairment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkImpairment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkImpairment) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNetworkList(s, schemas.NetworkImpairment_AsPath, v.AsPath)
+	if v.NetworkEventType != "" {
+		s.WriteString(schemas.NetworkImpairment_NetworkEventType, string(v.NetworkEventType))
+	}
+	serializeNetworkList(s, schemas.NetworkImpairment_Networks, v.Networks)
+}
+func (v *NetworkImpairment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkImpairment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkImpairment_AsPath:
+			return deserializeNetworkList(d, schemas.NetworkImpairment_AsPath, &v.AsPath)
+		case schemas.NetworkImpairment_NetworkEventType:
+			var ev string
+			if err := d.ReadString(schemas.NetworkImpairment_NetworkEventType, &ev); err != nil {
+				return err
+			}
+			v.NetworkEventType = TriangulationEventType(ev)
+			return nil
+		case schemas.NetworkImpairment_Networks:
+			return deserializeNetworkList(d, schemas.NetworkImpairment_Networks, &v.Networks)
+		}
+		return nil
+	})
 }
 
 // Amazon CloudWatch Internet Monitor calculates measurements about the
@@ -608,6 +1250,48 @@ type PerformanceMeasurement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PerformanceMeasurement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PerformanceMeasurement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PerformanceMeasurement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExperienceScore != nil {
+		s.WriteFloat64(schemas.PerformanceMeasurement_ExperienceScore, *v.ExperienceScore)
+	}
+	if v.PercentOfClientLocationImpacted != nil {
+		s.WriteFloat64(schemas.PerformanceMeasurement_PercentOfClientLocationImpacted, *v.PercentOfClientLocationImpacted)
+	}
+	if v.PercentOfTotalTrafficImpacted != nil {
+		s.WriteFloat64(schemas.PerformanceMeasurement_PercentOfTotalTrafficImpacted, *v.PercentOfTotalTrafficImpacted)
+	}
+	if v.RoundTripTime != nil {
+		s.WriteStruct(schemas.PerformanceMeasurement_RoundTripTime)
+		v.RoundTripTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PerformanceMeasurement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PerformanceMeasurement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PerformanceMeasurement_ExperienceScore:
+			v.ExperienceScore = new(float64)
+			return d.ReadFloat64(schemas.PerformanceMeasurement_ExperienceScore, v.ExperienceScore)
+		case schemas.PerformanceMeasurement_PercentOfClientLocationImpacted:
+			v.PercentOfClientLocationImpacted = new(float64)
+			return d.ReadFloat64(schemas.PerformanceMeasurement_PercentOfClientLocationImpacted, v.PercentOfClientLocationImpacted)
+		case schemas.PerformanceMeasurement_PercentOfTotalTrafficImpacted:
+			v.PercentOfTotalTrafficImpacted = new(float64)
+			return d.ReadFloat64(schemas.PerformanceMeasurement_PercentOfTotalTrafficImpacted, v.PercentOfTotalTrafficImpacted)
+		case schemas.PerformanceMeasurement_RoundTripTime:
+			v.RoundTripTime = &RoundTripTime{}
+			return v.RoundTripTime.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Defines a field to query for your application's Amazon CloudWatch Internet
 // Monitor data. You create a data repository by running a query of a specific
 // type. Each QueryType includes a specific set of fields and datatypes to
@@ -626,6 +1310,34 @@ type QueryField struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.QueryField_Name, *v.Name)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.QueryField_Type, *v.Type)
+	}
+}
+func (v *QueryField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryField_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.QueryField_Name, v.Name)
+		case schemas.QueryField_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.QueryField_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Round-trip time (RTT) is how long it takes for a request from the user to
 // return a response to the user. Amazon CloudWatch Internet Monitor calculates RTT
 // at different percentiles: p50, p90, and p95.
@@ -641,6 +1353,40 @@ type RoundTripTime struct {
 	P95 *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *RoundTripTime) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RoundTripTime)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RoundTripTime) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.P50 != nil {
+		s.WriteFloat64(schemas.RoundTripTime_P50, *v.P50)
+	}
+	if v.P90 != nil {
+		s.WriteFloat64(schemas.RoundTripTime_P90, *v.P90)
+	}
+	if v.P95 != nil {
+		s.WriteFloat64(schemas.RoundTripTime_P95, *v.P95)
+	}
+}
+func (v *RoundTripTime) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RoundTripTime, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RoundTripTime_P50:
+			v.P50 = new(float64)
+			return d.ReadFloat64(schemas.RoundTripTime_P50, v.P50)
+		case schemas.RoundTripTime_P90:
+			v.P90 = new(float64)
+			return d.ReadFloat64(schemas.RoundTripTime_P90, v.P90)
+		case schemas.RoundTripTime_P95:
+			v.P95 = new(float64)
+			return d.ReadFloat64(schemas.RoundTripTime_P95, v.P95)
+		}
+		return nil
+	})
 }
 
 // The configuration for publishing Amazon CloudWatch Internet Monitor internet
@@ -661,6 +1407,44 @@ type S3Config struct {
 	LogDeliveryStatus LogDeliveryStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3Config) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Config)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Config) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.S3Config_BucketName, *v.BucketName)
+	}
+	if v.BucketPrefix != nil {
+		s.WriteString(schemas.S3Config_BucketPrefix, *v.BucketPrefix)
+	}
+	if v.LogDeliveryStatus != "" {
+		s.WriteString(schemas.S3Config_LogDeliveryStatus, string(v.LogDeliveryStatus))
+	}
+}
+func (v *S3Config) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Config, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Config_BucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.S3Config_BucketName, v.BucketName)
+		case schemas.S3Config_BucketPrefix:
+			v.BucketPrefix = new(string)
+			return d.ReadString(schemas.S3Config_BucketPrefix, v.BucketPrefix)
+		case schemas.S3Config_LogDeliveryStatus:
+			var ev string
+			if err := d.ReadString(schemas.S3Config_LogDeliveryStatus, &ev); err != nil {
+				return err
+			}
+			v.LogDeliveryStatus = LogDeliveryStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -5,7 +5,9 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,27 @@ type ListAgentRecommendationGenerationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentRecommendationGenerationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentRecommendationGenerationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentRecommendationGenerationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAgentRecommendationGenerationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentRecommendationGenerationsRequest_nextToken, *v.NextToken)
+	}
+	if v.ProfileArn != nil {
+		s.WriteString(schemas.ListAgentRecommendationGenerationsRequest_profileArn, *v.ProfileArn)
+	}
+	if v.RecommendationType != "" {
+		s.WriteString(schemas.ListAgentRecommendationGenerationsRequest_recommendationType, string(v.RecommendationType))
+	}
+}
+
 type ListAgentRecommendationGenerationsOutput struct {
 
 	// A list of recommendation generation summaries.
@@ -61,13 +84,35 @@ type ListAgentRecommendationGenerationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentRecommendationGenerationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentRecommendationGenerationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentRecommendationGenerationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentRecommendationGenerationSummaries(s, schemas.ListAgentRecommendationGenerationsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentRecommendationGenerationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAgentRecommendationGenerationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAgentRecommendationGenerationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAgentRecommendationGenerationsResponse_items:
+			return deserializeAgentRecommendationGenerationSummaries(d, schemas.ListAgentRecommendationGenerationsResponse_items, &v.Items)
+		case schemas.ListAgentRecommendationGenerationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAgentRecommendationGenerationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAgentRecommendationGenerationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAgentRecommendationGenerations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentRecommendationGenerations, schemas.ListAgentRecommendationGenerationsRequest, schemas.ListAgentRecommendationGenerationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAgentRecommendationGenerations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentRecommendationGenerations, schemas.ListAgentRecommendationGenerationsRequest, schemas.ListAgentRecommendationGenerationsResponse), output: &ListAgentRecommendationGenerationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

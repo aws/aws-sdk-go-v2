@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type DeleteAlarmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAlarmInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAlarmRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlarmName != nil {
+		s.WriteString(schemas.DeleteAlarmRequest_alarmName, *v.AlarmName)
+	}
+}
+
 type DeleteAlarmOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -54,13 +68,29 @@ type DeleteAlarmOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAlarmOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAlarmResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAlarmOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.DeleteAlarmResult_operations, v.Operations)
+}
+func (v *DeleteAlarmOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAlarmResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAlarmResult_operations:
+			return deserializeOperationList(d, schemas.DeleteAlarmResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAlarm{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAlarm, schemas.DeleteAlarmRequest, schemas.DeleteAlarmResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteAlarm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAlarm, schemas.DeleteAlarmRequest, schemas.DeleteAlarmResult), output: &DeleteAlarmOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

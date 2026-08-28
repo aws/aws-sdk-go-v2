@@ -5,6 +5,8 @@ package glacier
 import (
 	"context"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"io"
 )
@@ -107,6 +109,37 @@ type UploadMultipartPartInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UploadMultipartPartInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UploadMultipartPartInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UploadMultipartPartInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.UploadMultipartPartInput_accountId, *v.AccountId)
+	}
+	if v.Checksum != nil {
+		s.WriteString(schemas.UploadMultipartPartInput_checksum, *v.Checksum)
+	}
+	if v.Range != nil {
+		s.WriteString(schemas.UploadMultipartPartInput_range, *v.Range)
+	}
+	if v.UploadId != nil {
+		s.WriteString(schemas.UploadMultipartPartInput_uploadId, *v.UploadId)
+	}
+	if v.VaultName != nil {
+		s.WriteString(schemas.UploadMultipartPartInput_vaultName, *v.VaultName)
+	}
+}
+func (v *UploadMultipartPartInput) GetPayloadStream() io.Reader { return v.Body }
+
+var _ smithy.StreamingInput = (*UploadMultipartPartInput)(nil)
+
+func (v *UploadMultipartPartInput) SetPayloadStream(r io.ReadCloser) { v.Body = r }
+
+var _ smithy.StreamingOutput = (*UploadMultipartPartInput)(nil)
+
 // Contains the Amazon Glacier response to your request.
 type UploadMultipartPartOutput struct {
 
@@ -119,13 +152,32 @@ type UploadMultipartPartOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UploadMultipartPartOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UploadMultipartPartOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UploadMultipartPartOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Checksum != nil {
+		s.WriteString(schemas.UploadMultipartPartOutput_checksum, *v.Checksum)
+	}
+}
+func (v *UploadMultipartPartOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UploadMultipartPartOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UploadMultipartPartOutput_checksum:
+			v.Checksum = new(string)
+			return d.ReadString(schemas.UploadMultipartPartOutput_checksum, v.Checksum)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUploadMultipartPartMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUploadMultipartPart{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UploadMultipartPart, schemas.UploadMultipartPartInput, schemas.UploadMultipartPartOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUploadMultipartPart{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UploadMultipartPart, schemas.UploadMultipartPartInput, schemas.UploadMultipartPartOutput), output: &UploadMultipartPartOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

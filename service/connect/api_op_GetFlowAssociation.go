@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,24 @@ type GetFlowAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFlowAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFlowAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFlowAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.GetFlowAssociationRequest_InstanceId, *v.InstanceId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.GetFlowAssociationRequest_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.GetFlowAssociationRequest_ResourceType, string(v.ResourceType))
+	}
+}
+
 type GetFlowAssociationOutput struct {
 
 	// The identifier of the flow.
@@ -70,13 +90,48 @@ type GetFlowAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFlowAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFlowAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFlowAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowId != nil {
+		s.WriteString(schemas.GetFlowAssociationResponse_FlowId, *v.FlowId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.GetFlowAssociationResponse_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.GetFlowAssociationResponse_ResourceType, string(v.ResourceType))
+	}
+}
+func (v *GetFlowAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFlowAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFlowAssociationResponse_FlowId:
+			v.FlowId = new(string)
+			return d.ReadString(schemas.GetFlowAssociationResponse_FlowId, v.FlowId)
+		case schemas.GetFlowAssociationResponse_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.GetFlowAssociationResponse_ResourceId, v.ResourceId)
+		case schemas.GetFlowAssociationResponse_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.GetFlowAssociationResponse_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = types.FlowAssociationResourceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFlowAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFlowAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFlowAssociation, schemas.GetFlowAssociationRequest, schemas.GetFlowAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFlowAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFlowAssociation, schemas.GetFlowAssociationRequest, schemas.GetFlowAssociationResponse), output: &GetFlowAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

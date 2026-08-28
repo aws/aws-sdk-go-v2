@@ -4,7 +4,9 @@ package opensearchserverless
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,17 @@ type BatchGetCollectionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetCollectionGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetCollectionGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetCollectionGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCollectionGroupIds(s, schemas.BatchGetCollectionGroupRequest_ids, v.Ids)
+	serializeCollectionGroupNames(s, schemas.BatchGetCollectionGroupRequest_names, v.Names)
+}
+
 type BatchGetCollectionGroupOutput struct {
 
 	// Details about each collection group.
@@ -54,13 +67,32 @@ type BatchGetCollectionGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetCollectionGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetCollectionGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetCollectionGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCollectionGroupDetails(s, schemas.BatchGetCollectionGroupResponse_collectionGroupDetails, v.CollectionGroupDetails)
+	serializeCollectionGroupErrorDetails(s, schemas.BatchGetCollectionGroupResponse_collectionGroupErrorDetails, v.CollectionGroupErrorDetails)
+}
+func (v *BatchGetCollectionGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetCollectionGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetCollectionGroupResponse_collectionGroupDetails:
+			return deserializeCollectionGroupDetails(d, schemas.BatchGetCollectionGroupResponse_collectionGroupDetails, &v.CollectionGroupDetails)
+		case schemas.BatchGetCollectionGroupResponse_collectionGroupErrorDetails:
+			return deserializeCollectionGroupErrorDetails(d, schemas.BatchGetCollectionGroupResponse_collectionGroupErrorDetails, &v.CollectionGroupErrorDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetCollectionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchGetCollectionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCollectionGroup, schemas.BatchGetCollectionGroupRequest, schemas.BatchGetCollectionGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchGetCollectionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCollectionGroup, schemas.BatchGetCollectionGroupRequest, schemas.BatchGetCollectionGroupResponse), output: &BatchGetCollectionGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

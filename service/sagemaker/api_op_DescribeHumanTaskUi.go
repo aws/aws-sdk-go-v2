@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type DescribeHumanTaskUiInput struct {
 	HumanTaskUiName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeHumanTaskUiInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHumanTaskUiRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHumanTaskUiInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HumanTaskUiName != nil {
+		s.WriteString(schemas.DescribeHumanTaskUiRequest_HumanTaskUiName, *v.HumanTaskUiName)
+	}
 }
 
 type DescribeHumanTaskUiOutput struct {
@@ -70,13 +84,62 @@ type DescribeHumanTaskUiOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeHumanTaskUiOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHumanTaskUiResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHumanTaskUiOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeHumanTaskUiResponse_CreationTime, *v.CreationTime)
+	}
+	if v.HumanTaskUiArn != nil {
+		s.WriteString(schemas.DescribeHumanTaskUiResponse_HumanTaskUiArn, *v.HumanTaskUiArn)
+	}
+	if v.HumanTaskUiName != nil {
+		s.WriteString(schemas.DescribeHumanTaskUiResponse_HumanTaskUiName, *v.HumanTaskUiName)
+	}
+	if v.HumanTaskUiStatus != "" {
+		s.WriteString(schemas.DescribeHumanTaskUiResponse_HumanTaskUiStatus, string(v.HumanTaskUiStatus))
+	}
+	if v.UiTemplate != nil {
+		s.WriteStruct(schemas.DescribeHumanTaskUiResponse_UiTemplate)
+		v.UiTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeHumanTaskUiOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeHumanTaskUiResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeHumanTaskUiResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeHumanTaskUiResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeHumanTaskUiResponse_HumanTaskUiArn:
+			v.HumanTaskUiArn = new(string)
+			return d.ReadString(schemas.DescribeHumanTaskUiResponse_HumanTaskUiArn, v.HumanTaskUiArn)
+		case schemas.DescribeHumanTaskUiResponse_HumanTaskUiName:
+			v.HumanTaskUiName = new(string)
+			return d.ReadString(schemas.DescribeHumanTaskUiResponse_HumanTaskUiName, v.HumanTaskUiName)
+		case schemas.DescribeHumanTaskUiResponse_HumanTaskUiStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeHumanTaskUiResponse_HumanTaskUiStatus, &ev); err != nil {
+				return err
+			}
+			v.HumanTaskUiStatus = types.HumanTaskUiStatus(ev)
+			return nil
+		case schemas.DescribeHumanTaskUiResponse_UiTemplate:
+			v.UiTemplate = &types.UiTemplateInfo{}
+			return v.UiTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeHumanTaskUiMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeHumanTaskUi{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHumanTaskUi, schemas.DescribeHumanTaskUiRequest, schemas.DescribeHumanTaskUiResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeHumanTaskUi{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHumanTaskUi, schemas.DescribeHumanTaskUiRequest, schemas.DescribeHumanTaskUiResponse), output: &DescribeHumanTaskUiOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,16 @@ type StopWorkspacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopWorkspacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopWorkspacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopWorkspacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStopWorkspaceRequests(s, schemas.StopWorkspacesRequest_StopWorkspaceRequests, v.StopWorkspaceRequests)
+}
+
 type StopWorkspacesOutput struct {
 
 	// Information about the WorkSpaces that could not be stopped.
@@ -48,13 +60,29 @@ type StopWorkspacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopWorkspacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopWorkspacesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopWorkspacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedStopWorkspaceRequests(s, schemas.StopWorkspacesResult_FailedRequests, v.FailedRequests)
+}
+func (v *StopWorkspacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopWorkspacesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopWorkspacesResult_FailedRequests:
+			return deserializeFailedStopWorkspaceRequests(d, schemas.StopWorkspacesResult_FailedRequests, &v.FailedRequests)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopWorkspaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopWorkspaces, schemas.StopWorkspacesRequest, schemas.StopWorkspacesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopWorkspaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopWorkspaces, schemas.StopWorkspacesRequest, schemas.StopWorkspacesResult), output: &StopWorkspacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,33 @@ type SearchVocabulariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchVocabulariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchVocabulariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchVocabulariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SearchVocabulariesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.SearchVocabulariesRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchVocabulariesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameStartsWith != nil {
+		s.WriteString(schemas.SearchVocabulariesRequest_NameStartsWith, *v.NameStartsWith)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchVocabulariesRequest_NextToken, *v.NextToken)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.SearchVocabulariesRequest_State, string(v.State))
+	}
+}
+
 type SearchVocabulariesOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.
@@ -72,13 +101,35 @@ type SearchVocabulariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchVocabulariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchVocabulariesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchVocabulariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchVocabulariesResponse_NextToken, *v.NextToken)
+	}
+	serializeVocabularySummaryList(s, schemas.SearchVocabulariesResponse_VocabularySummaryList, v.VocabularySummaryList)
+}
+func (v *SearchVocabulariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchVocabulariesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchVocabulariesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchVocabulariesResponse_NextToken, v.NextToken)
+		case schemas.SearchVocabulariesResponse_VocabularySummaryList:
+			return deserializeVocabularySummaryList(d, schemas.SearchVocabulariesResponse_VocabularySummaryList, &v.VocabularySummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchVocabulariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchVocabularies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchVocabularies, schemas.SearchVocabulariesRequest, schemas.SearchVocabulariesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchVocabularies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchVocabularies, schemas.SearchVocabulariesRequest, schemas.SearchVocabulariesResponse), output: &SearchVocabulariesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

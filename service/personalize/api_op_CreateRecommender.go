@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -122,6 +124,30 @@ type CreateRecommenderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRecommenderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRecommenderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRecommenderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetGroupArn != nil {
+		s.WriteString(schemas.CreateRecommenderRequest_datasetGroupArn, *v.DatasetGroupArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRecommenderRequest_name, *v.Name)
+	}
+	if v.RecipeArn != nil {
+		s.WriteString(schemas.CreateRecommenderRequest_recipeArn, *v.RecipeArn)
+	}
+	if v.RecommenderConfig != nil {
+		s.WriteStruct(schemas.CreateRecommenderRequest_recommenderConfig)
+		v.RecommenderConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateRecommenderRequest_tags, v.Tags)
+}
+
 type CreateRecommenderOutput struct {
 
 	// The Amazon Resource Name (ARN) of the recommender.
@@ -133,13 +159,32 @@ type CreateRecommenderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRecommenderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRecommenderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRecommenderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecommenderArn != nil {
+		s.WriteString(schemas.CreateRecommenderResponse_recommenderArn, *v.RecommenderArn)
+	}
+}
+func (v *CreateRecommenderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRecommenderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRecommenderResponse_recommenderArn:
+			v.RecommenderArn = new(string)
+			return d.ReadString(schemas.CreateRecommenderResponse_recommenderArn, v.RecommenderArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRecommenderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRecommender{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRecommender, schemas.CreateRecommenderRequest, schemas.CreateRecommenderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateRecommender{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRecommender, schemas.CreateRecommenderRequest, schemas.CreateRecommenderResponse), output: &CreateRecommenderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

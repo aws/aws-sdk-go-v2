@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,20 @@ type DescribeComplianceByConfigRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeComplianceByConfigRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeComplianceByConfigRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeComplianceByConfigRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComplianceTypes(s, schemas.DescribeComplianceByConfigRuleRequest_ComplianceTypes, v.ComplianceTypes)
+	serializeConfigRuleNames(s, schemas.DescribeComplianceByConfigRuleRequest_ConfigRuleNames, v.ConfigRuleNames)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeComplianceByConfigRuleRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeComplianceByConfigRuleOutput struct {
 
 	// Indicates whether each of the specified Config rules is compliant.
@@ -76,13 +92,35 @@ type DescribeComplianceByConfigRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeComplianceByConfigRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeComplianceByConfigRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeComplianceByConfigRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComplianceByConfigRules(s, schemas.DescribeComplianceByConfigRuleResponse_ComplianceByConfigRules, v.ComplianceByConfigRules)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeComplianceByConfigRuleResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeComplianceByConfigRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeComplianceByConfigRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeComplianceByConfigRuleResponse_ComplianceByConfigRules:
+			return deserializeComplianceByConfigRules(d, schemas.DescribeComplianceByConfigRuleResponse_ComplianceByConfigRules, &v.ComplianceByConfigRules)
+		case schemas.DescribeComplianceByConfigRuleResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeComplianceByConfigRuleResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeComplianceByConfigRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeComplianceByConfigRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComplianceByConfigRule, schemas.DescribeComplianceByConfigRuleRequest, schemas.DescribeComplianceByConfigRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeComplianceByConfigRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComplianceByConfigRule, schemas.DescribeComplianceByConfigRuleRequest, schemas.DescribeComplianceByConfigRuleResponse), output: &DescribeComplianceByConfigRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

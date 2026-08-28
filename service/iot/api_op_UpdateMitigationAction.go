@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,26 @@ type UpdateMitigationActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMitigationActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMitigationActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMitigationActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionName != nil {
+		s.WriteString(schemas.UpdateMitigationActionRequest_actionName, *v.ActionName)
+	}
+	if v.ActionParams != nil {
+		s.WriteStruct(schemas.UpdateMitigationActionRequest_actionParams)
+		v.ActionParams.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateMitigationActionRequest_roleArn, *v.RoleArn)
+	}
+}
+
 type UpdateMitigationActionOutput struct {
 
 	// The ARN for the new mitigation action.
@@ -60,13 +82,38 @@ type UpdateMitigationActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMitigationActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMitigationActionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMitigationActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionArn != nil {
+		s.WriteString(schemas.UpdateMitigationActionResponse_actionArn, *v.ActionArn)
+	}
+	if v.ActionId != nil {
+		s.WriteString(schemas.UpdateMitigationActionResponse_actionId, *v.ActionId)
+	}
+}
+func (v *UpdateMitigationActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMitigationActionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMitigationActionResponse_actionArn:
+			v.ActionArn = new(string)
+			return d.ReadString(schemas.UpdateMitigationActionResponse_actionArn, v.ActionArn)
+		case schemas.UpdateMitigationActionResponse_actionId:
+			v.ActionId = new(string)
+			return d.ReadString(schemas.UpdateMitigationActionResponse_actionId, v.ActionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMitigationActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMitigationAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMitigationAction, schemas.UpdateMitigationActionRequest, schemas.UpdateMitigationActionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMitigationAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMitigationAction, schemas.UpdateMitigationActionRequest, schemas.UpdateMitigationActionResponse), output: &UpdateMitigationActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

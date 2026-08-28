@@ -5,7 +5,9 @@ package cleanrooms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,44 @@ type ListMembershipsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMembershipsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMembershipsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMembershipsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMembershipsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMembershipsInput_nextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListMembershipsInput_status, string(v.Status))
+	}
+}
+func (v *ListMembershipsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMembershipsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMembershipsInput_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListMembershipsInput_maxResults, v.MaxResults)
+		case schemas.ListMembershipsInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMembershipsInput_nextToken, v.NextToken)
+		case schemas.ListMembershipsInput_status:
+			var ev string
+			if err := d.ReadString(schemas.ListMembershipsInput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.MembershipStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type ListMembershipsOutput struct {
 
 	// The list of memberships returned from the ListMemberships operation.
@@ -57,13 +97,35 @@ type ListMembershipsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMembershipsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMembershipsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMembershipsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMembershipSummaryList(s, schemas.ListMembershipsOutput_membershipSummaries, v.MembershipSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMembershipsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListMembershipsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMembershipsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMembershipsOutput_membershipSummaries:
+			return deserializeMembershipSummaryList(d, schemas.ListMembershipsOutput_membershipSummaries, &v.MembershipSummaries)
+		case schemas.ListMembershipsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMembershipsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMembershipsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMemberships{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMemberships, schemas.ListMembershipsInput, schemas.ListMembershipsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMemberships{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMemberships, schemas.ListMembershipsInput, schemas.ListMembershipsOutput), output: &ListMembershipsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

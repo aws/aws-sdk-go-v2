@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type GetBucketAccessKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBucketAccessKeysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBucketAccessKeysRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBucketAccessKeysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.GetBucketAccessKeysRequest_bucketName, *v.BucketName)
+	}
+}
+
 type GetBucketAccessKeysOutput struct {
 
 	// An object that describes the access keys for the specified bucket.
@@ -51,13 +65,29 @@ type GetBucketAccessKeysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBucketAccessKeysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBucketAccessKeysResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBucketAccessKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessKeyList(s, schemas.GetBucketAccessKeysResult_accessKeys, v.AccessKeys)
+}
+func (v *GetBucketAccessKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBucketAccessKeysResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBucketAccessKeysResult_accessKeys:
+			return deserializeAccessKeyList(d, schemas.GetBucketAccessKeysResult_accessKeys, &v.AccessKeys)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBucketAccessKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetBucketAccessKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBucketAccessKeys, schemas.GetBucketAccessKeysRequest, schemas.GetBucketAccessKeysResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetBucketAccessKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBucketAccessKeys, schemas.GetBucketAccessKeysRequest, schemas.GetBucketAccessKeysResult), output: &GetBucketAccessKeysOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

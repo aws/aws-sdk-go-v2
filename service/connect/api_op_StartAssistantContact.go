@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -90,6 +92,45 @@ type StartAssistantContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAssistantContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAssistantContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAssistantContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AiAgent != nil {
+		s.WriteStruct(schemas.StartAssistantContactRequest_AiAgent)
+		v.AiAgent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAttributes(s, schemas.StartAssistantContactRequest_Attributes, v.Attributes)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartAssistantContactRequest_ClientToken, *v.ClientToken)
+	}
+	if v.InitialMessage != nil {
+		s.WriteStruct(schemas.StartAssistantContactRequest_InitialMessage)
+		v.InitialMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StartAssistantContactRequest_InstanceId, *v.InstanceId)
+	}
+	if v.ParticipantDetails != nil {
+		s.WriteStruct(schemas.StartAssistantContactRequest_ParticipantDetails)
+		v.ParticipantDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PersistentChat != nil {
+		s.WriteStruct(schemas.StartAssistantContactRequest_PersistentChat)
+		v.PersistentChat.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RelatedContactId != nil {
+		s.WriteString(schemas.StartAssistantContactRequest_RelatedContactId, *v.RelatedContactId)
+	}
+}
+
 type StartAssistantContactOutput struct {
 
 	// The identifier of the contact within the Connect Customer instance.
@@ -115,13 +156,50 @@ type StartAssistantContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAssistantContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAssistantContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAssistantContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.StartAssistantContactResponse_ContactId, *v.ContactId)
+	}
+	if v.ContinuedFromContactId != nil {
+		s.WriteString(schemas.StartAssistantContactResponse_ContinuedFromContactId, *v.ContinuedFromContactId)
+	}
+	if v.ParticipantId != nil {
+		s.WriteString(schemas.StartAssistantContactResponse_ParticipantId, *v.ParticipantId)
+	}
+	if v.ParticipantToken != nil {
+		s.WriteString(schemas.StartAssistantContactResponse_ParticipantToken, *v.ParticipantToken)
+	}
+}
+func (v *StartAssistantContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartAssistantContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartAssistantContactResponse_ContactId:
+			v.ContactId = new(string)
+			return d.ReadString(schemas.StartAssistantContactResponse_ContactId, v.ContactId)
+		case schemas.StartAssistantContactResponse_ContinuedFromContactId:
+			v.ContinuedFromContactId = new(string)
+			return d.ReadString(schemas.StartAssistantContactResponse_ContinuedFromContactId, v.ContinuedFromContactId)
+		case schemas.StartAssistantContactResponse_ParticipantId:
+			v.ParticipantId = new(string)
+			return d.ReadString(schemas.StartAssistantContactResponse_ParticipantId, v.ParticipantId)
+		case schemas.StartAssistantContactResponse_ParticipantToken:
+			v.ParticipantToken = new(string)
+			return d.ReadString(schemas.StartAssistantContactResponse_ParticipantToken, v.ParticipantToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartAssistantContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartAssistantContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAssistantContact, schemas.StartAssistantContactRequest, schemas.StartAssistantContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartAssistantContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAssistantContact, schemas.StartAssistantContactRequest, schemas.StartAssistantContactResponse), output: &StartAssistantContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

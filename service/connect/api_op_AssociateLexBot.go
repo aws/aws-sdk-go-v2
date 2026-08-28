@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,26 @@ type AssociateLexBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateLexBotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateLexBotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateLexBotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AssociateLexBotRequest_ClientToken, *v.ClientToken)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.AssociateLexBotRequest_InstanceId, *v.InstanceId)
+	}
+	if v.LexBot != nil {
+		s.WriteStruct(schemas.AssociateLexBotRequest_LexBot)
+		v.LexBot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type AssociateLexBotOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,13 +82,26 @@ type AssociateLexBotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateLexBotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateLexBotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateLexBotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateLexBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateLexBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateLexBot, schemas.AssociateLexBotRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateLexBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateLexBot, schemas.AssociateLexBotRequest, nil), output: &AssociateLexBotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

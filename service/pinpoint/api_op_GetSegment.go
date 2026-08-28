@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type GetSegmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSegmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSegmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSegmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetSegmentRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.SegmentId != nil {
+		s.WriteString(schemas.GetSegmentRequest_SegmentId, *v.SegmentId)
+	}
+}
+
 type GetSegmentOutput struct {
 
 	// Provides information about the configuration, dimension, and other settings for
@@ -55,13 +72,34 @@ type GetSegmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSegmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSegmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSegmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SegmentResponse != nil {
+		s.WriteStruct(schemas.GetSegmentResponse_SegmentResponse)
+		v.SegmentResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSegmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSegmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSegmentResponse_SegmentResponse:
+			v.SegmentResponse = &types.SegmentResponse{}
+			return v.SegmentResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSegmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSegment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSegment, schemas.GetSegmentRequest, schemas.GetSegmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSegment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSegment, schemas.GetSegmentRequest, schemas.GetSegmentResponse), output: &GetSegmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

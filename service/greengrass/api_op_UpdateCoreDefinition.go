@@ -4,6 +4,8 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type UpdateCoreDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCoreDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCoreDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCoreDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreDefinitionId != nil {
+		s.WriteString(schemas.UpdateCoreDefinitionRequest_CoreDefinitionId, *v.CoreDefinitionId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateCoreDefinitionRequest_Name, *v.Name)
+	}
+}
+
 type UpdateCoreDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +60,26 @@ type UpdateCoreDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCoreDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCoreDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCoreDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateCoreDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCoreDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCoreDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCoreDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCoreDefinition, schemas.UpdateCoreDefinitionRequest, schemas.UpdateCoreDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCoreDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCoreDefinition, schemas.UpdateCoreDefinitionRequest, schemas.UpdateCoreDefinitionResponse), output: &UpdateCoreDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

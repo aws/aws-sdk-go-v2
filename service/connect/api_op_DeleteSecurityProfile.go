@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DeleteSecurityProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSecurityProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSecurityProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSecurityProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeleteSecurityProfileRequest_InstanceId, *v.InstanceId)
+	}
+	if v.SecurityProfileId != nil {
+		s.WriteString(schemas.DeleteSecurityProfileRequest_SecurityProfileId, *v.SecurityProfileId)
+	}
+}
+
 type DeleteSecurityProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +65,26 @@ type DeleteSecurityProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSecurityProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSecurityProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSecurityProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSecurityProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSecurityProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSecurityProfile, schemas.DeleteSecurityProfileRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSecurityProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSecurityProfile, schemas.DeleteSecurityProfileRequest, nil), output: &DeleteSecurityProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

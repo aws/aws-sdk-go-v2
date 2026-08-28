@@ -4,6 +4,8 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskArn != nil {
+		s.WriteString(schemas.DeleteTaskRequest_TaskArn, *v.TaskArn)
+	}
+}
+
 type DeleteTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTask, schemas.DeleteTaskRequest, schemas.DeleteTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTask, schemas.DeleteTaskRequest, schemas.DeleteTaskResponse), output: &DeleteTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

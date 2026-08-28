@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,35 @@ type CreateAuthorizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAuthorizerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAuthorizerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAuthorizerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizerFunctionArn != nil {
+		s.WriteString(schemas.CreateAuthorizerRequest_authorizerFunctionArn, *v.AuthorizerFunctionArn)
+	}
+	if v.AuthorizerName != nil {
+		s.WriteString(schemas.CreateAuthorizerRequest_authorizerName, *v.AuthorizerName)
+	}
+	if v.EnableCachingForHttp != nil {
+		s.WriteBool(schemas.CreateAuthorizerRequest_enableCachingForHttp, *v.EnableCachingForHttp)
+	}
+	if v.SigningDisabled != nil {
+		s.WriteBool(schemas.CreateAuthorizerRequest_signingDisabled, *v.SigningDisabled)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateAuthorizerRequest_status, string(v.Status))
+	}
+	serializeTagList(s, schemas.CreateAuthorizerRequest_tags, v.Tags)
+	if v.TokenKeyName != nil {
+		s.WriteString(schemas.CreateAuthorizerRequest_tokenKeyName, *v.TokenKeyName)
+	}
+	serializePublicKeyMap(s, schemas.CreateAuthorizerRequest_tokenSigningPublicKeys, v.TokenSigningPublicKeys)
+}
+
 type CreateAuthorizerOutput struct {
 
 	// The authorizer ARN.
@@ -88,13 +119,38 @@ type CreateAuthorizerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAuthorizerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAuthorizerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAuthorizerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizerArn != nil {
+		s.WriteString(schemas.CreateAuthorizerResponse_authorizerArn, *v.AuthorizerArn)
+	}
+	if v.AuthorizerName != nil {
+		s.WriteString(schemas.CreateAuthorizerResponse_authorizerName, *v.AuthorizerName)
+	}
+}
+func (v *CreateAuthorizerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAuthorizerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAuthorizerResponse_authorizerArn:
+			v.AuthorizerArn = new(string)
+			return d.ReadString(schemas.CreateAuthorizerResponse_authorizerArn, v.AuthorizerArn)
+		case schemas.CreateAuthorizerResponse_authorizerName:
+			v.AuthorizerName = new(string)
+			return d.ReadString(schemas.CreateAuthorizerResponse_authorizerName, v.AuthorizerName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAuthorizer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAuthorizer, schemas.CreateAuthorizerRequest, schemas.CreateAuthorizerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAuthorizer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAuthorizer, schemas.CreateAuthorizerRequest, schemas.CreateAuthorizerResponse), output: &CreateAuthorizerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

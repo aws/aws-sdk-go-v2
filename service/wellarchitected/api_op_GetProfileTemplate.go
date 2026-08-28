@@ -4,7 +4,9 @@ package wellarchitected
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type GetProfileTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProfileTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProfileTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProfileTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetProfileTemplateOutput struct {
 
 	// The profile template.
@@ -39,13 +50,34 @@ type GetProfileTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProfileTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProfileTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProfileTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfileTemplate != nil {
+		s.WriteStruct(schemas.GetProfileTemplateOutput_ProfileTemplate)
+		v.ProfileTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetProfileTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProfileTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProfileTemplateOutput_ProfileTemplate:
+			v.ProfileTemplate = &types.ProfileTemplate{}
+			return v.ProfileTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProfileTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProfileTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProfileTemplate, schemas.GetProfileTemplateInput, schemas.GetProfileTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetProfileTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProfileTemplate, schemas.GetProfileTemplateInput, schemas.GetProfileTemplateOutput), output: &GetProfileTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

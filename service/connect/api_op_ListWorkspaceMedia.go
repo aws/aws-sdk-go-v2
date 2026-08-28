@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type ListWorkspaceMediaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkspaceMediaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkspaceMediaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkspaceMediaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListWorkspaceMediaRequest_InstanceId, *v.InstanceId)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.ListWorkspaceMediaRequest_WorkspaceId, *v.WorkspaceId)
+	}
+}
+
 type ListWorkspaceMediaOutput struct {
 
 	// A list of media assets for the workspace.
@@ -53,13 +70,29 @@ type ListWorkspaceMediaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkspaceMediaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkspaceMediaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkspaceMediaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMediaList(s, schemas.ListWorkspaceMediaResponse_Media, v.Media)
+}
+func (v *ListWorkspaceMediaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkspaceMediaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkspaceMediaResponse_Media:
+			return deserializeMediaList(d, schemas.ListWorkspaceMediaResponse_Media, &v.Media)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkspaceMediaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWorkspaceMedia{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkspaceMedia, schemas.ListWorkspaceMediaRequest, schemas.ListWorkspaceMediaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWorkspaceMedia{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkspaceMedia, schemas.ListWorkspaceMediaRequest, schemas.ListWorkspaceMediaResponse), output: &ListWorkspaceMediaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

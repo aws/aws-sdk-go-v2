@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -126,6 +128,35 @@ type ResendConfirmationCodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResendConfirmationCodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResendConfirmationCodeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResendConfirmationCodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyticsMetadata != nil {
+		s.WriteStruct(schemas.ResendConfirmationCodeRequest_AnalyticsMetadata)
+		v.AnalyticsMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientId != nil {
+		s.WriteString(schemas.ResendConfirmationCodeRequest_ClientId, *v.ClientId)
+	}
+	serializeClientMetadataType(s, schemas.ResendConfirmationCodeRequest_ClientMetadata, v.ClientMetadata)
+	if v.SecretHash != nil {
+		s.WriteString(schemas.ResendConfirmationCodeRequest_SecretHash, *v.SecretHash)
+	}
+	if v.UserContextData != nil {
+		s.WriteStruct(schemas.ResendConfirmationCodeRequest_UserContextData)
+		v.UserContextData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.ResendConfirmationCodeRequest_Username, *v.Username)
+	}
+}
+
 // The response from the server when Amazon Cognito makes the request to resend a
 // confirmation code.
 type ResendConfirmationCodeOutput struct {
@@ -140,13 +171,34 @@ type ResendConfirmationCodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResendConfirmationCodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResendConfirmationCodeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResendConfirmationCodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeDeliveryDetails != nil {
+		s.WriteStruct(schemas.ResendConfirmationCodeResponse_CodeDeliveryDetails)
+		v.CodeDeliveryDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ResendConfirmationCodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResendConfirmationCodeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResendConfirmationCodeResponse_CodeDeliveryDetails:
+			v.CodeDeliveryDetails = &types.CodeDeliveryDetailsType{}
+			return v.CodeDeliveryDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResendConfirmationCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResendConfirmationCode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResendConfirmationCode, schemas.ResendConfirmationCodeRequest, schemas.ResendConfirmationCodeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpResendConfirmationCode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResendConfirmationCode, schemas.ResendConfirmationCodeRequest, schemas.ResendConfirmationCodeResponse), output: &ResendConfirmationCodeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

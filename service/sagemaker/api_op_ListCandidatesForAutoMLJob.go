@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,36 @@ type ListCandidatesForAutoMLJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCandidatesForAutoMLJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCandidatesForAutoMLJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCandidatesForAutoMLJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoMLJobName != nil {
+		s.WriteString(schemas.ListCandidatesForAutoMLJobRequest_AutoMLJobName, *v.AutoMLJobName)
+	}
+	if v.CandidateNameEquals != nil {
+		s.WriteString(schemas.ListCandidatesForAutoMLJobRequest_CandidateNameEquals, *v.CandidateNameEquals)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCandidatesForAutoMLJobRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCandidatesForAutoMLJobRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListCandidatesForAutoMLJobRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListCandidatesForAutoMLJobRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListCandidatesForAutoMLJobRequest_StatusEquals, string(v.StatusEquals))
+	}
+}
+
 type ListCandidatesForAutoMLJobOutput struct {
 
 	// Summaries about the AutoMLCandidates .
@@ -71,13 +103,35 @@ type ListCandidatesForAutoMLJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCandidatesForAutoMLJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCandidatesForAutoMLJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCandidatesForAutoMLJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutoMLCandidates(s, schemas.ListCandidatesForAutoMLJobResponse_Candidates, v.Candidates)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCandidatesForAutoMLJobResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCandidatesForAutoMLJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCandidatesForAutoMLJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCandidatesForAutoMLJobResponse_Candidates:
+			return deserializeAutoMLCandidates(d, schemas.ListCandidatesForAutoMLJobResponse_Candidates, &v.Candidates)
+		case schemas.ListCandidatesForAutoMLJobResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCandidatesForAutoMLJobResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCandidatesForAutoMLJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCandidatesForAutoMLJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCandidatesForAutoMLJob, schemas.ListCandidatesForAutoMLJobRequest, schemas.ListCandidatesForAutoMLJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCandidatesForAutoMLJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCandidatesForAutoMLJob, schemas.ListCandidatesForAutoMLJobRequest, schemas.ListCandidatesForAutoMLJobResponse), output: &ListCandidatesForAutoMLJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

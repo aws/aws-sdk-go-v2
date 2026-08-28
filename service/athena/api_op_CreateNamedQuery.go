@@ -5,6 +5,8 @@ package athena
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,33 @@ type CreateNamedQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNamedQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNamedQueryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNamedQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateNamedQueryInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Database != nil {
+		s.WriteString(schemas.CreateNamedQueryInput_Database, *v.Database)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateNamedQueryInput_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateNamedQueryInput_Name, *v.Name)
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.CreateNamedQueryInput_QueryString, *v.QueryString)
+	}
+	if v.WorkGroup != nil {
+		s.WriteString(schemas.CreateNamedQueryInput_WorkGroup, *v.WorkGroup)
+	}
+}
+
 type CreateNamedQueryOutput struct {
 
 	// The unique ID of the query.
@@ -73,13 +102,32 @@ type CreateNamedQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNamedQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNamedQueryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNamedQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NamedQueryId != nil {
+		s.WriteString(schemas.CreateNamedQueryOutput_NamedQueryId, *v.NamedQueryId)
+	}
+}
+func (v *CreateNamedQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateNamedQueryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateNamedQueryOutput_NamedQueryId:
+			v.NamedQueryId = new(string)
+			return d.ReadString(schemas.CreateNamedQueryOutput_NamedQueryId, v.NamedQueryId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateNamedQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateNamedQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNamedQuery, schemas.CreateNamedQueryInput, schemas.CreateNamedQueryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateNamedQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNamedQuery, schemas.CreateNamedQueryInput, schemas.CreateNamedQueryOutput), output: &CreateNamedQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

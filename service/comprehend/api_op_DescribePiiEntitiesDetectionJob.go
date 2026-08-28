@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DescribePiiEntitiesDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePiiEntitiesDetectionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePiiEntitiesDetectionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePiiEntitiesDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribePiiEntitiesDetectionJobRequest_JobId, *v.JobId)
+	}
+}
+
 type DescribePiiEntitiesDetectionJobOutput struct {
 
 	// Provides information about a PII entities detection job.
@@ -47,13 +61,34 @@ type DescribePiiEntitiesDetectionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePiiEntitiesDetectionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePiiEntitiesDetectionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePiiEntitiesDetectionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PiiEntitiesDetectionJobProperties != nil {
+		s.WriteStruct(schemas.DescribePiiEntitiesDetectionJobResponse_PiiEntitiesDetectionJobProperties)
+		v.PiiEntitiesDetectionJobProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribePiiEntitiesDetectionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePiiEntitiesDetectionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePiiEntitiesDetectionJobResponse_PiiEntitiesDetectionJobProperties:
+			v.PiiEntitiesDetectionJobProperties = &types.PiiEntitiesDetectionJobProperties{}
+			return v.PiiEntitiesDetectionJobProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePiiEntitiesDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePiiEntitiesDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePiiEntitiesDetectionJob, schemas.DescribePiiEntitiesDetectionJobRequest, schemas.DescribePiiEntitiesDetectionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePiiEntitiesDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePiiEntitiesDetectionJob, schemas.DescribePiiEntitiesDetectionJobRequest, schemas.DescribePiiEntitiesDetectionJobResponse), output: &DescribePiiEntitiesDetectionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

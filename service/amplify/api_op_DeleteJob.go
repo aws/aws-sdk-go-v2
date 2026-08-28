@@ -4,7 +4,9 @@ package amplify
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type DeleteJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.DeleteJobRequest_appId, *v.AppId)
+	}
+	if v.BranchName != nil {
+		s.WriteString(schemas.DeleteJobRequest_branchName, *v.BranchName)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.DeleteJobRequest_jobId, *v.JobId)
+	}
+}
+
 // The result structure for the delete job request.
 type DeleteJobOutput struct {
 
@@ -59,13 +79,34 @@ type DeleteJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteJobResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobSummary != nil {
+		s.WriteStruct(schemas.DeleteJobResult_jobSummary)
+		v.JobSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteJobResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteJobResult_jobSummary:
+			v.JobSummary = &types.JobSummary{}
+			return v.JobSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteJob, schemas.DeleteJobRequest, schemas.DeleteJobResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteJob, schemas.DeleteJobRequest, schemas.DeleteJobResult), output: &DeleteJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,28 @@ type UpdateImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImageDeletePropertyList(s, schemas.UpdateImageRequest_DeleteProperties, v.DeleteProperties)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateImageRequest_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateImageRequest_DisplayName, *v.DisplayName)
+	}
+	if v.ImageName != nil {
+		s.WriteString(schemas.UpdateImageRequest_ImageName, *v.ImageName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateImageRequest_RoleArn, *v.RoleArn)
+	}
+}
+
 type UpdateImageOutput struct {
 
 	// The ARN of the image.
@@ -62,13 +86,32 @@ type UpdateImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateImageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageArn != nil {
+		s.WriteString(schemas.UpdateImageResponse_ImageArn, *v.ImageArn)
+	}
+}
+func (v *UpdateImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateImageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateImageResponse_ImageArn:
+			v.ImageArn = new(string)
+			return d.ReadString(schemas.UpdateImageResponse_ImageArn, v.ImageArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateImage, schemas.UpdateImageRequest, schemas.UpdateImageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateImage, schemas.UpdateImageRequest, schemas.UpdateImageResponse), output: &UpdateImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

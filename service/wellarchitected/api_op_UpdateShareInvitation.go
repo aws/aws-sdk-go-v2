@@ -4,7 +4,9 @@ package wellarchitected
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type UpdateShareInvitationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateShareInvitationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateShareInvitationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateShareInvitationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ShareInvitationAction != "" {
+		s.WriteString(schemas.UpdateShareInvitationInput_ShareInvitationAction, string(v.ShareInvitationAction))
+	}
+	if v.ShareInvitationId != nil {
+		s.WriteString(schemas.UpdateShareInvitationInput_ShareInvitationId, *v.ShareInvitationId)
+	}
+}
+
 type UpdateShareInvitationOutput struct {
 
 	// The updated workload or custom lens share invitation.
@@ -54,13 +71,34 @@ type UpdateShareInvitationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateShareInvitationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateShareInvitationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateShareInvitationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ShareInvitation != nil {
+		s.WriteStruct(schemas.UpdateShareInvitationOutput_ShareInvitation)
+		v.ShareInvitation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateShareInvitationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateShareInvitationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateShareInvitationOutput_ShareInvitation:
+			v.ShareInvitation = &types.ShareInvitation{}
+			return v.ShareInvitation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateShareInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateShareInvitation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateShareInvitation, schemas.UpdateShareInvitationInput, schemas.UpdateShareInvitationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateShareInvitation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateShareInvitation, schemas.UpdateShareInvitationInput, schemas.UpdateShareInvitationOutput), output: &UpdateShareInvitationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

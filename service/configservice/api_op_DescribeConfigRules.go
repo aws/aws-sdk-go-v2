@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type DescribeConfigRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigRuleNames(s, schemas.DescribeConfigRulesRequest_ConfigRuleNames, v.ConfigRuleNames)
+	if v.Filters != nil {
+		s.WriteStruct(schemas.DescribeConfigRulesRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeConfigRulesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeConfigRulesOutput struct {
 
 	// The details about your Config rules.
@@ -60,13 +80,35 @@ type DescribeConfigRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigRulesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigRules(s, schemas.DescribeConfigRulesResponse_ConfigRules, v.ConfigRules)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeConfigRulesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeConfigRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConfigRulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConfigRulesResponse_ConfigRules:
+			return deserializeConfigRules(d, schemas.DescribeConfigRulesResponse_ConfigRules, &v.ConfigRules)
+		case schemas.DescribeConfigRulesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeConfigRulesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConfigRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConfigRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigRules, schemas.DescribeConfigRulesRequest, schemas.DescribeConfigRulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeConfigRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigRules, schemas.DescribeConfigRulesRequest, schemas.DescribeConfigRulesResponse), output: &DescribeConfigRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

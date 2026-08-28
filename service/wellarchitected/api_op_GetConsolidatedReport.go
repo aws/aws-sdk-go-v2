@@ -5,7 +5,9 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type GetConsolidatedReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConsolidatedReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConsolidatedReportInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConsolidatedReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Format != "" {
+		s.WriteString(schemas.GetConsolidatedReportInput_Format, string(v.Format))
+	}
+	if v.IncludeSharedResources != nil {
+		s.WriteBool(schemas.GetConsolidatedReportInput_IncludeSharedResources, *v.IncludeSharedResources)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetConsolidatedReportInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetConsolidatedReportInput_NextToken, *v.NextToken)
+	}
+}
+
 type GetConsolidatedReportOutput struct {
 
 	// The Base64-encoded string representation of a lens review report.
@@ -71,13 +94,41 @@ type GetConsolidatedReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConsolidatedReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConsolidatedReportOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConsolidatedReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Base64String != nil {
+		s.WriteString(schemas.GetConsolidatedReportOutput_Base64String, *v.Base64String)
+	}
+	serializeConsolidatedReportMetrics(s, schemas.GetConsolidatedReportOutput_Metrics, v.Metrics)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetConsolidatedReportOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *GetConsolidatedReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConsolidatedReportOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConsolidatedReportOutput_Base64String:
+			v.Base64String = new(string)
+			return d.ReadString(schemas.GetConsolidatedReportOutput_Base64String, v.Base64String)
+		case schemas.GetConsolidatedReportOutput_Metrics:
+			return deserializeConsolidatedReportMetrics(d, schemas.GetConsolidatedReportOutput_Metrics, &v.Metrics)
+		case schemas.GetConsolidatedReportOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetConsolidatedReportOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConsolidatedReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConsolidatedReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConsolidatedReport, schemas.GetConsolidatedReportInput, schemas.GetConsolidatedReportOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConsolidatedReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConsolidatedReport, schemas.GetConsolidatedReportInput, schemas.GetConsolidatedReportOutput), output: &GetConsolidatedReportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

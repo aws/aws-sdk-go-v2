@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,30 @@ type UpdateInstanceMetadataOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInstanceMetadataOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInstanceMetadataOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInstanceMetadataOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HttpEndpoint != "" {
+		s.WriteString(schemas.UpdateInstanceMetadataOptionsRequest_httpEndpoint, string(v.HttpEndpoint))
+	}
+	if v.HttpProtocolIpv6 != "" {
+		s.WriteString(schemas.UpdateInstanceMetadataOptionsRequest_httpProtocolIpv6, string(v.HttpProtocolIpv6))
+	}
+	if v.HttpPutResponseHopLimit != nil {
+		s.WriteInt32(schemas.UpdateInstanceMetadataOptionsRequest_httpPutResponseHopLimit, *v.HttpPutResponseHopLimit)
+	}
+	if v.HttpTokens != "" {
+		s.WriteString(schemas.UpdateInstanceMetadataOptionsRequest_httpTokens, string(v.HttpTokens))
+	}
+	if v.InstanceName != nil {
+		s.WriteString(schemas.UpdateInstanceMetadataOptionsRequest_instanceName, *v.InstanceName)
+	}
+}
+
 type UpdateInstanceMetadataOptionsOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -87,13 +113,34 @@ type UpdateInstanceMetadataOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInstanceMetadataOptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInstanceMetadataOptionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInstanceMetadataOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Operation != nil {
+		s.WriteStruct(schemas.UpdateInstanceMetadataOptionsResult_operation)
+		v.Operation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateInstanceMetadataOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateInstanceMetadataOptionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateInstanceMetadataOptionsResult_operation:
+			v.Operation = &types.Operation{}
+			return v.Operation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateInstanceMetadataOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateInstanceMetadataOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInstanceMetadataOptions, schemas.UpdateInstanceMetadataOptionsRequest, schemas.UpdateInstanceMetadataOptionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateInstanceMetadataOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInstanceMetadataOptions, schemas.UpdateInstanceMetadataOptionsRequest, schemas.UpdateInstanceMetadataOptionsResult), output: &UpdateInstanceMetadataOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

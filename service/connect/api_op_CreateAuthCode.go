@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,27 @@ type CreateAuthCodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAuthCodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAuthCodeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAuthCodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateAuthCodeRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxSessionDurationMinutes != nil {
+		s.WriteInt32(schemas.CreateAuthCodeRequest_MaxSessionDurationMinutes, *v.MaxSessionDurationMinutes)
+	}
+	if v.Scope != nil {
+		s.WriteStruct(schemas.CreateAuthCodeRequest_Scope)
+		v.Scope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.WriteInt32(schemas.CreateAuthCodeRequest_SessionInactivityDurationMinutes, v.SessionInactivityDurationMinutes)
+}
+
 type CreateAuthCodeOutput struct {
 
 	// The authorization code to use for establishing a session.
@@ -76,13 +99,54 @@ type CreateAuthCodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAuthCodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAuthCodeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAuthCodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthCode != nil {
+		s.WriteString(schemas.CreateAuthCodeResponse_AuthCode, *v.AuthCode)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.CreateAuthCodeResponse_EntityId, *v.EntityId)
+	}
+	if v.EntityType != "" {
+		s.WriteString(schemas.CreateAuthCodeResponse_EntityType, string(v.EntityType))
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.CreateAuthCodeResponse_SessionId, *v.SessionId)
+	}
+}
+func (v *CreateAuthCodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAuthCodeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAuthCodeResponse_AuthCode:
+			v.AuthCode = new(string)
+			return d.ReadString(schemas.CreateAuthCodeResponse_AuthCode, v.AuthCode)
+		case schemas.CreateAuthCodeResponse_EntityId:
+			v.EntityId = new(string)
+			return d.ReadString(schemas.CreateAuthCodeResponse_EntityId, v.EntityId)
+		case schemas.CreateAuthCodeResponse_EntityType:
+			var ev string
+			if err := d.ReadString(schemas.CreateAuthCodeResponse_EntityType, &ev); err != nil {
+				return err
+			}
+			v.EntityType = types.AuthCodeEntityType(ev)
+			return nil
+		case schemas.CreateAuthCodeResponse_SessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.CreateAuthCodeResponse_SessionId, v.SessionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAuthCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAuthCode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAuthCode, schemas.CreateAuthCodeRequest, schemas.CreateAuthCodeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAuthCode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAuthCode, schemas.CreateAuthCodeRequest, schemas.CreateAuthCodeResponse), output: &CreateAuthCodeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

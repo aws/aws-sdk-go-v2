@@ -4,7 +4,9 @@ package ecrpublic
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecrpublic/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecrpublic/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type PutRegistryCatalogDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRegistryCatalogDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRegistryCatalogDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRegistryCatalogDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.PutRegistryCatalogDataRequest_displayName, *v.DisplayName)
+	}
+}
+
 type PutRegistryCatalogDataOutput struct {
 
 	// The catalog data for the public registry.
@@ -49,13 +63,34 @@ type PutRegistryCatalogDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRegistryCatalogDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRegistryCatalogDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRegistryCatalogDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistryCatalogData != nil {
+		s.WriteStruct(schemas.PutRegistryCatalogDataResponse_registryCatalogData)
+		v.RegistryCatalogData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutRegistryCatalogDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutRegistryCatalogDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutRegistryCatalogDataResponse_registryCatalogData:
+			v.RegistryCatalogData = &types.RegistryCatalogData{}
+			return v.RegistryCatalogData.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutRegistryCatalogDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutRegistryCatalogData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRegistryCatalogData, schemas.PutRegistryCatalogDataRequest, schemas.PutRegistryCatalogDataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutRegistryCatalogData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRegistryCatalogData, schemas.PutRegistryCatalogDataRequest, schemas.PutRegistryCatalogDataResponse), output: &PutRegistryCatalogDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type UpdateGroupCertificateConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGroupCertificateConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGroupCertificateConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGroupCertificateConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateExpiryInMilliseconds != nil {
+		s.WriteString(schemas.UpdateGroupCertificateConfigurationRequest_CertificateExpiryInMilliseconds, *v.CertificateExpiryInMilliseconds)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.UpdateGroupCertificateConfigurationRequest_GroupId, *v.GroupId)
+	}
+}
+
 type UpdateGroupCertificateConfigurationOutput struct {
 
 	// The amount of time remaining before the certificate authority expires, in
@@ -54,13 +71,44 @@ type UpdateGroupCertificateConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGroupCertificateConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGroupCertificateConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGroupCertificateConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateAuthorityExpiryInMilliseconds != nil {
+		s.WriteString(schemas.UpdateGroupCertificateConfigurationResponse_CertificateAuthorityExpiryInMilliseconds, *v.CertificateAuthorityExpiryInMilliseconds)
+	}
+	if v.CertificateExpiryInMilliseconds != nil {
+		s.WriteString(schemas.UpdateGroupCertificateConfigurationResponse_CertificateExpiryInMilliseconds, *v.CertificateExpiryInMilliseconds)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.UpdateGroupCertificateConfigurationResponse_GroupId, *v.GroupId)
+	}
+}
+func (v *UpdateGroupCertificateConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGroupCertificateConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGroupCertificateConfigurationResponse_CertificateAuthorityExpiryInMilliseconds:
+			v.CertificateAuthorityExpiryInMilliseconds = new(string)
+			return d.ReadString(schemas.UpdateGroupCertificateConfigurationResponse_CertificateAuthorityExpiryInMilliseconds, v.CertificateAuthorityExpiryInMilliseconds)
+		case schemas.UpdateGroupCertificateConfigurationResponse_CertificateExpiryInMilliseconds:
+			v.CertificateExpiryInMilliseconds = new(string)
+			return d.ReadString(schemas.UpdateGroupCertificateConfigurationResponse_CertificateExpiryInMilliseconds, v.CertificateExpiryInMilliseconds)
+		case schemas.UpdateGroupCertificateConfigurationResponse_GroupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.UpdateGroupCertificateConfigurationResponse_GroupId, v.GroupId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGroupCertificateConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateGroupCertificateConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGroupCertificateConfiguration, schemas.UpdateGroupCertificateConfigurationRequest, schemas.UpdateGroupCertificateConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateGroupCertificateConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGroupCertificateConfiguration, schemas.UpdateGroupCertificateConfigurationRequest, schemas.UpdateGroupCertificateConfigurationResponse), output: &UpdateGroupCertificateConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

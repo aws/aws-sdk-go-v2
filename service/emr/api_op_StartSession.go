@@ -4,7 +4,9 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,37 @@ type StartSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSessionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartSessionInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.StartSessionInput_ClusterId, *v.ClusterId)
+	}
+	serializeConfigurationList(s, schemas.StartSessionInput_EngineConfigurations, v.EngineConfigurations)
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.StartSessionInput_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.MonitoringConfiguration != nil {
+		s.WriteStruct(schemas.StartSessionInput_MonitoringConfiguration)
+		v.MonitoringConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartSessionInput_Name, *v.Name)
+	}
+	if v.SessionIdleTimeoutInMinutes != nil {
+		s.WriteInt64(schemas.StartSessionInput_SessionIdleTimeoutInMinutes, *v.SessionIdleTimeoutInMinutes)
+	}
+	serializeTagList(s, schemas.StartSessionInput_Tags, v.Tags)
+}
+
 // Output of the StartSession operation.
 type StartSessionOutput struct {
 
@@ -92,13 +125,60 @@ type StartSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSessionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.StartSessionOutput_AccountId, *v.AccountId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.StartSessionOutput_Arn, *v.Arn)
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.StartSessionOutput_ClusterId, *v.ClusterId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.StartSessionOutput_Id, *v.Id)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.StartSessionOutput_State, string(v.State))
+	}
+}
+func (v *StartSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSessionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSessionOutput_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.StartSessionOutput_AccountId, v.AccountId)
+		case schemas.StartSessionOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StartSessionOutput_Arn, v.Arn)
+		case schemas.StartSessionOutput_ClusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.StartSessionOutput_ClusterId, v.ClusterId)
+		case schemas.StartSessionOutput_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartSessionOutput_Id, v.Id)
+		case schemas.StartSessionOutput_State:
+			var ev string
+			if err := d.ReadString(schemas.StartSessionOutput_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.SessionState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSession, schemas.StartSessionInput, schemas.StartSessionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSession, schemas.StartSessionInput, schemas.StartSessionOutput), output: &StartSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

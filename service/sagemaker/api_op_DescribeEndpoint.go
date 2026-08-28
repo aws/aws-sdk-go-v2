@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -38,6 +39,18 @@ type DescribeEndpointInput struct {
 	EndpointName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEndpointInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointName != nil {
+		s.WriteString(schemas.DescribeEndpointInput_EndpointName, *v.EndpointName)
+	}
 }
 
 type DescribeEndpointOutput struct {
@@ -151,13 +164,126 @@ type DescribeEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEndpointOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AsyncInferenceConfig != nil {
+		s.WriteStruct(schemas.DescribeEndpointOutput_AsyncInferenceConfig)
+		v.AsyncInferenceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeEndpointOutput_CreationTime, *v.CreationTime)
+	}
+	if v.DataCaptureConfig != nil {
+		s.WriteStruct(schemas.DescribeEndpointOutput_DataCaptureConfig)
+		v.DataCaptureConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointArn != nil {
+		s.WriteString(schemas.DescribeEndpointOutput_EndpointArn, *v.EndpointArn)
+	}
+	if v.EndpointConfigName != nil {
+		s.WriteString(schemas.DescribeEndpointOutput_EndpointConfigName, *v.EndpointConfigName)
+	}
+	if v.EndpointName != nil {
+		s.WriteString(schemas.DescribeEndpointOutput_EndpointName, *v.EndpointName)
+	}
+	if v.EndpointStatus != "" {
+		s.WriteString(schemas.DescribeEndpointOutput_EndpointStatus, string(v.EndpointStatus))
+	}
+	if v.ExplainerConfig != nil {
+		s.WriteStruct(schemas.DescribeEndpointOutput_ExplainerConfig)
+		v.ExplainerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeEndpointOutput_FailureReason, *v.FailureReason)
+	}
+	if v.LastDeploymentConfig != nil {
+		s.WriteStruct(schemas.DescribeEndpointOutput_LastDeploymentConfig)
+		v.LastDeploymentConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeEndpointOutput_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.MetricsConfig != nil {
+		s.WriteStruct(schemas.DescribeEndpointOutput_MetricsConfig)
+		v.MetricsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PendingDeploymentSummary != nil {
+		s.WriteStruct(schemas.DescribeEndpointOutput_PendingDeploymentSummary)
+		v.PendingDeploymentSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeProductionVariantSummaryList(s, schemas.DescribeEndpointOutput_ProductionVariants, v.ProductionVariants)
+	serializeProductionVariantSummaryList(s, schemas.DescribeEndpointOutput_ShadowProductionVariants, v.ShadowProductionVariants)
+}
+func (v *DescribeEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEndpointOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEndpointOutput_AsyncInferenceConfig:
+			v.AsyncInferenceConfig = &types.AsyncInferenceConfig{}
+			return v.AsyncInferenceConfig.Deserialize(d)
+		case schemas.DescribeEndpointOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeEndpointOutput_CreationTime, v.CreationTime)
+		case schemas.DescribeEndpointOutput_DataCaptureConfig:
+			v.DataCaptureConfig = &types.DataCaptureConfigSummary{}
+			return v.DataCaptureConfig.Deserialize(d)
+		case schemas.DescribeEndpointOutput_EndpointArn:
+			v.EndpointArn = new(string)
+			return d.ReadString(schemas.DescribeEndpointOutput_EndpointArn, v.EndpointArn)
+		case schemas.DescribeEndpointOutput_EndpointConfigName:
+			v.EndpointConfigName = new(string)
+			return d.ReadString(schemas.DescribeEndpointOutput_EndpointConfigName, v.EndpointConfigName)
+		case schemas.DescribeEndpointOutput_EndpointName:
+			v.EndpointName = new(string)
+			return d.ReadString(schemas.DescribeEndpointOutput_EndpointName, v.EndpointName)
+		case schemas.DescribeEndpointOutput_EndpointStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeEndpointOutput_EndpointStatus, &ev); err != nil {
+				return err
+			}
+			v.EndpointStatus = types.EndpointStatus(ev)
+			return nil
+		case schemas.DescribeEndpointOutput_ExplainerConfig:
+			v.ExplainerConfig = &types.ExplainerConfig{}
+			return v.ExplainerConfig.Deserialize(d)
+		case schemas.DescribeEndpointOutput_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeEndpointOutput_FailureReason, v.FailureReason)
+		case schemas.DescribeEndpointOutput_LastDeploymentConfig:
+			v.LastDeploymentConfig = &types.DeploymentConfig{}
+			return v.LastDeploymentConfig.Deserialize(d)
+		case schemas.DescribeEndpointOutput_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeEndpointOutput_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeEndpointOutput_MetricsConfig:
+			v.MetricsConfig = &types.MetricsConfig{}
+			return v.MetricsConfig.Deserialize(d)
+		case schemas.DescribeEndpointOutput_PendingDeploymentSummary:
+			v.PendingDeploymentSummary = &types.PendingDeploymentSummary{}
+			return v.PendingDeploymentSummary.Deserialize(d)
+		case schemas.DescribeEndpointOutput_ProductionVariants:
+			return deserializeProductionVariantSummaryList(d, schemas.DescribeEndpointOutput_ProductionVariants, &v.ProductionVariants)
+		case schemas.DescribeEndpointOutput_ShadowProductionVariants:
+			return deserializeProductionVariantSummaryList(d, schemas.DescribeEndpointOutput_ShadowProductionVariants, &v.ShadowProductionVariants)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEndpoint, schemas.DescribeEndpointInput, schemas.DescribeEndpointOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEndpoint, schemas.DescribeEndpointInput, schemas.DescribeEndpointOutput), output: &DescribeEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

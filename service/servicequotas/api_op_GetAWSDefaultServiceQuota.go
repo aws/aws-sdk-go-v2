@@ -4,7 +4,9 @@ package servicequotas
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type GetAWSDefaultServiceQuotaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAWSDefaultServiceQuotaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAWSDefaultServiceQuotaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAWSDefaultServiceQuotaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QuotaCode != nil {
+		s.WriteString(schemas.GetAWSDefaultServiceQuotaRequest_QuotaCode, *v.QuotaCode)
+	}
+	if v.ServiceCode != nil {
+		s.WriteString(schemas.GetAWSDefaultServiceQuotaRequest_ServiceCode, *v.ServiceCode)
+	}
+}
+
 type GetAWSDefaultServiceQuotaOutput struct {
 
 	// Information about the quota.
@@ -54,13 +71,34 @@ type GetAWSDefaultServiceQuotaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAWSDefaultServiceQuotaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAWSDefaultServiceQuotaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAWSDefaultServiceQuotaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Quota != nil {
+		s.WriteStruct(schemas.GetAWSDefaultServiceQuotaResponse_Quota)
+		v.Quota.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAWSDefaultServiceQuotaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAWSDefaultServiceQuotaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAWSDefaultServiceQuotaResponse_Quota:
+			v.Quota = &types.ServiceQuota{}
+			return v.Quota.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAWSDefaultServiceQuotaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAWSDefaultServiceQuota{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAWSDefaultServiceQuota, schemas.GetAWSDefaultServiceQuotaRequest, schemas.GetAWSDefaultServiceQuotaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAWSDefaultServiceQuota{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAWSDefaultServiceQuota, schemas.GetAWSDefaultServiceQuotaRequest, schemas.GetAWSDefaultServiceQuotaResponse), output: &GetAWSDefaultServiceQuotaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,27 @@ type CreateGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmznClientToken != nil {
+		s.WriteString(schemas.CreateGroupRequest_AmznClientToken, *v.AmznClientToken)
+	}
+	if v.InitialVersion != nil {
+		s.WriteStruct(schemas.CreateGroupRequest_InitialVersion)
+		v.InitialVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateGroupRequest_Name, *v.Name)
+	}
+	serializeTags(s, schemas.CreateGroupRequest_tags, v.Tags)
+}
+
 type CreateGroupOutput struct {
 
 	// The ARN of the definition.
@@ -75,13 +98,68 @@ type CreateGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateGroupResponse_Arn, *v.Arn)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteString(schemas.CreateGroupResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateGroupResponse_Id, *v.Id)
+	}
+	if v.LastUpdatedTimestamp != nil {
+		s.WriteString(schemas.CreateGroupResponse_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
+	}
+	if v.LatestVersion != nil {
+		s.WriteString(schemas.CreateGroupResponse_LatestVersion, *v.LatestVersion)
+	}
+	if v.LatestVersionArn != nil {
+		s.WriteString(schemas.CreateGroupResponse_LatestVersionArn, *v.LatestVersionArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateGroupResponse_Name, *v.Name)
+	}
+}
+func (v *CreateGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGroupResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateGroupResponse_Arn, v.Arn)
+		case schemas.CreateGroupResponse_CreationTimestamp:
+			v.CreationTimestamp = new(string)
+			return d.ReadString(schemas.CreateGroupResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.CreateGroupResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateGroupResponse_Id, v.Id)
+		case schemas.CreateGroupResponse_LastUpdatedTimestamp:
+			v.LastUpdatedTimestamp = new(string)
+			return d.ReadString(schemas.CreateGroupResponse_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		case schemas.CreateGroupResponse_LatestVersion:
+			v.LatestVersion = new(string)
+			return d.ReadString(schemas.CreateGroupResponse_LatestVersion, v.LatestVersion)
+		case schemas.CreateGroupResponse_LatestVersionArn:
+			v.LatestVersionArn = new(string)
+			return d.ReadString(schemas.CreateGroupResponse_LatestVersionArn, v.LatestVersionArn)
+		case schemas.CreateGroupResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateGroupResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGroup, schemas.CreateGroupRequest, schemas.CreateGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGroup, schemas.CreateGroupRequest, schemas.CreateGroupResponse), output: &CreateGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

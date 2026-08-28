@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -26,6 +28,15 @@ func (c *Client) CreateUsageReportSubscription(ctx context.Context, params *Crea
 
 type CreateUsageReportSubscriptionInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *CreateUsageReportSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUsageReportSubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUsageReportSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type CreateUsageReportSubscriptionOutput struct {
@@ -50,13 +61,42 @@ type CreateUsageReportSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUsageReportSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUsageReportSubscriptionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUsageReportSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3BucketName != nil {
+		s.WriteString(schemas.CreateUsageReportSubscriptionResult_S3BucketName, *v.S3BucketName)
+	}
+	if v.Schedule != "" {
+		s.WriteString(schemas.CreateUsageReportSubscriptionResult_Schedule, string(v.Schedule))
+	}
+}
+func (v *CreateUsageReportSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUsageReportSubscriptionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUsageReportSubscriptionResult_S3BucketName:
+			v.S3BucketName = new(string)
+			return d.ReadString(schemas.CreateUsageReportSubscriptionResult_S3BucketName, v.S3BucketName)
+		case schemas.CreateUsageReportSubscriptionResult_Schedule:
+			var ev string
+			if err := d.ReadString(schemas.CreateUsageReportSubscriptionResult_Schedule, &ev); err != nil {
+				return err
+			}
+			v.Schedule = types.UsageReportSchedule(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUsageReportSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateUsageReportSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUsageReportSubscription, schemas.CreateUsageReportSubscriptionRequest, schemas.CreateUsageReportSubscriptionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateUsageReportSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUsageReportSubscription, schemas.CreateUsageReportSubscriptionRequest, schemas.CreateUsageReportSubscriptionResult), output: &CreateUsageReportSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

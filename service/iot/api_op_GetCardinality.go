@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,27 @@ type GetCardinalityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCardinalityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCardinalityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCardinalityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationField != nil {
+		s.WriteString(schemas.GetCardinalityRequest_aggregationField, *v.AggregationField)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.GetCardinalityRequest_indexName, *v.IndexName)
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.GetCardinalityRequest_queryString, *v.QueryString)
+	}
+	if v.QueryVersion != nil {
+		s.WriteString(schemas.GetCardinalityRequest_queryVersion, *v.QueryVersion)
+	}
+}
+
 type GetCardinalityOutput struct {
 
 	// The approximate count of unique values that match the query.
@@ -57,13 +80,31 @@ type GetCardinalityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCardinalityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCardinalityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCardinalityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cardinality != 0 {
+		s.WriteInt32(schemas.GetCardinalityResponse_cardinality, v.Cardinality)
+	}
+}
+func (v *GetCardinalityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCardinalityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCardinalityResponse_cardinality:
+			return d.ReadInt32(schemas.GetCardinalityResponse_cardinality, &v.Cardinality)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCardinalityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCardinality{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCardinality, schemas.GetCardinalityRequest, schemas.GetCardinalityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCardinality{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCardinality, schemas.GetCardinalityRequest, schemas.GetCardinalityResponse), output: &GetCardinalityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

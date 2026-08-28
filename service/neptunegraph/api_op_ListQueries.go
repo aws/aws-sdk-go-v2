@@ -5,6 +5,7 @@ package neptunegraph
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -47,6 +48,23 @@ type ListQueriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueriesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphIdentifier != nil {
+		s.WriteString(schemas.ListQueriesInput_graphIdentifier, *v.GraphIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListQueriesInput_maxResults, *v.MaxResults)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ListQueriesInput_state, string(v.State))
+	}
+}
 func (in *ListQueriesInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ApiType = ptr.String("DataPlane")
@@ -65,13 +83,29 @@ type ListQueriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueriesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeQuerySummaryList(s, schemas.ListQueriesOutput_queries, v.Queries)
+}
+func (v *ListQueriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListQueriesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListQueriesOutput_queries:
+			return deserializeQuerySummaryList(d, schemas.ListQueriesOutput_queries, &v.Queries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListQueriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListQueries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueries, schemas.ListQueriesInput, schemas.ListQueriesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListQueries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueries, schemas.ListQueriesInput, schemas.ListQueriesOutput), output: &ListQueriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

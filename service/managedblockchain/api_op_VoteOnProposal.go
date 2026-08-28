@@ -4,7 +4,9 @@ package managedblockchain
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,27 @@ type VoteOnProposalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VoteOnProposalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VoteOnProposalInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VoteOnProposalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkId != nil {
+		s.WriteString(schemas.VoteOnProposalInput_NetworkId, *v.NetworkId)
+	}
+	if v.ProposalId != nil {
+		s.WriteString(schemas.VoteOnProposalInput_ProposalId, *v.ProposalId)
+	}
+	if v.Vote != "" {
+		s.WriteString(schemas.VoteOnProposalInput_Vote, string(v.Vote))
+	}
+	if v.VoterMemberId != nil {
+		s.WriteString(schemas.VoteOnProposalInput_VoterMemberId, *v.VoterMemberId)
+	}
+}
+
 type VoteOnProposalOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,13 +83,26 @@ type VoteOnProposalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VoteOnProposalOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VoteOnProposalOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VoteOnProposalOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *VoteOnProposalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VoteOnProposalOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationVoteOnProposalMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpVoteOnProposal{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VoteOnProposal, schemas.VoteOnProposalInput, schemas.VoteOnProposalOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpVoteOnProposal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VoteOnProposal, schemas.VoteOnProposalInput, schemas.VoteOnProposalOutput), output: &VoteOnProposalOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

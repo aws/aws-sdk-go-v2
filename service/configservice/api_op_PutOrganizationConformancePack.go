@@ -4,7 +4,9 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -110,6 +112,33 @@ type PutOrganizationConformancePackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutOrganizationConformancePackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutOrganizationConformancePackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutOrganizationConformancePackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConformancePackInputParameters(s, schemas.PutOrganizationConformancePackRequest_ConformancePackInputParameters, v.ConformancePackInputParameters)
+	if v.DeliveryS3Bucket != nil {
+		s.WriteString(schemas.PutOrganizationConformancePackRequest_DeliveryS3Bucket, *v.DeliveryS3Bucket)
+	}
+	if v.DeliveryS3KeyPrefix != nil {
+		s.WriteString(schemas.PutOrganizationConformancePackRequest_DeliveryS3KeyPrefix, *v.DeliveryS3KeyPrefix)
+	}
+	serializeExcludedAccounts(s, schemas.PutOrganizationConformancePackRequest_ExcludedAccounts, v.ExcludedAccounts)
+	if v.OrganizationConformancePackName != nil {
+		s.WriteString(schemas.PutOrganizationConformancePackRequest_OrganizationConformancePackName, *v.OrganizationConformancePackName)
+	}
+	serializeTagsList(s, schemas.PutOrganizationConformancePackRequest_Tags, v.Tags)
+	if v.TemplateBody != nil {
+		s.WriteString(schemas.PutOrganizationConformancePackRequest_TemplateBody, *v.TemplateBody)
+	}
+	if v.TemplateS3Uri != nil {
+		s.WriteString(schemas.PutOrganizationConformancePackRequest_TemplateS3Uri, *v.TemplateS3Uri)
+	}
+}
+
 type PutOrganizationConformancePackOutput struct {
 
 	// ARN of the organization conformance pack.
@@ -121,13 +150,32 @@ type PutOrganizationConformancePackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutOrganizationConformancePackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutOrganizationConformancePackResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutOrganizationConformancePackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationConformancePackArn != nil {
+		s.WriteString(schemas.PutOrganizationConformancePackResponse_OrganizationConformancePackArn, *v.OrganizationConformancePackArn)
+	}
+}
+func (v *PutOrganizationConformancePackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutOrganizationConformancePackResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutOrganizationConformancePackResponse_OrganizationConformancePackArn:
+			v.OrganizationConformancePackArn = new(string)
+			return d.ReadString(schemas.PutOrganizationConformancePackResponse_OrganizationConformancePackArn, v.OrganizationConformancePackArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutOrganizationConformancePackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutOrganizationConformancePack{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutOrganizationConformancePack, schemas.PutOrganizationConformancePackRequest, schemas.PutOrganizationConformancePackResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutOrganizationConformancePack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutOrganizationConformancePack, schemas.PutOrganizationConformancePackRequest, schemas.PutOrganizationConformancePackResponse), output: &PutOrganizationConformancePackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

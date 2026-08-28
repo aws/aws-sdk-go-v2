@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListProvisioningTemplateVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProvisioningTemplateVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProvisioningTemplateVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProvisioningTemplateVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProvisioningTemplateVersionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProvisioningTemplateVersionsRequest_nextToken, *v.NextToken)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.ListProvisioningTemplateVersionsRequest_templateName, *v.TemplateName)
+	}
+}
+
 type ListProvisioningTemplateVersionsOutput struct {
 
 	// A token to retrieve the next set of results.
@@ -59,13 +79,35 @@ type ListProvisioningTemplateVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProvisioningTemplateVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProvisioningTemplateVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProvisioningTemplateVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProvisioningTemplateVersionsResponse_nextToken, *v.NextToken)
+	}
+	serializeProvisioningTemplateVersionListing(s, schemas.ListProvisioningTemplateVersionsResponse_versions, v.Versions)
+}
+func (v *ListProvisioningTemplateVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProvisioningTemplateVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProvisioningTemplateVersionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProvisioningTemplateVersionsResponse_nextToken, v.NextToken)
+		case schemas.ListProvisioningTemplateVersionsResponse_versions:
+			return deserializeProvisioningTemplateVersionListing(d, schemas.ListProvisioningTemplateVersionsResponse_versions, &v.Versions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProvisioningTemplateVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProvisioningTemplateVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProvisioningTemplateVersions, schemas.ListProvisioningTemplateVersionsRequest, schemas.ListProvisioningTemplateVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProvisioningTemplateVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProvisioningTemplateVersions, schemas.ListProvisioningTemplateVersionsRequest, schemas.ListProvisioningTemplateVersionsResponse), output: &ListProvisioningTemplateVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

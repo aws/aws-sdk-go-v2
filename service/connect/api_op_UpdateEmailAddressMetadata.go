@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,30 @@ type UpdateEmailAddressMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEmailAddressMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEmailAddressMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEmailAddressMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateEmailAddressMetadataRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateEmailAddressMetadataRequest_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateEmailAddressMetadataRequest_DisplayName, *v.DisplayName)
+	}
+	if v.EmailAddressId != nil {
+		s.WriteString(schemas.UpdateEmailAddressMetadataRequest_EmailAddressId, *v.EmailAddressId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateEmailAddressMetadataRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type UpdateEmailAddressMetadataOutput struct {
 
 	// The Amazon Resource Name (ARN) of the email address.
@@ -71,13 +97,38 @@ type UpdateEmailAddressMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEmailAddressMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEmailAddressMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEmailAddressMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailAddressArn != nil {
+		s.WriteString(schemas.UpdateEmailAddressMetadataResponse_EmailAddressArn, *v.EmailAddressArn)
+	}
+	if v.EmailAddressId != nil {
+		s.WriteString(schemas.UpdateEmailAddressMetadataResponse_EmailAddressId, *v.EmailAddressId)
+	}
+}
+func (v *UpdateEmailAddressMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEmailAddressMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEmailAddressMetadataResponse_EmailAddressArn:
+			v.EmailAddressArn = new(string)
+			return d.ReadString(schemas.UpdateEmailAddressMetadataResponse_EmailAddressArn, v.EmailAddressArn)
+		case schemas.UpdateEmailAddressMetadataResponse_EmailAddressId:
+			v.EmailAddressId = new(string)
+			return d.ReadString(schemas.UpdateEmailAddressMetadataResponse_EmailAddressId, v.EmailAddressId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEmailAddressMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEmailAddressMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEmailAddressMetadata, schemas.UpdateEmailAddressMetadataRequest, schemas.UpdateEmailAddressMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateEmailAddressMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEmailAddressMetadata, schemas.UpdateEmailAddressMetadataRequest, schemas.UpdateEmailAddressMetadataResponse), output: &UpdateEmailAddressMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

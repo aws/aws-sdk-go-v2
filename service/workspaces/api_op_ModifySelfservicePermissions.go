@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,23 @@ type ModifySelfservicePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifySelfservicePermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifySelfservicePermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifySelfservicePermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceId != nil {
+		s.WriteString(schemas.ModifySelfservicePermissionsRequest_ResourceId, *v.ResourceId)
+	}
+	if v.SelfservicePermissions != nil {
+		s.WriteStruct(schemas.ModifySelfservicePermissionsRequest_SelfservicePermissions)
+		v.SelfservicePermissions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ModifySelfservicePermissionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +68,26 @@ type ModifySelfservicePermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifySelfservicePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifySelfservicePermissionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifySelfservicePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ModifySelfservicePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifySelfservicePermissionsResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifySelfservicePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifySelfservicePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifySelfservicePermissions, schemas.ModifySelfservicePermissionsRequest, schemas.ModifySelfservicePermissionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpModifySelfservicePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifySelfservicePermissions, schemas.ModifySelfservicePermissionsRequest, schemas.ModifySelfservicePermissionsResult), output: &ModifySelfservicePermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

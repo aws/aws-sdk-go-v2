@@ -4,6 +4,8 @@ package grafana
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/grafana/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,46 @@ type CreateWorkspaceApiKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkspaceApiKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkspaceApiKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkspaceApiKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyName != nil {
+		s.WriteString(schemas.CreateWorkspaceApiKeyRequest_keyName, *v.KeyName)
+	}
+	if v.KeyRole != nil {
+		s.WriteString(schemas.CreateWorkspaceApiKeyRequest_keyRole, *v.KeyRole)
+	}
+	if v.SecondsToLive != nil {
+		s.WriteInt32(schemas.CreateWorkspaceApiKeyRequest_secondsToLive, *v.SecondsToLive)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.CreateWorkspaceApiKeyRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *CreateWorkspaceApiKeyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkspaceApiKeyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkspaceApiKeyRequest_keyName:
+			v.KeyName = new(string)
+			return d.ReadString(schemas.CreateWorkspaceApiKeyRequest_keyName, v.KeyName)
+		case schemas.CreateWorkspaceApiKeyRequest_keyRole:
+			v.KeyRole = new(string)
+			return d.ReadString(schemas.CreateWorkspaceApiKeyRequest_keyRole, v.KeyRole)
+		case schemas.CreateWorkspaceApiKeyRequest_secondsToLive:
+			v.SecondsToLive = new(int32)
+			return d.ReadInt32(schemas.CreateWorkspaceApiKeyRequest_secondsToLive, v.SecondsToLive)
+		case schemas.CreateWorkspaceApiKeyRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.CreateWorkspaceApiKeyRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type CreateWorkspaceApiKeyOutput struct {
 
 	// The key token. Use this value as a bearer token to authenticate HTTP requests
@@ -82,13 +124,44 @@ type CreateWorkspaceApiKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkspaceApiKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkspaceApiKeyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkspaceApiKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.CreateWorkspaceApiKeyResponse_key, *v.Key)
+	}
+	if v.KeyName != nil {
+		s.WriteString(schemas.CreateWorkspaceApiKeyResponse_keyName, *v.KeyName)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.CreateWorkspaceApiKeyResponse_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *CreateWorkspaceApiKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkspaceApiKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkspaceApiKeyResponse_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.CreateWorkspaceApiKeyResponse_key, v.Key)
+		case schemas.CreateWorkspaceApiKeyResponse_keyName:
+			v.KeyName = new(string)
+			return d.ReadString(schemas.CreateWorkspaceApiKeyResponse_keyName, v.KeyName)
+		case schemas.CreateWorkspaceApiKeyResponse_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.CreateWorkspaceApiKeyResponse_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWorkspaceApiKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWorkspaceApiKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkspaceApiKey, schemas.CreateWorkspaceApiKeyRequest, schemas.CreateWorkspaceApiKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWorkspaceApiKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkspaceApiKey, schemas.CreateWorkspaceApiKeyRequest, schemas.CreateWorkspaceApiKeyResponse), output: &CreateWorkspaceApiKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

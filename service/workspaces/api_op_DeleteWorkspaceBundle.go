@@ -4,6 +4,8 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteWorkspaceBundleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkspaceBundleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkspaceBundleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkspaceBundleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BundleId != nil {
+		s.WriteString(schemas.DeleteWorkspaceBundleRequest_BundleId, *v.BundleId)
+	}
+}
+
 type DeleteWorkspaceBundleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteWorkspaceBundleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkspaceBundleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkspaceBundleResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkspaceBundleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteWorkspaceBundleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWorkspaceBundleResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWorkspaceBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteWorkspaceBundle{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkspaceBundle, schemas.DeleteWorkspaceBundleRequest, schemas.DeleteWorkspaceBundleResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteWorkspaceBundle{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkspaceBundle, schemas.DeleteWorkspaceBundleRequest, schemas.DeleteWorkspaceBundleResult), output: &DeleteWorkspaceBundleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

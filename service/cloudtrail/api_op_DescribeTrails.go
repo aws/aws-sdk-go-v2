@@ -4,7 +4,9 @@ package cloudtrail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,19 @@ type DescribeTrailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTrailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTrailsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTrailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeShadowTrails != nil {
+		s.WriteBool(schemas.DescribeTrailsRequest_includeShadowTrails, *v.IncludeShadowTrails)
+	}
+	serializeTrailNameList(s, schemas.DescribeTrailsRequest_trailNameList, v.TrailNameList)
+}
+
 // Returns the objects or data listed below if successful. Otherwise, returns an
 // error.
 type DescribeTrailsOutput struct {
@@ -77,13 +92,29 @@ type DescribeTrailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTrailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTrailsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTrailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTrailList(s, schemas.DescribeTrailsResponse_trailList, v.TrailList)
+}
+func (v *DescribeTrailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTrailsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTrailsResponse_trailList:
+			return deserializeTrailList(d, schemas.DescribeTrailsResponse_trailList, &v.TrailList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTrailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTrails{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrails, schemas.DescribeTrailsRequest, schemas.DescribeTrailsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTrails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrails, schemas.DescribeTrailsRequest, schemas.DescribeTrailsResponse), output: &DescribeTrailsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

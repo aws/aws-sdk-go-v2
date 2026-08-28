@@ -5,7 +5,9 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -110,6 +112,34 @@ type ListIntentStageMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntentStageMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntentStageMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntentStageMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalyticsBinByList(s, schemas.ListIntentStageMetricsRequest_binBy, v.BinBy)
+	if v.BotId != nil {
+		s.WriteString(schemas.ListIntentStageMetricsRequest_botId, *v.BotId)
+	}
+	if v.EndDateTime != nil {
+		s.WriteTime(schemas.ListIntentStageMetricsRequest_endDateTime, *v.EndDateTime)
+	}
+	serializeAnalyticsIntentStageFilters(s, schemas.ListIntentStageMetricsRequest_filters, v.Filters)
+	serializeAnalyticsIntentStageGroupByList(s, schemas.ListIntentStageMetricsRequest_groupBy, v.GroupBy)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIntentStageMetricsRequest_maxResults, *v.MaxResults)
+	}
+	serializeAnalyticsIntentStageMetrics(s, schemas.ListIntentStageMetricsRequest_metrics, v.Metrics)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIntentStageMetricsRequest_nextToken, *v.NextToken)
+	}
+	if v.StartDateTime != nil {
+		s.WriteTime(schemas.ListIntentStageMetricsRequest_startDateTime, *v.StartDateTime)
+	}
+}
+
 type ListIntentStageMetricsOutput struct {
 
 	// The identifier for the bot for which you retrieved intent stage metrics.
@@ -133,13 +163,41 @@ type ListIntentStageMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntentStageMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntentStageMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntentStageMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListIntentStageMetricsResponse_botId, *v.BotId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIntentStageMetricsResponse_nextToken, *v.NextToken)
+	}
+	serializeAnalyticsIntentStageResults(s, schemas.ListIntentStageMetricsResponse_results, v.Results)
+}
+func (v *ListIntentStageMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIntentStageMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIntentStageMetricsResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.ListIntentStageMetricsResponse_botId, v.BotId)
+		case schemas.ListIntentStageMetricsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIntentStageMetricsResponse_nextToken, v.NextToken)
+		case schemas.ListIntentStageMetricsResponse_results:
+			return deserializeAnalyticsIntentStageResults(d, schemas.ListIntentStageMetricsResponse_results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIntentStageMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIntentStageMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntentStageMetrics, schemas.ListIntentStageMetricsRequest, schemas.ListIntentStageMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIntentStageMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntentStageMetrics, schemas.ListIntentStageMetricsRequest, schemas.ListIntentStageMetricsResponse), output: &ListIntentStageMetricsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

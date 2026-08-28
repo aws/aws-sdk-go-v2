@@ -4,7 +4,9 @@ package cognitoidentity
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -77,6 +79,64 @@ type UpdateIdentityPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIdentityPoolInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdentityPool)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIdentityPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowClassicFlow != nil {
+		s.WriteBool(schemas.IdentityPool_AllowClassicFlow, *v.AllowClassicFlow)
+	}
+	s.WriteBool(schemas.IdentityPool_AllowUnauthenticatedIdentities, v.AllowUnauthenticatedIdentities)
+	serializeCognitoIdentityProviderList(s, schemas.IdentityPool_CognitoIdentityProviders, v.CognitoIdentityProviders)
+	if v.DeveloperProviderName != nil {
+		s.WriteString(schemas.IdentityPool_DeveloperProviderName, *v.DeveloperProviderName)
+	}
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.IdentityPool_IdentityPoolId, *v.IdentityPoolId)
+	}
+	if v.IdentityPoolName != nil {
+		s.WriteString(schemas.IdentityPool_IdentityPoolName, *v.IdentityPoolName)
+	}
+	serializeIdentityPoolTagsType(s, schemas.IdentityPool_IdentityPoolTags, v.IdentityPoolTags)
+	serializeOIDCProviderList(s, schemas.IdentityPool_OpenIdConnectProviderARNs, v.OpenIdConnectProviderARNs)
+	serializeSAMLProviderList(s, schemas.IdentityPool_SamlProviderARNs, v.SamlProviderARNs)
+	serializeIdentityProviders(s, schemas.IdentityPool_SupportedLoginProviders, v.SupportedLoginProviders)
+}
+func (v *UpdateIdentityPoolInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdentityPool, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdentityPool_AllowClassicFlow:
+			v.AllowClassicFlow = new(bool)
+			return d.ReadBool(schemas.IdentityPool_AllowClassicFlow, v.AllowClassicFlow)
+		case schemas.IdentityPool_AllowUnauthenticatedIdentities:
+			return d.ReadBool(schemas.IdentityPool_AllowUnauthenticatedIdentities, &v.AllowUnauthenticatedIdentities)
+		case schemas.IdentityPool_CognitoIdentityProviders:
+			return deserializeCognitoIdentityProviderList(d, schemas.IdentityPool_CognitoIdentityProviders, &v.CognitoIdentityProviders)
+		case schemas.IdentityPool_DeveloperProviderName:
+			v.DeveloperProviderName = new(string)
+			return d.ReadString(schemas.IdentityPool_DeveloperProviderName, v.DeveloperProviderName)
+		case schemas.IdentityPool_IdentityPoolId:
+			v.IdentityPoolId = new(string)
+			return d.ReadString(schemas.IdentityPool_IdentityPoolId, v.IdentityPoolId)
+		case schemas.IdentityPool_IdentityPoolName:
+			v.IdentityPoolName = new(string)
+			return d.ReadString(schemas.IdentityPool_IdentityPoolName, v.IdentityPoolName)
+		case schemas.IdentityPool_IdentityPoolTags:
+			return deserializeIdentityPoolTagsType(d, schemas.IdentityPool_IdentityPoolTags, &v.IdentityPoolTags)
+		case schemas.IdentityPool_OpenIdConnectProviderARNs:
+			return deserializeOIDCProviderList(d, schemas.IdentityPool_OpenIdConnectProviderARNs, &v.OpenIdConnectProviderARNs)
+		case schemas.IdentityPool_SamlProviderARNs:
+			return deserializeSAMLProviderList(d, schemas.IdentityPool_SamlProviderARNs, &v.SamlProviderARNs)
+		case schemas.IdentityPool_SupportedLoginProviders:
+			return deserializeIdentityProviders(d, schemas.IdentityPool_SupportedLoginProviders, &v.SupportedLoginProviders)
+		}
+		return nil
+	})
+}
+
 // An object representing an Amazon Cognito identity pool.
 type UpdateIdentityPoolOutput struct {
 
@@ -128,13 +188,68 @@ type UpdateIdentityPoolOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIdentityPoolOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IdentityPool)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIdentityPoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowClassicFlow != nil {
+		s.WriteBool(schemas.IdentityPool_AllowClassicFlow, *v.AllowClassicFlow)
+	}
+	s.WriteBool(schemas.IdentityPool_AllowUnauthenticatedIdentities, v.AllowUnauthenticatedIdentities)
+	serializeCognitoIdentityProviderList(s, schemas.IdentityPool_CognitoIdentityProviders, v.CognitoIdentityProviders)
+	if v.DeveloperProviderName != nil {
+		s.WriteString(schemas.IdentityPool_DeveloperProviderName, *v.DeveloperProviderName)
+	}
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.IdentityPool_IdentityPoolId, *v.IdentityPoolId)
+	}
+	if v.IdentityPoolName != nil {
+		s.WriteString(schemas.IdentityPool_IdentityPoolName, *v.IdentityPoolName)
+	}
+	serializeIdentityPoolTagsType(s, schemas.IdentityPool_IdentityPoolTags, v.IdentityPoolTags)
+	serializeOIDCProviderList(s, schemas.IdentityPool_OpenIdConnectProviderARNs, v.OpenIdConnectProviderARNs)
+	serializeSAMLProviderList(s, schemas.IdentityPool_SamlProviderARNs, v.SamlProviderARNs)
+	serializeIdentityProviders(s, schemas.IdentityPool_SupportedLoginProviders, v.SupportedLoginProviders)
+}
+func (v *UpdateIdentityPoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IdentityPool, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IdentityPool_AllowClassicFlow:
+			v.AllowClassicFlow = new(bool)
+			return d.ReadBool(schemas.IdentityPool_AllowClassicFlow, v.AllowClassicFlow)
+		case schemas.IdentityPool_AllowUnauthenticatedIdentities:
+			return d.ReadBool(schemas.IdentityPool_AllowUnauthenticatedIdentities, &v.AllowUnauthenticatedIdentities)
+		case schemas.IdentityPool_CognitoIdentityProviders:
+			return deserializeCognitoIdentityProviderList(d, schemas.IdentityPool_CognitoIdentityProviders, &v.CognitoIdentityProviders)
+		case schemas.IdentityPool_DeveloperProviderName:
+			v.DeveloperProviderName = new(string)
+			return d.ReadString(schemas.IdentityPool_DeveloperProviderName, v.DeveloperProviderName)
+		case schemas.IdentityPool_IdentityPoolId:
+			v.IdentityPoolId = new(string)
+			return d.ReadString(schemas.IdentityPool_IdentityPoolId, v.IdentityPoolId)
+		case schemas.IdentityPool_IdentityPoolName:
+			v.IdentityPoolName = new(string)
+			return d.ReadString(schemas.IdentityPool_IdentityPoolName, v.IdentityPoolName)
+		case schemas.IdentityPool_IdentityPoolTags:
+			return deserializeIdentityPoolTagsType(d, schemas.IdentityPool_IdentityPoolTags, &v.IdentityPoolTags)
+		case schemas.IdentityPool_OpenIdConnectProviderARNs:
+			return deserializeOIDCProviderList(d, schemas.IdentityPool_OpenIdConnectProviderARNs, &v.OpenIdConnectProviderARNs)
+		case schemas.IdentityPool_SamlProviderARNs:
+			return deserializeSAMLProviderList(d, schemas.IdentityPool_SamlProviderARNs, &v.SamlProviderARNs)
+		case schemas.IdentityPool_SupportedLoginProviders:
+			return deserializeIdentityProviders(d, schemas.IdentityPool_SupportedLoginProviders, &v.SupportedLoginProviders)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIdentityPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateIdentityPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIdentityPool, schemas.IdentityPool, schemas.IdentityPool)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateIdentityPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIdentityPool, schemas.IdentityPool, schemas.IdentityPool), output: &UpdateIdentityPoolOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

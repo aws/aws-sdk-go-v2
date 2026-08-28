@@ -4,7 +4,9 @@ package route53resolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type UpdateResolverDnssecConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResolverDnssecConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResolverDnssecConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResolverDnssecConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceId != nil {
+		s.WriteString(schemas.UpdateResolverDnssecConfigRequest_ResourceId, *v.ResourceId)
+	}
+	if v.Validation != "" {
+		s.WriteString(schemas.UpdateResolverDnssecConfigRequest_Validation, string(v.Validation))
+	}
+}
+
 type UpdateResolverDnssecConfigOutput struct {
 
 	// A complex type that contains settings for the specified DNSSEC configuration.
@@ -54,13 +71,34 @@ type UpdateResolverDnssecConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResolverDnssecConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResolverDnssecConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResolverDnssecConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverDNSSECConfig != nil {
+		s.WriteStruct(schemas.UpdateResolverDnssecConfigResponse_ResolverDNSSECConfig)
+		v.ResolverDNSSECConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateResolverDnssecConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateResolverDnssecConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateResolverDnssecConfigResponse_ResolverDNSSECConfig:
+			v.ResolverDNSSECConfig = &types.ResolverDnssecConfig{}
+			return v.ResolverDNSSECConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateResolverDnssecConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateResolverDnssecConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResolverDnssecConfig, schemas.UpdateResolverDnssecConfigRequest, schemas.UpdateResolverDnssecConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateResolverDnssecConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResolverDnssecConfig, schemas.UpdateResolverDnssecConfigRequest, schemas.UpdateResolverDnssecConfigResponse), output: &UpdateResolverDnssecConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

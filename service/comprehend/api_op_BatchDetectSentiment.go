@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,19 @@ type BatchDetectSentimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDetectSentimentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetectSentimentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetectSentimentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.BatchDetectSentimentRequest_LanguageCode, string(v.LanguageCode))
+	}
+	serializeCustomerInputStringList(s, schemas.BatchDetectSentimentRequest_TextList, v.TextList)
+}
+
 type BatchDetectSentimentOutput struct {
 
 	// A list containing one object for each document that contained an error. The
@@ -67,13 +82,32 @@ type BatchDetectSentimentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDetectSentimentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetectSentimentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetectSentimentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchItemErrorList(s, schemas.BatchDetectSentimentResponse_ErrorList, v.ErrorList)
+	serializeListOfDetectSentimentResult(s, schemas.BatchDetectSentimentResponse_ResultList, v.ResultList)
+}
+func (v *BatchDetectSentimentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDetectSentimentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDetectSentimentResponse_ErrorList:
+			return deserializeBatchItemErrorList(d, schemas.BatchDetectSentimentResponse_ErrorList, &v.ErrorList)
+		case schemas.BatchDetectSentimentResponse_ResultList:
+			return deserializeListOfDetectSentimentResult(d, schemas.BatchDetectSentimentResponse_ResultList, &v.ResultList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDetectSentimentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDetectSentiment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDetectSentiment, schemas.BatchDetectSentimentRequest, schemas.BatchDetectSentimentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchDetectSentiment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDetectSentiment, schemas.BatchDetectSentimentRequest, schemas.BatchDetectSentimentResponse), output: &BatchDetectSentimentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

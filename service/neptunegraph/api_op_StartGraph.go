@@ -4,7 +4,9 @@ package neptunegraph
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	"time"
@@ -36,6 +38,17 @@ type StartGraphInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartGraphInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartGraphInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartGraphInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphIdentifier != nil {
+		s.WriteString(schemas.StartGraphInput_graphIdentifier, *v.GraphIdentifier)
+	}
+}
 func (in *StartGraphInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ApiType = ptr.String("ControlPlane")
@@ -103,13 +116,122 @@ type StartGraphOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartGraphOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartGraphOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartGraphOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StartGraphOutput_arn, *v.Arn)
+	}
+	if v.BuildNumber != nil {
+		s.WriteString(schemas.StartGraphOutput_buildNumber, *v.BuildNumber)
+	}
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.StartGraphOutput_createTime, *v.CreateTime)
+	}
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.StartGraphOutput_deletionProtection, *v.DeletionProtection)
+	}
+	if v.Endpoint != nil {
+		s.WriteString(schemas.StartGraphOutput_endpoint, *v.Endpoint)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.StartGraphOutput_id, *v.Id)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.StartGraphOutput_kmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartGraphOutput_name, *v.Name)
+	}
+	if v.ProvisionedMemory != nil {
+		s.WriteInt32(schemas.StartGraphOutput_provisionedMemory, *v.ProvisionedMemory)
+	}
+	if v.PublicConnectivity != nil {
+		s.WriteBool(schemas.StartGraphOutput_publicConnectivity, *v.PublicConnectivity)
+	}
+	if v.ReplicaCount != nil {
+		s.WriteInt32(schemas.StartGraphOutput_replicaCount, *v.ReplicaCount)
+	}
+	if v.SourceSnapshotId != nil {
+		s.WriteString(schemas.StartGraphOutput_sourceSnapshotId, *v.SourceSnapshotId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartGraphOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.StartGraphOutput_statusReason, *v.StatusReason)
+	}
+	if v.VectorSearchConfiguration != nil {
+		s.WriteStruct(schemas.StartGraphOutput_vectorSearchConfiguration)
+		v.VectorSearchConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartGraphOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartGraphOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartGraphOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StartGraphOutput_arn, v.Arn)
+		case schemas.StartGraphOutput_buildNumber:
+			v.BuildNumber = new(string)
+			return d.ReadString(schemas.StartGraphOutput_buildNumber, v.BuildNumber)
+		case schemas.StartGraphOutput_createTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.StartGraphOutput_createTime, v.CreateTime)
+		case schemas.StartGraphOutput_deletionProtection:
+			v.DeletionProtection = new(bool)
+			return d.ReadBool(schemas.StartGraphOutput_deletionProtection, v.DeletionProtection)
+		case schemas.StartGraphOutput_endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.StartGraphOutput_endpoint, v.Endpoint)
+		case schemas.StartGraphOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartGraphOutput_id, v.Id)
+		case schemas.StartGraphOutput_kmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.StartGraphOutput_kmsKeyIdentifier, v.KmsKeyIdentifier)
+		case schemas.StartGraphOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StartGraphOutput_name, v.Name)
+		case schemas.StartGraphOutput_provisionedMemory:
+			v.ProvisionedMemory = new(int32)
+			return d.ReadInt32(schemas.StartGraphOutput_provisionedMemory, v.ProvisionedMemory)
+		case schemas.StartGraphOutput_publicConnectivity:
+			v.PublicConnectivity = new(bool)
+			return d.ReadBool(schemas.StartGraphOutput_publicConnectivity, v.PublicConnectivity)
+		case schemas.StartGraphOutput_replicaCount:
+			v.ReplicaCount = new(int32)
+			return d.ReadInt32(schemas.StartGraphOutput_replicaCount, v.ReplicaCount)
+		case schemas.StartGraphOutput_sourceSnapshotId:
+			v.SourceSnapshotId = new(string)
+			return d.ReadString(schemas.StartGraphOutput_sourceSnapshotId, v.SourceSnapshotId)
+		case schemas.StartGraphOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.StartGraphOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.GraphStatus(ev)
+			return nil
+		case schemas.StartGraphOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.StartGraphOutput_statusReason, v.StatusReason)
+		case schemas.StartGraphOutput_vectorSearchConfiguration:
+			v.VectorSearchConfiguration = &types.VectorSearchConfiguration{}
+			return v.VectorSearchConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartGraph{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartGraph, schemas.StartGraphInput, schemas.StartGraphOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartGraph{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartGraph, schemas.StartGraphInput, schemas.StartGraphOutput), output: &StartGraphOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

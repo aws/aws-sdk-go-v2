@@ -4,6 +4,8 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type DescribeLocationFsxLustreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLocationFsxLustreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLocationFsxLustreRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLocationFsxLustreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.DescribeLocationFsxLustreRequest_LocationArn, *v.LocationArn)
+	}
+}
+
 type DescribeLocationFsxLustreOutput struct {
 
 	// The time that the FSx for Lustre location was created.
@@ -57,13 +71,47 @@ type DescribeLocationFsxLustreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLocationFsxLustreOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLocationFsxLustreResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLocationFsxLustreOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeLocationFsxLustreResponse_CreationTime, *v.CreationTime)
+	}
+	if v.LocationArn != nil {
+		s.WriteString(schemas.DescribeLocationFsxLustreResponse_LocationArn, *v.LocationArn)
+	}
+	if v.LocationUri != nil {
+		s.WriteString(schemas.DescribeLocationFsxLustreResponse_LocationUri, *v.LocationUri)
+	}
+	serializeEc2SecurityGroupArnList(s, schemas.DescribeLocationFsxLustreResponse_SecurityGroupArns, v.SecurityGroupArns)
+}
+func (v *DescribeLocationFsxLustreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLocationFsxLustreResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLocationFsxLustreResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeLocationFsxLustreResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeLocationFsxLustreResponse_LocationArn:
+			v.LocationArn = new(string)
+			return d.ReadString(schemas.DescribeLocationFsxLustreResponse_LocationArn, v.LocationArn)
+		case schemas.DescribeLocationFsxLustreResponse_LocationUri:
+			v.LocationUri = new(string)
+			return d.ReadString(schemas.DescribeLocationFsxLustreResponse_LocationUri, v.LocationUri)
+		case schemas.DescribeLocationFsxLustreResponse_SecurityGroupArns:
+			return deserializeEc2SecurityGroupArnList(d, schemas.DescribeLocationFsxLustreResponse_SecurityGroupArns, &v.SecurityGroupArns)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLocationFsxLustreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLocationFsxLustre{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLocationFsxLustre, schemas.DescribeLocationFsxLustreRequest, schemas.DescribeLocationFsxLustreResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLocationFsxLustre{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLocationFsxLustre, schemas.DescribeLocationFsxLustreRequest, schemas.DescribeLocationFsxLustreResponse), output: &DescribeLocationFsxLustreOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package cognitoidentityprovider
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,27 @@ type ListUsersInGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUsersInGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUsersInGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUsersInGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupName != nil {
+		s.WriteString(schemas.ListUsersInGroupRequest_GroupName, *v.GroupName)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListUsersInGroupRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUsersInGroupRequest_NextToken, *v.NextToken)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.ListUsersInGroupRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 type ListUsersInGroupOutput struct {
 
 	// The identifier that Amazon Cognito returned with the previous request to this
@@ -88,13 +111,35 @@ type ListUsersInGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUsersInGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUsersInGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUsersInGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUsersInGroupResponse_NextToken, *v.NextToken)
+	}
+	serializeUsersListType(s, schemas.ListUsersInGroupResponse_Users, v.Users)
+}
+func (v *ListUsersInGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUsersInGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUsersInGroupResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUsersInGroupResponse_NextToken, v.NextToken)
+		case schemas.ListUsersInGroupResponse_Users:
+			return deserializeUsersListType(d, schemas.ListUsersInGroupResponse_Users, &v.Users)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUsersInGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListUsersInGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUsersInGroup, schemas.ListUsersInGroupRequest, schemas.ListUsersInGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListUsersInGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUsersInGroup, schemas.ListUsersInGroupRequest, schemas.ListUsersInGroupResponse), output: &ListUsersInGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

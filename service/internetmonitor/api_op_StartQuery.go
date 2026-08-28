@@ -4,7 +4,9 @@ package internetmonitor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -108,6 +110,31 @@ type StartQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartQueryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.StartQueryInput_EndTime, *v.EndTime)
+	}
+	serializeFilterParameters(s, schemas.StartQueryInput_FilterParameters, v.FilterParameters)
+	if v.LinkedAccountId != nil {
+		s.WriteString(schemas.StartQueryInput_LinkedAccountId, *v.LinkedAccountId)
+	}
+	if v.MonitorName != nil {
+		s.WriteString(schemas.StartQueryInput_MonitorName, *v.MonitorName)
+	}
+	if v.QueryType != "" {
+		s.WriteString(schemas.StartQueryInput_QueryType, string(v.QueryType))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.StartQueryInput_StartTime, *v.StartTime)
+	}
+}
+
 type StartQueryOutput struct {
 
 	// The internally-generated identifier of a specific query.
@@ -121,13 +148,32 @@ type StartQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartQueryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryId != nil {
+		s.WriteString(schemas.StartQueryOutput_QueryId, *v.QueryId)
+	}
+}
+func (v *StartQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartQueryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartQueryOutput_QueryId:
+			v.QueryId = new(string)
+			return d.ReadString(schemas.StartQueryOutput_QueryId, v.QueryId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartQuery, schemas.StartQueryInput, schemas.StartQueryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartQuery, schemas.StartQueryInput, schemas.StartQueryOutput), output: &StartQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

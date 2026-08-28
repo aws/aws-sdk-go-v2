@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DeleteProvisioningTemplateVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProvisioningTemplateVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProvisioningTemplateVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProvisioningTemplateVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateName != nil {
+		s.WriteString(schemas.DeleteProvisioningTemplateVersionRequest_templateName, *v.TemplateName)
+	}
+	if v.VersionId != nil {
+		s.WriteInt32(schemas.DeleteProvisioningTemplateVersionRequest_versionId, *v.VersionId)
+	}
+}
+
 type DeleteProvisioningTemplateVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +66,26 @@ type DeleteProvisioningTemplateVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProvisioningTemplateVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProvisioningTemplateVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProvisioningTemplateVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteProvisioningTemplateVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteProvisioningTemplateVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteProvisioningTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteProvisioningTemplateVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProvisioningTemplateVersion, schemas.DeleteProvisioningTemplateVersionRequest, schemas.DeleteProvisioningTemplateVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteProvisioningTemplateVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProvisioningTemplateVersion, schemas.DeleteProvisioningTemplateVersionRequest, schemas.DeleteProvisioningTemplateVersionResponse), output: &DeleteProvisioningTemplateVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

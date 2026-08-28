@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,19 @@ type BatchDetectKeyPhrasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDetectKeyPhrasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetectKeyPhrasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetectKeyPhrasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.BatchDetectKeyPhrasesRequest_LanguageCode, string(v.LanguageCode))
+	}
+	serializeCustomerInputStringList(s, schemas.BatchDetectKeyPhrasesRequest_TextList, v.TextList)
+}
+
 type BatchDetectKeyPhrasesOutput struct {
 
 	// A list containing one object for each document that contained an error. The
@@ -66,13 +81,32 @@ type BatchDetectKeyPhrasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDetectKeyPhrasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetectKeyPhrasesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetectKeyPhrasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchItemErrorList(s, schemas.BatchDetectKeyPhrasesResponse_ErrorList, v.ErrorList)
+	serializeListOfDetectKeyPhrasesResult(s, schemas.BatchDetectKeyPhrasesResponse_ResultList, v.ResultList)
+}
+func (v *BatchDetectKeyPhrasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDetectKeyPhrasesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDetectKeyPhrasesResponse_ErrorList:
+			return deserializeBatchItemErrorList(d, schemas.BatchDetectKeyPhrasesResponse_ErrorList, &v.ErrorList)
+		case schemas.BatchDetectKeyPhrasesResponse_ResultList:
+			return deserializeListOfDetectKeyPhrasesResult(d, schemas.BatchDetectKeyPhrasesResponse_ResultList, &v.ResultList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDetectKeyPhrasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDetectKeyPhrases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDetectKeyPhrases, schemas.BatchDetectKeyPhrasesRequest, schemas.BatchDetectKeyPhrasesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchDetectKeyPhrases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDetectKeyPhrases, schemas.BatchDetectKeyPhrasesRequest, schemas.BatchDetectKeyPhrasesResponse), output: &BatchDetectKeyPhrasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

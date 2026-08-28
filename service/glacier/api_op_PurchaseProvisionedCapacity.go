@@ -5,6 +5,8 @@ package glacier
 import (
 	"context"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type PurchaseProvisionedCapacityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PurchaseProvisionedCapacityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurchaseProvisionedCapacityInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurchaseProvisionedCapacityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.PurchaseProvisionedCapacityInput_accountId, *v.AccountId)
+	}
+}
+
 type PurchaseProvisionedCapacityOutput struct {
 
 	// The ID that identifies the provisioned capacity unit.
@@ -48,13 +62,32 @@ type PurchaseProvisionedCapacityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PurchaseProvisionedCapacityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurchaseProvisionedCapacityOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurchaseProvisionedCapacityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityId != nil {
+		s.WriteString(schemas.PurchaseProvisionedCapacityOutput_capacityId, *v.CapacityId)
+	}
+}
+func (v *PurchaseProvisionedCapacityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PurchaseProvisionedCapacityOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PurchaseProvisionedCapacityOutput_capacityId:
+			v.CapacityId = new(string)
+			return d.ReadString(schemas.PurchaseProvisionedCapacityOutput_capacityId, v.CapacityId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPurchaseProvisionedCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPurchaseProvisionedCapacity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PurchaseProvisionedCapacity, schemas.PurchaseProvisionedCapacityInput, schemas.PurchaseProvisionedCapacityOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPurchaseProvisionedCapacity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PurchaseProvisionedCapacity, schemas.PurchaseProvisionedCapacityInput, schemas.PurchaseProvisionedCapacityOutput), output: &PurchaseProvisionedCapacityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

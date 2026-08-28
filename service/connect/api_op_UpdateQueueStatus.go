@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type UpdateQueueStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateQueueStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateQueueStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQueueStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateQueueStatusRequest_InstanceId, *v.InstanceId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.UpdateQueueStatusRequest_QueueId, *v.QueueId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateQueueStatusRequest_Status, string(v.Status))
+	}
+}
+
 type UpdateQueueStatusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +74,26 @@ type UpdateQueueStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateQueueStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQueueStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateQueueStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateQueueStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateQueueStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQueueStatus, schemas.UpdateQueueStatusRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateQueueStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQueueStatus, schemas.UpdateQueueStatusRequest, nil), output: &UpdateQueueStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

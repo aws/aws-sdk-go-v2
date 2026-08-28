@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeMonitoringScheduleInput struct {
 	MonitoringScheduleName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeMonitoringScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMonitoringScheduleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMonitoringScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonitoringScheduleName != nil {
+		s.WriteString(schemas.DescribeMonitoringScheduleRequest_MonitoringScheduleName, *v.MonitoringScheduleName)
+	}
 }
 
 type DescribeMonitoringScheduleOutput struct {
@@ -96,13 +110,98 @@ type DescribeMonitoringScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMonitoringScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMonitoringScheduleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMonitoringScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeMonitoringScheduleResponse_CreationTime, *v.CreationTime)
+	}
+	if v.EndpointName != nil {
+		s.WriteString(schemas.DescribeMonitoringScheduleResponse_EndpointName, *v.EndpointName)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeMonitoringScheduleResponse_FailureReason, *v.FailureReason)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeMonitoringScheduleResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.LastMonitoringExecutionSummary != nil {
+		s.WriteStruct(schemas.DescribeMonitoringScheduleResponse_LastMonitoringExecutionSummary)
+		v.LastMonitoringExecutionSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MonitoringScheduleArn != nil {
+		s.WriteString(schemas.DescribeMonitoringScheduleResponse_MonitoringScheduleArn, *v.MonitoringScheduleArn)
+	}
+	if v.MonitoringScheduleConfig != nil {
+		s.WriteStruct(schemas.DescribeMonitoringScheduleResponse_MonitoringScheduleConfig)
+		v.MonitoringScheduleConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MonitoringScheduleName != nil {
+		s.WriteString(schemas.DescribeMonitoringScheduleResponse_MonitoringScheduleName, *v.MonitoringScheduleName)
+	}
+	if v.MonitoringScheduleStatus != "" {
+		s.WriteString(schemas.DescribeMonitoringScheduleResponse_MonitoringScheduleStatus, string(v.MonitoringScheduleStatus))
+	}
+	if v.MonitoringType != "" {
+		s.WriteString(schemas.DescribeMonitoringScheduleResponse_MonitoringType, string(v.MonitoringType))
+	}
+}
+func (v *DescribeMonitoringScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMonitoringScheduleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMonitoringScheduleResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeMonitoringScheduleResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeMonitoringScheduleResponse_EndpointName:
+			v.EndpointName = new(string)
+			return d.ReadString(schemas.DescribeMonitoringScheduleResponse_EndpointName, v.EndpointName)
+		case schemas.DescribeMonitoringScheduleResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeMonitoringScheduleResponse_FailureReason, v.FailureReason)
+		case schemas.DescribeMonitoringScheduleResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeMonitoringScheduleResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeMonitoringScheduleResponse_LastMonitoringExecutionSummary:
+			v.LastMonitoringExecutionSummary = &types.MonitoringExecutionSummary{}
+			return v.LastMonitoringExecutionSummary.Deserialize(d)
+		case schemas.DescribeMonitoringScheduleResponse_MonitoringScheduleArn:
+			v.MonitoringScheduleArn = new(string)
+			return d.ReadString(schemas.DescribeMonitoringScheduleResponse_MonitoringScheduleArn, v.MonitoringScheduleArn)
+		case schemas.DescribeMonitoringScheduleResponse_MonitoringScheduleConfig:
+			v.MonitoringScheduleConfig = &types.MonitoringScheduleConfig{}
+			return v.MonitoringScheduleConfig.Deserialize(d)
+		case schemas.DescribeMonitoringScheduleResponse_MonitoringScheduleName:
+			v.MonitoringScheduleName = new(string)
+			return d.ReadString(schemas.DescribeMonitoringScheduleResponse_MonitoringScheduleName, v.MonitoringScheduleName)
+		case schemas.DescribeMonitoringScheduleResponse_MonitoringScheduleStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeMonitoringScheduleResponse_MonitoringScheduleStatus, &ev); err != nil {
+				return err
+			}
+			v.MonitoringScheduleStatus = types.ScheduleStatus(ev)
+			return nil
+		case schemas.DescribeMonitoringScheduleResponse_MonitoringType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeMonitoringScheduleResponse_MonitoringType, &ev); err != nil {
+				return err
+			}
+			v.MonitoringType = types.MonitoringType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMonitoringScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMonitoringSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMonitoringSchedule, schemas.DescribeMonitoringScheduleRequest, schemas.DescribeMonitoringScheduleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeMonitoringSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMonitoringSchedule, schemas.DescribeMonitoringScheduleRequest, schemas.DescribeMonitoringScheduleResponse), output: &DescribeMonitoringScheduleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

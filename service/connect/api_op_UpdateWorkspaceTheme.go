@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,26 @@ type UpdateWorkspaceThemeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkspaceThemeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkspaceThemeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkspaceThemeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateWorkspaceThemeRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Theme != nil {
+		s.WriteStruct(schemas.UpdateWorkspaceThemeRequest_Theme)
+		v.Theme.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.UpdateWorkspaceThemeRequest_WorkspaceId, *v.WorkspaceId)
+	}
+}
+
 type UpdateWorkspaceThemeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +74,26 @@ type UpdateWorkspaceThemeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkspaceThemeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkspaceThemeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkspaceThemeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateWorkspaceThemeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkspaceThemeResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkspaceThemeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWorkspaceTheme{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkspaceTheme, schemas.UpdateWorkspaceThemeRequest, schemas.UpdateWorkspaceThemeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWorkspaceTheme{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkspaceTheme, schemas.UpdateWorkspaceThemeRequest, schemas.UpdateWorkspaceThemeResponse), output: &UpdateWorkspaceThemeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

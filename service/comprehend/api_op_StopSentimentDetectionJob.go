@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,18 @@ type StopSentimentDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopSentimentDetectionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopSentimentDetectionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopSentimentDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopSentimentDetectionJobRequest_JobId, *v.JobId)
+	}
+}
+
 type StopSentimentDetectionJobOutput struct {
 
 	// The identifier of the sentiment detection job to stop.
@@ -61,13 +75,42 @@ type StopSentimentDetectionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopSentimentDetectionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopSentimentDetectionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopSentimentDetectionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopSentimentDetectionJobResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.StopSentimentDetectionJobResponse_JobStatus, string(v.JobStatus))
+	}
+}
+func (v *StopSentimentDetectionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopSentimentDetectionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopSentimentDetectionJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StopSentimentDetectionJobResponse_JobId, v.JobId)
+		case schemas.StopSentimentDetectionJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.StopSentimentDetectionJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopSentimentDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopSentimentDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopSentimentDetectionJob, schemas.StopSentimentDetectionJobRequest, schemas.StopSentimentDetectionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopSentimentDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopSentimentDetectionJob, schemas.StopSentimentDetectionJobRequest, schemas.StopSentimentDetectionJobResponse), output: &StopSentimentDetectionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

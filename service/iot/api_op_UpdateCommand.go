@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -43,6 +45,27 @@ type UpdateCommandInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCommandInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCommandRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCommandInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommandId != nil {
+		s.WriteString(schemas.UpdateCommandRequest_commandId, *v.CommandId)
+	}
+	if v.Deprecated != nil {
+		s.WriteBool(schemas.UpdateCommandRequest_deprecated, *v.Deprecated)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateCommandRequest_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateCommandRequest_displayName, *v.DisplayName)
+	}
+}
+
 type UpdateCommandOutput struct {
 
 	// The unique identifier of the command.
@@ -67,13 +90,56 @@ type UpdateCommandOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCommandOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCommandResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCommandOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommandId != nil {
+		s.WriteString(schemas.UpdateCommandResponse_commandId, *v.CommandId)
+	}
+	if v.Deprecated != nil {
+		s.WriteBool(schemas.UpdateCommandResponse_deprecated, *v.Deprecated)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateCommandResponse_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateCommandResponse_displayName, *v.DisplayName)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.UpdateCommandResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+}
+func (v *UpdateCommandOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCommandResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCommandResponse_commandId:
+			v.CommandId = new(string)
+			return d.ReadString(schemas.UpdateCommandResponse_commandId, v.CommandId)
+		case schemas.UpdateCommandResponse_deprecated:
+			v.Deprecated = new(bool)
+			return d.ReadBool(schemas.UpdateCommandResponse_deprecated, v.Deprecated)
+		case schemas.UpdateCommandResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateCommandResponse_description, v.Description)
+		case schemas.UpdateCommandResponse_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.UpdateCommandResponse_displayName, v.DisplayName)
+		case schemas.UpdateCommandResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateCommandResponse_lastUpdatedAt, v.LastUpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCommandMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCommand{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCommand, schemas.UpdateCommandRequest, schemas.UpdateCommandResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCommand{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCommand, schemas.UpdateCommandRequest, schemas.UpdateCommandResponse), output: &UpdateCommandOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

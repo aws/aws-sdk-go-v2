@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -92,6 +94,39 @@ type CreateSecurityProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSecurityProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSecurityProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSecurityProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowedAccessControlHierarchyGroupId != nil {
+		s.WriteString(schemas.CreateSecurityProfileRequest_AllowedAccessControlHierarchyGroupId, *v.AllowedAccessControlHierarchyGroupId)
+	}
+	serializeAllowedAccessControlTags(s, schemas.CreateSecurityProfileRequest_AllowedAccessControlTags, v.AllowedAccessControlTags)
+	serializeAllowedFlowModules(s, schemas.CreateSecurityProfileRequest_AllowedFlowModules, v.AllowedFlowModules)
+	serializeApplications(s, schemas.CreateSecurityProfileRequest_Applications, v.Applications)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateSecurityProfileRequest_Description, *v.Description)
+	}
+	if v.GranularAccessControlConfiguration != nil {
+		s.WriteStruct(schemas.CreateSecurityProfileRequest_GranularAccessControlConfiguration)
+		v.GranularAccessControlConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeHierarchyRestrictedResourceList(s, schemas.CreateSecurityProfileRequest_HierarchyRestrictedResources, v.HierarchyRestrictedResources)
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateSecurityProfileRequest_InstanceId, *v.InstanceId)
+	}
+	serializePermissionsList(s, schemas.CreateSecurityProfileRequest_Permissions, v.Permissions)
+	if v.SecurityProfileName != nil {
+		s.WriteString(schemas.CreateSecurityProfileRequest_SecurityProfileName, *v.SecurityProfileName)
+	}
+	serializeTagRestrictedResourceList(s, schemas.CreateSecurityProfileRequest_TagRestrictedResources, v.TagRestrictedResources)
+	serializeTagMap(s, schemas.CreateSecurityProfileRequest_Tags, v.Tags)
+}
+
 type CreateSecurityProfileOutput struct {
 
 	// The Amazon Resource Name (ARN) for the security profile.
@@ -106,13 +141,38 @@ type CreateSecurityProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSecurityProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSecurityProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSecurityProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecurityProfileArn != nil {
+		s.WriteString(schemas.CreateSecurityProfileResponse_SecurityProfileArn, *v.SecurityProfileArn)
+	}
+	if v.SecurityProfileId != nil {
+		s.WriteString(schemas.CreateSecurityProfileResponse_SecurityProfileId, *v.SecurityProfileId)
+	}
+}
+func (v *CreateSecurityProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSecurityProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSecurityProfileResponse_SecurityProfileArn:
+			v.SecurityProfileArn = new(string)
+			return d.ReadString(schemas.CreateSecurityProfileResponse_SecurityProfileArn, v.SecurityProfileArn)
+		case schemas.CreateSecurityProfileResponse_SecurityProfileId:
+			v.SecurityProfileId = new(string)
+			return d.ReadString(schemas.CreateSecurityProfileResponse_SecurityProfileId, v.SecurityProfileId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSecurityProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSecurityProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecurityProfile, schemas.CreateSecurityProfileRequest, schemas.CreateSecurityProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSecurityProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecurityProfile, schemas.CreateSecurityProfileRequest, schemas.CreateSecurityProfileResponse), output: &CreateSecurityProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

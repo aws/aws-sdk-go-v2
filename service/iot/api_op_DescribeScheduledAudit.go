@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DescribeScheduledAuditInput struct {
 	ScheduledAuditName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeScheduledAuditInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeScheduledAuditRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScheduledAuditInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScheduledAuditName != nil {
+		s.WriteString(schemas.DescribeScheduledAuditRequest_scheduledAuditName, *v.ScheduledAuditName)
+	}
 }
 
 type DescribeScheduledAuditOutput struct {
@@ -71,13 +85,67 @@ type DescribeScheduledAuditOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScheduledAuditOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeScheduledAuditResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScheduledAuditOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DayOfMonth != nil {
+		s.WriteString(schemas.DescribeScheduledAuditResponse_dayOfMonth, *v.DayOfMonth)
+	}
+	if v.DayOfWeek != "" {
+		s.WriteString(schemas.DescribeScheduledAuditResponse_dayOfWeek, string(v.DayOfWeek))
+	}
+	if v.Frequency != "" {
+		s.WriteString(schemas.DescribeScheduledAuditResponse_frequency, string(v.Frequency))
+	}
+	if v.ScheduledAuditArn != nil {
+		s.WriteString(schemas.DescribeScheduledAuditResponse_scheduledAuditArn, *v.ScheduledAuditArn)
+	}
+	if v.ScheduledAuditName != nil {
+		s.WriteString(schemas.DescribeScheduledAuditResponse_scheduledAuditName, *v.ScheduledAuditName)
+	}
+	serializeTargetAuditCheckNames(s, schemas.DescribeScheduledAuditResponse_targetCheckNames, v.TargetCheckNames)
+}
+func (v *DescribeScheduledAuditOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeScheduledAuditResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeScheduledAuditResponse_dayOfMonth:
+			v.DayOfMonth = new(string)
+			return d.ReadString(schemas.DescribeScheduledAuditResponse_dayOfMonth, v.DayOfMonth)
+		case schemas.DescribeScheduledAuditResponse_dayOfWeek:
+			var ev string
+			if err := d.ReadString(schemas.DescribeScheduledAuditResponse_dayOfWeek, &ev); err != nil {
+				return err
+			}
+			v.DayOfWeek = types.DayOfWeek(ev)
+			return nil
+		case schemas.DescribeScheduledAuditResponse_frequency:
+			var ev string
+			if err := d.ReadString(schemas.DescribeScheduledAuditResponse_frequency, &ev); err != nil {
+				return err
+			}
+			v.Frequency = types.AuditFrequency(ev)
+			return nil
+		case schemas.DescribeScheduledAuditResponse_scheduledAuditArn:
+			v.ScheduledAuditArn = new(string)
+			return d.ReadString(schemas.DescribeScheduledAuditResponse_scheduledAuditArn, v.ScheduledAuditArn)
+		case schemas.DescribeScheduledAuditResponse_scheduledAuditName:
+			v.ScheduledAuditName = new(string)
+			return d.ReadString(schemas.DescribeScheduledAuditResponse_scheduledAuditName, v.ScheduledAuditName)
+		case schemas.DescribeScheduledAuditResponse_targetCheckNames:
+			return deserializeTargetAuditCheckNames(d, schemas.DescribeScheduledAuditResponse_targetCheckNames, &v.TargetCheckNames)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeScheduledAuditMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeScheduledAudit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScheduledAudit, schemas.DescribeScheduledAuditRequest, schemas.DescribeScheduledAuditResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeScheduledAudit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScheduledAudit, schemas.DescribeScheduledAuditRequest, schemas.DescribeScheduledAuditResponse), output: &DescribeScheduledAuditOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

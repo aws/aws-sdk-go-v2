@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,22 @@ type BatchDeleteDataTableValueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteDataTableValueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteDataTableValueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteDataTableValueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataTableId != nil {
+		s.WriteString(schemas.BatchDeleteDataTableValueRequest_DataTableId, *v.DataTableId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.BatchDeleteDataTableValueRequest_InstanceId, *v.InstanceId)
+	}
+	serializeDataTableDeleteValueIdentifierList(s, schemas.BatchDeleteDataTableValueRequest_Values, v.Values)
+}
+
 type BatchDeleteDataTableValueOutput struct {
 
 	// A list of values that failed to be deleted with error messages explaining the
@@ -69,13 +87,32 @@ type BatchDeleteDataTableValueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteDataTableValueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteDataTableValueResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteDataTableValueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchDeleteDataTableValueFailureResultList(s, schemas.BatchDeleteDataTableValueResponse_Failed, v.Failed)
+	serializeBatchDeleteDataTableValueSuccessResultList(s, schemas.BatchDeleteDataTableValueResponse_Successful, v.Successful)
+}
+func (v *BatchDeleteDataTableValueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteDataTableValueResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteDataTableValueResponse_Failed:
+			return deserializeBatchDeleteDataTableValueFailureResultList(d, schemas.BatchDeleteDataTableValueResponse_Failed, &v.Failed)
+		case schemas.BatchDeleteDataTableValueResponse_Successful:
+			return deserializeBatchDeleteDataTableValueSuccessResultList(d, schemas.BatchDeleteDataTableValueResponse_Successful, &v.Successful)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteDataTableValueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteDataTableValue{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteDataTableValue, schemas.BatchDeleteDataTableValueRequest, schemas.BatchDeleteDataTableValueResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeleteDataTableValue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteDataTableValue, schemas.BatchDeleteDataTableValueRequest, schemas.BatchDeleteDataTableValueResponse), output: &BatchDeleteDataTableValueOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

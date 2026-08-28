@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,18 @@ type DescribePhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePhoneNumberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePhoneNumberRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PhoneNumberId != nil {
+		s.WriteString(schemas.DescribePhoneNumberRequest_PhoneNumberId, *v.PhoneNumberId)
+	}
+}
+
 type DescribePhoneNumberOutput struct {
 
 	// Information about a phone number that's been claimed to your Connect Customer
@@ -56,13 +70,34 @@ type DescribePhoneNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePhoneNumberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePhoneNumberResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePhoneNumberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClaimedPhoneNumberSummary != nil {
+		s.WriteStruct(schemas.DescribePhoneNumberResponse_ClaimedPhoneNumberSummary)
+		v.ClaimedPhoneNumberSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribePhoneNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePhoneNumberResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePhoneNumberResponse_ClaimedPhoneNumberSummary:
+			v.ClaimedPhoneNumberSummary = &types.ClaimedPhoneNumberSummary{}
+			return v.ClaimedPhoneNumberSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribePhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePhoneNumber, schemas.DescribePhoneNumberRequest, schemas.DescribePhoneNumberResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribePhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePhoneNumber, schemas.DescribePhoneNumberRequest, schemas.DescribePhoneNumberResponse), output: &DescribePhoneNumberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DeleteConfiguredAudienceModelAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConfiguredAudienceModelAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConfiguredAudienceModelAssociationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConfiguredAudienceModelAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfiguredAudienceModelAssociationIdentifier != nil {
+		s.WriteString(schemas.DeleteConfiguredAudienceModelAssociationInput_configuredAudienceModelAssociationIdentifier, *v.ConfiguredAudienceModelAssociationIdentifier)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.DeleteConfiguredAudienceModelAssociationInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+
 type DeleteConfiguredAudienceModelAssociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +65,26 @@ type DeleteConfiguredAudienceModelAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConfiguredAudienceModelAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConfiguredAudienceModelAssociationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConfiguredAudienceModelAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteConfiguredAudienceModelAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteConfiguredAudienceModelAssociationOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteConfiguredAudienceModelAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteConfiguredAudienceModelAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConfiguredAudienceModelAssociation, schemas.DeleteConfiguredAudienceModelAssociationInput, schemas.DeleteConfiguredAudienceModelAssociationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteConfiguredAudienceModelAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConfiguredAudienceModelAssociation, schemas.DeleteConfiguredAudienceModelAssociationInput, schemas.DeleteConfiguredAudienceModelAssociationOutput), output: &DeleteConfiguredAudienceModelAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

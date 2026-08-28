@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListMitigationActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMitigationActionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMitigationActionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMitigationActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionType != "" {
+		s.WriteString(schemas.ListMitigationActionsRequest_actionType, string(v.ActionType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMitigationActionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMitigationActionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListMitigationActionsOutput struct {
 
 	// A set of actions that matched the specified filter criteria.
@@ -58,13 +78,35 @@ type ListMitigationActionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMitigationActionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMitigationActionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMitigationActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMitigationActionIdentifierList(s, schemas.ListMitigationActionsResponse_actionIdentifiers, v.ActionIdentifiers)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMitigationActionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListMitigationActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMitigationActionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMitigationActionsResponse_actionIdentifiers:
+			return deserializeMitigationActionIdentifierList(d, schemas.ListMitigationActionsResponse_actionIdentifiers, &v.ActionIdentifiers)
+		case schemas.ListMitigationActionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMitigationActionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMitigationActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMitigationActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMitigationActions, schemas.ListMitigationActionsRequest, schemas.ListMitigationActionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMitigationActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMitigationActions, schemas.ListMitigationActionsRequest, schemas.ListMitigationActionsResponse), output: &ListMitigationActionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

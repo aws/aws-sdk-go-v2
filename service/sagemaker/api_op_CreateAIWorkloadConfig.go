@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,25 @@ type CreateAIWorkloadConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAIWorkloadConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAIWorkloadConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAIWorkloadConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIWorkloadConfigName != nil {
+		s.WriteString(schemas.CreateAIWorkloadConfigRequest_AIWorkloadConfigName, *v.AIWorkloadConfigName)
+	}
+	if v.AIWorkloadConfigs != nil {
+		s.WriteStruct(schemas.CreateAIWorkloadConfigRequest_AIWorkloadConfigs)
+		v.AIWorkloadConfigs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAIDatasetConfig(s, schemas.CreateAIWorkloadConfigRequest_DatasetConfig, v.DatasetConfig)
+	serializeTagList(s, schemas.CreateAIWorkloadConfigRequest_Tags, v.Tags)
+}
+
 type CreateAIWorkloadConfigOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created AI workload configuration.
@@ -66,13 +87,32 @@ type CreateAIWorkloadConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAIWorkloadConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAIWorkloadConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAIWorkloadConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIWorkloadConfigArn != nil {
+		s.WriteString(schemas.CreateAIWorkloadConfigResponse_AIWorkloadConfigArn, *v.AIWorkloadConfigArn)
+	}
+}
+func (v *CreateAIWorkloadConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAIWorkloadConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAIWorkloadConfigResponse_AIWorkloadConfigArn:
+			v.AIWorkloadConfigArn = new(string)
+			return d.ReadString(schemas.CreateAIWorkloadConfigResponse_AIWorkloadConfigArn, v.AIWorkloadConfigArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAIWorkloadConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAIWorkloadConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAIWorkloadConfig, schemas.CreateAIWorkloadConfigRequest, schemas.CreateAIWorkloadConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAIWorkloadConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAIWorkloadConfig, schemas.CreateAIWorkloadConfigRequest, schemas.CreateAIWorkloadConfigResponse), output: &CreateAIWorkloadConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

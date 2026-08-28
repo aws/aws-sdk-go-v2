@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,29 @@ type GetOrganizationConfigRuleDetailedStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOrganizationConfigRuleDetailedStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOrganizationConfigRuleDetailedStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOrganizationConfigRuleDetailedStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.GetOrganizationConfigRuleDetailedStatusRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.GetOrganizationConfigRuleDetailedStatusRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetOrganizationConfigRuleDetailedStatusRequest_NextToken, *v.NextToken)
+	}
+	if v.OrganizationConfigRuleName != nil {
+		s.WriteString(schemas.GetOrganizationConfigRuleDetailedStatusRequest_OrganizationConfigRuleName, *v.OrganizationConfigRuleName)
+	}
+}
+
 type GetOrganizationConfigRuleDetailedStatusOutput struct {
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -64,13 +89,35 @@ type GetOrganizationConfigRuleDetailedStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOrganizationConfigRuleDetailedStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOrganizationConfigRuleDetailedStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOrganizationConfigRuleDetailedStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetOrganizationConfigRuleDetailedStatusResponse_NextToken, *v.NextToken)
+	}
+	serializeOrganizationConfigRuleDetailedStatus(s, schemas.GetOrganizationConfigRuleDetailedStatusResponse_OrganizationConfigRuleDetailedStatus, v.OrganizationConfigRuleDetailedStatus)
+}
+func (v *GetOrganizationConfigRuleDetailedStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOrganizationConfigRuleDetailedStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOrganizationConfigRuleDetailedStatusResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetOrganizationConfigRuleDetailedStatusResponse_NextToken, v.NextToken)
+		case schemas.GetOrganizationConfigRuleDetailedStatusResponse_OrganizationConfigRuleDetailedStatus:
+			return deserializeOrganizationConfigRuleDetailedStatus(d, schemas.GetOrganizationConfigRuleDetailedStatusResponse_OrganizationConfigRuleDetailedStatus, &v.OrganizationConfigRuleDetailedStatus)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOrganizationConfigRuleDetailedStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetOrganizationConfigRuleDetailedStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOrganizationConfigRuleDetailedStatus, schemas.GetOrganizationConfigRuleDetailedStatusRequest, schemas.GetOrganizationConfigRuleDetailedStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetOrganizationConfigRuleDetailedStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOrganizationConfigRuleDetailedStatus, schemas.GetOrganizationConfigRuleDetailedStatusRequest, schemas.GetOrganizationConfigRuleDetailedStatusResponse), output: &GetOrganizationConfigRuleDetailedStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

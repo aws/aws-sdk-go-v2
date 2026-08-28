@@ -5,6 +5,8 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -77,6 +79,33 @@ type TransferContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TransferContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransferContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TransferContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.TransferContactRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ContactFlowId != nil {
+		s.WriteString(schemas.TransferContactRequest_ContactFlowId, *v.ContactFlowId)
+	}
+	if v.ContactId != nil {
+		s.WriteString(schemas.TransferContactRequest_ContactId, *v.ContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.TransferContactRequest_InstanceId, *v.InstanceId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.TransferContactRequest_QueueId, *v.QueueId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.TransferContactRequest_UserId, *v.UserId)
+	}
+}
+
 type TransferContactOutput struct {
 
 	// The Amazon Resource Name (ARN) of the contact.
@@ -91,13 +120,38 @@ type TransferContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TransferContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransferContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TransferContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactArn != nil {
+		s.WriteString(schemas.TransferContactResponse_ContactArn, *v.ContactArn)
+	}
+	if v.ContactId != nil {
+		s.WriteString(schemas.TransferContactResponse_ContactId, *v.ContactId)
+	}
+}
+func (v *TransferContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TransferContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TransferContactResponse_ContactArn:
+			v.ContactArn = new(string)
+			return d.ReadString(schemas.TransferContactResponse_ContactArn, v.ContactArn)
+		case schemas.TransferContactResponse_ContactId:
+			v.ContactId = new(string)
+			return d.ReadString(schemas.TransferContactResponse_ContactId, v.ContactId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTransferContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTransferContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TransferContact, schemas.TransferContactRequest, schemas.TransferContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTransferContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TransferContact, schemas.TransferContactRequest, schemas.TransferContactResponse), output: &TransferContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ListProvisioningTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProvisioningTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProvisioningTemplatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProvisioningTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProvisioningTemplatesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProvisioningTemplatesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListProvisioningTemplatesOutput struct {
 
 	// A token to retrieve the next set of results.
@@ -54,13 +71,35 @@ type ListProvisioningTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProvisioningTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProvisioningTemplatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProvisioningTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProvisioningTemplatesResponse_nextToken, *v.NextToken)
+	}
+	serializeProvisioningTemplateListing(s, schemas.ListProvisioningTemplatesResponse_templates, v.Templates)
+}
+func (v *ListProvisioningTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProvisioningTemplatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProvisioningTemplatesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProvisioningTemplatesResponse_nextToken, v.NextToken)
+		case schemas.ListProvisioningTemplatesResponse_templates:
+			return deserializeProvisioningTemplateListing(d, schemas.ListProvisioningTemplatesResponse_templates, &v.Templates)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProvisioningTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProvisioningTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProvisioningTemplates, schemas.ListProvisioningTemplatesRequest, schemas.ListProvisioningTemplatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProvisioningTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProvisioningTemplates, schemas.ListProvisioningTemplatesRequest, schemas.ListProvisioningTemplatesResponse), output: &ListProvisioningTemplatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

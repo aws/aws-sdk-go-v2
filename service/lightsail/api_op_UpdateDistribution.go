@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,46 @@ type UpdateDistributionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDistributionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDistributionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDistributionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheBehaviorSettings != nil {
+		s.WriteStruct(schemas.UpdateDistributionRequest_cacheBehaviorSettings)
+		v.CacheBehaviorSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCacheBehaviorList(s, schemas.UpdateDistributionRequest_cacheBehaviors, v.CacheBehaviors)
+	if v.CertificateName != nil {
+		s.WriteString(schemas.UpdateDistributionRequest_certificateName, *v.CertificateName)
+	}
+	if v.DefaultCacheBehavior != nil {
+		s.WriteStruct(schemas.UpdateDistributionRequest_defaultCacheBehavior)
+		v.DefaultCacheBehavior.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DistributionName != nil {
+		s.WriteString(schemas.UpdateDistributionRequest_distributionName, *v.DistributionName)
+	}
+	if v.IsEnabled != nil {
+		s.WriteBool(schemas.UpdateDistributionRequest_isEnabled, *v.IsEnabled)
+	}
+	if v.Origin != nil {
+		s.WriteStruct(schemas.UpdateDistributionRequest_origin)
+		v.Origin.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UseDefaultCertificate != nil {
+		s.WriteBool(schemas.UpdateDistributionRequest_useDefaultCertificate, *v.UseDefaultCertificate)
+	}
+	if v.ViewerMinimumTlsProtocolVersion != "" {
+		s.WriteString(schemas.UpdateDistributionRequest_viewerMinimumTlsProtocolVersion, string(v.ViewerMinimumTlsProtocolVersion))
+	}
+}
+
 type UpdateDistributionOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -95,13 +137,34 @@ type UpdateDistributionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDistributionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDistributionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDistributionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Operation != nil {
+		s.WriteStruct(schemas.UpdateDistributionResult_operation)
+		v.Operation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateDistributionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDistributionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDistributionResult_operation:
+			v.Operation = &types.Operation{}
+			return v.Operation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDistribution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDistribution, schemas.UpdateDistributionRequest, schemas.UpdateDistributionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDistribution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDistribution, schemas.UpdateDistributionRequest, schemas.UpdateDistributionResult), output: &UpdateDistributionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

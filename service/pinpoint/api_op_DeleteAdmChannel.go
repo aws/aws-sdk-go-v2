@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteAdmChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAdmChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAdmChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAdmChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.DeleteAdmChannelRequest_ApplicationId, *v.ApplicationId)
+	}
+}
+
 type DeleteAdmChannelOutput struct {
 
 	// Provides information about the status and settings of the ADM (Amazon Device
@@ -50,13 +64,34 @@ type DeleteAdmChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAdmChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAdmChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAdmChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ADMChannelResponse != nil {
+		s.WriteStruct(schemas.DeleteAdmChannelResponse_ADMChannelResponse)
+		v.ADMChannelResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteAdmChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAdmChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAdmChannelResponse_ADMChannelResponse:
+			v.ADMChannelResponse = &types.ADMChannelResponse{}
+			return v.ADMChannelResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAdmChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAdmChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAdmChannel, schemas.DeleteAdmChannelRequest, schemas.DeleteAdmChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAdmChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAdmChannel, schemas.DeleteAdmChannelRequest, schemas.DeleteAdmChannelResponse), output: &DeleteAdmChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

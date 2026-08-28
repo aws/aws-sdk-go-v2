@@ -5,7 +5,11 @@ package wellarchitected
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/wellarchitected/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -43,6 +47,21 @@ type GetAgentRecommendationGenerationInput struct {
 	ProfileArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetAgentRecommendationGenerationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentRecommendationGenerationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentRecommendationGenerationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GenerationId != nil {
+		s.WriteString(schemas.GetAgentRecommendationGenerationRequest_generationId, *v.GenerationId)
+	}
+	if v.ProfileArn != nil {
+		s.WriteString(schemas.GetAgentRecommendationGenerationRequest_profileArn, *v.ProfileArn)
+	}
 }
 
 type GetAgentRecommendationGenerationOutput struct {
@@ -111,13 +130,132 @@ type GetAgentRecommendationGenerationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgentRecommendationGenerationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentRecommendationGenerationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentRecommendationGenerationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalContext != nil {
+		s.WriteDocument(schemas.GetAgentRecommendationGenerationResponse_additionalContext, &smithydocument.Opaque{Value: v.AdditionalContext})
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetAgentRecommendationGenerationResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetAgentRecommendationGenerationResponse_createdBy, *v.CreatedBy)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.GetAgentRecommendationGenerationResponse_endedAt, *v.EndedAt)
+	}
+	if v.ErrorDetails != nil {
+		s.WriteStruct(schemas.GetAgentRecommendationGenerationResponse_errorDetails)
+		v.ErrorDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EstimatedCompletionTime != nil {
+		s.WriteTime(schemas.GetAgentRecommendationGenerationResponse_estimatedCompletionTime, *v.EstimatedCompletionTime)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetAgentRecommendationGenerationResponse_id, *v.Id)
+	}
+	if v.LastModifiedAt != nil {
+		s.WriteTime(schemas.GetAgentRecommendationGenerationResponse_lastModifiedAt, *v.LastModifiedAt)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteString(schemas.GetAgentRecommendationGenerationResponse_lastModifiedBy, *v.LastModifiedBy)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetAgentRecommendationGenerationResponse_name, *v.Name)
+	}
+	if v.ProfileArn != nil {
+		s.WriteString(schemas.GetAgentRecommendationGenerationResponse_profileArn, *v.ProfileArn)
+	}
+	if v.Progress != nil {
+		s.WriteStruct(schemas.GetAgentRecommendationGenerationResponse_progress)
+		v.Progress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Scope != nil {
+		s.WriteStruct(schemas.GetAgentRecommendationGenerationResponse_scope)
+		v.Scope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.GetAgentRecommendationGenerationResponse_startedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetAgentRecommendationGenerationResponse_status, string(v.Status))
+	}
+}
+func (v *GetAgentRecommendationGenerationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAgentRecommendationGenerationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAgentRecommendationGenerationResponse_additionalContext:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.GetAgentRecommendationGenerationResponse_additionalContext, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.AdditionalContext = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.GetAgentRecommendationGenerationResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAgentRecommendationGenerationResponse_createdAt, v.CreatedAt)
+		case schemas.GetAgentRecommendationGenerationResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetAgentRecommendationGenerationResponse_createdBy, v.CreatedBy)
+		case schemas.GetAgentRecommendationGenerationResponse_endedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAgentRecommendationGenerationResponse_endedAt, v.EndedAt)
+		case schemas.GetAgentRecommendationGenerationResponse_errorDetails:
+			v.ErrorDetails = &types.ErrorDetails{}
+			return v.ErrorDetails.Deserialize(d)
+		case schemas.GetAgentRecommendationGenerationResponse_estimatedCompletionTime:
+			v.EstimatedCompletionTime = new(time.Time)
+			return d.ReadTime(schemas.GetAgentRecommendationGenerationResponse_estimatedCompletionTime, v.EstimatedCompletionTime)
+		case schemas.GetAgentRecommendationGenerationResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetAgentRecommendationGenerationResponse_id, v.Id)
+		case schemas.GetAgentRecommendationGenerationResponse_lastModifiedAt:
+			v.LastModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAgentRecommendationGenerationResponse_lastModifiedAt, v.LastModifiedAt)
+		case schemas.GetAgentRecommendationGenerationResponse_lastModifiedBy:
+			v.LastModifiedBy = new(string)
+			return d.ReadString(schemas.GetAgentRecommendationGenerationResponse_lastModifiedBy, v.LastModifiedBy)
+		case schemas.GetAgentRecommendationGenerationResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetAgentRecommendationGenerationResponse_name, v.Name)
+		case schemas.GetAgentRecommendationGenerationResponse_profileArn:
+			v.ProfileArn = new(string)
+			return d.ReadString(schemas.GetAgentRecommendationGenerationResponse_profileArn, v.ProfileArn)
+		case schemas.GetAgentRecommendationGenerationResponse_progress:
+			v.Progress = &types.Progress{}
+			return v.Progress.Deserialize(d)
+		case schemas.GetAgentRecommendationGenerationResponse_scope:
+			v.Scope = &types.Scope{}
+			return v.Scope.Deserialize(d)
+		case schemas.GetAgentRecommendationGenerationResponse_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAgentRecommendationGenerationResponse_startedAt, v.StartedAt)
+		case schemas.GetAgentRecommendationGenerationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetAgentRecommendationGenerationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.GenerationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAgentRecommendationGenerationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAgentRecommendationGeneration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentRecommendationGeneration, schemas.GetAgentRecommendationGenerationRequest, schemas.GetAgentRecommendationGenerationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAgentRecommendationGeneration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentRecommendationGeneration, schemas.GetAgentRecommendationGenerationRequest, schemas.GetAgentRecommendationGenerationResponse), output: &GetAgentRecommendationGenerationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

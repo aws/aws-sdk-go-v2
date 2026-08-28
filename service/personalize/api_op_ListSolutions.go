@@ -5,7 +5,9 @@ package personalize
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListSolutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSolutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSolutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSolutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetGroupArn != nil {
+		s.WriteString(schemas.ListSolutionsRequest_datasetGroupArn, *v.DatasetGroupArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSolutionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSolutionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListSolutionsOutput struct {
 
 	// A token for getting the next set of solutions (if they exist).
@@ -59,13 +79,35 @@ type ListSolutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSolutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSolutionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSolutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSolutionsResponse_nextToken, *v.NextToken)
+	}
+	serializeSolutions(s, schemas.ListSolutionsResponse_solutions, v.Solutions)
+}
+func (v *ListSolutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSolutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSolutionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSolutionsResponse_nextToken, v.NextToken)
+		case schemas.ListSolutionsResponse_solutions:
+			return deserializeSolutions(d, schemas.ListSolutionsResponse_solutions, &v.Solutions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSolutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSolutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSolutions, schemas.ListSolutionsRequest, schemas.ListSolutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSolutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSolutions, schemas.ListSolutionsRequest, schemas.ListSolutionsResponse), output: &ListSolutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

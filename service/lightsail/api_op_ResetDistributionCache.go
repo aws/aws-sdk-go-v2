@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -40,6 +42,18 @@ type ResetDistributionCacheInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetDistributionCacheInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetDistributionCacheRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetDistributionCacheInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DistributionName != nil {
+		s.WriteString(schemas.ResetDistributionCacheRequest_distributionName, *v.DistributionName)
+	}
+}
+
 type ResetDistributionCacheOutput struct {
 
 	// The timestamp of the reset cache request ( 1479734909.17 ) in Unix time format.
@@ -59,13 +73,46 @@ type ResetDistributionCacheOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResetDistributionCacheOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResetDistributionCacheResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResetDistributionCacheOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.ResetDistributionCacheResult_createTime, *v.CreateTime)
+	}
+	if v.Operation != nil {
+		s.WriteStruct(schemas.ResetDistributionCacheResult_operation)
+		v.Operation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ResetDistributionCacheResult_status, *v.Status)
+	}
+}
+func (v *ResetDistributionCacheOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResetDistributionCacheResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResetDistributionCacheResult_createTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.ResetDistributionCacheResult_createTime, v.CreateTime)
+		case schemas.ResetDistributionCacheResult_operation:
+			v.Operation = &types.Operation{}
+			return v.Operation.Deserialize(d)
+		case schemas.ResetDistributionCacheResult_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ResetDistributionCacheResult_status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResetDistributionCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResetDistributionCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetDistributionCache, schemas.ResetDistributionCacheRequest, schemas.ResetDistributionCacheResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpResetDistributionCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResetDistributionCache, schemas.ResetDistributionCacheRequest, schemas.ResetDistributionCacheResult), output: &ResetDistributionCacheOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

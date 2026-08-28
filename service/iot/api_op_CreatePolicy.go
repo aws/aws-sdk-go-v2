@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,22 @@ type CreatePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyDocument != nil {
+		s.WriteString(schemas.CreatePolicyRequest_policyDocument, *v.PolicyDocument)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.CreatePolicyRequest_policyName, *v.PolicyName)
+	}
+	serializeTagList(s, schemas.CreatePolicyRequest_tags, v.Tags)
+}
+
 // The output from the CreatePolicy operation.
 type CreatePolicyOutput struct {
 
@@ -80,13 +98,50 @@ type CreatePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.CreatePolicyResponse_policyArn, *v.PolicyArn)
+	}
+	if v.PolicyDocument != nil {
+		s.WriteString(schemas.CreatePolicyResponse_policyDocument, *v.PolicyDocument)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.CreatePolicyResponse_policyName, *v.PolicyName)
+	}
+	if v.PolicyVersionId != nil {
+		s.WriteString(schemas.CreatePolicyResponse_policyVersionId, *v.PolicyVersionId)
+	}
+}
+func (v *CreatePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePolicyResponse_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.CreatePolicyResponse_policyArn, v.PolicyArn)
+		case schemas.CreatePolicyResponse_policyDocument:
+			v.PolicyDocument = new(string)
+			return d.ReadString(schemas.CreatePolicyResponse_policyDocument, v.PolicyDocument)
+		case schemas.CreatePolicyResponse_policyName:
+			v.PolicyName = new(string)
+			return d.ReadString(schemas.CreatePolicyResponse_policyName, v.PolicyName)
+		case schemas.CreatePolicyResponse_policyVersionId:
+			v.PolicyVersionId = new(string)
+			return d.ReadString(schemas.CreatePolicyResponse_policyVersionId, v.PolicyVersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePolicy, schemas.CreatePolicyRequest, schemas.CreatePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePolicy, schemas.CreatePolicyRequest, schemas.CreatePolicyResponse), output: &CreatePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

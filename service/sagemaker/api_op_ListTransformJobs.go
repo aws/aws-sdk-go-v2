@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -65,6 +67,45 @@ type ListTransformJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTransformJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTransformJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTransformJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListTransformJobsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListTransformJobsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.LastModifiedTimeAfter != nil {
+		s.WriteTime(schemas.ListTransformJobsRequest_LastModifiedTimeAfter, *v.LastModifiedTimeAfter)
+	}
+	if v.LastModifiedTimeBefore != nil {
+		s.WriteTime(schemas.ListTransformJobsRequest_LastModifiedTimeBefore, *v.LastModifiedTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTransformJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListTransformJobsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTransformJobsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListTransformJobsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListTransformJobsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListTransformJobsRequest_StatusEquals, string(v.StatusEquals))
+	}
+}
+
 type ListTransformJobsOutput struct {
 
 	// An array of TransformJobSummary objects.
@@ -82,13 +123,35 @@ type ListTransformJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTransformJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTransformJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTransformJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTransformJobsResponse_NextToken, *v.NextToken)
+	}
+	serializeTransformJobSummaries(s, schemas.ListTransformJobsResponse_TransformJobSummaries, v.TransformJobSummaries)
+}
+func (v *ListTransformJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTransformJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTransformJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTransformJobsResponse_NextToken, v.NextToken)
+		case schemas.ListTransformJobsResponse_TransformJobSummaries:
+			return deserializeTransformJobSummaries(d, schemas.ListTransformJobsResponse_TransformJobSummaries, &v.TransformJobSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTransformJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTransformJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTransformJobs, schemas.ListTransformJobsRequest, schemas.ListTransformJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTransformJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTransformJobs, schemas.ListTransformJobsRequest, schemas.ListTransformJobsResponse), output: &ListTransformJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

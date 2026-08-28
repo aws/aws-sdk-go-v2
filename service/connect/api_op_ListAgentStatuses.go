@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,25 @@ type ListAgentStatusesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentStatusesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentStatusesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentStatusTypes(s, schemas.ListAgentStatusRequest_AgentStatusTypes, v.AgentStatusTypes)
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListAgentStatusRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAgentStatusRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentStatusRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAgentStatusesOutput struct {
 
 	// A summary of agent statuses.
@@ -62,13 +83,35 @@ type ListAgentStatusesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentStatusesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentStatusesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentStatusSummaryList(s, schemas.ListAgentStatusResponse_AgentStatusSummaryList, v.AgentStatusSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentStatusResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAgentStatusesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAgentStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAgentStatusResponse_AgentStatusSummaryList:
+			return deserializeAgentStatusSummaryList(d, schemas.ListAgentStatusResponse_AgentStatusSummaryList, &v.AgentStatusSummaryList)
+		case schemas.ListAgentStatusResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAgentStatusResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAgentStatusesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAgentStatuses{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentStatuses, schemas.ListAgentStatusRequest, schemas.ListAgentStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAgentStatuses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentStatuses, schemas.ListAgentStatusRequest, schemas.ListAgentStatusResponse), output: &ListAgentStatusesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

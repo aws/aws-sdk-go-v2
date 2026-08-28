@@ -4,7 +4,9 @@ package apprunner
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type PauseServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PauseServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PauseServiceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PauseServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.PauseServiceRequest_ServiceArn, *v.ServiceArn)
+	}
+}
+
 type PauseServiceOutput struct {
 
 	// A description of the App Runner service that this request just paused.
@@ -55,13 +69,40 @@ type PauseServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PauseServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PauseServiceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PauseServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.PauseServiceResponse_OperationId, *v.OperationId)
+	}
+	if v.Service != nil {
+		s.WriteStruct(schemas.PauseServiceResponse_Service)
+		v.Service.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PauseServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PauseServiceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PauseServiceResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.PauseServiceResponse_OperationId, v.OperationId)
+		case schemas.PauseServiceResponse_Service:
+			v.Service = &types.Service{}
+			return v.Service.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPauseServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPauseService{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PauseService, schemas.PauseServiceRequest, schemas.PauseServiceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpPauseService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PauseService, schemas.PauseServiceRequest, schemas.PauseServiceResponse), output: &PauseServiceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

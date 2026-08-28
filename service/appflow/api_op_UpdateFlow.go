@@ -5,7 +5,9 @@ package appflow
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appflow/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,41 @@ type UpdateFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFlowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateFlowRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFlowRequest_description, *v.Description)
+	}
+	serializeDestinationFlowConfigList(s, schemas.UpdateFlowRequest_destinationFlowConfigList, v.DestinationFlowConfigList)
+	if v.FlowName != nil {
+		s.WriteString(schemas.UpdateFlowRequest_flowName, *v.FlowName)
+	}
+	if v.MetadataCatalogConfig != nil {
+		s.WriteStruct(schemas.UpdateFlowRequest_metadataCatalogConfig)
+		v.MetadataCatalogConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceFlowConfig != nil {
+		s.WriteStruct(schemas.UpdateFlowRequest_sourceFlowConfig)
+		v.SourceFlowConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTasks(s, schemas.UpdateFlowRequest_tasks, v.Tasks)
+	if v.TriggerConfig != nil {
+		s.WriteStruct(schemas.UpdateFlowRequest_triggerConfig)
+		v.TriggerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateFlowOutput struct {
 
 	// Indicates the current status of the flow.
@@ -93,13 +130,36 @@ type UpdateFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFlowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFlowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowStatus != "" {
+		s.WriteString(schemas.UpdateFlowResponse_flowStatus, string(v.FlowStatus))
+	}
+}
+func (v *UpdateFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFlowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFlowResponse_flowStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateFlowResponse_flowStatus, &ev); err != nil {
+				return err
+			}
+			v.FlowStatus = types.FlowStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFlow, schemas.UpdateFlowRequest, schemas.UpdateFlowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFlow, schemas.UpdateFlowRequest, schemas.UpdateFlowResponse), output: &UpdateFlowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

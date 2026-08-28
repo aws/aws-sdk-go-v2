@@ -5,7 +5,9 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,46 @@ type UpdateVpcEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVpcEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVpcEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVpcEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSecurityGroupIds(s, schemas.UpdateVpcEndpointRequest_addSecurityGroupIds, v.AddSecurityGroupIds)
+	serializeSubnetIds(s, schemas.UpdateVpcEndpointRequest_addSubnetIds, v.AddSubnetIds)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateVpcEndpointRequest_clientToken, *v.ClientToken)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateVpcEndpointRequest_id, *v.Id)
+	}
+	serializeSecurityGroupIds(s, schemas.UpdateVpcEndpointRequest_removeSecurityGroupIds, v.RemoveSecurityGroupIds)
+	serializeSubnetIds(s, schemas.UpdateVpcEndpointRequest_removeSubnetIds, v.RemoveSubnetIds)
+}
+func (v *UpdateVpcEndpointInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateVpcEndpointRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateVpcEndpointRequest_addSecurityGroupIds:
+			return deserializeSecurityGroupIds(d, schemas.UpdateVpcEndpointRequest_addSecurityGroupIds, &v.AddSecurityGroupIds)
+		case schemas.UpdateVpcEndpointRequest_addSubnetIds:
+			return deserializeSubnetIds(d, schemas.UpdateVpcEndpointRequest_addSubnetIds, &v.AddSubnetIds)
+		case schemas.UpdateVpcEndpointRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.UpdateVpcEndpointRequest_clientToken, v.ClientToken)
+		case schemas.UpdateVpcEndpointRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateVpcEndpointRequest_id, v.Id)
+		case schemas.UpdateVpcEndpointRequest_removeSecurityGroupIds:
+			return deserializeSecurityGroupIds(d, schemas.UpdateVpcEndpointRequest_removeSecurityGroupIds, &v.RemoveSecurityGroupIds)
+		case schemas.UpdateVpcEndpointRequest_removeSubnetIds:
+			return deserializeSubnetIds(d, schemas.UpdateVpcEndpointRequest_removeSubnetIds, &v.RemoveSubnetIds)
+		}
+		return nil
+	})
+}
+
 type UpdateVpcEndpointOutput struct {
 
 	// Details about the updated VPC endpoint.
@@ -66,13 +108,34 @@ type UpdateVpcEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVpcEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVpcEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVpcEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UpdateVpcEndpointDetail != nil {
+		s.WriteStruct(schemas.UpdateVpcEndpointResponse_UpdateVpcEndpointDetail)
+		v.UpdateVpcEndpointDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateVpcEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateVpcEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateVpcEndpointResponse_UpdateVpcEndpointDetail:
+			v.UpdateVpcEndpointDetail = &types.UpdateVpcEndpointDetail{}
+			return v.UpdateVpcEndpointDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateVpcEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateVpcEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVpcEndpoint, schemas.UpdateVpcEndpointRequest, schemas.UpdateVpcEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateVpcEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVpcEndpoint, schemas.UpdateVpcEndpointRequest, schemas.UpdateVpcEndpointResponse), output: &UpdateVpcEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

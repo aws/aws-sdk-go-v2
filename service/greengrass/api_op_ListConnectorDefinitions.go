@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type ListConnectorDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConnectorDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConnectorDefinitionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConnectorDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteString(schemas.ListConnectorDefinitionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConnectorDefinitionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListConnectorDefinitionsOutput struct {
 
 	// Information about a definition.
@@ -51,13 +68,35 @@ type ListConnectorDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConnectorDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConnectorDefinitionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConnectorDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfDefinitionInformation(s, schemas.ListConnectorDefinitionsResponse_Definitions, v.Definitions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConnectorDefinitionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListConnectorDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConnectorDefinitionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConnectorDefinitionsResponse_Definitions:
+			return deserialize__listOfDefinitionInformation(d, schemas.ListConnectorDefinitionsResponse_Definitions, &v.Definitions)
+		case schemas.ListConnectorDefinitionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConnectorDefinitionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConnectorDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConnectorDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnectorDefinitions, schemas.ListConnectorDefinitionsRequest, schemas.ListConnectorDefinitionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConnectorDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnectorDefinitions, schemas.ListConnectorDefinitionsRequest, schemas.ListConnectorDefinitionsResponse), output: &ListConnectorDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

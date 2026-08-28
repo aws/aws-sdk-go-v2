@@ -4,6 +4,8 @@ package mailmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type GetAddonInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAddonInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAddonInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAddonInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddonInstanceId != nil {
+		s.WriteString(schemas.GetAddonInstanceRequest_AddonInstanceId, *v.AddonInstanceId)
+	}
+}
+
 type GetAddonInstanceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Add On instance.
@@ -54,13 +68,50 @@ type GetAddonInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAddonInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAddonInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAddonInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddonInstanceArn != nil {
+		s.WriteString(schemas.GetAddonInstanceResponse_AddonInstanceArn, *v.AddonInstanceArn)
+	}
+	if v.AddonName != nil {
+		s.WriteString(schemas.GetAddonInstanceResponse_AddonName, *v.AddonName)
+	}
+	if v.AddonSubscriptionId != nil {
+		s.WriteString(schemas.GetAddonInstanceResponse_AddonSubscriptionId, *v.AddonSubscriptionId)
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.GetAddonInstanceResponse_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+}
+func (v *GetAddonInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAddonInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAddonInstanceResponse_AddonInstanceArn:
+			v.AddonInstanceArn = new(string)
+			return d.ReadString(schemas.GetAddonInstanceResponse_AddonInstanceArn, v.AddonInstanceArn)
+		case schemas.GetAddonInstanceResponse_AddonName:
+			v.AddonName = new(string)
+			return d.ReadString(schemas.GetAddonInstanceResponse_AddonName, v.AddonName)
+		case schemas.GetAddonInstanceResponse_AddonSubscriptionId:
+			v.AddonSubscriptionId = new(string)
+			return d.ReadString(schemas.GetAddonInstanceResponse_AddonSubscriptionId, v.AddonSubscriptionId)
+		case schemas.GetAddonInstanceResponse_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetAddonInstanceResponse_CreatedTimestamp, v.CreatedTimestamp)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAddonInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetAddonInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAddonInstance, schemas.GetAddonInstanceRequest, schemas.GetAddonInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetAddonInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAddonInstance, schemas.GetAddonInstanceRequest, schemas.GetAddonInstanceResponse), output: &GetAddonInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

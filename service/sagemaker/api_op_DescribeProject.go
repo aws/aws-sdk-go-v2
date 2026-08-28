@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeProjectInput struct {
 	ProjectName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeProjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProjectInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProjectName != nil {
+		s.WriteString(schemas.DescribeProjectInput_ProjectName, *v.ProjectName)
+	}
 }
 
 type DescribeProjectOutput struct {
@@ -91,13 +105,107 @@ type DescribeProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProjectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProjectOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.DescribeProjectOutput_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeProjectOutput_CreationTime, *v.CreationTime)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteStruct(schemas.DescribeProjectOutput_LastModifiedBy)
+		v.LastModifiedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeProjectOutput_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.DescribeProjectOutput_ProjectArn, *v.ProjectArn)
+	}
+	if v.ProjectDescription != nil {
+		s.WriteString(schemas.DescribeProjectOutput_ProjectDescription, *v.ProjectDescription)
+	}
+	if v.ProjectId != nil {
+		s.WriteString(schemas.DescribeProjectOutput_ProjectId, *v.ProjectId)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.DescribeProjectOutput_ProjectName, *v.ProjectName)
+	}
+	if v.ProjectStatus != "" {
+		s.WriteString(schemas.DescribeProjectOutput_ProjectStatus, string(v.ProjectStatus))
+	}
+	if v.ServiceCatalogProvisionedProductDetails != nil {
+		s.WriteStruct(schemas.DescribeProjectOutput_ServiceCatalogProvisionedProductDetails)
+		v.ServiceCatalogProvisionedProductDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceCatalogProvisioningDetails != nil {
+		s.WriteStruct(schemas.DescribeProjectOutput_ServiceCatalogProvisioningDetails)
+		v.ServiceCatalogProvisioningDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTemplateProviderDetailList(s, schemas.DescribeProjectOutput_TemplateProviderDetails, v.TemplateProviderDetails)
+}
+func (v *DescribeProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeProjectOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeProjectOutput_CreatedBy:
+			v.CreatedBy = &types.UserContext{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.DescribeProjectOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeProjectOutput_CreationTime, v.CreationTime)
+		case schemas.DescribeProjectOutput_LastModifiedBy:
+			v.LastModifiedBy = &types.UserContext{}
+			return v.LastModifiedBy.Deserialize(d)
+		case schemas.DescribeProjectOutput_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeProjectOutput_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeProjectOutput_ProjectArn:
+			v.ProjectArn = new(string)
+			return d.ReadString(schemas.DescribeProjectOutput_ProjectArn, v.ProjectArn)
+		case schemas.DescribeProjectOutput_ProjectDescription:
+			v.ProjectDescription = new(string)
+			return d.ReadString(schemas.DescribeProjectOutput_ProjectDescription, v.ProjectDescription)
+		case schemas.DescribeProjectOutput_ProjectId:
+			v.ProjectId = new(string)
+			return d.ReadString(schemas.DescribeProjectOutput_ProjectId, v.ProjectId)
+		case schemas.DescribeProjectOutput_ProjectName:
+			v.ProjectName = new(string)
+			return d.ReadString(schemas.DescribeProjectOutput_ProjectName, v.ProjectName)
+		case schemas.DescribeProjectOutput_ProjectStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeProjectOutput_ProjectStatus, &ev); err != nil {
+				return err
+			}
+			v.ProjectStatus = types.ProjectStatus(ev)
+			return nil
+		case schemas.DescribeProjectOutput_ServiceCatalogProvisionedProductDetails:
+			v.ServiceCatalogProvisionedProductDetails = &types.ServiceCatalogProvisionedProductDetails{}
+			return v.ServiceCatalogProvisionedProductDetails.Deserialize(d)
+		case schemas.DescribeProjectOutput_ServiceCatalogProvisioningDetails:
+			v.ServiceCatalogProvisioningDetails = &types.ServiceCatalogProvisioningDetails{}
+			return v.ServiceCatalogProvisioningDetails.Deserialize(d)
+		case schemas.DescribeProjectOutput_TemplateProviderDetails:
+			return deserializeTemplateProviderDetailList(d, schemas.DescribeProjectOutput_TemplateProviderDetails, &v.TemplateProviderDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProject, schemas.DescribeProjectInput, schemas.DescribeProjectOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProject, schemas.DescribeProjectInput, schemas.DescribeProjectOutput), output: &DescribeProjectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

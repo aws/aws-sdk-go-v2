@@ -5,7 +5,9 @@ package connectparticipant
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connectparticipant/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectparticipant/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -81,6 +83,27 @@ type SendMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendMessageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendMessageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.SendMessageRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ConnectionToken != nil {
+		s.WriteString(schemas.SendMessageRequest_ConnectionToken, *v.ConnectionToken)
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.SendMessageRequest_Content, *v.Content)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.SendMessageRequest_ContentType, *v.ContentType)
+	}
+}
+
 type SendMessageOutput struct {
 
 	// The time when the message was sent.
@@ -101,13 +124,46 @@ type SendMessageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendMessageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendMessageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendMessageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AbsoluteTime != nil {
+		s.WriteString(schemas.SendMessageResponse_AbsoluteTime, *v.AbsoluteTime)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.SendMessageResponse_Id, *v.Id)
+	}
+	if v.MessageMetadata != nil {
+		s.WriteStruct(schemas.SendMessageResponse_MessageMetadata)
+		v.MessageMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SendMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendMessageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendMessageResponse_AbsoluteTime:
+			v.AbsoluteTime = new(string)
+			return d.ReadString(schemas.SendMessageResponse_AbsoluteTime, v.AbsoluteTime)
+		case schemas.SendMessageResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.SendMessageResponse_Id, v.Id)
+		case schemas.SendMessageResponse_MessageMetadata:
+			v.MessageMetadata = &types.MessageProcessingMetadata{}
+			return v.MessageMetadata.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendMessage, schemas.SendMessageRequest, schemas.SendMessageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendMessage, schemas.SendMessageRequest, schemas.SendMessageResponse), output: &SendMessageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

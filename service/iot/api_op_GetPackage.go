@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,18 @@ type GetPackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPackageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPackageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPackageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PackageName != nil {
+		s.WriteString(schemas.GetPackageRequest_packageName, *v.PackageName)
+	}
+}
+
 type GetPackageOutput struct {
 
 	// The date the package was created.
@@ -64,13 +78,62 @@ type GetPackageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPackageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPackageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPackageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.GetPackageResponse_creationDate, *v.CreationDate)
+	}
+	if v.DefaultVersionName != nil {
+		s.WriteString(schemas.GetPackageResponse_defaultVersionName, *v.DefaultVersionName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetPackageResponse_description, *v.Description)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.GetPackageResponse_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.PackageArn != nil {
+		s.WriteString(schemas.GetPackageResponse_packageArn, *v.PackageArn)
+	}
+	if v.PackageName != nil {
+		s.WriteString(schemas.GetPackageResponse_packageName, *v.PackageName)
+	}
+}
+func (v *GetPackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPackageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPackageResponse_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.GetPackageResponse_creationDate, v.CreationDate)
+		case schemas.GetPackageResponse_defaultVersionName:
+			v.DefaultVersionName = new(string)
+			return d.ReadString(schemas.GetPackageResponse_defaultVersionName, v.DefaultVersionName)
+		case schemas.GetPackageResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetPackageResponse_description, v.Description)
+		case schemas.GetPackageResponse_lastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.GetPackageResponse_lastModifiedDate, v.LastModifiedDate)
+		case schemas.GetPackageResponse_packageArn:
+			v.PackageArn = new(string)
+			return d.ReadString(schemas.GetPackageResponse_packageArn, v.PackageArn)
+		case schemas.GetPackageResponse_packageName:
+			v.PackageName = new(string)
+			return d.ReadString(schemas.GetPackageResponse_packageName, v.PackageName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPackage, schemas.GetPackageRequest, schemas.GetPackageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPackage, schemas.GetPackageRequest, schemas.GetPackageResponse), output: &GetPackageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

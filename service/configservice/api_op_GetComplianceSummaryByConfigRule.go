@@ -4,7 +4,9 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -29,6 +31,22 @@ type GetComplianceSummaryByConfigRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComplianceSummaryByConfigRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComplianceSummaryByConfigRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetComplianceSummaryByConfigRuleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type GetComplianceSummaryByConfigRuleOutput struct {
 
 	// The number of Config rules that are compliant and the number that are
@@ -41,13 +59,34 @@ type GetComplianceSummaryByConfigRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComplianceSummaryByConfigRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComplianceSummaryByConfigRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComplianceSummaryByConfigRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComplianceSummary != nil {
+		s.WriteStruct(schemas.GetComplianceSummaryByConfigRuleResponse_ComplianceSummary)
+		v.ComplianceSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetComplianceSummaryByConfigRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetComplianceSummaryByConfigRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetComplianceSummaryByConfigRuleResponse_ComplianceSummary:
+			v.ComplianceSummary = &types.ComplianceSummary{}
+			return v.ComplianceSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetComplianceSummaryByConfigRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetComplianceSummaryByConfigRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComplianceSummaryByConfigRule, nil, schemas.GetComplianceSummaryByConfigRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetComplianceSummaryByConfigRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComplianceSummaryByConfigRule, nil, schemas.GetComplianceSummaryByConfigRuleResponse), output: &GetComplianceSummaryByConfigRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type StopCompilationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopCompilationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopCompilationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopCompilationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompilationJobName != nil {
+		s.WriteString(schemas.StopCompilationJobRequest_CompilationJobName, *v.CompilationJobName)
+	}
+}
+
 type StopCompilationJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +62,26 @@ type StopCompilationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopCompilationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopCompilationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopCompilationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopCompilationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopCompilationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopCompilationJob, schemas.StopCompilationJobRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopCompilationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopCompilationJob, schemas.StopCompilationJobRequest, nil), output: &StopCompilationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

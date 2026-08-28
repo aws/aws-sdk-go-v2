@@ -4,6 +4,8 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DeleteUserPoolDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUserPoolDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteUserPoolDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUserPoolDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.DeleteUserPoolDomainRequest_Domain, *v.Domain)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.DeleteUserPoolDomainRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 type DeleteUserPoolDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +66,26 @@ type DeleteUserPoolDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUserPoolDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteUserPoolDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUserPoolDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteUserPoolDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteUserPoolDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteUserPoolDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteUserPoolDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUserPoolDomain, schemas.DeleteUserPoolDomainRequest, schemas.DeleteUserPoolDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteUserPoolDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUserPoolDomain, schemas.DeleteUserPoolDomainRequest, schemas.DeleteUserPoolDomainResponse), output: &DeleteUserPoolDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

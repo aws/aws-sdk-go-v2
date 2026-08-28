@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,34 @@ type SearchContactEvaluationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchContactEvaluationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchContactEvaluationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchContactEvaluationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SearchContactEvaluationsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchContactEvaluationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchContactEvaluationsRequest_NextToken, *v.NextToken)
+	}
+	if v.SearchCriteria != nil {
+		s.WriteStruct(schemas.SearchContactEvaluationsRequest_SearchCriteria)
+		v.SearchCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SearchFilter != nil {
+		s.WriteStruct(schemas.SearchContactEvaluationsRequest_SearchFilter)
+		v.SearchFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchContactEvaluationsOutput struct {
 
 	// The total number of contact evaluations that matched your search query.
@@ -87,13 +117,41 @@ type SearchContactEvaluationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchContactEvaluationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchContactEvaluationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchContactEvaluationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateTotalCount != nil {
+		s.WriteInt64(schemas.SearchContactEvaluationsResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
+	}
+	serializeEvaluationSearchSummaryList(s, schemas.SearchContactEvaluationsResponse_EvaluationSearchSummaryList, v.EvaluationSearchSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchContactEvaluationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *SearchContactEvaluationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchContactEvaluationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchContactEvaluationsResponse_ApproximateTotalCount:
+			v.ApproximateTotalCount = new(int64)
+			return d.ReadInt64(schemas.SearchContactEvaluationsResponse_ApproximateTotalCount, v.ApproximateTotalCount)
+		case schemas.SearchContactEvaluationsResponse_EvaluationSearchSummaryList:
+			return deserializeEvaluationSearchSummaryList(d, schemas.SearchContactEvaluationsResponse_EvaluationSearchSummaryList, &v.EvaluationSearchSummaryList)
+		case schemas.SearchContactEvaluationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchContactEvaluationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchContactEvaluationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchContactEvaluations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchContactEvaluations, schemas.SearchContactEvaluationsRequest, schemas.SearchContactEvaluationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchContactEvaluations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchContactEvaluations, schemas.SearchContactEvaluationsRequest, schemas.SearchContactEvaluationsResponse), output: &SearchContactEvaluationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

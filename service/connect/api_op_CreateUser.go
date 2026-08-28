@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -138,6 +140,50 @@ type CreateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAfterContactWorkConfigs(s, schemas.CreateUserRequest_AfterContactWorkConfigs, v.AfterContactWorkConfigs)
+	serializeAutoAcceptConfigs(s, schemas.CreateUserRequest_AutoAcceptConfigs, v.AutoAcceptConfigs)
+	if v.DirectoryUserId != nil {
+		s.WriteString(schemas.CreateUserRequest_DirectoryUserId, *v.DirectoryUserId)
+	}
+	if v.HierarchyGroupId != nil {
+		s.WriteString(schemas.CreateUserRequest_HierarchyGroupId, *v.HierarchyGroupId)
+	}
+	if v.IdentityInfo != nil {
+		s.WriteStruct(schemas.CreateUserRequest_IdentityInfo)
+		v.IdentityInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateUserRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.CreateUserRequest_Password, *v.Password)
+	}
+	serializePersistentConnectionConfigs(s, schemas.CreateUserRequest_PersistentConnectionConfigs, v.PersistentConnectionConfigs)
+	if v.PhoneConfig != nil {
+		s.WriteStruct(schemas.CreateUserRequest_PhoneConfig)
+		v.PhoneConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePhoneNumberConfigs(s, schemas.CreateUserRequest_PhoneNumberConfigs, v.PhoneNumberConfigs)
+	if v.RoutingProfileId != nil {
+		s.WriteString(schemas.CreateUserRequest_RoutingProfileId, *v.RoutingProfileId)
+	}
+	serializeSecurityProfileIds(s, schemas.CreateUserRequest_SecurityProfileIds, v.SecurityProfileIds)
+	serializeTagMap(s, schemas.CreateUserRequest_Tags, v.Tags)
+	if v.Username != nil {
+		s.WriteString(schemas.CreateUserRequest_Username, *v.Username)
+	}
+	serializeVoiceEnhancementConfigs(s, schemas.CreateUserRequest_VoiceEnhancementConfigs, v.VoiceEnhancementConfigs)
+}
+
 type CreateUserOutput struct {
 
 	// The Amazon Resource Name (ARN) of the user account.
@@ -152,13 +198,38 @@ type CreateUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserArn != nil {
+		s.WriteString(schemas.CreateUserResponse_UserArn, *v.UserArn)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.CreateUserResponse_UserId, *v.UserId)
+	}
+}
+func (v *CreateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUserResponse_UserArn:
+			v.UserArn = new(string)
+			return d.ReadString(schemas.CreateUserResponse_UserArn, v.UserArn)
+		case schemas.CreateUserResponse_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.CreateUserResponse_UserId, v.UserId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUser, schemas.CreateUserRequest, schemas.CreateUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUser, schemas.CreateUserRequest, schemas.CreateUserResponse), output: &CreateUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

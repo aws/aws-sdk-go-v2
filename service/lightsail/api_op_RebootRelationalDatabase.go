@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type RebootRelationalDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootRelationalDatabaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootRelationalDatabaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootRelationalDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RelationalDatabaseName != nil {
+		s.WriteString(schemas.RebootRelationalDatabaseRequest_relationalDatabaseName, *v.RelationalDatabaseName)
+	}
+}
+
 type RebootRelationalDatabaseOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -53,13 +67,29 @@ type RebootRelationalDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootRelationalDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootRelationalDatabaseResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootRelationalDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.RebootRelationalDatabaseResult_operations, v.Operations)
+}
+func (v *RebootRelationalDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RebootRelationalDatabaseResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RebootRelationalDatabaseResult_operations:
+			return deserializeOperationList(d, schemas.RebootRelationalDatabaseResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRebootRelationalDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRebootRelationalDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootRelationalDatabase, schemas.RebootRelationalDatabaseRequest, schemas.RebootRelationalDatabaseResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRebootRelationalDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootRelationalDatabase, schemas.RebootRelationalDatabaseRequest, schemas.RebootRelationalDatabaseResult), output: &RebootRelationalDatabaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type DescribeDataTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataTableRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataTableId != nil {
+		s.WriteString(schemas.DescribeDataTableRequest_DataTableId, *v.DataTableId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeDataTableRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DescribeDataTableOutput struct {
 
 	// The complete data table information including metadata, configuration, and
@@ -58,13 +75,34 @@ type DescribeDataTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataTableResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataTable != nil {
+		s.WriteStruct(schemas.DescribeDataTableResponse_DataTable)
+		v.DataTable.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeDataTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDataTableResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDataTableResponse_DataTable:
+			v.DataTable = &types.DataTable{}
+			return v.DataTable.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDataTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDataTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataTable, schemas.DescribeDataTableRequest, schemas.DescribeDataTableResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDataTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataTable, schemas.DescribeDataTableRequest, schemas.DescribeDataTableResponse), output: &DescribeDataTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

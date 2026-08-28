@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,27 @@ type CreateUserImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogsRoleArn != nil {
+		s.WriteString(schemas.CreateUserImportJobRequest_CloudWatchLogsRoleArn, *v.CloudWatchLogsRoleArn)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.CreateUserImportJobRequest_JobName, *v.JobName)
+	}
+	if v.PasswordHashingAlgorithm != "" {
+		s.WriteString(schemas.CreateUserImportJobRequest_PasswordHashingAlgorithm, string(v.PasswordHashingAlgorithm))
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.CreateUserImportJobRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 // Represents the response from the server to the request to create the user
 // import job.
 type CreateUserImportJobOutput struct {
@@ -82,13 +105,34 @@ type CreateUserImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserImportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserImportJob != nil {
+		s.WriteStruct(schemas.CreateUserImportJobResponse_UserImportJob)
+		v.UserImportJob.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateUserImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUserImportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUserImportJobResponse_UserImportJob:
+			v.UserImportJob = &types.UserImportJobType{}
+			return v.UserImportJob.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUserImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateUserImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserImportJob, schemas.CreateUserImportJobRequest, schemas.CreateUserImportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateUserImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserImportJob, schemas.CreateUserImportJobRequest, schemas.CreateUserImportJobResponse), output: &CreateUserImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

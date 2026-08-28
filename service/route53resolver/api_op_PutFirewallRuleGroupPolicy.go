@@ -4,6 +4,8 @@ package route53resolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type PutFirewallRuleGroupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFirewallRuleGroupPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutFirewallRuleGroupPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFirewallRuleGroupPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.PutFirewallRuleGroupPolicyRequest_Arn, *v.Arn)
+	}
+	if v.FirewallRuleGroupPolicy != nil {
+		s.WriteString(schemas.PutFirewallRuleGroupPolicyRequest_FirewallRuleGroupPolicy, *v.FirewallRuleGroupPolicy)
+	}
+}
+
 type PutFirewallRuleGroupPolicyOutput struct {
 
 	//
@@ -52,13 +69,31 @@ type PutFirewallRuleGroupPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFirewallRuleGroupPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutFirewallRuleGroupPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFirewallRuleGroupPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReturnValue != false {
+		s.WriteBool(schemas.PutFirewallRuleGroupPolicyResponse_ReturnValue, v.ReturnValue)
+	}
+}
+func (v *PutFirewallRuleGroupPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutFirewallRuleGroupPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutFirewallRuleGroupPolicyResponse_ReturnValue:
+			return d.ReadBool(schemas.PutFirewallRuleGroupPolicyResponse_ReturnValue, &v.ReturnValue)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutFirewallRuleGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutFirewallRuleGroupPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFirewallRuleGroupPolicy, schemas.PutFirewallRuleGroupPolicyRequest, schemas.PutFirewallRuleGroupPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutFirewallRuleGroupPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFirewallRuleGroupPolicy, schemas.PutFirewallRuleGroupPolicyRequest, schemas.PutFirewallRuleGroupPolicyResponse), output: &PutFirewallRuleGroupPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

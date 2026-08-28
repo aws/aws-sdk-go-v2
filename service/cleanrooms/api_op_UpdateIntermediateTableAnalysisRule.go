@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,25 @@ type UpdateIntermediateTableAnalysisRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIntermediateTableAnalysisRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIntermediateTableAnalysisRuleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIntermediateTableAnalysisRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIntermediateTableAnalysisRulePolicy(s, schemas.UpdateIntermediateTableAnalysisRuleInput_analysisRulePolicy, v.AnalysisRulePolicy)
+	if v.AnalysisRuleType != "" {
+		s.WriteString(schemas.UpdateIntermediateTableAnalysisRuleInput_analysisRuleType, string(v.AnalysisRuleType))
+	}
+	if v.IntermediateTableIdentifier != nil {
+		s.WriteString(schemas.UpdateIntermediateTableAnalysisRuleInput_intermediateTableIdentifier, *v.IntermediateTableIdentifier)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.UpdateIntermediateTableAnalysisRuleInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+
 type UpdateIntermediateTableAnalysisRuleOutput struct {
 
 	// The updated analysis rule for the intermediate table.
@@ -64,13 +85,34 @@ type UpdateIntermediateTableAnalysisRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIntermediateTableAnalysisRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIntermediateTableAnalysisRuleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIntermediateTableAnalysisRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisRule != nil {
+		s.WriteStruct(schemas.UpdateIntermediateTableAnalysisRuleOutput_analysisRule)
+		v.AnalysisRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateIntermediateTableAnalysisRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIntermediateTableAnalysisRuleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIntermediateTableAnalysisRuleOutput_analysisRule:
+			v.AnalysisRule = &types.IntermediateTableAnalysisRule{}
+			return v.AnalysisRule.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIntermediateTableAnalysisRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIntermediateTableAnalysisRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIntermediateTableAnalysisRule, schemas.UpdateIntermediateTableAnalysisRuleInput, schemas.UpdateIntermediateTableAnalysisRuleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIntermediateTableAnalysisRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIntermediateTableAnalysisRule, schemas.UpdateIntermediateTableAnalysisRuleInput, schemas.UpdateIntermediateTableAnalysisRuleOutput), output: &UpdateIntermediateTableAnalysisRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

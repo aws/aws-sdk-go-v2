@@ -5,7 +5,9 @@ package transcribe
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,21 @@ type ListCallAnalyticsCategoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCallAnalyticsCategoriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCallAnalyticsCategoriesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCallAnalyticsCategoriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCallAnalyticsCategoriesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCallAnalyticsCategoriesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListCallAnalyticsCategoriesOutput struct {
 
 	// Provides detailed information about your Call Analytics categories, including
@@ -66,13 +83,35 @@ type ListCallAnalyticsCategoriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCallAnalyticsCategoriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCallAnalyticsCategoriesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCallAnalyticsCategoriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCategoryPropertiesList(s, schemas.ListCallAnalyticsCategoriesResponse_Categories, v.Categories)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCallAnalyticsCategoriesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCallAnalyticsCategoriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCallAnalyticsCategoriesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCallAnalyticsCategoriesResponse_Categories:
+			return deserializeCategoryPropertiesList(d, schemas.ListCallAnalyticsCategoriesResponse_Categories, &v.Categories)
+		case schemas.ListCallAnalyticsCategoriesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCallAnalyticsCategoriesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCallAnalyticsCategoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCallAnalyticsCategories{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCallAnalyticsCategories, schemas.ListCallAnalyticsCategoriesRequest, schemas.ListCallAnalyticsCategoriesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCallAnalyticsCategories{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCallAnalyticsCategories, schemas.ListCallAnalyticsCategoriesRequest, schemas.ListCallAnalyticsCategoriesResponse), output: &ListCallAnalyticsCategoriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

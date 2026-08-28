@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -82,6 +84,38 @@ type SetUserMFAPreferenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetUserMFAPreferenceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetUserMFAPreferenceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetUserMFAPreferenceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.SetUserMFAPreferenceRequest_AccessToken, *v.AccessToken)
+	}
+	if v.EmailMfaSettings != nil {
+		s.WriteStruct(schemas.SetUserMFAPreferenceRequest_EmailMfaSettings)
+		v.EmailMfaSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SMSMfaSettings != nil {
+		s.WriteStruct(schemas.SetUserMFAPreferenceRequest_SMSMfaSettings)
+		v.SMSMfaSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SoftwareTokenMfaSettings != nil {
+		s.WriteStruct(schemas.SetUserMFAPreferenceRequest_SoftwareTokenMfaSettings)
+		v.SoftwareTokenMfaSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WebAuthnMfaSettings != nil {
+		s.WriteStruct(schemas.SetUserMFAPreferenceRequest_WebAuthnMfaSettings)
+		v.WebAuthnMfaSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SetUserMFAPreferenceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -89,13 +123,26 @@ type SetUserMFAPreferenceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetUserMFAPreferenceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetUserMFAPreferenceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetUserMFAPreferenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SetUserMFAPreferenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetUserMFAPreferenceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetUserMFAPreferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetUserMFAPreference{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetUserMFAPreference, schemas.SetUserMFAPreferenceRequest, schemas.SetUserMFAPreferenceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSetUserMFAPreference{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetUserMFAPreference, schemas.SetUserMFAPreferenceRequest, schemas.SetUserMFAPreferenceResponse), output: &SetUserMFAPreferenceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

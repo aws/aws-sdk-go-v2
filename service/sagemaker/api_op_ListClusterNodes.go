@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -91,6 +93,42 @@ type ListClusterNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClusterNodesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClusterNodesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClusterNodesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ListClusterNodesRequest_ClusterName, *v.ClusterName)
+	}
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListClusterNodesRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListClusterNodesRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.IncludeNodeLogicalIds != nil {
+		s.WriteBool(schemas.ListClusterNodesRequest_IncludeNodeLogicalIds, *v.IncludeNodeLogicalIds)
+	}
+	if v.InstanceGroupNameContains != nil {
+		s.WriteString(schemas.ListClusterNodesRequest_InstanceGroupNameContains, *v.InstanceGroupNameContains)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListClusterNodesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListClusterNodesRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListClusterNodesRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListClusterNodesRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListClusterNodesOutput struct {
 
 	// The summaries of listed instances in a SageMaker HyperPod cluster
@@ -107,13 +145,35 @@ type ListClusterNodesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClusterNodesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClusterNodesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClusterNodesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClusterNodeSummaries(s, schemas.ListClusterNodesResponse_ClusterNodeSummaries, v.ClusterNodeSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListClusterNodesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListClusterNodesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListClusterNodesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListClusterNodesResponse_ClusterNodeSummaries:
+			return deserializeClusterNodeSummaries(d, schemas.ListClusterNodesResponse_ClusterNodeSummaries, &v.ClusterNodeSummaries)
+		case schemas.ListClusterNodesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListClusterNodesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListClusterNodesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListClusterNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClusterNodes, schemas.ListClusterNodesRequest, schemas.ListClusterNodesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListClusterNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClusterNodes, schemas.ListClusterNodesRequest, schemas.ListClusterNodesResponse), output: &ListClusterNodesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

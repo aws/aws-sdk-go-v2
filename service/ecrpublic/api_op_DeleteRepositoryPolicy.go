@@ -4,6 +4,8 @@ package ecrpublic
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ecrpublic/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteRepositoryPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRepositoryPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRepositoryPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRepositoryPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistryId != nil {
+		s.WriteString(schemas.DeleteRepositoryPolicyRequest_registryId, *v.RegistryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.DeleteRepositoryPolicyRequest_repositoryName, *v.RepositoryName)
+	}
+}
+
 type DeleteRepositoryPolicyOutput struct {
 
 	// The JSON repository policy that was deleted from the repository.
@@ -56,13 +73,44 @@ type DeleteRepositoryPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRepositoryPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRepositoryPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRepositoryPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyText != nil {
+		s.WriteString(schemas.DeleteRepositoryPolicyResponse_policyText, *v.PolicyText)
+	}
+	if v.RegistryId != nil {
+		s.WriteString(schemas.DeleteRepositoryPolicyResponse_registryId, *v.RegistryId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.DeleteRepositoryPolicyResponse_repositoryName, *v.RepositoryName)
+	}
+}
+func (v *DeleteRepositoryPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRepositoryPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRepositoryPolicyResponse_policyText:
+			v.PolicyText = new(string)
+			return d.ReadString(schemas.DeleteRepositoryPolicyResponse_policyText, v.PolicyText)
+		case schemas.DeleteRepositoryPolicyResponse_registryId:
+			v.RegistryId = new(string)
+			return d.ReadString(schemas.DeleteRepositoryPolicyResponse_registryId, v.RegistryId)
+		case schemas.DeleteRepositoryPolicyResponse_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.DeleteRepositoryPolicyResponse_repositoryName, v.RepositoryName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRepositoryPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRepositoryPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRepositoryPolicy, schemas.DeleteRepositoryPolicyRequest, schemas.DeleteRepositoryPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteRepositoryPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRepositoryPolicy, schemas.DeleteRepositoryPolicyRequest, schemas.DeleteRepositoryPolicyResponse), output: &DeleteRepositoryPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

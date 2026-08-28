@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,18 @@ type DescribeHyperParameterTuningJobInput struct {
 	HyperParameterTuningJobName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeHyperParameterTuningJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHyperParameterTuningJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHyperParameterTuningJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HyperParameterTuningJobName != nil {
+		s.WriteString(schemas.DescribeHyperParameterTuningJobRequest_HyperParameterTuningJobName, *v.HyperParameterTuningJobName)
+	}
 }
 
 type DescribeHyperParameterTuningJobOutput struct {
@@ -140,13 +154,155 @@ type DescribeHyperParameterTuningJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeHyperParameterTuningJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHyperParameterTuningJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHyperParameterTuningJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Autotune != nil {
+		s.WriteStruct(schemas.DescribeHyperParameterTuningJobResponse_Autotune)
+		v.Autotune.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BestTrainingJob != nil {
+		s.WriteStruct(schemas.DescribeHyperParameterTuningJobResponse_BestTrainingJob)
+		v.BestTrainingJob.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConsumedResources != nil {
+		s.WriteStruct(schemas.DescribeHyperParameterTuningJobResponse_ConsumedResources)
+		v.ConsumedResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeHyperParameterTuningJobResponse_CreationTime, *v.CreationTime)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeHyperParameterTuningJobResponse_FailureReason, *v.FailureReason)
+	}
+	if v.HyperParameterTuningEndTime != nil {
+		s.WriteTime(schemas.DescribeHyperParameterTuningJobResponse_HyperParameterTuningEndTime, *v.HyperParameterTuningEndTime)
+	}
+	if v.HyperParameterTuningJobArn != nil {
+		s.WriteString(schemas.DescribeHyperParameterTuningJobResponse_HyperParameterTuningJobArn, *v.HyperParameterTuningJobArn)
+	}
+	if v.HyperParameterTuningJobConfig != nil {
+		s.WriteStruct(schemas.DescribeHyperParameterTuningJobResponse_HyperParameterTuningJobConfig)
+		v.HyperParameterTuningJobConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HyperParameterTuningJobName != nil {
+		s.WriteString(schemas.DescribeHyperParameterTuningJobResponse_HyperParameterTuningJobName, *v.HyperParameterTuningJobName)
+	}
+	if v.HyperParameterTuningJobStatus != "" {
+		s.WriteString(schemas.DescribeHyperParameterTuningJobResponse_HyperParameterTuningJobStatus, string(v.HyperParameterTuningJobStatus))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeHyperParameterTuningJobResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.ObjectiveStatusCounters != nil {
+		s.WriteStruct(schemas.DescribeHyperParameterTuningJobResponse_ObjectiveStatusCounters)
+		v.ObjectiveStatusCounters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OverallBestTrainingJob != nil {
+		s.WriteStruct(schemas.DescribeHyperParameterTuningJobResponse_OverallBestTrainingJob)
+		v.OverallBestTrainingJob.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrainingJobDefinition != nil {
+		s.WriteStruct(schemas.DescribeHyperParameterTuningJobResponse_TrainingJobDefinition)
+		v.TrainingJobDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeHyperParameterTrainingJobDefinitions(s, schemas.DescribeHyperParameterTuningJobResponse_TrainingJobDefinitions, v.TrainingJobDefinitions)
+	if v.TrainingJobStatusCounters != nil {
+		s.WriteStruct(schemas.DescribeHyperParameterTuningJobResponse_TrainingJobStatusCounters)
+		v.TrainingJobStatusCounters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TuningJobCompletionDetails != nil {
+		s.WriteStruct(schemas.DescribeHyperParameterTuningJobResponse_TuningJobCompletionDetails)
+		v.TuningJobCompletionDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WarmStartConfig != nil {
+		s.WriteStruct(schemas.DescribeHyperParameterTuningJobResponse_WarmStartConfig)
+		v.WarmStartConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeHyperParameterTuningJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeHyperParameterTuningJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeHyperParameterTuningJobResponse_Autotune:
+			v.Autotune = &types.Autotune{}
+			return v.Autotune.Deserialize(d)
+		case schemas.DescribeHyperParameterTuningJobResponse_BestTrainingJob:
+			v.BestTrainingJob = &types.HyperParameterTrainingJobSummary{}
+			return v.BestTrainingJob.Deserialize(d)
+		case schemas.DescribeHyperParameterTuningJobResponse_ConsumedResources:
+			v.ConsumedResources = &types.HyperParameterTuningJobConsumedResources{}
+			return v.ConsumedResources.Deserialize(d)
+		case schemas.DescribeHyperParameterTuningJobResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeHyperParameterTuningJobResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeHyperParameterTuningJobResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeHyperParameterTuningJobResponse_FailureReason, v.FailureReason)
+		case schemas.DescribeHyperParameterTuningJobResponse_HyperParameterTuningEndTime:
+			v.HyperParameterTuningEndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeHyperParameterTuningJobResponse_HyperParameterTuningEndTime, v.HyperParameterTuningEndTime)
+		case schemas.DescribeHyperParameterTuningJobResponse_HyperParameterTuningJobArn:
+			v.HyperParameterTuningJobArn = new(string)
+			return d.ReadString(schemas.DescribeHyperParameterTuningJobResponse_HyperParameterTuningJobArn, v.HyperParameterTuningJobArn)
+		case schemas.DescribeHyperParameterTuningJobResponse_HyperParameterTuningJobConfig:
+			v.HyperParameterTuningJobConfig = &types.HyperParameterTuningJobConfig{}
+			return v.HyperParameterTuningJobConfig.Deserialize(d)
+		case schemas.DescribeHyperParameterTuningJobResponse_HyperParameterTuningJobName:
+			v.HyperParameterTuningJobName = new(string)
+			return d.ReadString(schemas.DescribeHyperParameterTuningJobResponse_HyperParameterTuningJobName, v.HyperParameterTuningJobName)
+		case schemas.DescribeHyperParameterTuningJobResponse_HyperParameterTuningJobStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeHyperParameterTuningJobResponse_HyperParameterTuningJobStatus, &ev); err != nil {
+				return err
+			}
+			v.HyperParameterTuningJobStatus = types.HyperParameterTuningJobStatus(ev)
+			return nil
+		case schemas.DescribeHyperParameterTuningJobResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeHyperParameterTuningJobResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeHyperParameterTuningJobResponse_ObjectiveStatusCounters:
+			v.ObjectiveStatusCounters = &types.ObjectiveStatusCounters{}
+			return v.ObjectiveStatusCounters.Deserialize(d)
+		case schemas.DescribeHyperParameterTuningJobResponse_OverallBestTrainingJob:
+			v.OverallBestTrainingJob = &types.HyperParameterTrainingJobSummary{}
+			return v.OverallBestTrainingJob.Deserialize(d)
+		case schemas.DescribeHyperParameterTuningJobResponse_TrainingJobDefinition:
+			v.TrainingJobDefinition = &types.HyperParameterTrainingJobDefinition{}
+			return v.TrainingJobDefinition.Deserialize(d)
+		case schemas.DescribeHyperParameterTuningJobResponse_TrainingJobDefinitions:
+			return deserializeHyperParameterTrainingJobDefinitions(d, schemas.DescribeHyperParameterTuningJobResponse_TrainingJobDefinitions, &v.TrainingJobDefinitions)
+		case schemas.DescribeHyperParameterTuningJobResponse_TrainingJobStatusCounters:
+			v.TrainingJobStatusCounters = &types.TrainingJobStatusCounters{}
+			return v.TrainingJobStatusCounters.Deserialize(d)
+		case schemas.DescribeHyperParameterTuningJobResponse_TuningJobCompletionDetails:
+			v.TuningJobCompletionDetails = &types.HyperParameterTuningJobCompletionDetails{}
+			return v.TuningJobCompletionDetails.Deserialize(d)
+		case schemas.DescribeHyperParameterTuningJobResponse_WarmStartConfig:
+			v.WarmStartConfig = &types.HyperParameterTuningJobWarmStartConfig{}
+			return v.WarmStartConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeHyperParameterTuningJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeHyperParameterTuningJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHyperParameterTuningJob, schemas.DescribeHyperParameterTuningJobRequest, schemas.DescribeHyperParameterTuningJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeHyperParameterTuningJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHyperParameterTuningJob, schemas.DescribeHyperParameterTuningJobRequest, schemas.DescribeHyperParameterTuningJobResponse), output: &DescribeHyperParameterTuningJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

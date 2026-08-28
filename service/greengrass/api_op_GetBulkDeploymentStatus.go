@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetBulkDeploymentStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBulkDeploymentStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBulkDeploymentStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBulkDeploymentStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BulkDeploymentId != nil {
+		s.WriteString(schemas.GetBulkDeploymentStatusRequest_BulkDeploymentId, *v.BulkDeploymentId)
+	}
+}
+
 type GetBulkDeploymentStatusOutput struct {
 
 	// Relevant metrics on input records processed during bulk deployment.
@@ -60,13 +74,62 @@ type GetBulkDeploymentStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBulkDeploymentStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBulkDeploymentStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBulkDeploymentStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BulkDeploymentMetrics != nil {
+		s.WriteStruct(schemas.GetBulkDeploymentStatusResponse_BulkDeploymentMetrics)
+		v.BulkDeploymentMetrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BulkDeploymentStatus != "" {
+		s.WriteString(schemas.GetBulkDeploymentStatusResponse_BulkDeploymentStatus, string(v.BulkDeploymentStatus))
+	}
+	if v.CreatedAt != nil {
+		s.WriteString(schemas.GetBulkDeploymentStatusResponse_CreatedAt, *v.CreatedAt)
+	}
+	serializeErrorDetails(s, schemas.GetBulkDeploymentStatusResponse_ErrorDetails, v.ErrorDetails)
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.GetBulkDeploymentStatusResponse_ErrorMessage, *v.ErrorMessage)
+	}
+	serializeTags(s, schemas.GetBulkDeploymentStatusResponse_tags, v.Tags)
+}
+func (v *GetBulkDeploymentStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBulkDeploymentStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBulkDeploymentStatusResponse_BulkDeploymentMetrics:
+			v.BulkDeploymentMetrics = &types.BulkDeploymentMetrics{}
+			return v.BulkDeploymentMetrics.Deserialize(d)
+		case schemas.GetBulkDeploymentStatusResponse_BulkDeploymentStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetBulkDeploymentStatusResponse_BulkDeploymentStatus, &ev); err != nil {
+				return err
+			}
+			v.BulkDeploymentStatus = types.BulkDeploymentStatus(ev)
+			return nil
+		case schemas.GetBulkDeploymentStatusResponse_CreatedAt:
+			v.CreatedAt = new(string)
+			return d.ReadString(schemas.GetBulkDeploymentStatusResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetBulkDeploymentStatusResponse_ErrorDetails:
+			return deserializeErrorDetails(d, schemas.GetBulkDeploymentStatusResponse_ErrorDetails, &v.ErrorDetails)
+		case schemas.GetBulkDeploymentStatusResponse_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.GetBulkDeploymentStatusResponse_ErrorMessage, v.ErrorMessage)
+		case schemas.GetBulkDeploymentStatusResponse_tags:
+			return deserializeTags(d, schemas.GetBulkDeploymentStatusResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBulkDeploymentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBulkDeploymentStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBulkDeploymentStatus, schemas.GetBulkDeploymentStatusRequest, schemas.GetBulkDeploymentStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBulkDeploymentStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBulkDeploymentStatus, schemas.GetBulkDeploymentStatusRequest, schemas.GetBulkDeploymentStatusResponse), output: &GetBulkDeploymentStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

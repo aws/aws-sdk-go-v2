@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type GetFunctionDefinitionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFunctionDefinitionVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFunctionDefinitionVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFunctionDefinitionVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FunctionDefinitionId != nil {
+		s.WriteString(schemas.GetFunctionDefinitionVersionRequest_FunctionDefinitionId, *v.FunctionDefinitionId)
+	}
+	if v.FunctionDefinitionVersionId != nil {
+		s.WriteString(schemas.GetFunctionDefinitionVersionRequest_FunctionDefinitionVersionId, *v.FunctionDefinitionVersionId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetFunctionDefinitionVersionRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetFunctionDefinitionVersionOutput struct {
 
 	// The ARN of the function definition version.
@@ -77,13 +97,64 @@ type GetFunctionDefinitionVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFunctionDefinitionVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFunctionDefinitionVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFunctionDefinitionVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetFunctionDefinitionVersionResponse_Arn, *v.Arn)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteString(schemas.GetFunctionDefinitionVersionResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Definition != nil {
+		s.WriteStruct(schemas.GetFunctionDefinitionVersionResponse_Definition)
+		v.Definition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetFunctionDefinitionVersionResponse_Id, *v.Id)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetFunctionDefinitionVersionResponse_NextToken, *v.NextToken)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.GetFunctionDefinitionVersionResponse_Version, *v.Version)
+	}
+}
+func (v *GetFunctionDefinitionVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFunctionDefinitionVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFunctionDefinitionVersionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetFunctionDefinitionVersionResponse_Arn, v.Arn)
+		case schemas.GetFunctionDefinitionVersionResponse_CreationTimestamp:
+			v.CreationTimestamp = new(string)
+			return d.ReadString(schemas.GetFunctionDefinitionVersionResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.GetFunctionDefinitionVersionResponse_Definition:
+			v.Definition = &types.FunctionDefinitionVersion{}
+			return v.Definition.Deserialize(d)
+		case schemas.GetFunctionDefinitionVersionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetFunctionDefinitionVersionResponse_Id, v.Id)
+		case schemas.GetFunctionDefinitionVersionResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetFunctionDefinitionVersionResponse_NextToken, v.NextToken)
+		case schemas.GetFunctionDefinitionVersionResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.GetFunctionDefinitionVersionResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFunctionDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFunctionDefinitionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFunctionDefinitionVersion, schemas.GetFunctionDefinitionVersionRequest, schemas.GetFunctionDefinitionVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFunctionDefinitionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFunctionDefinitionVersion, schemas.GetFunctionDefinitionVersionRequest, schemas.GetFunctionDefinitionVersionResponse), output: &GetFunctionDefinitionVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

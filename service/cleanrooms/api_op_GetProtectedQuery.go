@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,34 @@ type GetProtectedQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProtectedQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProtectedQueryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProtectedQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.GetProtectedQueryInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.ProtectedQueryIdentifier != nil {
+		s.WriteString(schemas.GetProtectedQueryInput_protectedQueryIdentifier, *v.ProtectedQueryIdentifier)
+	}
+}
+func (v *GetProtectedQueryInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProtectedQueryInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProtectedQueryInput_membershipIdentifier:
+			v.MembershipIdentifier = new(string)
+			return d.ReadString(schemas.GetProtectedQueryInput_membershipIdentifier, v.MembershipIdentifier)
+		case schemas.GetProtectedQueryInput_protectedQueryIdentifier:
+			v.ProtectedQueryIdentifier = new(string)
+			return d.ReadString(schemas.GetProtectedQueryInput_protectedQueryIdentifier, v.ProtectedQueryIdentifier)
+		}
+		return nil
+	})
+}
+
 type GetProtectedQueryOutput struct {
 
 	// The query processing metadata.
@@ -52,13 +82,34 @@ type GetProtectedQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProtectedQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProtectedQueryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProtectedQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProtectedQuery != nil {
+		s.WriteStruct(schemas.GetProtectedQueryOutput_protectedQuery)
+		v.ProtectedQuery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetProtectedQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProtectedQueryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProtectedQueryOutput_protectedQuery:
+			v.ProtectedQuery = &types.ProtectedQuery{}
+			return v.ProtectedQuery.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProtectedQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProtectedQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProtectedQuery, schemas.GetProtectedQueryInput, schemas.GetProtectedQueryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetProtectedQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProtectedQuery, schemas.GetProtectedQueryInput, schemas.GetProtectedQueryOutput), output: &GetProtectedQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package schemas
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/schemas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/schemas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,27 @@ type ListSchemasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSchemasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSchemasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSchemasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListSchemasRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSchemasRequest_NextToken, *v.NextToken)
+	}
+	if v.RegistryName != nil {
+		s.WriteString(schemas.ListSchemasRequest_RegistryName, *v.RegistryName)
+	}
+	if v.SchemaNamePrefix != nil {
+		s.WriteString(schemas.ListSchemasRequest_SchemaNamePrefix, *v.SchemaNamePrefix)
+	}
+}
+
 type ListSchemasOutput struct {
 
 	// The token that specifies the next page of results to return. To request the
@@ -62,13 +85,35 @@ type ListSchemasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSchemasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSchemasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSchemasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSchemasResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfSchemaSummary(s, schemas.ListSchemasResponse_Schemas, v.Schemas)
+}
+func (v *ListSchemasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSchemasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSchemasResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSchemasResponse_NextToken, v.NextToken)
+		case schemas.ListSchemasResponse_Schemas:
+			return deserialize__listOfSchemaSummary(d, schemas.ListSchemasResponse_Schemas, &v.Schemas)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSchemasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSchemas{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSchemas, schemas.ListSchemasRequest, schemas.ListSchemasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSchemas{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSchemas, schemas.ListSchemasRequest, schemas.ListSchemasResponse), output: &ListSchemasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

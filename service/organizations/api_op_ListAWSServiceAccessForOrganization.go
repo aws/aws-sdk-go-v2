@@ -5,7 +5,9 @@ package organizations
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,21 @@ type ListAWSServiceAccessForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAWSServiceAccessForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAWSServiceAccessForOrganizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAWSServiceAccessForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAWSServiceAccessForOrganizationRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAWSServiceAccessForOrganizationRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAWSServiceAccessForOrganizationOutput struct {
 
 	// A list of the service principals for the services that are enabled to integrate
@@ -72,13 +89,35 @@ type ListAWSServiceAccessForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAWSServiceAccessForOrganizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAWSServiceAccessForOrganizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAWSServiceAccessForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEnabledServicePrincipals(s, schemas.ListAWSServiceAccessForOrganizationResponse_EnabledServicePrincipals, v.EnabledServicePrincipals)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAWSServiceAccessForOrganizationResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAWSServiceAccessForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAWSServiceAccessForOrganizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAWSServiceAccessForOrganizationResponse_EnabledServicePrincipals:
+			return deserializeEnabledServicePrincipals(d, schemas.ListAWSServiceAccessForOrganizationResponse_EnabledServicePrincipals, &v.EnabledServicePrincipals)
+		case schemas.ListAWSServiceAccessForOrganizationResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAWSServiceAccessForOrganizationResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAWSServiceAccessForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAWSServiceAccessForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAWSServiceAccessForOrganization, schemas.ListAWSServiceAccessForOrganizationRequest, schemas.ListAWSServiceAccessForOrganizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAWSServiceAccessForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAWSServiceAccessForOrganization, schemas.ListAWSServiceAccessForOrganizationRequest, schemas.ListAWSServiceAccessForOrganizationResponse), output: &ListAWSServiceAccessForOrganizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

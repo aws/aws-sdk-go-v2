@@ -4,7 +4,9 @@ package organizations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -87,6 +89,24 @@ type InviteAccountToOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InviteAccountToOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InviteAccountToOrganizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InviteAccountToOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Notes != nil {
+		s.WriteString(schemas.InviteAccountToOrganizationRequest_Notes, *v.Notes)
+	}
+	serializeTags(s, schemas.InviteAccountToOrganizationRequest_Tags, v.Tags)
+	if v.Target != nil {
+		s.WriteStruct(schemas.InviteAccountToOrganizationRequest_Target)
+		v.Target.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type InviteAccountToOrganizationOutput struct {
 
 	// A structure that contains details about the handshake that is created to
@@ -99,13 +119,34 @@ type InviteAccountToOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InviteAccountToOrganizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InviteAccountToOrganizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InviteAccountToOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Handshake != nil {
+		s.WriteStruct(schemas.InviteAccountToOrganizationResponse_Handshake)
+		v.Handshake.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InviteAccountToOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InviteAccountToOrganizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InviteAccountToOrganizationResponse_Handshake:
+			v.Handshake = &types.Handshake{}
+			return v.Handshake.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInviteAccountToOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpInviteAccountToOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InviteAccountToOrganization, schemas.InviteAccountToOrganizationRequest, schemas.InviteAccountToOrganizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpInviteAccountToOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InviteAccountToOrganization, schemas.InviteAccountToOrganizationRequest, schemas.InviteAccountToOrganizationResponse), output: &InviteAccountToOrganizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

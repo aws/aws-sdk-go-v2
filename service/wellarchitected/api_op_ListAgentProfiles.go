@@ -5,7 +5,9 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListAgentProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAgentProfilesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentProfilesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAgentProfilesOutput struct {
 
 	// A list of profile summaries.
@@ -53,13 +70,35 @@ type ListAgentProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentProfilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentProfileSummaries(s, schemas.ListAgentProfilesResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentProfilesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAgentProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAgentProfilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAgentProfilesResponse_items:
+			return deserializeAgentProfileSummaries(d, schemas.ListAgentProfilesResponse_items, &v.Items)
+		case schemas.ListAgentProfilesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAgentProfilesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAgentProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAgentProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentProfiles, schemas.ListAgentProfilesRequest, schemas.ListAgentProfilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAgentProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentProfiles, schemas.ListAgentProfilesRequest, schemas.ListAgentProfilesResponse), output: &ListAgentProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

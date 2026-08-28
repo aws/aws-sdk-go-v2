@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,21 @@ type StopJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobCategory != "" {
+		s.WriteString(schemas.StopJobRequest_JobCategory, string(v.JobCategory))
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.StopJobRequest_JobName, *v.JobName)
+	}
+}
+
 type StopJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +74,26 @@ type StopJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopJob, schemas.StopJobRequest, schemas.StopJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopJob, schemas.StopJobRequest, schemas.StopJobResponse), output: &StopJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

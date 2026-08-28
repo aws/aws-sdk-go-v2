@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,19 @@ type SetUserSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetUserSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetUserSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetUserSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.SetUserSettingsRequest_AccessToken, *v.AccessToken)
+	}
+	serializeMFAOptionListType(s, schemas.SetUserSettingsRequest_MFAOptions, v.MFAOptions)
+}
+
 // The response from the server for a set user settings request.
 type SetUserSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -64,13 +79,26 @@ type SetUserSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetUserSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetUserSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetUserSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SetUserSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetUserSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetUserSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetUserSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetUserSettings, schemas.SetUserSettingsRequest, schemas.SetUserSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSetUserSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetUserSettings, schemas.SetUserSettingsRequest, schemas.SetUserSettingsResponse), output: &SetUserSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

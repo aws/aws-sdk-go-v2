@@ -4,6 +4,8 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,16 @@ type TerminateJobFlowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateJobFlowsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateJobFlowsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateJobFlowsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeXmlStringList(s, schemas.TerminateJobFlowsInput_JobFlowIds, v.JobFlowIds)
+}
+
 type TerminateJobFlowsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +61,26 @@ type TerminateJobFlowsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateJobFlowsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateJobFlowsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *TerminateJobFlowsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTerminateJobFlowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTerminateJobFlows{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateJobFlows, schemas.TerminateJobFlowsInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpTerminateJobFlows{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateJobFlows, schemas.TerminateJobFlowsInput, nil), output: &TerminateJobFlowsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

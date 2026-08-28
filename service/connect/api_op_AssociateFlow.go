@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,27 @@ type AssociateFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateFlowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowId != nil {
+		s.WriteString(schemas.AssociateFlowRequest_FlowId, *v.FlowId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.AssociateFlowRequest_InstanceId, *v.InstanceId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.AssociateFlowRequest_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.AssociateFlowRequest_ResourceType, string(v.ResourceType))
+	}
+}
+
 type AssociateFlowOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -65,13 +88,26 @@ type AssociateFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateFlowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateFlowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateFlowResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateFlow, schemas.AssociateFlowRequest, schemas.AssociateFlowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateFlow, schemas.AssociateFlowRequest, schemas.AssociateFlowResponse), output: &AssociateFlowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

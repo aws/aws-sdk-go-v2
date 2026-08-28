@@ -4,6 +4,8 @@ package schemas
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/schemas/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteDiscovererInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDiscovererInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDiscovererRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDiscovererInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DiscovererId != nil {
+		s.WriteString(schemas.DeleteDiscovererRequest_DiscovererId, *v.DiscovererId)
+	}
+}
+
 type DeleteDiscovererOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteDiscovererOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDiscovererOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDiscovererOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteDiscovererOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDiscovererMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDiscoverer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDiscoverer, schemas.DeleteDiscovererRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDiscoverer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDiscoverer, schemas.DeleteDiscovererRequest, nil), output: &DeleteDiscovererOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

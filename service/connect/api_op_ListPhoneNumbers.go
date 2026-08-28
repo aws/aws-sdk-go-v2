@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,26 @@ type ListPhoneNumbersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPhoneNumbersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPhoneNumbersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPhoneNumbersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListPhoneNumbersRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPhoneNumbersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPhoneNumbersRequest_NextToken, *v.NextToken)
+	}
+	serializePhoneNumberCountryCodes(s, schemas.ListPhoneNumbersRequest_PhoneNumberCountryCodes, v.PhoneNumberCountryCodes)
+	serializePhoneNumberTypes(s, schemas.ListPhoneNumbersRequest_PhoneNumberTypes, v.PhoneNumberTypes)
+}
+
 type ListPhoneNumbersOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.
@@ -90,13 +112,35 @@ type ListPhoneNumbersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPhoneNumbersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPhoneNumbersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPhoneNumbersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPhoneNumbersResponse_NextToken, *v.NextToken)
+	}
+	serializePhoneNumberSummaryList(s, schemas.ListPhoneNumbersResponse_PhoneNumberSummaryList, v.PhoneNumberSummaryList)
+}
+func (v *ListPhoneNumbersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPhoneNumbersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPhoneNumbersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPhoneNumbersResponse_NextToken, v.NextToken)
+		case schemas.ListPhoneNumbersResponse_PhoneNumberSummaryList:
+			return deserializePhoneNumberSummaryList(d, schemas.ListPhoneNumbersResponse_PhoneNumberSummaryList, &v.PhoneNumberSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPhoneNumbersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPhoneNumbers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPhoneNumbers, schemas.ListPhoneNumbersRequest, schemas.ListPhoneNumbersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPhoneNumbers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPhoneNumbers, schemas.ListPhoneNumbersRequest, schemas.ListPhoneNumbersResponse), output: &ListPhoneNumbersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

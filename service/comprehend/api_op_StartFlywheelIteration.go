@@ -4,6 +4,8 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type StartFlywheelIterationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFlywheelIterationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFlywheelIterationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFlywheelIterationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartFlywheelIterationRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.FlywheelArn != nil {
+		s.WriteString(schemas.StartFlywheelIterationRequest_FlywheelArn, *v.FlywheelArn)
+	}
+}
+
 type StartFlywheelIterationOutput struct {
 
 	//
@@ -55,13 +72,38 @@ type StartFlywheelIterationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFlywheelIterationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFlywheelIterationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFlywheelIterationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlywheelArn != nil {
+		s.WriteString(schemas.StartFlywheelIterationResponse_FlywheelArn, *v.FlywheelArn)
+	}
+	if v.FlywheelIterationId != nil {
+		s.WriteString(schemas.StartFlywheelIterationResponse_FlywheelIterationId, *v.FlywheelIterationId)
+	}
+}
+func (v *StartFlywheelIterationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartFlywheelIterationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartFlywheelIterationResponse_FlywheelArn:
+			v.FlywheelArn = new(string)
+			return d.ReadString(schemas.StartFlywheelIterationResponse_FlywheelArn, v.FlywheelArn)
+		case schemas.StartFlywheelIterationResponse_FlywheelIterationId:
+			v.FlywheelIterationId = new(string)
+			return d.ReadString(schemas.StartFlywheelIterationResponse_FlywheelIterationId, v.FlywheelIterationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartFlywheelIterationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartFlywheelIteration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFlywheelIteration, schemas.StartFlywheelIterationRequest, schemas.StartFlywheelIterationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartFlywheelIteration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFlywheelIteration, schemas.StartFlywheelIterationRequest, schemas.StartFlywheelIterationResponse), output: &StartFlywheelIterationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

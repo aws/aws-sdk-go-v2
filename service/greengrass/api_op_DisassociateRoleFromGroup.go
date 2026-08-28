@@ -4,6 +4,8 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DisassociateRoleFromGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateRoleFromGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateRoleFromGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateRoleFromGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.DisassociateRoleFromGroupRequest_GroupId, *v.GroupId)
+	}
+}
+
 type DisassociateRoleFromGroupOutput struct {
 
 	// The time, in milliseconds since the epoch, when the role was disassociated from
@@ -45,13 +59,32 @@ type DisassociateRoleFromGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateRoleFromGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateRoleFromGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateRoleFromGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisassociatedAt != nil {
+		s.WriteString(schemas.DisassociateRoleFromGroupResponse_DisassociatedAt, *v.DisassociatedAt)
+	}
+}
+func (v *DisassociateRoleFromGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateRoleFromGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateRoleFromGroupResponse_DisassociatedAt:
+			v.DisassociatedAt = new(string)
+			return d.ReadString(schemas.DisassociateRoleFromGroupResponse_DisassociatedAt, v.DisassociatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateRoleFromGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateRoleFromGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateRoleFromGroup, schemas.DisassociateRoleFromGroupRequest, schemas.DisassociateRoleFromGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateRoleFromGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateRoleFromGroup, schemas.DisassociateRoleFromGroupRequest, schemas.DisassociateRoleFromGroupResponse), output: &DisassociateRoleFromGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

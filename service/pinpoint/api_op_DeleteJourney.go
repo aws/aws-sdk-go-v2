@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteJourneyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteJourneyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteJourneyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteJourneyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.DeleteJourneyRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.JourneyId != nil {
+		s.WriteString(schemas.DeleteJourneyRequest_JourneyId, *v.JourneyId)
+	}
+}
+
 type DeleteJourneyOutput struct {
 
 	// Provides information about the status, configuration, and other settings for a
@@ -54,13 +71,34 @@ type DeleteJourneyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteJourneyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteJourneyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteJourneyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JourneyResponse != nil {
+		s.WriteStruct(schemas.DeleteJourneyResponse_JourneyResponse)
+		v.JourneyResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteJourneyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteJourneyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteJourneyResponse_JourneyResponse:
+			v.JourneyResponse = &types.JourneyResponse{}
+			return v.JourneyResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteJourneyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteJourney{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteJourney, schemas.DeleteJourneyRequest, schemas.DeleteJourneyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteJourney{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteJourney, schemas.DeleteJourneyRequest, schemas.DeleteJourneyResponse), output: &DeleteJourneyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

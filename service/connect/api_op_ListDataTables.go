@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListDataTablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataTablesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataTablesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataTablesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListDataTablesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataTablesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataTablesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDataTablesOutput struct {
 
 	// A list of data table summaries containing basic information about each table
@@ -63,13 +83,35 @@ type ListDataTablesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataTablesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataTablesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataTablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataTableSummaryList(s, schemas.ListDataTablesResponse_DataTableSummaryList, v.DataTableSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataTablesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDataTablesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataTablesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataTablesResponse_DataTableSummaryList:
+			return deserializeDataTableSummaryList(d, schemas.ListDataTablesResponse_DataTableSummaryList, &v.DataTableSummaryList)
+		case schemas.ListDataTablesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataTablesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataTables{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataTables, schemas.ListDataTablesRequest, schemas.ListDataTablesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataTables{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataTables, schemas.ListDataTablesRequest, schemas.ListDataTablesResponse), output: &ListDataTablesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

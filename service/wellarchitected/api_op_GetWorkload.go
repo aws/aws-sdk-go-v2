@@ -4,7 +4,9 @@ package wellarchitected
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetWorkloadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkloadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkloadInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkloadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.GetWorkloadInput_WorkloadId, *v.WorkloadId)
+	}
+}
+
 // Output of a get workload call.
 type GetWorkloadOutput struct {
 
@@ -48,13 +62,34 @@ type GetWorkloadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkloadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkloadOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkloadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Workload != nil {
+		s.WriteStruct(schemas.GetWorkloadOutput_Workload)
+		v.Workload.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetWorkloadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWorkloadOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWorkloadOutput_Workload:
+			v.Workload = &types.Workload{}
+			return v.Workload.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWorkloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWorkload{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkload, schemas.GetWorkloadInput, schemas.GetWorkloadOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWorkload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkload, schemas.GetWorkloadInput, schemas.GetWorkloadOutput), output: &GetWorkloadOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

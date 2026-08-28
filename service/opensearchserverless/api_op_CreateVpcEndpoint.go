@@ -5,7 +5,9 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,46 @@ type CreateVpcEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVpcEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVpcEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVpcEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateVpcEndpointRequest_clientToken, *v.ClientToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateVpcEndpointRequest_name, *v.Name)
+	}
+	serializeSecurityGroupIds(s, schemas.CreateVpcEndpointRequest_securityGroupIds, v.SecurityGroupIds)
+	serializeSubnetIds(s, schemas.CreateVpcEndpointRequest_subnetIds, v.SubnetIds)
+	if v.VpcId != nil {
+		s.WriteString(schemas.CreateVpcEndpointRequest_vpcId, *v.VpcId)
+	}
+}
+func (v *CreateVpcEndpointInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVpcEndpointRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVpcEndpointRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateVpcEndpointRequest_clientToken, v.ClientToken)
+		case schemas.CreateVpcEndpointRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateVpcEndpointRequest_name, v.Name)
+		case schemas.CreateVpcEndpointRequest_securityGroupIds:
+			return deserializeSecurityGroupIds(d, schemas.CreateVpcEndpointRequest_securityGroupIds, &v.SecurityGroupIds)
+		case schemas.CreateVpcEndpointRequest_subnetIds:
+			return deserializeSubnetIds(d, schemas.CreateVpcEndpointRequest_subnetIds, &v.SubnetIds)
+		case schemas.CreateVpcEndpointRequest_vpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.CreateVpcEndpointRequest_vpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 type CreateVpcEndpointOutput struct {
 
 	// Details about the created interface VPC endpoint.
@@ -66,13 +108,34 @@ type CreateVpcEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVpcEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVpcEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVpcEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateVpcEndpointDetail != nil {
+		s.WriteStruct(schemas.CreateVpcEndpointResponse_createVpcEndpointDetail)
+		v.CreateVpcEndpointDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateVpcEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVpcEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVpcEndpointResponse_createVpcEndpointDetail:
+			v.CreateVpcEndpointDetail = &types.CreateVpcEndpointDetail{}
+			return v.CreateVpcEndpointDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVpcEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateVpcEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVpcEndpoint, schemas.CreateVpcEndpointRequest, schemas.CreateVpcEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateVpcEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVpcEndpoint, schemas.CreateVpcEndpointRequest, schemas.CreateVpcEndpointResponse), output: &CreateVpcEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package mailmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteIngressPointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIngressPointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIngressPointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIngressPointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IngressPointId != nil {
+		s.WriteString(schemas.DeleteIngressPointRequest_IngressPointId, *v.IngressPointId)
+	}
+}
+
 type DeleteIngressPointOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteIngressPointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIngressPointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIngressPointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIngressPointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteIngressPointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteIngressPointResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteIngressPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteIngressPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIngressPoint, schemas.DeleteIngressPointRequest, schemas.DeleteIngressPointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteIngressPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIngressPoint, schemas.DeleteIngressPointRequest, schemas.DeleteIngressPointResponse), output: &DeleteIngressPointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

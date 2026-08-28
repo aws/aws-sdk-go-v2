@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeTrialComponentInput struct {
 	TrialComponentName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeTrialComponentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTrialComponentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTrialComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrialComponentName != nil {
+		s.WriteString(schemas.DescribeTrialComponentRequest_TrialComponentName, *v.TrialComponentName)
+	}
 }
 
 type DescribeTrialComponentOutput struct {
@@ -105,13 +119,129 @@ type DescribeTrialComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTrialComponentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTrialComponentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTrialComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.DescribeTrialComponentResponse_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeTrialComponentResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.DescribeTrialComponentResponse_DisplayName, *v.DisplayName)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.DescribeTrialComponentResponse_EndTime, *v.EndTime)
+	}
+	serializeTrialComponentArtifacts(s, schemas.DescribeTrialComponentResponse_InputArtifacts, v.InputArtifacts)
+	if v.LastModifiedBy != nil {
+		s.WriteStruct(schemas.DescribeTrialComponentResponse_LastModifiedBy)
+		v.LastModifiedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeTrialComponentResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.LineageGroupArn != nil {
+		s.WriteString(schemas.DescribeTrialComponentResponse_LineageGroupArn, *v.LineageGroupArn)
+	}
+	if v.MetadataProperties != nil {
+		s.WriteStruct(schemas.DescribeTrialComponentResponse_MetadataProperties)
+		v.MetadataProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTrialComponentMetricSummaries(s, schemas.DescribeTrialComponentResponse_Metrics, v.Metrics)
+	serializeTrialComponentArtifacts(s, schemas.DescribeTrialComponentResponse_OutputArtifacts, v.OutputArtifacts)
+	serializeTrialComponentParameters(s, schemas.DescribeTrialComponentResponse_Parameters, v.Parameters)
+	if v.Source != nil {
+		s.WriteStruct(schemas.DescribeTrialComponentResponse_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTrialComponentSources(s, schemas.DescribeTrialComponentResponse_Sources, v.Sources)
+	if v.StartTime != nil {
+		s.WriteTime(schemas.DescribeTrialComponentResponse_StartTime, *v.StartTime)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.DescribeTrialComponentResponse_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrialComponentArn != nil {
+		s.WriteString(schemas.DescribeTrialComponentResponse_TrialComponentArn, *v.TrialComponentArn)
+	}
+	if v.TrialComponentName != nil {
+		s.WriteString(schemas.DescribeTrialComponentResponse_TrialComponentName, *v.TrialComponentName)
+	}
+}
+func (v *DescribeTrialComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTrialComponentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTrialComponentResponse_CreatedBy:
+			v.CreatedBy = &types.UserContext{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.DescribeTrialComponentResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTrialComponentResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeTrialComponentResponse_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.DescribeTrialComponentResponse_DisplayName, v.DisplayName)
+		case schemas.DescribeTrialComponentResponse_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTrialComponentResponse_EndTime, v.EndTime)
+		case schemas.DescribeTrialComponentResponse_InputArtifacts:
+			return deserializeTrialComponentArtifacts(d, schemas.DescribeTrialComponentResponse_InputArtifacts, &v.InputArtifacts)
+		case schemas.DescribeTrialComponentResponse_LastModifiedBy:
+			v.LastModifiedBy = &types.UserContext{}
+			return v.LastModifiedBy.Deserialize(d)
+		case schemas.DescribeTrialComponentResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTrialComponentResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeTrialComponentResponse_LineageGroupArn:
+			v.LineageGroupArn = new(string)
+			return d.ReadString(schemas.DescribeTrialComponentResponse_LineageGroupArn, v.LineageGroupArn)
+		case schemas.DescribeTrialComponentResponse_MetadataProperties:
+			v.MetadataProperties = &types.MetadataProperties{}
+			return v.MetadataProperties.Deserialize(d)
+		case schemas.DescribeTrialComponentResponse_Metrics:
+			return deserializeTrialComponentMetricSummaries(d, schemas.DescribeTrialComponentResponse_Metrics, &v.Metrics)
+		case schemas.DescribeTrialComponentResponse_OutputArtifacts:
+			return deserializeTrialComponentArtifacts(d, schemas.DescribeTrialComponentResponse_OutputArtifacts, &v.OutputArtifacts)
+		case schemas.DescribeTrialComponentResponse_Parameters:
+			return deserializeTrialComponentParameters(d, schemas.DescribeTrialComponentResponse_Parameters, &v.Parameters)
+		case schemas.DescribeTrialComponentResponse_Source:
+			v.Source = &types.TrialComponentSource{}
+			return v.Source.Deserialize(d)
+		case schemas.DescribeTrialComponentResponse_Sources:
+			return deserializeTrialComponentSources(d, schemas.DescribeTrialComponentResponse_Sources, &v.Sources)
+		case schemas.DescribeTrialComponentResponse_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTrialComponentResponse_StartTime, v.StartTime)
+		case schemas.DescribeTrialComponentResponse_Status:
+			v.Status = &types.TrialComponentStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.DescribeTrialComponentResponse_TrialComponentArn:
+			v.TrialComponentArn = new(string)
+			return d.ReadString(schemas.DescribeTrialComponentResponse_TrialComponentArn, v.TrialComponentArn)
+		case schemas.DescribeTrialComponentResponse_TrialComponentName:
+			v.TrialComponentName = new(string)
+			return d.ReadString(schemas.DescribeTrialComponentResponse_TrialComponentName, v.TrialComponentName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTrialComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTrialComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrialComponent, schemas.DescribeTrialComponentRequest, schemas.DescribeTrialComponentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTrialComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrialComponent, schemas.DescribeTrialComponentRequest, schemas.DescribeTrialComponentResponse), output: &DescribeTrialComponentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

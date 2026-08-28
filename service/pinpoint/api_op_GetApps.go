@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type GetAppsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAppsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAppsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAppsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PageSize != nil {
+		s.WriteString(schemas.GetAppsRequest_PageSize, *v.PageSize)
+	}
+	if v.Token != nil {
+		s.WriteString(schemas.GetAppsRequest_Token, *v.Token)
+	}
+}
+
 type GetAppsOutput struct {
 
 	// Provides information about all of your applications.
@@ -51,13 +68,34 @@ type GetAppsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAppsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAppsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAppsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationsResponse != nil {
+		s.WriteStruct(schemas.GetAppsResponse_ApplicationsResponse)
+		v.ApplicationsResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAppsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAppsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAppsResponse_ApplicationsResponse:
+			v.ApplicationsResponse = &types.ApplicationsResponse{}
+			return v.ApplicationsResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAppsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApps, schemas.GetAppsRequest, schemas.GetAppsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApps, schemas.GetAppsRequest, schemas.GetAppsResponse), output: &GetAppsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

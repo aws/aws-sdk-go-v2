@@ -4,6 +4,8 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteAggregationAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAggregationAuthorizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAggregationAuthorizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAggregationAuthorizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizedAccountId != nil {
+		s.WriteString(schemas.DeleteAggregationAuthorizationRequest_AuthorizedAccountId, *v.AuthorizedAccountId)
+	}
+	if v.AuthorizedAwsRegion != nil {
+		s.WriteString(schemas.DeleteAggregationAuthorizationRequest_AuthorizedAwsRegion, *v.AuthorizedAwsRegion)
+	}
+}
+
 type DeleteAggregationAuthorizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type DeleteAggregationAuthorizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAggregationAuthorizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAggregationAuthorizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAggregationAuthorizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAggregationAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAggregationAuthorization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAggregationAuthorization, schemas.DeleteAggregationAuthorizationRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteAggregationAuthorization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAggregationAuthorization, schemas.DeleteAggregationAuthorizationRequest, nil), output: &DeleteAggregationAuthorizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

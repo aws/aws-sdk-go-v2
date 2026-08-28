@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,24 @@ type DeleteRelationalDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRelationalDatabaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRelationalDatabaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRelationalDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FinalRelationalDatabaseSnapshotName != nil {
+		s.WriteString(schemas.DeleteRelationalDatabaseRequest_finalRelationalDatabaseSnapshotName, *v.FinalRelationalDatabaseSnapshotName)
+	}
+	if v.RelationalDatabaseName != nil {
+		s.WriteString(schemas.DeleteRelationalDatabaseRequest_relationalDatabaseName, *v.RelationalDatabaseName)
+	}
+	if v.SkipFinalSnapshot != nil {
+		s.WriteBool(schemas.DeleteRelationalDatabaseRequest_skipFinalSnapshot, *v.SkipFinalSnapshot)
+	}
+}
+
 type DeleteRelationalDatabaseOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -76,13 +96,29 @@ type DeleteRelationalDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRelationalDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRelationalDatabaseResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRelationalDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.DeleteRelationalDatabaseResult_operations, v.Operations)
+}
+func (v *DeleteRelationalDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRelationalDatabaseResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRelationalDatabaseResult_operations:
+			return deserializeOperationList(d, schemas.DeleteRelationalDatabaseResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRelationalDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRelationalDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRelationalDatabase, schemas.DeleteRelationalDatabaseRequest, schemas.DeleteRelationalDatabaseResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteRelationalDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRelationalDatabase, schemas.DeleteRelationalDatabaseRequest, schemas.DeleteRelationalDatabaseResult), output: &DeleteRelationalDatabaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

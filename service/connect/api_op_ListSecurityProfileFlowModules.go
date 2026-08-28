@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -52,6 +54,27 @@ type ListSecurityProfileFlowModulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityProfileFlowModulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityProfileFlowModulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityProfileFlowModulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListSecurityProfileFlowModulesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSecurityProfileFlowModulesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityProfileFlowModulesRequest_NextToken, *v.NextToken)
+	}
+	if v.SecurityProfileId != nil {
+		s.WriteString(schemas.ListSecurityProfileFlowModulesRequest_SecurityProfileId, *v.SecurityProfileId)
+	}
+}
+
 type ListSecurityProfileFlowModulesOutput struct {
 
 	//  A list of Flow Modules an AI Agent can invoke as a tool.
@@ -73,13 +96,47 @@ type ListSecurityProfileFlowModulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityProfileFlowModulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityProfileFlowModulesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityProfileFlowModulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAllowedFlowModules(s, schemas.ListSecurityProfileFlowModulesResponse_AllowedFlowModules, v.AllowedFlowModules)
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.ListSecurityProfileFlowModulesResponse_LastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ListSecurityProfileFlowModulesResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityProfileFlowModulesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListSecurityProfileFlowModulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSecurityProfileFlowModulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSecurityProfileFlowModulesResponse_AllowedFlowModules:
+			return deserializeAllowedFlowModules(d, schemas.ListSecurityProfileFlowModulesResponse_AllowedFlowModules, &v.AllowedFlowModules)
+		case schemas.ListSecurityProfileFlowModulesResponse_LastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.ListSecurityProfileFlowModulesResponse_LastModifiedRegion, v.LastModifiedRegion)
+		case schemas.ListSecurityProfileFlowModulesResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ListSecurityProfileFlowModulesResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.ListSecurityProfileFlowModulesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSecurityProfileFlowModulesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSecurityProfileFlowModulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSecurityProfileFlowModules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityProfileFlowModules, schemas.ListSecurityProfileFlowModulesRequest, schemas.ListSecurityProfileFlowModulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSecurityProfileFlowModules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityProfileFlowModules, schemas.ListSecurityProfileFlowModulesRequest, schemas.ListSecurityProfileFlowModulesResponse), output: &ListSecurityProfileFlowModulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

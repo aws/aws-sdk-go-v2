@@ -4,7 +4,9 @@ package codedeploy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,16 @@ type BatchGetApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetApplicationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetApplicationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApplicationsList(s, schemas.BatchGetApplicationsInput_applicationNames, v.ApplicationNames)
+}
+
 // Represents the output of a BatchGetApplications operation.
 type BatchGetApplicationsOutput struct {
 
@@ -49,13 +61,29 @@ type BatchGetApplicationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetApplicationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApplicationsInfoList(s, schemas.BatchGetApplicationsOutput_applicationsInfo, v.ApplicationsInfo)
+}
+func (v *BatchGetApplicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetApplicationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetApplicationsOutput_applicationsInfo:
+			return deserializeApplicationsInfoList(d, schemas.BatchGetApplicationsOutput_applicationsInfo, &v.ApplicationsInfo)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetApplications, schemas.BatchGetApplicationsInput, schemas.BatchGetApplicationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetApplications, schemas.BatchGetApplicationsInput, schemas.BatchGetApplicationsOutput), output: &BatchGetApplicationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

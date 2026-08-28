@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteEventStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEventStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEventStreamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEventStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.DeleteEventStreamRequest_ApplicationId, *v.ApplicationId)
+	}
+}
+
 type DeleteEventStreamOutput struct {
 
 	// Specifies settings for publishing event data to an Amazon Kinesis data stream
@@ -49,13 +63,34 @@ type DeleteEventStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEventStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEventStreamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEventStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventStream != nil {
+		s.WriteStruct(schemas.DeleteEventStreamResponse_EventStream)
+		v.EventStream.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteEventStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEventStreamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteEventStreamResponse_EventStream:
+			v.EventStream = &types.EventStream{}
+			return v.EventStream.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEventStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteEventStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEventStream, schemas.DeleteEventStreamRequest, schemas.DeleteEventStreamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteEventStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEventStream, schemas.DeleteEventStreamRequest, schemas.DeleteEventStreamResponse), output: &DeleteEventStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

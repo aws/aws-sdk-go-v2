@@ -4,7 +4,9 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribeNotebookExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNotebookExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNotebookExecutionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNotebookExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotebookExecutionId != nil {
+		s.WriteString(schemas.DescribeNotebookExecutionInput_NotebookExecutionId, *v.NotebookExecutionId)
+	}
+}
+
 type DescribeNotebookExecutionOutput struct {
 
 	// Properties of the notebook execution.
@@ -45,13 +59,34 @@ type DescribeNotebookExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNotebookExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNotebookExecutionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNotebookExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotebookExecution != nil {
+		s.WriteStruct(schemas.DescribeNotebookExecutionOutput_NotebookExecution)
+		v.NotebookExecution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeNotebookExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeNotebookExecutionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeNotebookExecutionOutput_NotebookExecution:
+			v.NotebookExecution = &types.NotebookExecution{}
+			return v.NotebookExecution.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeNotebookExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeNotebookExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNotebookExecution, schemas.DescribeNotebookExecutionInput, schemas.DescribeNotebookExecutionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeNotebookExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNotebookExecution, schemas.DescribeNotebookExecutionInput, schemas.DescribeNotebookExecutionOutput), output: &DescribeNotebookExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

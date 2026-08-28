@@ -4,6 +4,8 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type UpdateDeviceDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDeviceDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDeviceDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDeviceDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceDefinitionId != nil {
+		s.WriteString(schemas.UpdateDeviceDefinitionRequest_DeviceDefinitionId, *v.DeviceDefinitionId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDeviceDefinitionRequest_Name, *v.Name)
+	}
+}
+
 type UpdateDeviceDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +60,26 @@ type UpdateDeviceDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDeviceDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDeviceDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDeviceDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateDeviceDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDeviceDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDeviceDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDeviceDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDeviceDefinition, schemas.UpdateDeviceDefinitionRequest, schemas.UpdateDeviceDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDeviceDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDeviceDefinition, schemas.UpdateDeviceDefinitionRequest, schemas.UpdateDeviceDefinitionResponse), output: &UpdateDeviceDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package athena
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type GetCalculationExecutionCodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCalculationExecutionCodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCalculationExecutionCodeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCalculationExecutionCodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CalculationExecutionId != nil {
+		s.WriteString(schemas.GetCalculationExecutionCodeRequest_CalculationExecutionId, *v.CalculationExecutionId)
+	}
+}
+
 type GetCalculationExecutionCodeOutput struct {
 
 	// The unencrypted code that was executed for the calculation.
@@ -44,13 +58,32 @@ type GetCalculationExecutionCodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCalculationExecutionCodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCalculationExecutionCodeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCalculationExecutionCodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeBlock != nil {
+		s.WriteString(schemas.GetCalculationExecutionCodeResponse_CodeBlock, *v.CodeBlock)
+	}
+}
+func (v *GetCalculationExecutionCodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCalculationExecutionCodeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCalculationExecutionCodeResponse_CodeBlock:
+			v.CodeBlock = new(string)
+			return d.ReadString(schemas.GetCalculationExecutionCodeResponse_CodeBlock, v.CodeBlock)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCalculationExecutionCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCalculationExecutionCode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCalculationExecutionCode, schemas.GetCalculationExecutionCodeRequest, schemas.GetCalculationExecutionCodeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCalculationExecutionCode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCalculationExecutionCode, schemas.GetCalculationExecutionCodeRequest, schemas.GetCalculationExecutionCodeResponse), output: &GetCalculationExecutionCodeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

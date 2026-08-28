@@ -5,7 +5,9 @@ package personalize
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListBatchInferenceJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBatchInferenceJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBatchInferenceJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBatchInferenceJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBatchInferenceJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBatchInferenceJobsRequest_nextToken, *v.NextToken)
+	}
+	if v.SolutionVersionArn != nil {
+		s.WriteString(schemas.ListBatchInferenceJobsRequest_solutionVersionArn, *v.SolutionVersionArn)
+	}
+}
+
 type ListBatchInferenceJobsOutput struct {
 
 	// A list containing information on each job that is returned.
@@ -57,13 +77,35 @@ type ListBatchInferenceJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBatchInferenceJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBatchInferenceJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBatchInferenceJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchInferenceJobs(s, schemas.ListBatchInferenceJobsResponse_batchInferenceJobs, v.BatchInferenceJobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBatchInferenceJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListBatchInferenceJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBatchInferenceJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBatchInferenceJobsResponse_batchInferenceJobs:
+			return deserializeBatchInferenceJobs(d, schemas.ListBatchInferenceJobsResponse_batchInferenceJobs, &v.BatchInferenceJobs)
+		case schemas.ListBatchInferenceJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBatchInferenceJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBatchInferenceJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListBatchInferenceJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBatchInferenceJobs, schemas.ListBatchInferenceJobsRequest, schemas.ListBatchInferenceJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListBatchInferenceJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBatchInferenceJobs, schemas.ListBatchInferenceJobsRequest, schemas.ListBatchInferenceJobsResponse), output: &ListBatchInferenceJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

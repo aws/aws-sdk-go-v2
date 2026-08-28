@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,19 @@ type CreateCollaborationChangeRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCollaborationChangeRequestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCollaborationChangeRequestInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCollaborationChangeRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChangeInputList(s, schemas.CreateCollaborationChangeRequestInput_changes, v.Changes)
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.CreateCollaborationChangeRequestInput_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+}
+
 type CreateCollaborationChangeRequestOutput struct {
 
 	// Represents a request to modify a collaboration. Change requests enable
@@ -56,13 +71,34 @@ type CreateCollaborationChangeRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCollaborationChangeRequestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCollaborationChangeRequestOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCollaborationChangeRequestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationChangeRequest != nil {
+		s.WriteStruct(schemas.CreateCollaborationChangeRequestOutput_collaborationChangeRequest)
+		v.CollaborationChangeRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateCollaborationChangeRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCollaborationChangeRequestOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCollaborationChangeRequestOutput_collaborationChangeRequest:
+			v.CollaborationChangeRequest = &types.CollaborationChangeRequest{}
+			return v.CollaborationChangeRequest.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCollaborationChangeRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCollaborationChangeRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCollaborationChangeRequest, schemas.CreateCollaborationChangeRequestInput, schemas.CreateCollaborationChangeRequestOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCollaborationChangeRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCollaborationChangeRequest, schemas.CreateCollaborationChangeRequestInput, schemas.CreateCollaborationChangeRequestOutput), output: &CreateCollaborationChangeRequestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

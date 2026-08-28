@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,44 @@ type GetSchemaAnalysisRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSchemaAnalysisRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSchemaAnalysisRuleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSchemaAnalysisRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.GetSchemaAnalysisRuleInput_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetSchemaAnalysisRuleInput_name, *v.Name)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GetSchemaAnalysisRuleInput_type, string(v.Type))
+	}
+}
+func (v *GetSchemaAnalysisRuleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSchemaAnalysisRuleInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSchemaAnalysisRuleInput_collaborationIdentifier:
+			v.CollaborationIdentifier = new(string)
+			return d.ReadString(schemas.GetSchemaAnalysisRuleInput_collaborationIdentifier, v.CollaborationIdentifier)
+		case schemas.GetSchemaAnalysisRuleInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetSchemaAnalysisRuleInput_name, v.Name)
+		case schemas.GetSchemaAnalysisRuleInput_type:
+			var ev string
+			if err := d.ReadString(schemas.GetSchemaAnalysisRuleInput_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.AnalysisRuleType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type GetSchemaAnalysisRuleOutput struct {
 
 	// A specification about how data from the configured table can be used.
@@ -60,13 +100,34 @@ type GetSchemaAnalysisRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSchemaAnalysisRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSchemaAnalysisRuleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSchemaAnalysisRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisRule != nil {
+		s.WriteStruct(schemas.GetSchemaAnalysisRuleOutput_analysisRule)
+		v.AnalysisRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSchemaAnalysisRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSchemaAnalysisRuleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSchemaAnalysisRuleOutput_analysisRule:
+			v.AnalysisRule = &types.AnalysisRule{}
+			return v.AnalysisRule.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSchemaAnalysisRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSchemaAnalysisRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSchemaAnalysisRule, schemas.GetSchemaAnalysisRuleInput, schemas.GetSchemaAnalysisRuleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSchemaAnalysisRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSchemaAnalysisRule, schemas.GetSchemaAnalysisRuleInput, schemas.GetSchemaAnalysisRuleOutput), output: &GetSchemaAnalysisRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

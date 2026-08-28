@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeReservedCapacityInput struct {
 	ReservedCapacityArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeReservedCapacityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReservedCapacityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservedCapacityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReservedCapacityArn != nil {
+		s.WriteString(schemas.DescribeReservedCapacityRequest_ReservedCapacityArn, *v.ReservedCapacityArn)
+	}
 }
 
 type DescribeReservedCapacityOutput struct {
@@ -90,13 +104,118 @@ type DescribeReservedCapacityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReservedCapacityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReservedCapacityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservedCapacityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.DescribeReservedCapacityResponse_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailableInstanceCount != nil {
+		s.WriteInt32(schemas.DescribeReservedCapacityResponse_AvailableInstanceCount, *v.AvailableInstanceCount)
+	}
+	if v.DurationHours != nil {
+		s.WriteInt64(schemas.DescribeReservedCapacityResponse_DurationHours, *v.DurationHours)
+	}
+	if v.DurationMinutes != nil {
+		s.WriteInt64(schemas.DescribeReservedCapacityResponse_DurationMinutes, *v.DurationMinutes)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.DescribeReservedCapacityResponse_EndTime, *v.EndTime)
+	}
+	if v.InUseInstanceCount != nil {
+		s.WriteInt32(schemas.DescribeReservedCapacityResponse_InUseInstanceCount, *v.InUseInstanceCount)
+	}
+	if v.InstanceType != "" {
+		s.WriteString(schemas.DescribeReservedCapacityResponse_InstanceType, string(v.InstanceType))
+	}
+	if v.ReservedCapacityArn != nil {
+		s.WriteString(schemas.DescribeReservedCapacityResponse_ReservedCapacityArn, *v.ReservedCapacityArn)
+	}
+	if v.ReservedCapacityType != "" {
+		s.WriteString(schemas.DescribeReservedCapacityResponse_ReservedCapacityType, string(v.ReservedCapacityType))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.DescribeReservedCapacityResponse_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeReservedCapacityResponse_Status, string(v.Status))
+	}
+	if v.TotalInstanceCount != nil {
+		s.WriteInt32(schemas.DescribeReservedCapacityResponse_TotalInstanceCount, *v.TotalInstanceCount)
+	}
+	if v.UltraServerSummary != nil {
+		s.WriteStruct(schemas.DescribeReservedCapacityResponse_UltraServerSummary)
+		v.UltraServerSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeReservedCapacityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReservedCapacityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReservedCapacityResponse_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.DescribeReservedCapacityResponse_AvailabilityZone, v.AvailabilityZone)
+		case schemas.DescribeReservedCapacityResponse_AvailableInstanceCount:
+			v.AvailableInstanceCount = new(int32)
+			return d.ReadInt32(schemas.DescribeReservedCapacityResponse_AvailableInstanceCount, v.AvailableInstanceCount)
+		case schemas.DescribeReservedCapacityResponse_DurationHours:
+			v.DurationHours = new(int64)
+			return d.ReadInt64(schemas.DescribeReservedCapacityResponse_DurationHours, v.DurationHours)
+		case schemas.DescribeReservedCapacityResponse_DurationMinutes:
+			v.DurationMinutes = new(int64)
+			return d.ReadInt64(schemas.DescribeReservedCapacityResponse_DurationMinutes, v.DurationMinutes)
+		case schemas.DescribeReservedCapacityResponse_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeReservedCapacityResponse_EndTime, v.EndTime)
+		case schemas.DescribeReservedCapacityResponse_InUseInstanceCount:
+			v.InUseInstanceCount = new(int32)
+			return d.ReadInt32(schemas.DescribeReservedCapacityResponse_InUseInstanceCount, v.InUseInstanceCount)
+		case schemas.DescribeReservedCapacityResponse_InstanceType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeReservedCapacityResponse_InstanceType, &ev); err != nil {
+				return err
+			}
+			v.InstanceType = types.ReservedCapacityInstanceType(ev)
+			return nil
+		case schemas.DescribeReservedCapacityResponse_ReservedCapacityArn:
+			v.ReservedCapacityArn = new(string)
+			return d.ReadString(schemas.DescribeReservedCapacityResponse_ReservedCapacityArn, v.ReservedCapacityArn)
+		case schemas.DescribeReservedCapacityResponse_ReservedCapacityType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeReservedCapacityResponse_ReservedCapacityType, &ev); err != nil {
+				return err
+			}
+			v.ReservedCapacityType = types.ReservedCapacityType(ev)
+			return nil
+		case schemas.DescribeReservedCapacityResponse_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeReservedCapacityResponse_StartTime, v.StartTime)
+		case schemas.DescribeReservedCapacityResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeReservedCapacityResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ReservedCapacityStatus(ev)
+			return nil
+		case schemas.DescribeReservedCapacityResponse_TotalInstanceCount:
+			v.TotalInstanceCount = new(int32)
+			return d.ReadInt32(schemas.DescribeReservedCapacityResponse_TotalInstanceCount, v.TotalInstanceCount)
+		case schemas.DescribeReservedCapacityResponse_UltraServerSummary:
+			v.UltraServerSummary = &types.UltraServerSummary{}
+			return v.UltraServerSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReservedCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeReservedCapacity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservedCapacity, schemas.DescribeReservedCapacityRequest, schemas.DescribeReservedCapacityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeReservedCapacity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservedCapacity, schemas.DescribeReservedCapacityRequest, schemas.DescribeReservedCapacityResponse), output: &DescribeReservedCapacityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

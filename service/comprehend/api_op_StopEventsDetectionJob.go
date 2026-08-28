@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type StopEventsDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopEventsDetectionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopEventsDetectionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopEventsDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopEventsDetectionJobRequest_JobId, *v.JobId)
+	}
+}
+
 type StopEventsDetectionJobOutput struct {
 
 	// The identifier of the events detection job to stop.
@@ -48,13 +62,42 @@ type StopEventsDetectionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopEventsDetectionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopEventsDetectionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopEventsDetectionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopEventsDetectionJobResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.StopEventsDetectionJobResponse_JobStatus, string(v.JobStatus))
+	}
+}
+func (v *StopEventsDetectionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopEventsDetectionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopEventsDetectionJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StopEventsDetectionJobResponse_JobId, v.JobId)
+		case schemas.StopEventsDetectionJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.StopEventsDetectionJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopEventsDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopEventsDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopEventsDetectionJob, schemas.StopEventsDetectionJobRequest, schemas.StopEventsDetectionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopEventsDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopEventsDetectionJob, schemas.StopEventsDetectionJobRequest, schemas.StopEventsDetectionJobResponse), output: &StopEventsDetectionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

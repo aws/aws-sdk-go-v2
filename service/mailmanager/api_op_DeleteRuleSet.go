@@ -4,6 +4,8 @@ package mailmanager
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteRuleSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRuleSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRuleSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRuleSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleSetId != nil {
+		s.WriteString(schemas.DeleteRuleSetRequest_RuleSetId, *v.RuleSetId)
+	}
+}
+
 type DeleteRuleSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteRuleSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRuleSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRuleSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRuleSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteRuleSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRuleSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRuleSet, schemas.DeleteRuleSetRequest, schemas.DeleteRuleSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRuleSet, schemas.DeleteRuleSetRequest, schemas.DeleteRuleSetResponse), output: &DeleteRuleSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

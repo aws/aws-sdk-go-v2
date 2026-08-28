@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type StopHyperParameterTuningJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopHyperParameterTuningJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopHyperParameterTuningJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopHyperParameterTuningJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HyperParameterTuningJobName != nil {
+		s.WriteString(schemas.StopHyperParameterTuningJobRequest_HyperParameterTuningJobName, *v.HyperParameterTuningJobName)
+	}
+}
+
 type StopHyperParameterTuningJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +60,26 @@ type StopHyperParameterTuningJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopHyperParameterTuningJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopHyperParameterTuningJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopHyperParameterTuningJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopHyperParameterTuningJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopHyperParameterTuningJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopHyperParameterTuningJob, schemas.StopHyperParameterTuningJobRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopHyperParameterTuningJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopHyperParameterTuningJob, schemas.StopHyperParameterTuningJobRequest, nil), output: &StopHyperParameterTuningJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

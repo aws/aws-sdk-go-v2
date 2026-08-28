@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,27 @@ type GetStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStatisticsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationField != nil {
+		s.WriteString(schemas.GetStatisticsRequest_aggregationField, *v.AggregationField)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.GetStatisticsRequest_indexName, *v.IndexName)
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.GetStatisticsRequest_queryString, *v.QueryString)
+	}
+	if v.QueryVersion != nil {
+		s.WriteString(schemas.GetStatisticsRequest_queryVersion, *v.QueryVersion)
+	}
+}
+
 type GetStatisticsOutput struct {
 
 	// The statistics returned by the Fleet Indexing service based on the query and
@@ -62,13 +85,34 @@ type GetStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStatisticsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Statistics != nil {
+		s.WriteStruct(schemas.GetStatisticsResponse_statistics)
+		v.Statistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetStatisticsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetStatisticsResponse_statistics:
+			v.Statistics = &types.Statistics{}
+			return v.Statistics.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStatistics, schemas.GetStatisticsRequest, schemas.GetStatisticsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStatistics, schemas.GetStatisticsRequest, schemas.GetStatisticsResponse), output: &GetStatisticsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

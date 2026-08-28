@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,33 @@ type ListJobExecutionsForThingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobExecutionsForThingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobExecutionsForThingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobExecutionsForThingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.ListJobExecutionsForThingRequest_jobId, *v.JobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListJobExecutionsForThingRequest_maxResults, *v.MaxResults)
+	}
+	if v.NamespaceId != nil {
+		s.WriteString(schemas.ListJobExecutionsForThingRequest_namespaceId, *v.NamespaceId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListJobExecutionsForThingRequest_nextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListJobExecutionsForThingRequest_status, string(v.Status))
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.ListJobExecutionsForThingRequest_thingName, *v.ThingName)
+	}
+}
+
 type ListJobExecutionsForThingOutput struct {
 
 	// A list of job execution summaries.
@@ -80,13 +109,35 @@ type ListJobExecutionsForThingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobExecutionsForThingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobExecutionsForThingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobExecutionsForThingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeJobExecutionSummaryForThingList(s, schemas.ListJobExecutionsForThingResponse_executionSummaries, v.ExecutionSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListJobExecutionsForThingResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListJobExecutionsForThingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListJobExecutionsForThingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListJobExecutionsForThingResponse_executionSummaries:
+			return deserializeJobExecutionSummaryForThingList(d, schemas.ListJobExecutionsForThingResponse_executionSummaries, &v.ExecutionSummaries)
+		case schemas.ListJobExecutionsForThingResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListJobExecutionsForThingResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListJobExecutionsForThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListJobExecutionsForThing{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobExecutionsForThing, schemas.ListJobExecutionsForThingRequest, schemas.ListJobExecutionsForThingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListJobExecutionsForThing{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobExecutionsForThing, schemas.ListJobExecutionsForThingRequest, schemas.ListJobExecutionsForThingResponse), output: &ListJobExecutionsForThingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,6 +5,8 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type DisassociateLambdaFunctionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateLambdaFunctionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateLambdaFunctionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateLambdaFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DisassociateLambdaFunctionRequest_ClientToken, *v.ClientToken)
+	}
+	if v.FunctionArn != nil {
+		s.WriteString(schemas.DisassociateLambdaFunctionRequest_FunctionArn, *v.FunctionArn)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DisassociateLambdaFunctionRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DisassociateLambdaFunctionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,13 +79,26 @@ type DisassociateLambdaFunctionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateLambdaFunctionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateLambdaFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateLambdaFunctionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateLambdaFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateLambdaFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateLambdaFunction, schemas.DisassociateLambdaFunctionRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateLambdaFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateLambdaFunction, schemas.DisassociateLambdaFunctionRequest, nil), output: &DisassociateLambdaFunctionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

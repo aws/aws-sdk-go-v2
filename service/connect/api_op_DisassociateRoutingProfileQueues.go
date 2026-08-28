@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,23 @@ type DisassociateRoutingProfileQueuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateRoutingProfileQueuesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateRoutingProfileQueuesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateRoutingProfileQueuesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DisassociateRoutingProfileQueuesRequest_InstanceId, *v.InstanceId)
+	}
+	serializeRoutingProfileQueueReferenceList(s, schemas.DisassociateRoutingProfileQueuesRequest_ManualAssignmentQueueReferences, v.ManualAssignmentQueueReferences)
+	serializeRoutingProfileQueueReferenceList(s, schemas.DisassociateRoutingProfileQueuesRequest_QueueReferences, v.QueueReferences)
+	if v.RoutingProfileId != nil {
+		s.WriteString(schemas.DisassociateRoutingProfileQueuesRequest_RoutingProfileId, *v.RoutingProfileId)
+	}
+}
+
 type DisassociateRoutingProfileQueuesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,13 +78,26 @@ type DisassociateRoutingProfileQueuesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateRoutingProfileQueuesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateRoutingProfileQueuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateRoutingProfileQueuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateRoutingProfileQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateRoutingProfileQueues{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateRoutingProfileQueues, schemas.DisassociateRoutingProfileQueuesRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateRoutingProfileQueues{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateRoutingProfileQueues, schemas.DisassociateRoutingProfileQueuesRequest, nil), output: &DisassociateRoutingProfileQueuesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

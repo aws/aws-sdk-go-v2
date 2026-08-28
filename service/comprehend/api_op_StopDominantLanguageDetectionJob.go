@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,18 @@ type StopDominantLanguageDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopDominantLanguageDetectionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopDominantLanguageDetectionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopDominantLanguageDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopDominantLanguageDetectionJobRequest_JobId, *v.JobId)
+	}
+}
+
 type StopDominantLanguageDetectionJobOutput struct {
 
 	// The identifier of the dominant language detection job to stop.
@@ -61,13 +75,42 @@ type StopDominantLanguageDetectionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopDominantLanguageDetectionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopDominantLanguageDetectionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopDominantLanguageDetectionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopDominantLanguageDetectionJobResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.StopDominantLanguageDetectionJobResponse_JobStatus, string(v.JobStatus))
+	}
+}
+func (v *StopDominantLanguageDetectionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopDominantLanguageDetectionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopDominantLanguageDetectionJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StopDominantLanguageDetectionJobResponse_JobId, v.JobId)
+		case schemas.StopDominantLanguageDetectionJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.StopDominantLanguageDetectionJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopDominantLanguageDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopDominantLanguageDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDominantLanguageDetectionJob, schemas.StopDominantLanguageDetectionJobRequest, schemas.StopDominantLanguageDetectionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopDominantLanguageDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDominantLanguageDetectionJob, schemas.StopDominantLanguageDetectionJobRequest, schemas.StopDominantLanguageDetectionJobResponse), output: &StopDominantLanguageDetectionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

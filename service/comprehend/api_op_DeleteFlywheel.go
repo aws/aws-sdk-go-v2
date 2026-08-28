@@ -4,6 +4,8 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type DeleteFlywheelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFlywheelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFlywheelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFlywheelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlywheelArn != nil {
+		s.WriteString(schemas.DeleteFlywheelRequest_FlywheelArn, *v.FlywheelArn)
+	}
+}
+
 type DeleteFlywheelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +60,26 @@ type DeleteFlywheelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFlywheelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFlywheelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFlywheelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteFlywheelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFlywheelResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFlywheelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteFlywheel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFlywheel, schemas.DeleteFlywheelRequest, schemas.DeleteFlywheelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteFlywheel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFlywheel, schemas.DeleteFlywheelRequest, schemas.DeleteFlywheelResponse), output: &DeleteFlywheelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

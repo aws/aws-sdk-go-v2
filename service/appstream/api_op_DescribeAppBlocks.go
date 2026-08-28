@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,22 @@ type DescribeAppBlocksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppBlocksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppBlocksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppBlocksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeArnList(s, schemas.DescribeAppBlocksRequest_Arns, v.Arns)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeAppBlocksRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAppBlocksRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeAppBlocksOutput struct {
 
 	// The app blocks in the list.
@@ -54,13 +72,35 @@ type DescribeAppBlocksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppBlocksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppBlocksResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppBlocksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAppBlocks(s, schemas.DescribeAppBlocksResult_AppBlocks, v.AppBlocks)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAppBlocksResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAppBlocksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAppBlocksResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAppBlocksResult_AppBlocks:
+			return deserializeAppBlocks(d, schemas.DescribeAppBlocksResult_AppBlocks, &v.AppBlocks)
+		case schemas.DescribeAppBlocksResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAppBlocksResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAppBlocksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeAppBlocks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppBlocks, schemas.DescribeAppBlocksRequest, schemas.DescribeAppBlocksResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeAppBlocks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppBlocks, schemas.DescribeAppBlocksRequest, schemas.DescribeAppBlocksResult), output: &DescribeAppBlocksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

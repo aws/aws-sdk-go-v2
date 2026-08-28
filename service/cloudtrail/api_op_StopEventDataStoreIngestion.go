@@ -4,6 +4,8 @@ package cloudtrail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type StopEventDataStoreIngestionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopEventDataStoreIngestionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopEventDataStoreIngestionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopEventDataStoreIngestionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventDataStore != nil {
+		s.WriteString(schemas.StopEventDataStoreIngestionRequest_EventDataStore, *v.EventDataStore)
+	}
+}
+
 type StopEventDataStoreIngestionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +58,26 @@ type StopEventDataStoreIngestionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopEventDataStoreIngestionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopEventDataStoreIngestionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopEventDataStoreIngestionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopEventDataStoreIngestionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopEventDataStoreIngestionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopEventDataStoreIngestionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopEventDataStoreIngestion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopEventDataStoreIngestion, schemas.StopEventDataStoreIngestionRequest, schemas.StopEventDataStoreIngestionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopEventDataStoreIngestion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopEventDataStoreIngestion, schemas.StopEventDataStoreIngestionRequest, schemas.StopEventDataStoreIngestionResponse), output: &StopEventDataStoreIngestionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

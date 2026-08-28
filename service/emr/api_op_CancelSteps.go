@@ -4,7 +4,9 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,22 @@ type CancelStepsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelStepsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelStepsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelStepsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.CancelStepsInput_ClusterId, *v.ClusterId)
+	}
+	if v.StepCancellationOption != "" {
+		s.WriteString(schemas.CancelStepsInput_StepCancellationOption, string(v.StepCancellationOption))
+	}
+	serializeStepIdsList(s, schemas.CancelStepsInput_StepIds, v.StepIds)
+}
+
 // The output for the CancelSteps operation.
 type CancelStepsOutput struct {
 
@@ -65,13 +83,29 @@ type CancelStepsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelStepsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelStepsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCancelStepsInfoList(s, schemas.CancelStepsOutput_CancelStepsInfoList, v.CancelStepsInfoList)
+}
+func (v *CancelStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelStepsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelStepsOutput_CancelStepsInfoList:
+			return deserializeCancelStepsInfoList(d, schemas.CancelStepsOutput_CancelStepsInfoList, &v.CancelStepsInfoList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelStepsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelSteps, schemas.CancelStepsInput, schemas.CancelStepsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCancelSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelSteps, schemas.CancelStepsInput, schemas.CancelStepsOutput), output: &CancelStepsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

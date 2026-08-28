@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type DisableTopicRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableTopicRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableTopicRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableTopicRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleName != nil {
+		s.WriteString(schemas.DisableTopicRuleRequest_ruleName, *v.RuleName)
+	}
+}
+
 type DisableTopicRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +59,26 @@ type DisableTopicRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableTopicRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableTopicRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisableTopicRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableTopicRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisableTopicRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableTopicRule, schemas.DisableTopicRuleRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisableTopicRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableTopicRule, schemas.DisableTopicRuleRequest, nil), output: &DisableTopicRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

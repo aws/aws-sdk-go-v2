@@ -5,7 +5,9 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,27 @@ type ListProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProfilesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProfilesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProfilesInput_NextToken, *v.NextToken)
+	}
+	if v.ProfileNamePrefix != nil {
+		s.WriteString(schemas.ListProfilesInput_ProfileNamePrefix, *v.ProfileNamePrefix)
+	}
+	if v.ProfileOwnerType != "" {
+		s.WriteString(schemas.ListProfilesInput_ProfileOwnerType, string(v.ProfileOwnerType))
+	}
+}
+
 type ListProfilesOutput struct {
 
 	// The token to use to retrieve the next set of results.
@@ -57,13 +80,35 @@ type ListProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProfilesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProfilesOutput_NextToken, *v.NextToken)
+	}
+	serializeProfileSummaries(s, schemas.ListProfilesOutput_ProfileSummaries, v.ProfileSummaries)
+}
+func (v *ListProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProfilesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProfilesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProfilesOutput_NextToken, v.NextToken)
+		case schemas.ListProfilesOutput_ProfileSummaries:
+			return deserializeProfileSummaries(d, schemas.ListProfilesOutput_ProfileSummaries, &v.ProfileSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfiles, schemas.ListProfilesInput, schemas.ListProfilesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProfiles, schemas.ListProfilesInput, schemas.ListProfilesOutput), output: &ListProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

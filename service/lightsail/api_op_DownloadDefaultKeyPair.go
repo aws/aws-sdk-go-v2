@@ -4,6 +4,8 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -31,6 +33,15 @@ type DownloadDefaultKeyPairInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DownloadDefaultKeyPairInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DownloadDefaultKeyPairRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DownloadDefaultKeyPairInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DownloadDefaultKeyPairOutput struct {
 
 	// The timestamp when the default key pair was created.
@@ -48,13 +59,44 @@ type DownloadDefaultKeyPairOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DownloadDefaultKeyPairOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DownloadDefaultKeyPairResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DownloadDefaultKeyPairOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DownloadDefaultKeyPairResult_createdAt, *v.CreatedAt)
+	}
+	if v.PrivateKeyBase64 != nil {
+		s.WriteString(schemas.DownloadDefaultKeyPairResult_privateKeyBase64, *v.PrivateKeyBase64)
+	}
+	if v.PublicKeyBase64 != nil {
+		s.WriteString(schemas.DownloadDefaultKeyPairResult_publicKeyBase64, *v.PublicKeyBase64)
+	}
+}
+func (v *DownloadDefaultKeyPairOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DownloadDefaultKeyPairResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DownloadDefaultKeyPairResult_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DownloadDefaultKeyPairResult_createdAt, v.CreatedAt)
+		case schemas.DownloadDefaultKeyPairResult_privateKeyBase64:
+			v.PrivateKeyBase64 = new(string)
+			return d.ReadString(schemas.DownloadDefaultKeyPairResult_privateKeyBase64, v.PrivateKeyBase64)
+		case schemas.DownloadDefaultKeyPairResult_publicKeyBase64:
+			v.PublicKeyBase64 = new(string)
+			return d.ReadString(schemas.DownloadDefaultKeyPairResult_publicKeyBase64, v.PublicKeyBase64)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDownloadDefaultKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDownloadDefaultKeyPair{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DownloadDefaultKeyPair, schemas.DownloadDefaultKeyPairRequest, schemas.DownloadDefaultKeyPairResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDownloadDefaultKeyPair{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DownloadDefaultKeyPair, schemas.DownloadDefaultKeyPairRequest, schemas.DownloadDefaultKeyPairResult), output: &DownloadDefaultKeyPairOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

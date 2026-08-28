@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -78,6 +80,52 @@ type UpdateSlotTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSlotTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSlotTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSlotTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.UpdateSlotTypeRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.UpdateSlotTypeRequest_botVersion, *v.BotVersion)
+	}
+	if v.CompositeSlotTypeSetting != nil {
+		s.WriteStruct(schemas.UpdateSlotTypeRequest_compositeSlotTypeSetting)
+		v.CompositeSlotTypeSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSlotTypeRequest_description, *v.Description)
+	}
+	if v.ExternalSourceSetting != nil {
+		s.WriteStruct(schemas.UpdateSlotTypeRequest_externalSourceSetting)
+		v.ExternalSourceSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.UpdateSlotTypeRequest_localeId, *v.LocaleId)
+	}
+	if v.ParentSlotTypeSignature != nil {
+		s.WriteString(schemas.UpdateSlotTypeRequest_parentSlotTypeSignature, *v.ParentSlotTypeSignature)
+	}
+	if v.SlotTypeId != nil {
+		s.WriteString(schemas.UpdateSlotTypeRequest_slotTypeId, *v.SlotTypeId)
+	}
+	if v.SlotTypeName != nil {
+		s.WriteString(schemas.UpdateSlotTypeRequest_slotTypeName, *v.SlotTypeName)
+	}
+	serializeSlotTypeValues(s, schemas.UpdateSlotTypeRequest_slotTypeValues, v.SlotTypeValues)
+	if v.ValueSelectionSetting != nil {
+		s.WriteStruct(schemas.UpdateSlotTypeRequest_valueSelectionSetting)
+		v.ValueSelectionSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateSlotTypeOutput struct {
 
 	// The identifier of the bot that contains the slot type.
@@ -127,13 +175,107 @@ type UpdateSlotTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSlotTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSlotTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSlotTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.UpdateSlotTypeResponse_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.UpdateSlotTypeResponse_botVersion, *v.BotVersion)
+	}
+	if v.CompositeSlotTypeSetting != nil {
+		s.WriteStruct(schemas.UpdateSlotTypeResponse_compositeSlotTypeSetting)
+		v.CompositeSlotTypeSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.UpdateSlotTypeResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSlotTypeResponse_description, *v.Description)
+	}
+	if v.ExternalSourceSetting != nil {
+		s.WriteStruct(schemas.UpdateSlotTypeResponse_externalSourceSetting)
+		v.ExternalSourceSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.UpdateSlotTypeResponse_lastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.UpdateSlotTypeResponse_localeId, *v.LocaleId)
+	}
+	if v.ParentSlotTypeSignature != nil {
+		s.WriteString(schemas.UpdateSlotTypeResponse_parentSlotTypeSignature, *v.ParentSlotTypeSignature)
+	}
+	if v.SlotTypeId != nil {
+		s.WriteString(schemas.UpdateSlotTypeResponse_slotTypeId, *v.SlotTypeId)
+	}
+	if v.SlotTypeName != nil {
+		s.WriteString(schemas.UpdateSlotTypeResponse_slotTypeName, *v.SlotTypeName)
+	}
+	serializeSlotTypeValues(s, schemas.UpdateSlotTypeResponse_slotTypeValues, v.SlotTypeValues)
+	if v.ValueSelectionSetting != nil {
+		s.WriteStruct(schemas.UpdateSlotTypeResponse_valueSelectionSetting)
+		v.ValueSelectionSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateSlotTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSlotTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSlotTypeResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.UpdateSlotTypeResponse_botId, v.BotId)
+		case schemas.UpdateSlotTypeResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.UpdateSlotTypeResponse_botVersion, v.BotVersion)
+		case schemas.UpdateSlotTypeResponse_compositeSlotTypeSetting:
+			v.CompositeSlotTypeSetting = &types.CompositeSlotTypeSetting{}
+			return v.CompositeSlotTypeSetting.Deserialize(d)
+		case schemas.UpdateSlotTypeResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateSlotTypeResponse_creationDateTime, v.CreationDateTime)
+		case schemas.UpdateSlotTypeResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateSlotTypeResponse_description, v.Description)
+		case schemas.UpdateSlotTypeResponse_externalSourceSetting:
+			v.ExternalSourceSetting = &types.ExternalSourceSetting{}
+			return v.ExternalSourceSetting.Deserialize(d)
+		case schemas.UpdateSlotTypeResponse_lastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateSlotTypeResponse_lastUpdatedDateTime, v.LastUpdatedDateTime)
+		case schemas.UpdateSlotTypeResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.UpdateSlotTypeResponse_localeId, v.LocaleId)
+		case schemas.UpdateSlotTypeResponse_parentSlotTypeSignature:
+			v.ParentSlotTypeSignature = new(string)
+			return d.ReadString(schemas.UpdateSlotTypeResponse_parentSlotTypeSignature, v.ParentSlotTypeSignature)
+		case schemas.UpdateSlotTypeResponse_slotTypeId:
+			v.SlotTypeId = new(string)
+			return d.ReadString(schemas.UpdateSlotTypeResponse_slotTypeId, v.SlotTypeId)
+		case schemas.UpdateSlotTypeResponse_slotTypeName:
+			v.SlotTypeName = new(string)
+			return d.ReadString(schemas.UpdateSlotTypeResponse_slotTypeName, v.SlotTypeName)
+		case schemas.UpdateSlotTypeResponse_slotTypeValues:
+			return deserializeSlotTypeValues(d, schemas.UpdateSlotTypeResponse_slotTypeValues, &v.SlotTypeValues)
+		case schemas.UpdateSlotTypeResponse_valueSelectionSetting:
+			v.ValueSelectionSetting = &types.SlotValueSelectionSetting{}
+			return v.ValueSelectionSetting.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSlotTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSlotType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSlotType, schemas.UpdateSlotTypeRequest, schemas.UpdateSlotTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSlotType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSlotType, schemas.UpdateSlotTypeRequest, schemas.UpdateSlotTypeResponse), output: &UpdateSlotTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

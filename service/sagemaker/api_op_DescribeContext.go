@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeContextInput struct {
 	ContextName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeContextInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeContextRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeContextInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContextName != nil {
+		s.WriteString(schemas.DescribeContextRequest_ContextName, *v.ContextName)
+	}
 }
 
 type DescribeContextOutput struct {
@@ -76,13 +90,95 @@ type DescribeContextOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeContextOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeContextResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeContextOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContextArn != nil {
+		s.WriteString(schemas.DescribeContextResponse_ContextArn, *v.ContextArn)
+	}
+	if v.ContextName != nil {
+		s.WriteString(schemas.DescribeContextResponse_ContextName, *v.ContextName)
+	}
+	if v.ContextType != nil {
+		s.WriteString(schemas.DescribeContextResponse_ContextType, *v.ContextType)
+	}
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.DescribeContextResponse_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeContextResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeContextResponse_Description, *v.Description)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteStruct(schemas.DescribeContextResponse_LastModifiedBy)
+		v.LastModifiedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeContextResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.LineageGroupArn != nil {
+		s.WriteString(schemas.DescribeContextResponse_LineageGroupArn, *v.LineageGroupArn)
+	}
+	serializeLineageEntityParameters(s, schemas.DescribeContextResponse_Properties, v.Properties)
+	if v.Source != nil {
+		s.WriteStruct(schemas.DescribeContextResponse_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeContextOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeContextResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeContextResponse_ContextArn:
+			v.ContextArn = new(string)
+			return d.ReadString(schemas.DescribeContextResponse_ContextArn, v.ContextArn)
+		case schemas.DescribeContextResponse_ContextName:
+			v.ContextName = new(string)
+			return d.ReadString(schemas.DescribeContextResponse_ContextName, v.ContextName)
+		case schemas.DescribeContextResponse_ContextType:
+			v.ContextType = new(string)
+			return d.ReadString(schemas.DescribeContextResponse_ContextType, v.ContextType)
+		case schemas.DescribeContextResponse_CreatedBy:
+			v.CreatedBy = &types.UserContext{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.DescribeContextResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeContextResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeContextResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeContextResponse_Description, v.Description)
+		case schemas.DescribeContextResponse_LastModifiedBy:
+			v.LastModifiedBy = &types.UserContext{}
+			return v.LastModifiedBy.Deserialize(d)
+		case schemas.DescribeContextResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeContextResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeContextResponse_LineageGroupArn:
+			v.LineageGroupArn = new(string)
+			return d.ReadString(schemas.DescribeContextResponse_LineageGroupArn, v.LineageGroupArn)
+		case schemas.DescribeContextResponse_Properties:
+			return deserializeLineageEntityParameters(d, schemas.DescribeContextResponse_Properties, &v.Properties)
+		case schemas.DescribeContextResponse_Source:
+			v.Source = &types.ContextSource{}
+			return v.Source.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeContextMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeContext{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeContext, schemas.DescribeContextRequest, schemas.DescribeContextResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeContext{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeContext, schemas.DescribeContextRequest, schemas.DescribeContextResponse), output: &DescribeContextOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

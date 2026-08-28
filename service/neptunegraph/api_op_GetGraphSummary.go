@@ -5,6 +5,7 @@ package neptunegraph
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -43,6 +44,20 @@ type GetGraphSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGraphSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGraphSummaryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGraphSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphIdentifier != nil {
+		s.WriteString(schemas.GetGraphSummaryInput_graphIdentifier, *v.GraphIdentifier)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.GetGraphSummaryInput_mode, string(v.Mode))
+	}
+}
 func (in *GetGraphSummaryInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ApiType = ptr.String("DataPlane")
@@ -66,13 +81,46 @@ type GetGraphSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGraphSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGraphSummaryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGraphSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphSummary != nil {
+		s.WriteStruct(schemas.GetGraphSummaryOutput_graphSummary)
+		v.GraphSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastStatisticsComputationTime != nil {
+		s.WriteTime(schemas.GetGraphSummaryOutput_lastStatisticsComputationTime, *v.LastStatisticsComputationTime)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.GetGraphSummaryOutput_version, *v.Version)
+	}
+}
+func (v *GetGraphSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGraphSummaryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGraphSummaryOutput_graphSummary:
+			v.GraphSummary = &types.GraphDataSummary{}
+			return v.GraphSummary.Deserialize(d)
+		case schemas.GetGraphSummaryOutput_lastStatisticsComputationTime:
+			v.LastStatisticsComputationTime = new(time.Time)
+			return d.ReadTime(schemas.GetGraphSummaryOutput_lastStatisticsComputationTime, v.LastStatisticsComputationTime)
+		case schemas.GetGraphSummaryOutput_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.GetGraphSummaryOutput_version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGraphSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGraphSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGraphSummary, schemas.GetGraphSummaryInput, schemas.GetGraphSummaryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGraphSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGraphSummary, schemas.GetGraphSummaryInput, schemas.GetGraphSummaryOutput), output: &GetGraphSummaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

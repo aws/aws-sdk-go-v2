@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,23 @@ type DescribeWorkspacesPoolsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkspacesPoolsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspacesPoolsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspacesPoolsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDescribeWorkspacesPoolsFilters(s, schemas.DescribeWorkspacesPoolsRequest_Filters, v.Filters)
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeWorkspacesPoolsRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeWorkspacesPoolsRequest_NextToken, *v.NextToken)
+	}
+	serializeWorkspacesPoolIds(s, schemas.DescribeWorkspacesPoolsRequest_PoolIds, v.PoolIds)
+}
+
 type DescribeWorkspacesPoolsOutput struct {
 
 	// If you received a NextToken from a previous call that was paginated, provide
@@ -64,13 +83,35 @@ type DescribeWorkspacesPoolsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkspacesPoolsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspacesPoolsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspacesPoolsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeWorkspacesPoolsResult_NextToken, *v.NextToken)
+	}
+	serializeWorkspacesPools(s, schemas.DescribeWorkspacesPoolsResult_WorkspacesPools, v.WorkspacesPools)
+}
+func (v *DescribeWorkspacesPoolsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWorkspacesPoolsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWorkspacesPoolsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeWorkspacesPoolsResult_NextToken, v.NextToken)
+		case schemas.DescribeWorkspacesPoolsResult_WorkspacesPools:
+			return deserializeWorkspacesPools(d, schemas.DescribeWorkspacesPoolsResult_WorkspacesPools, &v.WorkspacesPools)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeWorkspacesPoolsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWorkspacesPools{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkspacesPools, schemas.DescribeWorkspacesPoolsRequest, schemas.DescribeWorkspacesPoolsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeWorkspacesPools{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkspacesPools, schemas.DescribeWorkspacesPoolsRequest, schemas.DescribeWorkspacesPoolsResult), output: &DescribeWorkspacesPoolsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

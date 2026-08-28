@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,21 @@ type DescribeRoutingProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRoutingProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRoutingProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRoutingProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeRoutingProfileRequest_InstanceId, *v.InstanceId)
+	}
+	if v.RoutingProfileId != nil {
+		s.WriteString(schemas.DescribeRoutingProfileRequest_RoutingProfileId, *v.RoutingProfileId)
+	}
+}
+
 type DescribeRoutingProfileOutput struct {
 
 	// The routing profile.
@@ -59,13 +76,34 @@ type DescribeRoutingProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRoutingProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRoutingProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRoutingProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoutingProfile != nil {
+		s.WriteStruct(schemas.DescribeRoutingProfileResponse_RoutingProfile)
+		v.RoutingProfile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeRoutingProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRoutingProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRoutingProfileResponse_RoutingProfile:
+			v.RoutingProfile = &types.RoutingProfile{}
+			return v.RoutingProfile.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRoutingProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRoutingProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRoutingProfile, schemas.DescribeRoutingProfileRequest, schemas.DescribeRoutingProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeRoutingProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRoutingProfile, schemas.DescribeRoutingProfileRequest, schemas.DescribeRoutingProfileResponse), output: &DescribeRoutingProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

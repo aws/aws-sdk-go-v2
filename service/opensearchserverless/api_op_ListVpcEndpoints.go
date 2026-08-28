@@ -5,7 +5,9 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,42 @@ type ListVpcEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVpcEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVpcEndpointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVpcEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListVpcEndpointsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVpcEndpointsRequest_nextToken, *v.NextToken)
+	}
+	if v.VpcEndpointFilters != nil {
+		s.WriteStruct(schemas.ListVpcEndpointsRequest_vpcEndpointFilters)
+		v.VpcEndpointFilters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ListVpcEndpointsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVpcEndpointsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVpcEndpointsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListVpcEndpointsRequest_maxResults, v.MaxResults)
+		case schemas.ListVpcEndpointsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVpcEndpointsRequest_nextToken, v.NextToken)
+		case schemas.ListVpcEndpointsRequest_vpcEndpointFilters:
+			v.VpcEndpointFilters = &types.VpcEndpointFilters{}
+			return v.VpcEndpointFilters.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type ListVpcEndpointsOutput struct {
 
 	// When nextToken is returned, there are more results available. The value of
@@ -62,13 +100,35 @@ type ListVpcEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVpcEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVpcEndpointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVpcEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVpcEndpointsResponse_nextToken, *v.NextToken)
+	}
+	serializeVpcEndpointSummaries(s, schemas.ListVpcEndpointsResponse_vpcEndpointSummaries, v.VpcEndpointSummaries)
+}
+func (v *ListVpcEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVpcEndpointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVpcEndpointsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVpcEndpointsResponse_nextToken, v.NextToken)
+		case schemas.ListVpcEndpointsResponse_vpcEndpointSummaries:
+			return deserializeVpcEndpointSummaries(d, schemas.ListVpcEndpointsResponse_vpcEndpointSummaries, &v.VpcEndpointSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVpcEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListVpcEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVpcEndpoints, schemas.ListVpcEndpointsRequest, schemas.ListVpcEndpointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListVpcEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVpcEndpoints, schemas.ListVpcEndpointsRequest, schemas.ListVpcEndpointsResponse), output: &ListVpcEndpointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

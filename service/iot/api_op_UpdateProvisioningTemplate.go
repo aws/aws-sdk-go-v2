@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,38 @@ type UpdateProvisioningTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProvisioningTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProvisioningTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProvisioningTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultVersionId != nil {
+		s.WriteInt32(schemas.UpdateProvisioningTemplateRequest_defaultVersionId, *v.DefaultVersionId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateProvisioningTemplateRequest_description, *v.Description)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.UpdateProvisioningTemplateRequest_enabled, *v.Enabled)
+	}
+	if v.PreProvisioningHook != nil {
+		s.WriteStruct(schemas.UpdateProvisioningTemplateRequest_preProvisioningHook)
+		v.PreProvisioningHook.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProvisioningRoleArn != nil {
+		s.WriteString(schemas.UpdateProvisioningTemplateRequest_provisioningRoleArn, *v.ProvisioningRoleArn)
+	}
+	if v.RemovePreProvisioningHook != nil {
+		s.WriteBool(schemas.UpdateProvisioningTemplateRequest_removePreProvisioningHook, *v.RemovePreProvisioningHook)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.UpdateProvisioningTemplateRequest_templateName, *v.TemplateName)
+	}
+}
+
 type UpdateProvisioningTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -68,13 +102,26 @@ type UpdateProvisioningTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProvisioningTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProvisioningTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProvisioningTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateProvisioningTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProvisioningTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProvisioningTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateProvisioningTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProvisioningTemplate, schemas.UpdateProvisioningTemplateRequest, schemas.UpdateProvisioningTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateProvisioningTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProvisioningTemplate, schemas.UpdateProvisioningTemplateRequest, schemas.UpdateProvisioningTemplateResponse), output: &UpdateProvisioningTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

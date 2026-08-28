@@ -5,7 +5,9 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -92,6 +94,25 @@ type ImportLensInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportLensInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportLensInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportLensInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.ImportLensInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.JSONString != nil {
+		s.WriteString(schemas.ImportLensInput_JSONString, *v.JSONString)
+	}
+	if v.LensAlias != nil {
+		s.WriteString(schemas.ImportLensInput_LensAlias, *v.LensAlias)
+	}
+	serializeTagMap(s, schemas.ImportLensInput_Tags, v.Tags)
+}
+
 type ImportLensOutput struct {
 
 	// The ARN for the lens that was created or updated.
@@ -106,13 +127,42 @@ type ImportLensOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportLensOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportLensOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportLensOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LensArn != nil {
+		s.WriteString(schemas.ImportLensOutput_LensArn, *v.LensArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ImportLensOutput_Status, string(v.Status))
+	}
+}
+func (v *ImportLensOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportLensOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportLensOutput_LensArn:
+			v.LensArn = new(string)
+			return d.ReadString(schemas.ImportLensOutput_LensArn, v.LensArn)
+		case schemas.ImportLensOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.ImportLensOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ImportLensStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportLensMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportLens{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportLens, schemas.ImportLensInput, schemas.ImportLensOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportLens{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportLens, schemas.ImportLensInput, schemas.ImportLensOutput), output: &ImportLensOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

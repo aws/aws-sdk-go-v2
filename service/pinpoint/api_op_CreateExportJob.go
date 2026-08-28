@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,23 @@ type CreateExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CreateExportJobRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.ExportJobRequest != nil {
+		s.WriteStruct(schemas.CreateExportJobRequest_ExportJobRequest)
+		v.ExportJobRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateExportJobOutput struct {
 
 	// Provides information about the status and settings of a job that exports
@@ -57,13 +76,34 @@ type CreateExportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportJobResponse != nil {
+		s.WriteStruct(schemas.CreateExportJobResponse_ExportJobResponse)
+		v.ExportJobResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateExportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateExportJobResponse_ExportJobResponse:
+			v.ExportJobResponse = &types.ExportJobResponse{}
+			return v.ExportJobResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExportJob, schemas.CreateExportJobRequest, schemas.CreateExportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExportJob, schemas.CreateExportJobRequest, schemas.CreateExportJobResponse), output: &CreateExportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

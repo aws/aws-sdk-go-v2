@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DeleteAuthorizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAuthorizerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAuthorizerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAuthorizerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizerName != nil {
+		s.WriteString(schemas.DeleteAuthorizerRequest_authorizerName, *v.AuthorizerName)
+	}
+}
+
 type DeleteAuthorizerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +58,26 @@ type DeleteAuthorizerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAuthorizerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAuthorizerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAuthorizerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAuthorizerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAuthorizerResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAuthorizer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAuthorizer, schemas.DeleteAuthorizerRequest, schemas.DeleteAuthorizerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAuthorizer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAuthorizer, schemas.DeleteAuthorizerRequest, schemas.DeleteAuthorizerResponse), output: &DeleteAuthorizerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

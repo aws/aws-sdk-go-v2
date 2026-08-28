@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,23 @@ type UpdateApnsChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApnsChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApnsChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApnsChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.APNSChannelRequest != nil {
+		s.WriteStruct(schemas.UpdateApnsChannelRequest_APNSChannelRequest)
+		v.APNSChannelRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.UpdateApnsChannelRequest_ApplicationId, *v.ApplicationId)
+	}
+}
+
 type UpdateApnsChannelOutput struct {
 
 	// Provides information about the status and settings of the APNs (Apple Push
@@ -56,13 +75,34 @@ type UpdateApnsChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApnsChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApnsChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApnsChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.APNSChannelResponse != nil {
+		s.WriteStruct(schemas.UpdateApnsChannelResponse_APNSChannelResponse)
+		v.APNSChannelResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateApnsChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateApnsChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateApnsChannelResponse_APNSChannelResponse:
+			v.APNSChannelResponse = &types.APNSChannelResponse{}
+			return v.APNSChannelResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateApnsChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateApnsChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApnsChannel, schemas.UpdateApnsChannelRequest, schemas.UpdateApnsChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateApnsChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApnsChannel, schemas.UpdateApnsChannelRequest, schemas.UpdateApnsChannelResponse), output: &UpdateApnsChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -126,6 +128,27 @@ type CreateEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEndpointInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentConfig != nil {
+		s.WriteStruct(schemas.CreateEndpointInput_DeploymentConfig)
+		v.DeploymentConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointConfigName != nil {
+		s.WriteString(schemas.CreateEndpointInput_EndpointConfigName, *v.EndpointConfigName)
+	}
+	if v.EndpointName != nil {
+		s.WriteString(schemas.CreateEndpointInput_EndpointName, *v.EndpointName)
+	}
+	serializeTagList(s, schemas.CreateEndpointInput_Tags, v.Tags)
+}
+
 type CreateEndpointOutput struct {
 
 	// The Amazon Resource Name (ARN) of the endpoint.
@@ -139,13 +162,32 @@ type CreateEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEndpointOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointArn != nil {
+		s.WriteString(schemas.CreateEndpointOutput_EndpointArn, *v.EndpointArn)
+	}
+}
+func (v *CreateEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEndpointOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEndpointOutput_EndpointArn:
+			v.EndpointArn = new(string)
+			return d.ReadString(schemas.CreateEndpointOutput_EndpointArn, v.EndpointArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEndpoint, schemas.CreateEndpointInput, schemas.CreateEndpointOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEndpoint, schemas.CreateEndpointInput, schemas.CreateEndpointOutput), output: &CreateEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

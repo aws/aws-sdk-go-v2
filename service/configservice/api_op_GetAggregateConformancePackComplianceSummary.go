@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,32 @@ type GetAggregateConformancePackComplianceSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAggregateConformancePackComplianceSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAggregateConformancePackComplianceSummaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAggregateConformancePackComplianceSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationAggregatorName != nil {
+		s.WriteString(schemas.GetAggregateConformancePackComplianceSummaryRequest_ConfigurationAggregatorName, *v.ConfigurationAggregatorName)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.GetAggregateConformancePackComplianceSummaryRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GroupByKey != "" {
+		s.WriteString(schemas.GetAggregateConformancePackComplianceSummaryRequest_GroupByKey, string(v.GroupByKey))
+	}
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.GetAggregateConformancePackComplianceSummaryRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAggregateConformancePackComplianceSummaryRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetAggregateConformancePackComplianceSummaryOutput struct {
 
 	// Returns a list of AggregateConformancePackComplianceSummary object.
@@ -76,13 +104,41 @@ type GetAggregateConformancePackComplianceSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAggregateConformancePackComplianceSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAggregateConformancePackComplianceSummaryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAggregateConformancePackComplianceSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAggregateConformancePackComplianceSummaryList(s, schemas.GetAggregateConformancePackComplianceSummaryResponse_AggregateConformancePackComplianceSummaries, v.AggregateConformancePackComplianceSummaries)
+	if v.GroupByKey != nil {
+		s.WriteString(schemas.GetAggregateConformancePackComplianceSummaryResponse_GroupByKey, *v.GroupByKey)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAggregateConformancePackComplianceSummaryResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetAggregateConformancePackComplianceSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAggregateConformancePackComplianceSummaryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAggregateConformancePackComplianceSummaryResponse_AggregateConformancePackComplianceSummaries:
+			return deserializeAggregateConformancePackComplianceSummaryList(d, schemas.GetAggregateConformancePackComplianceSummaryResponse_AggregateConformancePackComplianceSummaries, &v.AggregateConformancePackComplianceSummaries)
+		case schemas.GetAggregateConformancePackComplianceSummaryResponse_GroupByKey:
+			v.GroupByKey = new(string)
+			return d.ReadString(schemas.GetAggregateConformancePackComplianceSummaryResponse_GroupByKey, v.GroupByKey)
+		case schemas.GetAggregateConformancePackComplianceSummaryResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetAggregateConformancePackComplianceSummaryResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAggregateConformancePackComplianceSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAggregateConformancePackComplianceSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAggregateConformancePackComplianceSummary, schemas.GetAggregateConformancePackComplianceSummaryRequest, schemas.GetAggregateConformancePackComplianceSummaryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAggregateConformancePackComplianceSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAggregateConformancePackComplianceSummary, schemas.GetAggregateConformancePackComplianceSummaryRequest, schemas.GetAggregateConformancePackComplianceSummaryResponse), output: &GetAggregateConformancePackComplianceSummaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

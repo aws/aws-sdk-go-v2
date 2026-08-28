@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -142,6 +144,44 @@ type ConfirmSignUpInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfirmSignUpInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfirmSignUpRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfirmSignUpInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyticsMetadata != nil {
+		s.WriteStruct(schemas.ConfirmSignUpRequest_AnalyticsMetadata)
+		v.AnalyticsMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientId != nil {
+		s.WriteString(schemas.ConfirmSignUpRequest_ClientId, *v.ClientId)
+	}
+	serializeClientMetadataType(s, schemas.ConfirmSignUpRequest_ClientMetadata, v.ClientMetadata)
+	if v.ConfirmationCode != nil {
+		s.WriteString(schemas.ConfirmSignUpRequest_ConfirmationCode, *v.ConfirmationCode)
+	}
+	if v.ForceAliasCreation != false {
+		s.WriteBool(schemas.ConfirmSignUpRequest_ForceAliasCreation, v.ForceAliasCreation)
+	}
+	if v.SecretHash != nil {
+		s.WriteString(schemas.ConfirmSignUpRequest_SecretHash, *v.SecretHash)
+	}
+	if v.Session != nil {
+		s.WriteString(schemas.ConfirmSignUpRequest_Session, *v.Session)
+	}
+	if v.UserContextData != nil {
+		s.WriteStruct(schemas.ConfirmSignUpRequest_UserContextData)
+		v.UserContextData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.ConfirmSignUpRequest_Username, *v.Username)
+	}
+}
+
 // Represents the response from the server for the registration confirmation.
 type ConfirmSignUpOutput struct {
 
@@ -156,13 +196,32 @@ type ConfirmSignUpOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfirmSignUpOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfirmSignUpResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfirmSignUpOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Session != nil {
+		s.WriteString(schemas.ConfirmSignUpResponse_Session, *v.Session)
+	}
+}
+func (v *ConfirmSignUpOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfirmSignUpResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfirmSignUpResponse_Session:
+			v.Session = new(string)
+			return d.ReadString(schemas.ConfirmSignUpResponse_Session, v.Session)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationConfirmSignUpMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpConfirmSignUp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfirmSignUp, schemas.ConfirmSignUpRequest, schemas.ConfirmSignUpResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpConfirmSignUp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfirmSignUp, schemas.ConfirmSignUpRequest, schemas.ConfirmSignUpResponse), output: &ConfirmSignUpOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

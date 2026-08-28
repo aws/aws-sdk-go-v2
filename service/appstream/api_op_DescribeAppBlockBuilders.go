@@ -5,7 +5,9 @@ package appstream
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,22 @@ type DescribeAppBlockBuildersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppBlockBuildersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppBlockBuildersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppBlockBuildersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeAppBlockBuildersRequest_MaxResults, *v.MaxResults)
+	}
+	serializeStringList(s, schemas.DescribeAppBlockBuildersRequest_Names, v.Names)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAppBlockBuildersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeAppBlockBuildersOutput struct {
 
 	// The list that describes one or more app block builders.
@@ -55,13 +73,35 @@ type DescribeAppBlockBuildersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppBlockBuildersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppBlockBuildersResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppBlockBuildersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAppBlockBuilderList(s, schemas.DescribeAppBlockBuildersResult_AppBlockBuilders, v.AppBlockBuilders)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAppBlockBuildersResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAppBlockBuildersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAppBlockBuildersResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAppBlockBuildersResult_AppBlockBuilders:
+			return deserializeAppBlockBuilderList(d, schemas.DescribeAppBlockBuildersResult_AppBlockBuilders, &v.AppBlockBuilders)
+		case schemas.DescribeAppBlockBuildersResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAppBlockBuildersResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAppBlockBuildersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeAppBlockBuilders{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppBlockBuilders, schemas.DescribeAppBlockBuildersRequest, schemas.DescribeAppBlockBuildersResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeAppBlockBuilders{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppBlockBuilders, schemas.DescribeAppBlockBuildersRequest, schemas.DescribeAppBlockBuildersResult), output: &DescribeAppBlockBuildersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

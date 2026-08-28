@@ -5,7 +5,9 @@ package glacier
 import (
 	"context"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,21 @@ type GetVaultNotificationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVaultNotificationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVaultNotificationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVaultNotificationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetVaultNotificationsInput_accountId, *v.AccountId)
+	}
+	if v.VaultName != nil {
+		s.WriteString(schemas.GetVaultNotificationsInput_vaultName, *v.VaultName)
+	}
+}
+
 // Contains the Amazon Glacier response to your request.
 type GetVaultNotificationsOutput struct {
 
@@ -75,13 +92,34 @@ type GetVaultNotificationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVaultNotificationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVaultNotificationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVaultNotificationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VaultNotificationConfig != nil {
+		s.WriteStruct(schemas.GetVaultNotificationsOutput_vaultNotificationConfig)
+		v.VaultNotificationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetVaultNotificationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetVaultNotificationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetVaultNotificationsOutput_vaultNotificationConfig:
+			v.VaultNotificationConfig = &types.VaultNotificationConfig{}
+			return v.VaultNotificationConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetVaultNotificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetVaultNotifications{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVaultNotifications, schemas.GetVaultNotificationsInput, schemas.GetVaultNotificationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetVaultNotifications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVaultNotifications, schemas.GetVaultNotificationsInput, schemas.GetVaultNotificationsOutput), output: &GetVaultNotificationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

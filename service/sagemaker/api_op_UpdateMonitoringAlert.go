@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type UpdateMonitoringAlertInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMonitoringAlertInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMonitoringAlertRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMonitoringAlertInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatapointsToAlert != nil {
+		s.WriteInt32(schemas.UpdateMonitoringAlertRequest_DatapointsToAlert, *v.DatapointsToAlert)
+	}
+	if v.EvaluationPeriod != nil {
+		s.WriteInt32(schemas.UpdateMonitoringAlertRequest_EvaluationPeriod, *v.EvaluationPeriod)
+	}
+	if v.MonitoringAlertName != nil {
+		s.WriteString(schemas.UpdateMonitoringAlertRequest_MonitoringAlertName, *v.MonitoringAlertName)
+	}
+	if v.MonitoringScheduleName != nil {
+		s.WriteString(schemas.UpdateMonitoringAlertRequest_MonitoringScheduleName, *v.MonitoringScheduleName)
+	}
+}
+
 type UpdateMonitoringAlertOutput struct {
 
 	// The Amazon Resource Name (ARN) of the monitoring schedule.
@@ -65,13 +88,38 @@ type UpdateMonitoringAlertOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMonitoringAlertOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMonitoringAlertResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMonitoringAlertOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonitoringAlertName != nil {
+		s.WriteString(schemas.UpdateMonitoringAlertResponse_MonitoringAlertName, *v.MonitoringAlertName)
+	}
+	if v.MonitoringScheduleArn != nil {
+		s.WriteString(schemas.UpdateMonitoringAlertResponse_MonitoringScheduleArn, *v.MonitoringScheduleArn)
+	}
+}
+func (v *UpdateMonitoringAlertOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMonitoringAlertResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMonitoringAlertResponse_MonitoringAlertName:
+			v.MonitoringAlertName = new(string)
+			return d.ReadString(schemas.UpdateMonitoringAlertResponse_MonitoringAlertName, v.MonitoringAlertName)
+		case schemas.UpdateMonitoringAlertResponse_MonitoringScheduleArn:
+			v.MonitoringScheduleArn = new(string)
+			return d.ReadString(schemas.UpdateMonitoringAlertResponse_MonitoringScheduleArn, v.MonitoringScheduleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMonitoringAlertMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateMonitoringAlert{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMonitoringAlert, schemas.UpdateMonitoringAlertRequest, schemas.UpdateMonitoringAlertResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateMonitoringAlert{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMonitoringAlert, schemas.UpdateMonitoringAlertRequest, schemas.UpdateMonitoringAlertResponse), output: &UpdateMonitoringAlertOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

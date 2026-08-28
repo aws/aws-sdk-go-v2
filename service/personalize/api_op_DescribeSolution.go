@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DescribeSolutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSolutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSolutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSolutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SolutionArn != nil {
+		s.WriteString(schemas.DescribeSolutionRequest_solutionArn, *v.SolutionArn)
+	}
+}
+
 type DescribeSolutionOutput struct {
 
 	// An object that describes the solution.
@@ -47,13 +61,34 @@ type DescribeSolutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSolutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSolutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSolutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Solution != nil {
+		s.WriteStruct(schemas.DescribeSolutionResponse_solution)
+		v.Solution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeSolutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSolutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSolutionResponse_solution:
+			v.Solution = &types.Solution{}
+			return v.Solution.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSolutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSolution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSolution, schemas.DescribeSolutionRequest, schemas.DescribeSolutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeSolution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSolution, schemas.DescribeSolutionRequest, schemas.DescribeSolutionResponse), output: &DescribeSolutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

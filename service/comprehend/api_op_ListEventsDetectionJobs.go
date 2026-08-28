@@ -5,7 +5,9 @@ package comprehend
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,26 @@ type ListEventsDetectionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventsDetectionJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventsDetectionJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventsDetectionJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListEventsDetectionJobsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEventsDetectionJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventsDetectionJobsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListEventsDetectionJobsOutput struct {
 
 	// A list containing the properties of each job that is returned.
@@ -55,13 +77,35 @@ type ListEventsDetectionJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventsDetectionJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventsDetectionJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventsDetectionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventsDetectionJobPropertiesList(s, schemas.ListEventsDetectionJobsResponse_EventsDetectionJobPropertiesList, v.EventsDetectionJobPropertiesList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventsDetectionJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEventsDetectionJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEventsDetectionJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEventsDetectionJobsResponse_EventsDetectionJobPropertiesList:
+			return deserializeEventsDetectionJobPropertiesList(d, schemas.ListEventsDetectionJobsResponse_EventsDetectionJobPropertiesList, &v.EventsDetectionJobPropertiesList)
+		case schemas.ListEventsDetectionJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEventsDetectionJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEventsDetectionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEventsDetectionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventsDetectionJobs, schemas.ListEventsDetectionJobsRequest, schemas.ListEventsDetectionJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListEventsDetectionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventsDetectionJobs, schemas.ListEventsDetectionJobsRequest, schemas.ListEventsDetectionJobsResponse), output: &ListEventsDetectionJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

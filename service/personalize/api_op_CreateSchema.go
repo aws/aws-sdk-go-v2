@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,24 @@ type CreateSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSchemaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSchemaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != "" {
+		s.WriteString(schemas.CreateSchemaRequest_domain, string(v.Domain))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSchemaRequest_name, *v.Name)
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.CreateSchemaRequest_schema, *v.Schema)
+	}
+}
+
 type CreateSchemaOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created schema.
@@ -74,13 +94,32 @@ type CreateSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSchemaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSchemaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.CreateSchemaResponse_schemaArn, *v.SchemaArn)
+	}
+}
+func (v *CreateSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSchemaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSchemaResponse_schemaArn:
+			v.SchemaArn = new(string)
+			return d.ReadString(schemas.CreateSchemaResponse_schemaArn, v.SchemaArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSchema, schemas.CreateSchemaRequest, schemas.CreateSchemaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSchema, schemas.CreateSchemaRequest, schemas.CreateSchemaResponse), output: &CreateSchemaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

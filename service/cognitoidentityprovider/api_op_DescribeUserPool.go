@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,18 @@ type DescribeUserPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUserPoolInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUserPoolRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUserPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.DescribeUserPoolRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 // Represents the response to describe the user pool.
 type DescribeUserPoolOutput struct {
 
@@ -63,13 +77,34 @@ type DescribeUserPoolOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUserPoolOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUserPoolResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUserPoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserPool != nil {
+		s.WriteStruct(schemas.DescribeUserPoolResponse_UserPool)
+		v.UserPool.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeUserPoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeUserPoolResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeUserPoolResponse_UserPool:
+			v.UserPool = &types.UserPoolType{}
+			return v.UserPool.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeUserPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeUserPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUserPool, schemas.DescribeUserPoolRequest, schemas.DescribeUserPoolResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeUserPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUserPool, schemas.DescribeUserPoolRequest, schemas.DescribeUserPoolResponse), output: &DescribeUserPoolOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

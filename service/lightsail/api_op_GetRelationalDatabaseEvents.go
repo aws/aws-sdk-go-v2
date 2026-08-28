@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type GetRelationalDatabaseEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRelationalDatabaseEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRelationalDatabaseEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRelationalDatabaseEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurationInMinutes != nil {
+		s.WriteInt32(schemas.GetRelationalDatabaseEventsRequest_durationInMinutes, *v.DurationInMinutes)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.GetRelationalDatabaseEventsRequest_pageToken, *v.PageToken)
+	}
+	if v.RelationalDatabaseName != nil {
+		s.WriteString(schemas.GetRelationalDatabaseEventsRequest_relationalDatabaseName, *v.RelationalDatabaseName)
+	}
+}
+
 type GetRelationalDatabaseEventsOutput struct {
 
 	// The token to advance to the next page of results from your request.
@@ -68,13 +88,35 @@ type GetRelationalDatabaseEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRelationalDatabaseEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRelationalDatabaseEventsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRelationalDatabaseEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetRelationalDatabaseEventsResult_nextPageToken, *v.NextPageToken)
+	}
+	serializeRelationalDatabaseEventList(s, schemas.GetRelationalDatabaseEventsResult_relationalDatabaseEvents, v.RelationalDatabaseEvents)
+}
+func (v *GetRelationalDatabaseEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRelationalDatabaseEventsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRelationalDatabaseEventsResult_nextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetRelationalDatabaseEventsResult_nextPageToken, v.NextPageToken)
+		case schemas.GetRelationalDatabaseEventsResult_relationalDatabaseEvents:
+			return deserializeRelationalDatabaseEventList(d, schemas.GetRelationalDatabaseEventsResult_relationalDatabaseEvents, &v.RelationalDatabaseEvents)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRelationalDatabaseEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRelationalDatabaseEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRelationalDatabaseEvents, schemas.GetRelationalDatabaseEventsRequest, schemas.GetRelationalDatabaseEventsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRelationalDatabaseEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRelationalDatabaseEvents, schemas.GetRelationalDatabaseEventsRequest, schemas.GetRelationalDatabaseEventsResult), output: &GetRelationalDatabaseEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

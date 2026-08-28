@@ -5,6 +5,8 @@ package glacier
 import (
 	"context"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -107,6 +109,30 @@ type CompleteMultipartUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompleteMultipartUploadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompleteMultipartUploadInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompleteMultipartUploadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.CompleteMultipartUploadInput_accountId, *v.AccountId)
+	}
+	if v.ArchiveSize != nil {
+		s.WriteString(schemas.CompleteMultipartUploadInput_archiveSize, *v.ArchiveSize)
+	}
+	if v.Checksum != nil {
+		s.WriteString(schemas.CompleteMultipartUploadInput_checksum, *v.Checksum)
+	}
+	if v.UploadId != nil {
+		s.WriteString(schemas.CompleteMultipartUploadInput_uploadId, *v.UploadId)
+	}
+	if v.VaultName != nil {
+		s.WriteString(schemas.CompleteMultipartUploadInput_vaultName, *v.VaultName)
+	}
+}
+
 // Contains the Amazon Glacier response to your request.
 //
 // For information about the underlying REST API, see [Upload Archive]. For conceptual
@@ -131,13 +157,44 @@ type CompleteMultipartUploadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompleteMultipartUploadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ArchiveCreationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompleteMultipartUploadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveId != nil {
+		s.WriteString(schemas.ArchiveCreationOutput_archiveId, *v.ArchiveId)
+	}
+	if v.Checksum != nil {
+		s.WriteString(schemas.ArchiveCreationOutput_checksum, *v.Checksum)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.ArchiveCreationOutput_location, *v.Location)
+	}
+}
+func (v *CompleteMultipartUploadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ArchiveCreationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ArchiveCreationOutput_archiveId:
+			v.ArchiveId = new(string)
+			return d.ReadString(schemas.ArchiveCreationOutput_archiveId, v.ArchiveId)
+		case schemas.ArchiveCreationOutput_checksum:
+			v.Checksum = new(string)
+			return d.ReadString(schemas.ArchiveCreationOutput_checksum, v.Checksum)
+		case schemas.ArchiveCreationOutput_location:
+			v.Location = new(string)
+			return d.ReadString(schemas.ArchiveCreationOutput_location, v.Location)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCompleteMultipartUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCompleteMultipartUpload{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompleteMultipartUpload, schemas.CompleteMultipartUploadInput, schemas.ArchiveCreationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCompleteMultipartUpload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompleteMultipartUpload, schemas.CompleteMultipartUploadInput, schemas.ArchiveCreationOutput), output: &CompleteMultipartUploadOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

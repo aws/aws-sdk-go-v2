@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,22 @@ type UpdateParticipantRoleConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateParticipantRoleConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateParticipantRoleConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateParticipantRoleConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUpdateParticipantRoleConfigChannelInfo(s, schemas.UpdateParticipantRoleConfigRequest_ChannelConfiguration, v.ChannelConfiguration)
+	if v.ContactId != nil {
+		s.WriteString(schemas.UpdateParticipantRoleConfigRequest_ContactId, *v.ContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateParticipantRoleConfigRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type UpdateParticipantRoleConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -68,13 +86,26 @@ type UpdateParticipantRoleConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateParticipantRoleConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateParticipantRoleConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateParticipantRoleConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateParticipantRoleConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateParticipantRoleConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateParticipantRoleConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateParticipantRoleConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateParticipantRoleConfig, schemas.UpdateParticipantRoleConfigRequest, schemas.UpdateParticipantRoleConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateParticipantRoleConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateParticipantRoleConfig, schemas.UpdateParticipantRoleConfigRequest, schemas.UpdateParticipantRoleConfigResponse), output: &UpdateParticipantRoleConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

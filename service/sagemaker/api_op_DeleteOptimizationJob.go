@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteOptimizationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOptimizationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteOptimizationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteOptimizationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OptimizationJobName != nil {
+		s.WriteString(schemas.DeleteOptimizationJobRequest_OptimizationJobName, *v.OptimizationJobName)
+	}
+}
+
 type DeleteOptimizationJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteOptimizationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOptimizationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteOptimizationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteOptimizationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteOptimizationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteOptimizationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOptimizationJob, schemas.DeleteOptimizationJobRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteOptimizationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOptimizationJob, schemas.DeleteOptimizationJobRequest, nil), output: &DeleteOptimizationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

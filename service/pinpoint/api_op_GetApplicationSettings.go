@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetApplicationSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApplicationSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetApplicationSettingsRequest_ApplicationId, *v.ApplicationId)
+	}
+}
+
 type GetApplicationSettingsOutput struct {
 
 	// Provides information about an application, including the default settings for
@@ -49,13 +63,34 @@ type GetApplicationSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApplicationSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationSettingsResource != nil {
+		s.WriteStruct(schemas.GetApplicationSettingsResponse_ApplicationSettingsResource)
+		v.ApplicationSettingsResource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetApplicationSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApplicationSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApplicationSettingsResponse_ApplicationSettingsResource:
+			v.ApplicationSettingsResource = &types.ApplicationSettingsResource{}
+			return v.ApplicationSettingsResource.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetApplicationSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApplicationSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplicationSettings, schemas.GetApplicationSettingsRequest, schemas.GetApplicationSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApplicationSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplicationSettings, schemas.GetApplicationSettingsRequest, schemas.GetApplicationSettingsResponse), output: &GetApplicationSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

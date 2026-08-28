@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,25 @@ type ListContactReferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContactReferencesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContactReferencesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContactReferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.ListContactReferencesRequest_ContactId, *v.ContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListContactReferencesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContactReferencesRequest_NextToken, *v.NextToken)
+	}
+	serializeReferenceTypes(s, schemas.ListContactReferencesRequest_ReferenceTypes, v.ReferenceTypes)
+}
+
 type ListContactReferencesOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.
@@ -75,13 +96,35 @@ type ListContactReferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContactReferencesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContactReferencesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContactReferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContactReferencesResponse_NextToken, *v.NextToken)
+	}
+	serializeReferenceSummaryList(s, schemas.ListContactReferencesResponse_ReferenceSummaryList, v.ReferenceSummaryList)
+}
+func (v *ListContactReferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListContactReferencesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListContactReferencesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListContactReferencesResponse_NextToken, v.NextToken)
+		case schemas.ListContactReferencesResponse_ReferenceSummaryList:
+			return deserializeReferenceSummaryList(d, schemas.ListContactReferencesResponse_ReferenceSummaryList, &v.ReferenceSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListContactReferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListContactReferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContactReferences, schemas.ListContactReferencesRequest, schemas.ListContactReferencesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListContactReferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContactReferences, schemas.ListContactReferencesRequest, schemas.ListContactReferencesResponse), output: &ListContactReferencesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

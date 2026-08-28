@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type AssociateApplicationFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateApplicationFleetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateApplicationFleetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateApplicationFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.AssociateApplicationFleetRequest_ApplicationArn, *v.ApplicationArn)
+	}
+	if v.FleetName != nil {
+		s.WriteString(schemas.AssociateApplicationFleetRequest_FleetName, *v.FleetName)
+	}
+}
+
 type AssociateApplicationFleetOutput struct {
 
 	// If fleet name is specified, this returns the list of applications that are
@@ -53,13 +70,34 @@ type AssociateApplicationFleetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateApplicationFleetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateApplicationFleetResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateApplicationFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationFleetAssociation != nil {
+		s.WriteStruct(schemas.AssociateApplicationFleetResult_ApplicationFleetAssociation)
+		v.ApplicationFleetAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateApplicationFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateApplicationFleetResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateApplicationFleetResult_ApplicationFleetAssociation:
+			v.ApplicationFleetAssociation = &types.ApplicationFleetAssociation{}
+			return v.ApplicationFleetAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateApplicationFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpAssociateApplicationFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateApplicationFleet, schemas.AssociateApplicationFleetRequest, schemas.AssociateApplicationFleetResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpAssociateApplicationFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateApplicationFleet, schemas.AssociateApplicationFleetRequest, schemas.AssociateApplicationFleetResult), output: &AssociateApplicationFleetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

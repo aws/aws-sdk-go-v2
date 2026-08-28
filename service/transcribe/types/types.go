@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -46,6 +48,46 @@ type AbsoluteTimeRange struct {
 	StartTime *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *AbsoluteTimeRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AbsoluteTimeRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AbsoluteTimeRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteInt64(schemas.AbsoluteTimeRange_EndTime, *v.EndTime)
+	}
+	if v.First != nil {
+		s.WriteInt64(schemas.AbsoluteTimeRange_First, *v.First)
+	}
+	if v.Last != nil {
+		s.WriteInt64(schemas.AbsoluteTimeRange_Last, *v.Last)
+	}
+	if v.StartTime != nil {
+		s.WriteInt64(schemas.AbsoluteTimeRange_StartTime, *v.StartTime)
+	}
+}
+func (v *AbsoluteTimeRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AbsoluteTimeRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AbsoluteTimeRange_EndTime:
+			v.EndTime = new(int64)
+			return d.ReadInt64(schemas.AbsoluteTimeRange_EndTime, v.EndTime)
+		case schemas.AbsoluteTimeRange_First:
+			v.First = new(int64)
+			return d.ReadInt64(schemas.AbsoluteTimeRange_First, v.First)
+		case schemas.AbsoluteTimeRange_Last:
+			v.Last = new(int64)
+			return d.ReadInt64(schemas.AbsoluteTimeRange_Last, v.Last)
+		case schemas.AbsoluteTimeRange_StartTime:
+			v.StartTime = new(int64)
+			return d.ReadInt64(schemas.AbsoluteTimeRange_StartTime, v.StartTime)
+		}
+		return nil
+	})
 }
 
 // Provides detailed information about a Call Analytics job.
@@ -190,6 +232,138 @@ type CallAnalyticsJob struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CallAnalyticsJob) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CallAnalyticsJob)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CallAnalyticsJob) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallAnalyticsJobDetails != nil {
+		s.WriteStruct(schemas.CallAnalyticsJob_CallAnalyticsJobDetails)
+		v.CallAnalyticsJobDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CallAnalyticsJobName != nil {
+		s.WriteString(schemas.CallAnalyticsJob_CallAnalyticsJobName, *v.CallAnalyticsJobName)
+	}
+	if v.CallAnalyticsJobStatus != "" {
+		s.WriteString(schemas.CallAnalyticsJob_CallAnalyticsJobStatus, string(v.CallAnalyticsJobStatus))
+	}
+	serializeChannelDefinitions(s, schemas.CallAnalyticsJob_ChannelDefinitions, v.ChannelDefinitions)
+	if v.CompletionTime != nil {
+		s.WriteTime(schemas.CallAnalyticsJob_CompletionTime, *v.CompletionTime)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.CallAnalyticsJob_CreationTime, *v.CreationTime)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.CallAnalyticsJob_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.CallAnalyticsJob_FailureReason, *v.FailureReason)
+	}
+	if v.IdentifiedLanguageScore != nil {
+		s.WriteFloat32(schemas.CallAnalyticsJob_IdentifiedLanguageScore, *v.IdentifiedLanguageScore)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.CallAnalyticsJob_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Media != nil {
+		s.WriteStruct(schemas.CallAnalyticsJob_Media)
+		v.Media.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MediaFormat != "" {
+		s.WriteString(schemas.CallAnalyticsJob_MediaFormat, string(v.MediaFormat))
+	}
+	if v.MediaSampleRateHertz != nil {
+		s.WriteInt32(schemas.CallAnalyticsJob_MediaSampleRateHertz, *v.MediaSampleRateHertz)
+	}
+	if v.Settings != nil {
+		s.WriteStruct(schemas.CallAnalyticsJob_Settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.CallAnalyticsJob_StartTime, *v.StartTime)
+	}
+	serializeTagList(s, schemas.CallAnalyticsJob_Tags, v.Tags)
+	if v.Transcript != nil {
+		s.WriteStruct(schemas.CallAnalyticsJob_Transcript)
+		v.Transcript.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CallAnalyticsJob) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CallAnalyticsJob, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CallAnalyticsJob_CallAnalyticsJobDetails:
+			v.CallAnalyticsJobDetails = &CallAnalyticsJobDetails{}
+			return v.CallAnalyticsJobDetails.Deserialize(d)
+		case schemas.CallAnalyticsJob_CallAnalyticsJobName:
+			v.CallAnalyticsJobName = new(string)
+			return d.ReadString(schemas.CallAnalyticsJob_CallAnalyticsJobName, v.CallAnalyticsJobName)
+		case schemas.CallAnalyticsJob_CallAnalyticsJobStatus:
+			var ev string
+			if err := d.ReadString(schemas.CallAnalyticsJob_CallAnalyticsJobStatus, &ev); err != nil {
+				return err
+			}
+			v.CallAnalyticsJobStatus = CallAnalyticsJobStatus(ev)
+			return nil
+		case schemas.CallAnalyticsJob_ChannelDefinitions:
+			return deserializeChannelDefinitions(d, schemas.CallAnalyticsJob_ChannelDefinitions, &v.ChannelDefinitions)
+		case schemas.CallAnalyticsJob_CompletionTime:
+			v.CompletionTime = new(time.Time)
+			return d.ReadTime(schemas.CallAnalyticsJob_CompletionTime, v.CompletionTime)
+		case schemas.CallAnalyticsJob_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CallAnalyticsJob_CreationTime, v.CreationTime)
+		case schemas.CallAnalyticsJob_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.CallAnalyticsJob_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.CallAnalyticsJob_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.CallAnalyticsJob_FailureReason, v.FailureReason)
+		case schemas.CallAnalyticsJob_IdentifiedLanguageScore:
+			v.IdentifiedLanguageScore = new(float32)
+			return d.ReadFloat32(schemas.CallAnalyticsJob_IdentifiedLanguageScore, v.IdentifiedLanguageScore)
+		case schemas.CallAnalyticsJob_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.CallAnalyticsJob_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.CallAnalyticsJob_Media:
+			v.Media = &Media{}
+			return v.Media.Deserialize(d)
+		case schemas.CallAnalyticsJob_MediaFormat:
+			var ev string
+			if err := d.ReadString(schemas.CallAnalyticsJob_MediaFormat, &ev); err != nil {
+				return err
+			}
+			v.MediaFormat = MediaFormat(ev)
+			return nil
+		case schemas.CallAnalyticsJob_MediaSampleRateHertz:
+			v.MediaSampleRateHertz = new(int32)
+			return d.ReadInt32(schemas.CallAnalyticsJob_MediaSampleRateHertz, v.MediaSampleRateHertz)
+		case schemas.CallAnalyticsJob_Settings:
+			v.Settings = &CallAnalyticsJobSettings{}
+			return v.Settings.Deserialize(d)
+		case schemas.CallAnalyticsJob_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.CallAnalyticsJob_StartTime, v.StartTime)
+		case schemas.CallAnalyticsJob_Tags:
+			return deserializeTagList(d, schemas.CallAnalyticsJob_Tags, &v.Tags)
+		case schemas.CallAnalyticsJob_Transcript:
+			v.Transcript = &Transcript{}
+			return v.Transcript.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains details about a call analytics job, including information about
 // skipped analytics features.
 type CallAnalyticsJobDetails struct {
@@ -202,6 +376,25 @@ type CallAnalyticsJobDetails struct {
 	Skipped []CallAnalyticsSkippedFeature
 
 	noSmithyDocumentSerde
+}
+
+func (v *CallAnalyticsJobDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CallAnalyticsJobDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CallAnalyticsJobDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCallAnalyticsSkippedFeatureList(s, schemas.CallAnalyticsJobDetails_Skipped, v.Skipped)
+}
+func (v *CallAnalyticsJobDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CallAnalyticsJobDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CallAnalyticsJobDetails_Skipped:
+			return deserializeCallAnalyticsSkippedFeatureList(d, schemas.CallAnalyticsJobDetails_Skipped, &v.Skipped)
+		}
+		return nil
+	})
 }
 
 // Provides additional optional settings for your request, including content
@@ -299,6 +492,72 @@ type CallAnalyticsJobSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CallAnalyticsJobSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CallAnalyticsJobSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CallAnalyticsJobSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentRedaction != nil {
+		s.WriteStruct(schemas.CallAnalyticsJobSettings_ContentRedaction)
+		v.ContentRedaction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeLanguageIdSettingsMap(s, schemas.CallAnalyticsJobSettings_LanguageIdSettings, v.LanguageIdSettings)
+	if v.LanguageModelName != nil {
+		s.WriteString(schemas.CallAnalyticsJobSettings_LanguageModelName, *v.LanguageModelName)
+	}
+	serializeLanguageOptions(s, schemas.CallAnalyticsJobSettings_LanguageOptions, v.LanguageOptions)
+	if v.Summarization != nil {
+		s.WriteStruct(schemas.CallAnalyticsJobSettings_Summarization)
+		v.Summarization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VocabularyFilterMethod != "" {
+		s.WriteString(schemas.CallAnalyticsJobSettings_VocabularyFilterMethod, string(v.VocabularyFilterMethod))
+	}
+	if v.VocabularyFilterName != nil {
+		s.WriteString(schemas.CallAnalyticsJobSettings_VocabularyFilterName, *v.VocabularyFilterName)
+	}
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.CallAnalyticsJobSettings_VocabularyName, *v.VocabularyName)
+	}
+}
+func (v *CallAnalyticsJobSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CallAnalyticsJobSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CallAnalyticsJobSettings_ContentRedaction:
+			v.ContentRedaction = &ContentRedaction{}
+			return v.ContentRedaction.Deserialize(d)
+		case schemas.CallAnalyticsJobSettings_LanguageIdSettings:
+			return deserializeLanguageIdSettingsMap(d, schemas.CallAnalyticsJobSettings_LanguageIdSettings, &v.LanguageIdSettings)
+		case schemas.CallAnalyticsJobSettings_LanguageModelName:
+			v.LanguageModelName = new(string)
+			return d.ReadString(schemas.CallAnalyticsJobSettings_LanguageModelName, v.LanguageModelName)
+		case schemas.CallAnalyticsJobSettings_LanguageOptions:
+			return deserializeLanguageOptions(d, schemas.CallAnalyticsJobSettings_LanguageOptions, &v.LanguageOptions)
+		case schemas.CallAnalyticsJobSettings_Summarization:
+			v.Summarization = &Summarization{}
+			return v.Summarization.Deserialize(d)
+		case schemas.CallAnalyticsJobSettings_VocabularyFilterMethod:
+			var ev string
+			if err := d.ReadString(schemas.CallAnalyticsJobSettings_VocabularyFilterMethod, &ev); err != nil {
+				return err
+			}
+			v.VocabularyFilterMethod = VocabularyFilterMethod(ev)
+			return nil
+		case schemas.CallAnalyticsJobSettings_VocabularyFilterName:
+			v.VocabularyFilterName = new(string)
+			return d.ReadString(schemas.CallAnalyticsJobSettings_VocabularyFilterName, v.VocabularyFilterName)
+		case schemas.CallAnalyticsJobSettings_VocabularyName:
+			v.VocabularyName = new(string)
+			return d.ReadString(schemas.CallAnalyticsJobSettings_VocabularyName, v.VocabularyName)
+		}
+		return nil
+	})
+}
+
 // Provides detailed information about a specific Call Analytics job.
 type CallAnalyticsJobSummary struct {
 
@@ -351,6 +610,80 @@ type CallAnalyticsJobSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CallAnalyticsJobSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CallAnalyticsJobSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CallAnalyticsJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallAnalyticsJobDetails != nil {
+		s.WriteStruct(schemas.CallAnalyticsJobSummary_CallAnalyticsJobDetails)
+		v.CallAnalyticsJobDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CallAnalyticsJobName != nil {
+		s.WriteString(schemas.CallAnalyticsJobSummary_CallAnalyticsJobName, *v.CallAnalyticsJobName)
+	}
+	if v.CallAnalyticsJobStatus != "" {
+		s.WriteString(schemas.CallAnalyticsJobSummary_CallAnalyticsJobStatus, string(v.CallAnalyticsJobStatus))
+	}
+	if v.CompletionTime != nil {
+		s.WriteTime(schemas.CallAnalyticsJobSummary_CompletionTime, *v.CompletionTime)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.CallAnalyticsJobSummary_CreationTime, *v.CreationTime)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.CallAnalyticsJobSummary_FailureReason, *v.FailureReason)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.CallAnalyticsJobSummary_LanguageCode, string(v.LanguageCode))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.CallAnalyticsJobSummary_StartTime, *v.StartTime)
+	}
+}
+func (v *CallAnalyticsJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CallAnalyticsJobSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CallAnalyticsJobSummary_CallAnalyticsJobDetails:
+			v.CallAnalyticsJobDetails = &CallAnalyticsJobDetails{}
+			return v.CallAnalyticsJobDetails.Deserialize(d)
+		case schemas.CallAnalyticsJobSummary_CallAnalyticsJobName:
+			v.CallAnalyticsJobName = new(string)
+			return d.ReadString(schemas.CallAnalyticsJobSummary_CallAnalyticsJobName, v.CallAnalyticsJobName)
+		case schemas.CallAnalyticsJobSummary_CallAnalyticsJobStatus:
+			var ev string
+			if err := d.ReadString(schemas.CallAnalyticsJobSummary_CallAnalyticsJobStatus, &ev); err != nil {
+				return err
+			}
+			v.CallAnalyticsJobStatus = CallAnalyticsJobStatus(ev)
+			return nil
+		case schemas.CallAnalyticsJobSummary_CompletionTime:
+			v.CompletionTime = new(time.Time)
+			return d.ReadTime(schemas.CallAnalyticsJobSummary_CompletionTime, v.CompletionTime)
+		case schemas.CallAnalyticsJobSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CallAnalyticsJobSummary_CreationTime, v.CreationTime)
+		case schemas.CallAnalyticsJobSummary_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.CallAnalyticsJobSummary_FailureReason, v.FailureReason)
+		case schemas.CallAnalyticsJobSummary_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.CallAnalyticsJobSummary_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.CallAnalyticsJobSummary_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.CallAnalyticsJobSummary_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 // Represents a skipped analytics feature during the analysis of a call analytics
 // job.
 //
@@ -376,6 +709,48 @@ type CallAnalyticsSkippedFeature struct {
 	ReasonCode CallAnalyticsSkippedReasonCode
 
 	noSmithyDocumentSerde
+}
+
+func (v *CallAnalyticsSkippedFeature) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CallAnalyticsSkippedFeature)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CallAnalyticsSkippedFeature) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Feature != "" {
+		s.WriteString(schemas.CallAnalyticsSkippedFeature_Feature, string(v.Feature))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.CallAnalyticsSkippedFeature_Message, *v.Message)
+	}
+	if v.ReasonCode != "" {
+		s.WriteString(schemas.CallAnalyticsSkippedFeature_ReasonCode, string(v.ReasonCode))
+	}
+}
+func (v *CallAnalyticsSkippedFeature) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CallAnalyticsSkippedFeature, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CallAnalyticsSkippedFeature_Feature:
+			var ev string
+			if err := d.ReadString(schemas.CallAnalyticsSkippedFeature_Feature, &ev); err != nil {
+				return err
+			}
+			v.Feature = CallAnalyticsFeature(ev)
+			return nil
+		case schemas.CallAnalyticsSkippedFeature_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CallAnalyticsSkippedFeature_Message, v.Message)
+		case schemas.CallAnalyticsSkippedFeature_ReasonCode:
+			var ev string
+			if err := d.ReadString(schemas.CallAnalyticsSkippedFeature_ReasonCode, &ev); err != nil {
+				return err
+			}
+			v.ReasonCode = CallAnalyticsSkippedReasonCode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Provides you with the properties of the Call Analytics category you specified
@@ -415,6 +790,56 @@ type CategoryProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CategoryProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CategoryProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CategoryProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CategoryName != nil {
+		s.WriteString(schemas.CategoryProperties_CategoryName, *v.CategoryName)
+	}
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.CategoryProperties_CreateTime, *v.CreateTime)
+	}
+	if v.InputType != "" {
+		s.WriteString(schemas.CategoryProperties_InputType, string(v.InputType))
+	}
+	if v.LastUpdateTime != nil {
+		s.WriteTime(schemas.CategoryProperties_LastUpdateTime, *v.LastUpdateTime)
+	}
+	serializeRuleList(s, schemas.CategoryProperties_Rules, v.Rules)
+	serializeTagList(s, schemas.CategoryProperties_Tags, v.Tags)
+}
+func (v *CategoryProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CategoryProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CategoryProperties_CategoryName:
+			v.CategoryName = new(string)
+			return d.ReadString(schemas.CategoryProperties_CategoryName, v.CategoryName)
+		case schemas.CategoryProperties_CreateTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.CategoryProperties_CreateTime, v.CreateTime)
+		case schemas.CategoryProperties_InputType:
+			var ev string
+			if err := d.ReadString(schemas.CategoryProperties_InputType, &ev); err != nil {
+				return err
+			}
+			v.InputType = InputType(ev)
+			return nil
+		case schemas.CategoryProperties_LastUpdateTime:
+			v.LastUpdateTime = new(time.Time)
+			return d.ReadTime(schemas.CategoryProperties_LastUpdateTime, v.LastUpdateTime)
+		case schemas.CategoryProperties_Rules:
+			return deserializeRuleList(d, schemas.CategoryProperties_Rules, &v.Rules)
+		case schemas.CategoryProperties_Tags:
+			return deserializeTagList(d, schemas.CategoryProperties_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Makes it possible to specify which speaker is on which channel. For example, if
 // your agent is the first participant to speak, you would set ChannelId to 0 (to
 // indicate the first channel) and ParticipantRole to AGENT (to indicate that it's
@@ -429,6 +854,37 @@ type ChannelDefinition struct {
 	ParticipantRole ParticipantRole
 
 	noSmithyDocumentSerde
+}
+
+func (v *ChannelDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChannelDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelId != 0 {
+		s.WriteInt32(schemas.ChannelDefinition_ChannelId, v.ChannelId)
+	}
+	if v.ParticipantRole != "" {
+		s.WriteString(schemas.ChannelDefinition_ParticipantRole, string(v.ParticipantRole))
+	}
+}
+func (v *ChannelDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChannelDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChannelDefinition_ChannelId:
+			return d.ReadInt32(schemas.ChannelDefinition_ChannelId, &v.ChannelId)
+		case schemas.ChannelDefinition_ParticipantRole:
+			var ev string
+			if err := d.ReadString(schemas.ChannelDefinition_ParticipantRole, &ev); err != nil {
+				return err
+			}
+			v.ParticipantRole = ParticipantRole(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The output configuration for clinical note generation.
@@ -461,6 +917,32 @@ type ClinicalNoteGenerationSettings struct {
 	NoteTemplate MedicalScribeNoteTemplate
 
 	noSmithyDocumentSerde
+}
+
+func (v *ClinicalNoteGenerationSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClinicalNoteGenerationSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClinicalNoteGenerationSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NoteTemplate != "" {
+		s.WriteString(schemas.ClinicalNoteGenerationSettings_NoteTemplate, string(v.NoteTemplate))
+	}
+}
+func (v *ClinicalNoteGenerationSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClinicalNoteGenerationSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClinicalNoteGenerationSettings_NoteTemplate:
+			var ev string
+			if err := d.ReadString(schemas.ClinicalNoteGenerationSettings_NoteTemplate, &ev); err != nil {
+				return err
+			}
+			v.NoteTemplate = MedicalScribeNoteTemplate(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Makes it possible to redact or flag specified personally identifiable
@@ -496,6 +978,45 @@ type ContentRedaction struct {
 	PiiEntityTypes []PiiEntityType
 
 	noSmithyDocumentSerde
+}
+
+func (v *ContentRedaction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContentRedaction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContentRedaction) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePiiEntityTypes(s, schemas.ContentRedaction_PiiEntityTypes, v.PiiEntityTypes)
+	if v.RedactionOutput != "" {
+		s.WriteString(schemas.ContentRedaction_RedactionOutput, string(v.RedactionOutput))
+	}
+	if v.RedactionType != "" {
+		s.WriteString(schemas.ContentRedaction_RedactionType, string(v.RedactionType))
+	}
+}
+func (v *ContentRedaction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContentRedaction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContentRedaction_PiiEntityTypes:
+			return deserializePiiEntityTypes(d, schemas.ContentRedaction_PiiEntityTypes, &v.PiiEntityTypes)
+		case schemas.ContentRedaction_RedactionOutput:
+			var ev string
+			if err := d.ReadString(schemas.ContentRedaction_RedactionOutput, &ev); err != nil {
+				return err
+			}
+			v.RedactionOutput = RedactionOutput(ev)
+			return nil
+		case schemas.ContentRedaction_RedactionType:
+			var ev string
+			if err := d.ReadString(schemas.ContentRedaction_RedactionType, &ev); err != nil {
+				return err
+			}
+			v.RedactionType = RedactionType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains the Amazon S3 location of the training data you want to use to create
@@ -536,6 +1057,40 @@ type InputDataConfig struct {
 	TuningDataS3Uri *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.InputDataConfig_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.S3Uri != nil {
+		s.WriteString(schemas.InputDataConfig_S3Uri, *v.S3Uri)
+	}
+	if v.TuningDataS3Uri != nil {
+		s.WriteString(schemas.InputDataConfig_TuningDataS3Uri, *v.TuningDataS3Uri)
+	}
+}
+func (v *InputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputDataConfig_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.InputDataConfig_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.InputDataConfig_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.InputDataConfig_S3Uri, v.S3Uri)
+		case schemas.InputDataConfig_TuningDataS3Uri:
+			v.TuningDataS3Uri = new(string)
+			return d.ReadString(schemas.InputDataConfig_TuningDataS3Uri, v.TuningDataS3Uri)
+		}
+		return nil
+	})
 }
 
 // Flag the presence or absence of interruptions in your Call Analytics
@@ -579,6 +1134,60 @@ type InterruptionFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InterruptionFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InterruptionFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InterruptionFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AbsoluteTimeRange != nil {
+		s.WriteStruct(schemas.InterruptionFilter_AbsoluteTimeRange)
+		v.AbsoluteTimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Negate != nil {
+		s.WriteBool(schemas.InterruptionFilter_Negate, *v.Negate)
+	}
+	if v.ParticipantRole != "" {
+		s.WriteString(schemas.InterruptionFilter_ParticipantRole, string(v.ParticipantRole))
+	}
+	if v.RelativeTimeRange != nil {
+		s.WriteStruct(schemas.InterruptionFilter_RelativeTimeRange)
+		v.RelativeTimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Threshold != nil {
+		s.WriteInt64(schemas.InterruptionFilter_Threshold, *v.Threshold)
+	}
+}
+func (v *InterruptionFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InterruptionFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InterruptionFilter_AbsoluteTimeRange:
+			v.AbsoluteTimeRange = &AbsoluteTimeRange{}
+			return v.AbsoluteTimeRange.Deserialize(d)
+		case schemas.InterruptionFilter_Negate:
+			v.Negate = new(bool)
+			return d.ReadBool(schemas.InterruptionFilter_Negate, v.Negate)
+		case schemas.InterruptionFilter_ParticipantRole:
+			var ev string
+			if err := d.ReadString(schemas.InterruptionFilter_ParticipantRole, &ev); err != nil {
+				return err
+			}
+			v.ParticipantRole = ParticipantRole(ev)
+			return nil
+		case schemas.InterruptionFilter_RelativeTimeRange:
+			v.RelativeTimeRange = &RelativeTimeRange{}
+			return v.RelativeTimeRange.Deserialize(d)
+		case schemas.InterruptionFilter_Threshold:
+			v.Threshold = new(int64)
+			return d.ReadInt64(schemas.InterruptionFilter_Threshold, v.Threshold)
+		}
+		return nil
+	})
+}
+
 // Makes it possible to control how your transcription job is processed.
 // Currently, the only JobExecutionSettings modification you can choose is
 // enabling job queueing using the AllowDeferredExecution sub-parameter.
@@ -616,6 +1225,34 @@ type JobExecutionSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JobExecutionSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobExecutionSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobExecutionSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowDeferredExecution != nil {
+		s.WriteBool(schemas.JobExecutionSettings_AllowDeferredExecution, *v.AllowDeferredExecution)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.JobExecutionSettings_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+}
+func (v *JobExecutionSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobExecutionSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobExecutionSettings_AllowDeferredExecution:
+			v.AllowDeferredExecution = new(bool)
+			return d.ReadBool(schemas.JobExecutionSettings_AllowDeferredExecution, v.AllowDeferredExecution)
+		case schemas.JobExecutionSettings_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.JobExecutionSettings_DataAccessRoleArn, v.DataAccessRoleArn)
+		}
+		return nil
+	})
+}
+
 // Provides information on the speech contained in a discreet utterance when
 // multi-language identification is enabled in your request. This utterance
 // represents a block of speech consisting of one language, preceded or followed by
@@ -630,6 +1267,38 @@ type LanguageCodeItem struct {
 	LanguageCode LanguageCode
 
 	noSmithyDocumentSerde
+}
+
+func (v *LanguageCodeItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LanguageCodeItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LanguageCodeItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurationInSeconds != nil {
+		s.WriteFloat32(schemas.LanguageCodeItem_DurationInSeconds, *v.DurationInSeconds)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.LanguageCodeItem_LanguageCode, string(v.LanguageCode))
+	}
+}
+func (v *LanguageCodeItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LanguageCodeItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LanguageCodeItem_DurationInSeconds:
+			v.DurationInSeconds = new(float32)
+			return d.ReadFloat32(schemas.LanguageCodeItem_DurationInSeconds, v.DurationInSeconds)
+		case schemas.LanguageCodeItem_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.LanguageCodeItem_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // If using automatic language identification in your request and you want to
@@ -692,6 +1361,40 @@ type LanguageIdSettings struct {
 	VocabularyName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LanguageIdSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LanguageIdSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LanguageIdSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageModelName != nil {
+		s.WriteString(schemas.LanguageIdSettings_LanguageModelName, *v.LanguageModelName)
+	}
+	if v.VocabularyFilterName != nil {
+		s.WriteString(schemas.LanguageIdSettings_VocabularyFilterName, *v.VocabularyFilterName)
+	}
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.LanguageIdSettings_VocabularyName, *v.VocabularyName)
+	}
+}
+func (v *LanguageIdSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LanguageIdSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LanguageIdSettings_LanguageModelName:
+			v.LanguageModelName = new(string)
+			return d.ReadString(schemas.LanguageIdSettings_LanguageModelName, v.LanguageModelName)
+		case schemas.LanguageIdSettings_VocabularyFilterName:
+			v.VocabularyFilterName = new(string)
+			return d.ReadString(schemas.LanguageIdSettings_VocabularyFilterName, v.VocabularyFilterName)
+		case schemas.LanguageIdSettings_VocabularyName:
+			v.VocabularyName = new(string)
+			return d.ReadString(schemas.LanguageIdSettings_VocabularyName, v.VocabularyName)
+		}
+		return nil
+	})
 }
 
 // Provides information about a custom language model, including:
@@ -778,6 +1481,90 @@ type LanguageModel struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LanguageModel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LanguageModel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LanguageModel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseModelName != "" {
+		s.WriteString(schemas.LanguageModel_BaseModelName, string(v.BaseModelName))
+	}
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.LanguageModel_CreateTime, *v.CreateTime)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.LanguageModel_FailureReason, *v.FailureReason)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.LanguageModel_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.LanguageModel_LanguageCode, string(v.LanguageCode))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.LanguageModel_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.LanguageModel_ModelName, *v.ModelName)
+	}
+	if v.ModelStatus != "" {
+		s.WriteString(schemas.LanguageModel_ModelStatus, string(v.ModelStatus))
+	}
+	if v.UpgradeAvailability != nil {
+		s.WriteBool(schemas.LanguageModel_UpgradeAvailability, *v.UpgradeAvailability)
+	}
+}
+func (v *LanguageModel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LanguageModel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LanguageModel_BaseModelName:
+			var ev string
+			if err := d.ReadString(schemas.LanguageModel_BaseModelName, &ev); err != nil {
+				return err
+			}
+			v.BaseModelName = BaseModelName(ev)
+			return nil
+		case schemas.LanguageModel_CreateTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.LanguageModel_CreateTime, v.CreateTime)
+		case schemas.LanguageModel_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.LanguageModel_FailureReason, v.FailureReason)
+		case schemas.LanguageModel_InputDataConfig:
+			v.InputDataConfig = &InputDataConfig{}
+			return v.InputDataConfig.Deserialize(d)
+		case schemas.LanguageModel_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.LanguageModel_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = CLMLanguageCode(ev)
+			return nil
+		case schemas.LanguageModel_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.LanguageModel_LastModifiedTime, v.LastModifiedTime)
+		case schemas.LanguageModel_ModelName:
+			v.ModelName = new(string)
+			return d.ReadString(schemas.LanguageModel_ModelName, v.ModelName)
+		case schemas.LanguageModel_ModelStatus:
+			var ev string
+			if err := d.ReadString(schemas.LanguageModel_ModelStatus, &ev); err != nil {
+				return err
+			}
+			v.ModelStatus = ModelStatus(ev)
+			return nil
+		case schemas.LanguageModel_UpgradeAvailability:
+			v.UpgradeAvailability = new(bool)
+			return d.ReadBool(schemas.LanguageModel_UpgradeAvailability, v.UpgradeAvailability)
+		}
+		return nil
+	})
+}
+
 // Describes the Amazon S3 location of the media file you want to use in your
 // request.
 //
@@ -816,6 +1603,34 @@ type Media struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Media) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Media)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Media) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MediaFileUri != nil {
+		s.WriteString(schemas.Media_MediaFileUri, *v.MediaFileUri)
+	}
+	if v.RedactedMediaFileUri != nil {
+		s.WriteString(schemas.Media_RedactedMediaFileUri, *v.RedactedMediaFileUri)
+	}
+}
+func (v *Media) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Media, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Media_MediaFileUri:
+			v.MediaFileUri = new(string)
+			return d.ReadString(schemas.Media_MediaFileUri, v.MediaFileUri)
+		case schemas.Media_RedactedMediaFileUri:
+			v.RedactedMediaFileUri = new(string)
+			return d.ReadString(schemas.Media_RedactedMediaFileUri, v.RedactedMediaFileUri)
+		}
+		return nil
+	})
+}
+
 // Indicates which speaker is on which channel. The options are CLINICIAN and
 // PATIENT
 type MedicalScribeChannelDefinition struct {
@@ -834,6 +1649,35 @@ type MedicalScribeChannelDefinition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MedicalScribeChannelDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribeChannelDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalScribeChannelDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.MedicalScribeChannelDefinition_ChannelId, v.ChannelId)
+	if v.ParticipantRole != "" {
+		s.WriteString(schemas.MedicalScribeChannelDefinition_ParticipantRole, string(v.ParticipantRole))
+	}
+}
+func (v *MedicalScribeChannelDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalScribeChannelDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalScribeChannelDefinition_ChannelId:
+			return d.ReadInt32(schemas.MedicalScribeChannelDefinition_ChannelId, &v.ChannelId)
+		case schemas.MedicalScribeChannelDefinition_ParticipantRole:
+			var ev string
+			if err := d.ReadString(schemas.MedicalScribeChannelDefinition_ParticipantRole, &ev); err != nil {
+				return err
+			}
+			v.ParticipantRole = MedicalScribeParticipantRole(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The MedicalScribeContext object that contains contextual information used to
 // generate customized clinical notes.
 type MedicalScribeContext struct {
@@ -842,6 +1686,30 @@ type MedicalScribeContext struct {
 	PatientContext *MedicalScribePatientContext
 
 	noSmithyDocumentSerde
+}
+
+func (v *MedicalScribeContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribeContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalScribeContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PatientContext != nil {
+		s.WriteStruct(schemas.MedicalScribeContext_PatientContext)
+		v.PatientContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MedicalScribeContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalScribeContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalScribeContext_PatientContext:
+			v.PatientContext = &MedicalScribePatientContext{}
+			return v.PatientContext.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Provides detailed information about a Medical Scribe job.
@@ -957,6 +1825,114 @@ type MedicalScribeJob struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MedicalScribeJob) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribeJob)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalScribeJob) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMedicalScribeChannelDefinitions(s, schemas.MedicalScribeJob_ChannelDefinitions, v.ChannelDefinitions)
+	if v.CompletionTime != nil {
+		s.WriteTime(schemas.MedicalScribeJob_CompletionTime, *v.CompletionTime)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.MedicalScribeJob_CreationTime, *v.CreationTime)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.MedicalScribeJob_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.MedicalScribeJob_FailureReason, *v.FailureReason)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.MedicalScribeJob_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Media != nil {
+		s.WriteStruct(schemas.MedicalScribeJob_Media)
+		v.Media.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MedicalScribeContextProvided != nil {
+		s.WriteBool(schemas.MedicalScribeJob_MedicalScribeContextProvided, *v.MedicalScribeContextProvided)
+	}
+	if v.MedicalScribeJobName != nil {
+		s.WriteString(schemas.MedicalScribeJob_MedicalScribeJobName, *v.MedicalScribeJobName)
+	}
+	if v.MedicalScribeJobStatus != "" {
+		s.WriteString(schemas.MedicalScribeJob_MedicalScribeJobStatus, string(v.MedicalScribeJobStatus))
+	}
+	if v.MedicalScribeOutput != nil {
+		s.WriteStruct(schemas.MedicalScribeJob_MedicalScribeOutput)
+		v.MedicalScribeOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Settings != nil {
+		s.WriteStruct(schemas.MedicalScribeJob_Settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.MedicalScribeJob_StartTime, *v.StartTime)
+	}
+	serializeTagList(s, schemas.MedicalScribeJob_Tags, v.Tags)
+}
+func (v *MedicalScribeJob) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalScribeJob, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalScribeJob_ChannelDefinitions:
+			return deserializeMedicalScribeChannelDefinitions(d, schemas.MedicalScribeJob_ChannelDefinitions, &v.ChannelDefinitions)
+		case schemas.MedicalScribeJob_CompletionTime:
+			v.CompletionTime = new(time.Time)
+			return d.ReadTime(schemas.MedicalScribeJob_CompletionTime, v.CompletionTime)
+		case schemas.MedicalScribeJob_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.MedicalScribeJob_CreationTime, v.CreationTime)
+		case schemas.MedicalScribeJob_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.MedicalScribeJob_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.MedicalScribeJob_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.MedicalScribeJob_FailureReason, v.FailureReason)
+		case schemas.MedicalScribeJob_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.MedicalScribeJob_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = MedicalScribeLanguageCode(ev)
+			return nil
+		case schemas.MedicalScribeJob_Media:
+			v.Media = &Media{}
+			return v.Media.Deserialize(d)
+		case schemas.MedicalScribeJob_MedicalScribeContextProvided:
+			v.MedicalScribeContextProvided = new(bool)
+			return d.ReadBool(schemas.MedicalScribeJob_MedicalScribeContextProvided, v.MedicalScribeContextProvided)
+		case schemas.MedicalScribeJob_MedicalScribeJobName:
+			v.MedicalScribeJobName = new(string)
+			return d.ReadString(schemas.MedicalScribeJob_MedicalScribeJobName, v.MedicalScribeJobName)
+		case schemas.MedicalScribeJob_MedicalScribeJobStatus:
+			var ev string
+			if err := d.ReadString(schemas.MedicalScribeJob_MedicalScribeJobStatus, &ev); err != nil {
+				return err
+			}
+			v.MedicalScribeJobStatus = MedicalScribeJobStatus(ev)
+			return nil
+		case schemas.MedicalScribeJob_MedicalScribeOutput:
+			v.MedicalScribeOutput = &MedicalScribeOutput{}
+			return v.MedicalScribeOutput.Deserialize(d)
+		case schemas.MedicalScribeJob_Settings:
+			v.Settings = &MedicalScribeSettings{}
+			return v.Settings.Deserialize(d)
+		case schemas.MedicalScribeJob_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.MedicalScribeJob_StartTime, v.StartTime)
+		case schemas.MedicalScribeJob_Tags:
+			return deserializeTagList(d, schemas.MedicalScribeJob_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Provides detailed information about a specific Medical Scribe job.
 type MedicalScribeJobSummary struct {
 
@@ -1005,6 +1981,72 @@ type MedicalScribeJobSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MedicalScribeJobSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribeJobSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalScribeJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletionTime != nil {
+		s.WriteTime(schemas.MedicalScribeJobSummary_CompletionTime, *v.CompletionTime)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.MedicalScribeJobSummary_CreationTime, *v.CreationTime)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.MedicalScribeJobSummary_FailureReason, *v.FailureReason)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.MedicalScribeJobSummary_LanguageCode, string(v.LanguageCode))
+	}
+	if v.MedicalScribeJobName != nil {
+		s.WriteString(schemas.MedicalScribeJobSummary_MedicalScribeJobName, *v.MedicalScribeJobName)
+	}
+	if v.MedicalScribeJobStatus != "" {
+		s.WriteString(schemas.MedicalScribeJobSummary_MedicalScribeJobStatus, string(v.MedicalScribeJobStatus))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.MedicalScribeJobSummary_StartTime, *v.StartTime)
+	}
+}
+func (v *MedicalScribeJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalScribeJobSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalScribeJobSummary_CompletionTime:
+			v.CompletionTime = new(time.Time)
+			return d.ReadTime(schemas.MedicalScribeJobSummary_CompletionTime, v.CompletionTime)
+		case schemas.MedicalScribeJobSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.MedicalScribeJobSummary_CreationTime, v.CreationTime)
+		case schemas.MedicalScribeJobSummary_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.MedicalScribeJobSummary_FailureReason, v.FailureReason)
+		case schemas.MedicalScribeJobSummary_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.MedicalScribeJobSummary_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = MedicalScribeLanguageCode(ev)
+			return nil
+		case schemas.MedicalScribeJobSummary_MedicalScribeJobName:
+			v.MedicalScribeJobName = new(string)
+			return d.ReadString(schemas.MedicalScribeJobSummary_MedicalScribeJobName, v.MedicalScribeJobName)
+		case schemas.MedicalScribeJobSummary_MedicalScribeJobStatus:
+			var ev string
+			if err := d.ReadString(schemas.MedicalScribeJobSummary_MedicalScribeJobStatus, &ev); err != nil {
+				return err
+			}
+			v.MedicalScribeJobStatus = MedicalScribeJobStatus(ev)
+			return nil
+		case schemas.MedicalScribeJobSummary_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.MedicalScribeJobSummary_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 // The location of the output of your Medical Scribe job. ClinicalDocumentUri
 // holds the Amazon S3 URI for the Clinical Document and TranscriptFileUri holds
 // the Amazon S3 URI for the Transcript.
@@ -1023,6 +2065,34 @@ type MedicalScribeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MedicalScribeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalScribeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClinicalDocumentUri != nil {
+		s.WriteString(schemas.MedicalScribeOutput_ClinicalDocumentUri, *v.ClinicalDocumentUri)
+	}
+	if v.TranscriptFileUri != nil {
+		s.WriteString(schemas.MedicalScribeOutput_TranscriptFileUri, *v.TranscriptFileUri)
+	}
+}
+func (v *MedicalScribeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalScribeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalScribeOutput_ClinicalDocumentUri:
+			v.ClinicalDocumentUri = new(string)
+			return d.ReadString(schemas.MedicalScribeOutput_ClinicalDocumentUri, v.ClinicalDocumentUri)
+		case schemas.MedicalScribeOutput_TranscriptFileUri:
+			v.TranscriptFileUri = new(string)
+			return d.ReadString(schemas.MedicalScribeOutput_TranscriptFileUri, v.TranscriptFileUri)
+		}
+		return nil
+	})
+}
+
 // Contains patient-specific information used to customize the clinical note
 // generation.
 type MedicalScribePatientContext struct {
@@ -1032,6 +2102,32 @@ type MedicalScribePatientContext struct {
 	Pronouns Pronouns
 
 	noSmithyDocumentSerde
+}
+
+func (v *MedicalScribePatientContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribePatientContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalScribePatientContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Pronouns != "" {
+		s.WriteString(schemas.MedicalScribePatientContext_Pronouns, string(v.Pronouns))
+	}
+}
+func (v *MedicalScribePatientContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalScribePatientContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalScribePatientContext_Pronouns:
+			var ev string
+			if err := d.ReadString(schemas.MedicalScribePatientContext_Pronouns, &ev); err != nil {
+				return err
+			}
+			v.Pronouns = Pronouns(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Makes it possible to control how your Medical Scribe job is processed using a
@@ -1101,6 +2197,70 @@ type MedicalScribeSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MedicalScribeSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalScribeSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalScribeSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelIdentification != nil {
+		s.WriteBool(schemas.MedicalScribeSettings_ChannelIdentification, *v.ChannelIdentification)
+	}
+	if v.ClinicalNoteGenerationSettings != nil {
+		s.WriteStruct(schemas.MedicalScribeSettings_ClinicalNoteGenerationSettings)
+		v.ClinicalNoteGenerationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxSpeakerLabels != nil {
+		s.WriteInt32(schemas.MedicalScribeSettings_MaxSpeakerLabels, *v.MaxSpeakerLabels)
+	}
+	if v.ShowSpeakerLabels != nil {
+		s.WriteBool(schemas.MedicalScribeSettings_ShowSpeakerLabels, *v.ShowSpeakerLabels)
+	}
+	if v.VocabularyFilterMethod != "" {
+		s.WriteString(schemas.MedicalScribeSettings_VocabularyFilterMethod, string(v.VocabularyFilterMethod))
+	}
+	if v.VocabularyFilterName != nil {
+		s.WriteString(schemas.MedicalScribeSettings_VocabularyFilterName, *v.VocabularyFilterName)
+	}
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.MedicalScribeSettings_VocabularyName, *v.VocabularyName)
+	}
+}
+func (v *MedicalScribeSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalScribeSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalScribeSettings_ChannelIdentification:
+			v.ChannelIdentification = new(bool)
+			return d.ReadBool(schemas.MedicalScribeSettings_ChannelIdentification, v.ChannelIdentification)
+		case schemas.MedicalScribeSettings_ClinicalNoteGenerationSettings:
+			v.ClinicalNoteGenerationSettings = &ClinicalNoteGenerationSettings{}
+			return v.ClinicalNoteGenerationSettings.Deserialize(d)
+		case schemas.MedicalScribeSettings_MaxSpeakerLabels:
+			v.MaxSpeakerLabels = new(int32)
+			return d.ReadInt32(schemas.MedicalScribeSettings_MaxSpeakerLabels, v.MaxSpeakerLabels)
+		case schemas.MedicalScribeSettings_ShowSpeakerLabels:
+			v.ShowSpeakerLabels = new(bool)
+			return d.ReadBool(schemas.MedicalScribeSettings_ShowSpeakerLabels, v.ShowSpeakerLabels)
+		case schemas.MedicalScribeSettings_VocabularyFilterMethod:
+			var ev string
+			if err := d.ReadString(schemas.MedicalScribeSettings_VocabularyFilterMethod, &ev); err != nil {
+				return err
+			}
+			v.VocabularyFilterMethod = VocabularyFilterMethod(ev)
+			return nil
+		case schemas.MedicalScribeSettings_VocabularyFilterName:
+			v.VocabularyFilterName = new(string)
+			return d.ReadString(schemas.MedicalScribeSettings_VocabularyFilterName, v.VocabularyFilterName)
+		case schemas.MedicalScribeSettings_VocabularyName:
+			v.VocabularyName = new(string)
+			return d.ReadString(schemas.MedicalScribeSettings_VocabularyName, v.VocabularyName)
+		}
+		return nil
+	})
+}
+
 // Provides you with the Amazon S3 URI you can use to access your transcript.
 type MedicalTranscript struct {
 
@@ -1112,6 +2272,28 @@ type MedicalTranscript struct {
 	TranscriptFileUri *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MedicalTranscript) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalTranscript)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalTranscript) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TranscriptFileUri != nil {
+		s.WriteString(schemas.MedicalTranscript_TranscriptFileUri, *v.TranscriptFileUri)
+	}
+}
+func (v *MedicalTranscript) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalTranscript, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalTranscript_TranscriptFileUri:
+			v.TranscriptFileUri = new(string)
+			return d.ReadString(schemas.MedicalTranscript_TranscriptFileUri, v.TranscriptFileUri)
+		}
+		return nil
+	})
 }
 
 // Provides detailed information about a medical transcription job.
@@ -1240,6 +2422,145 @@ type MedicalTranscriptionJob struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MedicalTranscriptionJob) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalTranscriptionJob)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalTranscriptionJob) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletionTime != nil {
+		s.WriteTime(schemas.MedicalTranscriptionJob_CompletionTime, *v.CompletionTime)
+	}
+	if v.ContentIdentificationType != "" {
+		s.WriteString(schemas.MedicalTranscriptionJob_ContentIdentificationType, string(v.ContentIdentificationType))
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.MedicalTranscriptionJob_CreationTime, *v.CreationTime)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.MedicalTranscriptionJob_FailureReason, *v.FailureReason)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.MedicalTranscriptionJob_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Media != nil {
+		s.WriteStruct(schemas.MedicalTranscriptionJob_Media)
+		v.Media.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MediaFormat != "" {
+		s.WriteString(schemas.MedicalTranscriptionJob_MediaFormat, string(v.MediaFormat))
+	}
+	if v.MediaSampleRateHertz != nil {
+		s.WriteInt32(schemas.MedicalTranscriptionJob_MediaSampleRateHertz, *v.MediaSampleRateHertz)
+	}
+	if v.MedicalTranscriptionJobName != nil {
+		s.WriteString(schemas.MedicalTranscriptionJob_MedicalTranscriptionJobName, *v.MedicalTranscriptionJobName)
+	}
+	if v.Settings != nil {
+		s.WriteStruct(schemas.MedicalTranscriptionJob_Settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Specialty != "" {
+		s.WriteString(schemas.MedicalTranscriptionJob_Specialty, string(v.Specialty))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.MedicalTranscriptionJob_StartTime, *v.StartTime)
+	}
+	serializeTagList(s, schemas.MedicalTranscriptionJob_Tags, v.Tags)
+	if v.Transcript != nil {
+		s.WriteStruct(schemas.MedicalTranscriptionJob_Transcript)
+		v.Transcript.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TranscriptionJobStatus != "" {
+		s.WriteString(schemas.MedicalTranscriptionJob_TranscriptionJobStatus, string(v.TranscriptionJobStatus))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.MedicalTranscriptionJob_Type, string(v.Type))
+	}
+}
+func (v *MedicalTranscriptionJob) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalTranscriptionJob, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalTranscriptionJob_CompletionTime:
+			v.CompletionTime = new(time.Time)
+			return d.ReadTime(schemas.MedicalTranscriptionJob_CompletionTime, v.CompletionTime)
+		case schemas.MedicalTranscriptionJob_ContentIdentificationType:
+			var ev string
+			if err := d.ReadString(schemas.MedicalTranscriptionJob_ContentIdentificationType, &ev); err != nil {
+				return err
+			}
+			v.ContentIdentificationType = MedicalContentIdentificationType(ev)
+			return nil
+		case schemas.MedicalTranscriptionJob_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.MedicalTranscriptionJob_CreationTime, v.CreationTime)
+		case schemas.MedicalTranscriptionJob_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.MedicalTranscriptionJob_FailureReason, v.FailureReason)
+		case schemas.MedicalTranscriptionJob_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.MedicalTranscriptionJob_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.MedicalTranscriptionJob_Media:
+			v.Media = &Media{}
+			return v.Media.Deserialize(d)
+		case schemas.MedicalTranscriptionJob_MediaFormat:
+			var ev string
+			if err := d.ReadString(schemas.MedicalTranscriptionJob_MediaFormat, &ev); err != nil {
+				return err
+			}
+			v.MediaFormat = MediaFormat(ev)
+			return nil
+		case schemas.MedicalTranscriptionJob_MediaSampleRateHertz:
+			v.MediaSampleRateHertz = new(int32)
+			return d.ReadInt32(schemas.MedicalTranscriptionJob_MediaSampleRateHertz, v.MediaSampleRateHertz)
+		case schemas.MedicalTranscriptionJob_MedicalTranscriptionJobName:
+			v.MedicalTranscriptionJobName = new(string)
+			return d.ReadString(schemas.MedicalTranscriptionJob_MedicalTranscriptionJobName, v.MedicalTranscriptionJobName)
+		case schemas.MedicalTranscriptionJob_Settings:
+			v.Settings = &MedicalTranscriptionSetting{}
+			return v.Settings.Deserialize(d)
+		case schemas.MedicalTranscriptionJob_Specialty:
+			var ev string
+			if err := d.ReadString(schemas.MedicalTranscriptionJob_Specialty, &ev); err != nil {
+				return err
+			}
+			v.Specialty = Specialty(ev)
+			return nil
+		case schemas.MedicalTranscriptionJob_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.MedicalTranscriptionJob_StartTime, v.StartTime)
+		case schemas.MedicalTranscriptionJob_Tags:
+			return deserializeTagList(d, schemas.MedicalTranscriptionJob_Tags, &v.Tags)
+		case schemas.MedicalTranscriptionJob_Transcript:
+			v.Transcript = &MedicalTranscript{}
+			return v.Transcript.Deserialize(d)
+		case schemas.MedicalTranscriptionJob_TranscriptionJobStatus:
+			var ev string
+			if err := d.ReadString(schemas.MedicalTranscriptionJob_TranscriptionJobStatus, &ev); err != nil {
+				return err
+			}
+			v.TranscriptionJobStatus = TranscriptionJobStatus(ev)
+			return nil
+		case schemas.MedicalTranscriptionJob_Type:
+			var ev string
+			if err := d.ReadString(schemas.MedicalTranscriptionJob_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = Type(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Provides detailed information about a specific medical transcription job.
 type MedicalTranscriptionJobSummary struct {
 
@@ -1311,6 +2632,112 @@ type MedicalTranscriptionJobSummary struct {
 	Type Type
 
 	noSmithyDocumentSerde
+}
+
+func (v *MedicalTranscriptionJobSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalTranscriptionJobSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalTranscriptionJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletionTime != nil {
+		s.WriteTime(schemas.MedicalTranscriptionJobSummary_CompletionTime, *v.CompletionTime)
+	}
+	if v.ContentIdentificationType != "" {
+		s.WriteString(schemas.MedicalTranscriptionJobSummary_ContentIdentificationType, string(v.ContentIdentificationType))
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.MedicalTranscriptionJobSummary_CreationTime, *v.CreationTime)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.MedicalTranscriptionJobSummary_FailureReason, *v.FailureReason)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.MedicalTranscriptionJobSummary_LanguageCode, string(v.LanguageCode))
+	}
+	if v.MedicalTranscriptionJobName != nil {
+		s.WriteString(schemas.MedicalTranscriptionJobSummary_MedicalTranscriptionJobName, *v.MedicalTranscriptionJobName)
+	}
+	if v.OutputLocationType != "" {
+		s.WriteString(schemas.MedicalTranscriptionJobSummary_OutputLocationType, string(v.OutputLocationType))
+	}
+	if v.Specialty != "" {
+		s.WriteString(schemas.MedicalTranscriptionJobSummary_Specialty, string(v.Specialty))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.MedicalTranscriptionJobSummary_StartTime, *v.StartTime)
+	}
+	if v.TranscriptionJobStatus != "" {
+		s.WriteString(schemas.MedicalTranscriptionJobSummary_TranscriptionJobStatus, string(v.TranscriptionJobStatus))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.MedicalTranscriptionJobSummary_Type, string(v.Type))
+	}
+}
+func (v *MedicalTranscriptionJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalTranscriptionJobSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalTranscriptionJobSummary_CompletionTime:
+			v.CompletionTime = new(time.Time)
+			return d.ReadTime(schemas.MedicalTranscriptionJobSummary_CompletionTime, v.CompletionTime)
+		case schemas.MedicalTranscriptionJobSummary_ContentIdentificationType:
+			var ev string
+			if err := d.ReadString(schemas.MedicalTranscriptionJobSummary_ContentIdentificationType, &ev); err != nil {
+				return err
+			}
+			v.ContentIdentificationType = MedicalContentIdentificationType(ev)
+			return nil
+		case schemas.MedicalTranscriptionJobSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.MedicalTranscriptionJobSummary_CreationTime, v.CreationTime)
+		case schemas.MedicalTranscriptionJobSummary_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.MedicalTranscriptionJobSummary_FailureReason, v.FailureReason)
+		case schemas.MedicalTranscriptionJobSummary_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.MedicalTranscriptionJobSummary_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.MedicalTranscriptionJobSummary_MedicalTranscriptionJobName:
+			v.MedicalTranscriptionJobName = new(string)
+			return d.ReadString(schemas.MedicalTranscriptionJobSummary_MedicalTranscriptionJobName, v.MedicalTranscriptionJobName)
+		case schemas.MedicalTranscriptionJobSummary_OutputLocationType:
+			var ev string
+			if err := d.ReadString(schemas.MedicalTranscriptionJobSummary_OutputLocationType, &ev); err != nil {
+				return err
+			}
+			v.OutputLocationType = OutputLocationType(ev)
+			return nil
+		case schemas.MedicalTranscriptionJobSummary_Specialty:
+			var ev string
+			if err := d.ReadString(schemas.MedicalTranscriptionJobSummary_Specialty, &ev); err != nil {
+				return err
+			}
+			v.Specialty = Specialty(ev)
+			return nil
+		case schemas.MedicalTranscriptionJobSummary_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.MedicalTranscriptionJobSummary_StartTime, v.StartTime)
+		case schemas.MedicalTranscriptionJobSummary_TranscriptionJobStatus:
+			var ev string
+			if err := d.ReadString(schemas.MedicalTranscriptionJobSummary_TranscriptionJobStatus, &ev); err != nil {
+				return err
+			}
+			v.TranscriptionJobStatus = TranscriptionJobStatus(ev)
+			return nil
+		case schemas.MedicalTranscriptionJobSummary_Type:
+			var ev string
+			if err := d.ReadString(schemas.MedicalTranscriptionJobSummary_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = Type(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Allows additional optional settings in your request, including channel
@@ -1393,6 +2820,58 @@ type MedicalTranscriptionSetting struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MedicalTranscriptionSetting) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MedicalTranscriptionSetting)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MedicalTranscriptionSetting) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelIdentification != nil {
+		s.WriteBool(schemas.MedicalTranscriptionSetting_ChannelIdentification, *v.ChannelIdentification)
+	}
+	if v.MaxAlternatives != nil {
+		s.WriteInt32(schemas.MedicalTranscriptionSetting_MaxAlternatives, *v.MaxAlternatives)
+	}
+	if v.MaxSpeakerLabels != nil {
+		s.WriteInt32(schemas.MedicalTranscriptionSetting_MaxSpeakerLabels, *v.MaxSpeakerLabels)
+	}
+	if v.ShowAlternatives != nil {
+		s.WriteBool(schemas.MedicalTranscriptionSetting_ShowAlternatives, *v.ShowAlternatives)
+	}
+	if v.ShowSpeakerLabels != nil {
+		s.WriteBool(schemas.MedicalTranscriptionSetting_ShowSpeakerLabels, *v.ShowSpeakerLabels)
+	}
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.MedicalTranscriptionSetting_VocabularyName, *v.VocabularyName)
+	}
+}
+func (v *MedicalTranscriptionSetting) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MedicalTranscriptionSetting, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MedicalTranscriptionSetting_ChannelIdentification:
+			v.ChannelIdentification = new(bool)
+			return d.ReadBool(schemas.MedicalTranscriptionSetting_ChannelIdentification, v.ChannelIdentification)
+		case schemas.MedicalTranscriptionSetting_MaxAlternatives:
+			v.MaxAlternatives = new(int32)
+			return d.ReadInt32(schemas.MedicalTranscriptionSetting_MaxAlternatives, v.MaxAlternatives)
+		case schemas.MedicalTranscriptionSetting_MaxSpeakerLabels:
+			v.MaxSpeakerLabels = new(int32)
+			return d.ReadInt32(schemas.MedicalTranscriptionSetting_MaxSpeakerLabels, v.MaxSpeakerLabels)
+		case schemas.MedicalTranscriptionSetting_ShowAlternatives:
+			v.ShowAlternatives = new(bool)
+			return d.ReadBool(schemas.MedicalTranscriptionSetting_ShowAlternatives, v.ShowAlternatives)
+		case schemas.MedicalTranscriptionSetting_ShowSpeakerLabels:
+			v.ShowSpeakerLabels = new(bool)
+			return d.ReadBool(schemas.MedicalTranscriptionSetting_ShowSpeakerLabels, v.ShowSpeakerLabels)
+		case schemas.MedicalTranscriptionSetting_VocabularyName:
+			v.VocabularyName = new(string)
+			return d.ReadString(schemas.MedicalTranscriptionSetting_VocabularyName, v.VocabularyName)
+		}
+		return nil
+	})
+}
+
 // Provides the name of the custom language model that was included in the
 // specified transcription job.
 //
@@ -1411,6 +2890,28 @@ type ModelSettings struct {
 	LanguageModelName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ModelSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModelSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModelSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageModelName != nil {
+		s.WriteString(schemas.ModelSettings_LanguageModelName, *v.LanguageModelName)
+	}
+}
+func (v *ModelSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModelSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModelSettings_LanguageModelName:
+			v.LanguageModelName = new(string)
+			return d.ReadString(schemas.ModelSettings_LanguageModelName, v.LanguageModelName)
+		}
+		return nil
+	})
 }
 
 // Flag the presence or absence of periods of silence in your Call Analytics
@@ -1444,6 +2945,50 @@ type NonTalkTimeFilter struct {
 	Threshold *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *NonTalkTimeFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NonTalkTimeFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NonTalkTimeFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AbsoluteTimeRange != nil {
+		s.WriteStruct(schemas.NonTalkTimeFilter_AbsoluteTimeRange)
+		v.AbsoluteTimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Negate != nil {
+		s.WriteBool(schemas.NonTalkTimeFilter_Negate, *v.Negate)
+	}
+	if v.RelativeTimeRange != nil {
+		s.WriteStruct(schemas.NonTalkTimeFilter_RelativeTimeRange)
+		v.RelativeTimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Threshold != nil {
+		s.WriteInt64(schemas.NonTalkTimeFilter_Threshold, *v.Threshold)
+	}
+}
+func (v *NonTalkTimeFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NonTalkTimeFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NonTalkTimeFilter_AbsoluteTimeRange:
+			v.AbsoluteTimeRange = &AbsoluteTimeRange{}
+			return v.AbsoluteTimeRange.Deserialize(d)
+		case schemas.NonTalkTimeFilter_Negate:
+			v.Negate = new(bool)
+			return d.ReadBool(schemas.NonTalkTimeFilter_Negate, v.Negate)
+		case schemas.NonTalkTimeFilter_RelativeTimeRange:
+			v.RelativeTimeRange = &RelativeTimeRange{}
+			return v.RelativeTimeRange.Deserialize(d)
+		case schemas.NonTalkTimeFilter_Threshold:
+			v.Threshold = new(int64)
+			return d.ReadInt64(schemas.NonTalkTimeFilter_Threshold, v.Threshold)
+		}
+		return nil
+	})
 }
 
 // A time range, in percentage, between two points in your media file.
@@ -1485,6 +3030,46 @@ type RelativeTimeRange struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RelativeTimeRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RelativeTimeRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RelativeTimeRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndPercentage != nil {
+		s.WriteInt32(schemas.RelativeTimeRange_EndPercentage, *v.EndPercentage)
+	}
+	if v.First != nil {
+		s.WriteInt32(schemas.RelativeTimeRange_First, *v.First)
+	}
+	if v.Last != nil {
+		s.WriteInt32(schemas.RelativeTimeRange_Last, *v.Last)
+	}
+	if v.StartPercentage != nil {
+		s.WriteInt32(schemas.RelativeTimeRange_StartPercentage, *v.StartPercentage)
+	}
+}
+func (v *RelativeTimeRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RelativeTimeRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RelativeTimeRange_EndPercentage:
+			v.EndPercentage = new(int32)
+			return d.ReadInt32(schemas.RelativeTimeRange_EndPercentage, v.EndPercentage)
+		case schemas.RelativeTimeRange_First:
+			v.First = new(int32)
+			return d.ReadInt32(schemas.RelativeTimeRange_First, v.First)
+		case schemas.RelativeTimeRange_Last:
+			v.Last = new(int32)
+			return d.ReadInt32(schemas.RelativeTimeRange_Last, v.Last)
+		case schemas.RelativeTimeRange_StartPercentage:
+			v.StartPercentage = new(int32)
+			return d.ReadInt32(schemas.RelativeTimeRange_StartPercentage, v.StartPercentage)
+		}
+		return nil
+	})
+}
+
 // A rule is a set of criteria that you can specify to flag an attribute in your
 // Call Analytics output. Rules define a Call Analytics category.
 //
@@ -1517,6 +3102,14 @@ type RuleMemberInterruptionFilter struct {
 }
 
 func (*RuleMemberInterruptionFilter) isRule() {}
+func (v *RuleMemberInterruptionFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Rule_InterruptionFilter)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RuleMemberInterruptionFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Flag the presence or absence of periods of silence in your Call Analytics
 // transcription output. Refer to for more detail.
@@ -1527,6 +3120,14 @@ type RuleMemberNonTalkTimeFilter struct {
 }
 
 func (*RuleMemberNonTalkTimeFilter) isRule() {}
+func (v *RuleMemberNonTalkTimeFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Rule_NonTalkTimeFilter)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RuleMemberNonTalkTimeFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Flag the presence or absence of specific sentiments in your Call Analytics
 // transcription output. Refer to for more detail.
@@ -1537,6 +3138,14 @@ type RuleMemberSentimentFilter struct {
 }
 
 func (*RuleMemberSentimentFilter) isRule() {}
+func (v *RuleMemberSentimentFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Rule_SentimentFilter)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RuleMemberSentimentFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Flag the presence or absence of specific words or phrases in your Call
 // Analytics transcription output. Refer to for more detail.
@@ -1547,6 +3156,14 @@ type RuleMemberTranscriptFilter struct {
 }
 
 func (*RuleMemberTranscriptFilter) isRule() {}
+func (v *RuleMemberTranscriptFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Rule_TranscriptFilter)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RuleMemberTranscriptFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Flag the presence or absence of specific sentiments detected in your Call
 // Analytics transcription output.
@@ -1594,6 +3211,57 @@ type SentimentFilter struct {
 	RelativeTimeRange *RelativeTimeRange
 
 	noSmithyDocumentSerde
+}
+
+func (v *SentimentFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SentimentFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SentimentFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AbsoluteTimeRange != nil {
+		s.WriteStruct(schemas.SentimentFilter_AbsoluteTimeRange)
+		v.AbsoluteTimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Negate != nil {
+		s.WriteBool(schemas.SentimentFilter_Negate, *v.Negate)
+	}
+	if v.ParticipantRole != "" {
+		s.WriteString(schemas.SentimentFilter_ParticipantRole, string(v.ParticipantRole))
+	}
+	if v.RelativeTimeRange != nil {
+		s.WriteStruct(schemas.SentimentFilter_RelativeTimeRange)
+		v.RelativeTimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSentimentValueList(s, schemas.SentimentFilter_Sentiments, v.Sentiments)
+}
+func (v *SentimentFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SentimentFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SentimentFilter_AbsoluteTimeRange:
+			v.AbsoluteTimeRange = &AbsoluteTimeRange{}
+			return v.AbsoluteTimeRange.Deserialize(d)
+		case schemas.SentimentFilter_Negate:
+			v.Negate = new(bool)
+			return d.ReadBool(schemas.SentimentFilter_Negate, v.Negate)
+		case schemas.SentimentFilter_ParticipantRole:
+			var ev string
+			if err := d.ReadString(schemas.SentimentFilter_ParticipantRole, &ev); err != nil {
+				return err
+			}
+			v.ParticipantRole = ParticipantRole(ev)
+			return nil
+		case schemas.SentimentFilter_RelativeTimeRange:
+			v.RelativeTimeRange = &RelativeTimeRange{}
+			return v.RelativeTimeRange.Deserialize(d)
+		case schemas.SentimentFilter_Sentiments:
+			return deserializeSentimentValueList(d, schemas.SentimentFilter_Sentiments, &v.Sentiments)
+		}
+		return nil
+	})
 }
 
 // Allows additional optional settings in your request, including channel
@@ -1688,6 +3356,74 @@ type Settings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Settings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Settings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Settings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelIdentification != nil {
+		s.WriteBool(schemas.Settings_ChannelIdentification, *v.ChannelIdentification)
+	}
+	if v.MaxAlternatives != nil {
+		s.WriteInt32(schemas.Settings_MaxAlternatives, *v.MaxAlternatives)
+	}
+	if v.MaxSpeakerLabels != nil {
+		s.WriteInt32(schemas.Settings_MaxSpeakerLabels, *v.MaxSpeakerLabels)
+	}
+	if v.ShowAlternatives != nil {
+		s.WriteBool(schemas.Settings_ShowAlternatives, *v.ShowAlternatives)
+	}
+	if v.ShowSpeakerLabels != nil {
+		s.WriteBool(schemas.Settings_ShowSpeakerLabels, *v.ShowSpeakerLabels)
+	}
+	if v.VocabularyFilterMethod != "" {
+		s.WriteString(schemas.Settings_VocabularyFilterMethod, string(v.VocabularyFilterMethod))
+	}
+	if v.VocabularyFilterName != nil {
+		s.WriteString(schemas.Settings_VocabularyFilterName, *v.VocabularyFilterName)
+	}
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.Settings_VocabularyName, *v.VocabularyName)
+	}
+}
+func (v *Settings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Settings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Settings_ChannelIdentification:
+			v.ChannelIdentification = new(bool)
+			return d.ReadBool(schemas.Settings_ChannelIdentification, v.ChannelIdentification)
+		case schemas.Settings_MaxAlternatives:
+			v.MaxAlternatives = new(int32)
+			return d.ReadInt32(schemas.Settings_MaxAlternatives, v.MaxAlternatives)
+		case schemas.Settings_MaxSpeakerLabels:
+			v.MaxSpeakerLabels = new(int32)
+			return d.ReadInt32(schemas.Settings_MaxSpeakerLabels, v.MaxSpeakerLabels)
+		case schemas.Settings_ShowAlternatives:
+			v.ShowAlternatives = new(bool)
+			return d.ReadBool(schemas.Settings_ShowAlternatives, v.ShowAlternatives)
+		case schemas.Settings_ShowSpeakerLabels:
+			v.ShowSpeakerLabels = new(bool)
+			return d.ReadBool(schemas.Settings_ShowSpeakerLabels, v.ShowSpeakerLabels)
+		case schemas.Settings_VocabularyFilterMethod:
+			var ev string
+			if err := d.ReadString(schemas.Settings_VocabularyFilterMethod, &ev); err != nil {
+				return err
+			}
+			v.VocabularyFilterMethod = VocabularyFilterMethod(ev)
+			return nil
+		case schemas.Settings_VocabularyFilterName:
+			v.VocabularyFilterName = new(string)
+			return d.ReadString(schemas.Settings_VocabularyFilterName, v.VocabularyFilterName)
+		case schemas.Settings_VocabularyName:
+			v.VocabularyName = new(string)
+			return d.ReadString(schemas.Settings_VocabularyName, v.VocabularyName)
+		}
+		return nil
+	})
+}
+
 // Generate subtitles for your media file with your transcription request.
 //
 // You can choose a start index of 0 or 1, and you can specify either WebVTT or
@@ -1709,6 +3445,31 @@ type Subtitles struct {
 	OutputStartIndex *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *Subtitles) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Subtitles)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Subtitles) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSubtitleFormats(s, schemas.Subtitles_Formats, v.Formats)
+	if v.OutputStartIndex != nil {
+		s.WriteInt32(schemas.Subtitles_OutputStartIndex, *v.OutputStartIndex)
+	}
+}
+func (v *Subtitles) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Subtitles, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Subtitles_Formats:
+			return deserializeSubtitleFormats(d, schemas.Subtitles_Formats, &v.Formats)
+		case schemas.Subtitles_OutputStartIndex:
+			v.OutputStartIndex = new(int32)
+			return d.ReadInt32(schemas.Subtitles_OutputStartIndex, v.OutputStartIndex)
+		}
+		return nil
+	})
 }
 
 // Provides information about your subtitle file, including format, start index,
@@ -1745,6 +3506,34 @@ type SubtitlesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubtitlesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubtitlesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubtitlesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSubtitleFormats(s, schemas.SubtitlesOutput_Formats, v.Formats)
+	if v.OutputStartIndex != nil {
+		s.WriteInt32(schemas.SubtitlesOutput_OutputStartIndex, *v.OutputStartIndex)
+	}
+	serializeSubtitleFileUris(s, schemas.SubtitlesOutput_SubtitleFileUris, v.SubtitleFileUris)
+}
+func (v *SubtitlesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubtitlesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubtitlesOutput_Formats:
+			return deserializeSubtitleFormats(d, schemas.SubtitlesOutput_Formats, &v.Formats)
+		case schemas.SubtitlesOutput_OutputStartIndex:
+			v.OutputStartIndex = new(int32)
+			return d.ReadInt32(schemas.SubtitlesOutput_OutputStartIndex, v.OutputStartIndex)
+		case schemas.SubtitlesOutput_SubtitleFileUris:
+			return deserializeSubtitleFileUris(d, schemas.SubtitlesOutput_SubtitleFileUris, &v.SubtitleFileUris)
+		}
+		return nil
+	})
+}
+
 // Contains GenerateAbstractiveSummary , which is a required parameter if you want
 // to enable Generative call summarization in your Call Analytics request.
 type Summarization struct {
@@ -1762,6 +3551,28 @@ type Summarization struct {
 	GenerateAbstractiveSummary *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *Summarization) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Summarization)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Summarization) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GenerateAbstractiveSummary != nil {
+		s.WriteBool(schemas.Summarization_GenerateAbstractiveSummary, *v.GenerateAbstractiveSummary)
+	}
+}
+func (v *Summarization) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Summarization, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Summarization_GenerateAbstractiveSummary:
+			v.GenerateAbstractiveSummary = new(bool)
+			return d.ReadBool(schemas.Summarization_GenerateAbstractiveSummary, v.GenerateAbstractiveSummary)
+		}
+		return nil
+	})
 }
 
 // Adds metadata, in the form of a key:value pair, to the specified resource.
@@ -1794,6 +3605,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Contains ToxicityCategories , which is a required parameter if you want to
 // enable toxicity detection ( ToxicityDetection ) in your transcription request.
 type ToxicityDetectionSettings struct {
@@ -1805,6 +3644,25 @@ type ToxicityDetectionSettings struct {
 	ToxicityCategories []ToxicityCategory
 
 	noSmithyDocumentSerde
+}
+
+func (v *ToxicityDetectionSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ToxicityDetectionSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ToxicityDetectionSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeToxicityCategories(s, schemas.ToxicityDetectionSettings_ToxicityCategories, v.ToxicityCategories)
+}
+func (v *ToxicityDetectionSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ToxicityDetectionSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ToxicityDetectionSettings_ToxicityCategories:
+			return deserializeToxicityCategories(d, schemas.ToxicityDetectionSettings_ToxicityCategories, &v.ToxicityCategories)
+		}
+		return nil
+	})
 }
 
 // Provides you with the Amazon S3 URI you can use to access your transcript.
@@ -1845,6 +3703,34 @@ type Transcript struct {
 	TranscriptFileUri *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Transcript) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Transcript)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Transcript) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RedactedTranscriptFileUri != nil {
+		s.WriteString(schemas.Transcript_RedactedTranscriptFileUri, *v.RedactedTranscriptFileUri)
+	}
+	if v.TranscriptFileUri != nil {
+		s.WriteString(schemas.Transcript_TranscriptFileUri, *v.TranscriptFileUri)
+	}
+}
+func (v *Transcript) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Transcript, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Transcript_RedactedTranscriptFileUri:
+			v.RedactedTranscriptFileUri = new(string)
+			return d.ReadString(schemas.Transcript_RedactedTranscriptFileUri, v.RedactedTranscriptFileUri)
+		case schemas.Transcript_TranscriptFileUri:
+			v.TranscriptFileUri = new(string)
+			return d.ReadString(schemas.Transcript_TranscriptFileUri, v.TranscriptFileUri)
+		}
+		return nil
+	})
 }
 
 // Flag the presence or absence of specific words or phrases detected in your Call
@@ -1900,6 +3786,67 @@ type TranscriptFilter struct {
 	RelativeTimeRange *RelativeTimeRange
 
 	noSmithyDocumentSerde
+}
+
+func (v *TranscriptFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TranscriptFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TranscriptFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AbsoluteTimeRange != nil {
+		s.WriteStruct(schemas.TranscriptFilter_AbsoluteTimeRange)
+		v.AbsoluteTimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Negate != nil {
+		s.WriteBool(schemas.TranscriptFilter_Negate, *v.Negate)
+	}
+	if v.ParticipantRole != "" {
+		s.WriteString(schemas.TranscriptFilter_ParticipantRole, string(v.ParticipantRole))
+	}
+	if v.RelativeTimeRange != nil {
+		s.WriteStruct(schemas.TranscriptFilter_RelativeTimeRange)
+		v.RelativeTimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStringTargetList(s, schemas.TranscriptFilter_Targets, v.Targets)
+	if v.TranscriptFilterType != "" {
+		s.WriteString(schemas.TranscriptFilter_TranscriptFilterType, string(v.TranscriptFilterType))
+	}
+}
+func (v *TranscriptFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TranscriptFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TranscriptFilter_AbsoluteTimeRange:
+			v.AbsoluteTimeRange = &AbsoluteTimeRange{}
+			return v.AbsoluteTimeRange.Deserialize(d)
+		case schemas.TranscriptFilter_Negate:
+			v.Negate = new(bool)
+			return d.ReadBool(schemas.TranscriptFilter_Negate, v.Negate)
+		case schemas.TranscriptFilter_ParticipantRole:
+			var ev string
+			if err := d.ReadString(schemas.TranscriptFilter_ParticipantRole, &ev); err != nil {
+				return err
+			}
+			v.ParticipantRole = ParticipantRole(ev)
+			return nil
+		case schemas.TranscriptFilter_RelativeTimeRange:
+			v.RelativeTimeRange = &RelativeTimeRange{}
+			return v.RelativeTimeRange.Deserialize(d)
+		case schemas.TranscriptFilter_Targets:
+			return deserializeStringTargetList(d, schemas.TranscriptFilter_Targets, &v.Targets)
+		case schemas.TranscriptFilter_TranscriptFilterType:
+			var ev string
+			if err := d.ReadString(schemas.TranscriptFilter_TranscriptFilterType, &ev); err != nil {
+				return err
+			}
+			v.TranscriptFilterType = TranscriptFilterType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Provides detailed information about a transcription job.
@@ -2060,6 +4007,177 @@ type TranscriptionJob struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TranscriptionJob) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TranscriptionJob)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TranscriptionJob) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletionTime != nil {
+		s.WriteTime(schemas.TranscriptionJob_CompletionTime, *v.CompletionTime)
+	}
+	if v.ContentRedaction != nil {
+		s.WriteStruct(schemas.TranscriptionJob_ContentRedaction)
+		v.ContentRedaction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.TranscriptionJob_CreationTime, *v.CreationTime)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.TranscriptionJob_FailureReason, *v.FailureReason)
+	}
+	if v.IdentifiedLanguageScore != nil {
+		s.WriteFloat32(schemas.TranscriptionJob_IdentifiedLanguageScore, *v.IdentifiedLanguageScore)
+	}
+	if v.IdentifyLanguage != nil {
+		s.WriteBool(schemas.TranscriptionJob_IdentifyLanguage, *v.IdentifyLanguage)
+	}
+	if v.IdentifyMultipleLanguages != nil {
+		s.WriteBool(schemas.TranscriptionJob_IdentifyMultipleLanguages, *v.IdentifyMultipleLanguages)
+	}
+	if v.JobExecutionSettings != nil {
+		s.WriteStruct(schemas.TranscriptionJob_JobExecutionSettings)
+		v.JobExecutionSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.TranscriptionJob_LanguageCode, string(v.LanguageCode))
+	}
+	serializeLanguageCodeList(s, schemas.TranscriptionJob_LanguageCodes, v.LanguageCodes)
+	serializeLanguageIdSettingsMap(s, schemas.TranscriptionJob_LanguageIdSettings, v.LanguageIdSettings)
+	serializeLanguageOptions(s, schemas.TranscriptionJob_LanguageOptions, v.LanguageOptions)
+	if v.Media != nil {
+		s.WriteStruct(schemas.TranscriptionJob_Media)
+		v.Media.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MediaFormat != "" {
+		s.WriteString(schemas.TranscriptionJob_MediaFormat, string(v.MediaFormat))
+	}
+	if v.MediaSampleRateHertz != nil {
+		s.WriteInt32(schemas.TranscriptionJob_MediaSampleRateHertz, *v.MediaSampleRateHertz)
+	}
+	if v.ModelSettings != nil {
+		s.WriteStruct(schemas.TranscriptionJob_ModelSettings)
+		v.ModelSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Settings != nil {
+		s.WriteStruct(schemas.TranscriptionJob_Settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.TranscriptionJob_StartTime, *v.StartTime)
+	}
+	if v.Subtitles != nil {
+		s.WriteStruct(schemas.TranscriptionJob_Subtitles)
+		v.Subtitles.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.TranscriptionJob_Tags, v.Tags)
+	serializeToxicityDetection(s, schemas.TranscriptionJob_ToxicityDetection, v.ToxicityDetection)
+	if v.Transcript != nil {
+		s.WriteStruct(schemas.TranscriptionJob_Transcript)
+		v.Transcript.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TranscriptionJobName != nil {
+		s.WriteString(schemas.TranscriptionJob_TranscriptionJobName, *v.TranscriptionJobName)
+	}
+	if v.TranscriptionJobStatus != "" {
+		s.WriteString(schemas.TranscriptionJob_TranscriptionJobStatus, string(v.TranscriptionJobStatus))
+	}
+}
+func (v *TranscriptionJob) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TranscriptionJob, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TranscriptionJob_CompletionTime:
+			v.CompletionTime = new(time.Time)
+			return d.ReadTime(schemas.TranscriptionJob_CompletionTime, v.CompletionTime)
+		case schemas.TranscriptionJob_ContentRedaction:
+			v.ContentRedaction = &ContentRedaction{}
+			return v.ContentRedaction.Deserialize(d)
+		case schemas.TranscriptionJob_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.TranscriptionJob_CreationTime, v.CreationTime)
+		case schemas.TranscriptionJob_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.TranscriptionJob_FailureReason, v.FailureReason)
+		case schemas.TranscriptionJob_IdentifiedLanguageScore:
+			v.IdentifiedLanguageScore = new(float32)
+			return d.ReadFloat32(schemas.TranscriptionJob_IdentifiedLanguageScore, v.IdentifiedLanguageScore)
+		case schemas.TranscriptionJob_IdentifyLanguage:
+			v.IdentifyLanguage = new(bool)
+			return d.ReadBool(schemas.TranscriptionJob_IdentifyLanguage, v.IdentifyLanguage)
+		case schemas.TranscriptionJob_IdentifyMultipleLanguages:
+			v.IdentifyMultipleLanguages = new(bool)
+			return d.ReadBool(schemas.TranscriptionJob_IdentifyMultipleLanguages, v.IdentifyMultipleLanguages)
+		case schemas.TranscriptionJob_JobExecutionSettings:
+			v.JobExecutionSettings = &JobExecutionSettings{}
+			return v.JobExecutionSettings.Deserialize(d)
+		case schemas.TranscriptionJob_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.TranscriptionJob_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.TranscriptionJob_LanguageCodes:
+			return deserializeLanguageCodeList(d, schemas.TranscriptionJob_LanguageCodes, &v.LanguageCodes)
+		case schemas.TranscriptionJob_LanguageIdSettings:
+			return deserializeLanguageIdSettingsMap(d, schemas.TranscriptionJob_LanguageIdSettings, &v.LanguageIdSettings)
+		case schemas.TranscriptionJob_LanguageOptions:
+			return deserializeLanguageOptions(d, schemas.TranscriptionJob_LanguageOptions, &v.LanguageOptions)
+		case schemas.TranscriptionJob_Media:
+			v.Media = &Media{}
+			return v.Media.Deserialize(d)
+		case schemas.TranscriptionJob_MediaFormat:
+			var ev string
+			if err := d.ReadString(schemas.TranscriptionJob_MediaFormat, &ev); err != nil {
+				return err
+			}
+			v.MediaFormat = MediaFormat(ev)
+			return nil
+		case schemas.TranscriptionJob_MediaSampleRateHertz:
+			v.MediaSampleRateHertz = new(int32)
+			return d.ReadInt32(schemas.TranscriptionJob_MediaSampleRateHertz, v.MediaSampleRateHertz)
+		case schemas.TranscriptionJob_ModelSettings:
+			v.ModelSettings = &ModelSettings{}
+			return v.ModelSettings.Deserialize(d)
+		case schemas.TranscriptionJob_Settings:
+			v.Settings = &Settings{}
+			return v.Settings.Deserialize(d)
+		case schemas.TranscriptionJob_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.TranscriptionJob_StartTime, v.StartTime)
+		case schemas.TranscriptionJob_Subtitles:
+			v.Subtitles = &SubtitlesOutput{}
+			return v.Subtitles.Deserialize(d)
+		case schemas.TranscriptionJob_Tags:
+			return deserializeTagList(d, schemas.TranscriptionJob_Tags, &v.Tags)
+		case schemas.TranscriptionJob_ToxicityDetection:
+			return deserializeToxicityDetection(d, schemas.TranscriptionJob_ToxicityDetection, &v.ToxicityDetection)
+		case schemas.TranscriptionJob_Transcript:
+			v.Transcript = &Transcript{}
+			return v.Transcript.Deserialize(d)
+		case schemas.TranscriptionJob_TranscriptionJobName:
+			v.TranscriptionJobName = new(string)
+			return d.ReadString(schemas.TranscriptionJob_TranscriptionJobName, v.TranscriptionJobName)
+		case schemas.TranscriptionJob_TranscriptionJobStatus:
+			var ev string
+			if err := d.ReadString(schemas.TranscriptionJob_TranscriptionJobStatus, &ev); err != nil {
+				return err
+			}
+			v.TranscriptionJobStatus = TranscriptionJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Provides detailed information about a specific transcription job.
 type TranscriptionJobSummary struct {
 
@@ -2155,6 +4273,122 @@ type TranscriptionJobSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TranscriptionJobSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TranscriptionJobSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TranscriptionJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletionTime != nil {
+		s.WriteTime(schemas.TranscriptionJobSummary_CompletionTime, *v.CompletionTime)
+	}
+	if v.ContentRedaction != nil {
+		s.WriteStruct(schemas.TranscriptionJobSummary_ContentRedaction)
+		v.ContentRedaction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.TranscriptionJobSummary_CreationTime, *v.CreationTime)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.TranscriptionJobSummary_FailureReason, *v.FailureReason)
+	}
+	if v.IdentifiedLanguageScore != nil {
+		s.WriteFloat32(schemas.TranscriptionJobSummary_IdentifiedLanguageScore, *v.IdentifiedLanguageScore)
+	}
+	if v.IdentifyLanguage != nil {
+		s.WriteBool(schemas.TranscriptionJobSummary_IdentifyLanguage, *v.IdentifyLanguage)
+	}
+	if v.IdentifyMultipleLanguages != nil {
+		s.WriteBool(schemas.TranscriptionJobSummary_IdentifyMultipleLanguages, *v.IdentifyMultipleLanguages)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.TranscriptionJobSummary_LanguageCode, string(v.LanguageCode))
+	}
+	serializeLanguageCodeList(s, schemas.TranscriptionJobSummary_LanguageCodes, v.LanguageCodes)
+	if v.ModelSettings != nil {
+		s.WriteStruct(schemas.TranscriptionJobSummary_ModelSettings)
+		v.ModelSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputLocationType != "" {
+		s.WriteString(schemas.TranscriptionJobSummary_OutputLocationType, string(v.OutputLocationType))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.TranscriptionJobSummary_StartTime, *v.StartTime)
+	}
+	serializeToxicityDetection(s, schemas.TranscriptionJobSummary_ToxicityDetection, v.ToxicityDetection)
+	if v.TranscriptionJobName != nil {
+		s.WriteString(schemas.TranscriptionJobSummary_TranscriptionJobName, *v.TranscriptionJobName)
+	}
+	if v.TranscriptionJobStatus != "" {
+		s.WriteString(schemas.TranscriptionJobSummary_TranscriptionJobStatus, string(v.TranscriptionJobStatus))
+	}
+}
+func (v *TranscriptionJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TranscriptionJobSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TranscriptionJobSummary_CompletionTime:
+			v.CompletionTime = new(time.Time)
+			return d.ReadTime(schemas.TranscriptionJobSummary_CompletionTime, v.CompletionTime)
+		case schemas.TranscriptionJobSummary_ContentRedaction:
+			v.ContentRedaction = &ContentRedaction{}
+			return v.ContentRedaction.Deserialize(d)
+		case schemas.TranscriptionJobSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.TranscriptionJobSummary_CreationTime, v.CreationTime)
+		case schemas.TranscriptionJobSummary_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.TranscriptionJobSummary_FailureReason, v.FailureReason)
+		case schemas.TranscriptionJobSummary_IdentifiedLanguageScore:
+			v.IdentifiedLanguageScore = new(float32)
+			return d.ReadFloat32(schemas.TranscriptionJobSummary_IdentifiedLanguageScore, v.IdentifiedLanguageScore)
+		case schemas.TranscriptionJobSummary_IdentifyLanguage:
+			v.IdentifyLanguage = new(bool)
+			return d.ReadBool(schemas.TranscriptionJobSummary_IdentifyLanguage, v.IdentifyLanguage)
+		case schemas.TranscriptionJobSummary_IdentifyMultipleLanguages:
+			v.IdentifyMultipleLanguages = new(bool)
+			return d.ReadBool(schemas.TranscriptionJobSummary_IdentifyMultipleLanguages, v.IdentifyMultipleLanguages)
+		case schemas.TranscriptionJobSummary_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.TranscriptionJobSummary_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.TranscriptionJobSummary_LanguageCodes:
+			return deserializeLanguageCodeList(d, schemas.TranscriptionJobSummary_LanguageCodes, &v.LanguageCodes)
+		case schemas.TranscriptionJobSummary_ModelSettings:
+			v.ModelSettings = &ModelSettings{}
+			return v.ModelSettings.Deserialize(d)
+		case schemas.TranscriptionJobSummary_OutputLocationType:
+			var ev string
+			if err := d.ReadString(schemas.TranscriptionJobSummary_OutputLocationType, &ev); err != nil {
+				return err
+			}
+			v.OutputLocationType = OutputLocationType(ev)
+			return nil
+		case schemas.TranscriptionJobSummary_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.TranscriptionJobSummary_StartTime, v.StartTime)
+		case schemas.TranscriptionJobSummary_ToxicityDetection:
+			return deserializeToxicityDetection(d, schemas.TranscriptionJobSummary_ToxicityDetection, &v.ToxicityDetection)
+		case schemas.TranscriptionJobSummary_TranscriptionJobName:
+			v.TranscriptionJobName = new(string)
+			return d.ReadString(schemas.TranscriptionJobSummary_TranscriptionJobName, v.TranscriptionJobName)
+		case schemas.TranscriptionJobSummary_TranscriptionJobStatus:
+			var ev string
+			if err := d.ReadString(schemas.TranscriptionJobSummary_TranscriptionJobStatus, &ev); err != nil {
+				return err
+			}
+			v.TranscriptionJobStatus = TranscriptionJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Provides information about a custom vocabulary filter, including the language
 // of the filter, when it was last modified, and its name.
 type VocabularyFilterInfo struct {
@@ -2188,6 +4422,44 @@ type VocabularyFilterInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VocabularyFilterInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VocabularyFilterInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VocabularyFilterInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.VocabularyFilterInfo_LanguageCode, string(v.LanguageCode))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.VocabularyFilterInfo_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.VocabularyFilterName != nil {
+		s.WriteString(schemas.VocabularyFilterInfo_VocabularyFilterName, *v.VocabularyFilterName)
+	}
+}
+func (v *VocabularyFilterInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VocabularyFilterInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VocabularyFilterInfo_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.VocabularyFilterInfo_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.VocabularyFilterInfo_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.VocabularyFilterInfo_LastModifiedTime, v.LastModifiedTime)
+		case schemas.VocabularyFilterInfo_VocabularyFilterName:
+			v.VocabularyFilterName = new(string)
+			return d.ReadString(schemas.VocabularyFilterInfo_VocabularyFilterName, v.VocabularyFilterName)
+		}
+		return nil
+	})
+}
+
 // Provides information about a custom vocabulary, including the language of the
 // custom vocabulary, when it was last modified, its name, and the processing
 // state.
@@ -2218,6 +4490,54 @@ type VocabularyInfo struct {
 	VocabularyState VocabularyState
 
 	noSmithyDocumentSerde
+}
+
+func (v *VocabularyInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VocabularyInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VocabularyInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.VocabularyInfo_LanguageCode, string(v.LanguageCode))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.VocabularyInfo_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.VocabularyInfo_VocabularyName, *v.VocabularyName)
+	}
+	if v.VocabularyState != "" {
+		s.WriteString(schemas.VocabularyInfo_VocabularyState, string(v.VocabularyState))
+	}
+}
+func (v *VocabularyInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VocabularyInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VocabularyInfo_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.VocabularyInfo_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.VocabularyInfo_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.VocabularyInfo_LastModifiedTime, v.LastModifiedTime)
+		case schemas.VocabularyInfo_VocabularyName:
+			v.VocabularyName = new(string)
+			return d.ReadString(schemas.VocabularyInfo_VocabularyName, v.VocabularyName)
+		case schemas.VocabularyInfo_VocabularyState:
+			var ev string
+			if err := d.ReadString(schemas.VocabularyInfo_VocabularyState, &ev); err != nil {
+				return err
+			}
+			v.VocabularyState = VocabularyState(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type DescribeInstanceAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInstanceAttributeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInstanceAttributeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInstanceAttributeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeType != "" {
+		s.WriteString(schemas.DescribeInstanceAttributeRequest_AttributeType, string(v.AttributeType))
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeInstanceAttributeRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DescribeInstanceAttributeOutput struct {
 
 	// The type of attribute.
@@ -55,13 +72,34 @@ type DescribeInstanceAttributeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInstanceAttributeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInstanceAttributeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInstanceAttributeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attribute != nil {
+		s.WriteStruct(schemas.DescribeInstanceAttributeResponse_Attribute)
+		v.Attribute.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeInstanceAttributeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInstanceAttributeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInstanceAttributeResponse_Attribute:
+			v.Attribute = &types.Attribute{}
+			return v.Attribute.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeInstanceAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeInstanceAttribute{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstanceAttribute, schemas.DescribeInstanceAttributeRequest, schemas.DescribeInstanceAttributeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeInstanceAttribute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInstanceAttribute, schemas.DescribeInstanceAttributeRequest, schemas.DescribeInstanceAttributeResponse), output: &DescribeInstanceAttributeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package cognitoidentity
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,27 @@ type MergeDeveloperIdentitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MergeDeveloperIdentitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MergeDeveloperIdentitiesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MergeDeveloperIdentitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationUserIdentifier != nil {
+		s.WriteString(schemas.MergeDeveloperIdentitiesInput_DestinationUserIdentifier, *v.DestinationUserIdentifier)
+	}
+	if v.DeveloperProviderName != nil {
+		s.WriteString(schemas.MergeDeveloperIdentitiesInput_DeveloperProviderName, *v.DeveloperProviderName)
+	}
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.MergeDeveloperIdentitiesInput_IdentityPoolId, *v.IdentityPoolId)
+	}
+	if v.SourceUserIdentifier != nil {
+		s.WriteString(schemas.MergeDeveloperIdentitiesInput_SourceUserIdentifier, *v.SourceUserIdentifier)
+	}
+}
+
 // Returned in response to a successful MergeDeveloperIdentities action.
 type MergeDeveloperIdentitiesOutput struct {
 
@@ -81,13 +104,32 @@ type MergeDeveloperIdentitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MergeDeveloperIdentitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MergeDeveloperIdentitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MergeDeveloperIdentitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityId != nil {
+		s.WriteString(schemas.MergeDeveloperIdentitiesResponse_IdentityId, *v.IdentityId)
+	}
+}
+func (v *MergeDeveloperIdentitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MergeDeveloperIdentitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MergeDeveloperIdentitiesResponse_IdentityId:
+			v.IdentityId = new(string)
+			return d.ReadString(schemas.MergeDeveloperIdentitiesResponse_IdentityId, v.IdentityId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMergeDeveloperIdentitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMergeDeveloperIdentities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MergeDeveloperIdentities, schemas.MergeDeveloperIdentitiesInput, schemas.MergeDeveloperIdentitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpMergeDeveloperIdentities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MergeDeveloperIdentities, schemas.MergeDeveloperIdentitiesInput, schemas.MergeDeveloperIdentitiesResponse), output: &MergeDeveloperIdentitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

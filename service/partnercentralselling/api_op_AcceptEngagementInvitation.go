@@ -4,6 +4,8 @@ package partnercentralselling
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type AcceptEngagementInvitationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptEngagementInvitationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptEngagementInvitationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptEngagementInvitationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.AcceptEngagementInvitationRequest_Catalog, *v.Catalog)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.AcceptEngagementInvitationRequest_Identifier, *v.Identifier)
+	}
+}
+
 type AcceptEngagementInvitationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +69,26 @@ type AcceptEngagementInvitationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptEngagementInvitationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptEngagementInvitationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AcceptEngagementInvitationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcceptEngagementInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAcceptEngagementInvitation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptEngagementInvitation, schemas.AcceptEngagementInvitationRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAcceptEngagementInvitation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptEngagementInvitation, schemas.AcceptEngagementInvitationRequest, nil), output: &AcceptEngagementInvitationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

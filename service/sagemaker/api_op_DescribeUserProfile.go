@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type DescribeUserProfileInput struct {
 	UserProfileName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeUserProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUserProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUserProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.DescribeUserProfileRequest_DomainId, *v.DomainId)
+	}
+	if v.UserProfileName != nil {
+		s.WriteString(schemas.DescribeUserProfileRequest_UserProfileName, *v.UserProfileName)
+	}
 }
 
 type DescribeUserProfileOutput struct {
@@ -81,13 +98,98 @@ type DescribeUserProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUserProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUserProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUserProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeUserProfileResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.DescribeUserProfileResponse_DomainId, *v.DomainId)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeUserProfileResponse_FailureReason, *v.FailureReason)
+	}
+	if v.HomeEfsFileSystemUid != nil {
+		s.WriteString(schemas.DescribeUserProfileResponse_HomeEfsFileSystemUid, *v.HomeEfsFileSystemUid)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeUserProfileResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.SingleSignOnUserIdentifier != nil {
+		s.WriteString(schemas.DescribeUserProfileResponse_SingleSignOnUserIdentifier, *v.SingleSignOnUserIdentifier)
+	}
+	if v.SingleSignOnUserValue != nil {
+		s.WriteString(schemas.DescribeUserProfileResponse_SingleSignOnUserValue, *v.SingleSignOnUserValue)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeUserProfileResponse_Status, string(v.Status))
+	}
+	if v.UserProfileArn != nil {
+		s.WriteString(schemas.DescribeUserProfileResponse_UserProfileArn, *v.UserProfileArn)
+	}
+	if v.UserProfileName != nil {
+		s.WriteString(schemas.DescribeUserProfileResponse_UserProfileName, *v.UserProfileName)
+	}
+	if v.UserSettings != nil {
+		s.WriteStruct(schemas.DescribeUserProfileResponse_UserSettings)
+		v.UserSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeUserProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeUserProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeUserProfileResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeUserProfileResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeUserProfileResponse_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.DescribeUserProfileResponse_DomainId, v.DomainId)
+		case schemas.DescribeUserProfileResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeUserProfileResponse_FailureReason, v.FailureReason)
+		case schemas.DescribeUserProfileResponse_HomeEfsFileSystemUid:
+			v.HomeEfsFileSystemUid = new(string)
+			return d.ReadString(schemas.DescribeUserProfileResponse_HomeEfsFileSystemUid, v.HomeEfsFileSystemUid)
+		case schemas.DescribeUserProfileResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeUserProfileResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeUserProfileResponse_SingleSignOnUserIdentifier:
+			v.SingleSignOnUserIdentifier = new(string)
+			return d.ReadString(schemas.DescribeUserProfileResponse_SingleSignOnUserIdentifier, v.SingleSignOnUserIdentifier)
+		case schemas.DescribeUserProfileResponse_SingleSignOnUserValue:
+			v.SingleSignOnUserValue = new(string)
+			return d.ReadString(schemas.DescribeUserProfileResponse_SingleSignOnUserValue, v.SingleSignOnUserValue)
+		case schemas.DescribeUserProfileResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeUserProfileResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.UserProfileStatus(ev)
+			return nil
+		case schemas.DescribeUserProfileResponse_UserProfileArn:
+			v.UserProfileArn = new(string)
+			return d.ReadString(schemas.DescribeUserProfileResponse_UserProfileArn, v.UserProfileArn)
+		case schemas.DescribeUserProfileResponse_UserProfileName:
+			v.UserProfileName = new(string)
+			return d.ReadString(schemas.DescribeUserProfileResponse_UserProfileName, v.UserProfileName)
+		case schemas.DescribeUserProfileResponse_UserSettings:
+			v.UserSettings = &types.UserSettings{}
+			return v.UserSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeUserProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeUserProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUserProfile, schemas.DescribeUserProfileRequest, schemas.DescribeUserProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeUserProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUserProfile, schemas.DescribeUserProfileRequest, schemas.DescribeUserProfileResponse), output: &DescribeUserProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

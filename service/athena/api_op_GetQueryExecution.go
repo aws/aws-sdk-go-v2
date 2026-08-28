@@ -4,7 +4,9 @@ package athena
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetQueryExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueryExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueryExecutionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueryExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryExecutionId != nil {
+		s.WriteString(schemas.GetQueryExecutionInput_QueryExecutionId, *v.QueryExecutionId)
+	}
+}
+
 type GetQueryExecutionOutput struct {
 
 	// Information about the query execution.
@@ -47,13 +61,34 @@ type GetQueryExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueryExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueryExecutionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueryExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryExecution != nil {
+		s.WriteStruct(schemas.GetQueryExecutionOutput_QueryExecution)
+		v.QueryExecution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetQueryExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetQueryExecutionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetQueryExecutionOutput_QueryExecution:
+			v.QueryExecution = &types.QueryExecution{}
+			return v.QueryExecution.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetQueryExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetQueryExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryExecution, schemas.GetQueryExecutionInput, schemas.GetQueryExecutionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetQueryExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryExecution, schemas.GetQueryExecutionInput, schemas.GetQueryExecutionOutput), output: &GetQueryExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

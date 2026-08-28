@@ -4,6 +4,8 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteContainerServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContainerServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContainerServiceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContainerServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceName != nil {
+		s.WriteString(schemas.DeleteContainerServiceRequest_serviceName, *v.ServiceName)
+	}
+}
+
 type DeleteContainerServiceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteContainerServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContainerServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContainerServiceResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContainerServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteContainerServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteContainerServiceResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteContainerServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteContainerService{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContainerService, schemas.DeleteContainerServiceRequest, schemas.DeleteContainerServiceResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteContainerService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContainerService, schemas.DeleteContainerServiceRequest, schemas.DeleteContainerServiceResult), output: &DeleteContainerServiceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

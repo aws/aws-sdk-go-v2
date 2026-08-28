@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,26 @@ type CreateCertificateProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCertificateProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCertificateProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCertificateProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCertificateProviderAccountDefaultForOperations(s, schemas.CreateCertificateProviderRequest_accountDefaultForOperations, v.AccountDefaultForOperations)
+	if v.CertificateProviderName != nil {
+		s.WriteString(schemas.CreateCertificateProviderRequest_certificateProviderName, *v.CertificateProviderName)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateCertificateProviderRequest_clientToken, *v.ClientToken)
+	}
+	if v.LambdaFunctionArn != nil {
+		s.WriteString(schemas.CreateCertificateProviderRequest_lambdaFunctionArn, *v.LambdaFunctionArn)
+	}
+	serializeTagList(s, schemas.CreateCertificateProviderRequest_tags, v.Tags)
+}
+
 type CreateCertificateProviderOutput struct {
 
 	// The ARN of the certificate provider.
@@ -82,13 +104,38 @@ type CreateCertificateProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCertificateProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCertificateProviderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCertificateProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateProviderArn != nil {
+		s.WriteString(schemas.CreateCertificateProviderResponse_certificateProviderArn, *v.CertificateProviderArn)
+	}
+	if v.CertificateProviderName != nil {
+		s.WriteString(schemas.CreateCertificateProviderResponse_certificateProviderName, *v.CertificateProviderName)
+	}
+}
+func (v *CreateCertificateProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCertificateProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCertificateProviderResponse_certificateProviderArn:
+			v.CertificateProviderArn = new(string)
+			return d.ReadString(schemas.CreateCertificateProviderResponse_certificateProviderArn, v.CertificateProviderArn)
+		case schemas.CreateCertificateProviderResponse_certificateProviderName:
+			v.CertificateProviderName = new(string)
+			return d.ReadString(schemas.CreateCertificateProviderResponse_certificateProviderName, v.CertificateProviderName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCertificateProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCertificateProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCertificateProvider, schemas.CreateCertificateProviderRequest, schemas.CreateCertificateProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCertificateProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCertificateProvider, schemas.CreateCertificateProviderRequest, schemas.CreateCertificateProviderResponse), output: &CreateCertificateProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

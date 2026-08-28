@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -68,6 +70,39 @@ type ListMlflowTrackingServersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMlflowTrackingServersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMlflowTrackingServersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMlflowTrackingServersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAfter != nil {
+		s.WriteTime(schemas.ListMlflowTrackingServersRequest_CreatedAfter, *v.CreatedAfter)
+	}
+	if v.CreatedBefore != nil {
+		s.WriteTime(schemas.ListMlflowTrackingServersRequest_CreatedBefore, *v.CreatedBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMlflowTrackingServersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MlflowVersion != nil {
+		s.WriteString(schemas.ListMlflowTrackingServersRequest_MlflowVersion, *v.MlflowVersion)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMlflowTrackingServersRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListMlflowTrackingServersRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListMlflowTrackingServersRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.TrackingServerStatus != "" {
+		s.WriteString(schemas.ListMlflowTrackingServersRequest_TrackingServerStatus, string(v.TrackingServerStatus))
+	}
+}
+
 type ListMlflowTrackingServersOutput struct {
 
 	// If the previous response was truncated, you will receive this token. Use it in
@@ -83,13 +118,35 @@ type ListMlflowTrackingServersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMlflowTrackingServersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMlflowTrackingServersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMlflowTrackingServersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMlflowTrackingServersResponse_NextToken, *v.NextToken)
+	}
+	serializeTrackingServerSummaryList(s, schemas.ListMlflowTrackingServersResponse_TrackingServerSummaries, v.TrackingServerSummaries)
+}
+func (v *ListMlflowTrackingServersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMlflowTrackingServersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMlflowTrackingServersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMlflowTrackingServersResponse_NextToken, v.NextToken)
+		case schemas.ListMlflowTrackingServersResponse_TrackingServerSummaries:
+			return deserializeTrackingServerSummaryList(d, schemas.ListMlflowTrackingServersResponse_TrackingServerSummaries, &v.TrackingServerSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMlflowTrackingServersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMlflowTrackingServers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMlflowTrackingServers, schemas.ListMlflowTrackingServersRequest, schemas.ListMlflowTrackingServersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMlflowTrackingServers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMlflowTrackingServers, schemas.ListMlflowTrackingServersRequest, schemas.ListMlflowTrackingServersResponse), output: &ListMlflowTrackingServersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

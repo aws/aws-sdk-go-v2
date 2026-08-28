@@ -5,7 +5,9 @@ package cognitoidentityprovider
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -138,6 +140,28 @@ type ListUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUsersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUsersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUsersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSearchedAttributeNamesListType(s, schemas.ListUsersRequest_AttributesToGet, v.AttributesToGet)
+	if v.Filter != nil {
+		s.WriteString(schemas.ListUsersRequest_Filter, *v.Filter)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListUsersRequest_Limit, *v.Limit)
+	}
+	if v.PaginationToken != nil {
+		s.WriteString(schemas.ListUsersRequest_PaginationToken, *v.PaginationToken)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.ListUsersRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 // The response from the request to list users.
 type ListUsersOutput struct {
 
@@ -160,13 +184,35 @@ type ListUsersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUsersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUsersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUsersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PaginationToken != nil {
+		s.WriteString(schemas.ListUsersResponse_PaginationToken, *v.PaginationToken)
+	}
+	serializeUsersListType(s, schemas.ListUsersResponse_Users, v.Users)
+}
+func (v *ListUsersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUsersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUsersResponse_PaginationToken:
+			v.PaginationToken = new(string)
+			return d.ReadString(schemas.ListUsersResponse_PaginationToken, v.PaginationToken)
+		case schemas.ListUsersResponse_Users:
+			return deserializeUsersListType(d, schemas.ListUsersResponse_Users, &v.Users)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListUsers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUsers, schemas.ListUsersRequest, schemas.ListUsersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListUsers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUsers, schemas.ListUsersRequest, schemas.ListUsersResponse), output: &ListUsersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

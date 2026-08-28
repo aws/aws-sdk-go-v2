@@ -4,6 +4,8 @@ package cognitoidentity
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,27 @@ type UnlinkDeveloperIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnlinkDeveloperIdentityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnlinkDeveloperIdentityInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnlinkDeveloperIdentityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeveloperProviderName != nil {
+		s.WriteString(schemas.UnlinkDeveloperIdentityInput_DeveloperProviderName, *v.DeveloperProviderName)
+	}
+	if v.DeveloperUserIdentifier != nil {
+		s.WriteString(schemas.UnlinkDeveloperIdentityInput_DeveloperUserIdentifier, *v.DeveloperUserIdentifier)
+	}
+	if v.IdentityId != nil {
+		s.WriteString(schemas.UnlinkDeveloperIdentityInput_IdentityId, *v.IdentityId)
+	}
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.UnlinkDeveloperIdentityInput_IdentityPoolId, *v.IdentityPoolId)
+	}
+}
+
 type UnlinkDeveloperIdentityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,13 +84,26 @@ type UnlinkDeveloperIdentityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnlinkDeveloperIdentityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnlinkDeveloperIdentityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UnlinkDeveloperIdentityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUnlinkDeveloperIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUnlinkDeveloperIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UnlinkDeveloperIdentity, schemas.UnlinkDeveloperIdentityInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUnlinkDeveloperIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UnlinkDeveloperIdentity, schemas.UnlinkDeveloperIdentityInput, nil), output: &UnlinkDeveloperIdentityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/amp/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amp/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -45,6 +47,21 @@ type DescribeAnomalyDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAnomalyDetectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAnomalyDetectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAnomalyDetectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnomalyDetectorId != nil {
+		s.WriteString(schemas.DescribeAnomalyDetectorRequest_anomalyDetectorId, *v.AnomalyDetectorId)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DescribeAnomalyDetectorRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+
 type DescribeAnomalyDetectorOutput struct {
 
 	// The detailed information about the anomaly detector.
@@ -58,13 +75,34 @@ type DescribeAnomalyDetectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAnomalyDetectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAnomalyDetectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAnomalyDetectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnomalyDetector != nil {
+		s.WriteStruct(schemas.DescribeAnomalyDetectorResponse_anomalyDetector)
+		v.AnomalyDetector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAnomalyDetectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAnomalyDetectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAnomalyDetectorResponse_anomalyDetector:
+			v.AnomalyDetector = &types.AnomalyDetectorDescription{}
+			return v.AnomalyDetector.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAnomalyDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAnomalyDetector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAnomalyDetector, schemas.DescribeAnomalyDetectorRequest, schemas.DescribeAnomalyDetectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAnomalyDetector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAnomalyDetector, schemas.DescribeAnomalyDetectorRequest, schemas.DescribeAnomalyDetectorResponse), output: &DescribeAnomalyDetectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

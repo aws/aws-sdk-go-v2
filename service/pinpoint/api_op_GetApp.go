@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetAppRequest_ApplicationId, *v.ApplicationId)
+	}
+}
+
 type GetAppOutput struct {
 
 	// Provides information about an application.
@@ -48,13 +62,34 @@ type GetAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAppResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationResponse != nil {
+		s.WriteStruct(schemas.GetAppResponse_ApplicationResponse)
+		v.ApplicationResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAppResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAppResponse_ApplicationResponse:
+			v.ApplicationResponse = &types.ApplicationResponse{}
+			return v.ApplicationResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApp, schemas.GetAppRequest, schemas.GetAppResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApp, schemas.GetAppRequest, schemas.GetAppResponse), output: &GetAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

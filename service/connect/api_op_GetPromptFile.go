@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -42,6 +44,21 @@ type GetPromptFileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPromptFileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPromptFileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPromptFileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.GetPromptFileRequest_InstanceId, *v.InstanceId)
+	}
+	if v.PromptId != nil {
+		s.WriteString(schemas.GetPromptFileRequest_PromptId, *v.PromptId)
+	}
+}
+
 type GetPromptFileOutput struct {
 
 	// The Amazon Web Services Region where this resource was last modified.
@@ -60,13 +77,44 @@ type GetPromptFileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPromptFileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPromptFileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPromptFileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.GetPromptFileResponse_LastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.GetPromptFileResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.PromptPresignedUrl != nil {
+		s.WriteString(schemas.GetPromptFileResponse_PromptPresignedUrl, *v.PromptPresignedUrl)
+	}
+}
+func (v *GetPromptFileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPromptFileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPromptFileResponse_LastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.GetPromptFileResponse_LastModifiedRegion, v.LastModifiedRegion)
+		case schemas.GetPromptFileResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.GetPromptFileResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.GetPromptFileResponse_PromptPresignedUrl:
+			v.PromptPresignedUrl = new(string)
+			return d.ReadString(schemas.GetPromptFileResponse_PromptPresignedUrl, v.PromptPresignedUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPromptFileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPromptFile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPromptFile, schemas.GetPromptFileRequest, schemas.GetPromptFileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPromptFile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPromptFile, schemas.GetPromptFileRequest, schemas.GetPromptFileResponse), output: &GetPromptFileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

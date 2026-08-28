@@ -4,6 +4,8 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DeleteImagePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteImagePermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteImagePermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteImagePermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteImagePermissionsRequest_Name, *v.Name)
+	}
+	if v.SharedAccountId != nil {
+		s.WriteString(schemas.DeleteImagePermissionsRequest_SharedAccountId, *v.SharedAccountId)
+	}
+}
+
 type DeleteImagePermissionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +65,26 @@ type DeleteImagePermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteImagePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteImagePermissionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteImagePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteImagePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteImagePermissionsResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteImagePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteImagePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteImagePermissions, schemas.DeleteImagePermissionsRequest, schemas.DeleteImagePermissionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteImagePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteImagePermissions, schemas.DeleteImagePermissionsRequest, schemas.DeleteImagePermissionsResult), output: &DeleteImagePermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

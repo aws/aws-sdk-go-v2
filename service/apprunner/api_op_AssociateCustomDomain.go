@@ -4,7 +4,9 @@ package apprunner
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,24 @@ type AssociateCustomDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateCustomDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateCustomDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateCustomDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.AssociateCustomDomainRequest_DomainName, *v.DomainName)
+	}
+	if v.EnableWWWSubdomain != nil {
+		s.WriteBool(schemas.AssociateCustomDomainRequest_EnableWWWSubdomain, *v.EnableWWWSubdomain)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.AssociateCustomDomainRequest_ServiceArn, *v.ServiceArn)
+	}
+}
+
 type AssociateCustomDomainOutput struct {
 
 	// A description of the domain name that's being associated.
@@ -88,13 +108,49 @@ type AssociateCustomDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateCustomDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateCustomDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateCustomDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomDomain != nil {
+		s.WriteStruct(schemas.AssociateCustomDomainResponse_CustomDomain)
+		v.CustomDomain.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DNSTarget != nil {
+		s.WriteString(schemas.AssociateCustomDomainResponse_DNSTarget, *v.DNSTarget)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.AssociateCustomDomainResponse_ServiceArn, *v.ServiceArn)
+	}
+	serializeVpcDNSTargetList(s, schemas.AssociateCustomDomainResponse_VpcDNSTargets, v.VpcDNSTargets)
+}
+func (v *AssociateCustomDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateCustomDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateCustomDomainResponse_CustomDomain:
+			v.CustomDomain = &types.CustomDomain{}
+			return v.CustomDomain.Deserialize(d)
+		case schemas.AssociateCustomDomainResponse_DNSTarget:
+			v.DNSTarget = new(string)
+			return d.ReadString(schemas.AssociateCustomDomainResponse_DNSTarget, v.DNSTarget)
+		case schemas.AssociateCustomDomainResponse_ServiceArn:
+			v.ServiceArn = new(string)
+			return d.ReadString(schemas.AssociateCustomDomainResponse_ServiceArn, v.ServiceArn)
+		case schemas.AssociateCustomDomainResponse_VpcDNSTargets:
+			return deserializeVpcDNSTargetList(d, schemas.AssociateCustomDomainResponse_VpcDNSTargets, &v.VpcDNSTargets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateCustomDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAssociateCustomDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateCustomDomain, schemas.AssociateCustomDomainRequest, schemas.AssociateCustomDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAssociateCustomDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateCustomDomain, schemas.AssociateCustomDomainRequest, schemas.AssociateCustomDomainResponse), output: &AssociateCustomDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

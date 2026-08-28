@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,36 @@ type GetAggregateComplianceDetailsByConfigRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAggregateComplianceDetailsByConfigRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAggregateComplianceDetailsByConfigRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAggregateComplianceDetailsByConfigRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetAggregateComplianceDetailsByConfigRuleRequest_AccountId, *v.AccountId)
+	}
+	if v.AwsRegion != nil {
+		s.WriteString(schemas.GetAggregateComplianceDetailsByConfigRuleRequest_AwsRegion, *v.AwsRegion)
+	}
+	if v.ComplianceType != "" {
+		s.WriteString(schemas.GetAggregateComplianceDetailsByConfigRuleRequest_ComplianceType, string(v.ComplianceType))
+	}
+	if v.ConfigRuleName != nil {
+		s.WriteString(schemas.GetAggregateComplianceDetailsByConfigRuleRequest_ConfigRuleName, *v.ConfigRuleName)
+	}
+	if v.ConfigurationAggregatorName != nil {
+		s.WriteString(schemas.GetAggregateComplianceDetailsByConfigRuleRequest_ConfigurationAggregatorName, *v.ConfigurationAggregatorName)
+	}
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.GetAggregateComplianceDetailsByConfigRuleRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAggregateComplianceDetailsByConfigRuleRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetAggregateComplianceDetailsByConfigRuleOutput struct {
 
 	// Returns an AggregateEvaluationResults object.
@@ -87,13 +119,35 @@ type GetAggregateComplianceDetailsByConfigRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAggregateComplianceDetailsByConfigRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAggregateComplianceDetailsByConfigRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAggregateComplianceDetailsByConfigRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAggregateEvaluationResultList(s, schemas.GetAggregateComplianceDetailsByConfigRuleResponse_AggregateEvaluationResults, v.AggregateEvaluationResults)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAggregateComplianceDetailsByConfigRuleResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetAggregateComplianceDetailsByConfigRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAggregateComplianceDetailsByConfigRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAggregateComplianceDetailsByConfigRuleResponse_AggregateEvaluationResults:
+			return deserializeAggregateEvaluationResultList(d, schemas.GetAggregateComplianceDetailsByConfigRuleResponse_AggregateEvaluationResults, &v.AggregateEvaluationResults)
+		case schemas.GetAggregateComplianceDetailsByConfigRuleResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetAggregateComplianceDetailsByConfigRuleResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAggregateComplianceDetailsByConfigRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAggregateComplianceDetailsByConfigRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAggregateComplianceDetailsByConfigRule, schemas.GetAggregateComplianceDetailsByConfigRuleRequest, schemas.GetAggregateComplianceDetailsByConfigRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAggregateComplianceDetailsByConfigRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAggregateComplianceDetailsByConfigRule, schemas.GetAggregateComplianceDetailsByConfigRuleRequest, schemas.GetAggregateComplianceDetailsByConfigRuleResponse), output: &GetAggregateComplianceDetailsByConfigRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

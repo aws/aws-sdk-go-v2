@@ -5,7 +5,9 @@ package managedblockchain
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -79,6 +81,33 @@ type CreateProposalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProposalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProposalInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProposalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Actions != nil {
+		s.WriteStruct(schemas.CreateProposalInput_Actions)
+		v.Actions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateProposalInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateProposalInput_Description, *v.Description)
+	}
+	if v.MemberId != nil {
+		s.WriteString(schemas.CreateProposalInput_MemberId, *v.MemberId)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.CreateProposalInput_NetworkId, *v.NetworkId)
+	}
+	serializeInputTagMap(s, schemas.CreateProposalInput_Tags, v.Tags)
+}
+
 type CreateProposalOutput struct {
 
 	// The unique identifier of the proposal.
@@ -90,13 +119,32 @@ type CreateProposalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProposalOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProposalOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProposalOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProposalId != nil {
+		s.WriteString(schemas.CreateProposalOutput_ProposalId, *v.ProposalId)
+	}
+}
+func (v *CreateProposalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProposalOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProposalOutput_ProposalId:
+			v.ProposalId = new(string)
+			return d.ReadString(schemas.CreateProposalOutput_ProposalId, v.ProposalId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProposalMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProposal{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProposal, schemas.CreateProposalInput, schemas.CreateProposalOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateProposal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProposal, schemas.CreateProposalInput, schemas.CreateProposalOutput), output: &CreateProposalOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

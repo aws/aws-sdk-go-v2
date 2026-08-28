@@ -4,6 +4,8 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,24 @@ type DeleteResourcePolicyStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourcePolicyStatementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourcePolicyStatementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourcePolicyStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpectedRevisionId != nil {
+		s.WriteString(schemas.DeleteResourcePolicyStatementRequest_expectedRevisionId, *v.ExpectedRevisionId)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DeleteResourcePolicyStatementRequest_resourceArn, *v.ResourceArn)
+	}
+	if v.StatementId != nil {
+		s.WriteString(schemas.DeleteResourcePolicyStatementRequest_statementId, *v.StatementId)
+	}
+}
+
 type DeleteResourcePolicyStatementOutput struct {
 
 	// The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy
@@ -70,13 +90,38 @@ type DeleteResourcePolicyStatementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourcePolicyStatementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourcePolicyStatementResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourcePolicyStatementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DeleteResourcePolicyStatementResponse_resourceArn, *v.ResourceArn)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.DeleteResourcePolicyStatementResponse_revisionId, *v.RevisionId)
+	}
+}
+func (v *DeleteResourcePolicyStatementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteResourcePolicyStatementResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteResourcePolicyStatementResponse_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.DeleteResourcePolicyStatementResponse_resourceArn, v.ResourceArn)
+		case schemas.DeleteResourcePolicyStatementResponse_revisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.DeleteResourcePolicyStatementResponse_revisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteResourcePolicyStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteResourcePolicyStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourcePolicyStatement, schemas.DeleteResourcePolicyStatementRequest, schemas.DeleteResourcePolicyStatementResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteResourcePolicyStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourcePolicyStatement, schemas.DeleteResourcePolicyStatementRequest, schemas.DeleteResourcePolicyStatementResponse), output: &DeleteResourcePolicyStatementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

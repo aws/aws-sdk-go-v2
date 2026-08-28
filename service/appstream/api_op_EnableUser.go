@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type EnableUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationType != "" {
+		s.WriteString(schemas.EnableUserRequest_AuthenticationType, string(v.AuthenticationType))
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.EnableUserRequest_UserName, *v.UserName)
+	}
+}
+
 type EnableUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +70,26 @@ type EnableUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableUserResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *EnableUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnableUserResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpEnableUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableUser, schemas.EnableUserRequest, schemas.EnableUserResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpEnableUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableUser, schemas.EnableUserRequest, schemas.EnableUserResult), output: &EnableUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

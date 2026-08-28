@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListWorkspacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkspacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkspacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkspacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListWorkspacesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWorkspacesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkspacesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListWorkspacesOutput struct {
 
 	// A summary list of workspaces.
@@ -61,13 +81,35 @@ type ListWorkspacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkspacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkspacesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkspacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkspacesResponse_NextToken, *v.NextToken)
+	}
+	serializeWorkspaceSummaryList(s, schemas.ListWorkspacesResponse_WorkspaceSummaryList, v.WorkspaceSummaryList)
+}
+func (v *ListWorkspacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkspacesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkspacesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkspacesResponse_NextToken, v.NextToken)
+		case schemas.ListWorkspacesResponse_WorkspaceSummaryList:
+			return deserializeWorkspaceSummaryList(d, schemas.ListWorkspacesResponse_WorkspaceSummaryList, &v.WorkspaceSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWorkspaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkspaces, schemas.ListWorkspacesRequest, schemas.ListWorkspacesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWorkspaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkspaces, schemas.ListWorkspacesRequest, schemas.ListWorkspacesResponse), output: &ListWorkspacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

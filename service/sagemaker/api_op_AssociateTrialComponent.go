@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type AssociateTrialComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateTrialComponentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateTrialComponentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateTrialComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrialComponentName != nil {
+		s.WriteString(schemas.AssociateTrialComponentRequest_TrialComponentName, *v.TrialComponentName)
+	}
+	if v.TrialName != nil {
+		s.WriteString(schemas.AssociateTrialComponentRequest_TrialName, *v.TrialName)
+	}
+}
+
 type AssociateTrialComponentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the trial.
@@ -56,13 +73,38 @@ type AssociateTrialComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateTrialComponentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateTrialComponentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateTrialComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrialArn != nil {
+		s.WriteString(schemas.AssociateTrialComponentResponse_TrialArn, *v.TrialArn)
+	}
+	if v.TrialComponentArn != nil {
+		s.WriteString(schemas.AssociateTrialComponentResponse_TrialComponentArn, *v.TrialComponentArn)
+	}
+}
+func (v *AssociateTrialComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateTrialComponentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateTrialComponentResponse_TrialArn:
+			v.TrialArn = new(string)
+			return d.ReadString(schemas.AssociateTrialComponentResponse_TrialArn, v.TrialArn)
+		case schemas.AssociateTrialComponentResponse_TrialComponentArn:
+			v.TrialComponentArn = new(string)
+			return d.ReadString(schemas.AssociateTrialComponentResponse_TrialComponentArn, v.TrialComponentArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateTrialComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateTrialComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateTrialComponent, schemas.AssociateTrialComponentRequest, schemas.AssociateTrialComponentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateTrialComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateTrialComponent, schemas.AssociateTrialComponentRequest, schemas.AssociateTrialComponentResponse), output: &AssociateTrialComponentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

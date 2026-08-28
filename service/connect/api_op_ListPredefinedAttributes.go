@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,24 @@ type ListPredefinedAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPredefinedAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPredefinedAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPredefinedAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListPredefinedAttributesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPredefinedAttributesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPredefinedAttributesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListPredefinedAttributesOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.
@@ -76,13 +96,35 @@ type ListPredefinedAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPredefinedAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPredefinedAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPredefinedAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPredefinedAttributesResponse_NextToken, *v.NextToken)
+	}
+	serializePredefinedAttributeSummaryList(s, schemas.ListPredefinedAttributesResponse_PredefinedAttributeSummaryList, v.PredefinedAttributeSummaryList)
+}
+func (v *ListPredefinedAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPredefinedAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPredefinedAttributesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPredefinedAttributesResponse_NextToken, v.NextToken)
+		case schemas.ListPredefinedAttributesResponse_PredefinedAttributeSummaryList:
+			return deserializePredefinedAttributeSummaryList(d, schemas.ListPredefinedAttributesResponse_PredefinedAttributeSummaryList, &v.PredefinedAttributeSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPredefinedAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPredefinedAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPredefinedAttributes, schemas.ListPredefinedAttributesRequest, schemas.ListPredefinedAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPredefinedAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPredefinedAttributes, schemas.ListPredefinedAttributesRequest, schemas.ListPredefinedAttributesResponse), output: &ListPredefinedAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

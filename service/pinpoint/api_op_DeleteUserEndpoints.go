@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteUserEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUserEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteUserEndpointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUserEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.DeleteUserEndpointsRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.DeleteUserEndpointsRequest_UserId, *v.UserId)
+	}
+}
+
 type DeleteUserEndpointsOutput struct {
 
 	// Provides information about all the endpoints that are associated with a user ID.
@@ -53,13 +70,34 @@ type DeleteUserEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUserEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteUserEndpointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUserEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointsResponse != nil {
+		s.WriteStruct(schemas.DeleteUserEndpointsResponse_EndpointsResponse)
+		v.EndpointsResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteUserEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteUserEndpointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteUserEndpointsResponse_EndpointsResponse:
+			v.EndpointsResponse = &types.EndpointsResponse{}
+			return v.EndpointsResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteUserEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteUserEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUserEndpoints, schemas.DeleteUserEndpointsRequest, schemas.DeleteUserEndpointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteUserEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUserEndpoints, schemas.DeleteUserEndpointsRequest, schemas.DeleteUserEndpointsResponse), output: &DeleteUserEndpointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

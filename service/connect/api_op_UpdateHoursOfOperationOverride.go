@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,45 @@ type UpdateHoursOfOperationOverrideInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateHoursOfOperationOverrideInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateHoursOfOperationOverrideRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateHoursOfOperationOverrideInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHoursOfOperationOverrideConfigList(s, schemas.UpdateHoursOfOperationOverrideRequest_Config, v.Config)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateHoursOfOperationOverrideRequest_Description, *v.Description)
+	}
+	if v.EffectiveFrom != nil {
+		s.WriteString(schemas.UpdateHoursOfOperationOverrideRequest_EffectiveFrom, *v.EffectiveFrom)
+	}
+	if v.EffectiveTill != nil {
+		s.WriteString(schemas.UpdateHoursOfOperationOverrideRequest_EffectiveTill, *v.EffectiveTill)
+	}
+	if v.HoursOfOperationId != nil {
+		s.WriteString(schemas.UpdateHoursOfOperationOverrideRequest_HoursOfOperationId, *v.HoursOfOperationId)
+	}
+	if v.HoursOfOperationOverrideId != nil {
+		s.WriteString(schemas.UpdateHoursOfOperationOverrideRequest_HoursOfOperationOverrideId, *v.HoursOfOperationOverrideId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateHoursOfOperationOverrideRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateHoursOfOperationOverrideRequest_Name, *v.Name)
+	}
+	if v.OverrideType != "" {
+		s.WriteString(schemas.UpdateHoursOfOperationOverrideRequest_OverrideType, string(v.OverrideType))
+	}
+	if v.RecurrenceConfig != nil {
+		s.WriteStruct(schemas.UpdateHoursOfOperationOverrideRequest_RecurrenceConfig)
+		v.RecurrenceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateHoursOfOperationOverrideOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -78,13 +119,26 @@ type UpdateHoursOfOperationOverrideOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateHoursOfOperationOverrideOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateHoursOfOperationOverrideOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateHoursOfOperationOverrideOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateHoursOfOperationOverrideMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateHoursOfOperationOverride{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHoursOfOperationOverride, schemas.UpdateHoursOfOperationOverrideRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateHoursOfOperationOverride{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHoursOfOperationOverride, schemas.UpdateHoursOfOperationOverrideRequest, nil), output: &UpdateHoursOfOperationOverrideOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

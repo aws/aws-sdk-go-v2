@@ -5,7 +5,10 @@ package cognitoidentityprovider
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/document"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -92,6 +95,28 @@ type UpdateManagedLoginBrandingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateManagedLoginBrandingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateManagedLoginBrandingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateManagedLoginBrandingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssetListType(s, schemas.UpdateManagedLoginBrandingRequest_Assets, v.Assets)
+	if v.ManagedLoginBrandingId != nil {
+		s.WriteString(schemas.UpdateManagedLoginBrandingRequest_ManagedLoginBrandingId, *v.ManagedLoginBrandingId)
+	}
+	if v.Settings != nil {
+		s.WriteDocument(schemas.UpdateManagedLoginBrandingRequest_Settings, &smithydocument.Opaque{Value: v.Settings})
+	}
+	if v.UseCognitoProvidedValues != false {
+		s.WriteBool(schemas.UpdateManagedLoginBrandingRequest_UseCognitoProvidedValues, v.UseCognitoProvidedValues)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.UpdateManagedLoginBrandingRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 type UpdateManagedLoginBrandingOutput struct {
 
 	// The details of the branding style that you updated.
@@ -103,13 +128,34 @@ type UpdateManagedLoginBrandingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateManagedLoginBrandingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateManagedLoginBrandingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateManagedLoginBrandingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagedLoginBranding != nil {
+		s.WriteStruct(schemas.UpdateManagedLoginBrandingResponse_ManagedLoginBranding)
+		v.ManagedLoginBranding.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateManagedLoginBrandingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateManagedLoginBrandingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateManagedLoginBrandingResponse_ManagedLoginBranding:
+			v.ManagedLoginBranding = &types.ManagedLoginBrandingType{}
+			return v.ManagedLoginBranding.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateManagedLoginBrandingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateManagedLoginBranding{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateManagedLoginBranding, schemas.UpdateManagedLoginBrandingRequest, schemas.UpdateManagedLoginBrandingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateManagedLoginBranding{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateManagedLoginBranding, schemas.UpdateManagedLoginBrandingRequest, schemas.UpdateManagedLoginBrandingResponse), output: &UpdateManagedLoginBrandingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

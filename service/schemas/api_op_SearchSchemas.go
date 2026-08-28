@@ -5,7 +5,9 @@ package schemas
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/schemas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/schemas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type SearchSchemasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchSchemasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchSchemasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchSchemasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Keywords != nil {
+		s.WriteString(schemas.SearchSchemasRequest_Keywords, *v.Keywords)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.SearchSchemasRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchSchemasRequest_NextToken, *v.NextToken)
+	}
+	if v.RegistryName != nil {
+		s.WriteString(schemas.SearchSchemasRequest_RegistryName, *v.RegistryName)
+	}
+}
+
 type SearchSchemasOutput struct {
 
 	// The token that specifies the next page of results to return. To request the
@@ -64,13 +87,35 @@ type SearchSchemasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchSchemasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchSchemasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchSchemasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchSchemasResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfSearchSchemaSummary(s, schemas.SearchSchemasResponse_Schemas, v.Schemas)
+}
+func (v *SearchSchemasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchSchemasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchSchemasResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchSchemasResponse_NextToken, v.NextToken)
+		case schemas.SearchSchemasResponse_Schemas:
+			return deserialize__listOfSearchSchemaSummary(d, schemas.SearchSchemasResponse_Schemas, &v.Schemas)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchSchemasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchSchemas{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchSchemas, schemas.SearchSchemasRequest, schemas.SearchSchemasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchSchemas{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchSchemas, schemas.SearchSchemasRequest, schemas.SearchSchemasResponse), output: &SearchSchemasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

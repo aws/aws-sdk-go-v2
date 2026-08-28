@@ -5,7 +5,9 @@ package personalize
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type ListDatasetImportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatasetImportJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasetImportJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasetImportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.ListDatasetImportJobsRequest_datasetArn, *v.DatasetArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDatasetImportJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatasetImportJobsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListDatasetImportJobsOutput struct {
 
 	// The list of dataset import jobs.
@@ -62,13 +82,35 @@ type ListDatasetImportJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatasetImportJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasetImportJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasetImportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatasetImportJobs(s, schemas.ListDatasetImportJobsResponse_datasetImportJobs, v.DatasetImportJobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatasetImportJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDatasetImportJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDatasetImportJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDatasetImportJobsResponse_datasetImportJobs:
+			return deserializeDatasetImportJobs(d, schemas.ListDatasetImportJobsResponse_datasetImportJobs, &v.DatasetImportJobs)
+		case schemas.ListDatasetImportJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDatasetImportJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDatasetImportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDatasetImportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasetImportJobs, schemas.ListDatasetImportJobsRequest, schemas.ListDatasetImportJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDatasetImportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasetImportJobs, schemas.ListDatasetImportJobsRequest, schemas.ListDatasetImportJobsResponse), output: &ListDatasetImportJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

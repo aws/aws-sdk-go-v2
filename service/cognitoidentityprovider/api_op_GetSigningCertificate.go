@@ -4,6 +4,8 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,18 @@ type GetSigningCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSigningCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSigningCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSigningCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.GetSigningCertificateRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 // Response from Amazon Cognito for a signing certificate request.
 type GetSigningCertificateOutput struct {
 
@@ -69,13 +83,32 @@ type GetSigningCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSigningCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSigningCertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSigningCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Certificate != nil {
+		s.WriteString(schemas.GetSigningCertificateResponse_Certificate, *v.Certificate)
+	}
+}
+func (v *GetSigningCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSigningCertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSigningCertificateResponse_Certificate:
+			v.Certificate = new(string)
+			return d.ReadString(schemas.GetSigningCertificateResponse_Certificate, v.Certificate)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSigningCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSigningCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSigningCertificate, schemas.GetSigningCertificateRequest, schemas.GetSigningCertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSigningCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSigningCertificate, schemas.GetSigningCertificateRequest, schemas.GetSigningCertificateResponse), output: &GetSigningCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

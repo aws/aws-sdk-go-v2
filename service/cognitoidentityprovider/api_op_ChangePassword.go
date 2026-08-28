@@ -4,6 +4,8 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,24 @@ type ChangePasswordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChangePasswordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChangePasswordRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChangePasswordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.ChangePasswordRequest_AccessToken, *v.AccessToken)
+	}
+	if v.PreviousPassword != nil {
+		s.WriteString(schemas.ChangePasswordRequest_PreviousPassword, *v.PreviousPassword)
+	}
+	if v.ProposedPassword != nil {
+		s.WriteString(schemas.ChangePasswordRequest_ProposedPassword, *v.ProposedPassword)
+	}
+}
+
 // The response from the server to the change password request.
 type ChangePasswordOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -64,13 +84,26 @@ type ChangePasswordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChangePasswordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChangePasswordResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChangePasswordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ChangePasswordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChangePasswordResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationChangePasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpChangePassword{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ChangePassword, schemas.ChangePasswordRequest, schemas.ChangePasswordResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpChangePassword{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ChangePassword, schemas.ChangePasswordRequest, schemas.ChangePasswordResponse), output: &ChangePasswordOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

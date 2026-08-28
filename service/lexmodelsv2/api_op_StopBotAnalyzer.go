@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type StopBotAnalyzerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopBotAnalyzerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopBotAnalyzerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopBotAnalyzerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotAnalyzerRequestId != nil {
+		s.WriteString(schemas.StopBotAnalyzerRequest_botAnalyzerRequestId, *v.BotAnalyzerRequestId)
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.StopBotAnalyzerRequest_botId, *v.BotId)
+	}
+}
+
 type StopBotAnalyzerOutput struct {
 
 	// The unique identifier of the analysis request.
@@ -66,13 +83,60 @@ type StopBotAnalyzerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopBotAnalyzerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopBotAnalyzerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopBotAnalyzerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotAnalyzerRequestId != nil {
+		s.WriteString(schemas.StopBotAnalyzerResponse_botAnalyzerRequestId, *v.BotAnalyzerRequestId)
+	}
+	if v.BotAnalyzerStatus != "" {
+		s.WriteString(schemas.StopBotAnalyzerResponse_botAnalyzerStatus, string(v.BotAnalyzerStatus))
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.StopBotAnalyzerResponse_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.StopBotAnalyzerResponse_botVersion, *v.BotVersion)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.StopBotAnalyzerResponse_localeId, *v.LocaleId)
+	}
+}
+func (v *StopBotAnalyzerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopBotAnalyzerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopBotAnalyzerResponse_botAnalyzerRequestId:
+			v.BotAnalyzerRequestId = new(string)
+			return d.ReadString(schemas.StopBotAnalyzerResponse_botAnalyzerRequestId, v.BotAnalyzerRequestId)
+		case schemas.StopBotAnalyzerResponse_botAnalyzerStatus:
+			var ev string
+			if err := d.ReadString(schemas.StopBotAnalyzerResponse_botAnalyzerStatus, &ev); err != nil {
+				return err
+			}
+			v.BotAnalyzerStatus = types.BotAnalyzerStatus(ev)
+			return nil
+		case schemas.StopBotAnalyzerResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.StopBotAnalyzerResponse_botId, v.BotId)
+		case schemas.StopBotAnalyzerResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.StopBotAnalyzerResponse_botVersion, v.BotVersion)
+		case schemas.StopBotAnalyzerResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.StopBotAnalyzerResponse_localeId, v.LocaleId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopBotAnalyzerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopBotAnalyzer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopBotAnalyzer, schemas.StopBotAnalyzerRequest, schemas.StopBotAnalyzerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopBotAnalyzer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopBotAnalyzer, schemas.StopBotAnalyzerRequest, schemas.StopBotAnalyzerResponse), output: &StopBotAnalyzerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

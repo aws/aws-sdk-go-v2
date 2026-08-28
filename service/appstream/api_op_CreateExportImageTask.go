@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,28 @@ type CreateExportImageTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExportImageTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExportImageTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExportImageTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmiDescription != nil {
+		s.WriteString(schemas.CreateExportImageTaskRequest_AmiDescription, *v.AmiDescription)
+	}
+	if v.AmiName != nil {
+		s.WriteString(schemas.CreateExportImageTaskRequest_AmiName, *v.AmiName)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.CreateExportImageTaskRequest_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.ImageName != nil {
+		s.WriteString(schemas.CreateExportImageTaskRequest_ImageName, *v.ImageName)
+	}
+	serializeTags(s, schemas.CreateExportImageTaskRequest_TagSpecifications, v.TagSpecifications)
+}
+
 type CreateExportImageTaskOutput struct {
 
 	// Information about the export image task that was created, including the task ID
@@ -70,13 +94,34 @@ type CreateExportImageTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExportImageTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExportImageTaskResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExportImageTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportImageTask != nil {
+		s.WriteStruct(schemas.CreateExportImageTaskResult_ExportImageTask)
+		v.ExportImageTask.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateExportImageTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateExportImageTaskResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateExportImageTaskResult_ExportImageTask:
+			v.ExportImageTask = &types.ExportImageTask{}
+			return v.ExportImageTask.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateExportImageTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateExportImageTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExportImageTask, schemas.CreateExportImageTaskRequest, schemas.CreateExportImageTaskResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateExportImageTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExportImageTask, schemas.CreateExportImageTaskRequest, schemas.CreateExportImageTaskResult), output: &CreateExportImageTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package wellarchitected
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,22 @@ type UpdateProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProfileInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfileArn != nil {
+		s.WriteString(schemas.UpdateProfileInput_ProfileArn, *v.ProfileArn)
+	}
+	if v.ProfileDescription != nil {
+		s.WriteString(schemas.UpdateProfileInput_ProfileDescription, *v.ProfileDescription)
+	}
+	serializeProfileQuestionUpdates(s, schemas.UpdateProfileInput_ProfileQuestions, v.ProfileQuestions)
+}
+
 type UpdateProfileOutput struct {
 
 	// The profile.
@@ -51,13 +69,34 @@ type UpdateProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProfileOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Profile != nil {
+		s.WriteStruct(schemas.UpdateProfileOutput_Profile)
+		v.Profile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProfileOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProfileOutput_Profile:
+			v.Profile = &types.Profile{}
+			return v.Profile.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProfile, schemas.UpdateProfileInput, schemas.UpdateProfileOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProfile, schemas.UpdateProfileInput, schemas.UpdateProfileOutput), output: &UpdateProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

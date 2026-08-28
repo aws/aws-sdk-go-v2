@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,32 @@ type UpdateInstanceStorageConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInstanceStorageConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInstanceStorageConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInstanceStorageConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.UpdateInstanceStorageConfigRequest_AssociationId, *v.AssociationId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateInstanceStorageConfigRequest_ClientToken, *v.ClientToken)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateInstanceStorageConfigRequest_InstanceId, *v.InstanceId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.UpdateInstanceStorageConfigRequest_ResourceType, string(v.ResourceType))
+	}
+	if v.StorageConfig != nil {
+		s.WriteStruct(schemas.UpdateInstanceStorageConfigRequest_StorageConfig)
+		v.StorageConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateInstanceStorageConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -70,13 +98,26 @@ type UpdateInstanceStorageConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInstanceStorageConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInstanceStorageConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateInstanceStorageConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateInstanceStorageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateInstanceStorageConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInstanceStorageConfig, schemas.UpdateInstanceStorageConfigRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateInstanceStorageConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInstanceStorageConfig, schemas.UpdateInstanceStorageConfigRequest, nil), output: &UpdateInstanceStorageConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -76,6 +78,20 @@ type BatchRebootClusterNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchRebootClusterNodesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchRebootClusterNodesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchRebootClusterNodesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.BatchRebootClusterNodesRequest_ClusterName, *v.ClusterName)
+	}
+	serializeClusterNodeIds(s, schemas.BatchRebootClusterNodesRequest_NodeIds, v.NodeIds)
+	serializeClusterNodeLogicalIdList(s, schemas.BatchRebootClusterNodesRequest_NodeLogicalIds, v.NodeLogicalIds)
+}
+
 type BatchRebootClusterNodesOutput struct {
 
 	// A list of errors encountered for EC2 instance IDs that could not be rebooted.
@@ -103,13 +119,38 @@ type BatchRebootClusterNodesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchRebootClusterNodesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchRebootClusterNodesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchRebootClusterNodesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchRebootClusterNodesErrors(s, schemas.BatchRebootClusterNodesResponse_Failed, v.Failed)
+	serializeBatchRebootClusterNodeLogicalIdsErrors(s, schemas.BatchRebootClusterNodesResponse_FailedNodeLogicalIds, v.FailedNodeLogicalIds)
+	serializeClusterNodeIds(s, schemas.BatchRebootClusterNodesResponse_Successful, v.Successful)
+	serializeClusterNodeLogicalIdList(s, schemas.BatchRebootClusterNodesResponse_SuccessfulNodeLogicalIds, v.SuccessfulNodeLogicalIds)
+}
+func (v *BatchRebootClusterNodesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchRebootClusterNodesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchRebootClusterNodesResponse_Failed:
+			return deserializeBatchRebootClusterNodesErrors(d, schemas.BatchRebootClusterNodesResponse_Failed, &v.Failed)
+		case schemas.BatchRebootClusterNodesResponse_FailedNodeLogicalIds:
+			return deserializeBatchRebootClusterNodeLogicalIdsErrors(d, schemas.BatchRebootClusterNodesResponse_FailedNodeLogicalIds, &v.FailedNodeLogicalIds)
+		case schemas.BatchRebootClusterNodesResponse_Successful:
+			return deserializeClusterNodeIds(d, schemas.BatchRebootClusterNodesResponse_Successful, &v.Successful)
+		case schemas.BatchRebootClusterNodesResponse_SuccessfulNodeLogicalIds:
+			return deserializeClusterNodeLogicalIdList(d, schemas.BatchRebootClusterNodesResponse_SuccessfulNodeLogicalIds, &v.SuccessfulNodeLogicalIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchRebootClusterNodesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchRebootClusterNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchRebootClusterNodes, schemas.BatchRebootClusterNodesRequest, schemas.BatchRebootClusterNodesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchRebootClusterNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchRebootClusterNodes, schemas.BatchRebootClusterNodesRequest, schemas.BatchRebootClusterNodesResponse), output: &BatchRebootClusterNodesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type StartContactMediaProcessingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartContactMediaProcessingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartContactMediaProcessingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartContactMediaProcessingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.StartContactMediaProcessingRequest_ContactId, *v.ContactId)
+	}
+	if v.FailureMode != "" {
+		s.WriteString(schemas.StartContactMediaProcessingRequest_FailureMode, string(v.FailureMode))
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StartContactMediaProcessingRequest_InstanceId, *v.InstanceId)
+	}
+	if v.ProcessorArn != nil {
+		s.WriteString(schemas.StartContactMediaProcessingRequest_ProcessorArn, *v.ProcessorArn)
+	}
+}
+
 type StartContactMediaProcessingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +78,26 @@ type StartContactMediaProcessingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartContactMediaProcessingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartContactMediaProcessingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartContactMediaProcessingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartContactMediaProcessingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartContactMediaProcessingResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartContactMediaProcessingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartContactMediaProcessing{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartContactMediaProcessing, schemas.StartContactMediaProcessingRequest, schemas.StartContactMediaProcessingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartContactMediaProcessing{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartContactMediaProcessing, schemas.StartContactMediaProcessingRequest, schemas.StartContactMediaProcessingResponse), output: &StartContactMediaProcessingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

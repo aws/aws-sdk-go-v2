@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,30 @@ type SearchIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchIndexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchIndexRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexName != nil {
+		s.WriteString(schemas.SearchIndexRequest_indexName, *v.IndexName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchIndexRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchIndexRequest_nextToken, *v.NextToken)
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.SearchIndexRequest_queryString, *v.QueryString)
+	}
+	if v.QueryVersion != nil {
+		s.WriteString(schemas.SearchIndexRequest_queryVersion, *v.QueryVersion)
+	}
+}
+
 type SearchIndexOutput struct {
 
 	// The token used to get the next set of results, or null if there are no
@@ -82,13 +108,38 @@ type SearchIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchIndexOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchIndexResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchIndexResponse_nextToken, *v.NextToken)
+	}
+	serializeThingGroupDocumentList(s, schemas.SearchIndexResponse_thingGroups, v.ThingGroups)
+	serializeThingDocumentList(s, schemas.SearchIndexResponse_things, v.Things)
+}
+func (v *SearchIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchIndexResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchIndexResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchIndexResponse_nextToken, v.NextToken)
+		case schemas.SearchIndexResponse_thingGroups:
+			return deserializeThingGroupDocumentList(d, schemas.SearchIndexResponse_thingGroups, &v.ThingGroups)
+		case schemas.SearchIndexResponse_things:
+			return deserializeThingDocumentList(d, schemas.SearchIndexResponse_things, &v.Things)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchIndex, schemas.SearchIndexRequest, schemas.SearchIndexResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchIndex, schemas.SearchIndexRequest, schemas.SearchIndexResponse), output: &SearchIndexOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

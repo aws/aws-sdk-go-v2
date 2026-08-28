@@ -4,7 +4,9 @@ package servicequotas
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type GetServiceQuotaIncreaseRequestFromTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceQuotaIncreaseRequestFromTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceQuotaIncreaseRequestFromTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceQuotaIncreaseRequestFromTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsRegion != nil {
+		s.WriteString(schemas.GetServiceQuotaIncreaseRequestFromTemplateRequest_AwsRegion, *v.AwsRegion)
+	}
+	if v.QuotaCode != nil {
+		s.WriteString(schemas.GetServiceQuotaIncreaseRequestFromTemplateRequest_QuotaCode, *v.QuotaCode)
+	}
+	if v.ServiceCode != nil {
+		s.WriteString(schemas.GetServiceQuotaIncreaseRequestFromTemplateRequest_ServiceCode, *v.ServiceCode)
+	}
+}
+
 type GetServiceQuotaIncreaseRequestFromTemplateOutput struct {
 
 	// Information about the quota increase request.
@@ -59,13 +79,34 @@ type GetServiceQuotaIncreaseRequestFromTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceQuotaIncreaseRequestFromTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceQuotaIncreaseRequestFromTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceQuotaIncreaseRequestFromTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceQuotaIncreaseRequestInTemplate != nil {
+		s.WriteStruct(schemas.GetServiceQuotaIncreaseRequestFromTemplateResponse_ServiceQuotaIncreaseRequestInTemplate)
+		v.ServiceQuotaIncreaseRequestInTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetServiceQuotaIncreaseRequestFromTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceQuotaIncreaseRequestFromTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceQuotaIncreaseRequestFromTemplateResponse_ServiceQuotaIncreaseRequestInTemplate:
+			v.ServiceQuotaIncreaseRequestInTemplate = &types.ServiceQuotaIncreaseRequestInTemplate{}
+			return v.ServiceQuotaIncreaseRequestInTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceQuotaIncreaseRequestFromTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetServiceQuotaIncreaseRequestFromTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceQuotaIncreaseRequestFromTemplate, schemas.GetServiceQuotaIncreaseRequestFromTemplateRequest, schemas.GetServiceQuotaIncreaseRequestFromTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetServiceQuotaIncreaseRequestFromTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceQuotaIncreaseRequestFromTemplate, schemas.GetServiceQuotaIncreaseRequestFromTemplateRequest, schemas.GetServiceQuotaIncreaseRequestFromTemplateResponse), output: &GetServiceQuotaIncreaseRequestFromTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

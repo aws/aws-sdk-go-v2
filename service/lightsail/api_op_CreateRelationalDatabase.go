@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -228,6 +230,46 @@ type CreateRelationalDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRelationalDatabaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRelationalDatabaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRelationalDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.CreateRelationalDatabaseRequest_availabilityZone, *v.AvailabilityZone)
+	}
+	if v.MasterDatabaseName != nil {
+		s.WriteString(schemas.CreateRelationalDatabaseRequest_masterDatabaseName, *v.MasterDatabaseName)
+	}
+	if v.MasterUserPassword != nil {
+		s.WriteString(schemas.CreateRelationalDatabaseRequest_masterUserPassword, *v.MasterUserPassword)
+	}
+	if v.MasterUsername != nil {
+		s.WriteString(schemas.CreateRelationalDatabaseRequest_masterUsername, *v.MasterUsername)
+	}
+	if v.PreferredBackupWindow != nil {
+		s.WriteString(schemas.CreateRelationalDatabaseRequest_preferredBackupWindow, *v.PreferredBackupWindow)
+	}
+	if v.PreferredMaintenanceWindow != nil {
+		s.WriteString(schemas.CreateRelationalDatabaseRequest_preferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
+	}
+	if v.PubliclyAccessible != nil {
+		s.WriteBool(schemas.CreateRelationalDatabaseRequest_publiclyAccessible, *v.PubliclyAccessible)
+	}
+	if v.RelationalDatabaseBlueprintId != nil {
+		s.WriteString(schemas.CreateRelationalDatabaseRequest_relationalDatabaseBlueprintId, *v.RelationalDatabaseBlueprintId)
+	}
+	if v.RelationalDatabaseBundleId != nil {
+		s.WriteString(schemas.CreateRelationalDatabaseRequest_relationalDatabaseBundleId, *v.RelationalDatabaseBundleId)
+	}
+	if v.RelationalDatabaseName != nil {
+		s.WriteString(schemas.CreateRelationalDatabaseRequest_relationalDatabaseName, *v.RelationalDatabaseName)
+	}
+	serializeTagList(s, schemas.CreateRelationalDatabaseRequest_tags, v.Tags)
+}
+
 type CreateRelationalDatabaseOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -241,13 +283,29 @@ type CreateRelationalDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRelationalDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRelationalDatabaseResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRelationalDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.CreateRelationalDatabaseResult_operations, v.Operations)
+}
+func (v *CreateRelationalDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRelationalDatabaseResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRelationalDatabaseResult_operations:
+			return deserializeOperationList(d, schemas.CreateRelationalDatabaseResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRelationalDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRelationalDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRelationalDatabase, schemas.CreateRelationalDatabaseRequest, schemas.CreateRelationalDatabaseResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateRelationalDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRelationalDatabase, schemas.CreateRelationalDatabaseRequest, schemas.CreateRelationalDatabaseResult), output: &CreateRelationalDatabaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

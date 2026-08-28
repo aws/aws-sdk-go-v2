@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,24 @@ type ListManagedJobTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedJobTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedJobTemplatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedJobTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListManagedJobTemplatesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedJobTemplatesRequest_nextToken, *v.NextToken)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.ListManagedJobTemplatesRequest_templateName, *v.TemplateName)
+	}
+}
+
 type ListManagedJobTemplatesOutput struct {
 
 	// A list of managed job templates that are returned.
@@ -54,13 +74,35 @@ type ListManagedJobTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedJobTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedJobTemplatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedJobTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeManagedJobTemplatesSummaryList(s, schemas.ListManagedJobTemplatesResponse_managedJobTemplates, v.ManagedJobTemplates)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedJobTemplatesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListManagedJobTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListManagedJobTemplatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListManagedJobTemplatesResponse_managedJobTemplates:
+			return deserializeManagedJobTemplatesSummaryList(d, schemas.ListManagedJobTemplatesResponse_managedJobTemplates, &v.ManagedJobTemplates)
+		case schemas.ListManagedJobTemplatesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListManagedJobTemplatesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListManagedJobTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListManagedJobTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedJobTemplates, schemas.ListManagedJobTemplatesRequest, schemas.ListManagedJobTemplatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListManagedJobTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedJobTemplates, schemas.ListManagedJobTemplatesRequest, schemas.ListManagedJobTemplatesResponse), output: &ListManagedJobTemplatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

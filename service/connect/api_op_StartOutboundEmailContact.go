@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,44 @@ type StartOutboundEmailContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartOutboundEmailContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartOutboundEmailContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartOutboundEmailContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalRecipients != nil {
+		s.WriteStruct(schemas.StartOutboundEmailContactRequest_AdditionalRecipients)
+		v.AdditionalRecipients.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartOutboundEmailContactRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ContactId != nil {
+		s.WriteString(schemas.StartOutboundEmailContactRequest_ContactId, *v.ContactId)
+	}
+	if v.DestinationEmailAddress != nil {
+		s.WriteStruct(schemas.StartOutboundEmailContactRequest_DestinationEmailAddress)
+		v.DestinationEmailAddress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EmailMessage != nil {
+		s.WriteStruct(schemas.StartOutboundEmailContactRequest_EmailMessage)
+		v.EmailMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FromEmailAddress != nil {
+		s.WriteStruct(schemas.StartOutboundEmailContactRequest_FromEmailAddress)
+		v.FromEmailAddress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StartOutboundEmailContactRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type StartOutboundEmailContactOutput struct {
 
 	// The identifier of the contact in this instance of Connect Customer.
@@ -78,13 +118,32 @@ type StartOutboundEmailContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartOutboundEmailContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartOutboundEmailContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartOutboundEmailContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.StartOutboundEmailContactResponse_ContactId, *v.ContactId)
+	}
+}
+func (v *StartOutboundEmailContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartOutboundEmailContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartOutboundEmailContactResponse_ContactId:
+			v.ContactId = new(string)
+			return d.ReadString(schemas.StartOutboundEmailContactResponse_ContactId, v.ContactId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartOutboundEmailContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartOutboundEmailContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartOutboundEmailContact, schemas.StartOutboundEmailContactRequest, schemas.StartOutboundEmailContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartOutboundEmailContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartOutboundEmailContact, schemas.StartOutboundEmailContactRequest, schemas.StartOutboundEmailContactResponse), output: &StartOutboundEmailContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

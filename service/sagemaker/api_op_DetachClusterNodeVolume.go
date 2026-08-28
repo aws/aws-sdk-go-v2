@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -55,6 +57,24 @@ type DetachClusterNodeVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetachClusterNodeVolumeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetachClusterNodeVolumeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetachClusterNodeVolumeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.DetachClusterNodeVolumeRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.NodeId != nil {
+		s.WriteString(schemas.DetachClusterNodeVolumeRequest_NodeId, *v.NodeId)
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.DetachClusterNodeVolumeRequest_VolumeId, *v.VolumeId)
+	}
+}
+
 type DetachClusterNodeVolumeOutput struct {
 
 	//  The original timestamp when your volume was initially attached to the node.
@@ -94,13 +114,66 @@ type DetachClusterNodeVolumeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetachClusterNodeVolumeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetachClusterNodeVolumeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetachClusterNodeVolumeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachTime != nil {
+		s.WriteTime(schemas.DetachClusterNodeVolumeResponse_AttachTime, *v.AttachTime)
+	}
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.DetachClusterNodeVolumeResponse_ClusterArn, *v.ClusterArn)
+	}
+	if v.DeviceName != nil {
+		s.WriteString(schemas.DetachClusterNodeVolumeResponse_DeviceName, *v.DeviceName)
+	}
+	if v.NodeId != nil {
+		s.WriteString(schemas.DetachClusterNodeVolumeResponse_NodeId, *v.NodeId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DetachClusterNodeVolumeResponse_Status, string(v.Status))
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.DetachClusterNodeVolumeResponse_VolumeId, *v.VolumeId)
+	}
+}
+func (v *DetachClusterNodeVolumeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetachClusterNodeVolumeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetachClusterNodeVolumeResponse_AttachTime:
+			v.AttachTime = new(time.Time)
+			return d.ReadTime(schemas.DetachClusterNodeVolumeResponse_AttachTime, v.AttachTime)
+		case schemas.DetachClusterNodeVolumeResponse_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.DetachClusterNodeVolumeResponse_ClusterArn, v.ClusterArn)
+		case schemas.DetachClusterNodeVolumeResponse_DeviceName:
+			v.DeviceName = new(string)
+			return d.ReadString(schemas.DetachClusterNodeVolumeResponse_DeviceName, v.DeviceName)
+		case schemas.DetachClusterNodeVolumeResponse_NodeId:
+			v.NodeId = new(string)
+			return d.ReadString(schemas.DetachClusterNodeVolumeResponse_NodeId, v.NodeId)
+		case schemas.DetachClusterNodeVolumeResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DetachClusterNodeVolumeResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.VolumeAttachmentStatus(ev)
+			return nil
+		case schemas.DetachClusterNodeVolumeResponse_VolumeId:
+			v.VolumeId = new(string)
+			return d.ReadString(schemas.DetachClusterNodeVolumeResponse_VolumeId, v.VolumeId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetachClusterNodeVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetachClusterNodeVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachClusterNodeVolume, schemas.DetachClusterNodeVolumeRequest, schemas.DetachClusterNodeVolumeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetachClusterNodeVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachClusterNodeVolume, schemas.DetachClusterNodeVolumeRequest, schemas.DetachClusterNodeVolumeResponse), output: &DetachClusterNodeVolumeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

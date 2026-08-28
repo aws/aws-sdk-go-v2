@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type CreatePresignedMlflowTrackingServerUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePresignedMlflowTrackingServerUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePresignedMlflowTrackingServerUrlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePresignedMlflowTrackingServerUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpiresInSeconds != nil {
+		s.WriteInt32(schemas.CreatePresignedMlflowTrackingServerUrlRequest_ExpiresInSeconds, *v.ExpiresInSeconds)
+	}
+	if v.SessionExpirationDurationInSeconds != nil {
+		s.WriteInt32(schemas.CreatePresignedMlflowTrackingServerUrlRequest_SessionExpirationDurationInSeconds, *v.SessionExpirationDurationInSeconds)
+	}
+	if v.TrackingServerName != nil {
+		s.WriteString(schemas.CreatePresignedMlflowTrackingServerUrlRequest_TrackingServerName, *v.TrackingServerName)
+	}
+}
+
 type CreatePresignedMlflowTrackingServerUrlOutput struct {
 
 	// A presigned URL with an authorization token.
@@ -54,13 +74,32 @@ type CreatePresignedMlflowTrackingServerUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePresignedMlflowTrackingServerUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePresignedMlflowTrackingServerUrlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePresignedMlflowTrackingServerUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizedUrl != nil {
+		s.WriteString(schemas.CreatePresignedMlflowTrackingServerUrlResponse_AuthorizedUrl, *v.AuthorizedUrl)
+	}
+}
+func (v *CreatePresignedMlflowTrackingServerUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePresignedMlflowTrackingServerUrlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePresignedMlflowTrackingServerUrlResponse_AuthorizedUrl:
+			v.AuthorizedUrl = new(string)
+			return d.ReadString(schemas.CreatePresignedMlflowTrackingServerUrlResponse_AuthorizedUrl, v.AuthorizedUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePresignedMlflowTrackingServerUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePresignedMlflowTrackingServerUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePresignedMlflowTrackingServerUrl, schemas.CreatePresignedMlflowTrackingServerUrlRequest, schemas.CreatePresignedMlflowTrackingServerUrlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePresignedMlflowTrackingServerUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePresignedMlflowTrackingServerUrl, schemas.CreatePresignedMlflowTrackingServerUrlRequest, schemas.CreatePresignedMlflowTrackingServerUrlResponse), output: &CreatePresignedMlflowTrackingServerUrlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

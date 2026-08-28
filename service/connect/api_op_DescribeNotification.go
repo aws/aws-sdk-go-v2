@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type DescribeNotificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNotificationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNotificationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNotificationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeNotificationRequest_InstanceId, *v.InstanceId)
+	}
+	if v.NotificationId != nil {
+		s.WriteString(schemas.DescribeNotificationRequest_NotificationId, *v.NotificationId)
+	}
+}
+
 type DescribeNotificationOutput struct {
 
 	// The complete notification information including content, priority, recipients,
@@ -57,13 +74,34 @@ type DescribeNotificationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNotificationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNotificationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNotificationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Notification != nil {
+		s.WriteStruct(schemas.DescribeNotificationResponse_Notification)
+		v.Notification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeNotificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeNotificationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeNotificationResponse_Notification:
+			v.Notification = &types.Notification{}
+			return v.Notification.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeNotification{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNotification, schemas.DescribeNotificationRequest, schemas.DescribeNotificationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeNotification{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNotification, schemas.DescribeNotificationRequest, schemas.DescribeNotificationResponse), output: &DescribeNotificationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

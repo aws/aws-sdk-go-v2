@@ -4,6 +4,8 @@ package codedeploy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type DeleteGitHubAccountTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGitHubAccountTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGitHubAccountTokenInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGitHubAccountTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TokenName != nil {
+		s.WriteString(schemas.DeleteGitHubAccountTokenInput_tokenName, *v.TokenName)
+	}
+}
+
 // Represents the output of a DeleteGitHubAccountToken operation.
 type DeleteGitHubAccountTokenOutput struct {
 
@@ -44,13 +58,32 @@ type DeleteGitHubAccountTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGitHubAccountTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGitHubAccountTokenOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGitHubAccountTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TokenName != nil {
+		s.WriteString(schemas.DeleteGitHubAccountTokenOutput_tokenName, *v.TokenName)
+	}
+}
+func (v *DeleteGitHubAccountTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteGitHubAccountTokenOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteGitHubAccountTokenOutput_tokenName:
+			v.TokenName = new(string)
+			return d.ReadString(schemas.DeleteGitHubAccountTokenOutput_tokenName, v.TokenName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteGitHubAccountTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteGitHubAccountToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGitHubAccountToken, schemas.DeleteGitHubAccountTokenInput, schemas.DeleteGitHubAccountTokenOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteGitHubAccountToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGitHubAccountToken, schemas.DeleteGitHubAccountTokenInput, schemas.DeleteGitHubAccountTokenOutput), output: &DeleteGitHubAccountTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

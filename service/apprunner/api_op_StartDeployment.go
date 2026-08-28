@@ -4,6 +4,8 @@ package apprunner
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,18 @@ type StartDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.StartDeploymentRequest_ServiceArn, *v.ServiceArn)
+	}
+}
+
 type StartDeploymentOutput struct {
 
 	// The unique ID of the asynchronous operation that this request started. You can
@@ -57,13 +71,32 @@ type StartDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDeploymentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.StartDeploymentResponse_OperationId, *v.OperationId)
+	}
+}
+func (v *StartDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDeploymentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDeploymentResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.StartDeploymentResponse_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDeployment, schemas.StartDeploymentRequest, schemas.StartDeploymentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDeployment, schemas.StartDeploymentRequest, schemas.StartDeploymentResponse), output: &StartDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

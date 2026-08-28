@@ -5,7 +5,9 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,30 @@ type ListReviewTemplateAnswersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReviewTemplateAnswersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReviewTemplateAnswersInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReviewTemplateAnswersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LensAlias != nil {
+		s.WriteString(schemas.ListReviewTemplateAnswersInput_LensAlias, *v.LensAlias)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListReviewTemplateAnswersInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReviewTemplateAnswersInput_NextToken, *v.NextToken)
+	}
+	if v.PillarId != nil {
+		s.WriteString(schemas.ListReviewTemplateAnswersInput_PillarId, *v.PillarId)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.ListReviewTemplateAnswersInput_TemplateArn, *v.TemplateArn)
+	}
+}
+
 type ListReviewTemplateAnswersOutput struct {
 
 	// List of answer summaries of a lens review in a review template.
@@ -95,13 +121,47 @@ type ListReviewTemplateAnswersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReviewTemplateAnswersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReviewTemplateAnswersOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReviewTemplateAnswersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeReviewTemplateAnswerSummaries(s, schemas.ListReviewTemplateAnswersOutput_AnswerSummaries, v.AnswerSummaries)
+	if v.LensAlias != nil {
+		s.WriteString(schemas.ListReviewTemplateAnswersOutput_LensAlias, *v.LensAlias)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReviewTemplateAnswersOutput_NextToken, *v.NextToken)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.ListReviewTemplateAnswersOutput_TemplateArn, *v.TemplateArn)
+	}
+}
+func (v *ListReviewTemplateAnswersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReviewTemplateAnswersOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReviewTemplateAnswersOutput_AnswerSummaries:
+			return deserializeReviewTemplateAnswerSummaries(d, schemas.ListReviewTemplateAnswersOutput_AnswerSummaries, &v.AnswerSummaries)
+		case schemas.ListReviewTemplateAnswersOutput_LensAlias:
+			v.LensAlias = new(string)
+			return d.ReadString(schemas.ListReviewTemplateAnswersOutput_LensAlias, v.LensAlias)
+		case schemas.ListReviewTemplateAnswersOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReviewTemplateAnswersOutput_NextToken, v.NextToken)
+		case schemas.ListReviewTemplateAnswersOutput_TemplateArn:
+			v.TemplateArn = new(string)
+			return d.ReadString(schemas.ListReviewTemplateAnswersOutput_TemplateArn, v.TemplateArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReviewTemplateAnswersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListReviewTemplateAnswers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReviewTemplateAnswers, schemas.ListReviewTemplateAnswersInput, schemas.ListReviewTemplateAnswersOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListReviewTemplateAnswers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReviewTemplateAnswers, schemas.ListReviewTemplateAnswersInput, schemas.ListReviewTemplateAnswersOutput), output: &ListReviewTemplateAnswersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,27 @@ type GetBucketsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBucketsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBucketsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBucketsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.GetBucketsRequest_bucketName, *v.BucketName)
+	}
+	if v.IncludeConnectedResources != nil {
+		s.WriteBool(schemas.GetBucketsRequest_includeConnectedResources, *v.IncludeConnectedResources)
+	}
+	if v.IncludeCors != nil {
+		s.WriteBool(schemas.GetBucketsRequest_includeCors, *v.IncludeCors)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.GetBucketsRequest_pageToken, *v.PageToken)
+	}
+}
+
 type GetBucketsOutput struct {
 
 	// An object that describes the synchronization status of the Amazon S3
@@ -93,13 +116,43 @@ type GetBucketsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBucketsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBucketsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBucketsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountLevelBpaSync != nil {
+		s.WriteStruct(schemas.GetBucketsResult_accountLevelBpaSync)
+		v.AccountLevelBpaSync.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeBucketList(s, schemas.GetBucketsResult_buckets, v.Buckets)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetBucketsResult_nextPageToken, *v.NextPageToken)
+	}
+}
+func (v *GetBucketsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBucketsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBucketsResult_accountLevelBpaSync:
+			v.AccountLevelBpaSync = &types.AccountLevelBpaSync{}
+			return v.AccountLevelBpaSync.Deserialize(d)
+		case schemas.GetBucketsResult_buckets:
+			return deserializeBucketList(d, schemas.GetBucketsResult_buckets, &v.Buckets)
+		case schemas.GetBucketsResult_nextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetBucketsResult_nextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBucketsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetBuckets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBuckets, schemas.GetBucketsRequest, schemas.GetBucketsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetBuckets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBuckets, schemas.GetBucketsRequest, schemas.GetBucketsResult), output: &GetBucketsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

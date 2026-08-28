@@ -5,7 +5,9 @@ package route53resolver
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,22 @@ type CreateFirewallDomainListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFirewallDomainListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFirewallDomainListRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFirewallDomainListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.CreateFirewallDomainListRequest_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateFirewallDomainListRequest_Name, *v.Name)
+	}
+	serializeTagList(s, schemas.CreateFirewallDomainListRequest_Tags, v.Tags)
+}
+
 type CreateFirewallDomainListOutput struct {
 
 	// The domain list that you just created.
@@ -59,13 +77,34 @@ type CreateFirewallDomainListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFirewallDomainListOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFirewallDomainListResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFirewallDomainListOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallDomainList != nil {
+		s.WriteStruct(schemas.CreateFirewallDomainListResponse_FirewallDomainList)
+		v.FirewallDomainList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateFirewallDomainListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFirewallDomainListResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFirewallDomainListResponse_FirewallDomainList:
+			v.FirewallDomainList = &types.FirewallDomainList{}
+			return v.FirewallDomainList.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFirewallDomainListMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateFirewallDomainList{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFirewallDomainList, schemas.CreateFirewallDomainListRequest, schemas.CreateFirewallDomainListResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateFirewallDomainList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFirewallDomainList, schemas.CreateFirewallDomainListRequest, schemas.CreateFirewallDomainListResponse), output: &CreateFirewallDomainListOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

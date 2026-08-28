@@ -4,7 +4,9 @@ package greengrassv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,19 @@ type UpdateConnectivityInfoInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectivityInfoInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectivityInfoRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectivityInfoInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeconnectivityInfoList(s, schemas.UpdateConnectivityInfoRequest_connectivityInfo, v.ConnectivityInfo)
+	if v.ThingName != nil {
+		s.WriteString(schemas.UpdateConnectivityInfoRequest_thingName, *v.ThingName)
+	}
+}
+
 type UpdateConnectivityInfoOutput struct {
 
 	// A message about the connectivity information update request.
@@ -62,13 +77,38 @@ type UpdateConnectivityInfoOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectivityInfoOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectivityInfoResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectivityInfoOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UpdateConnectivityInfoResponse_message, *v.Message)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.UpdateConnectivityInfoResponse_version, *v.Version)
+	}
+}
+func (v *UpdateConnectivityInfoOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConnectivityInfoResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConnectivityInfoResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UpdateConnectivityInfoResponse_message, v.Message)
+		case schemas.UpdateConnectivityInfoResponse_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.UpdateConnectivityInfoResponse_version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConnectivityInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateConnectivityInfo{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnectivityInfo, schemas.UpdateConnectivityInfoRequest, schemas.UpdateConnectivityInfoResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateConnectivityInfo{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnectivityInfo, schemas.UpdateConnectivityInfoRequest, schemas.UpdateConnectivityInfoResponse), output: &UpdateConnectivityInfoOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package m2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/m2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,40 @@ type CancelBatchJobExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelBatchJobExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelBatchJobExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelBatchJobExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CancelBatchJobExecutionRequest_applicationId, *v.ApplicationId)
+	}
+	if v.AuthSecretsManagerArn != nil {
+		s.WriteString(schemas.CancelBatchJobExecutionRequest_authSecretsManagerArn, *v.AuthSecretsManagerArn)
+	}
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.CancelBatchJobExecutionRequest_executionId, *v.ExecutionId)
+	}
+}
+func (v *CancelBatchJobExecutionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelBatchJobExecutionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelBatchJobExecutionRequest_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.CancelBatchJobExecutionRequest_applicationId, v.ApplicationId)
+		case schemas.CancelBatchJobExecutionRequest_authSecretsManagerArn:
+			v.AuthSecretsManagerArn = new(string)
+			return d.ReadString(schemas.CancelBatchJobExecutionRequest_authSecretsManagerArn, v.AuthSecretsManagerArn)
+		case schemas.CancelBatchJobExecutionRequest_executionId:
+			v.ExecutionId = new(string)
+			return d.ReadString(schemas.CancelBatchJobExecutionRequest_executionId, v.ExecutionId)
+		}
+		return nil
+	})
+}
+
 type CancelBatchJobExecutionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +85,26 @@ type CancelBatchJobExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelBatchJobExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelBatchJobExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelBatchJobExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelBatchJobExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelBatchJobExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelBatchJobExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelBatchJobExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelBatchJobExecution, schemas.CancelBatchJobExecutionRequest, schemas.CancelBatchJobExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelBatchJobExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelBatchJobExecution, schemas.CancelBatchJobExecutionRequest, schemas.CancelBatchJobExecutionResponse), output: &CancelBatchJobExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

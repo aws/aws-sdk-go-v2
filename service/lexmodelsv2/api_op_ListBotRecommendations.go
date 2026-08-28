@@ -5,7 +5,9 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,30 @@ type ListBotRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBotRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBotRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBotRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListBotRecommendationsRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.ListBotRecommendationsRequest_botVersion, *v.BotVersion)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListBotRecommendationsRequest_localeId, *v.LocaleId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBotRecommendationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBotRecommendationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListBotRecommendationsOutput struct {
 
 	// The unique identifier of the bot that contains the bot recommendation list.
@@ -84,13 +110,53 @@ type ListBotRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBotRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBotRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBotRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListBotRecommendationsResponse_botId, *v.BotId)
+	}
+	serializeBotRecommendationSummaryList(s, schemas.ListBotRecommendationsResponse_botRecommendationSummaries, v.BotRecommendationSummaries)
+	if v.BotVersion != nil {
+		s.WriteString(schemas.ListBotRecommendationsResponse_botVersion, *v.BotVersion)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListBotRecommendationsResponse_localeId, *v.LocaleId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBotRecommendationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListBotRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBotRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBotRecommendationsResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.ListBotRecommendationsResponse_botId, v.BotId)
+		case schemas.ListBotRecommendationsResponse_botRecommendationSummaries:
+			return deserializeBotRecommendationSummaryList(d, schemas.ListBotRecommendationsResponse_botRecommendationSummaries, &v.BotRecommendationSummaries)
+		case schemas.ListBotRecommendationsResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.ListBotRecommendationsResponse_botVersion, v.BotVersion)
+		case schemas.ListBotRecommendationsResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.ListBotRecommendationsResponse_localeId, v.LocaleId)
+		case schemas.ListBotRecommendationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBotRecommendationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBotRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBotRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBotRecommendations, schemas.ListBotRecommendationsRequest, schemas.ListBotRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBotRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBotRecommendations, schemas.ListBotRecommendationsRequest, schemas.ListBotRecommendationsResponse), output: &ListBotRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -71,6 +73,48 @@ type ListHubContentVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHubContentVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHubContentVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHubContentVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListHubContentVersionsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListHubContentVersionsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.HubContentName != nil {
+		s.WriteString(schemas.ListHubContentVersionsRequest_HubContentName, *v.HubContentName)
+	}
+	if v.HubContentType != "" {
+		s.WriteString(schemas.ListHubContentVersionsRequest_HubContentType, string(v.HubContentType))
+	}
+	if v.HubName != nil {
+		s.WriteString(schemas.ListHubContentVersionsRequest_HubName, *v.HubName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListHubContentVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MaxSchemaVersion != nil {
+		s.WriteString(schemas.ListHubContentVersionsRequest_MaxSchemaVersion, *v.MaxSchemaVersion)
+	}
+	if v.MinVersion != nil {
+		s.WriteString(schemas.ListHubContentVersionsRequest_MinVersion, *v.MinVersion)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHubContentVersionsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListHubContentVersionsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListHubContentVersionsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListHubContentVersionsOutput struct {
 
 	// The summaries of the listed hub content versions.
@@ -88,13 +132,35 @@ type ListHubContentVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHubContentVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHubContentVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHubContentVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHubContentInfoList(s, schemas.ListHubContentVersionsResponse_HubContentSummaries, v.HubContentSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHubContentVersionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListHubContentVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListHubContentVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListHubContentVersionsResponse_HubContentSummaries:
+			return deserializeHubContentInfoList(d, schemas.ListHubContentVersionsResponse_HubContentSummaries, &v.HubContentSummaries)
+		case schemas.ListHubContentVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListHubContentVersionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListHubContentVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListHubContentVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHubContentVersions, schemas.ListHubContentVersionsRequest, schemas.ListHubContentVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListHubContentVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHubContentVersions, schemas.ListHubContentVersionsRequest, schemas.ListHubContentVersionsResponse), output: &ListHubContentVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

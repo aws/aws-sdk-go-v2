@@ -4,6 +4,8 @@ package route53resolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,21 @@ type PutResolverQueryLogConfigPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutResolverQueryLogConfigPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutResolverQueryLogConfigPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutResolverQueryLogConfigPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.PutResolverQueryLogConfigPolicyRequest_Arn, *v.Arn)
+	}
+	if v.ResolverQueryLogConfigPolicy != nil {
+		s.WriteString(schemas.PutResolverQueryLogConfigPolicyRequest_ResolverQueryLogConfigPolicy, *v.ResolverQueryLogConfigPolicy)
+	}
+}
+
 // The response to a PutResolverQueryLogConfigPolicy request.
 type PutResolverQueryLogConfigPolicyOutput struct {
 
@@ -66,13 +83,31 @@ type PutResolverQueryLogConfigPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutResolverQueryLogConfigPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutResolverQueryLogConfigPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutResolverQueryLogConfigPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReturnValue != false {
+		s.WriteBool(schemas.PutResolverQueryLogConfigPolicyResponse_ReturnValue, v.ReturnValue)
+	}
+}
+func (v *PutResolverQueryLogConfigPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutResolverQueryLogConfigPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutResolverQueryLogConfigPolicyResponse_ReturnValue:
+			return d.ReadBool(schemas.PutResolverQueryLogConfigPolicyResponse_ReturnValue, &v.ReturnValue)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutResolverQueryLogConfigPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutResolverQueryLogConfigPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutResolverQueryLogConfigPolicy, schemas.PutResolverQueryLogConfigPolicyRequest, schemas.PutResolverQueryLogConfigPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutResolverQueryLogConfigPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutResolverQueryLogConfigPolicy, schemas.PutResolverQueryLogConfigPolicyRequest, schemas.PutResolverQueryLogConfigPolicyResponse), output: &PutResolverQueryLogConfigPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

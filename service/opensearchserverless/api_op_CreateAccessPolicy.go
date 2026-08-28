@@ -5,7 +5,9 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,56 @@ type CreateAccessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccessPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccessPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccessPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAccessPolicyRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAccessPolicyRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAccessPolicyRequest_name, *v.Name)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.CreateAccessPolicyRequest_policy, *v.Policy)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateAccessPolicyRequest_type, string(v.Type))
+	}
+}
+func (v *CreateAccessPolicyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAccessPolicyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAccessPolicyRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateAccessPolicyRequest_clientToken, v.ClientToken)
+		case schemas.CreateAccessPolicyRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateAccessPolicyRequest_description, v.Description)
+		case schemas.CreateAccessPolicyRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateAccessPolicyRequest_name, v.Name)
+		case schemas.CreateAccessPolicyRequest_policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.CreateAccessPolicyRequest_policy, v.Policy)
+		case schemas.CreateAccessPolicyRequest_type:
+			var ev string
+			if err := d.ReadString(schemas.CreateAccessPolicyRequest_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.AccessPolicyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type CreateAccessPolicyOutput struct {
 
 	// Details about the created access policy.
@@ -68,13 +120,34 @@ type CreateAccessPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccessPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccessPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccessPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessPolicyDetail != nil {
+		s.WriteStruct(schemas.CreateAccessPolicyResponse_accessPolicyDetail)
+		v.AccessPolicyDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAccessPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAccessPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAccessPolicyResponse_accessPolicyDetail:
+			v.AccessPolicyDetail = &types.AccessPolicyDetail{}
+			return v.AccessPolicyDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateAccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccessPolicy, schemas.CreateAccessPolicyRequest, schemas.CreateAccessPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateAccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccessPolicy, schemas.CreateAccessPolicyRequest, schemas.CreateAccessPolicyResponse), output: &CreateAccessPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

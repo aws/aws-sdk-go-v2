@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type DetectPiiEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectPiiEntitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectPiiEntitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectPiiEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.DetectPiiEntitiesRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.DetectPiiEntitiesRequest_Text, *v.Text)
+	}
+}
+
 type DetectPiiEntitiesOutput struct {
 
 	// A collection of PII entities identified in the input text. For each entity, the
@@ -54,13 +71,29 @@ type DetectPiiEntitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectPiiEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectPiiEntitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectPiiEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfPiiEntities(s, schemas.DetectPiiEntitiesResponse_Entities, v.Entities)
+}
+func (v *DetectPiiEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectPiiEntitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectPiiEntitiesResponse_Entities:
+			return deserializeListOfPiiEntities(d, schemas.DetectPiiEntitiesResponse_Entities, &v.Entities)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetectPiiEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectPiiEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectPiiEntities, schemas.DetectPiiEntitiesRequest, schemas.DetectPiiEntitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetectPiiEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectPiiEntities, schemas.DetectPiiEntitiesRequest, schemas.DetectPiiEntitiesResponse), output: &DetectPiiEntitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

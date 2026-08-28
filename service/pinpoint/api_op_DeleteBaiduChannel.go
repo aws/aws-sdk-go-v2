@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteBaiduChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBaiduChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBaiduChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBaiduChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.DeleteBaiduChannelRequest_ApplicationId, *v.ApplicationId)
+	}
+}
+
 type DeleteBaiduChannelOutput struct {
 
 	// Provides information about the status and settings of the Baidu (Baidu Cloud
@@ -50,13 +64,34 @@ type DeleteBaiduChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBaiduChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBaiduChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBaiduChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaiduChannelResponse != nil {
+		s.WriteStruct(schemas.DeleteBaiduChannelResponse_BaiduChannelResponse)
+		v.BaiduChannelResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteBaiduChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBaiduChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBaiduChannelResponse_BaiduChannelResponse:
+			v.BaiduChannelResponse = &types.BaiduChannelResponse{}
+			return v.BaiduChannelResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBaiduChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBaiduChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBaiduChannel, schemas.DeleteBaiduChannelRequest, schemas.DeleteBaiduChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteBaiduChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBaiduChannel, schemas.DeleteBaiduChannelRequest, schemas.DeleteBaiduChannelResponse), output: &DeleteBaiduChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

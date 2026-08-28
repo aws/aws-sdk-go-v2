@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -55,6 +57,29 @@ type UpdateAttachedFilesConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAttachedFilesConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAttachedFilesConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAttachedFilesConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentScope != "" {
+		s.WriteString(schemas.UpdateAttachedFilesConfigurationRequest_AttachmentScope, string(v.AttachmentScope))
+	}
+	if v.ExtensionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateAttachedFilesConfigurationRequest_ExtensionConfiguration)
+		v.ExtensionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateAttachedFilesConfigurationRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaximumSizeLimitInBytes != nil {
+		s.WriteInt64(schemas.UpdateAttachedFilesConfigurationRequest_MaximumSizeLimitInBytes, *v.MaximumSizeLimitInBytes)
+	}
+}
+
 type UpdateAttachedFilesConfigurationOutput struct {
 
 	// The scope of the attachment.
@@ -82,13 +107,62 @@ type UpdateAttachedFilesConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAttachedFilesConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAttachedFilesConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAttachedFilesConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentScope != "" {
+		s.WriteString(schemas.UpdateAttachedFilesConfigurationResponse_AttachmentScope, string(v.AttachmentScope))
+	}
+	if v.ExtensionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateAttachedFilesConfigurationResponse_ExtensionConfiguration)
+		v.ExtensionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateAttachedFilesConfigurationResponse_InstanceId, *v.InstanceId)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.UpdateAttachedFilesConfigurationResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.MaximumSizeLimitInBytes != nil {
+		s.WriteInt64(schemas.UpdateAttachedFilesConfigurationResponse_MaximumSizeLimitInBytes, *v.MaximumSizeLimitInBytes)
+	}
+}
+func (v *UpdateAttachedFilesConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAttachedFilesConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAttachedFilesConfigurationResponse_AttachmentScope:
+			var ev string
+			if err := d.ReadString(schemas.UpdateAttachedFilesConfigurationResponse_AttachmentScope, &ev); err != nil {
+				return err
+			}
+			v.AttachmentScope = types.AttachmentScope(ev)
+			return nil
+		case schemas.UpdateAttachedFilesConfigurationResponse_ExtensionConfiguration:
+			v.ExtensionConfiguration = &types.ExtensionConfiguration{}
+			return v.ExtensionConfiguration.Deserialize(d)
+		case schemas.UpdateAttachedFilesConfigurationResponse_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.UpdateAttachedFilesConfigurationResponse_InstanceId, v.InstanceId)
+		case schemas.UpdateAttachedFilesConfigurationResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateAttachedFilesConfigurationResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.UpdateAttachedFilesConfigurationResponse_MaximumSizeLimitInBytes:
+			v.MaximumSizeLimitInBytes = new(int64)
+			return d.ReadInt64(schemas.UpdateAttachedFilesConfigurationResponse_MaximumSizeLimitInBytes, v.MaximumSizeLimitInBytes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAttachedFilesConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAttachedFilesConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAttachedFilesConfiguration, schemas.UpdateAttachedFilesConfigurationRequest, schemas.UpdateAttachedFilesConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAttachedFilesConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAttachedFilesConfiguration, schemas.UpdateAttachedFilesConfigurationRequest, schemas.UpdateAttachedFilesConfigurationResponse), output: &UpdateAttachedFilesConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

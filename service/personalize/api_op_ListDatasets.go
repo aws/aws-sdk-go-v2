@@ -5,7 +5,9 @@ package personalize
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListDatasetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatasetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetGroupArn != nil {
+		s.WriteString(schemas.ListDatasetsRequest_datasetGroupArn, *v.DatasetGroupArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDatasetsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatasetsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListDatasetsOutput struct {
 
 	// An array of Dataset objects. Each object provides metadata information.
@@ -59,13 +79,35 @@ type ListDatasetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatasetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatasets(s, schemas.ListDatasetsResponse_datasets, v.Datasets)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatasetsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDatasetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDatasetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDatasetsResponse_datasets:
+			return deserializeDatasets(d, schemas.ListDatasetsResponse_datasets, &v.Datasets)
+		case schemas.ListDatasetsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDatasetsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDatasetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDatasets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasets, schemas.ListDatasetsRequest, schemas.ListDatasetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDatasets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasets, schemas.ListDatasetsRequest, schemas.ListDatasetsResponse), output: &ListDatasetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

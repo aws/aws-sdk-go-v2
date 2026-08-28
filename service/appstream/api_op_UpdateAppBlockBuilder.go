@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -97,6 +99,46 @@ type UpdateAppBlockBuilderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAppBlockBuilderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAppBlockBuilderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAppBlockBuilderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessEndpointList(s, schemas.UpdateAppBlockBuilderRequest_AccessEndpoints, v.AccessEndpoints)
+	serializeAppBlockBuilderAttributes(s, schemas.UpdateAppBlockBuilderRequest_AttributesToDelete, v.AttributesToDelete)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAppBlockBuilderRequest_Description, *v.Description)
+	}
+	if v.DisableIMDSV1 != nil {
+		s.WriteBool(schemas.UpdateAppBlockBuilderRequest_DisableIMDSV1, *v.DisableIMDSV1)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateAppBlockBuilderRequest_DisplayName, *v.DisplayName)
+	}
+	if v.EnableDefaultInternetAccess != nil {
+		s.WriteBool(schemas.UpdateAppBlockBuilderRequest_EnableDefaultInternetAccess, *v.EnableDefaultInternetAccess)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.UpdateAppBlockBuilderRequest_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.UpdateAppBlockBuilderRequest_InstanceType, *v.InstanceType)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAppBlockBuilderRequest_Name, *v.Name)
+	}
+	if v.Platform != "" {
+		s.WriteString(schemas.UpdateAppBlockBuilderRequest_Platform, string(v.Platform))
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.UpdateAppBlockBuilderRequest_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateAppBlockBuilderOutput struct {
 
 	// Describes an app block builder.
@@ -108,13 +150,34 @@ type UpdateAppBlockBuilderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAppBlockBuilderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAppBlockBuilderResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAppBlockBuilderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppBlockBuilder != nil {
+		s.WriteStruct(schemas.UpdateAppBlockBuilderResult_AppBlockBuilder)
+		v.AppBlockBuilder.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAppBlockBuilderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAppBlockBuilderResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAppBlockBuilderResult_AppBlockBuilder:
+			v.AppBlockBuilder = &types.AppBlockBuilder{}
+			return v.AppBlockBuilder.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAppBlockBuilderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateAppBlockBuilder{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAppBlockBuilder, schemas.UpdateAppBlockBuilderRequest, schemas.UpdateAppBlockBuilderResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateAppBlockBuilder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAppBlockBuilder, schemas.UpdateAppBlockBuilderRequest, schemas.UpdateAppBlockBuilderResult), output: &UpdateAppBlockBuilderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

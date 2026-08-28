@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,18 @@ type DescribeAuditTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAuditTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAuditTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAuditTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskId != nil {
+		s.WriteString(schemas.DescribeAuditTaskRequest_taskId, *v.TaskId)
+	}
+}
+
 type DescribeAuditTaskOutput struct {
 
 	// Detailed information about each check performed during this audit.
@@ -66,13 +80,69 @@ type DescribeAuditTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAuditTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAuditTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAuditTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuditDetails(s, schemas.DescribeAuditTaskResponse_auditDetails, v.AuditDetails)
+	if v.ScheduledAuditName != nil {
+		s.WriteString(schemas.DescribeAuditTaskResponse_scheduledAuditName, *v.ScheduledAuditName)
+	}
+	if v.TaskStartTime != nil {
+		s.WriteTime(schemas.DescribeAuditTaskResponse_taskStartTime, *v.TaskStartTime)
+	}
+	if v.TaskStatistics != nil {
+		s.WriteStruct(schemas.DescribeAuditTaskResponse_taskStatistics)
+		v.TaskStatistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskStatus != "" {
+		s.WriteString(schemas.DescribeAuditTaskResponse_taskStatus, string(v.TaskStatus))
+	}
+	if v.TaskType != "" {
+		s.WriteString(schemas.DescribeAuditTaskResponse_taskType, string(v.TaskType))
+	}
+}
+func (v *DescribeAuditTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAuditTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAuditTaskResponse_auditDetails:
+			return deserializeAuditDetails(d, schemas.DescribeAuditTaskResponse_auditDetails, &v.AuditDetails)
+		case schemas.DescribeAuditTaskResponse_scheduledAuditName:
+			v.ScheduledAuditName = new(string)
+			return d.ReadString(schemas.DescribeAuditTaskResponse_scheduledAuditName, v.ScheduledAuditName)
+		case schemas.DescribeAuditTaskResponse_taskStartTime:
+			v.TaskStartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeAuditTaskResponse_taskStartTime, v.TaskStartTime)
+		case schemas.DescribeAuditTaskResponse_taskStatistics:
+			v.TaskStatistics = &types.TaskStatistics{}
+			return v.TaskStatistics.Deserialize(d)
+		case schemas.DescribeAuditTaskResponse_taskStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAuditTaskResponse_taskStatus, &ev); err != nil {
+				return err
+			}
+			v.TaskStatus = types.AuditTaskStatus(ev)
+			return nil
+		case schemas.DescribeAuditTaskResponse_taskType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAuditTaskResponse_taskType, &ev); err != nil {
+				return err
+			}
+			v.TaskType = types.AuditTaskType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAuditTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAuditTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAuditTask, schemas.DescribeAuditTaskRequest, schemas.DescribeAuditTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAuditTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAuditTask, schemas.DescribeAuditTaskRequest, schemas.DescribeAuditTaskResponse), output: &DescribeAuditTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

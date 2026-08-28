@@ -4,6 +4,8 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,21 @@ type DeleteWebAuthnCredentialInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWebAuthnCredentialInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWebAuthnCredentialRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWebAuthnCredentialInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.DeleteWebAuthnCredentialRequest_AccessToken, *v.AccessToken)
+	}
+	if v.CredentialId != nil {
+		s.WriteString(schemas.DeleteWebAuthnCredentialRequest_CredentialId, *v.CredentialId)
+	}
+}
+
 type DeleteWebAuthnCredentialOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,13 +75,26 @@ type DeleteWebAuthnCredentialOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWebAuthnCredentialOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWebAuthnCredentialResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWebAuthnCredentialOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteWebAuthnCredentialOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWebAuthnCredentialResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWebAuthnCredentialMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteWebAuthnCredential{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWebAuthnCredential, schemas.DeleteWebAuthnCredentialRequest, schemas.DeleteWebAuthnCredentialResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteWebAuthnCredential{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWebAuthnCredential, schemas.DeleteWebAuthnCredentialRequest, schemas.DeleteWebAuthnCredentialResponse), output: &DeleteWebAuthnCredentialOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

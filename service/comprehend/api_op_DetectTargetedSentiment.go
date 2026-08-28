@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type DetectTargetedSentimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectTargetedSentimentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectTargetedSentimentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectTargetedSentimentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.DetectTargetedSentimentRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.DetectTargetedSentimentRequest_Text, *v.Text)
+	}
+}
+
 type DetectTargetedSentimentOutput struct {
 
 	// Targeted sentiment analysis for each of the entities identified in the input
@@ -58,13 +75,29 @@ type DetectTargetedSentimentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectTargetedSentimentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectTargetedSentimentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectTargetedSentimentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfTargetedSentimentEntities(s, schemas.DetectTargetedSentimentResponse_Entities, v.Entities)
+}
+func (v *DetectTargetedSentimentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectTargetedSentimentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectTargetedSentimentResponse_Entities:
+			return deserializeListOfTargetedSentimentEntities(d, schemas.DetectTargetedSentimentResponse_Entities, &v.Entities)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetectTargetedSentimentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectTargetedSentiment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectTargetedSentiment, schemas.DetectTargetedSentimentRequest, schemas.DetectTargetedSentimentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetectTargetedSentiment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectTargetedSentiment, schemas.DetectTargetedSentimentRequest, schemas.DetectTargetedSentimentResponse), output: &DetectTargetedSentimentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

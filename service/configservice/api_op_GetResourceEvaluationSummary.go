@@ -4,7 +4,9 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -47,6 +49,18 @@ type GetResourceEvaluationSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceEvaluationSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceEvaluationSummaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceEvaluationSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceEvaluationId != nil {
+		s.WriteString(schemas.GetResourceEvaluationSummaryRequest_ResourceEvaluationId, *v.ResourceEvaluationId)
+	}
+}
+
 type GetResourceEvaluationSummaryOutput struct {
 
 	// The compliance status of the resource evaluation summary.
@@ -79,13 +93,82 @@ type GetResourceEvaluationSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceEvaluationSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceEvaluationSummaryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceEvaluationSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Compliance != "" {
+		s.WriteString(schemas.GetResourceEvaluationSummaryResponse_Compliance, string(v.Compliance))
+	}
+	if v.EvaluationContext != nil {
+		s.WriteStruct(schemas.GetResourceEvaluationSummaryResponse_EvaluationContext)
+		v.EvaluationContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EvaluationMode != "" {
+		s.WriteString(schemas.GetResourceEvaluationSummaryResponse_EvaluationMode, string(v.EvaluationMode))
+	}
+	if v.EvaluationStartTimestamp != nil {
+		s.WriteTime(schemas.GetResourceEvaluationSummaryResponse_EvaluationStartTimestamp, *v.EvaluationStartTimestamp)
+	}
+	if v.EvaluationStatus != nil {
+		s.WriteStruct(schemas.GetResourceEvaluationSummaryResponse_EvaluationStatus)
+		v.EvaluationStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceDetails != nil {
+		s.WriteStruct(schemas.GetResourceEvaluationSummaryResponse_ResourceDetails)
+		v.ResourceDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceEvaluationId != nil {
+		s.WriteString(schemas.GetResourceEvaluationSummaryResponse_ResourceEvaluationId, *v.ResourceEvaluationId)
+	}
+}
+func (v *GetResourceEvaluationSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourceEvaluationSummaryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourceEvaluationSummaryResponse_Compliance:
+			var ev string
+			if err := d.ReadString(schemas.GetResourceEvaluationSummaryResponse_Compliance, &ev); err != nil {
+				return err
+			}
+			v.Compliance = types.ComplianceType(ev)
+			return nil
+		case schemas.GetResourceEvaluationSummaryResponse_EvaluationContext:
+			v.EvaluationContext = &types.EvaluationContext{}
+			return v.EvaluationContext.Deserialize(d)
+		case schemas.GetResourceEvaluationSummaryResponse_EvaluationMode:
+			var ev string
+			if err := d.ReadString(schemas.GetResourceEvaluationSummaryResponse_EvaluationMode, &ev); err != nil {
+				return err
+			}
+			v.EvaluationMode = types.EvaluationMode(ev)
+			return nil
+		case schemas.GetResourceEvaluationSummaryResponse_EvaluationStartTimestamp:
+			v.EvaluationStartTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetResourceEvaluationSummaryResponse_EvaluationStartTimestamp, v.EvaluationStartTimestamp)
+		case schemas.GetResourceEvaluationSummaryResponse_EvaluationStatus:
+			v.EvaluationStatus = &types.EvaluationStatus{}
+			return v.EvaluationStatus.Deserialize(d)
+		case schemas.GetResourceEvaluationSummaryResponse_ResourceDetails:
+			v.ResourceDetails = &types.ResourceDetails{}
+			return v.ResourceDetails.Deserialize(d)
+		case schemas.GetResourceEvaluationSummaryResponse_ResourceEvaluationId:
+			v.ResourceEvaluationId = new(string)
+			return d.ReadString(schemas.GetResourceEvaluationSummaryResponse_ResourceEvaluationId, v.ResourceEvaluationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourceEvaluationSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetResourceEvaluationSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceEvaluationSummary, schemas.GetResourceEvaluationSummaryRequest, schemas.GetResourceEvaluationSummaryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetResourceEvaluationSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceEvaluationSummary, schemas.GetResourceEvaluationSummaryRequest, schemas.GetResourceEvaluationSummaryResponse), output: &GetResourceEvaluationSummaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

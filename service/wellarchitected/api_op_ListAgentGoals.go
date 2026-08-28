@@ -5,7 +5,9 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListAgentGoalsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentGoalsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentGoalsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentGoalsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAgentGoalsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentGoalsRequest_nextToken, *v.NextToken)
+	}
+	if v.ProfileArn != nil {
+		s.WriteString(schemas.ListAgentGoalsRequest_profileArn, *v.ProfileArn)
+	}
+}
+
 type ListAgentGoalsOutput struct {
 
 	// A list of goal summaries associated with the profile.
@@ -58,13 +78,35 @@ type ListAgentGoalsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgentGoalsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgentGoalsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgentGoalsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGoalSummaries(s, schemas.ListAgentGoalsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgentGoalsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAgentGoalsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAgentGoalsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAgentGoalsResponse_items:
+			return deserializeGoalSummaries(d, schemas.ListAgentGoalsResponse_items, &v.Items)
+		case schemas.ListAgentGoalsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAgentGoalsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAgentGoalsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAgentGoals{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentGoals, schemas.ListAgentGoalsRequest, schemas.ListAgentGoalsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAgentGoals{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgentGoals, schemas.ListAgentGoalsRequest, schemas.ListAgentGoalsResponse), output: &ListAgentGoalsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

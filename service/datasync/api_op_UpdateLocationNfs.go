@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,34 @@ type UpdateLocationNfsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLocationNfsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLocationNfsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLocationNfsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.UpdateLocationNfsRequest_LocationArn, *v.LocationArn)
+	}
+	if v.MountOptions != nil {
+		s.WriteStruct(schemas.UpdateLocationNfsRequest_MountOptions)
+		v.MountOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OnPremConfig != nil {
+		s.WriteStruct(schemas.UpdateLocationNfsRequest_OnPremConfig)
+		v.OnPremConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServerHostname != nil {
+		s.WriteString(schemas.UpdateLocationNfsRequest_ServerHostname, *v.ServerHostname)
+	}
+	if v.Subdirectory != nil {
+		s.WriteString(schemas.UpdateLocationNfsRequest_Subdirectory, *v.Subdirectory)
+	}
+}
+
 type UpdateLocationNfsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -67,13 +97,26 @@ type UpdateLocationNfsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLocationNfsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLocationNfsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLocationNfsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateLocationNfsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLocationNfsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLocationNfsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLocationNfs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLocationNfs, schemas.UpdateLocationNfsRequest, schemas.UpdateLocationNfsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateLocationNfs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLocationNfs, schemas.UpdateLocationNfsRequest, schemas.UpdateLocationNfsResponse), output: &UpdateLocationNfsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

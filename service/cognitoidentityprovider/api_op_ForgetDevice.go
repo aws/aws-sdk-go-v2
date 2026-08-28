@@ -4,6 +4,8 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,21 @@ type ForgetDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ForgetDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ForgetDeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ForgetDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.ForgetDeviceRequest_AccessToken, *v.AccessToken)
+	}
+	if v.DeviceKey != nil {
+		s.WriteString(schemas.ForgetDeviceRequest_DeviceKey, *v.DeviceKey)
+	}
+}
+
 type ForgetDeviceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,13 +76,26 @@ type ForgetDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ForgetDeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ForgetDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ForgetDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationForgetDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpForgetDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ForgetDevice, schemas.ForgetDeviceRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpForgetDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ForgetDevice, schemas.ForgetDeviceRequest, nil), output: &ForgetDeviceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package codedeploy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type ContinueDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContinueDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContinueDeploymentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContinueDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.ContinueDeploymentInput_deploymentId, *v.DeploymentId)
+	}
+	if v.DeploymentWaitType != "" {
+		s.WriteString(schemas.ContinueDeploymentInput_deploymentWaitType, string(v.DeploymentWaitType))
+	}
+}
+
 type ContinueDeploymentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +67,26 @@ type ContinueDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContinueDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContinueDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ContinueDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationContinueDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpContinueDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ContinueDeployment, schemas.ContinueDeploymentInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpContinueDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ContinueDeployment, schemas.ContinueDeploymentInput, nil), output: &ContinueDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

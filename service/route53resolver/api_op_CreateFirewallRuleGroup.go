@@ -5,7 +5,9 @@ package route53resolver
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,22 @@ type CreateFirewallRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFirewallRuleGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFirewallRuleGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFirewallRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.CreateFirewallRuleGroupRequest_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateFirewallRuleGroupRequest_Name, *v.Name)
+	}
+	serializeTagList(s, schemas.CreateFirewallRuleGroupRequest_Tags, v.Tags)
+}
+
 type CreateFirewallRuleGroupOutput struct {
 
 	// A collection of rules used to filter DNS network traffic.
@@ -58,13 +76,34 @@ type CreateFirewallRuleGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFirewallRuleGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFirewallRuleGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFirewallRuleGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallRuleGroup != nil {
+		s.WriteStruct(schemas.CreateFirewallRuleGroupResponse_FirewallRuleGroup)
+		v.FirewallRuleGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateFirewallRuleGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFirewallRuleGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFirewallRuleGroupResponse_FirewallRuleGroup:
+			v.FirewallRuleGroup = &types.FirewallRuleGroup{}
+			return v.FirewallRuleGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFirewallRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateFirewallRuleGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFirewallRuleGroup, schemas.CreateFirewallRuleGroupRequest, schemas.CreateFirewallRuleGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateFirewallRuleGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFirewallRuleGroup, schemas.CreateFirewallRuleGroupRequest, schemas.CreateFirewallRuleGroupResponse), output: &CreateFirewallRuleGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

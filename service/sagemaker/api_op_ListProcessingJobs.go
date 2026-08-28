@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -64,6 +66,45 @@ type ListProcessingJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProcessingJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProcessingJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProcessingJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListProcessingJobsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListProcessingJobsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.LastModifiedTimeAfter != nil {
+		s.WriteTime(schemas.ListProcessingJobsRequest_LastModifiedTimeAfter, *v.LastModifiedTimeAfter)
+	}
+	if v.LastModifiedTimeBefore != nil {
+		s.WriteTime(schemas.ListProcessingJobsRequest_LastModifiedTimeBefore, *v.LastModifiedTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProcessingJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListProcessingJobsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProcessingJobsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListProcessingJobsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListProcessingJobsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListProcessingJobsRequest_StatusEquals, string(v.StatusEquals))
+	}
+}
+
 type ListProcessingJobsOutput struct {
 
 	// An array of ProcessingJobSummary objects, each listing a processing job.
@@ -81,13 +122,35 @@ type ListProcessingJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProcessingJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProcessingJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProcessingJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProcessingJobsResponse_NextToken, *v.NextToken)
+	}
+	serializeProcessingJobSummaries(s, schemas.ListProcessingJobsResponse_ProcessingJobSummaries, v.ProcessingJobSummaries)
+}
+func (v *ListProcessingJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProcessingJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProcessingJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProcessingJobsResponse_NextToken, v.NextToken)
+		case schemas.ListProcessingJobsResponse_ProcessingJobSummaries:
+			return deserializeProcessingJobSummaries(d, schemas.ListProcessingJobsResponse_ProcessingJobSummaries, &v.ProcessingJobSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProcessingJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListProcessingJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProcessingJobs, schemas.ListProcessingJobsRequest, schemas.ListProcessingJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListProcessingJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProcessingJobs, schemas.ListProcessingJobsRequest, schemas.ListProcessingJobsResponse), output: &ListProcessingJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

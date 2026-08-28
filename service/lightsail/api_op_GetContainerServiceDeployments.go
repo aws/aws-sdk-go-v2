@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,18 @@ type GetContainerServiceDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContainerServiceDeploymentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContainerServiceDeploymentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContainerServiceDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceName != nil {
+		s.WriteString(schemas.GetContainerServiceDeploymentsRequest_serviceName, *v.ServiceName)
+	}
+}
+
 type GetContainerServiceDeploymentsOutput struct {
 
 	// An array of objects that describe deployments for a container service.
@@ -57,13 +71,29 @@ type GetContainerServiceDeploymentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContainerServiceDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContainerServiceDeploymentsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContainerServiceDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContainerServiceDeploymentList(s, schemas.GetContainerServiceDeploymentsResult_deployments, v.Deployments)
+}
+func (v *GetContainerServiceDeploymentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetContainerServiceDeploymentsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetContainerServiceDeploymentsResult_deployments:
+			return deserializeContainerServiceDeploymentList(d, schemas.GetContainerServiceDeploymentsResult_deployments, &v.Deployments)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetContainerServiceDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetContainerServiceDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContainerServiceDeployments, schemas.GetContainerServiceDeploymentsRequest, schemas.GetContainerServiceDeploymentsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetContainerServiceDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContainerServiceDeployments, schemas.GetContainerServiceDeploymentsRequest, schemas.GetContainerServiceDeploymentsResult), output: &GetContainerServiceDeploymentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

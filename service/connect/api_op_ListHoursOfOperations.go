@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type ListHoursOfOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHoursOfOperationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHoursOfOperationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHoursOfOperationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListHoursOfOperationsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListHoursOfOperationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHoursOfOperationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListHoursOfOperationsOutput struct {
 
 	// Information about the hours of operation.
@@ -66,13 +86,35 @@ type ListHoursOfOperationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHoursOfOperationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHoursOfOperationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHoursOfOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHoursOfOperationSummaryList(s, schemas.ListHoursOfOperationsResponse_HoursOfOperationSummaryList, v.HoursOfOperationSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHoursOfOperationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListHoursOfOperationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListHoursOfOperationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListHoursOfOperationsResponse_HoursOfOperationSummaryList:
+			return deserializeHoursOfOperationSummaryList(d, schemas.ListHoursOfOperationsResponse_HoursOfOperationSummaryList, &v.HoursOfOperationSummaryList)
+		case schemas.ListHoursOfOperationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListHoursOfOperationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListHoursOfOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListHoursOfOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHoursOfOperations, schemas.ListHoursOfOperationsRequest, schemas.ListHoursOfOperationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListHoursOfOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHoursOfOperations, schemas.ListHoursOfOperationsRequest, schemas.ListHoursOfOperationsResponse), output: &ListHoursOfOperationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

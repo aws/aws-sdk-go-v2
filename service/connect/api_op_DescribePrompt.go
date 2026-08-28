@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DescribePromptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePromptInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePromptRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePromptInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribePromptRequest_InstanceId, *v.InstanceId)
+	}
+	if v.PromptId != nil {
+		s.WriteString(schemas.DescribePromptRequest_PromptId, *v.PromptId)
+	}
+}
+
 type DescribePromptOutput struct {
 
 	// Information about the prompt.
@@ -53,13 +70,34 @@ type DescribePromptOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePromptOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePromptResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePromptOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Prompt != nil {
+		s.WriteStruct(schemas.DescribePromptResponse_Prompt)
+		v.Prompt.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribePromptOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePromptResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePromptResponse_Prompt:
+			v.Prompt = &types.Prompt{}
+			return v.Prompt.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePromptMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribePrompt{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePrompt, schemas.DescribePromptRequest, schemas.DescribePromptResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribePrompt{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePrompt, schemas.DescribePromptRequest, schemas.DescribePromptResponse), output: &DescribePromptOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

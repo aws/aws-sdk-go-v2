@@ -4,7 +4,9 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,27 @@ type DeleteStudioSessionMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStudioSessionMappingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteStudioSessionMappingInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStudioSessionMappingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityId != nil {
+		s.WriteString(schemas.DeleteStudioSessionMappingInput_IdentityId, *v.IdentityId)
+	}
+	if v.IdentityName != nil {
+		s.WriteString(schemas.DeleteStudioSessionMappingInput_IdentityName, *v.IdentityName)
+	}
+	if v.IdentityType != "" {
+		s.WriteString(schemas.DeleteStudioSessionMappingInput_IdentityType, string(v.IdentityType))
+	}
+	if v.StudioId != nil {
+		s.WriteString(schemas.DeleteStudioSessionMappingInput_StudioId, *v.StudioId)
+	}
+}
+
 type DeleteStudioSessionMappingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -64,13 +87,26 @@ type DeleteStudioSessionMappingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStudioSessionMappingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStudioSessionMappingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteStudioSessionMappingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteStudioSessionMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteStudioSessionMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStudioSessionMapping, schemas.DeleteStudioSessionMappingInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteStudioSessionMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStudioSessionMapping, schemas.DeleteStudioSessionMappingInput, nil), output: &DeleteStudioSessionMappingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

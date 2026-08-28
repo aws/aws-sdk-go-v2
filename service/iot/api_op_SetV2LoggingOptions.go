@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,25 @@ type SetV2LoggingOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetV2LoggingOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetV2LoggingOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetV2LoggingOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultLogLevel != "" {
+		s.WriteString(schemas.SetV2LoggingOptionsRequest_defaultLogLevel, string(v.DefaultLogLevel))
+	}
+	if v.DisableAllLogs != false {
+		s.WriteBool(schemas.SetV2LoggingOptionsRequest_disableAllLogs, v.DisableAllLogs)
+	}
+	serializeLogEventConfigurations(s, schemas.SetV2LoggingOptionsRequest_eventConfigurations, v.EventConfigurations)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.SetV2LoggingOptionsRequest_roleArn, *v.RoleArn)
+	}
+}
+
 type SetV2LoggingOptionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +73,26 @@ type SetV2LoggingOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetV2LoggingOptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetV2LoggingOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SetV2LoggingOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetV2LoggingOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSetV2LoggingOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetV2LoggingOptions, schemas.SetV2LoggingOptionsRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSetV2LoggingOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetV2LoggingOptions, schemas.SetV2LoggingOptionsRequest, nil), output: &SetV2LoggingOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

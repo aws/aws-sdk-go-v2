@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -71,6 +73,32 @@ type UpdateContactRoutingDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContactRoutingDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContactRoutingDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContactRoutingDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.UpdateContactRoutingDataRequest_ContactId, *v.ContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateContactRoutingDataRequest_InstanceId, *v.InstanceId)
+	}
+	if v.QueuePriority != nil {
+		s.WriteInt64(schemas.UpdateContactRoutingDataRequest_QueuePriority, *v.QueuePriority)
+	}
+	if v.QueueTimeAdjustmentSeconds != nil {
+		s.WriteInt32(schemas.UpdateContactRoutingDataRequest_QueueTimeAdjustmentSeconds, *v.QueueTimeAdjustmentSeconds)
+	}
+	if v.RoutingCriteria != nil {
+		s.WriteStruct(schemas.UpdateContactRoutingDataRequest_RoutingCriteria)
+		v.RoutingCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateContactRoutingDataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -78,13 +106,26 @@ type UpdateContactRoutingDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContactRoutingDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContactRoutingDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContactRoutingDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateContactRoutingDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateContactRoutingDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateContactRoutingDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateContactRoutingData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContactRoutingData, schemas.UpdateContactRoutingDataRequest, schemas.UpdateContactRoutingDataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateContactRoutingData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContactRoutingData, schemas.UpdateContactRoutingDataRequest, schemas.UpdateContactRoutingDataResponse), output: &UpdateContactRoutingDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

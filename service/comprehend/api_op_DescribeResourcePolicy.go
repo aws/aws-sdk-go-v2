@@ -4,6 +4,8 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -36,6 +38,18 @@ type DescribeResourcePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeResourcePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeResourcePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeResourcePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DescribeResourcePolicyRequest_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type DescribeResourcePolicyOutput struct {
 
 	// The time at which the policy was created.
@@ -57,13 +71,50 @@ type DescribeResourcePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeResourcePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeResourcePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeResourcePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeResourcePolicyResponse_CreationTime, *v.CreationTime)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeResourcePolicyResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.PolicyRevisionId != nil {
+		s.WriteString(schemas.DescribeResourcePolicyResponse_PolicyRevisionId, *v.PolicyRevisionId)
+	}
+	if v.ResourcePolicy != nil {
+		s.WriteString(schemas.DescribeResourcePolicyResponse_ResourcePolicy, *v.ResourcePolicy)
+	}
+}
+func (v *DescribeResourcePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeResourcePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeResourcePolicyResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeResourcePolicyResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeResourcePolicyResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeResourcePolicyResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeResourcePolicyResponse_PolicyRevisionId:
+			v.PolicyRevisionId = new(string)
+			return d.ReadString(schemas.DescribeResourcePolicyResponse_PolicyRevisionId, v.PolicyRevisionId)
+		case schemas.DescribeResourcePolicyResponse_ResourcePolicy:
+			v.ResourcePolicy = new(string)
+			return d.ReadString(schemas.DescribeResourcePolicyResponse_ResourcePolicy, v.ResourcePolicy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeResourcePolicy, schemas.DescribeResourcePolicyRequest, schemas.DescribeResourcePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeResourcePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeResourcePolicy, schemas.DescribeResourcePolicyRequest, schemas.DescribeResourcePolicyResponse), output: &DescribeResourcePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

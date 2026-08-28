@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,22 @@ type ListExportImageTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExportImageTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExportImageTasksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExportImageTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilters(s, schemas.ListExportImageTasksRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListExportImageTasksRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExportImageTasksRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListExportImageTasksOutput struct {
 
 	// The list of export image tasks that match the specified criteria.
@@ -57,13 +75,35 @@ type ListExportImageTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExportImageTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExportImageTasksResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExportImageTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExportImageTasks(s, schemas.ListExportImageTasksResult_ExportImageTasks, v.ExportImageTasks)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExportImageTasksResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListExportImageTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListExportImageTasksResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListExportImageTasksResult_ExportImageTasks:
+			return deserializeExportImageTasks(d, schemas.ListExportImageTasksResult_ExportImageTasks, &v.ExportImageTasks)
+		case schemas.ListExportImageTasksResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListExportImageTasksResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListExportImageTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListExportImageTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExportImageTasks, schemas.ListExportImageTasksRequest, schemas.ListExportImageTasksResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListExportImageTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExportImageTasks, schemas.ListExportImageTasksRequest, schemas.ListExportImageTasksResult), output: &ListExportImageTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,22 @@ type BatchGetAttachedFileMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetAttachedFileMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetAttachedFileMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetAttachedFileMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedResourceArn != nil {
+		s.WriteString(schemas.BatchGetAttachedFileMetadataRequest_AssociatedResourceArn, *v.AssociatedResourceArn)
+	}
+	serializeFileIdList(s, schemas.BatchGetAttachedFileMetadataRequest_FileIds, v.FileIds)
+	if v.InstanceId != nil {
+		s.WriteString(schemas.BatchGetAttachedFileMetadataRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type BatchGetAttachedFileMetadataOutput struct {
 
 	// List of errors of attached files that could not be retrieved.
@@ -67,13 +85,32 @@ type BatchGetAttachedFileMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetAttachedFileMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetAttachedFileMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetAttachedFileMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttachedFileErrorsList(s, schemas.BatchGetAttachedFileMetadataResponse_Errors, v.Errors)
+	serializeAttachedFilesList(s, schemas.BatchGetAttachedFileMetadataResponse_Files, v.Files)
+}
+func (v *BatchGetAttachedFileMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetAttachedFileMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetAttachedFileMetadataResponse_Errors:
+			return deserializeAttachedFileErrorsList(d, schemas.BatchGetAttachedFileMetadataResponse_Errors, &v.Errors)
+		case schemas.BatchGetAttachedFileMetadataResponse_Files:
+			return deserializeAttachedFilesList(d, schemas.BatchGetAttachedFileMetadataResponse_Files, &v.Files)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetAttachedFileMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetAttachedFileMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetAttachedFileMetadata, schemas.BatchGetAttachedFileMetadataRequest, schemas.BatchGetAttachedFileMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetAttachedFileMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetAttachedFileMetadata, schemas.BatchGetAttachedFileMetadataRequest, schemas.BatchGetAttachedFileMetadataResponse), output: &BatchGetAttachedFileMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

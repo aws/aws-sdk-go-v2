@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -73,6 +75,48 @@ type CreateTestCaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTestCaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTestCaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTestCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteString(schemas.CreateTestCaseRequest_Content, *v.Content)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateTestCaseRequest_Description, *v.Description)
+	}
+	if v.EntryPoint != nil {
+		s.WriteStruct(schemas.CreateTestCaseRequest_EntryPoint)
+		v.EntryPoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InitializationData != nil {
+		s.WriteString(schemas.CreateTestCaseRequest_InitializationData, *v.InitializationData)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateTestCaseRequest_InstanceId, *v.InstanceId)
+	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.CreateTestCaseRequest_LastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.CreateTestCaseRequest_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateTestCaseRequest_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateTestCaseRequest_Status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.CreateTestCaseRequest_Tags, v.Tags)
+	if v.TestCaseId != nil {
+		s.WriteString(schemas.CreateTestCaseRequest_TestCaseId, *v.TestCaseId)
+	}
+}
+
 type CreateTestCaseOutput struct {
 
 	// The Amazon Resource Name (ARN) of the test.
@@ -87,13 +131,38 @@ type CreateTestCaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTestCaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTestCaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTestCaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TestCaseArn != nil {
+		s.WriteString(schemas.CreateTestCaseResponse_TestCaseArn, *v.TestCaseArn)
+	}
+	if v.TestCaseId != nil {
+		s.WriteString(schemas.CreateTestCaseResponse_TestCaseId, *v.TestCaseId)
+	}
+}
+func (v *CreateTestCaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTestCaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTestCaseResponse_TestCaseArn:
+			v.TestCaseArn = new(string)
+			return d.ReadString(schemas.CreateTestCaseResponse_TestCaseArn, v.TestCaseArn)
+		case schemas.CreateTestCaseResponse_TestCaseId:
+			v.TestCaseId = new(string)
+			return d.ReadString(schemas.CreateTestCaseResponse_TestCaseId, v.TestCaseId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTestCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTestCase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTestCase, schemas.CreateTestCaseRequest, schemas.CreateTestCaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTestCase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTestCase, schemas.CreateTestCaseRequest, schemas.CreateTestCaseResponse), output: &CreateTestCaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type PauseContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PauseContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PauseContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PauseContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactFlowId != nil {
+		s.WriteString(schemas.PauseContactRequest_ContactFlowId, *v.ContactFlowId)
+	}
+	if v.ContactId != nil {
+		s.WriteString(schemas.PauseContactRequest_ContactId, *v.ContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.PauseContactRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type PauseContactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +69,26 @@ type PauseContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PauseContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PauseContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PauseContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PauseContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PauseContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPauseContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPauseContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PauseContact, schemas.PauseContactRequest, schemas.PauseContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPauseContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PauseContact, schemas.PauseContactRequest, schemas.PauseContactResponse), output: &PauseContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

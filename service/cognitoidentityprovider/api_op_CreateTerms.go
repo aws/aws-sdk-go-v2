@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -95,6 +97,31 @@ type CreateTermsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTermsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTermsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTermsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.CreateTermsRequest_ClientId, *v.ClientId)
+	}
+	if v.Enforcement != "" {
+		s.WriteString(schemas.CreateTermsRequest_Enforcement, string(v.Enforcement))
+	}
+	serializeLinksType(s, schemas.CreateTermsRequest_Links, v.Links)
+	if v.TermsName != nil {
+		s.WriteString(schemas.CreateTermsRequest_TermsName, *v.TermsName)
+	}
+	if v.TermsSource != "" {
+		s.WriteString(schemas.CreateTermsRequest_TermsSource, string(v.TermsSource))
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.CreateTermsRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 type CreateTermsOutput struct {
 
 	// A summary of your terms documents. Includes a unique identifier for later
@@ -107,13 +134,34 @@ type CreateTermsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTermsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTermsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTermsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Terms != nil {
+		s.WriteStruct(schemas.CreateTermsResponse_Terms)
+		v.Terms.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateTermsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTermsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTermsResponse_Terms:
+			v.Terms = &types.TermsType{}
+			return v.Terms.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTermsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTerms{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTerms, schemas.CreateTermsRequest, schemas.CreateTermsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateTerms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTerms, schemas.CreateTermsRequest, schemas.CreateTermsResponse), output: &CreateTermsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

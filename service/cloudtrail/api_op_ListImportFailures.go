@@ -5,7 +5,9 @@ package cloudtrail
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListImportFailuresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImportFailuresInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImportFailuresRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImportFailuresInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImportId != nil {
+		s.WriteString(schemas.ListImportFailuresRequest_ImportId, *v.ImportId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListImportFailuresRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImportFailuresRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListImportFailuresOutput struct {
 
 	//  Contains information about the import failures.
@@ -55,13 +75,35 @@ type ListImportFailuresOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImportFailuresOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImportFailuresResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImportFailuresOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImportFailureList(s, schemas.ListImportFailuresResponse_Failures, v.Failures)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImportFailuresResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListImportFailuresOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListImportFailuresResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListImportFailuresResponse_Failures:
+			return deserializeImportFailureList(d, schemas.ListImportFailuresResponse_Failures, &v.Failures)
+		case schemas.ListImportFailuresResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListImportFailuresResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListImportFailuresMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListImportFailures{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImportFailures, schemas.ListImportFailuresRequest, schemas.ListImportFailuresResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListImportFailures{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImportFailures, schemas.ListImportFailuresRequest, schemas.ListImportFailuresResponse), output: &ListImportFailuresOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

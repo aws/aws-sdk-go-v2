@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -84,6 +86,38 @@ type UpdateSecurityProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSecurityProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSecurityProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSecurityProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowedAccessControlHierarchyGroupId != nil {
+		s.WriteString(schemas.UpdateSecurityProfileRequest_AllowedAccessControlHierarchyGroupId, *v.AllowedAccessControlHierarchyGroupId)
+	}
+	serializeAllowedAccessControlTags(s, schemas.UpdateSecurityProfileRequest_AllowedAccessControlTags, v.AllowedAccessControlTags)
+	serializeAllowedFlowModules(s, schemas.UpdateSecurityProfileRequest_AllowedFlowModules, v.AllowedFlowModules)
+	serializeApplications(s, schemas.UpdateSecurityProfileRequest_Applications, v.Applications)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSecurityProfileRequest_Description, *v.Description)
+	}
+	if v.GranularAccessControlConfiguration != nil {
+		s.WriteStruct(schemas.UpdateSecurityProfileRequest_GranularAccessControlConfiguration)
+		v.GranularAccessControlConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeHierarchyRestrictedResourceList(s, schemas.UpdateSecurityProfileRequest_HierarchyRestrictedResources, v.HierarchyRestrictedResources)
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateSecurityProfileRequest_InstanceId, *v.InstanceId)
+	}
+	serializePermissionsList(s, schemas.UpdateSecurityProfileRequest_Permissions, v.Permissions)
+	if v.SecurityProfileId != nil {
+		s.WriteString(schemas.UpdateSecurityProfileRequest_SecurityProfileId, *v.SecurityProfileId)
+	}
+	serializeTagRestrictedResourceList(s, schemas.UpdateSecurityProfileRequest_TagRestrictedResources, v.TagRestrictedResources)
+}
+
 type UpdateSecurityProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -91,13 +125,26 @@ type UpdateSecurityProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSecurityProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSecurityProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateSecurityProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSecurityProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSecurityProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSecurityProfile, schemas.UpdateSecurityProfileRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSecurityProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSecurityProfile, schemas.UpdateSecurityProfileRequest, nil), output: &UpdateSecurityProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -95,6 +97,51 @@ type ListTrainingJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTrainingJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTrainingJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTrainingJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListTrainingJobsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListTrainingJobsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.LastModifiedTimeAfter != nil {
+		s.WriteTime(schemas.ListTrainingJobsRequest_LastModifiedTimeAfter, *v.LastModifiedTimeAfter)
+	}
+	if v.LastModifiedTimeBefore != nil {
+		s.WriteTime(schemas.ListTrainingJobsRequest_LastModifiedTimeBefore, *v.LastModifiedTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTrainingJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListTrainingJobsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTrainingJobsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListTrainingJobsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListTrainingJobsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListTrainingJobsRequest_StatusEquals, string(v.StatusEquals))
+	}
+	if v.TrainingPlanArnEquals != nil {
+		s.WriteString(schemas.ListTrainingJobsRequest_TrainingPlanArnEquals, *v.TrainingPlanArnEquals)
+	}
+	if v.WarmPoolStatusEquals != "" {
+		s.WriteString(schemas.ListTrainingJobsRequest_WarmPoolStatusEquals, string(v.WarmPoolStatusEquals))
+	}
+}
+
 type ListTrainingJobsOutput struct {
 
 	// An array of TrainingJobSummary objects, each listing a training job.
@@ -112,13 +159,35 @@ type ListTrainingJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTrainingJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTrainingJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTrainingJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTrainingJobsResponse_NextToken, *v.NextToken)
+	}
+	serializeTrainingJobSummaries(s, schemas.ListTrainingJobsResponse_TrainingJobSummaries, v.TrainingJobSummaries)
+}
+func (v *ListTrainingJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTrainingJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTrainingJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTrainingJobsResponse_NextToken, v.NextToken)
+		case schemas.ListTrainingJobsResponse_TrainingJobSummaries:
+			return deserializeTrainingJobSummaries(d, schemas.ListTrainingJobsResponse_TrainingJobSummaries, &v.TrainingJobSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTrainingJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTrainingJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrainingJobs, schemas.ListTrainingJobsRequest, schemas.ListTrainingJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTrainingJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrainingJobs, schemas.ListTrainingJobsRequest, schemas.ListTrainingJobsResponse), output: &ListTrainingJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

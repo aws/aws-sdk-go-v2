@@ -5,7 +5,9 @@ package managedblockchain
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type ListInvitationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInvitationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInvitationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInvitationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInvitationsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInvitationsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListInvitationsOutput struct {
 
 	// The invitations for the network.
@@ -52,13 +69,35 @@ type ListInvitationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInvitationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInvitationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInvitationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInvitationList(s, schemas.ListInvitationsOutput_Invitations, v.Invitations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInvitationsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListInvitationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInvitationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInvitationsOutput_Invitations:
+			return deserializeInvitationList(d, schemas.ListInvitationsOutput_Invitations, &v.Invitations)
+		case schemas.ListInvitationsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInvitationsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInvitationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInvitations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInvitations, schemas.ListInvitationsInput, schemas.ListInvitationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListInvitations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInvitations, schemas.ListInvitationsInput, schemas.ListInvitationsOutput), output: &ListInvitationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

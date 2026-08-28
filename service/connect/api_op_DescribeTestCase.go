@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type DescribeTestCaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTestCaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTestCaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTestCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeTestCaseRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeTestCaseRequest_Status, string(v.Status))
+	}
+	if v.TestCaseId != nil {
+		s.WriteString(schemas.DescribeTestCaseRequest_TestCaseId, *v.TestCaseId)
+	}
+}
+
 type DescribeTestCaseOutput struct {
 
 	// The test case object containing all test case information.
@@ -55,13 +75,34 @@ type DescribeTestCaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTestCaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTestCaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTestCaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TestCase != nil {
+		s.WriteStruct(schemas.DescribeTestCaseResponse_TestCase)
+		v.TestCase.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeTestCaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTestCaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTestCaseResponse_TestCase:
+			v.TestCase = &types.TestCase{}
+			return v.TestCase.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTestCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeTestCase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTestCase, schemas.DescribeTestCaseRequest, schemas.DescribeTestCaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeTestCase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTestCase, schemas.DescribeTestCaseRequest, schemas.DescribeTestCaseResponse), output: &DescribeTestCaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetSmsChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSmsChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSmsChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSmsChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetSmsChannelRequest_ApplicationId, *v.ApplicationId)
+	}
+}
+
 type GetSmsChannelOutput struct {
 
 	// Provides information about the status and settings of the SMS channel for an
@@ -50,13 +64,34 @@ type GetSmsChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSmsChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSmsChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSmsChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SMSChannelResponse != nil {
+		s.WriteStruct(schemas.GetSmsChannelResponse_SMSChannelResponse)
+		v.SMSChannelResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSmsChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSmsChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSmsChannelResponse_SMSChannelResponse:
+			v.SMSChannelResponse = &types.SMSChannelResponse{}
+			return v.SMSChannelResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSmsChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSmsChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSmsChannel, schemas.GetSmsChannelRequest, schemas.GetSmsChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSmsChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSmsChannel, schemas.GetSmsChannelRequest, schemas.GetSmsChannelResponse), output: &GetSmsChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

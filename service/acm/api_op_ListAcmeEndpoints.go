@@ -5,7 +5,9 @@ package acm
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/acm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/acm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -38,6 +40,20 @@ type ListAcmeEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAcmeEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAcmeEndpointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAcmeEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAcmeEndpointsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAcmeEndpointsRequest_NextToken, *v.NextToken)
+	}
+}
 func (in *ListAcmeEndpointsInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ServiceType = ptr.String("ACM-ACME")
@@ -57,13 +73,35 @@ type ListAcmeEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAcmeEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAcmeEndpointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAcmeEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAcmeEndpointList(s, schemas.ListAcmeEndpointsResponse_AcmeEndpoints, v.AcmeEndpoints)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAcmeEndpointsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAcmeEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAcmeEndpointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAcmeEndpointsResponse_AcmeEndpoints:
+			return deserializeAcmeEndpointList(d, schemas.ListAcmeEndpointsResponse_AcmeEndpoints, &v.AcmeEndpoints)
+		case schemas.ListAcmeEndpointsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAcmeEndpointsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAcmeEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAcmeEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAcmeEndpoints, schemas.ListAcmeEndpointsRequest, schemas.ListAcmeEndpointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAcmeEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAcmeEndpoints, schemas.ListAcmeEndpointsRequest, schemas.ListAcmeEndpointsResponse), output: &ListAcmeEndpointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

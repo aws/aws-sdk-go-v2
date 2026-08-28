@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,23 @@ type UpdateThingTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateThingTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateThingTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateThingTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ThingTypeName != nil {
+		s.WriteString(schemas.UpdateThingTypeRequest_thingTypeName, *v.ThingTypeName)
+	}
+	if v.ThingTypeProperties != nil {
+		s.WriteStruct(schemas.UpdateThingTypeRequest_thingTypeProperties)
+		v.ThingTypeProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateThingTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +64,26 @@ type UpdateThingTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateThingTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateThingTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateThingTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateThingTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateThingTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateThingTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateThingType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateThingType, schemas.UpdateThingTypeRequest, schemas.UpdateThingTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateThingType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateThingType, schemas.UpdateThingTypeRequest, schemas.UpdateThingTypeResponse), output: &UpdateThingTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

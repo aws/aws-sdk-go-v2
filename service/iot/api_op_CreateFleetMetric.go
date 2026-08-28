@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -77,6 +79,45 @@ type CreateFleetMetricInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFleetMetricInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFleetMetricRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFleetMetricInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationField != nil {
+		s.WriteString(schemas.CreateFleetMetricRequest_aggregationField, *v.AggregationField)
+	}
+	if v.AggregationType != nil {
+		s.WriteStruct(schemas.CreateFleetMetricRequest_aggregationType)
+		v.AggregationType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateFleetMetricRequest_description, *v.Description)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.CreateFleetMetricRequest_indexName, *v.IndexName)
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.CreateFleetMetricRequest_metricName, *v.MetricName)
+	}
+	if v.Period != nil {
+		s.WriteInt32(schemas.CreateFleetMetricRequest_period, *v.Period)
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.CreateFleetMetricRequest_queryString, *v.QueryString)
+	}
+	if v.QueryVersion != nil {
+		s.WriteString(schemas.CreateFleetMetricRequest_queryVersion, *v.QueryVersion)
+	}
+	serializeTagList(s, schemas.CreateFleetMetricRequest_tags, v.Tags)
+	if v.Unit != "" {
+		s.WriteString(schemas.CreateFleetMetricRequest_unit, string(v.Unit))
+	}
+}
+
 type CreateFleetMetricOutput struct {
 
 	// The Amazon Resource Name (ARN) of the new fleet metric.
@@ -91,13 +132,38 @@ type CreateFleetMetricOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFleetMetricOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFleetMetricResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFleetMetricOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricArn != nil {
+		s.WriteString(schemas.CreateFleetMetricResponse_metricArn, *v.MetricArn)
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.CreateFleetMetricResponse_metricName, *v.MetricName)
+	}
+}
+func (v *CreateFleetMetricOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFleetMetricResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFleetMetricResponse_metricArn:
+			v.MetricArn = new(string)
+			return d.ReadString(schemas.CreateFleetMetricResponse_metricArn, v.MetricArn)
+		case schemas.CreateFleetMetricResponse_metricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.CreateFleetMetricResponse_metricName, v.MetricName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFleetMetricMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFleetMetric{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFleetMetric, schemas.CreateFleetMetricRequest, schemas.CreateFleetMetricResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateFleetMetric{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFleetMetric, schemas.CreateFleetMetricRequest, schemas.CreateFleetMetricResponse), output: &CreateFleetMetricOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

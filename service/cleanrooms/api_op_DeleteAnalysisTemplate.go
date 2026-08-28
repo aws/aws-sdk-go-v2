@@ -4,6 +4,8 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,34 @@ type DeleteAnalysisTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAnalysisTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAnalysisTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAnalysisTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisTemplateIdentifier != nil {
+		s.WriteString(schemas.DeleteAnalysisTemplateInput_analysisTemplateIdentifier, *v.AnalysisTemplateIdentifier)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.DeleteAnalysisTemplateInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+func (v *DeleteAnalysisTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAnalysisTemplateInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAnalysisTemplateInput_analysisTemplateIdentifier:
+			v.AnalysisTemplateIdentifier = new(string)
+			return d.ReadString(schemas.DeleteAnalysisTemplateInput_analysisTemplateIdentifier, v.AnalysisTemplateIdentifier)
+		case schemas.DeleteAnalysisTemplateInput_membershipIdentifier:
+			v.MembershipIdentifier = new(string)
+			return d.ReadString(schemas.DeleteAnalysisTemplateInput_membershipIdentifier, v.MembershipIdentifier)
+		}
+		return nil
+	})
+}
+
 type DeleteAnalysisTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +75,26 @@ type DeleteAnalysisTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAnalysisTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAnalysisTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAnalysisTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAnalysisTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAnalysisTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAnalysisTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAnalysisTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAnalysisTemplate, schemas.DeleteAnalysisTemplateInput, schemas.DeleteAnalysisTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAnalysisTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAnalysisTemplate, schemas.DeleteAnalysisTemplateInput, schemas.DeleteAnalysisTemplateOutput), output: &DeleteAnalysisTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package paymentcryptographydata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -111,6 +113,36 @@ type ReEncryptDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReEncryptDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReEncryptDataInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReEncryptDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CipherText != nil {
+		s.WriteString(schemas.ReEncryptDataInput_CipherText, *v.CipherText)
+	}
+	serializeReEncryptionAttributes(s, schemas.ReEncryptDataInput_IncomingEncryptionAttributes, v.IncomingEncryptionAttributes)
+	if v.IncomingKeyIdentifier != nil {
+		s.WriteString(schemas.ReEncryptDataInput_IncomingKeyIdentifier, *v.IncomingKeyIdentifier)
+	}
+	if v.IncomingWrappedKey != nil {
+		s.WriteStruct(schemas.ReEncryptDataInput_IncomingWrappedKey)
+		v.IncomingWrappedKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeReEncryptionAttributes(s, schemas.ReEncryptDataInput_OutgoingEncryptionAttributes, v.OutgoingEncryptionAttributes)
+	if v.OutgoingKeyIdentifier != nil {
+		s.WriteString(schemas.ReEncryptDataInput_OutgoingKeyIdentifier, *v.OutgoingKeyIdentifier)
+	}
+	if v.OutgoingWrappedKey != nil {
+		s.WriteStruct(schemas.ReEncryptDataInput_OutgoingWrappedKey)
+		v.OutgoingWrappedKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ReEncryptDataOutput struct {
 
 	// The encrypted ciphertext.
@@ -140,13 +172,44 @@ type ReEncryptDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReEncryptDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReEncryptDataOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReEncryptDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CipherText != nil {
+		s.WriteString(schemas.ReEncryptDataOutput_CipherText, *v.CipherText)
+	}
+	if v.KeyArn != nil {
+		s.WriteString(schemas.ReEncryptDataOutput_KeyArn, *v.KeyArn)
+	}
+	if v.KeyCheckValue != nil {
+		s.WriteString(schemas.ReEncryptDataOutput_KeyCheckValue, *v.KeyCheckValue)
+	}
+}
+func (v *ReEncryptDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReEncryptDataOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReEncryptDataOutput_CipherText:
+			v.CipherText = new(string)
+			return d.ReadString(schemas.ReEncryptDataOutput_CipherText, v.CipherText)
+		case schemas.ReEncryptDataOutput_KeyArn:
+			v.KeyArn = new(string)
+			return d.ReadString(schemas.ReEncryptDataOutput_KeyArn, v.KeyArn)
+		case schemas.ReEncryptDataOutput_KeyCheckValue:
+			v.KeyCheckValue = new(string)
+			return d.ReadString(schemas.ReEncryptDataOutput_KeyCheckValue, v.KeyCheckValue)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationReEncryptDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpReEncryptData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReEncryptData, schemas.ReEncryptDataInput, schemas.ReEncryptDataOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpReEncryptData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReEncryptData, schemas.ReEncryptDataInput, schemas.ReEncryptDataOutput), output: &ReEncryptDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

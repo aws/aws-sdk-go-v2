@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -164,6 +166,54 @@ type CreateAutoMLJobV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutoMLJobV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutoMLJobV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutoMLJobV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoMLComputeConfig != nil {
+		s.WriteStruct(schemas.CreateAutoMLJobV2Request_AutoMLComputeConfig)
+		v.AutoMLComputeConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAutoMLJobInputDataConfig(s, schemas.CreateAutoMLJobV2Request_AutoMLJobInputDataConfig, v.AutoMLJobInputDataConfig)
+	if v.AutoMLJobName != nil {
+		s.WriteString(schemas.CreateAutoMLJobV2Request_AutoMLJobName, *v.AutoMLJobName)
+	}
+	if v.AutoMLJobObjective != nil {
+		s.WriteStruct(schemas.CreateAutoMLJobV2Request_AutoMLJobObjective)
+		v.AutoMLJobObjective.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAutoMLProblemTypeConfig(s, schemas.CreateAutoMLJobV2Request_AutoMLProblemTypeConfig, v.AutoMLProblemTypeConfig)
+	if v.DataSplitConfig != nil {
+		s.WriteStruct(schemas.CreateAutoMLJobV2Request_DataSplitConfig)
+		v.DataSplitConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelDeployConfig != nil {
+		s.WriteStruct(schemas.CreateAutoMLJobV2Request_ModelDeployConfig)
+		v.ModelDeployConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.CreateAutoMLJobV2Request_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateAutoMLJobV2Request_RoleArn, *v.RoleArn)
+	}
+	if v.SecurityConfig != nil {
+		s.WriteStruct(schemas.CreateAutoMLJobV2Request_SecurityConfig)
+		v.SecurityConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateAutoMLJobV2Request_Tags, v.Tags)
+}
+
 type CreateAutoMLJobV2Output struct {
 
 	// The unique ARN assigned to the AutoMLJob when it is created.
@@ -177,13 +227,32 @@ type CreateAutoMLJobV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutoMLJobV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutoMLJobV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutoMLJobV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoMLJobArn != nil {
+		s.WriteString(schemas.CreateAutoMLJobV2Response_AutoMLJobArn, *v.AutoMLJobArn)
+	}
+}
+func (v *CreateAutoMLJobV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAutoMLJobV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAutoMLJobV2Response_AutoMLJobArn:
+			v.AutoMLJobArn = new(string)
+			return d.ReadString(schemas.CreateAutoMLJobV2Response_AutoMLJobArn, v.AutoMLJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAutoMLJobV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAutoMLJobV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutoMLJobV2, schemas.CreateAutoMLJobV2Request, schemas.CreateAutoMLJobV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAutoMLJobV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutoMLJobV2, schemas.CreateAutoMLJobV2Request, schemas.CreateAutoMLJobV2Response), output: &CreateAutoMLJobV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 

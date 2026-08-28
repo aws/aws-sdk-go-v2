@@ -5,7 +5,9 @@ package configservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,22 @@ type DescribeConfigRuleEvaluationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigRuleEvaluationStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigRuleEvaluationStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigRuleEvaluationStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigRuleNames(s, schemas.DescribeConfigRuleEvaluationStatusRequest_ConfigRuleNames, v.ConfigRuleNames)
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.DescribeConfigRuleEvaluationStatusRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeConfigRuleEvaluationStatusRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeConfigRuleEvaluationStatusOutput struct {
 
 	// Status information about your Config managed rules.
@@ -68,13 +86,35 @@ type DescribeConfigRuleEvaluationStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigRuleEvaluationStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigRuleEvaluationStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigRuleEvaluationStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigRuleEvaluationStatusList(s, schemas.DescribeConfigRuleEvaluationStatusResponse_ConfigRulesEvaluationStatus, v.ConfigRulesEvaluationStatus)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeConfigRuleEvaluationStatusResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeConfigRuleEvaluationStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConfigRuleEvaluationStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConfigRuleEvaluationStatusResponse_ConfigRulesEvaluationStatus:
+			return deserializeConfigRuleEvaluationStatusList(d, schemas.DescribeConfigRuleEvaluationStatusResponse_ConfigRulesEvaluationStatus, &v.ConfigRulesEvaluationStatus)
+		case schemas.DescribeConfigRuleEvaluationStatusResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeConfigRuleEvaluationStatusResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConfigRuleEvaluationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConfigRuleEvaluationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigRuleEvaluationStatus, schemas.DescribeConfigRuleEvaluationStatusRequest, schemas.DescribeConfigRuleEvaluationStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeConfigRuleEvaluationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigRuleEvaluationStatus, schemas.DescribeConfigRuleEvaluationStatusRequest, schemas.DescribeConfigRuleEvaluationStatusResponse), output: &DescribeConfigRuleEvaluationStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

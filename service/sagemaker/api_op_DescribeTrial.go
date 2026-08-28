@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeTrialInput struct {
 	TrialName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeTrialInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTrialRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTrialInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrialName != nil {
+		s.WriteString(schemas.DescribeTrialRequest_TrialName, *v.TrialName)
+	}
 }
 
 type DescribeTrialOutput struct {
@@ -74,13 +88,94 @@ type DescribeTrialOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTrialOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTrialResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTrialOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.DescribeTrialResponse_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeTrialResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.DescribeTrialResponse_DisplayName, *v.DisplayName)
+	}
+	if v.ExperimentName != nil {
+		s.WriteString(schemas.DescribeTrialResponse_ExperimentName, *v.ExperimentName)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteStruct(schemas.DescribeTrialResponse_LastModifiedBy)
+		v.LastModifiedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeTrialResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.MetadataProperties != nil {
+		s.WriteStruct(schemas.DescribeTrialResponse_MetadataProperties)
+		v.MetadataProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.DescribeTrialResponse_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrialArn != nil {
+		s.WriteString(schemas.DescribeTrialResponse_TrialArn, *v.TrialArn)
+	}
+	if v.TrialName != nil {
+		s.WriteString(schemas.DescribeTrialResponse_TrialName, *v.TrialName)
+	}
+}
+func (v *DescribeTrialOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTrialResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTrialResponse_CreatedBy:
+			v.CreatedBy = &types.UserContext{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.DescribeTrialResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTrialResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeTrialResponse_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.DescribeTrialResponse_DisplayName, v.DisplayName)
+		case schemas.DescribeTrialResponse_ExperimentName:
+			v.ExperimentName = new(string)
+			return d.ReadString(schemas.DescribeTrialResponse_ExperimentName, v.ExperimentName)
+		case schemas.DescribeTrialResponse_LastModifiedBy:
+			v.LastModifiedBy = &types.UserContext{}
+			return v.LastModifiedBy.Deserialize(d)
+		case schemas.DescribeTrialResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeTrialResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeTrialResponse_MetadataProperties:
+			v.MetadataProperties = &types.MetadataProperties{}
+			return v.MetadataProperties.Deserialize(d)
+		case schemas.DescribeTrialResponse_Source:
+			v.Source = &types.TrialSource{}
+			return v.Source.Deserialize(d)
+		case schemas.DescribeTrialResponse_TrialArn:
+			v.TrialArn = new(string)
+			return d.ReadString(schemas.DescribeTrialResponse_TrialArn, v.TrialArn)
+		case schemas.DescribeTrialResponse_TrialName:
+			v.TrialName = new(string)
+			return d.ReadString(schemas.DescribeTrialResponse_TrialName, v.TrialName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTrialMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTrial{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrial, schemas.DescribeTrialRequest, schemas.DescribeTrialResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTrial{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrial, schemas.DescribeTrialRequest, schemas.DescribeTrialResponse), output: &DescribeTrialOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

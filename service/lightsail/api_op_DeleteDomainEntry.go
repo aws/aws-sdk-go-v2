@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,23 @@ type DeleteDomainEntryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDomainEntryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDomainEntryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDomainEntryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainEntry != nil {
+		s.WriteStruct(schemas.DeleteDomainEntryRequest_domainEntry)
+		v.DomainEntry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.DeleteDomainEntryRequest_domainName, *v.DomainName)
+	}
+}
+
 type DeleteDomainEntryOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -58,13 +77,34 @@ type DeleteDomainEntryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDomainEntryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDomainEntryResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDomainEntryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Operation != nil {
+		s.WriteStruct(schemas.DeleteDomainEntryResult_operation)
+		v.Operation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteDomainEntryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDomainEntryResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDomainEntryResult_operation:
+			v.Operation = &types.Operation{}
+			return v.Operation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDomainEntryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDomainEntry{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDomainEntry, schemas.DeleteDomainEntryRequest, schemas.DeleteDomainEntryResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteDomainEntry{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDomainEntry, schemas.DeleteDomainEntryRequest, schemas.DeleteDomainEntryResult), output: &DeleteDomainEntryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

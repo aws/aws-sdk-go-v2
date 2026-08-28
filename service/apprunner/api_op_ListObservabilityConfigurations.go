@@ -5,7 +5,9 @@ package apprunner
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,27 @@ type ListObservabilityConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListObservabilityConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListObservabilityConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListObservabilityConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LatestOnly != false {
+		s.WriteBool(schemas.ListObservabilityConfigurationsRequest_LatestOnly, v.LatestOnly)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListObservabilityConfigurationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListObservabilityConfigurationsRequest_NextToken, *v.NextToken)
+	}
+	if v.ObservabilityConfigurationName != nil {
+		s.WriteString(schemas.ListObservabilityConfigurationsRequest_ObservabilityConfigurationName, *v.ObservabilityConfigurationName)
+	}
+}
+
 type ListObservabilityConfigurationsOutput struct {
 
 	// A list of summary information records for observability configurations. In a
@@ -81,13 +104,35 @@ type ListObservabilityConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListObservabilityConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListObservabilityConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListObservabilityConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListObservabilityConfigurationsResponse_NextToken, *v.NextToken)
+	}
+	serializeObservabilityConfigurationSummaryList(s, schemas.ListObservabilityConfigurationsResponse_ObservabilityConfigurationSummaryList, v.ObservabilityConfigurationSummaryList)
+}
+func (v *ListObservabilityConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListObservabilityConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListObservabilityConfigurationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListObservabilityConfigurationsResponse_NextToken, v.NextToken)
+		case schemas.ListObservabilityConfigurationsResponse_ObservabilityConfigurationSummaryList:
+			return deserializeObservabilityConfigurationSummaryList(d, schemas.ListObservabilityConfigurationsResponse_ObservabilityConfigurationSummaryList, &v.ObservabilityConfigurationSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListObservabilityConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListObservabilityConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListObservabilityConfigurations, schemas.ListObservabilityConfigurationsRequest, schemas.ListObservabilityConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListObservabilityConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListObservabilityConfigurations, schemas.ListObservabilityConfigurationsRequest, schemas.ListObservabilityConfigurationsResponse), output: &ListObservabilityConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

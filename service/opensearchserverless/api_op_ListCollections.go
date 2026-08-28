@@ -5,7 +5,9 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,42 @@ type ListCollectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCollectionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCollectionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCollectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollectionFilters != nil {
+		s.WriteStruct(schemas.ListCollectionsRequest_collectionFilters)
+		v.CollectionFilters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCollectionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCollectionsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCollectionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCollectionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCollectionsRequest_collectionFilters:
+			v.CollectionFilters = &types.CollectionFilters{}
+			return v.CollectionFilters.Deserialize(d)
+		case schemas.ListCollectionsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListCollectionsRequest_maxResults, v.MaxResults)
+		case schemas.ListCollectionsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCollectionsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListCollectionsOutput struct {
 
 	// Details about each collection.
@@ -63,13 +101,35 @@ type ListCollectionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCollectionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCollectionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCollectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCollectionSummaries(s, schemas.ListCollectionsResponse_collectionSummaries, v.CollectionSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCollectionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCollectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCollectionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCollectionsResponse_collectionSummaries:
+			return deserializeCollectionSummaries(d, schemas.ListCollectionsResponse_collectionSummaries, &v.CollectionSummaries)
+		case schemas.ListCollectionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCollectionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCollectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListCollections{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCollections, schemas.ListCollectionsRequest, schemas.ListCollectionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListCollections{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCollections, schemas.ListCollectionsRequest, schemas.ListCollectionsResponse), output: &ListCollectionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

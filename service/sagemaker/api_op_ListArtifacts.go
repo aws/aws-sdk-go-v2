@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -57,6 +59,39 @@ type ListArtifactsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListArtifactsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListArtifactsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListArtifactsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactType != nil {
+		s.WriteString(schemas.ListArtifactsRequest_ArtifactType, *v.ArtifactType)
+	}
+	if v.CreatedAfter != nil {
+		s.WriteTime(schemas.ListArtifactsRequest_CreatedAfter, *v.CreatedAfter)
+	}
+	if v.CreatedBefore != nil {
+		s.WriteTime(schemas.ListArtifactsRequest_CreatedBefore, *v.CreatedBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListArtifactsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListArtifactsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListArtifactsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListArtifactsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.SourceUri != nil {
+		s.WriteString(schemas.ListArtifactsRequest_SourceUri, *v.SourceUri)
+	}
+}
+
 type ListArtifactsOutput struct {
 
 	// A list of artifacts and their properties.
@@ -71,13 +106,35 @@ type ListArtifactsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListArtifactsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListArtifactsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListArtifactsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeArtifactSummaries(s, schemas.ListArtifactsResponse_ArtifactSummaries, v.ArtifactSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListArtifactsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListArtifactsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListArtifactsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListArtifactsResponse_ArtifactSummaries:
+			return deserializeArtifactSummaries(d, schemas.ListArtifactsResponse_ArtifactSummaries, &v.ArtifactSummaries)
+		case schemas.ListArtifactsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListArtifactsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListArtifactsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListArtifacts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListArtifacts, schemas.ListArtifactsRequest, schemas.ListArtifactsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListArtifacts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListArtifacts, schemas.ListArtifactsRequest, schemas.ListArtifactsResponse), output: &ListArtifactsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

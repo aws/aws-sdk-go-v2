@@ -5,7 +5,9 @@ package grafana
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/grafana/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/grafana/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,27 @@ type ListWorkspaceServiceAccountTokensInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkspaceServiceAccountTokensInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkspaceServiceAccountTokensRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkspaceServiceAccountTokensInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWorkspaceServiceAccountTokensRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkspaceServiceAccountTokensRequest_nextToken, *v.NextToken)
+	}
+	if v.ServiceAccountId != nil {
+		s.WriteString(schemas.ListWorkspaceServiceAccountTokensRequest_serviceAccountId, *v.ServiceAccountId)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.ListWorkspaceServiceAccountTokensRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+
 type ListWorkspaceServiceAccountTokensOutput struct {
 
 	// The ID of the service account where the tokens reside.
@@ -79,13 +102,47 @@ type ListWorkspaceServiceAccountTokensOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkspaceServiceAccountTokensOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkspaceServiceAccountTokensResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkspaceServiceAccountTokensOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkspaceServiceAccountTokensResponse_nextToken, *v.NextToken)
+	}
+	if v.ServiceAccountId != nil {
+		s.WriteString(schemas.ListWorkspaceServiceAccountTokensResponse_serviceAccountId, *v.ServiceAccountId)
+	}
+	serializeServiceAccountTokenList(s, schemas.ListWorkspaceServiceAccountTokensResponse_serviceAccountTokens, v.ServiceAccountTokens)
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.ListWorkspaceServiceAccountTokensResponse_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *ListWorkspaceServiceAccountTokensOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkspaceServiceAccountTokensResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkspaceServiceAccountTokensResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkspaceServiceAccountTokensResponse_nextToken, v.NextToken)
+		case schemas.ListWorkspaceServiceAccountTokensResponse_serviceAccountId:
+			v.ServiceAccountId = new(string)
+			return d.ReadString(schemas.ListWorkspaceServiceAccountTokensResponse_serviceAccountId, v.ServiceAccountId)
+		case schemas.ListWorkspaceServiceAccountTokensResponse_serviceAccountTokens:
+			return deserializeServiceAccountTokenList(d, schemas.ListWorkspaceServiceAccountTokensResponse_serviceAccountTokens, &v.ServiceAccountTokens)
+		case schemas.ListWorkspaceServiceAccountTokensResponse_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.ListWorkspaceServiceAccountTokensResponse_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkspaceServiceAccountTokensMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWorkspaceServiceAccountTokens{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkspaceServiceAccountTokens, schemas.ListWorkspaceServiceAccountTokensRequest, schemas.ListWorkspaceServiceAccountTokensResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWorkspaceServiceAccountTokens{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkspaceServiceAccountTokens, schemas.ListWorkspaceServiceAccountTokensRequest, schemas.ListWorkspaceServiceAccountTokensResponse), output: &ListWorkspaceServiceAccountTokensOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

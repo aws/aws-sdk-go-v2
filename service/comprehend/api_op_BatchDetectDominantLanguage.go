@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,16 @@ type BatchDetectDominantLanguageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDetectDominantLanguageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetectDominantLanguageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetectDominantLanguageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomerInputStringList(s, schemas.BatchDetectDominantLanguageRequest_TextList, v.TextList)
+}
+
 type BatchDetectDominantLanguageOutput struct {
 
 	// A list containing one object for each document that contained an error. The
@@ -63,13 +75,32 @@ type BatchDetectDominantLanguageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDetectDominantLanguageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetectDominantLanguageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetectDominantLanguageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchItemErrorList(s, schemas.BatchDetectDominantLanguageResponse_ErrorList, v.ErrorList)
+	serializeListOfDetectDominantLanguageResult(s, schemas.BatchDetectDominantLanguageResponse_ResultList, v.ResultList)
+}
+func (v *BatchDetectDominantLanguageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDetectDominantLanguageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDetectDominantLanguageResponse_ErrorList:
+			return deserializeBatchItemErrorList(d, schemas.BatchDetectDominantLanguageResponse_ErrorList, &v.ErrorList)
+		case schemas.BatchDetectDominantLanguageResponse_ResultList:
+			return deserializeListOfDetectDominantLanguageResult(d, schemas.BatchDetectDominantLanguageResponse_ResultList, &v.ResultList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDetectDominantLanguageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDetectDominantLanguage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDetectDominantLanguage, schemas.BatchDetectDominantLanguageRequest, schemas.BatchDetectDominantLanguageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchDetectDominantLanguage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDetectDominantLanguage, schemas.BatchDetectDominantLanguageRequest, schemas.BatchDetectDominantLanguageResponse), output: &BatchDetectDominantLanguageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

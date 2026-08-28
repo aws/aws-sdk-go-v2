@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type DeleteContactFlowModuleAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContactFlowModuleAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContactFlowModuleAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContactFlowModuleAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasId != nil {
+		s.WriteString(schemas.DeleteContactFlowModuleAliasRequest_AliasId, *v.AliasId)
+	}
+	if v.ContactFlowModuleId != nil {
+		s.WriteString(schemas.DeleteContactFlowModuleAliasRequest_ContactFlowModuleId, *v.ContactFlowModuleId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeleteContactFlowModuleAliasRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DeleteContactFlowModuleAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +74,26 @@ type DeleteContactFlowModuleAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContactFlowModuleAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContactFlowModuleAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContactFlowModuleAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteContactFlowModuleAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteContactFlowModuleAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteContactFlowModuleAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteContactFlowModuleAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContactFlowModuleAlias, schemas.DeleteContactFlowModuleAliasRequest, schemas.DeleteContactFlowModuleAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteContactFlowModuleAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContactFlowModuleAlias, schemas.DeleteContactFlowModuleAliasRequest, schemas.DeleteContactFlowModuleAliasResponse), output: &DeleteContactFlowModuleAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

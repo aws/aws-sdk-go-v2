@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,29 @@ type UpdateClusterSchedulerConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterSchedulerConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterSchedulerConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterSchedulerConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterSchedulerConfigId != nil {
+		s.WriteString(schemas.UpdateClusterSchedulerConfigRequest_ClusterSchedulerConfigId, *v.ClusterSchedulerConfigId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateClusterSchedulerConfigRequest_Description, *v.Description)
+	}
+	if v.SchedulerConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterSchedulerConfigRequest_SchedulerConfig)
+		v.SchedulerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetVersion != nil {
+		s.WriteInt32(schemas.UpdateClusterSchedulerConfigRequest_TargetVersion, *v.TargetVersion)
+	}
+}
+
 type UpdateClusterSchedulerConfigOutput struct {
 
 	// ARN of the cluster policy.
@@ -63,13 +88,38 @@ type UpdateClusterSchedulerConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterSchedulerConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterSchedulerConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterSchedulerConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterSchedulerConfigArn != nil {
+		s.WriteString(schemas.UpdateClusterSchedulerConfigResponse_ClusterSchedulerConfigArn, *v.ClusterSchedulerConfigArn)
+	}
+	if v.ClusterSchedulerConfigVersion != nil {
+		s.WriteInt32(schemas.UpdateClusterSchedulerConfigResponse_ClusterSchedulerConfigVersion, *v.ClusterSchedulerConfigVersion)
+	}
+}
+func (v *UpdateClusterSchedulerConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateClusterSchedulerConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateClusterSchedulerConfigResponse_ClusterSchedulerConfigArn:
+			v.ClusterSchedulerConfigArn = new(string)
+			return d.ReadString(schemas.UpdateClusterSchedulerConfigResponse_ClusterSchedulerConfigArn, v.ClusterSchedulerConfigArn)
+		case schemas.UpdateClusterSchedulerConfigResponse_ClusterSchedulerConfigVersion:
+			v.ClusterSchedulerConfigVersion = new(int32)
+			return d.ReadInt32(schemas.UpdateClusterSchedulerConfigResponse_ClusterSchedulerConfigVersion, v.ClusterSchedulerConfigVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateClusterSchedulerConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateClusterSchedulerConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateClusterSchedulerConfig, schemas.UpdateClusterSchedulerConfigRequest, schemas.UpdateClusterSchedulerConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateClusterSchedulerConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateClusterSchedulerConfig, schemas.UpdateClusterSchedulerConfigRequest, schemas.UpdateClusterSchedulerConfigResponse), output: &UpdateClusterSchedulerConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

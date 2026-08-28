@@ -5,6 +5,8 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type AssociateApprovedOriginInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateApprovedOriginInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateApprovedOriginRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateApprovedOriginInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AssociateApprovedOriginRequest_ClientToken, *v.ClientToken)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.AssociateApprovedOriginRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Origin != nil {
+		s.WriteString(schemas.AssociateApprovedOriginRequest_Origin, *v.Origin)
+	}
+}
+
 type AssociateApprovedOriginOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,13 +78,26 @@ type AssociateApprovedOriginOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateApprovedOriginOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateApprovedOriginOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateApprovedOriginOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateApprovedOriginMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateApprovedOrigin{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateApprovedOrigin, schemas.AssociateApprovedOriginRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateApprovedOrigin{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateApprovedOrigin, schemas.AssociateApprovedOriginRequest, nil), output: &AssociateApprovedOriginOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

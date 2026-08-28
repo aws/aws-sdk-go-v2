@@ -5,6 +5,8 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,30 @@ type ListAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAliasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAliasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAliasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.ListAliasesRequest_Alias, *v.Alias)
+	}
+	if v.ImageName != nil {
+		s.WriteString(schemas.ListAliasesRequest_ImageName, *v.ImageName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAliasesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAliasesRequest_NextToken, *v.NextToken)
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.ListAliasesRequest_Version, *v.Version)
+	}
+}
+
 type ListAliasesOutput struct {
 
 	// A token for getting the next set of aliases, if more aliases exist.
@@ -62,13 +88,35 @@ type ListAliasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAliasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAliasesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAliasesResponse_NextToken, *v.NextToken)
+	}
+	serializeSageMakerImageVersionAliases(s, schemas.ListAliasesResponse_SageMakerImageVersionAliases, v.SageMakerImageVersionAliases)
+}
+func (v *ListAliasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAliasesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAliasesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAliasesResponse_NextToken, v.NextToken)
+		case schemas.ListAliasesResponse_SageMakerImageVersionAliases:
+			return deserializeSageMakerImageVersionAliases(d, schemas.ListAliasesResponse_SageMakerImageVersionAliases, &v.SageMakerImageVersionAliases)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAliases, schemas.ListAliasesRequest, schemas.ListAliasesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAliases, schemas.ListAliasesRequest, schemas.ListAliasesResponse), output: &ListAliasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

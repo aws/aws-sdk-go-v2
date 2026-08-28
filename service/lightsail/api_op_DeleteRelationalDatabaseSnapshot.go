@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,18 @@ type DeleteRelationalDatabaseSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRelationalDatabaseSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRelationalDatabaseSnapshotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRelationalDatabaseSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RelationalDatabaseSnapshotName != nil {
+		s.WriteString(schemas.DeleteRelationalDatabaseSnapshotRequest_relationalDatabaseSnapshotName, *v.RelationalDatabaseSnapshotName)
+	}
+}
+
 type DeleteRelationalDatabaseSnapshotOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -53,13 +67,29 @@ type DeleteRelationalDatabaseSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRelationalDatabaseSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRelationalDatabaseSnapshotResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRelationalDatabaseSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.DeleteRelationalDatabaseSnapshotResult_operations, v.Operations)
+}
+func (v *DeleteRelationalDatabaseSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRelationalDatabaseSnapshotResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRelationalDatabaseSnapshotResult_operations:
+			return deserializeOperationList(d, schemas.DeleteRelationalDatabaseSnapshotResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRelationalDatabaseSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRelationalDatabaseSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRelationalDatabaseSnapshot, schemas.DeleteRelationalDatabaseSnapshotRequest, schemas.DeleteRelationalDatabaseSnapshotResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteRelationalDatabaseSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRelationalDatabaseSnapshot, schemas.DeleteRelationalDatabaseSnapshotRequest, schemas.DeleteRelationalDatabaseSnapshotResult), output: &DeleteRelationalDatabaseSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

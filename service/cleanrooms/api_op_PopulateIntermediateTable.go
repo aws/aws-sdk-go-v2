@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,26 @@ type PopulateIntermediateTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PopulateIntermediateTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PopulateIntermediateTableInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PopulateIntermediateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisPayerAccountId != nil {
+		s.WriteString(schemas.PopulateIntermediateTableInput_analysisPayerAccountId, *v.AnalysisPayerAccountId)
+	}
+	serializeIntermediateTableComputeConfiguration(s, schemas.PopulateIntermediateTableInput_computeConfiguration, v.ComputeConfiguration)
+	if v.IntermediateTableIdentifier != nil {
+		s.WriteString(schemas.PopulateIntermediateTableInput_intermediateTableIdentifier, *v.IntermediateTableIdentifier)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.PopulateIntermediateTableInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	serializeParameterMap(s, schemas.PopulateIntermediateTableInput_parameters, v.Parameters)
+}
+
 type PopulateIntermediateTableOutput struct {
 
 	// The identifier for the protected query execution that populated the
@@ -75,13 +97,48 @@ type PopulateIntermediateTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PopulateIntermediateTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PopulateIntermediateTableOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PopulateIntermediateTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisId != nil {
+		s.WriteString(schemas.PopulateIntermediateTableOutput_analysisId, *v.AnalysisId)
+	}
+	if v.AnalysisType != "" {
+		s.WriteString(schemas.PopulateIntermediateTableOutput_analysisType, string(v.AnalysisType))
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.PopulateIntermediateTableOutput_versionId, *v.VersionId)
+	}
+}
+func (v *PopulateIntermediateTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PopulateIntermediateTableOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PopulateIntermediateTableOutput_analysisId:
+			v.AnalysisId = new(string)
+			return d.ReadString(schemas.PopulateIntermediateTableOutput_analysisId, v.AnalysisId)
+		case schemas.PopulateIntermediateTableOutput_analysisType:
+			var ev string
+			if err := d.ReadString(schemas.PopulateIntermediateTableOutput_analysisType, &ev); err != nil {
+				return err
+			}
+			v.AnalysisType = types.PopulateIntermediateTableAnalysisType(ev)
+			return nil
+		case schemas.PopulateIntermediateTableOutput_versionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.PopulateIntermediateTableOutput_versionId, v.VersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPopulateIntermediateTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPopulateIntermediateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PopulateIntermediateTable, schemas.PopulateIntermediateTableInput, schemas.PopulateIntermediateTableOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPopulateIntermediateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PopulateIntermediateTable, schemas.PopulateIntermediateTableInput, schemas.PopulateIntermediateTableOutput), output: &PopulateIntermediateTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

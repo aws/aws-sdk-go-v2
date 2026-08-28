@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,34 @@ type GetSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSchemaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSchemaInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.GetSchemaInput_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetSchemaInput_name, *v.Name)
+	}
+}
+func (v *GetSchemaInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSchemaInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSchemaInput_collaborationIdentifier:
+			v.CollaborationIdentifier = new(string)
+			return d.ReadString(schemas.GetSchemaInput_collaborationIdentifier, v.CollaborationIdentifier)
+		case schemas.GetSchemaInput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetSchemaInput_name, v.Name)
+		}
+		return nil
+	})
+}
+
 type GetSchemaOutput struct {
 
 	// The entire schema object.
@@ -53,13 +83,34 @@ type GetSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSchemaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSchemaOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Schema != nil {
+		s.WriteStruct(schemas.GetSchemaOutput_schema)
+		v.Schema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSchemaOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSchemaOutput_schema:
+			v.Schema = &types.Schema{}
+			return v.Schema.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSchema, schemas.GetSchemaInput, schemas.GetSchemaOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSchema, schemas.GetSchemaInput, schemas.GetSchemaOutput), output: &GetSchemaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

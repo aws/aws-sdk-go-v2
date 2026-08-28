@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,30 @@ type CreateTrialInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTrialInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTrialRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTrialInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateTrialRequest_DisplayName, *v.DisplayName)
+	}
+	if v.ExperimentName != nil {
+		s.WriteString(schemas.CreateTrialRequest_ExperimentName, *v.ExperimentName)
+	}
+	if v.MetadataProperties != nil {
+		s.WriteStruct(schemas.CreateTrialRequest_MetadataProperties)
+		v.MetadataProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateTrialRequest_Tags, v.Tags)
+	if v.TrialName != nil {
+		s.WriteString(schemas.CreateTrialRequest_TrialName, *v.TrialName)
+	}
+}
+
 type CreateTrialOutput struct {
 
 	// The Amazon Resource Name (ARN) of the trial.
@@ -81,13 +107,32 @@ type CreateTrialOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTrialOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTrialResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTrialOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrialArn != nil {
+		s.WriteString(schemas.CreateTrialResponse_TrialArn, *v.TrialArn)
+	}
+}
+func (v *CreateTrialOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTrialResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTrialResponse_TrialArn:
+			v.TrialArn = new(string)
+			return d.ReadString(schemas.CreateTrialResponse_TrialArn, v.TrialArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTrialMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTrial{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrial, schemas.CreateTrialRequest, schemas.CreateTrialResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateTrial{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrial, schemas.CreateTrialRequest, schemas.CreateTrialResponse), output: &CreateTrialOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DescribeSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSchemaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSchemaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.DescribeSchemaRequest_schemaArn, *v.SchemaArn)
+	}
+}
+
 type DescribeSchemaOutput struct {
 
 	// The requested schema.
@@ -47,13 +61,34 @@ type DescribeSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSchemaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSchemaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Schema != nil {
+		s.WriteStruct(schemas.DescribeSchemaResponse_schema)
+		v.Schema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSchemaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSchemaResponse_schema:
+			v.Schema = &types.DatasetSchema{}
+			return v.Schema.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSchema, schemas.DescribeSchemaRequest, schemas.DescribeSchemaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSchema, schemas.DescribeSchemaRequest, schemas.DescribeSchemaResponse), output: &DescribeSchemaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

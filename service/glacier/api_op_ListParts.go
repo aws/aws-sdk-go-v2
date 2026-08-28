@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -87,6 +89,30 @@ type ListPartsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPartsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPartsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPartsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListPartsInput_accountId, *v.AccountId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListPartsInput_limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListPartsInput_marker, *v.Marker)
+	}
+	if v.UploadId != nil {
+		s.WriteString(schemas.ListPartsInput_uploadId, *v.UploadId)
+	}
+	if v.VaultName != nil {
+		s.WriteString(schemas.ListPartsInput_vaultName, *v.VaultName)
+	}
+}
+
 // Contains the Amazon Glacier response to your request.
 type ListPartsOutput struct {
 
@@ -123,13 +149,64 @@ type ListPartsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPartsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPartsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPartsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveDescription != nil {
+		s.WriteString(schemas.ListPartsOutput_ArchiveDescription, *v.ArchiveDescription)
+	}
+	if v.CreationDate != nil {
+		s.WriteString(schemas.ListPartsOutput_CreationDate, *v.CreationDate)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListPartsOutput_Marker, *v.Marker)
+	}
+	if v.MultipartUploadId != nil {
+		s.WriteString(schemas.ListPartsOutput_MultipartUploadId, *v.MultipartUploadId)
+	}
+	if v.PartSizeInBytes != 0 {
+		s.WriteInt64(schemas.ListPartsOutput_PartSizeInBytes, v.PartSizeInBytes)
+	}
+	serializePartList(s, schemas.ListPartsOutput_Parts, v.Parts)
+	if v.VaultARN != nil {
+		s.WriteString(schemas.ListPartsOutput_VaultARN, *v.VaultARN)
+	}
+}
+func (v *ListPartsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPartsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPartsOutput_ArchiveDescription:
+			v.ArchiveDescription = new(string)
+			return d.ReadString(schemas.ListPartsOutput_ArchiveDescription, v.ArchiveDescription)
+		case schemas.ListPartsOutput_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.ListPartsOutput_CreationDate, v.CreationDate)
+		case schemas.ListPartsOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListPartsOutput_Marker, v.Marker)
+		case schemas.ListPartsOutput_MultipartUploadId:
+			v.MultipartUploadId = new(string)
+			return d.ReadString(schemas.ListPartsOutput_MultipartUploadId, v.MultipartUploadId)
+		case schemas.ListPartsOutput_PartSizeInBytes:
+			return d.ReadInt64(schemas.ListPartsOutput_PartSizeInBytes, &v.PartSizeInBytes)
+		case schemas.ListPartsOutput_Parts:
+			return deserializePartList(d, schemas.ListPartsOutput_Parts, &v.Parts)
+		case schemas.ListPartsOutput_VaultARN:
+			v.VaultARN = new(string)
+			return d.ReadString(schemas.ListPartsOutput_VaultARN, v.VaultARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPartsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListParts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListParts, schemas.ListPartsInput, schemas.ListPartsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListParts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListParts, schemas.ListPartsInput, schemas.ListPartsOutput), output: &ListPartsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

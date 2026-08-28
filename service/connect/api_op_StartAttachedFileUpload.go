@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -88,6 +90,38 @@ type StartAttachedFileUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAttachedFileUploadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAttachedFileUploadRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAttachedFileUploadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedResourceArn != nil {
+		s.WriteString(schemas.StartAttachedFileUploadRequest_AssociatedResourceArn, *v.AssociatedResourceArn)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartAttachedFileUploadRequest_ClientToken, *v.ClientToken)
+	}
+	serializeCreatedByInfo(s, schemas.StartAttachedFileUploadRequest_CreatedBy, v.CreatedBy)
+	if v.FileName != nil {
+		s.WriteString(schemas.StartAttachedFileUploadRequest_FileName, *v.FileName)
+	}
+	if v.FileSizeInBytes != nil {
+		s.WriteInt64(schemas.StartAttachedFileUploadRequest_FileSizeInBytes, *v.FileSizeInBytes)
+	}
+	if v.FileUseCaseType != "" {
+		s.WriteString(schemas.StartAttachedFileUploadRequest_FileUseCaseType, string(v.FileUseCaseType))
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StartAttachedFileUploadRequest_InstanceId, *v.InstanceId)
+	}
+	serializeTagMap(s, schemas.StartAttachedFileUploadRequest_Tags, v.Tags)
+	if v.UrlExpiryInSeconds != nil {
+		s.WriteInt32(schemas.StartAttachedFileUploadRequest_UrlExpiryInSeconds, *v.UrlExpiryInSeconds)
+	}
+}
+
 // Response from StartAttachedFileUpload API.
 type StartAttachedFileUploadOutput struct {
 
@@ -117,13 +151,65 @@ type StartAttachedFileUploadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAttachedFileUploadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAttachedFileUploadResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAttachedFileUploadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCreatedByInfo(s, schemas.StartAttachedFileUploadResponse_CreatedBy, v.CreatedBy)
+	if v.CreationTime != nil {
+		s.WriteString(schemas.StartAttachedFileUploadResponse_CreationTime, *v.CreationTime)
+	}
+	if v.FileArn != nil {
+		s.WriteString(schemas.StartAttachedFileUploadResponse_FileArn, *v.FileArn)
+	}
+	if v.FileId != nil {
+		s.WriteString(schemas.StartAttachedFileUploadResponse_FileId, *v.FileId)
+	}
+	if v.FileStatus != "" {
+		s.WriteString(schemas.StartAttachedFileUploadResponse_FileStatus, string(v.FileStatus))
+	}
+	if v.UploadUrlMetadata != nil {
+		s.WriteStruct(schemas.StartAttachedFileUploadResponse_UploadUrlMetadata)
+		v.UploadUrlMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartAttachedFileUploadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartAttachedFileUploadResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartAttachedFileUploadResponse_CreatedBy:
+			return deserializeCreatedByInfo(d, schemas.StartAttachedFileUploadResponse_CreatedBy, &v.CreatedBy)
+		case schemas.StartAttachedFileUploadResponse_CreationTime:
+			v.CreationTime = new(string)
+			return d.ReadString(schemas.StartAttachedFileUploadResponse_CreationTime, v.CreationTime)
+		case schemas.StartAttachedFileUploadResponse_FileArn:
+			v.FileArn = new(string)
+			return d.ReadString(schemas.StartAttachedFileUploadResponse_FileArn, v.FileArn)
+		case schemas.StartAttachedFileUploadResponse_FileId:
+			v.FileId = new(string)
+			return d.ReadString(schemas.StartAttachedFileUploadResponse_FileId, v.FileId)
+		case schemas.StartAttachedFileUploadResponse_FileStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartAttachedFileUploadResponse_FileStatus, &ev); err != nil {
+				return err
+			}
+			v.FileStatus = types.FileStatusType(ev)
+			return nil
+		case schemas.StartAttachedFileUploadResponse_UploadUrlMetadata:
+			v.UploadUrlMetadata = &types.UploadUrlMetadata{}
+			return v.UploadUrlMetadata.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartAttachedFileUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartAttachedFileUpload{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAttachedFileUpload, schemas.StartAttachedFileUploadRequest, schemas.StartAttachedFileUploadResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartAttachedFileUpload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAttachedFileUpload, schemas.StartAttachedFileUploadRequest, schemas.StartAttachedFileUploadResponse), output: &StartAttachedFileUploadOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

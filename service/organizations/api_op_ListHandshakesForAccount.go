@@ -5,7 +5,9 @@ package organizations
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,26 @@ type ListHandshakesForAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHandshakesForAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHandshakesForAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHandshakesForAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListHandshakesForAccountRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListHandshakesForAccountRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHandshakesForAccountRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListHandshakesForAccountOutput struct {
 
 	// An array of Handshake objects. Contains details for a handshake.
@@ -73,13 +95,35 @@ type ListHandshakesForAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHandshakesForAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHandshakesForAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHandshakesForAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHandshakes(s, schemas.ListHandshakesForAccountResponse_Handshakes, v.Handshakes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHandshakesForAccountResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListHandshakesForAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListHandshakesForAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListHandshakesForAccountResponse_Handshakes:
+			return deserializeHandshakes(d, schemas.ListHandshakesForAccountResponse_Handshakes, &v.Handshakes)
+		case schemas.ListHandshakesForAccountResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListHandshakesForAccountResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListHandshakesForAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListHandshakesForAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHandshakesForAccount, schemas.ListHandshakesForAccountRequest, schemas.ListHandshakesForAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListHandshakesForAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHandshakesForAccount, schemas.ListHandshakesForAccountRequest, schemas.ListHandshakesForAccountResponse), output: &ListHandshakesForAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

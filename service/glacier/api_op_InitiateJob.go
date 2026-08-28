@@ -5,7 +5,9 @@ package glacier
 import (
 	"context"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,26 @@ type InitiateJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InitiateJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InitiateJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InitiateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.InitiateJobInput_accountId, *v.AccountId)
+	}
+	if v.JobParameters != nil {
+		s.WriteStruct(schemas.InitiateJobInput_jobParameters)
+		v.JobParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VaultName != nil {
+		s.WriteString(schemas.InitiateJobInput_vaultName, *v.VaultName)
+	}
+}
+
 // Contains the Amazon Glacier response to your request.
 type InitiateJobOutput struct {
 
@@ -70,13 +92,44 @@ type InitiateJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InitiateJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InitiateJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InitiateJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.InitiateJobOutput_jobId, *v.JobId)
+	}
+	if v.JobOutputPath != nil {
+		s.WriteString(schemas.InitiateJobOutput_jobOutputPath, *v.JobOutputPath)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.InitiateJobOutput_location, *v.Location)
+	}
+}
+func (v *InitiateJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InitiateJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InitiateJobOutput_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.InitiateJobOutput_jobId, v.JobId)
+		case schemas.InitiateJobOutput_jobOutputPath:
+			v.JobOutputPath = new(string)
+			return d.ReadString(schemas.InitiateJobOutput_jobOutputPath, v.JobOutputPath)
+		case schemas.InitiateJobOutput_location:
+			v.Location = new(string)
+			return d.ReadString(schemas.InitiateJobOutput_location, v.Location)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInitiateJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInitiateJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InitiateJob, schemas.InitiateJobInput, schemas.InitiateJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInitiateJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InitiateJob, schemas.InitiateJobInput, schemas.InitiateJobOutput), output: &InitiateJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

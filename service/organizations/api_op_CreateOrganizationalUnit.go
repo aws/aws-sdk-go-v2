@@ -4,7 +4,9 @@ package organizations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,22 @@ type CreateOrganizationalUnitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOrganizationalUnitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOrganizationalUnitRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOrganizationalUnitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateOrganizationalUnitRequest_Name, *v.Name)
+	}
+	if v.ParentId != nil {
+		s.WriteString(schemas.CreateOrganizationalUnitRequest_ParentId, *v.ParentId)
+	}
+	serializeTags(s, schemas.CreateOrganizationalUnitRequest_Tags, v.Tags)
+}
+
 type CreateOrganizationalUnitOutput struct {
 
 	// A structure that contains details about the newly created OU.
@@ -86,13 +104,34 @@ type CreateOrganizationalUnitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOrganizationalUnitOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOrganizationalUnitResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOrganizationalUnitOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationalUnit != nil {
+		s.WriteStruct(schemas.CreateOrganizationalUnitResponse_OrganizationalUnit)
+		v.OrganizationalUnit.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateOrganizationalUnitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOrganizationalUnitResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOrganizationalUnitResponse_OrganizationalUnit:
+			v.OrganizationalUnit = &types.OrganizationalUnit{}
+			return v.OrganizationalUnit.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateOrganizationalUnitMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateOrganizationalUnit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOrganizationalUnit, schemas.CreateOrganizationalUnitRequest, schemas.CreateOrganizationalUnitResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateOrganizationalUnit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOrganizationalUnit, schemas.CreateOrganizationalUnitRequest, schemas.CreateOrganizationalUnitResponse), output: &CreateOrganizationalUnitOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

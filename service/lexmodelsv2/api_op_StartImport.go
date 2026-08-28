@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -56,6 +58,29 @@ type StartImportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartImportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartImportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartImportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilePassword != nil {
+		s.WriteString(schemas.StartImportRequest_filePassword, *v.FilePassword)
+	}
+	if v.ImportId != nil {
+		s.WriteString(schemas.StartImportRequest_importId, *v.ImportId)
+	}
+	if v.MergeStrategy != "" {
+		s.WriteString(schemas.StartImportRequest_mergeStrategy, string(v.MergeStrategy))
+	}
+	if v.ResourceSpecification != nil {
+		s.WriteStruct(schemas.StartImportRequest_resourceSpecification)
+		v.ResourceSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartImportOutput struct {
 
 	// The date and time that the import request was created.
@@ -82,13 +107,66 @@ type StartImportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartImportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartImportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartImportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.StartImportResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.ImportId != nil {
+		s.WriteString(schemas.StartImportResponse_importId, *v.ImportId)
+	}
+	if v.ImportStatus != "" {
+		s.WriteString(schemas.StartImportResponse_importStatus, string(v.ImportStatus))
+	}
+	if v.MergeStrategy != "" {
+		s.WriteString(schemas.StartImportResponse_mergeStrategy, string(v.MergeStrategy))
+	}
+	if v.ResourceSpecification != nil {
+		s.WriteStruct(schemas.StartImportResponse_resourceSpecification)
+		v.ResourceSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartImportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartImportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartImportResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.StartImportResponse_creationDateTime, v.CreationDateTime)
+		case schemas.StartImportResponse_importId:
+			v.ImportId = new(string)
+			return d.ReadString(schemas.StartImportResponse_importId, v.ImportId)
+		case schemas.StartImportResponse_importStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartImportResponse_importStatus, &ev); err != nil {
+				return err
+			}
+			v.ImportStatus = types.ImportStatus(ev)
+			return nil
+		case schemas.StartImportResponse_mergeStrategy:
+			var ev string
+			if err := d.ReadString(schemas.StartImportResponse_mergeStrategy, &ev); err != nil {
+				return err
+			}
+			v.MergeStrategy = types.MergeStrategy(ev)
+			return nil
+		case schemas.StartImportResponse_resourceSpecification:
+			v.ResourceSpecification = &types.ImportResourceSpecification{}
+			return v.ResourceSpecification.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartImportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartImport, schemas.StartImportRequest, schemas.StartImportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartImport, schemas.StartImportRequest, schemas.StartImportResponse), output: &StartImportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

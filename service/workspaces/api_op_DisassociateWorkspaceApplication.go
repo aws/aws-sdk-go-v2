@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DisassociateWorkspaceApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateWorkspaceApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateWorkspaceApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateWorkspaceApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.DisassociateWorkspaceApplicationRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DisassociateWorkspaceApplicationRequest_WorkspaceId, *v.WorkspaceId)
+	}
+}
+
 type DisassociateWorkspaceApplicationOutput struct {
 
 	// Information about the targeted association.
@@ -50,13 +67,34 @@ type DisassociateWorkspaceApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateWorkspaceApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateWorkspaceApplicationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateWorkspaceApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Association != nil {
+		s.WriteStruct(schemas.DisassociateWorkspaceApplicationResult_Association)
+		v.Association.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DisassociateWorkspaceApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateWorkspaceApplicationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateWorkspaceApplicationResult_Association:
+			v.Association = &types.WorkspaceResourceAssociation{}
+			return v.Association.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateWorkspaceApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateWorkspaceApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateWorkspaceApplication, schemas.DisassociateWorkspaceApplicationRequest, schemas.DisassociateWorkspaceApplicationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateWorkspaceApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateWorkspaceApplication, schemas.DisassociateWorkspaceApplicationRequest, schemas.DisassociateWorkspaceApplicationResult), output: &DisassociateWorkspaceApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type DescribeTrainingPlanExtensionHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTrainingPlanExtensionHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTrainingPlanExtensionHistoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTrainingPlanExtensionHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeTrainingPlanExtensionHistoryRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeTrainingPlanExtensionHistoryRequest_NextToken, *v.NextToken)
+	}
+	if v.TrainingPlanArn != nil {
+		s.WriteString(schemas.DescribeTrainingPlanExtensionHistoryRequest_TrainingPlanArn, *v.TrainingPlanArn)
+	}
+}
+
 type DescribeTrainingPlanExtensionHistoryOutput struct {
 
 	// A list of extensions for the specified training plan.
@@ -60,13 +80,35 @@ type DescribeTrainingPlanExtensionHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTrainingPlanExtensionHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTrainingPlanExtensionHistoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTrainingPlanExtensionHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeTrainingPlanExtensionHistoryResponse_NextToken, *v.NextToken)
+	}
+	serializeTrainingPlanExtensions(s, schemas.DescribeTrainingPlanExtensionHistoryResponse_TrainingPlanExtensions, v.TrainingPlanExtensions)
+}
+func (v *DescribeTrainingPlanExtensionHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTrainingPlanExtensionHistoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTrainingPlanExtensionHistoryResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeTrainingPlanExtensionHistoryResponse_NextToken, v.NextToken)
+		case schemas.DescribeTrainingPlanExtensionHistoryResponse_TrainingPlanExtensions:
+			return deserializeTrainingPlanExtensions(d, schemas.DescribeTrainingPlanExtensionHistoryResponse_TrainingPlanExtensions, &v.TrainingPlanExtensions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTrainingPlanExtensionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTrainingPlanExtensionHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrainingPlanExtensionHistory, schemas.DescribeTrainingPlanExtensionHistoryRequest, schemas.DescribeTrainingPlanExtensionHistoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTrainingPlanExtensionHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTrainingPlanExtensionHistory, schemas.DescribeTrainingPlanExtensionHistoryRequest, schemas.DescribeTrainingPlanExtensionHistoryResponse), output: &DescribeTrainingPlanExtensionHistoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package grafana
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/grafana/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/grafana/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -164,6 +166,137 @@ type CreateWorkspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkspaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkspaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountAccessType != "" {
+		s.WriteString(schemas.CreateWorkspaceRequest_accountAccessType, string(v.AccountAccessType))
+	}
+	serializeAuthenticationProviders(s, schemas.CreateWorkspaceRequest_authenticationProviders, v.AuthenticationProviders)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateWorkspaceRequest_clientToken, *v.ClientToken)
+	}
+	if v.Configuration != nil {
+		s.WriteString(schemas.CreateWorkspaceRequest_configuration, *v.Configuration)
+	}
+	if v.GrafanaVersion != nil {
+		s.WriteString(schemas.CreateWorkspaceRequest_grafanaVersion, *v.GrafanaVersion)
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.CreateWorkspaceRequest_ipAddressType, string(v.IpAddressType))
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateWorkspaceRequest_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.NetworkAccessControl != nil {
+		s.WriteStruct(schemas.CreateWorkspaceRequest_networkAccessControl)
+		v.NetworkAccessControl.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrganizationRoleName != nil {
+		s.WriteString(schemas.CreateWorkspaceRequest_organizationRoleName, *v.OrganizationRoleName)
+	}
+	if v.PermissionType != "" {
+		s.WriteString(schemas.CreateWorkspaceRequest_permissionType, string(v.PermissionType))
+	}
+	if v.StackSetName != nil {
+		s.WriteString(schemas.CreateWorkspaceRequest_stackSetName, *v.StackSetName)
+	}
+	serializeTagMap(s, schemas.CreateWorkspaceRequest_tags, v.Tags)
+	if v.VpcConfiguration != nil {
+		s.WriteStruct(schemas.CreateWorkspaceRequest_vpcConfiguration)
+		v.VpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDataSourceTypesList(s, schemas.CreateWorkspaceRequest_workspaceDataSources, v.WorkspaceDataSources)
+	if v.WorkspaceDescription != nil {
+		s.WriteString(schemas.CreateWorkspaceRequest_workspaceDescription, *v.WorkspaceDescription)
+	}
+	if v.WorkspaceName != nil {
+		s.WriteString(schemas.CreateWorkspaceRequest_workspaceName, *v.WorkspaceName)
+	}
+	serializeNotificationDestinationsList(s, schemas.CreateWorkspaceRequest_workspaceNotificationDestinations, v.WorkspaceNotificationDestinations)
+	serializeOrganizationalUnitList(s, schemas.CreateWorkspaceRequest_workspaceOrganizationalUnits, v.WorkspaceOrganizationalUnits)
+	if v.WorkspaceRoleArn != nil {
+		s.WriteString(schemas.CreateWorkspaceRequest_workspaceRoleArn, *v.WorkspaceRoleArn)
+	}
+}
+func (v *CreateWorkspaceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkspaceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkspaceRequest_accountAccessType:
+			var ev string
+			if err := d.ReadString(schemas.CreateWorkspaceRequest_accountAccessType, &ev); err != nil {
+				return err
+			}
+			v.AccountAccessType = types.AccountAccessType(ev)
+			return nil
+		case schemas.CreateWorkspaceRequest_authenticationProviders:
+			return deserializeAuthenticationProviders(d, schemas.CreateWorkspaceRequest_authenticationProviders, &v.AuthenticationProviders)
+		case schemas.CreateWorkspaceRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateWorkspaceRequest_clientToken, v.ClientToken)
+		case schemas.CreateWorkspaceRequest_configuration:
+			v.Configuration = new(string)
+			return d.ReadString(schemas.CreateWorkspaceRequest_configuration, v.Configuration)
+		case schemas.CreateWorkspaceRequest_grafanaVersion:
+			v.GrafanaVersion = new(string)
+			return d.ReadString(schemas.CreateWorkspaceRequest_grafanaVersion, v.GrafanaVersion)
+		case schemas.CreateWorkspaceRequest_ipAddressType:
+			var ev string
+			if err := d.ReadString(schemas.CreateWorkspaceRequest_ipAddressType, &ev); err != nil {
+				return err
+			}
+			v.IpAddressType = types.IPAddressType(ev)
+			return nil
+		case schemas.CreateWorkspaceRequest_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.CreateWorkspaceRequest_kmsKeyId, v.KmsKeyId)
+		case schemas.CreateWorkspaceRequest_networkAccessControl:
+			v.NetworkAccessControl = &types.NetworkAccessConfiguration{}
+			return v.NetworkAccessControl.Deserialize(d)
+		case schemas.CreateWorkspaceRequest_organizationRoleName:
+			v.OrganizationRoleName = new(string)
+			return d.ReadString(schemas.CreateWorkspaceRequest_organizationRoleName, v.OrganizationRoleName)
+		case schemas.CreateWorkspaceRequest_permissionType:
+			var ev string
+			if err := d.ReadString(schemas.CreateWorkspaceRequest_permissionType, &ev); err != nil {
+				return err
+			}
+			v.PermissionType = types.PermissionType(ev)
+			return nil
+		case schemas.CreateWorkspaceRequest_stackSetName:
+			v.StackSetName = new(string)
+			return d.ReadString(schemas.CreateWorkspaceRequest_stackSetName, v.StackSetName)
+		case schemas.CreateWorkspaceRequest_tags:
+			return deserializeTagMap(d, schemas.CreateWorkspaceRequest_tags, &v.Tags)
+		case schemas.CreateWorkspaceRequest_vpcConfiguration:
+			v.VpcConfiguration = &types.VpcConfiguration{}
+			return v.VpcConfiguration.Deserialize(d)
+		case schemas.CreateWorkspaceRequest_workspaceDataSources:
+			return deserializeDataSourceTypesList(d, schemas.CreateWorkspaceRequest_workspaceDataSources, &v.WorkspaceDataSources)
+		case schemas.CreateWorkspaceRequest_workspaceDescription:
+			v.WorkspaceDescription = new(string)
+			return d.ReadString(schemas.CreateWorkspaceRequest_workspaceDescription, v.WorkspaceDescription)
+		case schemas.CreateWorkspaceRequest_workspaceName:
+			v.WorkspaceName = new(string)
+			return d.ReadString(schemas.CreateWorkspaceRequest_workspaceName, v.WorkspaceName)
+		case schemas.CreateWorkspaceRequest_workspaceNotificationDestinations:
+			return deserializeNotificationDestinationsList(d, schemas.CreateWorkspaceRequest_workspaceNotificationDestinations, &v.WorkspaceNotificationDestinations)
+		case schemas.CreateWorkspaceRequest_workspaceOrganizationalUnits:
+			return deserializeOrganizationalUnitList(d, schemas.CreateWorkspaceRequest_workspaceOrganizationalUnits, &v.WorkspaceOrganizationalUnits)
+		case schemas.CreateWorkspaceRequest_workspaceRoleArn:
+			v.WorkspaceRoleArn = new(string)
+			return d.ReadString(schemas.CreateWorkspaceRequest_workspaceRoleArn, v.WorkspaceRoleArn)
+		}
+		return nil
+	})
+}
+
 type CreateWorkspaceOutput struct {
 
 	// A structure containing data about the workspace that was created.
@@ -177,13 +310,34 @@ type CreateWorkspaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkspaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkspaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkspaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Workspace != nil {
+		s.WriteStruct(schemas.CreateWorkspaceResponse_workspace)
+		v.Workspace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateWorkspaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkspaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkspaceResponse_workspace:
+			v.Workspace = &types.WorkspaceDescription{}
+			return v.Workspace.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkspace, schemas.CreateWorkspaceRequest, schemas.CreateWorkspaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkspace, schemas.CreateWorkspaceRequest, schemas.CreateWorkspaceResponse), output: &CreateWorkspaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

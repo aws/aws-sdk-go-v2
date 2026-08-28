@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,34 @@ type SearchTestCasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchTestCasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchTestCasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchTestCasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SearchTestCasesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchTestCasesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchTestCasesRequest_NextToken, *v.NextToken)
+	}
+	if v.SearchCriteria != nil {
+		s.WriteStruct(schemas.SearchTestCasesRequest_SearchCriteria)
+		v.SearchCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SearchFilter != nil {
+		s.WriteStruct(schemas.SearchTestCasesRequest_SearchFilter)
+		v.SearchFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchTestCasesOutput struct {
 
 	// The total number of test cases which matched your search query.
@@ -67,13 +97,41 @@ type SearchTestCasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchTestCasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchTestCasesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchTestCasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateTotalCount != nil {
+		s.WriteInt64(schemas.SearchTestCasesResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchTestCasesResponse_NextToken, *v.NextToken)
+	}
+	serializeTestCaseSearchSummaryList(s, schemas.SearchTestCasesResponse_TestCases, v.TestCases)
+}
+func (v *SearchTestCasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchTestCasesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchTestCasesResponse_ApproximateTotalCount:
+			v.ApproximateTotalCount = new(int64)
+			return d.ReadInt64(schemas.SearchTestCasesResponse_ApproximateTotalCount, v.ApproximateTotalCount)
+		case schemas.SearchTestCasesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchTestCasesResponse_NextToken, v.NextToken)
+		case schemas.SearchTestCasesResponse_TestCases:
+			return deserializeTestCaseSearchSummaryList(d, schemas.SearchTestCasesResponse_TestCases, &v.TestCases)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchTestCasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchTestCases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchTestCases, schemas.SearchTestCasesRequest, schemas.SearchTestCasesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchTestCases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchTestCases, schemas.SearchTestCasesRequest, schemas.SearchTestCasesResponse), output: &SearchTestCasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -54,6 +56,36 @@ type ListProjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProjectsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProjectsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProjectsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListProjectsInput_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListProjectsInput_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProjectsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListProjectsInput_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProjectsInput_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListProjectsInput_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListProjectsInput_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListProjectsOutput struct {
 
 	// A list of summaries of projects.
@@ -72,13 +104,35 @@ type ListProjectsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProjectsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProjectsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProjectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProjectsOutput_NextToken, *v.NextToken)
+	}
+	serializeProjectSummaryList(s, schemas.ListProjectsOutput_ProjectSummaryList, v.ProjectSummaryList)
+}
+func (v *ListProjectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProjectsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProjectsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProjectsOutput_NextToken, v.NextToken)
+		case schemas.ListProjectsOutput_ProjectSummaryList:
+			return deserializeProjectSummaryList(d, schemas.ListProjectsOutput_ProjectSummaryList, &v.ProjectSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListProjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProjects, schemas.ListProjectsInput, schemas.ListProjectsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListProjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProjects, schemas.ListProjectsInput, schemas.ListProjectsOutput), output: &ListProjectsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

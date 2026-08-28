@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -93,6 +95,47 @@ type CreateDistributionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDistributionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDistributionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDistributionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BundleId != nil {
+		s.WriteString(schemas.CreateDistributionRequest_bundleId, *v.BundleId)
+	}
+	if v.CacheBehaviorSettings != nil {
+		s.WriteStruct(schemas.CreateDistributionRequest_cacheBehaviorSettings)
+		v.CacheBehaviorSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCacheBehaviorList(s, schemas.CreateDistributionRequest_cacheBehaviors, v.CacheBehaviors)
+	if v.CertificateName != nil {
+		s.WriteString(schemas.CreateDistributionRequest_certificateName, *v.CertificateName)
+	}
+	if v.DefaultCacheBehavior != nil {
+		s.WriteStruct(schemas.CreateDistributionRequest_defaultCacheBehavior)
+		v.DefaultCacheBehavior.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DistributionName != nil {
+		s.WriteString(schemas.CreateDistributionRequest_distributionName, *v.DistributionName)
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.CreateDistributionRequest_ipAddressType, string(v.IpAddressType))
+	}
+	if v.Origin != nil {
+		s.WriteStruct(schemas.CreateDistributionRequest_origin)
+		v.Origin.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateDistributionRequest_tags, v.Tags)
+	if v.ViewerMinimumTlsProtocolVersion != "" {
+		s.WriteString(schemas.CreateDistributionRequest_viewerMinimumTlsProtocolVersion, string(v.ViewerMinimumTlsProtocolVersion))
+	}
+}
+
 type CreateDistributionOutput struct {
 
 	// An object that describes the distribution created.
@@ -109,13 +152,42 @@ type CreateDistributionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDistributionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDistributionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDistributionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Distribution != nil {
+		s.WriteStruct(schemas.CreateDistributionResult_distribution)
+		v.Distribution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Operation != nil {
+		s.WriteStruct(schemas.CreateDistributionResult_operation)
+		v.Operation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateDistributionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDistributionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDistributionResult_distribution:
+			v.Distribution = &types.LightsailDistribution{}
+			return v.Distribution.Deserialize(d)
+		case schemas.CreateDistributionResult_operation:
+			v.Operation = &types.Operation{}
+			return v.Operation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDistribution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDistribution, schemas.CreateDistributionRequest, schemas.CreateDistributionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDistribution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDistribution, schemas.CreateDistributionRequest, schemas.CreateDistributionResult), output: &CreateDistributionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

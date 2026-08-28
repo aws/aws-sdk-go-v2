@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListBulkDeploymentDetailedReportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBulkDeploymentDetailedReportsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBulkDeploymentDetailedReportsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBulkDeploymentDetailedReportsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BulkDeploymentId != nil {
+		s.WriteString(schemas.ListBulkDeploymentDetailedReportsRequest_BulkDeploymentId, *v.BulkDeploymentId)
+	}
+	if v.MaxResults != nil {
+		s.WriteString(schemas.ListBulkDeploymentDetailedReportsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBulkDeploymentDetailedReportsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListBulkDeploymentDetailedReportsOutput struct {
 
 	// A list of the individual group deployments in the bulk deployment operation.
@@ -57,13 +77,35 @@ type ListBulkDeploymentDetailedReportsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBulkDeploymentDetailedReportsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBulkDeploymentDetailedReportsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBulkDeploymentDetailedReportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBulkDeploymentResults(s, schemas.ListBulkDeploymentDetailedReportsResponse_Deployments, v.Deployments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBulkDeploymentDetailedReportsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListBulkDeploymentDetailedReportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBulkDeploymentDetailedReportsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBulkDeploymentDetailedReportsResponse_Deployments:
+			return deserializeBulkDeploymentResults(d, schemas.ListBulkDeploymentDetailedReportsResponse_Deployments, &v.Deployments)
+		case schemas.ListBulkDeploymentDetailedReportsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBulkDeploymentDetailedReportsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBulkDeploymentDetailedReportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBulkDeploymentDetailedReports{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBulkDeploymentDetailedReports, schemas.ListBulkDeploymentDetailedReportsRequest, schemas.ListBulkDeploymentDetailedReportsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBulkDeploymentDetailedReports{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBulkDeploymentDetailedReports, schemas.ListBulkDeploymentDetailedReportsRequest, schemas.ListBulkDeploymentDetailedReportsResponse), output: &ListBulkDeploymentDetailedReportsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

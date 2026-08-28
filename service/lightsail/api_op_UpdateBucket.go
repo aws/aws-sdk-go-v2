@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,37 @@ type UpdateBucketInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBucketInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBucketRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBucketInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessLogConfig != nil {
+		s.WriteStruct(schemas.UpdateBucketRequest_accessLogConfig)
+		v.AccessLogConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AccessRules != nil {
+		s.WriteStruct(schemas.UpdateBucketRequest_accessRules)
+		v.AccessRules.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BucketName != nil {
+		s.WriteString(schemas.UpdateBucketRequest_bucketName, *v.BucketName)
+	}
+	if v.Cors != nil {
+		s.WriteStruct(schemas.UpdateBucketRequest_cors)
+		v.Cors.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePartnerIdList(s, schemas.UpdateBucketRequest_readonlyAccessAccounts, v.ReadonlyAccessAccounts)
+	if v.Versioning != nil {
+		s.WriteString(schemas.UpdateBucketRequest_versioning, *v.Versioning)
+	}
+}
+
 type UpdateBucketOutput struct {
 
 	// An object that describes the bucket that is updated.
@@ -86,13 +119,37 @@ type UpdateBucketOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBucketOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBucketResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBucketOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteStruct(schemas.UpdateBucketResult_bucket)
+		v.Bucket.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeOperationList(s, schemas.UpdateBucketResult_operations, v.Operations)
+}
+func (v *UpdateBucketOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBucketResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBucketResult_bucket:
+			v.Bucket = &types.Bucket{}
+			return v.Bucket.Deserialize(d)
+		case schemas.UpdateBucketResult_operations:
+			return deserializeOperationList(d, schemas.UpdateBucketResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateBucket{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBucket, schemas.UpdateBucketRequest, schemas.UpdateBucketResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateBucket{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBucket, schemas.UpdateBucketRequest, schemas.UpdateBucketResult), output: &UpdateBucketOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

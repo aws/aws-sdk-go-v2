@@ -5,6 +5,8 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type DisassociateSecurityKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateSecurityKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateSecurityKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateSecurityKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.DisassociateSecurityKeyRequest_AssociationId, *v.AssociationId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DisassociateSecurityKeyRequest_ClientToken, *v.ClientToken)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DisassociateSecurityKeyRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DisassociateSecurityKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,13 +79,26 @@ type DisassociateSecurityKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateSecurityKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateSecurityKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateSecurityKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateSecurityKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateSecurityKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateSecurityKey, schemas.DisassociateSecurityKeyRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateSecurityKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateSecurityKey, schemas.DisassociateSecurityKeyRequest, nil), output: &DisassociateSecurityKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

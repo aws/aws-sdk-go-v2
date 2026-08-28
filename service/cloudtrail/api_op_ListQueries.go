@@ -5,7 +5,9 @@ package cloudtrail
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -61,6 +63,33 @@ type ListQueriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueriesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListQueriesRequest_EndTime, *v.EndTime)
+	}
+	if v.EventDataStore != nil {
+		s.WriteString(schemas.ListQueriesRequest_EventDataStore, *v.EventDataStore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListQueriesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueriesRequest_NextToken, *v.NextToken)
+	}
+	if v.QueryStatus != "" {
+		s.WriteString(schemas.ListQueriesRequest_QueryStatus, string(v.QueryStatus))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListQueriesRequest_StartTime, *v.StartTime)
+	}
+}
+
 type ListQueriesOutput struct {
 
 	// A token you can use to get the next page of results.
@@ -76,13 +105,35 @@ type ListQueriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueriesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueriesResponse_NextToken, *v.NextToken)
+	}
+	serializeQueries(s, schemas.ListQueriesResponse_Queries, v.Queries)
+}
+func (v *ListQueriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListQueriesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListQueriesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListQueriesResponse_NextToken, v.NextToken)
+		case schemas.ListQueriesResponse_Queries:
+			return deserializeQueries(d, schemas.ListQueriesResponse_Queries, &v.Queries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListQueriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListQueries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueries, schemas.ListQueriesRequest, schemas.ListQueriesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListQueries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueries, schemas.ListQueriesRequest, schemas.ListQueriesResponse), output: &ListQueriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

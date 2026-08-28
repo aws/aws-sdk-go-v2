@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -100,6 +102,22 @@ type GetUserAttributeVerificationCodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserAttributeVerificationCodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserAttributeVerificationCodeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserAttributeVerificationCodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.GetUserAttributeVerificationCodeRequest_AccessToken, *v.AccessToken)
+	}
+	if v.AttributeName != nil {
+		s.WriteString(schemas.GetUserAttributeVerificationCodeRequest_AttributeName, *v.AttributeName)
+	}
+	serializeClientMetadataType(s, schemas.GetUserAttributeVerificationCodeRequest_ClientMetadata, v.ClientMetadata)
+}
+
 // The verification code response returned by the server response to get the user
 // attribute verification code.
 type GetUserAttributeVerificationCodeOutput struct {
@@ -114,13 +132,34 @@ type GetUserAttributeVerificationCodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserAttributeVerificationCodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserAttributeVerificationCodeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserAttributeVerificationCodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeDeliveryDetails != nil {
+		s.WriteStruct(schemas.GetUserAttributeVerificationCodeResponse_CodeDeliveryDetails)
+		v.CodeDeliveryDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetUserAttributeVerificationCodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUserAttributeVerificationCodeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUserAttributeVerificationCodeResponse_CodeDeliveryDetails:
+			v.CodeDeliveryDetails = &types.CodeDeliveryDetailsType{}
+			return v.CodeDeliveryDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUserAttributeVerificationCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetUserAttributeVerificationCode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUserAttributeVerificationCode, schemas.GetUserAttributeVerificationCodeRequest, schemas.GetUserAttributeVerificationCodeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetUserAttributeVerificationCode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUserAttributeVerificationCode, schemas.GetUserAttributeVerificationCodeRequest, schemas.GetUserAttributeVerificationCodeResponse), output: &GetUserAttributeVerificationCodeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

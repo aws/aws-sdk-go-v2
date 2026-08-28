@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -38,6 +39,18 @@ type DescribeImageInput struct {
 	ImageName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageName != nil {
+		s.WriteString(schemas.DescribeImageRequest_ImageName, *v.ImageName)
+	}
 }
 
 type DescribeImageOutput struct {
@@ -76,13 +89,84 @@ type DescribeImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeImageResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeImageResponse_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.DescribeImageResponse_DisplayName, *v.DisplayName)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeImageResponse_FailureReason, *v.FailureReason)
+	}
+	if v.ImageArn != nil {
+		s.WriteString(schemas.DescribeImageResponse_ImageArn, *v.ImageArn)
+	}
+	if v.ImageName != nil {
+		s.WriteString(schemas.DescribeImageResponse_ImageName, *v.ImageName)
+	}
+	if v.ImageStatus != "" {
+		s.WriteString(schemas.DescribeImageResponse_ImageStatus, string(v.ImageStatus))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeImageResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeImageResponse_RoleArn, *v.RoleArn)
+	}
+}
+func (v *DescribeImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeImageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeImageResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeImageResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeImageResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeImageResponse_Description, v.Description)
+		case schemas.DescribeImageResponse_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.DescribeImageResponse_DisplayName, v.DisplayName)
+		case schemas.DescribeImageResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeImageResponse_FailureReason, v.FailureReason)
+		case schemas.DescribeImageResponse_ImageArn:
+			v.ImageArn = new(string)
+			return d.ReadString(schemas.DescribeImageResponse_ImageArn, v.ImageArn)
+		case schemas.DescribeImageResponse_ImageName:
+			v.ImageName = new(string)
+			return d.ReadString(schemas.DescribeImageResponse_ImageName, v.ImageName)
+		case schemas.DescribeImageResponse_ImageStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeImageResponse_ImageStatus, &ev); err != nil {
+				return err
+			}
+			v.ImageStatus = types.ImageStatus(ev)
+			return nil
+		case schemas.DescribeImageResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeImageResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeImageResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeImageResponse_RoleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImage, schemas.DescribeImageRequest, schemas.DescribeImageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImage, schemas.DescribeImageRequest, schemas.DescribeImageResponse), output: &DescribeImageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

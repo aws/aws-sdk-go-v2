@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,22 @@ type BatchGetFlowAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetFlowAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetFlowAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetFlowAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.BatchGetFlowAssociationRequest_InstanceId, *v.InstanceId)
+	}
+	serializeresourceArnListMaxLimit100(s, schemas.BatchGetFlowAssociationRequest_ResourceIds, v.ResourceIds)
+	if v.ResourceType != "" {
+		s.WriteString(schemas.BatchGetFlowAssociationRequest_ResourceType, string(v.ResourceType))
+	}
+}
+
 type BatchGetFlowAssociationOutput struct {
 
 	// Information about flow associations.
@@ -62,13 +80,29 @@ type BatchGetFlowAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetFlowAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetFlowAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetFlowAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFlowAssociationSummaryList(s, schemas.BatchGetFlowAssociationResponse_FlowAssociationSummaryList, v.FlowAssociationSummaryList)
+}
+func (v *BatchGetFlowAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetFlowAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetFlowAssociationResponse_FlowAssociationSummaryList:
+			return deserializeFlowAssociationSummaryList(d, schemas.BatchGetFlowAssociationResponse_FlowAssociationSummaryList, &v.FlowAssociationSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetFlowAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetFlowAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetFlowAssociation, schemas.BatchGetFlowAssociationRequest, schemas.BatchGetFlowAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetFlowAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetFlowAssociation, schemas.BatchGetFlowAssociationRequest, schemas.BatchGetFlowAssociationResponse), output: &BatchGetFlowAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

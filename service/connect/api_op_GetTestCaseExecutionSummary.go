@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -46,6 +48,24 @@ type GetTestCaseExecutionSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTestCaseExecutionSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTestCaseExecutionSummaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTestCaseExecutionSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.GetTestCaseExecutionSummaryRequest_InstanceId, *v.InstanceId)
+	}
+	if v.TestCaseExecutionId != nil {
+		s.WriteString(schemas.GetTestCaseExecutionSummaryRequest_TestCaseExecutionId, *v.TestCaseExecutionId)
+	}
+	if v.TestCaseId != nil {
+		s.WriteString(schemas.GetTestCaseExecutionSummaryRequest_TestCaseId, *v.TestCaseId)
+	}
+}
+
 type GetTestCaseExecutionSummaryOutput struct {
 
 	// The timestamp when the test case execution ended.
@@ -66,13 +86,56 @@ type GetTestCaseExecutionSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTestCaseExecutionSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTestCaseExecutionSummaryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTestCaseExecutionSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetTestCaseExecutionSummaryResponse_EndTime, *v.EndTime)
+	}
+	if v.ObservationSummary != nil {
+		s.WriteStruct(schemas.GetTestCaseExecutionSummaryResponse_ObservationSummary)
+		v.ObservationSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetTestCaseExecutionSummaryResponse_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetTestCaseExecutionSummaryResponse_Status, string(v.Status))
+	}
+}
+func (v *GetTestCaseExecutionSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTestCaseExecutionSummaryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTestCaseExecutionSummaryResponse_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.GetTestCaseExecutionSummaryResponse_EndTime, v.EndTime)
+		case schemas.GetTestCaseExecutionSummaryResponse_ObservationSummary:
+			v.ObservationSummary = &types.ObservationSummary{}
+			return v.ObservationSummary.Deserialize(d)
+		case schemas.GetTestCaseExecutionSummaryResponse_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.GetTestCaseExecutionSummaryResponse_StartTime, v.StartTime)
+		case schemas.GetTestCaseExecutionSummaryResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetTestCaseExecutionSummaryResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TestCaseExecutionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTestCaseExecutionSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTestCaseExecutionSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTestCaseExecutionSummary, schemas.GetTestCaseExecutionSummaryRequest, schemas.GetTestCaseExecutionSummaryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTestCaseExecutionSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTestCaseExecutionSummary, schemas.GetTestCaseExecutionSummaryRequest, schemas.GetTestCaseExecutionSummaryResponse), output: &GetTestCaseExecutionSummaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

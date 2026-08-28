@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type GetV2LoggingOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetV2LoggingOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetV2LoggingOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetV2LoggingOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Verbose != false {
+		s.WriteBool(schemas.GetV2LoggingOptionsRequest_verbose, v.Verbose)
+	}
+}
+
 type GetV2LoggingOptionsOutput struct {
 
 	// The default log level.
@@ -57,13 +71,50 @@ type GetV2LoggingOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetV2LoggingOptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetV2LoggingOptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetV2LoggingOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultLogLevel != "" {
+		s.WriteString(schemas.GetV2LoggingOptionsResponse_defaultLogLevel, string(v.DefaultLogLevel))
+	}
+	if v.DisableAllLogs != false {
+		s.WriteBool(schemas.GetV2LoggingOptionsResponse_disableAllLogs, v.DisableAllLogs)
+	}
+	serializeLogEventConfigurations(s, schemas.GetV2LoggingOptionsResponse_eventConfigurations, v.EventConfigurations)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetV2LoggingOptionsResponse_roleArn, *v.RoleArn)
+	}
+}
+func (v *GetV2LoggingOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetV2LoggingOptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetV2LoggingOptionsResponse_defaultLogLevel:
+			var ev string
+			if err := d.ReadString(schemas.GetV2LoggingOptionsResponse_defaultLogLevel, &ev); err != nil {
+				return err
+			}
+			v.DefaultLogLevel = types.LogLevel(ev)
+			return nil
+		case schemas.GetV2LoggingOptionsResponse_disableAllLogs:
+			return d.ReadBool(schemas.GetV2LoggingOptionsResponse_disableAllLogs, &v.DisableAllLogs)
+		case schemas.GetV2LoggingOptionsResponse_eventConfigurations:
+			return deserializeLogEventConfigurations(d, schemas.GetV2LoggingOptionsResponse_eventConfigurations, &v.EventConfigurations)
+		case schemas.GetV2LoggingOptionsResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetV2LoggingOptionsResponse_roleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetV2LoggingOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetV2LoggingOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetV2LoggingOptions, schemas.GetV2LoggingOptionsRequest, schemas.GetV2LoggingOptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetV2LoggingOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetV2LoggingOptions, schemas.GetV2LoggingOptionsRequest, schemas.GetV2LoggingOptionsResponse), output: &GetV2LoggingOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type DeleteNotebookInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteNotebookInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteNotebookInstanceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNotebookInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotebookInstanceName != nil {
+		s.WriteString(schemas.DeleteNotebookInstanceInput_NotebookInstanceName, *v.NotebookInstanceName)
+	}
+}
+
 type DeleteNotebookInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +60,26 @@ type DeleteNotebookInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteNotebookInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNotebookInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteNotebookInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteNotebookInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteNotebookInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNotebookInstance, schemas.DeleteNotebookInstanceInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteNotebookInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNotebookInstance, schemas.DeleteNotebookInstanceInput, nil), output: &DeleteNotebookInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

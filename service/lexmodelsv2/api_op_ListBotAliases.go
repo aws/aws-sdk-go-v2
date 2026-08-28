@@ -5,7 +5,9 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListBotAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBotAliasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBotAliasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBotAliasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListBotAliasesRequest_botId, *v.BotId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBotAliasesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBotAliasesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListBotAliasesOutput struct {
 
 	// Summary information for the bot aliases that meet the filter criteria specified
@@ -68,13 +88,41 @@ type ListBotAliasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBotAliasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBotAliasesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBotAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBotAliasSummaryList(s, schemas.ListBotAliasesResponse_botAliasSummaries, v.BotAliasSummaries)
+	if v.BotId != nil {
+		s.WriteString(schemas.ListBotAliasesResponse_botId, *v.BotId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBotAliasesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListBotAliasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBotAliasesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBotAliasesResponse_botAliasSummaries:
+			return deserializeBotAliasSummaryList(d, schemas.ListBotAliasesResponse_botAliasSummaries, &v.BotAliasSummaries)
+		case schemas.ListBotAliasesResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.ListBotAliasesResponse_botId, v.BotId)
+		case schemas.ListBotAliasesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBotAliasesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBotAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBotAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBotAliases, schemas.ListBotAliasesRequest, schemas.ListBotAliasesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBotAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBotAliases, schemas.ListBotAliasesRequest, schemas.ListBotAliasesResponse), output: &ListBotAliasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

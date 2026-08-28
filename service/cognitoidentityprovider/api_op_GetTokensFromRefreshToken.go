@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -91,6 +93,28 @@ type GetTokensFromRefreshTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTokensFromRefreshTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTokensFromRefreshTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTokensFromRefreshTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.GetTokensFromRefreshTokenRequest_ClientId, *v.ClientId)
+	}
+	serializeClientMetadataType(s, schemas.GetTokensFromRefreshTokenRequest_ClientMetadata, v.ClientMetadata)
+	if v.ClientSecret != nil {
+		s.WriteString(schemas.GetTokensFromRefreshTokenRequest_ClientSecret, *v.ClientSecret)
+	}
+	if v.DeviceKey != nil {
+		s.WriteString(schemas.GetTokensFromRefreshTokenRequest_DeviceKey, *v.DeviceKey)
+	}
+	if v.RefreshToken != nil {
+		s.WriteString(schemas.GetTokensFromRefreshTokenRequest_RefreshToken, *v.RefreshToken)
+	}
+}
+
 type GetTokensFromRefreshTokenOutput struct {
 
 	// The object that your application receives after authentication. Contains tokens
@@ -103,13 +127,34 @@ type GetTokensFromRefreshTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTokensFromRefreshTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTokensFromRefreshTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTokensFromRefreshTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationResult != nil {
+		s.WriteStruct(schemas.GetTokensFromRefreshTokenResponse_AuthenticationResult)
+		v.AuthenticationResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTokensFromRefreshTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTokensFromRefreshTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTokensFromRefreshTokenResponse_AuthenticationResult:
+			v.AuthenticationResult = &types.AuthenticationResultType{}
+			return v.AuthenticationResult.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTokensFromRefreshTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTokensFromRefreshToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTokensFromRefreshToken, schemas.GetTokensFromRefreshTokenRequest, schemas.GetTokensFromRefreshTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTokensFromRefreshToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTokensFromRefreshToken, schemas.GetTokensFromRefreshTokenRequest, schemas.GetTokensFromRefreshTokenResponse), output: &GetTokensFromRefreshTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,23 @@ type UpdateConnectionAliasPermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectionAliasPermissionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectionAliasPermissionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectionAliasPermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasId != nil {
+		s.WriteString(schemas.UpdateConnectionAliasPermissionRequest_AliasId, *v.AliasId)
+	}
+	if v.ConnectionAliasPermission != nil {
+		s.WriteStruct(schemas.UpdateConnectionAliasPermissionRequest_ConnectionAliasPermission)
+		v.ConnectionAliasPermission.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateConnectionAliasPermissionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -63,13 +82,26 @@ type UpdateConnectionAliasPermissionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectionAliasPermissionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectionAliasPermissionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectionAliasPermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateConnectionAliasPermissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConnectionAliasPermissionResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConnectionAliasPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateConnectionAliasPermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnectionAliasPermission, schemas.UpdateConnectionAliasPermissionRequest, schemas.UpdateConnectionAliasPermissionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateConnectionAliasPermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnectionAliasPermission, schemas.UpdateConnectionAliasPermissionRequest, schemas.UpdateConnectionAliasPermissionResult), output: &UpdateConnectionAliasPermissionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

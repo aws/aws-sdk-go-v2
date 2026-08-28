@@ -4,7 +4,9 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,18 @@ type DescribeLocationNfsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLocationNfsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLocationNfsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLocationNfsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.DescribeLocationNfsRequest_LocationArn, *v.LocationArn)
+	}
+}
+
 // DescribeLocationNfsResponse
 type DescribeLocationNfsOutput struct {
 
@@ -63,13 +77,60 @@ type DescribeLocationNfsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLocationNfsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLocationNfsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLocationNfsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeLocationNfsResponse_CreationTime, *v.CreationTime)
+	}
+	if v.LocationArn != nil {
+		s.WriteString(schemas.DescribeLocationNfsResponse_LocationArn, *v.LocationArn)
+	}
+	if v.LocationUri != nil {
+		s.WriteString(schemas.DescribeLocationNfsResponse_LocationUri, *v.LocationUri)
+	}
+	if v.MountOptions != nil {
+		s.WriteStruct(schemas.DescribeLocationNfsResponse_MountOptions)
+		v.MountOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OnPremConfig != nil {
+		s.WriteStruct(schemas.DescribeLocationNfsResponse_OnPremConfig)
+		v.OnPremConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeLocationNfsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLocationNfsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLocationNfsResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeLocationNfsResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeLocationNfsResponse_LocationArn:
+			v.LocationArn = new(string)
+			return d.ReadString(schemas.DescribeLocationNfsResponse_LocationArn, v.LocationArn)
+		case schemas.DescribeLocationNfsResponse_LocationUri:
+			v.LocationUri = new(string)
+			return d.ReadString(schemas.DescribeLocationNfsResponse_LocationUri, v.LocationUri)
+		case schemas.DescribeLocationNfsResponse_MountOptions:
+			v.MountOptions = &types.NfsMountOptions{}
+			return v.MountOptions.Deserialize(d)
+		case schemas.DescribeLocationNfsResponse_OnPremConfig:
+			v.OnPremConfig = &types.OnPremConfig{}
+			return v.OnPremConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLocationNfsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLocationNfs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLocationNfs, schemas.DescribeLocationNfsRequest, schemas.DescribeLocationNfsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLocationNfs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLocationNfs, schemas.DescribeLocationNfsRequest, schemas.DescribeLocationNfsResponse), output: &DescribeLocationNfsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

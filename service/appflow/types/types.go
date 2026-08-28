@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/appflow/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -25,6 +27,38 @@ type AggregationConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AggregationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AggregationConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AggregationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationType != "" {
+		s.WriteString(schemas.AggregationConfig_aggregationType, string(v.AggregationType))
+	}
+	if v.TargetFileSize != nil {
+		s.WriteInt64(schemas.AggregationConfig_targetFileSize, *v.TargetFileSize)
+	}
+}
+func (v *AggregationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AggregationConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AggregationConfig_aggregationType:
+			var ev string
+			if err := d.ReadString(schemas.AggregationConfig_aggregationType, &ev); err != nil {
+				return err
+			}
+			v.AggregationType = AggregationType(ev)
+			return nil
+		case schemas.AggregationConfig_targetFileSize:
+			v.TargetFileSize = new(int64)
+			return d.ReadInt64(schemas.AggregationConfig_targetFileSize, v.TargetFileSize)
+		}
+		return nil
+	})
+}
+
 // The connector-specific credentials required when using Amplitude.
 type AmplitudeConnectorProfileCredentials struct {
 
@@ -42,14 +76,74 @@ type AmplitudeConnectorProfileCredentials struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AmplitudeConnectorProfileCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmplitudeConnectorProfileCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmplitudeConnectorProfileCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiKey != nil {
+		s.WriteString(schemas.AmplitudeConnectorProfileCredentials_apiKey, *v.ApiKey)
+	}
+	if v.SecretKey != nil {
+		s.WriteString(schemas.AmplitudeConnectorProfileCredentials_secretKey, *v.SecretKey)
+	}
+}
+func (v *AmplitudeConnectorProfileCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmplitudeConnectorProfileCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmplitudeConnectorProfileCredentials_apiKey:
+			v.ApiKey = new(string)
+			return d.ReadString(schemas.AmplitudeConnectorProfileCredentials_apiKey, v.ApiKey)
+		case schemas.AmplitudeConnectorProfileCredentials_secretKey:
+			v.SecretKey = new(string)
+			return d.ReadString(schemas.AmplitudeConnectorProfileCredentials_secretKey, v.SecretKey)
+		}
+		return nil
+	})
+}
+
 // The connector-specific profile properties required when using Amplitude.
 type AmplitudeConnectorProfileProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AmplitudeConnectorProfileProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmplitudeConnectorProfileProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmplitudeConnectorProfileProperties) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AmplitudeConnectorProfileProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmplitudeConnectorProfileProperties, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 // The connector metadata specific to Amplitude.
 type AmplitudeMetadata struct {
 	noSmithyDocumentSerde
+}
+
+func (v *AmplitudeMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmplitudeMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmplitudeMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AmplitudeMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmplitudeMetadata, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // The properties that are applied when Amplitude is being used as a source.
@@ -61,6 +155,28 @@ type AmplitudeSourceProperties struct {
 	Object *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AmplitudeSourceProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmplitudeSourceProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmplitudeSourceProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Object != nil {
+		s.WriteString(schemas.AmplitudeSourceProperties_object, *v.Object)
+	}
+}
+func (v *AmplitudeSourceProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmplitudeSourceProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmplitudeSourceProperties_object:
+			v.Object = new(string)
+			return d.ReadString(schemas.AmplitudeSourceProperties_object, v.Object)
+		}
+		return nil
+	})
 }
 
 // The API key credentials required for API key authentication.
@@ -75,6 +191,34 @@ type ApiKeyCredentials struct {
 	ApiSecretKey *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApiKeyCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApiKeyCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApiKeyCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiKey != nil {
+		s.WriteString(schemas.ApiKeyCredentials_apiKey, *v.ApiKey)
+	}
+	if v.ApiSecretKey != nil {
+		s.WriteString(schemas.ApiKeyCredentials_apiSecretKey, *v.ApiSecretKey)
+	}
+}
+func (v *ApiKeyCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApiKeyCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApiKeyCredentials_apiKey:
+			v.ApiKey = new(string)
+			return d.ReadString(schemas.ApiKeyCredentials_apiKey, v.ApiKey)
+		case schemas.ApiKeyCredentials_apiSecretKey:
+			v.ApiSecretKey = new(string)
+			return d.ReadString(schemas.ApiKeyCredentials_apiSecretKey, v.ApiSecretKey)
+		}
+		return nil
+	})
 }
 
 // Contains information about the authentication config that the connector
@@ -102,6 +246,53 @@ type AuthenticationConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AuthenticationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuthenticationConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuthenticationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomAuthConfigList(s, schemas.AuthenticationConfig_customAuthConfigs, v.CustomAuthConfigs)
+	if v.IsApiKeyAuthSupported != false {
+		s.WriteBool(schemas.AuthenticationConfig_isApiKeyAuthSupported, v.IsApiKeyAuthSupported)
+	}
+	if v.IsBasicAuthSupported != false {
+		s.WriteBool(schemas.AuthenticationConfig_isBasicAuthSupported, v.IsBasicAuthSupported)
+	}
+	if v.IsCustomAuthSupported != false {
+		s.WriteBool(schemas.AuthenticationConfig_isCustomAuthSupported, v.IsCustomAuthSupported)
+	}
+	if v.IsOAuth2Supported != false {
+		s.WriteBool(schemas.AuthenticationConfig_isOAuth2Supported, v.IsOAuth2Supported)
+	}
+	if v.OAuth2Defaults != nil {
+		s.WriteStruct(schemas.AuthenticationConfig_oAuth2Defaults)
+		v.OAuth2Defaults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AuthenticationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AuthenticationConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AuthenticationConfig_customAuthConfigs:
+			return deserializeCustomAuthConfigList(d, schemas.AuthenticationConfig_customAuthConfigs, &v.CustomAuthConfigs)
+		case schemas.AuthenticationConfig_isApiKeyAuthSupported:
+			return d.ReadBool(schemas.AuthenticationConfig_isApiKeyAuthSupported, &v.IsApiKeyAuthSupported)
+		case schemas.AuthenticationConfig_isBasicAuthSupported:
+			return d.ReadBool(schemas.AuthenticationConfig_isBasicAuthSupported, &v.IsBasicAuthSupported)
+		case schemas.AuthenticationConfig_isCustomAuthSupported:
+			return d.ReadBool(schemas.AuthenticationConfig_isCustomAuthSupported, &v.IsCustomAuthSupported)
+		case schemas.AuthenticationConfig_isOAuth2Supported:
+			return d.ReadBool(schemas.AuthenticationConfig_isOAuth2Supported, &v.IsOAuth2Supported)
+		case schemas.AuthenticationConfig_oAuth2Defaults:
+			v.OAuth2Defaults = &OAuth2Defaults{}
+			return v.OAuth2Defaults.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Information about required authentication parameters.
 type AuthParameter struct {
 
@@ -127,6 +318,53 @@ type AuthParameter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AuthParameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuthParameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuthParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectorSuppliedValueList(s, schemas.AuthParameter_connectorSuppliedValues, v.ConnectorSuppliedValues)
+	if v.Description != nil {
+		s.WriteString(schemas.AuthParameter_description, *v.Description)
+	}
+	if v.IsRequired != false {
+		s.WriteBool(schemas.AuthParameter_isRequired, v.IsRequired)
+	}
+	if v.IsSensitiveField != false {
+		s.WriteBool(schemas.AuthParameter_isSensitiveField, v.IsSensitiveField)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.AuthParameter_key, *v.Key)
+	}
+	if v.Label != nil {
+		s.WriteString(schemas.AuthParameter_label, *v.Label)
+	}
+}
+func (v *AuthParameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AuthParameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AuthParameter_connectorSuppliedValues:
+			return deserializeConnectorSuppliedValueList(d, schemas.AuthParameter_connectorSuppliedValues, &v.ConnectorSuppliedValues)
+		case schemas.AuthParameter_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AuthParameter_description, v.Description)
+		case schemas.AuthParameter_isRequired:
+			return d.ReadBool(schemas.AuthParameter_isRequired, &v.IsRequired)
+		case schemas.AuthParameter_isSensitiveField:
+			return d.ReadBool(schemas.AuthParameter_isSensitiveField, &v.IsSensitiveField)
+		case schemas.AuthParameter_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.AuthParameter_key, v.Key)
+		case schemas.AuthParameter_label:
+			v.Label = new(string)
+			return d.ReadString(schemas.AuthParameter_label, v.Label)
+		}
+		return nil
+	})
+}
+
 // The basic auth credentials required for basic authentication.
 type BasicAuthCredentials struct {
 
@@ -141,6 +379,34 @@ type BasicAuthCredentials struct {
 	Username *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BasicAuthCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BasicAuthCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BasicAuthCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Password != nil {
+		s.WriteString(schemas.BasicAuthCredentials_password, *v.Password)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.BasicAuthCredentials_username, *v.Username)
+	}
+}
+func (v *BasicAuthCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BasicAuthCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BasicAuthCredentials_password:
+			v.Password = new(string)
+			return d.ReadString(schemas.BasicAuthCredentials_password, v.Password)
+		case schemas.BasicAuthCredentials_username:
+			v.Username = new(string)
+			return d.ReadString(schemas.BasicAuthCredentials_username, v.Username)
+		}
+		return nil
+	})
 }
 
 // The configuration settings related to a given connector.
@@ -239,6 +505,170 @@ type ConnectorConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectorConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectorConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationConfig != nil {
+		s.WriteStruct(schemas.ConnectorConfiguration_authenticationConfig)
+		v.AuthenticationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CanUseAsDestination != false {
+		s.WriteBool(schemas.ConnectorConfiguration_canUseAsDestination, v.CanUseAsDestination)
+	}
+	if v.CanUseAsSource != false {
+		s.WriteBool(schemas.ConnectorConfiguration_canUseAsSource, v.CanUseAsSource)
+	}
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.ConnectorConfiguration_connectorArn, *v.ConnectorArn)
+	}
+	if v.ConnectorDescription != nil {
+		s.WriteString(schemas.ConnectorConfiguration_connectorDescription, *v.ConnectorDescription)
+	}
+	if v.ConnectorLabel != nil {
+		s.WriteString(schemas.ConnectorConfiguration_connectorLabel, *v.ConnectorLabel)
+	}
+	if v.ConnectorMetadata != nil {
+		s.WriteStruct(schemas.ConnectorConfiguration_connectorMetadata)
+		v.ConnectorMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeConnectorModeList(s, schemas.ConnectorConfiguration_connectorModes, v.ConnectorModes)
+	if v.ConnectorName != nil {
+		s.WriteString(schemas.ConnectorConfiguration_connectorName, *v.ConnectorName)
+	}
+	if v.ConnectorOwner != nil {
+		s.WriteString(schemas.ConnectorConfiguration_connectorOwner, *v.ConnectorOwner)
+	}
+	if v.ConnectorProvisioningConfig != nil {
+		s.WriteStruct(schemas.ConnectorConfiguration_connectorProvisioningConfig)
+		v.ConnectorProvisioningConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConnectorProvisioningType != "" {
+		s.WriteString(schemas.ConnectorConfiguration_connectorProvisioningType, string(v.ConnectorProvisioningType))
+	}
+	serializeConnectorRuntimeSettingList(s, schemas.ConnectorConfiguration_connectorRuntimeSettings, v.ConnectorRuntimeSettings)
+	if v.ConnectorType != "" {
+		s.WriteString(schemas.ConnectorConfiguration_connectorType, string(v.ConnectorType))
+	}
+	if v.ConnectorVersion != nil {
+		s.WriteString(schemas.ConnectorConfiguration_connectorVersion, *v.ConnectorVersion)
+	}
+	if v.IsPrivateLinkEnabled != false {
+		s.WriteBool(schemas.ConnectorConfiguration_isPrivateLinkEnabled, v.IsPrivateLinkEnabled)
+	}
+	if v.IsPrivateLinkEndpointUrlRequired != false {
+		s.WriteBool(schemas.ConnectorConfiguration_isPrivateLinkEndpointUrlRequired, v.IsPrivateLinkEndpointUrlRequired)
+	}
+	if v.LogoURL != nil {
+		s.WriteString(schemas.ConnectorConfiguration_logoURL, *v.LogoURL)
+	}
+	if v.RegisteredAt != nil {
+		s.WriteTime(schemas.ConnectorConfiguration_registeredAt, *v.RegisteredAt)
+	}
+	if v.RegisteredBy != nil {
+		s.WriteString(schemas.ConnectorConfiguration_registeredBy, *v.RegisteredBy)
+	}
+	serializeSupportedApiVersionList(s, schemas.ConnectorConfiguration_supportedApiVersions, v.SupportedApiVersions)
+	serializeSupportedDataTransferApis(s, schemas.ConnectorConfiguration_supportedDataTransferApis, v.SupportedDataTransferApis)
+	serializeSupportedDataTransferTypeList(s, schemas.ConnectorConfiguration_supportedDataTransferTypes, v.SupportedDataTransferTypes)
+	serializeConnectorTypeList(s, schemas.ConnectorConfiguration_supportedDestinationConnectors, v.SupportedDestinationConnectors)
+	serializeSupportedOperatorList(s, schemas.ConnectorConfiguration_supportedOperators, v.SupportedOperators)
+	serializeSchedulingFrequencyTypeList(s, schemas.ConnectorConfiguration_supportedSchedulingFrequencies, v.SupportedSchedulingFrequencies)
+	serializeTriggerTypeList(s, schemas.ConnectorConfiguration_supportedTriggerTypes, v.SupportedTriggerTypes)
+	serializeSupportedWriteOperationList(s, schemas.ConnectorConfiguration_supportedWriteOperations, v.SupportedWriteOperations)
+}
+func (v *ConnectorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectorConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectorConfiguration_authenticationConfig:
+			v.AuthenticationConfig = &AuthenticationConfig{}
+			return v.AuthenticationConfig.Deserialize(d)
+		case schemas.ConnectorConfiguration_canUseAsDestination:
+			return d.ReadBool(schemas.ConnectorConfiguration_canUseAsDestination, &v.CanUseAsDestination)
+		case schemas.ConnectorConfiguration_canUseAsSource:
+			return d.ReadBool(schemas.ConnectorConfiguration_canUseAsSource, &v.CanUseAsSource)
+		case schemas.ConnectorConfiguration_connectorArn:
+			v.ConnectorArn = new(string)
+			return d.ReadString(schemas.ConnectorConfiguration_connectorArn, v.ConnectorArn)
+		case schemas.ConnectorConfiguration_connectorDescription:
+			v.ConnectorDescription = new(string)
+			return d.ReadString(schemas.ConnectorConfiguration_connectorDescription, v.ConnectorDescription)
+		case schemas.ConnectorConfiguration_connectorLabel:
+			v.ConnectorLabel = new(string)
+			return d.ReadString(schemas.ConnectorConfiguration_connectorLabel, v.ConnectorLabel)
+		case schemas.ConnectorConfiguration_connectorMetadata:
+			v.ConnectorMetadata = &ConnectorMetadata{}
+			return v.ConnectorMetadata.Deserialize(d)
+		case schemas.ConnectorConfiguration_connectorModes:
+			return deserializeConnectorModeList(d, schemas.ConnectorConfiguration_connectorModes, &v.ConnectorModes)
+		case schemas.ConnectorConfiguration_connectorName:
+			v.ConnectorName = new(string)
+			return d.ReadString(schemas.ConnectorConfiguration_connectorName, v.ConnectorName)
+		case schemas.ConnectorConfiguration_connectorOwner:
+			v.ConnectorOwner = new(string)
+			return d.ReadString(schemas.ConnectorConfiguration_connectorOwner, v.ConnectorOwner)
+		case schemas.ConnectorConfiguration_connectorProvisioningConfig:
+			v.ConnectorProvisioningConfig = &ConnectorProvisioningConfig{}
+			return v.ConnectorProvisioningConfig.Deserialize(d)
+		case schemas.ConnectorConfiguration_connectorProvisioningType:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorConfiguration_connectorProvisioningType, &ev); err != nil {
+				return err
+			}
+			v.ConnectorProvisioningType = ConnectorProvisioningType(ev)
+			return nil
+		case schemas.ConnectorConfiguration_connectorRuntimeSettings:
+			return deserializeConnectorRuntimeSettingList(d, schemas.ConnectorConfiguration_connectorRuntimeSettings, &v.ConnectorRuntimeSettings)
+		case schemas.ConnectorConfiguration_connectorType:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorConfiguration_connectorType, &ev); err != nil {
+				return err
+			}
+			v.ConnectorType = ConnectorType(ev)
+			return nil
+		case schemas.ConnectorConfiguration_connectorVersion:
+			v.ConnectorVersion = new(string)
+			return d.ReadString(schemas.ConnectorConfiguration_connectorVersion, v.ConnectorVersion)
+		case schemas.ConnectorConfiguration_isPrivateLinkEnabled:
+			return d.ReadBool(schemas.ConnectorConfiguration_isPrivateLinkEnabled, &v.IsPrivateLinkEnabled)
+		case schemas.ConnectorConfiguration_isPrivateLinkEndpointUrlRequired:
+			return d.ReadBool(schemas.ConnectorConfiguration_isPrivateLinkEndpointUrlRequired, &v.IsPrivateLinkEndpointUrlRequired)
+		case schemas.ConnectorConfiguration_logoURL:
+			v.LogoURL = new(string)
+			return d.ReadString(schemas.ConnectorConfiguration_logoURL, v.LogoURL)
+		case schemas.ConnectorConfiguration_registeredAt:
+			v.RegisteredAt = new(time.Time)
+			return d.ReadTime(schemas.ConnectorConfiguration_registeredAt, v.RegisteredAt)
+		case schemas.ConnectorConfiguration_registeredBy:
+			v.RegisteredBy = new(string)
+			return d.ReadString(schemas.ConnectorConfiguration_registeredBy, v.RegisteredBy)
+		case schemas.ConnectorConfiguration_supportedApiVersions:
+			return deserializeSupportedApiVersionList(d, schemas.ConnectorConfiguration_supportedApiVersions, &v.SupportedApiVersions)
+		case schemas.ConnectorConfiguration_supportedDataTransferApis:
+			return deserializeSupportedDataTransferApis(d, schemas.ConnectorConfiguration_supportedDataTransferApis, &v.SupportedDataTransferApis)
+		case schemas.ConnectorConfiguration_supportedDataTransferTypes:
+			return deserializeSupportedDataTransferTypeList(d, schemas.ConnectorConfiguration_supportedDataTransferTypes, &v.SupportedDataTransferTypes)
+		case schemas.ConnectorConfiguration_supportedDestinationConnectors:
+			return deserializeConnectorTypeList(d, schemas.ConnectorConfiguration_supportedDestinationConnectors, &v.SupportedDestinationConnectors)
+		case schemas.ConnectorConfiguration_supportedOperators:
+			return deserializeSupportedOperatorList(d, schemas.ConnectorConfiguration_supportedOperators, &v.SupportedOperators)
+		case schemas.ConnectorConfiguration_supportedSchedulingFrequencies:
+			return deserializeSchedulingFrequencyTypeList(d, schemas.ConnectorConfiguration_supportedSchedulingFrequencies, &v.SupportedSchedulingFrequencies)
+		case schemas.ConnectorConfiguration_supportedTriggerTypes:
+			return deserializeTriggerTypeList(d, schemas.ConnectorConfiguration_supportedTriggerTypes, &v.SupportedTriggerTypes)
+		case schemas.ConnectorConfiguration_supportedWriteOperations:
+			return deserializeSupportedWriteOperationList(d, schemas.ConnectorConfiguration_supportedWriteOperations, &v.SupportedWriteOperations)
+		}
+		return nil
+	})
+}
+
 // Information about the registered connector.
 type ConnectorDetail struct {
 
@@ -285,6 +715,96 @@ type ConnectorDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectorDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectorDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectorDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationType != nil {
+		s.WriteString(schemas.ConnectorDetail_applicationType, *v.ApplicationType)
+	}
+	if v.ConnectorDescription != nil {
+		s.WriteString(schemas.ConnectorDetail_connectorDescription, *v.ConnectorDescription)
+	}
+	if v.ConnectorLabel != nil {
+		s.WriteString(schemas.ConnectorDetail_connectorLabel, *v.ConnectorLabel)
+	}
+	serializeConnectorModeList(s, schemas.ConnectorDetail_connectorModes, v.ConnectorModes)
+	if v.ConnectorName != nil {
+		s.WriteString(schemas.ConnectorDetail_connectorName, *v.ConnectorName)
+	}
+	if v.ConnectorOwner != nil {
+		s.WriteString(schemas.ConnectorDetail_connectorOwner, *v.ConnectorOwner)
+	}
+	if v.ConnectorProvisioningType != "" {
+		s.WriteString(schemas.ConnectorDetail_connectorProvisioningType, string(v.ConnectorProvisioningType))
+	}
+	if v.ConnectorType != "" {
+		s.WriteString(schemas.ConnectorDetail_connectorType, string(v.ConnectorType))
+	}
+	if v.ConnectorVersion != nil {
+		s.WriteString(schemas.ConnectorDetail_connectorVersion, *v.ConnectorVersion)
+	}
+	if v.RegisteredAt != nil {
+		s.WriteTime(schemas.ConnectorDetail_registeredAt, *v.RegisteredAt)
+	}
+	if v.RegisteredBy != nil {
+		s.WriteString(schemas.ConnectorDetail_registeredBy, *v.RegisteredBy)
+	}
+	serializeSupportedDataTransferTypeList(s, schemas.ConnectorDetail_supportedDataTransferTypes, v.SupportedDataTransferTypes)
+}
+func (v *ConnectorDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectorDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectorDetail_applicationType:
+			v.ApplicationType = new(string)
+			return d.ReadString(schemas.ConnectorDetail_applicationType, v.ApplicationType)
+		case schemas.ConnectorDetail_connectorDescription:
+			v.ConnectorDescription = new(string)
+			return d.ReadString(schemas.ConnectorDetail_connectorDescription, v.ConnectorDescription)
+		case schemas.ConnectorDetail_connectorLabel:
+			v.ConnectorLabel = new(string)
+			return d.ReadString(schemas.ConnectorDetail_connectorLabel, v.ConnectorLabel)
+		case schemas.ConnectorDetail_connectorModes:
+			return deserializeConnectorModeList(d, schemas.ConnectorDetail_connectorModes, &v.ConnectorModes)
+		case schemas.ConnectorDetail_connectorName:
+			v.ConnectorName = new(string)
+			return d.ReadString(schemas.ConnectorDetail_connectorName, v.ConnectorName)
+		case schemas.ConnectorDetail_connectorOwner:
+			v.ConnectorOwner = new(string)
+			return d.ReadString(schemas.ConnectorDetail_connectorOwner, v.ConnectorOwner)
+		case schemas.ConnectorDetail_connectorProvisioningType:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorDetail_connectorProvisioningType, &ev); err != nil {
+				return err
+			}
+			v.ConnectorProvisioningType = ConnectorProvisioningType(ev)
+			return nil
+		case schemas.ConnectorDetail_connectorType:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorDetail_connectorType, &ev); err != nil {
+				return err
+			}
+			v.ConnectorType = ConnectorType(ev)
+			return nil
+		case schemas.ConnectorDetail_connectorVersion:
+			v.ConnectorVersion = new(string)
+			return d.ReadString(schemas.ConnectorDetail_connectorVersion, v.ConnectorVersion)
+		case schemas.ConnectorDetail_registeredAt:
+			v.RegisteredAt = new(time.Time)
+			return d.ReadTime(schemas.ConnectorDetail_registeredAt, v.RegisteredAt)
+		case schemas.ConnectorDetail_registeredBy:
+			v.RegisteredBy = new(string)
+			return d.ReadString(schemas.ConnectorDetail_registeredBy, v.RegisteredBy)
+		case schemas.ConnectorDetail_supportedDataTransferTypes:
+			return deserializeSupportedDataTransferTypeList(d, schemas.ConnectorDetail_supportedDataTransferTypes, &v.SupportedDataTransferTypes)
+		}
+		return nil
+	})
+}
+
 //	The high-level entity that can be queried in Amazon AppFlow. For example, a
 //
 // Salesforce entity might be an Account or Opportunity, whereas a ServiceNow
@@ -307,6 +827,39 @@ type ConnectorEntity struct {
 	Label *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConnectorEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectorEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectorEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HasNestedEntities != false {
+		s.WriteBool(schemas.ConnectorEntity_hasNestedEntities, v.HasNestedEntities)
+	}
+	if v.Label != nil {
+		s.WriteString(schemas.ConnectorEntity_label, *v.Label)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ConnectorEntity_name, *v.Name)
+	}
+}
+func (v *ConnectorEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectorEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectorEntity_hasNestedEntities:
+			return d.ReadBool(schemas.ConnectorEntity_hasNestedEntities, &v.HasNestedEntities)
+		case schemas.ConnectorEntity_label:
+			v.Label = new(string)
+			return d.ReadString(schemas.ConnectorEntity_label, v.Label)
+		case schemas.ConnectorEntity_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ConnectorEntity_name, v.Name)
+		}
+		return nil
+	})
 }
 
 //	Describes the data model of a connector field. For example, for an account
@@ -353,6 +906,89 @@ type ConnectorEntityField struct {
 	SupportedFieldTypeDetails *SupportedFieldTypeDetails
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConnectorEntityField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectorEntityField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectorEntityField) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomProperties(s, schemas.ConnectorEntityField_customProperties, v.CustomProperties)
+	if v.DefaultValue != nil {
+		s.WriteString(schemas.ConnectorEntityField_defaultValue, *v.DefaultValue)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ConnectorEntityField_description, *v.Description)
+	}
+	if v.DestinationProperties != nil {
+		s.WriteStruct(schemas.ConnectorEntityField_destinationProperties)
+		v.DestinationProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.ConnectorEntityField_identifier, *v.Identifier)
+	}
+	if v.IsDeprecated != false {
+		s.WriteBool(schemas.ConnectorEntityField_isDeprecated, v.IsDeprecated)
+	}
+	if v.IsPrimaryKey != false {
+		s.WriteBool(schemas.ConnectorEntityField_isPrimaryKey, v.IsPrimaryKey)
+	}
+	if v.Label != nil {
+		s.WriteString(schemas.ConnectorEntityField_label, *v.Label)
+	}
+	if v.ParentIdentifier != nil {
+		s.WriteString(schemas.ConnectorEntityField_parentIdentifier, *v.ParentIdentifier)
+	}
+	if v.SourceProperties != nil {
+		s.WriteStruct(schemas.ConnectorEntityField_sourceProperties)
+		v.SourceProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SupportedFieldTypeDetails != nil {
+		s.WriteStruct(schemas.ConnectorEntityField_supportedFieldTypeDetails)
+		v.SupportedFieldTypeDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ConnectorEntityField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectorEntityField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectorEntityField_customProperties:
+			return deserializeCustomProperties(d, schemas.ConnectorEntityField_customProperties, &v.CustomProperties)
+		case schemas.ConnectorEntityField_defaultValue:
+			v.DefaultValue = new(string)
+			return d.ReadString(schemas.ConnectorEntityField_defaultValue, v.DefaultValue)
+		case schemas.ConnectorEntityField_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ConnectorEntityField_description, v.Description)
+		case schemas.ConnectorEntityField_destinationProperties:
+			v.DestinationProperties = &DestinationFieldProperties{}
+			return v.DestinationProperties.Deserialize(d)
+		case schemas.ConnectorEntityField_identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.ConnectorEntityField_identifier, v.Identifier)
+		case schemas.ConnectorEntityField_isDeprecated:
+			return d.ReadBool(schemas.ConnectorEntityField_isDeprecated, &v.IsDeprecated)
+		case schemas.ConnectorEntityField_isPrimaryKey:
+			return d.ReadBool(schemas.ConnectorEntityField_isPrimaryKey, &v.IsPrimaryKey)
+		case schemas.ConnectorEntityField_label:
+			v.Label = new(string)
+			return d.ReadString(schemas.ConnectorEntityField_label, v.Label)
+		case schemas.ConnectorEntityField_parentIdentifier:
+			v.ParentIdentifier = new(string)
+			return d.ReadString(schemas.ConnectorEntityField_parentIdentifier, v.ParentIdentifier)
+		case schemas.ConnectorEntityField_sourceProperties:
+			v.SourceProperties = &SourceFieldProperties{}
+			return v.SourceProperties.Deserialize(d)
+		case schemas.ConnectorEntityField_supportedFieldTypeDetails:
+			v.SupportedFieldTypeDetails = &SupportedFieldTypeDetails{}
+			return v.SupportedFieldTypeDetails.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 //	A structure to specify connector-specific metadata such as oAuthScopes ,
@@ -429,6 +1065,198 @@ type ConnectorMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectorMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectorMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectorMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amplitude != nil {
+		s.WriteStruct(schemas.ConnectorMetadata_Amplitude)
+		v.Amplitude.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomerProfiles != nil {
+		s.WriteStruct(schemas.ConnectorMetadata_CustomerProfiles)
+		v.CustomerProfiles.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Datadog != nil {
+		s.WriteStruct(schemas.ConnectorMetadata_Datadog)
+		v.Datadog.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Dynatrace != nil {
+		s.WriteStruct(schemas.ConnectorMetadata_Dynatrace)
+		v.Dynatrace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventBridge != nil {
+		s.WriteStruct(schemas.ConnectorMetadata_EventBridge)
+		v.EventBridge.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GoogleAnalytics != nil {
+		s.WriteStruct(schemas.ConnectorMetadata_GoogleAnalytics)
+		v.GoogleAnalytics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Honeycode != nil {
+		s.WriteStruct(schemas.ConnectorMetadata_Honeycode)
+		v.Honeycode.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InforNexus != nil {
+		s.WriteStruct(schemas.ConnectorMetadata_InforNexus)
+		v.InforNexus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Marketo != nil {
+		s.WriteStruct(schemas.ConnectorMetadata_Marketo)
+		v.Marketo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Pardot != nil {
+		s.WriteStruct(schemas.ConnectorMetadata_Pardot)
+		v.Pardot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Redshift != nil {
+		s.WriteStruct(schemas.ConnectorMetadata_Redshift)
+		v.Redshift.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3 != nil {
+		s.WriteStruct(schemas.ConnectorMetadata_S3)
+		v.S3.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SAPOData != nil {
+		s.WriteStruct(schemas.ConnectorMetadata_SAPOData)
+		v.SAPOData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Salesforce != nil {
+		s.WriteStruct(schemas.ConnectorMetadata_Salesforce)
+		v.Salesforce.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceNow != nil {
+		s.WriteStruct(schemas.ConnectorMetadata_ServiceNow)
+		v.ServiceNow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Singular != nil {
+		s.WriteStruct(schemas.ConnectorMetadata_Singular)
+		v.Singular.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Slack != nil {
+		s.WriteStruct(schemas.ConnectorMetadata_Slack)
+		v.Slack.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Snowflake != nil {
+		s.WriteStruct(schemas.ConnectorMetadata_Snowflake)
+		v.Snowflake.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Trendmicro != nil {
+		s.WriteStruct(schemas.ConnectorMetadata_Trendmicro)
+		v.Trendmicro.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Upsolver != nil {
+		s.WriteStruct(schemas.ConnectorMetadata_Upsolver)
+		v.Upsolver.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Veeva != nil {
+		s.WriteStruct(schemas.ConnectorMetadata_Veeva)
+		v.Veeva.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Zendesk != nil {
+		s.WriteStruct(schemas.ConnectorMetadata_Zendesk)
+		v.Zendesk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ConnectorMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectorMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectorMetadata_Amplitude:
+			v.Amplitude = &AmplitudeMetadata{}
+			return v.Amplitude.Deserialize(d)
+		case schemas.ConnectorMetadata_CustomerProfiles:
+			v.CustomerProfiles = &CustomerProfilesMetadata{}
+			return v.CustomerProfiles.Deserialize(d)
+		case schemas.ConnectorMetadata_Datadog:
+			v.Datadog = &DatadogMetadata{}
+			return v.Datadog.Deserialize(d)
+		case schemas.ConnectorMetadata_Dynatrace:
+			v.Dynatrace = &DynatraceMetadata{}
+			return v.Dynatrace.Deserialize(d)
+		case schemas.ConnectorMetadata_EventBridge:
+			v.EventBridge = &EventBridgeMetadata{}
+			return v.EventBridge.Deserialize(d)
+		case schemas.ConnectorMetadata_GoogleAnalytics:
+			v.GoogleAnalytics = &GoogleAnalyticsMetadata{}
+			return v.GoogleAnalytics.Deserialize(d)
+		case schemas.ConnectorMetadata_Honeycode:
+			v.Honeycode = &HoneycodeMetadata{}
+			return v.Honeycode.Deserialize(d)
+		case schemas.ConnectorMetadata_InforNexus:
+			v.InforNexus = &InforNexusMetadata{}
+			return v.InforNexus.Deserialize(d)
+		case schemas.ConnectorMetadata_Marketo:
+			v.Marketo = &MarketoMetadata{}
+			return v.Marketo.Deserialize(d)
+		case schemas.ConnectorMetadata_Pardot:
+			v.Pardot = &PardotMetadata{}
+			return v.Pardot.Deserialize(d)
+		case schemas.ConnectorMetadata_Redshift:
+			v.Redshift = &RedshiftMetadata{}
+			return v.Redshift.Deserialize(d)
+		case schemas.ConnectorMetadata_S3:
+			v.S3 = &S3Metadata{}
+			return v.S3.Deserialize(d)
+		case schemas.ConnectorMetadata_SAPOData:
+			v.SAPOData = &SAPODataMetadata{}
+			return v.SAPOData.Deserialize(d)
+		case schemas.ConnectorMetadata_Salesforce:
+			v.Salesforce = &SalesforceMetadata{}
+			return v.Salesforce.Deserialize(d)
+		case schemas.ConnectorMetadata_ServiceNow:
+			v.ServiceNow = &ServiceNowMetadata{}
+			return v.ServiceNow.Deserialize(d)
+		case schemas.ConnectorMetadata_Singular:
+			v.Singular = &SingularMetadata{}
+			return v.Singular.Deserialize(d)
+		case schemas.ConnectorMetadata_Slack:
+			v.Slack = &SlackMetadata{}
+			return v.Slack.Deserialize(d)
+		case schemas.ConnectorMetadata_Snowflake:
+			v.Snowflake = &SnowflakeMetadata{}
+			return v.Snowflake.Deserialize(d)
+		case schemas.ConnectorMetadata_Trendmicro:
+			v.Trendmicro = &TrendmicroMetadata{}
+			return v.Trendmicro.Deserialize(d)
+		case schemas.ConnectorMetadata_Upsolver:
+			v.Upsolver = &UpsolverMetadata{}
+			return v.Upsolver.Deserialize(d)
+		case schemas.ConnectorMetadata_Veeva:
+			v.Veeva = &VeevaMetadata{}
+			return v.Veeva.Deserialize(d)
+		case schemas.ConnectorMetadata_Zendesk:
+			v.Zendesk = &ZendeskMetadata{}
+			return v.Zendesk.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 //	Used by select connectors for which the OAuth workflow is supported, such as
 //
 // Salesforce, Google Analytics, Marketo, Zendesk, and Slack.
@@ -443,6 +1271,34 @@ type ConnectorOAuthRequest struct {
 	RedirectUri *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConnectorOAuthRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectorOAuthRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectorOAuthRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthCode != nil {
+		s.WriteString(schemas.ConnectorOAuthRequest_authCode, *v.AuthCode)
+	}
+	if v.RedirectUri != nil {
+		s.WriteString(schemas.ConnectorOAuthRequest_redirectUri, *v.RedirectUri)
+	}
+}
+func (v *ConnectorOAuthRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectorOAuthRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectorOAuthRequest_authCode:
+			v.AuthCode = new(string)
+			return d.ReadString(schemas.ConnectorOAuthRequest_authCode, v.AuthCode)
+		case schemas.ConnectorOAuthRequest_redirectUri:
+			v.RedirectUri = new(string)
+			return d.ReadString(schemas.ConnectorOAuthRequest_redirectUri, v.RedirectUri)
+		}
+		return nil
+	})
 }
 
 // The operation to be performed on the provided source fields.
@@ -502,6 +1358,192 @@ type ConnectorOperator struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectorOperator) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectorOperator)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectorOperator) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amplitude != "" {
+		s.WriteString(schemas.ConnectorOperator_Amplitude, string(v.Amplitude))
+	}
+	if v.CustomConnector != "" {
+		s.WriteString(schemas.ConnectorOperator_CustomConnector, string(v.CustomConnector))
+	}
+	if v.Datadog != "" {
+		s.WriteString(schemas.ConnectorOperator_Datadog, string(v.Datadog))
+	}
+	if v.Dynatrace != "" {
+		s.WriteString(schemas.ConnectorOperator_Dynatrace, string(v.Dynatrace))
+	}
+	if v.GoogleAnalytics != "" {
+		s.WriteString(schemas.ConnectorOperator_GoogleAnalytics, string(v.GoogleAnalytics))
+	}
+	if v.InforNexus != "" {
+		s.WriteString(schemas.ConnectorOperator_InforNexus, string(v.InforNexus))
+	}
+	if v.Marketo != "" {
+		s.WriteString(schemas.ConnectorOperator_Marketo, string(v.Marketo))
+	}
+	if v.Pardot != "" {
+		s.WriteString(schemas.ConnectorOperator_Pardot, string(v.Pardot))
+	}
+	if v.S3 != "" {
+		s.WriteString(schemas.ConnectorOperator_S3, string(v.S3))
+	}
+	if v.SAPOData != "" {
+		s.WriteString(schemas.ConnectorOperator_SAPOData, string(v.SAPOData))
+	}
+	if v.Salesforce != "" {
+		s.WriteString(schemas.ConnectorOperator_Salesforce, string(v.Salesforce))
+	}
+	if v.ServiceNow != "" {
+		s.WriteString(schemas.ConnectorOperator_ServiceNow, string(v.ServiceNow))
+	}
+	if v.Singular != "" {
+		s.WriteString(schemas.ConnectorOperator_Singular, string(v.Singular))
+	}
+	if v.Slack != "" {
+		s.WriteString(schemas.ConnectorOperator_Slack, string(v.Slack))
+	}
+	if v.Trendmicro != "" {
+		s.WriteString(schemas.ConnectorOperator_Trendmicro, string(v.Trendmicro))
+	}
+	if v.Veeva != "" {
+		s.WriteString(schemas.ConnectorOperator_Veeva, string(v.Veeva))
+	}
+	if v.Zendesk != "" {
+		s.WriteString(schemas.ConnectorOperator_Zendesk, string(v.Zendesk))
+	}
+}
+func (v *ConnectorOperator) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectorOperator, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectorOperator_Amplitude:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorOperator_Amplitude, &ev); err != nil {
+				return err
+			}
+			v.Amplitude = AmplitudeConnectorOperator(ev)
+			return nil
+		case schemas.ConnectorOperator_CustomConnector:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorOperator_CustomConnector, &ev); err != nil {
+				return err
+			}
+			v.CustomConnector = Operator(ev)
+			return nil
+		case schemas.ConnectorOperator_Datadog:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorOperator_Datadog, &ev); err != nil {
+				return err
+			}
+			v.Datadog = DatadogConnectorOperator(ev)
+			return nil
+		case schemas.ConnectorOperator_Dynatrace:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorOperator_Dynatrace, &ev); err != nil {
+				return err
+			}
+			v.Dynatrace = DynatraceConnectorOperator(ev)
+			return nil
+		case schemas.ConnectorOperator_GoogleAnalytics:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorOperator_GoogleAnalytics, &ev); err != nil {
+				return err
+			}
+			v.GoogleAnalytics = GoogleAnalyticsConnectorOperator(ev)
+			return nil
+		case schemas.ConnectorOperator_InforNexus:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorOperator_InforNexus, &ev); err != nil {
+				return err
+			}
+			v.InforNexus = InforNexusConnectorOperator(ev)
+			return nil
+		case schemas.ConnectorOperator_Marketo:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorOperator_Marketo, &ev); err != nil {
+				return err
+			}
+			v.Marketo = MarketoConnectorOperator(ev)
+			return nil
+		case schemas.ConnectorOperator_Pardot:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorOperator_Pardot, &ev); err != nil {
+				return err
+			}
+			v.Pardot = PardotConnectorOperator(ev)
+			return nil
+		case schemas.ConnectorOperator_S3:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorOperator_S3, &ev); err != nil {
+				return err
+			}
+			v.S3 = S3ConnectorOperator(ev)
+			return nil
+		case schemas.ConnectorOperator_SAPOData:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorOperator_SAPOData, &ev); err != nil {
+				return err
+			}
+			v.SAPOData = SAPODataConnectorOperator(ev)
+			return nil
+		case schemas.ConnectorOperator_Salesforce:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorOperator_Salesforce, &ev); err != nil {
+				return err
+			}
+			v.Salesforce = SalesforceConnectorOperator(ev)
+			return nil
+		case schemas.ConnectorOperator_ServiceNow:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorOperator_ServiceNow, &ev); err != nil {
+				return err
+			}
+			v.ServiceNow = ServiceNowConnectorOperator(ev)
+			return nil
+		case schemas.ConnectorOperator_Singular:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorOperator_Singular, &ev); err != nil {
+				return err
+			}
+			v.Singular = SingularConnectorOperator(ev)
+			return nil
+		case schemas.ConnectorOperator_Slack:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorOperator_Slack, &ev); err != nil {
+				return err
+			}
+			v.Slack = SlackConnectorOperator(ev)
+			return nil
+		case schemas.ConnectorOperator_Trendmicro:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorOperator_Trendmicro, &ev); err != nil {
+				return err
+			}
+			v.Trendmicro = TrendmicroConnectorOperator(ev)
+			return nil
+		case schemas.ConnectorOperator_Veeva:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorOperator_Veeva, &ev); err != nil {
+				return err
+			}
+			v.Veeva = VeevaConnectorOperator(ev)
+			return nil
+		case schemas.ConnectorOperator_Zendesk:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorOperator_Zendesk, &ev); err != nil {
+				return err
+			}
+			v.Zendesk = ZendeskConnectorOperator(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	Describes an instance of a connector. This includes the provided name,
 //
 // credentials ARN, connection-mode, and so on. To keep the API intuitive and
@@ -544,6 +1586,94 @@ type ConnectorProfile struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectorProfile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectorProfile)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectorProfile) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionMode != "" {
+		s.WriteString(schemas.ConnectorProfile_connectionMode, string(v.ConnectionMode))
+	}
+	if v.ConnectorLabel != nil {
+		s.WriteString(schemas.ConnectorProfile_connectorLabel, *v.ConnectorLabel)
+	}
+	if v.ConnectorProfileArn != nil {
+		s.WriteString(schemas.ConnectorProfile_connectorProfileArn, *v.ConnectorProfileArn)
+	}
+	if v.ConnectorProfileName != nil {
+		s.WriteString(schemas.ConnectorProfile_connectorProfileName, *v.ConnectorProfileName)
+	}
+	if v.ConnectorProfileProperties != nil {
+		s.WriteStruct(schemas.ConnectorProfile_connectorProfileProperties)
+		v.ConnectorProfileProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConnectorType != "" {
+		s.WriteString(schemas.ConnectorProfile_connectorType, string(v.ConnectorType))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ConnectorProfile_createdAt, *v.CreatedAt)
+	}
+	if v.CredentialsArn != nil {
+		s.WriteString(schemas.ConnectorProfile_credentialsArn, *v.CredentialsArn)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.ConnectorProfile_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.PrivateConnectionProvisioningState != nil {
+		s.WriteStruct(schemas.ConnectorProfile_privateConnectionProvisioningState)
+		v.PrivateConnectionProvisioningState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ConnectorProfile) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectorProfile, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectorProfile_connectionMode:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorProfile_connectionMode, &ev); err != nil {
+				return err
+			}
+			v.ConnectionMode = ConnectionMode(ev)
+			return nil
+		case schemas.ConnectorProfile_connectorLabel:
+			v.ConnectorLabel = new(string)
+			return d.ReadString(schemas.ConnectorProfile_connectorLabel, v.ConnectorLabel)
+		case schemas.ConnectorProfile_connectorProfileArn:
+			v.ConnectorProfileArn = new(string)
+			return d.ReadString(schemas.ConnectorProfile_connectorProfileArn, v.ConnectorProfileArn)
+		case schemas.ConnectorProfile_connectorProfileName:
+			v.ConnectorProfileName = new(string)
+			return d.ReadString(schemas.ConnectorProfile_connectorProfileName, v.ConnectorProfileName)
+		case schemas.ConnectorProfile_connectorProfileProperties:
+			v.ConnectorProfileProperties = &ConnectorProfileProperties{}
+			return v.ConnectorProfileProperties.Deserialize(d)
+		case schemas.ConnectorProfile_connectorType:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorProfile_connectorType, &ev); err != nil {
+				return err
+			}
+			v.ConnectorType = ConnectorType(ev)
+			return nil
+		case schemas.ConnectorProfile_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ConnectorProfile_createdAt, v.CreatedAt)
+		case schemas.ConnectorProfile_credentialsArn:
+			v.CredentialsArn = new(string)
+			return d.ReadString(schemas.ConnectorProfile_credentialsArn, v.CredentialsArn)
+		case schemas.ConnectorProfile_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ConnectorProfile_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.ConnectorProfile_privateConnectionProvisioningState:
+			v.PrivateConnectionProvisioningState = &PrivateConnectionProvisioningState{}
+			return v.PrivateConnectionProvisioningState.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 //	Defines the connector-specific configuration and credentials for the connector
 //
 // profile.
@@ -558,6 +1688,38 @@ type ConnectorProfileConfig struct {
 	ConnectorProfileCredentials *ConnectorProfileCredentials
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConnectorProfileConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectorProfileConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectorProfileConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorProfileCredentials != nil {
+		s.WriteStruct(schemas.ConnectorProfileConfig_connectorProfileCredentials)
+		v.ConnectorProfileCredentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConnectorProfileProperties != nil {
+		s.WriteStruct(schemas.ConnectorProfileConfig_connectorProfileProperties)
+		v.ConnectorProfileProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ConnectorProfileConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectorProfileConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectorProfileConfig_connectorProfileCredentials:
+			v.ConnectorProfileCredentials = &ConnectorProfileCredentials{}
+			return v.ConnectorProfileCredentials.Deserialize(d)
+		case schemas.ConnectorProfileConfig_connectorProfileProperties:
+			v.ConnectorProfileProperties = &ConnectorProfileProperties{}
+			return v.ConnectorProfileProperties.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The connector-specific credentials required by a connector.
@@ -624,6 +1786,174 @@ type ConnectorProfileCredentials struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectorProfileCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectorProfileCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectorProfileCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amplitude != nil {
+		s.WriteStruct(schemas.ConnectorProfileCredentials_Amplitude)
+		v.Amplitude.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomConnector != nil {
+		s.WriteStruct(schemas.ConnectorProfileCredentials_CustomConnector)
+		v.CustomConnector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Datadog != nil {
+		s.WriteStruct(schemas.ConnectorProfileCredentials_Datadog)
+		v.Datadog.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Dynatrace != nil {
+		s.WriteStruct(schemas.ConnectorProfileCredentials_Dynatrace)
+		v.Dynatrace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GoogleAnalytics != nil {
+		s.WriteStruct(schemas.ConnectorProfileCredentials_GoogleAnalytics)
+		v.GoogleAnalytics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Honeycode != nil {
+		s.WriteStruct(schemas.ConnectorProfileCredentials_Honeycode)
+		v.Honeycode.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InforNexus != nil {
+		s.WriteStruct(schemas.ConnectorProfileCredentials_InforNexus)
+		v.InforNexus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Marketo != nil {
+		s.WriteStruct(schemas.ConnectorProfileCredentials_Marketo)
+		v.Marketo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Pardot != nil {
+		s.WriteStruct(schemas.ConnectorProfileCredentials_Pardot)
+		v.Pardot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Redshift != nil {
+		s.WriteStruct(schemas.ConnectorProfileCredentials_Redshift)
+		v.Redshift.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SAPOData != nil {
+		s.WriteStruct(schemas.ConnectorProfileCredentials_SAPOData)
+		v.SAPOData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Salesforce != nil {
+		s.WriteStruct(schemas.ConnectorProfileCredentials_Salesforce)
+		v.Salesforce.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceNow != nil {
+		s.WriteStruct(schemas.ConnectorProfileCredentials_ServiceNow)
+		v.ServiceNow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Singular != nil {
+		s.WriteStruct(schemas.ConnectorProfileCredentials_Singular)
+		v.Singular.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Slack != nil {
+		s.WriteStruct(schemas.ConnectorProfileCredentials_Slack)
+		v.Slack.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Snowflake != nil {
+		s.WriteStruct(schemas.ConnectorProfileCredentials_Snowflake)
+		v.Snowflake.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Trendmicro != nil {
+		s.WriteStruct(schemas.ConnectorProfileCredentials_Trendmicro)
+		v.Trendmicro.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Veeva != nil {
+		s.WriteStruct(schemas.ConnectorProfileCredentials_Veeva)
+		v.Veeva.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Zendesk != nil {
+		s.WriteStruct(schemas.ConnectorProfileCredentials_Zendesk)
+		v.Zendesk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ConnectorProfileCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectorProfileCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectorProfileCredentials_Amplitude:
+			v.Amplitude = &AmplitudeConnectorProfileCredentials{}
+			return v.Amplitude.Deserialize(d)
+		case schemas.ConnectorProfileCredentials_CustomConnector:
+			v.CustomConnector = &CustomConnectorProfileCredentials{}
+			return v.CustomConnector.Deserialize(d)
+		case schemas.ConnectorProfileCredentials_Datadog:
+			v.Datadog = &DatadogConnectorProfileCredentials{}
+			return v.Datadog.Deserialize(d)
+		case schemas.ConnectorProfileCredentials_Dynatrace:
+			v.Dynatrace = &DynatraceConnectorProfileCredentials{}
+			return v.Dynatrace.Deserialize(d)
+		case schemas.ConnectorProfileCredentials_GoogleAnalytics:
+			v.GoogleAnalytics = &GoogleAnalyticsConnectorProfileCredentials{}
+			return v.GoogleAnalytics.Deserialize(d)
+		case schemas.ConnectorProfileCredentials_Honeycode:
+			v.Honeycode = &HoneycodeConnectorProfileCredentials{}
+			return v.Honeycode.Deserialize(d)
+		case schemas.ConnectorProfileCredentials_InforNexus:
+			v.InforNexus = &InforNexusConnectorProfileCredentials{}
+			return v.InforNexus.Deserialize(d)
+		case schemas.ConnectorProfileCredentials_Marketo:
+			v.Marketo = &MarketoConnectorProfileCredentials{}
+			return v.Marketo.Deserialize(d)
+		case schemas.ConnectorProfileCredentials_Pardot:
+			v.Pardot = &PardotConnectorProfileCredentials{}
+			return v.Pardot.Deserialize(d)
+		case schemas.ConnectorProfileCredentials_Redshift:
+			v.Redshift = &RedshiftConnectorProfileCredentials{}
+			return v.Redshift.Deserialize(d)
+		case schemas.ConnectorProfileCredentials_SAPOData:
+			v.SAPOData = &SAPODataConnectorProfileCredentials{}
+			return v.SAPOData.Deserialize(d)
+		case schemas.ConnectorProfileCredentials_Salesforce:
+			v.Salesforce = &SalesforceConnectorProfileCredentials{}
+			return v.Salesforce.Deserialize(d)
+		case schemas.ConnectorProfileCredentials_ServiceNow:
+			v.ServiceNow = &ServiceNowConnectorProfileCredentials{}
+			return v.ServiceNow.Deserialize(d)
+		case schemas.ConnectorProfileCredentials_Singular:
+			v.Singular = &SingularConnectorProfileCredentials{}
+			return v.Singular.Deserialize(d)
+		case schemas.ConnectorProfileCredentials_Slack:
+			v.Slack = &SlackConnectorProfileCredentials{}
+			return v.Slack.Deserialize(d)
+		case schemas.ConnectorProfileCredentials_Snowflake:
+			v.Snowflake = &SnowflakeConnectorProfileCredentials{}
+			return v.Snowflake.Deserialize(d)
+		case schemas.ConnectorProfileCredentials_Trendmicro:
+			v.Trendmicro = &TrendmicroConnectorProfileCredentials{}
+			return v.Trendmicro.Deserialize(d)
+		case schemas.ConnectorProfileCredentials_Veeva:
+			v.Veeva = &VeevaConnectorProfileCredentials{}
+			return v.Veeva.Deserialize(d)
+		case schemas.ConnectorProfileCredentials_Zendesk:
+			v.Zendesk = &ZendeskConnectorProfileCredentials{}
+			return v.Zendesk.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The connector-specific profile properties required by each connector.
 type ConnectorProfileProperties struct {
 
@@ -687,6 +2017,174 @@ type ConnectorProfileProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectorProfileProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectorProfileProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectorProfileProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amplitude != nil {
+		s.WriteStruct(schemas.ConnectorProfileProperties_Amplitude)
+		v.Amplitude.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomConnector != nil {
+		s.WriteStruct(schemas.ConnectorProfileProperties_CustomConnector)
+		v.CustomConnector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Datadog != nil {
+		s.WriteStruct(schemas.ConnectorProfileProperties_Datadog)
+		v.Datadog.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Dynatrace != nil {
+		s.WriteStruct(schemas.ConnectorProfileProperties_Dynatrace)
+		v.Dynatrace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GoogleAnalytics != nil {
+		s.WriteStruct(schemas.ConnectorProfileProperties_GoogleAnalytics)
+		v.GoogleAnalytics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Honeycode != nil {
+		s.WriteStruct(schemas.ConnectorProfileProperties_Honeycode)
+		v.Honeycode.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InforNexus != nil {
+		s.WriteStruct(schemas.ConnectorProfileProperties_InforNexus)
+		v.InforNexus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Marketo != nil {
+		s.WriteStruct(schemas.ConnectorProfileProperties_Marketo)
+		v.Marketo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Pardot != nil {
+		s.WriteStruct(schemas.ConnectorProfileProperties_Pardot)
+		v.Pardot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Redshift != nil {
+		s.WriteStruct(schemas.ConnectorProfileProperties_Redshift)
+		v.Redshift.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SAPOData != nil {
+		s.WriteStruct(schemas.ConnectorProfileProperties_SAPOData)
+		v.SAPOData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Salesforce != nil {
+		s.WriteStruct(schemas.ConnectorProfileProperties_Salesforce)
+		v.Salesforce.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceNow != nil {
+		s.WriteStruct(schemas.ConnectorProfileProperties_ServiceNow)
+		v.ServiceNow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Singular != nil {
+		s.WriteStruct(schemas.ConnectorProfileProperties_Singular)
+		v.Singular.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Slack != nil {
+		s.WriteStruct(schemas.ConnectorProfileProperties_Slack)
+		v.Slack.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Snowflake != nil {
+		s.WriteStruct(schemas.ConnectorProfileProperties_Snowflake)
+		v.Snowflake.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Trendmicro != nil {
+		s.WriteStruct(schemas.ConnectorProfileProperties_Trendmicro)
+		v.Trendmicro.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Veeva != nil {
+		s.WriteStruct(schemas.ConnectorProfileProperties_Veeva)
+		v.Veeva.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Zendesk != nil {
+		s.WriteStruct(schemas.ConnectorProfileProperties_Zendesk)
+		v.Zendesk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ConnectorProfileProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectorProfileProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectorProfileProperties_Amplitude:
+			v.Amplitude = &AmplitudeConnectorProfileProperties{}
+			return v.Amplitude.Deserialize(d)
+		case schemas.ConnectorProfileProperties_CustomConnector:
+			v.CustomConnector = &CustomConnectorProfileProperties{}
+			return v.CustomConnector.Deserialize(d)
+		case schemas.ConnectorProfileProperties_Datadog:
+			v.Datadog = &DatadogConnectorProfileProperties{}
+			return v.Datadog.Deserialize(d)
+		case schemas.ConnectorProfileProperties_Dynatrace:
+			v.Dynatrace = &DynatraceConnectorProfileProperties{}
+			return v.Dynatrace.Deserialize(d)
+		case schemas.ConnectorProfileProperties_GoogleAnalytics:
+			v.GoogleAnalytics = &GoogleAnalyticsConnectorProfileProperties{}
+			return v.GoogleAnalytics.Deserialize(d)
+		case schemas.ConnectorProfileProperties_Honeycode:
+			v.Honeycode = &HoneycodeConnectorProfileProperties{}
+			return v.Honeycode.Deserialize(d)
+		case schemas.ConnectorProfileProperties_InforNexus:
+			v.InforNexus = &InforNexusConnectorProfileProperties{}
+			return v.InforNexus.Deserialize(d)
+		case schemas.ConnectorProfileProperties_Marketo:
+			v.Marketo = &MarketoConnectorProfileProperties{}
+			return v.Marketo.Deserialize(d)
+		case schemas.ConnectorProfileProperties_Pardot:
+			v.Pardot = &PardotConnectorProfileProperties{}
+			return v.Pardot.Deserialize(d)
+		case schemas.ConnectorProfileProperties_Redshift:
+			v.Redshift = &RedshiftConnectorProfileProperties{}
+			return v.Redshift.Deserialize(d)
+		case schemas.ConnectorProfileProperties_SAPOData:
+			v.SAPOData = &SAPODataConnectorProfileProperties{}
+			return v.SAPOData.Deserialize(d)
+		case schemas.ConnectorProfileProperties_Salesforce:
+			v.Salesforce = &SalesforceConnectorProfileProperties{}
+			return v.Salesforce.Deserialize(d)
+		case schemas.ConnectorProfileProperties_ServiceNow:
+			v.ServiceNow = &ServiceNowConnectorProfileProperties{}
+			return v.ServiceNow.Deserialize(d)
+		case schemas.ConnectorProfileProperties_Singular:
+			v.Singular = &SingularConnectorProfileProperties{}
+			return v.Singular.Deserialize(d)
+		case schemas.ConnectorProfileProperties_Slack:
+			v.Slack = &SlackConnectorProfileProperties{}
+			return v.Slack.Deserialize(d)
+		case schemas.ConnectorProfileProperties_Snowflake:
+			v.Snowflake = &SnowflakeConnectorProfileProperties{}
+			return v.Snowflake.Deserialize(d)
+		case schemas.ConnectorProfileProperties_Trendmicro:
+			v.Trendmicro = &TrendmicroConnectorProfileProperties{}
+			return v.Trendmicro.Deserialize(d)
+		case schemas.ConnectorProfileProperties_Veeva:
+			v.Veeva = &VeevaConnectorProfileProperties{}
+			return v.Veeva.Deserialize(d)
+		case schemas.ConnectorProfileProperties_Zendesk:
+			v.Zendesk = &ZendeskConnectorProfileProperties{}
+			return v.Zendesk.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains information about the configuration of the connector being registered.
 type ConnectorProvisioningConfig struct {
 
@@ -695,6 +2193,30 @@ type ConnectorProvisioningConfig struct {
 	Lambda *LambdaConnectorProvisioningConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConnectorProvisioningConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectorProvisioningConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectorProvisioningConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Lambda != nil {
+		s.WriteStruct(schemas.ConnectorProvisioningConfig_lambda)
+		v.Lambda.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ConnectorProvisioningConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectorProvisioningConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectorProvisioningConfig_lambda:
+			v.Lambda = &LambdaConnectorProvisioningConfig{}
+			return v.Lambda.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Contains information about the connector runtime settings that are required for
@@ -726,6 +2248,60 @@ type ConnectorRuntimeSetting struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectorRuntimeSetting) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectorRuntimeSetting)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectorRuntimeSetting) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectorSuppliedValueOptionList(s, schemas.ConnectorRuntimeSetting_connectorSuppliedValueOptions, v.ConnectorSuppliedValueOptions)
+	if v.DataType != nil {
+		s.WriteString(schemas.ConnectorRuntimeSetting_dataType, *v.DataType)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ConnectorRuntimeSetting_description, *v.Description)
+	}
+	if v.IsRequired != false {
+		s.WriteBool(schemas.ConnectorRuntimeSetting_isRequired, v.IsRequired)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.ConnectorRuntimeSetting_key, *v.Key)
+	}
+	if v.Label != nil {
+		s.WriteString(schemas.ConnectorRuntimeSetting_label, *v.Label)
+	}
+	if v.Scope != nil {
+		s.WriteString(schemas.ConnectorRuntimeSetting_scope, *v.Scope)
+	}
+}
+func (v *ConnectorRuntimeSetting) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectorRuntimeSetting, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectorRuntimeSetting_connectorSuppliedValueOptions:
+			return deserializeConnectorSuppliedValueOptionList(d, schemas.ConnectorRuntimeSetting_connectorSuppliedValueOptions, &v.ConnectorSuppliedValueOptions)
+		case schemas.ConnectorRuntimeSetting_dataType:
+			v.DataType = new(string)
+			return d.ReadString(schemas.ConnectorRuntimeSetting_dataType, v.DataType)
+		case schemas.ConnectorRuntimeSetting_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ConnectorRuntimeSetting_description, v.Description)
+		case schemas.ConnectorRuntimeSetting_isRequired:
+			return d.ReadBool(schemas.ConnectorRuntimeSetting_isRequired, &v.IsRequired)
+		case schemas.ConnectorRuntimeSetting_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.ConnectorRuntimeSetting_key, v.Key)
+		case schemas.ConnectorRuntimeSetting_label:
+			v.Label = new(string)
+			return d.ReadString(schemas.ConnectorRuntimeSetting_label, v.Label)
+		case schemas.ConnectorRuntimeSetting_scope:
+			v.Scope = new(string)
+			return d.ReadString(schemas.ConnectorRuntimeSetting_scope, v.Scope)
+		}
+		return nil
+	})
+}
+
 // Configuration information required for custom authentication.
 type CustomAuthConfig struct {
 
@@ -736,6 +2312,31 @@ type CustomAuthConfig struct {
 	CustomAuthenticationType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomAuthConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomAuthConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomAuthConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuthParameterList(s, schemas.CustomAuthConfig_authParameters, v.AuthParameters)
+	if v.CustomAuthenticationType != nil {
+		s.WriteString(schemas.CustomAuthConfig_customAuthenticationType, *v.CustomAuthenticationType)
+	}
+}
+func (v *CustomAuthConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomAuthConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomAuthConfig_authParameters:
+			return deserializeAuthParameterList(d, schemas.CustomAuthConfig_authParameters, &v.AuthParameters)
+		case schemas.CustomAuthConfig_customAuthenticationType:
+			v.CustomAuthenticationType = new(string)
+			return d.ReadString(schemas.CustomAuthConfig_customAuthenticationType, v.CustomAuthenticationType)
+		}
+		return nil
+	})
 }
 
 // The custom credentials required for custom authentication.
@@ -750,6 +2351,31 @@ type CustomAuthCredentials struct {
 	CredentialsMap map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomAuthCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomAuthCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomAuthCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCredentialsMap(s, schemas.CustomAuthCredentials_credentialsMap, v.CredentialsMap)
+	if v.CustomAuthenticationType != nil {
+		s.WriteString(schemas.CustomAuthCredentials_customAuthenticationType, *v.CustomAuthenticationType)
+	}
+}
+func (v *CustomAuthCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomAuthCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomAuthCredentials_credentialsMap:
+			return deserializeCredentialsMap(d, schemas.CustomAuthCredentials_credentialsMap, &v.CredentialsMap)
+		case schemas.CustomAuthCredentials_customAuthenticationType:
+			v.CustomAuthenticationType = new(string)
+			return d.ReadString(schemas.CustomAuthCredentials_customAuthenticationType, v.CustomAuthenticationType)
+		}
+		return nil
+	})
 }
 
 // The properties that are applied when the custom connector is being used as a
@@ -780,6 +2406,52 @@ type CustomConnectorDestinationProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomConnectorDestinationProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomConnectorDestinationProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomConnectorDestinationProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomProperties(s, schemas.CustomConnectorDestinationProperties_customProperties, v.CustomProperties)
+	if v.EntityName != nil {
+		s.WriteString(schemas.CustomConnectorDestinationProperties_entityName, *v.EntityName)
+	}
+	if v.ErrorHandlingConfig != nil {
+		s.WriteStruct(schemas.CustomConnectorDestinationProperties_errorHandlingConfig)
+		v.ErrorHandlingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIdFieldNameList(s, schemas.CustomConnectorDestinationProperties_idFieldNames, v.IdFieldNames)
+	if v.WriteOperationType != "" {
+		s.WriteString(schemas.CustomConnectorDestinationProperties_writeOperationType, string(v.WriteOperationType))
+	}
+}
+func (v *CustomConnectorDestinationProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomConnectorDestinationProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomConnectorDestinationProperties_customProperties:
+			return deserializeCustomProperties(d, schemas.CustomConnectorDestinationProperties_customProperties, &v.CustomProperties)
+		case schemas.CustomConnectorDestinationProperties_entityName:
+			v.EntityName = new(string)
+			return d.ReadString(schemas.CustomConnectorDestinationProperties_entityName, v.EntityName)
+		case schemas.CustomConnectorDestinationProperties_errorHandlingConfig:
+			v.ErrorHandlingConfig = &ErrorHandlingConfig{}
+			return v.ErrorHandlingConfig.Deserialize(d)
+		case schemas.CustomConnectorDestinationProperties_idFieldNames:
+			return deserializeIdFieldNameList(d, schemas.CustomConnectorDestinationProperties_idFieldNames, &v.IdFieldNames)
+		case schemas.CustomConnectorDestinationProperties_writeOperationType:
+			var ev string
+			if err := d.ReadString(schemas.CustomConnectorDestinationProperties_writeOperationType, &ev); err != nil {
+				return err
+			}
+			v.WriteOperationType = WriteOperationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The connector-specific profile credentials that are required when using the
 // custom connector.
 type CustomConnectorProfileCredentials struct {
@@ -806,6 +2478,64 @@ type CustomConnectorProfileCredentials struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomConnectorProfileCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomConnectorProfileCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomConnectorProfileCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiKey != nil {
+		s.WriteStruct(schemas.CustomConnectorProfileCredentials_apiKey)
+		v.ApiKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AuthenticationType != "" {
+		s.WriteString(schemas.CustomConnectorProfileCredentials_authenticationType, string(v.AuthenticationType))
+	}
+	if v.Basic != nil {
+		s.WriteStruct(schemas.CustomConnectorProfileCredentials_basic)
+		v.Basic.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Custom != nil {
+		s.WriteStruct(schemas.CustomConnectorProfileCredentials_custom)
+		v.Custom.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Oauth2 != nil {
+		s.WriteStruct(schemas.CustomConnectorProfileCredentials_oauth2)
+		v.Oauth2.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CustomConnectorProfileCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomConnectorProfileCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomConnectorProfileCredentials_apiKey:
+			v.ApiKey = &ApiKeyCredentials{}
+			return v.ApiKey.Deserialize(d)
+		case schemas.CustomConnectorProfileCredentials_authenticationType:
+			var ev string
+			if err := d.ReadString(schemas.CustomConnectorProfileCredentials_authenticationType, &ev); err != nil {
+				return err
+			}
+			v.AuthenticationType = AuthenticationType(ev)
+			return nil
+		case schemas.CustomConnectorProfileCredentials_basic:
+			v.Basic = &BasicAuthCredentials{}
+			return v.Basic.Deserialize(d)
+		case schemas.CustomConnectorProfileCredentials_custom:
+			v.Custom = &CustomAuthCredentials{}
+			return v.Custom.Deserialize(d)
+		case schemas.CustomConnectorProfileCredentials_oauth2:
+			v.Oauth2 = &OAuth2Credentials{}
+			return v.Oauth2.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The profile properties required by the custom connector.
 type CustomConnectorProfileProperties struct {
 
@@ -817,6 +2547,33 @@ type CustomConnectorProfileProperties struct {
 	ProfileProperties map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomConnectorProfileProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomConnectorProfileProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomConnectorProfileProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OAuth2Properties != nil {
+		s.WriteStruct(schemas.CustomConnectorProfileProperties_oAuth2Properties)
+		v.OAuth2Properties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeProfilePropertiesMap(s, schemas.CustomConnectorProfileProperties_profileProperties, v.ProfileProperties)
+}
+func (v *CustomConnectorProfileProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomConnectorProfileProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomConnectorProfileProperties_oAuth2Properties:
+			v.OAuth2Properties = &OAuth2Properties{}
+			return v.OAuth2Properties.Deserialize(d)
+		case schemas.CustomConnectorProfileProperties_profileProperties:
+			return deserializeProfilePropertiesMap(d, schemas.CustomConnectorProfileProperties_profileProperties, &v.ProfileProperties)
+		}
+		return nil
+	})
 }
 
 // The properties that are applied when the custom connector is being used as a
@@ -838,6 +2595,39 @@ type CustomConnectorSourceProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomConnectorSourceProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomConnectorSourceProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomConnectorSourceProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomProperties(s, schemas.CustomConnectorSourceProperties_customProperties, v.CustomProperties)
+	if v.DataTransferApi != nil {
+		s.WriteStruct(schemas.CustomConnectorSourceProperties_dataTransferApi)
+		v.DataTransferApi.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EntityName != nil {
+		s.WriteString(schemas.CustomConnectorSourceProperties_entityName, *v.EntityName)
+	}
+}
+func (v *CustomConnectorSourceProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomConnectorSourceProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomConnectorSourceProperties_customProperties:
+			return deserializeCustomProperties(d, schemas.CustomConnectorSourceProperties_customProperties, &v.CustomProperties)
+		case schemas.CustomConnectorSourceProperties_dataTransferApi:
+			v.DataTransferApi = &DataTransferApi{}
+			return v.DataTransferApi.Deserialize(d)
+		case schemas.CustomConnectorSourceProperties_entityName:
+			v.EntityName = new(string)
+			return d.ReadString(schemas.CustomConnectorSourceProperties_entityName, v.EntityName)
+		}
+		return nil
+	})
+}
+
 //	The properties that are applied when Connect Customer Customer Profiles is
 //
 // used as a destination.
@@ -855,9 +2645,53 @@ type CustomerProfilesDestinationProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomerProfilesDestinationProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomerProfilesDestinationProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomerProfilesDestinationProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.CustomerProfilesDestinationProperties_domainName, *v.DomainName)
+	}
+	if v.ObjectTypeName != nil {
+		s.WriteString(schemas.CustomerProfilesDestinationProperties_objectTypeName, *v.ObjectTypeName)
+	}
+}
+func (v *CustomerProfilesDestinationProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomerProfilesDestinationProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomerProfilesDestinationProperties_domainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.CustomerProfilesDestinationProperties_domainName, v.DomainName)
+		case schemas.CustomerProfilesDestinationProperties_objectTypeName:
+			v.ObjectTypeName = new(string)
+			return d.ReadString(schemas.CustomerProfilesDestinationProperties_objectTypeName, v.ObjectTypeName)
+		}
+		return nil
+	})
+}
+
 // The connector metadata specific to Connect Customer Customer Profiles.
 type CustomerProfilesMetadata struct {
 	noSmithyDocumentSerde
+}
+
+func (v *CustomerProfilesMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomerProfilesMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomerProfilesMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CustomerProfilesMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomerProfilesMetadata, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // The connector-specific credentials required by Datadog.
@@ -880,6 +2714,34 @@ type DatadogConnectorProfileCredentials struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DatadogConnectorProfileCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatadogConnectorProfileCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatadogConnectorProfileCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiKey != nil {
+		s.WriteString(schemas.DatadogConnectorProfileCredentials_apiKey, *v.ApiKey)
+	}
+	if v.ApplicationKey != nil {
+		s.WriteString(schemas.DatadogConnectorProfileCredentials_applicationKey, *v.ApplicationKey)
+	}
+}
+func (v *DatadogConnectorProfileCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatadogConnectorProfileCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatadogConnectorProfileCredentials_apiKey:
+			v.ApiKey = new(string)
+			return d.ReadString(schemas.DatadogConnectorProfileCredentials_apiKey, v.ApiKey)
+		case schemas.DatadogConnectorProfileCredentials_applicationKey:
+			v.ApplicationKey = new(string)
+			return d.ReadString(schemas.DatadogConnectorProfileCredentials_applicationKey, v.ApplicationKey)
+		}
+		return nil
+	})
+}
+
 // The connector-specific profile properties required by Datadog.
 type DatadogConnectorProfileProperties struct {
 
@@ -891,9 +2753,47 @@ type DatadogConnectorProfileProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DatadogConnectorProfileProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatadogConnectorProfileProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatadogConnectorProfileProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceUrl != nil {
+		s.WriteString(schemas.DatadogConnectorProfileProperties_instanceUrl, *v.InstanceUrl)
+	}
+}
+func (v *DatadogConnectorProfileProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatadogConnectorProfileProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatadogConnectorProfileProperties_instanceUrl:
+			v.InstanceUrl = new(string)
+			return d.ReadString(schemas.DatadogConnectorProfileProperties_instanceUrl, v.InstanceUrl)
+		}
+		return nil
+	})
+}
+
 // The connector metadata specific to Datadog.
 type DatadogMetadata struct {
 	noSmithyDocumentSerde
+}
+
+func (v *DatadogMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatadogMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatadogMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DatadogMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatadogMetadata, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // The properties that are applied when Datadog is being used as a source.
@@ -905,6 +2805,28 @@ type DatadogSourceProperties struct {
 	Object *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DatadogSourceProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatadogSourceProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatadogSourceProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Object != nil {
+		s.WriteString(schemas.DatadogSourceProperties_object, *v.Object)
+	}
+}
+func (v *DatadogSourceProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatadogSourceProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatadogSourceProperties_object:
+			v.Object = new(string)
+			return d.ReadString(schemas.DatadogSourceProperties_object, v.Object)
+		}
+		return nil
+	})
 }
 
 // The API of the connector application that Amazon AppFlow uses to transfer your
@@ -927,6 +2849,38 @@ type DataTransferApi struct {
 	Type DataTransferApiType
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataTransferApi) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataTransferApi)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataTransferApi) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DataTransferApi_Name, *v.Name)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DataTransferApi_Type, string(v.Type))
+	}
+}
+func (v *DataTransferApi) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataTransferApi, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataTransferApi_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DataTransferApi_Name, v.Name)
+		case schemas.DataTransferApi_Type:
+			var ev string
+			if err := d.ReadString(schemas.DataTransferApi_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = DataTransferApiType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // This stores the information that is required to query a particular connector.
@@ -974,6 +2928,126 @@ type DestinationConnectorProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DestinationConnectorProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationConnectorProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DestinationConnectorProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomConnector != nil {
+		s.WriteStruct(schemas.DestinationConnectorProperties_CustomConnector)
+		v.CustomConnector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomerProfiles != nil {
+		s.WriteStruct(schemas.DestinationConnectorProperties_CustomerProfiles)
+		v.CustomerProfiles.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventBridge != nil {
+		s.WriteStruct(schemas.DestinationConnectorProperties_EventBridge)
+		v.EventBridge.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Honeycode != nil {
+		s.WriteStruct(schemas.DestinationConnectorProperties_Honeycode)
+		v.Honeycode.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LookoutMetrics != nil {
+		s.WriteStruct(schemas.DestinationConnectorProperties_LookoutMetrics)
+		v.LookoutMetrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Marketo != nil {
+		s.WriteStruct(schemas.DestinationConnectorProperties_Marketo)
+		v.Marketo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Redshift != nil {
+		s.WriteStruct(schemas.DestinationConnectorProperties_Redshift)
+		v.Redshift.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3 != nil {
+		s.WriteStruct(schemas.DestinationConnectorProperties_S3)
+		v.S3.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SAPOData != nil {
+		s.WriteStruct(schemas.DestinationConnectorProperties_SAPOData)
+		v.SAPOData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Salesforce != nil {
+		s.WriteStruct(schemas.DestinationConnectorProperties_Salesforce)
+		v.Salesforce.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Snowflake != nil {
+		s.WriteStruct(schemas.DestinationConnectorProperties_Snowflake)
+		v.Snowflake.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Upsolver != nil {
+		s.WriteStruct(schemas.DestinationConnectorProperties_Upsolver)
+		v.Upsolver.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Zendesk != nil {
+		s.WriteStruct(schemas.DestinationConnectorProperties_Zendesk)
+		v.Zendesk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DestinationConnectorProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DestinationConnectorProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DestinationConnectorProperties_CustomConnector:
+			v.CustomConnector = &CustomConnectorDestinationProperties{}
+			return v.CustomConnector.Deserialize(d)
+		case schemas.DestinationConnectorProperties_CustomerProfiles:
+			v.CustomerProfiles = &CustomerProfilesDestinationProperties{}
+			return v.CustomerProfiles.Deserialize(d)
+		case schemas.DestinationConnectorProperties_EventBridge:
+			v.EventBridge = &EventBridgeDestinationProperties{}
+			return v.EventBridge.Deserialize(d)
+		case schemas.DestinationConnectorProperties_Honeycode:
+			v.Honeycode = &HoneycodeDestinationProperties{}
+			return v.Honeycode.Deserialize(d)
+		case schemas.DestinationConnectorProperties_LookoutMetrics:
+			v.LookoutMetrics = &LookoutMetricsDestinationProperties{}
+			return v.LookoutMetrics.Deserialize(d)
+		case schemas.DestinationConnectorProperties_Marketo:
+			v.Marketo = &MarketoDestinationProperties{}
+			return v.Marketo.Deserialize(d)
+		case schemas.DestinationConnectorProperties_Redshift:
+			v.Redshift = &RedshiftDestinationProperties{}
+			return v.Redshift.Deserialize(d)
+		case schemas.DestinationConnectorProperties_S3:
+			v.S3 = &S3DestinationProperties{}
+			return v.S3.Deserialize(d)
+		case schemas.DestinationConnectorProperties_SAPOData:
+			v.SAPOData = &SAPODataDestinationProperties{}
+			return v.SAPOData.Deserialize(d)
+		case schemas.DestinationConnectorProperties_Salesforce:
+			v.Salesforce = &SalesforceDestinationProperties{}
+			return v.Salesforce.Deserialize(d)
+		case schemas.DestinationConnectorProperties_Snowflake:
+			v.Snowflake = &SnowflakeDestinationProperties{}
+			return v.Snowflake.Deserialize(d)
+		case schemas.DestinationConnectorProperties_Upsolver:
+			v.Upsolver = &UpsolverDestinationProperties{}
+			return v.Upsolver.Deserialize(d)
+		case schemas.DestinationConnectorProperties_Zendesk:
+			v.Zendesk = &ZendeskDestinationProperties{}
+			return v.Zendesk.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 //	The properties that can be applied to a field when connector is being used as
 //
 // a destination.
@@ -1004,6 +3078,50 @@ type DestinationFieldProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DestinationFieldProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationFieldProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DestinationFieldProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsCreatable != false {
+		s.WriteBool(schemas.DestinationFieldProperties_isCreatable, v.IsCreatable)
+	}
+	if v.IsDefaultedOnCreate != false {
+		s.WriteBool(schemas.DestinationFieldProperties_isDefaultedOnCreate, v.IsDefaultedOnCreate)
+	}
+	if v.IsNullable != false {
+		s.WriteBool(schemas.DestinationFieldProperties_isNullable, v.IsNullable)
+	}
+	if v.IsUpdatable != false {
+		s.WriteBool(schemas.DestinationFieldProperties_isUpdatable, v.IsUpdatable)
+	}
+	if v.IsUpsertable != false {
+		s.WriteBool(schemas.DestinationFieldProperties_isUpsertable, v.IsUpsertable)
+	}
+	serializeSupportedWriteOperationList(s, schemas.DestinationFieldProperties_supportedWriteOperations, v.SupportedWriteOperations)
+}
+func (v *DestinationFieldProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DestinationFieldProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DestinationFieldProperties_isCreatable:
+			return d.ReadBool(schemas.DestinationFieldProperties_isCreatable, &v.IsCreatable)
+		case schemas.DestinationFieldProperties_isDefaultedOnCreate:
+			return d.ReadBool(schemas.DestinationFieldProperties_isDefaultedOnCreate, &v.IsDefaultedOnCreate)
+		case schemas.DestinationFieldProperties_isNullable:
+			return d.ReadBool(schemas.DestinationFieldProperties_isNullable, &v.IsNullable)
+		case schemas.DestinationFieldProperties_isUpdatable:
+			return d.ReadBool(schemas.DestinationFieldProperties_isUpdatable, &v.IsUpdatable)
+		case schemas.DestinationFieldProperties_isUpsertable:
+			return d.ReadBool(schemas.DestinationFieldProperties_isUpsertable, &v.IsUpsertable)
+		case schemas.DestinationFieldProperties_supportedWriteOperations:
+			return deserializeSupportedWriteOperationList(d, schemas.DestinationFieldProperties_supportedWriteOperations, &v.SupportedWriteOperations)
+		}
+		return nil
+	})
+}
+
 //	Contains information about the configuration of destination connectors present
 //
 // in the flow.
@@ -1029,6 +3147,52 @@ type DestinationFlowConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DestinationFlowConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationFlowConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DestinationFlowConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiVersion != nil {
+		s.WriteString(schemas.DestinationFlowConfig_apiVersion, *v.ApiVersion)
+	}
+	if v.ConnectorProfileName != nil {
+		s.WriteString(schemas.DestinationFlowConfig_connectorProfileName, *v.ConnectorProfileName)
+	}
+	if v.ConnectorType != "" {
+		s.WriteString(schemas.DestinationFlowConfig_connectorType, string(v.ConnectorType))
+	}
+	if v.DestinationConnectorProperties != nil {
+		s.WriteStruct(schemas.DestinationFlowConfig_destinationConnectorProperties)
+		v.DestinationConnectorProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DestinationFlowConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DestinationFlowConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DestinationFlowConfig_apiVersion:
+			v.ApiVersion = new(string)
+			return d.ReadString(schemas.DestinationFlowConfig_apiVersion, v.ApiVersion)
+		case schemas.DestinationFlowConfig_connectorProfileName:
+			v.ConnectorProfileName = new(string)
+			return d.ReadString(schemas.DestinationFlowConfig_connectorProfileName, v.ConnectorProfileName)
+		case schemas.DestinationFlowConfig_connectorType:
+			var ev string
+			if err := d.ReadString(schemas.DestinationFlowConfig_connectorType, &ev); err != nil {
+				return err
+			}
+			v.ConnectorType = ConnectorType(ev)
+			return nil
+		case schemas.DestinationFlowConfig_destinationConnectorProperties:
+			v.DestinationConnectorProperties = &DestinationConnectorProperties{}
+			return v.DestinationConnectorProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The connector-specific profile credentials required by Dynatrace.
 type DynatraceConnectorProfileCredentials struct {
 
@@ -1038,6 +3202,28 @@ type DynatraceConnectorProfileCredentials struct {
 	ApiToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DynatraceConnectorProfileCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DynatraceConnectorProfileCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DynatraceConnectorProfileCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiToken != nil {
+		s.WriteString(schemas.DynatraceConnectorProfileCredentials_apiToken, *v.ApiToken)
+	}
+}
+func (v *DynatraceConnectorProfileCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DynatraceConnectorProfileCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DynatraceConnectorProfileCredentials_apiToken:
+			v.ApiToken = new(string)
+			return d.ReadString(schemas.DynatraceConnectorProfileCredentials_apiToken, v.ApiToken)
+		}
+		return nil
+	})
 }
 
 // The connector-specific profile properties required by Dynatrace.
@@ -1051,9 +3237,47 @@ type DynatraceConnectorProfileProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DynatraceConnectorProfileProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DynatraceConnectorProfileProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DynatraceConnectorProfileProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceUrl != nil {
+		s.WriteString(schemas.DynatraceConnectorProfileProperties_instanceUrl, *v.InstanceUrl)
+	}
+}
+func (v *DynatraceConnectorProfileProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DynatraceConnectorProfileProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DynatraceConnectorProfileProperties_instanceUrl:
+			v.InstanceUrl = new(string)
+			return d.ReadString(schemas.DynatraceConnectorProfileProperties_instanceUrl, v.InstanceUrl)
+		}
+		return nil
+	})
+}
+
 // The connector metadata specific to Dynatrace.
 type DynatraceMetadata struct {
 	noSmithyDocumentSerde
+}
+
+func (v *DynatraceMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DynatraceMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DynatraceMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DynatraceMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DynatraceMetadata, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // The properties that are applied when Dynatrace is being used as a source.
@@ -1065,6 +3289,28 @@ type DynatraceSourceProperties struct {
 	Object *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DynatraceSourceProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DynatraceSourceProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DynatraceSourceProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Object != nil {
+		s.WriteString(schemas.DynatraceSourceProperties_object, *v.Object)
+	}
+}
+func (v *DynatraceSourceProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DynatraceSourceProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DynatraceSourceProperties_object:
+			v.Object = new(string)
+			return d.ReadString(schemas.DynatraceSourceProperties_object, v.Object)
+		}
+		return nil
+	})
 }
 
 //	The settings that determine how Amazon AppFlow handles an error when placing
@@ -1088,6 +3334,39 @@ type ErrorHandlingConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ErrorHandlingConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorHandlingConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorHandlingConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.ErrorHandlingConfig_bucketName, *v.BucketName)
+	}
+	if v.BucketPrefix != nil {
+		s.WriteString(schemas.ErrorHandlingConfig_bucketPrefix, *v.BucketPrefix)
+	}
+	if v.FailOnFirstDestinationError != false {
+		s.WriteBool(schemas.ErrorHandlingConfig_failOnFirstDestinationError, v.FailOnFirstDestinationError)
+	}
+}
+func (v *ErrorHandlingConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ErrorHandlingConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ErrorHandlingConfig_bucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.ErrorHandlingConfig_bucketName, v.BucketName)
+		case schemas.ErrorHandlingConfig_bucketPrefix:
+			v.BucketPrefix = new(string)
+			return d.ReadString(schemas.ErrorHandlingConfig_bucketPrefix, v.BucketPrefix)
+		case schemas.ErrorHandlingConfig_failOnFirstDestinationError:
+			return d.ReadBool(schemas.ErrorHandlingConfig_failOnFirstDestinationError, &v.FailOnFirstDestinationError)
+		}
+		return nil
+	})
+}
+
 //	Provides details in the event of a failed flow, including the failure count
 //
 // and the related error messages.
@@ -1100,6 +3379,34 @@ type ErrorInfo struct {
 	PutFailuresCount *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *ErrorInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionMessage != nil {
+		s.WriteString(schemas.ErrorInfo_executionMessage, *v.ExecutionMessage)
+	}
+	if v.PutFailuresCount != nil {
+		s.WriteInt64(schemas.ErrorInfo_putFailuresCount, *v.PutFailuresCount)
+	}
+}
+func (v *ErrorInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ErrorInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ErrorInfo_executionMessage:
+			v.ExecutionMessage = new(string)
+			return d.ReadString(schemas.ErrorInfo_executionMessage, v.ExecutionMessage)
+		case schemas.ErrorInfo_putFailuresCount:
+			v.PutFailuresCount = new(int64)
+			return d.ReadInt64(schemas.ErrorInfo_putFailuresCount, v.PutFailuresCount)
+		}
+		return nil
+	})
 }
 
 //	The properties that are applied when Amazon EventBridge is being used as a
@@ -1122,9 +3429,55 @@ type EventBridgeDestinationProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EventBridgeDestinationProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventBridgeDestinationProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventBridgeDestinationProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorHandlingConfig != nil {
+		s.WriteStruct(schemas.EventBridgeDestinationProperties_errorHandlingConfig)
+		v.ErrorHandlingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Object != nil {
+		s.WriteString(schemas.EventBridgeDestinationProperties_object, *v.Object)
+	}
+}
+func (v *EventBridgeDestinationProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventBridgeDestinationProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventBridgeDestinationProperties_errorHandlingConfig:
+			v.ErrorHandlingConfig = &ErrorHandlingConfig{}
+			return v.ErrorHandlingConfig.Deserialize(d)
+		case schemas.EventBridgeDestinationProperties_object:
+			v.Object = new(string)
+			return d.ReadString(schemas.EventBridgeDestinationProperties_object, v.Object)
+		}
+		return nil
+	})
+}
+
 // The connector metadata specific to Amazon EventBridge.
 type EventBridgeMetadata struct {
 	noSmithyDocumentSerde
+}
+
+func (v *EventBridgeMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventBridgeMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventBridgeMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *EventBridgeMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventBridgeMetadata, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 //	Describes the details of the flow run, including the timestamp, status, and
@@ -1142,6 +3495,44 @@ type ExecutionDetails struct {
 	MostRecentExecutionTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExecutionDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutionDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecutionDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MostRecentExecutionMessage != nil {
+		s.WriteString(schemas.ExecutionDetails_mostRecentExecutionMessage, *v.MostRecentExecutionMessage)
+	}
+	if v.MostRecentExecutionStatus != "" {
+		s.WriteString(schemas.ExecutionDetails_mostRecentExecutionStatus, string(v.MostRecentExecutionStatus))
+	}
+	if v.MostRecentExecutionTime != nil {
+		s.WriteTime(schemas.ExecutionDetails_mostRecentExecutionTime, *v.MostRecentExecutionTime)
+	}
+}
+func (v *ExecutionDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecutionDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecutionDetails_mostRecentExecutionMessage:
+			v.MostRecentExecutionMessage = new(string)
+			return d.ReadString(schemas.ExecutionDetails_mostRecentExecutionMessage, v.MostRecentExecutionMessage)
+		case schemas.ExecutionDetails_mostRecentExecutionStatus:
+			var ev string
+			if err := d.ReadString(schemas.ExecutionDetails_mostRecentExecutionStatus, &ev); err != nil {
+				return err
+			}
+			v.MostRecentExecutionStatus = ExecutionStatus(ev)
+			return nil
+		case schemas.ExecutionDetails_mostRecentExecutionTime:
+			v.MostRecentExecutionTime = new(time.Time)
+			return d.ReadTime(schemas.ExecutionDetails_mostRecentExecutionTime, v.MostRecentExecutionTime)
+		}
+		return nil
+	})
 }
 
 // Specifies information about the past flow run instances for a given flow.
@@ -1178,6 +3569,73 @@ type ExecutionRecord struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecutionRecord) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutionRecord)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecutionRecord) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataPullEndTime != nil {
+		s.WriteTime(schemas.ExecutionRecord_dataPullEndTime, *v.DataPullEndTime)
+	}
+	if v.DataPullStartTime != nil {
+		s.WriteTime(schemas.ExecutionRecord_dataPullStartTime, *v.DataPullStartTime)
+	}
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.ExecutionRecord_executionId, *v.ExecutionId)
+	}
+	if v.ExecutionResult != nil {
+		s.WriteStruct(schemas.ExecutionRecord_executionResult)
+		v.ExecutionResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionStatus != "" {
+		s.WriteString(schemas.ExecutionRecord_executionStatus, string(v.ExecutionStatus))
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.ExecutionRecord_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	serializeMetadataCatalogDetails(s, schemas.ExecutionRecord_metadataCatalogDetails, v.MetadataCatalogDetails)
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.ExecutionRecord_startedAt, *v.StartedAt)
+	}
+}
+func (v *ExecutionRecord) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecutionRecord, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecutionRecord_dataPullEndTime:
+			v.DataPullEndTime = new(time.Time)
+			return d.ReadTime(schemas.ExecutionRecord_dataPullEndTime, v.DataPullEndTime)
+		case schemas.ExecutionRecord_dataPullStartTime:
+			v.DataPullStartTime = new(time.Time)
+			return d.ReadTime(schemas.ExecutionRecord_dataPullStartTime, v.DataPullStartTime)
+		case schemas.ExecutionRecord_executionId:
+			v.ExecutionId = new(string)
+			return d.ReadString(schemas.ExecutionRecord_executionId, v.ExecutionId)
+		case schemas.ExecutionRecord_executionResult:
+			v.ExecutionResult = &ExecutionResult{}
+			return v.ExecutionResult.Deserialize(d)
+		case schemas.ExecutionRecord_executionStatus:
+			var ev string
+			if err := d.ReadString(schemas.ExecutionRecord_executionStatus, &ev); err != nil {
+				return err
+			}
+			v.ExecutionStatus = ExecutionStatus(ev)
+			return nil
+		case schemas.ExecutionRecord_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ExecutionRecord_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.ExecutionRecord_metadataCatalogDetails:
+			return deserializeMetadataCatalogDetails(d, schemas.ExecutionRecord_metadataCatalogDetails, &v.MetadataCatalogDetails)
+		case schemas.ExecutionRecord_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.ExecutionRecord_startedAt, v.StartedAt)
+		}
+		return nil
+	})
+}
+
 // Specifies the end result of the flow run.
 type ExecutionResult struct {
 
@@ -1202,6 +3660,60 @@ type ExecutionResult struct {
 	RecordsProcessed *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExecutionResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecutionResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BytesProcessed != nil {
+		s.WriteInt64(schemas.ExecutionResult_bytesProcessed, *v.BytesProcessed)
+	}
+	if v.BytesWritten != nil {
+		s.WriteInt64(schemas.ExecutionResult_bytesWritten, *v.BytesWritten)
+	}
+	if v.ErrorInfo != nil {
+		s.WriteStruct(schemas.ExecutionResult_errorInfo)
+		v.ErrorInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxPageSize != nil {
+		s.WriteInt64(schemas.ExecutionResult_maxPageSize, *v.MaxPageSize)
+	}
+	if v.NumParallelProcesses != nil {
+		s.WriteInt64(schemas.ExecutionResult_numParallelProcesses, *v.NumParallelProcesses)
+	}
+	if v.RecordsProcessed != nil {
+		s.WriteInt64(schemas.ExecutionResult_recordsProcessed, *v.RecordsProcessed)
+	}
+}
+func (v *ExecutionResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecutionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecutionResult_bytesProcessed:
+			v.BytesProcessed = new(int64)
+			return d.ReadInt64(schemas.ExecutionResult_bytesProcessed, v.BytesProcessed)
+		case schemas.ExecutionResult_bytesWritten:
+			v.BytesWritten = new(int64)
+			return d.ReadInt64(schemas.ExecutionResult_bytesWritten, v.BytesWritten)
+		case schemas.ExecutionResult_errorInfo:
+			v.ErrorInfo = &ErrorInfo{}
+			return v.ErrorInfo.Deserialize(d)
+		case schemas.ExecutionResult_maxPageSize:
+			v.MaxPageSize = new(int64)
+			return d.ReadInt64(schemas.ExecutionResult_maxPageSize, v.MaxPageSize)
+		case schemas.ExecutionResult_numParallelProcesses:
+			v.NumParallelProcesses = new(int64)
+			return d.ReadInt64(schemas.ExecutionResult_numParallelProcesses, v.NumParallelProcesses)
+		case schemas.ExecutionResult_recordsProcessed:
+			v.RecordsProcessed = new(int64)
+			return d.ReadInt64(schemas.ExecutionResult_recordsProcessed, v.RecordsProcessed)
+		}
+		return nil
+	})
 }
 
 //	Contains details regarding the supported field type and the operators that can
@@ -1236,6 +3748,62 @@ type FieldTypeDetails struct {
 	ValueRegexPattern *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FieldTypeDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FieldTypeDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FieldTypeDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FieldLengthRange != nil {
+		s.WriteStruct(schemas.FieldTypeDetails_fieldLengthRange)
+		v.FieldLengthRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FieldType != nil {
+		s.WriteString(schemas.FieldTypeDetails_fieldType, *v.FieldType)
+	}
+	if v.FieldValueRange != nil {
+		s.WriteStruct(schemas.FieldTypeDetails_fieldValueRange)
+		v.FieldValueRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFilterOperatorList(s, schemas.FieldTypeDetails_filterOperators, v.FilterOperators)
+	if v.SupportedDateFormat != nil {
+		s.WriteString(schemas.FieldTypeDetails_supportedDateFormat, *v.SupportedDateFormat)
+	}
+	serializeSupportedValueList(s, schemas.FieldTypeDetails_supportedValues, v.SupportedValues)
+	if v.ValueRegexPattern != nil {
+		s.WriteString(schemas.FieldTypeDetails_valueRegexPattern, *v.ValueRegexPattern)
+	}
+}
+func (v *FieldTypeDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FieldTypeDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FieldTypeDetails_fieldLengthRange:
+			v.FieldLengthRange = &Range{}
+			return v.FieldLengthRange.Deserialize(d)
+		case schemas.FieldTypeDetails_fieldType:
+			v.FieldType = new(string)
+			return d.ReadString(schemas.FieldTypeDetails_fieldType, v.FieldType)
+		case schemas.FieldTypeDetails_fieldValueRange:
+			v.FieldValueRange = &Range{}
+			return v.FieldValueRange.Deserialize(d)
+		case schemas.FieldTypeDetails_filterOperators:
+			return deserializeFilterOperatorList(d, schemas.FieldTypeDetails_filterOperators, &v.FilterOperators)
+		case schemas.FieldTypeDetails_supportedDateFormat:
+			v.SupportedDateFormat = new(string)
+			return d.ReadString(schemas.FieldTypeDetails_supportedDateFormat, v.SupportedDateFormat)
+		case schemas.FieldTypeDetails_supportedValues:
+			return deserializeSupportedValueList(d, schemas.FieldTypeDetails_supportedValues, &v.SupportedValues)
+		case schemas.FieldTypeDetails_valueRegexPattern:
+			v.ValueRegexPattern = new(string)
+			return d.ReadString(schemas.FieldTypeDetails_valueRegexPattern, v.ValueRegexPattern)
+		}
+		return nil
+	})
 }
 
 //	The properties of the flow, such as its source, destination, trigger type, and
@@ -1295,6 +3863,127 @@ type FlowDefinition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FlowDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlowDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlowDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.FlowDefinition_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.FlowDefinition_createdBy, *v.CreatedBy)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.FlowDefinition_description, *v.Description)
+	}
+	if v.DestinationConnectorLabel != nil {
+		s.WriteString(schemas.FlowDefinition_destinationConnectorLabel, *v.DestinationConnectorLabel)
+	}
+	if v.DestinationConnectorType != "" {
+		s.WriteString(schemas.FlowDefinition_destinationConnectorType, string(v.DestinationConnectorType))
+	}
+	if v.FlowArn != nil {
+		s.WriteString(schemas.FlowDefinition_flowArn, *v.FlowArn)
+	}
+	if v.FlowName != nil {
+		s.WriteString(schemas.FlowDefinition_flowName, *v.FlowName)
+	}
+	if v.FlowStatus != "" {
+		s.WriteString(schemas.FlowDefinition_flowStatus, string(v.FlowStatus))
+	}
+	if v.LastRunExecutionDetails != nil {
+		s.WriteStruct(schemas.FlowDefinition_lastRunExecutionDetails)
+		v.LastRunExecutionDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.FlowDefinition_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.LastUpdatedBy != nil {
+		s.WriteString(schemas.FlowDefinition_lastUpdatedBy, *v.LastUpdatedBy)
+	}
+	if v.SourceConnectorLabel != nil {
+		s.WriteString(schemas.FlowDefinition_sourceConnectorLabel, *v.SourceConnectorLabel)
+	}
+	if v.SourceConnectorType != "" {
+		s.WriteString(schemas.FlowDefinition_sourceConnectorType, string(v.SourceConnectorType))
+	}
+	serializeTagMap(s, schemas.FlowDefinition_tags, v.Tags)
+	if v.TriggerType != "" {
+		s.WriteString(schemas.FlowDefinition_triggerType, string(v.TriggerType))
+	}
+}
+func (v *FlowDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FlowDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FlowDefinition_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.FlowDefinition_createdAt, v.CreatedAt)
+		case schemas.FlowDefinition_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.FlowDefinition_createdBy, v.CreatedBy)
+		case schemas.FlowDefinition_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.FlowDefinition_description, v.Description)
+		case schemas.FlowDefinition_destinationConnectorLabel:
+			v.DestinationConnectorLabel = new(string)
+			return d.ReadString(schemas.FlowDefinition_destinationConnectorLabel, v.DestinationConnectorLabel)
+		case schemas.FlowDefinition_destinationConnectorType:
+			var ev string
+			if err := d.ReadString(schemas.FlowDefinition_destinationConnectorType, &ev); err != nil {
+				return err
+			}
+			v.DestinationConnectorType = ConnectorType(ev)
+			return nil
+		case schemas.FlowDefinition_flowArn:
+			v.FlowArn = new(string)
+			return d.ReadString(schemas.FlowDefinition_flowArn, v.FlowArn)
+		case schemas.FlowDefinition_flowName:
+			v.FlowName = new(string)
+			return d.ReadString(schemas.FlowDefinition_flowName, v.FlowName)
+		case schemas.FlowDefinition_flowStatus:
+			var ev string
+			if err := d.ReadString(schemas.FlowDefinition_flowStatus, &ev); err != nil {
+				return err
+			}
+			v.FlowStatus = FlowStatus(ev)
+			return nil
+		case schemas.FlowDefinition_lastRunExecutionDetails:
+			v.LastRunExecutionDetails = &ExecutionDetails{}
+			return v.LastRunExecutionDetails.Deserialize(d)
+		case schemas.FlowDefinition_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.FlowDefinition_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.FlowDefinition_lastUpdatedBy:
+			v.LastUpdatedBy = new(string)
+			return d.ReadString(schemas.FlowDefinition_lastUpdatedBy, v.LastUpdatedBy)
+		case schemas.FlowDefinition_sourceConnectorLabel:
+			v.SourceConnectorLabel = new(string)
+			return d.ReadString(schemas.FlowDefinition_sourceConnectorLabel, v.SourceConnectorLabel)
+		case schemas.FlowDefinition_sourceConnectorType:
+			var ev string
+			if err := d.ReadString(schemas.FlowDefinition_sourceConnectorType, &ev); err != nil {
+				return err
+			}
+			v.SourceConnectorType = ConnectorType(ev)
+			return nil
+		case schemas.FlowDefinition_tags:
+			return deserializeTagMap(d, schemas.FlowDefinition_tags, &v.Tags)
+		case schemas.FlowDefinition_triggerType:
+			var ev string
+			if err := d.ReadString(schemas.FlowDefinition_triggerType, &ev); err != nil {
+				return err
+			}
+			v.TriggerType = TriggerType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies the configuration that Amazon AppFlow uses when it catalogs your data
 // with the Glue Data Catalog. When Amazon AppFlow catalogs your data, it stores
 // metadata in Data Catalog tables. This metadata represents the data that's
@@ -1335,6 +4024,40 @@ type GlueDataCatalogConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GlueDataCatalogConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GlueDataCatalogConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GlueDataCatalogConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.GlueDataCatalogConfig_databaseName, *v.DatabaseName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GlueDataCatalogConfig_roleArn, *v.RoleArn)
+	}
+	if v.TablePrefix != nil {
+		s.WriteString(schemas.GlueDataCatalogConfig_tablePrefix, *v.TablePrefix)
+	}
+}
+func (v *GlueDataCatalogConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GlueDataCatalogConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GlueDataCatalogConfig_databaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.GlueDataCatalogConfig_databaseName, v.DatabaseName)
+		case schemas.GlueDataCatalogConfig_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GlueDataCatalogConfig_roleArn, v.RoleArn)
+		case schemas.GlueDataCatalogConfig_tablePrefix:
+			v.TablePrefix = new(string)
+			return d.ReadString(schemas.GlueDataCatalogConfig_tablePrefix, v.TablePrefix)
+		}
+		return nil
+	})
+}
+
 // The connector-specific profile credentials required by Google Analytics.
 type GoogleAnalyticsConnectorProfileCredentials struct {
 
@@ -1363,9 +4086,73 @@ type GoogleAnalyticsConnectorProfileCredentials struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GoogleAnalyticsConnectorProfileCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GoogleAnalyticsConnectorProfileCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GoogleAnalyticsConnectorProfileCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.GoogleAnalyticsConnectorProfileCredentials_accessToken, *v.AccessToken)
+	}
+	if v.ClientId != nil {
+		s.WriteString(schemas.GoogleAnalyticsConnectorProfileCredentials_clientId, *v.ClientId)
+	}
+	if v.ClientSecret != nil {
+		s.WriteString(schemas.GoogleAnalyticsConnectorProfileCredentials_clientSecret, *v.ClientSecret)
+	}
+	if v.OAuthRequest != nil {
+		s.WriteStruct(schemas.GoogleAnalyticsConnectorProfileCredentials_oAuthRequest)
+		v.OAuthRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RefreshToken != nil {
+		s.WriteString(schemas.GoogleAnalyticsConnectorProfileCredentials_refreshToken, *v.RefreshToken)
+	}
+}
+func (v *GoogleAnalyticsConnectorProfileCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GoogleAnalyticsConnectorProfileCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GoogleAnalyticsConnectorProfileCredentials_accessToken:
+			v.AccessToken = new(string)
+			return d.ReadString(schemas.GoogleAnalyticsConnectorProfileCredentials_accessToken, v.AccessToken)
+		case schemas.GoogleAnalyticsConnectorProfileCredentials_clientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.GoogleAnalyticsConnectorProfileCredentials_clientId, v.ClientId)
+		case schemas.GoogleAnalyticsConnectorProfileCredentials_clientSecret:
+			v.ClientSecret = new(string)
+			return d.ReadString(schemas.GoogleAnalyticsConnectorProfileCredentials_clientSecret, v.ClientSecret)
+		case schemas.GoogleAnalyticsConnectorProfileCredentials_oAuthRequest:
+			v.OAuthRequest = &ConnectorOAuthRequest{}
+			return v.OAuthRequest.Deserialize(d)
+		case schemas.GoogleAnalyticsConnectorProfileCredentials_refreshToken:
+			v.RefreshToken = new(string)
+			return d.ReadString(schemas.GoogleAnalyticsConnectorProfileCredentials_refreshToken, v.RefreshToken)
+		}
+		return nil
+	})
+}
+
 // The connector-specific profile properties required by Google Analytics.
 type GoogleAnalyticsConnectorProfileProperties struct {
 	noSmithyDocumentSerde
+}
+
+func (v *GoogleAnalyticsConnectorProfileProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GoogleAnalyticsConnectorProfileProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GoogleAnalyticsConnectorProfileProperties) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GoogleAnalyticsConnectorProfileProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GoogleAnalyticsConnectorProfileProperties, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // The connector metadata specific to Google Analytics.
@@ -1375,6 +4162,25 @@ type GoogleAnalyticsMetadata struct {
 	OAuthScopes []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GoogleAnalyticsMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GoogleAnalyticsMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GoogleAnalyticsMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOAuthScopeList(s, schemas.GoogleAnalyticsMetadata_oAuthScopes, v.OAuthScopes)
+}
+func (v *GoogleAnalyticsMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GoogleAnalyticsMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GoogleAnalyticsMetadata_oAuthScopes:
+			return deserializeOAuthScopeList(d, schemas.GoogleAnalyticsMetadata_oAuthScopes, &v.OAuthScopes)
+		}
+		return nil
+	})
 }
 
 //	The properties that are applied when Google Analytics is being used as a
@@ -1388,6 +4194,28 @@ type GoogleAnalyticsSourceProperties struct {
 	Object *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GoogleAnalyticsSourceProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GoogleAnalyticsSourceProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GoogleAnalyticsSourceProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Object != nil {
+		s.WriteString(schemas.GoogleAnalyticsSourceProperties_object, *v.Object)
+	}
+}
+func (v *GoogleAnalyticsSourceProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GoogleAnalyticsSourceProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GoogleAnalyticsSourceProperties_object:
+			v.Object = new(string)
+			return d.ReadString(schemas.GoogleAnalyticsSourceProperties_object, v.Object)
+		}
+		return nil
+	})
 }
 
 // The connector-specific credentials required when using Amazon Honeycode.
@@ -1406,9 +4234,61 @@ type HoneycodeConnectorProfileCredentials struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HoneycodeConnectorProfileCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HoneycodeConnectorProfileCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HoneycodeConnectorProfileCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.HoneycodeConnectorProfileCredentials_accessToken, *v.AccessToken)
+	}
+	if v.OAuthRequest != nil {
+		s.WriteStruct(schemas.HoneycodeConnectorProfileCredentials_oAuthRequest)
+		v.OAuthRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RefreshToken != nil {
+		s.WriteString(schemas.HoneycodeConnectorProfileCredentials_refreshToken, *v.RefreshToken)
+	}
+}
+func (v *HoneycodeConnectorProfileCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HoneycodeConnectorProfileCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HoneycodeConnectorProfileCredentials_accessToken:
+			v.AccessToken = new(string)
+			return d.ReadString(schemas.HoneycodeConnectorProfileCredentials_accessToken, v.AccessToken)
+		case schemas.HoneycodeConnectorProfileCredentials_oAuthRequest:
+			v.OAuthRequest = &ConnectorOAuthRequest{}
+			return v.OAuthRequest.Deserialize(d)
+		case schemas.HoneycodeConnectorProfileCredentials_refreshToken:
+			v.RefreshToken = new(string)
+			return d.ReadString(schemas.HoneycodeConnectorProfileCredentials_refreshToken, v.RefreshToken)
+		}
+		return nil
+	})
+}
+
 // The connector-specific properties required when using Amazon Honeycode.
 type HoneycodeConnectorProfileProperties struct {
 	noSmithyDocumentSerde
+}
+
+func (v *HoneycodeConnectorProfileProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HoneycodeConnectorProfileProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HoneycodeConnectorProfileProperties) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *HoneycodeConnectorProfileProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HoneycodeConnectorProfileProperties, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 //	The properties that are applied when Amazon Honeycode is used as a
@@ -1431,6 +4311,36 @@ type HoneycodeDestinationProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HoneycodeDestinationProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HoneycodeDestinationProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HoneycodeDestinationProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorHandlingConfig != nil {
+		s.WriteStruct(schemas.HoneycodeDestinationProperties_errorHandlingConfig)
+		v.ErrorHandlingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Object != nil {
+		s.WriteString(schemas.HoneycodeDestinationProperties_object, *v.Object)
+	}
+}
+func (v *HoneycodeDestinationProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HoneycodeDestinationProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HoneycodeDestinationProperties_errorHandlingConfig:
+			v.ErrorHandlingConfig = &ErrorHandlingConfig{}
+			return v.ErrorHandlingConfig.Deserialize(d)
+		case schemas.HoneycodeDestinationProperties_object:
+			v.Object = new(string)
+			return d.ReadString(schemas.HoneycodeDestinationProperties_object, v.Object)
+		}
+		return nil
+	})
+}
+
 // The connector metadata specific to Amazon Honeycode.
 type HoneycodeMetadata struct {
 
@@ -1438,6 +4348,25 @@ type HoneycodeMetadata struct {
 	OAuthScopes []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HoneycodeMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HoneycodeMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HoneycodeMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOAuthScopeList(s, schemas.HoneycodeMetadata_oAuthScopes, v.OAuthScopes)
+}
+func (v *HoneycodeMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HoneycodeMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HoneycodeMetadata_oAuthScopes:
+			return deserializeOAuthScopeList(d, schemas.HoneycodeMetadata_oAuthScopes, &v.OAuthScopes)
+		}
+		return nil
+	})
 }
 
 //	Specifies the configuration used when importing incremental records from the
@@ -1450,6 +4379,28 @@ type IncrementalPullConfig struct {
 	DatetimeTypeFieldName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *IncrementalPullConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IncrementalPullConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IncrementalPullConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatetimeTypeFieldName != nil {
+		s.WriteString(schemas.IncrementalPullConfig_datetimeTypeFieldName, *v.DatetimeTypeFieldName)
+	}
+}
+func (v *IncrementalPullConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IncrementalPullConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IncrementalPullConfig_datetimeTypeFieldName:
+			v.DatetimeTypeFieldName = new(string)
+			return d.ReadString(schemas.IncrementalPullConfig_datetimeTypeFieldName, v.DatetimeTypeFieldName)
+		}
+		return nil
+	})
 }
 
 // The connector-specific profile credentials required by Infor Nexus.
@@ -1478,6 +4429,46 @@ type InforNexusConnectorProfileCredentials struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InforNexusConnectorProfileCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InforNexusConnectorProfileCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InforNexusConnectorProfileCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessKeyId != nil {
+		s.WriteString(schemas.InforNexusConnectorProfileCredentials_accessKeyId, *v.AccessKeyId)
+	}
+	if v.Datakey != nil {
+		s.WriteString(schemas.InforNexusConnectorProfileCredentials_datakey, *v.Datakey)
+	}
+	if v.SecretAccessKey != nil {
+		s.WriteString(schemas.InforNexusConnectorProfileCredentials_secretAccessKey, *v.SecretAccessKey)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.InforNexusConnectorProfileCredentials_userId, *v.UserId)
+	}
+}
+func (v *InforNexusConnectorProfileCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InforNexusConnectorProfileCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InforNexusConnectorProfileCredentials_accessKeyId:
+			v.AccessKeyId = new(string)
+			return d.ReadString(schemas.InforNexusConnectorProfileCredentials_accessKeyId, v.AccessKeyId)
+		case schemas.InforNexusConnectorProfileCredentials_datakey:
+			v.Datakey = new(string)
+			return d.ReadString(schemas.InforNexusConnectorProfileCredentials_datakey, v.Datakey)
+		case schemas.InforNexusConnectorProfileCredentials_secretAccessKey:
+			v.SecretAccessKey = new(string)
+			return d.ReadString(schemas.InforNexusConnectorProfileCredentials_secretAccessKey, v.SecretAccessKey)
+		case schemas.InforNexusConnectorProfileCredentials_userId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.InforNexusConnectorProfileCredentials_userId, v.UserId)
+		}
+		return nil
+	})
+}
+
 // The connector-specific profile properties required by Infor Nexus.
 type InforNexusConnectorProfileProperties struct {
 
@@ -1489,9 +4480,47 @@ type InforNexusConnectorProfileProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InforNexusConnectorProfileProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InforNexusConnectorProfileProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InforNexusConnectorProfileProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceUrl != nil {
+		s.WriteString(schemas.InforNexusConnectorProfileProperties_instanceUrl, *v.InstanceUrl)
+	}
+}
+func (v *InforNexusConnectorProfileProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InforNexusConnectorProfileProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InforNexusConnectorProfileProperties_instanceUrl:
+			v.InstanceUrl = new(string)
+			return d.ReadString(schemas.InforNexusConnectorProfileProperties_instanceUrl, v.InstanceUrl)
+		}
+		return nil
+	})
+}
+
 // The connector metadata specific to Infor Nexus.
 type InforNexusMetadata struct {
 	noSmithyDocumentSerde
+}
+
+func (v *InforNexusMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InforNexusMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InforNexusMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *InforNexusMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InforNexusMetadata, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // The properties that are applied when Infor Nexus is being used as a source.
@@ -1503,6 +4532,28 @@ type InforNexusSourceProperties struct {
 	Object *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InforNexusSourceProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InforNexusSourceProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InforNexusSourceProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Object != nil {
+		s.WriteString(schemas.InforNexusSourceProperties_object, *v.Object)
+	}
+}
+func (v *InforNexusSourceProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InforNexusSourceProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InforNexusSourceProperties_object:
+			v.Object = new(string)
+			return d.ReadString(schemas.InforNexusSourceProperties_object, v.Object)
+		}
+		return nil
+	})
 }
 
 // Contains information about the configuration of the lambda which is being
@@ -1517,11 +4568,49 @@ type LambdaConnectorProvisioningConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LambdaConnectorProvisioningConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaConnectorProvisioningConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaConnectorProvisioningConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LambdaArn != nil {
+		s.WriteString(schemas.LambdaConnectorProvisioningConfig_lambdaArn, *v.LambdaArn)
+	}
+}
+func (v *LambdaConnectorProvisioningConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaConnectorProvisioningConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaConnectorProvisioningConfig_lambdaArn:
+			v.LambdaArn = new(string)
+			return d.ReadString(schemas.LambdaConnectorProvisioningConfig_lambdaArn, v.LambdaArn)
+		}
+		return nil
+	})
+}
+
 //	The properties that are applied when Amazon Lookout for Metrics is used as a
 //
 // destination.
 type LookoutMetricsDestinationProperties struct {
 	noSmithyDocumentSerde
+}
+
+func (v *LookoutMetricsDestinationProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LookoutMetricsDestinationProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LookoutMetricsDestinationProperties) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *LookoutMetricsDestinationProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LookoutMetricsDestinationProperties, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // The connector-specific profile credentials required by Marketo.
@@ -1548,6 +4637,48 @@ type MarketoConnectorProfileCredentials struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MarketoConnectorProfileCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MarketoConnectorProfileCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MarketoConnectorProfileCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.MarketoConnectorProfileCredentials_accessToken, *v.AccessToken)
+	}
+	if v.ClientId != nil {
+		s.WriteString(schemas.MarketoConnectorProfileCredentials_clientId, *v.ClientId)
+	}
+	if v.ClientSecret != nil {
+		s.WriteString(schemas.MarketoConnectorProfileCredentials_clientSecret, *v.ClientSecret)
+	}
+	if v.OAuthRequest != nil {
+		s.WriteStruct(schemas.MarketoConnectorProfileCredentials_oAuthRequest)
+		v.OAuthRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MarketoConnectorProfileCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MarketoConnectorProfileCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MarketoConnectorProfileCredentials_accessToken:
+			v.AccessToken = new(string)
+			return d.ReadString(schemas.MarketoConnectorProfileCredentials_accessToken, v.AccessToken)
+		case schemas.MarketoConnectorProfileCredentials_clientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.MarketoConnectorProfileCredentials_clientId, v.ClientId)
+		case schemas.MarketoConnectorProfileCredentials_clientSecret:
+			v.ClientSecret = new(string)
+			return d.ReadString(schemas.MarketoConnectorProfileCredentials_clientSecret, v.ClientSecret)
+		case schemas.MarketoConnectorProfileCredentials_oAuthRequest:
+			v.OAuthRequest = &ConnectorOAuthRequest{}
+			return v.OAuthRequest.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The connector-specific profile properties required when using Marketo.
 type MarketoConnectorProfileProperties struct {
 
@@ -1557,6 +4688,28 @@ type MarketoConnectorProfileProperties struct {
 	InstanceUrl *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MarketoConnectorProfileProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MarketoConnectorProfileProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MarketoConnectorProfileProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceUrl != nil {
+		s.WriteString(schemas.MarketoConnectorProfileProperties_instanceUrl, *v.InstanceUrl)
+	}
+}
+func (v *MarketoConnectorProfileProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MarketoConnectorProfileProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MarketoConnectorProfileProperties_instanceUrl:
+			v.InstanceUrl = new(string)
+			return d.ReadString(schemas.MarketoConnectorProfileProperties_instanceUrl, v.InstanceUrl)
+		}
+		return nil
+	})
 }
 
 // The properties that Amazon AppFlow applies when you use Marketo as a flow
@@ -1578,9 +4731,55 @@ type MarketoDestinationProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MarketoDestinationProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MarketoDestinationProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MarketoDestinationProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorHandlingConfig != nil {
+		s.WriteStruct(schemas.MarketoDestinationProperties_errorHandlingConfig)
+		v.ErrorHandlingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Object != nil {
+		s.WriteString(schemas.MarketoDestinationProperties_object, *v.Object)
+	}
+}
+func (v *MarketoDestinationProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MarketoDestinationProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MarketoDestinationProperties_errorHandlingConfig:
+			v.ErrorHandlingConfig = &ErrorHandlingConfig{}
+			return v.ErrorHandlingConfig.Deserialize(d)
+		case schemas.MarketoDestinationProperties_object:
+			v.Object = new(string)
+			return d.ReadString(schemas.MarketoDestinationProperties_object, v.Object)
+		}
+		return nil
+	})
+}
+
 // The connector metadata specific to Marketo.
 type MarketoMetadata struct {
 	noSmithyDocumentSerde
+}
+
+func (v *MarketoMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MarketoMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MarketoMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *MarketoMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MarketoMetadata, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // The properties that are applied when Marketo is being used as a source.
@@ -1594,6 +4793,28 @@ type MarketoSourceProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MarketoSourceProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MarketoSourceProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MarketoSourceProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Object != nil {
+		s.WriteString(schemas.MarketoSourceProperties_object, *v.Object)
+	}
+}
+func (v *MarketoSourceProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MarketoSourceProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MarketoSourceProperties_object:
+			v.Object = new(string)
+			return d.ReadString(schemas.MarketoSourceProperties_object, v.Object)
+		}
+		return nil
+	})
+}
+
 // Specifies the configuration that Amazon AppFlow uses when it catalogs your
 // data. When Amazon AppFlow catalogs your data, it stores metadata in a data
 // catalog.
@@ -1604,6 +4825,30 @@ type MetadataCatalogConfig struct {
 	GlueDataCatalog *GlueDataCatalogConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *MetadataCatalogConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetadataCatalogConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetadataCatalogConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlueDataCatalog != nil {
+		s.WriteStruct(schemas.MetadataCatalogConfig_glueDataCatalog)
+		v.GlueDataCatalog.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MetadataCatalogConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetadataCatalogConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetadataCatalogConfig_glueDataCatalog:
+			v.GlueDataCatalog = &GlueDataCatalogConfig{}
+			return v.GlueDataCatalog.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes the metadata catalog, metadata table, and data partitions that Amazon
@@ -1637,6 +4882,54 @@ type MetadataCatalogDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetadataCatalogDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetadataCatalogDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetadataCatalogDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogType != "" {
+		s.WriteString(schemas.MetadataCatalogDetail_catalogType, string(v.CatalogType))
+	}
+	if v.PartitionRegistrationOutput != nil {
+		s.WriteStruct(schemas.MetadataCatalogDetail_partitionRegistrationOutput)
+		v.PartitionRegistrationOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.MetadataCatalogDetail_tableName, *v.TableName)
+	}
+	if v.TableRegistrationOutput != nil {
+		s.WriteStruct(schemas.MetadataCatalogDetail_tableRegistrationOutput)
+		v.TableRegistrationOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MetadataCatalogDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetadataCatalogDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetadataCatalogDetail_catalogType:
+			var ev string
+			if err := d.ReadString(schemas.MetadataCatalogDetail_catalogType, &ev); err != nil {
+				return err
+			}
+			v.CatalogType = CatalogType(ev)
+			return nil
+		case schemas.MetadataCatalogDetail_partitionRegistrationOutput:
+			v.PartitionRegistrationOutput = &RegistrationOutput{}
+			return v.PartitionRegistrationOutput.Deserialize(d)
+		case schemas.MetadataCatalogDetail_tableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.MetadataCatalogDetail_tableName, v.TableName)
+		case schemas.MetadataCatalogDetail_tableRegistrationOutput:
+			v.TableRegistrationOutput = &RegistrationOutput{}
+			return v.TableRegistrationOutput.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The OAuth 2.0 credentials required for OAuth 2.0 authentication.
 type OAuth2Credentials struct {
 
@@ -1658,6 +4951,54 @@ type OAuth2Credentials struct {
 	RefreshToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OAuth2Credentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OAuth2Credentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OAuth2Credentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.OAuth2Credentials_accessToken, *v.AccessToken)
+	}
+	if v.ClientId != nil {
+		s.WriteString(schemas.OAuth2Credentials_clientId, *v.ClientId)
+	}
+	if v.ClientSecret != nil {
+		s.WriteString(schemas.OAuth2Credentials_clientSecret, *v.ClientSecret)
+	}
+	if v.OAuthRequest != nil {
+		s.WriteStruct(schemas.OAuth2Credentials_oAuthRequest)
+		v.OAuthRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RefreshToken != nil {
+		s.WriteString(schemas.OAuth2Credentials_refreshToken, *v.RefreshToken)
+	}
+}
+func (v *OAuth2Credentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OAuth2Credentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OAuth2Credentials_accessToken:
+			v.AccessToken = new(string)
+			return d.ReadString(schemas.OAuth2Credentials_accessToken, v.AccessToken)
+		case schemas.OAuth2Credentials_clientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.OAuth2Credentials_clientId, v.ClientId)
+		case schemas.OAuth2Credentials_clientSecret:
+			v.ClientSecret = new(string)
+			return d.ReadString(schemas.OAuth2Credentials_clientSecret, v.ClientSecret)
+		case schemas.OAuth2Credentials_oAuthRequest:
+			v.OAuthRequest = &ConnectorOAuthRequest{}
+			return v.OAuthRequest.Deserialize(d)
+		case schemas.OAuth2Credentials_refreshToken:
+			v.RefreshToken = new(string)
+			return d.ReadString(schemas.OAuth2Credentials_refreshToken, v.RefreshToken)
+		}
+		return nil
+	})
 }
 
 // Custom parameter required for OAuth 2.0 authentication.
@@ -1688,6 +5029,63 @@ type OAuth2CustomParameter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OAuth2CustomParameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OAuth2CustomParameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OAuth2CustomParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectorSuppliedValueList(s, schemas.OAuth2CustomParameter_connectorSuppliedValues, v.ConnectorSuppliedValues)
+	if v.Description != nil {
+		s.WriteString(schemas.OAuth2CustomParameter_description, *v.Description)
+	}
+	if v.IsRequired != false {
+		s.WriteBool(schemas.OAuth2CustomParameter_isRequired, v.IsRequired)
+	}
+	if v.IsSensitiveField != false {
+		s.WriteBool(schemas.OAuth2CustomParameter_isSensitiveField, v.IsSensitiveField)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.OAuth2CustomParameter_key, *v.Key)
+	}
+	if v.Label != nil {
+		s.WriteString(schemas.OAuth2CustomParameter_label, *v.Label)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.OAuth2CustomParameter_type, string(v.Type))
+	}
+}
+func (v *OAuth2CustomParameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OAuth2CustomParameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OAuth2CustomParameter_connectorSuppliedValues:
+			return deserializeConnectorSuppliedValueList(d, schemas.OAuth2CustomParameter_connectorSuppliedValues, &v.ConnectorSuppliedValues)
+		case schemas.OAuth2CustomParameter_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.OAuth2CustomParameter_description, v.Description)
+		case schemas.OAuth2CustomParameter_isRequired:
+			return d.ReadBool(schemas.OAuth2CustomParameter_isRequired, &v.IsRequired)
+		case schemas.OAuth2CustomParameter_isSensitiveField:
+			return d.ReadBool(schemas.OAuth2CustomParameter_isSensitiveField, &v.IsSensitiveField)
+		case schemas.OAuth2CustomParameter_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.OAuth2CustomParameter_key, v.Key)
+		case schemas.OAuth2CustomParameter_label:
+			v.Label = new(string)
+			return d.ReadString(schemas.OAuth2CustomParameter_label, v.Label)
+		case schemas.OAuth2CustomParameter_type:
+			var ev string
+			if err := d.ReadString(schemas.OAuth2CustomParameter_type, &ev); err != nil {
+				return err
+			}
+			v.Type = OAuth2CustomPropType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains the default values required for OAuth 2.0 authentication.
 type OAuth2Defaults struct {
 
@@ -1709,6 +5107,37 @@ type OAuth2Defaults struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OAuth2Defaults) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OAuth2Defaults)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OAuth2Defaults) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuthCodeUrlList(s, schemas.OAuth2Defaults_authCodeUrls, v.AuthCodeUrls)
+	serializeOAuth2CustomPropertiesList(s, schemas.OAuth2Defaults_oauth2CustomProperties, v.Oauth2CustomProperties)
+	serializeOAuth2GrantTypeSupportedList(s, schemas.OAuth2Defaults_oauth2GrantTypesSupported, v.Oauth2GrantTypesSupported)
+	serializeOAuthScopeList(s, schemas.OAuth2Defaults_oauthScopes, v.OauthScopes)
+	serializeTokenUrlList(s, schemas.OAuth2Defaults_tokenUrls, v.TokenUrls)
+}
+func (v *OAuth2Defaults) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OAuth2Defaults, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OAuth2Defaults_authCodeUrls:
+			return deserializeAuthCodeUrlList(d, schemas.OAuth2Defaults_authCodeUrls, &v.AuthCodeUrls)
+		case schemas.OAuth2Defaults_oauth2CustomProperties:
+			return deserializeOAuth2CustomPropertiesList(d, schemas.OAuth2Defaults_oauth2CustomProperties, &v.Oauth2CustomProperties)
+		case schemas.OAuth2Defaults_oauth2GrantTypesSupported:
+			return deserializeOAuth2GrantTypeSupportedList(d, schemas.OAuth2Defaults_oauth2GrantTypesSupported, &v.Oauth2GrantTypesSupported)
+		case schemas.OAuth2Defaults_oauthScopes:
+			return deserializeOAuthScopeList(d, schemas.OAuth2Defaults_oauthScopes, &v.OauthScopes)
+		case schemas.OAuth2Defaults_tokenUrls:
+			return deserializeTokenUrlList(d, schemas.OAuth2Defaults_tokenUrls, &v.TokenUrls)
+		}
+		return nil
+	})
+}
+
 // The OAuth 2.0 properties required for OAuth 2.0 authentication.
 type OAuth2Properties struct {
 
@@ -1728,6 +5157,41 @@ type OAuth2Properties struct {
 	TokenUrlCustomProperties map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OAuth2Properties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OAuth2Properties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OAuth2Properties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OAuth2GrantType != "" {
+		s.WriteString(schemas.OAuth2Properties_oAuth2GrantType, string(v.OAuth2GrantType))
+	}
+	if v.TokenUrl != nil {
+		s.WriteString(schemas.OAuth2Properties_tokenUrl, *v.TokenUrl)
+	}
+	serializeTokenUrlCustomProperties(s, schemas.OAuth2Properties_tokenUrlCustomProperties, v.TokenUrlCustomProperties)
+}
+func (v *OAuth2Properties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OAuth2Properties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OAuth2Properties_oAuth2GrantType:
+			var ev string
+			if err := d.ReadString(schemas.OAuth2Properties_oAuth2GrantType, &ev); err != nil {
+				return err
+			}
+			v.OAuth2GrantType = OAuth2GrantType(ev)
+			return nil
+		case schemas.OAuth2Properties_tokenUrl:
+			v.TokenUrl = new(string)
+			return d.ReadString(schemas.OAuth2Properties_tokenUrl, v.TokenUrl)
+		case schemas.OAuth2Properties_tokenUrlCustomProperties:
+			return deserializeTokenUrlCustomProperties(d, schemas.OAuth2Properties_tokenUrlCustomProperties, &v.TokenUrlCustomProperties)
+		}
+		return nil
+	})
 }
 
 // The OAuth credentials required for OAuth type authentication.
@@ -1757,6 +5221,54 @@ type OAuthCredentials struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OAuthCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OAuthCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OAuthCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.OAuthCredentials_accessToken, *v.AccessToken)
+	}
+	if v.ClientId != nil {
+		s.WriteString(schemas.OAuthCredentials_clientId, *v.ClientId)
+	}
+	if v.ClientSecret != nil {
+		s.WriteString(schemas.OAuthCredentials_clientSecret, *v.ClientSecret)
+	}
+	if v.OAuthRequest != nil {
+		s.WriteStruct(schemas.OAuthCredentials_oAuthRequest)
+		v.OAuthRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RefreshToken != nil {
+		s.WriteString(schemas.OAuthCredentials_refreshToken, *v.RefreshToken)
+	}
+}
+func (v *OAuthCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OAuthCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OAuthCredentials_accessToken:
+			v.AccessToken = new(string)
+			return d.ReadString(schemas.OAuthCredentials_accessToken, v.AccessToken)
+		case schemas.OAuthCredentials_clientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.OAuthCredentials_clientId, v.ClientId)
+		case schemas.OAuthCredentials_clientSecret:
+			v.ClientSecret = new(string)
+			return d.ReadString(schemas.OAuthCredentials_clientSecret, v.ClientSecret)
+		case schemas.OAuthCredentials_oAuthRequest:
+			v.OAuthRequest = &ConnectorOAuthRequest{}
+			return v.OAuthRequest.Deserialize(d)
+		case schemas.OAuthCredentials_refreshToken:
+			v.RefreshToken = new(string)
+			return d.ReadString(schemas.OAuthCredentials_refreshToken, v.RefreshToken)
+		}
+		return nil
+	})
+}
+
 // The OAuth properties required for OAuth type authentication.
 type OAuthProperties struct {
 
@@ -1780,6 +5292,37 @@ type OAuthProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OAuthProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OAuthProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OAuthProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthCodeUrl != nil {
+		s.WriteString(schemas.OAuthProperties_authCodeUrl, *v.AuthCodeUrl)
+	}
+	serializeOAuthScopeList(s, schemas.OAuthProperties_oAuthScopes, v.OAuthScopes)
+	if v.TokenUrl != nil {
+		s.WriteString(schemas.OAuthProperties_tokenUrl, *v.TokenUrl)
+	}
+}
+func (v *OAuthProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OAuthProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OAuthProperties_authCodeUrl:
+			v.AuthCodeUrl = new(string)
+			return d.ReadString(schemas.OAuthProperties_authCodeUrl, v.AuthCodeUrl)
+		case schemas.OAuthProperties_oAuthScopes:
+			return deserializeOAuthScopeList(d, schemas.OAuthProperties_oAuthScopes, &v.OAuthScopes)
+		case schemas.OAuthProperties_tokenUrl:
+			v.TokenUrl = new(string)
+			return d.ReadString(schemas.OAuthProperties_tokenUrl, v.TokenUrl)
+		}
+		return nil
+	})
+}
+
 // The connector-specific profile credentials required when using Salesforce
 // Pardot.
 type PardotConnectorProfileCredentials struct {
@@ -1801,6 +5344,48 @@ type PardotConnectorProfileCredentials struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PardotConnectorProfileCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PardotConnectorProfileCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PardotConnectorProfileCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.PardotConnectorProfileCredentials_accessToken, *v.AccessToken)
+	}
+	if v.ClientCredentialsArn != nil {
+		s.WriteString(schemas.PardotConnectorProfileCredentials_clientCredentialsArn, *v.ClientCredentialsArn)
+	}
+	if v.OAuthRequest != nil {
+		s.WriteStruct(schemas.PardotConnectorProfileCredentials_oAuthRequest)
+		v.OAuthRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RefreshToken != nil {
+		s.WriteString(schemas.PardotConnectorProfileCredentials_refreshToken, *v.RefreshToken)
+	}
+}
+func (v *PardotConnectorProfileCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PardotConnectorProfileCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PardotConnectorProfileCredentials_accessToken:
+			v.AccessToken = new(string)
+			return d.ReadString(schemas.PardotConnectorProfileCredentials_accessToken, v.AccessToken)
+		case schemas.PardotConnectorProfileCredentials_clientCredentialsArn:
+			v.ClientCredentialsArn = new(string)
+			return d.ReadString(schemas.PardotConnectorProfileCredentials_clientCredentialsArn, v.ClientCredentialsArn)
+		case schemas.PardotConnectorProfileCredentials_oAuthRequest:
+			v.OAuthRequest = &ConnectorOAuthRequest{}
+			return v.OAuthRequest.Deserialize(d)
+		case schemas.PardotConnectorProfileCredentials_refreshToken:
+			v.RefreshToken = new(string)
+			return d.ReadString(schemas.PardotConnectorProfileCredentials_refreshToken, v.RefreshToken)
+		}
+		return nil
+	})
+}
+
 // The connector-specific profile properties required when using Salesforce Pardot.
 type PardotConnectorProfileProperties struct {
 
@@ -1817,9 +5402,58 @@ type PardotConnectorProfileProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PardotConnectorProfileProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PardotConnectorProfileProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PardotConnectorProfileProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BusinessUnitId != nil {
+		s.WriteString(schemas.PardotConnectorProfileProperties_businessUnitId, *v.BusinessUnitId)
+	}
+	if v.InstanceUrl != nil {
+		s.WriteString(schemas.PardotConnectorProfileProperties_instanceUrl, *v.InstanceUrl)
+	}
+	if v.IsSandboxEnvironment != false {
+		s.WriteBool(schemas.PardotConnectorProfileProperties_isSandboxEnvironment, v.IsSandboxEnvironment)
+	}
+}
+func (v *PardotConnectorProfileProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PardotConnectorProfileProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PardotConnectorProfileProperties_businessUnitId:
+			v.BusinessUnitId = new(string)
+			return d.ReadString(schemas.PardotConnectorProfileProperties_businessUnitId, v.BusinessUnitId)
+		case schemas.PardotConnectorProfileProperties_instanceUrl:
+			v.InstanceUrl = new(string)
+			return d.ReadString(schemas.PardotConnectorProfileProperties_instanceUrl, v.InstanceUrl)
+		case schemas.PardotConnectorProfileProperties_isSandboxEnvironment:
+			return d.ReadBool(schemas.PardotConnectorProfileProperties_isSandboxEnvironment, &v.IsSandboxEnvironment)
+		}
+		return nil
+	})
+}
+
 // The connector metadata specific to Salesforce Pardot.
 type PardotMetadata struct {
 	noSmithyDocumentSerde
+}
+
+func (v *PardotMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PardotMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PardotMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PardotMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PardotMetadata, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // The properties that are applied when Salesforce Pardot is being used as a
@@ -1832,6 +5466,28 @@ type PardotSourceProperties struct {
 	Object *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PardotSourceProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PardotSourceProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PardotSourceProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Object != nil {
+		s.WriteString(schemas.PardotSourceProperties_object, *v.Object)
+	}
+}
+func (v *PardotSourceProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PardotSourceProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PardotSourceProperties_object:
+			v.Object = new(string)
+			return d.ReadString(schemas.PardotSourceProperties_object, v.Object)
+		}
+		return nil
+	})
 }
 
 // Specifies elements that Amazon AppFlow includes in the file and folder names in
@@ -1865,6 +5521,45 @@ type PrefixConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PrefixConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrefixConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrefixConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePathPrefixHierarchy(s, schemas.PrefixConfig_pathPrefixHierarchy, v.PathPrefixHierarchy)
+	if v.PrefixFormat != "" {
+		s.WriteString(schemas.PrefixConfig_prefixFormat, string(v.PrefixFormat))
+	}
+	if v.PrefixType != "" {
+		s.WriteString(schemas.PrefixConfig_prefixType, string(v.PrefixType))
+	}
+}
+func (v *PrefixConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrefixConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrefixConfig_pathPrefixHierarchy:
+			return deserializePathPrefixHierarchy(d, schemas.PrefixConfig_pathPrefixHierarchy, &v.PathPrefixHierarchy)
+		case schemas.PrefixConfig_prefixFormat:
+			var ev string
+			if err := d.ReadString(schemas.PrefixConfig_prefixFormat, &ev); err != nil {
+				return err
+			}
+			v.PrefixFormat = PrefixFormat(ev)
+			return nil
+		case schemas.PrefixConfig_prefixType:
+			var ev string
+			if err := d.ReadString(schemas.PrefixConfig_prefixType, &ev); err != nil {
+				return err
+			}
+			v.PrefixType = PrefixType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies the private connection provisioning state.
 type PrivateConnectionProvisioningState struct {
 
@@ -1880,6 +5575,48 @@ type PrivateConnectionProvisioningState struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PrivateConnectionProvisioningState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrivateConnectionProvisioningState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrivateConnectionProvisioningState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureCause != "" {
+		s.WriteString(schemas.PrivateConnectionProvisioningState_failureCause, string(v.FailureCause))
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.PrivateConnectionProvisioningState_failureMessage, *v.FailureMessage)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.PrivateConnectionProvisioningState_status, string(v.Status))
+	}
+}
+func (v *PrivateConnectionProvisioningState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrivateConnectionProvisioningState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrivateConnectionProvisioningState_failureCause:
+			var ev string
+			if err := d.ReadString(schemas.PrivateConnectionProvisioningState_failureCause, &ev); err != nil {
+				return err
+			}
+			v.FailureCause = PrivateConnectionProvisioningFailureCause(ev)
+			return nil
+		case schemas.PrivateConnectionProvisioningState_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.PrivateConnectionProvisioningState_failureMessage, v.FailureMessage)
+		case schemas.PrivateConnectionProvisioningState_status:
+			var ev string
+			if err := d.ReadString(schemas.PrivateConnectionProvisioningState_status, &ev); err != nil {
+				return err
+			}
+			v.Status = PrivateConnectionProvisioningStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The range of values that the property supports.
 type Range struct {
 
@@ -1890,6 +5627,32 @@ type Range struct {
 	Minimum float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *Range) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Range)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Range) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Maximum != 0 {
+		s.WriteFloat64(schemas.Range_maximum, v.Maximum)
+	}
+	if v.Minimum != 0 {
+		s.WriteFloat64(schemas.Range_minimum, v.Minimum)
+	}
+}
+func (v *Range) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Range, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Range_maximum:
+			return d.ReadFloat64(schemas.Range_maximum, &v.Maximum)
+		case schemas.Range_minimum:
+			return d.ReadFloat64(schemas.Range_minimum, &v.Minimum)
+		}
+		return nil
+	})
 }
 
 //	The connector-specific profile credentials required when using Amazon
@@ -1904,6 +5667,34 @@ type RedshiftConnectorProfileCredentials struct {
 	Username *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RedshiftConnectorProfileCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedshiftConnectorProfileCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedshiftConnectorProfileCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Password != nil {
+		s.WriteString(schemas.RedshiftConnectorProfileCredentials_password, *v.Password)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.RedshiftConnectorProfileCredentials_username, *v.Username)
+	}
+}
+func (v *RedshiftConnectorProfileCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedshiftConnectorProfileCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RedshiftConnectorProfileCredentials_password:
+			v.Password = new(string)
+			return d.ReadString(schemas.RedshiftConnectorProfileCredentials_password, v.Password)
+		case schemas.RedshiftConnectorProfileCredentials_username:
+			v.Username = new(string)
+			return d.ReadString(schemas.RedshiftConnectorProfileCredentials_username, v.Username)
+		}
+		return nil
+	})
 }
 
 // The connector-specific profile properties when using Amazon Redshift.
@@ -1953,6 +5744,75 @@ type RedshiftConnectorProfileProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RedshiftConnectorProfileProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedshiftConnectorProfileProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedshiftConnectorProfileProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.RedshiftConnectorProfileProperties_bucketName, *v.BucketName)
+	}
+	if v.BucketPrefix != nil {
+		s.WriteString(schemas.RedshiftConnectorProfileProperties_bucketPrefix, *v.BucketPrefix)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.RedshiftConnectorProfileProperties_clusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.DataApiRoleArn != nil {
+		s.WriteString(schemas.RedshiftConnectorProfileProperties_dataApiRoleArn, *v.DataApiRoleArn)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.RedshiftConnectorProfileProperties_databaseName, *v.DatabaseName)
+	}
+	if v.DatabaseUrl != nil {
+		s.WriteString(schemas.RedshiftConnectorProfileProperties_databaseUrl, *v.DatabaseUrl)
+	}
+	if v.IsRedshiftServerless != false {
+		s.WriteBool(schemas.RedshiftConnectorProfileProperties_isRedshiftServerless, v.IsRedshiftServerless)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.RedshiftConnectorProfileProperties_roleArn, *v.RoleArn)
+	}
+	if v.WorkgroupName != nil {
+		s.WriteString(schemas.RedshiftConnectorProfileProperties_workgroupName, *v.WorkgroupName)
+	}
+}
+func (v *RedshiftConnectorProfileProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedshiftConnectorProfileProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RedshiftConnectorProfileProperties_bucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.RedshiftConnectorProfileProperties_bucketName, v.BucketName)
+		case schemas.RedshiftConnectorProfileProperties_bucketPrefix:
+			v.BucketPrefix = new(string)
+			return d.ReadString(schemas.RedshiftConnectorProfileProperties_bucketPrefix, v.BucketPrefix)
+		case schemas.RedshiftConnectorProfileProperties_clusterIdentifier:
+			v.ClusterIdentifier = new(string)
+			return d.ReadString(schemas.RedshiftConnectorProfileProperties_clusterIdentifier, v.ClusterIdentifier)
+		case schemas.RedshiftConnectorProfileProperties_dataApiRoleArn:
+			v.DataApiRoleArn = new(string)
+			return d.ReadString(schemas.RedshiftConnectorProfileProperties_dataApiRoleArn, v.DataApiRoleArn)
+		case schemas.RedshiftConnectorProfileProperties_databaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.RedshiftConnectorProfileProperties_databaseName, v.DatabaseName)
+		case schemas.RedshiftConnectorProfileProperties_databaseUrl:
+			v.DatabaseUrl = new(string)
+			return d.ReadString(schemas.RedshiftConnectorProfileProperties_databaseUrl, v.DatabaseUrl)
+		case schemas.RedshiftConnectorProfileProperties_isRedshiftServerless:
+			return d.ReadBool(schemas.RedshiftConnectorProfileProperties_isRedshiftServerless, &v.IsRedshiftServerless)
+		case schemas.RedshiftConnectorProfileProperties_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.RedshiftConnectorProfileProperties_roleArn, v.RoleArn)
+		case schemas.RedshiftConnectorProfileProperties_workgroupName:
+			v.WorkgroupName = new(string)
+			return d.ReadString(schemas.RedshiftConnectorProfileProperties_workgroupName, v.WorkgroupName)
+		}
+		return nil
+	})
+}
+
 //	The properties that are applied when Amazon Redshift is being used as a
 //
 // destination.
@@ -1983,9 +5843,67 @@ type RedshiftDestinationProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RedshiftDestinationProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedshiftDestinationProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedshiftDestinationProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketPrefix != nil {
+		s.WriteString(schemas.RedshiftDestinationProperties_bucketPrefix, *v.BucketPrefix)
+	}
+	if v.ErrorHandlingConfig != nil {
+		s.WriteStruct(schemas.RedshiftDestinationProperties_errorHandlingConfig)
+		v.ErrorHandlingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IntermediateBucketName != nil {
+		s.WriteString(schemas.RedshiftDestinationProperties_intermediateBucketName, *v.IntermediateBucketName)
+	}
+	if v.Object != nil {
+		s.WriteString(schemas.RedshiftDestinationProperties_object, *v.Object)
+	}
+}
+func (v *RedshiftDestinationProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedshiftDestinationProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RedshiftDestinationProperties_bucketPrefix:
+			v.BucketPrefix = new(string)
+			return d.ReadString(schemas.RedshiftDestinationProperties_bucketPrefix, v.BucketPrefix)
+		case schemas.RedshiftDestinationProperties_errorHandlingConfig:
+			v.ErrorHandlingConfig = &ErrorHandlingConfig{}
+			return v.ErrorHandlingConfig.Deserialize(d)
+		case schemas.RedshiftDestinationProperties_intermediateBucketName:
+			v.IntermediateBucketName = new(string)
+			return d.ReadString(schemas.RedshiftDestinationProperties_intermediateBucketName, v.IntermediateBucketName)
+		case schemas.RedshiftDestinationProperties_object:
+			v.Object = new(string)
+			return d.ReadString(schemas.RedshiftDestinationProperties_object, v.Object)
+		}
+		return nil
+	})
+}
+
 // The connector metadata specific to Amazon Redshift.
 type RedshiftMetadata struct {
 	noSmithyDocumentSerde
+}
+
+func (v *RedshiftMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedshiftMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedshiftMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RedshiftMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedshiftMetadata, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Describes the status of an attempt from Amazon AppFlow to register a resource.
@@ -2010,6 +5928,44 @@ type RegistrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegistrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegistrationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.RegistrationOutput_message, *v.Message)
+	}
+	if v.Result != nil {
+		s.WriteString(schemas.RegistrationOutput_result, *v.Result)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RegistrationOutput_status, string(v.Status))
+	}
+}
+func (v *RegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegistrationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegistrationOutput_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RegistrationOutput_message, v.Message)
+		case schemas.RegistrationOutput_result:
+			v.Result = new(string)
+			return d.ReadString(schemas.RegistrationOutput_result, v.Result)
+		case schemas.RegistrationOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.RegistrationOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ExecutionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The properties that are applied when Amazon S3 is used as a destination.
 type S3DestinationProperties struct {
 
@@ -2029,6 +5985,42 @@ type S3DestinationProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3DestinationProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3DestinationProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3DestinationProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.S3DestinationProperties_bucketName, *v.BucketName)
+	}
+	if v.BucketPrefix != nil {
+		s.WriteString(schemas.S3DestinationProperties_bucketPrefix, *v.BucketPrefix)
+	}
+	if v.S3OutputFormatConfig != nil {
+		s.WriteStruct(schemas.S3DestinationProperties_s3OutputFormatConfig)
+		v.S3OutputFormatConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *S3DestinationProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3DestinationProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3DestinationProperties_bucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.S3DestinationProperties_bucketName, v.BucketName)
+		case schemas.S3DestinationProperties_bucketPrefix:
+			v.BucketPrefix = new(string)
+			return d.ReadString(schemas.S3DestinationProperties_bucketPrefix, v.BucketPrefix)
+		case schemas.S3DestinationProperties_s3OutputFormatConfig:
+			v.S3OutputFormatConfig = &S3OutputFormatConfig{}
+			return v.S3OutputFormatConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 //	When you use Amazon S3 as the source, the configuration format that you
 //
 // provide the flow input data.
@@ -2040,9 +6032,51 @@ type S3InputFormatConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3InputFormatConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3InputFormatConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3InputFormatConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3InputFileType != "" {
+		s.WriteString(schemas.S3InputFormatConfig_s3InputFileType, string(v.S3InputFileType))
+	}
+}
+func (v *S3InputFormatConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3InputFormatConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3InputFormatConfig_s3InputFileType:
+			var ev string
+			if err := d.ReadString(schemas.S3InputFormatConfig_s3InputFileType, &ev); err != nil {
+				return err
+			}
+			v.S3InputFileType = S3InputFileType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The connector metadata specific to Amazon S3.
 type S3Metadata struct {
 	noSmithyDocumentSerde
+}
+
+func (v *S3Metadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Metadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Metadata) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *S3Metadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Metadata, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 //	The configuration that determines how Amazon AppFlow should format the flow
@@ -2077,6 +6111,54 @@ type S3OutputFormatConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3OutputFormatConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3OutputFormatConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3OutputFormatConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationConfig != nil {
+		s.WriteStruct(schemas.S3OutputFormatConfig_aggregationConfig)
+		v.AggregationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FileType != "" {
+		s.WriteString(schemas.S3OutputFormatConfig_fileType, string(v.FileType))
+	}
+	if v.PrefixConfig != nil {
+		s.WriteStruct(schemas.S3OutputFormatConfig_prefixConfig)
+		v.PrefixConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PreserveSourceDataTyping != nil {
+		s.WriteBool(schemas.S3OutputFormatConfig_preserveSourceDataTyping, *v.PreserveSourceDataTyping)
+	}
+}
+func (v *S3OutputFormatConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3OutputFormatConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3OutputFormatConfig_aggregationConfig:
+			v.AggregationConfig = &AggregationConfig{}
+			return v.AggregationConfig.Deserialize(d)
+		case schemas.S3OutputFormatConfig_fileType:
+			var ev string
+			if err := d.ReadString(schemas.S3OutputFormatConfig_fileType, &ev); err != nil {
+				return err
+			}
+			v.FileType = FileType(ev)
+			return nil
+		case schemas.S3OutputFormatConfig_prefixConfig:
+			v.PrefixConfig = &PrefixConfig{}
+			return v.PrefixConfig.Deserialize(d)
+		case schemas.S3OutputFormatConfig_preserveSourceDataTyping:
+			v.PreserveSourceDataTyping = new(bool)
+			return d.ReadBool(schemas.S3OutputFormatConfig_preserveSourceDataTyping, v.PreserveSourceDataTyping)
+		}
+		return nil
+	})
+}
+
 //	The properties that are applied when Amazon S3 is being used as the flow
 //
 // source.
@@ -2095,6 +6177,42 @@ type S3SourceProperties struct {
 	S3InputFormatConfig *S3InputFormatConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3SourceProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3SourceProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3SourceProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.S3SourceProperties_bucketName, *v.BucketName)
+	}
+	if v.BucketPrefix != nil {
+		s.WriteString(schemas.S3SourceProperties_bucketPrefix, *v.BucketPrefix)
+	}
+	if v.S3InputFormatConfig != nil {
+		s.WriteStruct(schemas.S3SourceProperties_s3InputFormatConfig)
+		v.S3InputFormatConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *S3SourceProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3SourceProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3SourceProperties_bucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.S3SourceProperties_bucketName, v.BucketName)
+		case schemas.S3SourceProperties_bucketPrefix:
+			v.BucketPrefix = new(string)
+			return d.ReadString(schemas.S3SourceProperties_bucketPrefix, v.BucketPrefix)
+		case schemas.S3SourceProperties_s3InputFormatConfig:
+			v.S3InputFormatConfig = &S3InputFormatConfig{}
+			return v.S3InputFormatConfig.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The connector-specific profile credentials required when using Salesforce.
@@ -2139,6 +6257,64 @@ type SalesforceConnectorProfileCredentials struct {
 	RefreshToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SalesforceConnectorProfileCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SalesforceConnectorProfileCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SalesforceConnectorProfileCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.SalesforceConnectorProfileCredentials_accessToken, *v.AccessToken)
+	}
+	if v.ClientCredentialsArn != nil {
+		s.WriteString(schemas.SalesforceConnectorProfileCredentials_clientCredentialsArn, *v.ClientCredentialsArn)
+	}
+	if v.JwtToken != nil {
+		s.WriteString(schemas.SalesforceConnectorProfileCredentials_jwtToken, *v.JwtToken)
+	}
+	if v.OAuth2GrantType != "" {
+		s.WriteString(schemas.SalesforceConnectorProfileCredentials_oAuth2GrantType, string(v.OAuth2GrantType))
+	}
+	if v.OAuthRequest != nil {
+		s.WriteStruct(schemas.SalesforceConnectorProfileCredentials_oAuthRequest)
+		v.OAuthRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RefreshToken != nil {
+		s.WriteString(schemas.SalesforceConnectorProfileCredentials_refreshToken, *v.RefreshToken)
+	}
+}
+func (v *SalesforceConnectorProfileCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SalesforceConnectorProfileCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SalesforceConnectorProfileCredentials_accessToken:
+			v.AccessToken = new(string)
+			return d.ReadString(schemas.SalesforceConnectorProfileCredentials_accessToken, v.AccessToken)
+		case schemas.SalesforceConnectorProfileCredentials_clientCredentialsArn:
+			v.ClientCredentialsArn = new(string)
+			return d.ReadString(schemas.SalesforceConnectorProfileCredentials_clientCredentialsArn, v.ClientCredentialsArn)
+		case schemas.SalesforceConnectorProfileCredentials_jwtToken:
+			v.JwtToken = new(string)
+			return d.ReadString(schemas.SalesforceConnectorProfileCredentials_jwtToken, v.JwtToken)
+		case schemas.SalesforceConnectorProfileCredentials_oAuth2GrantType:
+			var ev string
+			if err := d.ReadString(schemas.SalesforceConnectorProfileCredentials_oAuth2GrantType, &ev); err != nil {
+				return err
+			}
+			v.OAuth2GrantType = OAuth2GrantType(ev)
+			return nil
+		case schemas.SalesforceConnectorProfileCredentials_oAuthRequest:
+			v.OAuthRequest = &ConnectorOAuthRequest{}
+			return v.OAuthRequest.Deserialize(d)
+		case schemas.SalesforceConnectorProfileCredentials_refreshToken:
+			v.RefreshToken = new(string)
+			return d.ReadString(schemas.SalesforceConnectorProfileCredentials_refreshToken, v.RefreshToken)
+		}
+		return nil
+	})
 }
 
 // The connector-specific profile properties required when using Salesforce.
@@ -2186,6 +6362,38 @@ type SalesforceConnectorProfileProperties struct {
 	UsePrivateLinkForMetadataAndAuthorization bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *SalesforceConnectorProfileProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SalesforceConnectorProfileProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SalesforceConnectorProfileProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceUrl != nil {
+		s.WriteString(schemas.SalesforceConnectorProfileProperties_instanceUrl, *v.InstanceUrl)
+	}
+	if v.IsSandboxEnvironment != false {
+		s.WriteBool(schemas.SalesforceConnectorProfileProperties_isSandboxEnvironment, v.IsSandboxEnvironment)
+	}
+	if v.UsePrivateLinkForMetadataAndAuthorization != false {
+		s.WriteBool(schemas.SalesforceConnectorProfileProperties_usePrivateLinkForMetadataAndAuthorization, v.UsePrivateLinkForMetadataAndAuthorization)
+	}
+}
+func (v *SalesforceConnectorProfileProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SalesforceConnectorProfileProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SalesforceConnectorProfileProperties_instanceUrl:
+			v.InstanceUrl = new(string)
+			return d.ReadString(schemas.SalesforceConnectorProfileProperties_instanceUrl, v.InstanceUrl)
+		case schemas.SalesforceConnectorProfileProperties_isSandboxEnvironment:
+			return d.ReadBool(schemas.SalesforceConnectorProfileProperties_isSandboxEnvironment, &v.IsSandboxEnvironment)
+		case schemas.SalesforceConnectorProfileProperties_usePrivateLinkForMetadataAndAuthorization:
+			return d.ReadBool(schemas.SalesforceConnectorProfileProperties_usePrivateLinkForMetadataAndAuthorization, &v.UsePrivateLinkForMetadataAndAuthorization)
+		}
+		return nil
+	})
 }
 
 //	The properties that are applied when Salesforce is being used as a
@@ -2250,6 +6458,59 @@ type SalesforceDestinationProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SalesforceDestinationProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SalesforceDestinationProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SalesforceDestinationProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataTransferApi != "" {
+		s.WriteString(schemas.SalesforceDestinationProperties_dataTransferApi, string(v.DataTransferApi))
+	}
+	if v.ErrorHandlingConfig != nil {
+		s.WriteStruct(schemas.SalesforceDestinationProperties_errorHandlingConfig)
+		v.ErrorHandlingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIdFieldNameList(s, schemas.SalesforceDestinationProperties_idFieldNames, v.IdFieldNames)
+	if v.Object != nil {
+		s.WriteString(schemas.SalesforceDestinationProperties_object, *v.Object)
+	}
+	if v.WriteOperationType != "" {
+		s.WriteString(schemas.SalesforceDestinationProperties_writeOperationType, string(v.WriteOperationType))
+	}
+}
+func (v *SalesforceDestinationProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SalesforceDestinationProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SalesforceDestinationProperties_dataTransferApi:
+			var ev string
+			if err := d.ReadString(schemas.SalesforceDestinationProperties_dataTransferApi, &ev); err != nil {
+				return err
+			}
+			v.DataTransferApi = SalesforceDataTransferApi(ev)
+			return nil
+		case schemas.SalesforceDestinationProperties_errorHandlingConfig:
+			v.ErrorHandlingConfig = &ErrorHandlingConfig{}
+			return v.ErrorHandlingConfig.Deserialize(d)
+		case schemas.SalesforceDestinationProperties_idFieldNames:
+			return deserializeIdFieldNameList(d, schemas.SalesforceDestinationProperties_idFieldNames, &v.IdFieldNames)
+		case schemas.SalesforceDestinationProperties_object:
+			v.Object = new(string)
+			return d.ReadString(schemas.SalesforceDestinationProperties_object, v.Object)
+		case schemas.SalesforceDestinationProperties_writeOperationType:
+			var ev string
+			if err := d.ReadString(schemas.SalesforceDestinationProperties_writeOperationType, &ev); err != nil {
+				return err
+			}
+			v.WriteOperationType = WriteOperationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The connector metadata specific to Salesforce.
 type SalesforceMetadata struct {
 
@@ -2279,6 +6540,31 @@ type SalesforceMetadata struct {
 	Oauth2GrantTypesSupported []OAuth2GrantType
 
 	noSmithyDocumentSerde
+}
+
+func (v *SalesforceMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SalesforceMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SalesforceMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSalesforceDataTransferApiList(s, schemas.SalesforceMetadata_dataTransferApis, v.DataTransferApis)
+	serializeOAuthScopeList(s, schemas.SalesforceMetadata_oAuthScopes, v.OAuthScopes)
+	serializeOAuth2GrantTypeSupportedList(s, schemas.SalesforceMetadata_oauth2GrantTypesSupported, v.Oauth2GrantTypesSupported)
+}
+func (v *SalesforceMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SalesforceMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SalesforceMetadata_dataTransferApis:
+			return deserializeSalesforceDataTransferApiList(d, schemas.SalesforceMetadata_dataTransferApis, &v.DataTransferApis)
+		case schemas.SalesforceMetadata_oAuthScopes:
+			return deserializeOAuthScopeList(d, schemas.SalesforceMetadata_oAuthScopes, &v.OAuthScopes)
+		case schemas.SalesforceMetadata_oauth2GrantTypesSupported:
+			return deserializeOAuth2GrantTypeSupportedList(d, schemas.SalesforceMetadata_oauth2GrantTypesSupported, &v.Oauth2GrantTypesSupported)
+		}
+		return nil
+	})
 }
 
 // The properties that are applied when Salesforce is being used as a source.
@@ -2334,6 +6620,48 @@ type SalesforceSourceProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SalesforceSourceProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SalesforceSourceProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SalesforceSourceProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataTransferApi != "" {
+		s.WriteString(schemas.SalesforceSourceProperties_dataTransferApi, string(v.DataTransferApi))
+	}
+	if v.EnableDynamicFieldUpdate != false {
+		s.WriteBool(schemas.SalesforceSourceProperties_enableDynamicFieldUpdate, v.EnableDynamicFieldUpdate)
+	}
+	if v.IncludeDeletedRecords != false {
+		s.WriteBool(schemas.SalesforceSourceProperties_includeDeletedRecords, v.IncludeDeletedRecords)
+	}
+	if v.Object != nil {
+		s.WriteString(schemas.SalesforceSourceProperties_object, *v.Object)
+	}
+}
+func (v *SalesforceSourceProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SalesforceSourceProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SalesforceSourceProperties_dataTransferApi:
+			var ev string
+			if err := d.ReadString(schemas.SalesforceSourceProperties_dataTransferApi, &ev); err != nil {
+				return err
+			}
+			v.DataTransferApi = SalesforceDataTransferApi(ev)
+			return nil
+		case schemas.SalesforceSourceProperties_enableDynamicFieldUpdate:
+			return d.ReadBool(schemas.SalesforceSourceProperties_enableDynamicFieldUpdate, &v.EnableDynamicFieldUpdate)
+		case schemas.SalesforceSourceProperties_includeDeletedRecords:
+			return d.ReadBool(schemas.SalesforceSourceProperties_includeDeletedRecords, &v.IncludeDeletedRecords)
+		case schemas.SalesforceSourceProperties_object:
+			v.Object = new(string)
+			return d.ReadString(schemas.SalesforceSourceProperties_object, v.Object)
+		}
+		return nil
+	})
+}
+
 // The connector-specific profile credentials required when using SAPOData.
 type SAPODataConnectorProfileCredentials struct {
 
@@ -2344,6 +6672,38 @@ type SAPODataConnectorProfileCredentials struct {
 	OAuthCredentials *OAuthCredentials
 
 	noSmithyDocumentSerde
+}
+
+func (v *SAPODataConnectorProfileCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SAPODataConnectorProfileCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SAPODataConnectorProfileCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BasicAuthCredentials != nil {
+		s.WriteStruct(schemas.SAPODataConnectorProfileCredentials_basicAuthCredentials)
+		v.BasicAuthCredentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OAuthCredentials != nil {
+		s.WriteStruct(schemas.SAPODataConnectorProfileCredentials_oAuthCredentials)
+		v.OAuthCredentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SAPODataConnectorProfileCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SAPODataConnectorProfileCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SAPODataConnectorProfileCredentials_basicAuthCredentials:
+			v.BasicAuthCredentials = &BasicAuthCredentials{}
+			return v.BasicAuthCredentials.Deserialize(d)
+		case schemas.SAPODataConnectorProfileCredentials_oAuthCredentials:
+			v.OAuthCredentials = &OAuthCredentials{}
+			return v.OAuthCredentials.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The connector-specific profile properties required when using SAPOData.
@@ -2392,6 +6752,71 @@ type SAPODataConnectorProfileProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SAPODataConnectorProfileProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SAPODataConnectorProfileProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SAPODataConnectorProfileProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationHostUrl != nil {
+		s.WriteString(schemas.SAPODataConnectorProfileProperties_applicationHostUrl, *v.ApplicationHostUrl)
+	}
+	if v.ApplicationServicePath != nil {
+		s.WriteString(schemas.SAPODataConnectorProfileProperties_applicationServicePath, *v.ApplicationServicePath)
+	}
+	if v.ClientNumber != nil {
+		s.WriteString(schemas.SAPODataConnectorProfileProperties_clientNumber, *v.ClientNumber)
+	}
+	if v.DisableSSO != false {
+		s.WriteBool(schemas.SAPODataConnectorProfileProperties_disableSSO, v.DisableSSO)
+	}
+	if v.LogonLanguage != nil {
+		s.WriteString(schemas.SAPODataConnectorProfileProperties_logonLanguage, *v.LogonLanguage)
+	}
+	if v.OAuthProperties != nil {
+		s.WriteStruct(schemas.SAPODataConnectorProfileProperties_oAuthProperties)
+		v.OAuthProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PortNumber != nil {
+		s.WriteInt32(schemas.SAPODataConnectorProfileProperties_portNumber, *v.PortNumber)
+	}
+	if v.PrivateLinkServiceName != nil {
+		s.WriteString(schemas.SAPODataConnectorProfileProperties_privateLinkServiceName, *v.PrivateLinkServiceName)
+	}
+}
+func (v *SAPODataConnectorProfileProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SAPODataConnectorProfileProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SAPODataConnectorProfileProperties_applicationHostUrl:
+			v.ApplicationHostUrl = new(string)
+			return d.ReadString(schemas.SAPODataConnectorProfileProperties_applicationHostUrl, v.ApplicationHostUrl)
+		case schemas.SAPODataConnectorProfileProperties_applicationServicePath:
+			v.ApplicationServicePath = new(string)
+			return d.ReadString(schemas.SAPODataConnectorProfileProperties_applicationServicePath, v.ApplicationServicePath)
+		case schemas.SAPODataConnectorProfileProperties_clientNumber:
+			v.ClientNumber = new(string)
+			return d.ReadString(schemas.SAPODataConnectorProfileProperties_clientNumber, v.ClientNumber)
+		case schemas.SAPODataConnectorProfileProperties_disableSSO:
+			return d.ReadBool(schemas.SAPODataConnectorProfileProperties_disableSSO, &v.DisableSSO)
+		case schemas.SAPODataConnectorProfileProperties_logonLanguage:
+			v.LogonLanguage = new(string)
+			return d.ReadString(schemas.SAPODataConnectorProfileProperties_logonLanguage, v.LogonLanguage)
+		case schemas.SAPODataConnectorProfileProperties_oAuthProperties:
+			v.OAuthProperties = &OAuthProperties{}
+			return v.OAuthProperties.Deserialize(d)
+		case schemas.SAPODataConnectorProfileProperties_portNumber:
+			v.PortNumber = new(int32)
+			return d.ReadInt32(schemas.SAPODataConnectorProfileProperties_portNumber, v.PortNumber)
+		case schemas.SAPODataConnectorProfileProperties_privateLinkServiceName:
+			v.PrivateLinkServiceName = new(string)
+			return d.ReadString(schemas.SAPODataConnectorProfileProperties_privateLinkServiceName, v.PrivateLinkServiceName)
+		}
+		return nil
+	})
+}
+
 // The properties that are applied when using SAPOData as a flow destination
 type SAPODataDestinationProperties struct {
 
@@ -2425,9 +6850,76 @@ type SAPODataDestinationProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SAPODataDestinationProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SAPODataDestinationProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SAPODataDestinationProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorHandlingConfig != nil {
+		s.WriteStruct(schemas.SAPODataDestinationProperties_errorHandlingConfig)
+		v.ErrorHandlingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIdFieldNameList(s, schemas.SAPODataDestinationProperties_idFieldNames, v.IdFieldNames)
+	if v.ObjectPath != nil {
+		s.WriteString(schemas.SAPODataDestinationProperties_objectPath, *v.ObjectPath)
+	}
+	if v.SuccessResponseHandlingConfig != nil {
+		s.WriteStruct(schemas.SAPODataDestinationProperties_successResponseHandlingConfig)
+		v.SuccessResponseHandlingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WriteOperationType != "" {
+		s.WriteString(schemas.SAPODataDestinationProperties_writeOperationType, string(v.WriteOperationType))
+	}
+}
+func (v *SAPODataDestinationProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SAPODataDestinationProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SAPODataDestinationProperties_errorHandlingConfig:
+			v.ErrorHandlingConfig = &ErrorHandlingConfig{}
+			return v.ErrorHandlingConfig.Deserialize(d)
+		case schemas.SAPODataDestinationProperties_idFieldNames:
+			return deserializeIdFieldNameList(d, schemas.SAPODataDestinationProperties_idFieldNames, &v.IdFieldNames)
+		case schemas.SAPODataDestinationProperties_objectPath:
+			v.ObjectPath = new(string)
+			return d.ReadString(schemas.SAPODataDestinationProperties_objectPath, v.ObjectPath)
+		case schemas.SAPODataDestinationProperties_successResponseHandlingConfig:
+			v.SuccessResponseHandlingConfig = &SuccessResponseHandlingConfig{}
+			return v.SuccessResponseHandlingConfig.Deserialize(d)
+		case schemas.SAPODataDestinationProperties_writeOperationType:
+			var ev string
+			if err := d.ReadString(schemas.SAPODataDestinationProperties_writeOperationType, &ev); err != nil {
+				return err
+			}
+			v.WriteOperationType = WriteOperationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The connector metadata specific to SAPOData.
 type SAPODataMetadata struct {
 	noSmithyDocumentSerde
+}
+
+func (v *SAPODataMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SAPODataMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SAPODataMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SAPODataMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SAPODataMetadata, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Sets the page size for each concurrent process that transfers OData records
@@ -2447,6 +6939,28 @@ type SAPODataPaginationConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SAPODataPaginationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SAPODataPaginationConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SAPODataPaginationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxPageSize != nil {
+		s.WriteInt32(schemas.SAPODataPaginationConfig_maxPageSize, *v.MaxPageSize)
+	}
+}
+func (v *SAPODataPaginationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SAPODataPaginationConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SAPODataPaginationConfig_maxPageSize:
+			v.MaxPageSize = new(int32)
+			return d.ReadInt32(schemas.SAPODataPaginationConfig_maxPageSize, v.MaxPageSize)
+		}
+		return nil
+	})
+}
+
 // Sets the number of concurrent processes that transfer OData records from your
 // SAP instance. A concurrent process is query that retrieves a batch of records as
 // part of a flow run. Amazon AppFlow can run multiple concurrent processes in
@@ -2460,6 +6974,28 @@ type SAPODataParallelismConfig struct {
 	MaxParallelism *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *SAPODataParallelismConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SAPODataParallelismConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SAPODataParallelismConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxParallelism != nil {
+		s.WriteInt32(schemas.SAPODataParallelismConfig_maxParallelism, *v.MaxParallelism)
+	}
+}
+func (v *SAPODataParallelismConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SAPODataParallelismConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SAPODataParallelismConfig_maxParallelism:
+			v.MaxParallelism = new(int32)
+			return d.ReadInt32(schemas.SAPODataParallelismConfig_maxParallelism, v.MaxParallelism)
+		}
+		return nil
+	})
 }
 
 // The properties that are applied when using SAPOData as a flow source.
@@ -2477,6 +7013,44 @@ type SAPODataSourceProperties struct {
 	ParallelismConfig *SAPODataParallelismConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *SAPODataSourceProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SAPODataSourceProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SAPODataSourceProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObjectPath != nil {
+		s.WriteString(schemas.SAPODataSourceProperties_objectPath, *v.ObjectPath)
+	}
+	if v.PaginationConfig != nil {
+		s.WriteStruct(schemas.SAPODataSourceProperties_paginationConfig)
+		v.PaginationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParallelismConfig != nil {
+		s.WriteStruct(schemas.SAPODataSourceProperties_parallelismConfig)
+		v.ParallelismConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SAPODataSourceProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SAPODataSourceProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SAPODataSourceProperties_objectPath:
+			v.ObjectPath = new(string)
+			return d.ReadString(schemas.SAPODataSourceProperties_objectPath, v.ObjectPath)
+		case schemas.SAPODataSourceProperties_paginationConfig:
+			v.PaginationConfig = &SAPODataPaginationConfig{}
+			return v.PaginationConfig.Deserialize(d)
+		case schemas.SAPODataSourceProperties_parallelismConfig:
+			v.ParallelismConfig = &SAPODataParallelismConfig{}
+			return v.ParallelismConfig.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 //	Specifies the configuration details of a schedule-triggered flow as defined by
@@ -2527,6 +7101,74 @@ type ScheduledTriggerProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScheduledTriggerProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduledTriggerProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduledTriggerProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataPullMode != "" {
+		s.WriteString(schemas.ScheduledTriggerProperties_dataPullMode, string(v.DataPullMode))
+	}
+	if v.FirstExecutionFrom != nil {
+		s.WriteTime(schemas.ScheduledTriggerProperties_firstExecutionFrom, *v.FirstExecutionFrom)
+	}
+	if v.FlowErrorDeactivationThreshold != nil {
+		s.WriteInt32(schemas.ScheduledTriggerProperties_flowErrorDeactivationThreshold, *v.FlowErrorDeactivationThreshold)
+	}
+	if v.ScheduleEndTime != nil {
+		s.WriteTime(schemas.ScheduledTriggerProperties_scheduleEndTime, *v.ScheduleEndTime)
+	}
+	if v.ScheduleExpression != nil {
+		s.WriteString(schemas.ScheduledTriggerProperties_scheduleExpression, *v.ScheduleExpression)
+	}
+	if v.ScheduleOffset != nil {
+		s.WriteInt64(schemas.ScheduledTriggerProperties_scheduleOffset, *v.ScheduleOffset)
+	}
+	if v.ScheduleStartTime != nil {
+		s.WriteTime(schemas.ScheduledTriggerProperties_scheduleStartTime, *v.ScheduleStartTime)
+	}
+	if v.Timezone != nil {
+		s.WriteString(schemas.ScheduledTriggerProperties_timezone, *v.Timezone)
+	}
+}
+func (v *ScheduledTriggerProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduledTriggerProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduledTriggerProperties_dataPullMode:
+			var ev string
+			if err := d.ReadString(schemas.ScheduledTriggerProperties_dataPullMode, &ev); err != nil {
+				return err
+			}
+			v.DataPullMode = DataPullMode(ev)
+			return nil
+		case schemas.ScheduledTriggerProperties_firstExecutionFrom:
+			v.FirstExecutionFrom = new(time.Time)
+			return d.ReadTime(schemas.ScheduledTriggerProperties_firstExecutionFrom, v.FirstExecutionFrom)
+		case schemas.ScheduledTriggerProperties_flowErrorDeactivationThreshold:
+			v.FlowErrorDeactivationThreshold = new(int32)
+			return d.ReadInt32(schemas.ScheduledTriggerProperties_flowErrorDeactivationThreshold, v.FlowErrorDeactivationThreshold)
+		case schemas.ScheduledTriggerProperties_scheduleEndTime:
+			v.ScheduleEndTime = new(time.Time)
+			return d.ReadTime(schemas.ScheduledTriggerProperties_scheduleEndTime, v.ScheduleEndTime)
+		case schemas.ScheduledTriggerProperties_scheduleExpression:
+			v.ScheduleExpression = new(string)
+			return d.ReadString(schemas.ScheduledTriggerProperties_scheduleExpression, v.ScheduleExpression)
+		case schemas.ScheduledTriggerProperties_scheduleOffset:
+			v.ScheduleOffset = new(int64)
+			return d.ReadInt64(schemas.ScheduledTriggerProperties_scheduleOffset, v.ScheduleOffset)
+		case schemas.ScheduledTriggerProperties_scheduleStartTime:
+			v.ScheduleStartTime = new(time.Time)
+			return d.ReadTime(schemas.ScheduledTriggerProperties_scheduleStartTime, v.ScheduleStartTime)
+		case schemas.ScheduledTriggerProperties_timezone:
+			v.Timezone = new(string)
+			return d.ReadString(schemas.ScheduledTriggerProperties_timezone, v.Timezone)
+		}
+		return nil
+	})
+}
+
 // The connector-specific profile credentials required when using ServiceNow.
 type ServiceNowConnectorProfileCredentials struct {
 
@@ -2542,6 +7184,42 @@ type ServiceNowConnectorProfileCredentials struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ServiceNowConnectorProfileCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceNowConnectorProfileCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceNowConnectorProfileCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OAuth2Credentials != nil {
+		s.WriteStruct(schemas.ServiceNowConnectorProfileCredentials_oAuth2Credentials)
+		v.OAuth2Credentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.ServiceNowConnectorProfileCredentials_password, *v.Password)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.ServiceNowConnectorProfileCredentials_username, *v.Username)
+	}
+}
+func (v *ServiceNowConnectorProfileCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceNowConnectorProfileCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceNowConnectorProfileCredentials_oAuth2Credentials:
+			v.OAuth2Credentials = &OAuth2Credentials{}
+			return v.OAuth2Credentials.Deserialize(d)
+		case schemas.ServiceNowConnectorProfileCredentials_password:
+			v.Password = new(string)
+			return d.ReadString(schemas.ServiceNowConnectorProfileCredentials_password, v.Password)
+		case schemas.ServiceNowConnectorProfileCredentials_username:
+			v.Username = new(string)
+			return d.ReadString(schemas.ServiceNowConnectorProfileCredentials_username, v.Username)
+		}
+		return nil
+	})
+}
+
 // The connector-specific profile properties required when using ServiceNow.
 type ServiceNowConnectorProfileProperties struct {
 
@@ -2553,9 +7231,47 @@ type ServiceNowConnectorProfileProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ServiceNowConnectorProfileProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceNowConnectorProfileProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceNowConnectorProfileProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceUrl != nil {
+		s.WriteString(schemas.ServiceNowConnectorProfileProperties_instanceUrl, *v.InstanceUrl)
+	}
+}
+func (v *ServiceNowConnectorProfileProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceNowConnectorProfileProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceNowConnectorProfileProperties_instanceUrl:
+			v.InstanceUrl = new(string)
+			return d.ReadString(schemas.ServiceNowConnectorProfileProperties_instanceUrl, v.InstanceUrl)
+		}
+		return nil
+	})
+}
+
 // The connector metadata specific to ServiceNow.
 type ServiceNowMetadata struct {
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceNowMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceNowMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceNowMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ServiceNowMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceNowMetadata, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // The properties that are applied when ServiceNow is being used as a source.
@@ -2567,6 +7283,28 @@ type ServiceNowSourceProperties struct {
 	Object *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceNowSourceProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceNowSourceProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceNowSourceProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Object != nil {
+		s.WriteString(schemas.ServiceNowSourceProperties_object, *v.Object)
+	}
+}
+func (v *ServiceNowSourceProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceNowSourceProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceNowSourceProperties_object:
+			v.Object = new(string)
+			return d.ReadString(schemas.ServiceNowSourceProperties_object, v.Object)
+		}
+		return nil
+	})
 }
 
 // The connector-specific profile credentials required when using Singular.
@@ -2581,14 +7319,68 @@ type SingularConnectorProfileCredentials struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SingularConnectorProfileCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SingularConnectorProfileCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SingularConnectorProfileCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiKey != nil {
+		s.WriteString(schemas.SingularConnectorProfileCredentials_apiKey, *v.ApiKey)
+	}
+}
+func (v *SingularConnectorProfileCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SingularConnectorProfileCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SingularConnectorProfileCredentials_apiKey:
+			v.ApiKey = new(string)
+			return d.ReadString(schemas.SingularConnectorProfileCredentials_apiKey, v.ApiKey)
+		}
+		return nil
+	})
+}
+
 // The connector-specific profile properties required when using Singular.
 type SingularConnectorProfileProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SingularConnectorProfileProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SingularConnectorProfileProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SingularConnectorProfileProperties) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SingularConnectorProfileProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SingularConnectorProfileProperties, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 // The connector metadata specific to Singular.
 type SingularMetadata struct {
 	noSmithyDocumentSerde
+}
+
+func (v *SingularMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SingularMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SingularMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SingularMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SingularMetadata, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // The properties that are applied when Singular is being used as a source.
@@ -2600,6 +7392,28 @@ type SingularSourceProperties struct {
 	Object *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SingularSourceProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SingularSourceProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SingularSourceProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Object != nil {
+		s.WriteString(schemas.SingularSourceProperties_object, *v.Object)
+	}
+}
+func (v *SingularSourceProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SingularSourceProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SingularSourceProperties_object:
+			v.Object = new(string)
+			return d.ReadString(schemas.SingularSourceProperties_object, v.Object)
+		}
+		return nil
+	})
 }
 
 // The connector-specific profile credentials required when using Slack.
@@ -2626,6 +7440,48 @@ type SlackConnectorProfileCredentials struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SlackConnectorProfileCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SlackConnectorProfileCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SlackConnectorProfileCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.SlackConnectorProfileCredentials_accessToken, *v.AccessToken)
+	}
+	if v.ClientId != nil {
+		s.WriteString(schemas.SlackConnectorProfileCredentials_clientId, *v.ClientId)
+	}
+	if v.ClientSecret != nil {
+		s.WriteString(schemas.SlackConnectorProfileCredentials_clientSecret, *v.ClientSecret)
+	}
+	if v.OAuthRequest != nil {
+		s.WriteStruct(schemas.SlackConnectorProfileCredentials_oAuthRequest)
+		v.OAuthRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SlackConnectorProfileCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SlackConnectorProfileCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SlackConnectorProfileCredentials_accessToken:
+			v.AccessToken = new(string)
+			return d.ReadString(schemas.SlackConnectorProfileCredentials_accessToken, v.AccessToken)
+		case schemas.SlackConnectorProfileCredentials_clientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.SlackConnectorProfileCredentials_clientId, v.ClientId)
+		case schemas.SlackConnectorProfileCredentials_clientSecret:
+			v.ClientSecret = new(string)
+			return d.ReadString(schemas.SlackConnectorProfileCredentials_clientSecret, v.ClientSecret)
+		case schemas.SlackConnectorProfileCredentials_oAuthRequest:
+			v.OAuthRequest = &ConnectorOAuthRequest{}
+			return v.OAuthRequest.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The connector-specific profile properties required when using Slack.
 type SlackConnectorProfileProperties struct {
 
@@ -2637,6 +7493,28 @@ type SlackConnectorProfileProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SlackConnectorProfileProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SlackConnectorProfileProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SlackConnectorProfileProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceUrl != nil {
+		s.WriteString(schemas.SlackConnectorProfileProperties_instanceUrl, *v.InstanceUrl)
+	}
+}
+func (v *SlackConnectorProfileProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SlackConnectorProfileProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SlackConnectorProfileProperties_instanceUrl:
+			v.InstanceUrl = new(string)
+			return d.ReadString(schemas.SlackConnectorProfileProperties_instanceUrl, v.InstanceUrl)
+		}
+		return nil
+	})
+}
+
 // The connector metadata specific to Slack.
 type SlackMetadata struct {
 
@@ -2644,6 +7522,25 @@ type SlackMetadata struct {
 	OAuthScopes []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SlackMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SlackMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SlackMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOAuthScopeList(s, schemas.SlackMetadata_oAuthScopes, v.OAuthScopes)
+}
+func (v *SlackMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SlackMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SlackMetadata_oAuthScopes:
+			return deserializeOAuthScopeList(d, schemas.SlackMetadata_oAuthScopes, &v.OAuthScopes)
+		}
+		return nil
+	})
 }
 
 // The properties that are applied when Slack is being used as a source.
@@ -2655,6 +7552,28 @@ type SlackSourceProperties struct {
 	Object *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SlackSourceProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SlackSourceProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SlackSourceProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Object != nil {
+		s.WriteString(schemas.SlackSourceProperties_object, *v.Object)
+	}
+}
+func (v *SlackSourceProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SlackSourceProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SlackSourceProperties_object:
+			v.Object = new(string)
+			return d.ReadString(schemas.SlackSourceProperties_object, v.Object)
+		}
+		return nil
+	})
 }
 
 // The connector-specific profile credentials required when using Snowflake.
@@ -2671,6 +7590,34 @@ type SnowflakeConnectorProfileCredentials struct {
 	Username *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SnowflakeConnectorProfileCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnowflakeConnectorProfileCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnowflakeConnectorProfileCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Password != nil {
+		s.WriteString(schemas.SnowflakeConnectorProfileCredentials_password, *v.Password)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.SnowflakeConnectorProfileCredentials_username, *v.Username)
+	}
+}
+func (v *SnowflakeConnectorProfileCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnowflakeConnectorProfileCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnowflakeConnectorProfileCredentials_password:
+			v.Password = new(string)
+			return d.ReadString(schemas.SnowflakeConnectorProfileCredentials_password, v.Password)
+		case schemas.SnowflakeConnectorProfileCredentials_username:
+			v.Username = new(string)
+			return d.ReadString(schemas.SnowflakeConnectorProfileCredentials_username, v.Username)
+		}
+		return nil
+	})
 }
 
 // The connector-specific profile properties required when using Snowflake.
@@ -2708,6 +7655,64 @@ type SnowflakeConnectorProfileProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SnowflakeConnectorProfileProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnowflakeConnectorProfileProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnowflakeConnectorProfileProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountName != nil {
+		s.WriteString(schemas.SnowflakeConnectorProfileProperties_accountName, *v.AccountName)
+	}
+	if v.BucketName != nil {
+		s.WriteString(schemas.SnowflakeConnectorProfileProperties_bucketName, *v.BucketName)
+	}
+	if v.BucketPrefix != nil {
+		s.WriteString(schemas.SnowflakeConnectorProfileProperties_bucketPrefix, *v.BucketPrefix)
+	}
+	if v.PrivateLinkServiceName != nil {
+		s.WriteString(schemas.SnowflakeConnectorProfileProperties_privateLinkServiceName, *v.PrivateLinkServiceName)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.SnowflakeConnectorProfileProperties_region, *v.Region)
+	}
+	if v.Stage != nil {
+		s.WriteString(schemas.SnowflakeConnectorProfileProperties_stage, *v.Stage)
+	}
+	if v.Warehouse != nil {
+		s.WriteString(schemas.SnowflakeConnectorProfileProperties_warehouse, *v.Warehouse)
+	}
+}
+func (v *SnowflakeConnectorProfileProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnowflakeConnectorProfileProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnowflakeConnectorProfileProperties_accountName:
+			v.AccountName = new(string)
+			return d.ReadString(schemas.SnowflakeConnectorProfileProperties_accountName, v.AccountName)
+		case schemas.SnowflakeConnectorProfileProperties_bucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.SnowflakeConnectorProfileProperties_bucketName, v.BucketName)
+		case schemas.SnowflakeConnectorProfileProperties_bucketPrefix:
+			v.BucketPrefix = new(string)
+			return d.ReadString(schemas.SnowflakeConnectorProfileProperties_bucketPrefix, v.BucketPrefix)
+		case schemas.SnowflakeConnectorProfileProperties_privateLinkServiceName:
+			v.PrivateLinkServiceName = new(string)
+			return d.ReadString(schemas.SnowflakeConnectorProfileProperties_privateLinkServiceName, v.PrivateLinkServiceName)
+		case schemas.SnowflakeConnectorProfileProperties_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.SnowflakeConnectorProfileProperties_region, v.Region)
+		case schemas.SnowflakeConnectorProfileProperties_stage:
+			v.Stage = new(string)
+			return d.ReadString(schemas.SnowflakeConnectorProfileProperties_stage, v.Stage)
+		case schemas.SnowflakeConnectorProfileProperties_warehouse:
+			v.Warehouse = new(string)
+			return d.ReadString(schemas.SnowflakeConnectorProfileProperties_warehouse, v.Warehouse)
+		}
+		return nil
+	})
+}
+
 // The properties that are applied when Snowflake is being used as a destination.
 type SnowflakeDestinationProperties struct {
 
@@ -2736,6 +7741,48 @@ type SnowflakeDestinationProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SnowflakeDestinationProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnowflakeDestinationProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnowflakeDestinationProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketPrefix != nil {
+		s.WriteString(schemas.SnowflakeDestinationProperties_bucketPrefix, *v.BucketPrefix)
+	}
+	if v.ErrorHandlingConfig != nil {
+		s.WriteStruct(schemas.SnowflakeDestinationProperties_errorHandlingConfig)
+		v.ErrorHandlingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IntermediateBucketName != nil {
+		s.WriteString(schemas.SnowflakeDestinationProperties_intermediateBucketName, *v.IntermediateBucketName)
+	}
+	if v.Object != nil {
+		s.WriteString(schemas.SnowflakeDestinationProperties_object, *v.Object)
+	}
+}
+func (v *SnowflakeDestinationProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnowflakeDestinationProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnowflakeDestinationProperties_bucketPrefix:
+			v.BucketPrefix = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationProperties_bucketPrefix, v.BucketPrefix)
+		case schemas.SnowflakeDestinationProperties_errorHandlingConfig:
+			v.ErrorHandlingConfig = &ErrorHandlingConfig{}
+			return v.ErrorHandlingConfig.Deserialize(d)
+		case schemas.SnowflakeDestinationProperties_intermediateBucketName:
+			v.IntermediateBucketName = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationProperties_intermediateBucketName, v.IntermediateBucketName)
+		case schemas.SnowflakeDestinationProperties_object:
+			v.Object = new(string)
+			return d.ReadString(schemas.SnowflakeDestinationProperties_object, v.Object)
+		}
+		return nil
+	})
+}
+
 // The connector metadata specific to Snowflake.
 type SnowflakeMetadata struct {
 
@@ -2743,6 +7790,25 @@ type SnowflakeMetadata struct {
 	SupportedRegions []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SnowflakeMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnowflakeMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnowflakeMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRegionList(s, schemas.SnowflakeMetadata_supportedRegions, v.SupportedRegions)
+}
+func (v *SnowflakeMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnowflakeMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnowflakeMetadata_supportedRegions:
+			return deserializeRegionList(d, schemas.SnowflakeMetadata_supportedRegions, &v.SupportedRegions)
+		}
+		return nil
+	})
 }
 
 // Specifies the information that is required to query a particular connector.
@@ -2803,6 +7869,158 @@ type SourceConnectorProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SourceConnectorProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceConnectorProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceConnectorProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amplitude != nil {
+		s.WriteStruct(schemas.SourceConnectorProperties_Amplitude)
+		v.Amplitude.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomConnector != nil {
+		s.WriteStruct(schemas.SourceConnectorProperties_CustomConnector)
+		v.CustomConnector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Datadog != nil {
+		s.WriteStruct(schemas.SourceConnectorProperties_Datadog)
+		v.Datadog.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Dynatrace != nil {
+		s.WriteStruct(schemas.SourceConnectorProperties_Dynatrace)
+		v.Dynatrace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GoogleAnalytics != nil {
+		s.WriteStruct(schemas.SourceConnectorProperties_GoogleAnalytics)
+		v.GoogleAnalytics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InforNexus != nil {
+		s.WriteStruct(schemas.SourceConnectorProperties_InforNexus)
+		v.InforNexus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Marketo != nil {
+		s.WriteStruct(schemas.SourceConnectorProperties_Marketo)
+		v.Marketo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Pardot != nil {
+		s.WriteStruct(schemas.SourceConnectorProperties_Pardot)
+		v.Pardot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3 != nil {
+		s.WriteStruct(schemas.SourceConnectorProperties_S3)
+		v.S3.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SAPOData != nil {
+		s.WriteStruct(schemas.SourceConnectorProperties_SAPOData)
+		v.SAPOData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Salesforce != nil {
+		s.WriteStruct(schemas.SourceConnectorProperties_Salesforce)
+		v.Salesforce.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceNow != nil {
+		s.WriteStruct(schemas.SourceConnectorProperties_ServiceNow)
+		v.ServiceNow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Singular != nil {
+		s.WriteStruct(schemas.SourceConnectorProperties_Singular)
+		v.Singular.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Slack != nil {
+		s.WriteStruct(schemas.SourceConnectorProperties_Slack)
+		v.Slack.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Trendmicro != nil {
+		s.WriteStruct(schemas.SourceConnectorProperties_Trendmicro)
+		v.Trendmicro.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Veeva != nil {
+		s.WriteStruct(schemas.SourceConnectorProperties_Veeva)
+		v.Veeva.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Zendesk != nil {
+		s.WriteStruct(schemas.SourceConnectorProperties_Zendesk)
+		v.Zendesk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SourceConnectorProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceConnectorProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceConnectorProperties_Amplitude:
+			v.Amplitude = &AmplitudeSourceProperties{}
+			return v.Amplitude.Deserialize(d)
+		case schemas.SourceConnectorProperties_CustomConnector:
+			v.CustomConnector = &CustomConnectorSourceProperties{}
+			return v.CustomConnector.Deserialize(d)
+		case schemas.SourceConnectorProperties_Datadog:
+			v.Datadog = &DatadogSourceProperties{}
+			return v.Datadog.Deserialize(d)
+		case schemas.SourceConnectorProperties_Dynatrace:
+			v.Dynatrace = &DynatraceSourceProperties{}
+			return v.Dynatrace.Deserialize(d)
+		case schemas.SourceConnectorProperties_GoogleAnalytics:
+			v.GoogleAnalytics = &GoogleAnalyticsSourceProperties{}
+			return v.GoogleAnalytics.Deserialize(d)
+		case schemas.SourceConnectorProperties_InforNexus:
+			v.InforNexus = &InforNexusSourceProperties{}
+			return v.InforNexus.Deserialize(d)
+		case schemas.SourceConnectorProperties_Marketo:
+			v.Marketo = &MarketoSourceProperties{}
+			return v.Marketo.Deserialize(d)
+		case schemas.SourceConnectorProperties_Pardot:
+			v.Pardot = &PardotSourceProperties{}
+			return v.Pardot.Deserialize(d)
+		case schemas.SourceConnectorProperties_S3:
+			v.S3 = &S3SourceProperties{}
+			return v.S3.Deserialize(d)
+		case schemas.SourceConnectorProperties_SAPOData:
+			v.SAPOData = &SAPODataSourceProperties{}
+			return v.SAPOData.Deserialize(d)
+		case schemas.SourceConnectorProperties_Salesforce:
+			v.Salesforce = &SalesforceSourceProperties{}
+			return v.Salesforce.Deserialize(d)
+		case schemas.SourceConnectorProperties_ServiceNow:
+			v.ServiceNow = &ServiceNowSourceProperties{}
+			return v.ServiceNow.Deserialize(d)
+		case schemas.SourceConnectorProperties_Singular:
+			v.Singular = &SingularSourceProperties{}
+			return v.Singular.Deserialize(d)
+		case schemas.SourceConnectorProperties_Slack:
+			v.Slack = &SlackSourceProperties{}
+			return v.Slack.Deserialize(d)
+		case schemas.SourceConnectorProperties_Trendmicro:
+			v.Trendmicro = &TrendmicroSourceProperties{}
+			return v.Trendmicro.Deserialize(d)
+		case schemas.SourceConnectorProperties_Veeva:
+			v.Veeva = &VeevaSourceProperties{}
+			return v.Veeva.Deserialize(d)
+		case schemas.SourceConnectorProperties_Zendesk:
+			v.Zendesk = &ZendeskSourceProperties{}
+			return v.Zendesk.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 //	The properties that can be applied to a field when the connector is being used
 //
 // as a source.
@@ -2818,6 +8036,37 @@ type SourceFieldProperties struct {
 	IsTimestampFieldForIncrementalQueries bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *SourceFieldProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceFieldProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceFieldProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsQueryable != false {
+		s.WriteBool(schemas.SourceFieldProperties_isQueryable, v.IsQueryable)
+	}
+	if v.IsRetrievable != false {
+		s.WriteBool(schemas.SourceFieldProperties_isRetrievable, v.IsRetrievable)
+	}
+	if v.IsTimestampFieldForIncrementalQueries != false {
+		s.WriteBool(schemas.SourceFieldProperties_isTimestampFieldForIncrementalQueries, v.IsTimestampFieldForIncrementalQueries)
+	}
+}
+func (v *SourceFieldProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceFieldProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceFieldProperties_isQueryable:
+			return d.ReadBool(schemas.SourceFieldProperties_isQueryable, &v.IsQueryable)
+		case schemas.SourceFieldProperties_isRetrievable:
+			return d.ReadBool(schemas.SourceFieldProperties_isRetrievable, &v.IsRetrievable)
+		case schemas.SourceFieldProperties_isTimestampFieldForIncrementalQueries:
+			return d.ReadBool(schemas.SourceFieldProperties_isTimestampFieldForIncrementalQueries, &v.IsTimestampFieldForIncrementalQueries)
+		}
+		return nil
+	})
 }
 
 //	Contains information about the configuration of the source connector used in
@@ -2851,6 +8100,60 @@ type SourceFlowConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SourceFlowConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceFlowConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceFlowConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiVersion != nil {
+		s.WriteString(schemas.SourceFlowConfig_apiVersion, *v.ApiVersion)
+	}
+	if v.ConnectorProfileName != nil {
+		s.WriteString(schemas.SourceFlowConfig_connectorProfileName, *v.ConnectorProfileName)
+	}
+	if v.ConnectorType != "" {
+		s.WriteString(schemas.SourceFlowConfig_connectorType, string(v.ConnectorType))
+	}
+	if v.IncrementalPullConfig != nil {
+		s.WriteStruct(schemas.SourceFlowConfig_incrementalPullConfig)
+		v.IncrementalPullConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceConnectorProperties != nil {
+		s.WriteStruct(schemas.SourceFlowConfig_sourceConnectorProperties)
+		v.SourceConnectorProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SourceFlowConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceFlowConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceFlowConfig_apiVersion:
+			v.ApiVersion = new(string)
+			return d.ReadString(schemas.SourceFlowConfig_apiVersion, v.ApiVersion)
+		case schemas.SourceFlowConfig_connectorProfileName:
+			v.ConnectorProfileName = new(string)
+			return d.ReadString(schemas.SourceFlowConfig_connectorProfileName, v.ConnectorProfileName)
+		case schemas.SourceFlowConfig_connectorType:
+			var ev string
+			if err := d.ReadString(schemas.SourceFlowConfig_connectorType, &ev); err != nil {
+				return err
+			}
+			v.ConnectorType = ConnectorType(ev)
+			return nil
+		case schemas.SourceFlowConfig_incrementalPullConfig:
+			v.IncrementalPullConfig = &IncrementalPullConfig{}
+			return v.IncrementalPullConfig.Deserialize(d)
+		case schemas.SourceFlowConfig_sourceConnectorProperties:
+			v.SourceConnectorProperties = &SourceConnectorProperties{}
+			return v.SourceConnectorProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Determines how Amazon AppFlow handles the success response that it gets from
 // the connector after placing data.
 //
@@ -2867,6 +8170,34 @@ type SuccessResponseHandlingConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SuccessResponseHandlingConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SuccessResponseHandlingConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuccessResponseHandlingConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.SuccessResponseHandlingConfig_bucketName, *v.BucketName)
+	}
+	if v.BucketPrefix != nil {
+		s.WriteString(schemas.SuccessResponseHandlingConfig_bucketPrefix, *v.BucketPrefix)
+	}
+}
+func (v *SuccessResponseHandlingConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SuccessResponseHandlingConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SuccessResponseHandlingConfig_bucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.SuccessResponseHandlingConfig_bucketName, v.BucketName)
+		case schemas.SuccessResponseHandlingConfig_bucketPrefix:
+			v.BucketPrefix = new(string)
+			return d.ReadString(schemas.SuccessResponseHandlingConfig_bucketPrefix, v.BucketPrefix)
+		}
+		return nil
+	})
+}
+
 //	Contains details regarding all the supported FieldTypes and their
 //
 // corresponding filterOperators and supportedValues .
@@ -2879,6 +8210,30 @@ type SupportedFieldTypeDetails struct {
 	V1 *FieldTypeDetails
 
 	noSmithyDocumentSerde
+}
+
+func (v *SupportedFieldTypeDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SupportedFieldTypeDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SupportedFieldTypeDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.V1 != nil {
+		s.WriteStruct(schemas.SupportedFieldTypeDetails_v1)
+		v.V1.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SupportedFieldTypeDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SupportedFieldTypeDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SupportedFieldTypeDetails_v1:
+			v.V1 = &FieldTypeDetails{}
+			return v.V1.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 //	A class for modeling different type of tasks. Task implementation varies based
@@ -2910,6 +8265,52 @@ type Task struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Task) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Task)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Task) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorOperator != nil {
+		s.WriteStruct(schemas.Task_connectorOperator)
+		v.ConnectorOperator.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DestinationField != nil {
+		s.WriteString(schemas.Task_destinationField, *v.DestinationField)
+	}
+	serializeSourceFields(s, schemas.Task_sourceFields, v.SourceFields)
+	serializeTaskPropertiesMap(s, schemas.Task_taskProperties, v.TaskProperties)
+	if v.TaskType != "" {
+		s.WriteString(schemas.Task_taskType, string(v.TaskType))
+	}
+}
+func (v *Task) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Task, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Task_connectorOperator:
+			v.ConnectorOperator = &ConnectorOperator{}
+			return v.ConnectorOperator.Deserialize(d)
+		case schemas.Task_destinationField:
+			v.DestinationField = new(string)
+			return d.ReadString(schemas.Task_destinationField, v.DestinationField)
+		case schemas.Task_sourceFields:
+			return deserializeSourceFields(d, schemas.Task_sourceFields, &v.SourceFields)
+		case schemas.Task_taskProperties:
+			return deserializeTaskPropertiesMap(d, schemas.Task_taskProperties, &v.TaskProperties)
+		case schemas.Task_taskType:
+			var ev string
+			if err := d.ReadString(schemas.Task_taskType, &ev); err != nil {
+				return err
+			}
+			v.TaskType = TaskType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The connector-specific profile credentials required when using Trend Micro.
 type TrendmicroConnectorProfileCredentials struct {
 
@@ -2921,14 +8322,68 @@ type TrendmicroConnectorProfileCredentials struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TrendmicroConnectorProfileCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrendmicroConnectorProfileCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrendmicroConnectorProfileCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiSecretKey != nil {
+		s.WriteString(schemas.TrendmicroConnectorProfileCredentials_apiSecretKey, *v.ApiSecretKey)
+	}
+}
+func (v *TrendmicroConnectorProfileCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrendmicroConnectorProfileCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrendmicroConnectorProfileCredentials_apiSecretKey:
+			v.ApiSecretKey = new(string)
+			return d.ReadString(schemas.TrendmicroConnectorProfileCredentials_apiSecretKey, v.ApiSecretKey)
+		}
+		return nil
+	})
+}
+
 // The connector-specific profile properties required when using Trend Micro.
 type TrendmicroConnectorProfileProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TrendmicroConnectorProfileProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrendmicroConnectorProfileProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrendmicroConnectorProfileProperties) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *TrendmicroConnectorProfileProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrendmicroConnectorProfileProperties, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 // The connector metadata specific to Trend Micro.
 type TrendmicroMetadata struct {
 	noSmithyDocumentSerde
+}
+
+func (v *TrendmicroMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrendmicroMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrendmicroMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *TrendmicroMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrendmicroMetadata, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // The properties that are applied when using Trend Micro as a flow source.
@@ -2940,6 +8395,28 @@ type TrendmicroSourceProperties struct {
 	Object *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TrendmicroSourceProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrendmicroSourceProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrendmicroSourceProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Object != nil {
+		s.WriteString(schemas.TrendmicroSourceProperties_object, *v.Object)
+	}
+}
+func (v *TrendmicroSourceProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrendmicroSourceProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrendmicroSourceProperties_object:
+			v.Object = new(string)
+			return d.ReadString(schemas.TrendmicroSourceProperties_object, v.Object)
+		}
+		return nil
+	})
 }
 
 //	The trigger settings that determine how and when Amazon AppFlow runs the
@@ -2960,6 +8437,40 @@ type TriggerConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TriggerConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TriggerConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TriggerConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TriggerProperties != nil {
+		s.WriteStruct(schemas.TriggerConfig_triggerProperties)
+		v.TriggerProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TriggerType != "" {
+		s.WriteString(schemas.TriggerConfig_triggerType, string(v.TriggerType))
+	}
+}
+func (v *TriggerConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TriggerConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TriggerConfig_triggerProperties:
+			v.TriggerProperties = &TriggerProperties{}
+			return v.TriggerProperties.Deserialize(d)
+		case schemas.TriggerConfig_triggerType:
+			var ev string
+			if err := d.ReadString(schemas.TriggerConfig_triggerType, &ev); err != nil {
+				return err
+			}
+			v.TriggerType = TriggerType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	Specifies the configuration details that control the trigger for a flow.
 //
 // Currently, these settings only apply to the Scheduled trigger type.
@@ -2970,6 +8481,30 @@ type TriggerProperties struct {
 	Scheduled *ScheduledTriggerProperties
 
 	noSmithyDocumentSerde
+}
+
+func (v *TriggerProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TriggerProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TriggerProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Scheduled != nil {
+		s.WriteStruct(schemas.TriggerProperties_Scheduled)
+		v.Scheduled.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TriggerProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TriggerProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TriggerProperties_Scheduled:
+			v.Scheduled = &ScheduledTriggerProperties{}
+			return v.Scheduled.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The properties that are applied when Upsolver is used as a destination.
@@ -2994,9 +8529,61 @@ type UpsolverDestinationProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpsolverDestinationProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpsolverDestinationProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpsolverDestinationProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.UpsolverDestinationProperties_bucketName, *v.BucketName)
+	}
+	if v.BucketPrefix != nil {
+		s.WriteString(schemas.UpsolverDestinationProperties_bucketPrefix, *v.BucketPrefix)
+	}
+	if v.S3OutputFormatConfig != nil {
+		s.WriteStruct(schemas.UpsolverDestinationProperties_s3OutputFormatConfig)
+		v.S3OutputFormatConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpsolverDestinationProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpsolverDestinationProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpsolverDestinationProperties_bucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.UpsolverDestinationProperties_bucketName, v.BucketName)
+		case schemas.UpsolverDestinationProperties_bucketPrefix:
+			v.BucketPrefix = new(string)
+			return d.ReadString(schemas.UpsolverDestinationProperties_bucketPrefix, v.BucketPrefix)
+		case schemas.UpsolverDestinationProperties_s3OutputFormatConfig:
+			v.S3OutputFormatConfig = &UpsolverS3OutputFormatConfig{}
+			return v.S3OutputFormatConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The connector metadata specific to Upsolver.
 type UpsolverMetadata struct {
 	noSmithyDocumentSerde
+}
+
+func (v *UpsolverMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpsolverMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpsolverMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpsolverMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpsolverMetadata, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 //	The configuration that determines how Amazon AppFlow formats the flow output
@@ -3021,6 +8608,48 @@ type UpsolverS3OutputFormatConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpsolverS3OutputFormatConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpsolverS3OutputFormatConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpsolverS3OutputFormatConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationConfig != nil {
+		s.WriteStruct(schemas.UpsolverS3OutputFormatConfig_aggregationConfig)
+		v.AggregationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FileType != "" {
+		s.WriteString(schemas.UpsolverS3OutputFormatConfig_fileType, string(v.FileType))
+	}
+	if v.PrefixConfig != nil {
+		s.WriteStruct(schemas.UpsolverS3OutputFormatConfig_prefixConfig)
+		v.PrefixConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpsolverS3OutputFormatConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpsolverS3OutputFormatConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpsolverS3OutputFormatConfig_aggregationConfig:
+			v.AggregationConfig = &AggregationConfig{}
+			return v.AggregationConfig.Deserialize(d)
+		case schemas.UpsolverS3OutputFormatConfig_fileType:
+			var ev string
+			if err := d.ReadString(schemas.UpsolverS3OutputFormatConfig_fileType, &ev); err != nil {
+				return err
+			}
+			v.FileType = FileType(ev)
+			return nil
+		case schemas.UpsolverS3OutputFormatConfig_prefixConfig:
+			v.PrefixConfig = &PrefixConfig{}
+			return v.PrefixConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The connector-specific profile credentials required when using Veeva.
 type VeevaConnectorProfileCredentials struct {
 
@@ -3037,6 +8666,34 @@ type VeevaConnectorProfileCredentials struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VeevaConnectorProfileCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VeevaConnectorProfileCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VeevaConnectorProfileCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Password != nil {
+		s.WriteString(schemas.VeevaConnectorProfileCredentials_password, *v.Password)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.VeevaConnectorProfileCredentials_username, *v.Username)
+	}
+}
+func (v *VeevaConnectorProfileCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VeevaConnectorProfileCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VeevaConnectorProfileCredentials_password:
+			v.Password = new(string)
+			return d.ReadString(schemas.VeevaConnectorProfileCredentials_password, v.Password)
+		case schemas.VeevaConnectorProfileCredentials_username:
+			v.Username = new(string)
+			return d.ReadString(schemas.VeevaConnectorProfileCredentials_username, v.Username)
+		}
+		return nil
+	})
+}
+
 // The connector-specific profile properties required when using Veeva.
 type VeevaConnectorProfileProperties struct {
 
@@ -3048,9 +8705,47 @@ type VeevaConnectorProfileProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VeevaConnectorProfileProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VeevaConnectorProfileProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VeevaConnectorProfileProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceUrl != nil {
+		s.WriteString(schemas.VeevaConnectorProfileProperties_instanceUrl, *v.InstanceUrl)
+	}
+}
+func (v *VeevaConnectorProfileProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VeevaConnectorProfileProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VeevaConnectorProfileProperties_instanceUrl:
+			v.InstanceUrl = new(string)
+			return d.ReadString(schemas.VeevaConnectorProfileProperties_instanceUrl, v.InstanceUrl)
+		}
+		return nil
+	})
+}
+
 // The connector metadata specific to Veeva.
 type VeevaMetadata struct {
 	noSmithyDocumentSerde
+}
+
+func (v *VeevaMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VeevaMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VeevaMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *VeevaMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VeevaMetadata, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // The properties that are applied when using Veeva as a flow source.
@@ -3074,6 +8769,49 @@ type VeevaSourceProperties struct {
 	IncludeSourceFiles bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *VeevaSourceProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VeevaSourceProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VeevaSourceProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentType != nil {
+		s.WriteString(schemas.VeevaSourceProperties_documentType, *v.DocumentType)
+	}
+	if v.IncludeAllVersions != false {
+		s.WriteBool(schemas.VeevaSourceProperties_includeAllVersions, v.IncludeAllVersions)
+	}
+	if v.IncludeRenditions != false {
+		s.WriteBool(schemas.VeevaSourceProperties_includeRenditions, v.IncludeRenditions)
+	}
+	if v.IncludeSourceFiles != false {
+		s.WriteBool(schemas.VeevaSourceProperties_includeSourceFiles, v.IncludeSourceFiles)
+	}
+	if v.Object != nil {
+		s.WriteString(schemas.VeevaSourceProperties_object, *v.Object)
+	}
+}
+func (v *VeevaSourceProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VeevaSourceProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VeevaSourceProperties_documentType:
+			v.DocumentType = new(string)
+			return d.ReadString(schemas.VeevaSourceProperties_documentType, v.DocumentType)
+		case schemas.VeevaSourceProperties_includeAllVersions:
+			return d.ReadBool(schemas.VeevaSourceProperties_includeAllVersions, &v.IncludeAllVersions)
+		case schemas.VeevaSourceProperties_includeRenditions:
+			return d.ReadBool(schemas.VeevaSourceProperties_includeRenditions, &v.IncludeRenditions)
+		case schemas.VeevaSourceProperties_includeSourceFiles:
+			return d.ReadBool(schemas.VeevaSourceProperties_includeSourceFiles, &v.IncludeSourceFiles)
+		case schemas.VeevaSourceProperties_object:
+			v.Object = new(string)
+			return d.ReadString(schemas.VeevaSourceProperties_object, v.Object)
+		}
+		return nil
+	})
 }
 
 // The connector-specific profile credentials required when using Zendesk.
@@ -3100,6 +8838,48 @@ type ZendeskConnectorProfileCredentials struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ZendeskConnectorProfileCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ZendeskConnectorProfileCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ZendeskConnectorProfileCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.ZendeskConnectorProfileCredentials_accessToken, *v.AccessToken)
+	}
+	if v.ClientId != nil {
+		s.WriteString(schemas.ZendeskConnectorProfileCredentials_clientId, *v.ClientId)
+	}
+	if v.ClientSecret != nil {
+		s.WriteString(schemas.ZendeskConnectorProfileCredentials_clientSecret, *v.ClientSecret)
+	}
+	if v.OAuthRequest != nil {
+		s.WriteStruct(schemas.ZendeskConnectorProfileCredentials_oAuthRequest)
+		v.OAuthRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ZendeskConnectorProfileCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ZendeskConnectorProfileCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ZendeskConnectorProfileCredentials_accessToken:
+			v.AccessToken = new(string)
+			return d.ReadString(schemas.ZendeskConnectorProfileCredentials_accessToken, v.AccessToken)
+		case schemas.ZendeskConnectorProfileCredentials_clientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.ZendeskConnectorProfileCredentials_clientId, v.ClientId)
+		case schemas.ZendeskConnectorProfileCredentials_clientSecret:
+			v.ClientSecret = new(string)
+			return d.ReadString(schemas.ZendeskConnectorProfileCredentials_clientSecret, v.ClientSecret)
+		case schemas.ZendeskConnectorProfileCredentials_oAuthRequest:
+			v.OAuthRequest = &ConnectorOAuthRequest{}
+			return v.OAuthRequest.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The connector-specific profile properties required when using Zendesk.
 type ZendeskConnectorProfileProperties struct {
 
@@ -3109,6 +8889,28 @@ type ZendeskConnectorProfileProperties struct {
 	InstanceUrl *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ZendeskConnectorProfileProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ZendeskConnectorProfileProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ZendeskConnectorProfileProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceUrl != nil {
+		s.WriteString(schemas.ZendeskConnectorProfileProperties_instanceUrl, *v.InstanceUrl)
+	}
+}
+func (v *ZendeskConnectorProfileProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ZendeskConnectorProfileProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ZendeskConnectorProfileProperties_instanceUrl:
+			v.InstanceUrl = new(string)
+			return d.ReadString(schemas.ZendeskConnectorProfileProperties_instanceUrl, v.InstanceUrl)
+		}
+		return nil
+	})
 }
 
 // The properties that are applied when Zendesk is used as a destination.
@@ -3137,6 +8939,49 @@ type ZendeskDestinationProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ZendeskDestinationProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ZendeskDestinationProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ZendeskDestinationProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorHandlingConfig != nil {
+		s.WriteStruct(schemas.ZendeskDestinationProperties_errorHandlingConfig)
+		v.ErrorHandlingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIdFieldNameList(s, schemas.ZendeskDestinationProperties_idFieldNames, v.IdFieldNames)
+	if v.Object != nil {
+		s.WriteString(schemas.ZendeskDestinationProperties_object, *v.Object)
+	}
+	if v.WriteOperationType != "" {
+		s.WriteString(schemas.ZendeskDestinationProperties_writeOperationType, string(v.WriteOperationType))
+	}
+}
+func (v *ZendeskDestinationProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ZendeskDestinationProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ZendeskDestinationProperties_errorHandlingConfig:
+			v.ErrorHandlingConfig = &ErrorHandlingConfig{}
+			return v.ErrorHandlingConfig.Deserialize(d)
+		case schemas.ZendeskDestinationProperties_idFieldNames:
+			return deserializeIdFieldNameList(d, schemas.ZendeskDestinationProperties_idFieldNames, &v.IdFieldNames)
+		case schemas.ZendeskDestinationProperties_object:
+			v.Object = new(string)
+			return d.ReadString(schemas.ZendeskDestinationProperties_object, v.Object)
+		case schemas.ZendeskDestinationProperties_writeOperationType:
+			var ev string
+			if err := d.ReadString(schemas.ZendeskDestinationProperties_writeOperationType, &ev); err != nil {
+				return err
+			}
+			v.WriteOperationType = WriteOperationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The connector metadata specific to Zendesk.
 type ZendeskMetadata struct {
 
@@ -3144,6 +8989,25 @@ type ZendeskMetadata struct {
 	OAuthScopes []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ZendeskMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ZendeskMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ZendeskMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOAuthScopeList(s, schemas.ZendeskMetadata_oAuthScopes, v.OAuthScopes)
+}
+func (v *ZendeskMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ZendeskMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ZendeskMetadata_oAuthScopes:
+			return deserializeOAuthScopeList(d, schemas.ZendeskMetadata_oAuthScopes, &v.OAuthScopes)
+		}
+		return nil
+	})
 }
 
 // The properties that are applied when using Zendesk as a flow source.
@@ -3155,6 +9019,28 @@ type ZendeskSourceProperties struct {
 	Object *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ZendeskSourceProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ZendeskSourceProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ZendeskSourceProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Object != nil {
+		s.WriteString(schemas.ZendeskSourceProperties_object, *v.Object)
+	}
+}
+func (v *ZendeskSourceProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ZendeskSourceProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ZendeskSourceProperties_object:
+			v.Object = new(string)
+			return d.ReadString(schemas.ZendeskSourceProperties_object, v.Object)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

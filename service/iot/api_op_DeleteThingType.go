@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type DeleteThingTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteThingTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteThingTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteThingTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ThingTypeName != nil {
+		s.WriteString(schemas.DeleteThingTypeRequest_thingTypeName, *v.ThingTypeName)
+	}
+}
+
 // The output for the DeleteThingType operation.
 type DeleteThingTypeOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -49,13 +63,26 @@ type DeleteThingTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteThingTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteThingTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteThingTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteThingTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteThingTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteThingTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteThingType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteThingType, schemas.DeleteThingTypeRequest, schemas.DeleteThingTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteThingType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteThingType, schemas.DeleteThingTypeRequest, schemas.DeleteThingTypeResponse), output: &DeleteThingTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

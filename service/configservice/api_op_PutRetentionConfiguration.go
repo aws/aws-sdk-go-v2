@@ -4,7 +4,9 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,18 @@ type PutRetentionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRetentionConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRetentionConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRetentionConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RetentionPeriodInDays != nil {
+		s.WriteInt32(schemas.PutRetentionConfigurationRequest_RetentionPeriodInDays, *v.RetentionPeriodInDays)
+	}
+}
+
 type PutRetentionConfigurationOutput struct {
 
 	// Returns a retention configuration object.
@@ -54,13 +68,34 @@ type PutRetentionConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRetentionConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRetentionConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRetentionConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RetentionConfiguration != nil {
+		s.WriteStruct(schemas.PutRetentionConfigurationResponse_RetentionConfiguration)
+		v.RetentionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutRetentionConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutRetentionConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutRetentionConfigurationResponse_RetentionConfiguration:
+			v.RetentionConfiguration = &types.RetentionConfiguration{}
+			return v.RetentionConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutRetentionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutRetentionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRetentionConfiguration, schemas.PutRetentionConfigurationRequest, schemas.PutRetentionConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutRetentionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRetentionConfiguration, schemas.PutRetentionConfigurationRequest, schemas.PutRetentionConfigurationResponse), output: &PutRetentionConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

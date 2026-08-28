@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type GetInstanceStateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInstanceStateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInstanceStateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInstanceStateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceName != nil {
+		s.WriteString(schemas.GetInstanceStateRequest_instanceName, *v.InstanceName)
+	}
+}
+
 type GetInstanceStateOutput struct {
 
 	// The state of the instance.
@@ -45,13 +59,34 @@ type GetInstanceStateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInstanceStateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInstanceStateResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInstanceStateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != nil {
+		s.WriteStruct(schemas.GetInstanceStateResult_state)
+		v.State.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetInstanceStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInstanceStateResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInstanceStateResult_state:
+			v.State = &types.InstanceState{}
+			return v.State.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInstanceStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetInstanceState{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInstanceState, schemas.GetInstanceStateRequest, schemas.GetInstanceStateResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetInstanceState{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInstanceState, schemas.GetInstanceStateRequest, schemas.GetInstanceStateResult), output: &GetInstanceStateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

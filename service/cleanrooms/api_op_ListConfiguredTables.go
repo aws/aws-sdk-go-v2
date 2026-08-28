@@ -5,7 +5,9 @@ package cleanrooms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,34 @@ type ListConfiguredTablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfiguredTablesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfiguredTablesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfiguredTablesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListConfiguredTablesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfiguredTablesInput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListConfiguredTablesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConfiguredTablesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConfiguredTablesInput_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListConfiguredTablesInput_maxResults, v.MaxResults)
+		case schemas.ListConfiguredTablesInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConfiguredTablesInput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListConfiguredTablesOutput struct {
 
 	// The configured tables listed by the request.
@@ -54,13 +84,35 @@ type ListConfiguredTablesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfiguredTablesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfiguredTablesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfiguredTablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfiguredTableSummaryList(s, schemas.ListConfiguredTablesOutput_configuredTableSummaries, v.ConfiguredTableSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfiguredTablesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListConfiguredTablesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConfiguredTablesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConfiguredTablesOutput_configuredTableSummaries:
+			return deserializeConfiguredTableSummaryList(d, schemas.ListConfiguredTablesOutput_configuredTableSummaries, &v.ConfiguredTableSummaries)
+		case schemas.ListConfiguredTablesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConfiguredTablesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConfiguredTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConfiguredTables{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfiguredTables, schemas.ListConfiguredTablesInput, schemas.ListConfiguredTablesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConfiguredTables{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfiguredTables, schemas.ListConfiguredTablesInput, schemas.ListConfiguredTablesOutput), output: &ListConfiguredTablesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

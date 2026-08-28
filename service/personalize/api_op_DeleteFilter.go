@@ -4,6 +4,8 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFilterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFilterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterArn != nil {
+		s.WriteString(schemas.DeleteFilterRequest_filterArn, *v.FilterArn)
+	}
+}
+
 type DeleteFilterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFilterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFilter, schemas.DeleteFilterRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFilter, schemas.DeleteFilterRequest, nil), output: &DeleteFilterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

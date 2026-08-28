@@ -4,7 +4,9 @@ package route53resolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetFirewallRuleGroupAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFirewallRuleGroupAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFirewallRuleGroupAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFirewallRuleGroupAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallRuleGroupAssociationId != nil {
+		s.WriteString(schemas.GetFirewallRuleGroupAssociationRequest_FirewallRuleGroupAssociationId, *v.FirewallRuleGroupAssociationId)
+	}
+}
+
 type GetFirewallRuleGroupAssociationOutput struct {
 
 	// The association that you requested.
@@ -47,13 +61,34 @@ type GetFirewallRuleGroupAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFirewallRuleGroupAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFirewallRuleGroupAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFirewallRuleGroupAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallRuleGroupAssociation != nil {
+		s.WriteStruct(schemas.GetFirewallRuleGroupAssociationResponse_FirewallRuleGroupAssociation)
+		v.FirewallRuleGroupAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetFirewallRuleGroupAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFirewallRuleGroupAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFirewallRuleGroupAssociationResponse_FirewallRuleGroupAssociation:
+			v.FirewallRuleGroupAssociation = &types.FirewallRuleGroupAssociation{}
+			return v.FirewallRuleGroupAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFirewallRuleGroupAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetFirewallRuleGroupAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFirewallRuleGroupAssociation, schemas.GetFirewallRuleGroupAssociationRequest, schemas.GetFirewallRuleGroupAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetFirewallRuleGroupAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFirewallRuleGroupAssociation, schemas.GetFirewallRuleGroupAssociationRequest, schemas.GetFirewallRuleGroupAssociationResponse), output: &GetFirewallRuleGroupAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

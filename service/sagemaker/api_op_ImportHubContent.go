@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -77,6 +79,47 @@ type ImportHubContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportHubContentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportHubContentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportHubContentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentSchemaVersion != nil {
+		s.WriteString(schemas.ImportHubContentRequest_DocumentSchemaVersion, *v.DocumentSchemaVersion)
+	}
+	if v.HubContentDescription != nil {
+		s.WriteString(schemas.ImportHubContentRequest_HubContentDescription, *v.HubContentDescription)
+	}
+	if v.HubContentDisplayName != nil {
+		s.WriteString(schemas.ImportHubContentRequest_HubContentDisplayName, *v.HubContentDisplayName)
+	}
+	if v.HubContentDocument != nil {
+		s.WriteString(schemas.ImportHubContentRequest_HubContentDocument, *v.HubContentDocument)
+	}
+	if v.HubContentMarkdown != nil {
+		s.WriteString(schemas.ImportHubContentRequest_HubContentMarkdown, *v.HubContentMarkdown)
+	}
+	if v.HubContentName != nil {
+		s.WriteString(schemas.ImportHubContentRequest_HubContentName, *v.HubContentName)
+	}
+	serializeHubContentSearchKeywordList(s, schemas.ImportHubContentRequest_HubContentSearchKeywords, v.HubContentSearchKeywords)
+	if v.HubContentType != "" {
+		s.WriteString(schemas.ImportHubContentRequest_HubContentType, string(v.HubContentType))
+	}
+	if v.HubContentVersion != nil {
+		s.WriteString(schemas.ImportHubContentRequest_HubContentVersion, *v.HubContentVersion)
+	}
+	if v.HubName != nil {
+		s.WriteString(schemas.ImportHubContentRequest_HubName, *v.HubName)
+	}
+	if v.SupportStatus != "" {
+		s.WriteString(schemas.ImportHubContentRequest_SupportStatus, string(v.SupportStatus))
+	}
+	serializeTagList(s, schemas.ImportHubContentRequest_Tags, v.Tags)
+}
+
 type ImportHubContentOutput struct {
 
 	// The ARN of the hub that the content was imported into.
@@ -95,13 +138,38 @@ type ImportHubContentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportHubContentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportHubContentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportHubContentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HubArn != nil {
+		s.WriteString(schemas.ImportHubContentResponse_HubArn, *v.HubArn)
+	}
+	if v.HubContentArn != nil {
+		s.WriteString(schemas.ImportHubContentResponse_HubContentArn, *v.HubContentArn)
+	}
+}
+func (v *ImportHubContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportHubContentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportHubContentResponse_HubArn:
+			v.HubArn = new(string)
+			return d.ReadString(schemas.ImportHubContentResponse_HubArn, v.HubArn)
+		case schemas.ImportHubContentResponse_HubContentArn:
+			v.HubContentArn = new(string)
+			return d.ReadString(schemas.ImportHubContentResponse_HubContentArn, v.HubContentArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportHubContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportHubContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportHubContent, schemas.ImportHubContentRequest, schemas.ImportHubContentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpImportHubContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportHubContent, schemas.ImportHubContentRequest, schemas.ImportHubContentResponse), output: &ImportHubContentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

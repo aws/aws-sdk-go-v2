@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -37,6 +39,18 @@ type DescribeMitigationActionInput struct {
 	ActionName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeMitigationActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMitigationActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMitigationActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionName != nil {
+		s.WriteString(schemas.DescribeMitigationActionRequest_actionName, *v.ActionName)
+	}
 }
 
 type DescribeMitigationActionOutput struct {
@@ -73,13 +87,80 @@ type DescribeMitigationActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMitigationActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMitigationActionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMitigationActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionArn != nil {
+		s.WriteString(schemas.DescribeMitigationActionResponse_actionArn, *v.ActionArn)
+	}
+	if v.ActionId != nil {
+		s.WriteString(schemas.DescribeMitigationActionResponse_actionId, *v.ActionId)
+	}
+	if v.ActionName != nil {
+		s.WriteString(schemas.DescribeMitigationActionResponse_actionName, *v.ActionName)
+	}
+	if v.ActionParams != nil {
+		s.WriteStruct(schemas.DescribeMitigationActionResponse_actionParams)
+		v.ActionParams.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ActionType != "" {
+		s.WriteString(schemas.DescribeMitigationActionResponse_actionType, string(v.ActionType))
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.DescribeMitigationActionResponse_creationDate, *v.CreationDate)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.DescribeMitigationActionResponse_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeMitigationActionResponse_roleArn, *v.RoleArn)
+	}
+}
+func (v *DescribeMitigationActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMitigationActionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMitigationActionResponse_actionArn:
+			v.ActionArn = new(string)
+			return d.ReadString(schemas.DescribeMitigationActionResponse_actionArn, v.ActionArn)
+		case schemas.DescribeMitigationActionResponse_actionId:
+			v.ActionId = new(string)
+			return d.ReadString(schemas.DescribeMitigationActionResponse_actionId, v.ActionId)
+		case schemas.DescribeMitigationActionResponse_actionName:
+			v.ActionName = new(string)
+			return d.ReadString(schemas.DescribeMitigationActionResponse_actionName, v.ActionName)
+		case schemas.DescribeMitigationActionResponse_actionParams:
+			v.ActionParams = &types.MitigationActionParams{}
+			return v.ActionParams.Deserialize(d)
+		case schemas.DescribeMitigationActionResponse_actionType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeMitigationActionResponse_actionType, &ev); err != nil {
+				return err
+			}
+			v.ActionType = types.MitigationActionType(ev)
+			return nil
+		case schemas.DescribeMitigationActionResponse_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeMitigationActionResponse_creationDate, v.CreationDate)
+		case schemas.DescribeMitigationActionResponse_lastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeMitigationActionResponse_lastModifiedDate, v.LastModifiedDate)
+		case schemas.DescribeMitigationActionResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeMitigationActionResponse_roleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMitigationActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeMitigationAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMitigationAction, schemas.DescribeMitigationActionRequest, schemas.DescribeMitigationActionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeMitigationAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMitigationAction, schemas.DescribeMitigationActionRequest, schemas.DescribeMitigationActionResponse), output: &DescribeMitigationActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

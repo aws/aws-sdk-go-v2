@@ -5,7 +5,9 @@ package personalize
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListEventTrackersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventTrackersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventTrackersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventTrackersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetGroupArn != nil {
+		s.WriteString(schemas.ListEventTrackersRequest_datasetGroupArn, *v.DatasetGroupArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEventTrackersRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventTrackersRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListEventTrackersOutput struct {
 
 	// A list of event trackers.
@@ -58,13 +78,35 @@ type ListEventTrackersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventTrackersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventTrackersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventTrackersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventTrackers(s, schemas.ListEventTrackersResponse_eventTrackers, v.EventTrackers)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventTrackersResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListEventTrackersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEventTrackersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEventTrackersResponse_eventTrackers:
+			return deserializeEventTrackers(d, schemas.ListEventTrackersResponse_eventTrackers, &v.EventTrackers)
+		case schemas.ListEventTrackersResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEventTrackersResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEventTrackersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEventTrackers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventTrackers, schemas.ListEventTrackersRequest, schemas.ListEventTrackersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListEventTrackers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventTrackers, schemas.ListEventTrackersRequest, schemas.ListEventTrackersResponse), output: &ListEventTrackersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

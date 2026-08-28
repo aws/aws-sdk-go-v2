@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -174,6 +176,49 @@ type StartTaskContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTaskContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTaskContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTaskContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTaskAttachments(s, schemas.StartTaskContactRequest_Attachments, v.Attachments)
+	serializeAttributes(s, schemas.StartTaskContactRequest_Attributes, v.Attributes)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartTaskContactRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ContactFlowId != nil {
+		s.WriteString(schemas.StartTaskContactRequest_ContactFlowId, *v.ContactFlowId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.StartTaskContactRequest_Description, *v.Description)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StartTaskContactRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartTaskContactRequest_Name, *v.Name)
+	}
+	if v.PreviousContactId != nil {
+		s.WriteString(schemas.StartTaskContactRequest_PreviousContactId, *v.PreviousContactId)
+	}
+	if v.QuickConnectId != nil {
+		s.WriteString(schemas.StartTaskContactRequest_QuickConnectId, *v.QuickConnectId)
+	}
+	serializeContactReferences(s, schemas.StartTaskContactRequest_References, v.References)
+	if v.RelatedContactId != nil {
+		s.WriteString(schemas.StartTaskContactRequest_RelatedContactId, *v.RelatedContactId)
+	}
+	if v.ScheduledTime != nil {
+		s.WriteTime(schemas.StartTaskContactRequest_ScheduledTime, *v.ScheduledTime)
+	}
+	serializeSegmentAttributes(s, schemas.StartTaskContactRequest_SegmentAttributes, v.SegmentAttributes)
+	if v.TaskTemplateId != nil {
+		s.WriteString(schemas.StartTaskContactRequest_TaskTemplateId, *v.TaskTemplateId)
+	}
+}
+
 type StartTaskContactOutput struct {
 
 	// The identifier of this contact within the Connect Customer instance.
@@ -185,13 +230,32 @@ type StartTaskContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTaskContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTaskContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTaskContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.StartTaskContactResponse_ContactId, *v.ContactId)
+	}
+}
+func (v *StartTaskContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartTaskContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartTaskContactResponse_ContactId:
+			v.ContactId = new(string)
+			return d.ReadString(schemas.StartTaskContactResponse_ContactId, v.ContactId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartTaskContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartTaskContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTaskContact, schemas.StartTaskContactRequest, schemas.StartTaskContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartTaskContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTaskContact, schemas.StartTaskContactRequest, schemas.StartTaskContactResponse), output: &StartTaskContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

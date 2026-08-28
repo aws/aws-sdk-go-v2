@@ -4,7 +4,9 @@ package amplify
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.DeleteAppRequest_appId, *v.AppId)
+	}
+}
+
 // The result structure for the delete app request.
 type DeleteAppOutput struct {
 
@@ -50,13 +64,34 @@ type DeleteAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAppResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.App != nil {
+		s.WriteStruct(schemas.DeleteAppResult_app)
+		v.App.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAppResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAppResult_app:
+			v.App = &types.App{}
+			return v.App.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApp, schemas.DeleteAppRequest, schemas.DeleteAppResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApp, schemas.DeleteAppRequest, schemas.DeleteAppResult), output: &DeleteAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

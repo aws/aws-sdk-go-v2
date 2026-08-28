@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,26 @@ type ListModelMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListModelMetadataRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelMetadataRequest_NextToken, *v.NextToken)
+	}
+	if v.SearchExpression != nil {
+		s.WriteStruct(schemas.ListModelMetadataRequest_SearchExpression)
+		v.SearchExpression.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListModelMetadataOutput struct {
 
 	// A structure that holds model metadata.
@@ -61,13 +83,35 @@ type ListModelMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeModelMetadataSummaries(s, schemas.ListModelMetadataResponse_ModelMetadataSummaries, v.ModelMetadataSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelMetadataResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListModelMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListModelMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListModelMetadataResponse_ModelMetadataSummaries:
+			return deserializeModelMetadataSummaries(d, schemas.ListModelMetadataResponse_ModelMetadataSummaries, &v.ModelMetadataSummaries)
+		case schemas.ListModelMetadataResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListModelMetadataResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListModelMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListModelMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelMetadata, schemas.ListModelMetadataRequest, schemas.ListModelMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListModelMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelMetadata, schemas.ListModelMetadataRequest, schemas.ListModelMetadataResponse), output: &ListModelMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

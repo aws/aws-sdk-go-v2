@@ -4,7 +4,9 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,19 @@ type AddInstanceGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddInstanceGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddInstanceGroupsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddInstanceGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstanceGroupConfigList(s, schemas.AddInstanceGroupsInput_InstanceGroups, v.InstanceGroups)
+	if v.JobFlowId != nil {
+		s.WriteString(schemas.AddInstanceGroupsInput_JobFlowId, *v.JobFlowId)
+	}
+}
+
 // Output from an AddInstanceGroups call.
 type AddInstanceGroupsOutput struct {
 
@@ -58,13 +73,41 @@ type AddInstanceGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddInstanceGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddInstanceGroupsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddInstanceGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.AddInstanceGroupsOutput_ClusterArn, *v.ClusterArn)
+	}
+	serializeInstanceGroupIdsList(s, schemas.AddInstanceGroupsOutput_InstanceGroupIds, v.InstanceGroupIds)
+	if v.JobFlowId != nil {
+		s.WriteString(schemas.AddInstanceGroupsOutput_JobFlowId, *v.JobFlowId)
+	}
+}
+func (v *AddInstanceGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddInstanceGroupsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddInstanceGroupsOutput_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.AddInstanceGroupsOutput_ClusterArn, v.ClusterArn)
+		case schemas.AddInstanceGroupsOutput_InstanceGroupIds:
+			return deserializeInstanceGroupIdsList(d, schemas.AddInstanceGroupsOutput_InstanceGroupIds, &v.InstanceGroupIds)
+		case schemas.AddInstanceGroupsOutput_JobFlowId:
+			v.JobFlowId = new(string)
+			return d.ReadString(schemas.AddInstanceGroupsOutput_JobFlowId, v.JobFlowId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddInstanceGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddInstanceGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddInstanceGroups, schemas.AddInstanceGroupsInput, schemas.AddInstanceGroupsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddInstanceGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddInstanceGroups, schemas.AddInstanceGroupsInput, schemas.AddInstanceGroupsOutput), output: &AddInstanceGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

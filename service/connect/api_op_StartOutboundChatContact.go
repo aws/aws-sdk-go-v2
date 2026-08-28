@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -147,6 +149,58 @@ type StartOutboundChatContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartOutboundChatContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartOutboundChatContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartOutboundChatContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.StartOutboundChatContactRequest_Attributes, v.Attributes)
+	if v.ChatDurationInMinutes != nil {
+		s.WriteInt32(schemas.StartOutboundChatContactRequest_ChatDurationInMinutes, *v.ChatDurationInMinutes)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartOutboundChatContactRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ContactFlowId != nil {
+		s.WriteString(schemas.StartOutboundChatContactRequest_ContactFlowId, *v.ContactFlowId)
+	}
+	if v.DestinationEndpoint != nil {
+		s.WriteStruct(schemas.StartOutboundChatContactRequest_DestinationEndpoint)
+		v.DestinationEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InitialSystemMessage != nil {
+		s.WriteStruct(schemas.StartOutboundChatContactRequest_InitialSystemMessage)
+		v.InitialSystemMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InitialTemplatedSystemMessage != nil {
+		s.WriteStruct(schemas.StartOutboundChatContactRequest_InitialTemplatedSystemMessage)
+		v.InitialTemplatedSystemMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StartOutboundChatContactRequest_InstanceId, *v.InstanceId)
+	}
+	if v.ParticipantDetails != nil {
+		s.WriteStruct(schemas.StartOutboundChatContactRequest_ParticipantDetails)
+		v.ParticipantDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RelatedContactId != nil {
+		s.WriteString(schemas.StartOutboundChatContactRequest_RelatedContactId, *v.RelatedContactId)
+	}
+	serializeSegmentAttributes(s, schemas.StartOutboundChatContactRequest_SegmentAttributes, v.SegmentAttributes)
+	if v.SourceEndpoint != nil {
+		s.WriteStruct(schemas.StartOutboundChatContactRequest_SourceEndpoint)
+		v.SourceEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSupportedMessagingContentTypes(s, schemas.StartOutboundChatContactRequest_SupportedMessagingContentTypes, v.SupportedMessagingContentTypes)
+}
+
 type StartOutboundChatContactOutput struct {
 
 	// The identifier of this contact within the Connect Customer instance.
@@ -158,13 +212,32 @@ type StartOutboundChatContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartOutboundChatContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartOutboundChatContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartOutboundChatContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.StartOutboundChatContactResponse_ContactId, *v.ContactId)
+	}
+}
+func (v *StartOutboundChatContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartOutboundChatContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartOutboundChatContactResponse_ContactId:
+			v.ContactId = new(string)
+			return d.ReadString(schemas.StartOutboundChatContactResponse_ContactId, v.ContactId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartOutboundChatContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartOutboundChatContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartOutboundChatContact, schemas.StartOutboundChatContactRequest, schemas.StartOutboundChatContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartOutboundChatContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartOutboundChatContact, schemas.StartOutboundChatContactRequest, schemas.StartOutboundChatContactResponse), output: &StartOutboundChatContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package cloudsearchdomain
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,24 @@ type SuggestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SuggestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SuggestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuggestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Query != nil {
+		s.WriteString(schemas.SuggestRequest_query, *v.Query)
+	}
+	if v.Size != 0 {
+		s.WriteInt64(schemas.SuggestRequest_size, v.Size)
+	}
+	if v.Suggester != nil {
+		s.WriteString(schemas.SuggestRequest_suggester, *v.Suggester)
+	}
+}
+
 // Contains the response to a Suggest request.
 type SuggestOutput struct {
 
@@ -76,13 +96,42 @@ type SuggestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SuggestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SuggestResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuggestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != nil {
+		s.WriteStruct(schemas.SuggestResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Suggest != nil {
+		s.WriteStruct(schemas.SuggestResponse_suggest)
+		v.Suggest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SuggestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SuggestResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SuggestResponse_status:
+			v.Status = &types.SuggestStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.SuggestResponse_suggest:
+			v.Suggest = &types.SuggestModel{}
+			return v.Suggest.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSuggestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSuggest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Suggest, schemas.SuggestRequest, schemas.SuggestResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSuggest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Suggest, schemas.SuggestRequest, schemas.SuggestResponse), output: &SuggestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

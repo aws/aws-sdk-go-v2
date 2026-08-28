@@ -4,6 +4,8 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type CreateImageBuilderStreamingURLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateImageBuilderStreamingURLInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateImageBuilderStreamingURLRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateImageBuilderStreamingURLInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateImageBuilderStreamingURLRequest_Name, *v.Name)
+	}
+	if v.Validity != nil {
+		s.WriteInt64(schemas.CreateImageBuilderStreamingURLRequest_Validity, *v.Validity)
+	}
+}
+
 type CreateImageBuilderStreamingURLOutput struct {
 
 	// The elapsed time, in seconds after the Unix epoch, when this URL expires.
@@ -52,13 +69,38 @@ type CreateImageBuilderStreamingURLOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateImageBuilderStreamingURLOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateImageBuilderStreamingURLResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateImageBuilderStreamingURLOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Expires != nil {
+		s.WriteTime(schemas.CreateImageBuilderStreamingURLResult_Expires, *v.Expires)
+	}
+	if v.StreamingURL != nil {
+		s.WriteString(schemas.CreateImageBuilderStreamingURLResult_StreamingURL, *v.StreamingURL)
+	}
+}
+func (v *CreateImageBuilderStreamingURLOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateImageBuilderStreamingURLResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateImageBuilderStreamingURLResult_Expires:
+			v.Expires = new(time.Time)
+			return d.ReadTime(schemas.CreateImageBuilderStreamingURLResult_Expires, v.Expires)
+		case schemas.CreateImageBuilderStreamingURLResult_StreamingURL:
+			v.StreamingURL = new(string)
+			return d.ReadString(schemas.CreateImageBuilderStreamingURLResult_StreamingURL, v.StreamingURL)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateImageBuilderStreamingURLMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateImageBuilderStreamingURL{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateImageBuilderStreamingURL, schemas.CreateImageBuilderStreamingURLRequest, schemas.CreateImageBuilderStreamingURLResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateImageBuilderStreamingURL{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateImageBuilderStreamingURL, schemas.CreateImageBuilderStreamingURLRequest, schemas.CreateImageBuilderStreamingURLResult), output: &CreateImageBuilderStreamingURLOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

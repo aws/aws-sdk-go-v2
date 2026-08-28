@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type ListAttachedPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAttachedPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAttachedPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAttachedPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListAttachedPoliciesRequest_marker, *v.Marker)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListAttachedPoliciesRequest_pageSize, *v.PageSize)
+	}
+	if v.Recursive != false {
+		s.WriteBool(schemas.ListAttachedPoliciesRequest_recursive, v.Recursive)
+	}
+	if v.Target != nil {
+		s.WriteString(schemas.ListAttachedPoliciesRequest_target, *v.Target)
+	}
+}
+
 type ListAttachedPoliciesOutput struct {
 
 	// The token to retrieve the next set of results, or ``null`` if there are no more
@@ -66,13 +89,35 @@ type ListAttachedPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAttachedPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAttachedPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAttachedPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListAttachedPoliciesResponse_nextMarker, *v.NextMarker)
+	}
+	serializePolicies(s, schemas.ListAttachedPoliciesResponse_policies, v.Policies)
+}
+func (v *ListAttachedPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAttachedPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAttachedPoliciesResponse_nextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListAttachedPoliciesResponse_nextMarker, v.NextMarker)
+		case schemas.ListAttachedPoliciesResponse_policies:
+			return deserializePolicies(d, schemas.ListAttachedPoliciesResponse_policies, &v.Policies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAttachedPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAttachedPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAttachedPolicies, schemas.ListAttachedPoliciesRequest, schemas.ListAttachedPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAttachedPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAttachedPolicies, schemas.ListAttachedPoliciesRequest, schemas.ListAttachedPoliciesResponse), output: &ListAttachedPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

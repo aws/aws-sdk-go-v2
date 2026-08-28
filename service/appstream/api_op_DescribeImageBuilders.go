@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,22 @@ type DescribeImageBuildersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImageBuildersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImageBuildersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImageBuildersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeImageBuildersRequest_MaxResults, *v.MaxResults)
+	}
+	serializeStringList(s, schemas.DescribeImageBuildersRequest_Names, v.Names)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeImageBuildersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeImageBuildersOutput struct {
 
 	// Information about the image builders.
@@ -56,13 +74,35 @@ type DescribeImageBuildersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImageBuildersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImageBuildersResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImageBuildersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImageBuilderList(s, schemas.DescribeImageBuildersResult_ImageBuilders, v.ImageBuilders)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeImageBuildersResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeImageBuildersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeImageBuildersResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeImageBuildersResult_ImageBuilders:
+			return deserializeImageBuilderList(d, schemas.DescribeImageBuildersResult_ImageBuilders, &v.ImageBuilders)
+		case schemas.DescribeImageBuildersResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeImageBuildersResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeImageBuildersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeImageBuilders{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImageBuilders, schemas.DescribeImageBuildersRequest, schemas.DescribeImageBuildersResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeImageBuilders{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImageBuilders, schemas.DescribeImageBuildersRequest, schemas.DescribeImageBuildersResult), output: &DescribeImageBuildersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

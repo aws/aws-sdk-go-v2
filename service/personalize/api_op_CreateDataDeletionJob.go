@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -97,6 +99,30 @@ type CreateDataDeletionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataDeletionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataDeletionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataDeletionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.CreateDataDeletionJobRequest_dataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DatasetGroupArn != nil {
+		s.WriteString(schemas.CreateDataDeletionJobRequest_datasetGroupArn, *v.DatasetGroupArn)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.CreateDataDeletionJobRequest_jobName, *v.JobName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateDataDeletionJobRequest_roleArn, *v.RoleArn)
+	}
+	serializeTags(s, schemas.CreateDataDeletionJobRequest_tags, v.Tags)
+}
+
 type CreateDataDeletionJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the data deletion job.
@@ -108,13 +134,32 @@ type CreateDataDeletionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataDeletionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataDeletionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataDeletionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataDeletionJobArn != nil {
+		s.WriteString(schemas.CreateDataDeletionJobResponse_dataDeletionJobArn, *v.DataDeletionJobArn)
+	}
+}
+func (v *CreateDataDeletionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataDeletionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDataDeletionJobResponse_dataDeletionJobArn:
+			v.DataDeletionJobArn = new(string)
+			return d.ReadString(schemas.CreateDataDeletionJobResponse_dataDeletionJobArn, v.DataDeletionJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDataDeletionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDataDeletionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataDeletionJob, schemas.CreateDataDeletionJobRequest, schemas.CreateDataDeletionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDataDeletionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataDeletionJob, schemas.CreateDataDeletionJobRequest, schemas.CreateDataDeletionJobResponse), output: &CreateDataDeletionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

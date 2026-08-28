@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type UpdateExperimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExperimentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExperimentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExperimentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateExperimentRequest_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateExperimentRequest_DisplayName, *v.DisplayName)
+	}
+	if v.ExperimentName != nil {
+		s.WriteString(schemas.UpdateExperimentRequest_ExperimentName, *v.ExperimentName)
+	}
+}
+
 type UpdateExperimentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the experiment.
@@ -52,13 +72,32 @@ type UpdateExperimentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExperimentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExperimentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExperimentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExperimentArn != nil {
+		s.WriteString(schemas.UpdateExperimentResponse_ExperimentArn, *v.ExperimentArn)
+	}
+}
+func (v *UpdateExperimentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateExperimentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateExperimentResponse_ExperimentArn:
+			v.ExperimentArn = new(string)
+			return d.ReadString(schemas.UpdateExperimentResponse_ExperimentArn, v.ExperimentArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateExperimentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateExperiment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExperiment, schemas.UpdateExperimentRequest, schemas.UpdateExperimentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateExperiment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExperiment, schemas.UpdateExperimentRequest, schemas.UpdateExperimentResponse), output: &UpdateExperimentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

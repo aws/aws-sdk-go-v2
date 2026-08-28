@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListMonitoringAlertsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMonitoringAlertsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMonitoringAlertsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMonitoringAlertsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMonitoringAlertsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MonitoringScheduleName != nil {
+		s.WriteString(schemas.ListMonitoringAlertsRequest_MonitoringScheduleName, *v.MonitoringScheduleName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMonitoringAlertsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListMonitoringAlertsOutput struct {
 
 	// A JSON array where each element is a summary for a monitoring alert.
@@ -58,13 +78,35 @@ type ListMonitoringAlertsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMonitoringAlertsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMonitoringAlertsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMonitoringAlertsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMonitoringAlertSummaryList(s, schemas.ListMonitoringAlertsResponse_MonitoringAlertSummaries, v.MonitoringAlertSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMonitoringAlertsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListMonitoringAlertsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMonitoringAlertsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMonitoringAlertsResponse_MonitoringAlertSummaries:
+			return deserializeMonitoringAlertSummaryList(d, schemas.ListMonitoringAlertsResponse_MonitoringAlertSummaries, &v.MonitoringAlertSummaries)
+		case schemas.ListMonitoringAlertsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMonitoringAlertsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMonitoringAlertsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMonitoringAlerts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMonitoringAlerts, schemas.ListMonitoringAlertsRequest, schemas.ListMonitoringAlertsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMonitoringAlerts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMonitoringAlerts, schemas.ListMonitoringAlertsRequest, schemas.ListMonitoringAlertsResponse), output: &ListMonitoringAlertsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

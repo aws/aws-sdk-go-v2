@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type DescribeMetricInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMetricInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMetricRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMetricInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeMetricRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MetricId != nil {
+		s.WriteString(schemas.DescribeMetricRequest_MetricId, *v.MetricId)
+	}
+}
+
 type DescribeMetricOutput struct {
 
 	// The metric definition.
@@ -58,13 +75,34 @@ type DescribeMetricOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMetricOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMetricResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMetricOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Metric != nil {
+		s.WriteStruct(schemas.DescribeMetricResponse_Metric)
+		v.Metric.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeMetricOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMetricResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMetricResponse_Metric:
+			v.Metric = &types.MetricDefinition{}
+			return v.Metric.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMetricMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeMetric{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMetric, schemas.DescribeMetricRequest, schemas.DescribeMetricResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeMetric{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMetric, schemas.DescribeMetricRequest, schemas.DescribeMetricResponse), output: &DescribeMetricOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

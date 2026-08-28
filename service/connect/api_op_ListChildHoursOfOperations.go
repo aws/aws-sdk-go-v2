@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -58,6 +60,27 @@ type ListChildHoursOfOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChildHoursOfOperationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListChildHoursOfOperationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListChildHoursOfOperationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HoursOfOperationId != nil {
+		s.WriteString(schemas.ListChildHoursOfOperationsRequest_HoursOfOperationId, *v.HoursOfOperationId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListChildHoursOfOperationsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListChildHoursOfOperationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListChildHoursOfOperationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListChildHoursOfOperationsOutput struct {
 
 	// Information about the hours of operation.
@@ -78,13 +101,47 @@ type ListChildHoursOfOperationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChildHoursOfOperationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListChildHoursOfOperationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListChildHoursOfOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChildHoursOfOperationsList(s, schemas.ListChildHoursOfOperationsResponse_ChildHoursOfOperationsSummaryList, v.ChildHoursOfOperationsSummaryList)
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.ListChildHoursOfOperationsResponse_LastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ListChildHoursOfOperationsResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListChildHoursOfOperationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListChildHoursOfOperationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListChildHoursOfOperationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListChildHoursOfOperationsResponse_ChildHoursOfOperationsSummaryList:
+			return deserializeChildHoursOfOperationsList(d, schemas.ListChildHoursOfOperationsResponse_ChildHoursOfOperationsSummaryList, &v.ChildHoursOfOperationsSummaryList)
+		case schemas.ListChildHoursOfOperationsResponse_LastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.ListChildHoursOfOperationsResponse_LastModifiedRegion, v.LastModifiedRegion)
+		case schemas.ListChildHoursOfOperationsResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ListChildHoursOfOperationsResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.ListChildHoursOfOperationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListChildHoursOfOperationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListChildHoursOfOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListChildHoursOfOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChildHoursOfOperations, schemas.ListChildHoursOfOperationsRequest, schemas.ListChildHoursOfOperationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListChildHoursOfOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChildHoursOfOperations, schemas.ListChildHoursOfOperationsRequest, schemas.ListChildHoursOfOperationsResponse), output: &ListChildHoursOfOperationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

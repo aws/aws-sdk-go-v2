@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteEdgeDeploymentPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEdgeDeploymentPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEdgeDeploymentPlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEdgeDeploymentPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EdgeDeploymentPlanName != nil {
+		s.WriteString(schemas.DeleteEdgeDeploymentPlanRequest_EdgeDeploymentPlanName, *v.EdgeDeploymentPlanName)
+	}
+}
+
 type DeleteEdgeDeploymentPlanOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteEdgeDeploymentPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEdgeDeploymentPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEdgeDeploymentPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteEdgeDeploymentPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEdgeDeploymentPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteEdgeDeploymentPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEdgeDeploymentPlan, schemas.DeleteEdgeDeploymentPlanRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteEdgeDeploymentPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEdgeDeploymentPlan, schemas.DeleteEdgeDeploymentPlanRequest, nil), output: &DeleteEdgeDeploymentPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,18 @@ type CreateKeysAndCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateKeysAndCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateKeysAndCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateKeysAndCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SetAsActive != false {
+		s.WriteBool(schemas.CreateKeysAndCertificateRequest_setAsActive, v.SetAsActive)
+	}
+}
+
 // The output of the CreateKeysAndCertificate operation.
 type CreateKeysAndCertificateOutput struct {
 
@@ -69,13 +83,52 @@ type CreateKeysAndCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateKeysAndCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateKeysAndCertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateKeysAndCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.CreateKeysAndCertificateResponse_certificateArn, *v.CertificateArn)
+	}
+	if v.CertificateId != nil {
+		s.WriteString(schemas.CreateKeysAndCertificateResponse_certificateId, *v.CertificateId)
+	}
+	if v.CertificatePem != nil {
+		s.WriteString(schemas.CreateKeysAndCertificateResponse_certificatePem, *v.CertificatePem)
+	}
+	if v.KeyPair != nil {
+		s.WriteStruct(schemas.CreateKeysAndCertificateResponse_keyPair)
+		v.KeyPair.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateKeysAndCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateKeysAndCertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateKeysAndCertificateResponse_certificateArn:
+			v.CertificateArn = new(string)
+			return d.ReadString(schemas.CreateKeysAndCertificateResponse_certificateArn, v.CertificateArn)
+		case schemas.CreateKeysAndCertificateResponse_certificateId:
+			v.CertificateId = new(string)
+			return d.ReadString(schemas.CreateKeysAndCertificateResponse_certificateId, v.CertificateId)
+		case schemas.CreateKeysAndCertificateResponse_certificatePem:
+			v.CertificatePem = new(string)
+			return d.ReadString(schemas.CreateKeysAndCertificateResponse_certificatePem, v.CertificatePem)
+		case schemas.CreateKeysAndCertificateResponse_keyPair:
+			v.KeyPair = &types.KeyPair{}
+			return v.KeyPair.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateKeysAndCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateKeysAndCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKeysAndCertificate, schemas.CreateKeysAndCertificateRequest, schemas.CreateKeysAndCertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateKeysAndCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKeysAndCertificate, schemas.CreateKeysAndCertificateRequest, schemas.CreateKeysAndCertificateResponse), output: &CreateKeysAndCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

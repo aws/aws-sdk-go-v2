@@ -5,6 +5,8 @@ package sqs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sqs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,24 @@ type ListDeadLetterSourceQueuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDeadLetterSourceQueuesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDeadLetterSourceQueuesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDeadLetterSourceQueuesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDeadLetterSourceQueuesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDeadLetterSourceQueuesRequest_NextToken, *v.NextToken)
+	}
+	if v.QueueUrl != nil {
+		s.WriteString(schemas.ListDeadLetterSourceQueuesRequest_QueueUrl, *v.QueueUrl)
+	}
+}
+
 // A list of your dead letter source queues.
 type ListDeadLetterSourceQueuesOutput struct {
 
@@ -77,13 +97,35 @@ type ListDeadLetterSourceQueuesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDeadLetterSourceQueuesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDeadLetterSourceQueuesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDeadLetterSourceQueuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDeadLetterSourceQueuesResult_NextToken, *v.NextToken)
+	}
+	serializeQueueUrlList(s, schemas.ListDeadLetterSourceQueuesResult_queueUrls, v.QueueUrls)
+}
+func (v *ListDeadLetterSourceQueuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDeadLetterSourceQueuesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDeadLetterSourceQueuesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDeadLetterSourceQueuesResult_NextToken, v.NextToken)
+		case schemas.ListDeadLetterSourceQueuesResult_queueUrls:
+			return deserializeQueueUrlList(d, schemas.ListDeadLetterSourceQueuesResult_queueUrls, &v.QueueUrls)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDeadLetterSourceQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListDeadLetterSourceQueues{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeadLetterSourceQueues, schemas.ListDeadLetterSourceQueuesRequest, schemas.ListDeadLetterSourceQueuesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListDeadLetterSourceQueues{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeadLetterSourceQueues, schemas.ListDeadLetterSourceQueuesRequest, schemas.ListDeadLetterSourceQueuesResult), output: &ListDeadLetterSourceQueuesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

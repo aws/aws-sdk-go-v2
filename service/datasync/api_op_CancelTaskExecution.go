@@ -4,6 +4,8 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,18 @@ type CancelTaskExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelTaskExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelTaskExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelTaskExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskExecutionArn != nil {
+		s.WriteString(schemas.CancelTaskExecutionRequest_TaskExecutionArn, *v.TaskExecutionArn)
+	}
+}
+
 type CancelTaskExecutionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +63,26 @@ type CancelTaskExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelTaskExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelTaskExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelTaskExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelTaskExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelTaskExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelTaskExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelTaskExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelTaskExecution, schemas.CancelTaskExecutionRequest, schemas.CancelTaskExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCancelTaskExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelTaskExecution, schemas.CancelTaskExecutionRequest, schemas.CancelTaskExecutionResponse), output: &CancelTaskExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

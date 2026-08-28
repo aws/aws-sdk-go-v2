@@ -5,7 +5,9 @@ package cleanrooms
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,50 @@ type ListProtectedQueriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProtectedQueriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProtectedQueriesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProtectedQueriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProtectedQueriesInput_maxResults, *v.MaxResults)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.ListProtectedQueriesInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProtectedQueriesInput_nextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListProtectedQueriesInput_status, string(v.Status))
+	}
+}
+func (v *ListProtectedQueriesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProtectedQueriesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProtectedQueriesInput_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListProtectedQueriesInput_maxResults, v.MaxResults)
+		case schemas.ListProtectedQueriesInput_membershipIdentifier:
+			v.MembershipIdentifier = new(string)
+			return d.ReadString(schemas.ListProtectedQueriesInput_membershipIdentifier, v.MembershipIdentifier)
+		case schemas.ListProtectedQueriesInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProtectedQueriesInput_nextToken, v.NextToken)
+		case schemas.ListProtectedQueriesInput_status:
+			var ev string
+			if err := d.ReadString(schemas.ListProtectedQueriesInput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ProtectedQueryStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type ListProtectedQueriesOutput struct {
 
 	// A list of protected queries.
@@ -62,13 +108,35 @@ type ListProtectedQueriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProtectedQueriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProtectedQueriesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProtectedQueriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProtectedQueriesOutput_nextToken, *v.NextToken)
+	}
+	serializeProtectedQuerySummaryList(s, schemas.ListProtectedQueriesOutput_protectedQueries, v.ProtectedQueries)
+}
+func (v *ListProtectedQueriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProtectedQueriesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProtectedQueriesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProtectedQueriesOutput_nextToken, v.NextToken)
+		case schemas.ListProtectedQueriesOutput_protectedQueries:
+			return deserializeProtectedQuerySummaryList(d, schemas.ListProtectedQueriesOutput_protectedQueries, &v.ProtectedQueries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProtectedQueriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProtectedQueries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProtectedQueries, schemas.ListProtectedQueriesInput, schemas.ListProtectedQueriesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProtectedQueries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProtectedQueries, schemas.ListProtectedQueriesInput, schemas.ListProtectedQueriesOutput), output: &ListProtectedQueriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

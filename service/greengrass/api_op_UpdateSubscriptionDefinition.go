@@ -4,6 +4,8 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type UpdateSubscriptionDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSubscriptionDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSubscriptionDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSubscriptionDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateSubscriptionDefinitionRequest_Name, *v.Name)
+	}
+	if v.SubscriptionDefinitionId != nil {
+		s.WriteString(schemas.UpdateSubscriptionDefinitionRequest_SubscriptionDefinitionId, *v.SubscriptionDefinitionId)
+	}
+}
+
 type UpdateSubscriptionDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +60,26 @@ type UpdateSubscriptionDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSubscriptionDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSubscriptionDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSubscriptionDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateSubscriptionDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSubscriptionDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSubscriptionDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSubscriptionDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSubscriptionDefinition, schemas.UpdateSubscriptionDefinitionRequest, schemas.UpdateSubscriptionDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSubscriptionDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSubscriptionDefinition, schemas.UpdateSubscriptionDefinitionRequest, schemas.UpdateSubscriptionDefinitionResponse), output: &UpdateSubscriptionDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

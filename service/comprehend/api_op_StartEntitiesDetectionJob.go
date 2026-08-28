@@ -5,7 +5,9 @@ package comprehend
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -102,6 +104,52 @@ type StartEntitiesDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartEntitiesDetectionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartEntitiesDetectionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartEntitiesDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartEntitiesDetectionJobRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.StartEntitiesDetectionJobRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.EntityRecognizerArn != nil {
+		s.WriteString(schemas.StartEntitiesDetectionJobRequest_EntityRecognizerArn, *v.EntityRecognizerArn)
+	}
+	if v.FlywheelArn != nil {
+		s.WriteString(schemas.StartEntitiesDetectionJobRequest_FlywheelArn, *v.FlywheelArn)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.StartEntitiesDetectionJobRequest_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.StartEntitiesDetectionJobRequest_JobName, *v.JobName)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.StartEntitiesDetectionJobRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.StartEntitiesDetectionJobRequest_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.StartEntitiesDetectionJobRequest_Tags, v.Tags)
+	if v.VolumeKmsKeyId != nil {
+		s.WriteString(schemas.StartEntitiesDetectionJobRequest_VolumeKmsKeyId, *v.VolumeKmsKeyId)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.StartEntitiesDetectionJobRequest_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartEntitiesDetectionJobOutput struct {
 
 	// The ARN of the custom entity recognition model.
@@ -145,13 +193,54 @@ type StartEntitiesDetectionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartEntitiesDetectionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartEntitiesDetectionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartEntitiesDetectionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityRecognizerArn != nil {
+		s.WriteString(schemas.StartEntitiesDetectionJobResponse_EntityRecognizerArn, *v.EntityRecognizerArn)
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.StartEntitiesDetectionJobResponse_JobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.StartEntitiesDetectionJobResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.StartEntitiesDetectionJobResponse_JobStatus, string(v.JobStatus))
+	}
+}
+func (v *StartEntitiesDetectionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartEntitiesDetectionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartEntitiesDetectionJobResponse_EntityRecognizerArn:
+			v.EntityRecognizerArn = new(string)
+			return d.ReadString(schemas.StartEntitiesDetectionJobResponse_EntityRecognizerArn, v.EntityRecognizerArn)
+		case schemas.StartEntitiesDetectionJobResponse_JobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.StartEntitiesDetectionJobResponse_JobArn, v.JobArn)
+		case schemas.StartEntitiesDetectionJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartEntitiesDetectionJobResponse_JobId, v.JobId)
+		case schemas.StartEntitiesDetectionJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartEntitiesDetectionJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartEntitiesDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartEntitiesDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartEntitiesDetectionJob, schemas.StartEntitiesDetectionJobRequest, schemas.StartEntitiesDetectionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartEntitiesDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartEntitiesDetectionJob, schemas.StartEntitiesDetectionJobRequest, schemas.StartEntitiesDetectionJobResponse), output: &StartEntitiesDetectionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

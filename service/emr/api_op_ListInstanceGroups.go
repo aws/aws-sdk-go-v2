@@ -5,7 +5,9 @@ package emr
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ListInstanceGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstanceGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInstanceGroupsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstanceGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.ListInstanceGroupsInput_ClusterId, *v.ClusterId)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListInstanceGroupsInput_Marker, *v.Marker)
+	}
+}
+
 // This input determines which instance groups to retrieve.
 type ListInstanceGroupsOutput struct {
 
@@ -54,13 +71,35 @@ type ListInstanceGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstanceGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInstanceGroupsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstanceGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstanceGroupList(s, schemas.ListInstanceGroupsOutput_InstanceGroups, v.InstanceGroups)
+	if v.Marker != nil {
+		s.WriteString(schemas.ListInstanceGroupsOutput_Marker, *v.Marker)
+	}
+}
+func (v *ListInstanceGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInstanceGroupsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInstanceGroupsOutput_InstanceGroups:
+			return deserializeInstanceGroupList(d, schemas.ListInstanceGroupsOutput_InstanceGroups, &v.InstanceGroups)
+		case schemas.ListInstanceGroupsOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListInstanceGroupsOutput_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInstanceGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListInstanceGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstanceGroups, schemas.ListInstanceGroupsInput, schemas.ListInstanceGroupsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListInstanceGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstanceGroups, schemas.ListInstanceGroupsInput, schemas.ListInstanceGroupsOutput), output: &ListInstanceGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

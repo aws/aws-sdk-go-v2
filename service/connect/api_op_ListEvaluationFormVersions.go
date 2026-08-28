@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,27 @@ type ListEvaluationFormVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEvaluationFormVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEvaluationFormVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEvaluationFormVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationFormId != nil {
+		s.WriteString(schemas.ListEvaluationFormVersionsRequest_EvaluationFormId, *v.EvaluationFormId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListEvaluationFormVersionsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEvaluationFormVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEvaluationFormVersionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListEvaluationFormVersionsOutput struct {
 
 	// Provides details about a list of evaluation forms belonging to an instance.
@@ -66,13 +89,35 @@ type ListEvaluationFormVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEvaluationFormVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEvaluationFormVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEvaluationFormVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEvaluationFormVersionSummaryList(s, schemas.ListEvaluationFormVersionsResponse_EvaluationFormVersionSummaryList, v.EvaluationFormVersionSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEvaluationFormVersionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEvaluationFormVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEvaluationFormVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEvaluationFormVersionsResponse_EvaluationFormVersionSummaryList:
+			return deserializeEvaluationFormVersionSummaryList(d, schemas.ListEvaluationFormVersionsResponse_EvaluationFormVersionSummaryList, &v.EvaluationFormVersionSummaryList)
+		case schemas.ListEvaluationFormVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEvaluationFormVersionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEvaluationFormVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEvaluationFormVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEvaluationFormVersions, schemas.ListEvaluationFormVersionsRequest, schemas.ListEvaluationFormVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEvaluationFormVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEvaluationFormVersions, schemas.ListEvaluationFormVersionsRequest, schemas.ListEvaluationFormVersionsResponse), output: &ListEvaluationFormVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

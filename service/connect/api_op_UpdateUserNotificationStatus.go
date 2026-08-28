@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -64,6 +66,33 @@ type UpdateUserNotificationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserNotificationStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserNotificationStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserNotificationStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateUserNotificationStatusRequest_InstanceId, *v.InstanceId)
+	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.UpdateUserNotificationStatusRequest_LastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.UpdateUserNotificationStatusRequest_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.NotificationId != nil {
+		s.WriteString(schemas.UpdateUserNotificationStatusRequest_NotificationId, *v.NotificationId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateUserNotificationStatusRequest_Status, string(v.Status))
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.UpdateUserNotificationStatusRequest_UserId, *v.UserId)
+	}
+}
+
 // The response from updating a user's notification status.
 type UpdateUserNotificationStatusOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -72,13 +101,26 @@ type UpdateUserNotificationStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserNotificationStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserNotificationStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserNotificationStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateUserNotificationStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateUserNotificationStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateUserNotificationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateUserNotificationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserNotificationStatus, schemas.UpdateUserNotificationStatusRequest, schemas.UpdateUserNotificationStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateUserNotificationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserNotificationStatus, schemas.UpdateUserNotificationStatusRequest, schemas.UpdateUserNotificationStatusResponse), output: &UpdateUserNotificationStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,18 @@ type StopKeyPhrasesDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopKeyPhrasesDetectionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopKeyPhrasesDetectionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopKeyPhrasesDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopKeyPhrasesDetectionJobRequest_JobId, *v.JobId)
+	}
+}
+
 type StopKeyPhrasesDetectionJobOutput struct {
 
 	// The identifier of the key phrases detection job to stop.
@@ -61,13 +75,42 @@ type StopKeyPhrasesDetectionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopKeyPhrasesDetectionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopKeyPhrasesDetectionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopKeyPhrasesDetectionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopKeyPhrasesDetectionJobResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.StopKeyPhrasesDetectionJobResponse_JobStatus, string(v.JobStatus))
+	}
+}
+func (v *StopKeyPhrasesDetectionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopKeyPhrasesDetectionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopKeyPhrasesDetectionJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StopKeyPhrasesDetectionJobResponse_JobId, v.JobId)
+		case schemas.StopKeyPhrasesDetectionJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.StopKeyPhrasesDetectionJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopKeyPhrasesDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopKeyPhrasesDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopKeyPhrasesDetectionJob, schemas.StopKeyPhrasesDetectionJobRequest, schemas.StopKeyPhrasesDetectionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopKeyPhrasesDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopKeyPhrasesDetectionJob, schemas.StopKeyPhrasesDetectionJobRequest, schemas.StopKeyPhrasesDetectionJobResponse), output: &StopKeyPhrasesDetectionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

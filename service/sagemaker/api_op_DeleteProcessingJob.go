@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DeleteProcessingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProcessingJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProcessingJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProcessingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProcessingJobName != nil {
+		s.WriteString(schemas.DeleteProcessingJobRequest_ProcessingJobName, *v.ProcessingJobName)
+	}
+}
+
 type DeleteProcessingJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +58,26 @@ type DeleteProcessingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProcessingJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProcessingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteProcessingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteProcessingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteProcessingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProcessingJob, schemas.DeleteProcessingJobRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteProcessingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProcessingJob, schemas.DeleteProcessingJobRequest, nil), output: &DeleteProcessingJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

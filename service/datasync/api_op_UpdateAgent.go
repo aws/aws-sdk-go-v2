@@ -4,6 +4,8 @@ package datasync
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type UpdateAgentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAgentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAgentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentArn != nil {
+		s.WriteString(schemas.UpdateAgentRequest_AgentArn, *v.AgentArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAgentRequest_Name, *v.Name)
+	}
+}
+
 type UpdateAgentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +61,26 @@ type UpdateAgentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAgentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAgentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAgentResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgent, schemas.UpdateAgentRequest, schemas.UpdateAgentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAgent, schemas.UpdateAgentRequest, schemas.UpdateAgentResponse), output: &UpdateAgentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

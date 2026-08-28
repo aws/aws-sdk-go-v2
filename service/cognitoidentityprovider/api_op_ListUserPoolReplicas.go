@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,21 @@ type ListUserPoolReplicasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUserPoolReplicasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUserPoolReplicasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUserPoolReplicasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUserPoolReplicasRequest_NextToken, *v.NextToken)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.ListUserPoolReplicasRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 type ListUserPoolReplicasOutput struct {
 
 	// A pagination token for retrieving the next page of results. If this value is
@@ -70,13 +87,35 @@ type ListUserPoolReplicasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUserPoolReplicasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUserPoolReplicasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUserPoolReplicasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUserPoolReplicasResponse_NextToken, *v.NextToken)
+	}
+	serializeUserPoolReplicaListType(s, schemas.ListUserPoolReplicasResponse_UserPoolReplicas, v.UserPoolReplicas)
+}
+func (v *ListUserPoolReplicasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUserPoolReplicasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUserPoolReplicasResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUserPoolReplicasResponse_NextToken, v.NextToken)
+		case schemas.ListUserPoolReplicasResponse_UserPoolReplicas:
+			return deserializeUserPoolReplicaListType(d, schemas.ListUserPoolReplicasResponse_UserPoolReplicas, &v.UserPoolReplicas)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUserPoolReplicasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListUserPoolReplicas{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUserPoolReplicas, schemas.ListUserPoolReplicasRequest, schemas.ListUserPoolReplicasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListUserPoolReplicas{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUserPoolReplicas, schemas.ListUserPoolReplicasRequest, schemas.ListUserPoolReplicasResponse), output: &ListUserPoolReplicasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

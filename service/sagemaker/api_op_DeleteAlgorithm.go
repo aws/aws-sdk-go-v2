@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteAlgorithmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAlgorithmInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAlgorithmInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAlgorithmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlgorithmName != nil {
+		s.WriteString(schemas.DeleteAlgorithmInput_AlgorithmName, *v.AlgorithmName)
+	}
+}
+
 type DeleteAlgorithmOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteAlgorithmOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAlgorithmOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAlgorithmOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAlgorithmOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAlgorithmMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteAlgorithm{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAlgorithm, schemas.DeleteAlgorithmInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteAlgorithm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAlgorithm, schemas.DeleteAlgorithmInput, nil), output: &DeleteAlgorithmOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

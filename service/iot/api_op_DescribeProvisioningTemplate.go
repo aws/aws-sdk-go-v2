@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -37,6 +39,18 @@ type DescribeProvisioningTemplateInput struct {
 	TemplateName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeProvisioningTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProvisioningTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProvisioningTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateName != nil {
+		s.WriteString(schemas.DescribeProvisioningTemplateRequest_templateName, *v.TemplateName)
+	}
 }
 
 type DescribeProvisioningTemplateOutput struct {
@@ -86,13 +100,98 @@ type DescribeProvisioningTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProvisioningTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProvisioningTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProvisioningTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.DescribeProvisioningTemplateResponse_creationDate, *v.CreationDate)
+	}
+	if v.DefaultVersionId != nil {
+		s.WriteInt32(schemas.DescribeProvisioningTemplateResponse_defaultVersionId, *v.DefaultVersionId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeProvisioningTemplateResponse_description, *v.Description)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.DescribeProvisioningTemplateResponse_enabled, *v.Enabled)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.DescribeProvisioningTemplateResponse_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.PreProvisioningHook != nil {
+		s.WriteStruct(schemas.DescribeProvisioningTemplateResponse_preProvisioningHook)
+		v.PreProvisioningHook.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProvisioningRoleArn != nil {
+		s.WriteString(schemas.DescribeProvisioningTemplateResponse_provisioningRoleArn, *v.ProvisioningRoleArn)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.DescribeProvisioningTemplateResponse_templateArn, *v.TemplateArn)
+	}
+	if v.TemplateBody != nil {
+		s.WriteString(schemas.DescribeProvisioningTemplateResponse_templateBody, *v.TemplateBody)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.DescribeProvisioningTemplateResponse_templateName, *v.TemplateName)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DescribeProvisioningTemplateResponse_type, string(v.Type))
+	}
+}
+func (v *DescribeProvisioningTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeProvisioningTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeProvisioningTemplateResponse_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeProvisioningTemplateResponse_creationDate, v.CreationDate)
+		case schemas.DescribeProvisioningTemplateResponse_defaultVersionId:
+			v.DefaultVersionId = new(int32)
+			return d.ReadInt32(schemas.DescribeProvisioningTemplateResponse_defaultVersionId, v.DefaultVersionId)
+		case schemas.DescribeProvisioningTemplateResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeProvisioningTemplateResponse_description, v.Description)
+		case schemas.DescribeProvisioningTemplateResponse_enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.DescribeProvisioningTemplateResponse_enabled, v.Enabled)
+		case schemas.DescribeProvisioningTemplateResponse_lastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeProvisioningTemplateResponse_lastModifiedDate, v.LastModifiedDate)
+		case schemas.DescribeProvisioningTemplateResponse_preProvisioningHook:
+			v.PreProvisioningHook = &types.ProvisioningHook{}
+			return v.PreProvisioningHook.Deserialize(d)
+		case schemas.DescribeProvisioningTemplateResponse_provisioningRoleArn:
+			v.ProvisioningRoleArn = new(string)
+			return d.ReadString(schemas.DescribeProvisioningTemplateResponse_provisioningRoleArn, v.ProvisioningRoleArn)
+		case schemas.DescribeProvisioningTemplateResponse_templateArn:
+			v.TemplateArn = new(string)
+			return d.ReadString(schemas.DescribeProvisioningTemplateResponse_templateArn, v.TemplateArn)
+		case schemas.DescribeProvisioningTemplateResponse_templateBody:
+			v.TemplateBody = new(string)
+			return d.ReadString(schemas.DescribeProvisioningTemplateResponse_templateBody, v.TemplateBody)
+		case schemas.DescribeProvisioningTemplateResponse_templateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.DescribeProvisioningTemplateResponse_templateName, v.TemplateName)
+		case schemas.DescribeProvisioningTemplateResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.DescribeProvisioningTemplateResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.TemplateType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeProvisioningTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeProvisioningTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProvisioningTemplate, schemas.DescribeProvisioningTemplateRequest, schemas.DescribeProvisioningTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeProvisioningTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProvisioningTemplate, schemas.DescribeProvisioningTemplateRequest, schemas.DescribeProvisioningTemplateResponse), output: &DescribeProvisioningTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

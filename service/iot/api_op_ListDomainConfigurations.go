@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListDomainConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDomainConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDomainConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDomainConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListDomainConfigurationsRequest_marker, *v.Marker)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListDomainConfigurationsRequest_pageSize, *v.PageSize)
+	}
+	if v.ServiceType != "" {
+		s.WriteString(schemas.ListDomainConfigurationsRequest_serviceType, string(v.ServiceType))
+	}
+}
+
 type ListDomainConfigurationsOutput struct {
 
 	// A list of objects that contain summary information about the user's domain
@@ -59,13 +79,35 @@ type ListDomainConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDomainConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDomainConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDomainConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDomainConfigurations(s, schemas.ListDomainConfigurationsResponse_domainConfigurations, v.DomainConfigurations)
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListDomainConfigurationsResponse_nextMarker, *v.NextMarker)
+	}
+}
+func (v *ListDomainConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDomainConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDomainConfigurationsResponse_domainConfigurations:
+			return deserializeDomainConfigurations(d, schemas.ListDomainConfigurationsResponse_domainConfigurations, &v.DomainConfigurations)
+		case schemas.ListDomainConfigurationsResponse_nextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListDomainConfigurationsResponse_nextMarker, v.NextMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDomainConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDomainConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomainConfigurations, schemas.ListDomainConfigurationsRequest, schemas.ListDomainConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDomainConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomainConfigurations, schemas.ListDomainConfigurationsRequest, schemas.ListDomainConfigurationsResponse), output: &ListDomainConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

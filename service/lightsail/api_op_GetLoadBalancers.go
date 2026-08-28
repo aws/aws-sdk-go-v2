@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetLoadBalancersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLoadBalancersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLoadBalancersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLoadBalancersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PageToken != nil {
+		s.WriteString(schemas.GetLoadBalancersRequest_pageToken, *v.PageToken)
+	}
+}
+
 type GetLoadBalancersOutput struct {
 
 	// An array of LoadBalancer objects describing your load balancers.
@@ -55,13 +69,35 @@ type GetLoadBalancersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLoadBalancersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLoadBalancersResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLoadBalancersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLoadBalancerList(s, schemas.GetLoadBalancersResult_loadBalancers, v.LoadBalancers)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetLoadBalancersResult_nextPageToken, *v.NextPageToken)
+	}
+}
+func (v *GetLoadBalancersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLoadBalancersResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLoadBalancersResult_loadBalancers:
+			return deserializeLoadBalancerList(d, schemas.GetLoadBalancersResult_loadBalancers, &v.LoadBalancers)
+		case schemas.GetLoadBalancersResult_nextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetLoadBalancersResult_nextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLoadBalancersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetLoadBalancers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLoadBalancers, schemas.GetLoadBalancersRequest, schemas.GetLoadBalancersResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetLoadBalancers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLoadBalancers, schemas.GetLoadBalancersRequest, schemas.GetLoadBalancersResult), output: &GetLoadBalancersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package athena
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,18 @@ type CreatePresignedNotebookUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePresignedNotebookUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePresignedNotebookUrlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePresignedNotebookUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionId != nil {
+		s.WriteString(schemas.CreatePresignedNotebookUrlRequest_SessionId, *v.SessionId)
+	}
+}
+
 type CreatePresignedNotebookUrlOutput struct {
 
 	// The authentication token for the notebook.
@@ -62,13 +76,44 @@ type CreatePresignedNotebookUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePresignedNotebookUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePresignedNotebookUrlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePresignedNotebookUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthToken != nil {
+		s.WriteString(schemas.CreatePresignedNotebookUrlResponse_AuthToken, *v.AuthToken)
+	}
+	if v.AuthTokenExpirationTime != nil {
+		s.WriteInt64(schemas.CreatePresignedNotebookUrlResponse_AuthTokenExpirationTime, *v.AuthTokenExpirationTime)
+	}
+	if v.NotebookUrl != nil {
+		s.WriteString(schemas.CreatePresignedNotebookUrlResponse_NotebookUrl, *v.NotebookUrl)
+	}
+}
+func (v *CreatePresignedNotebookUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePresignedNotebookUrlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePresignedNotebookUrlResponse_AuthToken:
+			v.AuthToken = new(string)
+			return d.ReadString(schemas.CreatePresignedNotebookUrlResponse_AuthToken, v.AuthToken)
+		case schemas.CreatePresignedNotebookUrlResponse_AuthTokenExpirationTime:
+			v.AuthTokenExpirationTime = new(int64)
+			return d.ReadInt64(schemas.CreatePresignedNotebookUrlResponse_AuthTokenExpirationTime, v.AuthTokenExpirationTime)
+		case schemas.CreatePresignedNotebookUrlResponse_NotebookUrl:
+			v.NotebookUrl = new(string)
+			return d.ReadString(schemas.CreatePresignedNotebookUrlResponse_NotebookUrl, v.NotebookUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePresignedNotebookUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePresignedNotebookUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePresignedNotebookUrl, schemas.CreatePresignedNotebookUrlRequest, schemas.CreatePresignedNotebookUrlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePresignedNotebookUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePresignedNotebookUrl, schemas.CreatePresignedNotebookUrlRequest, schemas.CreatePresignedNotebookUrlResponse), output: &CreatePresignedNotebookUrlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package cloudtrail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetEventConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEventConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEventConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEventConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventDataStore != nil {
+		s.WriteString(schemas.GetEventConfigurationRequest_EventDataStore, *v.EventDataStore)
+	}
+	if v.TrailName != nil {
+		s.WriteString(schemas.GetEventConfigurationRequest_TrailName, *v.TrailName)
+	}
+}
+
 type GetEventConfigurationOutput struct {
 
 	// The list of aggregation configurations that are configured for the trail.
@@ -65,13 +82,54 @@ type GetEventConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEventConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEventConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEventConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAggregationConfigurations(s, schemas.GetEventConfigurationResponse_AggregationConfigurations, v.AggregationConfigurations)
+	serializeContextKeySelectors(s, schemas.GetEventConfigurationResponse_ContextKeySelectors, v.ContextKeySelectors)
+	if v.EventDataStoreArn != nil {
+		s.WriteString(schemas.GetEventConfigurationResponse_EventDataStoreArn, *v.EventDataStoreArn)
+	}
+	if v.MaxEventSize != "" {
+		s.WriteString(schemas.GetEventConfigurationResponse_MaxEventSize, string(v.MaxEventSize))
+	}
+	if v.TrailARN != nil {
+		s.WriteString(schemas.GetEventConfigurationResponse_TrailARN, *v.TrailARN)
+	}
+}
+func (v *GetEventConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEventConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEventConfigurationResponse_AggregationConfigurations:
+			return deserializeAggregationConfigurations(d, schemas.GetEventConfigurationResponse_AggregationConfigurations, &v.AggregationConfigurations)
+		case schemas.GetEventConfigurationResponse_ContextKeySelectors:
+			return deserializeContextKeySelectors(d, schemas.GetEventConfigurationResponse_ContextKeySelectors, &v.ContextKeySelectors)
+		case schemas.GetEventConfigurationResponse_EventDataStoreArn:
+			v.EventDataStoreArn = new(string)
+			return d.ReadString(schemas.GetEventConfigurationResponse_EventDataStoreArn, v.EventDataStoreArn)
+		case schemas.GetEventConfigurationResponse_MaxEventSize:
+			var ev string
+			if err := d.ReadString(schemas.GetEventConfigurationResponse_MaxEventSize, &ev); err != nil {
+				return err
+			}
+			v.MaxEventSize = types.MaxEventSize(ev)
+			return nil
+		case schemas.GetEventConfigurationResponse_TrailARN:
+			v.TrailARN = new(string)
+			return d.ReadString(schemas.GetEventConfigurationResponse_TrailARN, v.TrailARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEventConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetEventConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEventConfiguration, schemas.GetEventConfigurationRequest, schemas.GetEventConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetEventConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEventConfiguration, schemas.GetEventConfigurationRequest, schemas.GetEventConfigurationResponse), output: &GetEventConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

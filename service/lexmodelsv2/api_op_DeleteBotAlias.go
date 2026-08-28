@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type DeleteBotAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBotAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBotAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBotAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotAliasId != nil {
+		s.WriteString(schemas.DeleteBotAliasRequest_botAliasId, *v.BotAliasId)
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.DeleteBotAliasRequest_botId, *v.BotId)
+	}
+	if v.SkipResourceInUseCheck != false {
+		s.WriteBool(schemas.DeleteBotAliasRequest_skipResourceInUseCheck, v.SkipResourceInUseCheck)
+	}
+}
+
 type DeleteBotAliasOutput struct {
 
 	// The unique identifier of the bot alias to delete.
@@ -65,13 +85,48 @@ type DeleteBotAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBotAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBotAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBotAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotAliasId != nil {
+		s.WriteString(schemas.DeleteBotAliasResponse_botAliasId, *v.BotAliasId)
+	}
+	if v.BotAliasStatus != "" {
+		s.WriteString(schemas.DeleteBotAliasResponse_botAliasStatus, string(v.BotAliasStatus))
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.DeleteBotAliasResponse_botId, *v.BotId)
+	}
+}
+func (v *DeleteBotAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBotAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBotAliasResponse_botAliasId:
+			v.BotAliasId = new(string)
+			return d.ReadString(schemas.DeleteBotAliasResponse_botAliasId, v.BotAliasId)
+		case schemas.DeleteBotAliasResponse_botAliasStatus:
+			var ev string
+			if err := d.ReadString(schemas.DeleteBotAliasResponse_botAliasStatus, &ev); err != nil {
+				return err
+			}
+			v.BotAliasStatus = types.BotAliasStatus(ev)
+			return nil
+		case schemas.DeleteBotAliasResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.DeleteBotAliasResponse_botId, v.BotId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBotAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBotAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBotAlias, schemas.DeleteBotAliasRequest, schemas.DeleteBotAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteBotAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBotAlias, schemas.DeleteBotAliasRequest, schemas.DeleteBotAliasResponse), output: &DeleteBotAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package cloudtrail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetTrailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTrailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTrailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTrailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetTrailRequest_Name, *v.Name)
+	}
+}
+
 type GetTrailOutput struct {
 
 	// The settings for a trail.
@@ -46,13 +60,34 @@ type GetTrailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTrailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTrailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTrailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Trail != nil {
+		s.WriteStruct(schemas.GetTrailResponse_Trail)
+		v.Trail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTrailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTrailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTrailResponse_Trail:
+			v.Trail = &types.Trail{}
+			return v.Trail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTrailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTrail{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrail, schemas.GetTrailRequest, schemas.GetTrailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTrail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrail, schemas.GetTrailRequest, schemas.GetTrailResponse), output: &GetTrailOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

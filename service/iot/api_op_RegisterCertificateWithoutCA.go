@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type RegisterCertificateWithoutCAInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterCertificateWithoutCAInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterCertificateWithoutCARequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterCertificateWithoutCAInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificatePem != nil {
+		s.WriteString(schemas.RegisterCertificateWithoutCARequest_certificatePem, *v.CertificatePem)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RegisterCertificateWithoutCARequest_status, string(v.Status))
+	}
+}
+
 type RegisterCertificateWithoutCAOutput struct {
 
 	// The Amazon Resource Name (ARN) of the registered certificate.
@@ -55,13 +72,38 @@ type RegisterCertificateWithoutCAOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterCertificateWithoutCAOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterCertificateWithoutCAResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterCertificateWithoutCAOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.RegisterCertificateWithoutCAResponse_certificateArn, *v.CertificateArn)
+	}
+	if v.CertificateId != nil {
+		s.WriteString(schemas.RegisterCertificateWithoutCAResponse_certificateId, *v.CertificateId)
+	}
+}
+func (v *RegisterCertificateWithoutCAOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterCertificateWithoutCAResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterCertificateWithoutCAResponse_certificateArn:
+			v.CertificateArn = new(string)
+			return d.ReadString(schemas.RegisterCertificateWithoutCAResponse_certificateArn, v.CertificateArn)
+		case schemas.RegisterCertificateWithoutCAResponse_certificateId:
+			v.CertificateId = new(string)
+			return d.ReadString(schemas.RegisterCertificateWithoutCAResponse_certificateId, v.CertificateId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterCertificateWithoutCAMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterCertificateWithoutCA{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterCertificateWithoutCA, schemas.RegisterCertificateWithoutCARequest, schemas.RegisterCertificateWithoutCAResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterCertificateWithoutCA{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterCertificateWithoutCA, schemas.RegisterCertificateWithoutCARequest, schemas.RegisterCertificateWithoutCAResponse), output: &RegisterCertificateWithoutCAOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -95,6 +97,22 @@ type AdminConfirmSignUpInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminConfirmSignUpInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminConfirmSignUpRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminConfirmSignUpInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClientMetadataType(s, schemas.AdminConfirmSignUpRequest_ClientMetadata, v.ClientMetadata)
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AdminConfirmSignUpRequest_UserPoolId, *v.UserPoolId)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.AdminConfirmSignUpRequest_Username, *v.Username)
+	}
+}
+
 // Represents the response from the server for the request to confirm registration.
 type AdminConfirmSignUpOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -103,13 +121,26 @@ type AdminConfirmSignUpOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminConfirmSignUpOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminConfirmSignUpResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminConfirmSignUpOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AdminConfirmSignUpOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdminConfirmSignUpResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAdminConfirmSignUpMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminConfirmSignUp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminConfirmSignUp, schemas.AdminConfirmSignUpRequest, schemas.AdminConfirmSignUpResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminConfirmSignUp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminConfirmSignUp, schemas.AdminConfirmSignUpRequest, schemas.AdminConfirmSignUpResponse), output: &AdminConfirmSignUpOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

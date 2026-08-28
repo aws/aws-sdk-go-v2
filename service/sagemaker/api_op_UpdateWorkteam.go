@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,32 @@ type UpdateWorkteamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkteamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkteamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkteamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateWorkteamRequest_Description, *v.Description)
+	}
+	serializeMemberDefinitions(s, schemas.UpdateWorkteamRequest_MemberDefinitions, v.MemberDefinitions)
+	if v.NotificationConfiguration != nil {
+		s.WriteStruct(schemas.UpdateWorkteamRequest_NotificationConfiguration)
+		v.NotificationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkerAccessConfiguration != nil {
+		s.WriteStruct(schemas.UpdateWorkteamRequest_WorkerAccessConfiguration)
+		v.WorkerAccessConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkteamName != nil {
+		s.WriteString(schemas.UpdateWorkteamRequest_WorkteamName, *v.WorkteamName)
+	}
+}
+
 type UpdateWorkteamOutput struct {
 
 	// A Workteam object that describes the updated work team.
@@ -83,13 +111,34 @@ type UpdateWorkteamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkteamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkteamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkteamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Workteam != nil {
+		s.WriteStruct(schemas.UpdateWorkteamResponse_Workteam)
+		v.Workteam.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateWorkteamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkteamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWorkteamResponse_Workteam:
+			v.Workteam = &types.Workteam{}
+			return v.Workteam.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkteamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateWorkteam{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkteam, schemas.UpdateWorkteamRequest, schemas.UpdateWorkteamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateWorkteam{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkteam, schemas.UpdateWorkteamRequest, schemas.UpdateWorkteamResponse), output: &UpdateWorkteamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

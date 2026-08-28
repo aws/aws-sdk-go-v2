@@ -4,7 +4,9 @@ package transcribe
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -103,6 +105,30 @@ type CreateLanguageModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLanguageModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLanguageModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLanguageModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseModelName != "" {
+		s.WriteString(schemas.CreateLanguageModelRequest_BaseModelName, string(v.BaseModelName))
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.CreateLanguageModelRequest_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.CreateLanguageModelRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.CreateLanguageModelRequest_ModelName, *v.ModelName)
+	}
+	serializeTagList(s, schemas.CreateLanguageModelRequest_Tags, v.Tags)
+}
+
 type CreateLanguageModelOutput struct {
 
 	// The Amazon Transcribe standard language model, or base model, you specified
@@ -130,13 +156,70 @@ type CreateLanguageModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLanguageModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLanguageModelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLanguageModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseModelName != "" {
+		s.WriteString(schemas.CreateLanguageModelResponse_BaseModelName, string(v.BaseModelName))
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.CreateLanguageModelResponse_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.CreateLanguageModelResponse_LanguageCode, string(v.LanguageCode))
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.CreateLanguageModelResponse_ModelName, *v.ModelName)
+	}
+	if v.ModelStatus != "" {
+		s.WriteString(schemas.CreateLanguageModelResponse_ModelStatus, string(v.ModelStatus))
+	}
+}
+func (v *CreateLanguageModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLanguageModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLanguageModelResponse_BaseModelName:
+			var ev string
+			if err := d.ReadString(schemas.CreateLanguageModelResponse_BaseModelName, &ev); err != nil {
+				return err
+			}
+			v.BaseModelName = types.BaseModelName(ev)
+			return nil
+		case schemas.CreateLanguageModelResponse_InputDataConfig:
+			v.InputDataConfig = &types.InputDataConfig{}
+			return v.InputDataConfig.Deserialize(d)
+		case schemas.CreateLanguageModelResponse_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.CreateLanguageModelResponse_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = types.CLMLanguageCode(ev)
+			return nil
+		case schemas.CreateLanguageModelResponse_ModelName:
+			v.ModelName = new(string)
+			return d.ReadString(schemas.CreateLanguageModelResponse_ModelName, v.ModelName)
+		case schemas.CreateLanguageModelResponse_ModelStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateLanguageModelResponse_ModelStatus, &ev); err != nil {
+				return err
+			}
+			v.ModelStatus = types.ModelStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLanguageModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLanguageModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLanguageModel, schemas.CreateLanguageModelRequest, schemas.CreateLanguageModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLanguageModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLanguageModel, schemas.CreateLanguageModelRequest, schemas.CreateLanguageModelResponse), output: &CreateLanguageModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

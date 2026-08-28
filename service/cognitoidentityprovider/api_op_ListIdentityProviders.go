@@ -5,7 +5,9 @@ package cognitoidentityprovider
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,24 @@ type ListIdentityProvidersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdentityProvidersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdentityProvidersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdentityProvidersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIdentityProvidersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdentityProvidersRequest_NextToken, *v.NextToken)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.ListIdentityProvidersRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 type ListIdentityProvidersOutput struct {
 
 	// An array of the IdPs in your user pool. For each, the response includes
@@ -84,13 +104,35 @@ type ListIdentityProvidersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdentityProvidersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdentityProvidersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdentityProvidersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdentityProvidersResponse_NextToken, *v.NextToken)
+	}
+	serializeProvidersListType(s, schemas.ListIdentityProvidersResponse_Providers, v.Providers)
+}
+func (v *ListIdentityProvidersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIdentityProvidersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIdentityProvidersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIdentityProvidersResponse_NextToken, v.NextToken)
+		case schemas.ListIdentityProvidersResponse_Providers:
+			return deserializeProvidersListType(d, schemas.ListIdentityProvidersResponse_Providers, &v.Providers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIdentityProvidersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListIdentityProviders{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdentityProviders, schemas.ListIdentityProvidersRequest, schemas.ListIdentityProvidersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListIdentityProviders{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdentityProviders, schemas.ListIdentityProvidersRequest, schemas.ListIdentityProvidersResponse), output: &ListIdentityProvidersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

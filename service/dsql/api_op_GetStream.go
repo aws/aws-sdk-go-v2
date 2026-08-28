@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/dsql/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dsql/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -42,6 +44,21 @@ type GetStreamInput struct {
 	StreamIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStreamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.GetStreamInput_clusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.StreamIdentifier != nil {
+		s.WriteString(schemas.GetStreamInput_streamIdentifier, *v.StreamIdentifier)
+	}
 }
 
 // The output of a retrieved stream.
@@ -97,13 +114,94 @@ type GetStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStreamOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetStreamOutput_arn, *v.Arn)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.GetStreamOutput_clusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetStreamOutput_creationTime, *v.CreationTime)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.GetStreamOutput_format, string(v.Format))
+	}
+	if v.Ordering != "" {
+		s.WriteString(schemas.GetStreamOutput_ordering, string(v.Ordering))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetStreamOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteStruct(schemas.GetStreamOutput_statusReason)
+		v.StatusReason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StreamIdentifier != nil {
+		s.WriteString(schemas.GetStreamOutput_streamIdentifier, *v.StreamIdentifier)
+	}
+	serializeTagMap(s, schemas.GetStreamOutput_tags, v.Tags)
+	serializeTargetDefinition(s, schemas.GetStreamOutput_targetDefinition, v.TargetDefinition)
+}
+func (v *GetStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetStreamOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetStreamOutput_arn, v.Arn)
+		case schemas.GetStreamOutput_clusterIdentifier:
+			v.ClusterIdentifier = new(string)
+			return d.ReadString(schemas.GetStreamOutput_clusterIdentifier, v.ClusterIdentifier)
+		case schemas.GetStreamOutput_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetStreamOutput_creationTime, v.CreationTime)
+		case schemas.GetStreamOutput_format:
+			var ev string
+			if err := d.ReadString(schemas.GetStreamOutput_format, &ev); err != nil {
+				return err
+			}
+			v.Format = types.StreamFormat(ev)
+			return nil
+		case schemas.GetStreamOutput_ordering:
+			var ev string
+			if err := d.ReadString(schemas.GetStreamOutput_ordering, &ev); err != nil {
+				return err
+			}
+			v.Ordering = types.StreamOrdering(ev)
+			return nil
+		case schemas.GetStreamOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetStreamOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.StreamStatus(ev)
+			return nil
+		case schemas.GetStreamOutput_statusReason:
+			v.StatusReason = &types.StatusReason{}
+			return v.StatusReason.Deserialize(d)
+		case schemas.GetStreamOutput_streamIdentifier:
+			v.StreamIdentifier = new(string)
+			return d.ReadString(schemas.GetStreamOutput_streamIdentifier, v.StreamIdentifier)
+		case schemas.GetStreamOutput_tags:
+			return deserializeTagMap(d, schemas.GetStreamOutput_tags, &v.Tags)
+		case schemas.GetStreamOutput_targetDefinition:
+			return deserializeTargetDefinition(d, schemas.GetStreamOutput_targetDefinition, &v.TargetDefinition)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStream, schemas.GetStreamInput, schemas.GetStreamOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStream, schemas.GetStreamInput, schemas.GetStreamOutput), output: &GetStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

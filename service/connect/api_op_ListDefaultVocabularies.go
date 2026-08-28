@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type ListDefaultVocabulariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDefaultVocabulariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDefaultVocabulariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDefaultVocabulariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListDefaultVocabulariesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.ListDefaultVocabulariesRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDefaultVocabulariesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDefaultVocabulariesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDefaultVocabulariesOutput struct {
 
 	// A list of default vocabularies.
@@ -67,13 +90,35 @@ type ListDefaultVocabulariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDefaultVocabulariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDefaultVocabulariesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDefaultVocabulariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDefaultVocabularyList(s, schemas.ListDefaultVocabulariesResponse_DefaultVocabularyList, v.DefaultVocabularyList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDefaultVocabulariesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDefaultVocabulariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDefaultVocabulariesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDefaultVocabulariesResponse_DefaultVocabularyList:
+			return deserializeDefaultVocabularyList(d, schemas.ListDefaultVocabulariesResponse_DefaultVocabularyList, &v.DefaultVocabularyList)
+		case schemas.ListDefaultVocabulariesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDefaultVocabulariesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDefaultVocabulariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDefaultVocabularies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDefaultVocabularies, schemas.ListDefaultVocabulariesRequest, schemas.ListDefaultVocabulariesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDefaultVocabularies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDefaultVocabularies, schemas.ListDefaultVocabulariesRequest, schemas.ListDefaultVocabulariesResponse), output: &ListDefaultVocabulariesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

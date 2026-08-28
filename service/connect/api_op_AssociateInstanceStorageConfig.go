@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -78,6 +80,29 @@ type AssociateInstanceStorageConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateInstanceStorageConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateInstanceStorageConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateInstanceStorageConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AssociateInstanceStorageConfigRequest_ClientToken, *v.ClientToken)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.AssociateInstanceStorageConfigRequest_InstanceId, *v.InstanceId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.AssociateInstanceStorageConfigRequest_ResourceType, string(v.ResourceType))
+	}
+	if v.StorageConfig != nil {
+		s.WriteStruct(schemas.AssociateInstanceStorageConfigRequest_StorageConfig)
+		v.StorageConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type AssociateInstanceStorageConfigOutput struct {
 
 	// The existing association identifier that uniquely identifies the resource type
@@ -90,13 +115,32 @@ type AssociateInstanceStorageConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateInstanceStorageConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateInstanceStorageConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateInstanceStorageConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.AssociateInstanceStorageConfigResponse_AssociationId, *v.AssociationId)
+	}
+}
+func (v *AssociateInstanceStorageConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateInstanceStorageConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateInstanceStorageConfigResponse_AssociationId:
+			v.AssociationId = new(string)
+			return d.ReadString(schemas.AssociateInstanceStorageConfigResponse_AssociationId, v.AssociationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateInstanceStorageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateInstanceStorageConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateInstanceStorageConfig, schemas.AssociateInstanceStorageConfigRequest, schemas.AssociateInstanceStorageConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateInstanceStorageConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateInstanceStorageConfig, schemas.AssociateInstanceStorageConfigRequest, schemas.AssociateInstanceStorageConfigResponse), output: &AssociateInstanceStorageConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

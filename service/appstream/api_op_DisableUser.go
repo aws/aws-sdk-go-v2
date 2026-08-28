@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DisableUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationType != "" {
+		s.WriteString(schemas.DisableUserRequest_AuthenticationType, string(v.AuthenticationType))
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.DisableUserRequest_UserName, *v.UserName)
+	}
+}
+
 type DisableUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +66,26 @@ type DisableUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableUserResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisableUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableUserResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDisableUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableUser, schemas.DisableUserRequest, schemas.DisableUserResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDisableUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableUser, schemas.DisableUserRequest, schemas.DisableUserResult), output: &DisableUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

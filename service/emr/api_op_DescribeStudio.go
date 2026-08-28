@@ -4,7 +4,9 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DescribeStudioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStudioInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStudioInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStudioInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StudioId != nil {
+		s.WriteString(schemas.DescribeStudioInput_StudioId, *v.StudioId)
+	}
+}
+
 type DescribeStudioOutput struct {
 
 	// The Amazon EMR Studio details.
@@ -46,13 +60,34 @@ type DescribeStudioOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStudioOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStudioOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStudioOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Studio != nil {
+		s.WriteStruct(schemas.DescribeStudioOutput_Studio)
+		v.Studio.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeStudioOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeStudioOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeStudioOutput_Studio:
+			v.Studio = &types.Studio{}
+			return v.Studio.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeStudioMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeStudio{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStudio, schemas.DescribeStudioInput, schemas.DescribeStudioOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeStudio{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStudio, schemas.DescribeStudioInput, schemas.DescribeStudioOutput), output: &DescribeStudioOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

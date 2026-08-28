@@ -5,7 +5,9 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,36 @@ type ListShareInvitationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListShareInvitationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListShareInvitationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListShareInvitationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LensNamePrefix != nil {
+		s.WriteString(schemas.ListShareInvitationsInput_LensNamePrefix, *v.LensNamePrefix)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListShareInvitationsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListShareInvitationsInput_NextToken, *v.NextToken)
+	}
+	if v.ProfileNamePrefix != nil {
+		s.WriteString(schemas.ListShareInvitationsInput_ProfileNamePrefix, *v.ProfileNamePrefix)
+	}
+	if v.ShareResourceType != "" {
+		s.WriteString(schemas.ListShareInvitationsInput_ShareResourceType, string(v.ShareResourceType))
+	}
+	if v.TemplateNamePrefix != nil {
+		s.WriteString(schemas.ListShareInvitationsInput_TemplateNamePrefix, *v.TemplateNamePrefix)
+	}
+	if v.WorkloadNamePrefix != nil {
+		s.WriteString(schemas.ListShareInvitationsInput_WorkloadNamePrefix, *v.WorkloadNamePrefix)
+	}
+}
+
 // Input for List Share Invitations
 type ListShareInvitationsOutput struct {
 
@@ -74,13 +106,35 @@ type ListShareInvitationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListShareInvitationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListShareInvitationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListShareInvitationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListShareInvitationsOutput_NextToken, *v.NextToken)
+	}
+	serializeShareInvitationSummaries(s, schemas.ListShareInvitationsOutput_ShareInvitationSummaries, v.ShareInvitationSummaries)
+}
+func (v *ListShareInvitationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListShareInvitationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListShareInvitationsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListShareInvitationsOutput_NextToken, v.NextToken)
+		case schemas.ListShareInvitationsOutput_ShareInvitationSummaries:
+			return deserializeShareInvitationSummaries(d, schemas.ListShareInvitationsOutput_ShareInvitationSummaries, &v.ShareInvitationSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListShareInvitationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListShareInvitations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListShareInvitations, schemas.ListShareInvitationsInput, schemas.ListShareInvitationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListShareInvitations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListShareInvitations, schemas.ListShareInvitationsInput, schemas.ListShareInvitationsOutput), output: &ListShareInvitationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

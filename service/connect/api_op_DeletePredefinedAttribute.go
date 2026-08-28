@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeletePredefinedAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePredefinedAttributeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePredefinedAttributeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePredefinedAttributeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeletePredefinedAttributeRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeletePredefinedAttributeRequest_Name, *v.Name)
+	}
+}
+
 type DeletePredefinedAttributeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type DeletePredefinedAttributeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePredefinedAttributeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePredefinedAttributeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeletePredefinedAttributeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePredefinedAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePredefinedAttribute{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePredefinedAttribute, schemas.DeletePredefinedAttributeRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePredefinedAttribute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePredefinedAttribute, schemas.DeletePredefinedAttributeRequest, nil), output: &DeletePredefinedAttributeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

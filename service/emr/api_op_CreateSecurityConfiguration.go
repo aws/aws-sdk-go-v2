@@ -4,6 +4,8 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -43,6 +45,21 @@ type CreateSecurityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSecurityConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSecurityConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSecurityConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSecurityConfigurationInput_Name, *v.Name)
+	}
+	if v.SecurityConfiguration != nil {
+		s.WriteString(schemas.CreateSecurityConfigurationInput_SecurityConfiguration, *v.SecurityConfiguration)
+	}
+}
+
 type CreateSecurityConfigurationOutput struct {
 
 	// The date and time the security configuration was created.
@@ -61,13 +78,38 @@ type CreateSecurityConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSecurityConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSecurityConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSecurityConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.CreateSecurityConfigurationOutput_CreationDateTime, *v.CreationDateTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSecurityConfigurationOutput_Name, *v.Name)
+	}
+}
+func (v *CreateSecurityConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSecurityConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSecurityConfigurationOutput_CreationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.CreateSecurityConfigurationOutput_CreationDateTime, v.CreationDateTime)
+		case schemas.CreateSecurityConfigurationOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateSecurityConfigurationOutput_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSecurityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSecurityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecurityConfiguration, schemas.CreateSecurityConfigurationInput, schemas.CreateSecurityConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateSecurityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecurityConfiguration, schemas.CreateSecurityConfigurationInput, schemas.CreateSecurityConfigurationOutput), output: &CreateSecurityConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

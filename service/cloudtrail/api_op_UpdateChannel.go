@@ -4,7 +4,9 @@ package cloudtrail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,22 @@ type UpdateChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Channel != nil {
+		s.WriteString(schemas.UpdateChannelRequest_Channel, *v.Channel)
+	}
+	serializeDestinations(s, schemas.UpdateChannelRequest_Destinations, v.Destinations)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateChannelRequest_Name, *v.Name)
+	}
+}
+
 type UpdateChannelOutput struct {
 
 	// The ARN of the channel that was updated.
@@ -61,13 +79,47 @@ type UpdateChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.UpdateChannelResponse_ChannelArn, *v.ChannelArn)
+	}
+	serializeDestinations(s, schemas.UpdateChannelResponse_Destinations, v.Destinations)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateChannelResponse_Name, *v.Name)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.UpdateChannelResponse_Source, *v.Source)
+	}
+}
+func (v *UpdateChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateChannelResponse_ChannelArn:
+			v.ChannelArn = new(string)
+			return d.ReadString(schemas.UpdateChannelResponse_ChannelArn, v.ChannelArn)
+		case schemas.UpdateChannelResponse_Destinations:
+			return deserializeDestinations(d, schemas.UpdateChannelResponse_Destinations, &v.Destinations)
+		case schemas.UpdateChannelResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateChannelResponse_Name, v.Name)
+		case schemas.UpdateChannelResponse_Source:
+			v.Source = new(string)
+			return d.ReadString(schemas.UpdateChannelResponse_Source, v.Source)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannel, schemas.UpdateChannelRequest, schemas.UpdateChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannel, schemas.UpdateChannelRequest, schemas.UpdateChannelResponse), output: &UpdateChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

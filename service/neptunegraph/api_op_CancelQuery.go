@@ -5,6 +5,7 @@ package neptunegraph
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/schemas"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
@@ -43,6 +44,20 @@ type CancelQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelQueryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphIdentifier != nil {
+		s.WriteString(schemas.CancelQueryInput_graphIdentifier, *v.GraphIdentifier)
+	}
+	if v.QueryId != nil {
+		s.WriteString(schemas.CancelQueryInput_queryId, *v.QueryId)
+	}
+}
 func (in *CancelQueryInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ApiType = ptr.String("DataPlane")
@@ -55,13 +70,26 @@ type CancelQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CancelQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelQuery, schemas.CancelQueryInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelQuery, schemas.CancelQueryInput, nil), output: &CancelQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

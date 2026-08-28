@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,24 @@ type CreateContainerServiceDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContainerServiceDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContainerServiceDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContainerServiceDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContainerMap(s, schemas.CreateContainerServiceDeploymentRequest_containers, v.Containers)
+	if v.PublicEndpoint != nil {
+		s.WriteStruct(schemas.CreateContainerServiceDeploymentRequest_publicEndpoint)
+		v.PublicEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.CreateContainerServiceDeploymentRequest_serviceName, *v.ServiceName)
+	}
+}
+
 type CreateContainerServiceDeploymentOutput struct {
 
 	// An object that describes a container service.
@@ -65,13 +85,34 @@ type CreateContainerServiceDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContainerServiceDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContainerServiceDeploymentResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContainerServiceDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerService != nil {
+		s.WriteStruct(schemas.CreateContainerServiceDeploymentResult_containerService)
+		v.ContainerService.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateContainerServiceDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateContainerServiceDeploymentResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateContainerServiceDeploymentResult_containerService:
+			v.ContainerService = &types.ContainerService{}
+			return v.ContainerService.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateContainerServiceDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateContainerServiceDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContainerServiceDeployment, schemas.CreateContainerServiceDeploymentRequest, schemas.CreateContainerServiceDeploymentResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateContainerServiceDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContainerServiceDeployment, schemas.CreateContainerServiceDeploymentRequest, schemas.CreateContainerServiceDeploymentResult), output: &CreateContainerServiceDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

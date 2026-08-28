@@ -4,7 +4,9 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,43 @@ type CreateAppBlockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAppBlockInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAppBlockRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAppBlockInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAppBlockRequest_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateAppBlockRequest_DisplayName, *v.DisplayName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAppBlockRequest_Name, *v.Name)
+	}
+	if v.PackagingType != "" {
+		s.WriteString(schemas.CreateAppBlockRequest_PackagingType, string(v.PackagingType))
+	}
+	if v.PostSetupScriptDetails != nil {
+		s.WriteStruct(schemas.CreateAppBlockRequest_PostSetupScriptDetails)
+		v.PostSetupScriptDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SetupScriptDetails != nil {
+		s.WriteStruct(schemas.CreateAppBlockRequest_SetupScriptDetails)
+		v.SetupScriptDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceS3Location != nil {
+		s.WriteStruct(schemas.CreateAppBlockRequest_SourceS3Location)
+		v.SourceS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateAppBlockRequest_Tags, v.Tags)
+}
+
 type CreateAppBlockOutput struct {
 
 	// The app block.
@@ -78,13 +117,34 @@ type CreateAppBlockOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAppBlockOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAppBlockResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAppBlockOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppBlock != nil {
+		s.WriteStruct(schemas.CreateAppBlockResult_AppBlock)
+		v.AppBlock.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAppBlockOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAppBlockResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAppBlockResult_AppBlock:
+			v.AppBlock = &types.AppBlock{}
+			return v.AppBlock.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAppBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateAppBlock{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAppBlock, schemas.CreateAppBlockRequest, schemas.CreateAppBlockResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateAppBlock{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAppBlock, schemas.CreateAppBlockRequest, schemas.CreateAppBlockResult), output: &CreateAppBlockOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

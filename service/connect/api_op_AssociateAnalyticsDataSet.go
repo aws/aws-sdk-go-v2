@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type AssociateAnalyticsDataSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateAnalyticsDataSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateAnalyticsDataSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateAnalyticsDataSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSetId != nil {
+		s.WriteString(schemas.AssociateAnalyticsDataSetRequest_DataSetId, *v.DataSetId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.AssociateAnalyticsDataSetRequest_InstanceId, *v.InstanceId)
+	}
+	if v.TargetAccountId != nil {
+		s.WriteString(schemas.AssociateAnalyticsDataSetRequest_TargetAccountId, *v.TargetAccountId)
+	}
+}
+
 type AssociateAnalyticsDataSetOutput struct {
 
 	// The identifier of the dataset that was associated.
@@ -68,13 +88,50 @@ type AssociateAnalyticsDataSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateAnalyticsDataSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateAnalyticsDataSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateAnalyticsDataSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSetId != nil {
+		s.WriteString(schemas.AssociateAnalyticsDataSetResponse_DataSetId, *v.DataSetId)
+	}
+	if v.ResourceShareArn != nil {
+		s.WriteString(schemas.AssociateAnalyticsDataSetResponse_ResourceShareArn, *v.ResourceShareArn)
+	}
+	if v.ResourceShareId != nil {
+		s.WriteString(schemas.AssociateAnalyticsDataSetResponse_ResourceShareId, *v.ResourceShareId)
+	}
+	if v.TargetAccountId != nil {
+		s.WriteString(schemas.AssociateAnalyticsDataSetResponse_TargetAccountId, *v.TargetAccountId)
+	}
+}
+func (v *AssociateAnalyticsDataSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateAnalyticsDataSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateAnalyticsDataSetResponse_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.AssociateAnalyticsDataSetResponse_DataSetId, v.DataSetId)
+		case schemas.AssociateAnalyticsDataSetResponse_ResourceShareArn:
+			v.ResourceShareArn = new(string)
+			return d.ReadString(schemas.AssociateAnalyticsDataSetResponse_ResourceShareArn, v.ResourceShareArn)
+		case schemas.AssociateAnalyticsDataSetResponse_ResourceShareId:
+			v.ResourceShareId = new(string)
+			return d.ReadString(schemas.AssociateAnalyticsDataSetResponse_ResourceShareId, v.ResourceShareId)
+		case schemas.AssociateAnalyticsDataSetResponse_TargetAccountId:
+			v.TargetAccountId = new(string)
+			return d.ReadString(schemas.AssociateAnalyticsDataSetResponse_TargetAccountId, v.TargetAccountId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateAnalyticsDataSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateAnalyticsDataSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateAnalyticsDataSet, schemas.AssociateAnalyticsDataSetRequest, schemas.AssociateAnalyticsDataSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateAnalyticsDataSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateAnalyticsDataSet, schemas.AssociateAnalyticsDataSetRequest, schemas.AssociateAnalyticsDataSetResponse), output: &AssociateAnalyticsDataSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

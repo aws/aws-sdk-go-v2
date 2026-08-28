@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type StopGUISessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopGUISessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopGUISessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopGUISessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceName != nil {
+		s.WriteString(schemas.StopGUISessionRequest_resourceName, *v.ResourceName)
+	}
+}
+
 type StopGUISessionOutput struct {
 
 	// The available API operations.
@@ -47,13 +61,29 @@ type StopGUISessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopGUISessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopGUISessionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopGUISessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.StopGUISessionResult_operations, v.Operations)
+}
+func (v *StopGUISessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopGUISessionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopGUISessionResult_operations:
+			return deserializeOperationList(d, schemas.StopGUISessionResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopGUISessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopGUISession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopGUISession, schemas.StopGUISessionRequest, schemas.StopGUISessionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopGUISession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopGUISession, schemas.StopGUISessionRequest, schemas.StopGUISessionResult), output: &StopGUISessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

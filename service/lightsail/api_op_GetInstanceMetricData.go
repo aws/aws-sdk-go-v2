@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -192,6 +194,34 @@ type GetInstanceMetricDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInstanceMetricDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInstanceMetricDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInstanceMetricDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetInstanceMetricDataRequest_endTime, *v.EndTime)
+	}
+	if v.InstanceName != nil {
+		s.WriteString(schemas.GetInstanceMetricDataRequest_instanceName, *v.InstanceName)
+	}
+	if v.MetricName != "" {
+		s.WriteString(schemas.GetInstanceMetricDataRequest_metricName, string(v.MetricName))
+	}
+	if v.Period != nil {
+		s.WriteInt32(schemas.GetInstanceMetricDataRequest_period, *v.Period)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetInstanceMetricDataRequest_startTime, *v.StartTime)
+	}
+	serializeMetricStatisticList(s, schemas.GetInstanceMetricDataRequest_statistics, v.Statistics)
+	if v.Unit != "" {
+		s.WriteString(schemas.GetInstanceMetricDataRequest_unit, string(v.Unit))
+	}
+}
+
 type GetInstanceMetricDataOutput struct {
 
 	// An array of objects that describe the metric data returned.
@@ -206,13 +236,39 @@ type GetInstanceMetricDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInstanceMetricDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInstanceMetricDataResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInstanceMetricDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricDatapointList(s, schemas.GetInstanceMetricDataResult_metricData, v.MetricData)
+	if v.MetricName != "" {
+		s.WriteString(schemas.GetInstanceMetricDataResult_metricName, string(v.MetricName))
+	}
+}
+func (v *GetInstanceMetricDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInstanceMetricDataResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInstanceMetricDataResult_metricData:
+			return deserializeMetricDatapointList(d, schemas.GetInstanceMetricDataResult_metricData, &v.MetricData)
+		case schemas.GetInstanceMetricDataResult_metricName:
+			var ev string
+			if err := d.ReadString(schemas.GetInstanceMetricDataResult_metricName, &ev); err != nil {
+				return err
+			}
+			v.MetricName = types.InstanceMetricName(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInstanceMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetInstanceMetricData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInstanceMetricData, schemas.GetInstanceMetricDataRequest, schemas.GetInstanceMetricDataResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetInstanceMetricData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInstanceMetricData, schemas.GetInstanceMetricDataRequest, schemas.GetInstanceMetricDataResult), output: &GetInstanceMetricDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

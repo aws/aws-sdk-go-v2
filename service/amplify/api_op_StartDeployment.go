@@ -4,7 +4,9 @@ package amplify
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,30 @@ type StartDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.StartDeploymentRequest_appId, *v.AppId)
+	}
+	if v.BranchName != nil {
+		s.WriteString(schemas.StartDeploymentRequest_branchName, *v.BranchName)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.StartDeploymentRequest_jobId, *v.JobId)
+	}
+	if v.SourceUrl != nil {
+		s.WriteString(schemas.StartDeploymentRequest_sourceUrl, *v.SourceUrl)
+	}
+	if v.SourceUrlType != "" {
+		s.WriteString(schemas.StartDeploymentRequest_sourceUrlType, string(v.SourceUrlType))
+	}
+}
+
 // The result structure for the start a deployment request.
 type StartDeploymentOutput struct {
 
@@ -74,13 +100,34 @@ type StartDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDeploymentResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobSummary != nil {
+		s.WriteStruct(schemas.StartDeploymentResult_jobSummary)
+		v.JobSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDeploymentResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDeploymentResult_jobSummary:
+			v.JobSummary = &types.JobSummary{}
+			return v.JobSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDeployment, schemas.StartDeploymentRequest, schemas.StartDeploymentResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDeployment, schemas.StartDeploymentRequest, schemas.StartDeploymentResult), output: &StartDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

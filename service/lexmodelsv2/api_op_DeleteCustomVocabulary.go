@@ -4,7 +4,9 @@ package lexmodelsv2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type DeleteCustomVocabularyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomVocabularyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCustomVocabularyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomVocabularyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.DeleteCustomVocabularyRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.DeleteCustomVocabularyRequest_botVersion, *v.BotVersion)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.DeleteCustomVocabularyRequest_localeId, *v.LocaleId)
+	}
+}
+
 type DeleteCustomVocabularyOutput struct {
 
 	// The identifier of the bot that the custom vocabulary was removed from.
@@ -66,13 +86,54 @@ type DeleteCustomVocabularyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomVocabularyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCustomVocabularyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomVocabularyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.DeleteCustomVocabularyResponse_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.DeleteCustomVocabularyResponse_botVersion, *v.BotVersion)
+	}
+	if v.CustomVocabularyStatus != "" {
+		s.WriteString(schemas.DeleteCustomVocabularyResponse_customVocabularyStatus, string(v.CustomVocabularyStatus))
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.DeleteCustomVocabularyResponse_localeId, *v.LocaleId)
+	}
+}
+func (v *DeleteCustomVocabularyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCustomVocabularyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteCustomVocabularyResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.DeleteCustomVocabularyResponse_botId, v.BotId)
+		case schemas.DeleteCustomVocabularyResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.DeleteCustomVocabularyResponse_botVersion, v.BotVersion)
+		case schemas.DeleteCustomVocabularyResponse_customVocabularyStatus:
+			var ev string
+			if err := d.ReadString(schemas.DeleteCustomVocabularyResponse_customVocabularyStatus, &ev); err != nil {
+				return err
+			}
+			v.CustomVocabularyStatus = types.CustomVocabularyStatus(ev)
+			return nil
+		case schemas.DeleteCustomVocabularyResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.DeleteCustomVocabularyResponse_localeId, v.LocaleId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCustomVocabularyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCustomVocabulary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomVocabulary, schemas.DeleteCustomVocabularyRequest, schemas.DeleteCustomVocabularyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCustomVocabulary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomVocabulary, schemas.DeleteCustomVocabularyRequest, schemas.DeleteCustomVocabularyResponse), output: &DeleteCustomVocabularyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

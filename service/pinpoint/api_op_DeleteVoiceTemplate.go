@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,21 @@ type DeleteVoiceTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVoiceTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVoiceTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVoiceTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateName != nil {
+		s.WriteString(schemas.DeleteVoiceTemplateRequest_TemplateName, *v.TemplateName)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.DeleteVoiceTemplateRequest_Version, *v.Version)
+	}
+}
+
 type DeleteVoiceTemplateOutput struct {
 
 	// Provides information about an API request or response.
@@ -75,13 +92,34 @@ type DeleteVoiceTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVoiceTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVoiceTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVoiceTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageBody != nil {
+		s.WriteStruct(schemas.DeleteVoiceTemplateResponse_MessageBody)
+		v.MessageBody.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteVoiceTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVoiceTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVoiceTemplateResponse_MessageBody:
+			v.MessageBody = &types.MessageBody{}
+			return v.MessageBody.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVoiceTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteVoiceTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVoiceTemplate, schemas.DeleteVoiceTemplateRequest, schemas.DeleteVoiceTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteVoiceTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVoiceTemplate, schemas.DeleteVoiceTemplateRequest, schemas.DeleteVoiceTemplateResponse), output: &DeleteVoiceTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

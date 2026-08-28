@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/amp/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -38,6 +40,47 @@ type AlertManagerDefinitionDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AlertManagerDefinitionDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AlertManagerDefinitionDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AlertManagerDefinitionDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AlertManagerDefinitionDescription_createdAt, *v.CreatedAt)
+	}
+	if v.Data != nil {
+		s.WriteBlob(schemas.AlertManagerDefinitionDescription_data, v.Data)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.AlertManagerDefinitionDescription_modifiedAt, *v.ModifiedAt)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.AlertManagerDefinitionDescription_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AlertManagerDefinitionDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AlertManagerDefinitionDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AlertManagerDefinitionDescription_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AlertManagerDefinitionDescription_createdAt, v.CreatedAt)
+		case schemas.AlertManagerDefinitionDescription_data:
+			return d.ReadBlob(schemas.AlertManagerDefinitionDescription_data, &v.Data)
+		case schemas.AlertManagerDefinitionDescription_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.AlertManagerDefinitionDescription_modifiedAt, v.ModifiedAt)
+		case schemas.AlertManagerDefinitionDescription_status:
+			v.Status = &AlertManagerDefinitionStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The status of the alert manager.
 type AlertManagerDefinitionStatus struct {
 
@@ -52,6 +95,38 @@ type AlertManagerDefinitionStatus struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AlertManagerDefinitionStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AlertManagerDefinitionStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AlertManagerDefinitionStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StatusCode != "" {
+		s.WriteString(schemas.AlertManagerDefinitionStatus_statusCode, string(v.StatusCode))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.AlertManagerDefinitionStatus_statusReason, *v.StatusReason)
+	}
+}
+func (v *AlertManagerDefinitionStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AlertManagerDefinitionStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AlertManagerDefinitionStatus_statusCode:
+			var ev string
+			if err := d.ReadString(schemas.AlertManagerDefinitionStatus_statusCode, &ev); err != nil {
+				return err
+			}
+			v.StatusCode = AlertManagerDefinitionStatusCode(ev)
+			return nil
+		case schemas.AlertManagerDefinitionStatus_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.AlertManagerDefinitionStatus_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
+
 // The AmpConfiguration structure defines the Amazon Managed Service for
 // Prometheus instance a scraper should send metrics to.
 type AmpConfiguration struct {
@@ -62,6 +137,28 @@ type AmpConfiguration struct {
 	WorkspaceArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AmpConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmpConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmpConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkspaceArn != nil {
+		s.WriteString(schemas.AmpConfiguration_workspaceArn, *v.WorkspaceArn)
+	}
+}
+func (v *AmpConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmpConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmpConfiguration_workspaceArn:
+			v.WorkspaceArn = new(string)
+			return d.ReadString(schemas.AmpConfiguration_workspaceArn, v.WorkspaceArn)
+		}
+		return nil
+	})
 }
 
 // The configuration for the anomaly detection algorithm.
@@ -81,6 +178,14 @@ type AnomalyDetectorConfigurationMemberRandomCutForest struct {
 }
 
 func (*AnomalyDetectorConfigurationMemberRandomCutForest) isAnomalyDetectorConfiguration() {}
+func (v *AnomalyDetectorConfigurationMemberRandomCutForest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnomalyDetectorConfiguration_randomCutForest)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AnomalyDetectorConfigurationMemberRandomCutForest) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Detailed information about an anomaly detector.
 type AnomalyDetectorDescription struct {
@@ -134,6 +239,78 @@ type AnomalyDetectorDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AnomalyDetectorDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnomalyDetectorDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnomalyDetectorDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.AnomalyDetectorDescription_alias, *v.Alias)
+	}
+	if v.AnomalyDetectorId != nil {
+		s.WriteString(schemas.AnomalyDetectorDescription_anomalyDetectorId, *v.AnomalyDetectorId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.AnomalyDetectorDescription_arn, *v.Arn)
+	}
+	serializeAnomalyDetectorConfiguration(s, schemas.AnomalyDetectorDescription_configuration, v.Configuration)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AnomalyDetectorDescription_createdAt, *v.CreatedAt)
+	}
+	if v.EvaluationIntervalInSeconds != nil {
+		s.WriteInt32(schemas.AnomalyDetectorDescription_evaluationIntervalInSeconds, *v.EvaluationIntervalInSeconds)
+	}
+	serializePrometheusMetricLabelMap(s, schemas.AnomalyDetectorDescription_labels, v.Labels)
+	serializeAnomalyDetectorMissingDataAction(s, schemas.AnomalyDetectorDescription_missingDataAction, v.MissingDataAction)
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.AnomalyDetectorDescription_modifiedAt, *v.ModifiedAt)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.AnomalyDetectorDescription_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.AnomalyDetectorDescription_tags, v.Tags)
+}
+func (v *AnomalyDetectorDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnomalyDetectorDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnomalyDetectorDescription_alias:
+			v.Alias = new(string)
+			return d.ReadString(schemas.AnomalyDetectorDescription_alias, v.Alias)
+		case schemas.AnomalyDetectorDescription_anomalyDetectorId:
+			v.AnomalyDetectorId = new(string)
+			return d.ReadString(schemas.AnomalyDetectorDescription_anomalyDetectorId, v.AnomalyDetectorId)
+		case schemas.AnomalyDetectorDescription_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AnomalyDetectorDescription_arn, v.Arn)
+		case schemas.AnomalyDetectorDescription_configuration:
+			return deserializeAnomalyDetectorConfiguration(d, schemas.AnomalyDetectorDescription_configuration, &v.Configuration)
+		case schemas.AnomalyDetectorDescription_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AnomalyDetectorDescription_createdAt, v.CreatedAt)
+		case schemas.AnomalyDetectorDescription_evaluationIntervalInSeconds:
+			v.EvaluationIntervalInSeconds = new(int32)
+			return d.ReadInt32(schemas.AnomalyDetectorDescription_evaluationIntervalInSeconds, v.EvaluationIntervalInSeconds)
+		case schemas.AnomalyDetectorDescription_labels:
+			return deserializePrometheusMetricLabelMap(d, schemas.AnomalyDetectorDescription_labels, &v.Labels)
+		case schemas.AnomalyDetectorDescription_missingDataAction:
+			return deserializeAnomalyDetectorMissingDataAction(d, schemas.AnomalyDetectorDescription_missingDataAction, &v.MissingDataAction)
+		case schemas.AnomalyDetectorDescription_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.AnomalyDetectorDescription_modifiedAt, v.ModifiedAt)
+		case schemas.AnomalyDetectorDescription_status:
+			v.Status = &AnomalyDetectorStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.AnomalyDetectorDescription_tags:
+			return deserializeTagMap(d, schemas.AnomalyDetectorDescription_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Specifies the action to take when data is missing during anomaly detection
 // evaluation.
 //
@@ -153,6 +330,12 @@ type AnomalyDetectorMissingDataActionMemberMarkAsAnomaly struct {
 }
 
 func (*AnomalyDetectorMissingDataActionMemberMarkAsAnomaly) isAnomalyDetectorMissingDataAction() {}
+func (v *AnomalyDetectorMissingDataActionMemberMarkAsAnomaly) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.AnomalyDetectorMissingDataAction_markAsAnomaly, v.Value)
+}
+func (v *AnomalyDetectorMissingDataActionMemberMarkAsAnomaly) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBool(schemas.AnomalyDetectorMissingDataAction_markAsAnomaly, &v.Value)
+}
 
 // Skips evaluation when data is missing.
 type AnomalyDetectorMissingDataActionMemberSkip struct {
@@ -162,6 +345,12 @@ type AnomalyDetectorMissingDataActionMemberSkip struct {
 }
 
 func (*AnomalyDetectorMissingDataActionMemberSkip) isAnomalyDetectorMissingDataAction() {}
+func (v *AnomalyDetectorMissingDataActionMemberSkip) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.AnomalyDetectorMissingDataAction_skip, v.Value)
+}
+func (v *AnomalyDetectorMissingDataActionMemberSkip) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBool(schemas.AnomalyDetectorMissingDataAction_skip, &v.Value)
+}
 
 // The status information of an anomaly detector.
 type AnomalyDetectorStatus struct {
@@ -175,6 +364,38 @@ type AnomalyDetectorStatus struct {
 	StatusReason *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AnomalyDetectorStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnomalyDetectorStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnomalyDetectorStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StatusCode != "" {
+		s.WriteString(schemas.AnomalyDetectorStatus_statusCode, string(v.StatusCode))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.AnomalyDetectorStatus_statusReason, *v.StatusReason)
+	}
+}
+func (v *AnomalyDetectorStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnomalyDetectorStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnomalyDetectorStatus_statusCode:
+			var ev string
+			if err := d.ReadString(schemas.AnomalyDetectorStatus_statusCode, &ev); err != nil {
+				return err
+			}
+			v.StatusCode = AnomalyDetectorStatusCode(ev)
+			return nil
+		case schemas.AnomalyDetectorStatus_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.AnomalyDetectorStatus_statusReason, v.StatusReason)
+		}
+		return nil
+	})
 }
 
 // Summary information about an anomaly detector for list operations.
@@ -216,6 +437,63 @@ type AnomalyDetectorSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AnomalyDetectorSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnomalyDetectorSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnomalyDetectorSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.AnomalyDetectorSummary_alias, *v.Alias)
+	}
+	if v.AnomalyDetectorId != nil {
+		s.WriteString(schemas.AnomalyDetectorSummary_anomalyDetectorId, *v.AnomalyDetectorId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.AnomalyDetectorSummary_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AnomalyDetectorSummary_createdAt, *v.CreatedAt)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.AnomalyDetectorSummary_modifiedAt, *v.ModifiedAt)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.AnomalyDetectorSummary_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.AnomalyDetectorSummary_tags, v.Tags)
+}
+func (v *AnomalyDetectorSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnomalyDetectorSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnomalyDetectorSummary_alias:
+			v.Alias = new(string)
+			return d.ReadString(schemas.AnomalyDetectorSummary_alias, v.Alias)
+		case schemas.AnomalyDetectorSummary_anomalyDetectorId:
+			v.AnomalyDetectorId = new(string)
+			return d.ReadString(schemas.AnomalyDetectorSummary_anomalyDetectorId, v.AnomalyDetectorId)
+		case schemas.AnomalyDetectorSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AnomalyDetectorSummary_arn, v.Arn)
+		case schemas.AnomalyDetectorSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AnomalyDetectorSummary_createdAt, v.CreatedAt)
+		case schemas.AnomalyDetectorSummary_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.AnomalyDetectorSummary_modifiedAt, v.ModifiedAt)
+		case schemas.AnomalyDetectorSummary_status:
+			v.Status = &AnomalyDetectorStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.AnomalyDetectorSummary_tags:
+			return deserializeTagMap(d, schemas.AnomalyDetectorSummary_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // The configuration identifies the CloudWatch dataset used as a scraper
 // destination.
 type CloudWatchConfiguration struct {
@@ -227,6 +505,28 @@ type CloudWatchConfiguration struct {
 	DatasetArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CloudWatchConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudWatchConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudWatchConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.CloudWatchConfiguration_datasetArn, *v.DatasetArn)
+	}
+}
+func (v *CloudWatchConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudWatchConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudWatchConfiguration_datasetArn:
+			v.DatasetArn = new(string)
+			return d.ReadString(schemas.CloudWatchConfiguration_datasetArn, v.DatasetArn)
+		}
+		return nil
+	})
 }
 
 // Configuration details for logging to CloudWatch Logs.
@@ -241,6 +541,28 @@ type CloudWatchLogDestination struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CloudWatchLogDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudWatchLogDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudWatchLogDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogGroupArn != nil {
+		s.WriteString(schemas.CloudWatchLogDestination_logGroupArn, *v.LogGroupArn)
+	}
+}
+func (v *CloudWatchLogDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudWatchLogDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudWatchLogDestination_logGroupArn:
+			v.LogGroupArn = new(string)
+			return d.ReadString(schemas.CloudWatchLogDestination_logGroupArn, v.LogGroupArn)
+		}
+		return nil
+	})
+}
+
 // Configuration settings for a scraper component.
 type ComponentConfig struct {
 
@@ -248,6 +570,25 @@ type ComponentConfig struct {
 	Options map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ComponentConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComponentConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComponentConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringMap(s, schemas.ComponentConfig_options, v.Options)
+}
+func (v *ComponentConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComponentConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComponentConfig_options:
+			return deserializeStringMap(d, schemas.ComponentConfig_options, &v.Options)
+		}
+		return nil
+	})
 }
 
 // Where to send the metrics from a scraper.
@@ -268,6 +609,14 @@ type DestinationMemberAmpConfiguration struct {
 }
 
 func (*DestinationMemberAmpConfiguration) isDestination() {}
+func (v *DestinationMemberAmpConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Destination_ampConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *DestinationMemberAmpConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The CloudWatch dataset to send metrics to.
 type DestinationMemberCloudWatchConfiguration struct {
@@ -277,6 +626,14 @@ type DestinationMemberCloudWatchConfiguration struct {
 }
 
 func (*DestinationMemberCloudWatchConfiguration) isDestination() {}
+func (v *DestinationMemberCloudWatchConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Destination_cloudWatchConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *DestinationMemberCloudWatchConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The EksConfiguration structure describes the connection to the Amazon EKS
 // cluster from which a scraper collects metrics.
@@ -298,6 +655,34 @@ type EksConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EksConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EksConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EksConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.EksConfiguration_clusterArn, *v.ClusterArn)
+	}
+	serializeSecurityGroupIds(s, schemas.EksConfiguration_securityGroupIds, v.SecurityGroupIds)
+	serializeSubnetIds(s, schemas.EksConfiguration_subnetIds, v.SubnetIds)
+}
+func (v *EksConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EksConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EksConfiguration_clusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.EksConfiguration_clusterArn, v.ClusterArn)
+		case schemas.EksConfiguration_securityGroupIds:
+			return deserializeSecurityGroupIds(d, schemas.EksConfiguration_securityGroupIds, &v.SecurityGroupIds)
+		case schemas.EksConfiguration_subnetIds:
+			return deserializeSubnetIds(d, schemas.EksConfiguration_subnetIds, &v.SubnetIds)
+		}
+		return nil
+	})
+}
+
 // Contains the configuration for an exporter managed by the scraper.
 //
 // The following types satisfy this interface:
@@ -316,6 +701,14 @@ type ExporterConfigurationMemberOpenSearchConfiguration struct {
 }
 
 func (*ExporterConfigurationMemberOpenSearchConfiguration) isExporterConfiguration() {}
+func (v *ExporterConfigurationMemberOpenSearchConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExporterConfiguration_openSearchConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ExporterConfigurationMemberOpenSearchConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Configuration for threshold settings that determine when values near expected
 // values should be ignored during anomaly detection.
@@ -337,6 +730,12 @@ type IgnoreNearExpectedMemberAmount struct {
 }
 
 func (*IgnoreNearExpectedMemberAmount) isIgnoreNearExpected() {}
+func (v *IgnoreNearExpectedMemberAmount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteFloat64(schemas.IgnoreNearExpected_amount, v.Value)
+}
+func (v *IgnoreNearExpectedMemberAmount) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadFloat64(schemas.IgnoreNearExpected_amount, &v.Value)
+}
 
 // The ratio by which values can differ from expected values before being
 // considered anomalous.
@@ -347,6 +746,12 @@ type IgnoreNearExpectedMemberRatio struct {
 }
 
 func (*IgnoreNearExpectedMemberRatio) isIgnoreNearExpected() {}
+func (v *IgnoreNearExpectedMemberRatio) Serialize(s smithy.ShapeSerializer) {
+	s.WriteFloat64(schemas.IgnoreNearExpected_ratio, v.Value)
+}
+func (v *IgnoreNearExpectedMemberRatio) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadFloat64(schemas.IgnoreNearExpected_ratio, &v.Value)
+}
 
 // This structure defines one label set used to enforce active time series limits
 // for the workspace, and defines the limit for that label set.
@@ -375,6 +780,33 @@ type LimitsPerLabelSet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LimitsPerLabelSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitsPerLabelSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitsPerLabelSet) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLabelSet(s, schemas.LimitsPerLabelSet_labelSet, v.LabelSet)
+	if v.Limits != nil {
+		s.WriteStruct(schemas.LimitsPerLabelSet_limits)
+		v.Limits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LimitsPerLabelSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitsPerLabelSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitsPerLabelSet_labelSet:
+			return deserializeLabelSet(d, schemas.LimitsPerLabelSet_labelSet, &v.LabelSet)
+		case schemas.LimitsPerLabelSet_limits:
+			v.Limits = &LimitsPerLabelSetEntry{}
+			return v.Limits.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // This structure contains the information about the limits that apply to time
 // series that match one label set.
 type LimitsPerLabelSetEntry struct {
@@ -387,6 +819,28 @@ type LimitsPerLabelSetEntry struct {
 	MaxSeries *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *LimitsPerLabelSetEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitsPerLabelSetEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitsPerLabelSetEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxSeries != nil {
+		s.WriteInt64(schemas.LimitsPerLabelSetEntry_maxSeries, *v.MaxSeries)
+	}
+}
+func (v *LimitsPerLabelSetEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitsPerLabelSetEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitsPerLabelSetEntry_maxSeries:
+			v.MaxSeries = new(int64)
+			return d.ReadInt64(schemas.LimitsPerLabelSetEntry_maxSeries, v.MaxSeries)
+		}
+		return nil
+	})
 }
 
 // Contains information about the current rules and alerting logging configuration
@@ -424,6 +878,54 @@ type LoggingConfigurationMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LoggingConfigurationMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoggingConfigurationMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoggingConfigurationMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.LoggingConfigurationMetadata_createdAt, *v.CreatedAt)
+	}
+	if v.LogGroupArn != nil {
+		s.WriteString(schemas.LoggingConfigurationMetadata_logGroupArn, *v.LogGroupArn)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.LoggingConfigurationMetadata_modifiedAt, *v.ModifiedAt)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.LoggingConfigurationMetadata_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Workspace != nil {
+		s.WriteString(schemas.LoggingConfigurationMetadata_workspace, *v.Workspace)
+	}
+}
+func (v *LoggingConfigurationMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoggingConfigurationMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoggingConfigurationMetadata_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.LoggingConfigurationMetadata_createdAt, v.CreatedAt)
+		case schemas.LoggingConfigurationMetadata_logGroupArn:
+			v.LogGroupArn = new(string)
+			return d.ReadString(schemas.LoggingConfigurationMetadata_logGroupArn, v.LogGroupArn)
+		case schemas.LoggingConfigurationMetadata_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.LoggingConfigurationMetadata_modifiedAt, v.ModifiedAt)
+		case schemas.LoggingConfigurationMetadata_status:
+			v.Status = &LoggingConfigurationStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.LoggingConfigurationMetadata_workspace:
+			v.Workspace = new(string)
+			return d.ReadString(schemas.LoggingConfigurationMetadata_workspace, v.Workspace)
+		}
+		return nil
+	})
+}
+
 // The status of the logging configuration.
 type LoggingConfigurationStatus struct {
 
@@ -438,6 +940,38 @@ type LoggingConfigurationStatus struct {
 	StatusReason *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LoggingConfigurationStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoggingConfigurationStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoggingConfigurationStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StatusCode != "" {
+		s.WriteString(schemas.LoggingConfigurationStatus_statusCode, string(v.StatusCode))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.LoggingConfigurationStatus_statusReason, *v.StatusReason)
+	}
+}
+func (v *LoggingConfigurationStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoggingConfigurationStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoggingConfigurationStatus_statusCode:
+			var ev string
+			if err := d.ReadString(schemas.LoggingConfigurationStatus_statusCode, &ev); err != nil {
+				return err
+			}
+			v.StatusCode = LoggingConfigurationStatusCode(ev)
+			return nil
+		case schemas.LoggingConfigurationStatus_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.LoggingConfigurationStatus_statusReason, v.StatusReason)
+		}
+		return nil
+	})
 }
 
 // Defines a destination and its associated filtering criteria for query logging.
@@ -456,6 +990,38 @@ type LoggingDestination struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LoggingDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoggingDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoggingDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogs != nil {
+		s.WriteStruct(schemas.LoggingDestination_cloudWatchLogs)
+		v.CloudWatchLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.LoggingDestination_filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LoggingDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoggingDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoggingDestination_cloudWatchLogs:
+			v.CloudWatchLogs = &CloudWatchLogDestination{}
+			return v.CloudWatchLogs.Deserialize(d)
+		case schemas.LoggingDestination_filters:
+			v.Filters = &LoggingFilter{}
+			return v.Filters.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Filtering criteria that determine which queries are logged.
 type LoggingFilter struct {
 
@@ -468,6 +1034,28 @@ type LoggingFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LoggingFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoggingFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoggingFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QspThreshold != nil {
+		s.WriteInt64(schemas.LoggingFilter_qspThreshold, *v.QspThreshold)
+	}
+}
+func (v *LoggingFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoggingFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoggingFilter_qspThreshold:
+			v.QspThreshold = new(int64)
+			return d.ReadInt64(schemas.LoggingFilter_qspThreshold, v.QspThreshold)
+		}
+		return nil
+	})
+}
+
 // The configuration for exporting metrics to an Amazon OpenSearch Service domain.
 type OpenSearchExporterConfiguration struct {
 
@@ -477,6 +1065,28 @@ type OpenSearchExporterConfiguration struct {
 	DomainArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OpenSearchExporterConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenSearchExporterConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenSearchExporterConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainArn != nil {
+		s.WriteString(schemas.OpenSearchExporterConfiguration_domainArn, *v.DomainArn)
+	}
+}
+func (v *OpenSearchExporterConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenSearchExporterConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenSearchExporterConfiguration_domainArn:
+			v.DomainArn = new(string)
+			return d.ReadString(schemas.OpenSearchExporterConfiguration_domainArn, v.DomainArn)
+		}
+		return nil
+	})
 }
 
 // The metadata for a query logging configuration.
@@ -510,6 +1120,51 @@ type QueryLoggingConfigurationMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryLoggingConfigurationMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryLoggingConfigurationMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryLoggingConfigurationMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.QueryLoggingConfigurationMetadata_createdAt, *v.CreatedAt)
+	}
+	serializeLoggingDestinations(s, schemas.QueryLoggingConfigurationMetadata_destinations, v.Destinations)
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.QueryLoggingConfigurationMetadata_modifiedAt, *v.ModifiedAt)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.QueryLoggingConfigurationMetadata_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Workspace != nil {
+		s.WriteString(schemas.QueryLoggingConfigurationMetadata_workspace, *v.Workspace)
+	}
+}
+func (v *QueryLoggingConfigurationMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryLoggingConfigurationMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryLoggingConfigurationMetadata_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.QueryLoggingConfigurationMetadata_createdAt, v.CreatedAt)
+		case schemas.QueryLoggingConfigurationMetadata_destinations:
+			return deserializeLoggingDestinations(d, schemas.QueryLoggingConfigurationMetadata_destinations, &v.Destinations)
+		case schemas.QueryLoggingConfigurationMetadata_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.QueryLoggingConfigurationMetadata_modifiedAt, v.ModifiedAt)
+		case schemas.QueryLoggingConfigurationMetadata_status:
+			v.Status = &QueryLoggingConfigurationStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.QueryLoggingConfigurationMetadata_workspace:
+			v.Workspace = new(string)
+			return d.ReadString(schemas.QueryLoggingConfigurationMetadata_workspace, v.Workspace)
+		}
+		return nil
+	})
+}
+
 // The status information for a query logging configuration.
 type QueryLoggingConfigurationStatus struct {
 
@@ -522,6 +1177,38 @@ type QueryLoggingConfigurationStatus struct {
 	StatusReason *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *QueryLoggingConfigurationStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryLoggingConfigurationStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryLoggingConfigurationStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StatusCode != "" {
+		s.WriteString(schemas.QueryLoggingConfigurationStatus_statusCode, string(v.StatusCode))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.QueryLoggingConfigurationStatus_statusReason, *v.StatusReason)
+	}
+}
+func (v *QueryLoggingConfigurationStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryLoggingConfigurationStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryLoggingConfigurationStatus_statusCode:
+			var ev string
+			if err := d.ReadString(schemas.QueryLoggingConfigurationStatus_statusCode, &ev); err != nil {
+				return err
+			}
+			v.StatusCode = QueryLoggingConfigurationStatusCode(ev)
+			return nil
+		case schemas.QueryLoggingConfigurationStatus_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.QueryLoggingConfigurationStatus_statusReason, v.StatusReason)
+		}
+		return nil
+	})
 }
 
 // Configuration for the Random Cut Forest algorithm used for anomaly detection in
@@ -561,6 +1248,46 @@ type RandomCutForestConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RandomCutForestConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RandomCutForestConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RandomCutForestConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIgnoreNearExpected(s, schemas.RandomCutForestConfiguration_ignoreNearExpectedFromAbove, v.IgnoreNearExpectedFromAbove)
+	serializeIgnoreNearExpected(s, schemas.RandomCutForestConfiguration_ignoreNearExpectedFromBelow, v.IgnoreNearExpectedFromBelow)
+	if v.Query != nil {
+		s.WriteString(schemas.RandomCutForestConfiguration_query, *v.Query)
+	}
+	if v.SampleSize != nil {
+		s.WriteInt32(schemas.RandomCutForestConfiguration_sampleSize, *v.SampleSize)
+	}
+	if v.ShingleSize != nil {
+		s.WriteInt32(schemas.RandomCutForestConfiguration_shingleSize, *v.ShingleSize)
+	}
+}
+func (v *RandomCutForestConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RandomCutForestConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RandomCutForestConfiguration_ignoreNearExpectedFromAbove:
+			return deserializeIgnoreNearExpected(d, schemas.RandomCutForestConfiguration_ignoreNearExpectedFromAbove, &v.IgnoreNearExpectedFromAbove)
+		case schemas.RandomCutForestConfiguration_ignoreNearExpectedFromBelow:
+			return deserializeIgnoreNearExpected(d, schemas.RandomCutForestConfiguration_ignoreNearExpectedFromBelow, &v.IgnoreNearExpectedFromBelow)
+		case schemas.RandomCutForestConfiguration_query:
+			v.Query = new(string)
+			return d.ReadString(schemas.RandomCutForestConfiguration_query, v.Query)
+		case schemas.RandomCutForestConfiguration_sampleSize:
+			v.SampleSize = new(int32)
+			return d.ReadInt32(schemas.RandomCutForestConfiguration_sampleSize, v.SampleSize)
+		case schemas.RandomCutForestConfiguration_shingleSize:
+			v.ShingleSize = new(int32)
+			return d.ReadInt32(schemas.RandomCutForestConfiguration_shingleSize, v.ShingleSize)
+		}
+		return nil
+	})
+}
+
 // Use this structure to enable cross-account access, so that you can use a target
 // account to access Prometheus metrics from source accounts.
 type RoleConfiguration struct {
@@ -578,6 +1305,34 @@ type RoleConfiguration struct {
 	TargetRoleArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RoleConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RoleConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RoleConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceRoleArn != nil {
+		s.WriteString(schemas.RoleConfiguration_sourceRoleArn, *v.SourceRoleArn)
+	}
+	if v.TargetRoleArn != nil {
+		s.WriteString(schemas.RoleConfiguration_targetRoleArn, *v.TargetRoleArn)
+	}
+}
+func (v *RoleConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RoleConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RoleConfiguration_sourceRoleArn:
+			v.SourceRoleArn = new(string)
+			return d.ReadString(schemas.RoleConfiguration_sourceRoleArn, v.SourceRoleArn)
+		case schemas.RoleConfiguration_targetRoleArn:
+			v.TargetRoleArn = new(string)
+			return d.ReadString(schemas.RoleConfiguration_targetRoleArn, v.TargetRoleArn)
+		}
+		return nil
+	})
 }
 
 // The details about one rule groups namespace.
@@ -626,6 +1381,62 @@ type RuleGroupsNamespaceDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RuleGroupsNamespaceDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuleGroupsNamespaceDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuleGroupsNamespaceDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.RuleGroupsNamespaceDescription_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.RuleGroupsNamespaceDescription_createdAt, *v.CreatedAt)
+	}
+	if v.Data != nil {
+		s.WriteBlob(schemas.RuleGroupsNamespaceDescription_data, v.Data)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.RuleGroupsNamespaceDescription_modifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RuleGroupsNamespaceDescription_name, *v.Name)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.RuleGroupsNamespaceDescription_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.RuleGroupsNamespaceDescription_tags, v.Tags)
+}
+func (v *RuleGroupsNamespaceDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuleGroupsNamespaceDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuleGroupsNamespaceDescription_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RuleGroupsNamespaceDescription_arn, v.Arn)
+		case schemas.RuleGroupsNamespaceDescription_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.RuleGroupsNamespaceDescription_createdAt, v.CreatedAt)
+		case schemas.RuleGroupsNamespaceDescription_data:
+			return d.ReadBlob(schemas.RuleGroupsNamespaceDescription_data, &v.Data)
+		case schemas.RuleGroupsNamespaceDescription_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.RuleGroupsNamespaceDescription_modifiedAt, v.ModifiedAt)
+		case schemas.RuleGroupsNamespaceDescription_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RuleGroupsNamespaceDescription_name, v.Name)
+		case schemas.RuleGroupsNamespaceDescription_status:
+			v.Status = &RuleGroupsNamespaceStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.RuleGroupsNamespaceDescription_tags:
+			return deserializeTagMap(d, schemas.RuleGroupsNamespaceDescription_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // The status information about a rule groups namespace.
 type RuleGroupsNamespaceStatus struct {
 
@@ -638,6 +1449,38 @@ type RuleGroupsNamespaceStatus struct {
 	StatusReason *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RuleGroupsNamespaceStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuleGroupsNamespaceStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuleGroupsNamespaceStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StatusCode != "" {
+		s.WriteString(schemas.RuleGroupsNamespaceStatus_statusCode, string(v.StatusCode))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.RuleGroupsNamespaceStatus_statusReason, *v.StatusReason)
+	}
+}
+func (v *RuleGroupsNamespaceStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuleGroupsNamespaceStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuleGroupsNamespaceStatus_statusCode:
+			var ev string
+			if err := d.ReadString(schemas.RuleGroupsNamespaceStatus_statusCode, &ev); err != nil {
+				return err
+			}
+			v.StatusCode = RuleGroupsNamespaceStatusCode(ev)
+			return nil
+		case schemas.RuleGroupsNamespaceStatus_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.RuleGroupsNamespaceStatus_statusReason, v.StatusReason)
+		}
+		return nil
+	})
 }
 
 // The high-level information about a rule groups namespace. To retrieve more
@@ -676,6 +1519,57 @@ type RuleGroupsNamespaceSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RuleGroupsNamespaceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuleGroupsNamespaceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuleGroupsNamespaceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.RuleGroupsNamespaceSummary_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.RuleGroupsNamespaceSummary_createdAt, *v.CreatedAt)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.RuleGroupsNamespaceSummary_modifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RuleGroupsNamespaceSummary_name, *v.Name)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.RuleGroupsNamespaceSummary_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.RuleGroupsNamespaceSummary_tags, v.Tags)
+}
+func (v *RuleGroupsNamespaceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuleGroupsNamespaceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuleGroupsNamespaceSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RuleGroupsNamespaceSummary_arn, v.Arn)
+		case schemas.RuleGroupsNamespaceSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.RuleGroupsNamespaceSummary_createdAt, v.CreatedAt)
+		case schemas.RuleGroupsNamespaceSummary_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.RuleGroupsNamespaceSummary_modifiedAt, v.ModifiedAt)
+		case schemas.RuleGroupsNamespaceSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RuleGroupsNamespaceSummary_name, v.Name)
+		case schemas.RuleGroupsNamespaceSummary_status:
+			v.Status = &RuleGroupsNamespaceStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.RuleGroupsNamespaceSummary_tags:
+			return deserializeTagMap(d, schemas.RuleGroupsNamespaceSummary_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // A scrape configuration for a scraper, base 64 encoded. For more information,
 // see [Scraper configuration]in the Amazon Managed Service for Prometheus User Guide.
 //
@@ -696,6 +1590,12 @@ type ScrapeConfigurationMemberConfigurationBlob struct {
 }
 
 func (*ScrapeConfigurationMemberConfigurationBlob) isScrapeConfiguration() {}
+func (v *ScrapeConfigurationMemberConfigurationBlob) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBlob(schemas.ScrapeConfiguration_configurationBlob, v.Value)
+}
+func (v *ScrapeConfigurationMemberConfigurationBlob) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBlob(schemas.ScrapeConfiguration_configurationBlob, &v.Value)
+}
 
 // A component of a Amazon Managed Service for Prometheus scraper that can be
 // configured for logging.
@@ -710,6 +1610,40 @@ type ScraperComponent struct {
 	Config *ComponentConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScraperComponent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScraperComponent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScraperComponent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Config != nil {
+		s.WriteStruct(schemas.ScraperComponent_config)
+		v.Config.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ScraperComponent_type, string(v.Type))
+	}
+}
+func (v *ScraperComponent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScraperComponent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScraperComponent_config:
+			v.Config = &ComponentConfig{}
+			return v.Config.Deserialize(d)
+		case schemas.ScraperComponent_type:
+			var ev string
+			if err := d.ReadString(schemas.ScraperComponent_type, &ev); err != nil {
+				return err
+			}
+			v.Type = ScraperComponentType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The ScraperDescription structure contains the full details about one scraper in
@@ -788,6 +1722,95 @@ type ScraperDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScraperDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScraperDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScraperDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.ScraperDescription_alias, *v.Alias)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.ScraperDescription_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ScraperDescription_createdAt, *v.CreatedAt)
+	}
+	serializeDestination(s, schemas.ScraperDescription_destination, v.Destination)
+	serializeExporterList(s, schemas.ScraperDescription_exporters, v.Exporters)
+	if v.LastModifiedAt != nil {
+		s.WriteTime(schemas.ScraperDescription_lastModifiedAt, *v.LastModifiedAt)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.ScraperDescription_roleArn, *v.RoleArn)
+	}
+	if v.RoleConfiguration != nil {
+		s.WriteStruct(schemas.ScraperDescription_roleConfiguration)
+		v.RoleConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeScrapeConfiguration(s, schemas.ScraperDescription_scrapeConfiguration, v.ScrapeConfiguration)
+	if v.ScraperId != nil {
+		s.WriteString(schemas.ScraperDescription_scraperId, *v.ScraperId)
+	}
+	serializeSource(s, schemas.ScraperDescription_source, v.Source)
+	if v.Status != nil {
+		s.WriteStruct(schemas.ScraperDescription_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.ScraperDescription_statusReason, *v.StatusReason)
+	}
+	serializeTagMap(s, schemas.ScraperDescription_tags, v.Tags)
+}
+func (v *ScraperDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScraperDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScraperDescription_alias:
+			v.Alias = new(string)
+			return d.ReadString(schemas.ScraperDescription_alias, v.Alias)
+		case schemas.ScraperDescription_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ScraperDescription_arn, v.Arn)
+		case schemas.ScraperDescription_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ScraperDescription_createdAt, v.CreatedAt)
+		case schemas.ScraperDescription_destination:
+			return deserializeDestination(d, schemas.ScraperDescription_destination, &v.Destination)
+		case schemas.ScraperDescription_exporters:
+			return deserializeExporterList(d, schemas.ScraperDescription_exporters, &v.Exporters)
+		case schemas.ScraperDescription_lastModifiedAt:
+			v.LastModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.ScraperDescription_lastModifiedAt, v.LastModifiedAt)
+		case schemas.ScraperDescription_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.ScraperDescription_roleArn, v.RoleArn)
+		case schemas.ScraperDescription_roleConfiguration:
+			v.RoleConfiguration = &RoleConfiguration{}
+			return v.RoleConfiguration.Deserialize(d)
+		case schemas.ScraperDescription_scrapeConfiguration:
+			return deserializeScrapeConfiguration(d, schemas.ScraperDescription_scrapeConfiguration, &v.ScrapeConfiguration)
+		case schemas.ScraperDescription_scraperId:
+			v.ScraperId = new(string)
+			return d.ReadString(schemas.ScraperDescription_scraperId, v.ScraperId)
+		case schemas.ScraperDescription_source:
+			return deserializeSource(d, schemas.ScraperDescription_source, &v.Source)
+		case schemas.ScraperDescription_status:
+			v.Status = &ScraperStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.ScraperDescription_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.ScraperDescription_statusReason, v.StatusReason)
+		case schemas.ScraperDescription_tags:
+			return deserializeTagMap(d, schemas.ScraperDescription_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // The status of a scraper logging configuration.
 type ScraperLoggingConfigurationStatus struct {
 
@@ -800,6 +1823,38 @@ type ScraperLoggingConfigurationStatus struct {
 	StatusReason *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScraperLoggingConfigurationStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScraperLoggingConfigurationStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScraperLoggingConfigurationStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StatusCode != "" {
+		s.WriteString(schemas.ScraperLoggingConfigurationStatus_statusCode, string(v.StatusCode))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.ScraperLoggingConfigurationStatus_statusReason, *v.StatusReason)
+	}
+}
+func (v *ScraperLoggingConfigurationStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScraperLoggingConfigurationStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScraperLoggingConfigurationStatus_statusCode:
+			var ev string
+			if err := d.ReadString(schemas.ScraperLoggingConfigurationStatus_statusCode, &ev); err != nil {
+				return err
+			}
+			v.StatusCode = ScraperLoggingConfigurationStatusCode(ev)
+			return nil
+		case schemas.ScraperLoggingConfigurationStatus_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.ScraperLoggingConfigurationStatus_statusReason, v.StatusReason)
+		}
+		return nil
+	})
 }
 
 // The destination where scraper logs are sent.
@@ -819,6 +1874,14 @@ type ScraperLoggingDestinationMemberCloudWatchLogs struct {
 }
 
 func (*ScraperLoggingDestinationMemberCloudWatchLogs) isScraperLoggingDestination() {}
+func (v *ScraperLoggingDestinationMemberCloudWatchLogs) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScraperLoggingDestination_cloudWatchLogs)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ScraperLoggingDestinationMemberCloudWatchLogs) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The ScraperStatus structure contains status information about the scraper.
 type ScraperStatus struct {
@@ -829,6 +1892,32 @@ type ScraperStatus struct {
 	StatusCode ScraperStatusCode
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScraperStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScraperStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScraperStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StatusCode != "" {
+		s.WriteString(schemas.ScraperStatus_statusCode, string(v.StatusCode))
+	}
+}
+func (v *ScraperStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScraperStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScraperStatus_statusCode:
+			var ev string
+			if err := d.ReadString(schemas.ScraperStatus_statusCode, &ev); err != nil {
+				return err
+			}
+			v.StatusCode = ScraperStatusCode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The ScraperSummary structure contains a summary of the details about one
@@ -897,6 +1986,92 @@ type ScraperSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScraperSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScraperSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScraperSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.ScraperSummary_alias, *v.Alias)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.ScraperSummary_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ScraperSummary_createdAt, *v.CreatedAt)
+	}
+	serializeDestination(s, schemas.ScraperSummary_destination, v.Destination)
+	serializeExporterList(s, schemas.ScraperSummary_exporters, v.Exporters)
+	if v.LastModifiedAt != nil {
+		s.WriteTime(schemas.ScraperSummary_lastModifiedAt, *v.LastModifiedAt)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.ScraperSummary_roleArn, *v.RoleArn)
+	}
+	if v.RoleConfiguration != nil {
+		s.WriteStruct(schemas.ScraperSummary_roleConfiguration)
+		v.RoleConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScraperId != nil {
+		s.WriteString(schemas.ScraperSummary_scraperId, *v.ScraperId)
+	}
+	serializeSource(s, schemas.ScraperSummary_source, v.Source)
+	if v.Status != nil {
+		s.WriteStruct(schemas.ScraperSummary_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.ScraperSummary_statusReason, *v.StatusReason)
+	}
+	serializeTagMap(s, schemas.ScraperSummary_tags, v.Tags)
+}
+func (v *ScraperSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScraperSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScraperSummary_alias:
+			v.Alias = new(string)
+			return d.ReadString(schemas.ScraperSummary_alias, v.Alias)
+		case schemas.ScraperSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ScraperSummary_arn, v.Arn)
+		case schemas.ScraperSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ScraperSummary_createdAt, v.CreatedAt)
+		case schemas.ScraperSummary_destination:
+			return deserializeDestination(d, schemas.ScraperSummary_destination, &v.Destination)
+		case schemas.ScraperSummary_exporters:
+			return deserializeExporterList(d, schemas.ScraperSummary_exporters, &v.Exporters)
+		case schemas.ScraperSummary_lastModifiedAt:
+			v.LastModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.ScraperSummary_lastModifiedAt, v.LastModifiedAt)
+		case schemas.ScraperSummary_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.ScraperSummary_roleArn, v.RoleArn)
+		case schemas.ScraperSummary_roleConfiguration:
+			v.RoleConfiguration = &RoleConfiguration{}
+			return v.RoleConfiguration.Deserialize(d)
+		case schemas.ScraperSummary_scraperId:
+			v.ScraperId = new(string)
+			return d.ReadString(schemas.ScraperSummary_scraperId, v.ScraperId)
+		case schemas.ScraperSummary_source:
+			return deserializeSource(d, schemas.ScraperSummary_source, &v.Source)
+		case schemas.ScraperSummary_status:
+			v.Status = &ScraperStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.ScraperSummary_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.ScraperSummary_statusReason, v.StatusReason)
+		case schemas.ScraperSummary_tags:
+			return deserializeTagMap(d, schemas.ScraperSummary_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // The source of collected metrics for a scraper.
 //
 // The following types satisfy this interface:
@@ -915,6 +2090,14 @@ type SourceMemberEksConfiguration struct {
 }
 
 func (*SourceMemberEksConfiguration) isSource() {}
+func (v *SourceMemberEksConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Source_eksConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SourceMemberEksConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The Amazon VPC configuration for the Prometheus collector when connecting to
 // Amazon MSK clusters. This configuration enables secure, private network
@@ -927,6 +2110,14 @@ type SourceMemberVpcConfiguration struct {
 }
 
 func (*SourceMemberVpcConfiguration) isSource() {}
+func (v *SourceMemberVpcConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Source_vpcConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SourceMemberVpcConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Information about a field passed into a request that resulted in an exception.
 type ValidationExceptionField struct {
@@ -942,6 +2133,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
+		case schemas.ValidationExceptionField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // The Amazon VPC configuration that specifies the network settings for a
@@ -965,6 +2184,28 @@ type VpcConfiguration struct {
 	SubnetIds []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VpcConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSecurityGroupIds(s, schemas.VpcConfiguration_securityGroupIds, v.SecurityGroupIds)
+	serializeSubnetIds(s, schemas.VpcConfiguration_subnetIds, v.SubnetIds)
+}
+func (v *VpcConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcConfiguration_securityGroupIds:
+			return deserializeSecurityGroupIds(d, schemas.VpcConfiguration_securityGroupIds, &v.SecurityGroupIds)
+		case schemas.VpcConfiguration_subnetIds:
+			return deserializeSubnetIds(d, schemas.VpcConfiguration_subnetIds, &v.SubnetIds)
+		}
+		return nil
+	})
 }
 
 // This structure contains the description of the workspace configuration.
@@ -994,6 +2235,51 @@ type WorkspaceConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkspaceConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkspaceConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkspaceConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLimitsPerLabelSetList(s, schemas.WorkspaceConfigurationDescription_limitsPerLabelSet, v.LimitsPerLabelSet)
+	if v.OutOfOrderTimeWindowInSeconds != nil {
+		s.WriteInt32(schemas.WorkspaceConfigurationDescription_outOfOrderTimeWindowInSeconds, *v.OutOfOrderTimeWindowInSeconds)
+	}
+	if v.RetentionPeriodInDays != nil {
+		s.WriteInt32(schemas.WorkspaceConfigurationDescription_retentionPeriodInDays, *v.RetentionPeriodInDays)
+	}
+	if v.RuleQueryOffsetInSeconds != nil {
+		s.WriteInt32(schemas.WorkspaceConfigurationDescription_ruleQueryOffsetInSeconds, *v.RuleQueryOffsetInSeconds)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.WorkspaceConfigurationDescription_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *WorkspaceConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkspaceConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkspaceConfigurationDescription_limitsPerLabelSet:
+			return deserializeLimitsPerLabelSetList(d, schemas.WorkspaceConfigurationDescription_limitsPerLabelSet, &v.LimitsPerLabelSet)
+		case schemas.WorkspaceConfigurationDescription_outOfOrderTimeWindowInSeconds:
+			v.OutOfOrderTimeWindowInSeconds = new(int32)
+			return d.ReadInt32(schemas.WorkspaceConfigurationDescription_outOfOrderTimeWindowInSeconds, v.OutOfOrderTimeWindowInSeconds)
+		case schemas.WorkspaceConfigurationDescription_retentionPeriodInDays:
+			v.RetentionPeriodInDays = new(int32)
+			return d.ReadInt32(schemas.WorkspaceConfigurationDescription_retentionPeriodInDays, v.RetentionPeriodInDays)
+		case schemas.WorkspaceConfigurationDescription_ruleQueryOffsetInSeconds:
+			v.RuleQueryOffsetInSeconds = new(int32)
+			return d.ReadInt32(schemas.WorkspaceConfigurationDescription_ruleQueryOffsetInSeconds, v.RuleQueryOffsetInSeconds)
+		case schemas.WorkspaceConfigurationDescription_status:
+			v.Status = &WorkspaceConfigurationStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // This structure displays the current status of the workspace configuration, and
 // might also contain a reason for that status.
 type WorkspaceConfigurationStatus struct {
@@ -1007,6 +2293,38 @@ type WorkspaceConfigurationStatus struct {
 	StatusReason *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkspaceConfigurationStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkspaceConfigurationStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkspaceConfigurationStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StatusCode != "" {
+		s.WriteString(schemas.WorkspaceConfigurationStatus_statusCode, string(v.StatusCode))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.WorkspaceConfigurationStatus_statusReason, *v.StatusReason)
+	}
+}
+func (v *WorkspaceConfigurationStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkspaceConfigurationStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkspaceConfigurationStatus_statusCode:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceConfigurationStatus_statusCode, &ev); err != nil {
+				return err
+			}
+			v.StatusCode = WorkspaceConfigurationStatusCode(ev)
+			return nil
+		case schemas.WorkspaceConfigurationStatus_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.WorkspaceConfigurationStatus_statusReason, v.StatusReason)
+		}
+		return nil
+	})
 }
 
 // The full details about one Amazon Managed Service for Prometheus workspace in
@@ -1055,6 +2373,69 @@ type WorkspaceDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkspaceDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkspaceDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkspaceDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.WorkspaceDescription_alias, *v.Alias)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.WorkspaceDescription_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.WorkspaceDescription_createdAt, *v.CreatedAt)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.WorkspaceDescription_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.PrometheusEndpoint != nil {
+		s.WriteString(schemas.WorkspaceDescription_prometheusEndpoint, *v.PrometheusEndpoint)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.WorkspaceDescription_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.WorkspaceDescription_tags, v.Tags)
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.WorkspaceDescription_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *WorkspaceDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkspaceDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkspaceDescription_alias:
+			v.Alias = new(string)
+			return d.ReadString(schemas.WorkspaceDescription_alias, v.Alias)
+		case schemas.WorkspaceDescription_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.WorkspaceDescription_arn, v.Arn)
+		case schemas.WorkspaceDescription_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.WorkspaceDescription_createdAt, v.CreatedAt)
+		case schemas.WorkspaceDescription_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.WorkspaceDescription_kmsKeyArn, v.KmsKeyArn)
+		case schemas.WorkspaceDescription_prometheusEndpoint:
+			v.PrometheusEndpoint = new(string)
+			return d.ReadString(schemas.WorkspaceDescription_prometheusEndpoint, v.PrometheusEndpoint)
+		case schemas.WorkspaceDescription_status:
+			v.Status = &WorkspaceStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.WorkspaceDescription_tags:
+			return deserializeTagMap(d, schemas.WorkspaceDescription_tags, &v.Tags)
+		case schemas.WorkspaceDescription_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.WorkspaceDescription_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 // The status of the workspace.
 type WorkspaceStatus struct {
 
@@ -1064,6 +2445,32 @@ type WorkspaceStatus struct {
 	StatusCode WorkspaceStatusCode
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkspaceStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkspaceStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkspaceStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StatusCode != "" {
+		s.WriteString(schemas.WorkspaceStatus_statusCode, string(v.StatusCode))
+	}
+}
+func (v *WorkspaceStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkspaceStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkspaceStatus_statusCode:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceStatus_statusCode, &ev); err != nil {
+				return err
+			}
+			v.StatusCode = WorkspaceStatusCode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The information about one Amazon Managed Service for Prometheus workspace in
@@ -1102,6 +2509,63 @@ type WorkspaceSummary struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkspaceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkspaceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkspaceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.WorkspaceSummary_alias, *v.Alias)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.WorkspaceSummary_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.WorkspaceSummary_createdAt, *v.CreatedAt)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.WorkspaceSummary_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.WorkspaceSummary_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.WorkspaceSummary_tags, v.Tags)
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.WorkspaceSummary_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *WorkspaceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkspaceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkspaceSummary_alias:
+			v.Alias = new(string)
+			return d.ReadString(schemas.WorkspaceSummary_alias, v.Alias)
+		case schemas.WorkspaceSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.WorkspaceSummary_arn, v.Arn)
+		case schemas.WorkspaceSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.WorkspaceSummary_createdAt, v.CreatedAt)
+		case schemas.WorkspaceSummary_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.WorkspaceSummary_kmsKeyArn, v.KmsKeyArn)
+		case schemas.WorkspaceSummary_status:
+			v.Status = &WorkspaceStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.WorkspaceSummary_tags:
+			return deserializeTagMap(d, schemas.WorkspaceSummary_tags, &v.Tags)
+		case schemas.WorkspaceSummary_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.WorkspaceSummary_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

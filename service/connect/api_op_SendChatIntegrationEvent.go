@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,34 @@ type SendChatIntegrationEventInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendChatIntegrationEventInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendChatIntegrationEventRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendChatIntegrationEventInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationId != nil {
+		s.WriteString(schemas.SendChatIntegrationEventRequest_DestinationId, *v.DestinationId)
+	}
+	if v.Event != nil {
+		s.WriteStruct(schemas.SendChatIntegrationEventRequest_Event)
+		v.Event.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NewSessionDetails != nil {
+		s.WriteStruct(schemas.SendChatIntegrationEventRequest_NewSessionDetails)
+		v.NewSessionDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceId != nil {
+		s.WriteString(schemas.SendChatIntegrationEventRequest_SourceId, *v.SourceId)
+	}
+	if v.Subtype != nil {
+		s.WriteString(schemas.SendChatIntegrationEventRequest_Subtype, *v.Subtype)
+	}
+}
+
 type SendChatIntegrationEventOutput struct {
 
 	// Identifier of chat contact used to handle integration event. This may be null
@@ -89,13 +119,38 @@ type SendChatIntegrationEventOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendChatIntegrationEventOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendChatIntegrationEventResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendChatIntegrationEventOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InitialContactId != nil {
+		s.WriteString(schemas.SendChatIntegrationEventResponse_InitialContactId, *v.InitialContactId)
+	}
+	if v.NewChatCreated != nil {
+		s.WriteBool(schemas.SendChatIntegrationEventResponse_NewChatCreated, *v.NewChatCreated)
+	}
+}
+func (v *SendChatIntegrationEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendChatIntegrationEventResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendChatIntegrationEventResponse_InitialContactId:
+			v.InitialContactId = new(string)
+			return d.ReadString(schemas.SendChatIntegrationEventResponse_InitialContactId, v.InitialContactId)
+		case schemas.SendChatIntegrationEventResponse_NewChatCreated:
+			v.NewChatCreated = new(bool)
+			return d.ReadBool(schemas.SendChatIntegrationEventResponse_NewChatCreated, v.NewChatCreated)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendChatIntegrationEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendChatIntegrationEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendChatIntegrationEvent, schemas.SendChatIntegrationEventRequest, schemas.SendChatIntegrationEventResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendChatIntegrationEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendChatIntegrationEvent, schemas.SendChatIntegrationEventRequest, schemas.SendChatIntegrationEventResponse), output: &SendChatIntegrationEventOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

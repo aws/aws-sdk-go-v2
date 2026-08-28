@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,20 @@ type UpdateAccountAuditConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccountAuditConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccountAuditConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccountAuditConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuditCheckConfigurations(s, schemas.UpdateAccountAuditConfigurationRequest_auditCheckConfigurations, v.AuditCheckConfigurations)
+	serializeAuditNotificationTargetConfigurations(s, schemas.UpdateAccountAuditConfigurationRequest_auditNotificationTargetConfigurations, v.AuditNotificationTargetConfigurations)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateAccountAuditConfigurationRequest_roleArn, *v.RoleArn)
+	}
+}
+
 type UpdateAccountAuditConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -65,13 +81,26 @@ type UpdateAccountAuditConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccountAuditConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccountAuditConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccountAuditConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateAccountAuditConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAccountAuditConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAccountAuditConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAccountAuditConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountAuditConfiguration, schemas.UpdateAccountAuditConfigurationRequest, schemas.UpdateAccountAuditConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAccountAuditConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountAuditConfiguration, schemas.UpdateAccountAuditConfigurationRequest, schemas.UpdateAccountAuditConfigurationResponse), output: &UpdateAccountAuditConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

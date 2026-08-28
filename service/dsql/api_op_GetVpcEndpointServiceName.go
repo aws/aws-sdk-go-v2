@@ -4,6 +4,8 @@ package dsql
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/dsql/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type GetVpcEndpointServiceNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVpcEndpointServiceNameInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVpcEndpointServiceNameInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVpcEndpointServiceNameInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetVpcEndpointServiceNameInput_identifier, *v.Identifier)
+	}
+}
+
 type GetVpcEndpointServiceNameOutput struct {
 
 	// The VPC endpoint service name.
@@ -49,13 +63,38 @@ type GetVpcEndpointServiceNameOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVpcEndpointServiceNameOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVpcEndpointServiceNameOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVpcEndpointServiceNameOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterVpcEndpoint != nil {
+		s.WriteString(schemas.GetVpcEndpointServiceNameOutput_clusterVpcEndpoint, *v.ClusterVpcEndpoint)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.GetVpcEndpointServiceNameOutput_serviceName, *v.ServiceName)
+	}
+}
+func (v *GetVpcEndpointServiceNameOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetVpcEndpointServiceNameOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetVpcEndpointServiceNameOutput_clusterVpcEndpoint:
+			v.ClusterVpcEndpoint = new(string)
+			return d.ReadString(schemas.GetVpcEndpointServiceNameOutput_clusterVpcEndpoint, v.ClusterVpcEndpoint)
+		case schemas.GetVpcEndpointServiceNameOutput_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.GetVpcEndpointServiceNameOutput_serviceName, v.ServiceName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetVpcEndpointServiceNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetVpcEndpointServiceName{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVpcEndpointServiceName, schemas.GetVpcEndpointServiceNameInput, schemas.GetVpcEndpointServiceNameOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetVpcEndpointServiceName{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVpcEndpointServiceName, schemas.GetVpcEndpointServiceNameInput, schemas.GetVpcEndpointServiceNameOutput), output: &GetVpcEndpointServiceNameOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

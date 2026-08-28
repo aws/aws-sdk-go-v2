@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,19 @@ type AddTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddTagsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.AddTagsInput_ResourceArn, *v.ResourceArn)
+	}
+	serializeTagList(s, schemas.AddTagsInput_Tags, v.Tags)
+}
+
 type AddTagsOutput struct {
 
 	// A list of tags associated with the SageMaker resource.
@@ -81,13 +96,29 @@ type AddTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddTagsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTagList(s, schemas.AddTagsOutput_Tags, v.Tags)
+}
+func (v *AddTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddTagsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddTagsOutput_Tags:
+			return deserializeTagList(d, schemas.AddTagsOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddTags, schemas.AddTagsInput, schemas.AddTagsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddTags, schemas.AddTagsInput, schemas.AddTagsOutput), output: &AddTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

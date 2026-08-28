@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type CreateHumanTaskUiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHumanTaskUiInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHumanTaskUiRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHumanTaskUiInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HumanTaskUiName != nil {
+		s.WriteString(schemas.CreateHumanTaskUiRequest_HumanTaskUiName, *v.HumanTaskUiName)
+	}
+	serializeTagList(s, schemas.CreateHumanTaskUiRequest_Tags, v.Tags)
+	if v.UiTemplate != nil {
+		s.WriteStruct(schemas.CreateHumanTaskUiRequest_UiTemplate)
+		v.UiTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateHumanTaskUiOutput struct {
 
 	// The Amazon Resource Name (ARN) of the human review workflow user interface you
@@ -60,13 +80,32 @@ type CreateHumanTaskUiOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHumanTaskUiOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHumanTaskUiResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHumanTaskUiOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HumanTaskUiArn != nil {
+		s.WriteString(schemas.CreateHumanTaskUiResponse_HumanTaskUiArn, *v.HumanTaskUiArn)
+	}
+}
+func (v *CreateHumanTaskUiOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateHumanTaskUiResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateHumanTaskUiResponse_HumanTaskUiArn:
+			v.HumanTaskUiArn = new(string)
+			return d.ReadString(schemas.CreateHumanTaskUiResponse_HumanTaskUiArn, v.HumanTaskUiArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateHumanTaskUiMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateHumanTaskUi{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHumanTaskUi, schemas.CreateHumanTaskUiRequest, schemas.CreateHumanTaskUiResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateHumanTaskUi{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHumanTaskUi, schemas.CreateHumanTaskUiRequest, schemas.CreateHumanTaskUiResponse), output: &CreateHumanTaskUiOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

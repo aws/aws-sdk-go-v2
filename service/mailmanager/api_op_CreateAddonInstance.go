@@ -5,7 +5,9 @@ package mailmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,22 @@ type CreateAddonInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAddonInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAddonInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAddonInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddonSubscriptionId != nil {
+		s.WriteString(schemas.CreateAddonInstanceRequest_AddonSubscriptionId, *v.AddonSubscriptionId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAddonInstanceRequest_ClientToken, *v.ClientToken)
+	}
+	serializeTagList(s, schemas.CreateAddonInstanceRequest_Tags, v.Tags)
+}
+
 type CreateAddonInstanceOutput struct {
 
 	// The unique ID of the Add On instance created by this API.
@@ -59,13 +77,32 @@ type CreateAddonInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAddonInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAddonInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAddonInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddonInstanceId != nil {
+		s.WriteString(schemas.CreateAddonInstanceResponse_AddonInstanceId, *v.AddonInstanceId)
+	}
+}
+func (v *CreateAddonInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAddonInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAddonInstanceResponse_AddonInstanceId:
+			v.AddonInstanceId = new(string)
+			return d.ReadString(schemas.CreateAddonInstanceResponse_AddonInstanceId, v.AddonInstanceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAddonInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateAddonInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAddonInstance, schemas.CreateAddonInstanceRequest, schemas.CreateAddonInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateAddonInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAddonInstance, schemas.CreateAddonInstanceRequest, schemas.CreateAddonInstanceResponse), output: &CreateAddonInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

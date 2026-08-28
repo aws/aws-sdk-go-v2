@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,26 @@ type UpdateUserConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAfterContactWorkConfigs(s, schemas.UpdateUserConfigRequest_AfterContactWorkConfigs, v.AfterContactWorkConfigs)
+	serializeAutoAcceptConfigs(s, schemas.UpdateUserConfigRequest_AutoAcceptConfigs, v.AutoAcceptConfigs)
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateUserConfigRequest_InstanceId, *v.InstanceId)
+	}
+	serializePersistentConnectionConfigs(s, schemas.UpdateUserConfigRequest_PersistentConnectionConfigs, v.PersistentConnectionConfigs)
+	serializePhoneNumberConfigs(s, schemas.UpdateUserConfigRequest_PhoneNumberConfigs, v.PhoneNumberConfigs)
+	if v.UserId != nil {
+		s.WriteString(schemas.UpdateUserConfigRequest_UserId, *v.UserId)
+	}
+	serializeVoiceEnhancementConfigs(s, schemas.UpdateUserConfigRequest_VoiceEnhancementConfigs, v.VoiceEnhancementConfigs)
+}
+
 type UpdateUserConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -77,13 +99,26 @@ type UpdateUserConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateUserConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateUserConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateUserConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserConfig, schemas.UpdateUserConfigRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateUserConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserConfig, schemas.UpdateUserConfigRequest, nil), output: &UpdateUserConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

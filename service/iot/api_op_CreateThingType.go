@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type CreateThingTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateThingTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateThingTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateThingTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTagList(s, schemas.CreateThingTypeRequest_tags, v.Tags)
+	if v.ThingTypeName != nil {
+		s.WriteString(schemas.CreateThingTypeRequest_thingTypeName, *v.ThingTypeName)
+	}
+	if v.ThingTypeProperties != nil {
+		s.WriteStruct(schemas.CreateThingTypeRequest_thingTypeProperties)
+		v.ThingTypeProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The output of the CreateThingType operation.
 type CreateThingTypeOutput struct {
 
@@ -68,13 +88,44 @@ type CreateThingTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateThingTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateThingTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateThingTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ThingTypeArn != nil {
+		s.WriteString(schemas.CreateThingTypeResponse_thingTypeArn, *v.ThingTypeArn)
+	}
+	if v.ThingTypeId != nil {
+		s.WriteString(schemas.CreateThingTypeResponse_thingTypeId, *v.ThingTypeId)
+	}
+	if v.ThingTypeName != nil {
+		s.WriteString(schemas.CreateThingTypeResponse_thingTypeName, *v.ThingTypeName)
+	}
+}
+func (v *CreateThingTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateThingTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateThingTypeResponse_thingTypeArn:
+			v.ThingTypeArn = new(string)
+			return d.ReadString(schemas.CreateThingTypeResponse_thingTypeArn, v.ThingTypeArn)
+		case schemas.CreateThingTypeResponse_thingTypeId:
+			v.ThingTypeId = new(string)
+			return d.ReadString(schemas.CreateThingTypeResponse_thingTypeId, v.ThingTypeId)
+		case schemas.CreateThingTypeResponse_thingTypeName:
+			v.ThingTypeName = new(string)
+			return d.ReadString(schemas.CreateThingTypeResponse_thingTypeName, v.ThingTypeName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateThingTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateThingType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateThingType, schemas.CreateThingTypeRequest, schemas.CreateThingTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateThingType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateThingType, schemas.CreateThingTypeRequest, schemas.CreateThingTypeResponse), output: &CreateThingTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

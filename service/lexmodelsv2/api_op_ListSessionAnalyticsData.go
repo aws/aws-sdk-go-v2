@@ -5,7 +5,9 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -81,6 +83,36 @@ type ListSessionAnalyticsDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSessionAnalyticsDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSessionAnalyticsDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSessionAnalyticsDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListSessionAnalyticsDataRequest_botId, *v.BotId)
+	}
+	if v.EndDateTime != nil {
+		s.WriteTime(schemas.ListSessionAnalyticsDataRequest_endDateTime, *v.EndDateTime)
+	}
+	serializeAnalyticsSessionFilters(s, schemas.ListSessionAnalyticsDataRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSessionAnalyticsDataRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSessionAnalyticsDataRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != nil {
+		s.WriteStruct(schemas.ListSessionAnalyticsDataRequest_sortBy)
+		v.SortBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartDateTime != nil {
+		s.WriteTime(schemas.ListSessionAnalyticsDataRequest_startDateTime, *v.StartDateTime)
+	}
+}
+
 type ListSessionAnalyticsDataOutput struct {
 
 	// The unique identifier of the bot that the sessions belong to.
@@ -106,13 +138,41 @@ type ListSessionAnalyticsDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSessionAnalyticsDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSessionAnalyticsDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSessionAnalyticsDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListSessionAnalyticsDataResponse_botId, *v.BotId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSessionAnalyticsDataResponse_nextToken, *v.NextToken)
+	}
+	serializeSessionSpecifications(s, schemas.ListSessionAnalyticsDataResponse_sessions, v.Sessions)
+}
+func (v *ListSessionAnalyticsDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSessionAnalyticsDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSessionAnalyticsDataResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.ListSessionAnalyticsDataResponse_botId, v.BotId)
+		case schemas.ListSessionAnalyticsDataResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSessionAnalyticsDataResponse_nextToken, v.NextToken)
+		case schemas.ListSessionAnalyticsDataResponse_sessions:
+			return deserializeSessionSpecifications(d, schemas.ListSessionAnalyticsDataResponse_sessions, &v.Sessions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSessionAnalyticsDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSessionAnalyticsData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSessionAnalyticsData, schemas.ListSessionAnalyticsDataRequest, schemas.ListSessionAnalyticsDataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSessionAnalyticsData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSessionAnalyticsData, schemas.ListSessionAnalyticsDataRequest, schemas.ListSessionAnalyticsDataResponse), output: &ListSessionAnalyticsDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

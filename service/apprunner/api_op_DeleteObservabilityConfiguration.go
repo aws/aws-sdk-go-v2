@@ -4,7 +4,9 @@ package apprunner
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type DeleteObservabilityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteObservabilityConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteObservabilityConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteObservabilityConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObservabilityConfigurationArn != nil {
+		s.WriteString(schemas.DeleteObservabilityConfigurationRequest_ObservabilityConfigurationArn, *v.ObservabilityConfigurationArn)
+	}
+}
+
 type DeleteObservabilityConfigurationOutput struct {
 
 	// A description of the App Runner observability configuration that this request
@@ -55,13 +69,34 @@ type DeleteObservabilityConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteObservabilityConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteObservabilityConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteObservabilityConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObservabilityConfiguration != nil {
+		s.WriteStruct(schemas.DeleteObservabilityConfigurationResponse_ObservabilityConfiguration)
+		v.ObservabilityConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteObservabilityConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteObservabilityConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteObservabilityConfigurationResponse_ObservabilityConfiguration:
+			v.ObservabilityConfiguration = &types.ObservabilityConfiguration{}
+			return v.ObservabilityConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteObservabilityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteObservabilityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteObservabilityConfiguration, schemas.DeleteObservabilityConfigurationRequest, schemas.DeleteObservabilityConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteObservabilityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteObservabilityConfiguration, schemas.DeleteObservabilityConfigurationRequest, schemas.DeleteObservabilityConfigurationResponse), output: &DeleteObservabilityConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

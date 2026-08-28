@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type StopContactMediaProcessingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopContactMediaProcessingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopContactMediaProcessingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopContactMediaProcessingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.StopContactMediaProcessingRequest_ContactId, *v.ContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StopContactMediaProcessingRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type StopContactMediaProcessingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,13 +61,26 @@ type StopContactMediaProcessingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopContactMediaProcessingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopContactMediaProcessingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopContactMediaProcessingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopContactMediaProcessingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopContactMediaProcessingResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopContactMediaProcessingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopContactMediaProcessing{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopContactMediaProcessing, schemas.StopContactMediaProcessingRequest, schemas.StopContactMediaProcessingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopContactMediaProcessing{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopContactMediaProcessing, schemas.StopContactMediaProcessingRequest, schemas.StopContactMediaProcessingResponse), output: &StopContactMediaProcessingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

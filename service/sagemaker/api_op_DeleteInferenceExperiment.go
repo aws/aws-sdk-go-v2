@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteInferenceExperimentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInferenceExperimentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInferenceExperimentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInferenceExperimentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteInferenceExperimentRequest_Name, *v.Name)
+	}
+}
+
 type DeleteInferenceExperimentOutput struct {
 
 	// The ARN of the deleted inference experiment.
@@ -49,13 +63,32 @@ type DeleteInferenceExperimentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInferenceExperimentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInferenceExperimentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInferenceExperimentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InferenceExperimentArn != nil {
+		s.WriteString(schemas.DeleteInferenceExperimentResponse_InferenceExperimentArn, *v.InferenceExperimentArn)
+	}
+}
+func (v *DeleteInferenceExperimentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteInferenceExperimentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteInferenceExperimentResponse_InferenceExperimentArn:
+			v.InferenceExperimentArn = new(string)
+			return d.ReadString(schemas.DeleteInferenceExperimentResponse_InferenceExperimentArn, v.InferenceExperimentArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteInferenceExperimentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteInferenceExperiment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInferenceExperiment, schemas.DeleteInferenceExperimentRequest, schemas.DeleteInferenceExperimentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteInferenceExperiment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInferenceExperiment, schemas.DeleteInferenceExperimentRequest, schemas.DeleteInferenceExperimentResponse), output: &DeleteInferenceExperimentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

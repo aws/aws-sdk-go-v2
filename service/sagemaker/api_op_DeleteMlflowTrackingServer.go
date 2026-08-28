@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteMlflowTrackingServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMlflowTrackingServerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMlflowTrackingServerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMlflowTrackingServerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrackingServerName != nil {
+		s.WriteString(schemas.DeleteMlflowTrackingServerRequest_TrackingServerName, *v.TrackingServerName)
+	}
+}
+
 type DeleteMlflowTrackingServerOutput struct {
 
 	// A TrackingServerArn object, the ARN of the tracking server that is deleted if
@@ -47,13 +61,32 @@ type DeleteMlflowTrackingServerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMlflowTrackingServerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMlflowTrackingServerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMlflowTrackingServerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrackingServerArn != nil {
+		s.WriteString(schemas.DeleteMlflowTrackingServerResponse_TrackingServerArn, *v.TrackingServerArn)
+	}
+}
+func (v *DeleteMlflowTrackingServerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMlflowTrackingServerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteMlflowTrackingServerResponse_TrackingServerArn:
+			v.TrackingServerArn = new(string)
+			return d.ReadString(schemas.DeleteMlflowTrackingServerResponse_TrackingServerArn, v.TrackingServerArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMlflowTrackingServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteMlflowTrackingServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMlflowTrackingServer, schemas.DeleteMlflowTrackingServerRequest, schemas.DeleteMlflowTrackingServerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteMlflowTrackingServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMlflowTrackingServer, schemas.DeleteMlflowTrackingServerRequest, schemas.DeleteMlflowTrackingServerResponse), output: &DeleteMlflowTrackingServerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

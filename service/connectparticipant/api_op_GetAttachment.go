@@ -4,6 +4,8 @@ package connectparticipant
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connectparticipant/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,24 @@ type GetAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.GetAttachmentRequest_AttachmentId, *v.AttachmentId)
+	}
+	if v.ConnectionToken != nil {
+		s.WriteString(schemas.GetAttachmentRequest_ConnectionToken, *v.ConnectionToken)
+	}
+	if v.UrlExpiryInSeconds != nil {
+		s.WriteInt32(schemas.GetAttachmentRequest_UrlExpiryInSeconds, *v.UrlExpiryInSeconds)
+	}
+}
+
 type GetAttachmentOutput struct {
 
 	// The size of the attachment in bytes.
@@ -79,13 +99,44 @@ type GetAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAttachmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAttachmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentSizeInBytes != nil {
+		s.WriteInt64(schemas.GetAttachmentResponse_AttachmentSizeInBytes, *v.AttachmentSizeInBytes)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.GetAttachmentResponse_Url, *v.Url)
+	}
+	if v.UrlExpiry != nil {
+		s.WriteString(schemas.GetAttachmentResponse_UrlExpiry, *v.UrlExpiry)
+	}
+}
+func (v *GetAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAttachmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAttachmentResponse_AttachmentSizeInBytes:
+			v.AttachmentSizeInBytes = new(int64)
+			return d.ReadInt64(schemas.GetAttachmentResponse_AttachmentSizeInBytes, v.AttachmentSizeInBytes)
+		case schemas.GetAttachmentResponse_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.GetAttachmentResponse_Url, v.Url)
+		case schemas.GetAttachmentResponse_UrlExpiry:
+			v.UrlExpiry = new(string)
+			return d.ReadString(schemas.GetAttachmentResponse_UrlExpiry, v.UrlExpiry)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAttachment, schemas.GetAttachmentRequest, schemas.GetAttachmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAttachment, schemas.GetAttachmentRequest, schemas.GetAttachmentResponse), output: &GetAttachmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

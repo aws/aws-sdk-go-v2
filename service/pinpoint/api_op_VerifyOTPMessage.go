@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,23 @@ type VerifyOTPMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyOTPMessageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyOTPMessageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyOTPMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.VerifyOTPMessageRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.VerifyOTPMessageRequestParameters != nil {
+		s.WriteStruct(schemas.VerifyOTPMessageRequest_VerifyOTPMessageRequestParameters)
+		v.VerifyOTPMessageRequestParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type VerifyOTPMessageOutput struct {
 
 	// Verify OTP Message Response.
@@ -52,13 +71,34 @@ type VerifyOTPMessageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyOTPMessageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyOTPMessageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyOTPMessageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VerificationResponse != nil {
+		s.WriteStruct(schemas.VerifyOTPMessageResponse_VerificationResponse)
+		v.VerificationResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *VerifyOTPMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VerifyOTPMessageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VerifyOTPMessageResponse_VerificationResponse:
+			v.VerificationResponse = &types.VerificationResponse{}
+			return v.VerificationResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationVerifyOTPMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpVerifyOTPMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyOTPMessage, schemas.VerifyOTPMessageRequest, schemas.VerifyOTPMessageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpVerifyOTPMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyOTPMessage, schemas.VerifyOTPMessageRequest, schemas.VerifyOTPMessageResponse), output: &VerifyOTPMessageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

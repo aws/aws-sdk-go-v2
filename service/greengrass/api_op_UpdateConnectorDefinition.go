@@ -4,6 +4,8 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type UpdateConnectorDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectorDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectorDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectorDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorDefinitionId != nil {
+		s.WriteString(schemas.UpdateConnectorDefinitionRequest_ConnectorDefinitionId, *v.ConnectorDefinitionId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateConnectorDefinitionRequest_Name, *v.Name)
+	}
+}
+
 type UpdateConnectorDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +60,26 @@ type UpdateConnectorDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectorDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectorDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectorDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateConnectorDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConnectorDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConnectorDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateConnectorDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnectorDefinition, schemas.UpdateConnectorDefinitionRequest, schemas.UpdateConnectorDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateConnectorDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnectorDefinition, schemas.UpdateConnectorDefinitionRequest, schemas.UpdateConnectorDefinitionResponse), output: &UpdateConnectorDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

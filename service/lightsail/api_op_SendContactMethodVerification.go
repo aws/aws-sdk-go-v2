@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,18 @@ type SendContactMethodVerificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendContactMethodVerificationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendContactMethodVerificationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendContactMethodVerificationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Protocol != "" {
+		s.WriteString(schemas.SendContactMethodVerificationRequest_protocol, string(v.Protocol))
+	}
+}
+
 type SendContactMethodVerificationOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -63,13 +77,29 @@ type SendContactMethodVerificationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendContactMethodVerificationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendContactMethodVerificationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendContactMethodVerificationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.SendContactMethodVerificationResult_operations, v.Operations)
+}
+func (v *SendContactMethodVerificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendContactMethodVerificationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendContactMethodVerificationResult_operations:
+			return deserializeOperationList(d, schemas.SendContactMethodVerificationResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendContactMethodVerificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSendContactMethodVerification{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendContactMethodVerification, schemas.SendContactMethodVerificationRequest, schemas.SendContactMethodVerificationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSendContactMethodVerification{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendContactMethodVerification, schemas.SendContactMethodVerificationRequest, schemas.SendContactMethodVerificationResult), output: &SendContactMethodVerificationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

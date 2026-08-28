@@ -5,7 +5,9 @@ package partnercentralselling
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -59,6 +61,25 @@ type StartEngagementByAcceptingInvitationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartEngagementByAcceptingInvitationTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartEngagementByAcceptingInvitationTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartEngagementByAcceptingInvitationTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.StartEngagementByAcceptingInvitationTaskRequest_Catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartEngagementByAcceptingInvitationTaskRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.StartEngagementByAcceptingInvitationTaskRequest_Identifier, *v.Identifier)
+	}
+	serializeTagList(s, schemas.StartEngagementByAcceptingInvitationTaskRequest_Tags, v.Tags)
+}
+
 type StartEngagementByAcceptingInvitationTaskOutput struct {
 
 	// Returns the identifier of the engagement invitation that was accepted and used
@@ -99,13 +120,88 @@ type StartEngagementByAcceptingInvitationTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartEngagementByAcceptingInvitationTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartEngagementByAcceptingInvitationTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartEngagementByAcceptingInvitationTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EngagementInvitationId != nil {
+		s.WriteString(schemas.StartEngagementByAcceptingInvitationTaskResponse_EngagementInvitationId, *v.EngagementInvitationId)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.StartEngagementByAcceptingInvitationTaskResponse_Message, *v.Message)
+	}
+	if v.OpportunityId != nil {
+		s.WriteString(schemas.StartEngagementByAcceptingInvitationTaskResponse_OpportunityId, *v.OpportunityId)
+	}
+	if v.ReasonCode != "" {
+		s.WriteString(schemas.StartEngagementByAcceptingInvitationTaskResponse_ReasonCode, string(v.ReasonCode))
+	}
+	if v.ResourceSnapshotJobId != nil {
+		s.WriteString(schemas.StartEngagementByAcceptingInvitationTaskResponse_ResourceSnapshotJobId, *v.ResourceSnapshotJobId)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.StartEngagementByAcceptingInvitationTaskResponse_StartTime, *v.StartTime)
+	}
+	if v.TaskArn != nil {
+		s.WriteString(schemas.StartEngagementByAcceptingInvitationTaskResponse_TaskArn, *v.TaskArn)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.StartEngagementByAcceptingInvitationTaskResponse_TaskId, *v.TaskId)
+	}
+	if v.TaskStatus != "" {
+		s.WriteString(schemas.StartEngagementByAcceptingInvitationTaskResponse_TaskStatus, string(v.TaskStatus))
+	}
+}
+func (v *StartEngagementByAcceptingInvitationTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartEngagementByAcceptingInvitationTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartEngagementByAcceptingInvitationTaskResponse_EngagementInvitationId:
+			v.EngagementInvitationId = new(string)
+			return d.ReadString(schemas.StartEngagementByAcceptingInvitationTaskResponse_EngagementInvitationId, v.EngagementInvitationId)
+		case schemas.StartEngagementByAcceptingInvitationTaskResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.StartEngagementByAcceptingInvitationTaskResponse_Message, v.Message)
+		case schemas.StartEngagementByAcceptingInvitationTaskResponse_OpportunityId:
+			v.OpportunityId = new(string)
+			return d.ReadString(schemas.StartEngagementByAcceptingInvitationTaskResponse_OpportunityId, v.OpportunityId)
+		case schemas.StartEngagementByAcceptingInvitationTaskResponse_ReasonCode:
+			var ev string
+			if err := d.ReadString(schemas.StartEngagementByAcceptingInvitationTaskResponse_ReasonCode, &ev); err != nil {
+				return err
+			}
+			v.ReasonCode = types.ReasonCode(ev)
+			return nil
+		case schemas.StartEngagementByAcceptingInvitationTaskResponse_ResourceSnapshotJobId:
+			v.ResourceSnapshotJobId = new(string)
+			return d.ReadString(schemas.StartEngagementByAcceptingInvitationTaskResponse_ResourceSnapshotJobId, v.ResourceSnapshotJobId)
+		case schemas.StartEngagementByAcceptingInvitationTaskResponse_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.StartEngagementByAcceptingInvitationTaskResponse_StartTime, v.StartTime)
+		case schemas.StartEngagementByAcceptingInvitationTaskResponse_TaskArn:
+			v.TaskArn = new(string)
+			return d.ReadString(schemas.StartEngagementByAcceptingInvitationTaskResponse_TaskArn, v.TaskArn)
+		case schemas.StartEngagementByAcceptingInvitationTaskResponse_TaskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.StartEngagementByAcceptingInvitationTaskResponse_TaskId, v.TaskId)
+		case schemas.StartEngagementByAcceptingInvitationTaskResponse_TaskStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartEngagementByAcceptingInvitationTaskResponse_TaskStatus, &ev); err != nil {
+				return err
+			}
+			v.TaskStatus = types.TaskStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartEngagementByAcceptingInvitationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartEngagementByAcceptingInvitationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartEngagementByAcceptingInvitationTask, schemas.StartEngagementByAcceptingInvitationTaskRequest, schemas.StartEngagementByAcceptingInvitationTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartEngagementByAcceptingInvitationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartEngagementByAcceptingInvitationTask, schemas.StartEngagementByAcceptingInvitationTaskRequest, schemas.StartEngagementByAcceptingInvitationTaskResponse), output: &StartEngagementByAcceptingInvitationTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

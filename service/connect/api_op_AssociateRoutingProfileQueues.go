@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,23 @@ type AssociateRoutingProfileQueuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateRoutingProfileQueuesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateRoutingProfileQueuesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateRoutingProfileQueuesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.AssociateRoutingProfileQueuesRequest_InstanceId, *v.InstanceId)
+	}
+	serializeRoutingProfileManualAssignmentQueueConfigList(s, schemas.AssociateRoutingProfileQueuesRequest_ManualAssignmentQueueConfigs, v.ManualAssignmentQueueConfigs)
+	serializeRoutingProfileQueueConfigList(s, schemas.AssociateRoutingProfileQueuesRequest_QueueConfigs, v.QueueConfigs)
+	if v.RoutingProfileId != nil {
+		s.WriteString(schemas.AssociateRoutingProfileQueuesRequest_RoutingProfileId, *v.RoutingProfileId)
+	}
+}
+
 type AssociateRoutingProfileQueuesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,13 +77,26 @@ type AssociateRoutingProfileQueuesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateRoutingProfileQueuesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateRoutingProfileQueuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateRoutingProfileQueuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateRoutingProfileQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateRoutingProfileQueues{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateRoutingProfileQueues, schemas.AssociateRoutingProfileQueuesRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateRoutingProfileQueues{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateRoutingProfileQueues, schemas.AssociateRoutingProfileQueuesRequest, nil), output: &AssociateRoutingProfileQueuesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,18 @@ type StopSolutionVersionCreationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopSolutionVersionCreationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopSolutionVersionCreationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopSolutionVersionCreationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SolutionVersionArn != nil {
+		s.WriteString(schemas.StopSolutionVersionCreationRequest_solutionVersionArn, *v.SolutionVersionArn)
+	}
+}
+
 type StopSolutionVersionCreationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +69,26 @@ type StopSolutionVersionCreationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopSolutionVersionCreationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopSolutionVersionCreationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopSolutionVersionCreationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopSolutionVersionCreationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopSolutionVersionCreation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopSolutionVersionCreation, schemas.StopSolutionVersionCreationRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopSolutionVersionCreation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopSolutionVersionCreation, schemas.StopSolutionVersionCreationRequest, nil), output: &StopSolutionVersionCreationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,26 @@ type CreateLoadBalancerTlsCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLoadBalancerTlsCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLoadBalancerTlsCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLoadBalancerTlsCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDomainNameList(s, schemas.CreateLoadBalancerTlsCertificateRequest_certificateAlternativeNames, v.CertificateAlternativeNames)
+	if v.CertificateDomainName != nil {
+		s.WriteString(schemas.CreateLoadBalancerTlsCertificateRequest_certificateDomainName, *v.CertificateDomainName)
+	}
+	if v.CertificateName != nil {
+		s.WriteString(schemas.CreateLoadBalancerTlsCertificateRequest_certificateName, *v.CertificateName)
+	}
+	if v.LoadBalancerName != nil {
+		s.WriteString(schemas.CreateLoadBalancerTlsCertificateRequest_loadBalancerName, *v.LoadBalancerName)
+	}
+	serializeTagList(s, schemas.CreateLoadBalancerTlsCertificateRequest_tags, v.Tags)
+}
+
 type CreateLoadBalancerTlsCertificateOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -83,13 +105,29 @@ type CreateLoadBalancerTlsCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLoadBalancerTlsCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLoadBalancerTlsCertificateResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLoadBalancerTlsCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.CreateLoadBalancerTlsCertificateResult_operations, v.Operations)
+}
+func (v *CreateLoadBalancerTlsCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLoadBalancerTlsCertificateResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLoadBalancerTlsCertificateResult_operations:
+			return deserializeOperationList(d, schemas.CreateLoadBalancerTlsCertificateResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLoadBalancerTlsCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLoadBalancerTlsCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLoadBalancerTlsCertificate, schemas.CreateLoadBalancerTlsCertificateRequest, schemas.CreateLoadBalancerTlsCertificateResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLoadBalancerTlsCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLoadBalancerTlsCertificate, schemas.CreateLoadBalancerTlsCertificateRequest, schemas.CreateLoadBalancerTlsCertificateResult), output: &CreateLoadBalancerTlsCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

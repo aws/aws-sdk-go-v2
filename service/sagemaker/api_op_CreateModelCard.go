@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,30 @@ type CreateModelCardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelCardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelCardRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelCardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteString(schemas.CreateModelCardRequest_Content, *v.Content)
+	}
+	if v.ModelCardName != nil {
+		s.WriteString(schemas.CreateModelCardRequest_ModelCardName, *v.ModelCardName)
+	}
+	if v.ModelCardStatus != "" {
+		s.WriteString(schemas.CreateModelCardRequest_ModelCardStatus, string(v.ModelCardStatus))
+	}
+	if v.SecurityConfig != nil {
+		s.WriteStruct(schemas.CreateModelCardRequest_SecurityConfig)
+		v.SecurityConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateModelCardRequest_Tags, v.Tags)
+}
+
 type CreateModelCardOutput struct {
 
 	// The Amazon Resource Name (ARN) of the successfully created model card.
@@ -80,13 +106,32 @@ type CreateModelCardOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelCardOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelCardResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelCardOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelCardArn != nil {
+		s.WriteString(schemas.CreateModelCardResponse_ModelCardArn, *v.ModelCardArn)
+	}
+}
+func (v *CreateModelCardOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateModelCardResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateModelCardResponse_ModelCardArn:
+			v.ModelCardArn = new(string)
+			return d.ReadString(schemas.CreateModelCardResponse_ModelCardArn, v.ModelCardArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateModelCardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateModelCard{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelCard, schemas.CreateModelCardRequest, schemas.CreateModelCardResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateModelCard{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelCard, schemas.CreateModelCardRequest, schemas.CreateModelCardResponse), output: &CreateModelCardOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

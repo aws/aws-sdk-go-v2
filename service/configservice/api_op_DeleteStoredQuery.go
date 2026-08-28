@@ -4,6 +4,8 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteStoredQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStoredQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteStoredQueryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStoredQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryName != nil {
+		s.WriteString(schemas.DeleteStoredQueryRequest_QueryName, *v.QueryName)
+	}
+}
+
 type DeleteStoredQueryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteStoredQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteStoredQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteStoredQueryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteStoredQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteStoredQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteStoredQueryResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteStoredQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteStoredQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStoredQuery, schemas.DeleteStoredQueryRequest, schemas.DeleteStoredQueryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteStoredQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteStoredQuery, schemas.DeleteStoredQueryRequest, schemas.DeleteStoredQueryResponse), output: &DeleteStoredQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

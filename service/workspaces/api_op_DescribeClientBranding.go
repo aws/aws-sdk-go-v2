@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type DescribeClientBrandingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClientBrandingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClientBrandingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClientBrandingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceId != nil {
+		s.WriteString(schemas.DescribeClientBrandingRequest_ResourceId, *v.ResourceId)
+	}
+}
+
 type DescribeClientBrandingOutput struct {
 
 	// The branding information for Android devices.
@@ -67,13 +81,74 @@ type DescribeClientBrandingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClientBrandingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClientBrandingResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClientBrandingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceTypeAndroid != nil {
+		s.WriteStruct(schemas.DescribeClientBrandingResult_DeviceTypeAndroid)
+		v.DeviceTypeAndroid.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceTypeIos != nil {
+		s.WriteStruct(schemas.DescribeClientBrandingResult_DeviceTypeIos)
+		v.DeviceTypeIos.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceTypeLinux != nil {
+		s.WriteStruct(schemas.DescribeClientBrandingResult_DeviceTypeLinux)
+		v.DeviceTypeLinux.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceTypeOsx != nil {
+		s.WriteStruct(schemas.DescribeClientBrandingResult_DeviceTypeOsx)
+		v.DeviceTypeOsx.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceTypeWeb != nil {
+		s.WriteStruct(schemas.DescribeClientBrandingResult_DeviceTypeWeb)
+		v.DeviceTypeWeb.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceTypeWindows != nil {
+		s.WriteStruct(schemas.DescribeClientBrandingResult_DeviceTypeWindows)
+		v.DeviceTypeWindows.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeClientBrandingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeClientBrandingResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeClientBrandingResult_DeviceTypeAndroid:
+			v.DeviceTypeAndroid = &types.DefaultClientBrandingAttributes{}
+			return v.DeviceTypeAndroid.Deserialize(d)
+		case schemas.DescribeClientBrandingResult_DeviceTypeIos:
+			v.DeviceTypeIos = &types.IosClientBrandingAttributes{}
+			return v.DeviceTypeIos.Deserialize(d)
+		case schemas.DescribeClientBrandingResult_DeviceTypeLinux:
+			v.DeviceTypeLinux = &types.DefaultClientBrandingAttributes{}
+			return v.DeviceTypeLinux.Deserialize(d)
+		case schemas.DescribeClientBrandingResult_DeviceTypeOsx:
+			v.DeviceTypeOsx = &types.DefaultClientBrandingAttributes{}
+			return v.DeviceTypeOsx.Deserialize(d)
+		case schemas.DescribeClientBrandingResult_DeviceTypeWeb:
+			v.DeviceTypeWeb = &types.DefaultClientBrandingAttributes{}
+			return v.DeviceTypeWeb.Deserialize(d)
+		case schemas.DescribeClientBrandingResult_DeviceTypeWindows:
+			v.DeviceTypeWindows = &types.DefaultClientBrandingAttributes{}
+			return v.DeviceTypeWindows.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeClientBrandingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeClientBranding{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClientBranding, schemas.DescribeClientBrandingRequest, schemas.DescribeClientBrandingResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeClientBranding{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClientBranding, schemas.DescribeClientBrandingRequest, schemas.DescribeClientBrandingResult), output: &DescribeClientBrandingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

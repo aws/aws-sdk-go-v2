@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -227,6 +229,36 @@ type InitiateAuthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InitiateAuthInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InitiateAuthRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InitiateAuthInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyticsMetadata != nil {
+		s.WriteStruct(schemas.InitiateAuthRequest_AnalyticsMetadata)
+		v.AnalyticsMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AuthFlow != "" {
+		s.WriteString(schemas.InitiateAuthRequest_AuthFlow, string(v.AuthFlow))
+	}
+	serializeAuthParametersType(s, schemas.InitiateAuthRequest_AuthParameters, v.AuthParameters)
+	if v.ClientId != nil {
+		s.WriteString(schemas.InitiateAuthRequest_ClientId, *v.ClientId)
+	}
+	serializeClientMetadataType(s, schemas.InitiateAuthRequest_ClientMetadata, v.ClientMetadata)
+	if v.Session != nil {
+		s.WriteString(schemas.InitiateAuthRequest_Session, *v.Session)
+	}
+	if v.UserContextData != nil {
+		s.WriteStruct(schemas.InitiateAuthRequest_UserContextData)
+		v.UserContextData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Initiates the authentication response.
 type InitiateAuthOutput struct {
 
@@ -343,13 +375,56 @@ type InitiateAuthOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InitiateAuthOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InitiateAuthResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InitiateAuthOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationResult != nil {
+		s.WriteStruct(schemas.InitiateAuthResponse_AuthenticationResult)
+		v.AuthenticationResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAvailableChallengeListType(s, schemas.InitiateAuthResponse_AvailableChallenges, v.AvailableChallenges)
+	if v.ChallengeName != "" {
+		s.WriteString(schemas.InitiateAuthResponse_ChallengeName, string(v.ChallengeName))
+	}
+	serializeChallengeParametersType(s, schemas.InitiateAuthResponse_ChallengeParameters, v.ChallengeParameters)
+	if v.Session != nil {
+		s.WriteString(schemas.InitiateAuthResponse_Session, *v.Session)
+	}
+}
+func (v *InitiateAuthOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InitiateAuthResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InitiateAuthResponse_AuthenticationResult:
+			v.AuthenticationResult = &types.AuthenticationResultType{}
+			return v.AuthenticationResult.Deserialize(d)
+		case schemas.InitiateAuthResponse_AvailableChallenges:
+			return deserializeAvailableChallengeListType(d, schemas.InitiateAuthResponse_AvailableChallenges, &v.AvailableChallenges)
+		case schemas.InitiateAuthResponse_ChallengeName:
+			var ev string
+			if err := d.ReadString(schemas.InitiateAuthResponse_ChallengeName, &ev); err != nil {
+				return err
+			}
+			v.ChallengeName = types.ChallengeNameType(ev)
+			return nil
+		case schemas.InitiateAuthResponse_ChallengeParameters:
+			return deserializeChallengeParametersType(d, schemas.InitiateAuthResponse_ChallengeParameters, &v.ChallengeParameters)
+		case schemas.InitiateAuthResponse_Session:
+			v.Session = new(string)
+			return d.ReadString(schemas.InitiateAuthResponse_Session, v.Session)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInitiateAuthMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpInitiateAuth{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InitiateAuth, schemas.InitiateAuthRequest, schemas.InitiateAuthResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpInitiateAuth{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InitiateAuth, schemas.InitiateAuthRequest, schemas.InitiateAuthResponse), output: &InitiateAuthOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -41,6 +43,24 @@ type DescribeDeviceInput struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceFleetName != nil {
+		s.WriteString(schemas.DescribeDeviceRequest_DeviceFleetName, *v.DeviceFleetName)
+	}
+	if v.DeviceName != nil {
+		s.WriteString(schemas.DescribeDeviceRequest_DeviceName, *v.DeviceName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDeviceRequest_NextToken, *v.NextToken)
+	}
 }
 
 type DescribeDeviceOutput struct {
@@ -92,13 +112,89 @@ type DescribeDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDeviceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentVersion != nil {
+		s.WriteString(schemas.DescribeDeviceResponse_AgentVersion, *v.AgentVersion)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeDeviceResponse_Description, *v.Description)
+	}
+	if v.DeviceArn != nil {
+		s.WriteString(schemas.DescribeDeviceResponse_DeviceArn, *v.DeviceArn)
+	}
+	if v.DeviceFleetName != nil {
+		s.WriteString(schemas.DescribeDeviceResponse_DeviceFleetName, *v.DeviceFleetName)
+	}
+	if v.DeviceName != nil {
+		s.WriteString(schemas.DescribeDeviceResponse_DeviceName, *v.DeviceName)
+	}
+	if v.IotThingName != nil {
+		s.WriteString(schemas.DescribeDeviceResponse_IotThingName, *v.IotThingName)
+	}
+	if v.LatestHeartbeat != nil {
+		s.WriteTime(schemas.DescribeDeviceResponse_LatestHeartbeat, *v.LatestHeartbeat)
+	}
+	if v.MaxModels != nil {
+		s.WriteInt32(schemas.DescribeDeviceResponse_MaxModels, *v.MaxModels)
+	}
+	serializeEdgeModels(s, schemas.DescribeDeviceResponse_Models, v.Models)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDeviceResponse_NextToken, *v.NextToken)
+	}
+	if v.RegistrationTime != nil {
+		s.WriteTime(schemas.DescribeDeviceResponse_RegistrationTime, *v.RegistrationTime)
+	}
+}
+func (v *DescribeDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDeviceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDeviceResponse_AgentVersion:
+			v.AgentVersion = new(string)
+			return d.ReadString(schemas.DescribeDeviceResponse_AgentVersion, v.AgentVersion)
+		case schemas.DescribeDeviceResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeDeviceResponse_Description, v.Description)
+		case schemas.DescribeDeviceResponse_DeviceArn:
+			v.DeviceArn = new(string)
+			return d.ReadString(schemas.DescribeDeviceResponse_DeviceArn, v.DeviceArn)
+		case schemas.DescribeDeviceResponse_DeviceFleetName:
+			v.DeviceFleetName = new(string)
+			return d.ReadString(schemas.DescribeDeviceResponse_DeviceFleetName, v.DeviceFleetName)
+		case schemas.DescribeDeviceResponse_DeviceName:
+			v.DeviceName = new(string)
+			return d.ReadString(schemas.DescribeDeviceResponse_DeviceName, v.DeviceName)
+		case schemas.DescribeDeviceResponse_IotThingName:
+			v.IotThingName = new(string)
+			return d.ReadString(schemas.DescribeDeviceResponse_IotThingName, v.IotThingName)
+		case schemas.DescribeDeviceResponse_LatestHeartbeat:
+			v.LatestHeartbeat = new(time.Time)
+			return d.ReadTime(schemas.DescribeDeviceResponse_LatestHeartbeat, v.LatestHeartbeat)
+		case schemas.DescribeDeviceResponse_MaxModels:
+			v.MaxModels = new(int32)
+			return d.ReadInt32(schemas.DescribeDeviceResponse_MaxModels, v.MaxModels)
+		case schemas.DescribeDeviceResponse_Models:
+			return deserializeEdgeModels(d, schemas.DescribeDeviceResponse_Models, &v.Models)
+		case schemas.DescribeDeviceResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeDeviceResponse_NextToken, v.NextToken)
+		case schemas.DescribeDeviceResponse_RegistrationTime:
+			v.RegistrationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeDeviceResponse_RegistrationTime, v.RegistrationTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDevice, schemas.DescribeDeviceRequest, schemas.DescribeDeviceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDevice, schemas.DescribeDeviceRequest, schemas.DescribeDeviceResponse), output: &DescribeDeviceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

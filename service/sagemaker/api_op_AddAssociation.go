@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,24 @@ type AddAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationType != "" {
+		s.WriteString(schemas.AddAssociationRequest_AssociationType, string(v.AssociationType))
+	}
+	if v.DestinationArn != nil {
+		s.WriteString(schemas.AddAssociationRequest_DestinationArn, *v.DestinationArn)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.AddAssociationRequest_SourceArn, *v.SourceArn)
+	}
+}
+
 type AddAssociationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the destination.
@@ -76,13 +96,38 @@ type AddAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationArn != nil {
+		s.WriteString(schemas.AddAssociationResponse_DestinationArn, *v.DestinationArn)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.AddAssociationResponse_SourceArn, *v.SourceArn)
+	}
+}
+func (v *AddAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddAssociationResponse_DestinationArn:
+			v.DestinationArn = new(string)
+			return d.ReadString(schemas.AddAssociationResponse_DestinationArn, v.DestinationArn)
+		case schemas.AddAssociationResponse_SourceArn:
+			v.SourceArn = new(string)
+			return d.ReadString(schemas.AddAssociationResponse_SourceArn, v.SourceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddAssociation, schemas.AddAssociationRequest, schemas.AddAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddAssociation, schemas.AddAssociationRequest, schemas.AddAssociationResponse), output: &AddAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

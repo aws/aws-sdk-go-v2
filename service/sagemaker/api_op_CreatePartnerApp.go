@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -98,6 +100,58 @@ type CreatePartnerAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePartnerAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePartnerAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePartnerAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationConfig != nil {
+		s.WriteStruct(schemas.CreatePartnerAppRequest_ApplicationConfig)
+		v.ApplicationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AuthType != "" {
+		s.WriteString(schemas.CreatePartnerAppRequest_AuthType, string(v.AuthType))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreatePartnerAppRequest_ClientToken, *v.ClientToken)
+	}
+	if v.EnableAutoMinorVersionUpgrade != nil {
+		s.WriteBool(schemas.CreatePartnerAppRequest_EnableAutoMinorVersionUpgrade, *v.EnableAutoMinorVersionUpgrade)
+	}
+	if v.EnableIamSessionBasedIdentity != nil {
+		s.WriteBool(schemas.CreatePartnerAppRequest_EnableIamSessionBasedIdentity, *v.EnableIamSessionBasedIdentity)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.CreatePartnerAppRequest_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.IdcConfig != nil {
+		s.WriteStruct(schemas.CreatePartnerAppRequest_IdcConfig)
+		v.IdcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreatePartnerAppRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.MaintenanceConfig != nil {
+		s.WriteStruct(schemas.CreatePartnerAppRequest_MaintenanceConfig)
+		v.MaintenanceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreatePartnerAppRequest_Name, *v.Name)
+	}
+	serializeTagList(s, schemas.CreatePartnerAppRequest_Tags, v.Tags)
+	if v.Tier != nil {
+		s.WriteString(schemas.CreatePartnerAppRequest_Tier, *v.Tier)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreatePartnerAppRequest_Type, string(v.Type))
+	}
+}
+
 type CreatePartnerAppOutput struct {
 
 	// The ARN of the SageMaker Partner AI App.
@@ -109,13 +163,32 @@ type CreatePartnerAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePartnerAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePartnerAppResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePartnerAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreatePartnerAppResponse_Arn, *v.Arn)
+	}
+}
+func (v *CreatePartnerAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePartnerAppResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePartnerAppResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreatePartnerAppResponse_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePartnerAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePartnerApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePartnerApp, schemas.CreatePartnerAppRequest, schemas.CreatePartnerAppResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePartnerApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePartnerApp, schemas.CreatePartnerAppRequest, schemas.CreatePartnerAppResponse), output: &CreatePartnerAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

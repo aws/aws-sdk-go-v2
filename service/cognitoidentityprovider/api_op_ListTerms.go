@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,24 @@ type ListTermsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTermsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTermsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTermsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTermsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTermsRequest_NextToken, *v.NextToken)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.ListTermsRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 type ListTermsOutput struct {
 
 	// A summary of the requested terms documents. Includes unique identifiers for
@@ -82,13 +102,35 @@ type ListTermsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTermsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTermsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTermsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTermsResponse_NextToken, *v.NextToken)
+	}
+	serializeTermsDescriptionListType(s, schemas.ListTermsResponse_Terms, v.Terms)
+}
+func (v *ListTermsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTermsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTermsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTermsResponse_NextToken, v.NextToken)
+		case schemas.ListTermsResponse_Terms:
+			return deserializeTermsDescriptionListType(d, schemas.ListTermsResponse_Terms, &v.Terms)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTermsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTerms{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTerms, schemas.ListTermsRequest, schemas.ListTermsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTerms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTerms, schemas.ListTermsRequest, schemas.ListTermsResponse), output: &ListTermsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

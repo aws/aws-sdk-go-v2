@@ -5,7 +5,9 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,30 @@ type ListLensesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLensesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLensesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLensesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LensName != nil {
+		s.WriteString(schemas.ListLensesInput_LensName, *v.LensName)
+	}
+	if v.LensStatus != "" {
+		s.WriteString(schemas.ListLensesInput_LensStatus, string(v.LensStatus))
+	}
+	if v.LensType != "" {
+		s.WriteString(schemas.ListLensesInput_LensType, string(v.LensType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLensesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLensesInput_NextToken, *v.NextToken)
+	}
+}
+
 // Output of a list lenses call.
 type ListLensesOutput struct {
 
@@ -61,13 +87,35 @@ type ListLensesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLensesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLensesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLensesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLensSummaries(s, schemas.ListLensesOutput_LensSummaries, v.LensSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLensesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLensesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLensesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLensesOutput_LensSummaries:
+			return deserializeLensSummaries(d, schemas.ListLensesOutput_LensSummaries, &v.LensSummaries)
+		case schemas.ListLensesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLensesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLensesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLenses{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLenses, schemas.ListLensesInput, schemas.ListLensesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLenses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLenses, schemas.ListLensesInput, schemas.ListLensesOutput), output: &ListLensesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

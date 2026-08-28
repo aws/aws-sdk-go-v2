@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,41 @@ type UpdateConfiguredTableAnalysisRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfiguredTableAnalysisRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConfiguredTableAnalysisRuleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfiguredTableAnalysisRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfiguredTableAnalysisRulePolicy(s, schemas.UpdateConfiguredTableAnalysisRuleInput_analysisRulePolicy, v.AnalysisRulePolicy)
+	if v.AnalysisRuleType != "" {
+		s.WriteString(schemas.UpdateConfiguredTableAnalysisRuleInput_analysisRuleType, string(v.AnalysisRuleType))
+	}
+	if v.ConfiguredTableIdentifier != nil {
+		s.WriteString(schemas.UpdateConfiguredTableAnalysisRuleInput_configuredTableIdentifier, *v.ConfiguredTableIdentifier)
+	}
+}
+func (v *UpdateConfiguredTableAnalysisRuleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConfiguredTableAnalysisRuleInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConfiguredTableAnalysisRuleInput_analysisRulePolicy:
+			return deserializeConfiguredTableAnalysisRulePolicy(d, schemas.UpdateConfiguredTableAnalysisRuleInput_analysisRulePolicy, &v.AnalysisRulePolicy)
+		case schemas.UpdateConfiguredTableAnalysisRuleInput_analysisRuleType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateConfiguredTableAnalysisRuleInput_analysisRuleType, &ev); err != nil {
+				return err
+			}
+			v.AnalysisRuleType = types.ConfiguredTableAnalysisRuleType(ev)
+			return nil
+		case schemas.UpdateConfiguredTableAnalysisRuleInput_configuredTableIdentifier:
+			v.ConfiguredTableIdentifier = new(string)
+			return d.ReadString(schemas.UpdateConfiguredTableAnalysisRuleInput_configuredTableIdentifier, v.ConfiguredTableIdentifier)
+		}
+		return nil
+	})
+}
+
 type UpdateConfiguredTableAnalysisRuleOutput struct {
 
 	// The entire updated analysis rule.
@@ -59,13 +96,34 @@ type UpdateConfiguredTableAnalysisRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfiguredTableAnalysisRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConfiguredTableAnalysisRuleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfiguredTableAnalysisRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisRule != nil {
+		s.WriteStruct(schemas.UpdateConfiguredTableAnalysisRuleOutput_analysisRule)
+		v.AnalysisRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateConfiguredTableAnalysisRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConfiguredTableAnalysisRuleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConfiguredTableAnalysisRuleOutput_analysisRule:
+			v.AnalysisRule = &types.ConfiguredTableAnalysisRule{}
+			return v.AnalysisRule.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConfiguredTableAnalysisRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateConfiguredTableAnalysisRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfiguredTableAnalysisRule, schemas.UpdateConfiguredTableAnalysisRuleInput, schemas.UpdateConfiguredTableAnalysisRuleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateConfiguredTableAnalysisRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfiguredTableAnalysisRule, schemas.UpdateConfiguredTableAnalysisRuleInput, schemas.UpdateConfiguredTableAnalysisRuleOutput), output: &UpdateConfiguredTableAnalysisRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

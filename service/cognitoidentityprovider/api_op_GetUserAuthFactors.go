@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,18 @@ type GetUserAuthFactorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserAuthFactorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserAuthFactorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserAuthFactorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.GetUserAuthFactorsRequest_AccessToken, *v.AccessToken)
+	}
+}
+
 type GetUserAuthFactorsOutput struct {
 
 	// The name of the user who is eligible for the authentication factors in the
@@ -83,13 +97,44 @@ type GetUserAuthFactorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserAuthFactorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserAuthFactorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserAuthFactorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfiguredUserAuthFactorsListType(s, schemas.GetUserAuthFactorsResponse_ConfiguredUserAuthFactors, v.ConfiguredUserAuthFactors)
+	if v.PreferredMfaSetting != nil {
+		s.WriteString(schemas.GetUserAuthFactorsResponse_PreferredMfaSetting, *v.PreferredMfaSetting)
+	}
+	serializeUserMFASettingListType(s, schemas.GetUserAuthFactorsResponse_UserMFASettingList, v.UserMFASettingList)
+	if v.Username != nil {
+		s.WriteString(schemas.GetUserAuthFactorsResponse_Username, *v.Username)
+	}
+}
+func (v *GetUserAuthFactorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUserAuthFactorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUserAuthFactorsResponse_ConfiguredUserAuthFactors:
+			return deserializeConfiguredUserAuthFactorsListType(d, schemas.GetUserAuthFactorsResponse_ConfiguredUserAuthFactors, &v.ConfiguredUserAuthFactors)
+		case schemas.GetUserAuthFactorsResponse_PreferredMfaSetting:
+			v.PreferredMfaSetting = new(string)
+			return d.ReadString(schemas.GetUserAuthFactorsResponse_PreferredMfaSetting, v.PreferredMfaSetting)
+		case schemas.GetUserAuthFactorsResponse_UserMFASettingList:
+			return deserializeUserMFASettingListType(d, schemas.GetUserAuthFactorsResponse_UserMFASettingList, &v.UserMFASettingList)
+		case schemas.GetUserAuthFactorsResponse_Username:
+			v.Username = new(string)
+			return d.ReadString(schemas.GetUserAuthFactorsResponse_Username, v.Username)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUserAuthFactorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetUserAuthFactors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUserAuthFactors, schemas.GetUserAuthFactorsRequest, schemas.GetUserAuthFactorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetUserAuthFactors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUserAuthFactors, schemas.GetUserAuthFactorsRequest, schemas.GetUserAuthFactorsResponse), output: &GetUserAuthFactorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

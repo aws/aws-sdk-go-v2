@@ -5,7 +5,9 @@ package codedeploy
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -86,6 +88,36 @@ type ListApplicationRevisionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationRevisionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationRevisionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationRevisionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.ListApplicationRevisionsInput_applicationName, *v.ApplicationName)
+	}
+	if v.Deployed != "" {
+		s.WriteString(schemas.ListApplicationRevisionsInput_deployed, string(v.Deployed))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApplicationRevisionsInput_nextToken, *v.NextToken)
+	}
+	if v.S3Bucket != nil {
+		s.WriteString(schemas.ListApplicationRevisionsInput_s3Bucket, *v.S3Bucket)
+	}
+	if v.S3KeyPrefix != nil {
+		s.WriteString(schemas.ListApplicationRevisionsInput_s3KeyPrefix, *v.S3KeyPrefix)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListApplicationRevisionsInput_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListApplicationRevisionsInput_sortOrder, string(v.SortOrder))
+	}
+}
+
 // Represents the output of a ListApplicationRevisions operation.
 type ListApplicationRevisionsOutput struct {
 
@@ -103,13 +135,35 @@ type ListApplicationRevisionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationRevisionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationRevisionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationRevisionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApplicationRevisionsOutput_nextToken, *v.NextToken)
+	}
+	serializeRevisionLocationList(s, schemas.ListApplicationRevisionsOutput_revisions, v.Revisions)
+}
+func (v *ListApplicationRevisionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListApplicationRevisionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListApplicationRevisionsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListApplicationRevisionsOutput_nextToken, v.NextToken)
+		case schemas.ListApplicationRevisionsOutput_revisions:
+			return deserializeRevisionLocationList(d, schemas.ListApplicationRevisionsOutput_revisions, &v.Revisions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListApplicationRevisionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListApplicationRevisions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationRevisions, schemas.ListApplicationRevisionsInput, schemas.ListApplicationRevisionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListApplicationRevisions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationRevisions, schemas.ListApplicationRevisionsInput, schemas.ListApplicationRevisionsOutput), output: &ListApplicationRevisionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

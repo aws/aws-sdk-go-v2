@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -222,6 +224,34 @@ type AdminCreateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminCreateUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminCreateUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminCreateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClientMetadataType(s, schemas.AdminCreateUserRequest_ClientMetadata, v.ClientMetadata)
+	serializeDeliveryMediumListType(s, schemas.AdminCreateUserRequest_DesiredDeliveryMediums, v.DesiredDeliveryMediums)
+	if v.ForceAliasCreation != false {
+		s.WriteBool(schemas.AdminCreateUserRequest_ForceAliasCreation, v.ForceAliasCreation)
+	}
+	if v.MessageAction != "" {
+		s.WriteString(schemas.AdminCreateUserRequest_MessageAction, string(v.MessageAction))
+	}
+	if v.TemporaryPassword != nil {
+		s.WriteString(schemas.AdminCreateUserRequest_TemporaryPassword, *v.TemporaryPassword)
+	}
+	serializeAttributeListType(s, schemas.AdminCreateUserRequest_UserAttributes, v.UserAttributes)
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AdminCreateUserRequest_UserPoolId, *v.UserPoolId)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.AdminCreateUserRequest_Username, *v.Username)
+	}
+	serializeAttributeListType(s, schemas.AdminCreateUserRequest_ValidationData, v.ValidationData)
+}
+
 // Represents the response from the server to the request to create the user.
 type AdminCreateUserOutput struct {
 
@@ -234,13 +264,34 @@ type AdminCreateUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminCreateUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminCreateUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminCreateUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.User != nil {
+		s.WriteStruct(schemas.AdminCreateUserResponse_User)
+		v.User.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AdminCreateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdminCreateUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdminCreateUserResponse_User:
+			v.User = &types.UserType{}
+			return v.User.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAdminCreateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminCreateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminCreateUser, schemas.AdminCreateUserRequest, schemas.AdminCreateUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminCreateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminCreateUser, schemas.AdminCreateUserRequest, schemas.AdminCreateUserResponse), output: &AdminCreateUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

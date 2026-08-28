@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteThingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteThingGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteThingGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteThingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpectedVersion != nil {
+		s.WriteInt64(schemas.DeleteThingGroupRequest_expectedVersion, *v.ExpectedVersion)
+	}
+	if v.ThingGroupName != nil {
+		s.WriteString(schemas.DeleteThingGroupRequest_thingGroupName, *v.ThingGroupName)
+	}
+}
+
 type DeleteThingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +64,26 @@ type DeleteThingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteThingGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteThingGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteThingGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteThingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteThingGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteThingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteThingGroup, schemas.DeleteThingGroupRequest, schemas.DeleteThingGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteThingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteThingGroup, schemas.DeleteThingGroupRequest, schemas.DeleteThingGroupResponse), output: &DeleteThingGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

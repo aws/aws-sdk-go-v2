@@ -4,7 +4,9 @@ package cloudtrail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,30 @@ type DescribeQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeQueryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventDataStore != nil {
+		s.WriteString(schemas.DescribeQueryRequest_EventDataStore, *v.EventDataStore)
+	}
+	if v.EventDataStoreOwnerAccountId != nil {
+		s.WriteString(schemas.DescribeQueryRequest_EventDataStoreOwnerAccountId, *v.EventDataStoreOwnerAccountId)
+	}
+	if v.QueryAlias != nil {
+		s.WriteString(schemas.DescribeQueryRequest_QueryAlias, *v.QueryAlias)
+	}
+	if v.QueryId != nil {
+		s.WriteString(schemas.DescribeQueryRequest_QueryId, *v.QueryId)
+	}
+	if v.RefreshId != nil {
+		s.WriteString(schemas.DescribeQueryRequest_RefreshId, *v.RefreshId)
+	}
+}
+
 type DescribeQueryOutput struct {
 
 	// The URI for the S3 bucket where CloudTrail delivered query results, if
@@ -97,13 +123,90 @@ type DescribeQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeQueryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryS3Uri != nil {
+		s.WriteString(schemas.DescribeQueryResponse_DeliveryS3Uri, *v.DeliveryS3Uri)
+	}
+	if v.DeliveryStatus != "" {
+		s.WriteString(schemas.DescribeQueryResponse_DeliveryStatus, string(v.DeliveryStatus))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.DescribeQueryResponse_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.EventDataStoreOwnerAccountId != nil {
+		s.WriteString(schemas.DescribeQueryResponse_EventDataStoreOwnerAccountId, *v.EventDataStoreOwnerAccountId)
+	}
+	if v.Prompt != nil {
+		s.WriteString(schemas.DescribeQueryResponse_Prompt, *v.Prompt)
+	}
+	if v.QueryId != nil {
+		s.WriteString(schemas.DescribeQueryResponse_QueryId, *v.QueryId)
+	}
+	if v.QueryStatistics != nil {
+		s.WriteStruct(schemas.DescribeQueryResponse_QueryStatistics)
+		v.QueryStatistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueryStatus != "" {
+		s.WriteString(schemas.DescribeQueryResponse_QueryStatus, string(v.QueryStatus))
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.DescribeQueryResponse_QueryString, *v.QueryString)
+	}
+}
+func (v *DescribeQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeQueryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeQueryResponse_DeliveryS3Uri:
+			v.DeliveryS3Uri = new(string)
+			return d.ReadString(schemas.DescribeQueryResponse_DeliveryS3Uri, v.DeliveryS3Uri)
+		case schemas.DescribeQueryResponse_DeliveryStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeQueryResponse_DeliveryStatus, &ev); err != nil {
+				return err
+			}
+			v.DeliveryStatus = types.DeliveryStatus(ev)
+			return nil
+		case schemas.DescribeQueryResponse_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.DescribeQueryResponse_ErrorMessage, v.ErrorMessage)
+		case schemas.DescribeQueryResponse_EventDataStoreOwnerAccountId:
+			v.EventDataStoreOwnerAccountId = new(string)
+			return d.ReadString(schemas.DescribeQueryResponse_EventDataStoreOwnerAccountId, v.EventDataStoreOwnerAccountId)
+		case schemas.DescribeQueryResponse_Prompt:
+			v.Prompt = new(string)
+			return d.ReadString(schemas.DescribeQueryResponse_Prompt, v.Prompt)
+		case schemas.DescribeQueryResponse_QueryId:
+			v.QueryId = new(string)
+			return d.ReadString(schemas.DescribeQueryResponse_QueryId, v.QueryId)
+		case schemas.DescribeQueryResponse_QueryStatistics:
+			v.QueryStatistics = &types.QueryStatisticsForDescribeQuery{}
+			return v.QueryStatistics.Deserialize(d)
+		case schemas.DescribeQueryResponse_QueryStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeQueryResponse_QueryStatus, &ev); err != nil {
+				return err
+			}
+			v.QueryStatus = types.QueryStatus(ev)
+			return nil
+		case schemas.DescribeQueryResponse_QueryString:
+			v.QueryString = new(string)
+			return d.ReadString(schemas.DescribeQueryResponse_QueryString, v.QueryString)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQuery, schemas.DescribeQueryRequest, schemas.DescribeQueryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQuery, schemas.DescribeQueryRequest, schemas.DescribeQueryResponse), output: &DescribeQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

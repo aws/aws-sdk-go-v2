@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.DeleteClusterRequest_ClusterName, *v.ClusterName)
+	}
+}
+
 type DeleteClusterOutput struct {
 
 	// The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster to delete.
@@ -47,13 +61,32 @@ type DeleteClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteClusterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.DeleteClusterResponse_ClusterArn, *v.ClusterArn)
+	}
+}
+func (v *DeleteClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteClusterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteClusterResponse_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.DeleteClusterResponse_ClusterArn, v.ClusterArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCluster, schemas.DeleteClusterRequest, schemas.DeleteClusterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCluster, schemas.DeleteClusterRequest, schemas.DeleteClusterResponse), output: &DeleteClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

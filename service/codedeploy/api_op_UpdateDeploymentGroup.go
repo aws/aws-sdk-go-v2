@@ -4,7 +4,9 @@ package codedeploy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -141,6 +143,76 @@ type UpdateDeploymentGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDeploymentGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDeploymentGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDeploymentGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlarmConfiguration != nil {
+		s.WriteStruct(schemas.UpdateDeploymentGroupInput_alarmConfiguration)
+		v.AlarmConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.UpdateDeploymentGroupInput_applicationName, *v.ApplicationName)
+	}
+	if v.AutoRollbackConfiguration != nil {
+		s.WriteStruct(schemas.UpdateDeploymentGroupInput_autoRollbackConfiguration)
+		v.AutoRollbackConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAutoScalingGroupNameList(s, schemas.UpdateDeploymentGroupInput_autoScalingGroups, v.AutoScalingGroups)
+	if v.BlueGreenDeploymentConfiguration != nil {
+		s.WriteStruct(schemas.UpdateDeploymentGroupInput_blueGreenDeploymentConfiguration)
+		v.BlueGreenDeploymentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CurrentDeploymentGroupName != nil {
+		s.WriteString(schemas.UpdateDeploymentGroupInput_currentDeploymentGroupName, *v.CurrentDeploymentGroupName)
+	}
+	if v.DeploymentConfigName != nil {
+		s.WriteString(schemas.UpdateDeploymentGroupInput_deploymentConfigName, *v.DeploymentConfigName)
+	}
+	if v.DeploymentStyle != nil {
+		s.WriteStruct(schemas.UpdateDeploymentGroupInput_deploymentStyle)
+		v.DeploymentStyle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEC2TagFilterList(s, schemas.UpdateDeploymentGroupInput_ec2TagFilters, v.Ec2TagFilters)
+	if v.Ec2TagSet != nil {
+		s.WriteStruct(schemas.UpdateDeploymentGroupInput_ec2TagSet)
+		v.Ec2TagSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeECSServiceList(s, schemas.UpdateDeploymentGroupInput_ecsServices, v.EcsServices)
+	if v.LoadBalancerInfo != nil {
+		s.WriteStruct(schemas.UpdateDeploymentGroupInput_loadBalancerInfo)
+		v.LoadBalancerInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NewDeploymentGroupName != nil {
+		s.WriteString(schemas.UpdateDeploymentGroupInput_newDeploymentGroupName, *v.NewDeploymentGroupName)
+	}
+	serializeTagFilterList(s, schemas.UpdateDeploymentGroupInput_onPremisesInstanceTagFilters, v.OnPremisesInstanceTagFilters)
+	if v.OnPremisesTagSet != nil {
+		s.WriteStruct(schemas.UpdateDeploymentGroupInput_onPremisesTagSet)
+		v.OnPremisesTagSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutdatedInstancesStrategy != "" {
+		s.WriteString(schemas.UpdateDeploymentGroupInput_outdatedInstancesStrategy, string(v.OutdatedInstancesStrategy))
+	}
+	if v.ServiceRoleArn != nil {
+		s.WriteString(schemas.UpdateDeploymentGroupInput_serviceRoleArn, *v.ServiceRoleArn)
+	}
+	if v.TerminationHookEnabled != nil {
+		s.WriteBool(schemas.UpdateDeploymentGroupInput_terminationHookEnabled, *v.TerminationHookEnabled)
+	}
+	serializeTriggerConfigList(s, schemas.UpdateDeploymentGroupInput_triggerConfigurations, v.TriggerConfigurations)
+}
+
 // Represents the output of an UpdateDeploymentGroup operation.
 type UpdateDeploymentGroupOutput struct {
 
@@ -157,13 +229,29 @@ type UpdateDeploymentGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDeploymentGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDeploymentGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDeploymentGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutoScalingGroupList(s, schemas.UpdateDeploymentGroupOutput_hooksNotCleanedUp, v.HooksNotCleanedUp)
+}
+func (v *UpdateDeploymentGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDeploymentGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDeploymentGroupOutput_hooksNotCleanedUp:
+			return deserializeAutoScalingGroupList(d, schemas.UpdateDeploymentGroupOutput_hooksNotCleanedUp, &v.HooksNotCleanedUp)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDeploymentGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDeploymentGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDeploymentGroup, schemas.UpdateDeploymentGroupInput, schemas.UpdateDeploymentGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDeploymentGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDeploymentGroup, schemas.UpdateDeploymentGroupInput, schemas.UpdateDeploymentGroupOutput), output: &UpdateDeploymentGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package acm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/acm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/acm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -47,6 +49,20 @@ type RevokeCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.RevokeCertificateRequest_CertificateArn, *v.CertificateArn)
+	}
+	if v.RevocationReason != "" {
+		s.WriteString(schemas.RevokeCertificateRequest_RevocationReason, string(v.RevocationReason))
+	}
+}
 func (in *RevokeCertificateInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ServiceType = ptr.String("ACM")
@@ -64,13 +80,32 @@ type RevokeCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RevokeCertificateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RevokeCertificateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RevokeCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.RevokeCertificateResponse_CertificateArn, *v.CertificateArn)
+	}
+}
+func (v *RevokeCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RevokeCertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RevokeCertificateResponse_CertificateArn:
+			v.CertificateArn = new(string)
+			return d.ReadString(schemas.RevokeCertificateResponse_CertificateArn, v.CertificateArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRevokeCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRevokeCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeCertificate, schemas.RevokeCertificateRequest, schemas.RevokeCertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRevokeCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RevokeCertificate, schemas.RevokeCertificateRequest, schemas.RevokeCertificateResponse), output: &RevokeCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

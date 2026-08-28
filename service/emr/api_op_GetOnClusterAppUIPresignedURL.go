@@ -4,7 +4,9 @@ package emr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,30 @@ type GetOnClusterAppUIPresignedURLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOnClusterAppUIPresignedURLInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOnClusterAppUIPresignedURLInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOnClusterAppUIPresignedURLInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetOnClusterAppUIPresignedURLInput_ApplicationId, *v.ApplicationId)
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.GetOnClusterAppUIPresignedURLInput_ClusterId, *v.ClusterId)
+	}
+	if v.DryRun != nil {
+		s.WriteBool(schemas.GetOnClusterAppUIPresignedURLInput_DryRun, *v.DryRun)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.GetOnClusterAppUIPresignedURLInput_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.OnClusterAppUIType != "" {
+		s.WriteString(schemas.GetOnClusterAppUIPresignedURLInput_OnClusterAppUIType, string(v.OnClusterAppUIType))
+	}
+}
+
 type GetOnClusterAppUIPresignedURLOutput struct {
 
 	// The cluster's generated presigned URL.
@@ -64,13 +90,38 @@ type GetOnClusterAppUIPresignedURLOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOnClusterAppUIPresignedURLOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOnClusterAppUIPresignedURLOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOnClusterAppUIPresignedURLOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PresignedURL != nil {
+		s.WriteString(schemas.GetOnClusterAppUIPresignedURLOutput_PresignedURL, *v.PresignedURL)
+	}
+	if v.PresignedURLReady != nil {
+		s.WriteBool(schemas.GetOnClusterAppUIPresignedURLOutput_PresignedURLReady, *v.PresignedURLReady)
+	}
+}
+func (v *GetOnClusterAppUIPresignedURLOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOnClusterAppUIPresignedURLOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOnClusterAppUIPresignedURLOutput_PresignedURL:
+			v.PresignedURL = new(string)
+			return d.ReadString(schemas.GetOnClusterAppUIPresignedURLOutput_PresignedURL, v.PresignedURL)
+		case schemas.GetOnClusterAppUIPresignedURLOutput_PresignedURLReady:
+			v.PresignedURLReady = new(bool)
+			return d.ReadBool(schemas.GetOnClusterAppUIPresignedURLOutput_PresignedURLReady, v.PresignedURLReady)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOnClusterAppUIPresignedURLMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetOnClusterAppUIPresignedURL{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOnClusterAppUIPresignedURL, schemas.GetOnClusterAppUIPresignedURLInput, schemas.GetOnClusterAppUIPresignedURLOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetOnClusterAppUIPresignedURL{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOnClusterAppUIPresignedURL, schemas.GetOnClusterAppUIPresignedURLInput, schemas.GetOnClusterAppUIPresignedURLOutput), output: &GetOnClusterAppUIPresignedURLOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

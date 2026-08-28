@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,32 @@ type UpdateThingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateThingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateThingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateThingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributePayload != nil {
+		s.WriteStruct(schemas.UpdateThingRequest_attributePayload)
+		v.AttributePayload.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExpectedVersion != nil {
+		s.WriteInt64(schemas.UpdateThingRequest_expectedVersion, *v.ExpectedVersion)
+	}
+	if v.RemoveThingType != false {
+		s.WriteBool(schemas.UpdateThingRequest_removeThingType, v.RemoveThingType)
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.UpdateThingRequest_thingName, *v.ThingName)
+	}
+	if v.ThingTypeName != nil {
+		s.WriteString(schemas.UpdateThingRequest_thingTypeName, *v.ThingTypeName)
+	}
+}
+
 // The output from the UpdateThing operation.
 type UpdateThingOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -69,13 +97,26 @@ type UpdateThingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateThingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateThingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateThingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateThingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateThingResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateThing{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateThing, schemas.UpdateThingRequest, schemas.UpdateThingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateThing{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateThing, schemas.UpdateThingRequest, schemas.UpdateThingResponse), output: &UpdateThingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

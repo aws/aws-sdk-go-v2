@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -186,6 +188,60 @@ type CreateNotebookInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNotebookInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNotebookInstanceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNotebookInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNotebookInstanceAcceleratorTypes(s, schemas.CreateNotebookInstanceInput_AcceleratorTypes, v.AcceleratorTypes)
+	serializeAdditionalCodeRepositoryNamesOrUrls(s, schemas.CreateNotebookInstanceInput_AdditionalCodeRepositories, v.AdditionalCodeRepositories)
+	if v.DefaultCodeRepository != nil {
+		s.WriteString(schemas.CreateNotebookInstanceInput_DefaultCodeRepository, *v.DefaultCodeRepository)
+	}
+	if v.DirectInternetAccess != "" {
+		s.WriteString(schemas.CreateNotebookInstanceInput_DirectInternetAccess, string(v.DirectInternetAccess))
+	}
+	if v.InstanceMetadataServiceConfiguration != nil {
+		s.WriteStruct(schemas.CreateNotebookInstanceInput_InstanceMetadataServiceConfiguration)
+		v.InstanceMetadataServiceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceType != "" {
+		s.WriteString(schemas.CreateNotebookInstanceInput_InstanceType, string(v.InstanceType))
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.CreateNotebookInstanceInput_IpAddressType, string(v.IpAddressType))
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateNotebookInstanceInput_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.LifecycleConfigName != nil {
+		s.WriteString(schemas.CreateNotebookInstanceInput_LifecycleConfigName, *v.LifecycleConfigName)
+	}
+	if v.NotebookInstanceName != nil {
+		s.WriteString(schemas.CreateNotebookInstanceInput_NotebookInstanceName, *v.NotebookInstanceName)
+	}
+	if v.PlatformIdentifier != nil {
+		s.WriteString(schemas.CreateNotebookInstanceInput_PlatformIdentifier, *v.PlatformIdentifier)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateNotebookInstanceInput_RoleArn, *v.RoleArn)
+	}
+	if v.RootAccess != "" {
+		s.WriteString(schemas.CreateNotebookInstanceInput_RootAccess, string(v.RootAccess))
+	}
+	serializeSecurityGroupIds(s, schemas.CreateNotebookInstanceInput_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SubnetId != nil {
+		s.WriteString(schemas.CreateNotebookInstanceInput_SubnetId, *v.SubnetId)
+	}
+	serializeTagList(s, schemas.CreateNotebookInstanceInput_Tags, v.Tags)
+	if v.VolumeSizeInGB != nil {
+		s.WriteInt32(schemas.CreateNotebookInstanceInput_VolumeSizeInGB, *v.VolumeSizeInGB)
+	}
+}
+
 type CreateNotebookInstanceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the notebook instance.
@@ -197,13 +253,32 @@ type CreateNotebookInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNotebookInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNotebookInstanceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNotebookInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotebookInstanceArn != nil {
+		s.WriteString(schemas.CreateNotebookInstanceOutput_NotebookInstanceArn, *v.NotebookInstanceArn)
+	}
+}
+func (v *CreateNotebookInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateNotebookInstanceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateNotebookInstanceOutput_NotebookInstanceArn:
+			v.NotebookInstanceArn = new(string)
+			return d.ReadString(schemas.CreateNotebookInstanceOutput_NotebookInstanceArn, v.NotebookInstanceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateNotebookInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateNotebookInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNotebookInstance, schemas.CreateNotebookInstanceInput, schemas.CreateNotebookInstanceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateNotebookInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNotebookInstance, schemas.CreateNotebookInstanceInput, schemas.CreateNotebookInstanceOutput), output: &CreateNotebookInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

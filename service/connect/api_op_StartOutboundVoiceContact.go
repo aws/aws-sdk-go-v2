@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -149,6 +151,63 @@ type StartOutboundVoiceContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartOutboundVoiceContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartOutboundVoiceContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartOutboundVoiceContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnswerMachineDetectionConfig != nil {
+		s.WriteStruct(schemas.StartOutboundVoiceContactRequest_AnswerMachineDetectionConfig)
+		v.AnswerMachineDetectionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAttributes(s, schemas.StartOutboundVoiceContactRequest_Attributes, v.Attributes)
+	if v.CampaignId != nil {
+		s.WriteString(schemas.StartOutboundVoiceContactRequest_CampaignId, *v.CampaignId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartOutboundVoiceContactRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ContactFlowId != nil {
+		s.WriteString(schemas.StartOutboundVoiceContactRequest_ContactFlowId, *v.ContactFlowId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.StartOutboundVoiceContactRequest_Description, *v.Description)
+	}
+	if v.DestinationPhoneNumber != nil {
+		s.WriteString(schemas.StartOutboundVoiceContactRequest_DestinationPhoneNumber, *v.DestinationPhoneNumber)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StartOutboundVoiceContactRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartOutboundVoiceContactRequest_Name, *v.Name)
+	}
+	if v.OutboundStrategy != nil {
+		s.WriteStruct(schemas.StartOutboundVoiceContactRequest_OutboundStrategy)
+		v.OutboundStrategy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.StartOutboundVoiceContactRequest_QueueId, *v.QueueId)
+	}
+	serializeContactReferences(s, schemas.StartOutboundVoiceContactRequest_References, v.References)
+	if v.RelatedContactId != nil {
+		s.WriteString(schemas.StartOutboundVoiceContactRequest_RelatedContactId, *v.RelatedContactId)
+	}
+	if v.RingTimeoutInSeconds != nil {
+		s.WriteInt32(schemas.StartOutboundVoiceContactRequest_RingTimeoutInSeconds, *v.RingTimeoutInSeconds)
+	}
+	if v.SourcePhoneNumber != nil {
+		s.WriteString(schemas.StartOutboundVoiceContactRequest_SourcePhoneNumber, *v.SourcePhoneNumber)
+	}
+	if v.TrafficType != "" {
+		s.WriteString(schemas.StartOutboundVoiceContactRequest_TrafficType, string(v.TrafficType))
+	}
+}
+
 type StartOutboundVoiceContactOutput struct {
 
 	// The identifier of this contact within the Connect Customer instance.
@@ -160,13 +219,32 @@ type StartOutboundVoiceContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartOutboundVoiceContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartOutboundVoiceContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartOutboundVoiceContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.StartOutboundVoiceContactResponse_ContactId, *v.ContactId)
+	}
+}
+func (v *StartOutboundVoiceContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartOutboundVoiceContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartOutboundVoiceContactResponse_ContactId:
+			v.ContactId = new(string)
+			return d.ReadString(schemas.StartOutboundVoiceContactResponse_ContactId, v.ContactId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartOutboundVoiceContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartOutboundVoiceContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartOutboundVoiceContact, schemas.StartOutboundVoiceContactRequest, schemas.StartOutboundVoiceContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartOutboundVoiceContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartOutboundVoiceContact, schemas.StartOutboundVoiceContactRequest, schemas.StartOutboundVoiceContactResponse), output: &StartOutboundVoiceContactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

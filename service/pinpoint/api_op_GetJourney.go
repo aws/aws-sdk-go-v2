@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type GetJourneyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJourneyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJourneyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJourneyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetJourneyRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.JourneyId != nil {
+		s.WriteString(schemas.GetJourneyRequest_JourneyId, *v.JourneyId)
+	}
+}
+
 type GetJourneyOutput struct {
 
 	// Provides information about the status, configuration, and other settings for a
@@ -55,13 +72,34 @@ type GetJourneyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJourneyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJourneyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJourneyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JourneyResponse != nil {
+		s.WriteStruct(schemas.GetJourneyResponse_JourneyResponse)
+		v.JourneyResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetJourneyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetJourneyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetJourneyResponse_JourneyResponse:
+			v.JourneyResponse = &types.JourneyResponse{}
+			return v.JourneyResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetJourneyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetJourney{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJourney, schemas.GetJourneyRequest, schemas.GetJourneyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetJourney{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJourney, schemas.GetJourneyRequest, schemas.GetJourneyResponse), output: &GetJourneyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

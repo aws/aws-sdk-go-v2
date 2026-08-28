@@ -5,7 +5,9 @@ package internetmonitor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -104,6 +106,42 @@ type UpdateMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMonitorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMonitorInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateMonitorInput_ClientToken, *v.ClientToken)
+	}
+	if v.HealthEventsConfig != nil {
+		s.WriteStruct(schemas.UpdateMonitorInput_HealthEventsConfig)
+		v.HealthEventsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InternetMeasurementsLogDelivery != nil {
+		s.WriteStruct(schemas.UpdateMonitorInput_InternetMeasurementsLogDelivery)
+		v.InternetMeasurementsLogDelivery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxCityNetworksToMonitor != nil {
+		s.WriteInt32(schemas.UpdateMonitorInput_MaxCityNetworksToMonitor, *v.MaxCityNetworksToMonitor)
+	}
+	if v.MonitorName != nil {
+		s.WriteString(schemas.UpdateMonitorInput_MonitorName, *v.MonitorName)
+	}
+	serializeSetOfARNs(s, schemas.UpdateMonitorInput_ResourcesToAdd, v.ResourcesToAdd)
+	serializeSetOfARNs(s, schemas.UpdateMonitorInput_ResourcesToRemove, v.ResourcesToRemove)
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateMonitorInput_Status, string(v.Status))
+	}
+	if v.TrafficPercentageToMonitor != nil {
+		s.WriteInt32(schemas.UpdateMonitorInput_TrafficPercentageToMonitor, *v.TrafficPercentageToMonitor)
+	}
+}
+
 type UpdateMonitorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the monitor.
@@ -122,13 +160,42 @@ type UpdateMonitorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMonitorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMonitorOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMonitorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonitorArn != nil {
+		s.WriteString(schemas.UpdateMonitorOutput_MonitorArn, *v.MonitorArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateMonitorOutput_Status, string(v.Status))
+	}
+}
+func (v *UpdateMonitorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMonitorOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMonitorOutput_MonitorArn:
+			v.MonitorArn = new(string)
+			return d.ReadString(schemas.UpdateMonitorOutput_MonitorArn, v.MonitorArn)
+		case schemas.UpdateMonitorOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateMonitorOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.MonitorConfigState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMonitor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMonitor, schemas.UpdateMonitorInput, schemas.UpdateMonitorOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMonitor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMonitor, schemas.UpdateMonitorInput, schemas.UpdateMonitorOutput), output: &UpdateMonitorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

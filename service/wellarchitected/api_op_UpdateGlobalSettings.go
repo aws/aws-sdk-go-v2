@@ -4,7 +4,9 @@ package wellarchitected
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,26 @@ type UpdateGlobalSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGlobalSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGlobalSettingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGlobalSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DiscoveryIntegrationStatus != "" {
+		s.WriteString(schemas.UpdateGlobalSettingsInput_DiscoveryIntegrationStatus, string(v.DiscoveryIntegrationStatus))
+	}
+	if v.JiraConfiguration != nil {
+		s.WriteStruct(schemas.UpdateGlobalSettingsInput_JiraConfiguration)
+		v.JiraConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrganizationSharingStatus != "" {
+		s.WriteString(schemas.UpdateGlobalSettingsInput_OrganizationSharingStatus, string(v.OrganizationSharingStatus))
+	}
+}
+
 type UpdateGlobalSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +68,26 @@ type UpdateGlobalSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGlobalSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGlobalSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateGlobalSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGlobalSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateGlobalSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGlobalSettings, schemas.UpdateGlobalSettingsInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateGlobalSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGlobalSettings, schemas.UpdateGlobalSettingsInput, nil), output: &UpdateGlobalSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

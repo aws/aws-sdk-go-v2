@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DescribeSolutionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSolutionVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSolutionVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSolutionVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SolutionVersionArn != nil {
+		s.WriteString(schemas.DescribeSolutionVersionRequest_solutionVersionArn, *v.SolutionVersionArn)
+	}
+}
+
 type DescribeSolutionVersionOutput struct {
 
 	// The solution version.
@@ -48,13 +62,34 @@ type DescribeSolutionVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSolutionVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSolutionVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSolutionVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SolutionVersion != nil {
+		s.WriteStruct(schemas.DescribeSolutionVersionResponse_solutionVersion)
+		v.SolutionVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeSolutionVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSolutionVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSolutionVersionResponse_solutionVersion:
+			v.SolutionVersion = &types.SolutionVersion{}
+			return v.SolutionVersion.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSolutionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSolutionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSolutionVersion, schemas.DescribeSolutionVersionRequest, schemas.DescribeSolutionVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeSolutionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSolutionVersion, schemas.DescribeSolutionVersionRequest, schemas.DescribeSolutionVersionResponse), output: &DescribeSolutionVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

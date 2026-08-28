@@ -4,7 +4,9 @@ package personalize
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DescribeFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFilterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFilterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterArn != nil {
+		s.WriteString(schemas.DescribeFilterRequest_filterArn, *v.FilterArn)
+	}
+}
+
 type DescribeFilterOutput struct {
 
 	// The filter's details.
@@ -45,13 +59,34 @@ type DescribeFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFilterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFilterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.DescribeFilterResponse_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFilterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFilterResponse_filter:
+			v.Filter = &types.Filter{}
+			return v.Filter.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFilter, schemas.DescribeFilterRequest, schemas.DescribeFilterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFilter, schemas.DescribeFilterRequest, schemas.DescribeFilterResponse), output: &DescribeFilterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

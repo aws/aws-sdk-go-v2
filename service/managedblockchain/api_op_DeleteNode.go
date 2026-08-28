@@ -4,6 +4,8 @@ package managedblockchain
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type DeleteNodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteNodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteNodeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MemberId != nil {
+		s.WriteString(schemas.DeleteNodeInput_MemberId, *v.MemberId)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.DeleteNodeInput_NetworkId, *v.NetworkId)
+	}
+	if v.NodeId != nil {
+		s.WriteString(schemas.DeleteNodeInput_NodeId, *v.NodeId)
+	}
+}
+
 type DeleteNodeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +77,26 @@ type DeleteNodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteNodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteNodeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteNodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteNodeOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNode, schemas.DeleteNodeInput, schemas.DeleteNodeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNode, schemas.DeleteNodeInput, schemas.DeleteNodeOutput), output: &DeleteNodeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

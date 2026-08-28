@@ -4,6 +4,8 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -89,6 +91,19 @@ type AssociateSoftwareToImageBuilderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSoftwareToImageBuilderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSoftwareToImageBuilderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSoftwareToImageBuilderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageBuilderName != nil {
+		s.WriteString(schemas.AssociateSoftwareToImageBuilderRequest_ImageBuilderName, *v.ImageBuilderName)
+	}
+	serializeStringList(s, schemas.AssociateSoftwareToImageBuilderRequest_SoftwareNames, v.SoftwareNames)
+}
+
 type AssociateSoftwareToImageBuilderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -96,13 +111,26 @@ type AssociateSoftwareToImageBuilderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSoftwareToImageBuilderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSoftwareToImageBuilderResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSoftwareToImageBuilderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateSoftwareToImageBuilderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateSoftwareToImageBuilderResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateSoftwareToImageBuilderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpAssociateSoftwareToImageBuilder{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSoftwareToImageBuilder, schemas.AssociateSoftwareToImageBuilderRequest, schemas.AssociateSoftwareToImageBuilderResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpAssociateSoftwareToImageBuilder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSoftwareToImageBuilder, schemas.AssociateSoftwareToImageBuilderRequest, schemas.AssociateSoftwareToImageBuilderResult), output: &AssociateSoftwareToImageBuilderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteWorkteamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkteamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkteamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkteamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkteamName != nil {
+		s.WriteString(schemas.DeleteWorkteamRequest_WorkteamName, *v.WorkteamName)
+	}
+}
+
 type DeleteWorkteamOutput struct {
 
 	// Returns true if the work team was successfully deleted; otherwise, returns false
@@ -47,13 +61,32 @@ type DeleteWorkteamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkteamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkteamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkteamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Success != nil {
+		s.WriteBool(schemas.DeleteWorkteamResponse_Success, *v.Success)
+	}
+}
+func (v *DeleteWorkteamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWorkteamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteWorkteamResponse_Success:
+			v.Success = new(bool)
+			return d.ReadBool(schemas.DeleteWorkteamResponse_Success, v.Success)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWorkteamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteWorkteam{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkteam, schemas.DeleteWorkteamRequest, schemas.DeleteWorkteamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteWorkteam{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkteam, schemas.DeleteWorkteamRequest, schemas.DeleteWorkteamResponse), output: &DeleteWorkteamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

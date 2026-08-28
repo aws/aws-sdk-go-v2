@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,21 @@ type GetSmsTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSmsTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSmsTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSmsTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateName != nil {
+		s.WriteString(schemas.GetSmsTemplateRequest_TemplateName, *v.TemplateName)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.GetSmsTemplateRequest_Version, *v.Version)
+	}
+}
+
 type GetSmsTemplateOutput struct {
 
 	// Provides information about the content and settings for a message template that
@@ -76,13 +93,34 @@ type GetSmsTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSmsTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSmsTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSmsTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SMSTemplateResponse != nil {
+		s.WriteStruct(schemas.GetSmsTemplateResponse_SMSTemplateResponse)
+		v.SMSTemplateResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSmsTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSmsTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSmsTemplateResponse_SMSTemplateResponse:
+			v.SMSTemplateResponse = &types.SMSTemplateResponse{}
+			return v.SMSTemplateResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSmsTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSmsTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSmsTemplate, schemas.GetSmsTemplateRequest, schemas.GetSmsTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSmsTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSmsTemplate, schemas.GetSmsTemplateRequest, schemas.GetSmsTemplateResponse), output: &GetSmsTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

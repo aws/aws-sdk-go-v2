@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -63,6 +65,29 @@ type UpdateFeatureGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFeatureGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFeatureGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFeatureGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFeatureAdditions(s, schemas.UpdateFeatureGroupRequest_FeatureAdditions, v.FeatureAdditions)
+	if v.FeatureGroupName != nil {
+		s.WriteString(schemas.UpdateFeatureGroupRequest_FeatureGroupName, *v.FeatureGroupName)
+	}
+	if v.OnlineStoreConfig != nil {
+		s.WriteStruct(schemas.UpdateFeatureGroupRequest_OnlineStoreConfig)
+		v.OnlineStoreConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ThroughputConfig != nil {
+		s.WriteStruct(schemas.UpdateFeatureGroupRequest_ThroughputConfig)
+		v.ThroughputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateFeatureGroupOutput struct {
 
 	// The Amazon Resource Number (ARN) of the feature group that you're updating.
@@ -76,13 +101,32 @@ type UpdateFeatureGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFeatureGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFeatureGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFeatureGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FeatureGroupArn != nil {
+		s.WriteString(schemas.UpdateFeatureGroupResponse_FeatureGroupArn, *v.FeatureGroupArn)
+	}
+}
+func (v *UpdateFeatureGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFeatureGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFeatureGroupResponse_FeatureGroupArn:
+			v.FeatureGroupArn = new(string)
+			return d.ReadString(schemas.UpdateFeatureGroupResponse_FeatureGroupArn, v.FeatureGroupArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFeatureGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateFeatureGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFeatureGroup, schemas.UpdateFeatureGroupRequest, schemas.UpdateFeatureGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateFeatureGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFeatureGroup, schemas.UpdateFeatureGroupRequest, schemas.UpdateFeatureGroupResponse), output: &UpdateFeatureGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

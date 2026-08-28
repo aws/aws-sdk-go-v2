@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type ModifySamlPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifySamlPropertiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifySamlPropertiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifySamlPropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeletableSamlPropertiesList(s, schemas.ModifySamlPropertiesRequest_PropertiesToDelete, v.PropertiesToDelete)
+	if v.ResourceId != nil {
+		s.WriteString(schemas.ModifySamlPropertiesRequest_ResourceId, *v.ResourceId)
+	}
+	if v.SamlProperties != nil {
+		s.WriteStruct(schemas.ModifySamlPropertiesRequest_SamlProperties)
+		v.SamlProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ModifySamlPropertiesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -56,13 +76,26 @@ type ModifySamlPropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifySamlPropertiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifySamlPropertiesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifySamlPropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ModifySamlPropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifySamlPropertiesResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifySamlPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifySamlProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifySamlProperties, schemas.ModifySamlPropertiesRequest, schemas.ModifySamlPropertiesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpModifySamlProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifySamlProperties, schemas.ModifySamlPropertiesRequest, schemas.ModifySamlPropertiesResult), output: &ModifySamlPropertiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

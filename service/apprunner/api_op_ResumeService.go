@@ -4,7 +4,9 @@ package apprunner
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type ResumeServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResumeServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResumeServiceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResumeServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.ResumeServiceRequest_ServiceArn, *v.ServiceArn)
+	}
+}
+
 type ResumeServiceOutput struct {
 
 	// A description of the App Runner service that this request just resumed.
@@ -56,13 +70,40 @@ type ResumeServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResumeServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResumeServiceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResumeServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.ResumeServiceResponse_OperationId, *v.OperationId)
+	}
+	if v.Service != nil {
+		s.WriteStruct(schemas.ResumeServiceResponse_Service)
+		v.Service.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ResumeServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResumeServiceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResumeServiceResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.ResumeServiceResponse_OperationId, v.OperationId)
+		case schemas.ResumeServiceResponse_Service:
+			v.Service = &types.Service{}
+			return v.Service.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResumeServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpResumeService{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResumeService, schemas.ResumeServiceRequest, schemas.ResumeServiceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpResumeService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResumeService, schemas.ResumeServiceRequest, schemas.ResumeServiceResponse), output: &ResumeServiceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

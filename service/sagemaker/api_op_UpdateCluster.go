@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,50 @@ type UpdateClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScaling != nil {
+		s.WriteStruct(schemas.UpdateClusterRequest_AutoScaling)
+		v.AutoScaling.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.UpdateClusterRequest_ClusterName, *v.ClusterName)
+	}
+	if v.ClusterRole != nil {
+		s.WriteString(schemas.UpdateClusterRequest_ClusterRole, *v.ClusterRole)
+	}
+	serializeClusterInstanceGroupSpecifications(s, schemas.UpdateClusterRequest_InstanceGroups, v.InstanceGroups)
+	serializeClusterInstanceGroupsToDelete(s, schemas.UpdateClusterRequest_InstanceGroupsToDelete, v.InstanceGroupsToDelete)
+	if v.NodeProvisioningMode != "" {
+		s.WriteString(schemas.UpdateClusterRequest_NodeProvisioningMode, string(v.NodeProvisioningMode))
+	}
+	if v.NodeRecovery != "" {
+		s.WriteString(schemas.UpdateClusterRequest_NodeRecovery, string(v.NodeRecovery))
+	}
+	if v.Orchestrator != nil {
+		s.WriteStruct(schemas.UpdateClusterRequest_Orchestrator)
+		v.Orchestrator.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeClusterRestrictedInstanceGroupSpecifications(s, schemas.UpdateClusterRequest_RestrictedInstanceGroups, v.RestrictedInstanceGroups)
+	if v.RestrictedInstanceGroupsConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterRequest_RestrictedInstanceGroupsConfig)
+		v.RestrictedInstanceGroupsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TieredStorageConfig != nil {
+		s.WriteStruct(schemas.UpdateClusterRequest_TieredStorageConfig)
+		v.TieredStorageConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateClusterOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated SageMaker HyperPod cluster.
@@ -88,13 +134,32 @@ type UpdateClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.UpdateClusterResponse_ClusterArn, *v.ClusterArn)
+	}
+}
+func (v *UpdateClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateClusterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateClusterResponse_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.UpdateClusterResponse_ClusterArn, v.ClusterArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCluster, schemas.UpdateClusterRequest, schemas.UpdateClusterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCluster, schemas.UpdateClusterRequest, schemas.UpdateClusterResponse), output: &UpdateClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

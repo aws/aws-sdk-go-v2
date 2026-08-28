@@ -4,7 +4,9 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,23 @@ type PutExternalEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutExternalEvaluationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutExternalEvaluationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutExternalEvaluationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigRuleName != nil {
+		s.WriteString(schemas.PutExternalEvaluationRequest_ConfigRuleName, *v.ConfigRuleName)
+	}
+	if v.ExternalEvaluation != nil {
+		s.WriteStruct(schemas.PutExternalEvaluationRequest_ExternalEvaluation)
+		v.ExternalEvaluation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutExternalEvaluationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +66,26 @@ type PutExternalEvaluationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutExternalEvaluationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutExternalEvaluationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutExternalEvaluationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutExternalEvaluationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutExternalEvaluationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutExternalEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutExternalEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutExternalEvaluation, schemas.PutExternalEvaluationRequest, schemas.PutExternalEvaluationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutExternalEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutExternalEvaluation, schemas.PutExternalEvaluationRequest, schemas.PutExternalEvaluationResponse), output: &PutExternalEvaluationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

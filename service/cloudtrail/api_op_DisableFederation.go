@@ -4,7 +4,9 @@ package cloudtrail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,18 @@ type DisableFederationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableFederationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableFederationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableFederationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventDataStore != nil {
+		s.WriteString(schemas.DisableFederationRequest_EventDataStore, *v.EventDataStore)
+	}
+}
+
 type DisableFederationOutput struct {
 
 	//  The ARN of the event data store for which you disabled Lake query federation.
@@ -56,13 +70,42 @@ type DisableFederationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableFederationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableFederationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableFederationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventDataStoreArn != nil {
+		s.WriteString(schemas.DisableFederationResponse_EventDataStoreArn, *v.EventDataStoreArn)
+	}
+	if v.FederationStatus != "" {
+		s.WriteString(schemas.DisableFederationResponse_FederationStatus, string(v.FederationStatus))
+	}
+}
+func (v *DisableFederationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableFederationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisableFederationResponse_EventDataStoreArn:
+			v.EventDataStoreArn = new(string)
+			return d.ReadString(schemas.DisableFederationResponse_EventDataStoreArn, v.EventDataStoreArn)
+		case schemas.DisableFederationResponse_FederationStatus:
+			var ev string
+			if err := d.ReadString(schemas.DisableFederationResponse_FederationStatus, &ev); err != nil {
+				return err
+			}
+			v.FederationStatus = types.FederationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableFederationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisableFederation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableFederation, schemas.DisableFederationRequest, schemas.DisableFederationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisableFederation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableFederation, schemas.DisableFederationRequest, schemas.DisableFederationResponse), output: &DisableFederationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

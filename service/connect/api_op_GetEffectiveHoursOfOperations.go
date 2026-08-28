@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,27 @@ type GetEffectiveHoursOfOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEffectiveHoursOfOperationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEffectiveHoursOfOperationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEffectiveHoursOfOperationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FromDate != nil {
+		s.WriteString(schemas.GetEffectiveHoursOfOperationsRequest_FromDate, *v.FromDate)
+	}
+	if v.HoursOfOperationId != nil {
+		s.WriteString(schemas.GetEffectiveHoursOfOperationsRequest_HoursOfOperationId, *v.HoursOfOperationId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.GetEffectiveHoursOfOperationsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.ToDate != nil {
+		s.WriteString(schemas.GetEffectiveHoursOfOperationsRequest_ToDate, *v.ToDate)
+	}
+}
+
 type GetEffectiveHoursOfOperationsOutput struct {
 
 	// Information about the effective hours of operations.
@@ -72,13 +95,38 @@ type GetEffectiveHoursOfOperationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEffectiveHoursOfOperationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEffectiveHoursOfOperationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEffectiveHoursOfOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEffectiveHoursOfOperationList(s, schemas.GetEffectiveHoursOfOperationsResponse_EffectiveHoursOfOperationList, v.EffectiveHoursOfOperationList)
+	serializeEffectiveOverrideHoursList(s, schemas.GetEffectiveHoursOfOperationsResponse_EffectiveOverrideHoursList, v.EffectiveOverrideHoursList)
+	if v.TimeZone != nil {
+		s.WriteString(schemas.GetEffectiveHoursOfOperationsResponse_TimeZone, *v.TimeZone)
+	}
+}
+func (v *GetEffectiveHoursOfOperationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEffectiveHoursOfOperationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEffectiveHoursOfOperationsResponse_EffectiveHoursOfOperationList:
+			return deserializeEffectiveHoursOfOperationList(d, schemas.GetEffectiveHoursOfOperationsResponse_EffectiveHoursOfOperationList, &v.EffectiveHoursOfOperationList)
+		case schemas.GetEffectiveHoursOfOperationsResponse_EffectiveOverrideHoursList:
+			return deserializeEffectiveOverrideHoursList(d, schemas.GetEffectiveHoursOfOperationsResponse_EffectiveOverrideHoursList, &v.EffectiveOverrideHoursList)
+		case schemas.GetEffectiveHoursOfOperationsResponse_TimeZone:
+			v.TimeZone = new(string)
+			return d.ReadString(schemas.GetEffectiveHoursOfOperationsResponse_TimeZone, v.TimeZone)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEffectiveHoursOfOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEffectiveHoursOfOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEffectiveHoursOfOperations, schemas.GetEffectiveHoursOfOperationsRequest, schemas.GetEffectiveHoursOfOperationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEffectiveHoursOfOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEffectiveHoursOfOperations, schemas.GetEffectiveHoursOfOperationsRequest, schemas.GetEffectiveHoursOfOperationsResponse), output: &GetEffectiveHoursOfOperationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

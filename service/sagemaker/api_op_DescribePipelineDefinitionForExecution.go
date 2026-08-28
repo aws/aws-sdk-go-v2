@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type DescribePipelineDefinitionForExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePipelineDefinitionForExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePipelineDefinitionForExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePipelineDefinitionForExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineExecutionArn != nil {
+		s.WriteString(schemas.DescribePipelineDefinitionForExecutionRequest_PipelineExecutionArn, *v.PipelineExecutionArn)
+	}
+}
+
 type DescribePipelineDefinitionForExecutionOutput struct {
 
 	// The time when the pipeline was created.
@@ -48,13 +62,38 @@ type DescribePipelineDefinitionForExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePipelineDefinitionForExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePipelineDefinitionForExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePipelineDefinitionForExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribePipelineDefinitionForExecutionResponse_CreationTime, *v.CreationTime)
+	}
+	if v.PipelineDefinition != nil {
+		s.WriteString(schemas.DescribePipelineDefinitionForExecutionResponse_PipelineDefinition, *v.PipelineDefinition)
+	}
+}
+func (v *DescribePipelineDefinitionForExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePipelineDefinitionForExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePipelineDefinitionForExecutionResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribePipelineDefinitionForExecutionResponse_CreationTime, v.CreationTime)
+		case schemas.DescribePipelineDefinitionForExecutionResponse_PipelineDefinition:
+			v.PipelineDefinition = new(string)
+			return d.ReadString(schemas.DescribePipelineDefinitionForExecutionResponse_PipelineDefinition, v.PipelineDefinition)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePipelineDefinitionForExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePipelineDefinitionForExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePipelineDefinitionForExecution, schemas.DescribePipelineDefinitionForExecutionRequest, schemas.DescribePipelineDefinitionForExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePipelineDefinitionForExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePipelineDefinitionForExecution, schemas.DescribePipelineDefinitionForExecutionRequest, schemas.DescribePipelineDefinitionForExecutionResponse), output: &DescribePipelineDefinitionForExecutionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

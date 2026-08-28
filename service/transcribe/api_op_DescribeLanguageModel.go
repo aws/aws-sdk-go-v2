@@ -5,7 +5,9 @@ package transcribe
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -48,6 +50,18 @@ type DescribeLanguageModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLanguageModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLanguageModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLanguageModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelName != nil {
+		s.WriteString(schemas.DescribeLanguageModelRequest_ModelName, *v.ModelName)
+	}
+}
+
 type DescribeLanguageModelOutput struct {
 
 	// Provides information about the specified custom language model.
@@ -68,13 +82,34 @@ type DescribeLanguageModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLanguageModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLanguageModelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLanguageModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageModel != nil {
+		s.WriteStruct(schemas.DescribeLanguageModelResponse_LanguageModel)
+		v.LanguageModel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeLanguageModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLanguageModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLanguageModelResponse_LanguageModel:
+			v.LanguageModel = &types.LanguageModel{}
+			return v.LanguageModel.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLanguageModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLanguageModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLanguageModel, schemas.DescribeLanguageModelRequest, schemas.DescribeLanguageModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLanguageModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLanguageModel, schemas.DescribeLanguageModelRequest, schemas.DescribeLanguageModelResponse), output: &DescribeLanguageModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

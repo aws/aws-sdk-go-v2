@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,44 @@ type UpdateProtectedQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProtectedQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProtectedQueryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProtectedQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.UpdateProtectedQueryInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.ProtectedQueryIdentifier != nil {
+		s.WriteString(schemas.UpdateProtectedQueryInput_protectedQueryIdentifier, *v.ProtectedQueryIdentifier)
+	}
+	if v.TargetStatus != "" {
+		s.WriteString(schemas.UpdateProtectedQueryInput_targetStatus, string(v.TargetStatus))
+	}
+}
+func (v *UpdateProtectedQueryInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProtectedQueryInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProtectedQueryInput_membershipIdentifier:
+			v.MembershipIdentifier = new(string)
+			return d.ReadString(schemas.UpdateProtectedQueryInput_membershipIdentifier, v.MembershipIdentifier)
+		case schemas.UpdateProtectedQueryInput_protectedQueryIdentifier:
+			v.ProtectedQueryIdentifier = new(string)
+			return d.ReadString(schemas.UpdateProtectedQueryInput_protectedQueryIdentifier, v.ProtectedQueryIdentifier)
+		case schemas.UpdateProtectedQueryInput_targetStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateProtectedQueryInput_targetStatus, &ev); err != nil {
+				return err
+			}
+			v.TargetStatus = types.TargetProtectedQueryStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type UpdateProtectedQueryOutput struct {
 
 	// The protected query output.
@@ -58,13 +98,34 @@ type UpdateProtectedQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProtectedQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProtectedQueryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProtectedQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProtectedQuery != nil {
+		s.WriteStruct(schemas.UpdateProtectedQueryOutput_protectedQuery)
+		v.ProtectedQuery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateProtectedQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProtectedQueryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProtectedQueryOutput_protectedQuery:
+			v.ProtectedQuery = &types.ProtectedQuery{}
+			return v.ProtectedQuery.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProtectedQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateProtectedQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProtectedQuery, schemas.UpdateProtectedQueryInput, schemas.UpdateProtectedQueryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateProtectedQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProtectedQuery, schemas.UpdateProtectedQueryInput, schemas.UpdateProtectedQueryOutput), output: &UpdateProtectedQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

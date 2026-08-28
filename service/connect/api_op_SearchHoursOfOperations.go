@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,34 @@ type SearchHoursOfOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchHoursOfOperationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchHoursOfOperationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchHoursOfOperationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SearchHoursOfOperationsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchHoursOfOperationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchHoursOfOperationsRequest_NextToken, *v.NextToken)
+	}
+	if v.SearchCriteria != nil {
+		s.WriteStruct(schemas.SearchHoursOfOperationsRequest_SearchCriteria)
+		v.SearchCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SearchFilter != nil {
+		s.WriteStruct(schemas.SearchHoursOfOperationsRequest_SearchFilter)
+		v.SearchFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchHoursOfOperationsOutput struct {
 
 	// The total number of hours of operations which matched your search query.
@@ -69,13 +99,41 @@ type SearchHoursOfOperationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchHoursOfOperationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchHoursOfOperationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchHoursOfOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateTotalCount != nil {
+		s.WriteInt64(schemas.SearchHoursOfOperationsResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
+	}
+	serializeHoursOfOperationList(s, schemas.SearchHoursOfOperationsResponse_HoursOfOperations, v.HoursOfOperations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchHoursOfOperationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *SearchHoursOfOperationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchHoursOfOperationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchHoursOfOperationsResponse_ApproximateTotalCount:
+			v.ApproximateTotalCount = new(int64)
+			return d.ReadInt64(schemas.SearchHoursOfOperationsResponse_ApproximateTotalCount, v.ApproximateTotalCount)
+		case schemas.SearchHoursOfOperationsResponse_HoursOfOperations:
+			return deserializeHoursOfOperationList(d, schemas.SearchHoursOfOperationsResponse_HoursOfOperations, &v.HoursOfOperations)
+		case schemas.SearchHoursOfOperationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchHoursOfOperationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchHoursOfOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchHoursOfOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchHoursOfOperations, schemas.SearchHoursOfOperationsRequest, schemas.SearchHoursOfOperationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchHoursOfOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchHoursOfOperations, schemas.SearchHoursOfOperationsRequest, schemas.SearchHoursOfOperationsResponse), output: &SearchHoursOfOperationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package internetmonitor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -44,6 +46,21 @@ type GetMonitorInput struct {
 	LinkedAccountId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetMonitorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMonitorInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LinkedAccountId != nil {
+		s.WriteString(schemas.GetMonitorInput_LinkedAccountId, *v.LinkedAccountId)
+	}
+	if v.MonitorName != nil {
+		s.WriteString(schemas.GetMonitorInput_MonitorName, *v.MonitorName)
+	}
 }
 
 type GetMonitorOutput struct {
@@ -132,13 +149,110 @@ type GetMonitorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMonitorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMonitorOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMonitorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetMonitorOutput_CreatedAt, *v.CreatedAt)
+	}
+	if v.HealthEventsConfig != nil {
+		s.WriteStruct(schemas.GetMonitorOutput_HealthEventsConfig)
+		v.HealthEventsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InternetMeasurementsLogDelivery != nil {
+		s.WriteStruct(schemas.GetMonitorOutput_InternetMeasurementsLogDelivery)
+		v.InternetMeasurementsLogDelivery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxCityNetworksToMonitor != nil {
+		s.WriteInt32(schemas.GetMonitorOutput_MaxCityNetworksToMonitor, *v.MaxCityNetworksToMonitor)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.GetMonitorOutput_ModifiedAt, *v.ModifiedAt)
+	}
+	if v.MonitorArn != nil {
+		s.WriteString(schemas.GetMonitorOutput_MonitorArn, *v.MonitorArn)
+	}
+	if v.MonitorName != nil {
+		s.WriteString(schemas.GetMonitorOutput_MonitorName, *v.MonitorName)
+	}
+	if v.ProcessingStatus != "" {
+		s.WriteString(schemas.GetMonitorOutput_ProcessingStatus, string(v.ProcessingStatus))
+	}
+	if v.ProcessingStatusInfo != nil {
+		s.WriteString(schemas.GetMonitorOutput_ProcessingStatusInfo, *v.ProcessingStatusInfo)
+	}
+	serializeSetOfARNs(s, schemas.GetMonitorOutput_Resources, v.Resources)
+	if v.Status != "" {
+		s.WriteString(schemas.GetMonitorOutput_Status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.GetMonitorOutput_Tags, v.Tags)
+	if v.TrafficPercentageToMonitor != nil {
+		s.WriteInt32(schemas.GetMonitorOutput_TrafficPercentageToMonitor, *v.TrafficPercentageToMonitor)
+	}
+}
+func (v *GetMonitorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMonitorOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMonitorOutput_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetMonitorOutput_CreatedAt, v.CreatedAt)
+		case schemas.GetMonitorOutput_HealthEventsConfig:
+			v.HealthEventsConfig = &types.HealthEventsConfig{}
+			return v.HealthEventsConfig.Deserialize(d)
+		case schemas.GetMonitorOutput_InternetMeasurementsLogDelivery:
+			v.InternetMeasurementsLogDelivery = &types.InternetMeasurementsLogDelivery{}
+			return v.InternetMeasurementsLogDelivery.Deserialize(d)
+		case schemas.GetMonitorOutput_MaxCityNetworksToMonitor:
+			v.MaxCityNetworksToMonitor = new(int32)
+			return d.ReadInt32(schemas.GetMonitorOutput_MaxCityNetworksToMonitor, v.MaxCityNetworksToMonitor)
+		case schemas.GetMonitorOutput_ModifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.GetMonitorOutput_ModifiedAt, v.ModifiedAt)
+		case schemas.GetMonitorOutput_MonitorArn:
+			v.MonitorArn = new(string)
+			return d.ReadString(schemas.GetMonitorOutput_MonitorArn, v.MonitorArn)
+		case schemas.GetMonitorOutput_MonitorName:
+			v.MonitorName = new(string)
+			return d.ReadString(schemas.GetMonitorOutput_MonitorName, v.MonitorName)
+		case schemas.GetMonitorOutput_ProcessingStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetMonitorOutput_ProcessingStatus, &ev); err != nil {
+				return err
+			}
+			v.ProcessingStatus = types.MonitorProcessingStatusCode(ev)
+			return nil
+		case schemas.GetMonitorOutput_ProcessingStatusInfo:
+			v.ProcessingStatusInfo = new(string)
+			return d.ReadString(schemas.GetMonitorOutput_ProcessingStatusInfo, v.ProcessingStatusInfo)
+		case schemas.GetMonitorOutput_Resources:
+			return deserializeSetOfARNs(d, schemas.GetMonitorOutput_Resources, &v.Resources)
+		case schemas.GetMonitorOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetMonitorOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.MonitorConfigState(ev)
+			return nil
+		case schemas.GetMonitorOutput_Tags:
+			return deserializeTagMap(d, schemas.GetMonitorOutput_Tags, &v.Tags)
+		case schemas.GetMonitorOutput_TrafficPercentageToMonitor:
+			v.TrafficPercentageToMonitor = new(int32)
+			return d.ReadInt32(schemas.GetMonitorOutput_TrafficPercentageToMonitor, v.TrafficPercentageToMonitor)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMonitor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMonitor, schemas.GetMonitorInput, schemas.GetMonitorOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMonitor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMonitor, schemas.GetMonitorInput, schemas.GetMonitorOutput), output: &GetMonitorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

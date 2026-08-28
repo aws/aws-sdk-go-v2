@@ -4,7 +4,9 @@ package workspaces
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,19 @@ type UpdateRulesOfIpGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRulesOfIpGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRulesOfIpGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRulesOfIpGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.UpdateRulesOfIpGroupRequest_GroupId, *v.GroupId)
+	}
+	serializeIpRuleList(s, schemas.UpdateRulesOfIpGroupRequest_UserRules, v.UserRules)
+}
+
 type UpdateRulesOfIpGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +62,26 @@ type UpdateRulesOfIpGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRulesOfIpGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRulesOfIpGroupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRulesOfIpGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateRulesOfIpGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRulesOfIpGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRulesOfIpGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateRulesOfIpGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRulesOfIpGroup, schemas.UpdateRulesOfIpGroupRequest, schemas.UpdateRulesOfIpGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateRulesOfIpGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRulesOfIpGroup, schemas.UpdateRulesOfIpGroupRequest, schemas.UpdateRulesOfIpGroupResult), output: &UpdateRulesOfIpGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

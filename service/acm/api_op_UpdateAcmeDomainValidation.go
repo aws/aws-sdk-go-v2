@@ -4,7 +4,9 @@ package acm
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/acm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/acm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 )
@@ -38,6 +40,18 @@ type UpdateAcmeDomainValidationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAcmeDomainValidationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAcmeDomainValidationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAcmeDomainValidationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcmeDomainValidationArn != nil {
+		s.WriteString(schemas.UpdateAcmeDomainValidationRequest_AcmeDomainValidationArn, *v.AcmeDomainValidationArn)
+	}
+	serializePrevalidationOptions(s, schemas.UpdateAcmeDomainValidationRequest_PrevalidationOptions, v.PrevalidationOptions)
+}
 func (in *UpdateAcmeDomainValidationInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ServiceType = ptr.String("ACM-ACME")
@@ -50,13 +64,26 @@ type UpdateAcmeDomainValidationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAcmeDomainValidationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAcmeDomainValidationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateAcmeDomainValidationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAcmeDomainValidationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAcmeDomainValidation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAcmeDomainValidation, schemas.UpdateAcmeDomainValidationRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateAcmeDomainValidation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAcmeDomainValidation, schemas.UpdateAcmeDomainValidationRequest, nil), output: &UpdateAcmeDomainValidationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package cloudtrail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type CancelQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelQueryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventDataStore != nil {
+		s.WriteString(schemas.CancelQueryRequest_EventDataStore, *v.EventDataStore)
+	}
+	if v.EventDataStoreOwnerAccountId != nil {
+		s.WriteString(schemas.CancelQueryRequest_EventDataStoreOwnerAccountId, *v.EventDataStoreOwnerAccountId)
+	}
+	if v.QueryId != nil {
+		s.WriteString(schemas.CancelQueryRequest_QueryId, *v.QueryId)
+	}
+}
+
 type CancelQueryOutput struct {
 
 	// The ID of the canceled query.
@@ -70,13 +90,48 @@ type CancelQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelQueryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventDataStoreOwnerAccountId != nil {
+		s.WriteString(schemas.CancelQueryResponse_EventDataStoreOwnerAccountId, *v.EventDataStoreOwnerAccountId)
+	}
+	if v.QueryId != nil {
+		s.WriteString(schemas.CancelQueryResponse_QueryId, *v.QueryId)
+	}
+	if v.QueryStatus != "" {
+		s.WriteString(schemas.CancelQueryResponse_QueryStatus, string(v.QueryStatus))
+	}
+}
+func (v *CancelQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelQueryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelQueryResponse_EventDataStoreOwnerAccountId:
+			v.EventDataStoreOwnerAccountId = new(string)
+			return d.ReadString(schemas.CancelQueryResponse_EventDataStoreOwnerAccountId, v.EventDataStoreOwnerAccountId)
+		case schemas.CancelQueryResponse_QueryId:
+			v.QueryId = new(string)
+			return d.ReadString(schemas.CancelQueryResponse_QueryId, v.QueryId)
+		case schemas.CancelQueryResponse_QueryStatus:
+			var ev string
+			if err := d.ReadString(schemas.CancelQueryResponse_QueryStatus, &ev); err != nil {
+				return err
+			}
+			v.QueryStatus = types.QueryStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelQuery, schemas.CancelQueryRequest, schemas.CancelQueryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCancelQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelQuery, schemas.CancelQueryRequest, schemas.CancelQueryResponse), output: &CancelQueryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type DescribeAuditFindingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAuditFindingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAuditFindingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAuditFindingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FindingId != nil {
+		s.WriteString(schemas.DescribeAuditFindingRequest_findingId, *v.FindingId)
+	}
+}
+
 type DescribeAuditFindingOutput struct {
 
 	// The findings (results) of the audit.
@@ -52,13 +66,34 @@ type DescribeAuditFindingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAuditFindingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAuditFindingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAuditFindingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Finding != nil {
+		s.WriteStruct(schemas.DescribeAuditFindingResponse_finding)
+		v.Finding.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAuditFindingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAuditFindingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAuditFindingResponse_finding:
+			v.Finding = &types.AuditFinding{}
+			return v.Finding.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAuditFindingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAuditFinding{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAuditFinding, schemas.DescribeAuditFindingRequest, schemas.DescribeAuditFindingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAuditFinding{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAuditFinding, schemas.DescribeAuditFindingRequest, schemas.DescribeAuditFindingResponse), output: &DescribeAuditFindingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

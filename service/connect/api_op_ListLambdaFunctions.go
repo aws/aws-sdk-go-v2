@@ -5,6 +5,8 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type ListLambdaFunctionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLambdaFunctionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLambdaFunctionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLambdaFunctionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListLambdaFunctionsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLambdaFunctionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLambdaFunctionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListLambdaFunctionsOutput struct {
 
 	// The Lambdafunction ARNs associated with the specified instance.
@@ -61,13 +81,35 @@ type ListLambdaFunctionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLambdaFunctionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLambdaFunctionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLambdaFunctionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFunctionArnsList(s, schemas.ListLambdaFunctionsResponse_LambdaFunctions, v.LambdaFunctions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLambdaFunctionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLambdaFunctionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLambdaFunctionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLambdaFunctionsResponse_LambdaFunctions:
+			return deserializeFunctionArnsList(d, schemas.ListLambdaFunctionsResponse_LambdaFunctions, &v.LambdaFunctions)
+		case schemas.ListLambdaFunctionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLambdaFunctionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLambdaFunctionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLambdaFunctions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLambdaFunctions, schemas.ListLambdaFunctionsRequest, schemas.ListLambdaFunctionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLambdaFunctions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLambdaFunctions, schemas.ListLambdaFunctionsRequest, schemas.ListLambdaFunctionsResponse), output: &ListLambdaFunctionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

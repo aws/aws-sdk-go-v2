@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,18 @@ type DeleteContactMethodInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContactMethodInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContactMethodRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContactMethodInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Protocol != "" {
+		s.WriteString(schemas.DeleteContactMethodRequest_protocol, string(v.Protocol))
+	}
+}
+
 type DeleteContactMethodOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -58,13 +72,29 @@ type DeleteContactMethodOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContactMethodOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContactMethodResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContactMethodOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.DeleteContactMethodResult_operations, v.Operations)
+}
+func (v *DeleteContactMethodOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteContactMethodResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteContactMethodResult_operations:
+			return deserializeOperationList(d, schemas.DeleteContactMethodResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteContactMethodMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteContactMethod{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContactMethod, schemas.DeleteContactMethodRequest, schemas.DeleteContactMethodResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteContactMethod{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContactMethod, schemas.DeleteContactMethodRequest, schemas.DeleteContactMethodResult), output: &DeleteContactMethodOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

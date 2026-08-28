@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -83,6 +85,38 @@ type UpdateAuthenticationProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAuthenticationProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAuthenticationProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAuthenticationProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIpCidrList(s, schemas.UpdateAuthenticationProfileRequest_AllowedIps, v.AllowedIps)
+	if v.AuthenticationProfileId != nil {
+		s.WriteString(schemas.UpdateAuthenticationProfileRequest_AuthenticationProfileId, *v.AuthenticationProfileId)
+	}
+	serializeIpCidrList(s, schemas.UpdateAuthenticationProfileRequest_BlockedIps, v.BlockedIps)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAuthenticationProfileRequest_Description, *v.Description)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateAuthenticationProfileRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAuthenticationProfileRequest_Name, *v.Name)
+	}
+	if v.PeriodicSessionDuration != nil {
+		s.WriteInt32(schemas.UpdateAuthenticationProfileRequest_PeriodicSessionDuration, *v.PeriodicSessionDuration)
+	}
+	if v.SessionInactivityDuration != nil {
+		s.WriteInt32(schemas.UpdateAuthenticationProfileRequest_SessionInactivityDuration, *v.SessionInactivityDuration)
+	}
+	if v.SessionInactivityHandlingEnabled != nil {
+		s.WriteBool(schemas.UpdateAuthenticationProfileRequest_SessionInactivityHandlingEnabled, *v.SessionInactivityHandlingEnabled)
+	}
+}
+
 type UpdateAuthenticationProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -90,13 +124,26 @@ type UpdateAuthenticationProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAuthenticationProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAuthenticationProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateAuthenticationProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAuthenticationProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAuthenticationProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAuthenticationProfile, schemas.UpdateAuthenticationProfileRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAuthenticationProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAuthenticationProfile, schemas.UpdateAuthenticationProfileRequest, nil), output: &UpdateAuthenticationProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

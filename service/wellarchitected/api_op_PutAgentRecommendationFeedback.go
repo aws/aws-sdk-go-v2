@@ -4,7 +4,9 @@ package wellarchitected
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,27 @@ type PutAgentRecommendationFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAgentRecommendationFeedbackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAgentRecommendationFeedbackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAgentRecommendationFeedbackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Comments != nil {
+		s.WriteString(schemas.PutAgentRecommendationFeedbackRequest_comments, *v.Comments)
+	}
+	if v.FeedbackCategory != "" {
+		s.WriteString(schemas.PutAgentRecommendationFeedbackRequest_feedbackCategory, string(v.FeedbackCategory))
+	}
+	if v.RecommendationArn != nil {
+		s.WriteString(schemas.PutAgentRecommendationFeedbackRequest_recommendationArn, *v.RecommendationArn)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.PutAgentRecommendationFeedbackRequest_type, string(v.Type))
+	}
+}
+
 type PutAgentRecommendationFeedbackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +76,26 @@ type PutAgentRecommendationFeedbackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAgentRecommendationFeedbackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAgentRecommendationFeedbackResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAgentRecommendationFeedbackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutAgentRecommendationFeedbackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAgentRecommendationFeedbackResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAgentRecommendationFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAgentRecommendationFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAgentRecommendationFeedback, schemas.PutAgentRecommendationFeedbackRequest, schemas.PutAgentRecommendationFeedbackResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutAgentRecommendationFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAgentRecommendationFeedback, schemas.PutAgentRecommendationFeedbackRequest, schemas.PutAgentRecommendationFeedbackResponse), output: &PutAgentRecommendationFeedbackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

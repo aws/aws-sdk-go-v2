@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,25 @@ type AssociateSecurityProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSecurityProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSecurityProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSecurityProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityArn != nil {
+		s.WriteString(schemas.AssociateSecurityProfilesRequest_EntityArn, *v.EntityArn)
+	}
+	if v.EntityType != "" {
+		s.WriteString(schemas.AssociateSecurityProfilesRequest_EntityType, string(v.EntityType))
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.AssociateSecurityProfilesRequest_InstanceId, *v.InstanceId)
+	}
+	serializeSecurityProfiles(s, schemas.AssociateSecurityProfilesRequest_SecurityProfiles, v.SecurityProfiles)
+}
+
 type AssociateSecurityProfilesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,13 +78,26 @@ type AssociateSecurityProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSecurityProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSecurityProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateSecurityProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateSecurityProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateSecurityProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSecurityProfiles, schemas.AssociateSecurityProfilesRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateSecurityProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSecurityProfiles, schemas.AssociateSecurityProfilesRequest, nil), output: &AssociateSecurityProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package apprunner
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -73,6 +75,46 @@ type UpdateServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingConfigurationArn != nil {
+		s.WriteString(schemas.UpdateServiceRequest_AutoScalingConfigurationArn, *v.AutoScalingConfigurationArn)
+	}
+	if v.HealthCheckConfiguration != nil {
+		s.WriteStruct(schemas.UpdateServiceRequest_HealthCheckConfiguration)
+		v.HealthCheckConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceConfiguration != nil {
+		s.WriteStruct(schemas.UpdateServiceRequest_InstanceConfiguration)
+		v.InstanceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkConfiguration != nil {
+		s.WriteStruct(schemas.UpdateServiceRequest_NetworkConfiguration)
+		v.NetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ObservabilityConfiguration != nil {
+		s.WriteStruct(schemas.UpdateServiceRequest_ObservabilityConfiguration)
+		v.ObservabilityConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.UpdateServiceRequest_ServiceArn, *v.ServiceArn)
+	}
+	if v.SourceConfiguration != nil {
+		s.WriteStruct(schemas.UpdateServiceRequest_SourceConfiguration)
+		v.SourceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateServiceOutput struct {
 
 	// The unique ID of the asynchronous operation that this request started. You can
@@ -94,13 +136,40 @@ type UpdateServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.UpdateServiceResponse_OperationId, *v.OperationId)
+	}
+	if v.Service != nil {
+		s.WriteStruct(schemas.UpdateServiceResponse_Service)
+		v.Service.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.UpdateServiceResponse_OperationId, v.OperationId)
+		case schemas.UpdateServiceResponse_Service:
+			v.Service = &types.Service{}
+			return v.Service.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateService{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateService, schemas.UpdateServiceRequest, schemas.UpdateServiceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateService, schemas.UpdateServiceRequest, schemas.UpdateServiceResponse), output: &UpdateServiceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

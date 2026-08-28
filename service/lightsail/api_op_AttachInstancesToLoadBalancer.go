@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,19 @@ type AttachInstancesToLoadBalancerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachInstancesToLoadBalancerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachInstancesToLoadBalancerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachInstancesToLoadBalancerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceNameList(s, schemas.AttachInstancesToLoadBalancerRequest_instanceNames, v.InstanceNames)
+	if v.LoadBalancerName != nil {
+		s.WriteString(schemas.AttachInstancesToLoadBalancerRequest_loadBalancerName, *v.LoadBalancerName)
+	}
+}
+
 type AttachInstancesToLoadBalancerOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -68,13 +83,29 @@ type AttachInstancesToLoadBalancerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachInstancesToLoadBalancerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachInstancesToLoadBalancerResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachInstancesToLoadBalancerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.AttachInstancesToLoadBalancerResult_operations, v.Operations)
+}
+func (v *AttachInstancesToLoadBalancerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttachInstancesToLoadBalancerResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttachInstancesToLoadBalancerResult_operations:
+			return deserializeOperationList(d, schemas.AttachInstancesToLoadBalancerResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAttachInstancesToLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAttachInstancesToLoadBalancer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachInstancesToLoadBalancer, schemas.AttachInstancesToLoadBalancerRequest, schemas.AttachInstancesToLoadBalancerResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAttachInstancesToLoadBalancer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachInstancesToLoadBalancer, schemas.AttachInstancesToLoadBalancerRequest, schemas.AttachInstancesToLoadBalancerResult), output: &AttachInstancesToLoadBalancerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

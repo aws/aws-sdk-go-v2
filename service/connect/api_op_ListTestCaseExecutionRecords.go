@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,33 @@ type ListTestCaseExecutionRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestCaseExecutionRecordsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestCaseExecutionRecordsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestCaseExecutionRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListTestCaseExecutionRecordsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTestCaseExecutionRecordsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestCaseExecutionRecordsRequest_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListTestCaseExecutionRecordsRequest_Status, string(v.Status))
+	}
+	if v.TestCaseExecutionId != nil {
+		s.WriteString(schemas.ListTestCaseExecutionRecordsRequest_TestCaseExecutionId, *v.TestCaseExecutionId)
+	}
+	if v.TestCaseId != nil {
+		s.WriteString(schemas.ListTestCaseExecutionRecordsRequest_TestCaseId, *v.TestCaseId)
+	}
+}
+
 type ListTestCaseExecutionRecordsOutput struct {
 
 	// An array of test case execution record objects.
@@ -70,13 +99,35 @@ type ListTestCaseExecutionRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestCaseExecutionRecordsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestCaseExecutionRecordsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestCaseExecutionRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExecutionRecordList(s, schemas.ListTestCaseExecutionRecordsResponse_ExecutionRecords, v.ExecutionRecords)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestCaseExecutionRecordsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListTestCaseExecutionRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTestCaseExecutionRecordsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTestCaseExecutionRecordsResponse_ExecutionRecords:
+			return deserializeExecutionRecordList(d, schemas.ListTestCaseExecutionRecordsResponse_ExecutionRecords, &v.ExecutionRecords)
+		case schemas.ListTestCaseExecutionRecordsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTestCaseExecutionRecordsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTestCaseExecutionRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTestCaseExecutionRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestCaseExecutionRecords, schemas.ListTestCaseExecutionRecordsRequest, schemas.ListTestCaseExecutionRecordsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTestCaseExecutionRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestCaseExecutionRecords, schemas.ListTestCaseExecutionRecordsRequest, schemas.ListTestCaseExecutionRecordsResponse), output: &ListTestCaseExecutionRecordsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

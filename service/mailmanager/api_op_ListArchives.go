@@ -5,7 +5,9 @@ package mailmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ListArchivesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListArchivesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListArchivesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListArchivesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListArchivesRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListArchivesRequest_PageSize, *v.PageSize)
+	}
+}
+
 // The response containing a list of your email archives.
 type ListArchivesOutput struct {
 
@@ -57,13 +74,35 @@ type ListArchivesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListArchivesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListArchivesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListArchivesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeArchivesList(s, schemas.ListArchivesResponse_Archives, v.Archives)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListArchivesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListArchivesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListArchivesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListArchivesResponse_Archives:
+			return deserializeArchivesList(d, schemas.ListArchivesResponse_Archives, &v.Archives)
+		case schemas.ListArchivesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListArchivesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListArchivesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListArchives{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListArchives, schemas.ListArchivesRequest, schemas.ListArchivesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListArchives{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListArchives, schemas.ListArchivesRequest, schemas.ListArchivesResponse), output: &ListArchivesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

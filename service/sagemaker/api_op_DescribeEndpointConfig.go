@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type DescribeEndpointConfigInput struct {
 	EndpointConfigName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeEndpointConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEndpointConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEndpointConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointConfigName != nil {
+		s.WriteString(schemas.DescribeEndpointConfigInput_EndpointConfigName, *v.EndpointConfigName)
+	}
 }
 
 type DescribeEndpointConfigOutput struct {
@@ -105,13 +119,108 @@ type DescribeEndpointConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEndpointConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEndpointConfigOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEndpointConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AsyncInferenceConfig != nil {
+		s.WriteStruct(schemas.DescribeEndpointConfigOutput_AsyncInferenceConfig)
+		v.AsyncInferenceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeEndpointConfigOutput_CreationTime, *v.CreationTime)
+	}
+	if v.DataCaptureConfig != nil {
+		s.WriteStruct(schemas.DescribeEndpointConfigOutput_DataCaptureConfig)
+		v.DataCaptureConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EnableNetworkIsolation != nil {
+		s.WriteBool(schemas.DescribeEndpointConfigOutput_EnableNetworkIsolation, *v.EnableNetworkIsolation)
+	}
+	if v.EndpointConfigArn != nil {
+		s.WriteString(schemas.DescribeEndpointConfigOutput_EndpointConfigArn, *v.EndpointConfigArn)
+	}
+	if v.EndpointConfigName != nil {
+		s.WriteString(schemas.DescribeEndpointConfigOutput_EndpointConfigName, *v.EndpointConfigName)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.DescribeEndpointConfigOutput_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.ExplainerConfig != nil {
+		s.WriteStruct(schemas.DescribeEndpointConfigOutput_ExplainerConfig)
+		v.ExplainerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.DescribeEndpointConfigOutput_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.MetricsConfig != nil {
+		s.WriteStruct(schemas.DescribeEndpointConfigOutput_MetricsConfig)
+		v.MetricsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeProductionVariantList(s, schemas.DescribeEndpointConfigOutput_ProductionVariants, v.ProductionVariants)
+	serializeProductionVariantList(s, schemas.DescribeEndpointConfigOutput_ShadowProductionVariants, v.ShadowProductionVariants)
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.DescribeEndpointConfigOutput_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeEndpointConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEndpointConfigOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEndpointConfigOutput_AsyncInferenceConfig:
+			v.AsyncInferenceConfig = &types.AsyncInferenceConfig{}
+			return v.AsyncInferenceConfig.Deserialize(d)
+		case schemas.DescribeEndpointConfigOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeEndpointConfigOutput_CreationTime, v.CreationTime)
+		case schemas.DescribeEndpointConfigOutput_DataCaptureConfig:
+			v.DataCaptureConfig = &types.DataCaptureConfig{}
+			return v.DataCaptureConfig.Deserialize(d)
+		case schemas.DescribeEndpointConfigOutput_EnableNetworkIsolation:
+			v.EnableNetworkIsolation = new(bool)
+			return d.ReadBool(schemas.DescribeEndpointConfigOutput_EnableNetworkIsolation, v.EnableNetworkIsolation)
+		case schemas.DescribeEndpointConfigOutput_EndpointConfigArn:
+			v.EndpointConfigArn = new(string)
+			return d.ReadString(schemas.DescribeEndpointConfigOutput_EndpointConfigArn, v.EndpointConfigArn)
+		case schemas.DescribeEndpointConfigOutput_EndpointConfigName:
+			v.EndpointConfigName = new(string)
+			return d.ReadString(schemas.DescribeEndpointConfigOutput_EndpointConfigName, v.EndpointConfigName)
+		case schemas.DescribeEndpointConfigOutput_ExecutionRoleArn:
+			v.ExecutionRoleArn = new(string)
+			return d.ReadString(schemas.DescribeEndpointConfigOutput_ExecutionRoleArn, v.ExecutionRoleArn)
+		case schemas.DescribeEndpointConfigOutput_ExplainerConfig:
+			v.ExplainerConfig = &types.ExplainerConfig{}
+			return v.ExplainerConfig.Deserialize(d)
+		case schemas.DescribeEndpointConfigOutput_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.DescribeEndpointConfigOutput_KmsKeyId, v.KmsKeyId)
+		case schemas.DescribeEndpointConfigOutput_MetricsConfig:
+			v.MetricsConfig = &types.MetricsConfig{}
+			return v.MetricsConfig.Deserialize(d)
+		case schemas.DescribeEndpointConfigOutput_ProductionVariants:
+			return deserializeProductionVariantList(d, schemas.DescribeEndpointConfigOutput_ProductionVariants, &v.ProductionVariants)
+		case schemas.DescribeEndpointConfigOutput_ShadowProductionVariants:
+			return deserializeProductionVariantList(d, schemas.DescribeEndpointConfigOutput_ShadowProductionVariants, &v.ShadowProductionVariants)
+		case schemas.DescribeEndpointConfigOutput_VpcConfig:
+			v.VpcConfig = &types.VpcConfig{}
+			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEndpointConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEndpointConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEndpointConfig, schemas.DescribeEndpointConfigInput, schemas.DescribeEndpointConfigOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEndpointConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEndpointConfig, schemas.DescribeEndpointConfigInput, schemas.DescribeEndpointConfigOutput), output: &DescribeEndpointConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

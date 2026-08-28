@@ -4,6 +4,8 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,21 @@ type DetachThingPrincipalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetachThingPrincipalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetachThingPrincipalRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetachThingPrincipalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Principal != nil {
+		s.WriteString(schemas.DetachThingPrincipalRequest_principal, *v.Principal)
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.DetachThingPrincipalRequest_thingName, *v.ThingName)
+	}
+}
+
 // The output from the DetachThingPrincipal operation.
 type DetachThingPrincipalOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -58,13 +75,26 @@ type DetachThingPrincipalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetachThingPrincipalOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetachThingPrincipalResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetachThingPrincipalOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DetachThingPrincipalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetachThingPrincipalResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetachThingPrincipalMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDetachThingPrincipal{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachThingPrincipal, schemas.DetachThingPrincipalRequest, schemas.DetachThingPrincipalResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDetachThingPrincipal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachThingPrincipal, schemas.DetachThingPrincipalRequest, schemas.DetachThingPrincipalResponse), output: &DetachThingPrincipalOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

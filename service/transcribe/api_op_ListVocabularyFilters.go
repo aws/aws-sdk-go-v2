@@ -5,7 +5,9 @@ package transcribe
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,24 @@ type ListVocabularyFiltersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVocabularyFiltersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVocabularyFiltersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVocabularyFiltersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListVocabularyFiltersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListVocabularyFiltersRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVocabularyFiltersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListVocabularyFiltersOutput struct {
 
 	// If NextToken is present in your response, it indicates that not all results are
@@ -70,13 +90,35 @@ type ListVocabularyFiltersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVocabularyFiltersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVocabularyFiltersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVocabularyFiltersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVocabularyFiltersResponse_NextToken, *v.NextToken)
+	}
+	serializeVocabularyFilters(s, schemas.ListVocabularyFiltersResponse_VocabularyFilters, v.VocabularyFilters)
+}
+func (v *ListVocabularyFiltersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVocabularyFiltersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVocabularyFiltersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVocabularyFiltersResponse_NextToken, v.NextToken)
+		case schemas.ListVocabularyFiltersResponse_VocabularyFilters:
+			return deserializeVocabularyFilters(d, schemas.ListVocabularyFiltersResponse_VocabularyFilters, &v.VocabularyFilters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVocabularyFiltersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListVocabularyFilters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVocabularyFilters, schemas.ListVocabularyFiltersRequest, schemas.ListVocabularyFiltersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListVocabularyFilters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVocabularyFilters, schemas.ListVocabularyFiltersRequest, schemas.ListVocabularyFiltersResponse), output: &ListVocabularyFiltersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

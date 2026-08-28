@@ -4,6 +4,8 @@ package wellarchitected
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type DeleteAgentContextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAgentContextInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAgentContextRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAgentContextInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteAgentContextRequest_id, *v.Id)
+	}
+	if v.ProfileArn != nil {
+		s.WriteString(schemas.DeleteAgentContextRequest_profileArn, *v.ProfileArn)
+	}
+}
+
 type DeleteAgentContextOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,13 +62,26 @@ type DeleteAgentContextOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAgentContextOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAgentContextResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAgentContextOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAgentContextOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAgentContextResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAgentContextMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAgentContext{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAgentContext, schemas.DeleteAgentContextRequest, schemas.DeleteAgentContextResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAgentContext{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAgentContext, schemas.DeleteAgentContextRequest, schemas.DeleteAgentContextResponse), output: &DeleteAgentContextOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

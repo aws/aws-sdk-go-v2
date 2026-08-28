@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -140,6 +142,40 @@ type CreateHyperParameterTuningJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHyperParameterTuningJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHyperParameterTuningJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHyperParameterTuningJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Autotune != nil {
+		s.WriteStruct(schemas.CreateHyperParameterTuningJobRequest_Autotune)
+		v.Autotune.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HyperParameterTuningJobConfig != nil {
+		s.WriteStruct(schemas.CreateHyperParameterTuningJobRequest_HyperParameterTuningJobConfig)
+		v.HyperParameterTuningJobConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HyperParameterTuningJobName != nil {
+		s.WriteString(schemas.CreateHyperParameterTuningJobRequest_HyperParameterTuningJobName, *v.HyperParameterTuningJobName)
+	}
+	serializeTagList(s, schemas.CreateHyperParameterTuningJobRequest_Tags, v.Tags)
+	if v.TrainingJobDefinition != nil {
+		s.WriteStruct(schemas.CreateHyperParameterTuningJobRequest_TrainingJobDefinition)
+		v.TrainingJobDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeHyperParameterTrainingJobDefinitions(s, schemas.CreateHyperParameterTuningJobRequest_TrainingJobDefinitions, v.TrainingJobDefinitions)
+	if v.WarmStartConfig != nil {
+		s.WriteStruct(schemas.CreateHyperParameterTuningJobRequest_WarmStartConfig)
+		v.WarmStartConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateHyperParameterTuningJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the tuning job. SageMaker assigns an ARN to a
@@ -154,13 +190,32 @@ type CreateHyperParameterTuningJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHyperParameterTuningJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHyperParameterTuningJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHyperParameterTuningJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HyperParameterTuningJobArn != nil {
+		s.WriteString(schemas.CreateHyperParameterTuningJobResponse_HyperParameterTuningJobArn, *v.HyperParameterTuningJobArn)
+	}
+}
+func (v *CreateHyperParameterTuningJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateHyperParameterTuningJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateHyperParameterTuningJobResponse_HyperParameterTuningJobArn:
+			v.HyperParameterTuningJobArn = new(string)
+			return d.ReadString(schemas.CreateHyperParameterTuningJobResponse_HyperParameterTuningJobArn, v.HyperParameterTuningJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateHyperParameterTuningJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateHyperParameterTuningJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHyperParameterTuningJob, schemas.CreateHyperParameterTuningJobRequest, schemas.CreateHyperParameterTuningJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateHyperParameterTuningJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHyperParameterTuningJob, schemas.CreateHyperParameterTuningJobRequest, schemas.CreateHyperParameterTuningJobResponse), output: &CreateHyperParameterTuningJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

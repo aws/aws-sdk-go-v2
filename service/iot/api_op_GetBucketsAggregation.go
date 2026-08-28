@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,32 @@ type GetBucketsAggregationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBucketsAggregationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBucketsAggregationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBucketsAggregationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationField != nil {
+		s.WriteString(schemas.GetBucketsAggregationRequest_aggregationField, *v.AggregationField)
+	}
+	if v.BucketsAggregationType != nil {
+		s.WriteStruct(schemas.GetBucketsAggregationRequest_bucketsAggregationType)
+		v.BucketsAggregationType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.GetBucketsAggregationRequest_indexName, *v.IndexName)
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.GetBucketsAggregationRequest_queryString, *v.QueryString)
+	}
+	if v.QueryVersion != nil {
+		s.WriteString(schemas.GetBucketsAggregationRequest_queryVersion, *v.QueryVersion)
+	}
+}
+
 type GetBucketsAggregationOutput struct {
 
 	// The main part of the response with a list of buckets. Each bucket contains a
@@ -74,13 +102,34 @@ type GetBucketsAggregationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBucketsAggregationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBucketsAggregationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBucketsAggregationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBuckets(s, schemas.GetBucketsAggregationResponse_buckets, v.Buckets)
+	if v.TotalCount != 0 {
+		s.WriteInt32(schemas.GetBucketsAggregationResponse_totalCount, v.TotalCount)
+	}
+}
+func (v *GetBucketsAggregationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBucketsAggregationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBucketsAggregationResponse_buckets:
+			return deserializeBuckets(d, schemas.GetBucketsAggregationResponse_buckets, &v.Buckets)
+		case schemas.GetBucketsAggregationResponse_totalCount:
+			return d.ReadInt32(schemas.GetBucketsAggregationResponse_totalCount, &v.TotalCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBucketsAggregationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBucketsAggregation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBucketsAggregation, schemas.GetBucketsAggregationRequest, schemas.GetBucketsAggregationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBucketsAggregation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBucketsAggregation, schemas.GetBucketsAggregationRequest, schemas.GetBucketsAggregationResponse), output: &GetBucketsAggregationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

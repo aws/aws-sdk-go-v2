@@ -5,7 +5,9 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -91,6 +93,36 @@ type ListUtteranceAnalyticsDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUtteranceAnalyticsDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUtteranceAnalyticsDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUtteranceAnalyticsDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListUtteranceAnalyticsDataRequest_botId, *v.BotId)
+	}
+	if v.EndDateTime != nil {
+		s.WriteTime(schemas.ListUtteranceAnalyticsDataRequest_endDateTime, *v.EndDateTime)
+	}
+	serializeAnalyticsUtteranceFilters(s, schemas.ListUtteranceAnalyticsDataRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListUtteranceAnalyticsDataRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUtteranceAnalyticsDataRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != nil {
+		s.WriteStruct(schemas.ListUtteranceAnalyticsDataRequest_sortBy)
+		v.SortBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartDateTime != nil {
+		s.WriteTime(schemas.ListUtteranceAnalyticsDataRequest_startDateTime, *v.StartDateTime)
+	}
+}
+
 type ListUtteranceAnalyticsDataOutput struct {
 
 	// The unique identifier of the bot that the utterances belong to.
@@ -116,13 +148,41 @@ type ListUtteranceAnalyticsDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUtteranceAnalyticsDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUtteranceAnalyticsDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUtteranceAnalyticsDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListUtteranceAnalyticsDataResponse_botId, *v.BotId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUtteranceAnalyticsDataResponse_nextToken, *v.NextToken)
+	}
+	serializeUtteranceSpecifications(s, schemas.ListUtteranceAnalyticsDataResponse_utterances, v.Utterances)
+}
+func (v *ListUtteranceAnalyticsDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUtteranceAnalyticsDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUtteranceAnalyticsDataResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.ListUtteranceAnalyticsDataResponse_botId, v.BotId)
+		case schemas.ListUtteranceAnalyticsDataResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUtteranceAnalyticsDataResponse_nextToken, v.NextToken)
+		case schemas.ListUtteranceAnalyticsDataResponse_utterances:
+			return deserializeUtteranceSpecifications(d, schemas.ListUtteranceAnalyticsDataResponse_utterances, &v.Utterances)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUtteranceAnalyticsDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListUtteranceAnalyticsData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUtteranceAnalyticsData, schemas.ListUtteranceAnalyticsDataRequest, schemas.ListUtteranceAnalyticsDataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListUtteranceAnalyticsData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUtteranceAnalyticsData, schemas.ListUtteranceAnalyticsDataRequest, schemas.ListUtteranceAnalyticsDataResponse), output: &ListUtteranceAnalyticsDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

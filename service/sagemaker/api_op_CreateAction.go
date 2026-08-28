@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,39 @@ type CreateActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionName != nil {
+		s.WriteString(schemas.CreateActionRequest_ActionName, *v.ActionName)
+	}
+	if v.ActionType != nil {
+		s.WriteString(schemas.CreateActionRequest_ActionType, *v.ActionType)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateActionRequest_Description, *v.Description)
+	}
+	if v.MetadataProperties != nil {
+		s.WriteStruct(schemas.CreateActionRequest_MetadataProperties)
+		v.MetadataProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeLineageEntityParameters(s, schemas.CreateActionRequest_Properties, v.Properties)
+	if v.Source != nil {
+		s.WriteStruct(schemas.CreateActionRequest_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateActionRequest_Status, string(v.Status))
+	}
+	serializeTagList(s, schemas.CreateActionRequest_Tags, v.Tags)
+}
+
 type CreateActionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the action.
@@ -76,13 +111,32 @@ type CreateActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateActionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionArn != nil {
+		s.WriteString(schemas.CreateActionResponse_ActionArn, *v.ActionArn)
+	}
+}
+func (v *CreateActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateActionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateActionResponse_ActionArn:
+			v.ActionArn = new(string)
+			return d.ReadString(schemas.CreateActionResponse_ActionArn, v.ActionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAction, schemas.CreateActionRequest, schemas.CreateActionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAction, schemas.CreateActionRequest, schemas.CreateActionResponse), output: &CreateActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

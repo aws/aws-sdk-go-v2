@@ -4,6 +4,8 @@ package schemas
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/schemas/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,27 @@ type GetCodeBindingSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCodeBindingSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCodeBindingSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCodeBindingSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Language != nil {
+		s.WriteString(schemas.GetCodeBindingSourceRequest_Language, *v.Language)
+	}
+	if v.RegistryName != nil {
+		s.WriteString(schemas.GetCodeBindingSourceRequest_RegistryName, *v.RegistryName)
+	}
+	if v.SchemaName != nil {
+		s.WriteString(schemas.GetCodeBindingSourceRequest_SchemaName, *v.SchemaName)
+	}
+	if v.SchemaVersion != nil {
+		s.WriteString(schemas.GetCodeBindingSourceRequest_SchemaVersion, *v.SchemaVersion)
+	}
+}
+
 type GetCodeBindingSourceOutput struct {
 	Body []byte
 
@@ -55,13 +78,31 @@ type GetCodeBindingSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCodeBindingSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCodeBindingSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCodeBindingSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteBlob(schemas.GetCodeBindingSourceResponse_Body, v.Body)
+	}
+}
+func (v *GetCodeBindingSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCodeBindingSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCodeBindingSourceResponse_Body:
+			return d.ReadBlob(schemas.GetCodeBindingSourceResponse_Body, &v.Body)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCodeBindingSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCodeBindingSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCodeBindingSource, schemas.GetCodeBindingSourceRequest, schemas.GetCodeBindingSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCodeBindingSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCodeBindingSource, schemas.GetCodeBindingSourceRequest, schemas.GetCodeBindingSourceResponse), output: &GetCodeBindingSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

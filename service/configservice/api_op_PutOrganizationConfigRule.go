@@ -4,7 +4,9 @@ package configservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -119,6 +121,35 @@ type PutOrganizationConfigRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutOrganizationConfigRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutOrganizationConfigRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutOrganizationConfigRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExcludedAccounts(s, schemas.PutOrganizationConfigRuleRequest_ExcludedAccounts, v.ExcludedAccounts)
+	if v.OrganizationConfigRuleName != nil {
+		s.WriteString(schemas.PutOrganizationConfigRuleRequest_OrganizationConfigRuleName, *v.OrganizationConfigRuleName)
+	}
+	if v.OrganizationCustomPolicyRuleMetadata != nil {
+		s.WriteStruct(schemas.PutOrganizationConfigRuleRequest_OrganizationCustomPolicyRuleMetadata)
+		v.OrganizationCustomPolicyRuleMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrganizationCustomRuleMetadata != nil {
+		s.WriteStruct(schemas.PutOrganizationConfigRuleRequest_OrganizationCustomRuleMetadata)
+		v.OrganizationCustomRuleMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrganizationManagedRuleMetadata != nil {
+		s.WriteStruct(schemas.PutOrganizationConfigRuleRequest_OrganizationManagedRuleMetadata)
+		v.OrganizationManagedRuleMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsList(s, schemas.PutOrganizationConfigRuleRequest_Tags, v.Tags)
+}
+
 type PutOrganizationConfigRuleOutput struct {
 
 	// The Amazon Resource Name (ARN) of an organization Config rule.
@@ -130,13 +161,32 @@ type PutOrganizationConfigRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutOrganizationConfigRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutOrganizationConfigRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutOrganizationConfigRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationConfigRuleArn != nil {
+		s.WriteString(schemas.PutOrganizationConfigRuleResponse_OrganizationConfigRuleArn, *v.OrganizationConfigRuleArn)
+	}
+}
+func (v *PutOrganizationConfigRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutOrganizationConfigRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutOrganizationConfigRuleResponse_OrganizationConfigRuleArn:
+			v.OrganizationConfigRuleArn = new(string)
+			return d.ReadString(schemas.PutOrganizationConfigRuleResponse_OrganizationConfigRuleArn, v.OrganizationConfigRuleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutOrganizationConfigRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutOrganizationConfigRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutOrganizationConfigRule, schemas.PutOrganizationConfigRuleRequest, schemas.PutOrganizationConfigRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutOrganizationConfigRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutOrganizationConfigRule, schemas.PutOrganizationConfigRuleRequest, schemas.PutOrganizationConfigRuleResponse), output: &PutOrganizationConfigRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

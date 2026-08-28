@@ -4,7 +4,9 @@ package cleanrooms
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type DeleteConfiguredTableAssociationAnalysisRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConfiguredTableAssociationAnalysisRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConfiguredTableAssociationAnalysisRuleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConfiguredTableAssociationAnalysisRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisRuleType != "" {
+		s.WriteString(schemas.DeleteConfiguredTableAssociationAnalysisRuleInput_analysisRuleType, string(v.AnalysisRuleType))
+	}
+	if v.ConfiguredTableAssociationIdentifier != nil {
+		s.WriteString(schemas.DeleteConfiguredTableAssociationAnalysisRuleInput_configuredTableAssociationIdentifier, *v.ConfiguredTableAssociationIdentifier)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.DeleteConfiguredTableAssociationAnalysisRuleInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+
 type DeleteConfiguredTableAssociationAnalysisRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +73,26 @@ type DeleteConfiguredTableAssociationAnalysisRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConfiguredTableAssociationAnalysisRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConfiguredTableAssociationAnalysisRuleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConfiguredTableAssociationAnalysisRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteConfiguredTableAssociationAnalysisRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteConfiguredTableAssociationAnalysisRuleOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteConfiguredTableAssociationAnalysisRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteConfiguredTableAssociationAnalysisRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConfiguredTableAssociationAnalysisRule, schemas.DeleteConfiguredTableAssociationAnalysisRuleInput, schemas.DeleteConfiguredTableAssociationAnalysisRuleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteConfiguredTableAssociationAnalysisRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConfiguredTableAssociationAnalysisRule, schemas.DeleteConfiguredTableAssociationAnalysisRuleInput, schemas.DeleteConfiguredTableAssociationAnalysisRuleOutput), output: &DeleteConfiguredTableAssociationAnalysisRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

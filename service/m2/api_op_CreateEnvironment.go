@@ -5,7 +5,9 @@ package m2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/m2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/m2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -91,6 +93,109 @@ type CreateEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEnvironmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateEnvironmentRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateEnvironmentRequest_description, *v.Description)
+	}
+	if v.EngineType != "" {
+		s.WriteString(schemas.CreateEnvironmentRequest_engineType, string(v.EngineType))
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.CreateEnvironmentRequest_engineVersion, *v.EngineVersion)
+	}
+	if v.HighAvailabilityConfig != nil {
+		s.WriteStruct(schemas.CreateEnvironmentRequest_highAvailabilityConfig)
+		v.HighAvailabilityConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.CreateEnvironmentRequest_instanceType, *v.InstanceType)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateEnvironmentRequest_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateEnvironmentRequest_name, *v.Name)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.CreateEnvironmentRequest_networkType, string(v.NetworkType))
+	}
+	if v.PreferredMaintenanceWindow != nil {
+		s.WriteString(schemas.CreateEnvironmentRequest_preferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
+	}
+	if v.PubliclyAccessible != false {
+		s.WriteBool(schemas.CreateEnvironmentRequest_publiclyAccessible, v.PubliclyAccessible)
+	}
+	serializeString50List(s, schemas.CreateEnvironmentRequest_securityGroupIds, v.SecurityGroupIds)
+	serializeStorageConfigurationList(s, schemas.CreateEnvironmentRequest_storageConfigurations, v.StorageConfigurations)
+	serializeString50List(s, schemas.CreateEnvironmentRequest_subnetIds, v.SubnetIds)
+	serializeTagMap(s, schemas.CreateEnvironmentRequest_tags, v.Tags)
+}
+func (v *CreateEnvironmentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEnvironmentRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEnvironmentRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateEnvironmentRequest_clientToken, v.ClientToken)
+		case schemas.CreateEnvironmentRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateEnvironmentRequest_description, v.Description)
+		case schemas.CreateEnvironmentRequest_engineType:
+			var ev string
+			if err := d.ReadString(schemas.CreateEnvironmentRequest_engineType, &ev); err != nil {
+				return err
+			}
+			v.EngineType = types.EngineType(ev)
+			return nil
+		case schemas.CreateEnvironmentRequest_engineVersion:
+			v.EngineVersion = new(string)
+			return d.ReadString(schemas.CreateEnvironmentRequest_engineVersion, v.EngineVersion)
+		case schemas.CreateEnvironmentRequest_highAvailabilityConfig:
+			v.HighAvailabilityConfig = &types.HighAvailabilityConfig{}
+			return v.HighAvailabilityConfig.Deserialize(d)
+		case schemas.CreateEnvironmentRequest_instanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.CreateEnvironmentRequest_instanceType, v.InstanceType)
+		case schemas.CreateEnvironmentRequest_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.CreateEnvironmentRequest_kmsKeyId, v.KmsKeyId)
+		case schemas.CreateEnvironmentRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateEnvironmentRequest_name, v.Name)
+		case schemas.CreateEnvironmentRequest_networkType:
+			var ev string
+			if err := d.ReadString(schemas.CreateEnvironmentRequest_networkType, &ev); err != nil {
+				return err
+			}
+			v.NetworkType = types.NetworkType(ev)
+			return nil
+		case schemas.CreateEnvironmentRequest_preferredMaintenanceWindow:
+			v.PreferredMaintenanceWindow = new(string)
+			return d.ReadString(schemas.CreateEnvironmentRequest_preferredMaintenanceWindow, v.PreferredMaintenanceWindow)
+		case schemas.CreateEnvironmentRequest_publiclyAccessible:
+			return d.ReadBool(schemas.CreateEnvironmentRequest_publiclyAccessible, &v.PubliclyAccessible)
+		case schemas.CreateEnvironmentRequest_securityGroupIds:
+			return deserializeString50List(d, schemas.CreateEnvironmentRequest_securityGroupIds, &v.SecurityGroupIds)
+		case schemas.CreateEnvironmentRequest_storageConfigurations:
+			return deserializeStorageConfigurationList(d, schemas.CreateEnvironmentRequest_storageConfigurations, &v.StorageConfigurations)
+		case schemas.CreateEnvironmentRequest_subnetIds:
+			return deserializeString50List(d, schemas.CreateEnvironmentRequest_subnetIds, &v.SubnetIds)
+		case schemas.CreateEnvironmentRequest_tags:
+			return deserializeTagMap(d, schemas.CreateEnvironmentRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateEnvironmentOutput struct {
 
 	// The unique identifier of the runtime environment.
@@ -104,13 +209,32 @@ type CreateEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEnvironmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.CreateEnvironmentResponse_environmentId, *v.EnvironmentId)
+	}
+}
+func (v *CreateEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEnvironmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEnvironmentResponse_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.CreateEnvironmentResponse_environmentId, v.EnvironmentId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironment, schemas.CreateEnvironmentRequest, schemas.CreateEnvironmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironment, schemas.CreateEnvironmentRequest, schemas.CreateEnvironmentResponse), output: &CreateEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

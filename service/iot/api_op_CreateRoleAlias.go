@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,25 @@ type CreateRoleAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRoleAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRoleAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRoleAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CredentialDurationSeconds != nil {
+		s.WriteInt32(schemas.CreateRoleAliasRequest_credentialDurationSeconds, *v.CredentialDurationSeconds)
+	}
+	if v.RoleAlias != nil {
+		s.WriteString(schemas.CreateRoleAliasRequest_roleAlias, *v.RoleAlias)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateRoleAliasRequest_roleArn, *v.RoleArn)
+	}
+	serializeTagList(s, schemas.CreateRoleAliasRequest_tags, v.Tags)
+}
+
 type CreateRoleAliasOutput struct {
 
 	// The role alias.
@@ -82,13 +103,38 @@ type CreateRoleAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRoleAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRoleAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRoleAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoleAlias != nil {
+		s.WriteString(schemas.CreateRoleAliasResponse_roleAlias, *v.RoleAlias)
+	}
+	if v.RoleAliasArn != nil {
+		s.WriteString(schemas.CreateRoleAliasResponse_roleAliasArn, *v.RoleAliasArn)
+	}
+}
+func (v *CreateRoleAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRoleAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRoleAliasResponse_roleAlias:
+			v.RoleAlias = new(string)
+			return d.ReadString(schemas.CreateRoleAliasResponse_roleAlias, v.RoleAlias)
+		case schemas.CreateRoleAliasResponse_roleAliasArn:
+			v.RoleAliasArn = new(string)
+			return d.ReadString(schemas.CreateRoleAliasResponse_roleAliasArn, v.RoleAliasArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRoleAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRoleAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRoleAlias, schemas.CreateRoleAliasRequest, schemas.CreateRoleAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRoleAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRoleAlias, schemas.CreateRoleAliasRequest, schemas.CreateRoleAliasResponse), output: &CreateRoleAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

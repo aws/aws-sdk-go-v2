@@ -4,7 +4,9 @@ package pipes
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pipes/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pipes/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,18 @@ type DeletePipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePipeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePipeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePipeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeletePipeRequest_Name, *v.Name)
+	}
+}
+
 type DeletePipeOutput struct {
 
 	// The ARN of the pipe.
@@ -66,13 +80,70 @@ type DeletePipeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePipeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePipeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePipeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeletePipeResponse_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DeletePipeResponse_CreationTime, *v.CreationTime)
+	}
+	if v.CurrentState != "" {
+		s.WriteString(schemas.DeletePipeResponse_CurrentState, string(v.CurrentState))
+	}
+	if v.DesiredState != "" {
+		s.WriteString(schemas.DeletePipeResponse_DesiredState, string(v.DesiredState))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DeletePipeResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeletePipeResponse_Name, *v.Name)
+	}
+}
+func (v *DeletePipeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePipeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePipeResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeletePipeResponse_Arn, v.Arn)
+		case schemas.DeletePipeResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DeletePipeResponse_CreationTime, v.CreationTime)
+		case schemas.DeletePipeResponse_CurrentState:
+			var ev string
+			if err := d.ReadString(schemas.DeletePipeResponse_CurrentState, &ev); err != nil {
+				return err
+			}
+			v.CurrentState = types.PipeState(ev)
+			return nil
+		case schemas.DeletePipeResponse_DesiredState:
+			var ev string
+			if err := d.ReadString(schemas.DeletePipeResponse_DesiredState, &ev); err != nil {
+				return err
+			}
+			v.DesiredState = types.RequestedPipeStateDescribeResponse(ev)
+			return nil
+		case schemas.DeletePipeResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DeletePipeResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DeletePipeResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeletePipeResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePipe, schemas.DeletePipeRequest, schemas.DeletePipeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePipe, schemas.DeletePipeRequest, schemas.DeletePipeResponse), output: &DeletePipeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

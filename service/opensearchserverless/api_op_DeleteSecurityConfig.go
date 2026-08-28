@@ -5,6 +5,8 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,34 @@ type DeleteSecurityConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSecurityConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSecurityConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSecurityConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteSecurityConfigRequest_clientToken, *v.ClientToken)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteSecurityConfigRequest_id, *v.Id)
+	}
+}
+func (v *DeleteSecurityConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSecurityConfigRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSecurityConfigRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DeleteSecurityConfigRequest_clientToken, v.ClientToken)
+		case schemas.DeleteSecurityConfigRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteSecurityConfigRequest_id, v.Id)
+		}
+		return nil
+	})
+}
+
 type DeleteSecurityConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,13 +78,26 @@ type DeleteSecurityConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSecurityConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSecurityConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSecurityConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSecurityConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSecurityConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSecurityConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteSecurityConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSecurityConfig, schemas.DeleteSecurityConfigRequest, schemas.DeleteSecurityConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteSecurityConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSecurityConfig, schemas.DeleteSecurityConfigRequest, schemas.DeleteSecurityConfigResponse), output: &DeleteSecurityConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

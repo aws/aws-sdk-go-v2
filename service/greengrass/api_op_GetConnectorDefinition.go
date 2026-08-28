@@ -4,6 +4,8 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -31,6 +33,18 @@ type GetConnectorDefinitionInput struct {
 	ConnectorDefinitionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetConnectorDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConnectorDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConnectorDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorDefinitionId != nil {
+		s.WriteString(schemas.GetConnectorDefinitionRequest_ConnectorDefinitionId, *v.ConnectorDefinitionId)
+	}
 }
 
 type GetConnectorDefinitionOutput struct {
@@ -65,13 +79,71 @@ type GetConnectorDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConnectorDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConnectorDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConnectorDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetConnectorDefinitionResponse_Arn, *v.Arn)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteString(schemas.GetConnectorDefinitionResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetConnectorDefinitionResponse_Id, *v.Id)
+	}
+	if v.LastUpdatedTimestamp != nil {
+		s.WriteString(schemas.GetConnectorDefinitionResponse_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
+	}
+	if v.LatestVersion != nil {
+		s.WriteString(schemas.GetConnectorDefinitionResponse_LatestVersion, *v.LatestVersion)
+	}
+	if v.LatestVersionArn != nil {
+		s.WriteString(schemas.GetConnectorDefinitionResponse_LatestVersionArn, *v.LatestVersionArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetConnectorDefinitionResponse_Name, *v.Name)
+	}
+	serializeTags(s, schemas.GetConnectorDefinitionResponse_tags, v.Tags)
+}
+func (v *GetConnectorDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConnectorDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConnectorDefinitionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetConnectorDefinitionResponse_Arn, v.Arn)
+		case schemas.GetConnectorDefinitionResponse_CreationTimestamp:
+			v.CreationTimestamp = new(string)
+			return d.ReadString(schemas.GetConnectorDefinitionResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.GetConnectorDefinitionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetConnectorDefinitionResponse_Id, v.Id)
+		case schemas.GetConnectorDefinitionResponse_LastUpdatedTimestamp:
+			v.LastUpdatedTimestamp = new(string)
+			return d.ReadString(schemas.GetConnectorDefinitionResponse_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		case schemas.GetConnectorDefinitionResponse_LatestVersion:
+			v.LatestVersion = new(string)
+			return d.ReadString(schemas.GetConnectorDefinitionResponse_LatestVersion, v.LatestVersion)
+		case schemas.GetConnectorDefinitionResponse_LatestVersionArn:
+			v.LatestVersionArn = new(string)
+			return d.ReadString(schemas.GetConnectorDefinitionResponse_LatestVersionArn, v.LatestVersionArn)
+		case schemas.GetConnectorDefinitionResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetConnectorDefinitionResponse_Name, v.Name)
+		case schemas.GetConnectorDefinitionResponse_tags:
+			return deserializeTags(d, schemas.GetConnectorDefinitionResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConnectorDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConnectorDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnectorDefinition, schemas.GetConnectorDefinitionRequest, schemas.GetConnectorDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConnectorDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnectorDefinition, schemas.GetConnectorDefinitionRequest, schemas.GetConnectorDefinitionResponse), output: &GetConnectorDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type StopAIBenchmarkJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopAIBenchmarkJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopAIBenchmarkJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopAIBenchmarkJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIBenchmarkJobName != nil {
+		s.WriteString(schemas.StopAIBenchmarkJobRequest_AIBenchmarkJobName, *v.AIBenchmarkJobName)
+	}
+}
+
 type StopAIBenchmarkJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the stopped benchmark job.
@@ -46,13 +60,32 @@ type StopAIBenchmarkJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopAIBenchmarkJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopAIBenchmarkJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopAIBenchmarkJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIBenchmarkJobArn != nil {
+		s.WriteString(schemas.StopAIBenchmarkJobResponse_AIBenchmarkJobArn, *v.AIBenchmarkJobArn)
+	}
+}
+func (v *StopAIBenchmarkJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopAIBenchmarkJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopAIBenchmarkJobResponse_AIBenchmarkJobArn:
+			v.AIBenchmarkJobArn = new(string)
+			return d.ReadString(schemas.StopAIBenchmarkJobResponse_AIBenchmarkJobArn, v.AIBenchmarkJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopAIBenchmarkJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopAIBenchmarkJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopAIBenchmarkJob, schemas.StopAIBenchmarkJobRequest, schemas.StopAIBenchmarkJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopAIBenchmarkJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopAIBenchmarkJob, schemas.StopAIBenchmarkJobRequest, schemas.StopAIBenchmarkJobResponse), output: &StopAIBenchmarkJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

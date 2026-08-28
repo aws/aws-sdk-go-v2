@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -91,6 +93,25 @@ type CreateTrainingPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTrainingPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTrainingPlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTrainingPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SpareInstanceCountPerUltraServer != nil {
+		s.WriteInt32(schemas.CreateTrainingPlanRequest_SpareInstanceCountPerUltraServer, *v.SpareInstanceCountPerUltraServer)
+	}
+	serializeTagList(s, schemas.CreateTrainingPlanRequest_Tags, v.Tags)
+	if v.TrainingPlanName != nil {
+		s.WriteString(schemas.CreateTrainingPlanRequest_TrainingPlanName, *v.TrainingPlanName)
+	}
+	if v.TrainingPlanOfferingId != nil {
+		s.WriteString(schemas.CreateTrainingPlanRequest_TrainingPlanOfferingId, *v.TrainingPlanOfferingId)
+	}
+}
+
 type CreateTrainingPlanOutput struct {
 
 	// The Amazon Resource Name (ARN); of the created training plan.
@@ -104,13 +125,32 @@ type CreateTrainingPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTrainingPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTrainingPlanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTrainingPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrainingPlanArn != nil {
+		s.WriteString(schemas.CreateTrainingPlanResponse_TrainingPlanArn, *v.TrainingPlanArn)
+	}
+}
+func (v *CreateTrainingPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTrainingPlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTrainingPlanResponse_TrainingPlanArn:
+			v.TrainingPlanArn = new(string)
+			return d.ReadString(schemas.CreateTrainingPlanResponse_TrainingPlanArn, v.TrainingPlanArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTrainingPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTrainingPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrainingPlan, schemas.CreateTrainingPlanRequest, schemas.CreateTrainingPlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateTrainingPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrainingPlan, schemas.CreateTrainingPlanRequest, schemas.CreateTrainingPlanResponse), output: &CreateTrainingPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package organizations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,27 @@ type ListInboundResponsibilityTransfersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInboundResponsibilityTransfersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInboundResponsibilityTransfersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInboundResponsibilityTransfersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.ListInboundResponsibilityTransfersRequest_Id, *v.Id)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInboundResponsibilityTransfersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInboundResponsibilityTransfersRequest_NextToken, *v.NextToken)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListInboundResponsibilityTransfersRequest_Type, string(v.Type))
+	}
+}
+
 type ListInboundResponsibilityTransfersOutput struct {
 
 	// If present, indicates that more output is available than is included in the
@@ -73,13 +96,35 @@ type ListInboundResponsibilityTransfersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInboundResponsibilityTransfersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInboundResponsibilityTransfersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInboundResponsibilityTransfersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInboundResponsibilityTransfersResponse_NextToken, *v.NextToken)
+	}
+	serializeResponsibilityTransfers(s, schemas.ListInboundResponsibilityTransfersResponse_ResponsibilityTransfers, v.ResponsibilityTransfers)
+}
+func (v *ListInboundResponsibilityTransfersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInboundResponsibilityTransfersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInboundResponsibilityTransfersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInboundResponsibilityTransfersResponse_NextToken, v.NextToken)
+		case schemas.ListInboundResponsibilityTransfersResponse_ResponsibilityTransfers:
+			return deserializeResponsibilityTransfers(d, schemas.ListInboundResponsibilityTransfersResponse_ResponsibilityTransfers, &v.ResponsibilityTransfers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInboundResponsibilityTransfersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListInboundResponsibilityTransfers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInboundResponsibilityTransfers, schemas.ListInboundResponsibilityTransfersRequest, schemas.ListInboundResponsibilityTransfersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListInboundResponsibilityTransfers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInboundResponsibilityTransfers, schemas.ListInboundResponsibilityTransfersRequest, schemas.ListInboundResponsibilityTransfersResponse), output: &ListInboundResponsibilityTransfersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

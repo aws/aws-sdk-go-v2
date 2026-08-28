@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -65,6 +67,48 @@ type ListEdgePackagingJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEdgePackagingJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEdgePackagingJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEdgePackagingJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListEdgePackagingJobsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListEdgePackagingJobsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.LastModifiedTimeAfter != nil {
+		s.WriteTime(schemas.ListEdgePackagingJobsRequest_LastModifiedTimeAfter, *v.LastModifiedTimeAfter)
+	}
+	if v.LastModifiedTimeBefore != nil {
+		s.WriteTime(schemas.ListEdgePackagingJobsRequest_LastModifiedTimeBefore, *v.LastModifiedTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEdgePackagingJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.ModelNameContains != nil {
+		s.WriteString(schemas.ListEdgePackagingJobsRequest_ModelNameContains, *v.ModelNameContains)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListEdgePackagingJobsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEdgePackagingJobsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListEdgePackagingJobsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListEdgePackagingJobsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListEdgePackagingJobsRequest_StatusEquals, string(v.StatusEquals))
+	}
+}
+
 type ListEdgePackagingJobsOutput struct {
 
 	// Summaries of edge packaging jobs.
@@ -81,13 +125,35 @@ type ListEdgePackagingJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEdgePackagingJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEdgePackagingJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEdgePackagingJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEdgePackagingJobSummaries(s, schemas.ListEdgePackagingJobsResponse_EdgePackagingJobSummaries, v.EdgePackagingJobSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEdgePackagingJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEdgePackagingJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEdgePackagingJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEdgePackagingJobsResponse_EdgePackagingJobSummaries:
+			return deserializeEdgePackagingJobSummaries(d, schemas.ListEdgePackagingJobsResponse_EdgePackagingJobSummaries, &v.EdgePackagingJobSummaries)
+		case schemas.ListEdgePackagingJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEdgePackagingJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEdgePackagingJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEdgePackagingJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEdgePackagingJobs, schemas.ListEdgePackagingJobsRequest, schemas.ListEdgePackagingJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListEdgePackagingJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEdgePackagingJobs, schemas.ListEdgePackagingJobsRequest, schemas.ListEdgePackagingJobsResponse), output: &ListEdgePackagingJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

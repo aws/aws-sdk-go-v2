@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -20,6 +22,34 @@ type ApplicationDependencySummary struct {
 	SemanticVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApplicationDependencySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationDependencySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationDependencySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ApplicationDependencySummary_ApplicationId, *v.ApplicationId)
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.ApplicationDependencySummary_SemanticVersion, *v.SemanticVersion)
+	}
+}
+func (v *ApplicationDependencySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationDependencySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationDependencySummary_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.ApplicationDependencySummary_ApplicationId, v.ApplicationId)
+		case schemas.ApplicationDependencySummary_SemanticVersion:
+			v.SemanticVersion = new(string)
+			return d.ReadString(schemas.ApplicationDependencySummary_SemanticVersion, v.SemanticVersion)
+		}
+		return nil
+	})
 }
 
 // Policy statement applied to the application.
@@ -47,6 +77,37 @@ type ApplicationPolicyStatement struct {
 	StatementId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApplicationPolicyStatement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationPolicyStatement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationPolicyStatement) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOf__string(s, schemas.ApplicationPolicyStatement_Actions, v.Actions)
+	serialize__listOf__string(s, schemas.ApplicationPolicyStatement_PrincipalOrgIDs, v.PrincipalOrgIDs)
+	serialize__listOf__string(s, schemas.ApplicationPolicyStatement_Principals, v.Principals)
+	if v.StatementId != nil {
+		s.WriteString(schemas.ApplicationPolicyStatement_StatementId, *v.StatementId)
+	}
+}
+func (v *ApplicationPolicyStatement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationPolicyStatement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationPolicyStatement_Actions:
+			return deserialize__listOf__string(d, schemas.ApplicationPolicyStatement_Actions, &v.Actions)
+		case schemas.ApplicationPolicyStatement_PrincipalOrgIDs:
+			return deserialize__listOf__string(d, schemas.ApplicationPolicyStatement_PrincipalOrgIDs, &v.PrincipalOrgIDs)
+		case schemas.ApplicationPolicyStatement_Principals:
+			return deserialize__listOf__string(d, schemas.ApplicationPolicyStatement_Principals, &v.Principals)
+		case schemas.ApplicationPolicyStatement_StatementId:
+			v.StatementId = new(string)
+			return d.ReadString(schemas.ApplicationPolicyStatement_StatementId, v.StatementId)
+		}
+		return nil
+	})
 }
 
 // Summary of details about the application.
@@ -102,6 +163,67 @@ type ApplicationSummary struct {
 	SpdxLicenseId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApplicationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ApplicationSummary_ApplicationId, *v.ApplicationId)
+	}
+	if v.Author != nil {
+		s.WriteString(schemas.ApplicationSummary_Author, *v.Author)
+	}
+	if v.CreationTime != nil {
+		s.WriteString(schemas.ApplicationSummary_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ApplicationSummary_Description, *v.Description)
+	}
+	if v.HomePageUrl != nil {
+		s.WriteString(schemas.ApplicationSummary_HomePageUrl, *v.HomePageUrl)
+	}
+	serialize__listOf__string(s, schemas.ApplicationSummary_Labels, v.Labels)
+	if v.Name != nil {
+		s.WriteString(schemas.ApplicationSummary_Name, *v.Name)
+	}
+	if v.SpdxLicenseId != nil {
+		s.WriteString(schemas.ApplicationSummary_SpdxLicenseId, *v.SpdxLicenseId)
+	}
+}
+func (v *ApplicationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationSummary_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.ApplicationSummary_ApplicationId, v.ApplicationId)
+		case schemas.ApplicationSummary_Author:
+			v.Author = new(string)
+			return d.ReadString(schemas.ApplicationSummary_Author, v.Author)
+		case schemas.ApplicationSummary_CreationTime:
+			v.CreationTime = new(string)
+			return d.ReadString(schemas.ApplicationSummary_CreationTime, v.CreationTime)
+		case schemas.ApplicationSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ApplicationSummary_Description, v.Description)
+		case schemas.ApplicationSummary_HomePageUrl:
+			v.HomePageUrl = new(string)
+			return d.ReadString(schemas.ApplicationSummary_HomePageUrl, v.HomePageUrl)
+		case schemas.ApplicationSummary_Labels:
+			return deserialize__listOf__string(d, schemas.ApplicationSummary_Labels, &v.Labels)
+		case schemas.ApplicationSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ApplicationSummary_Name, v.Name)
+		case schemas.ApplicationSummary_SpdxLicenseId:
+			v.SpdxLicenseId = new(string)
+			return d.ReadString(schemas.ApplicationSummary_SpdxLicenseId, v.SpdxLicenseId)
+		}
+		return nil
+	})
 }
 
 // Parameters supported by the application.
@@ -200,6 +322,94 @@ type ParameterDefinition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ParameterDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ParameterDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ParameterDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowedPattern != nil {
+		s.WriteString(schemas.ParameterDefinition_AllowedPattern, *v.AllowedPattern)
+	}
+	serialize__listOf__string(s, schemas.ParameterDefinition_AllowedValues, v.AllowedValues)
+	if v.ConstraintDescription != nil {
+		s.WriteString(schemas.ParameterDefinition_ConstraintDescription, *v.ConstraintDescription)
+	}
+	if v.DefaultValue != nil {
+		s.WriteString(schemas.ParameterDefinition_DefaultValue, *v.DefaultValue)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ParameterDefinition_Description, *v.Description)
+	}
+	if v.MaxLength != nil {
+		s.WriteInt32(schemas.ParameterDefinition_MaxLength, *v.MaxLength)
+	}
+	if v.MaxValue != nil {
+		s.WriteInt32(schemas.ParameterDefinition_MaxValue, *v.MaxValue)
+	}
+	if v.MinLength != nil {
+		s.WriteInt32(schemas.ParameterDefinition_MinLength, *v.MinLength)
+	}
+	if v.MinValue != nil {
+		s.WriteInt32(schemas.ParameterDefinition_MinValue, *v.MinValue)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ParameterDefinition_Name, *v.Name)
+	}
+	if v.NoEcho != nil {
+		s.WriteBool(schemas.ParameterDefinition_NoEcho, *v.NoEcho)
+	}
+	serialize__listOf__string(s, schemas.ParameterDefinition_ReferencedByResources, v.ReferencedByResources)
+	if v.Type != nil {
+		s.WriteString(schemas.ParameterDefinition_Type, *v.Type)
+	}
+}
+func (v *ParameterDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ParameterDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ParameterDefinition_AllowedPattern:
+			v.AllowedPattern = new(string)
+			return d.ReadString(schemas.ParameterDefinition_AllowedPattern, v.AllowedPattern)
+		case schemas.ParameterDefinition_AllowedValues:
+			return deserialize__listOf__string(d, schemas.ParameterDefinition_AllowedValues, &v.AllowedValues)
+		case schemas.ParameterDefinition_ConstraintDescription:
+			v.ConstraintDescription = new(string)
+			return d.ReadString(schemas.ParameterDefinition_ConstraintDescription, v.ConstraintDescription)
+		case schemas.ParameterDefinition_DefaultValue:
+			v.DefaultValue = new(string)
+			return d.ReadString(schemas.ParameterDefinition_DefaultValue, v.DefaultValue)
+		case schemas.ParameterDefinition_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ParameterDefinition_Description, v.Description)
+		case schemas.ParameterDefinition_MaxLength:
+			v.MaxLength = new(int32)
+			return d.ReadInt32(schemas.ParameterDefinition_MaxLength, v.MaxLength)
+		case schemas.ParameterDefinition_MaxValue:
+			v.MaxValue = new(int32)
+			return d.ReadInt32(schemas.ParameterDefinition_MaxValue, v.MaxValue)
+		case schemas.ParameterDefinition_MinLength:
+			v.MinLength = new(int32)
+			return d.ReadInt32(schemas.ParameterDefinition_MinLength, v.MinLength)
+		case schemas.ParameterDefinition_MinValue:
+			v.MinValue = new(int32)
+			return d.ReadInt32(schemas.ParameterDefinition_MinValue, v.MinValue)
+		case schemas.ParameterDefinition_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ParameterDefinition_Name, v.Name)
+		case schemas.ParameterDefinition_NoEcho:
+			v.NoEcho = new(bool)
+			return d.ReadBool(schemas.ParameterDefinition_NoEcho, v.NoEcho)
+		case schemas.ParameterDefinition_ReferencedByResources:
+			return deserialize__listOf__string(d, schemas.ParameterDefinition_ReferencedByResources, &v.ReferencedByResources)
+		case schemas.ParameterDefinition_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ParameterDefinition_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Parameter value of the application.
 type ParameterValue struct {
 
@@ -216,6 +426,34 @@ type ParameterValue struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ParameterValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ParameterValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ParameterValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ParameterValue_Name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ParameterValue_Value, *v.Value)
+	}
+}
+func (v *ParameterValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ParameterValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ParameterValue_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ParameterValue_Name, v.Name)
+		case schemas.ParameterValue_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ParameterValue_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // This property corresponds to the AWS CloudFormation [RollbackConfiguration] Data Type.
@@ -236,6 +474,31 @@ type RollbackConfiguration struct {
 	RollbackTriggers []RollbackTrigger
 
 	noSmithyDocumentSerde
+}
+
+func (v *RollbackConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RollbackConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RollbackConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonitoringTimeInMinutes != nil {
+		s.WriteInt32(schemas.RollbackConfiguration_MonitoringTimeInMinutes, *v.MonitoringTimeInMinutes)
+	}
+	serialize__listOfRollbackTrigger(s, schemas.RollbackConfiguration_RollbackTriggers, v.RollbackTriggers)
+}
+func (v *RollbackConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RollbackConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RollbackConfiguration_MonitoringTimeInMinutes:
+			v.MonitoringTimeInMinutes = new(int32)
+			return d.ReadInt32(schemas.RollbackConfiguration_MonitoringTimeInMinutes, v.MonitoringTimeInMinutes)
+		case schemas.RollbackConfiguration_RollbackTriggers:
+			return deserialize__listOfRollbackTrigger(d, schemas.RollbackConfiguration_RollbackTriggers, &v.RollbackTriggers)
+		}
+		return nil
+	})
 }
 
 // This property corresponds to the AWS CloudFormation [RollbackTrigger] Data Type.
@@ -262,6 +525,34 @@ type RollbackTrigger struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RollbackTrigger) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RollbackTrigger)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RollbackTrigger) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.RollbackTrigger_Arn, *v.Arn)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.RollbackTrigger_Type, *v.Type)
+	}
+}
+func (v *RollbackTrigger) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RollbackTrigger, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RollbackTrigger_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RollbackTrigger_Arn, v.Arn)
+		case schemas.RollbackTrigger_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.RollbackTrigger_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // This property corresponds to the AWS CloudFormation [Tag] Data Type.
 //
 // [Tag]: https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag
@@ -284,6 +575,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Application version details.
@@ -377,6 +696,70 @@ type Version struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Version) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Version)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Version) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.Version_ApplicationId, *v.ApplicationId)
+	}
+	if v.CreationTime != nil {
+		s.WriteString(schemas.Version_CreationTime, *v.CreationTime)
+	}
+	serialize__listOfParameterDefinition(s, schemas.Version_ParameterDefinitions, v.ParameterDefinitions)
+	serialize__listOfCapability(s, schemas.Version_RequiredCapabilities, v.RequiredCapabilities)
+	if v.ResourcesSupported != nil {
+		s.WriteBool(schemas.Version_ResourcesSupported, *v.ResourcesSupported)
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.Version_SemanticVersion, *v.SemanticVersion)
+	}
+	if v.SourceCodeArchiveUrl != nil {
+		s.WriteString(schemas.Version_SourceCodeArchiveUrl, *v.SourceCodeArchiveUrl)
+	}
+	if v.SourceCodeUrl != nil {
+		s.WriteString(schemas.Version_SourceCodeUrl, *v.SourceCodeUrl)
+	}
+	if v.TemplateUrl != nil {
+		s.WriteString(schemas.Version_TemplateUrl, *v.TemplateUrl)
+	}
+}
+func (v *Version) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Version, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Version_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.Version_ApplicationId, v.ApplicationId)
+		case schemas.Version_CreationTime:
+			v.CreationTime = new(string)
+			return d.ReadString(schemas.Version_CreationTime, v.CreationTime)
+		case schemas.Version_ParameterDefinitions:
+			return deserialize__listOfParameterDefinition(d, schemas.Version_ParameterDefinitions, &v.ParameterDefinitions)
+		case schemas.Version_RequiredCapabilities:
+			return deserialize__listOfCapability(d, schemas.Version_RequiredCapabilities, &v.RequiredCapabilities)
+		case schemas.Version_ResourcesSupported:
+			v.ResourcesSupported = new(bool)
+			return d.ReadBool(schemas.Version_ResourcesSupported, v.ResourcesSupported)
+		case schemas.Version_SemanticVersion:
+			v.SemanticVersion = new(string)
+			return d.ReadString(schemas.Version_SemanticVersion, v.SemanticVersion)
+		case schemas.Version_SourceCodeArchiveUrl:
+			v.SourceCodeArchiveUrl = new(string)
+			return d.ReadString(schemas.Version_SourceCodeArchiveUrl, v.SourceCodeArchiveUrl)
+		case schemas.Version_SourceCodeUrl:
+			v.SourceCodeUrl = new(string)
+			return d.ReadString(schemas.Version_SourceCodeUrl, v.SourceCodeUrl)
+		case schemas.Version_TemplateUrl:
+			v.TemplateUrl = new(string)
+			return d.ReadString(schemas.Version_TemplateUrl, v.TemplateUrl)
+		}
+		return nil
+	})
+}
+
 // An application version summary.
 type VersionSummary struct {
 
@@ -404,6 +787,46 @@ type VersionSummary struct {
 	SourceCodeUrl *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VersionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VersionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VersionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.VersionSummary_ApplicationId, *v.ApplicationId)
+	}
+	if v.CreationTime != nil {
+		s.WriteString(schemas.VersionSummary_CreationTime, *v.CreationTime)
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.VersionSummary_SemanticVersion, *v.SemanticVersion)
+	}
+	if v.SourceCodeUrl != nil {
+		s.WriteString(schemas.VersionSummary_SourceCodeUrl, *v.SourceCodeUrl)
+	}
+}
+func (v *VersionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VersionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VersionSummary_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.VersionSummary_ApplicationId, v.ApplicationId)
+		case schemas.VersionSummary_CreationTime:
+			v.CreationTime = new(string)
+			return d.ReadString(schemas.VersionSummary_CreationTime, v.CreationTime)
+		case schemas.VersionSummary_SemanticVersion:
+			v.SemanticVersion = new(string)
+			return d.ReadString(schemas.VersionSummary_SemanticVersion, v.SemanticVersion)
+		case schemas.VersionSummary_SourceCodeUrl:
+			v.SourceCodeUrl = new(string)
+			return d.ReadString(schemas.VersionSummary_SourceCodeUrl, v.SourceCodeUrl)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

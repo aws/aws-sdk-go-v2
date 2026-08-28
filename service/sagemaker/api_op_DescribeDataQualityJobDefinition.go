@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeDataQualityJobDefinitionInput struct {
 	JobDefinitionName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeDataQualityJobDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataQualityJobDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataQualityJobDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobDefinitionName != nil {
+		s.WriteString(schemas.DescribeDataQualityJobDefinitionRequest_JobDefinitionName, *v.JobDefinitionName)
+	}
 }
 
 type DescribeDataQualityJobDefinitionOutput struct {
@@ -94,13 +108,106 @@ type DescribeDataQualityJobDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataQualityJobDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataQualityJobDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataQualityJobDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeDataQualityJobDefinitionResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DataQualityAppSpecification != nil {
+		s.WriteStruct(schemas.DescribeDataQualityJobDefinitionResponse_DataQualityAppSpecification)
+		v.DataQualityAppSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataQualityBaselineConfig != nil {
+		s.WriteStruct(schemas.DescribeDataQualityJobDefinitionResponse_DataQualityBaselineConfig)
+		v.DataQualityBaselineConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataQualityJobInput != nil {
+		s.WriteStruct(schemas.DescribeDataQualityJobDefinitionResponse_DataQualityJobInput)
+		v.DataQualityJobInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataQualityJobOutputConfig != nil {
+		s.WriteStruct(schemas.DescribeDataQualityJobDefinitionResponse_DataQualityJobOutputConfig)
+		v.DataQualityJobOutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobDefinitionArn != nil {
+		s.WriteString(schemas.DescribeDataQualityJobDefinitionResponse_JobDefinitionArn, *v.JobDefinitionArn)
+	}
+	if v.JobDefinitionName != nil {
+		s.WriteString(schemas.DescribeDataQualityJobDefinitionResponse_JobDefinitionName, *v.JobDefinitionName)
+	}
+	if v.JobResources != nil {
+		s.WriteStruct(schemas.DescribeDataQualityJobDefinitionResponse_JobResources)
+		v.JobResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkConfig != nil {
+		s.WriteStruct(schemas.DescribeDataQualityJobDefinitionResponse_NetworkConfig)
+		v.NetworkConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeDataQualityJobDefinitionResponse_RoleArn, *v.RoleArn)
+	}
+	if v.StoppingCondition != nil {
+		s.WriteStruct(schemas.DescribeDataQualityJobDefinitionResponse_StoppingCondition)
+		v.StoppingCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeDataQualityJobDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDataQualityJobDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDataQualityJobDefinitionResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeDataQualityJobDefinitionResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeDataQualityJobDefinitionResponse_DataQualityAppSpecification:
+			v.DataQualityAppSpecification = &types.DataQualityAppSpecification{}
+			return v.DataQualityAppSpecification.Deserialize(d)
+		case schemas.DescribeDataQualityJobDefinitionResponse_DataQualityBaselineConfig:
+			v.DataQualityBaselineConfig = &types.DataQualityBaselineConfig{}
+			return v.DataQualityBaselineConfig.Deserialize(d)
+		case schemas.DescribeDataQualityJobDefinitionResponse_DataQualityJobInput:
+			v.DataQualityJobInput = &types.DataQualityJobInput{}
+			return v.DataQualityJobInput.Deserialize(d)
+		case schemas.DescribeDataQualityJobDefinitionResponse_DataQualityJobOutputConfig:
+			v.DataQualityJobOutputConfig = &types.MonitoringOutputConfig{}
+			return v.DataQualityJobOutputConfig.Deserialize(d)
+		case schemas.DescribeDataQualityJobDefinitionResponse_JobDefinitionArn:
+			v.JobDefinitionArn = new(string)
+			return d.ReadString(schemas.DescribeDataQualityJobDefinitionResponse_JobDefinitionArn, v.JobDefinitionArn)
+		case schemas.DescribeDataQualityJobDefinitionResponse_JobDefinitionName:
+			v.JobDefinitionName = new(string)
+			return d.ReadString(schemas.DescribeDataQualityJobDefinitionResponse_JobDefinitionName, v.JobDefinitionName)
+		case schemas.DescribeDataQualityJobDefinitionResponse_JobResources:
+			v.JobResources = &types.MonitoringResources{}
+			return v.JobResources.Deserialize(d)
+		case schemas.DescribeDataQualityJobDefinitionResponse_NetworkConfig:
+			v.NetworkConfig = &types.MonitoringNetworkConfig{}
+			return v.NetworkConfig.Deserialize(d)
+		case schemas.DescribeDataQualityJobDefinitionResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeDataQualityJobDefinitionResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeDataQualityJobDefinitionResponse_StoppingCondition:
+			v.StoppingCondition = &types.MonitoringStoppingCondition{}
+			return v.StoppingCondition.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDataQualityJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDataQualityJobDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataQualityJobDefinition, schemas.DescribeDataQualityJobDefinitionRequest, schemas.DescribeDataQualityJobDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDataQualityJobDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataQualityJobDefinition, schemas.DescribeDataQualityJobDefinitionRequest, schemas.DescribeDataQualityJobDefinitionResponse), output: &DescribeDataQualityJobDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

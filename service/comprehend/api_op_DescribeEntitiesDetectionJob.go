@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DescribeEntitiesDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEntitiesDetectionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEntitiesDetectionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEntitiesDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeEntitiesDetectionJobRequest_JobId, *v.JobId)
+	}
+}
+
 type DescribeEntitiesDetectionJobOutput struct {
 
 	// An object that contains the properties associated with an entities detection
@@ -48,13 +62,34 @@ type DescribeEntitiesDetectionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEntitiesDetectionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEntitiesDetectionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEntitiesDetectionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntitiesDetectionJobProperties != nil {
+		s.WriteStruct(schemas.DescribeEntitiesDetectionJobResponse_EntitiesDetectionJobProperties)
+		v.EntitiesDetectionJobProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeEntitiesDetectionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEntitiesDetectionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEntitiesDetectionJobResponse_EntitiesDetectionJobProperties:
+			v.EntitiesDetectionJobProperties = &types.EntitiesDetectionJobProperties{}
+			return v.EntitiesDetectionJobProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEntitiesDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEntitiesDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEntitiesDetectionJob, schemas.DescribeEntitiesDetectionJobRequest, schemas.DescribeEntitiesDetectionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEntitiesDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEntitiesDetectionJob, schemas.DescribeEntitiesDetectionJobRequest, schemas.DescribeEntitiesDetectionJobResponse), output: &DescribeEntitiesDetectionJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

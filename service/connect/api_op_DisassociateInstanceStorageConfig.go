@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,27 @@ type DisassociateInstanceStorageConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateInstanceStorageConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateInstanceStorageConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateInstanceStorageConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.DisassociateInstanceStorageConfigRequest_AssociationId, *v.AssociationId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DisassociateInstanceStorageConfigRequest_ClientToken, *v.ClientToken)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DisassociateInstanceStorageConfigRequest_InstanceId, *v.InstanceId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.DisassociateInstanceStorageConfigRequest_ResourceType, string(v.ResourceType))
+	}
+}
+
 type DisassociateInstanceStorageConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,13 +89,26 @@ type DisassociateInstanceStorageConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateInstanceStorageConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateInstanceStorageConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateInstanceStorageConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateInstanceStorageConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateInstanceStorageConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateInstanceStorageConfig, schemas.DisassociateInstanceStorageConfigRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateInstanceStorageConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateInstanceStorageConfig, schemas.DisassociateInstanceStorageConfigRequest, nil), output: &DisassociateInstanceStorageConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

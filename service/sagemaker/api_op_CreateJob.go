@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -95,6 +97,31 @@ type CreateJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobCategory != "" {
+		s.WriteString(schemas.CreateJobRequest_JobCategory, string(v.JobCategory))
+	}
+	if v.JobConfigDocument != nil {
+		s.WriteString(schemas.CreateJobRequest_JobConfigDocument, *v.JobConfigDocument)
+	}
+	if v.JobConfigSchemaVersion != nil {
+		s.WriteString(schemas.CreateJobRequest_JobConfigSchemaVersion, *v.JobConfigSchemaVersion)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.CreateJobRequest_JobName, *v.JobName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateJobRequest_RoleArn, *v.RoleArn)
+	}
+	serializeTagList(s, schemas.CreateJobRequest_Tags, v.Tags)
+}
+
 type CreateJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the job.
@@ -108,13 +135,32 @@ type CreateJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobArn != nil {
+		s.WriteString(schemas.CreateJobResponse_JobArn, *v.JobArn)
+	}
+}
+func (v *CreateJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateJobResponse_JobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.CreateJobResponse_JobArn, v.JobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateJob, schemas.CreateJobRequest, schemas.CreateJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateJob, schemas.CreateJobRequest, schemas.CreateJobResponse), output: &CreateJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

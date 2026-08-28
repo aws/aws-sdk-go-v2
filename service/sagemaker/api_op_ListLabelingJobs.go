@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -68,6 +70,45 @@ type ListLabelingJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLabelingJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLabelingJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLabelingJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListLabelingJobsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListLabelingJobsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.LastModifiedTimeAfter != nil {
+		s.WriteTime(schemas.ListLabelingJobsRequest_LastModifiedTimeAfter, *v.LastModifiedTimeAfter)
+	}
+	if v.LastModifiedTimeBefore != nil {
+		s.WriteTime(schemas.ListLabelingJobsRequest_LastModifiedTimeBefore, *v.LastModifiedTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLabelingJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListLabelingJobsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLabelingJobsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListLabelingJobsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListLabelingJobsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListLabelingJobsRequest_StatusEquals, string(v.StatusEquals))
+	}
+}
+
 type ListLabelingJobsOutput struct {
 
 	// An array of LabelingJobSummary objects, each describing a labeling job.
@@ -83,13 +124,35 @@ type ListLabelingJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLabelingJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLabelingJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLabelingJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLabelingJobSummaryList(s, schemas.ListLabelingJobsResponse_LabelingJobSummaryList, v.LabelingJobSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLabelingJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLabelingJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLabelingJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLabelingJobsResponse_LabelingJobSummaryList:
+			return deserializeLabelingJobSummaryList(d, schemas.ListLabelingJobsResponse_LabelingJobSummaryList, &v.LabelingJobSummaryList)
+		case schemas.ListLabelingJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLabelingJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLabelingJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLabelingJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLabelingJobs, schemas.ListLabelingJobsRequest, schemas.ListLabelingJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListLabelingJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLabelingJobs, schemas.ListLabelingJobsRequest, schemas.ListLabelingJobsResponse), output: &ListLabelingJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

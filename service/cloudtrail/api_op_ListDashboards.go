@@ -4,7 +4,9 @@ package cloudtrail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,27 @@ type ListDashboardsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDashboardsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDashboardsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDashboardsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDashboardsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NamePrefix != nil {
+		s.WriteString(schemas.ListDashboardsRequest_NamePrefix, *v.NamePrefix)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDashboardsRequest_NextToken, *v.NextToken)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListDashboardsRequest_Type, string(v.Type))
+	}
+}
+
 type ListDashboardsOutput struct {
 
 	//  Contains information about dashboards in the account, in the current Region
@@ -58,13 +81,35 @@ type ListDashboardsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDashboardsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDashboardsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDashboardsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDashboards(s, schemas.ListDashboardsResponse_Dashboards, v.Dashboards)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDashboardsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDashboardsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDashboardsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDashboardsResponse_Dashboards:
+			return deserializeDashboards(d, schemas.ListDashboardsResponse_Dashboards, &v.Dashboards)
+		case schemas.ListDashboardsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDashboardsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDashboardsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDashboards{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDashboards, schemas.ListDashboardsRequest, schemas.ListDashboardsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDashboards{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDashboards, schemas.ListDashboardsRequest, schemas.ListDashboardsResponse), output: &ListDashboardsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

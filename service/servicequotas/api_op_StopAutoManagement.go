@@ -4,6 +4,8 @@ package servicequotas
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -31,6 +33,15 @@ type StopAutoManagementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopAutoManagementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopAutoManagementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopAutoManagementInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type StopAutoManagementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -38,13 +49,26 @@ type StopAutoManagementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopAutoManagementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopAutoManagementResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopAutoManagementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopAutoManagementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopAutoManagementResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopAutoManagementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopAutoManagement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopAutoManagement, schemas.StopAutoManagementRequest, schemas.StopAutoManagementResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopAutoManagement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopAutoManagement, schemas.StopAutoManagementRequest, schemas.StopAutoManagementResponse), output: &StopAutoManagementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

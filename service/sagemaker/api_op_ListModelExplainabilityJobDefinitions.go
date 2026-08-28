@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -60,6 +62,39 @@ type ListModelExplainabilityJobDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelExplainabilityJobDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelExplainabilityJobDefinitionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelExplainabilityJobDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListModelExplainabilityJobDefinitionsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListModelExplainabilityJobDefinitionsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.EndpointName != nil {
+		s.WriteString(schemas.ListModelExplainabilityJobDefinitionsRequest_EndpointName, *v.EndpointName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListModelExplainabilityJobDefinitionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListModelExplainabilityJobDefinitionsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelExplainabilityJobDefinitionsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListModelExplainabilityJobDefinitionsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListModelExplainabilityJobDefinitionsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListModelExplainabilityJobDefinitionsOutput struct {
 
 	// A JSON array in which each element is a summary for a explainability bias jobs.
@@ -77,13 +112,35 @@ type ListModelExplainabilityJobDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelExplainabilityJobDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelExplainabilityJobDefinitionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelExplainabilityJobDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMonitoringJobDefinitionSummaryList(s, schemas.ListModelExplainabilityJobDefinitionsResponse_JobDefinitionSummaries, v.JobDefinitionSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelExplainabilityJobDefinitionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListModelExplainabilityJobDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListModelExplainabilityJobDefinitionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListModelExplainabilityJobDefinitionsResponse_JobDefinitionSummaries:
+			return deserializeMonitoringJobDefinitionSummaryList(d, schemas.ListModelExplainabilityJobDefinitionsResponse_JobDefinitionSummaries, &v.JobDefinitionSummaries)
+		case schemas.ListModelExplainabilityJobDefinitionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListModelExplainabilityJobDefinitionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListModelExplainabilityJobDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListModelExplainabilityJobDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelExplainabilityJobDefinitions, schemas.ListModelExplainabilityJobDefinitionsRequest, schemas.ListModelExplainabilityJobDefinitionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListModelExplainabilityJobDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelExplainabilityJobDefinitions, schemas.ListModelExplainabilityJobDefinitionsRequest, schemas.ListModelExplainabilityJobDefinitionsResponse), output: &ListModelExplainabilityJobDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

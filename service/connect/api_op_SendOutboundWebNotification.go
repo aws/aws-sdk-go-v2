@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -89,6 +91,45 @@ type SendOutboundWebNotificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendOutboundWebNotificationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendOutboundWebNotificationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendOutboundWebNotificationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrowserId != nil {
+		s.WriteString(schemas.SendOutboundWebNotificationRequest_BrowserId, *v.BrowserId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.SendOutboundWebNotificationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Content != nil {
+		s.WriteStruct(schemas.SendOutboundWebNotificationRequest_Content)
+		v.Content.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Destination != nil {
+		s.WriteStruct(schemas.SendOutboundWebNotificationRequest_Destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.SendOutboundWebNotificationRequest_ExpiresAt, *v.ExpiresAt)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SendOutboundWebNotificationRequest_InstanceId, *v.InstanceId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.SendOutboundWebNotificationRequest_SessionId, *v.SessionId)
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.SendOutboundWebNotificationRequest_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SendOutboundWebNotificationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -96,13 +137,26 @@ type SendOutboundWebNotificationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendOutboundWebNotificationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendOutboundWebNotificationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendOutboundWebNotificationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SendOutboundWebNotificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendOutboundWebNotificationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendOutboundWebNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendOutboundWebNotification{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendOutboundWebNotification, schemas.SendOutboundWebNotificationRequest, schemas.SendOutboundWebNotificationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendOutboundWebNotification{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendOutboundWebNotification, schemas.SendOutboundWebNotificationRequest, schemas.SendOutboundWebNotificationResponse), output: &SendOutboundWebNotificationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

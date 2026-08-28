@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/amp/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amp/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -40,6 +42,18 @@ type DescribeScraperInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScraperInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeScraperRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScraperInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScraperId != nil {
+		s.WriteString(schemas.DescribeScraperRequest_scraperId, *v.ScraperId)
+	}
+}
+
 // Represents the output of a DescribeScraper operation.
 type DescribeScraperOutput struct {
 
@@ -54,13 +68,34 @@ type DescribeScraperOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeScraperOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeScraperResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeScraperOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Scraper != nil {
+		s.WriteStruct(schemas.DescribeScraperResponse_scraper)
+		v.Scraper.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeScraperOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeScraperResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeScraperResponse_scraper:
+			v.Scraper = &types.ScraperDescription{}
+			return v.Scraper.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeScraperMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeScraper{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScraper, schemas.DescribeScraperRequest, schemas.DescribeScraperResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeScraper{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeScraper, schemas.DescribeScraperRequest, schemas.DescribeScraperResponse), output: &DescribeScraperOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

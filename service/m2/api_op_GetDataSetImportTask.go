@@ -4,7 +4,9 @@ package m2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/m2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/m2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,34 @@ type GetDataSetImportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataSetImportTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataSetImportTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataSetImportTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetDataSetImportTaskRequest_applicationId, *v.ApplicationId)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.GetDataSetImportTaskRequest_taskId, *v.TaskId)
+	}
+}
+func (v *GetDataSetImportTaskInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataSetImportTaskRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataSetImportTaskRequest_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.GetDataSetImportTaskRequest_applicationId, v.ApplicationId)
+		case schemas.GetDataSetImportTaskRequest_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.GetDataSetImportTaskRequest_taskId, v.TaskId)
+		}
+		return nil
+	})
+}
+
 type GetDataSetImportTaskOutput struct {
 
 	// The status of the task.
@@ -60,13 +90,50 @@ type GetDataSetImportTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataSetImportTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataSetImportTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataSetImportTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.GetDataSetImportTaskResponse_status, string(v.Status))
+	}
+	if v.Summary != nil {
+		s.WriteStruct(schemas.GetDataSetImportTaskResponse_summary)
+		v.Summary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.GetDataSetImportTaskResponse_taskId, *v.TaskId)
+	}
+}
+func (v *GetDataSetImportTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataSetImportTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataSetImportTaskResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetDataSetImportTaskResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DataSetTaskLifecycle(ev)
+			return nil
+		case schemas.GetDataSetImportTaskResponse_summary:
+			v.Summary = &types.DataSetImportSummary{}
+			return v.Summary.Deserialize(d)
+		case schemas.GetDataSetImportTaskResponse_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.GetDataSetImportTaskResponse_taskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataSetImportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataSetImportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataSetImportTask, schemas.GetDataSetImportTaskRequest, schemas.GetDataSetImportTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataSetImportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataSetImportTask, schemas.GetDataSetImportTaskRequest, schemas.GetDataSetImportTaskResponse), output: &GetDataSetImportTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

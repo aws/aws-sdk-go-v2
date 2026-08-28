@@ -4,6 +4,8 @@ package appstream
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListAssociatedFleetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssociatedFleetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssociatedFleetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssociatedFleetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssociatedFleetsRequest_NextToken, *v.NextToken)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.ListAssociatedFleetsRequest_StackName, *v.StackName)
+	}
+}
+
 type ListAssociatedFleetsOutput struct {
 
 	// The name of the fleet.
@@ -52,13 +69,35 @@ type ListAssociatedFleetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssociatedFleetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssociatedFleetsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssociatedFleetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.ListAssociatedFleetsResult_Names, v.Names)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssociatedFleetsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAssociatedFleetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssociatedFleetsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssociatedFleetsResult_Names:
+			return deserializeStringList(d, schemas.ListAssociatedFleetsResult_Names, &v.Names)
+		case schemas.ListAssociatedFleetsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssociatedFleetsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssociatedFleetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListAssociatedFleets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociatedFleets, schemas.ListAssociatedFleetsRequest, schemas.ListAssociatedFleetsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListAssociatedFleets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociatedFleets, schemas.ListAssociatedFleetsRequest, schemas.ListAssociatedFleetsResult), output: &ListAssociatedFleetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,23 @@ type EnableAddOnInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableAddOnInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableAddOnRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableAddOnInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddOnRequest != nil {
+		s.WriteStruct(schemas.EnableAddOnRequest_addOnRequest)
+		v.AddOnRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.EnableAddOnRequest_resourceName, *v.ResourceName)
+	}
+}
+
 type EnableAddOnOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -55,13 +74,29 @@ type EnableAddOnOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableAddOnOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableAddOnResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableAddOnOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.EnableAddOnResult_operations, v.Operations)
+}
+func (v *EnableAddOnOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnableAddOnResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnableAddOnResult_operations:
+			return deserializeOperationList(d, schemas.EnableAddOnResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableAddOnMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnableAddOn{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableAddOn, schemas.EnableAddOnRequest, schemas.EnableAddOnResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpEnableAddOn{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableAddOn, schemas.EnableAddOnRequest, schemas.EnableAddOnResult), output: &EnableAddOnOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

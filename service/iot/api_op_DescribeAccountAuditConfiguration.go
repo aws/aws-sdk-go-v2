@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,15 @@ type DescribeAccountAuditConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountAuditConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountAuditConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountAuditConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DescribeAccountAuditConfigurationOutput struct {
 
 	// Which audit checks are enabled and disabled for this account.
@@ -57,13 +68,38 @@ type DescribeAccountAuditConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountAuditConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountAuditConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountAuditConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuditCheckConfigurations(s, schemas.DescribeAccountAuditConfigurationResponse_auditCheckConfigurations, v.AuditCheckConfigurations)
+	serializeAuditNotificationTargetConfigurations(s, schemas.DescribeAccountAuditConfigurationResponse_auditNotificationTargetConfigurations, v.AuditNotificationTargetConfigurations)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeAccountAuditConfigurationResponse_roleArn, *v.RoleArn)
+	}
+}
+func (v *DescribeAccountAuditConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAccountAuditConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAccountAuditConfigurationResponse_auditCheckConfigurations:
+			return deserializeAuditCheckConfigurations(d, schemas.DescribeAccountAuditConfigurationResponse_auditCheckConfigurations, &v.AuditCheckConfigurations)
+		case schemas.DescribeAccountAuditConfigurationResponse_auditNotificationTargetConfigurations:
+			return deserializeAuditNotificationTargetConfigurations(d, schemas.DescribeAccountAuditConfigurationResponse_auditNotificationTargetConfigurations, &v.AuditNotificationTargetConfigurations)
+		case schemas.DescribeAccountAuditConfigurationResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeAccountAuditConfigurationResponse_roleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAccountAuditConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAccountAuditConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountAuditConfiguration, schemas.DescribeAccountAuditConfigurationRequest, schemas.DescribeAccountAuditConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAccountAuditConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountAuditConfiguration, schemas.DescribeAccountAuditConfigurationRequest, schemas.DescribeAccountAuditConfigurationResponse), output: &DescribeAccountAuditConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

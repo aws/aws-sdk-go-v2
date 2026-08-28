@@ -4,7 +4,9 @@ package organizations
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,18 @@ type CreateOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOrganizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FeatureSet != "" {
+		s.WriteString(schemas.CreateOrganizationRequest_FeatureSet, string(v.FeatureSet))
+	}
+}
+
 type CreateOrganizationOutput struct {
 
 	// A structure that contains details about the newly created organization.
@@ -79,13 +93,34 @@ type CreateOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOrganizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOrganizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Organization != nil {
+		s.WriteStruct(schemas.CreateOrganizationResponse_Organization)
+		v.Organization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOrganizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOrganizationResponse_Organization:
+			v.Organization = &types.Organization{}
+			return v.Organization.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOrganization, schemas.CreateOrganizationRequest, schemas.CreateOrganizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOrganization, schemas.CreateOrganizationRequest, schemas.CreateOrganizationResponse), output: &CreateOrganizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

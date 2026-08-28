@@ -4,7 +4,9 @@ package lightsail
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -118,6 +120,34 @@ type GetBucketMetricDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBucketMetricDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBucketMetricDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBucketMetricDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.GetBucketMetricDataRequest_bucketName, *v.BucketName)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetBucketMetricDataRequest_endTime, *v.EndTime)
+	}
+	if v.MetricName != "" {
+		s.WriteString(schemas.GetBucketMetricDataRequest_metricName, string(v.MetricName))
+	}
+	if v.Period != nil {
+		s.WriteInt32(schemas.GetBucketMetricDataRequest_period, *v.Period)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetBucketMetricDataRequest_startTime, *v.StartTime)
+	}
+	serializeMetricStatisticList(s, schemas.GetBucketMetricDataRequest_statistics, v.Statistics)
+	if v.Unit != "" {
+		s.WriteString(schemas.GetBucketMetricDataRequest_unit, string(v.Unit))
+	}
+}
+
 type GetBucketMetricDataOutput struct {
 
 	// An array of objects that describe the metric data returned.
@@ -132,13 +162,39 @@ type GetBucketMetricDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBucketMetricDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBucketMetricDataResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBucketMetricDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricDatapointList(s, schemas.GetBucketMetricDataResult_metricData, v.MetricData)
+	if v.MetricName != "" {
+		s.WriteString(schemas.GetBucketMetricDataResult_metricName, string(v.MetricName))
+	}
+}
+func (v *GetBucketMetricDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBucketMetricDataResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBucketMetricDataResult_metricData:
+			return deserializeMetricDatapointList(d, schemas.GetBucketMetricDataResult_metricData, &v.MetricData)
+		case schemas.GetBucketMetricDataResult_metricName:
+			var ev string
+			if err := d.ReadString(schemas.GetBucketMetricDataResult_metricName, &ev); err != nil {
+				return err
+			}
+			v.MetricName = types.BucketMetricName(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBucketMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetBucketMetricData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBucketMetricData, schemas.GetBucketMetricDataRequest, schemas.GetBucketMetricDataResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetBucketMetricData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBucketMetricData, schemas.GetBucketMetricDataRequest, schemas.GetBucketMetricDataResult), output: &GetBucketMetricDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

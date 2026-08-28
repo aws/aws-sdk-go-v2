@@ -5,7 +5,9 @@ package appstream
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -41,6 +43,19 @@ type DescribeFleetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.DescribeFleetsRequest_Names, v.Names)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFleetsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeFleetsOutput struct {
 
 	// Information about the fleets.
@@ -56,13 +71,35 @@ type DescribeFleetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFleetList(s, schemas.DescribeFleetsResult_Fleets, v.Fleets)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFleetsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeFleetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFleetsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFleetsResult_Fleets:
+			return deserializeFleetList(d, schemas.DescribeFleetsResult_Fleets, &v.Fleets)
+		case schemas.DescribeFleetsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeFleetsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFleetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeFleets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleets, schemas.DescribeFleetsRequest, schemas.DescribeFleetsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeFleets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleets, schemas.DescribeFleetsRequest, schemas.DescribeFleetsResult), output: &DescribeFleetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

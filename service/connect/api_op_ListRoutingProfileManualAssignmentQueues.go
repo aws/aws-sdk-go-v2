@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -76,6 +78,27 @@ type ListRoutingProfileManualAssignmentQueuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRoutingProfileManualAssignmentQueuesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRoutingProfileManualAssignmentQueuesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRoutingProfileManualAssignmentQueuesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListRoutingProfileManualAssignmentQueuesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRoutingProfileManualAssignmentQueuesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRoutingProfileManualAssignmentQueuesRequest_NextToken, *v.NextToken)
+	}
+	if v.RoutingProfileId != nil {
+		s.WriteString(schemas.ListRoutingProfileManualAssignmentQueuesRequest_RoutingProfileId, *v.RoutingProfileId)
+	}
+}
+
 type ListRoutingProfileManualAssignmentQueuesOutput struct {
 
 	// The Amazon Web Services Region where this resource was last modified.
@@ -97,13 +120,47 @@ type ListRoutingProfileManualAssignmentQueuesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRoutingProfileManualAssignmentQueuesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRoutingProfileManualAssignmentQueuesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRoutingProfileManualAssignmentQueuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.ListRoutingProfileManualAssignmentQueuesResponse_LastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ListRoutingProfileManualAssignmentQueuesResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRoutingProfileManualAssignmentQueuesResponse_NextToken, *v.NextToken)
+	}
+	serializeRoutingProfileManualAssignmentQueueConfigSummaryList(s, schemas.ListRoutingProfileManualAssignmentQueuesResponse_RoutingProfileManualAssignmentQueueConfigSummaryList, v.RoutingProfileManualAssignmentQueueConfigSummaryList)
+}
+func (v *ListRoutingProfileManualAssignmentQueuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRoutingProfileManualAssignmentQueuesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRoutingProfileManualAssignmentQueuesResponse_LastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.ListRoutingProfileManualAssignmentQueuesResponse_LastModifiedRegion, v.LastModifiedRegion)
+		case schemas.ListRoutingProfileManualAssignmentQueuesResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ListRoutingProfileManualAssignmentQueuesResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.ListRoutingProfileManualAssignmentQueuesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRoutingProfileManualAssignmentQueuesResponse_NextToken, v.NextToken)
+		case schemas.ListRoutingProfileManualAssignmentQueuesResponse_RoutingProfileManualAssignmentQueueConfigSummaryList:
+			return deserializeRoutingProfileManualAssignmentQueueConfigSummaryList(d, schemas.ListRoutingProfileManualAssignmentQueuesResponse_RoutingProfileManualAssignmentQueueConfigSummaryList, &v.RoutingProfileManualAssignmentQueueConfigSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRoutingProfileManualAssignmentQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRoutingProfileManualAssignmentQueues{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoutingProfileManualAssignmentQueues, schemas.ListRoutingProfileManualAssignmentQueuesRequest, schemas.ListRoutingProfileManualAssignmentQueuesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRoutingProfileManualAssignmentQueues{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoutingProfileManualAssignmentQueues, schemas.ListRoutingProfileManualAssignmentQueuesRequest, schemas.ListRoutingProfileManualAssignmentQueuesResponse), output: &ListRoutingProfileManualAssignmentQueuesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

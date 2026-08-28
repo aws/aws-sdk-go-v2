@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type DisableSagemakerServicecatalogPortfolioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableSagemakerServicecatalogPortfolioInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableSagemakerServicecatalogPortfolioInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableSagemakerServicecatalogPortfolioInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DisableSagemakerServicecatalogPortfolioOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -35,13 +46,26 @@ type DisableSagemakerServicecatalogPortfolioOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableSagemakerServicecatalogPortfolioOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableSagemakerServicecatalogPortfolioOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableSagemakerServicecatalogPortfolioOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisableSagemakerServicecatalogPortfolioOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableSagemakerServicecatalogPortfolioOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableSagemakerServicecatalogPortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisableSagemakerServicecatalogPortfolio{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableSagemakerServicecatalogPortfolio, schemas.DisableSagemakerServicecatalogPortfolioInput, schemas.DisableSagemakerServicecatalogPortfolioOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisableSagemakerServicecatalogPortfolio{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableSagemakerServicecatalogPortfolio, schemas.DisableSagemakerServicecatalogPortfolioInput, schemas.DisableSagemakerServicecatalogPortfolioOutput), output: &DisableSagemakerServicecatalogPortfolioOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -132,6 +134,55 @@ type CreateClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScaling != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_AutoScaling)
+		v.AutoScaling.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.CreateClusterRequest_ClusterName, *v.ClusterName)
+	}
+	if v.ClusterRole != nil {
+		s.WriteString(schemas.CreateClusterRequest_ClusterRole, *v.ClusterRole)
+	}
+	serializeClusterInstanceGroupSpecifications(s, schemas.CreateClusterRequest_InstanceGroups, v.InstanceGroups)
+	if v.NodeProvisioningMode != "" {
+		s.WriteString(schemas.CreateClusterRequest_NodeProvisioningMode, string(v.NodeProvisioningMode))
+	}
+	if v.NodeRecovery != "" {
+		s.WriteString(schemas.CreateClusterRequest_NodeRecovery, string(v.NodeRecovery))
+	}
+	if v.Orchestrator != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_Orchestrator)
+		v.Orchestrator.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeClusterRestrictedInstanceGroupSpecifications(s, schemas.CreateClusterRequest_RestrictedInstanceGroups, v.RestrictedInstanceGroups)
+	if v.RestrictedInstanceGroupsConfig != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_RestrictedInstanceGroupsConfig)
+		v.RestrictedInstanceGroupsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateClusterRequest_Tags, v.Tags)
+	if v.TieredStorageConfig != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_TieredStorageConfig)
+		v.TieredStorageConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.CreateClusterRequest_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateClusterOutput struct {
 
 	// The Amazon Resource Name (ARN) of the cluster.
@@ -145,13 +196,32 @@ type CreateClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.CreateClusterResponse_ClusterArn, *v.ClusterArn)
+	}
+}
+func (v *CreateClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateClusterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateClusterResponse_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.CreateClusterResponse_ClusterArn, v.ClusterArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCluster, schemas.CreateClusterRequest, schemas.CreateClusterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCluster, schemas.CreateClusterRequest, schemas.CreateClusterResponse), output: &CreateClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

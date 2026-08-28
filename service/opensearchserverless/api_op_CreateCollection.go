@@ -5,7 +5,9 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -66,6 +68,95 @@ type CreateCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCollectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCollectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCollectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateCollectionRequest_clientToken, *v.ClientToken)
+	}
+	if v.CollectionGroupName != nil {
+		s.WriteString(schemas.CreateCollectionRequest_collectionGroupName, *v.CollectionGroupName)
+	}
+	if v.DeletionProtection != "" {
+		s.WriteString(schemas.CreateCollectionRequest_deletionProtection, string(v.DeletionProtection))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateCollectionRequest_description, *v.Description)
+	}
+	if v.EncryptionConfig != nil {
+		s.WriteStruct(schemas.CreateCollectionRequest_encryptionConfig)
+		v.EncryptionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCollectionRequest_name, *v.Name)
+	}
+	if v.StandbyReplicas != "" {
+		s.WriteString(schemas.CreateCollectionRequest_standbyReplicas, string(v.StandbyReplicas))
+	}
+	serializeTags(s, schemas.CreateCollectionRequest_tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateCollectionRequest_type, string(v.Type))
+	}
+	if v.VectorOptions != nil {
+		s.WriteStruct(schemas.CreateCollectionRequest_vectorOptions)
+		v.VectorOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateCollectionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCollectionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCollectionRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateCollectionRequest_clientToken, v.ClientToken)
+		case schemas.CreateCollectionRequest_collectionGroupName:
+			v.CollectionGroupName = new(string)
+			return d.ReadString(schemas.CreateCollectionRequest_collectionGroupName, v.CollectionGroupName)
+		case schemas.CreateCollectionRequest_deletionProtection:
+			var ev string
+			if err := d.ReadString(schemas.CreateCollectionRequest_deletionProtection, &ev); err != nil {
+				return err
+			}
+			v.DeletionProtection = types.DeletionProtection(ev)
+			return nil
+		case schemas.CreateCollectionRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateCollectionRequest_description, v.Description)
+		case schemas.CreateCollectionRequest_encryptionConfig:
+			v.EncryptionConfig = &types.EncryptionConfig{}
+			return v.EncryptionConfig.Deserialize(d)
+		case schemas.CreateCollectionRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateCollectionRequest_name, v.Name)
+		case schemas.CreateCollectionRequest_standbyReplicas:
+			var ev string
+			if err := d.ReadString(schemas.CreateCollectionRequest_standbyReplicas, &ev); err != nil {
+				return err
+			}
+			v.StandbyReplicas = types.StandbyReplicas(ev)
+			return nil
+		case schemas.CreateCollectionRequest_tags:
+			return deserializeTags(d, schemas.CreateCollectionRequest_tags, &v.Tags)
+		case schemas.CreateCollectionRequest_type:
+			var ev string
+			if err := d.ReadString(schemas.CreateCollectionRequest_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.CollectionType(ev)
+			return nil
+		case schemas.CreateCollectionRequest_vectorOptions:
+			v.VectorOptions = &types.VectorOptions{}
+			return v.VectorOptions.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type CreateCollectionOutput struct {
 
 	// Details about the collection.
@@ -77,13 +168,34 @@ type CreateCollectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCollectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCollectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCollectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateCollectionDetail != nil {
+		s.WriteStruct(schemas.CreateCollectionResponse_createCollectionDetail)
+		v.CreateCollectionDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateCollectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCollectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCollectionResponse_createCollectionDetail:
+			v.CreateCollectionDetail = &types.CreateCollectionDetail{}
+			return v.CreateCollectionDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCollection, schemas.CreateCollectionRequest, schemas.CreateCollectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCollection, schemas.CreateCollectionRequest, schemas.CreateCollectionResponse), output: &CreateCollectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

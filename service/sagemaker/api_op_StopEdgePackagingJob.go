@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type StopEdgePackagingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopEdgePackagingJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopEdgePackagingJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopEdgePackagingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EdgePackagingJobName != nil {
+		s.WriteString(schemas.StopEdgePackagingJobRequest_EdgePackagingJobName, *v.EdgePackagingJobName)
+	}
+}
+
 type StopEdgePackagingJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type StopEdgePackagingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopEdgePackagingJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopEdgePackagingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopEdgePackagingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopEdgePackagingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopEdgePackagingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopEdgePackagingJob, schemas.StopEdgePackagingJobRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopEdgePackagingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopEdgePackagingJob, schemas.StopEdgePackagingJobRequest, nil), output: &StopEdgePackagingJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

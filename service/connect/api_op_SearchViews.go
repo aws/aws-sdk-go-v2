@@ -5,7 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,34 @@ type SearchViewsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchViewsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchViewsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchViewsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SearchViewsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchViewsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchViewsRequest_NextToken, *v.NextToken)
+	}
+	if v.SearchCriteria != nil {
+		s.WriteStruct(schemas.SearchViewsRequest_SearchCriteria)
+		v.SearchCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SearchFilter != nil {
+		s.WriteStruct(schemas.SearchViewsRequest_SearchFilter)
+		v.SearchFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchViewsOutput struct {
 
 	// The approximate total number of views that match the search criteria.
@@ -68,13 +98,41 @@ type SearchViewsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchViewsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchViewsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchViewsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateTotalCount != nil {
+		s.WriteInt64(schemas.SearchViewsResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchViewsResponse_NextToken, *v.NextToken)
+	}
+	serializeViewSearchSummaryList(s, schemas.SearchViewsResponse_Views, v.Views)
+}
+func (v *SearchViewsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchViewsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchViewsResponse_ApproximateTotalCount:
+			v.ApproximateTotalCount = new(int64)
+			return d.ReadInt64(schemas.SearchViewsResponse_ApproximateTotalCount, v.ApproximateTotalCount)
+		case schemas.SearchViewsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchViewsResponse_NextToken, v.NextToken)
+		case schemas.SearchViewsResponse_Views:
+			return deserializeViewSearchSummaryList(d, schemas.SearchViewsResponse_Views, &v.Views)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchViewsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchViews{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchViews, schemas.SearchViewsRequest, schemas.SearchViewsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchViews{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchViews, schemas.SearchViewsRequest, schemas.SearchViewsResponse), output: &SearchViewsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

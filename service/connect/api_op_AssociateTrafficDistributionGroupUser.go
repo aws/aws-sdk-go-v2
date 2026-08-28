@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type AssociateTrafficDistributionGroupUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateTrafficDistributionGroupUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateTrafficDistributionGroupUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateTrafficDistributionGroupUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.AssociateTrafficDistributionGroupUserRequest_InstanceId, *v.InstanceId)
+	}
+	if v.TrafficDistributionGroupId != nil {
+		s.WriteString(schemas.AssociateTrafficDistributionGroupUserRequest_TrafficDistributionGroupId, *v.TrafficDistributionGroupId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.AssociateTrafficDistributionGroupUserRequest_UserId, *v.UserId)
+	}
+}
+
 type AssociateTrafficDistributionGroupUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +75,26 @@ type AssociateTrafficDistributionGroupUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateTrafficDistributionGroupUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateTrafficDistributionGroupUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateTrafficDistributionGroupUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateTrafficDistributionGroupUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateTrafficDistributionGroupUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateTrafficDistributionGroupUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateTrafficDistributionGroupUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateTrafficDistributionGroupUser, schemas.AssociateTrafficDistributionGroupUserRequest, schemas.AssociateTrafficDistributionGroupUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateTrafficDistributionGroupUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateTrafficDistributionGroupUser, schemas.AssociateTrafficDistributionGroupUserRequest, schemas.AssociateTrafficDistributionGroupUserResponse), output: &AssociateTrafficDistributionGroupUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

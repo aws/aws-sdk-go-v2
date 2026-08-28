@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,34 @@ type SearchEmailAddressesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchEmailAddressesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchEmailAddressesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchEmailAddressesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SearchEmailAddressesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchEmailAddressesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchEmailAddressesRequest_NextToken, *v.NextToken)
+	}
+	if v.SearchCriteria != nil {
+		s.WriteStruct(schemas.SearchEmailAddressesRequest_SearchCriteria)
+		v.SearchCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SearchFilter != nil {
+		s.WriteStruct(schemas.SearchEmailAddressesRequest_SearchFilter)
+		v.SearchFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchEmailAddressesOutput struct {
 
 	// The total number of email addresses which matched your search query.
@@ -67,13 +97,41 @@ type SearchEmailAddressesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchEmailAddressesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchEmailAddressesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchEmailAddressesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateTotalCount != nil {
+		s.WriteInt64(schemas.SearchEmailAddressesResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
+	}
+	serializeEmailAddressList(s, schemas.SearchEmailAddressesResponse_EmailAddresses, v.EmailAddresses)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchEmailAddressesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *SearchEmailAddressesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchEmailAddressesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchEmailAddressesResponse_ApproximateTotalCount:
+			v.ApproximateTotalCount = new(int64)
+			return d.ReadInt64(schemas.SearchEmailAddressesResponse_ApproximateTotalCount, v.ApproximateTotalCount)
+		case schemas.SearchEmailAddressesResponse_EmailAddresses:
+			return deserializeEmailAddressList(d, schemas.SearchEmailAddressesResponse_EmailAddresses, &v.EmailAddresses)
+		case schemas.SearchEmailAddressesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchEmailAddressesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchEmailAddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchEmailAddresses{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchEmailAddresses, schemas.SearchEmailAddressesRequest, schemas.SearchEmailAddressesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchEmailAddresses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchEmailAddresses, schemas.SearchEmailAddressesRequest, schemas.SearchEmailAddressesResponse), output: &SearchEmailAddressesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

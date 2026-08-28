@@ -4,7 +4,9 @@ package pinpoint
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteApnsChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApnsChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApnsChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApnsChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.DeleteApnsChannelRequest_ApplicationId, *v.ApplicationId)
+	}
+}
+
 type DeleteApnsChannelOutput struct {
 
 	// Provides information about the status and settings of the APNs (Apple Push
@@ -50,13 +64,34 @@ type DeleteApnsChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApnsChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApnsChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApnsChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.APNSChannelResponse != nil {
+		s.WriteStruct(schemas.DeleteApnsChannelResponse_APNSChannelResponse)
+		v.APNSChannelResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteApnsChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteApnsChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteApnsChannelResponse_APNSChannelResponse:
+			v.APNSChannelResponse = &types.APNSChannelResponse{}
+			return v.APNSChannelResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteApnsChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteApnsChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApnsChannel, schemas.DeleteApnsChannelRequest, schemas.DeleteApnsChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteApnsChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApnsChannel, schemas.DeleteApnsChannelRequest, schemas.DeleteApnsChannelResponse), output: &DeleteApnsChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

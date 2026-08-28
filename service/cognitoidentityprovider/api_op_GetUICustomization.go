@@ -4,7 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type GetUICustomizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUICustomizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUICustomizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUICustomizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.GetUICustomizationRequest_ClientId, *v.ClientId)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.GetUICustomizationRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 type GetUICustomizationOutput struct {
 
 	// Information about the classic hosted UI custom CSS and logo-image branding that
@@ -57,13 +74,34 @@ type GetUICustomizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUICustomizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUICustomizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUICustomizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UICustomization != nil {
+		s.WriteStruct(schemas.GetUICustomizationResponse_UICustomization)
+		v.UICustomization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetUICustomizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUICustomizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUICustomizationResponse_UICustomization:
+			v.UICustomization = &types.UICustomizationType{}
+			return v.UICustomization.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUICustomizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetUICustomization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUICustomization, schemas.GetUICustomizationRequest, schemas.GetUICustomizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetUICustomization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUICustomization, schemas.GetUICustomizationRequest, schemas.GetUICustomizationResponse), output: &GetUICustomizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

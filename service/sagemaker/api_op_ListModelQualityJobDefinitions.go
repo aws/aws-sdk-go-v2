@@ -5,7 +5,9 @@ package sagemaker
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -63,6 +65,39 @@ type ListModelQualityJobDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelQualityJobDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelQualityJobDefinitionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelQualityJobDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListModelQualityJobDefinitionsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListModelQualityJobDefinitionsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.EndpointName != nil {
+		s.WriteString(schemas.ListModelQualityJobDefinitionsRequest_EndpointName, *v.EndpointName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListModelQualityJobDefinitionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListModelQualityJobDefinitionsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelQualityJobDefinitionsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListModelQualityJobDefinitionsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListModelQualityJobDefinitionsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListModelQualityJobDefinitionsOutput struct {
 
 	// A list of summaries of model quality monitoring job definitions.
@@ -81,13 +116,35 @@ type ListModelQualityJobDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelQualityJobDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelQualityJobDefinitionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelQualityJobDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMonitoringJobDefinitionSummaryList(s, schemas.ListModelQualityJobDefinitionsResponse_JobDefinitionSummaries, v.JobDefinitionSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListModelQualityJobDefinitionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListModelQualityJobDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListModelQualityJobDefinitionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListModelQualityJobDefinitionsResponse_JobDefinitionSummaries:
+			return deserializeMonitoringJobDefinitionSummaryList(d, schemas.ListModelQualityJobDefinitionsResponse_JobDefinitionSummaries, &v.JobDefinitionSummaries)
+		case schemas.ListModelQualityJobDefinitionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListModelQualityJobDefinitionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListModelQualityJobDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListModelQualityJobDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelQualityJobDefinitions, schemas.ListModelQualityJobDefinitionsRequest, schemas.ListModelQualityJobDefinitionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListModelQualityJobDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModelQualityJobDefinitions, schemas.ListModelQualityJobDefinitionsRequest, schemas.ListModelQualityJobDefinitionsResponse), output: &ListModelQualityJobDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package greengrass
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type ListGroupCertificateAuthoritiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupCertificateAuthoritiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupCertificateAuthoritiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupCertificateAuthoritiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.ListGroupCertificateAuthoritiesRequest_GroupId, *v.GroupId)
+	}
+}
+
 type ListGroupCertificateAuthoritiesOutput struct {
 
 	// A list of certificate authorities associated with the group.
@@ -45,13 +59,29 @@ type ListGroupCertificateAuthoritiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupCertificateAuthoritiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupCertificateAuthoritiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupCertificateAuthoritiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfGroupCertificateAuthorityProperties(s, schemas.ListGroupCertificateAuthoritiesResponse_GroupCertificateAuthorities, v.GroupCertificateAuthorities)
+}
+func (v *ListGroupCertificateAuthoritiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGroupCertificateAuthoritiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGroupCertificateAuthoritiesResponse_GroupCertificateAuthorities:
+			return deserialize__listOfGroupCertificateAuthorityProperties(d, schemas.ListGroupCertificateAuthoritiesResponse_GroupCertificateAuthorities, &v.GroupCertificateAuthorities)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGroupCertificateAuthoritiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGroupCertificateAuthorities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroupCertificateAuthorities, schemas.ListGroupCertificateAuthoritiesRequest, schemas.ListGroupCertificateAuthoritiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGroupCertificateAuthorities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroupCertificateAuthorities, schemas.ListGroupCertificateAuthoritiesRequest, schemas.ListGroupCertificateAuthoritiesResponse), output: &ListGroupCertificateAuthoritiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

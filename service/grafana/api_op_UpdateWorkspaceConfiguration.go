@@ -4,6 +4,8 @@ package grafana
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/grafana/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,40 @@ type UpdateWorkspaceConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkspaceConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkspaceConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkspaceConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteString(schemas.UpdateWorkspaceConfigurationRequest_configuration, *v.Configuration)
+	}
+	if v.GrafanaVersion != nil {
+		s.WriteString(schemas.UpdateWorkspaceConfigurationRequest_grafanaVersion, *v.GrafanaVersion)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.UpdateWorkspaceConfigurationRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *UpdateWorkspaceConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkspaceConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWorkspaceConfigurationRequest_configuration:
+			v.Configuration = new(string)
+			return d.ReadString(schemas.UpdateWorkspaceConfigurationRequest_configuration, v.Configuration)
+		case schemas.UpdateWorkspaceConfigurationRequest_grafanaVersion:
+			v.GrafanaVersion = new(string)
+			return d.ReadString(schemas.UpdateWorkspaceConfigurationRequest_grafanaVersion, v.GrafanaVersion)
+		case schemas.UpdateWorkspaceConfigurationRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.UpdateWorkspaceConfigurationRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type UpdateWorkspaceConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,13 +98,26 @@ type UpdateWorkspaceConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkspaceConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkspaceConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkspaceConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateWorkspaceConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkspaceConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkspaceConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWorkspaceConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkspaceConfiguration, schemas.UpdateWorkspaceConfigurationRequest, schemas.UpdateWorkspaceConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWorkspaceConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkspaceConfiguration, schemas.UpdateWorkspaceConfigurationRequest, schemas.UpdateWorkspaceConfigurationResponse), output: &UpdateWorkspaceConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,27 @@ type ListSecurityProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DimensionName != nil {
+		s.WriteString(schemas.ListSecurityProfilesRequest_dimensionName, *v.DimensionName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSecurityProfilesRequest_maxResults, *v.MaxResults)
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.ListSecurityProfilesRequest_metricName, *v.MetricName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityProfilesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListSecurityProfilesOutput struct {
 
 	// A token that can be used to retrieve the next set of results, or null if there
@@ -72,13 +95,35 @@ type ListSecurityProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityProfilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityProfilesResponse_nextToken, *v.NextToken)
+	}
+	serializeSecurityProfileIdentifiers(s, schemas.ListSecurityProfilesResponse_securityProfileIdentifiers, v.SecurityProfileIdentifiers)
+}
+func (v *ListSecurityProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSecurityProfilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSecurityProfilesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSecurityProfilesResponse_nextToken, v.NextToken)
+		case schemas.ListSecurityProfilesResponse_securityProfileIdentifiers:
+			return deserializeSecurityProfileIdentifiers(d, schemas.ListSecurityProfilesResponse_securityProfileIdentifiers, &v.SecurityProfileIdentifiers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSecurityProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSecurityProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityProfiles, schemas.ListSecurityProfilesRequest, schemas.ListSecurityProfilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSecurityProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityProfiles, schemas.ListSecurityProfilesRequest, schemas.ListSecurityProfilesResponse), output: &ListSecurityProfilesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package organizations
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,26 @@ type ListHandshakesForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHandshakesForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHandshakesForOrganizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHandshakesForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListHandshakesForOrganizationRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListHandshakesForOrganizationRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHandshakesForOrganizationRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListHandshakesForOrganizationOutput struct {
 
 	// An array of Handshake objects. Contains details for a handshake.
@@ -74,13 +96,35 @@ type ListHandshakesForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHandshakesForOrganizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHandshakesForOrganizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHandshakesForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHandshakes(s, schemas.ListHandshakesForOrganizationResponse_Handshakes, v.Handshakes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHandshakesForOrganizationResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListHandshakesForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListHandshakesForOrganizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListHandshakesForOrganizationResponse_Handshakes:
+			return deserializeHandshakes(d, schemas.ListHandshakesForOrganizationResponse_Handshakes, &v.Handshakes)
+		case schemas.ListHandshakesForOrganizationResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListHandshakesForOrganizationResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListHandshakesForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListHandshakesForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHandshakesForOrganization, schemas.ListHandshakesForOrganizationRequest, schemas.ListHandshakesForOrganizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListHandshakesForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHandshakesForOrganization, schemas.ListHandshakesForOrganizationRequest, schemas.ListHandshakesForOrganizationResponse), output: &ListHandshakesForOrganizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type DescribeMlflowTrackingServerInput struct {
 	TrackingServerName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeMlflowTrackingServerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMlflowTrackingServerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMlflowTrackingServerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrackingServerName != nil {
+		s.WriteString(schemas.DescribeMlflowTrackingServerRequest_TrackingServerName, *v.TrackingServerName)
+	}
 }
 
 type DescribeMlflowTrackingServerOutput struct {
@@ -104,13 +118,154 @@ type DescribeMlflowTrackingServerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMlflowTrackingServerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMlflowTrackingServerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMlflowTrackingServerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactStoreUri != nil {
+		s.WriteString(schemas.DescribeMlflowTrackingServerResponse_ArtifactStoreUri, *v.ArtifactStoreUri)
+	}
+	if v.AutomaticModelRegistration != nil {
+		s.WriteBool(schemas.DescribeMlflowTrackingServerResponse_AutomaticModelRegistration, *v.AutomaticModelRegistration)
+	}
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.DescribeMlflowTrackingServerResponse_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeMlflowTrackingServerResponse_CreationTime, *v.CreationTime)
+	}
+	if v.IsActive != "" {
+		s.WriteString(schemas.DescribeMlflowTrackingServerResponse_IsActive, string(v.IsActive))
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteStruct(schemas.DescribeMlflowTrackingServerResponse_LastModifiedBy)
+		v.LastModifiedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeMlflowTrackingServerResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.MlflowVersion != nil {
+		s.WriteString(schemas.DescribeMlflowTrackingServerResponse_MlflowVersion, *v.MlflowVersion)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeMlflowTrackingServerResponse_RoleArn, *v.RoleArn)
+	}
+	if v.S3BucketOwnerAccountId != nil {
+		s.WriteString(schemas.DescribeMlflowTrackingServerResponse_S3BucketOwnerAccountId, *v.S3BucketOwnerAccountId)
+	}
+	if v.S3BucketOwnerVerification != nil {
+		s.WriteBool(schemas.DescribeMlflowTrackingServerResponse_S3BucketOwnerVerification, *v.S3BucketOwnerVerification)
+	}
+	if v.TrackingServerArn != nil {
+		s.WriteString(schemas.DescribeMlflowTrackingServerResponse_TrackingServerArn, *v.TrackingServerArn)
+	}
+	if v.TrackingServerMaintenanceStatus != "" {
+		s.WriteString(schemas.DescribeMlflowTrackingServerResponse_TrackingServerMaintenanceStatus, string(v.TrackingServerMaintenanceStatus))
+	}
+	if v.TrackingServerName != nil {
+		s.WriteString(schemas.DescribeMlflowTrackingServerResponse_TrackingServerName, *v.TrackingServerName)
+	}
+	if v.TrackingServerSize != "" {
+		s.WriteString(schemas.DescribeMlflowTrackingServerResponse_TrackingServerSize, string(v.TrackingServerSize))
+	}
+	if v.TrackingServerStatus != "" {
+		s.WriteString(schemas.DescribeMlflowTrackingServerResponse_TrackingServerStatus, string(v.TrackingServerStatus))
+	}
+	if v.TrackingServerUrl != nil {
+		s.WriteString(schemas.DescribeMlflowTrackingServerResponse_TrackingServerUrl, *v.TrackingServerUrl)
+	}
+	if v.WeeklyMaintenanceWindowStart != nil {
+		s.WriteString(schemas.DescribeMlflowTrackingServerResponse_WeeklyMaintenanceWindowStart, *v.WeeklyMaintenanceWindowStart)
+	}
+}
+func (v *DescribeMlflowTrackingServerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMlflowTrackingServerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMlflowTrackingServerResponse_ArtifactStoreUri:
+			v.ArtifactStoreUri = new(string)
+			return d.ReadString(schemas.DescribeMlflowTrackingServerResponse_ArtifactStoreUri, v.ArtifactStoreUri)
+		case schemas.DescribeMlflowTrackingServerResponse_AutomaticModelRegistration:
+			v.AutomaticModelRegistration = new(bool)
+			return d.ReadBool(schemas.DescribeMlflowTrackingServerResponse_AutomaticModelRegistration, v.AutomaticModelRegistration)
+		case schemas.DescribeMlflowTrackingServerResponse_CreatedBy:
+			v.CreatedBy = &types.UserContext{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.DescribeMlflowTrackingServerResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeMlflowTrackingServerResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeMlflowTrackingServerResponse_IsActive:
+			var ev string
+			if err := d.ReadString(schemas.DescribeMlflowTrackingServerResponse_IsActive, &ev); err != nil {
+				return err
+			}
+			v.IsActive = types.IsTrackingServerActive(ev)
+			return nil
+		case schemas.DescribeMlflowTrackingServerResponse_LastModifiedBy:
+			v.LastModifiedBy = &types.UserContext{}
+			return v.LastModifiedBy.Deserialize(d)
+		case schemas.DescribeMlflowTrackingServerResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeMlflowTrackingServerResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeMlflowTrackingServerResponse_MlflowVersion:
+			v.MlflowVersion = new(string)
+			return d.ReadString(schemas.DescribeMlflowTrackingServerResponse_MlflowVersion, v.MlflowVersion)
+		case schemas.DescribeMlflowTrackingServerResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeMlflowTrackingServerResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeMlflowTrackingServerResponse_S3BucketOwnerAccountId:
+			v.S3BucketOwnerAccountId = new(string)
+			return d.ReadString(schemas.DescribeMlflowTrackingServerResponse_S3BucketOwnerAccountId, v.S3BucketOwnerAccountId)
+		case schemas.DescribeMlflowTrackingServerResponse_S3BucketOwnerVerification:
+			v.S3BucketOwnerVerification = new(bool)
+			return d.ReadBool(schemas.DescribeMlflowTrackingServerResponse_S3BucketOwnerVerification, v.S3BucketOwnerVerification)
+		case schemas.DescribeMlflowTrackingServerResponse_TrackingServerArn:
+			v.TrackingServerArn = new(string)
+			return d.ReadString(schemas.DescribeMlflowTrackingServerResponse_TrackingServerArn, v.TrackingServerArn)
+		case schemas.DescribeMlflowTrackingServerResponse_TrackingServerMaintenanceStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeMlflowTrackingServerResponse_TrackingServerMaintenanceStatus, &ev); err != nil {
+				return err
+			}
+			v.TrackingServerMaintenanceStatus = types.TrackingServerMaintenanceStatus(ev)
+			return nil
+		case schemas.DescribeMlflowTrackingServerResponse_TrackingServerName:
+			v.TrackingServerName = new(string)
+			return d.ReadString(schemas.DescribeMlflowTrackingServerResponse_TrackingServerName, v.TrackingServerName)
+		case schemas.DescribeMlflowTrackingServerResponse_TrackingServerSize:
+			var ev string
+			if err := d.ReadString(schemas.DescribeMlflowTrackingServerResponse_TrackingServerSize, &ev); err != nil {
+				return err
+			}
+			v.TrackingServerSize = types.TrackingServerSize(ev)
+			return nil
+		case schemas.DescribeMlflowTrackingServerResponse_TrackingServerStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeMlflowTrackingServerResponse_TrackingServerStatus, &ev); err != nil {
+				return err
+			}
+			v.TrackingServerStatus = types.TrackingServerStatus(ev)
+			return nil
+		case schemas.DescribeMlflowTrackingServerResponse_TrackingServerUrl:
+			v.TrackingServerUrl = new(string)
+			return d.ReadString(schemas.DescribeMlflowTrackingServerResponse_TrackingServerUrl, v.TrackingServerUrl)
+		case schemas.DescribeMlflowTrackingServerResponse_WeeklyMaintenanceWindowStart:
+			v.WeeklyMaintenanceWindowStart = new(string)
+			return d.ReadString(schemas.DescribeMlflowTrackingServerResponse_WeeklyMaintenanceWindowStart, v.WeeklyMaintenanceWindowStart)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMlflowTrackingServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMlflowTrackingServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMlflowTrackingServer, schemas.DescribeMlflowTrackingServerRequest, schemas.DescribeMlflowTrackingServerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeMlflowTrackingServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMlflowTrackingServer, schemas.DescribeMlflowTrackingServerRequest, schemas.DescribeMlflowTrackingServerResponse), output: &DescribeMlflowTrackingServerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,24 @@ type UpdateUserHierarchyGroupNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserHierarchyGroupNameInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserHierarchyGroupNameRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserHierarchyGroupNameInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HierarchyGroupId != nil {
+		s.WriteString(schemas.UpdateUserHierarchyGroupNameRequest_HierarchyGroupId, *v.HierarchyGroupId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateUserHierarchyGroupNameRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateUserHierarchyGroupNameRequest_Name, *v.Name)
+	}
+}
+
 type UpdateUserHierarchyGroupNameOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,13 +73,26 @@ type UpdateUserHierarchyGroupNameOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserHierarchyGroupNameOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserHierarchyGroupNameOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateUserHierarchyGroupNameOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateUserHierarchyGroupNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateUserHierarchyGroupName{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserHierarchyGroupName, schemas.UpdateUserHierarchyGroupNameRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateUserHierarchyGroupName{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserHierarchyGroupName, schemas.UpdateUserHierarchyGroupNameRequest, nil), output: &UpdateUserHierarchyGroupNameOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

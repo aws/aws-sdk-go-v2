@@ -4,6 +4,8 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteContextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContextInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContextRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContextInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContextName != nil {
+		s.WriteString(schemas.DeleteContextRequest_ContextName, *v.ContextName)
+	}
+}
+
 type DeleteContextOutput struct {
 
 	// The Amazon Resource Name (ARN) of the context.
@@ -44,13 +58,32 @@ type DeleteContextOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContextOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContextResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContextOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContextArn != nil {
+		s.WriteString(schemas.DeleteContextResponse_ContextArn, *v.ContextArn)
+	}
+}
+func (v *DeleteContextOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteContextResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteContextResponse_ContextArn:
+			v.ContextArn = new(string)
+			return d.ReadString(schemas.DeleteContextResponse_ContextArn, v.ContextArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteContextMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteContext{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContext, schemas.DeleteContextRequest, schemas.DeleteContextResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteContext{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContext, schemas.DeleteContextRequest, schemas.DeleteContextResponse), output: &DeleteContextOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

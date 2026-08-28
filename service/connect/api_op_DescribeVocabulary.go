@@ -4,7 +4,9 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DescribeVocabularyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVocabularyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVocabularyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVocabularyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeVocabularyRequest_InstanceId, *v.InstanceId)
+	}
+	if v.VocabularyId != nil {
+		s.WriteString(schemas.DescribeVocabularyRequest_VocabularyId, *v.VocabularyId)
+	}
+}
+
 type DescribeVocabularyOutput struct {
 
 	// A list of specific words that you want Contact Lens for Connect Customer to
@@ -57,13 +74,34 @@ type DescribeVocabularyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVocabularyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVocabularyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVocabularyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Vocabulary != nil {
+		s.WriteStruct(schemas.DescribeVocabularyResponse_Vocabulary)
+		v.Vocabulary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeVocabularyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVocabularyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVocabularyResponse_Vocabulary:
+			v.Vocabulary = &types.Vocabulary{}
+			return v.Vocabulary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeVocabularyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeVocabulary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVocabulary, schemas.DescribeVocabularyRequest, schemas.DescribeVocabularyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeVocabulary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVocabulary, schemas.DescribeVocabularyRequest, schemas.DescribeVocabularyResponse), output: &DescribeVocabularyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

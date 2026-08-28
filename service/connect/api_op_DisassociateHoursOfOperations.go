@@ -4,6 +4,8 @@ package connect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,22 @@ type DisassociateHoursOfOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateHoursOfOperationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateHoursOfOperationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateHoursOfOperationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HoursOfOperationId != nil {
+		s.WriteString(schemas.DisassociateHoursOfOperationsRequest_HoursOfOperationId, *v.HoursOfOperationId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DisassociateHoursOfOperationsRequest_InstanceId, *v.InstanceId)
+	}
+	serializeParentHoursOfOperationIdList(s, schemas.DisassociateHoursOfOperationsRequest_ParentHoursOfOperationIds, v.ParentHoursOfOperationIds)
+}
+
 type DisassociateHoursOfOperationsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,13 +76,26 @@ type DisassociateHoursOfOperationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateHoursOfOperationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateHoursOfOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateHoursOfOperationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateHoursOfOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateHoursOfOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateHoursOfOperations, schemas.DisassociateHoursOfOperationsRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateHoursOfOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateHoursOfOperations, schemas.DisassociateHoursOfOperationsRequest, nil), output: &DisassociateHoursOfOperationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

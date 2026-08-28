@@ -4,7 +4,9 @@ package athena
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type GetDataCatalogInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataCatalogInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataCatalogInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataCatalogInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetDataCatalogInput_Name, *v.Name)
+	}
+	if v.WorkGroup != nil {
+		s.WriteString(schemas.GetDataCatalogInput_WorkGroup, *v.WorkGroup)
+	}
+}
+
 type GetDataCatalogOutput struct {
 
 	// The data catalog returned.
@@ -48,13 +65,34 @@ type GetDataCatalogOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataCatalogOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataCatalogOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataCatalogOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataCatalog != nil {
+		s.WriteStruct(schemas.GetDataCatalogOutput_DataCatalog)
+		v.DataCatalog.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetDataCatalogOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataCatalogOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataCatalogOutput_DataCatalog:
+			v.DataCatalog = &types.DataCatalog{}
+			return v.DataCatalog.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDataCatalog{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataCatalog, schemas.GetDataCatalogInput, schemas.GetDataCatalogOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDataCatalog{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataCatalog, schemas.GetDataCatalogInput, schemas.GetDataCatalogOutput), output: &GetDataCatalogOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

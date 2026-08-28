@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -29,6 +31,15 @@ type GetSagemakerServicecatalogPortfolioStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSagemakerServicecatalogPortfolioStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSagemakerServicecatalogPortfolioStatusInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSagemakerServicecatalogPortfolioStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetSagemakerServicecatalogPortfolioStatusOutput struct {
 
 	// Whether Service Catalog is enabled or disabled in SageMaker.
@@ -40,13 +51,36 @@ type GetSagemakerServicecatalogPortfolioStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSagemakerServicecatalogPortfolioStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSagemakerServicecatalogPortfolioStatusOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSagemakerServicecatalogPortfolioStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.GetSagemakerServicecatalogPortfolioStatusOutput_Status, string(v.Status))
+	}
+}
+func (v *GetSagemakerServicecatalogPortfolioStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSagemakerServicecatalogPortfolioStatusOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSagemakerServicecatalogPortfolioStatusOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetSagemakerServicecatalogPortfolioStatusOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SagemakerServicecatalogStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSagemakerServicecatalogPortfolioStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSagemakerServicecatalogPortfolioStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSagemakerServicecatalogPortfolioStatus, schemas.GetSagemakerServicecatalogPortfolioStatusInput, schemas.GetSagemakerServicecatalogPortfolioStatusOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSagemakerServicecatalogPortfolioStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSagemakerServicecatalogPortfolioStatus, schemas.GetSagemakerServicecatalogPortfolioStatusInput, schemas.GetSagemakerServicecatalogPortfolioStatusOutput), output: &GetSagemakerServicecatalogPortfolioStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package codedeploy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type RegisterOnPremisesInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterOnPremisesInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterOnPremisesInstanceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterOnPremisesInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IamSessionArn != nil {
+		s.WriteString(schemas.RegisterOnPremisesInstanceInput_iamSessionArn, *v.IamSessionArn)
+	}
+	if v.IamUserArn != nil {
+		s.WriteString(schemas.RegisterOnPremisesInstanceInput_iamUserArn, *v.IamUserArn)
+	}
+	if v.InstanceName != nil {
+		s.WriteString(schemas.RegisterOnPremisesInstanceInput_instanceName, *v.InstanceName)
+	}
+}
+
 type RegisterOnPremisesInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +70,26 @@ type RegisterOnPremisesInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterOnPremisesInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterOnPremisesInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RegisterOnPremisesInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterOnPremisesInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterOnPremisesInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterOnPremisesInstance, schemas.RegisterOnPremisesInstanceInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterOnPremisesInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterOnPremisesInstance, schemas.RegisterOnPremisesInstanceInput, nil), output: &RegisterOnPremisesInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

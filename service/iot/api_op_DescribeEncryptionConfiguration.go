@@ -4,7 +4,9 @@ package iot
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,15 @@ type DescribeEncryptionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEncryptionConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEncryptionConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEncryptionConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DescribeEncryptionConfigurationOutput struct {
 
 	// The encryption configuration details that include the status information of the
@@ -58,13 +69,62 @@ type DescribeEncryptionConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEncryptionConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEncryptionConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEncryptionConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationDetails != nil {
+		s.WriteStruct(schemas.DescribeEncryptionConfigurationResponse_configurationDetails)
+		v.ConfigurationDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EncryptionType != "" {
+		s.WriteString(schemas.DescribeEncryptionConfigurationResponse_encryptionType, string(v.EncryptionType))
+	}
+	if v.KmsAccessRoleArn != nil {
+		s.WriteString(schemas.DescribeEncryptionConfigurationResponse_kmsAccessRoleArn, *v.KmsAccessRoleArn)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.DescribeEncryptionConfigurationResponse_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.DescribeEncryptionConfigurationResponse_lastModifiedDate, *v.LastModifiedDate)
+	}
+}
+func (v *DescribeEncryptionConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEncryptionConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEncryptionConfigurationResponse_configurationDetails:
+			v.ConfigurationDetails = &types.ConfigurationDetails{}
+			return v.ConfigurationDetails.Deserialize(d)
+		case schemas.DescribeEncryptionConfigurationResponse_encryptionType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeEncryptionConfigurationResponse_encryptionType, &ev); err != nil {
+				return err
+			}
+			v.EncryptionType = types.EncryptionType(ev)
+			return nil
+		case schemas.DescribeEncryptionConfigurationResponse_kmsAccessRoleArn:
+			v.KmsAccessRoleArn = new(string)
+			return d.ReadString(schemas.DescribeEncryptionConfigurationResponse_kmsAccessRoleArn, v.KmsAccessRoleArn)
+		case schemas.DescribeEncryptionConfigurationResponse_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.DescribeEncryptionConfigurationResponse_kmsKeyArn, v.KmsKeyArn)
+		case schemas.DescribeEncryptionConfigurationResponse_lastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeEncryptionConfigurationResponse_lastModifiedDate, v.LastModifiedDate)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEncryptionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeEncryptionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEncryptionConfiguration, schemas.DescribeEncryptionConfigurationRequest, schemas.DescribeEncryptionConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeEncryptionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEncryptionConfiguration, schemas.DescribeEncryptionConfigurationRequest, schemas.DescribeEncryptionConfigurationResponse), output: &DescribeEncryptionConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

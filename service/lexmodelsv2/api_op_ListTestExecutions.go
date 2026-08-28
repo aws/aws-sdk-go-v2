@@ -5,7 +5,9 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,26 @@ type ListTestExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestExecutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTestExecutionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestExecutionsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != nil {
+		s.WriteStruct(schemas.ListTestExecutionsRequest_sortBy)
+		v.SortBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListTestExecutionsOutput struct {
 
 	// A token that indicates whether there are more results to return in a response
@@ -60,13 +82,35 @@ type ListTestExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestExecutionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestExecutionsResponse_nextToken, *v.NextToken)
+	}
+	serializeTestExecutionSummaryList(s, schemas.ListTestExecutionsResponse_testExecutions, v.TestExecutions)
+}
+func (v *ListTestExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTestExecutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTestExecutionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTestExecutionsResponse_nextToken, v.NextToken)
+		case schemas.ListTestExecutionsResponse_testExecutions:
+			return deserializeTestExecutionSummaryList(d, schemas.ListTestExecutionsResponse_testExecutions, &v.TestExecutions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTestExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTestExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestExecutions, schemas.ListTestExecutionsRequest, schemas.ListTestExecutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTestExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestExecutions, schemas.ListTestExecutionsRequest, schemas.ListTestExecutionsResponse), output: &ListTestExecutionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

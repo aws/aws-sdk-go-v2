@@ -4,7 +4,9 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -90,6 +92,47 @@ type UpdateImageVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateImageVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateImageVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateImageVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.UpdateImageVersionRequest_Alias, *v.Alias)
+	}
+	serializeSageMakerImageVersionAliases(s, schemas.UpdateImageVersionRequest_AliasesToAdd, v.AliasesToAdd)
+	serializeSageMakerImageVersionAliases(s, schemas.UpdateImageVersionRequest_AliasesToDelete, v.AliasesToDelete)
+	if v.Horovod != nil {
+		s.WriteBool(schemas.UpdateImageVersionRequest_Horovod, *v.Horovod)
+	}
+	if v.ImageName != nil {
+		s.WriteString(schemas.UpdateImageVersionRequest_ImageName, *v.ImageName)
+	}
+	if v.JobType != "" {
+		s.WriteString(schemas.UpdateImageVersionRequest_JobType, string(v.JobType))
+	}
+	if v.MLFramework != nil {
+		s.WriteString(schemas.UpdateImageVersionRequest_MLFramework, *v.MLFramework)
+	}
+	if v.Processor != "" {
+		s.WriteString(schemas.UpdateImageVersionRequest_Processor, string(v.Processor))
+	}
+	if v.ProgrammingLang != nil {
+		s.WriteString(schemas.UpdateImageVersionRequest_ProgrammingLang, *v.ProgrammingLang)
+	}
+	if v.ReleaseNotes != nil {
+		s.WriteString(schemas.UpdateImageVersionRequest_ReleaseNotes, *v.ReleaseNotes)
+	}
+	if v.VendorGuidance != "" {
+		s.WriteString(schemas.UpdateImageVersionRequest_VendorGuidance, string(v.VendorGuidance))
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.UpdateImageVersionRequest_Version, *v.Version)
+	}
+}
+
 type UpdateImageVersionOutput struct {
 
 	// The ARN of the image version.
@@ -101,13 +144,32 @@ type UpdateImageVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateImageVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateImageVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateImageVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageVersionArn != nil {
+		s.WriteString(schemas.UpdateImageVersionResponse_ImageVersionArn, *v.ImageVersionArn)
+	}
+}
+func (v *UpdateImageVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateImageVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateImageVersionResponse_ImageVersionArn:
+			v.ImageVersionArn = new(string)
+			return d.ReadString(schemas.UpdateImageVersionResponse_ImageVersionArn, v.ImageVersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateImageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateImageVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateImageVersion, schemas.UpdateImageVersionRequest, schemas.UpdateImageVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateImageVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateImageVersion, schemas.UpdateImageVersionRequest, schemas.UpdateImageVersionResponse), output: &UpdateImageVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

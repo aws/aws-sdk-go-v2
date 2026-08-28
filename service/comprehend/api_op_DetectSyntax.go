@@ -4,7 +4,9 @@ package comprehend
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type DetectSyntaxInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectSyntaxInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectSyntaxRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectSyntaxInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.DetectSyntaxRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.DetectSyntaxRequest_Text, *v.Text)
+	}
+}
+
 type DetectSyntaxOutput struct {
 
 	// A collection of syntax tokens describing the text. For each token, the response
@@ -60,13 +77,29 @@ type DetectSyntaxOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectSyntaxOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectSyntaxResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectSyntaxOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfSyntaxTokens(s, schemas.DetectSyntaxResponse_SyntaxTokens, v.SyntaxTokens)
+}
+func (v *DetectSyntaxOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectSyntaxResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectSyntaxResponse_SyntaxTokens:
+			return deserializeListOfSyntaxTokens(d, schemas.DetectSyntaxResponse_SyntaxTokens, &v.SyntaxTokens)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetectSyntaxMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectSyntax{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectSyntax, schemas.DetectSyntaxRequest, schemas.DetectSyntaxResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetectSyntax{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectSyntax, schemas.DetectSyntaxRequest, schemas.DetectSyntaxResponse), output: &DetectSyntaxOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
