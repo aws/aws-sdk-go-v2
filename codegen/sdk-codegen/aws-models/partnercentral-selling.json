@@ -1430,6 +1430,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ISVSM"
                     }
+                },
+                "SIGNATORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Signatory"
+                    }
                 }
             }
         },
@@ -1787,6 +1793,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Engagement classification for this opportunity. Read-only. Null before scoring. Known values: <code>AWS Field-engaged</code>, <code>Agent-engaged</code>, <code>Partner-led</code>.</p>"
                     }
+                },
+                "SoftwareRevenue": {
+                    "target": "com.amazonaws.partnercentralselling#AwsSoftwareRevenue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Seller-provided PARC deal terms: commitment value, discount, and contract dates.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1998,6 +2010,35 @@
                 "smithy.api#documentation": "<p>Source-separated spend insights that provide independent analysis for AWS recommendations and partner estimates.</p>"
             }
         },
+        "com.amazonaws.partnercentralselling#AwsSoftwareRevenue": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.partnercentralselling#MonetaryValue"
+                },
+                "Discount": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Discount percentage offered on the software revenue. Percent convention: 15.00 means 15%.</p>"
+                    }
+                },
+                "EffectiveDate": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contract effective (start) date in YYYY-MM-DD format.</p>"
+                    }
+                },
+                "ExpirationDate": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contract expiration (end) date in YYYY-MM-DD format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Seller-provided PARC deal terms for the opportunity, including commitment value, discount percentage, and contract dates.</p>"
+            }
+        },
         "com.amazonaws.partnercentralselling#AwsSubmission": {
             "type": "structure",
             "members": {
@@ -2056,6 +2097,7 @@
         "com.amazonaws.partnercentralselling#CatalogIdentifier": {
             "type": "string",
             "traits": {
+                "smithy.api#documentation": "Value space is validated at runtime against an allowlist, so the model keeps only a coarse character-class pattern.",
                 "smithy.api#pattern": "^[a-zA-Z]+$"
             }
         },
@@ -7121,6 +7163,12 @@
                         "smithy.api#documentation": "<p>Engagement classification for this opportunity. Read-only. Null before scoring. Known values: <code>AWS Field-engaged</code>, <code>Agent-engaged</code>, <code>Partner-led</code>.</p>"
                     }
                 },
+                "SoftwareRevenue": {
+                    "target": "com.amazonaws.partnercentralselling#AwsSoftwareRevenue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Seller-provided PARC deal terms: commitment value, discount, and contract dates.</p>"
+                    }
+                },
                 "Catalog": {
                     "target": "com.amazonaws.partnercentralselling#CatalogIdentifier",
                     "traits": {
@@ -8868,6 +8916,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
+                    "min": 1,
                     "max": 255
                 },
                 "smithy.api#sensitive": {}

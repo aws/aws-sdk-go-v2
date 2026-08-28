@@ -3364,6 +3364,20 @@
                 "smithy.api#documentation": "<p>An event that contains incremental output from a command execution. This event streams standard output and standard error content as it becomes available during command execution.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcore#ContentSource": {
+            "type": "union",
+            "members": {
+                "inline": {
+                    "target": "com.amazonaws.bedrockagentcore#InlineMemoryContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content included directly in the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source of the content to ingest. Only inline content is supported.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcore#ContentStartEvent": {
             "type": "structure",
             "members": {},
@@ -9829,6 +9843,153 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcore#IngestData": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcore#IngestDataInput"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcore#IngestDataOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcore#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ThrottledException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Submits content directly for ingestion to generate long-term memory records in a AgentCore Memory resource.</p> <p>To use this operation, you must have the <code>bedrock-agentcore:IngestData</code> permission.</p>",
+                "smithy.api#http": {
+                    "code": 202,
+                    "method": "POST",
+                    "uri": "/memories/{memoryId}/ingest"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#IngestDataInput": {
+            "type": "structure",
+            "members": {
+                "memoryId": {
+                    "target": "com.amazonaws.bedrockagentcore#MemoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the AgentCore Memory resource to ingest content into.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.bedrockagentcore#ContentSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content to ingest. Only inline content is supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the content occurred.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "actorId": {
+                    "target": "com.amazonaws.bedrockagentcore#ActorId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the actor associated with this content. An actor represents an entity that participates in sessions and generates content.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.bedrockagentcore#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the session that the content belongs to. If not provided, a session identifier is generated and returned in the response.</p>"
+                    }
+                },
+                "extractionConfig": {
+                    "target": "com.amazonaws.bedrockagentcore#ExtractionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The extraction configuration for long-term memory records. Use this parameter to specify namespace variable keys and their values for namespace substitution during extraction.</p>"
+                    }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.bedrockagentcore#MetadataMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key-value metadata to attach to the content.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, AgentCore ignores the request, but does not return an error.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#IngestDataOutput": {
+            "type": "structure",
+            "members": {
+                "sessionId": {
+                    "target": "com.amazonaws.bedrockagentcore#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the session that the service ingested the content into. This value echoes the session identifier from the request, or the identifier that the service generated when you did not provide one.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcore#IngestPayloadList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcore#IngestPayloadType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcore#IngestPayloadType": {
+            "type": "union",
+            "members": {
+                "conversational": {
+                    "target": "com.amazonaws.bedrockagentcore#Conversational",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conversational content for this payload item.</p>"
+                    }
+                },
+                "json": {
+                    "target": "com.amazonaws.bedrockagentcore#MemoryJsonData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON content for this payload item.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single content payload item to ingest. A payload item contains either conversational or JSON content.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcore#InlineContent": {
             "type": "string",
             "traits": {
@@ -9865,6 +10026,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Inline ground truth data containing assertions, expected trajectories, and per-turn expected responses.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcore#InlineMemoryContent": {
+            "type": "structure",
+            "members": {
+                "payload": {
+                    "target": "com.amazonaws.bedrockagentcore#IngestPayloadList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of content payload items to ingest.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The content included directly in the request as one or more payload items.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#InputContentBlock": {
@@ -13447,6 +13623,9 @@
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcore#GetMemoryRecord"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#IngestData"
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcore#ListActors"

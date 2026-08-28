@@ -239,6 +239,9 @@
                     "target": "com.amazonaws.cognitoidentityprovider#DescribeTerms"
                 },
                 {
+                    "target": "com.amazonaws.cognitoidentityprovider#DescribeTermsByClient"
+                },
+                {
                     "target": "com.amazonaws.cognitoidentityprovider#DescribeUserImportJob"
                 },
                 {
@@ -255,6 +258,9 @@
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#ForgotPassword"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#GetClientToken"
                 },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#GetCSVHeader"
@@ -5849,6 +5855,33 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.cognitoidentityprovider#ClientAuthenticationResultType": {
+            "type": "structure",
+            "members": {
+                "AccessToken": {
+                    "target": "com.amazonaws.cognitoidentityprovider#TokenModelType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access token for the requested app client. Present this token to a resource server\n            to authorize a request, using the scopes granted in the token.</p>"
+                    }
+                },
+                "ExpiresIn": {
+                    "target": "com.amazonaws.cognitoidentityprovider#IntegerType",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of seconds until the access token expires.</p>"
+                    }
+                },
+                "TokenType": {
+                    "target": "com.amazonaws.cognitoidentityprovider#StringType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the token. For example, <code>Bearer</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The access token and its metadata from a machine-to-machine (M2M) client credentials\n            grant.</p>"
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#ClientIdType": {
             "type": "string",
             "traits": {
@@ -9845,6 +9878,81 @@
                 "smithy.api#documentation": "<p>Returns details for the requested terms documents ID. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html#managed-login-terms-documents\">Terms documents</a>.</p>\n         <note>\n            <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you must use IAM credentials to authorize requests, and you must\n    grant yourself the corresponding IAM permission in a policy.</p>\n            <p class=\"title\">\n               <b>Learn more</b>\n            </p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html\">Signing Amazon Web Services API Requests</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>\n                  </p>\n               </li>\n            </ul>\n         </note>"
             }
         },
+        "com.amazonaws.cognitoidentityprovider#DescribeTermsByClient": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentityprovider#DescribeTermsByClientRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentityprovider#DescribeTermsByClientResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns details for the terms documents that are associated with an app client,\n            identified by the app client ID, user pool ID, and terms name. For\n            more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html#managed-login-terms-documents\">Terms documents</a>.</p>\n         <p>To call <code>DescribeTermsByClient</code>, you must have the\n            <code>cognito-idp:DescribeTermsByClient</code> Identity and Access Management (IAM) permission. This\n            operation additionally validates your permission for\n            <code>cognito-idp:DescribeTerms</code>, the action for . As a result, an IAM policy that denies\n            <code>cognito-idp:DescribeTerms</code> also denies requests to\n            <code>DescribeTermsByClient</code>.</p>\n         <note>\n            <p>Amazon Cognito evaluates Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you must use IAM credentials to authorize requests, and you must\n    grant yourself the corresponding IAM permission in a policy.</p>\n            <p class=\"title\">\n               <b>Learn more</b>\n            </p>\n            <ul>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html\">Signing Amazon Web Services API Requests</a>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>\n                  </p>\n               </li>\n            </ul>\n         </note>"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#DescribeTermsByClientRequest": {
+            "type": "structure",
+            "members": {
+                "ClientId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the app client that the terms documents are associated with.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UserPoolId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#UserPoolIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the user pool that contains the terms documents that you want to\n            describe.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TermsName": {
+                    "target": "com.amazonaws.cognitoidentityprovider#TermsNameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the terms documents that you want to describe.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#DescribeTermsByClientResponse": {
+            "type": "structure",
+            "members": {
+                "Terms": {
+                    "target": "com.amazonaws.cognitoidentityprovider#TermsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the requested terms documents. Includes a unique identifier for later\n            changes to the terms documents.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cognitoidentityprovider#DescribeTermsRequest": {
             "type": "structure",
             "members": {
@@ -11368,6 +11476,109 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents the response from the server to the request to get the header information\n            of the CSV file for the user import job.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#GetClientToken": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cognitoidentityprovider#GetClientTokenRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cognitoidentityprovider#GetClientTokenResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#NotAuthorizedException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#OperationNotEnabledException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Issues an access token for machine-to-machine (M2M) authorization. Your app client\n            provides its client ID and secret, and receives an access token that authorizes requests\n            to your resource servers. <code>GetClientToken</code> provides the same functionality as\n            the OAuth2 client-credentials grant; both authorize an application rather than a user.</p>\n         <p>To use this operation, you must configure the app client with a client secret and\n            enable the <code>ALLOW_CLIENT_TOKEN_AUTH</code> authentication flow. The\n            <code>ALLOW_CLIENT_TOKEN_AUTH</code> flow is mutually exclusive with user authentication\n            flows. It must be the only authentication flow that you configure for the app client. For\n            more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-define-resource-servers.html\">Scopes, M2M, and resource servers</a>.</p>\n         <note>\n            <p>Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in requests for this API operation. For\n    this operation, you can't use IAM credentials to authorize requests, and you can't\n    grant IAM permissions in policies. For more information about authorization models in\n    Amazon Cognito, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html\">Using the Amazon Cognito user pools API and user pool endpoints</a>.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Example – Get an access token for machine-to-machine authorization",
+                        "documentation": "The following example gets an access token for the app client 1example23456789 with the custom scope solar-system-data/asteroids.add.",
+                        "input": {
+                            "ClientId": "1example23456789",
+                            "Secret": "exampleClientSecret123EXAMPLE",
+                            "Scopes": [
+                                "solar-system-data/asteroids.add"
+                            ]
+                        },
+                        "output": {
+                            "ClientAuthenticationResult": {
+                                "AccessToken": "eyJra456defEXAMPLE",
+                                "ExpiresIn": 3600,
+                                "TokenType": "Bearer"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#GetClientTokenRequest": {
+            "type": "structure",
+            "members": {
+                "ClientId": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the app client that requests the access token. The app client must have a\n            client secret and the <code>ALLOW_CLIENT_TOKEN_AUTH</code> authentication flow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Secret": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientSecretType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An active secret for the app client.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Scopes": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ScopeListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom scopes to authorize in the access token, in the format\n                <code>resource-server-identifier/scope-name</code>. Each scope must belong to a\n            resource server in your user pool. If you don't specify any scopes, Amazon Cognito authorizes the\n            scopes that are configured for the app client.</p>"
+                    }
+                },
+                "ClientMetadata": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientMetadataType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of custom key-value pairs that you can provide as input for any custom workflows\n            that this action triggers. You create custom workflows by assigning Lambda functions\n            to user pool triggers.</p>\n         <p>When Amazon Cognito invokes any of these functions, it passes a JSON payload, which the\n            function receives as input. This payload contains a <code>clientMetadata</code>\n            attribute that provides the data that you assigned to the ClientMetadata parameter in\n            your request. In your function code, you can process the <code>clientMetadata</code>\n            value to enhance your workflow for your specific needs.</p>\n         <p>To review the Lambda trigger types that Amazon Cognito invokes at runtime with API requests, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-working-with-lambda-triggers.html#lambda-triggers-by-event\">\nConnecting API actions to Lambda triggers</a> in the <i>Amazon Cognito Developer Guide</i>.</p>\n         <note>\n            <p>When you use the <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the\n                following:</p>\n            <ul>\n               <li>\n                  <p>Store the <code>ClientMetadata</code> value. This data is available only\n                        to Lambda triggers that are assigned to a user pool to support custom\n                        workflows. If your user pool configuration doesn't include triggers, the\n                        <code>ClientMetadata</code> parameter serves no purpose.</p>\n               </li>\n               <li>\n                  <p>Validate the <code>ClientMetadata</code> value.</p>\n               </li>\n               <li>\n                  <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive\n                        information in this parameter.</p>\n               </li>\n            </ul>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#GetClientTokenResponse": {
+            "type": "structure",
+            "members": {
+                "ClientAuthenticationResult": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ClientAuthenticationResultType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access token that Amazon Cognito issues for the app client, and its metadata.</p>"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
