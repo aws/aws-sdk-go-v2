@@ -1,3 +1,7 @@
+# v1.26.0 (2026-08-28.2)
+
+* **Feature**: Releasing PARC, new APN Program that lets sellers add solftware revenue details to aws opportunity summary
+
 # v1.25.1 (2026-08-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.43.0 (2026-08-28.2)
+
+* **Feature**: AgentCore Memory now supports direct ingestion into long-term memory via IngestData API
+
 # v1.42.1 (2026-08-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

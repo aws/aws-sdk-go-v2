@@ -1,8 +1,0 @@
-{
-    "id": "bff4211a-30b0-45fa-903b-3f704f361602",
-    "type": "feature",
-    "description": "AgentCore Memory now supports direct ingestion into long-term memory via IngestData API",
-    "modules": [
-        "service/bedrockagentcore"
-    ]
-}

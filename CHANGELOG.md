@@ -1,3 +1,19 @@
+# Release (2026-08-28.2)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.61.0](service/bedrockagent/CHANGELOG.md#v1610-2026-08-282)
+  * **Feature**: Adds an optional syncSchedule field to CreateDataSource and UpdateDataSource for Managed Knowledge Bases data source connectors, so a data source can sync automatically on a daily, weekly, or monthly schedule.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.43.0](service/bedrockagentcore/CHANGELOG.md#v1430-2026-08-282)
+  * **Feature**: AgentCore Memory now supports direct ingestion into long-term memory via IngestData API
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.70.0](service/cognitoidentityprovider/CHANGELOG.md#v1700-2026-08-282)
+  * **Feature**: Adds two new operations - GetClientToken which allows M2M auth through the SDK, and DescribeTermsByClient to find which Terms are associated with a user-pool client without knowing the Terms resource id.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.93.0](service/ecs/CHANGELOG.md#v1930-2026-08-282)
+  * **Feature**: Amazon Elastic Container Service - This release adds support for early success criteria on ECS rolling deployments, letting deployment complete once a configurable percentage of tasks are healthy, with configurable BLOCKING (required) or DEFERRED (asynchronous) cleanup of previous service revisions.
+* `github.com/aws/aws-sdk-go-v2/service/healthlake`: [v1.46.0](service/healthlake/CHANGELOG.md#v1460-2026-08-282)
+  * **Feature**: New HealthLake API, RestoreFHIRDatastore, providing the capability to restore active datastores to a point in time within the last 30 days or recover a deleted datastore from the delete snapshot.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.26.0](service/partnercentralselling/CHANGELOG.md#v1260-2026-08-282)
+  * **Feature**: Releasing PARC, new APN Program that lets sellers add solftware revenue details to aws opportunity summary
+
 # Release (2026-08-28)
 
 ## General Highlights

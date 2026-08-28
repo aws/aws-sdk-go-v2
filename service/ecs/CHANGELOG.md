@@ -1,3 +1,7 @@
+# v1.93.0 (2026-08-28.2)
+
+* **Feature**: Amazon Elastic Container Service - This release adds support for early success criteria on ECS rolling deployments, letting deployment complete once a configurable percentage of tasks are healthy, with configurable BLOCKING (required) or DEFERRED (asynchronous) cleanup of previous service revisions.
+
 # v1.92.1 (2026-08-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

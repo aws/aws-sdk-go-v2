@@ -1,8 +1,0 @@
-{
-    "id": "81e14e3e-34ae-47e6-883e-f7b5003812b8",
-    "type": "feature",
-    "description": "Adds two new operations - GetClientToken which allows M2M auth through the SDK, and DescribeTermsByClient to find which Terms are associated with a user-pool client without knowing the Terms resource id.",
-    "modules": [
-        "service/cognitoidentityprovider"
-    ]
-}

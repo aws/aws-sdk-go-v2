@@ -1,8 +1,0 @@
-{
-    "id": "099d1dd6-828f-4c1a-acb6-5566b41968d7",
-    "type": "feature",
-    "description": "New HealthLake API, RestoreFHIRDatastore, providing the capability to restore active datastores to a point in time within the last 30 days or recover a deleted datastore from the delete snapshot.",
-    "modules": [
-        "service/healthlake"
-    ]
-}

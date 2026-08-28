@@ -1,3 +1,7 @@
+# v1.61.0 (2026-08-28.2)
+
+* **Feature**: Adds an optional syncSchedule field to CreateDataSource and UpdateDataSource for Managed Knowledge Bases data source connectors, so a data source can sync automatically on a daily, weekly, or monthly schedule.
+
 # v1.60.1 (2026-08-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

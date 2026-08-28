@@ -1,8 +1,0 @@
-{
-    "id": "17cdc2e7-e84d-4445-8ee1-2edbb0da1e09",
-    "type": "feature",
-    "description": "Adds an optional syncSchedule field to CreateDataSource and UpdateDataSource for Managed Knowledge Bases data source connectors, so a data source can sync automatically on a daily, weekly, or monthly schedule.",
-    "modules": [
-        "service/bedrockagent"
-    ]
-}

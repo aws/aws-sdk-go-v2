@@ -1,3 +1,7 @@
+# v1.46.0 (2026-08-28.2)
+
+* **Feature**: New HealthLake API, RestoreFHIRDatastore, providing the capability to restore active datastores to a point in time within the last 30 days or recover a deleted datastore from the delete snapshot.
+
 # v1.45.1 (2026-08-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions
