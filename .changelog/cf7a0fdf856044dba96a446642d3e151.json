@@ -1,0 +1,8 @@
+{
+    "id": "cf7a0fdf-8560-44db-a96a-446642d3e151",
+    "type": "bugfix",
+    "description": "Fix GetObject bug so object parts can be read to correct offset regardless of parts sizes change",
+    "modules": [
+        "feature/s3/transfermanager"
+    ]
+}
