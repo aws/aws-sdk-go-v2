@@ -58,6 +58,33 @@ type AnalyticsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The backup configuration for the data store.
+type BackupConfiguration struct {
+
+	// Specifies whether tags are included in backups.
+	BackupTagsEnabled bool
+
+	// The type of backup.
+	BackupType BackupType
+
+	// The number of days backup data is retained.
+	RetentionPeriodInDays *int32
+
+	// The backup status of the data store.
+	Status BackupStatus
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for continuous backup (point-in-time) restore.
+type ContinuousBackupRestoreConfiguration struct {
+
+	// The point in time to restore the data store to, specified as a UTC timestamp.
+	RestorePointTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // The source for initial content when creating a data transformation profile.
 // Specify exactly one variant: a built-in starter profile, an existing profile
 // version to clone, raw profile content, or a sample data file.
@@ -116,6 +143,27 @@ type CreateDataTransformationProfileSourceMemberStarterProfile struct {
 func (*CreateDataTransformationProfileSourceMemberStarterProfile) isCreateDataTransformationProfileSource() {
 }
 
+// The backup status information for the data store.
+type DatastoreBackupStatus struct {
+
+	// The time backup was enabled on the data store.
+	BackupEnabledAt *time.Time
+
+	// The backup configuration for the data store.
+	Configuration *BackupConfiguration
+
+	// The earliest point in time the data store can be restored to.
+	EarliestRestorePoint *time.Time
+
+	// The latest point in time the data store can be restored to.
+	LatestRestorePoint *time.Time
+
+	// The time the retained backup data is scheduled for permanent deletion.
+	ScheduledPermanentDeletionTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // The filters applied to a data store query.
 type DatastoreFilter struct {
 
@@ -144,7 +192,7 @@ type DatastoreProperties struct {
 	// This member is required.
 	DatastoreArn *string
 
-	// The AWS endpoint for the data store.
+	// The Amazon Web Services endpoint for the data store.
 	//
 	// This member is required.
 	DatastoreEndpoint *string
@@ -167,6 +215,9 @@ type DatastoreProperties struct {
 
 	// The analytics configuration for the data store.
 	AnalyticsConfiguration *AnalyticsConfiguration
+
+	// The backup status information for the data store.
+	BackupStatusInfo *DatastoreBackupStatus
 
 	// The time the data store was created.
 	CreatedAt *time.Time
@@ -272,13 +323,13 @@ type DataTransformationProfileVersionSummary struct {
 // output location and encryption settings.
 type DataTransformationS3Configuration struct {
 
-	// The AWS Key Management Service (AWS KMS) key identifier used to encrypt the
-	// transformation job output written to Amazon S3.
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
+	// identifier used to encrypt the transformation job output written to Amazon S3.
 	//
 	// This member is required.
 	KmsKeyId *string
 
-	// The Amazon S3 URI where AWS HealthLake writes the converted output files.
+	// The Amazon S3 URI where HealthLake writes the converted output files.
 	//
 	// This member is required.
 	S3Uri *string
@@ -371,8 +422,8 @@ type IdentityProviderConfiguration struct {
 	//   - SMART_ON_FHIR – Support for both SMART on FHIR V1 and V2, which includes
 	//   create , read , update , delete , and search permissions.
 	//
-	//   - AWS_AUTH – The default HealthLake authorization strategy; not affiliated
-	//   with SMART on FHIR.
+	//   - Amazon Web Services_AUTH – The default HealthLake authorization strategy;
+	//   not affiliated with SMART on FHIR.
 	//
 	// This member is required.
 	AuthorizationStrategy AuthorizationStrategy
@@ -439,8 +490,7 @@ type ImportJobProperties struct {
 	// This member is required.
 	SubmitTime *time.Time
 
-	// The Amazon Resource Name (ARN) that grants AWS HealthLake access to the input
-	// data.
+	// The Amazon Resource Name (ARN) that grants HealthLake access to the input data.
 	DataAccessRoleArn *string
 
 	// The time the import job was completed.
@@ -475,8 +525,8 @@ type InputDataConfig interface {
 	isInputDataConfig()
 }
 
-// The S3Uri is the user-specified S3 location of the FHIR data to be imported
-// into AWS HealthLake.
+// The S3Uri is the user-specified Amazon S3 location of the FHIR data to be
+// imported into HealthLake.
 type InputDataConfigMemberS3Uri struct {
 	Value string
 
@@ -497,8 +547,8 @@ type JobProgressReport struct {
 	// imports and for pure FHIR imports that skip transformation.
 	TotalFilesConverted *int64
 
-	// The number of files that failed to be read from the S3 input bucket due to
-	// customer error.
+	// The number of files that failed to be read from the Amazon S3 input bucket due
+	// to customer error.
 	TotalNumberOfFilesReadWithCustomerError *int64
 
 	// The number of files imported.
@@ -507,14 +557,14 @@ type JobProgressReport struct {
 	// The number of non-FHIR files imported.
 	TotalNumberOfImportedNonFhirFiles *int64
 
-	// The number of non-FHIR files that failed to be read from the S3 input bucket
-	// due to customer error.
+	// The number of non-FHIR files that failed to be read from the Amazon S3 input
+	// bucket due to customer error.
 	TotalNumberOfNonFhirFilesReadWithCustomerError *int64
 
 	// The number of non-FHIR resources imported.
 	TotalNumberOfNonFhirResourcesImported *int64
 
-	// The number of non-FHIR resources scanned from the S3 input bucket.
+	// The number of non-FHIR resources scanned from the Amazon S3 input bucket.
 	TotalNumberOfNonFhirResourcesScanned *int64
 
 	// The number of non-FHIR resources that failed due to customer error.
@@ -523,16 +573,16 @@ type JobProgressReport struct {
 	// The number of resources imported.
 	TotalNumberOfResourcesImported *int64
 
-	// The number of resources scanned from the S3 input bucket.
+	// The number of resources scanned from the Amazon S3 input bucket.
 	TotalNumberOfResourcesScanned *int64
 
 	// The number of resources that failed due to customer error.
 	TotalNumberOfResourcesWithCustomerError *int64
 
-	// The number of files scanned from the S3 input bucket.
+	// The number of files scanned from the Amazon S3 input bucket.
 	TotalNumberOfScannedFiles *int64
 
-	// The number of non-FHIR files scanned from the S3 input bucket.
+	// The number of non-FHIR files scanned from the Amazon S3 input bucket.
 	TotalNumberOfScannedNonFhirFiles *int64
 
 	// Number of FHIR resources produced by the transformation phase. Populated only
@@ -540,17 +590,18 @@ type JobProgressReport struct {
 	// imports and for pure FHIR imports.
 	TotalResourcesGenerated *int64
 
-	// The size (in MB) of files scanned from the S3 input bucket.
+	// The size (in MB) of files scanned from the Amazon S3 input bucket.
 	TotalSizeOfScannedFilesInMB *float64
 
-	// The size (in MB) of non-FHIR files scanned from the S3 input bucket.
+	// The size (in MB) of non-FHIR files scanned from the Amazon S3 input bucket.
 	TotalSizeOfScannedNonFhirFilesInMB *float64
 
 	noSmithyDocumentSerde
 }
 
 // The customer-managed-key (CMK) used when creating a data store. If a
-// customer-owned key is not specified, an AWS-owned key is used for encryption.
+// customer-owned key is not specified, an Amazon Web Services-owned key is used
+// for encryption.
 type KmsEncryptionConfig struct {
 
 	// The type of customer-managed-key (CMK) used for encryption.
@@ -624,17 +675,35 @@ type ProfileMappingSource struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration of the S3 bucket for either an import or export job. This
-// includes assigning access permissions.
+// Specifies the type and parameters for the restore operation.
+//
+// The following types satisfy this interface:
+//
+//	RestoreConfigurationMemberContinuousBackupRestoreConfiguration
+type RestoreConfiguration interface {
+	isRestoreConfiguration()
+}
+
+// Configuration for restoring from continuous backup to a specific point in time.
+type RestoreConfigurationMemberContinuousBackupRestoreConfiguration struct {
+	Value ContinuousBackupRestoreConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*RestoreConfigurationMemberContinuousBackupRestoreConfiguration) isRestoreConfiguration() {}
+
+// The configuration of the Amazon S3 bucket for either an import or export job.
+// This includes assigning access permissions.
 type S3Configuration struct {
 
-	// The Key Management Service (KMS) key ID used to access the S3 bucket.
+	// The Key Management Service (KMS) key ID used to access the Amazon S3 bucket.
 	//
 	// This member is required.
 	KmsKeyId *string
 
-	// The S3Uri is the user-specified S3 location of the FHIR data to be imported
-	// into AWS HealthLake.
+	// The S3Uri is the user-specified Amazon S3 location of the FHIR data to be
+	// imported into HealthLake.
 	//
 	// This member is required.
 	S3Uri *string
@@ -745,9 +814,10 @@ type TransformationJobProgressReport struct {
 // DescribeDataTransformationJob .
 type TransformationJobProperties struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that grants AWS HealthLake access to the specified Amazon S3 locations. AWS
-	// HealthLake assumes this role to read input files and write output files.
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access
+	// Management (IAM) role that grants HealthLake access to the specified Amazon S3
+	// locations. HealthLake assumes this role to read input files and write output
+	// files.
 	//
 	// This member is required.
 	DataAccessRoleArn *string
@@ -777,7 +847,7 @@ type TransformationJobProperties struct {
 	// This member is required.
 	SubmitTime *time.Time
 
-	// Specifies whether drift detection is enabled for this job. When enabled, AWS
+	// Specifies whether drift detection is enabled for this job. When enabled,
 	// HealthLake writes a drift report to the output Amazon S3 location alongside the
 	// converted files.
 	DriftDetectionEnabled *bool
@@ -848,8 +918,8 @@ type TransformationJobSummary struct {
 // job.
 type TransformationOutputDataConfig struct {
 
-	// The Amazon S3 output location and AWS Key Management Service (AWS KMS)
-	// encryption configuration.
+	// The Amazon S3 output location and Amazon Web Services Key Management Service
+	// (Amazon Web Services KMS) encryption configuration.
 	//
 	// This member is required.
 	S3Configuration *DataTransformationS3Configuration
@@ -871,3 +941,4 @@ type UnknownUnionMember struct {
 func (*UnknownUnionMember) isCreateDataTransformationProfileSource() {}
 func (*UnknownUnionMember) isInputDataConfig()                       {}
 func (*UnknownUnionMember) isOutputDataConfig()                      {}
+func (*UnknownUnionMember) isRestoreConfiguration()                  {}

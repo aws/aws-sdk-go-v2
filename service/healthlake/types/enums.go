@@ -98,6 +98,42 @@ func (AuthorizationStrategy) Values() []AuthorizationStrategy {
 	}
 }
 
+type BackupStatus string
+
+// Enum values for BackupStatus
+const (
+	BackupStatusEnabled  BackupStatus = "ENABLED"
+	BackupStatusDisabled BackupStatus = "DISABLED"
+)
+
+// Values returns all known values for BackupStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BackupStatus) Values() []BackupStatus {
+	return []BackupStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type BackupType string
+
+// Enum values for BackupType
+const (
+	BackupTypeContinuous BackupType = "CONTINUOUS"
+)
+
+// Values returns all known values for BackupType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BackupType) Values() []BackupType {
+	return []BackupType{
+		"CONTINUOUS",
+	}
+}
+
 type CmkType string
 
 // Enum values for CmkType

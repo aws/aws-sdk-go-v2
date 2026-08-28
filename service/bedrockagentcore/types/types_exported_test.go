@@ -207,6 +207,24 @@ func ExampleContent_outputUsage() {
 
 var _ *string
 
+func ExampleContentSource_outputUsage() {
+	var union types.ContentSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ContentSourceMemberInline:
+		_ = v.Value // Value is types.InlineMemoryContent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.InlineMemoryContent
+
 func ExampleContext_outputUsage() {
 	var union types.Context
 	// type switches can be used to check the union value
@@ -716,6 +734,28 @@ func ExampleHarnessToolResultContentBlock_outputUsage() {
 
 var _ *string
 var _ document.Interface
+
+func ExampleIngestPayloadType_outputUsage() {
+	var union types.IngestPayloadType
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.IngestPayloadTypeMemberConversational:
+		_ = v.Value // Value is types.Conversational
+
+	case *types.IngestPayloadTypeMemberJson:
+		_ = v.Value // Value is types.MemoryJsonData
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.MemoryJsonData
+var _ *types.Conversational
 
 func ExampleInvokeAgentRuntimeCommandStreamOutput_outputUsage() {
 	var union types.InvokeAgentRuntimeCommandStreamOutput

@@ -6832,6 +6832,11 @@ func awsAwsjson10_deserializeDocumentAwsOpportunitySummaryFullView(v **types.Aws
 				sv.RelatedOpportunityId = ptr.String(jtv)
 			}
 
+		case "SoftwareRevenue":
+			if err := awsAwsjson10_deserializeDocumentAwsSoftwareRevenue(&sv.SoftwareRevenue, value); err != nil {
+				return err
+			}
+
 		case "Visibility":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7238,6 +7243,69 @@ func awsAwsjson10_deserializeDocumentAwsProductsSpendInsightsBySource(v **types.
 
 		case "Partner":
 			if err := awsAwsjson10_deserializeDocumentAwsProductInsights(&sv.Partner, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentAwsSoftwareRevenue(v **types.AwsSoftwareRevenue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AwsSoftwareRevenue
+	if *v == nil {
+		sv = &types.AwsSoftwareRevenue{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Discount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Discount = ptr.String(jtv)
+			}
+
+		case "EffectiveDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.EffectiveDate = ptr.String(jtv)
+			}
+
+		case "ExpirationDate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ExpirationDate = ptr.String(jtv)
+			}
+
+		case "Value":
+			if err := awsAwsjson10_deserializeDocumentMonetaryValue(&sv.Value, value); err != nil {
 				return err
 			}
 
@@ -13763,6 +13831,11 @@ func awsAwsjson10_deserializeOpDocumentGetAwsOpportunitySummaryOutput(v **GetAws
 					return fmt.Errorf("expected OpportunityIdentifier to be of type string, got %T instead", value)
 				}
 				sv.RelatedOpportunityId = ptr.String(jtv)
+			}
+
+		case "SoftwareRevenue":
+			if err := awsAwsjson10_deserializeDocumentAwsSoftwareRevenue(&sv.SoftwareRevenue, value); err != nil {
+				return err
 			}
 
 		case "Visibility":

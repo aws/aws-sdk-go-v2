@@ -29,7 +29,7 @@ func (c *Client) StartFHIRImportJob(ctx context.Context, params *StartFHIRImport
 
 type StartFHIRImportJobInput struct {
 
-	// The Amazon Resource Name (ARN) that grants access permission to AWS HealthLake.
+	// The Amazon Resource Name (ARN) that grants access permission to HealthLake.
 	//
 	// This member is required.
 	DataAccessRoleArn *string
@@ -52,16 +52,16 @@ type StartFHIRImportJobInput struct {
 	// The optional user-provided token used for ensuring API idempotency.
 	ClientToken *string
 
-	// A boolean value.
+	// Specifies whether to enable drift detection for the import job.
 	DriftDetectionEnabled bool
 
-	// A bounded-length string value.
+	// The input format of the data to be imported.
 	InputFormat *string
 
 	// The import job name.
 	JobName *string
 
-	// A bounded-length string value.
+	// The data transformation profile identifier to use for the import job.
 	ProfileId *string
 
 	// Specifies whether to enable provenance for the import job.

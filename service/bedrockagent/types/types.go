@@ -1381,6 +1381,11 @@ type CyclicConnectionFlowValidationDetails struct {
 	noSmithyDocumentSerde
 }
 
+// A daily sync. The run time is system-chosen (off-peak) and not configurable.
+type DailySchedule struct {
+	noSmithyDocumentSerde
+}
+
 // Contains details about a data source.
 type DataSource struct {
 
@@ -1534,6 +1539,36 @@ type DataSourceSummary struct {
 
 	noSmithyDocumentSerde
 }
+
+// The day of the month on which a monthly sync runs. Specify exactly one of
+// dayNumber or lastDayOfMonth .
+//
+// The following types satisfy this interface:
+//
+//	DayOfMonthMemberDayNumber
+//	DayOfMonthMemberLastDayOfMonth
+type DayOfMonth interface {
+	isDayOfMonth()
+}
+
+// A specific day of the month, from 1 to 28. Values are capped at 28, so a
+// monthly sync runs in every month, including February.
+type DayOfMonthMemberDayNumber struct {
+	Value int32
+
+	noSmithyDocumentSerde
+}
+
+func (*DayOfMonthMemberDayNumber) isDayOfMonth() {}
+
+// Set this option to run the monthly sync on the last calendar day of each month.
+type DayOfMonthMemberLastDayOfMonth struct {
+	Value LastDayOfMonth
+
+	noSmithyDocumentSerde
+}
+
+func (*DayOfMonthMemberLastDayOfMonth) isDayOfMonth() {}
 
 // Configuration for deletion protection.
 type DeletionProtectionConfiguration struct {
@@ -3422,6 +3457,11 @@ type LambdaFunctionFlowNodeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The option to run the monthly sync on the last calendar day of each month.
+type LastDayOfMonth struct {
+	noSmithyDocumentSerde
+}
+
 // Contains configurations for a Lex node in the flow. You specify a Amazon Lex
 // bot to invoke. This node takes an utterance as the input and returns as the
 // output the intent identified by the Amazon Lex bot. For more information, see [Node types in a flow]
@@ -3598,6 +3638,11 @@ type ManagedKnowledgeBaseConnectorConfiguration struct {
 	// Configuration for extracting media (images, audio, video) from data source
 	// files.
 	MediaExtractionConfiguration *MediaExtractionConfiguration
+
+	// The recurring schedule on which the connector automatically syncs this data
+	// source. If not specified, the data source is not synced automatically and you
+	// start each sync yourself. Not supported for the Custom connector.
+	SyncSchedule SyncSchedule
 
 	noSmithyDocumentSerde
 }
@@ -3916,6 +3961,17 @@ type MongoDbAtlasFieldMapping struct {
 	//
 	// This member is required.
 	VectorField *string
+
+	noSmithyDocumentSerde
+}
+
+// A monthly sync on a specified day of the month.
+type MonthlySchedule struct {
+
+	// The day of the month on which the monthly sync runs.
+	//
+	// This member is required.
+	DayOfMonth DayOfMonth
 
 	noSmithyDocumentSerde
 }
@@ -5565,6 +5621,47 @@ type SupplementalDataStorageLocation struct {
 	noSmithyDocumentSerde
 }
 
+// The recurring schedule on which a managed knowledge base connector
+// automatically syncs its data source. Specify exactly one of daily , weekly , or
+// monthly .
+//
+// The following types satisfy this interface:
+//
+//	SyncScheduleMemberDaily
+//	SyncScheduleMemberMonthly
+//	SyncScheduleMemberWeekly
+type SyncSchedule interface {
+	isSyncSchedule()
+}
+
+// A daily sync that runs once a day at a system-chosen off-peak time. The run
+// time is not configurable.
+type SyncScheduleMemberDaily struct {
+	Value DailySchedule
+
+	noSmithyDocumentSerde
+}
+
+func (*SyncScheduleMemberDaily) isSyncSchedule() {}
+
+// A monthly sync that runs once a month on the specified day of the month.
+type SyncScheduleMemberMonthly struct {
+	Value MonthlySchedule
+
+	noSmithyDocumentSerde
+}
+
+func (*SyncScheduleMemberMonthly) isSyncSchedule() {}
+
+// A weekly sync that runs once a week on the specified day of the week.
+type SyncScheduleMemberWeekly struct {
+	Value WeeklySchedule
+
+	noSmithyDocumentSerde
+}
+
+func (*SyncScheduleMemberWeekly) isSyncSchedule() {}
+
 // Contains a system prompt to provide context to the model or to describe how it
 // should behave. For more information, see [Create a prompt using Prompt management].
 //
@@ -6179,6 +6276,17 @@ type WebSourceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// A weekly sync on a specified day of the week.
+type WeeklySchedule struct {
+
+	// The day of the week on which the weekly sync runs.
+	//
+	// This member is required.
+	DayOfWeek DayOfWeek
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -6193,6 +6301,7 @@ type UnknownUnionMember struct {
 func (*UnknownUnionMember) isActionGroupExecutor()                         {}
 func (*UnknownUnionMember) isAPISchema()                                   {}
 func (*UnknownUnionMember) isContentBlock()                                {}
+func (*UnknownUnionMember) isDayOfMonth()                                  {}
 func (*UnknownUnionMember) isFlowConnectionConfiguration()                 {}
 func (*UnknownUnionMember) isFlowNodeConfiguration()                       {}
 func (*UnknownUnionMember) isFlowValidationDetails()                       {}
@@ -6205,6 +6314,7 @@ func (*UnknownUnionMember) isPromptTemplateConfiguration()                 {}
 func (*UnknownUnionMember) isRerankingMetadataSelectiveModeConfiguration() {}
 func (*UnknownUnionMember) isRetrievalFlowNodeServiceConfiguration()       {}
 func (*UnknownUnionMember) isStorageFlowNodeServiceConfiguration()         {}
+func (*UnknownUnionMember) isSyncSchedule()                                {}
 func (*UnknownUnionMember) isSystemContentBlock()                          {}
 func (*UnknownUnionMember) isTool()                                        {}
 func (*UnknownUnionMember) isToolChoice()                                  {}

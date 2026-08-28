@@ -272,8 +272,8 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You are not authorized to make this request. Verify that your AWS credentials
-// are valid and that you have the required permissions.
+// You are not authorized to make this request. Verify that your Amazon Web
+// Services credentials are valid and that you have the required permissions.
 type UnauthorizedException struct {
 	Message *string
 

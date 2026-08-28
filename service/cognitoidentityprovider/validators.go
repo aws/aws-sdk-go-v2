@@ -1270,6 +1270,26 @@ func (m *validateOpDescribeRiskConfiguration) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeTermsByClient struct {
+}
+
+func (*validateOpDescribeTermsByClient) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeTermsByClient) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeTermsByClientInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeTermsByClientInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeTerms struct {
 }
 
@@ -1405,6 +1425,26 @@ func (m *validateOpForgotPassword) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpForgotPasswordInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetClientToken struct {
+}
+
+func (*validateOpGetClientToken) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetClientToken) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetClientTokenInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetClientTokenInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2842,6 +2882,10 @@ func addOpDescribeRiskConfigurationValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpDescribeRiskConfiguration{}, middleware.After)
 }
 
+func addOpDescribeTermsByClientValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeTermsByClient{}, middleware.After)
+}
+
 func addOpDescribeTermsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeTerms{}, middleware.After)
 }
@@ -2868,6 +2912,10 @@ func addOpForgetDeviceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpForgotPasswordValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpForgotPassword{}, middleware.After)
+}
+
+func addOpGetClientTokenValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetClientToken{}, middleware.After)
 }
 
 func addOpGetCSVHeaderValidationMiddleware(stack *middleware.Stack) error {
@@ -5004,6 +5052,27 @@ func validateOpDescribeRiskConfigurationInput(v *DescribeRiskConfigurationInput)
 	}
 }
 
+func validateOpDescribeTermsByClientInput(v *DescribeTermsByClientInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeTermsByClientInput"}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.UserPoolId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserPoolId"))
+	}
+	if v.TermsName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TermsName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeTermsInput(v *DescribeTermsInput) error {
 	if v == nil {
 		return nil
@@ -5113,6 +5182,24 @@ func validateOpForgotPasswordInput(v *ForgotPasswordInput) error {
 	}
 	if v.Username == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Username"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetClientTokenInput(v *GetClientTokenInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetClientTokenInput"}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.Secret == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Secret"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

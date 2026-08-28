@@ -690,6 +690,26 @@ func (m *validateOpGetWorkloadAccessToken) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpIngestData struct {
+}
+
+func (*validateOpIngestData) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpIngestData) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*IngestDataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpIngestDataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpInvokeAgentRuntimeCommand struct {
 }
 
@@ -1406,6 +1426,10 @@ func addOpGetWorkloadAccessTokenValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpGetWorkloadAccessToken{}, middleware.After)
 }
 
+func addOpIngestDataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpIngestData{}, middleware.After)
+}
+
 func addOpInvokeAgentRuntimeCommandValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInvokeAgentRuntimeCommand{}, middleware.After)
 }
@@ -2004,6 +2028,25 @@ func validateConfigurationBundleToolEntryList(v []types.ConfigurationBundleToolE
 		if err := validateConfigurationBundleToolEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContentSource(v types.ContentSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContentSource"}
+	switch uv := v.(type) {
+	case *types.ContentSourceMemberInline:
+		if err := validateInlineMemoryContent(&uv.Value); err != nil {
+			invalidParams.AddNested("[inline]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2795,6 +2838,66 @@ func validateHarnessToolUseBlock(v *types.HarnessToolUseBlock) error {
 	}
 	if v.Input == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Input"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIngestPayloadList(v []types.IngestPayloadType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IngestPayloadList"}
+	for i := range v {
+		if err := validateIngestPayloadType(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIngestPayloadType(v types.IngestPayloadType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IngestPayloadType"}
+	switch uv := v.(type) {
+	case *types.IngestPayloadTypeMemberConversational:
+		if err := validateConversational(&uv.Value); err != nil {
+			invalidParams.AddNested("[conversational]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.IngestPayloadTypeMemberJson:
+		if err := validateMemoryJsonData(&uv.Value); err != nil {
+			invalidParams.AddNested("[json]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInlineMemoryContent(v *types.InlineMemoryContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InlineMemoryContent"}
+	if v.Payload == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Payload"))
+	} else if v.Payload != nil {
+		if err := validateIngestPayloadList(v.Payload); err != nil {
+			invalidParams.AddNested("Payload", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4893,6 +4996,34 @@ func validateOpGetWorkloadAccessTokenInput(v *GetWorkloadAccessTokenInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "GetWorkloadAccessTokenInput"}
 	if v.WorkloadName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkloadName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpIngestDataInput(v *IngestDataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IngestDataInput"}
+	if v.MemoryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemoryId"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateContentSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContentTimestamp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentTimestamp"))
+	}
+	if v.ActorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActorId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

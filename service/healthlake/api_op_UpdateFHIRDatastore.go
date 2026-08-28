@@ -34,6 +34,9 @@ type UpdateFHIRDatastoreInput struct {
 	// The analytics configuration for the data store.
 	AnalyticsConfiguration *types.AnalyticsConfiguration
 
+	// The backup configuration for the data store.
+	BackupConfiguration *types.BackupConfiguration
+
 	// The data store name.
 	DatastoreName *string
 

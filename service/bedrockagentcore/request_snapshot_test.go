@@ -1468,6 +1468,69 @@ func TestCheckRequestSnapshot_GetWorkloadAccessTokenForUserId(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_IngestData(t *testing.T) {
+	input := &IngestDataInput{
+		MemoryId: ptr.String("__MemoryId__"),
+		Source: &types.ContentSourceMemberInline{
+			Value: types.InlineMemoryContent{
+				Payload: []types.IngestPayloadType{
+					&types.IngestPayloadTypeMemberConversational{
+						Value: types.Conversational{
+							Content: &types.ContentMemberText{
+								Value: "__ContentMemberText__",
+							},
+							Role: types.Role("ASSISTANT"),
+						},
+					},
+					&types.IngestPayloadTypeMemberConversational{
+						Value: types.Conversational{
+							Content: &types.ContentMemberText{
+								Value: "__ContentMemberText__",
+							},
+							Role: types.Role("ASSISTANT"),
+						},
+					},
+				},
+			},
+		},
+		ContentTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ActorId:          ptr.String("__ActorId__"),
+		SessionId:        ptr.String("__SessionId__"),
+		ExtractionConfig: &types.ExtractionConfig{
+			NamespaceVariables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Metadata: map[string]types.MetadataValue{
+			"key0": &types.MetadataValueMemberStringValue{
+				Value: "__MetadataValueMemberStringValue__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.IngestData(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "IngestData"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_InvokeAgentRuntime(t *testing.T) {
 	input := &InvokeAgentRuntimeInput{
 		ContentType:        ptr.String("__ContentType__"),
@@ -4078,6 +4141,69 @@ func TestUpdateRequestSnapshot_GetWorkloadAccessTokenForUserId(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetWorkloadAccessTokenForUserId"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_IngestData(t *testing.T) {
+	input := &IngestDataInput{
+		MemoryId: ptr.String("__MemoryId__"),
+		Source: &types.ContentSourceMemberInline{
+			Value: types.InlineMemoryContent{
+				Payload: []types.IngestPayloadType{
+					&types.IngestPayloadTypeMemberConversational{
+						Value: types.Conversational{
+							Content: &types.ContentMemberText{
+								Value: "__ContentMemberText__",
+							},
+							Role: types.Role("ASSISTANT"),
+						},
+					},
+					&types.IngestPayloadTypeMemberConversational{
+						Value: types.Conversational{
+							Content: &types.ContentMemberText{
+								Value: "__ContentMemberText__",
+							},
+							Role: types.Role("ASSISTANT"),
+						},
+					},
+				},
+			},
+		},
+		ContentTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ActorId:          ptr.String("__ActorId__"),
+		SessionId:        ptr.String("__SessionId__"),
+		ExtractionConfig: &types.ExtractionConfig{
+			NamespaceVariables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Metadata: map[string]types.MetadataValue{
+			"key0": &types.MetadataValueMemberStringValue{
+				Value: "__MetadataValueMemberStringValue__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.IngestData(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "IngestData"); err != nil {
 		t.Fatal(err)
 	}
 }

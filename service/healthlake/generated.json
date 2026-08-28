@@ -25,6 +25,7 @@
         "api_op_ListFHIRImportJobs.go",
         "api_op_ListTagsForResource.go",
         "api_op_PublishDataTransformationProfile.go",
+        "api_op_RestoreFHIRDatastore.go",
         "api_op_StartDataTransformationJob.go",
         "api_op_StartFHIRExportJob.go",
         "api_op_StartFHIRImportJob.go",

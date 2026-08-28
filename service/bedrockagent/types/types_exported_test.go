@@ -74,6 +74,28 @@ func ExampleContentBlock_outputUsage() {
 var _ *string
 var _ *types.CachePointBlock
 
+func ExampleDayOfMonth_outputUsage() {
+	var union types.DayOfMonth
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DayOfMonthMemberDayNumber:
+		_ = v.Value // Value is int32
+
+	case *types.DayOfMonthMemberLastDayOfMonth:
+		_ = v.Value // Value is types.LastDayOfMonth
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *int32
+var _ *types.LastDayOfMonth
+
 func ExampleFlowConnectionConfiguration_outputUsage() {
 	var union types.FlowConnectionConfiguration
 	// type switches can be used to check the union value
@@ -492,6 +514,32 @@ func ExampleStorageFlowNodeServiceConfiguration_outputUsage() {
 }
 
 var _ *types.StorageFlowNodeS3Configuration
+
+func ExampleSyncSchedule_outputUsage() {
+	var union types.SyncSchedule
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SyncScheduleMemberDaily:
+		_ = v.Value // Value is types.DailySchedule
+
+	case *types.SyncScheduleMemberMonthly:
+		_ = v.Value // Value is types.MonthlySchedule
+
+	case *types.SyncScheduleMemberWeekly:
+		_ = v.Value // Value is types.WeeklySchedule
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.MonthlySchedule
+var _ *types.DailySchedule
+var _ *types.WeeklySchedule
 
 func ExampleSystemContentBlock_outputUsage() {
 	var union types.SystemContentBlock

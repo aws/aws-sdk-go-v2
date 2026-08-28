@@ -842,6 +842,18 @@ func TestCheckSnapshot_DescribeTerms(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeTermsByClient(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTermsByClient(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeTermsByClient")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeUserImportJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeUserImportJob(context.Background(), nil, func(o *Options) {
@@ -907,6 +919,18 @@ func TestCheckSnapshot_ForgotPassword(t *testing.T) {
 	_, err := svc.ForgotPassword(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ForgotPassword")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetClientToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetClientToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetClientToken")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2401,6 +2425,18 @@ func TestUpdateSnapshot_DescribeTerms(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeTermsByClient(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeTermsByClient(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeTermsByClient")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeUserImportJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeUserImportJob(context.Background(), nil, func(o *Options) {
@@ -2466,6 +2502,18 @@ func TestUpdateSnapshot_ForgotPassword(t *testing.T) {
 	_, err := svc.ForgotPassword(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ForgotPassword")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetClientToken(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetClientToken(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetClientToken")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

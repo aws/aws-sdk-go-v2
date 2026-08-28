@@ -760,6 +760,11 @@ func TestCheckRequestSnapshot_CreateService(t *testing.T) {
 				CanaryPercent:           ptr.Float64(1.0),
 				CanaryBakeTimeInMinutes: ptr.Int32(1),
 			},
+			EarlySuccessCriteria: &types.DeploymentEarlySuccessCriteria{
+				Enable:                       true,
+				HealthyPercent:               ptr.Int32(1),
+				SourceServiceRevisionCleanup: types.ServiceRevisionCleanup("BLOCKING"),
+			},
 		},
 		PlacementConstraints: []types.PlacementConstraint{
 			{
@@ -5291,6 +5296,11 @@ func TestCheckRequestSnapshot_UpdateService(t *testing.T) {
 				CanaryPercent:           ptr.Float64(1.0),
 				CanaryBakeTimeInMinutes: ptr.Int32(1),
 			},
+			EarlySuccessCriteria: &types.DeploymentEarlySuccessCriteria{
+				Enable:                       true,
+				HealthyPercent:               ptr.Int32(1),
+				SourceServiceRevisionCleanup: types.ServiceRevisionCleanup("BLOCKING"),
+			},
 		},
 		AvailabilityZoneRebalancing: types.AvailabilityZoneRebalancing("ENABLED"),
 		NetworkConfiguration: &types.NetworkConfiguration{
@@ -6277,6 +6287,11 @@ func TestUpdateRequestSnapshot_CreateService(t *testing.T) {
 			CanaryConfiguration: &types.CanaryConfiguration{
 				CanaryPercent:           ptr.Float64(1.0),
 				CanaryBakeTimeInMinutes: ptr.Int32(1),
+			},
+			EarlySuccessCriteria: &types.DeploymentEarlySuccessCriteria{
+				Enable:                       true,
+				HealthyPercent:               ptr.Int32(1),
+				SourceServiceRevisionCleanup: types.ServiceRevisionCleanup("BLOCKING"),
 			},
 		},
 		PlacementConstraints: []types.PlacementConstraint{
@@ -10808,6 +10823,11 @@ func TestUpdateRequestSnapshot_UpdateService(t *testing.T) {
 			CanaryConfiguration: &types.CanaryConfiguration{
 				CanaryPercent:           ptr.Float64(1.0),
 				CanaryBakeTimeInMinutes: ptr.Int32(1),
+			},
+			EarlySuccessCriteria: &types.DeploymentEarlySuccessCriteria{
+				Enable:                       true,
+				HealthyPercent:               ptr.Int32(1),
+				SourceServiceRevisionCleanup: types.ServiceRevisionCleanup("BLOCKING"),
 			},
 		},
 		AvailabilityZoneRebalancing: types.AvailabilityZoneRebalancing("ENABLED"),

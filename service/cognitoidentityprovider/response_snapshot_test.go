@@ -2871,6 +2871,43 @@ func TestCheckResponseSnapshot_DescribeTerms(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeTermsByClient(t *testing.T) {
+	want := &DescribeTermsByClientOutput{
+		Terms: &types.TermsType{
+			TermsId:     ptr.String("__TermsId__"),
+			UserPoolId:  ptr.String("__UserPoolId__"),
+			ClientId:    ptr.String("__ClientId__"),
+			TermsName:   ptr.String("__TermsName__"),
+			TermsSource: types.TermsSourceType("LINK"),
+			Enforcement: types.TermsEnforcementType("NONE"),
+			Links: map[string]string{
+				"key0": "__Value__",
+			},
+			CreationDate:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeTermsByClient.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeTermsByClient(context.Background(), &DescribeTermsByClientInput{
+		ClientId:   ptr.String("__ClientId__"),
+		UserPoolId: ptr.String("__UserPoolId__"),
+		TermsName:  ptr.String("__TermsName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeTermsByClient.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeUserImportJob(t *testing.T) {
 	want := &DescribeUserImportJobOutput{
 		UserImportJob: &types.UserImportJobType{
@@ -3336,6 +3373,41 @@ func TestCheckResponseSnapshot_GetCSVHeader(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetCSVHeader.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetClientToken(t *testing.T) {
+	want := &GetClientTokenOutput{
+		ClientAuthenticationResult: &types.ClientAuthenticationResultType{
+			AccessToken: ptr.String("__AccessToken__"),
+			ExpiresIn:   1,
+			TokenType:   ptr.String("__TokenType__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetClientToken.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetClientToken(context.Background(), &GetClientTokenInput{
+		ClientId: ptr.String("__ClientId__"),
+		Secret:   ptr.String("__Secret__"),
+		Scopes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetClientToken.response", err)
 	}
 }
 

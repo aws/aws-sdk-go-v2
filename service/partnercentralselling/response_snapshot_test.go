@@ -898,7 +898,16 @@ func TestCheckResponseSnapshot_GetAwsOpportunitySummary(t *testing.T) {
 			AwsPartition: types.AwsPartition("aws-eusc"),
 		},
 		CosellMotion: ptr.String("__CosellMotion__"),
-		Catalog:      ptr.String("__Catalog__"),
+		SoftwareRevenue: &types.AwsSoftwareRevenue{
+			Value: &types.MonetaryValue{
+				Amount:       ptr.String("__Amount__"),
+				CurrencyCode: types.CurrencyCode("USD"),
+			},
+			Discount:       ptr.String("__Discount__"),
+			EffectiveDate:  ptr.String("__EffectiveDate__"),
+			ExpirationDate: ptr.String("__ExpirationDate__"),
+		},
+		Catalog: ptr.String("__Catalog__"),
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetAwsOpportunitySummary.response")
 	if errors.Is(err, fs.ErrNotExist) {

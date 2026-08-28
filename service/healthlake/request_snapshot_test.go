@@ -287,6 +287,12 @@ func TestCheckRequestSnapshot_CreateFHIRDatastore(t *testing.T) {
 				"__Member__",
 			},
 		},
+		BackupConfiguration: &types.BackupConfiguration{
+			Status:                types.BackupStatus("ENABLED"),
+			BackupType:            types.BackupType("CONTINUOUS"),
+			RetentionPeriodInDays: ptr.Int32(1),
+			BackupTagsEnabled:     true,
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -750,6 +756,74 @@ func TestCheckRequestSnapshot_PublishDataTransformationProfile(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_RestoreFHIRDatastore(t *testing.T) {
+	input := &RestoreFHIRDatastoreInput{
+		SourceDatastoreId: ptr.String("__SourceDatastoreId__"),
+		RestoreConfiguration: &types.RestoreConfigurationMemberContinuousBackupRestoreConfiguration{
+			Value: types.ContinuousBackupRestoreConfiguration{
+				RestorePointTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		DatastoreName: ptr.String("__DatastoreName__"),
+		SseConfiguration: &types.SseConfiguration{
+			KmsEncryptionConfig: &types.KmsEncryptionConfig{
+				CmkType:  types.CmkType("CUSTOMER_MANAGED_KMS_KEY"),
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		IdentityProviderConfiguration: &types.IdentityProviderConfiguration{
+			AuthorizationStrategy:           types.AuthorizationStrategy("SMART_ON_FHIR_V1"),
+			FineGrainedAuthorizationEnabled: true,
+			Metadata:                        ptr.String("__Metadata__"),
+			IdpLambdaArn:                    ptr.String("__IdpLambdaArn__"),
+		},
+		AnalyticsConfiguration: &types.AnalyticsConfiguration{
+			Status: types.AnalyticsStatus("ENABLED"),
+		},
+		NlpConfiguration: &types.NlpConfiguration{
+			Status: types.NlpStatus("ENABLED"),
+		},
+		ProfileConfiguration: &types.ProfileConfiguration{
+			DefaultProfiles: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RestoreFHIRDatastore(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RestoreFHIRDatastore"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_StartDataTransformationJob(t *testing.T) {
 	input := &StartDataTransformationJobInput{
 		InputDataConfig: &types.TransformationInputDataConfig{
@@ -993,6 +1067,12 @@ func TestCheckRequestSnapshot_UpdateFHIRDatastore(t *testing.T) {
 			Metadata:                        ptr.String("__Metadata__"),
 			IdpLambdaArn:                    ptr.String("__IdpLambdaArn__"),
 		},
+		BackupConfiguration: &types.BackupConfiguration{
+			Status:                types.BackupStatus("ENABLED"),
+			BackupType:            types.BackupType("CONTINUOUS"),
+			RetentionPeriodInDays: ptr.Int32(1),
+			BackupTagsEnabled:     true,
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1129,6 +1209,12 @@ func TestUpdateRequestSnapshot_CreateFHIRDatastore(t *testing.T) {
 				"__Member__",
 				"__Member__",
 			},
+		},
+		BackupConfiguration: &types.BackupConfiguration{
+			Status:                types.BackupStatus("ENABLED"),
+			BackupType:            types.BackupType("CONTINUOUS"),
+			RetentionPeriodInDays: ptr.Int32(1),
+			BackupTagsEnabled:     true,
 		},
 	}
 	body := &bytes.Buffer{}
@@ -1593,6 +1679,74 @@ func TestUpdateRequestSnapshot_PublishDataTransformationProfile(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_RestoreFHIRDatastore(t *testing.T) {
+	input := &RestoreFHIRDatastoreInput{
+		SourceDatastoreId: ptr.String("__SourceDatastoreId__"),
+		RestoreConfiguration: &types.RestoreConfigurationMemberContinuousBackupRestoreConfiguration{
+			Value: types.ContinuousBackupRestoreConfiguration{
+				RestorePointTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		DatastoreName: ptr.String("__DatastoreName__"),
+		SseConfiguration: &types.SseConfiguration{
+			KmsEncryptionConfig: &types.KmsEncryptionConfig{
+				CmkType:  types.CmkType("CUSTOMER_MANAGED_KMS_KEY"),
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		IdentityProviderConfiguration: &types.IdentityProviderConfiguration{
+			AuthorizationStrategy:           types.AuthorizationStrategy("SMART_ON_FHIR_V1"),
+			FineGrainedAuthorizationEnabled: true,
+			Metadata:                        ptr.String("__Metadata__"),
+			IdpLambdaArn:                    ptr.String("__IdpLambdaArn__"),
+		},
+		AnalyticsConfiguration: &types.AnalyticsConfiguration{
+			Status: types.AnalyticsStatus("ENABLED"),
+		},
+		NlpConfiguration: &types.NlpConfiguration{
+			Status: types.NlpStatus("ENABLED"),
+		},
+		ProfileConfiguration: &types.ProfileConfiguration{
+			DefaultProfiles: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RestoreFHIRDatastore(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RestoreFHIRDatastore"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_StartDataTransformationJob(t *testing.T) {
 	input := &StartDataTransformationJobInput{
 		InputDataConfig: &types.TransformationInputDataConfig{
@@ -1835,6 +1989,12 @@ func TestUpdateRequestSnapshot_UpdateFHIRDatastore(t *testing.T) {
 			FineGrainedAuthorizationEnabled: true,
 			Metadata:                        ptr.String("__Metadata__"),
 			IdpLambdaArn:                    ptr.String("__IdpLambdaArn__"),
+		},
+		BackupConfiguration: &types.BackupConfiguration{
+			Status:                types.BackupStatus("ENABLED"),
+			BackupType:            types.BackupType("CONTINUOUS"),
+			RetentionPeriodInDays: ptr.Int32(1),
+			BackupTagsEnabled:     true,
 		},
 	}
 	body := &bytes.Buffer{}

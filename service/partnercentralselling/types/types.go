@@ -358,6 +358,9 @@ type AwsOpportunitySummaryFullView struct {
 	// Identifier of the related partner opportunity.
 	RelatedOpportunityId *string
 
+	// Seller-provided PARC deal terms: commitment value, discount, and contract dates.
+	SoftwareRevenue *AwsSoftwareRevenue
+
 	// Visibility level for the AWS opportunity.
 	Visibility Visibility
 
@@ -461,6 +464,26 @@ type AwsProductsSpendInsightsBySource struct {
 
 	// Partner-sourced insights derived from Pricing Calculator URLs.
 	Partner *AwsProductInsights
+
+	noSmithyDocumentSerde
+}
+
+// Seller-provided PARC deal terms for the opportunity, including commitment
+// value, discount percentage, and contract dates.
+type AwsSoftwareRevenue struct {
+
+	// Discount percentage offered on the software revenue. Percent convention: 15.00
+	// means 15%.
+	Discount *string
+
+	// Contract effective (start) date in YYYY-MM-DD format.
+	EffectiveDate *string
+
+	// Contract expiration (end) date in YYYY-MM-DD format.
+	ExpirationDate *string
+
+	// Specifies payments details.
+	Value *MonetaryValue
 
 	noSmithyDocumentSerde
 }

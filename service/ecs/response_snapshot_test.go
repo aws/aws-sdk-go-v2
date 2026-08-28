@@ -1064,6 +1064,11 @@ func TestCheckResponseSnapshot_CreateService(t *testing.T) {
 					CanaryPercent:           ptr.Float64(1.0),
 					CanaryBakeTimeInMinutes: ptr.Int32(1),
 				},
+				EarlySuccessCriteria: &types.DeploymentEarlySuccessCriteria{
+					Enable:                       true,
+					HealthyPercent:               ptr.Int32(1),
+					SourceServiceRevisionCleanup: types.ServiceRevisionCleanup("BLOCKING"),
+				},
 			},
 			TaskSets: []types.TaskSet{
 				{
@@ -2023,6 +2028,11 @@ func TestCheckResponseSnapshot_CreateService(t *testing.T) {
 			CanaryConfiguration: &types.CanaryConfiguration{
 				CanaryPercent:           ptr.Float64(1.0),
 				CanaryBakeTimeInMinutes: ptr.Int32(1),
+			},
+			EarlySuccessCriteria: &types.DeploymentEarlySuccessCriteria{
+				Enable:                       true,
+				HealthyPercent:               ptr.Int32(1),
+				SourceServiceRevisionCleanup: types.ServiceRevisionCleanup("BLOCKING"),
 			},
 		},
 		PlacementConstraints: []types.PlacementConstraint{
@@ -3267,6 +3277,11 @@ func TestCheckResponseSnapshot_DeleteService(t *testing.T) {
 				CanaryConfiguration: &types.CanaryConfiguration{
 					CanaryPercent:           ptr.Float64(1.0),
 					CanaryBakeTimeInMinutes: ptr.Int32(1),
+				},
+				EarlySuccessCriteria: &types.DeploymentEarlySuccessCriteria{
+					Enable:                       true,
+					HealthyPercent:               ptr.Int32(1),
+					SourceServiceRevisionCleanup: types.ServiceRevisionCleanup("BLOCKING"),
 				},
 			},
 			TaskSets: []types.TaskSet{
@@ -8628,6 +8643,11 @@ func TestCheckResponseSnapshot_DescribeServiceDeployments(t *testing.T) {
 						CanaryPercent:           ptr.Float64(1.0),
 						CanaryBakeTimeInMinutes: ptr.Int32(1),
 					},
+					EarlySuccessCriteria: &types.DeploymentEarlySuccessCriteria{
+						Enable:                       true,
+						HealthyPercent:               ptr.Int32(1),
+						SourceServiceRevisionCleanup: types.ServiceRevisionCleanup("BLOCKING"),
+					},
 				},
 				Rollback: &types.Rollback{
 					Reason:             ptr.String("__Reason__"),
@@ -8766,6 +8786,11 @@ func TestCheckResponseSnapshot_DescribeServiceDeployments(t *testing.T) {
 					CanaryConfiguration: &types.CanaryConfiguration{
 						CanaryPercent:           ptr.Float64(1.0),
 						CanaryBakeTimeInMinutes: ptr.Int32(1),
+					},
+					EarlySuccessCriteria: &types.DeploymentEarlySuccessCriteria{
+						Enable:                       true,
+						HealthyPercent:               ptr.Int32(1),
+						SourceServiceRevisionCleanup: types.ServiceRevisionCleanup("BLOCKING"),
 					},
 				},
 				Rollback: &types.Rollback{
@@ -10116,6 +10141,11 @@ func TestCheckResponseSnapshot_DescribeServices(t *testing.T) {
 						CanaryPercent:           ptr.Float64(1.0),
 						CanaryBakeTimeInMinutes: ptr.Int32(1),
 					},
+					EarlySuccessCriteria: &types.DeploymentEarlySuccessCriteria{
+						Enable:                       true,
+						HealthyPercent:               ptr.Int32(1),
+						SourceServiceRevisionCleanup: types.ServiceRevisionCleanup("BLOCKING"),
+					},
 				},
 				TaskSets: []types.TaskSet{
 					{
@@ -11068,6 +11098,11 @@ func TestCheckResponseSnapshot_DescribeServices(t *testing.T) {
 					CanaryConfiguration: &types.CanaryConfiguration{
 						CanaryPercent:           ptr.Float64(1.0),
 						CanaryBakeTimeInMinutes: ptr.Int32(1),
+					},
+					EarlySuccessCriteria: &types.DeploymentEarlySuccessCriteria{
+						Enable:                       true,
+						HealthyPercent:               ptr.Int32(1),
+						SourceServiceRevisionCleanup: types.ServiceRevisionCleanup("BLOCKING"),
 					},
 				},
 				TaskSets: []types.TaskSet{
@@ -20619,6 +20654,11 @@ func TestCheckResponseSnapshot_UpdateService(t *testing.T) {
 					CanaryPercent:           ptr.Float64(1.0),
 					CanaryBakeTimeInMinutes: ptr.Int32(1),
 				},
+				EarlySuccessCriteria: &types.DeploymentEarlySuccessCriteria{
+					Enable:                       true,
+					HealthyPercent:               ptr.Int32(1),
+					SourceServiceRevisionCleanup: types.ServiceRevisionCleanup("BLOCKING"),
+				},
 			},
 			TaskSets: []types.TaskSet{
 				{
@@ -21533,6 +21573,11 @@ func TestCheckResponseSnapshot_UpdateService(t *testing.T) {
 			CanaryConfiguration: &types.CanaryConfiguration{
 				CanaryPercent:           ptr.Float64(1.0),
 				CanaryBakeTimeInMinutes: ptr.Int32(1),
+			},
+			EarlySuccessCriteria: &types.DeploymentEarlySuccessCriteria{
+				Enable:                       true,
+				HealthyPercent:               ptr.Int32(1),
+				SourceServiceRevisionCleanup: types.ServiceRevisionCleanup("BLOCKING"),
 			},
 		},
 		AvailabilityZoneRebalancing: types.AvailabilityZoneRebalancing("ENABLED"),

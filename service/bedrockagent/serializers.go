@@ -8057,6 +8057,13 @@ func awsRestjson1_serializeDocumentCustomTransformationConfiguration(v *types.Cu
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDailySchedule(v *types.DailySchedule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDataSourceConfiguration(v *types.DataSourceConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8108,6 +8115,28 @@ func awsRestjson1_serializeDocumentDataSourceConfiguration(v *types.DataSourceCo
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDayOfMonth(v types.DayOfMonth, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.DayOfMonthMemberDayNumber:
+		av := object.Key("dayNumber")
+		av.Integer(uv.Value)
+
+	case *types.DayOfMonthMemberLastDayOfMonth:
+		av := object.Key("lastDayOfMonth")
+		if err := awsRestjson1_serializeDocumentLastDayOfMonth(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 
@@ -9304,6 +9333,13 @@ func awsRestjson1_serializeDocumentLambdaFunctionFlowNodeConfiguration(v *types.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentLastDayOfMonth(v *types.LastDayOfMonth, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentLexFlowNodeConfiguration(v *types.LexFlowNodeConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9413,6 +9449,13 @@ func awsRestjson1_serializeDocumentManagedKnowledgeBaseConnectorConfiguration(v 
 	if v.MediaExtractionConfiguration != nil {
 		ok := object.Key("mediaExtractionConfiguration")
 		if err := awsRestjson1_serializeDocumentMediaExtractionConfiguration(v.MediaExtractionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SyncSchedule != nil {
+		ok := object.Key("syncSchedule")
+		if err := awsRestjson1_serializeDocumentSyncSchedule(v.SyncSchedule, ok); err != nil {
 			return err
 		}
 	}
@@ -9670,6 +9713,20 @@ func awsRestjson1_serializeDocumentMongoDbAtlasFieldMapping(v *types.MongoDbAtla
 	if v.VectorField != nil {
 		ok := object.Key("vectorField")
 		ok.String(*v.VectorField)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMonthlySchedule(v *types.MonthlySchedule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DayOfMonth != nil {
+		ok := object.Key("dayOfMonth")
+		if err := awsRestjson1_serializeDocumentDayOfMonth(v.DayOfMonth, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -11468,6 +11525,36 @@ func awsRestjson1_serializeDocumentSupplementalDataStorageLocations(v []types.Su
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSyncSchedule(v types.SyncSchedule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.SyncScheduleMemberDaily:
+		av := object.Key("daily")
+		if err := awsRestjson1_serializeDocumentDailySchedule(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.SyncScheduleMemberMonthly:
+		av := object.Key("monthly")
+		if err := awsRestjson1_serializeDocumentMonthlySchedule(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.SyncScheduleMemberWeekly:
+		av := object.Key("weekly")
+		if err := awsRestjson1_serializeDocumentWeeklySchedule(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSystemContentBlock(v types.SystemContentBlock, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -12031,6 +12118,18 @@ func awsRestjson1_serializeDocumentWebSourceConfiguration(v *types.WebSourceConf
 		if err := awsRestjson1_serializeDocumentUrlConfiguration(v.UrlConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWeeklySchedule(v *types.WeeklySchedule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DayOfWeek) > 0 {
+		ok := object.Key("dayOfWeek")
+		ok.String(string(v.DayOfWeek))
 	}
 
 	return nil

@@ -613,6 +613,9 @@ func TestCheckResponseSnapshot_CreateDataSource(t *testing.T) {
 						},
 					},
 					ConnectorParameters: document.NewLazyDocument("__Document__"),
+					SyncSchedule: &types.SyncScheduleMemberDaily{
+						Value: types.DailySchedule{},
+					},
 				},
 				S3Configuration: &types.S3DataSourceConfiguration{
 					BucketArn: ptr.String("__BucketArn__"),
@@ -891,6 +894,9 @@ func TestCheckResponseSnapshot_CreateDataSource(t *testing.T) {
 					},
 				},
 				ConnectorParameters: document.NewLazyDocument("__Document__"),
+				SyncSchedule: &types.SyncScheduleMemberDaily{
+					Value: types.DailySchedule{},
+				},
 			},
 			S3Configuration: &types.S3DataSourceConfiguration{
 				BucketArn: ptr.String("__BucketArn__"),
@@ -3368,6 +3374,9 @@ func TestCheckResponseSnapshot_GetDataSource(t *testing.T) {
 						},
 					},
 					ConnectorParameters: document.NewLazyDocument("__Document__"),
+					SyncSchedule: &types.SyncScheduleMemberDaily{
+						Value: types.DailySchedule{},
+					},
 				},
 				S3Configuration: &types.S3DataSourceConfiguration{
 					BucketArn: ptr.String("__BucketArn__"),
@@ -6229,6 +6238,9 @@ func TestCheckResponseSnapshot_UpdateDataSource(t *testing.T) {
 						},
 					},
 					ConnectorParameters: document.NewLazyDocument("__Document__"),
+					SyncSchedule: &types.SyncScheduleMemberDaily{
+						Value: types.DailySchedule{},
+					},
 				},
 				S3Configuration: &types.S3DataSourceConfiguration{
 					BucketArn: ptr.String("__BucketArn__"),
@@ -6507,6 +6519,9 @@ func TestCheckResponseSnapshot_UpdateDataSource(t *testing.T) {
 					},
 				},
 				ConnectorParameters: document.NewLazyDocument("__Document__"),
+				SyncSchedule: &types.SyncScheduleMemberDaily{
+					Value: types.DailySchedule{},
+				},
 			},
 			S3Configuration: &types.S3DataSourceConfiguration{
 				BucketArn: ptr.String("__BucketArn__"),

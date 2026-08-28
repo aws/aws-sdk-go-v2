@@ -12,7 +12,7 @@ import (
 
 // Starts an asynchronous data transformation job that converts source files from
 // Amazon Simple Storage Service (Amazon S3) and writes the output to Amazon S3 or
-// AWS HealthLake.
+// HealthLake.
 func (c *Client) StartDataTransformationJob(ctx context.Context, params *StartDataTransformationJobInput, optFns ...func(*Options)) (*StartDataTransformationJobOutput, error) {
 	if params == nil {
 		params = &StartDataTransformationJobInput{}
@@ -38,9 +38,9 @@ type StartDataTransformationJobInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that AWS HealthLake assumes to read from and write to the specified Amazon
-	// S3 locations.
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access
+	// Management (IAM) role that HealthLake assumes to read from and write to the
+	// specified Amazon S3 locations.
 	//
 	// This member is required.
 	DataAccessRoleArn *string
@@ -50,8 +50,8 @@ type StartDataTransformationJobInput struct {
 	// This member is required.
 	InputDataConfig *types.TransformationInputDataConfig
 
-	// The Amazon S3 output location and AWS Key Management Service (AWS KMS)
-	// encryption configuration.
+	// The Amazon S3 output location and Amazon Web Services Key Management Service
+	// (Amazon Web Services KMS) encryption configuration.
 	//
 	// This member is required.
 	OutputDataConfig *types.TransformationOutputDataConfig
@@ -61,7 +61,7 @@ type StartDataTransformationJobInput struct {
 	// This member is required.
 	ProfileId *string
 
-	// Specifies whether drift detection is enabled for this job. When enabled, AWS
+	// Specifies whether drift detection is enabled for this job. When enabled,
 	// HealthLake writes a drift report to the output Amazon S3 location alongside the
 	// converted files.
 	DriftDetectionEnabled *bool

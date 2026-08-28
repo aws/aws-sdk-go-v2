@@ -470,6 +470,18 @@ func TestCheckSnapshot_GetWorkloadAccessTokenForUserId(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_IngestData(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.IngestData(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "IngestData")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_InvokeAgentRuntime(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.InvokeAgentRuntime(context.Background(), nil, func(o *Options) {
@@ -1254,6 +1266,18 @@ func TestUpdateSnapshot_GetWorkloadAccessTokenForUserId(t *testing.T) {
 	_, err := svc.GetWorkloadAccessTokenForUserId(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetWorkloadAccessTokenForUserId")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_IngestData(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.IngestData(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "IngestData")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

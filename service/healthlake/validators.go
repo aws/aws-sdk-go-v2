@@ -310,6 +310,26 @@ func (m *validateOpPublishDataTransformationProfile) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRestoreFHIRDatastore struct {
+}
+
+func (*validateOpRestoreFHIRDatastore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRestoreFHIRDatastore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RestoreFHIRDatastoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRestoreFHIRDatastoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartDataTransformationJob struct {
 }
 
@@ -528,6 +548,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpPublishDataTransformationProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPublishDataTransformationProfile{}, middleware.After)
+}
+
+func addOpRestoreFHIRDatastoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRestoreFHIRDatastore{}, middleware.After)
 }
 
 func addOpStartDataTransformationJobValidationMiddleware(stack *middleware.Stack) error {
@@ -1121,6 +1145,39 @@ func validateOpPublishDataTransformationProfileInput(v *PublishDataTransformatio
 	}
 	if len(v.SourceFormat) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceFormat"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRestoreFHIRDatastoreInput(v *RestoreFHIRDatastoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RestoreFHIRDatastoreInput"}
+	if v.SourceDatastoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceDatastoreId"))
+	}
+	if v.RestoreConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RestoreConfiguration"))
+	}
+	if v.SseConfiguration != nil {
+		if err := validateSseConfiguration(v.SseConfiguration); err != nil {
+			invalidParams.AddNested("SseConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IdentityProviderConfiguration != nil {
+		if err := validateIdentityProviderConfiguration(v.IdentityProviderConfiguration); err != nil {
+			invalidParams.AddNested("IdentityProviderConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

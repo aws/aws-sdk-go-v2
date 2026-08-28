@@ -435,6 +435,23 @@ type ChallengeResponseType struct {
 	noSmithyDocumentSerde
 }
 
+// The access token and its metadata from a machine-to-machine (M2M) client
+// credentials grant.
+type ClientAuthenticationResultType struct {
+
+	// The access token for the requested app client. Present this token to a resource
+	// server to authorize a request, using the scopes granted in the token.
+	AccessToken *string
+
+	// The number of seconds until the access token expires.
+	ExpiresIn int32
+
+	// The type of the token. For example, Bearer .
+	TokenType *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a client secret, including its unique identifier,
 // value, and creation timestamp.
 type ClientSecretDescriptorType struct {

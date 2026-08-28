@@ -203,6 +203,12 @@ func TestCheckResponseSnapshot_CreateFHIRDatastore(t *testing.T) {
 				"__Member__",
 			},
 		},
+		BackupConfiguration: &types.BackupConfiguration{
+			Status:                types.BackupStatus("ENABLED"),
+			BackupType:            types.BackupType("CONTINUOUS"),
+			RetentionPeriodInDays: ptr.Int32(1),
+			BackupTagsEnabled:     true,
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -355,6 +361,18 @@ func TestCheckResponseSnapshot_DescribeFHIRDatastore(t *testing.T) {
 					"__Member__",
 					"__Member__",
 				},
+			},
+			BackupStatusInfo: &types.DatastoreBackupStatus{
+				Configuration: &types.BackupConfiguration{
+					Status:                types.BackupStatus("ENABLED"),
+					BackupType:            types.BackupType("CONTINUOUS"),
+					RetentionPeriodInDays: ptr.Int32(1),
+					BackupTagsEnabled:     true,
+				},
+				BackupEnabledAt:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EarliestRestorePoint:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LatestRestorePoint:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ScheduledPermanentDeletionTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 	}
@@ -690,6 +708,18 @@ func TestCheckResponseSnapshot_ListFHIRDatastores(t *testing.T) {
 						"__Member__",
 					},
 				},
+				BackupStatusInfo: &types.DatastoreBackupStatus{
+					Configuration: &types.BackupConfiguration{
+						Status:                types.BackupStatus("ENABLED"),
+						BackupType:            types.BackupType("CONTINUOUS"),
+						RetentionPeriodInDays: ptr.Int32(1),
+						BackupTagsEnabled:     true,
+					},
+					BackupEnabledAt:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EarliestRestorePoint:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LatestRestorePoint:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					ScheduledPermanentDeletionTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
 			},
 			{
 				DatastoreId:          ptr.String("__DatastoreId__"),
@@ -729,6 +759,18 @@ func TestCheckResponseSnapshot_ListFHIRDatastores(t *testing.T) {
 						"__Member__",
 						"__Member__",
 					},
+				},
+				BackupStatusInfo: &types.DatastoreBackupStatus{
+					Configuration: &types.BackupConfiguration{
+						Status:                types.BackupStatus("ENABLED"),
+						BackupType:            types.BackupType("CONTINUOUS"),
+						RetentionPeriodInDays: ptr.Int32(1),
+						BackupTagsEnabled:     true,
+					},
+					BackupEnabledAt:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EarliestRestorePoint:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LatestRestorePoint:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					ScheduledPermanentDeletionTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 			},
 		},
@@ -995,6 +1037,73 @@ func TestCheckResponseSnapshot_PublishDataTransformationProfile(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_RestoreFHIRDatastore(t *testing.T) {
+	want := &RestoreFHIRDatastoreOutput{
+		DatastoreId:       ptr.String("__DatastoreId__"),
+		DatastoreArn:      ptr.String("__DatastoreArn__"),
+		DatastoreStatus:   types.DatastoreStatus("CREATING"),
+		DatastoreEndpoint: ptr.String("__DatastoreEndpoint__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("RestoreFHIRDatastore.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.RestoreFHIRDatastore(context.Background(), &RestoreFHIRDatastoreInput{
+		SourceDatastoreId: ptr.String("__SourceDatastoreId__"),
+		RestoreConfiguration: &types.RestoreConfigurationMemberContinuousBackupRestoreConfiguration{
+			Value: types.ContinuousBackupRestoreConfiguration{
+				RestorePointTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		DatastoreName: ptr.String("__DatastoreName__"),
+		SseConfiguration: &types.SseConfiguration{
+			KmsEncryptionConfig: &types.KmsEncryptionConfig{
+				CmkType:  types.CmkType("CUSTOMER_MANAGED_KMS_KEY"),
+				KmsKeyId: ptr.String("__KmsKeyId__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+		Tags: []types.Tag{
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+			{
+				Key:   ptr.String("__Key__"),
+				Value: ptr.String("__Value__"),
+			},
+		},
+		IdentityProviderConfiguration: &types.IdentityProviderConfiguration{
+			AuthorizationStrategy:           types.AuthorizationStrategy("SMART_ON_FHIR_V1"),
+			FineGrainedAuthorizationEnabled: true,
+			Metadata:                        ptr.String("__Metadata__"),
+			IdpLambdaArn:                    ptr.String("__IdpLambdaArn__"),
+		},
+		AnalyticsConfiguration: &types.AnalyticsConfiguration{
+			Status: types.AnalyticsStatus("ENABLED"),
+		},
+		NlpConfiguration: &types.NlpConfiguration{
+			Status: types.NlpStatus("ENABLED"),
+		},
+		ProfileConfiguration: &types.ProfileConfiguration{
+			DefaultProfiles: []string{
+				"__Member__",
+				"__Member__",
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "RestoreFHIRDatastore.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_StartDataTransformationJob(t *testing.T) {
 	want := &StartDataTransformationJobOutput{
 		JobId:     ptr.String("__JobId__"),
@@ -1238,6 +1347,18 @@ func TestCheckResponseSnapshot_UpdateFHIRDatastore(t *testing.T) {
 					"__Member__",
 				},
 			},
+			BackupStatusInfo: &types.DatastoreBackupStatus{
+				Configuration: &types.BackupConfiguration{
+					Status:                types.BackupStatus("ENABLED"),
+					BackupType:            types.BackupType("CONTINUOUS"),
+					RetentionPeriodInDays: ptr.Int32(1),
+					BackupTagsEnabled:     true,
+				},
+				BackupEnabledAt:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EarliestRestorePoint:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LatestRestorePoint:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ScheduledPermanentDeletionTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateFHIRDatastore.response")
@@ -1268,6 +1389,12 @@ func TestCheckResponseSnapshot_UpdateFHIRDatastore(t *testing.T) {
 			FineGrainedAuthorizationEnabled: true,
 			Metadata:                        ptr.String("__Metadata__"),
 			IdpLambdaArn:                    ptr.String("__IdpLambdaArn__"),
+		},
+		BackupConfiguration: &types.BackupConfiguration{
+			Status:                types.BackupStatus("ENABLED"),
+			BackupType:            types.BackupType("CONTINUOUS"),
+			RetentionPeriodInDays: ptr.Int32(1),
+			BackupTagsEnabled:     true,
 		},
 	})
 	if err != nil {

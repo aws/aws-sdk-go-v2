@@ -55,8 +55,8 @@ type CreateDataTransformationProfileInput struct {
 	// ignores the request but does not return an error.
 	ClientToken *string
 
-	// The AWS Key Management Service (AWS KMS) key identifier used to encrypt the
-	// profile content at rest.
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
+	// identifier used to encrypt the profile content at rest.
 	KmsKeyId *string
 
 	// A human-readable description of the profile's purpose.

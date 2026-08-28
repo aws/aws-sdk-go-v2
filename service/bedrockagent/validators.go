@@ -3332,6 +3332,11 @@ func validateManagedKnowledgeBaseConnectorConfiguration(v *types.ManagedKnowledg
 			invalidParams.AddNested("MediaExtractionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SyncSchedule != nil {
+		if err := validateSyncSchedule(v.SyncSchedule); err != nil {
+			invalidParams.AddNested("SyncSchedule", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3541,6 +3546,21 @@ func validateMongoDbAtlasFieldMapping(v *types.MongoDbAtlasFieldMapping) error {
 	}
 	if v.MetadataField == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetadataField"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMonthlySchedule(v *types.MonthlySchedule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MonthlySchedule"}
+	if v.DayOfMonth == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DayOfMonth"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4937,6 +4957,30 @@ func validateSupplementalDataStorageLocations(v []types.SupplementalDataStorageL
 	}
 }
 
+func validateSyncSchedule(v types.SyncSchedule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SyncSchedule"}
+	switch uv := v.(type) {
+	case *types.SyncScheduleMemberMonthly:
+		if err := validateMonthlySchedule(&uv.Value); err != nil {
+			invalidParams.AddNested("[monthly]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.SyncScheduleMemberWeekly:
+		if err := validateWeeklySchedule(&uv.Value); err != nil {
+			invalidParams.AddNested("[weekly]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSystemContentBlock(v types.SystemContentBlock) error {
 	if v == nil {
 		return nil
@@ -5391,6 +5435,21 @@ func validateWebSourceConfiguration(v *types.WebSourceConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "WebSourceConfiguration"}
 	if v.UrlConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UrlConfiguration"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWeeklySchedule(v *types.WeeklySchedule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WeeklySchedule"}
+	if len(v.DayOfWeek) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DayOfWeek"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

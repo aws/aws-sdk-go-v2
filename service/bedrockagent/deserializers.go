@@ -17526,6 +17526,37 @@ func awsRestjson1_deserializeDocumentCyclicConnectionFlowValidationDetails(v **t
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDailySchedule(v **types.DailySchedule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DailySchedule
+	if *v == nil {
+		sv = &types.DailySchedule{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDataSource(v **types.DataSource, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17847,6 +17878,62 @@ func awsRestjson1_deserializeDocumentDataSourceSummary(v **types.DataSourceSumma
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDayOfMonth(v *types.DayOfMonth, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.DayOfMonth
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "dayNumber":
+			var mv int32
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DayOfMonthNumber to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				mv = int32(i64)
+			}
+			uv = &types.DayOfMonthMemberDayNumber{Value: mv}
+			break loop
+
+		case "lastDayOfMonth":
+			var mv types.LastDayOfMonth
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentLastDayOfMonth(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DayOfMonthMemberLastDayOfMonth{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -22027,6 +22114,37 @@ func awsRestjson1_deserializeDocumentLambdaFunctionFlowNodeConfiguration(v **typ
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentLastDayOfMonth(v **types.LastDayOfMonth, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LastDayOfMonth
+	if *v == nil {
+		sv = &types.LastDayOfMonth{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentLexFlowNodeConfiguration(v **types.LexFlowNodeConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -22459,6 +22577,11 @@ func awsRestjson1_deserializeDocumentManagedKnowledgeBaseConnectorConfiguration(
 
 		case "mediaExtractionConfiguration":
 			if err := awsRestjson1_deserializeDocumentMediaExtractionConfiguration(&sv.MediaExtractionConfiguration, value); err != nil {
+				return err
+			}
+
+		case "syncSchedule":
+			if err := awsRestjson1_deserializeDocumentSyncSchedule(&sv.SyncSchedule, value); err != nil {
 				return err
 			}
 
@@ -23317,6 +23440,42 @@ func awsRestjson1_deserializeDocumentMongoDbAtlasFieldMapping(v **types.MongoDbA
 					return fmt.Errorf("expected FieldName to be of type string, got %T instead", value)
 				}
 				sv.VectorField = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMonthlySchedule(v **types.MonthlySchedule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MonthlySchedule
+	if *v == nil {
+		sv = &types.MonthlySchedule{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "dayOfMonth":
+			if err := awsRestjson1_deserializeDocumentDayOfMonth(&sv.DayOfMonth, value); err != nil {
+				return err
 			}
 
 		default:
@@ -27883,6 +28042,66 @@ func awsRestjson1_deserializeDocumentSupplementalDataStorageLocations(v *[]types
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSyncSchedule(v *types.SyncSchedule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.SyncSchedule
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "daily":
+			var mv types.DailySchedule
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentDailySchedule(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.SyncScheduleMemberDaily{Value: mv}
+			break loop
+
+		case "monthly":
+			var mv types.MonthlySchedule
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentMonthlySchedule(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.SyncScheduleMemberMonthly{Value: mv}
+			break loop
+
+		case "weekly":
+			var mv types.WeeklySchedule
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentWeeklySchedule(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.SyncScheduleMemberWeekly{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSystemContentBlock(v *types.SystemContentBlock, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -29749,6 +29968,46 @@ func awsRestjson1_deserializeDocumentWebSourceConfiguration(v **types.WebSourceC
 		case "urlConfiguration":
 			if err := awsRestjson1_deserializeDocumentUrlConfiguration(&sv.UrlConfiguration, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWeeklySchedule(v **types.WeeklySchedule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WeeklySchedule
+	if *v == nil {
+		sv = &types.WeeklySchedule{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "dayOfWeek":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DayOfWeek to be of type string, got %T instead", value)
+				}
+				sv.DayOfWeek = types.DayOfWeek(jtv)
 			}
 
 		default:

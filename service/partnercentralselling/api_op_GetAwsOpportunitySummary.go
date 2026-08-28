@@ -107,6 +107,9 @@ type GetAwsOpportunitySummaryOutput struct {
 	// CRM system.
 	RelatedOpportunityId *string
 
+	// Seller-provided PARC deal terms: commitment value, discount, and contract dates.
+	SoftwareRevenue *types.AwsSoftwareRevenue
+
 	// Defines the visibility level for the AWS Opportunity. Use Full visibility for
 	// most cases, while Limited visibility is reserved for special programs or
 	// sensitive opportunities.

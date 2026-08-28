@@ -1,0 +1,8 @@
+{
+    "id": "5511967d-0edf-4eac-9aaf-e82b3b056c76",
+    "type": "feature",
+    "description": "Releasing PARC, new APN Program that lets sellers add solftware revenue details to aws opportunity summary",
+    "modules": [
+        "service/partnercentralselling"
+    ]
+}

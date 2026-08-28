@@ -160,6 +160,7 @@ const (
 	AwsMemberBusinessTitlePdm             AwsMemberBusinessTitle = "PDM"
 	AwsMemberBusinessTitlePsm             AwsMemberBusinessTitle = "PSM"
 	AwsMemberBusinessTitleIsvsm           AwsMemberBusinessTitle = "ISVSM"
+	AwsMemberBusinessTitleSignatory       AwsMemberBusinessTitle = "Signatory"
 )
 
 // Values returns all known values for AwsMemberBusinessTitle. Note that this can
@@ -174,6 +175,7 @@ func (AwsMemberBusinessTitle) Values() []AwsMemberBusinessTitle {
 		"PDM",
 		"PSM",
 		"ISVSM",
+		"Signatory",
 	}
 }
 

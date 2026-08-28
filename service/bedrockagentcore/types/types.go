@@ -1073,6 +1073,24 @@ type ContentDeltaEvent struct {
 	noSmithyDocumentSerde
 }
 
+// The source of the content to ingest. Only inline content is supported.
+//
+// The following types satisfy this interface:
+//
+//	ContentSourceMemberInline
+type ContentSource interface {
+	isContentSource()
+}
+
+// The content included directly in the request.
+type ContentSourceMemberInline struct {
+	Value InlineMemoryContent
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentSourceMemberInline) isContentSource() {}
+
 // An event that signals the start of content streaming from a command execution.
 // This event is sent when the command begins producing output.
 type ContentStartEvent struct {
@@ -3053,6 +3071,35 @@ type HarnessToolUseBlockStart struct {
 	noSmithyDocumentSerde
 }
 
+// A single content payload item to ingest. A payload item contains either
+// conversational or JSON content.
+//
+// The following types satisfy this interface:
+//
+//	IngestPayloadTypeMemberConversational
+//	IngestPayloadTypeMemberJson
+type IngestPayloadType interface {
+	isIngestPayloadType()
+}
+
+// The conversational content for this payload item.
+type IngestPayloadTypeMemberConversational struct {
+	Value Conversational
+
+	noSmithyDocumentSerde
+}
+
+func (*IngestPayloadTypeMemberConversational) isIngestPayloadType() {}
+
+// The JSON content for this payload item.
+type IngestPayloadTypeMemberJson struct {
+	Value MemoryJsonData
+
+	noSmithyDocumentSerde
+}
+
+func (*IngestPayloadTypeMemberJson) isIngestPayloadType() {}
+
 // Inline ground truth data containing assertions, expected trajectories, and
 // per-turn expected responses.
 type InlineGroundTruth struct {
@@ -3066,6 +3113,17 @@ type InlineGroundTruth struct {
 	// A list of per-turn ground truth data, each containing an input prompt and
 	// expected response.
 	Turns []GroundTruthTurn
+
+	noSmithyDocumentSerde
+}
+
+// The content included directly in the request as one or more payload items.
+type InlineMemoryContent struct {
+
+	// The list of content payload items to ingest.
+	//
+	// This member is required.
+	Payload []IngestPayloadType
 
 	noSmithyDocumentSerde
 }
@@ -5883,6 +5941,7 @@ func (*UnknownUnionMember) isBrowserActionResult()                   {}
 func (*UnknownUnionMember) isCertificateLocation()                   {}
 func (*UnknownUnionMember) isCodeInterpreterStreamOutput()           {}
 func (*UnknownUnionMember) isContent()                               {}
+func (*UnknownUnionMember) isContentSource()                         {}
 func (*UnknownUnionMember) isContext()                               {}
 func (*UnknownUnionMember) isDataSourceConfig()                      {}
 func (*UnknownUnionMember) isEvaluationContent()                     {}
@@ -5905,6 +5964,7 @@ func (*UnknownUnionMember) isHarnessSystemContentBlock()             {}
 func (*UnknownUnionMember) isHarnessToolConfiguration()              {}
 func (*UnknownUnionMember) isHarnessToolResultBlockDelta()           {}
 func (*UnknownUnionMember) isHarnessToolResultContentBlock()         {}
+func (*UnknownUnionMember) isIngestPayloadType()                     {}
 func (*UnknownUnionMember) isInvokeAgentRuntimeCommandStreamOutput() {}
 func (*UnknownUnionMember) isInvokeHarnessStreamOutput()             {}
 func (*UnknownUnionMember) isLeftExpression()                        {}

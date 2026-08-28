@@ -2864,6 +2864,65 @@ func TestCheckResponseSnapshot_GetWorkloadAccessTokenForUserId(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_IngestData(t *testing.T) {
+	want := &IngestDataOutput{
+		SessionId: ptr.String("__SessionId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("IngestData.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.IngestData(context.Background(), &IngestDataInput{
+		MemoryId: ptr.String("__MemoryId__"),
+		Source: &types.ContentSourceMemberInline{
+			Value: types.InlineMemoryContent{
+				Payload: []types.IngestPayloadType{
+					&types.IngestPayloadTypeMemberConversational{
+						Value: types.Conversational{
+							Content: &types.ContentMemberText{
+								Value: "__ContentMemberText__",
+							},
+							Role: types.Role("ASSISTANT"),
+						},
+					},
+					&types.IngestPayloadTypeMemberConversational{
+						Value: types.Conversational{
+							Content: &types.ContentMemberText{
+								Value: "__ContentMemberText__",
+							},
+							Role: types.Role("ASSISTANT"),
+						},
+					},
+				},
+			},
+		},
+		ContentTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ActorId:          ptr.String("__ActorId__"),
+		SessionId:        ptr.String("__SessionId__"),
+		ExtractionConfig: &types.ExtractionConfig{
+			NamespaceVariables: map[string]string{
+				"key0": "__Value__",
+			},
+		},
+		Metadata: map[string]types.MetadataValue{
+			"key0": &types.MetadataValueMemberStringValue{
+				Value: "__MetadataValueMemberStringValue__",
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "IngestData.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_InvokeAgentRuntime(t *testing.T) {
 	want := &InvokeAgentRuntimeOutput{
 		RuntimeSessionId:   ptr.String("__RuntimeSessionId__"),

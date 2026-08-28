@@ -26,7 +26,7 @@ func (c *Client) DeleteFHIRDatastore(ctx context.Context, params *DeleteFHIRData
 
 type DeleteFHIRDatastoreInput struct {
 
-	//  The AWS-generated identifier for the data store to be deleted.
+	//  The Amazon Web Services-generated identifier for the data store to be deleted.
 	//
 	// This member is required.
 	DatastoreId *string
@@ -36,17 +36,17 @@ type DeleteFHIRDatastoreInput struct {
 
 type DeleteFHIRDatastoreOutput struct {
 
-	// The Amazon Resource Name (ARN) that grants access permission to AWS HealthLake.
+	// The Amazon Resource Name (ARN) that grants access permission to HealthLake.
 	//
 	// This member is required.
 	DatastoreArn *string
 
-	// The AWS endpoint of the data store to be deleted.
+	// The Amazon Web Services endpoint of the data store to be deleted.
 	//
 	// This member is required.
 	DatastoreEndpoint *string
 
-	// The AWS-generated ID for the deleted data store.
+	// The Amazon Web Services-generated ID for the deleted data store.
 	//
 	// This member is required.
 	DatastoreId *string

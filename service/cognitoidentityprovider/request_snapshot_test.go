@@ -2555,6 +2555,35 @@ func TestCheckRequestSnapshot_DescribeTerms(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeTermsByClient(t *testing.T) {
+	input := &DescribeTermsByClientInput{
+		ClientId:   ptr.String("__ClientId__"),
+		UserPoolId: ptr.String("__UserPoolId__"),
+		TermsName:  ptr.String("__TermsName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTermsByClient(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTermsByClient"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DescribeUserImportJob(t *testing.T) {
 	input := &DescribeUserImportJobInput{
 		UserPoolId: ptr.String("__UserPoolId__"),
@@ -2728,6 +2757,41 @@ func TestCheckRequestSnapshot_ForgotPassword(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ForgotPassword"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetClientToken(t *testing.T) {
+	input := &GetClientTokenInput{
+		ClientId: ptr.String("__ClientId__"),
+		Secret:   ptr.String("__Secret__"),
+		Scopes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetClientToken(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetClientToken"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7240,6 +7304,35 @@ func TestUpdateRequestSnapshot_DescribeTerms(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DescribeTermsByClient(t *testing.T) {
+	input := &DescribeTermsByClientInput{
+		ClientId:   ptr.String("__ClientId__"),
+		UserPoolId: ptr.String("__UserPoolId__"),
+		TermsName:  ptr.String("__TermsName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeTermsByClient(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeTermsByClient"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DescribeUserImportJob(t *testing.T) {
 	input := &DescribeUserImportJobInput{
 		UserPoolId: ptr.String("__UserPoolId__"),
@@ -7413,6 +7506,41 @@ func TestUpdateRequestSnapshot_ForgotPassword(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ForgotPassword"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetClientToken(t *testing.T) {
+	input := &GetClientTokenInput{
+		ClientId: ptr.String("__ClientId__"),
+		Secret:   ptr.String("__Secret__"),
+		Scopes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		ClientMetadata: map[string]string{
+			"key0": "__Value__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetClientToken(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetClientToken"); err != nil {
 		t.Fatal(err)
 	}
 }

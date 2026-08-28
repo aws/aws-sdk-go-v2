@@ -36,6 +36,9 @@ type CreateFHIRDatastoreInput struct {
 	// The analytics configuration for the data store.
 	AnalyticsConfiguration *types.AnalyticsConfiguration
 
+	// The backup configuration for the data store.
+	BackupConfiguration *types.BackupConfiguration
+
 	// An optional user-provided token to ensure API idempotency.
 	ClientToken *string
 
@@ -72,7 +75,7 @@ type CreateFHIRDatastoreOutput struct {
 	// This member is required.
 	DatastoreArn *string
 
-	// The AWS endpoint created for the data store.
+	// The Amazon Web Services endpoint created for the data store.
 	//
 	// This member is required.
 	DatastoreEndpoint *string

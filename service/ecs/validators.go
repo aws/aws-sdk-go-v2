@@ -2041,6 +2041,11 @@ func validateDeploymentConfiguration(v *types.DeploymentConfiguration) error {
 			invalidParams.AddNested("Alarms", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.EarlySuccessCriteria != nil {
+		if err := validateDeploymentEarlySuccessCriteria(v.EarlySuccessCriteria); err != nil {
+			invalidParams.AddNested("EarlySuccessCriteria", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2056,6 +2061,18 @@ func validateDeploymentController(v *types.DeploymentController) error {
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDeploymentEarlySuccessCriteria(v *types.DeploymentEarlySuccessCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeploymentEarlySuccessCriteria"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
