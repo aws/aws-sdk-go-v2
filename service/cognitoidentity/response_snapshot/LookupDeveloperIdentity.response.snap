@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityService.LookupDeveloperIdentity
+
+{"DeveloperUserIdentifierList":["__Member__","__Member__"],"IdentityId":"__IdentityId__","NextToken":"__NextToken__"}

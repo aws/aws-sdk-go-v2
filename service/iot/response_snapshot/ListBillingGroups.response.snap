@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"billingGroups":[{"groupArn":"__GroupArn__","groupName":"__GroupName__"},{"groupArn":"__GroupArn__","groupName":"__GroupName__"}],"nextToken":"__NextToken__"}

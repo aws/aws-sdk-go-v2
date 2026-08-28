@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CrossAccount":true,"Description":"__Description__","DiscovererArn":"__DiscovererArn__","DiscovererId":"__DiscovererId__","SourceArn":"__SourceArn__","State":"STARTED","tags":{"key0":"__Value__"}}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: FmrsService.DescribeLocationFsxOntap
+
+{"CreationTime":946684800,"FsxFilesystemArn":"__FsxFilesystemArn__","LocationArn":"__LocationArn__","LocationUri":"__LocationUri__","Protocol":{"NFS":{"MountOptions":{"Version":"AUTOMATIC"}},"SMB":{"CmkSecretConfig":{"KmsKeyArn":"__KmsKeyArn__","SecretArn":"__SecretArn__"},"CustomSecretConfig":{"SecretAccessRoleArn":"__SecretAccessRoleArn__","SecretArn":"__SecretArn__"},"Domain":"__Domain__","ManagedSecretConfig":{"SecretArn":"__SecretArn__"},"MountOptions":{"Version":"AUTOMATIC"},"Password":"__Password__","User":"__User__"}},"SecurityGroupArns":["__Member__","__Member__"],"StorageVirtualMachineArn":"__StorageVirtualMachineArn__"}

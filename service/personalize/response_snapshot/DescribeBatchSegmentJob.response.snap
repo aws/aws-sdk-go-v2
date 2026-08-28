@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonPersonalize.DescribeBatchSegmentJob
+
+{"batchSegmentJob":{"batchSegmentJobArn":"__BatchSegmentJobArn__","creationDateTime":946684800,"failureReason":"__FailureReason__","filterArn":"__FilterArn__","jobInput":{"s3DataSource":{"kmsKeyArn":"__KmsKeyArn__","path":"__Path__"}},"jobName":"__JobName__","jobOutput":{"s3DataDestination":{"kmsKeyArn":"__KmsKeyArn__","path":"__Path__"}},"lastUpdatedDateTime":946684800,"numResults":1,"roleArn":"__RoleArn__","solutionVersionArn":"__SolutionVersionArn__","status":"__Status__"}}

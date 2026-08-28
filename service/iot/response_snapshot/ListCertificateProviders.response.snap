@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"certificateProviders":[{"certificateProviderArn":"__CertificateProviderArn__","certificateProviderName":"__CertificateProviderName__"},{"certificateProviderArn":"__CertificateProviderArn__","certificateProviderName":"__CertificateProviderName__"}],"nextToken":"__NextToken__"}

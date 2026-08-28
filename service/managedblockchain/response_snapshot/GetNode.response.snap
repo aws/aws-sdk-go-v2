@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Node":{"Arn":"__Arn__","AvailabilityZone":"__AvailabilityZone__","CreationDate":"2000-01-01T00:00:00Z","FrameworkAttributes":{"Ethereum":{"HttpEndpoint":"__HttpEndpoint__","WebSocketEndpoint":"__WebSocketEndpoint__"},"Fabric":{"PeerEndpoint":"__PeerEndpoint__","PeerEventEndpoint":"__PeerEventEndpoint__"}},"Id":"__Id__","InstanceType":"__InstanceType__","KmsKeyArn":"__KmsKeyArn__","LogPublishingConfiguration":{"Fabric":{"ChaincodeLogs":{"Cloudwatch":{"Enabled":true}},"PeerLogs":{"Cloudwatch":{"Enabled":true}}}},"MemberId":"__MemberId__","NetworkId":"__NetworkId__","StateDB":"LevelDB","Status":"CREATING","Tags":{"key0":"__Value__"}}}

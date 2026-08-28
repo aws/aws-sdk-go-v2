@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AttachmentScope":"EMAIL","ExtensionConfiguration":{"AllowedExtensions":[{"Extension":"__Extension__"},{"Extension":"__Extension__"}]},"InstanceId":"__InstanceId__","LastModifiedTime":946684800,"MaximumSizeLimitInBytes":1}

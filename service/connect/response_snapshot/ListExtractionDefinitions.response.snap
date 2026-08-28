@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ExtractionDefinitionSummaryList":[{"CreatedTime":946684800,"ExtractionDefinitionArn":"__ExtractionDefinitionArn__","ExtractionDefinitionId":"__ExtractionDefinitionId__","LastUpdatedBy":"__LastUpdatedBy__","LastUpdatedTime":946684800,"Name":"__Name__"},{"CreatedTime":946684800,"ExtractionDefinitionArn":"__ExtractionDefinitionArn__","ExtractionDefinitionId":"__ExtractionDefinitionId__","LastUpdatedBy":"__LastUpdatedBy__","LastUpdatedTime":946684800,"Name":"__Name__"}],"NextToken":"__NextToken__"}

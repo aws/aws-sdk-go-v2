@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkspacesService.DescribeApplications
+
+{"Applications":[{"ApplicationId":"__ApplicationId__","Created":946684800,"Description":"__Description__","LicenseType":"LICENSED","Name":"__Name__","Owner":"__Owner__","State":"PENDING","SupportedComputeTypeNames":["VALUE","VALUE"],"SupportedOperatingSystemNames":["AMAZON_LINUX_2","AMAZON_LINUX_2"]},{"ApplicationId":"__ApplicationId__","Created":946684800,"Description":"__Description__","LicenseType":"LICENSED","Name":"__Name__","Owner":"__Owner__","State":"PENDING","SupportedComputeTypeNames":["VALUE","VALUE"],"SupportedOperatingSystemNames":["AMAZON_LINUX_2","AMAZON_LINUX_2"]}],"NextToken":"__NextToken__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Message":"__Message__","Version":"__Version__"}

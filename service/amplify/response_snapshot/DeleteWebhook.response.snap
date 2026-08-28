@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"webhook":{"appId":"__AppId__","branchName":"__BranchName__","createTime":946684800,"description":"__Description__","updateTime":946684800,"webhookArn":"__WebhookArn__","webhookId":"__WebhookId__","webhookUrl":"__WebhookUrl__"}}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"metricArn":"__MetricArn__","metricName":"__MetricName__"}

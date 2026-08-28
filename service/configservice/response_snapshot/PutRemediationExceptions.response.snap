@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.PutRemediationExceptions
+
+{"FailedBatches":[{"FailedItems":[{"ConfigRuleName":"__ConfigRuleName__","ExpirationTime":946684800,"Message":"__Message__","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"},{"ConfigRuleName":"__ConfigRuleName__","ExpirationTime":946684800,"Message":"__Message__","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"}],"FailureMessage":"__FailureMessage__"},{"FailedItems":[{"ConfigRuleName":"__ConfigRuleName__","ExpirationTime":946684800,"Message":"__Message__","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"},{"ConfigRuleName":"__ConfigRuleName__","ExpirationTime":946684800,"Message":"__Message__","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"}],"FailureMessage":"__FailureMessage__"}]}

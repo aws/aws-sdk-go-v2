@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.GetContainerServicePowers
+
+{"powers":[{"cpuCount":1,"isActive":true,"name":"__Name__","powerId":"__PowerId__","price":1,"ramSizeInGb":1},{"cpuCount":1,"isActive":true,"name":"__Name__","powerId":"__PowerId__","price":1,"ramSizeInGb":1}]}

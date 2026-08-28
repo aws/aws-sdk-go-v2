@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","permissions":[{"role":"ADMIN","user":{"id":"__Id__","type":"SSO_USER"}},{"role":"ADMIN","user":{"id":"__Id__","type":"SSO_USER"}}]}

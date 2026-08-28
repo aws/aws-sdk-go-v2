@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListSpaces
+
+{"NextToken":"__NextToken__","Spaces":[{"CreationTime":946684800,"DomainId":"__DomainId__","LastModifiedTime":946684800,"OwnershipSettingsSummary":{"OwnerUserProfileName":"__OwnerUserProfileName__"},"SpaceDisplayName":"__SpaceDisplayName__","SpaceName":"__SpaceName__","SpaceSettingsSummary":{"AppType":"JupyterServer","RemoteAccess":"ENABLED","SpaceStorageSettings":{"EbsStorageSettings":{"EbsVolumeSizeInGb":1}}},"SpaceSharingSettingsSummary":{"SharingType":"Private"},"Status":"Deleting"},{"CreationTime":946684800,"DomainId":"__DomainId__","LastModifiedTime":946684800,"OwnershipSettingsSummary":{"OwnerUserProfileName":"__OwnerUserProfileName__"},"SpaceDisplayName":"__SpaceDisplayName__","SpaceName":"__SpaceName__","SpaceSettingsSummary":{"AppType":"JupyterServer","RemoteAccess":"ENABLED","SpaceStorageSettings":{"EbsStorageSettings":{"EbsVolumeSizeInGb":1}}},"SpaceSharingSettingsSummary":{"SharingType":"Private"},"Status":"Deleting"}]}

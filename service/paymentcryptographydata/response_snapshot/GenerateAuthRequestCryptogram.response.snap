@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AuthRequestCryptogram":"__AuthRequestCryptogram__","KeyArn":"__KeyArn__","KeyCheckValue":"__KeyCheckValue__"}

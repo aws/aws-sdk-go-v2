@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"additionalContext":"__Document__","createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","endedAt":"2000-01-01T00:00:00Z","errorDetails":{"code":"__Code__","message":"__Message__"},"estimatedCompletionTime":"2000-01-01T00:00:00Z","id":"__Id__","lastModifiedAt":"2000-01-01T00:00:00Z","lastModifiedBy":"__LastModifiedBy__","name":"__Name__","profileArn":"__ProfileArn__","progress":{"completionPercentage":1,"stepsCompleted":1,"totalSteps":1},"scope":{"goalIds":["__Member__","__Member__"],"items":[{"ids":["__Member__","__Member__"],"pillar":"COST_OPTIMIZATION"},{"ids":["__Member__","__Member__"],"pillar":"COST_OPTIMIZATION"}],"pillars":["COST_OPTIMIZATION","COST_OPTIMIZATION"]},"startedAt":"2000-01-01T00:00:00Z","status":"QUEUED"}

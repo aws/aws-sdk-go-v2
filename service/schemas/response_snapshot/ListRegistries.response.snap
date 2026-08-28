@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","Registries":[{"RegistryArn":"__RegistryArn__","RegistryName":"__RegistryName__","tags":{"key0":"__Value__"}},{"RegistryArn":"__RegistryArn__","RegistryName":"__RegistryName__","tags":{"key0":"__Value__"}}]}

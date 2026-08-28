@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListMlflowTrackingServers
+
+{"NextToken":"__NextToken__","TrackingServerSummaries":[{"CreationTime":946684800,"IsActive":"Active","LastModifiedTime":946684800,"MlflowVersion":"__MlflowVersion__","TrackingServerArn":"__TrackingServerArn__","TrackingServerName":"__TrackingServerName__","TrackingServerStatus":"Creating"},{"CreationTime":946684800,"IsActive":"Active","LastModifiedTime":946684800,"MlflowVersion":"__MlflowVersion__","TrackingServerArn":"__TrackingServerArn__","TrackingServerName":"__TrackingServerName__","TrackingServerStatus":"Creating"}]}

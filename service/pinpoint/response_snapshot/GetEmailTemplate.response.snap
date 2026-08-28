@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Arn":"__Arn__","CreationDate":"__CreationDate__","DefaultSubstitutions":"__DefaultSubstitutions__","Headers":[{"Name":"__Name__","Value":"__Value__"},{"Name":"__Name__","Value":"__Value__"}],"HtmlPart":"__HtmlPart__","LastModifiedDate":"__LastModifiedDate__","RecommenderId":"__RecommenderId__","Subject":"__Subject__","TemplateDescription":"__TemplateDescription__","TemplateName":"__TemplateName__","TemplateType":"EMAIL","TextPart":"__TextPart__","Version":"__Version__","tags":{"key0":"__Value__"}}

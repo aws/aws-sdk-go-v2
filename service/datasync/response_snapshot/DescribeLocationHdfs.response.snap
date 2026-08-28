@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: FmrsService.DescribeLocationHdfs
+
+{"AgentArns":["__Member__","__Member__"],"AuthenticationType":"SIMPLE","BlockSize":1,"CmkSecretConfig":{"KmsKeyArn":"__KmsKeyArn__","SecretArn":"__SecretArn__"},"CreationTime":946684800,"CustomSecretConfig":{"SecretAccessRoleArn":"__SecretAccessRoleArn__","SecretArn":"__SecretArn__"},"KerberosPrincipal":"__KerberosPrincipal__","KmsKeyProviderUri":"__KmsKeyProviderUri__","LocationArn":"__LocationArn__","LocationUri":"__LocationUri__","ManagedSecretConfig":{"SecretArn":"__SecretArn__"},"NameNodes":[{"Hostname":"__Hostname__","Port":1},{"Hostname":"__Hostname__","Port":1}],"QopConfiguration":{"DataTransferProtection":"DISABLED","RpcProtection":"DISABLED"},"ReplicationFactor":1,"SimpleUser":"__SimpleUser__"}

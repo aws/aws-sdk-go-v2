@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AllowedFlowModules":[{"FlowModuleId":"__FlowModuleId__","Type":"MCP"},{"FlowModuleId":"__FlowModuleId__","Type":"MCP"}],"LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"NextToken":"__NextToken__"}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.ListEngagementInvitations
+
+{"EngagementInvitationSummaries":[{"Arn":"__Arn__","Catalog":"__Catalog__","EngagementId":"__EngagementId__","EngagementTitle":"__EngagementTitle__","ExpirationDate":"2000-01-01T00:00:00Z","Id":"__Id__","InvitationDate":"2000-01-01T00:00:00Z","ParticipantType":"SENDER","PayloadType":"OpportunityInvitation","Receiver":{"Account":{"Alias":"__Alias__","AwsAccountId":"__AwsAccountId__"}},"SenderAwsAccountId":"__SenderAwsAccountId__","SenderCompanyName":"__SenderCompanyName__","Status":"ACCEPTED"},{"Arn":"__Arn__","Catalog":"__Catalog__","EngagementId":"__EngagementId__","EngagementTitle":"__EngagementTitle__","ExpirationDate":"2000-01-01T00:00:00Z","Id":"__Id__","InvitationDate":"2000-01-01T00:00:00Z","ParticipantType":"SENDER","PayloadType":"OpportunityInvitation","Receiver":{"Account":{"Alias":"__Alias__","AwsAccountId":"__AwsAccountId__"}},"SenderAwsAccountId":"__SenderAwsAccountId__","SenderCompanyName":"__SenderCompanyName__","Status":"ACCEPTED"}],"NextToken":"__NextToken__"}

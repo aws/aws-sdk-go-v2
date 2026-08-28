@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"botAliasReplicaSummaries":[{"botAliasId":"__BotAliasId__","botAliasReplicationStatus":"Creating","botVersion":"__BotVersion__","creationDateTime":946684800,"failureReasons":["__Member__","__Member__"],"lastUpdatedDateTime":946684800},{"botAliasId":"__BotAliasId__","botAliasReplicationStatus":"Creating","botVersion":"__BotVersion__","creationDateTime":946684800,"failureReasons":["__Member__","__Member__"],"lastUpdatedDateTime":946684800}],"botId":"__BotId__","nextToken":"__NextToken__","replicaRegion":"__ReplicaRegion__","sourceRegion":"__SourceRegion__"}

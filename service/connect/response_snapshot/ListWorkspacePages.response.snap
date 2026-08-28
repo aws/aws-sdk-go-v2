@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","WorkspacePageList":[{"InputData":"__InputData__","Page":"__Page__","ResourceArn":"__ResourceArn__","Slug":"__Slug__"},{"InputData":"__InputData__","Page":"__Page__","ResourceArn":"__ResourceArn__","Slug":"__Slug__"}]}

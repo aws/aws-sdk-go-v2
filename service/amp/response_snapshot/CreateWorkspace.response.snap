@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","kmsKeyArn":"__KmsKeyArn__","status":{"statusCode":"CREATING"},"tags":{"key0":"__Value__"},"workspaceId":"__WorkspaceId__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ExecutionRecords":[{"ObservationId":"__ObservationId__","Record":"__Record__","Status":"PASSED","Timestamp":946684800},{"ObservationId":"__ObservationId__","Record":"__Record__","Status":"PASSED","Timestamp":946684800}],"NextToken":"__NextToken__"}
