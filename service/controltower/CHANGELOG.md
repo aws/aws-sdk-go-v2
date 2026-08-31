@@ -1,3 +1,7 @@
+# v1.35.0 (2026-08-31.2)
+
+* **Feature**: Stop registering the `SetCredentialSourceMiddleware` middleware in generated clients. Credential source user agent features are now set when the client's middleware stack is constructed.
+
 # v1.34.2 (2026-08-31)
 
 * **Documentation**: Updated the descriptions for the AWS Control Tower ListEnabledControls API parameters to make them more accurate and intuitive.

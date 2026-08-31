@@ -1,3 +1,7 @@
+# v1.44.0 (2026-08-31.2)
+
+* **Feature**: Stop registering the `SetCredentialSourceMiddleware` middleware in generated clients. Credential source user agent features are now set when the client's middleware stack is constructed.
+
 # v1.43.0 (2026-08-28.2)
 
 * **Feature**: AgentCore Memory now supports direct ingestion into long-term memory via IngestData API

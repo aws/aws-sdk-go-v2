@@ -1,3 +1,7 @@
+# v1.62.0 (2026-08-31.2)
+
+* **Feature**: Stop registering the `SetCredentialSourceMiddleware` middleware in generated clients. Credential source user agent features are now set when the client's middleware stack is constructed.
+
 # v1.61.0 (2026-08-28.2)
 
 * **Feature**: Adds an optional syncSchedule field to CreateDataSource and UpdateDataSource for Managed Knowledge Bases data source connectors, so a data source can sync automatically on a daily, weekly, or monthly schedule.

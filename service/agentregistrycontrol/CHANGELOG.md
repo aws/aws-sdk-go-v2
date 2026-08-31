@@ -1,3 +1,7 @@
+# v1.4.0 (2026-08-31.2)
+
+* **Feature**: Stop registering the `SetCredentialSourceMiddleware` middleware in generated clients. Credential source user agent features are now set when the client's middleware stack is constructed.
+
 # v1.3.0 (2026-08-31)
 
 * **Feature**: AWS Agent Registry becomes Generally Available

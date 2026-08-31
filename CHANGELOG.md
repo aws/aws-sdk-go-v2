@@ -1,3 +1,13 @@
+# Release (2026-08-31.2)
+
+## General Highlights
+* **Feature**: Stop registering the `SetCredentialSourceMiddleware` middleware in generated clients. Credential source user agent features are now set when the client's middleware stack is constructed.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/agentregistry`: [v1.4.0](service/agentregistry/CHANGELOG.md#v140-2026-08-312)
+  * **Feature**: Release HTTP and AGUI descriptors to the dataplane model
+
 # Release (2026-08-31)
 
 ## Module Highlights

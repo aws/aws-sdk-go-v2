@@ -1,3 +1,7 @@
+# v0.4.2 (2026-08-31.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v0.4.1 (2026-08-28)
 
 * **Bug Fix**: Fix DownloadObject bug so parts can be read to correct offset regardless of parts sizes change

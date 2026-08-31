@@ -1,8 +1,0 @@
-{
-    "id": "c44f776d-1e6e-4350-9ba2-580839ee1e8e",
-    "type": "feature",
-    "description": "Release HTTP and AGUI descriptors to the dataplane model",
-    "modules": [
-        "service/agentregistry"
-    ]
-}

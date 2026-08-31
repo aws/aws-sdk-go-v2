@@ -1,3 +1,7 @@
+# v1.15.0 (2026-08-31.2)
+
+* **Feature**: Stop registering the `SetCredentialSourceMiddleware` middleware in generated clients. Credential source user agent features are now set when the client's middleware stack is constructed.
+
 # v1.14.0 (2026-08-31)
 
 * **Feature**: Adds support for Slack bidirectional communication configuration in AWS DevOps Agent agent spaces.
