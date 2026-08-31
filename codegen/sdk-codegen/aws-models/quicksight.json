@@ -70,7 +70,7 @@
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>Specifies whether ACLs are enabled for the knowledge base.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether ACLs are enabled for the knowledge base.</p>\n         <p>This setting works together with the data source connector's ACL crawling. To enforce document-level access control end to end, set <code>isACLEnabled</code> to <code>true</code> and enable ACL crawling on the connector. For example, for an Amazon S3 data source, set <code>accessControlConfiguration.crawlAcl</code> to <code>true</code> in the connector template. For more information, see <code>KbTemplateConfiguration</code>. Enabling only one of the two settings does not produce a fully ACL-enforced knowledge base.</p>"
                     }
                 }
             },
@@ -2385,6 +2385,92 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.quicksight#AnswerId"
+            }
+        },
+        "com.amazonaws.quicksight#AppId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            }
+        },
+        "com.amazonaws.quicksight#AppName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[\\S\\s]+$"
+            }
+        },
+        "com.amazonaws.quicksight#AppSummary": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.quicksight#AppId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the app.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the app.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#AppName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the app.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.quicksight#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the app was created.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.quicksight#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the app was last updated.</p>"
+                    }
+                },
+                "Visibility": {
+                    "target": "com.amazonaws.quicksight#AppVisibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sharing status of the app: <code>PUBLIC</code> if the app is shared publicly, or <code>PRIVATE</code> if it is private.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of an app, including its identifier, name, and metadata.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AppSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AppSummary"
+            }
+        },
+        "com.amazonaws.quicksight#AppVisibility": {
+            "type": "enum",
+            "members": {
+                "PRIVATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIVATE"
+                    }
+                },
+                "PUBLIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLIC"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The visibility of an app. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PRIVATE</code> – The app is reachable only by authorized Amazon QuickSight principals.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PUBLIC</code> – The published app is reachable by anyone on the internet without signing in.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.quicksight#AppendOperation": {
@@ -13949,7 +14035,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a dataset. This operation doesn't support datasets that include uploaded files\n\t\t\tas a source.</p>",
+                "smithy.api#documentation": "<p>Creates a dataset.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/data-sets",
@@ -15421,7 +15507,7 @@
                 "PrimaryOwnerArn": {
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the primary owner for the knowledge base. The specified user is always granted owner access, regardless of what is specified in the <code>Permissions</code> field. If you don't specify a primary owner, the knowledge base is created without one.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon QuickSight user or group to set as the primary owner of the knowledge base. The specified principal is always granted owner access, regardless of what is specified in the <code>Permissions</code> field.</p>\n         <p>This must be an Amazon QuickSight principal ARN, not an IAM user or role ARN. The API caller is never assigned as the owner automatically. If you don't specify a primary owner and don't grant owner access in <code>Permissions</code>, the knowledge base is created without an owner, even when you call the operation as an Amazon QuickSight user.</p>\n         <p>When you call <code>CreateKnowledgeBase</code> as an IAM user or an assumed IAM role, specify <code>PrimaryOwnerArn</code> (as an Amazon QuickSight principal ARN) or an owner entry in <code>Permissions</code> so that the knowledge base has an owner. Although optional, specifying a primary owner is recommended.</p>"
                     }
                 },
                 "Tags": {
@@ -23972,6 +24058,79 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#DeleteApp": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DeleteAppRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DeleteAppResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an app.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/accounts/{AwsAccountId}/apps/{AppId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteAppRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AppId": {
+                    "target": "com.amazonaws.quicksight#AppId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the app that you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteAppResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#DeleteApprovalPolicy": {
             "type": "operation",
             "input": {
@@ -28383,6 +28542,177 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#DescribeApp": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeAppRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeAppResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an app.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/apps/{AppId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeAppPermissions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeAppPermissionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeAppPermissionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the resource permissions for an app.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/apps/{AppId}/permissions",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeAppPermissionsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AppId": {
+                    "target": "com.amazonaws.quicksight#AppId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeAppPermissionsResponse": {
+            "type": "structure",
+            "members": {
+                "AppId": {
+                    "target": "com.amazonaws.quicksight#AppId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the app.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the app.</p>"
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource permissions for the app.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeAppRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AppId": {
+                    "target": "com.amazonaws.quicksight#AppId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the app that you want to describe.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeAppResponse": {
+            "type": "structure",
+            "members": {
+                "App": {
+                    "target": "com.amazonaws.quicksight#AppSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The information about the app.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#DescribeApprovalPolicy": {
             "type": "operation",
             "input": {
@@ -30014,7 +30344,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a dataset. This operation doesn't support datasets that include uploaded\n\t\t\tfiles as a source.</p>",
+                "smithy.api#documentation": "<p>Describes a dataset.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/data-sets/{DataSetId}",
@@ -44993,7 +45323,7 @@
                 "template": {
                     "target": "com.amazonaws.quicksight#KbTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The connector configuration for the knowledge base data source. The structure depends on the connector type of the data source referenced by <code>DataSourceArn</code>.</p>\n         <p>The template must be a JSON object. The required fields vary by connector type:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Amazon S3</b> (<code>S3V2</code>) – Requires <code>connectionConfiguration</code> with <code>bucketName</code>. Supports <code>filterConfiguration</code> for inclusion and exclusion prefixes and patterns. Supports <code>accessControlConfiguration</code> and <code>deletionProtectionConfiguration</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Google Drive</b> (<code>GOOGLEDRIVEV3</code>) – Requires <code>connectionConfiguration</code> with <code>authType</code> set to <code>SERVICE_ACCOUNT</code>. Supports <code>dataEntityConfiguration</code> with <code>crawlMyDrive</code>, <code>crawlSharedWithMe</code>, and <code>crawlSharedDrives</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>OneDrive</b> (<code>ONEDRIVEV3</code>) – Requires <code>authType</code> at the template root level set to <code>TWO_LEGGED_OAUTH</code>. Requires <code>connectionConfiguration</code> with <code>tenantId</code> in UUID format. Supports <code>dataEntityConfiguration</code> with <code>crawlPersonalDrives</code> and <code>crawlSharedWithMe</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>SharePoint</b> (<code>SHAREPOINTV3</code>) – Requires <code>connectionConfiguration</code> with <code>tenantId</code> in UUID format. Supports <code>dataEntityConfiguration</code> with <code>siteUrls</code>, <code>crawlFiles</code>, and <code>crawlPages</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Web Crawler</b> (<code>WEBCRAWLERV3</code>) – Requires <code>connectionConfiguration</code> with <code>seedUrls</code> or <code>siteMapUrls</code> (mutually exclusive) and <code>authType</code>. Supports <code>crawlConfiguration</code> for crawl depth, rate limits, and scope. Supports <code>filterConfiguration</code> for file size limits and URL patterns. Valid values for <code>authType</code>: <code>NO_AUTH</code>, <code>BASIC_AUTH</code>, <code>FORM</code>, <code>SAML</code>.</p>\n            </li>\n         </ul>\n         <p>The optional <code>deletionProtectionConfiguration</code> object is supported by all connector types. It contains <code>enableDeletionProtection</code> and <code>deletionProtectionThreshold</code>.</p>"
+                        "smithy.api#documentation": "<p>The connector configuration for the knowledge base data source. The structure depends on the connector type of the data source referenced by <code>DataSourceArn</code>.</p>\n         <p>The template must be a JSON object. All connector types share the following top-level keys. The value of <code>type</code> and the contents of <code>connectionConfiguration</code> vary by connector type.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>type</code> – (Required) The connector type of the data source. This value identifies the connector. Valid values: <code>S3V2</code>, <code>WEBCRAWLERV3</code>, <code>GOOGLEDRIVEV3</code>, <code>ONEDRIVEV3</code>, <code>SHAREPOINTV3</code>. For the fields required by each connector, see the connector-specific list that follows.</p>\n            </li>\n            <li>\n               <p>\n                  <code>connectionConfiguration</code> – (Required) The connection details for the data source. The keys in this object vary by connector type; see the connector-specific list that follows.</p>\n            </li>\n            <li>\n               <p>\n                  <code>filterConfiguration</code> – (Optional) Rules that determine which content is crawled, such as inclusion and exclusion prefixes, patterns, or file-size limits.</p>\n            </li>\n            <li>\n               <p>\n                  <code>accessControlConfiguration</code> – (Optional) Document-level access control (ACL) settings. Supported by all connector types except Web Crawler (<code>WEBCRAWLERV3</code>). The available fields depend on the connector type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deletionProtectionConfiguration</code> – (Optional) Deletion-protection settings, supported by all connector types. Contains <code>enableDeletionProtection</code> (Boolean) and <code>deletionProtectionThreshold</code> (String; a value from 1 to 100).</p>\n            </li>\n         </ul>\n         <p>The following list describes the valid <code>type</code> value, the <code>connectionConfiguration</code> contents, and any connector-specific fields for each connector type:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Amazon S3</b> (<code>type</code>: <code>S3V2</code>) – The <code>type</code> value must be <code>S3V2</code>. <code>connectionConfiguration</code> is required and contains:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>bucketName</code> – (Required) The name of the Amazon S3 bucket to crawl. Type: String. Length: 3–63 characters. Pattern: <code>^[a-z0-9][.\\-a-z0-9]{1,61}[a-z0-9]$</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>bucketOwnerAccountId</code> – (Required) The ID of the AWS account that owns the bucket. Type: String. Pattern: <code>^\\d{12}$</code>.</p>\n                  </li>\n               </ul>\n               <p>Amazon S3 supports the following optional <code>filterConfiguration</code> fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>inclusionPrefixes</code> or <code>exclusionPrefixes</code> – Amazon S3 key prefixes to include or exclude. Type: Array of String. Up to 350 items, each 1–1,024 characters.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>inclusionPatterns</code> or <code>exclusionPatterns</code> – Patterns to include or exclude objects. Type: Array of String. Up to 350 items, each 1–1,024 characters.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>maxFileSizeInMegaBytes</code> – The maximum size, in MB, of a file to ingest. Type: String. Pattern: <code>^\\d+$</code>.</p>\n                  </li>\n               </ul>\n               <p>For Amazon S3, <code>accessControlConfiguration</code> supports the following fields:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>crawlAcl</code> – Specifies whether the connector crawls and enforces document access control lists (ACLs). Type: Boolean. When set to <code>true</code>, provide ACLs either in a global ACL configuration file (<code>aclConfigurationFilePath</code>) or in per-document metadata files.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>aclConfigurationFilePath</code> – The Amazon S3 URI of the global ACL configuration file. Type: String. Length: 1–1,024 characters. Optional. If you don't provide a global ACL configuration file, define ACLs in per-document metadata files.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>defaultAccessType</code> – The access behavior applied to Amazon S3 prefixes that are not listed in the ACL configuration. Type: String. The only supported value is <code>ALLOW</code>.</p>\n                  </li>\n               </ul>\n               <p>\n                  <code>metadataFilesPrefix</code> – (Optional) The Amazon S3 prefix under which per-document metadata files are stored. Each metadata file describes a single source document and its indexable attributes. This is not the global ACL configuration file. For a single global ACL file, use <code>accessControlConfiguration.aclConfigurationFilePath</code>. Type: String. Length: 1–1,024 characters.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Google Drive</b> (<code>type</code>: <code>GOOGLEDRIVEV3</code>) – Requires <code>connectionConfiguration</code> with <code>authType</code> set to <code>SERVICE_ACCOUNT</code>. Supports <code>dataEntityConfiguration</code> with <code>crawlMyDrive</code>, <code>crawlSharedWithMe</code>, and <code>crawlSharedDrives</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>OneDrive</b> (<code>type</code>: <code>ONEDRIVEV3</code>) – Requires <code>authType</code> at the template root level set to <code>TWO_LEGGED_OAUTH</code>. Requires <code>connectionConfiguration</code> with <code>tenantId</code> in UUID format. Supports <code>dataEntityConfiguration</code> with <code>crawlPersonalDrives</code> and <code>crawlSharedWithMe</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>SharePoint</b> (<code>type</code>: <code>SHAREPOINTV3</code>) – Requires <code>connectionConfiguration</code> with <code>tenantId</code> in UUID format. Supports <code>dataEntityConfiguration</code> with <code>siteUrls</code>, <code>crawlFiles</code>, and <code>crawlPages</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Web Crawler</b> (<code>type</code>: <code>WEBCRAWLERV3</code>) – Requires <code>connectionConfiguration</code> with <code>seedUrls</code> or <code>siteMapUrls</code> (mutually exclusive) and <code>authType</code>. Supports <code>crawlConfiguration</code> for crawl depth, rate limits, and scope. Supports <code>filterConfiguration</code> for file size limits and URL patterns. Valid values for <code>authType</code>: <code>NO_AUTH</code>, <code>BASIC_AUTH</code>, <code>FORM</code>, <code>SAML</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Enabling document-level access control for Amazon S3</b>\n         </p>\n         <p>For an Amazon S3 (<code>S3V2</code>) knowledge base, document-level access control is governed by two settings that must both be enabled:</p>\n         <ol>\n            <li>\n               <p>In this template, set <code>accessControlConfiguration.crawlAcl</code> to <code>true</code>. Define ACLs either in a global ACL configuration file, referenced by <code>accessControlConfiguration.aclConfigurationFilePath</code>, or in per-document metadata files. To control access for prefixes that are not listed in the ACL file, you can also set <code>accessControlConfiguration.defaultAccessType</code>.</p>\n            </li>\n            <li>\n               <p>In the <code>CreateKnowledgeBase</code> or <code>UpdateKnowledgeBase</code> request, set the top-level <code>AccessControlConfiguration.isACLEnabled</code> to <code>true</code>.</p>\n            </li>\n         </ol>"
                     }
                 }
             },
@@ -47080,6 +47410,101 @@
                     "target": "com.amazonaws.quicksight#PaginationToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListApps": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#ListAppsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#ListAppsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the apps in an Amazon Web Services account. Results are paginated; use the <code>NextToken</code> parameter to retrieve additional results.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/apps",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "AppSummaryList",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListAppsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the apps.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.quicksight#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single request. Valid range is 1 to 100. If you don't specify a value, the default is 20.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListAppsResponse": {
+            "type": "structure",
+            "members": {
+                "AppSummaryList": {
+                    "target": "com.amazonaws.quicksight#AppSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of app summaries.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
             },
@@ -58248,6 +58673,9 @@
                     "target": "com.amazonaws.quicksight#DeleteAnalysis"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#DeleteApp"
+                },
+                {
                     "target": "com.amazonaws.quicksight#DeleteApprovalPolicy"
                 },
                 {
@@ -58387,6 +58815,12 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#DescribeAnalysisPermissions"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DescribeApp"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DescribeAppPermissions"
                 },
                 {
                     "target": "com.amazonaws.quicksight#DescribeApprovalPolicy"
@@ -58599,6 +59033,9 @@
                     "target": "com.amazonaws.quicksight#ListApprovalPolicies"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#ListApps"
+                },
+                {
                     "target": "com.amazonaws.quicksight#ListAssetBundleExportJobs"
                 },
                 {
@@ -58749,6 +59186,9 @@
                     "target": "com.amazonaws.quicksight#SearchAnalyses"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#SearchApps"
+                },
+                {
                     "target": "com.amazonaws.quicksight#SearchDashboards"
                 },
                 {
@@ -58828,6 +59268,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateApplicationWithTokenExchangeGrant"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateAppPermissions"
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateApprovalPolicy"
@@ -62880,12 +63323,12 @@
                 "MetadataFilesLocation": {
                     "target": "com.amazonaws.quicksight#MetadataFilesLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location of metadata files within the S3 bucket that describe the structure and content of the knowledge base.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 location (prefix) of per-document metadata files. Each metadata file describes a single source document and its indexable attributes, such as title, category, and version. This is not the global ACL configuration file. To apply a single global ACL file to the entire knowledge base, use the access control configuration instead.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The parameters that are required to connect to a S3 Knowledge Base data source.</p>"
+                "smithy.api#documentation": "<p>The parameters that are required to connect to an S3 knowledge base data source.</p>\n         <p>\n            <b>Prerequisites: Amazon S3 bucket access</b>\n         </p>\n         <p>Before you call <code>CreateKnowledgeBase</code> for an Amazon S3 knowledge base, an administrator must grant Amazon QuickSight access to the source S3 bucket. If access has not been granted for the bucket, knowledge base creation fails.</p>\n         <p>To grant access, an administrator adds the bucket in the Amazon QuickSight admin console, under Permissions, Amazon Web Services resources, Amazon S3, Select S3 buckets. This authorizes the Amazon QuickSight service role to read the bucket. The bucket can be in the same Amazon Web Services account or, when the bucket owner has authorized your account, in a different account.</p>\n         <p>The service role requires at least the following permissions on the bucket:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>s3:GetObject</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>s3:ListBucket</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>s3:GetBucketLocation</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>s3:GetObjectVersion</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>s3:ListBucketVersions</code>\n               </p>\n            </li>\n         </ul>\n         <p>For the full procedure, including cross-account buckets and KMS-encrypted buckets, see the Amazon S3 knowledge base administrator setup guide.</p>\n         <note>\n            <p>To grant access for a specific S3 knowledge base data source without granting account-wide S3 access, provide a custom IAM role on the data source by using <code>RoleArn</code>.</p>\n         </note>"
             }
         },
         "com.amazonaws.quicksight#S3Parameters": {
@@ -63767,6 +64210,178 @@
                 },
                 "RequestId": {
                     "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#SearchApps": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#SearchAppsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#SearchAppsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches for apps in an Amazon Web Services account using the specified filters. This operation is eventually consistent; the results might not reflect very recent updates. Results are paginated; use the <code>NextToken</code> parameter to retrieve additional results.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/search/apps",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "AppSummaryList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SearchAppsFilter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.quicksight#SearchAppsFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the filter attribute.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Operator": {
+                    "target": "com.amazonaws.quicksight#FilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison operator for the filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to filter on.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter to apply when searching for apps.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SearchAppsFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SearchAppsFilter"
+            }
+        },
+        "com.amazonaws.quicksight#SearchAppsFilterName": {
+            "type": "enum",
+            "members": {
+                "APP_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APP_ID"
+                    }
+                },
+                "APP_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APP_NAME"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_SOLE_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_SOLE_OWNER"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_OWNER"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The name of a field that you can use to filter app search results. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>APP_ID</code> – The unique identifier of the app.</p>\n            </li>\n            <li>\n               <p>\n                  <code>APP_NAME</code> – The display name of the app.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DIRECT_QUICKSIGHT_SOLE_OWNER</code> – An Amazon QuickSight user or group that is the sole direct owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DIRECT_QUICKSIGHT_OWNER</code> – An Amazon QuickSight user or group with direct owner permissions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DIRECT_QUICKSIGHT_VIEWER_OR_OWNER</code> – An Amazon QuickSight user or group with direct viewer or owner permissions.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.quicksight#SearchAppsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the apps to search.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.quicksight#SearchAppsFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters to apply to the search.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.quicksight#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single request. Valid range is 1 to 100. If you don't specify a value, the default is 20.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#SearchAppsResponse": {
+            "type": "structure",
+            "members": {
+                "AppSummaryList": {
+                    "target": "com.amazonaws.quicksight#AppSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of app summaries that match the search criteria.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
@@ -77326,6 +77941,124 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#UpdateAppPermissions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateAppPermissionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateAppPermissionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the resource permissions for an app. You can grant or revoke permissions and, optionally, change the app's visibility.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/accounts/{AwsAccountId}/apps/{AppId}/permissions",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateAppPermissionsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AppId": {
+                    "target": "com.amazonaws.quicksight#AppId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "GrantPermissions": {
+                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The permissions that you want to grant on the app.</p>"
+                    }
+                },
+                "RevokePermissions": {
+                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The permissions that you want to revoke from the app.</p>"
+                    }
+                },
+                "Visibility": {
+                    "target": "com.amazonaws.quicksight#AppVisibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility to set for the app. Currently, only <code>PRIVATE</code> is accepted, which removes public (anonymous) access from the app. If you don't specify a value, the app's visibility is unchanged. Setting an app to <code>PUBLIC</code> through this operation is not supported.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateAppPermissionsResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the app.</p>"
+                    }
+                },
+                "AppId": {
+                    "target": "com.amazonaws.quicksight#AppId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the app.</p>"
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated resource permissions for the app.</p>"
+                    }
+                },
+                "Visibility": {
+                    "target": "com.amazonaws.quicksight#AppVisibility",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The visibility of the app after the update (<code>PRIVATE</code> or <code>PUBLIC</code>).</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#UpdateApplicationWithTokenExchangeGrant": {
             "type": "operation",
             "input": {
@@ -78512,7 +79245,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a dataset. This operation doesn't support datasets that include uploaded files\n\t\t\tas a source. Partial updates are not supported by this operation.</p>",
+                "smithy.api#documentation": "<p>Updates a dataset. Partial updates are not supported by this operation.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/accounts/{AwsAccountId}/data-sets/{DataSetId}",

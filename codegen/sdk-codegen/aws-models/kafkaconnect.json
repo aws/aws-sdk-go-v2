@@ -379,6 +379,18 @@
                     {
                         "value": "ROLLBACK_COMPLETE",
                         "name": "ROLLBACK_COMPLETE"
+                    },
+                    {
+                        "value": "RESTART_IN_PROGRESS",
+                        "name": "RESTART_IN_PROGRESS"
+                    },
+                    {
+                        "value": "RESTART_COMPLETE",
+                        "name": "RESTART_COMPLETE"
+                    },
+                    {
+                        "value": "RESTART_FAILED",
+                        "name": "RESTART_FAILED"
                     }
                 ]
             }
@@ -514,6 +526,10 @@
                     {
                         "value": "RESTORE_CONNECTOR",
                         "name": "RESTORE_CONNECTOR"
+                    },
+                    {
+                        "value": "RESTART_CONNECTOR",
+                        "name": "RESTART_CONNECTOR"
                     }
                 ]
             }
@@ -541,6 +557,10 @@
                     {
                         "value": "FAILED",
                         "name": "FAILED"
+                    },
+                    {
+                        "value": "RESTARTING",
+                        "name": "RESTARTING"
                     }
                 ]
             }
@@ -2242,6 +2262,9 @@
                     "target": "com.amazonaws.kafkaconnect#ListWorkerConfigurations"
                 },
                 {
+                    "target": "com.amazonaws.kafkaconnect#RestartConnector"
+                },
+                {
                     "target": "com.amazonaws.kafkaconnect#TagResource"
                 },
                 {
@@ -3881,6 +3904,90 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An update to a connector's fixed capacity.</p>"
+            }
+        },
+        "com.amazonaws.kafkaconnect#RestartConnector": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kafkaconnect#RestartConnectorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafkaconnect#RestartConnectorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafkaconnect#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafkaconnect#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafkaconnect#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafkaconnect#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kafkaconnect#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kafkaconnect#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.kafkaconnect#UnauthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Restarts the specified connector. By default, this operation restarts the connector and all of its tasks. This operation is asynchronous and returns a connector operation ARN that you can pass to <code>DescribeConnectorOperation</code> to track the state of the restart.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/connectors/{connectorArn}/restart",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kafkaconnect#RestartConnectorRequest": {
+            "type": "structure",
+            "members": {
+                "connectorArn": {
+                    "target": "com.amazonaws.kafkaconnect#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connector that you want to restart.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "onlyFailedTasks": {
+                    "target": "com.amazonaws.kafkaconnect#__boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether to restart only the connector's failed tasks. If <code>true</code>, the operation restarts only the tasks that are currently in a failed state, and healthy tasks continue running. If <code>false</code> or not specified, the operation restarts the connector and all of its tasks.</p>",
+                        "smithy.api#httpQuery": "onlyFailedTasks"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kafkaconnect#RestartConnectorResponse": {
+            "type": "structure",
+            "members": {
+                "connectorArn": {
+                    "target": "com.amazonaws.kafkaconnect#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connector.</p>"
+                    }
+                },
+                "connectorOperationArn": {
+                    "target": "com.amazonaws.kafkaconnect#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the connector operation created to perform the restart.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kafkaconnect#S3Location": {

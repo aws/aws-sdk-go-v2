@@ -496,6 +496,112 @@
                 "smithy.api#pattern": "^arn:([a-z\\d-]+):profile:.*:.*:.+$"
             }
         },
+        "com.amazonaws.customerprofiles#AssociateStreamForSegments": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#AssociateStreamForSegmentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#AssociateStreamForSegmentsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates an Amazon Kinesis data stream to receive segment membership events for a given\n         domain. This is a domain-level configuration that applies to all segment\n         subscriptions within the domain. A domain can have only one associated stream at a time.\n      </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/segment-streams",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#AssociateStreamForSegmentsRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationArn": {
+                    "target": "com.amazonaws.customerprofiles#DestinationArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Kinesis data stream to deliver segment membership events to.\n         For example, <code>arn:aws:kinesis:region:account-id:stream/stream-name</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationRoleArn": {
+                    "target": "com.amazonaws.customerprofiles#DestinationRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that allows Customer Profiles service principal to assume the role for\n         conducting AWS Key Management Service (KMS) and Amazon Kinesis operations. The role must grant the following\n         Amazon Kinesis permissions to deliver segment membership events to the stream: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>kinesis:PutRecord</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>kinesis:PutRecords</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>kinesis:DescribeStream</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#AssociateStreamForSegmentsResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#AssociatedSegment": {
+            "type": "structure",
+            "members": {
+                "SegmentName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the segment definition. </p>",
+                        "smithy.api#jsonName": "SegmentName"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.customerprofiles#EventSubscriptionSegmentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subscription status of the segment. The following are valid values: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>STARTING</b>: The segment is being prepared to publish\n               membership events. </p>\n            </li>\n            <li>\n               <p>\n                  <b>RUNNING</b>: The segment is actively publishing\n               membership events to the stream. </p>\n            </li>\n            <li>\n               <p>\n                  <b>STOPPED</b>: The segment has stopped publishing\n               membership events. </p>\n            </li>\n            <li>\n               <p>\n                  <b>FAILED</b>: The segment failed to publish membership\n               events. </p>\n            </li>\n         </ul>",
+                        "smithy.api#jsonName": "Status"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#string1To1000",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional message providing context, such as a failure reason. </p>",
+                        "smithy.api#jsonName": "Message"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a segment associated with a membership event stream. </p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#AssociatedSegmentsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#AssociatedSegment"
+            }
+        },
         "com.amazonaws.customerprofiles#AttributeDetails": {
             "type": "structure",
             "members": {
@@ -533,7 +639,7 @@
                 "Values": {
                     "target": "com.amazonaws.customerprofiles#Values",
                     "traits": {
-                        "smithy.api#documentation": "<p>The values to apply the DimensionType on.</p>",
+                        "smithy.api#documentation": "<p>The values to apply the DimensionType on. To reference a calculated attribute or profile\n         attribute as a dynamic value, use handlebar notation:\n         <code>{{_profile.ProfileAttributeName}}</code> or\n         <code>{{_calculated_attribute.CalculatedAttributeName}}</code>.</p>",
                         "smithy.api#jsonName": "Values",
                         "smithy.api#required": {}
                     }
@@ -634,6 +740,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "EQUAL"
+                    }
+                },
+                "LIST_CONTAINS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LIST_CONTAINS"
+                    }
+                },
+                "LIST_CONTAINS_ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LIST_CONTAINS_ALL"
                     }
                 }
             }
@@ -1330,7 +1448,7 @@
                 "Values": {
                     "target": "com.amazonaws.customerprofiles#Values",
                     "traits": {
-                        "smithy.api#documentation": "<p>The values to apply the DimensionType with.</p>",
+                        "smithy.api#documentation": "<p>The values to apply the DimensionType with. To reference a calculated attribute or\n         profile attribute as a dynamic value, use handlebar notation:\n         <code>{{_profile.ProfileAttributeName}}</code> or\n         <code>{{_calculated_attribute.CalculatedAttributeName}}</code>.</p>",
                         "smithy.api#jsonName": "Values",
                         "smithy.api#required": {}
                     }
@@ -3750,6 +3868,9 @@
                     "target": "com.amazonaws.customerprofiles#AddProfileKey"
                 },
                 {
+                    "target": "com.amazonaws.customerprofiles#AssociateStreamForSegments"
+                },
+                {
                     "target": "com.amazonaws.customerprofiles#BatchGetCalculatedAttributeForProfile"
                 },
                 {
@@ -3846,10 +3967,16 @@
                     "target": "com.amazonaws.customerprofiles#DeleteSegmentDefinition"
                 },
                 {
+                    "target": "com.amazonaws.customerprofiles#DeleteSegmentSubscription"
+                },
+                {
                     "target": "com.amazonaws.customerprofiles#DeleteWorkflow"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#DetectProfileObjectType"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#DisassociateStreamForSegments"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#GetAutoMergingPreview"
@@ -3921,7 +4048,13 @@
                     "target": "com.amazonaws.customerprofiles#GetSegmentSnapshot"
                 },
                 {
+                    "target": "com.amazonaws.customerprofiles#GetSegmentSubscription"
+                },
+                {
                     "target": "com.amazonaws.customerprofiles#GetSimilarProfiles"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#GetStreamForSegments"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#GetUploadJob"
@@ -4005,6 +4138,9 @@
                     "target": "com.amazonaws.customerprofiles#ListSegmentDefinitions"
                 },
                 {
+                    "target": "com.amazonaws.customerprofiles#ListSegmentSubscriptionEvents"
+                },
+                {
                     "target": "com.amazonaws.customerprofiles#ListTagsForResource"
                 },
                 {
@@ -4027,6 +4163,9 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#PutProfileObjectType"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#PutSegmentSubscription"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#SearchProfiles"
@@ -5061,7 +5200,7 @@
                 "Values": {
                     "target": "com.amazonaws.customerprofiles#DateValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The values to apply the DimensionType on.</p>",
+                        "smithy.api#documentation": "<p>The values to apply the DimensionType on. To reference a calculated attribute or profile\n         attribute as a dynamic value, use handlebar notation:\n         <code>{{_profile.ProfileAttributeName}}</code> or\n         <code>{{_calculated_attribute.CalculatedAttributeName}}</code>.</p>",
                         "smithy.api#jsonName": "Values",
                         "smithy.api#required": {}
                     }
@@ -6198,6 +6337,80 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#DeleteSegmentSubscription": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#DeleteSegmentSubscriptionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#DeleteSegmentSubscriptionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a segment subscription for membership events. All active event notifications for\n         this segment are stopped. </p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/domains/{DomainName}/segment-definitions/{SegmentDefinitionName}/subscriptions",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteSegmentSubscriptionRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SegmentDefinitionName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the segment definition. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteSegmentSubscriptionResponse": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#string1To1000",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A confirmation message indicating the subscription was deleted successfully. </p>",
+                        "smithy.api#jsonName": "Message"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.customerprofiles#DeleteWorkflow": {
             "type": "operation",
             "input": {
@@ -6263,6 +6476,15 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#DestinationArnString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#DestinationField": {
             "type": "string",
             "traits": {
@@ -6271,6 +6493,16 @@
                     "max": 256
                 },
                 "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.customerprofiles#DestinationRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "arn:aws:iam:.*:[0-9]+:"
             }
         },
         "com.amazonaws.customerprofiles#DestinationSummary": {
@@ -6430,6 +6662,72 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.customerprofiles#Dimension"
+            }
+        },
+        "com.amazonaws.customerprofiles#DisassociateStreamForSegments": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#DisassociateStreamForSegmentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#DisassociateStreamForSegmentsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates the Amazon Kinesis data stream configured for segment membership events. All\n         active segment subscriptions delivering events to this stream are eventually stopped. </p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/domains/{DomainName}/segment-streams",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#DisassociateStreamForSegmentsRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#DisassociateStreamForSegmentsResponse": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#string1To1000",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A confirmation message indicating the stream was disassociated successfully. </p>",
+                        "smithy.api#jsonName": "Message"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.customerprofiles#DiversityCapType": {
@@ -6956,6 +7254,58 @@
                 "target": "com.amazonaws.customerprofiles#EventStreamSummary"
             }
         },
+        "com.amazonaws.customerprofiles#EventSubscriptionSegmentStatus": {
+            "type": "enum",
+            "members": {
+                "STARTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTING"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#EventSubscriptionState": {
+            "type": "enum",
+            "members": {
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "UNHEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNHEALTHY"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#EventTriggerCondition": {
             "type": "structure",
             "members": {
@@ -7195,7 +7545,7 @@
                 "Values": {
                     "target": "com.amazonaws.customerprofiles#ExtraLengthValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The values to apply the DimensionType on.</p>",
+                        "smithy.api#documentation": "<p>The values to apply the DimensionType on. To reference a calculated attribute or profile\n         attribute as a dynamic value, use handlebar notation:\n         <code>{{_profile.ProfileAttributeName}}</code> or\n         <code>{{_calculated_attribute.CalculatedAttributeName}}</code>.</p>",
                         "smithy.api#jsonName": "Values",
                         "smithy.api#required": {}
                     }
@@ -10600,6 +10950,115 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#GetSegmentSubscription": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#GetSegmentSubscriptionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#GetSegmentSubscriptionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the current subscription configuration, execution schedule, and status for\n         segment membership events. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/segment-definitions/{SegmentDefinitionName}/subscriptions",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetSegmentSubscriptionRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SegmentDefinitionName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the segment definition. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetSegmentSubscriptionResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.customerprofiles#SegmentSubscriptionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current lifecycle status of the subscription. The following are valid values: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>STARTING</b>: Initial snapshot is in progress. </p>\n            </li>\n            <li>\n               <p>\n                  <b>RUNNING</b>: Notifications are active and running.\n            </p>\n            </li>\n            <li>\n               <p>\n                  <b>STOPPED</b>: Notifications have been stopped. </p>\n            </li>\n            <li>\n               <p>\n                  <b>FAILED</b>: Notifications failed (for example, the\n               Amazon Kinesis data stream became inaccessible). </p>\n            </li>\n         </ul>",
+                        "smithy.api#jsonName": "Status"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#string1To1000",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A status message providing additional context, such as a failure reason. </p>",
+                        "smithy.api#jsonName": "Message"
+                    }
+                },
+                "ScheduleConfiguration": {
+                    "target": "com.amazonaws.customerprofiles#ScheduleConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schedule configuration for periodic membership event notifications. </p>",
+                        "smithy.api#jsonName": "ScheduleConfiguration"
+                    }
+                },
+                "ScheduledExecutions": {
+                    "target": "com.amazonaws.customerprofiles#ScheduledExecutions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about scheduled execution timestamps. </p>",
+                        "smithy.api#jsonName": "ScheduledExecutions"
+                    }
+                },
+                "StartedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the subscription was first started. </p>",
+                        "smithy.api#jsonName": "StartedAt"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the most recent configuration change. </p>",
+                        "smithy.api#jsonName": "LastUpdatedAt"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.customerprofiles#GetSimilarProfiles": {
             "type": "operation",
             "input": {
@@ -10728,6 +11187,121 @@
                     "target": "com.amazonaws.customerprofiles#token",
                     "traits": {
                         "smithy.api#documentation": "<p>The pagination token from the previous <code>GetSimilarProfiles</code> API call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetStreamForSegments": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#GetStreamForSegmentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#GetStreamForSegmentsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about the segment membership event stream configured for a specific\n         domain, including the stream state and associated segments. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/segment-streams",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetStreamForSegmentsRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetStreamForSegmentsResponse": {
+            "type": "structure",
+            "members": {
+                "AssociatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the stream was associated. </p>",
+                        "smithy.api#jsonName": "AssociatedAt"
+                    }
+                },
+                "AssociatedSegments": {
+                    "target": "com.amazonaws.customerprofiles#AssociatedSegmentsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of segments currently associated with the stream and their subscription status.\n      </p>",
+                        "smithy.api#jsonName": "AssociatedSegments"
+                    }
+                },
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#jsonName": "DomainName"
+                    }
+                },
+                "DestinationArn": {
+                    "target": "com.amazonaws.customerprofiles#DestinationArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Kinesis data stream receiving segment membership events. </p>",
+                        "smithy.api#jsonName": "DestinationArn"
+                    }
+                },
+                "DestinationRoleArn": {
+                    "target": "com.amazonaws.customerprofiles#DestinationRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role used for Amazon Kinesis and AWS Key Management Service (KMS) operations. </p>",
+                        "smithy.api#jsonName": "DestinationRoleArn"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.customerprofiles#EventSubscriptionState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operational state of the destination stream. The following are valid values: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>RUNNING</b>: The stream is associated and healthy.\n               Segment membership events are being published. </p>\n            </li>\n            <li>\n               <p>\n                  <b>UNHEALTHY</b>: The stream is associated but events\n               cannot currently be published. See <code>FailureReason</code> for details. </p>\n            </li>\n            <li>\n               <p>\n                  <b>STOPPED</b>: The stream is no longer publishing\n               segment membership events. </p>\n            </li>\n         </ul>",
+                        "smithy.api#jsonName": "State"
+                    }
+                },
+                "DisassociatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the stream was disassociated. </p>",
+                        "smithy.api#jsonName": "DisassociatedAt"
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason why the stream is in an unhealthy state, if applicable. </p>",
+                        "smithy.api#jsonName": "FailureReason"
                     }
                 }
             },
@@ -11467,6 +12041,15 @@
                 "smithy.api#documentation": "<p>An internal service error occurred.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.customerprofiles#IntervalValue": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 24
+                }
             }
         },
         "com.amazonaws.customerprofiles#JobSchedule": {
@@ -14094,6 +14677,107 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#ListSegmentSubscriptionEvents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#ListSegmentSubscriptionEventsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#ListSegmentSubscriptionEventsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the most recent membership events for a segment. Each event represents a profile\n         that entered or exited the segment. </p>\n         <p>This operation is paginated. </p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/segment-definitions/{SegmentDefinitionName}/subscription-events",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Events",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#ListSegmentSubscriptionEventsRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SegmentDefinitionName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the segment definition. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.customerprofiles#maxSize100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of events to return per page. </p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from the previous call to retrieve the next page of results. </p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#ListSegmentSubscriptionEventsResponse": {
+            "type": "structure",
+            "members": {
+                "Events": {
+                    "target": "com.amazonaws.customerprofiles#SubscriptionEventsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of segment membership events. </p>",
+                        "smithy.api#jsonName": "Events"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results. </p>",
+                        "smithy.api#jsonName": "NextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.customerprofiles#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -15673,7 +16357,7 @@
                 "Values": {
                     "target": "com.amazonaws.customerprofiles#Values",
                     "traits": {
-                        "smithy.api#documentation": "<p>The values to apply the DimensionType on.</p>",
+                        "smithy.api#documentation": "<p>The values to apply the DimensionType on. To reference a calculated attribute or profile\n         attribute as a dynamic value, use handlebar notation:\n         <code>{{_profile.ProfileAttributeName}}</code> or\n         <code>{{_calculated_attribute.CalculatedAttributeName}}</code>.</p>",
                         "smithy.api#jsonName": "Values",
                         "smithy.api#required": {}
                     }
@@ -16566,6 +17250,100 @@
                     "target": "com.amazonaws.customerprofiles#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#PutSegmentSubscription": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#PutSegmentSubscriptionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#PutSegmentSubscriptionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates or updates a segment subscription for membership events. When a subscription is\n         created, an initial snapshot is taken and the system begins monitoring for membership\n         changes. </p>\n         <p>You can optionally set a schedule configuration interval to control how often membership\n         snapshots are run. The interval can be from 1 to 24 hours. If not set, the interval defaults\n         to 24 hours. Scheduled snapshots run on\n         a best-effort basis. If a scheduled snapshot takes longer than the configured interval, the\n         next scheduled run does not start until the in-progress snapshot completes, so a run might\n         be delayed or skipped and is not guaranteed to occur at exactly the requested time. </p>\n         <p>For Classic segments, membership events are generated from these scheduled snapshots and\n         also in near real-time as profile attribute changes occur. For SQL segments, membership\n         events are generated only from the scheduled snapshots. </p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/domains/{DomainName}/segment-definitions/{SegmentDefinitionName}/subscriptions",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#PutSegmentSubscriptionRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SegmentDefinitionName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the segment definition. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScheduleConfiguration": {
+                    "target": "com.amazonaws.customerprofiles#ScheduleConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional schedule configuration that controls how often membership snapshots are run.\n         If not provided, the subscription defaults to a 24-hour interval. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#PutSegmentSubscriptionResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.customerprofiles#SegmentSubscriptionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current lifecycle status of the subscription. The following are valid values: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>STARTING</b>: Initial snapshot is in progress. </p>\n            </li>\n            <li>\n               <p>\n                  <b>RUNNING</b>: Notifications are active and running.\n            </p>\n            </li>\n            <li>\n               <p>\n                  <b>STOPPED</b>: Notifications have been stopped. </p>\n            </li>\n            <li>\n               <p>\n                  <b>FAILED</b>: Notifications failed (for example, the\n               Amazon Kinesis data stream became inaccessible). </p>\n            </li>\n         </ul>",
+                        "smithy.api#jsonName": "Status"
+                    }
+                },
+                "ScheduleConfiguration": {
+                    "target": "com.amazonaws.customerprofiles#ScheduleConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schedule configuration for the subscription, if configured. </p>",
+                        "smithy.api#jsonName": "ScheduleConfiguration"
+                    }
+                },
+                "StartedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the subscription was started. </p>",
+                        "smithy.api#jsonName": "StartedAt"
                     }
                 }
             },
@@ -17958,6 +18736,40 @@
                 "smithy.api#documentation": "<p>The properties that are applied when Salesforce is being used as a source.</p>"
             }
         },
+        "com.amazonaws.customerprofiles#ScheduleConfiguration": {
+            "type": "structure",
+            "members": {
+                "Interval": {
+                    "target": "com.amazonaws.customerprofiles#IntervalValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The interval between scheduled executions. </p>",
+                        "smithy.api#jsonName": "Interval",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Unit": {
+                    "target": "com.amazonaws.customerprofiles#ScheduleConfigurationUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit for the interval. The following are valid values: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>HOURLY</b>: The interval is measured in hours. </p>\n            </li>\n         </ul>",
+                        "smithy.api#jsonName": "Unit"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for scheduled segment membership event notifications. </p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#ScheduleConfigurationUnit": {
+            "type": "enum",
+            "members": {
+                "HOURLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HOURLY"
+                    }
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#ScheduleExpression": {
             "type": "string",
             "traits": {
@@ -17976,6 +18788,28 @@
                     "min": 0,
                     "max": 36000
                 }
+            }
+        },
+        "com.amazonaws.customerprofiles#ScheduledExecutions": {
+            "type": "structure",
+            "members": {
+                "NextExecutedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the next scheduled execution. </p>",
+                        "smithy.api#jsonName": "NextExecutedAt"
+                    }
+                },
+                "LastExecutedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the last successful scheduled execution. </p>",
+                        "smithy.api#jsonName": "LastExecutedAt"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about scheduled execution timestamps. </p>"
             }
         },
         "com.amazonaws.customerprofiles#ScheduledTriggerProperties": {
@@ -18355,6 +19189,35 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DESC"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#SegmentSubscriptionStatus": {
+            "type": "enum",
+            "members": {
+                "STARTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTING"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
                     }
                 }
             }
@@ -19038,6 +19901,12 @@
                     "traits": {
                         "smithy.api#enumValue": "MAX_OCCURRENCE"
                     }
+                },
+                "RECENT_OCCURRENCES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECENT_OCCURRENCES"
+                    }
                 }
             },
             "traits": {
@@ -19277,6 +20146,82 @@
                         "smithy.api#enumValue": "ENDS_WITH"
                     }
                 }
+            }
+        },
+        "com.amazonaws.customerprofiles#SubscriptionEvent": {
+            "type": "enum",
+            "members": {
+                "JOINED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JOINED"
+                    }
+                },
+                "LEFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LEFT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#SubscriptionEventItem": {
+            "type": "structure",
+            "members": {
+                "ProfileId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a customer profile.</p>",
+                        "smithy.api#jsonName": "ProfileId"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the membership change was detected. </p>",
+                        "smithy.api#jsonName": "UpdatedAt"
+                    }
+                },
+                "EventType": {
+                    "target": "com.amazonaws.customerprofiles#SubscriptionEventType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of event that triggered the membership change. The following are valid values:\n      </p>\n         <ul>\n            <li>\n               <p>\n                  <b>LIVE</b>: Real-time event triggered by a profile or\n               calculated attribute change (Classic segments only). </p>\n            </li>\n            <li>\n               <p>\n                  <b>SCHEDULE</b>: Event generated during a scheduled\n               execution. </p>\n            </li>\n         </ul>",
+                        "smithy.api#jsonName": "EventType"
+                    }
+                },
+                "Event": {
+                    "target": "com.amazonaws.customerprofiles#SubscriptionEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the profile joined or left the segment. The following are valid values: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>JOINED</b>: The profile joined the segment. </p>\n            </li>\n            <li>\n               <p>\n                  <b>LEFT</b>: The profile left the segment. </p>\n            </li>\n         </ul>",
+                        "smithy.api#jsonName": "Event"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a single segment membership event. </p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#SubscriptionEventType": {
+            "type": "enum",
+            "members": {
+                "LIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LIVE"
+                    }
+                },
+                "SCHEDULE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCHEDULE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#SubscriptionEventsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#SubscriptionEventItem"
             }
         },
         "com.amazonaws.customerprofiles#TagArn": {

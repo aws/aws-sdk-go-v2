@@ -5,10 +5,16 @@
             "type": "structure",
             "members": {
                 "data": {
-                    "target": "com.amazonaws.agentregistry#DescriptorData"
+                    "target": "com.amazonaws.agentregistry#DescriptorData",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The A2A agent card content, serialized as descriptor payload data.</p>"
+                    }
                 },
                 "dataSchemaVersion": {
-                    "target": "com.amazonaws.agentregistry#DataSchemaVersion"
+                    "target": "com.amazonaws.agentregistry#DataSchemaVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The schema version of the descriptor payload.</p>"
+                    }
                 },
                 "source": {
                     "target": "com.amazonaws.agentregistry#DescriptorSource",
@@ -18,7 +24,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Base mixin for A2A agent card descriptor content</p>"
+                "smithy.api#documentation": "<p> Descriptor that defines the content of an A2A (Agent-to-Agent) agent card registry record. The content is validated against the A2A protocol schema.</p>"
             }
         },
         "com.amazonaws.agentregistry#AccessDeniedException": {
@@ -228,7 +234,10 @@
             "type": "structure",
             "members": {
                 "skillMd": {
-                    "target": "com.amazonaws.agentregistry#AgentSkillsMdDescriptor"
+                    "target": "com.amazonaws.agentregistry#AgentSkillsMdDescriptor",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The agent skills markdown descriptor associated with the agent skills definition.</p>"
+                    }
                 }
             },
             "traits": {
@@ -239,10 +248,16 @@
             "type": "structure",
             "members": {
                 "data": {
-                    "target": "com.amazonaws.agentregistry#DescriptorData"
+                    "target": "com.amazonaws.agentregistry#DescriptorData",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The agent skills definition content, serialized as descriptor payload data.</p>"
+                    }
                 },
                 "dataSchemaVersion": {
-                    "target": "com.amazonaws.agentregistry#DataSchemaVersion"
+                    "target": "com.amazonaws.agentregistry#DataSchemaVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The schema version of the descriptor payload.</p>"
+                    }
                 },
                 "additionalData": {
                     "target": "com.amazonaws.agentregistry#AgentSkillsAdditionalData",
@@ -252,17 +267,23 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Base mixin for agent skills definition descriptor content</p>"
+                "smithy.api#documentation": "<p> Descriptor that defines an agent skills registry record and its associated content.</p>"
             }
         },
         "com.amazonaws.agentregistry#AgentSkillsMdDescriptor": {
             "type": "structure",
             "members": {
                 "data": {
-                    "target": "com.amazonaws.agentregistry#DescriptorData"
+                    "target": "com.amazonaws.agentregistry#DescriptorData",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The agent skills markdown content, serialized as descriptor payload data.</p>"
+                    }
                 },
                 "dataSchemaVersion": {
-                    "target": "com.amazonaws.agentregistry#DataSchemaVersion"
+                    "target": "com.amazonaws.agentregistry#DataSchemaVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The schema version of the descriptor payload.</p>"
+                    }
                 },
                 "source": {
                     "target": "com.amazonaws.agentregistry#DescriptorSource",
@@ -272,7 +293,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Base mixin for agent skills markdown descriptor content</p>"
+                "smithy.api#documentation": "<p> Markdown-format descriptor containing an agent skills document.</p>"
             }
         },
         "com.amazonaws.agentregistry#BatchGetDiscoverableRegistryRecord": {
@@ -340,12 +361,14 @@
                 "registryId": {
                     "target": "com.amazonaws.agentregistry#RegistryIdentifier",
                     "traits": {
+                        "smithy.api#documentation": "<p> The identifier of the registry the record was requested from, echoed from the request.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "recordId": {
                     "target": "com.amazonaws.agentregistry#RecordIdentifier",
                     "traits": {
+                        "smithy.api#documentation": "<p> The identifier of the record that could not be retrieved, echoed from the request in the same format that you supplied (ARN or record ID).</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -441,7 +464,10 @@
             "type": "structure",
             "members": {
                 "data": {
-                    "target": "com.amazonaws.agentregistry#DescriptorData"
+                    "target": "com.amazonaws.agentregistry#DescriptorData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom descriptor content, serialized as descriptor payload data.</p>"
+                    }
                 }
             },
             "traits": {
@@ -491,7 +517,10 @@
             "type": "structure",
             "members": {
                 "fromUrl": {
-                    "target": "com.amazonaws.agentregistry#DescriptorSourceFromUrl"
+                    "target": "com.amazonaws.agentregistry#DescriptorSourceFromUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The URL-based descriptor source, populated when descriptor content is synchronized from a URL.</p>"
+                    }
                 }
             },
             "traits": {
@@ -504,12 +533,13 @@
                 "url": {
                     "target": "com.amazonaws.agentregistry#DescriptorSourceUrl",
                     "traits": {
+                        "smithy.api#documentation": "<p> The URL from which the descriptor content is retrieved.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Base mixin for descriptor source from URL</p>"
+                "smithy.api#documentation": "<p> A URL-based descriptor source that identifies where descriptor content is retrieved from.</p>"
             }
         },
         "com.amazonaws.agentregistry#DescriptorSourceUrl": {
@@ -523,20 +553,43 @@
                 "smithy.api#pattern": "^https://.*$"
             }
         },
+        "com.amazonaws.agentregistry#DescriptorTypeList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.agentregistry#Descriptors": {
             "type": "structure",
             "members": {
                 "mcpServer": {
-                    "target": "com.amazonaws.agentregistry#McpServerDescriptor"
+                    "target": "com.amazonaws.agentregistry#McpServerDescriptor",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The MCP server descriptor, populated when the record type is MCP.</p>"
+                    }
                 },
                 "a2aAgentCard": {
-                    "target": "com.amazonaws.agentregistry#A2aAgentCardDescriptor"
+                    "target": "com.amazonaws.agentregistry#A2aAgentCardDescriptor",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The A2A agent card descriptor, populated when the record type is AGENT.</p>"
+                    }
                 },
                 "agentSkillsDefinition": {
-                    "target": "com.amazonaws.agentregistry#AgentSkillsDefinitionDescriptor"
+                    "target": "com.amazonaws.agentregistry#AgentSkillsDefinitionDescriptor",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The agent skills definition descriptor, populated when the record type is SKILL.</p>"
+                    }
                 },
                 "custom": {
-                    "target": "com.amazonaws.agentregistry#CustomDescriptor"
+                    "target": "com.amazonaws.agentregistry#CustomDescriptor",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The custom descriptor, populated when the record type is CUSTOM.</p>"
+                    }
                 }
             },
             "traits": {
@@ -561,61 +614,82 @@
                 "registryArn": {
                     "target": "com.amazonaws.agentregistry#RegistryArn",
                     "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the parent registry that owns the record.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "recordArn": {
                     "target": "com.amazonaws.agentregistry#RegistryRecordArn",
                     "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the registry record.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "recordId": {
                     "target": "com.amazonaws.agentregistry#RegistryRecordId",
                     "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the registry record.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "name": {
                     "target": "com.amazonaws.agentregistry#RegistryRecordName",
                     "traits": {
+                        "smithy.api#documentation": "<p> The name of the registry record. Names are unique within a registry.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "description": {
-                    "target": "com.amazonaws.agentregistry#Description"
+                    "target": "com.amazonaws.agentregistry#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A human-readable description of the registry record. Use this field to explain the record's purpose or content to consumers discovering it in the registry.</p>"
+                    }
                 },
                 "displayName": {
-                    "target": "com.amazonaws.agentregistry#RegistryRecordDisplayName"
+                    "target": "com.amazonaws.agentregistry#RegistryRecordDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The human-readable display name of the registry record.</p>"
+                    }
                 },
                 "recordType": {
                     "target": "com.amazonaws.agentregistry#RecordType",
                     "traits": {
+                        "smithy.api#documentation": "<p> The type of the registry record. <code>MCP</code> is a Model Context Protocol server record, <code>AGENT</code> is an Agent-to-Agent (A2A) agent card record, <code>SKILL</code> is an agent skills definition record, and <code>CUSTOM</code> is a record with a custom descriptor.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "recordVersion": {
                     "target": "com.amazonaws.agentregistry#RegistryRecordVersion",
                     "traits": {
+                        "smithy.api#documentation": "<p> The version identifier of the registry record.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.agentregistry#RegistryRecordStatus",
                     "traits": {
+                        "smithy.api#documentation": "<p> The lifecycle status of the registry record. A record is <code>DRAFT</code> before it is submitted, <code>PENDING_APPROVAL</code> while awaiting curator review, and <code>APPROVED</code> once it is approved and discoverable. <code>REJECTED</code> and <code>DEPRECATED</code> records are not discoverable. The <code>CREATING</code>, <code>UPDATING</code>, <code>CREATE_FAILED</code>, and <code>UPDATE_FAILED</code> values reflect the state of an in-progress or failed asynchronous change.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "createdAt": {
                     "target": "com.amazonaws.agentregistry#DateTimestamp",
                     "traits": {
+                        "smithy.api#documentation": "<p> The timestamp when the registry record was created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "updatedAt": {
                     "target": "com.amazonaws.agentregistry#DateTimestamp",
                     "traits": {
+                        "smithy.api#documentation": "<p> The timestamp when the registry record was last updated.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "descriptorTypes": {
+                    "target": "com.amazonaws.agentregistry#DescriptorTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The descriptor types that are present on this registry record. Each value corresponds to a descriptor entry key on the approved record.</p>"
                     }
                 }
             },
@@ -717,6 +791,7 @@
                 "registryId": {
                     "target": "com.amazonaws.agentregistry#RegistryIdentifier",
                     "traits": {
+                        "smithy.api#documentation": "<p> The identifier of the registry whose discoverable records are listed. You can provide either the full Amazon Resource Name (ARN) or the registry ID.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -777,7 +852,10 @@
             "type": "structure",
             "members": {
                 "tools": {
-                    "target": "com.amazonaws.agentregistry#McpToolsDescriptor"
+                    "target": "com.amazonaws.agentregistry#McpToolsDescriptor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MCP tools descriptor that defines the tools exposed by the MCP server.</p>"
+                    }
                 }
             },
             "traits": {
@@ -788,13 +866,22 @@
             "type": "structure",
             "members": {
                 "data": {
-                    "target": "com.amazonaws.agentregistry#DescriptorData"
+                    "target": "com.amazonaws.agentregistry#DescriptorData",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The MCP server descriptor content, serialized as descriptor payload data.</p>"
+                    }
                 },
                 "dataSchemaVersion": {
-                    "target": "com.amazonaws.agentregistry#DataSchemaVersion"
+                    "target": "com.amazonaws.agentregistry#DataSchemaVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The schema version of the descriptor payload.</p>"
+                    }
                 },
                 "additionalData": {
-                    "target": "com.amazonaws.agentregistry#McpServerAdditionalData"
+                    "target": "com.amazonaws.agentregistry#McpServerAdditionalData",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Additional data associated with the MCP server descriptor, such as tool definitions.</p>"
+                    }
                 },
                 "source": {
                     "target": "com.amazonaws.agentregistry#DescriptorSource",
@@ -804,17 +891,23 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Base mixin for MCP server descriptor content</p>"
+                "smithy.api#documentation": "<p> Descriptor that defines the content of an MCP (Model Context Protocol) server registry record, including the server definition and its tool definitions. The content is validated against the MCP protocol schema.</p>"
             }
         },
         "com.amazonaws.agentregistry#McpToolsDescriptor": {
             "type": "structure",
             "members": {
                 "data": {
-                    "target": "com.amazonaws.agentregistry#DescriptorData"
+                    "target": "com.amazonaws.agentregistry#DescriptorData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MCP tools descriptor content, serialized as descriptor payload data.</p>"
+                    }
                 },
                 "dataSchemaVersion": {
-                    "target": "com.amazonaws.agentregistry#DataSchemaVersion"
+                    "target": "com.amazonaws.agentregistry#DataSchemaVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema version of the descriptor payload.</p>"
+                    }
                 }
             },
             "traits": {
@@ -873,6 +966,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "SKILL"
+                    }
+                },
+                "GATEWAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GATEWAY"
                     }
                 }
             },
@@ -1083,36 +1182,47 @@
                 "registryArn": {
                     "target": "com.amazonaws.agentregistry#RegistryArn",
                     "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the parent registry that owns the record.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "recordArn": {
                     "target": "com.amazonaws.agentregistry#RegistryRecordArn",
                     "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the registry record.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "recordId": {
                     "target": "com.amazonaws.agentregistry#RegistryRecordId",
                     "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the registry record.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "name": {
                     "target": "com.amazonaws.agentregistry#RegistryRecordName",
                     "traits": {
+                        "smithy.api#documentation": "<p> The name of the registry record. Names are unique within a registry.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "description": {
-                    "target": "com.amazonaws.agentregistry#Description"
+                    "target": "com.amazonaws.agentregistry#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A human-readable description of the registry record. Use this field to explain the record's purpose or content to consumers discovering it in the registry.</p>"
+                    }
                 },
                 "displayName": {
-                    "target": "com.amazonaws.agentregistry#RegistryRecordDisplayName"
+                    "target": "com.amazonaws.agentregistry#RegistryRecordDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The human-readable display name of the registry record.</p>"
+                    }
                 },
                 "recordType": {
                     "target": "com.amazonaws.agentregistry#RecordType",
                     "traits": {
+                        "smithy.api#documentation": "<p> The type of the registry record. <code>MCP</code> is a Model Context Protocol server record, <code>AGENT</code> is an Agent-to-Agent (A2A) agent card record, <code>SKILL</code> is an agent skills definition record, and <code>CUSTOM</code> is a record with a custom descriptor.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1126,24 +1236,28 @@
                 "recordVersion": {
                     "target": "com.amazonaws.agentregistry#RegistryRecordVersion",
                     "traits": {
+                        "smithy.api#documentation": "<p> The version identifier of the registry record.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.agentregistry#RegistryRecordStatus",
                     "traits": {
+                        "smithy.api#documentation": "<p> The lifecycle status of the registry record. A record is <code>DRAFT</code> before it is submitted, <code>PENDING_APPROVAL</code> while awaiting curator review, and <code>APPROVED</code> once it is approved and discoverable. <code>REJECTED</code> and <code>DEPRECATED</code> records are not discoverable. The <code>CREATING</code>, <code>UPDATING</code>, <code>CREATE_FAILED</code>, and <code>UPDATE_FAILED</code> values reflect the state of an in-progress or failed asynchronous change.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "createdAt": {
                     "target": "com.amazonaws.agentregistry#DateTimestamp",
                     "traits": {
+                        "smithy.api#documentation": "<p> The timestamp when the registry record was created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "updatedAt": {
                     "target": "com.amazonaws.agentregistry#DateTimestamp",
                     "traits": {
+                        "smithy.api#documentation": "<p> The timestamp when the registry record was last updated.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1175,6 +1289,7 @@
                 "registryId": {
                     "target": "com.amazonaws.agentregistry#RegistryIdentifier",
                     "traits": {
+                        "smithy.api#documentation": "<p> The identifier of the registry to retrieve the records from. You can provide either the full Amazon Resource Name (ARN) or the registry ID.</p>",
                         "smithy.api#required": {}
                     }
                 },

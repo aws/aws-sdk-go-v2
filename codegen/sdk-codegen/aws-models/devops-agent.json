@@ -12058,6 +12058,27 @@
                 "smithy.api#pattern": "^(\\*|[a-z]{2,4}(-[a-z]+)+-\\d+)$"
             }
         },
+        "com.amazonaws.devopsagent#SlackBidirectionalConfiguration": {
+            "type": "structure",
+            "members": {
+                "roleArn": {
+                    "target": "com.amazonaws.devopsagent#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>IAM role ARN that AWS DevOps Agent assumes to exchange messages with your Slack workspace on behalf of this association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether bidirectional communication is enabled for this association. When you set this value to true, you can mention the agent in a configured Slack channel and it responds in that channel. When you omit this value or set it to false, the agent ignores mentions and only sends notifications.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for bidirectional Slack communication.</p>"
+            }
+        },
         "com.amazonaws.devopsagent#SlackChannel": {
             "type": "structure",
             "members": {
@@ -12107,6 +12128,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Transmission targets for agent notifications</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "bidirectional": {
+                    "target": "com.amazonaws.devopsagent#SlackBidirectionalConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional bidirectional communication configuration. Supply this configuration and set enabled to true so you can interact with the agent directly from Slack.</p>"
                     }
                 }
             },
