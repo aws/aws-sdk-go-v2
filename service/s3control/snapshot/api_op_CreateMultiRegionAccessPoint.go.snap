@@ -15,7 +15,6 @@ CreateMultiRegionAccessPoint
 		stashOperationInput
 		ContentChecksum
 		ClientRequestID
-		SetCredentialSourceMiddleware
 		UserAgent
 		RecursionDetection
 	Finalize stack step

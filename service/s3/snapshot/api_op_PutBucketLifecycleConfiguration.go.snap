@@ -17,7 +17,6 @@ PutBucketLifecycleConfiguration
 	Build stack step
 		ClientRequestID
 		AWSChecksum:RequestMetricsTracking
-		SetCredentialSourceMiddleware
 		UserAgent
 		RecursionDetection
 	Finalize stack step

@@ -9,7 +9,6 @@ GetObject
 	Build stack step
 		ClientRequestID
 		AWSChecksum:ResponseMetricsTracking
-		SetCredentialSourceMiddleware
 		UserAgent
 		RecursionDetection
 	Finalize stack step

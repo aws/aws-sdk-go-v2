@@ -13,7 +13,6 @@ UpdateStorageLensGroup
 	Build stack step
 		stashOperationInput
 		ClientRequestID
-		SetCredentialSourceMiddleware
 		UserAgent
 		RecursionDetection
 	Finalize stack step

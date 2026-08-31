@@ -7,7 +7,6 @@ DeleteVirtualCluster
 		OperationSerializer
 	Build stack step
 		ClientRequestID
-		SetCredentialSourceMiddleware
 		UserAgent
 		RecursionDetection
 	Finalize stack step

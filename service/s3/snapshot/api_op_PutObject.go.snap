@@ -17,7 +17,6 @@ PutObject
 	Build stack step
 		ClientRequestID
 		AWSChecksum:RequestMetricsTracking
-		SetCredentialSourceMiddleware
 		UserAgent
 		S3100Continue
 		RecursionDetection
