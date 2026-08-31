@@ -40,6 +40,20 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.agentregistry#AgUiDescriptor": {
+            "type": "structure",
+            "members": {
+                "source": {
+                    "target": "com.amazonaws.agentregistry#DescriptorSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The source location of the AG-UI protocol endpoint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> A descriptor for a registry record that exposes an AG-UI protocol endpoint. This descriptor is source-only: it identifies where the endpoint is located and carries no descriptor payload data or schema version.</p>"
+            }
+        },
         "com.amazonaws.agentregistry#AgentRegistry": {
             "type": "service",
             "version": "2025-12-01",
@@ -590,6 +604,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The custom descriptor, populated when the record type is CUSTOM.</p>"
                     }
+                },
+                "http": {
+                    "target": "com.amazonaws.agentregistry#HttpDescriptor",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The HTTP descriptor, populated when the record exposes an HTTP endpoint.</p>"
+                    }
+                },
+                "agui": {
+                    "target": "com.amazonaws.agentregistry#AgUiDescriptor",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The AG-UI descriptor, populated when the record exposes an AG-UI protocol endpoint.</p>"
+                    }
                 }
             },
             "traits": {
@@ -711,6 +737,20 @@
                     "min": 1,
                     "max": 255
                 }
+            }
+        },
+        "com.amazonaws.agentregistry#HttpDescriptor": {
+            "type": "structure",
+            "members": {
+                "source": {
+                    "target": "com.amazonaws.agentregistry#DescriptorSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The source location of the HTTP endpoint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> A descriptor for a registry record that exposes an HTTP endpoint. This descriptor is source-only: it identifies where the endpoint is located and carries no descriptor payload data or schema version.</p>"
             }
         },
         "com.amazonaws.agentregistry#InternalServerException": {
