@@ -1,8 +1,0 @@
-{
-    "id": "605f851a-9112-49b8-a6f7-9abc26a26aa9",
-    "type": "feature",
-    "description": "This release adds support for managing apps in Amazon QuickSight with ListApps, SearchApps, DescribeApp, DescribeAppPermissions, UpdateAppPermissions, and DeleteApp",
-    "modules": [
-        "service/quicksight"
-    ]
-}

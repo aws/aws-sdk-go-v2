@@ -10,7 +10,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.104.1
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.109.1
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.75.1
-	github.com/aws/aws-sdk-go-v2/service/sqs v1.48.1
+	github.com/aws/aws-sdk-go-v2/service/sqs v1.49.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.47.1
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.41.1
 	github.com/aws/smithy-go v1.28.1

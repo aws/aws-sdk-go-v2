@@ -1,3 +1,7 @@
+# v1.27.0 (2026-08-31)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.26.0 (2026-08-28.2)
 
 * **Feature**: Releasing PARC, new APN Program that lets sellers add solftware revenue details to aws opportunity summary

@@ -1,8 +1,0 @@
-{
-    "id": "786693d1-e96a-4b9b-babd-4ef6505a6b90",
-    "type": "feature",
-    "description": "AWS End User Messaging SMS now returns ConditionalBehavior on DescribeRegistrationFieldDefinitions, allowing you to programmatically discover which registration fields are required, optional, or disallowed based on the values of other fields in the same form.",
-    "modules": [
-        "service/pinpointsmsvoicev2"
-    ]
-}

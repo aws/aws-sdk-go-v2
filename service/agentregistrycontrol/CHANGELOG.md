@@ -1,3 +1,7 @@
+# v1.3.0 (2026-08-31)
+
+* **Feature**: AWS Agent Registry becomes Generally Available
+
 # v1.2.1 (2026-08-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

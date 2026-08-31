@@ -1,3 +1,7 @@
+# v1.14.0 (2026-08-31)
+
+* **Feature**: Adds support for Slack bidirectional communication configuration in AWS DevOps Agent agent spaces.
+
 # v1.13.1 (2026-08-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.12.0 (2026-08-31)
+
+* **Feature**: Amazon WorkSpaces Core managed instances now support nested virtualization. Customers can enable nested virtualization with supported instance types at launch via CpuOptions.NestedVirtualization in CreateWorkspaceInstance to run hypervisors and virtual machines inside their WorkSpaces Instance.
+
 # v1.11.1 (2026-08-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

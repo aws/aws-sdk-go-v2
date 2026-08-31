@@ -1,3 +1,7 @@
+# v1.36.0 (2026-08-31)
+
+* **Feature**: AWS End User Messaging SMS now returns ConditionalBehavior on DescribeRegistrationFieldDefinitions, allowing you to programmatically discover which registration fields are required, optional, or disallowed based on the values of other fields in the same form.
+
 # v1.35.1 (2026-08-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

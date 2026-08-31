@@ -1,3 +1,8 @@
+# v1.193.0 (2026-08-31)
+
+* **Feature**: Added support for global routing on Amazon Connect Global Resiliency instances. New APIs GetCrossRegionRouting and UpdateCrossRegionRouting allow you to view and control cross-region contact routing between linked instances, so both Regions are active at all times.
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.192.1 (2026-08-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

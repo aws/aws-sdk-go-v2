@@ -1,3 +1,7 @@
+# v1.127.0 (2026-08-31)
+
+* **Feature**: This release adds support for managing apps in Amazon QuickSight with ListApps, SearchApps, DescribeApp, DescribeAppPermissions, UpdateAppPermissions, and DeleteApp
+
 # v1.126.1 (2026-08-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

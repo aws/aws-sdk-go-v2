@@ -1,3 +1,7 @@
+# v1.71.0 (2026-08-31)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
 # v1.70.0 (2026-08-28.2)
 
 * **Feature**: Adds two new operations - GetClientToken which allows M2M auth through the SDK, and DescribeTermsByClient to find which Terms are associated with a user-pool client without knowing the Terms resource id.

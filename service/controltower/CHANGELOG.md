@@ -1,3 +1,7 @@
+# v1.34.2 (2026-08-31)
+
+* **Documentation**: Updated the descriptions for the AWS Control Tower ListEnabledControls API parameters to make them more accurate and intuitive.
+
 # v1.34.1 (2026-08-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

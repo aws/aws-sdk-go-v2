@@ -1,8 +1,0 @@
-{
-    "id": "ce6999dd-06fe-476b-b719-c91a6dc5f9a0",
-    "type": "feature",
-    "description": "Added support for global routing on Amazon Connect Global Resiliency instances. New APIs GetCrossRegionRouting and UpdateCrossRegionRouting allow you to view and control cross-region contact routing between linked instances, so both Regions are active at all times.",
-    "modules": [
-        "service/connect"
-    ]
-}

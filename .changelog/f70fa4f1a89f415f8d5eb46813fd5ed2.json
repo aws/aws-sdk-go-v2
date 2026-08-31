@@ -1,8 +1,0 @@
-{
-    "id": "f70fa4f1-a89f-415f-8d5e-b46813fd5ed2",
-    "type": "feature",
-    "description": "AWS Agent Registry becomes Generally Available",
-    "modules": [
-        "service/agentregistrycontrol"
-    ]
-}

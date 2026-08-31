@@ -1,3 +1,131 @@
+# Release (2026-08-31)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acm`: [v1.47.0](service/acm/CHANGELOG.md#v1470-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/agentregistry`: [v1.3.0](service/agentregistry/CHANGELOG.md#v130-2026-08-31)
+  * **Feature**: AWS Agent Registry becomes Generally Available
+* `github.com/aws/aws-sdk-go-v2/service/agentregistrycontrol`: [v1.3.0](service/agentregistrycontrol/CHANGELOG.md#v130-2026-08-31)
+  * **Feature**: AWS Agent Registry becomes Generally Available
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.51.0](service/amp/CHANGELOG.md#v1510-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.45.0](service/amplify/CHANGELOG.md#v1450-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.57.0](service/appflow/CHANGELOG.md#v1570-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/apprunner`: [v1.45.0](service/apprunner/CHANGELOG.md#v1450-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.67.0](service/appstream/CHANGELOG.md#v1670-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.63.0](service/athena/CHANGELOG.md#v1630-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.54.0](service/cleanrooms/CHANGELOG.md#v1540-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain`: [v1.34.0](service/cloudsearchdomain/CHANGELOG.md#v1340-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.61.0](service/cloudtrail/CHANGELOG.md#v1610-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/codedeploy`: [v1.41.0](service/codedeploy/CHANGELOG.md#v1410-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentity`: [v1.39.0](service/cognitoidentity/CHANGELOG.md#v1390-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.71.0](service/cognitoidentityprovider/CHANGELOG.md#v1710-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/comprehend`: [v1.46.0](service/comprehend/CHANGELOG.md#v1460-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.71.0](service/configservice/CHANGELOG.md#v1710-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.193.0](service/connect/CHANGELOG.md#v11930-2026-08-31)
+  * **Feature**: Added support for global routing on Amazon Connect Global Resiliency instances. New APIs GetCrossRegionRouting and UpdateCrossRegionRouting allow you to view and control cross-region contact routing between linked instances, so both Regions are active at all times.
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/connectcontactlens`: [v1.40.0](service/connectcontactlens/CHANGELOG.md#v1400-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/connectparticipant`: [v1.42.0](service/connectparticipant/CHANGELOG.md#v1420-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.34.2](service/controltower/CHANGELOG.md#v1342-2026-08-31)
+  * **Documentation**: Updated the descriptions for the AWS Control Tower ListEnabledControls API parameters to make them more accurate and intuitive.
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.68.0](service/customerprofiles/CHANGELOG.md#v1680-2026-08-31)
+  * **Feature**: This release introduces new APIs for segment membership events allowing segment definition membership events to be exported to a kinesis stream for downstream processing. Additionally, includes new calculated attribute statistic and 2 new segment dimension types.
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.64.0](service/datasync/CHANGELOG.md#v1640-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/devopsagent`: [v1.14.0](service/devopsagent/CHANGELOG.md#v1140-2026-08-31)
+  * **Feature**: Adds support for Slack bidirectional communication configuration in AWS DevOps Agent agent spaces.
+* `github.com/aws/aws-sdk-go-v2/service/dsql`: [v1.19.0](service/dsql/CHANGELOG.md#v1190-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/ecrpublic`: [v1.44.0](service/ecrpublic/CHANGELOG.md#v1440-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.67.0](service/emr/CHANGELOG.md#v1670-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/glacier`: [v1.38.0](service/glacier/CHANGELOG.md#v1380-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.41.0](service/grafana/CHANGELOG.md#v1410-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/greengrass`: [v1.38.0](service/greengrass/CHANGELOG.md#v1380-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/greengrassv2`: [v1.48.0](service/greengrassv2/CHANGELOG.md#v1480-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/internetmonitor`: [v1.32.0](service/internetmonitor/CHANGELOG.md#v1320-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.81.0](service/iot/CHANGELOG.md#v1810-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/kafkaconnect`: [v1.36.0](service/kafkaconnect/CHANGELOG.md#v1360-2026-08-31)
+  * **Feature**: Amazon MSK Connect now supports restarting newly created connectors via the asynchronous RestartConnector API. Restart all tasks or only failed tasks, while preserving configuration and committed offsets. This returns a connector operation ARN that you can track with DescribeConnectorOperation.
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.50.0](service/kinesis/CHANGELOG.md#v1500-2026-08-31)
+  * **Feature**: Adds support for data delivery to Amazon S3 Tables (Apache Iceberg) and general purpose Amazon S3 buckets with new CreateChannel, UpdateChannel, DeleteChannel, DescribeChannel, and ListChannels APIs for Amazon Kinesis Data Streams.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.67.0](service/lexmodelsv2/CHANGELOG.md#v1670-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.61.0](service/lightsail/CHANGELOG.md#v1610-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/m2`: [v1.32.0](service/m2/CHANGELOG.md#v1320-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/mailmanager`: [v1.24.0](service/mailmanager/CHANGELOG.md#v1240-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchain`: [v1.37.0](service/managedblockchain/CHANGELOG.md#v1370-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/neptunegraph`: [v1.27.0](service/neptunegraph/CHANGELOG.md#v1270-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.37.0](service/opensearchserverless/CHANGELOG.md#v1370-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.57.0](service/organizations/CHANGELOG.md#v1570-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.27.0](service/partnercentralselling/CHANGELOG.md#v1270-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.33.0](service/paymentcryptographydata/CHANGELOG.md#v1330-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/personalize`: [v1.53.0](service/personalize/CHANGELOG.md#v1530-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/pinpoint`: [v1.45.0](service/pinpoint/CHANGELOG.md#v1450-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.36.0](service/pinpointsmsvoicev2/CHANGELOG.md#v1360-2026-08-31)
+  * **Feature**: AWS End User Messaging SMS now returns ConditionalBehavior on DescribeRegistrationFieldDefinitions, allowing you to programmatically discover which registration fields are required, optional, or disallowed based on the values of other fields in the same form.
+* `github.com/aws/aws-sdk-go-v2/service/pipes`: [v1.29.0](service/pipes/CHANGELOG.md#v1290-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.127.0](service/quicksight/CHANGELOG.md#v11270-2026-08-31)
+  * **Feature**: This release adds support for managing apps in Amazon QuickSight with ListApps, SearchApps, DescribeApp, DescribeAppPermissions, UpdateAppPermissions, and DeleteApp
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.51.0](service/route53resolver/CHANGELOG.md#v1510-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.271.0](service/sagemaker/CHANGELOG.md#v12710-2026-08-31)
+  * **Feature**: Amazon SageMaker Batch Transform now supports G6e instances, powered by NVIDIA L40S Tensor Core GPUs. G6e instances are the most cost-efficient GPU instances for deploying generative AI models and the highest-performance GPU instances for spatial computing workloads.
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/schemas`: [v1.40.0](service/schemas/CHANGELOG.md#v1400-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository`: [v1.36.0](service/serverlessapplicationrepository/CHANGELOG.md#v1360-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/servicequotas`: [v1.40.0](service/servicequotas/CHANGELOG.md#v1400-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.49.0](service/sqs/CHANGELOG.md#v1490-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/support`: [v1.37.0](service/support/CHANGELOG.md#v1370-2026-08-31)
+  * **Feature**: AWS Support now allows up to 10 attachments (150 MB each) per case correspondence, up from 3 at 5 MB. Customers can share large diagnostic logs, heap dumps, and packet captures directly in cases to reduce back-and-forth and speed up resolution. Available in US East, US West, and Europe (Ireland).
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.61.0](service/transcribe/CHANGELOG.md#v1610-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/wellarchitected`: [v1.46.0](service/wellarchitected/CHANGELOG.md#v1460-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.77.0](service/workspaces/CHANGELOG.md#v1770-2026-08-31)
+  * **Feature**: Enable schema-based (de)serialization for this service.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesinstances`: [v1.12.0](service/workspacesinstances/CHANGELOG.md#v1120-2026-08-31)
+  * **Feature**: Amazon WorkSpaces Core managed instances now support nested virtualization. Customers can enable nested virtualization with supported instance types at launch via CpuOptions.NestedVirtualization in CreateWorkspaceInstance to run hypervisors and virtual machines inside their WorkSpaces Instance.
+
 # Release (2026-08-28.2)
 
 ## Module Highlights
