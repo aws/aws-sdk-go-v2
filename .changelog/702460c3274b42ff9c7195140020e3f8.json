@@ -1,0 +1,8 @@
+{
+    "id": "702460c3-274b-42ff-9c71-95140020e3f8",
+    "type": "feature",
+    "description": "AWS Agent Registry becomes Generally Available",
+    "modules": [
+        "service/agentregistry"
+    ]
+}

@@ -60,6 +60,12 @@ type DescribeLimitsOutput struct {
 	// This member is required.
 	ShardLimit *int32
 
+	// The number of channels in the account.
+	ChannelCount *int32
+
+	// The maximum number of channels allowed in the account.
+	ChannelCountLimit *int32
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

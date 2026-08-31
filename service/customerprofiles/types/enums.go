@@ -54,6 +54,8 @@ const (
 	AttributeDimensionTypeGreaterThanOrEqual AttributeDimensionType = "GREATER_THAN_OR_EQUAL"
 	AttributeDimensionTypeLessThanOrEqual    AttributeDimensionType = "LESS_THAN_OR_EQUAL"
 	AttributeDimensionTypeEqual              AttributeDimensionType = "EQUAL"
+	AttributeDimensionTypeListContains       AttributeDimensionType = "LIST_CONTAINS"
+	AttributeDimensionTypeListContainsAll    AttributeDimensionType = "LIST_CONTAINS_ALL"
 )
 
 // Values returns all known values for AttributeDimensionType. Note that this can
@@ -77,6 +79,8 @@ func (AttributeDimensionType) Values() []AttributeDimensionType {
 		"GREATER_THAN_OR_EQUAL",
 		"LESS_THAN_OR_EQUAL",
 		"EQUAL",
+		"LIST_CONTAINS",
+		"LIST_CONTAINS_ALL",
 	}
 }
 
@@ -351,6 +355,51 @@ const (
 func (EventStreamState) Values() []EventStreamState {
 	return []EventStreamState{
 		"RUNNING",
+		"STOPPED",
+	}
+}
+
+type EventSubscriptionSegmentStatus string
+
+// Enum values for EventSubscriptionSegmentStatus
+const (
+	EventSubscriptionSegmentStatusStarting EventSubscriptionSegmentStatus = "STARTING"
+	EventSubscriptionSegmentStatusRunning  EventSubscriptionSegmentStatus = "RUNNING"
+	EventSubscriptionSegmentStatusStopped  EventSubscriptionSegmentStatus = "STOPPED"
+	EventSubscriptionSegmentStatusFailed   EventSubscriptionSegmentStatus = "FAILED"
+)
+
+// Values returns all known values for EventSubscriptionSegmentStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventSubscriptionSegmentStatus) Values() []EventSubscriptionSegmentStatus {
+	return []EventSubscriptionSegmentStatus{
+		"STARTING",
+		"RUNNING",
+		"STOPPED",
+		"FAILED",
+	}
+}
+
+type EventSubscriptionState string
+
+// Enum values for EventSubscriptionState
+const (
+	EventSubscriptionStateRunning   EventSubscriptionState = "RUNNING"
+	EventSubscriptionStateUnhealthy EventSubscriptionState = "UNHEALTHY"
+	EventSubscriptionStateStopped   EventSubscriptionState = "STOPPED"
+)
+
+// Values returns all known values for EventSubscriptionState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventSubscriptionState) Values() []EventSubscriptionState {
+	return []EventSubscriptionState{
+		"RUNNING",
+		"UNHEALTHY",
 		"STOPPED",
 	}
 }
@@ -1132,6 +1181,23 @@ func (SalesforceConnectorOperator) Values() []SalesforceConnectorOperator {
 	}
 }
 
+type ScheduleConfigurationUnit string
+
+// Enum values for ScheduleConfigurationUnit
+const (
+	ScheduleConfigurationUnitHourly ScheduleConfigurationUnit = "HOURLY"
+)
+
+// Values returns all known values for ScheduleConfigurationUnit. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScheduleConfigurationUnit) Values() []ScheduleConfigurationUnit {
+	return []ScheduleConfigurationUnit{
+		"HOURLY",
+	}
+}
+
 type Scope string
 
 // Enum values for Scope
@@ -1209,6 +1275,29 @@ func (SegmentSortOrder) Values() []SegmentSortOrder {
 	return []SegmentSortOrder{
 		"ASC",
 		"DESC",
+	}
+}
+
+type SegmentSubscriptionStatus string
+
+// Enum values for SegmentSubscriptionStatus
+const (
+	SegmentSubscriptionStatusStarting SegmentSubscriptionStatus = "STARTING"
+	SegmentSubscriptionStatusRunning  SegmentSubscriptionStatus = "RUNNING"
+	SegmentSubscriptionStatusStopped  SegmentSubscriptionStatus = "STOPPED"
+	SegmentSubscriptionStatusFailed   SegmentSubscriptionStatus = "FAILED"
+)
+
+// Values returns all known values for SegmentSubscriptionStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SegmentSubscriptionStatus) Values() []SegmentSubscriptionStatus {
+	return []SegmentSubscriptionStatus{
+		"STARTING",
+		"RUNNING",
+		"STOPPED",
+		"FAILED",
 	}
 }
 
@@ -1391,14 +1480,15 @@ type Statistic string
 
 // Enum values for Statistic
 const (
-	StatisticFirstOccurrence Statistic = "FIRST_OCCURRENCE"
-	StatisticLastOccurrence  Statistic = "LAST_OCCURRENCE"
-	StatisticCount           Statistic = "COUNT"
-	StatisticSum             Statistic = "SUM"
-	StatisticMinimum         Statistic = "MINIMUM"
-	StatisticMaximum         Statistic = "MAXIMUM"
-	StatisticAverage         Statistic = "AVERAGE"
-	StatisticMaxOccurrence   Statistic = "MAX_OCCURRENCE"
+	StatisticFirstOccurrence   Statistic = "FIRST_OCCURRENCE"
+	StatisticLastOccurrence    Statistic = "LAST_OCCURRENCE"
+	StatisticCount             Statistic = "COUNT"
+	StatisticSum               Statistic = "SUM"
+	StatisticMinimum           Statistic = "MINIMUM"
+	StatisticMaximum           Statistic = "MAXIMUM"
+	StatisticAverage           Statistic = "AVERAGE"
+	StatisticMaxOccurrence     Statistic = "MAX_OCCURRENCE"
+	StatisticRecentOccurrences Statistic = "RECENT_OCCURRENCES"
 )
 
 // Values returns all known values for Statistic. Note that this can be expanded
@@ -1415,6 +1505,7 @@ func (Statistic) Values() []Statistic {
 		"MAXIMUM",
 		"AVERAGE",
 		"MAX_OCCURRENCE",
+		"RECENT_OCCURRENCES",
 	}
 }
 
@@ -1488,6 +1579,44 @@ func (StringDimensionType) Values() []StringDimensionType {
 		"CONTAINS",
 		"BEGINS_WITH",
 		"ENDS_WITH",
+	}
+}
+
+type SubscriptionEvent string
+
+// Enum values for SubscriptionEvent
+const (
+	SubscriptionEventJoined SubscriptionEvent = "JOINED"
+	SubscriptionEventLeft   SubscriptionEvent = "LEFT"
+)
+
+// Values returns all known values for SubscriptionEvent. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SubscriptionEvent) Values() []SubscriptionEvent {
+	return []SubscriptionEvent{
+		"JOINED",
+		"LEFT",
+	}
+}
+
+type SubscriptionEventType string
+
+// Enum values for SubscriptionEventType
+const (
+	SubscriptionEventTypeLive     SubscriptionEventType = "LIVE"
+	SubscriptionEventTypeSchedule SubscriptionEventType = "SCHEDULE"
+)
+
+// Values returns all known values for SubscriptionEventType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SubscriptionEventType) Values() []SubscriptionEventType {
+	return []SubscriptionEventType{
+		"LIVE",
+		"SCHEDULE",
 	}
 }
 

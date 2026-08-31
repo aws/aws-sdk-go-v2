@@ -3470,6 +3470,26 @@ func (m *validateOpGetContactMetrics) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetCrossRegionRouting struct {
+}
+
+func (*validateOpGetCrossRegionRouting) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCrossRegionRouting) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCrossRegionRoutingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCrossRegionRoutingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetCurrentMetricData struct {
 }
 
@@ -6710,6 +6730,26 @@ func (m *validateOpUpdateContactTaskTemplate) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateCrossRegionRouting struct {
+}
+
+func (*validateOpUpdateCrossRegionRouting) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCrossRegionRouting) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCrossRegionRoutingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCrossRegionRoutingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDataTableAttribute struct {
 }
 
@@ -8462,6 +8502,10 @@ func addOpGetContactMetricsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetContactMetrics{}, middleware.After)
 }
 
+func addOpGetCrossRegionRoutingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCrossRegionRouting{}, middleware.After)
+}
+
 func addOpGetCurrentMetricDataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCurrentMetricData{}, middleware.After)
 }
@@ -9108,6 +9152,10 @@ func addOpUpdateContactScheduleValidationMiddleware(stack *middleware.Stack) err
 
 func addOpUpdateContactTaskTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateContactTaskTemplate{}, middleware.After)
+}
+
+func addOpUpdateCrossRegionRoutingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCrossRegionRouting{}, middleware.After)
 }
 
 func addOpUpdateDataTableAttributeValidationMiddleware(stack *middleware.Stack) error {
@@ -16881,6 +16929,21 @@ func validateOpGetContactMetricsInput(v *GetContactMetricsInput) error {
 	}
 }
 
+func validateOpGetCrossRegionRoutingInput(v *GetCrossRegionRoutingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCrossRegionRoutingInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetCurrentMetricDataInput(v *GetCurrentMetricDataInput) error {
 	if v == nil {
 		return nil
@@ -19972,6 +20035,21 @@ func validateOpUpdateContactTaskTemplateInput(v *UpdateContactTaskTemplateInput)
 	}
 	if v.ContactId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCrossRegionRoutingInput(v *UpdateCrossRegionRoutingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCrossRegionRoutingInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

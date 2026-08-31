@@ -239,6 +239,35 @@ func TestCheckRequestSnapshot_AddProfileKey(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_AssociateStreamForSegments(t *testing.T) {
+	input := &AssociateStreamForSegmentsInput{
+		DomainName:         ptr.String("__DomainName__"),
+		DestinationArn:     ptr.String("__DestinationArn__"),
+		DestinationRoleArn: ptr.String("__DestinationRoleArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateStreamForSegments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateStreamForSegments"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_BatchGetCalculatedAttributeForProfile(t *testing.T) {
 	input := &BatchGetCalculatedAttributeForProfileInput{
 		CalculatedAttributeName: ptr.String("__CalculatedAttributeName__"),
@@ -4321,6 +4350,34 @@ func TestCheckRequestSnapshot_DeleteSegmentDefinition(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DeleteSegmentSubscription(t *testing.T) {
+	input := &DeleteSegmentSubscriptionInput{
+		DomainName:            ptr.String("__DomainName__"),
+		SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteSegmentSubscription(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteSegmentSubscription"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteWorkflow(t *testing.T) {
 	input := &DeleteWorkflowInput{
 		DomainName: ptr.String("__DomainName__"),
@@ -4376,6 +4433,33 @@ func TestCheckRequestSnapshot_DetectProfileObjectType(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DetectProfileObjectType"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DisassociateStreamForSegments(t *testing.T) {
+	input := &DisassociateStreamForSegmentsInput{
+		DomainName: ptr.String("__DomainName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateStreamForSegments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateStreamForSegments"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5101,6 +5185,34 @@ func TestCheckRequestSnapshot_GetSegmentSnapshot(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetSegmentSubscription(t *testing.T) {
+	input := &GetSegmentSubscriptionInput{
+		DomainName:            ptr.String("__DomainName__"),
+		SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetSegmentSubscription(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSegmentSubscription"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetSimilarProfiles(t *testing.T) {
 	input := &GetSimilarProfilesInput{
 		NextToken:   ptr.String("__NextToken__"),
@@ -5129,6 +5241,33 @@ func TestCheckRequestSnapshot_GetSimilarProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSimilarProfiles"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetStreamForSegments(t *testing.T) {
+	input := &GetStreamForSegmentsInput{
+		DomainName: ptr.String("__DomainName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetStreamForSegments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetStreamForSegments"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -5929,6 +6068,36 @@ func TestCheckRequestSnapshot_ListSegmentDefinitions(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ListSegmentSubscriptionEvents(t *testing.T) {
+	input := &ListSegmentSubscriptionEventsInput{
+		DomainName:            ptr.String("__DomainName__"),
+		SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+		MaxResults:            ptr.Int32(1),
+		NextToken:             ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListSegmentSubscriptionEvents(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListSegmentSubscriptionEvents"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListTagsForResource(t *testing.T) {
 	input := &ListTagsForResourceInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -6338,6 +6507,38 @@ func TestCheckRequestSnapshot_PutProfileObjectType(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutProfileObjectType"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_PutSegmentSubscription(t *testing.T) {
+	input := &PutSegmentSubscriptionInput{
+		DomainName:            ptr.String("__DomainName__"),
+		SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+		ScheduleConfiguration: &types.ScheduleConfiguration{
+			Interval: ptr.Int32(1),
+			Unit:     types.ScheduleConfigurationUnit("HOURLY"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutSegmentSubscription(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutSegmentSubscription"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -7139,6 +7340,35 @@ func TestUpdateRequestSnapshot_AddProfileKey(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AddProfileKey"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_AssociateStreamForSegments(t *testing.T) {
+	input := &AssociateStreamForSegmentsInput{
+		DomainName:         ptr.String("__DomainName__"),
+		DestinationArn:     ptr.String("__DestinationArn__"),
+		DestinationRoleArn: ptr.String("__DestinationRoleArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateStreamForSegments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateStreamForSegments"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -11225,6 +11455,34 @@ func TestUpdateRequestSnapshot_DeleteSegmentDefinition(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DeleteSegmentSubscription(t *testing.T) {
+	input := &DeleteSegmentSubscriptionInput{
+		DomainName:            ptr.String("__DomainName__"),
+		SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteSegmentSubscription(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteSegmentSubscription"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteWorkflow(t *testing.T) {
 	input := &DeleteWorkflowInput{
 		DomainName: ptr.String("__DomainName__"),
@@ -11280,6 +11538,33 @@ func TestUpdateRequestSnapshot_DetectProfileObjectType(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DetectProfileObjectType"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DisassociateStreamForSegments(t *testing.T) {
+	input := &DisassociateStreamForSegmentsInput{
+		DomainName: ptr.String("__DomainName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateStreamForSegments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateStreamForSegments"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -12005,6 +12290,34 @@ func TestUpdateRequestSnapshot_GetSegmentSnapshot(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetSegmentSubscription(t *testing.T) {
+	input := &GetSegmentSubscriptionInput{
+		DomainName:            ptr.String("__DomainName__"),
+		SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetSegmentSubscription(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSegmentSubscription"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetSimilarProfiles(t *testing.T) {
 	input := &GetSimilarProfilesInput{
 		NextToken:   ptr.String("__NextToken__"),
@@ -12033,6 +12346,33 @@ func TestUpdateRequestSnapshot_GetSimilarProfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetSimilarProfiles"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetStreamForSegments(t *testing.T) {
+	input := &GetStreamForSegmentsInput{
+		DomainName: ptr.String("__DomainName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetStreamForSegments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetStreamForSegments"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -12833,6 +13173,36 @@ func TestUpdateRequestSnapshot_ListSegmentDefinitions(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ListSegmentSubscriptionEvents(t *testing.T) {
+	input := &ListSegmentSubscriptionEventsInput{
+		DomainName:            ptr.String("__DomainName__"),
+		SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+		MaxResults:            ptr.Int32(1),
+		NextToken:             ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListSegmentSubscriptionEvents(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListSegmentSubscriptionEvents"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_ListTagsForResource(t *testing.T) {
 	input := &ListTagsForResourceInput{
 		ResourceArn: ptr.String("__ResourceArn__"),
@@ -13242,6 +13612,38 @@ func TestUpdateRequestSnapshot_PutProfileObjectType(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutProfileObjectType"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_PutSegmentSubscription(t *testing.T) {
+	input := &PutSegmentSubscriptionInput{
+		DomainName:            ptr.String("__DomainName__"),
+		SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+		ScheduleConfiguration: &types.ScheduleConfiguration{
+			Interval: ptr.Int32(1),
+			Unit:     types.ScheduleConfigurationUnit("HOURLY"),
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.PutSegmentSubscription(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "PutSegmentSubscription"); err != nil {
 		t.Fatal(err)
 	}
 }

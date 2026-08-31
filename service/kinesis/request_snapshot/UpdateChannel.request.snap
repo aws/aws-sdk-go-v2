@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Kinesis_20131202.UpdateChannel
+
+{"ChannelARN":"__ChannelARN__","LoggingConfiguration":{"CloudWatchLogs":{"Enabled":true,"LogGroupName":"__LogGroupName__","LogStreamName":"__LogStreamName__"}},"S3DestinationConfiguration":{"DataFreshnessInSeconds":1},"S3TablesDestinationConfiguration":{"DataFreshnessInSeconds":1}}

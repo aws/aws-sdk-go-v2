@@ -161,6 +161,12 @@ var _DescriptorSourceUrl = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DescriptorSourceUrl",
 }, smithy.ShapeTypeString, 0)
 
+var _DescriptorTypeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistry",
+	Name:      "DescriptorTypeList",
+}, smithy.ShapeTypeList, 1)
+var _DescriptorTypeList_member *smithy.Schema
+
 var _DiscoverableFilterValues = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "DiscoverableFilterValues",
@@ -170,7 +176,7 @@ var _DiscoverableFilterValues_member *smithy.Schema
 var DiscoverableRegistryRecordSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "DiscoverableRegistryRecordSummary",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 12)
 var DiscoverableRegistryRecordSummary_registryArn *smithy.Schema
 
 var DiscoverableRegistryRecordSummary_recordArn *smithy.Schema
@@ -192,6 +198,8 @@ var DiscoverableRegistryRecordSummary_status *smithy.Schema
 var DiscoverableRegistryRecordSummary_createdAt *smithy.Schema
 
 var DiscoverableRegistryRecordSummary_updatedAt *smithy.Schema
+
+var DiscoverableRegistryRecordSummary_descriptorTypes *smithy.Schema
 
 var _DiscoverableRegistryRecordSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
@@ -254,7 +262,7 @@ var _RecordIdentifier = smithy.NewSchema(smithy.ShapeID{
 var RecordType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
 	Name:      "RecordType",
-}, smithy.ShapeTypeEnum, 4)
+}, smithy.ShapeTypeEnum, 5)
 var RecordType_MCP *smithy.Schema
 
 var RecordType_AGENT *smithy.Schema
@@ -262,6 +270,8 @@ var RecordType_AGENT *smithy.Schema
 var RecordType_CUSTOM *smithy.Schema
 
 var RecordType_SKILL *smithy.Schema
+
+var RecordType_GATEWAY *smithy.Schema
 
 var _RegistryArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistry",
@@ -584,6 +594,8 @@ func init() {
 
 	Descriptors_custom = Descriptors.AddMember("custom", CustomDescriptor)
 
+	_DescriptorTypeList_member = _DescriptorTypeList.AddMember("member", smithyprelude.String)
+
 	_DiscoverableFilterValues_member = _DiscoverableFilterValues.AddMember("member", _FilterValue)
 
 	RecordType_MCP = RecordType.AddMember("MCP", smithyprelude.Unit)
@@ -593,6 +605,8 @@ func init() {
 	RecordType_CUSTOM = RecordType.AddMember("CUSTOM", smithyprelude.Unit)
 
 	RecordType_SKILL = RecordType.AddMember("SKILL", smithyprelude.Unit)
+
+	RecordType_GATEWAY = RecordType.AddMember("GATEWAY", smithyprelude.Unit)
 
 	RegistryRecordStatus_DRAFT = RegistryRecordStatus.AddMember("DRAFT", smithyprelude.Unit)
 
@@ -633,6 +647,8 @@ func init() {
 	DiscoverableRegistryRecordSummary_createdAt = DiscoverableRegistryRecordSummary.AddMember("createdAt", _DateTimestamp)
 
 	DiscoverableRegistryRecordSummary_updatedAt = DiscoverableRegistryRecordSummary.AddMember("updatedAt", _DateTimestamp)
+
+	DiscoverableRegistryRecordSummary_descriptorTypes = DiscoverableRegistryRecordSummary.AddMember("descriptorTypes", _DescriptorTypeList)
 
 	_DiscoverableRegistryRecordSummaryList_member = _DiscoverableRegistryRecordSummaryList.AddMember("member", DiscoverableRegistryRecordSummary)
 

@@ -2,6 +2,48 @@
 
 package types
 
+type AgentCoreGatewayProtocolType string
+
+// Enum values for AgentCoreGatewayProtocolType
+const (
+	AgentCoreGatewayProtocolTypeMcp AgentCoreGatewayProtocolType = "MCP"
+)
+
+// Values returns all known values for AgentCoreGatewayProtocolType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentCoreGatewayProtocolType) Values() []AgentCoreGatewayProtocolType {
+	return []AgentCoreGatewayProtocolType{
+		"MCP",
+	}
+}
+
+type AgentCoreRuntimeServerProtocol string
+
+// Enum values for AgentCoreRuntimeServerProtocol
+const (
+	AgentCoreRuntimeServerProtocolHttp AgentCoreRuntimeServerProtocol = "HTTP"
+	AgentCoreRuntimeServerProtocolA2a  AgentCoreRuntimeServerProtocol = "A2A"
+	AgentCoreRuntimeServerProtocolMcp  AgentCoreRuntimeServerProtocol = "MCP"
+	AgentCoreRuntimeServerProtocolAgui AgentCoreRuntimeServerProtocol = "AGUI"
+)
+
+// Values returns all known values for AgentCoreRuntimeServerProtocol. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentCoreRuntimeServerProtocol) Values() []AgentCoreRuntimeServerProtocol {
+	return []AgentCoreRuntimeServerProtocol{
+		"HTTP",
+		"A2A",
+		"MCP",
+		"AGUI",
+	}
+}
+
 type AutoApprovalRule string
 
 // Enum values for AutoApprovalRule
@@ -16,6 +58,42 @@ const (
 func (AutoApprovalRule) Values() []AutoApprovalRule {
 	return []AutoApprovalRule{
 		"APPROVE_ALL",
+	}
+}
+
+type AutoDetectionScope string
+
+// Enum values for AutoDetectionScope
+const (
+	AutoDetectionScopeOrganization AutoDetectionScope = "ORGANIZATION"
+)
+
+// Values returns all known values for AutoDetectionScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutoDetectionScope) Values() []AutoDetectionScope {
+	return []AutoDetectionScope{
+		"ORGANIZATION",
+	}
+}
+
+type AutoDetectionStatus string
+
+// Enum values for AutoDetectionStatus
+const (
+	AutoDetectionStatusActive   AutoDetectionStatus = "ACTIVE"
+	AutoDetectionStatusInactive AutoDetectionStatus = "INACTIVE"
+)
+
+// Values returns all known values for AutoDetectionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutoDetectionStatus) Values() []AutoDetectionStatus {
+	return []AutoDetectionStatus{
+		"ACTIVE",
+		"INACTIVE",
 	}
 }
 
@@ -78,14 +156,32 @@ func (InboundTokenClaimValueType) Values() []InboundTokenClaimValueType {
 	}
 }
 
+type ProvenanceRelation string
+
+// Enum values for ProvenanceRelation
+const (
+	ProvenanceRelationDetectedFrom ProvenanceRelation = "DETECTED_FROM"
+)
+
+// Values returns all known values for ProvenanceRelation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProvenanceRelation) Values() []ProvenanceRelation {
+	return []ProvenanceRelation{
+		"DETECTED_FROM",
+	}
+}
+
 type RecordType string
 
 // Enum values for RecordType
 const (
-	RecordTypeMcp    RecordType = "MCP"
-	RecordTypeAgent  RecordType = "AGENT"
-	RecordTypeCustom RecordType = "CUSTOM"
-	RecordTypeSkill  RecordType = "SKILL"
+	RecordTypeMcp     RecordType = "MCP"
+	RecordTypeAgent   RecordType = "AGENT"
+	RecordTypeCustom  RecordType = "CUSTOM"
+	RecordTypeSkill   RecordType = "SKILL"
+	RecordTypeGateway RecordType = "GATEWAY"
 )
 
 // Values returns all known values for RecordType. Note that this can be expanded
@@ -98,6 +194,7 @@ func (RecordType) Values() []RecordType {
 		"AGENT",
 		"CUSTOM",
 		"SKILL",
+		"GATEWAY",
 	}
 }
 
@@ -257,6 +354,25 @@ func (RegistryStatus) Values() []RegistryStatus {
 		"UPDATE_FAILED",
 		"DELETING",
 		"DELETE_FAILED",
+	}
+}
+
+type SourceType string
+
+// Enum values for SourceType
+const (
+	SourceTypeAwsBedrockAgentcoreRuntime SourceType = "AWS::BedrockAgentCore::Runtime"
+	SourceTypeAwsBedrockAgentcoreGateway SourceType = "AWS::BedrockAgentCore::Gateway"
+)
+
+// Values returns all known values for SourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SourceType) Values() []SourceType {
+	return []SourceType{
+		"AWS::BedrockAgentCore::Runtime",
+		"AWS::BedrockAgentCore::Gateway",
 	}
 }
 

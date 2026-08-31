@@ -86,6 +86,18 @@ func TestCheckSnapshot_AddCommunicationToCase(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CompleteAttachmentUpload(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CompleteAttachmentUpload(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CompleteAttachmentUpload")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateCase(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCase(context.Background(), nil, func(o *Options) {
@@ -103,6 +115,18 @@ func TestCheckSnapshot_DescribeAttachment(t *testing.T) {
 	_, err := svc.DescribeAttachment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeAttachmentUploadStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAttachmentUploadStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeAttachmentUploadStatus")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -230,6 +254,30 @@ func TestCheckSnapshot_DescribeTrustedAdvisorCheckSummaries(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAttachmentDownloadLink(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAttachmentDownloadLink(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAttachmentDownloadLink")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAttachmentUploadLinks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAttachmentUploadLinks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAttachmentUploadLinks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RefreshTrustedAdvisorCheck(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RefreshTrustedAdvisorCheck(context.Background(), nil, func(o *Options) {
@@ -277,6 +325,18 @@ func TestUpdateSnapshot_AddCommunicationToCase(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CompleteAttachmentUpload(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CompleteAttachmentUpload(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CompleteAttachmentUpload")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateCase(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCase(context.Background(), nil, func(o *Options) {
@@ -294,6 +354,18 @@ func TestUpdateSnapshot_DescribeAttachment(t *testing.T) {
 	_, err := svc.DescribeAttachment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeAttachmentUploadStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAttachmentUploadStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeAttachmentUploadStatus")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -414,6 +486,30 @@ func TestUpdateSnapshot_DescribeTrustedAdvisorCheckSummaries(t *testing.T) {
 	_, err := svc.DescribeTrustedAdvisorCheckSummaries(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeTrustedAdvisorCheckSummaries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAttachmentDownloadLink(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAttachmentDownloadLink(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAttachmentDownloadLink")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAttachmentUploadLinks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAttachmentUploadLinks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAttachmentUploadLinks")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

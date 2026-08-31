@@ -30,6 +30,26 @@ func (m *validateOpAddProfileKey) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateStreamForSegments struct {
+}
+
+func (*validateOpAssociateStreamForSegments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateStreamForSegments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateStreamForSegmentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateStreamForSegmentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetCalculatedAttributeForProfile struct {
 }
 
@@ -670,6 +690,26 @@ func (m *validateOpDeleteSegmentDefinition) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteSegmentSubscription struct {
+}
+
+func (*validateOpDeleteSegmentSubscription) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSegmentSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSegmentSubscriptionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSegmentSubscriptionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteWorkflow struct {
 }
 
@@ -705,6 +745,26 @@ func (m *validateOpDetectProfileObjectType) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDetectProfileObjectTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateStreamForSegments struct {
+}
+
+func (*validateOpDisassociateStreamForSegments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateStreamForSegments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateStreamForSegmentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateStreamForSegmentsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1170,6 +1230,26 @@ func (m *validateOpGetSegmentSnapshot) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetSegmentSubscription struct {
+}
+
+func (*validateOpGetSegmentSubscription) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSegmentSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSegmentSubscriptionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSegmentSubscriptionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetSimilarProfiles struct {
 }
 
@@ -1185,6 +1265,26 @@ func (m *validateOpGetSimilarProfiles) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetSimilarProfilesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetStreamForSegments struct {
+}
+
+func (*validateOpGetStreamForSegments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetStreamForSegments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetStreamForSegmentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetStreamForSegmentsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1670,6 +1770,26 @@ func (m *validateOpListSegmentDefinitions) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListSegmentSubscriptionEvents struct {
+}
+
+func (*validateOpListSegmentSubscriptionEvents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSegmentSubscriptionEvents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSegmentSubscriptionEventsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSegmentSubscriptionEventsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -1825,6 +1945,26 @@ func (m *validateOpPutProfileObjectType) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutProfileObjectTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutSegmentSubscription struct {
+}
+
+func (*validateOpPutSegmentSubscription) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutSegmentSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutSegmentSubscriptionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutSegmentSubscriptionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2094,6 +2234,10 @@ func addOpAddProfileKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddProfileKey{}, middleware.After)
 }
 
+func addOpAssociateStreamForSegmentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateStreamForSegments{}, middleware.After)
+}
+
 func addOpBatchGetCalculatedAttributeForProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetCalculatedAttributeForProfile{}, middleware.After)
 }
@@ -2222,12 +2366,20 @@ func addOpDeleteSegmentDefinitionValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDeleteSegmentDefinition{}, middleware.After)
 }
 
+func addOpDeleteSegmentSubscriptionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSegmentSubscription{}, middleware.After)
+}
+
 func addOpDeleteWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteWorkflow{}, middleware.After)
 }
 
 func addOpDetectProfileObjectTypeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDetectProfileObjectType{}, middleware.After)
+}
+
+func addOpDisassociateStreamForSegmentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateStreamForSegments{}, middleware.After)
 }
 
 func addOpGetAutoMergingPreviewValidationMiddleware(stack *middleware.Stack) error {
@@ -2322,8 +2474,16 @@ func addOpGetSegmentSnapshotValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpGetSegmentSnapshot{}, middleware.After)
 }
 
+func addOpGetSegmentSubscriptionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSegmentSubscription{}, middleware.After)
+}
+
 func addOpGetSimilarProfilesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSimilarProfiles{}, middleware.After)
+}
+
+func addOpGetStreamForSegmentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetStreamForSegments{}, middleware.After)
 }
 
 func addOpGetUploadJobValidationMiddleware(stack *middleware.Stack) error {
@@ -2422,6 +2582,10 @@ func addOpListSegmentDefinitionsValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpListSegmentDefinitions{}, middleware.After)
 }
 
+func addOpListSegmentSubscriptionEventsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSegmentSubscriptionEvents{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
@@ -2452,6 +2616,10 @@ func addOpPutProfileObjectValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutProfileObjectTypeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutProfileObjectType{}, middleware.After)
+}
+
+func addOpPutSegmentSubscriptionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutSegmentSubscription{}, middleware.After)
 }
 
 func addOpSearchProfilesValidationMiddleware(stack *middleware.Stack) error {
@@ -3993,6 +4161,21 @@ func validateSalesforceSourceProperties(v *types.SalesforceSourceProperties) err
 	}
 }
 
+func validateScheduleConfiguration(v *types.ScheduleConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScheduleConfiguration"}
+	if v.Interval == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Interval"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateScheduledTriggerProperties(v *types.ScheduledTriggerProperties) error {
 	if v == nil {
 		return nil
@@ -4326,6 +4509,27 @@ func validateOpAddProfileKeyInput(v *AddProfileKeyInput) error {
 	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateStreamForSegmentsInput(v *AssociateStreamForSegmentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateStreamForSegmentsInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.DestinationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationArn"))
+	}
+	if v.DestinationRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationRoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5046,6 +5250,24 @@ func validateOpDeleteSegmentDefinitionInput(v *DeleteSegmentDefinitionInput) err
 	}
 }
 
+func validateOpDeleteSegmentSubscriptionInput(v *DeleteSegmentSubscriptionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSegmentSubscriptionInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.SegmentDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SegmentDefinitionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteWorkflowInput(v *DeleteWorkflowInput) error {
 	if v == nil {
 		return nil
@@ -5072,6 +5294,21 @@ func validateOpDetectProfileObjectTypeInput(v *DetectProfileObjectTypeInput) err
 	if v.Objects == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Objects"))
 	}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateStreamForSegmentsInput(v *DisassociateStreamForSegmentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateStreamForSegmentsInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
@@ -5521,6 +5758,24 @@ func validateOpGetSegmentSnapshotInput(v *GetSegmentSnapshotInput) error {
 	}
 }
 
+func validateOpGetSegmentSubscriptionInput(v *GetSegmentSubscriptionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSegmentSubscriptionInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.SegmentDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SegmentDefinitionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetSimilarProfilesInput(v *GetSimilarProfilesInput) error {
 	if v == nil {
 		return nil
@@ -5537,6 +5792,21 @@ func validateOpGetSimilarProfilesInput(v *GetSimilarProfilesInput) error {
 	}
 	if v.SearchValue == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SearchValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetStreamForSegmentsInput(v *GetStreamForSegmentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetStreamForSegmentsInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5946,6 +6216,24 @@ func validateOpListSegmentDefinitionsInput(v *ListSegmentDefinitionsInput) error
 	}
 }
 
+func validateOpListSegmentSubscriptionEventsInput(v *ListSegmentSubscriptionEventsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSegmentSubscriptionEventsInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.SegmentDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SegmentDefinitionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -6091,6 +6379,29 @@ func validateOpPutProfileObjectTypeInput(v *PutProfileObjectTypeInput) error {
 	}
 	if v.Description == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutSegmentSubscriptionInput(v *PutSegmentSubscriptionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutSegmentSubscriptionInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.SegmentDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SegmentDefinitionName"))
+	}
+	if v.ScheduleConfiguration != nil {
+		if err := validateScheduleConfiguration(v.ScheduleConfiguration); err != nil {
+			invalidParams.AddNested("ScheduleConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

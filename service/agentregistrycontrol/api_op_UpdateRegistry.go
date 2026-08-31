@@ -43,6 +43,11 @@ type UpdateRegistryInput struct {
 	// are unaffected.
 	ApprovalConfiguration *types.UpdatedApprovalConfiguration
 
+	// The updated auto-detection configuration for the registry, with PATCH
+	// semantics. Omit this field to leave the current configuration unchanged. Supply
+	// an empty wrapper to unset it. Supply optionalValue to replace it.
+	AutoDetectionConfiguration *types.UpdatedAutoDetectionConfiguration
+
 	// The updated description of the registry
 	Description *types.UpdatedDescription
 
@@ -66,6 +71,11 @@ func (v *UpdateRegistryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApprovalConfiguration != nil {
 		s.WriteStruct(schemas.UpdateRegistryRequest_approvalConfiguration)
 		v.ApprovalConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AutoDetectionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateRegistryRequest_autoDetectionConfiguration)
+		v.AutoDetectionConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.Description != nil {
@@ -122,11 +132,20 @@ type UpdateRegistryOutput struct {
 	// Approval configuration for registry records
 	ApprovalConfiguration *types.ApprovalConfiguration
 
+	// The registry's auto-detection properties, including the requested configuration
+	// and the current detection status. Present only when auto-detection was
+	// configured for the registry.
+	AutoDetection *types.AutoDetection
+
 	// The description of the registry
 	Description *string
 
 	// Discovery configuration for the registry
 	DiscoveryConfiguration *types.DiscoveryConfiguration
+
+	// The server-side encryption configuration for the registry. Appears only when a
+	// customer-managed Amazon Web Services KMS key encrypts the registry.
+	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// The reason for the current status. Typically populated when the status
 	// indicates a failure state.
@@ -150,6 +169,11 @@ func (v *UpdateRegistryOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ApprovalConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.AutoDetection != nil {
+		s.WriteStruct(schemas.UpdateRegistryResponse_autoDetection)
+		v.AutoDetection.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.UpdateRegistryResponse_createdAt, *v.CreatedAt)
 	}
@@ -159,6 +183,11 @@ func (v *UpdateRegistryOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DiscoveryConfiguration != nil {
 		s.WriteStruct(schemas.UpdateRegistryResponse_discoveryConfiguration)
 		v.DiscoveryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateRegistryResponse_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.Name != nil {
@@ -186,6 +215,9 @@ func (v *UpdateRegistryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.UpdateRegistryResponse_approvalConfiguration:
 			v.ApprovalConfiguration = &types.ApprovalConfiguration{}
 			return v.ApprovalConfiguration.Deserialize(d)
+		case schemas.UpdateRegistryResponse_autoDetection:
+			v.AutoDetection = &types.AutoDetection{}
+			return v.AutoDetection.Deserialize(d)
 		case schemas.UpdateRegistryResponse_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.UpdateRegistryResponse_createdAt, v.CreatedAt)
@@ -195,6 +227,9 @@ func (v *UpdateRegistryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.UpdateRegistryResponse_discoveryConfiguration:
 			v.DiscoveryConfiguration = &types.DiscoveryConfiguration{}
 			return v.DiscoveryConfiguration.Deserialize(d)
+		case schemas.UpdateRegistryResponse_encryptionConfiguration:
+			v.EncryptionConfiguration = &types.EncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
 		case schemas.UpdateRegistryResponse_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.UpdateRegistryResponse_name, v.Name)

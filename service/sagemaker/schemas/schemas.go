@@ -23070,7 +23070,7 @@ var _TransformInstanceCount = smithy.NewSchema(smithy.ShapeID{
 var TransformInstanceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "TransformInstanceType",
-}, smithy.ShapeTypeEnum, 108)
+}, smithy.ShapeTypeEnum, 116)
 var TransformInstanceType_ML_M4_XLARGE *smithy.Schema
 
 var TransformInstanceType_ML_M4_2XLARGE *smithy.Schema
@@ -23286,6 +23286,22 @@ var TransformInstanceType_ML_G6_16XLARGE *smithy.Schema
 var TransformInstanceType_ML_G6_24XLARGE *smithy.Schema
 
 var TransformInstanceType_ML_G6_48XLARGE *smithy.Schema
+
+var TransformInstanceType_ML_G6E_XLARGE *smithy.Schema
+
+var TransformInstanceType_ML_G6E_2XLARGE *smithy.Schema
+
+var TransformInstanceType_ML_G6E_4XLARGE *smithy.Schema
+
+var TransformInstanceType_ML_G6E_8XLARGE *smithy.Schema
+
+var TransformInstanceType_ML_G6E_12XLARGE *smithy.Schema
+
+var TransformInstanceType_ML_G6E_16XLARGE *smithy.Schema
+
+var TransformInstanceType_ML_G6E_24XLARGE *smithy.Schema
+
+var TransformInstanceType_ML_G6E_48XLARGE *smithy.Schema
 
 var _TransformInstanceTypes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -34866,6 +34882,22 @@ func init() {
 	TransformInstanceType_ML_G6_24XLARGE = TransformInstanceType.AddMember("ML_G6_24XLARGE", smithyprelude.Unit)
 
 	TransformInstanceType_ML_G6_48XLARGE = TransformInstanceType.AddMember("ML_G6_48XLARGE", smithyprelude.Unit)
+
+	TransformInstanceType_ML_G6E_XLARGE = TransformInstanceType.AddMember("ML_G6E_XLARGE", smithyprelude.Unit)
+
+	TransformInstanceType_ML_G6E_2XLARGE = TransformInstanceType.AddMember("ML_G6E_2XLARGE", smithyprelude.Unit)
+
+	TransformInstanceType_ML_G6E_4XLARGE = TransformInstanceType.AddMember("ML_G6E_4XLARGE", smithyprelude.Unit)
+
+	TransformInstanceType_ML_G6E_8XLARGE = TransformInstanceType.AddMember("ML_G6E_8XLARGE", smithyprelude.Unit)
+
+	TransformInstanceType_ML_G6E_12XLARGE = TransformInstanceType.AddMember("ML_G6E_12XLARGE", smithyprelude.Unit)
+
+	TransformInstanceType_ML_G6E_16XLARGE = TransformInstanceType.AddMember("ML_G6E_16XLARGE", smithyprelude.Unit)
+
+	TransformInstanceType_ML_G6E_24XLARGE = TransformInstanceType.AddMember("ML_G6E_24XLARGE", smithyprelude.Unit)
+
+	TransformInstanceType_ML_G6E_48XLARGE = TransformInstanceType.AddMember("ML_G6E_48XLARGE", smithyprelude.Unit)
 
 	_TransformInstanceTypes_member = _TransformInstanceTypes.AddMember("member", TransformInstanceType)
 

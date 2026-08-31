@@ -28,10 +28,11 @@ type RecordType string
 
 // Enum values for RecordType
 const (
-	RecordTypeMcp    RecordType = "MCP"
-	RecordTypeAgent  RecordType = "AGENT"
-	RecordTypeCustom RecordType = "CUSTOM"
-	RecordTypeSkill  RecordType = "SKILL"
+	RecordTypeMcp     RecordType = "MCP"
+	RecordTypeAgent   RecordType = "AGENT"
+	RecordTypeCustom  RecordType = "CUSTOM"
+	RecordTypeSkill   RecordType = "SKILL"
+	RecordTypeGateway RecordType = "GATEWAY"
 )
 
 // Values returns all known values for RecordType. Note that this can be expanded
@@ -44,6 +45,7 @@ func (RecordType) Values() []RecordType {
 		"AGENT",
 		"CUSTOM",
 		"SKILL",
+		"GATEWAY",
 	}
 }
 

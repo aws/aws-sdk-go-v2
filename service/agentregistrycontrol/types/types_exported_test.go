@@ -108,3 +108,25 @@ func ExampleSelfManagedLatticeResource_outputUsage() {
 }
 
 var _ *string
+
+func ExampleSourceDetails_outputUsage() {
+	var union types.SourceDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SourceDetailsMemberAgentcoreGateway:
+		_ = v.Value // Value is types.AgentCoreGatewaySourceDetails
+
+	case *types.SourceDetailsMemberAgentcoreRuntime:
+		_ = v.Value // Value is types.AgentCoreRuntimeSourceDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AgentCoreRuntimeSourceDetails
+var _ *types.AgentCoreGatewaySourceDetails

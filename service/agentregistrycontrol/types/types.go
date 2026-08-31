@@ -62,6 +62,153 @@ func (v *A2aAgentCardDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Source details for a record auto-detected from an AgentCore Gateway resource.
+type AgentCoreGatewaySourceDetails struct {
+
+	// The authorizer configuration for a registry. Exactly one member is set.
+	AuthorizerConfiguration AuthorizerConfiguration
+
+	// The type of authorizer configured on the AgentCore Gateway resource that the
+	// registry record was detected from.
+	AuthorizerType *string
+
+	// The protocol type of an AgentCore Gateway.
+	ProtocolType AgentCoreGatewayProtocolType
+
+	// Workload identity details associated with a source resource.
+	WorkloadIdentityDetails *WorkloadIdentityDetails
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgentCoreGatewaySourceDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentCoreGatewaySourceDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgentCoreGatewaySourceDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuthorizerConfiguration(s, schemas.AgentCoreGatewaySourceDetails_authorizerConfiguration, v.AuthorizerConfiguration)
+	if v.AuthorizerType != nil {
+		s.WriteString(schemas.AgentCoreGatewaySourceDetails_authorizerType, *v.AuthorizerType)
+	}
+	if v.ProtocolType != "" {
+		s.WriteString(schemas.AgentCoreGatewaySourceDetails_protocolType, string(v.ProtocolType))
+	}
+	if v.WorkloadIdentityDetails != nil {
+		s.WriteStruct(schemas.AgentCoreGatewaySourceDetails_workloadIdentityDetails)
+		v.WorkloadIdentityDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AgentCoreGatewaySourceDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgentCoreGatewaySourceDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgentCoreGatewaySourceDetails_authorizerConfiguration:
+			return deserializeAuthorizerConfiguration(d, schemas.AgentCoreGatewaySourceDetails_authorizerConfiguration, &v.AuthorizerConfiguration)
+		case schemas.AgentCoreGatewaySourceDetails_authorizerType:
+			v.AuthorizerType = new(string)
+			return d.ReadString(schemas.AgentCoreGatewaySourceDetails_authorizerType, v.AuthorizerType)
+		case schemas.AgentCoreGatewaySourceDetails_protocolType:
+			var ev string
+			if err := d.ReadString(schemas.AgentCoreGatewaySourceDetails_protocolType, &ev); err != nil {
+				return err
+			}
+			v.ProtocolType = AgentCoreGatewayProtocolType(ev)
+			return nil
+		case schemas.AgentCoreGatewaySourceDetails_workloadIdentityDetails:
+			v.WorkloadIdentityDetails = &WorkloadIdentityDetails{}
+			return v.WorkloadIdentityDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Protocol configuration for an AgentCore Runtime.
+type AgentCoreRuntimeProtocolConfiguration struct {
+
+	// The server protocol used by an AgentCore Runtime.
+	ServerProtocol AgentCoreRuntimeServerProtocol
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgentCoreRuntimeProtocolConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentCoreRuntimeProtocolConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgentCoreRuntimeProtocolConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerProtocol != "" {
+		s.WriteString(schemas.AgentCoreRuntimeProtocolConfiguration_serverProtocol, string(v.ServerProtocol))
+	}
+}
+func (v *AgentCoreRuntimeProtocolConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgentCoreRuntimeProtocolConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgentCoreRuntimeProtocolConfiguration_serverProtocol:
+			var ev string
+			if err := d.ReadString(schemas.AgentCoreRuntimeProtocolConfiguration_serverProtocol, &ev); err != nil {
+				return err
+			}
+			v.ServerProtocol = AgentCoreRuntimeServerProtocol(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Source details for a record auto-detected from an AgentCore Runtime resource.
+type AgentCoreRuntimeSourceDetails struct {
+
+	// The authorizer configuration for a registry. Exactly one member is set.
+	AuthorizerConfiguration AuthorizerConfiguration
+
+	// Protocol configuration for an AgentCore Runtime.
+	ProtocolConfiguration *AgentCoreRuntimeProtocolConfiguration
+
+	// Workload identity details associated with a source resource.
+	WorkloadIdentityDetails *WorkloadIdentityDetails
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgentCoreRuntimeSourceDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentCoreRuntimeSourceDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgentCoreRuntimeSourceDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuthorizerConfiguration(s, schemas.AgentCoreRuntimeSourceDetails_authorizerConfiguration, v.AuthorizerConfiguration)
+	if v.ProtocolConfiguration != nil {
+		s.WriteStruct(schemas.AgentCoreRuntimeSourceDetails_protocolConfiguration)
+		v.ProtocolConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkloadIdentityDetails != nil {
+		s.WriteStruct(schemas.AgentCoreRuntimeSourceDetails_workloadIdentityDetails)
+		v.WorkloadIdentityDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AgentCoreRuntimeSourceDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgentCoreRuntimeSourceDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgentCoreRuntimeSourceDetails_authorizerConfiguration:
+			return deserializeAuthorizerConfiguration(d, schemas.AgentCoreRuntimeSourceDetails_authorizerConfiguration, &v.AuthorizerConfiguration)
+		case schemas.AgentCoreRuntimeSourceDetails_protocolConfiguration:
+			v.ProtocolConfiguration = &AgentCoreRuntimeProtocolConfiguration{}
+			return v.ProtocolConfiguration.Deserialize(d)
+		case schemas.AgentCoreRuntimeSourceDetails_workloadIdentityDetails:
+			v.WorkloadIdentityDetails = &WorkloadIdentityDetails{}
+			return v.WorkloadIdentityDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Additional data associated with an agent skills definition descriptor.
 type AgentSkillsAdditionalData struct {
 
@@ -199,6 +346,40 @@ func (v *AgentSkillsMdDescriptor) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// A registry record descriptor for the AG-UI (Agent-User Interaction) protocol.
+type AgUiDescriptor struct {
+
+	// The source configuration that defines where descriptor content is retrieved
+	// from.
+	Source *DescriptorSource
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgUiDescriptor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgUiDescriptor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgUiDescriptor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Source != nil {
+		s.WriteStruct(schemas.AgUiDescriptor_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AgUiDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgUiDescriptor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgUiDescriptor_source:
+			v.Source = &DescriptorSource{}
+			return v.Source.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Configuration for the registry's record approval workflow. Controls whether
 // records submitted for approval require manual review before they become approved
 // and discoverable, or are auto-approved. When no auto-approval rules are
@@ -297,6 +478,123 @@ func (v *AuthorizingClaimMatchValueType) Deserialize(d smithy.ShapeDeserializer)
 			return nil
 		case schemas.AuthorizingClaimMatchValueType_claimMatchValue:
 			return deserializeClaimMatchValueType(d, schemas.AuthorizingClaimMatchValueType_claimMatchValue, &v.ClaimMatchValue)
+		}
+		return nil
+	})
+}
+
+// The auto-detection properties for a registry, including the requested
+// configuration and the current detection status. When auto-detection is enabled
+// and the scope preconditions are met, the registry is automatically populated
+// with discovered resources.
+type AutoDetection struct {
+
+	// The auto-detection settings that control how resources are discovered for the
+	// registry.
+	//
+	// This member is required.
+	Configuration *AutoDetectionConfiguration
+
+	// The current auto-detection status. ACTIVE indicates that the registry is
+	// actively being populated with detected resources. INACTIVE indicates that the
+	// preconditions required at the configured scope are not currently met.
+	//
+	// This member is required.
+	Status AutoDetectionStatus
+
+	// A human-readable explanation of the current auto-detection status. Typically
+	// populated when the status requires additional context.
+	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AutoDetection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoDetection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoDetection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.AutoDetection_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AutoDetection_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.AutoDetection_statusReason, *v.StatusReason)
+	}
+}
+func (v *AutoDetection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoDetection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoDetection_configuration:
+			v.Configuration = &AutoDetectionConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.AutoDetection_status:
+			var ev string
+			if err := d.ReadString(schemas.AutoDetection_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AutoDetectionStatus(ev)
+			return nil
+		case schemas.AutoDetection_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.AutoDetection_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
+
+// The customer-defined auto-detection settings for a registry.
+type AutoDetectionConfiguration struct {
+
+	// Specifies whether auto-detection is requested for the registry. Setting this to
+	// true is necessary but not sufficient for auto-detection to become active; the
+	// preconditions of the configured scope must also be met.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The source from which resources are detected. For example, ORGANIZATION sources
+	// resources from all member accounts of an Amazon Web Services organization.
+	//
+	// This member is required.
+	Scope AutoDetectionScope
+
+	noSmithyDocumentSerde
+}
+
+func (v *AutoDetectionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoDetectionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoDetectionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.AutoDetectionConfiguration_enabled, *v.Enabled)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.AutoDetectionConfiguration_scope, string(v.Scope))
+	}
+}
+func (v *AutoDetectionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoDetectionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoDetectionConfiguration_enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.AutoDetectionConfiguration_enabled, v.Enabled)
+		case schemas.AutoDetectionConfiguration_scope:
+			var ev string
+			if err := d.ReadString(schemas.AutoDetectionConfiguration_scope, &ev); err != nil {
+				return err
+			}
+			v.Scope = AutoDetectionScope(ev)
+			return nil
 		}
 		return nil
 	})
@@ -407,7 +705,7 @@ func (v *CustomClaimValidationType) Deserialize(d smithy.ShapeDeserializer) erro
 // Custom descriptor for user-defined content
 type CustomDescriptor struct {
 
-	// Descriptor payload data
+	// The custom descriptor content, serialized as descriptor payload data.
 	Data *string
 
 	noSmithyDocumentSerde
@@ -521,8 +819,16 @@ type Descriptors struct {
 	// The agent skills definition descriptor, populated when the record type is SKILL.
 	AgentSkillsDefinition *AgentSkillsDefinitionDescriptor
 
+	// The AG-UI descriptor, populated for records detected from an AG-UI protocol
+	// source.
+	Agui *AgUiDescriptor
+
 	// The custom descriptor, populated when the record type is CUSTOM.
 	Custom *CustomDescriptor
+
+	// The HTTP descriptor, populated for records detected from an HTTP protocol
+	// source.
+	Http *HttpDescriptor
 
 	// The MCP server descriptor, populated when the record type is MCP.
 	McpServer *McpServerDescriptor
@@ -547,9 +853,19 @@ func (v *Descriptors) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AgentSkillsDefinition.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.Agui != nil {
+		s.WriteStruct(schemas.Descriptors_agui)
+		v.Agui.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Custom != nil {
 		s.WriteStruct(schemas.Descriptors_custom)
 		v.Custom.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Http != nil {
+		s.WriteStruct(schemas.Descriptors_http)
+		v.Http.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.McpServer != nil {
@@ -567,9 +883,15 @@ func (v *Descriptors) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Descriptors_agentSkillsDefinition:
 			v.AgentSkillsDefinition = &AgentSkillsDefinitionDescriptor{}
 			return v.AgentSkillsDefinition.Deserialize(d)
+		case schemas.Descriptors_agui:
+			v.Agui = &AgUiDescriptor{}
+			return v.Agui.Deserialize(d)
 		case schemas.Descriptors_custom:
 			v.Custom = &CustomDescriptor{}
 			return v.Custom.Deserialize(d)
+		case schemas.Descriptors_http:
+			v.Http = &HttpDescriptor{}
+			return v.Http.Deserialize(d)
 		case schemas.Descriptors_mcpServer:
 			v.McpServer = &McpServerDescriptor{}
 			return v.McpServer.Deserialize(d)
@@ -698,6 +1020,80 @@ func (v *DiscoveryConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The server-side encryption configuration for a registry. Specifies a
+// customer-managed Amazon Web Services KMS key used to encrypt the registry's
+// content.
+type EncryptionConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the customer-managed Amazon Web Services KMS
+	// key used to encrypt the registry's content. The key must be a symmetric
+	// encryption key in the same Amazon Web Services account and Region as the
+	// registry.
+	//
+	// This member is required.
+	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.EncryptionConfiguration_kmsKeyArn, *v.KmsKeyArn)
+	}
+}
+func (v *EncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EncryptionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EncryptionConfiguration_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.EncryptionConfiguration_kmsKeyArn, v.KmsKeyArn)
+		}
+		return nil
+	})
+}
+
+// A registry record descriptor for the HTTP protocol. This descriptor is
+// source-only: its content is synchronized from the configured source URL rather
+// than supplied inline.
+type HttpDescriptor struct {
+
+	// The source configuration that defines where descriptor content is retrieved
+	// from.
+	Source *DescriptorSource
+
+	noSmithyDocumentSerde
+}
+
+func (v *HttpDescriptor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpDescriptor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpDescriptor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Source != nil {
+		s.WriteStruct(schemas.HttpDescriptor_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *HttpDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpDescriptor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpDescriptor_source:
+			v.Source = &DescriptorSource{}
+			return v.Source.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A service-managed private endpoint provisioned within a customer VPC.
 type ManagedVpcResource struct {
 
@@ -724,7 +1120,7 @@ type ManagedVpcResource struct {
 	// network interfaces.
 	SecurityGroupIds []string
 
-	// A map of tag keys to tag values.
+	// The tags applied to the service-managed VPC resource.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -780,7 +1176,7 @@ func (v *ManagedVpcResource) Deserialize(d smithy.ShapeDeserializer) error {
 // Additional data for an MCP server descriptor
 type McpServerAdditionalData struct {
 
-	// MCP tools descriptor containing tool definitions
+	// The MCP tools descriptor that defines the tools exposed by the MCP server.
 	Tools *McpToolsDescriptor
 
 	noSmithyDocumentSerde
@@ -879,10 +1275,10 @@ func (v *McpServerDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
 // MCP tools descriptor containing tool definitions
 type McpToolsDescriptor struct {
 
-	// Descriptor payload data
+	// The MCP tools descriptor content, serialized as descriptor payload data.
 	Data *string
 
-	// Version of the descriptor type schema
+	// The schema version of the descriptor payload.
 	DataSchemaVersion *string
 
 	noSmithyDocumentSerde
@@ -995,6 +1391,140 @@ func (v *PrivateEndpointOverride) Deserialize(d smithy.ShapeDeserializer) error 
 			return d.ReadString(schemas.PrivateEndpointOverride_domain, v.Domain)
 		case schemas.PrivateEndpointOverride_privateEndpoint:
 			return deserializePrivateEndpoint(d, schemas.PrivateEndpointOverride_privateEndpoint, &v.PrivateEndpoint)
+		}
+		return nil
+	})
+}
+
+// One provenance entry describing the lineage of a registry record.
+type Provenance struct {
+
+	// The relationship between the registry record and its provenance source.
+	//
+	// This member is required.
+	Relation ProvenanceRelation
+
+	// The identifier of the upstream source that the registry record was detected
+	// from.
+	//
+	// This member is required.
+	SourceId *string
+
+	// Additional details about the upstream source that the registry record was
+	// detected from, such as the AgentCore Gateway or Runtime configuration. The
+	// populated member corresponds to the source type.
+	SourceDetails SourceDetails
+
+	// The type of the upstream source that the registry record was detected from.
+	SourceType SourceType
+
+	noSmithyDocumentSerde
+}
+
+func (v *Provenance) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Provenance)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Provenance) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Relation != "" {
+		s.WriteString(schemas.Provenance_relation, string(v.Relation))
+	}
+	serializeSourceDetails(s, schemas.Provenance_sourceDetails, v.SourceDetails)
+	if v.SourceId != nil {
+		s.WriteString(schemas.Provenance_sourceId, *v.SourceId)
+	}
+	if v.SourceType != "" {
+		s.WriteString(schemas.Provenance_sourceType, string(v.SourceType))
+	}
+}
+func (v *Provenance) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Provenance, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Provenance_relation:
+			var ev string
+			if err := d.ReadString(schemas.Provenance_relation, &ev); err != nil {
+				return err
+			}
+			v.Relation = ProvenanceRelation(ev)
+			return nil
+		case schemas.Provenance_sourceDetails:
+			return deserializeSourceDetails(d, schemas.Provenance_sourceDetails, &v.SourceDetails)
+		case schemas.Provenance_sourceId:
+			v.SourceId = new(string)
+			return d.ReadString(schemas.Provenance_sourceId, v.SourceId)
+		case schemas.Provenance_sourceType:
+			var ev string
+			if err := d.ReadString(schemas.Provenance_sourceType, &ev); err != nil {
+				return err
+			}
+			v.SourceType = SourceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Condensed provenance entry for list results — the key triple only (no
+// sourceDetails union). Enough to display and client-side-filter lineage without
+// the full-read config payload.
+type ProvenanceSummary struct {
+
+	// The relationship between the registry record and its provenance source.
+	//
+	// This member is required.
+	Relation ProvenanceRelation
+
+	// The identifier of the upstream source that the registry record was detected
+	// from.
+	//
+	// This member is required.
+	SourceId *string
+
+	// The type of the upstream source that the registry record was detected from.
+	SourceType SourceType
+
+	noSmithyDocumentSerde
+}
+
+func (v *ProvenanceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProvenanceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProvenanceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Relation != "" {
+		s.WriteString(schemas.ProvenanceSummary_relation, string(v.Relation))
+	}
+	if v.SourceId != nil {
+		s.WriteString(schemas.ProvenanceSummary_sourceId, *v.SourceId)
+	}
+	if v.SourceType != "" {
+		s.WriteString(schemas.ProvenanceSummary_sourceType, string(v.SourceType))
+	}
+}
+func (v *ProvenanceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProvenanceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProvenanceSummary_relation:
+			var ev string
+			if err := d.ReadString(schemas.ProvenanceSummary_relation, &ev); err != nil {
+				return err
+			}
+			v.Relation = ProvenanceRelation(ev)
+			return nil
+		case schemas.ProvenanceSummary_sourceId:
+			v.SourceId = new(string)
+			return d.ReadString(schemas.ProvenanceSummary_sourceId, v.SourceId)
+		case schemas.ProvenanceSummary_sourceType:
+			var ev string
+			if err := d.ReadString(schemas.ProvenanceSummary_sourceType, &ev); err != nil {
+				return err
+			}
+			v.SourceType = SourceType(ev)
+			return nil
 		}
 		return nil
 	})
@@ -1185,15 +1715,15 @@ func (v *RegistryRecordFilter) Deserialize(d smithy.ShapeDeserializer) error {
 }
 
 // The configuration for an IAM role credential provider that signs requests to a
-// registry record's source with AWS Signature Version 4 (SigV4).
+// registry record's source with Amazon Web Services Signature Version 4 (SigV4).
 type RegistryRecordIamCredentialProvider struct {
 
-	// The AWS Region to use for request signing. If not specified, the Region is
-	// derived from the source URL hostname, falling back to the Region of the
-	// registry.
+	// The Amazon Web Services Region to use for request signing. If not specified,
+	// the Region is derived from the source URL hostname, falling back to the Region
+	// of the registry.
 	Region *string
 
-	// The &ARN; of the IAM role to assume for request signing.
+	// The Amazon Resource Name (ARN) of the IAM role to assume for request signing.
 	RoleArn *string
 
 	// The service name to use for request signing, such as execute-api.
@@ -1240,8 +1770,8 @@ func (v *RegistryRecordIamCredentialProvider) Deserialize(d smithy.ShapeDeserial
 // requests to a registry record's source.
 type RegistryRecordOAuthCredentialProvider struct {
 
-	// The &ARN; of the OAuth 2.0 credential provider resource in Amazon Bedrock
-	// AgentCore Identity.
+	// The Amazon Resource Name (ARN) of the OAuth 2.0 credential provider resource in
+	// Amazon Bedrock AgentCore Identity.
 	//
 	// This member is required.
 	ProviderArn *string
@@ -1310,7 +1840,7 @@ type RegistryRecordSummary struct {
 	// This member is required.
 	Name *string
 
-	// The &ARN; of the registry record.
+	// The Amazon Resource Name (ARN) of the registry record.
 	//
 	// This member is required.
 	RecordArn *string
@@ -1330,7 +1860,7 @@ type RegistryRecordSummary struct {
 	// This member is required.
 	RecordVersion *string
 
-	// The &ARN; of the parent registry that owns the record.
+	// The Amazon Resource Name (ARN) of the parent registry that owns the record.
 	//
 	// This member is required.
 	RegistryArn *string
@@ -1345,11 +1875,25 @@ type RegistryRecordSummary struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The ID of the Amazon Web Services account that created the registry record.
+	CreatedBy *string
+
+	// Specifies whether the registry record was created by auto-detection. true
+	// indicates the record was automatically created by the service based on the
+	// registry's auto-detection configuration; false indicates the record was created
+	// through a control-plane API call.
+	CreatedByAutoDetection *bool
+
 	// A description of the registry record.
 	Description *string
 
 	// The human-readable display name of the registry record.
 	DisplayName *string
+
+	// List of condensed provenance entries surfaced on RegistryRecordSummary. Mirrors
+	// ProvenanceList's cardinality (one entry today); modeled as a list for
+	// forward-compatibility.
+	ProvenanceSummaryList []ProvenanceSummary
 
 	noSmithyDocumentSerde
 }
@@ -1364,6 +1908,12 @@ func (v *RegistryRecordSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.RegistryRecordSummary_createdAt, *v.CreatedAt)
 	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.RegistryRecordSummary_createdBy, *v.CreatedBy)
+	}
+	if v.CreatedByAutoDetection != nil {
+		s.WriteBool(schemas.RegistryRecordSummary_createdByAutoDetection, *v.CreatedByAutoDetection)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.RegistryRecordSummary_description, *v.Description)
 	}
@@ -1373,6 +1923,7 @@ func (v *RegistryRecordSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.RegistryRecordSummary_name, *v.Name)
 	}
+	serializeProvenanceSummaryList(s, schemas.RegistryRecordSummary_provenanceSummaryList, v.ProvenanceSummaryList)
 	if v.RecordArn != nil {
 		s.WriteString(schemas.RegistryRecordSummary_recordArn, *v.RecordArn)
 	}
@@ -1401,6 +1952,12 @@ func (v *RegistryRecordSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RegistryRecordSummary_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.RegistryRecordSummary_createdAt, v.CreatedAt)
+		case schemas.RegistryRecordSummary_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.RegistryRecordSummary_createdBy, v.CreatedBy)
+		case schemas.RegistryRecordSummary_createdByAutoDetection:
+			v.CreatedByAutoDetection = new(bool)
+			return d.ReadBool(schemas.RegistryRecordSummary_createdByAutoDetection, v.CreatedByAutoDetection)
 		case schemas.RegistryRecordSummary_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.RegistryRecordSummary_description, v.Description)
@@ -1410,6 +1967,8 @@ func (v *RegistryRecordSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RegistryRecordSummary_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.RegistryRecordSummary_name, v.Name)
+		case schemas.RegistryRecordSummary_provenanceSummaryList:
+			return deserializeProvenanceSummaryList(d, schemas.RegistryRecordSummary_provenanceSummaryList, &v.ProvenanceSummaryList)
 		case schemas.RegistryRecordSummary_recordArn:
 			v.RecordArn = new(string)
 			return d.ReadString(schemas.RegistryRecordSummary_recordArn, v.RecordArn)
@@ -1477,6 +2036,11 @@ type RegistrySummary struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The registry's auto-detection properties, including the requested configuration
+	// and the current detection status. Present only when auto-detection was
+	// configured for the registry.
+	AutoDetection *AutoDetection
+
 	// Registry description
 	Description *string
 
@@ -1497,6 +2061,11 @@ func (v *RegistrySummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RegistrySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoDetection != nil {
+		s.WriteStruct(schemas.RegistrySummary_autoDetection)
+		v.AutoDetection.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.RegistrySummary_createdAt, *v.CreatedAt)
 	}
@@ -1530,6 +2099,9 @@ func (v *RegistrySummary) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *RegistrySummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RegistrySummary, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.RegistrySummary_autoDetection:
+			v.AutoDetection = &AutoDetection{}
+			return v.AutoDetection.Deserialize(d)
 		case schemas.RegistrySummary_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.RegistrySummary_createdAt, v.CreatedAt)
@@ -1591,6 +2163,51 @@ func (v *SelfManagedLatticeResourceMemberResourceConfigurationIdentifier) Serial
 }
 func (v *SelfManagedLatticeResourceMemberResourceConfigurationIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
 	return d.ReadString(schemas.SelfManagedLatticeResource_resourceConfigurationIdentifier, &v.Value)
+}
+
+// The details about the upstream source from which a registry record was
+// detected. Exactly one member is populated, corresponding to the source type.
+//
+// The following types satisfy this interface:
+//
+//	SourceDetailsMemberAgentcoreGateway
+//	SourceDetailsMemberAgentcoreRuntime
+type SourceDetails interface {
+	isSourceDetails()
+}
+
+// Source details for a record auto-detected from an AgentCore Gateway resource.
+type SourceDetailsMemberAgentcoreGateway struct {
+	Value AgentCoreGatewaySourceDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceDetailsMemberAgentcoreGateway) isSourceDetails() {}
+func (v *SourceDetailsMemberAgentcoreGateway) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceDetails_agentcoreGateway)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SourceDetailsMemberAgentcoreGateway) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Source details for a record auto-detected from an AgentCore Runtime resource.
+type SourceDetailsMemberAgentcoreRuntime struct {
+	Value AgentCoreRuntimeSourceDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceDetailsMemberAgentcoreRuntime) isSourceDetails() {}
+func (v *SourceDetailsMemberAgentcoreRuntime) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceDetails_agentcoreRuntime)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SourceDetailsMemberAgentcoreRuntime) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // The A2A agent card descriptor patch wrapper. Omit to leave the descriptor
@@ -1933,6 +2550,73 @@ func (v *UpdatedAgentSkillsMdDescriptorFields) Deserialize(d smithy.ShapeDeseria
 	})
 }
 
+// The AG-UI descriptor patch wrapper. Omit to leave the descriptor unchanged;
+// supply an empty object to remove it; supply optionalValue to patch its fields.
+type UpdatedAgUiDescriptor struct {
+
+	// The value to set for this field. Omit the wrapper to leave the field unchanged.
+	OptionalValue *UpdatedAgUiDescriptorFields
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdatedAgUiDescriptor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatedAgUiDescriptor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatedAgUiDescriptor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OptionalValue != nil {
+		s.WriteStruct(schemas.UpdatedAgUiDescriptor_optionalValue)
+		v.OptionalValue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatedAgUiDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatedAgUiDescriptor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatedAgUiDescriptor_optionalValue:
+			v.OptionalValue = &UpdatedAgUiDescriptorFields{}
+			return v.OptionalValue.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The set of AG-UI descriptor fields that can be individually updated.
+type UpdatedAgUiDescriptorFields struct {
+
+	// The patch for the descriptor's source field.
+	Source *UpdatedDescriptorSource
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdatedAgUiDescriptorFields) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatedAgUiDescriptorFields)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatedAgUiDescriptorFields) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Source != nil {
+		s.WriteStruct(schemas.UpdatedAgUiDescriptorFields_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatedAgUiDescriptorFields) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatedAgUiDescriptorFields, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatedAgUiDescriptorFields_source:
+			v.Source = &UpdatedDescriptorSource{}
+			return v.Source.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A wrapper for updating the approval configuration of a registry. Include this
 // wrapper to replace the approval configuration with the specified value; omit it
 // to leave the approval configuration unchanged.
@@ -1992,6 +2676,43 @@ func (v *UpdatedAuthorizerConfiguration) Deserialize(d smithy.ShapeDeserializer)
 		switch s {
 		case schemas.UpdatedAuthorizerConfiguration_optionalValue:
 			return deserializeAuthorizerConfiguration(d, schemas.UpdatedAuthorizerConfiguration_optionalValue, &v.OptionalValue)
+		}
+		return nil
+	})
+}
+
+// A wrapper for updating the auto-detection configuration of a registry with
+// PATCH semantics. Include this wrapper to replace the auto-detection
+// configuration with the specified value. Omit it to leave the auto-detection
+// configuration unchanged. To clear the configuration, include the wrapper with a
+// null optionalValue .
+type UpdatedAutoDetectionConfiguration struct {
+
+	// The value to set for this field. Omit the wrapper to leave the field unchanged.
+	OptionalValue *AutoDetectionConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdatedAutoDetectionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatedAutoDetectionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatedAutoDetectionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OptionalValue != nil {
+		s.WriteStruct(schemas.UpdatedAutoDetectionConfiguration_optionalValue)
+		v.OptionalValue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatedAutoDetectionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatedAutoDetectionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatedAutoDetectionConfiguration_optionalValue:
+			v.OptionalValue = &AutoDetectionConfiguration{}
+			return v.OptionalValue.Deserialize(d)
 		}
 		return nil
 	})
@@ -2099,7 +2820,7 @@ func (v *UpdatedDataSchemaVersion) Deserialize(d smithy.ShapeDeserializer) error
 // Wrapper for updating an optional Description field with PATCH semantics
 type UpdatedDescription struct {
 
-	// Description of the Resource
+	// The value to set for this field. Omit the wrapper to leave the field unchanged.
 	OptionalValue *string
 
 	noSmithyDocumentSerde
@@ -2204,8 +2925,14 @@ type UpdatedDescriptorsFields struct {
 	// The patch for the agent skills definition descriptor.
 	AgentSkillsDefinition *UpdatedAgentSkillsDefinitionDescriptor
 
+	// The patch for the AG-UI descriptor.
+	Agui *UpdatedAgUiDescriptor
+
 	// The patch for the custom descriptor.
 	Custom *UpdatedCustomDescriptor
+
+	// The patch for the HTTP descriptor.
+	Http *UpdatedHttpDescriptor
 
 	// The patch for the MCP server descriptor.
 	McpServer *UpdatedMcpServerDescriptor
@@ -2230,9 +2957,19 @@ func (v *UpdatedDescriptorsFields) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AgentSkillsDefinition.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.Agui != nil {
+		s.WriteStruct(schemas.UpdatedDescriptorsFields_agui)
+		v.Agui.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Custom != nil {
 		s.WriteStruct(schemas.UpdatedDescriptorsFields_custom)
 		v.Custom.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Http != nil {
+		s.WriteStruct(schemas.UpdatedDescriptorsFields_http)
+		v.Http.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.McpServer != nil {
@@ -2250,9 +2987,15 @@ func (v *UpdatedDescriptorsFields) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.UpdatedDescriptorsFields_agentSkillsDefinition:
 			v.AgentSkillsDefinition = &UpdatedAgentSkillsDefinitionDescriptor{}
 			return v.AgentSkillsDefinition.Deserialize(d)
+		case schemas.UpdatedDescriptorsFields_agui:
+			v.Agui = &UpdatedAgUiDescriptor{}
+			return v.Agui.Deserialize(d)
 		case schemas.UpdatedDescriptorsFields_custom:
 			v.Custom = &UpdatedCustomDescriptor{}
 			return v.Custom.Deserialize(d)
+		case schemas.UpdatedDescriptorsFields_http:
+			v.Http = &UpdatedHttpDescriptor{}
+			return v.Http.Deserialize(d)
 		case schemas.UpdatedDescriptorsFields_mcpServer:
 			v.McpServer = &UpdatedMcpServerDescriptor{}
 			return v.McpServer.Deserialize(d)
@@ -2356,6 +3099,73 @@ func (v *UpdatedDisplayName) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.UpdatedDisplayName_optionalValue:
 			v.OptionalValue = new(string)
 			return d.ReadString(schemas.UpdatedDisplayName_optionalValue, v.OptionalValue)
+		}
+		return nil
+	})
+}
+
+// The HTTP descriptor patch wrapper. Omit to leave the descriptor unchanged;
+// supply an empty object to remove it; supply optionalValue to patch its fields.
+type UpdatedHttpDescriptor struct {
+
+	// The value to set for this field. Omit the wrapper to leave the field unchanged.
+	OptionalValue *UpdatedHttpDescriptorFields
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdatedHttpDescriptor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatedHttpDescriptor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatedHttpDescriptor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OptionalValue != nil {
+		s.WriteStruct(schemas.UpdatedHttpDescriptor_optionalValue)
+		v.OptionalValue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatedHttpDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatedHttpDescriptor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatedHttpDescriptor_optionalValue:
+			v.OptionalValue = &UpdatedHttpDescriptorFields{}
+			return v.OptionalValue.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The set of HTTP descriptor fields that can be individually updated.
+type UpdatedHttpDescriptorFields struct {
+
+	// The patch for the descriptor's source field.
+	Source *UpdatedDescriptorSource
+
+	noSmithyDocumentSerde
+}
+
+func (v *UpdatedHttpDescriptorFields) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatedHttpDescriptorFields)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatedHttpDescriptorFields) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Source != nil {
+		s.WriteStruct(schemas.UpdatedHttpDescriptorFields_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatedHttpDescriptorFields) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatedHttpDescriptorFields, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatedHttpDescriptorFields_source:
+			v.Source = &UpdatedDescriptorSource{}
+			return v.Source.Deserialize(d)
 		}
 		return nil
 	})
@@ -2653,6 +3463,40 @@ func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error
 	})
 }
 
+// Workload identity details associated with a source resource.
+type WorkloadIdentityDetails struct {
+
+	// The Amazon Resource Name (ARN) of the workload identity associated with the
+	// source resource.
+	//
+	// This member is required.
+	WorkloadIdentityArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *WorkloadIdentityDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkloadIdentityDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkloadIdentityDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkloadIdentityArn != nil {
+		s.WriteString(schemas.WorkloadIdentityDetails_workloadIdentityArn, *v.WorkloadIdentityArn)
+	}
+}
+func (v *WorkloadIdentityDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkloadIdentityDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkloadIdentityDetails_workloadIdentityArn:
+			v.WorkloadIdentityArn = new(string)
+			return d.ReadString(schemas.WorkloadIdentityDetails_workloadIdentityArn, v.WorkloadIdentityArn)
+		}
+		return nil
+	})
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -2669,3 +3513,4 @@ func (*UnknownUnionMember) isClaimMatchValueType()                   {}
 func (*UnknownUnionMember) isPrivateEndpoint()                       {}
 func (*UnknownUnionMember) isRegistryRecordCredentialProviderUnion() {}
 func (*UnknownUnionMember) isSelfManagedLatticeResource()            {}
+func (*UnknownUnionMember) isSourceDetails()                         {}

@@ -238,6 +238,125 @@ func TestCheckRequestSnapshot_AddTagsToStream(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateChannel(t *testing.T) {
+	input := &CreateChannelInput{
+		ChannelName:             ptr.String("__ChannelName__"),
+		ServiceExecutionRoleARN: ptr.String("__ServiceExecutionRoleARN__"),
+		StreamConfigurationList: []types.ChannelStreamConfiguration{
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				RecordConfiguration: &types.RecordConfiguration{
+					RecordFormatType: types.RecordFormatType("GSR_JSON"),
+					GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+				},
+			},
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				RecordConfiguration: &types.RecordConfiguration{
+					RecordFormatType: types.RecordFormatType("GSR_JSON"),
+					GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+				},
+			},
+		},
+		S3DestinationConfiguration: &types.S3DestinationConfiguration{
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+			},
+			StorageConfiguration: &types.S3StorageConfiguration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				OutputKeyTemplate:   ptr.String("__OutputKeyTemplate__"),
+				StorageClass:        types.S3StorageClass("STANDARD"),
+				CompressionType:     types.S3CompressionType("NONE"),
+			},
+		},
+		S3TablesDestinationConfiguration: &types.S3TablesDestinationConfiguration{
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+			},
+			S3TablesConfigurationList: []types.S3TablesConfiguration{
+				{
+					TableBucketARN:  ptr.String("__TableBucketARN__"),
+					Namespace:       ptr.String("__Namespace__"),
+					TableName:       ptr.String("__TableName__"),
+					CompressionType: types.S3TablesCompressionType("NONE"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionFields: []types.PartitionField{
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+				{
+					TableBucketARN:  ptr.String("__TableBucketARN__"),
+					Namespace:       ptr.String("__Namespace__"),
+					TableName:       ptr.String("__TableName__"),
+					CompressionType: types.S3TablesCompressionType("NONE"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionFields: []types.PartitionField{
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		EncryptionConfiguration: &types.ChannelEncryptionConfiguration{
+			EncryptionType: types.ChannelEncryptionType("KMS"),
+			KeyId:          ptr.String("__KeyId__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LoggingConfiguration: &types.ChannelLoggingConfiguration{
+			CloudWatchLogs: &types.CloudWatchLogs{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateChannel(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateChannel"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateStream(t *testing.T) {
 	input := &CreateStreamInput{
 		StreamName: ptr.String("__StreamName__"),
@@ -300,6 +419,33 @@ func TestCheckRequestSnapshot_DecreaseStreamRetentionPeriod(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DecreaseStreamRetentionPeriod"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DeleteChannel(t *testing.T) {
+	input := &DeleteChannelInput{
+		ChannelARN: ptr.String("__ChannelARN__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteChannel(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteChannel"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -413,6 +559,33 @@ func TestCheckRequestSnapshot_DescribeAccountSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAccountSettings"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DescribeChannel(t *testing.T) {
+	input := &DescribeChannelInput{
+		ChannelARN: ptr.String("__ChannelARN__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeChannel(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeChannel"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -715,6 +888,44 @@ func TestCheckRequestSnapshot_IncreaseStreamRetentionPeriod(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "IncreaseStreamRetentionPeriod"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListChannels(t *testing.T) {
+	input := &ListChannelsInput{
+		StreamFilter: []types.StreamFilter{
+			{
+				StreamARN:               ptr.String("__StreamARN__"),
+				StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				StreamARN:               ptr.String("__StreamARN__"),
+				StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListChannels(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListChannels"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1260,6 +1471,46 @@ func TestCheckRequestSnapshot_UpdateAccountSettings(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_UpdateChannel(t *testing.T) {
+	input := &UpdateChannelInput{
+		ChannelARN: ptr.String("__ChannelARN__"),
+		S3DestinationConfiguration: &types.S3DestinationUpdateInput{
+			DataFreshnessInSeconds: ptr.Int32(1),
+		},
+		S3TablesDestinationConfiguration: &types.S3TablesDestinationUpdateInput{
+			DataFreshnessInSeconds: ptr.Int32(1),
+		},
+		LoggingConfiguration: &types.ChannelLoggingUpdateInput{
+			CloudWatchLogs: &types.CloudWatchLogsUpdateInput{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateChannel(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateChannel"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_UpdateMaxRecordSize(t *testing.T) {
 	input := &UpdateMaxRecordSizeInput{
 		StreamARN:          ptr.String("__StreamARN__"),
@@ -1413,6 +1664,125 @@ func TestUpdateRequestSnapshot_AddTagsToStream(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateChannel(t *testing.T) {
+	input := &CreateChannelInput{
+		ChannelName:             ptr.String("__ChannelName__"),
+		ServiceExecutionRoleARN: ptr.String("__ServiceExecutionRoleARN__"),
+		StreamConfigurationList: []types.ChannelStreamConfiguration{
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				RecordConfiguration: &types.RecordConfiguration{
+					RecordFormatType: types.RecordFormatType("GSR_JSON"),
+					GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+				},
+			},
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				RecordConfiguration: &types.RecordConfiguration{
+					RecordFormatType: types.RecordFormatType("GSR_JSON"),
+					GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+				},
+			},
+		},
+		S3DestinationConfiguration: &types.S3DestinationConfiguration{
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+			},
+			StorageConfiguration: &types.S3StorageConfiguration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				OutputKeyTemplate:   ptr.String("__OutputKeyTemplate__"),
+				StorageClass:        types.S3StorageClass("STANDARD"),
+				CompressionType:     types.S3CompressionType("NONE"),
+			},
+		},
+		S3TablesDestinationConfiguration: &types.S3TablesDestinationConfiguration{
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+			},
+			S3TablesConfigurationList: []types.S3TablesConfiguration{
+				{
+					TableBucketARN:  ptr.String("__TableBucketARN__"),
+					Namespace:       ptr.String("__Namespace__"),
+					TableName:       ptr.String("__TableName__"),
+					CompressionType: types.S3TablesCompressionType("NONE"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionFields: []types.PartitionField{
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+				{
+					TableBucketARN:  ptr.String("__TableBucketARN__"),
+					Namespace:       ptr.String("__Namespace__"),
+					TableName:       ptr.String("__TableName__"),
+					CompressionType: types.S3TablesCompressionType("NONE"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionFields: []types.PartitionField{
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		EncryptionConfiguration: &types.ChannelEncryptionConfiguration{
+			EncryptionType: types.ChannelEncryptionType("KMS"),
+			KeyId:          ptr.String("__KeyId__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LoggingConfiguration: &types.ChannelLoggingConfiguration{
+			CloudWatchLogs: &types.CloudWatchLogs{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateChannel(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateChannel"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateStream(t *testing.T) {
 	input := &CreateStreamInput{
 		StreamName: ptr.String("__StreamName__"),
@@ -1475,6 +1845,33 @@ func TestUpdateRequestSnapshot_DecreaseStreamRetentionPeriod(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DecreaseStreamRetentionPeriod"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DeleteChannel(t *testing.T) {
+	input := &DeleteChannelInput{
+		ChannelARN: ptr.String("__ChannelARN__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DeleteChannel(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteChannel"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1588,6 +1985,33 @@ func TestUpdateRequestSnapshot_DescribeAccountSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAccountSettings"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DescribeChannel(t *testing.T) {
+	input := &DescribeChannelInput{
+		ChannelARN: ptr.String("__ChannelARN__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeChannel(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeChannel"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1890,6 +2314,44 @@ func TestUpdateRequestSnapshot_IncreaseStreamRetentionPeriod(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "IncreaseStreamRetentionPeriod"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListChannels(t *testing.T) {
+	input := &ListChannelsInput{
+		StreamFilter: []types.StreamFilter{
+			{
+				StreamARN:               ptr.String("__StreamARN__"),
+				StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				StreamARN:               ptr.String("__StreamARN__"),
+				StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListChannels(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListChannels"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2431,6 +2893,46 @@ func TestUpdateRequestSnapshot_UpdateAccountSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateAccountSettings"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_UpdateChannel(t *testing.T) {
+	input := &UpdateChannelInput{
+		ChannelARN: ptr.String("__ChannelARN__"),
+		S3DestinationConfiguration: &types.S3DestinationUpdateInput{
+			DataFreshnessInSeconds: ptr.Int32(1),
+		},
+		S3TablesDestinationConfiguration: &types.S3TablesDestinationUpdateInput{
+			DataFreshnessInSeconds: ptr.Int32(1),
+		},
+		LoggingConfiguration: &types.ChannelLoggingUpdateInput{
+			CloudWatchLogs: &types.CloudWatchLogsUpdateInput{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.UpdateChannel(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "UpdateChannel"); err != nil {
 		t.Fatal(err)
 	}
 }

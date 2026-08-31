@@ -10639,6 +10639,14 @@ const (
 	TransformInstanceTypeMlG616xlarge   TransformInstanceType = "ml.g6.16xlarge"
 	TransformInstanceTypeMlG624xlarge   TransformInstanceType = "ml.g6.24xlarge"
 	TransformInstanceTypeMlG648xlarge   TransformInstanceType = "ml.g6.48xlarge"
+	TransformInstanceTypeMlG6eXlarge    TransformInstanceType = "ml.g6e.xlarge"
+	TransformInstanceTypeMlG6e2xlarge   TransformInstanceType = "ml.g6e.2xlarge"
+	TransformInstanceTypeMlG6e4xlarge   TransformInstanceType = "ml.g6e.4xlarge"
+	TransformInstanceTypeMlG6e8xlarge   TransformInstanceType = "ml.g6e.8xlarge"
+	TransformInstanceTypeMlG6e12xlarge  TransformInstanceType = "ml.g6e.12xlarge"
+	TransformInstanceTypeMlG6e16xlarge  TransformInstanceType = "ml.g6e.16xlarge"
+	TransformInstanceTypeMlG6e24xlarge  TransformInstanceType = "ml.g6e.24xlarge"
+	TransformInstanceTypeMlG6e48xlarge  TransformInstanceType = "ml.g6e.48xlarge"
 )
 
 // Values returns all known values for TransformInstanceType. Note that this can
@@ -10755,6 +10763,14 @@ func (TransformInstanceType) Values() []TransformInstanceType {
 		"ml.g6.16xlarge",
 		"ml.g6.24xlarge",
 		"ml.g6.48xlarge",
+		"ml.g6e.xlarge",
+		"ml.g6e.2xlarge",
+		"ml.g6e.4xlarge",
+		"ml.g6e.8xlarge",
+		"ml.g6e.12xlarge",
+		"ml.g6e.16xlarge",
+		"ml.g6e.24xlarge",
+		"ml.g6e.48xlarge",
 	}
 }
 

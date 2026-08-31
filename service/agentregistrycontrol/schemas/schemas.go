@@ -136,6 +136,52 @@ var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 403})
 var AccessDeniedException_message *smithy.Schema
 
+var AgentCoreGatewayProtocolType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "AgentCoreGatewayProtocolType",
+}, smithy.ShapeTypeEnum, 1)
+var AgentCoreGatewayProtocolType_MCP *smithy.Schema
+
+var AgentCoreGatewaySourceDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "AgentCoreGatewaySourceDetails",
+}, smithy.ShapeTypeStructure, 4)
+var AgentCoreGatewaySourceDetails_protocolType *smithy.Schema
+
+var AgentCoreGatewaySourceDetails_authorizerType *smithy.Schema
+
+var AgentCoreGatewaySourceDetails_authorizerConfiguration *smithy.Schema
+
+var AgentCoreGatewaySourceDetails_workloadIdentityDetails *smithy.Schema
+
+var AgentCoreRuntimeProtocolConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "AgentCoreRuntimeProtocolConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var AgentCoreRuntimeProtocolConfiguration_serverProtocol *smithy.Schema
+
+var AgentCoreRuntimeServerProtocol = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "AgentCoreRuntimeServerProtocol",
+}, smithy.ShapeTypeEnum, 4)
+var AgentCoreRuntimeServerProtocol_HTTP *smithy.Schema
+
+var AgentCoreRuntimeServerProtocol_A2A *smithy.Schema
+
+var AgentCoreRuntimeServerProtocol_MCP *smithy.Schema
+
+var AgentCoreRuntimeServerProtocol_AGUI *smithy.Schema
+
+var AgentCoreRuntimeSourceDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "AgentCoreRuntimeSourceDetails",
+}, smithy.ShapeTypeStructure, 3)
+var AgentCoreRuntimeSourceDetails_protocolConfiguration *smithy.Schema
+
+var AgentCoreRuntimeSourceDetails_authorizerConfiguration *smithy.Schema
+
+var AgentCoreRuntimeSourceDetails_workloadIdentityDetails *smithy.Schema
+
 var AgentSkillsAdditionalData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "AgentSkillsAdditionalData",
@@ -161,6 +207,12 @@ var AgentSkillsMdDescriptor_data *smithy.Schema
 var AgentSkillsMdDescriptor_dataSchemaVersion *smithy.Schema
 
 var AgentSkillsMdDescriptor_source *smithy.Schema
+
+var AgUiDescriptor = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "AgUiDescriptor",
+}, smithy.ShapeTypeStructure, 1)
+var AgUiDescriptor_source *smithy.Schema
 
 var _AllowedAudience = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -227,6 +279,38 @@ var _AutoApprovalRuleList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _AutoApprovalRuleList_member *smithy.Schema
 
+var AutoDetection = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "AutoDetection",
+}, smithy.ShapeTypeStructure, 3)
+var AutoDetection_configuration *smithy.Schema
+
+var AutoDetection_status *smithy.Schema
+
+var AutoDetection_statusReason *smithy.Schema
+
+var AutoDetectionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "AutoDetectionConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var AutoDetectionConfiguration_scope *smithy.Schema
+
+var AutoDetectionConfiguration_enabled *smithy.Schema
+
+var AutoDetectionScope = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "AutoDetectionScope",
+}, smithy.ShapeTypeEnum, 1)
+var AutoDetectionScope_ORGANIZATION *smithy.Schema
+
+var AutoDetectionStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "AutoDetectionStatus",
+}, smithy.ShapeTypeEnum, 2)
+var AutoDetectionStatus_ACTIVE *smithy.Schema
+
+var AutoDetectionStatus_INACTIVE *smithy.Schema
+
 var ClaimMatchOperatorType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "ClaimMatchOperatorType",
@@ -255,6 +339,11 @@ var ConflictException = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ConflictException",
 }, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 409})
 var ConflictException_message *smithy.Schema
+
+var _CreatorAccountId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "CreatorAccountId",
+}, smithy.ShapeTypeString, 0)
 
 var _CredentialProviderArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -332,7 +421,7 @@ var _DescriptorData = smithy.NewSchema(smithy.ShapeID{
 var Descriptors = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "Descriptors",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 6)
 var Descriptors_mcpServer *smithy.Schema
 
 var Descriptors_a2aAgentCard *smithy.Schema
@@ -340,6 +429,10 @@ var Descriptors_a2aAgentCard *smithy.Schema
 var Descriptors_agentSkillsDefinition *smithy.Schema
 
 var Descriptors_custom *smithy.Schema
+
+var Descriptors_http *smithy.Schema
+
+var Descriptors_agui *smithy.Schema
 
 var DescriptorSource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -373,6 +466,12 @@ var _DiscoveryUrl = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DiscoveryUrl",
 }, smithy.ShapeTypeString, 0)
 
+var EncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "EncryptionConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var EncryptionConfiguration_kmsKeyArn *smithy.Schema
+
 var EndpointIpAddressType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "EndpointIpAddressType",
@@ -391,6 +490,12 @@ var _FilterValues = smithy.NewSchema(smithy.ShapeID{
 	Name:      "FilterValues",
 }, smithy.ShapeTypeList, 1)
 var _FilterValues_member *smithy.Schema
+
+var HttpDescriptor = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "HttpDescriptor",
+}, smithy.ShapeTypeStructure, 1)
+var HttpDescriptor_source *smithy.Schema
 
 var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -425,6 +530,11 @@ var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Name:      "InternalServerException",
 }, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 500})
 var InternalServerException_message *smithy.Schema
+
+var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "KmsKeyArn",
+}, smithy.ShapeTypeString, 0)
 
 var ManagedVpcResource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -521,6 +631,46 @@ var _PrivateEndpointOverrides = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _PrivateEndpointOverrides_member *smithy.Schema
 
+var Provenance = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "Provenance",
+}, smithy.ShapeTypeStructure, 4)
+var Provenance_relation *smithy.Schema
+
+var Provenance_sourceId *smithy.Schema
+
+var Provenance_sourceType *smithy.Schema
+
+var Provenance_sourceDetails *smithy.Schema
+
+var _ProvenanceList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "ProvenanceList",
+}, smithy.ShapeTypeList, 1)
+var _ProvenanceList_member *smithy.Schema
+
+var ProvenanceRelation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "ProvenanceRelation",
+}, smithy.ShapeTypeEnum, 1)
+var ProvenanceRelation_DETECTED_FROM *smithy.Schema
+
+var ProvenanceSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "ProvenanceSummary",
+}, smithy.ShapeTypeStructure, 3)
+var ProvenanceSummary_relation *smithy.Schema
+
+var ProvenanceSummary_sourceId *smithy.Schema
+
+var ProvenanceSummary_sourceType *smithy.Schema
+
+var _ProvenanceSummaryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "ProvenanceSummaryList",
+}, smithy.ShapeTypeList, 1)
+var _ProvenanceSummaryList_member *smithy.Schema
+
 var _RecordIdentifier = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "RecordIdentifier",
@@ -529,7 +679,7 @@ var _RecordIdentifier = smithy.NewSchema(smithy.ShapeID{
 var RecordType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "RecordType",
-}, smithy.ShapeTypeEnum, 4)
+}, smithy.ShapeTypeEnum, 5)
 var RecordType_MCP *smithy.Schema
 
 var RecordType_AGENT *smithy.Schema
@@ -537,6 +687,8 @@ var RecordType_AGENT *smithy.Schema
 var RecordType_CUSTOM *smithy.Schema
 
 var RecordType_SKILL *smithy.Schema
+
+var RecordType_GATEWAY *smithy.Schema
 
 var _RegistryArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -715,7 +867,7 @@ var RegistryRecordStatus_UPDATE_FAILED *smithy.Schema
 var RegistryRecordSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "RegistryRecordSummary",
-}, smithy.ShapeTypeStructure, 11)
+}, smithy.ShapeTypeStructure, 14)
 var RegistryRecordSummary_registryArn *smithy.Schema
 
 var RegistryRecordSummary_recordArn *smithy.Schema
@@ -737,6 +889,12 @@ var RegistryRecordSummary_status *smithy.Schema
 var RegistryRecordSummary_createdAt *smithy.Schema
 
 var RegistryRecordSummary_updatedAt *smithy.Schema
+
+var RegistryRecordSummary_createdByAutoDetection *smithy.Schema
+
+var RegistryRecordSummary_createdBy *smithy.Schema
+
+var RegistryRecordSummary_provenanceSummaryList *smithy.Schema
 
 var _RegistryRecordSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -770,7 +928,7 @@ var RegistryStatus_DELETE_FAILED *smithy.Schema
 var RegistrySummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "RegistrySummary",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var RegistrySummary_name *smithy.Schema
 
 var RegistrySummary_description *smithy.Schema
@@ -784,6 +942,8 @@ var RegistrySummary_discoveryConfiguration *smithy.Schema
 var RegistrySummary_status *smithy.Schema
 
 var RegistrySummary_statusReason *smithy.Schema
+
+var RegistrySummary_autoDetection *smithy.Schema
 
 var RegistrySummary_createdAt *smithy.Schema
 
@@ -852,6 +1012,27 @@ var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ServiceQuotaExceededException",
 }, smithy.ShapeTypeStructure, 1, &smithytraits.HTTPError{Code: 402})
 var ServiceQuotaExceededException_message *smithy.Schema
+
+var SourceDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "SourceDetails",
+}, smithy.ShapeTypeUnion, 2)
+var SourceDetails_agentcoreRuntime *smithy.Schema
+
+var SourceDetails_agentcoreGateway *smithy.Schema
+
+var _SourceId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "SourceId",
+}, smithy.ShapeTypeString, 0)
+
+var SourceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "SourceType",
+}, smithy.ShapeTypeEnum, 2)
+var SourceType_AWS_BEDROCK_AGENTCORE_RUNTIME *smithy.Schema
+
+var SourceType_AWS_BEDROCK_AGENTCORE_GATEWAY *smithy.Schema
 
 var _SubnetId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -954,6 +1135,18 @@ var UpdatedAgentSkillsMdDescriptorFields_dataSchemaVersion *smithy.Schema
 
 var UpdatedAgentSkillsMdDescriptorFields_source *smithy.Schema
 
+var UpdatedAgUiDescriptor = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "UpdatedAgUiDescriptor",
+}, smithy.ShapeTypeStructure, 1)
+var UpdatedAgUiDescriptor_optionalValue *smithy.Schema
+
+var UpdatedAgUiDescriptorFields = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "UpdatedAgUiDescriptorFields",
+}, smithy.ShapeTypeStructure, 1)
+var UpdatedAgUiDescriptorFields_source *smithy.Schema
+
 var UpdatedApprovalConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "UpdatedApprovalConfiguration",
@@ -965,6 +1158,12 @@ var UpdatedAuthorizerConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdatedAuthorizerConfiguration",
 }, smithy.ShapeTypeStructure, 1)
 var UpdatedAuthorizerConfiguration_optionalValue *smithy.Schema
+
+var UpdatedAutoDetectionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "UpdatedAutoDetectionConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var UpdatedAutoDetectionConfiguration_optionalValue *smithy.Schema
 
 var UpdatedCustomDescriptor = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -1005,7 +1204,7 @@ var UpdatedDescriptors_optionalValue *smithy.Schema
 var UpdatedDescriptorsFields = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "UpdatedDescriptorsFields",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 6)
 var UpdatedDescriptorsFields_mcpServer *smithy.Schema
 
 var UpdatedDescriptorsFields_a2aAgentCard *smithy.Schema
@@ -1013,6 +1212,10 @@ var UpdatedDescriptorsFields_a2aAgentCard *smithy.Schema
 var UpdatedDescriptorsFields_agentSkillsDefinition *smithy.Schema
 
 var UpdatedDescriptorsFields_custom *smithy.Schema
+
+var UpdatedDescriptorsFields_http *smithy.Schema
+
+var UpdatedDescriptorsFields_agui *smithy.Schema
 
 var UpdatedDescriptorSource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -1031,6 +1234,18 @@ var UpdatedDisplayName = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdatedDisplayName",
 }, smithy.ShapeTypeStructure, 1)
 var UpdatedDisplayName_optionalValue *smithy.Schema
+
+var UpdatedHttpDescriptor = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "UpdatedHttpDescriptor",
+}, smithy.ShapeTypeStructure, 1)
+var UpdatedHttpDescriptor_optionalValue *smithy.Schema
+
+var UpdatedHttpDescriptorFields = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "UpdatedHttpDescriptorFields",
+}, smithy.ShapeTypeStructure, 1)
+var UpdatedHttpDescriptorFields_source *smithy.Schema
 
 var UpdatedMcpServerAdditionalData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -1119,13 +1334,21 @@ var _VpcIdentifier = smithy.NewSchema(smithy.ShapeID{
 	Name:      "VpcIdentifier",
 }, smithy.ShapeTypeString, 0)
 
+var WorkloadIdentityDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.agentregistrycontrol",
+	Name:      "WorkloadIdentityDetails",
+}, smithy.ShapeTypeStructure, 1)
+var WorkloadIdentityDetails_workloadIdentityArn *smithy.Schema
+
 var CreateRegistryRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "CreateRegistryRequest",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 8)
 var CreateRegistryRequest_name *smithy.Schema
 
 var CreateRegistryRequest_description *smithy.Schema
+
+var CreateRegistryRequest_encryptionConfiguration *smithy.Schema
 
 var CreateRegistryRequest_discoveryConfiguration *smithy.Schema
 
@@ -1134,6 +1357,8 @@ var CreateRegistryRequest_clientToken *smithy.Schema
 var CreateRegistryRequest_tags *smithy.Schema
 
 var CreateRegistryRequest_approvalConfiguration *smithy.Schema
+
+var CreateRegistryRequest_autoDetectionConfiguration *smithy.Schema
 
 var CreateRegistryResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -1144,7 +1369,7 @@ var CreateRegistryResponse_registryArn *smithy.Schema
 var CreateRegistryRecordRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "CreateRegistryRecordRequest",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var CreateRegistryRecordRequest_registryId *smithy.Schema
 
 var CreateRegistryRecordRequest_name *smithy.Schema
@@ -1160,6 +1385,8 @@ var CreateRegistryRecordRequest_descriptors *smithy.Schema
 var CreateRegistryRecordRequest_recordVersion *smithy.Schema
 
 var CreateRegistryRecordRequest_clientToken *smithy.Schema
+
+var CreateRegistryRecordRequest_provenance *smithy.Schema
 
 var CreateRegistryRecordRequest_tags *smithy.Schema
 
@@ -1205,7 +1432,7 @@ var GetRegistryRequest_registryId *smithy.Schema
 var GetRegistryResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "GetRegistryResponse",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 12)
 var GetRegistryResponse_name *smithy.Schema
 
 var GetRegistryResponse_description *smithy.Schema
@@ -1216,11 +1443,15 @@ var GetRegistryResponse_registryArn *smithy.Schema
 
 var GetRegistryResponse_discoveryConfiguration *smithy.Schema
 
+var GetRegistryResponse_encryptionConfiguration *smithy.Schema
+
 var GetRegistryResponse_approvalConfiguration *smithy.Schema
 
 var GetRegistryResponse_status *smithy.Schema
 
 var GetRegistryResponse_statusReason *smithy.Schema
+
+var GetRegistryResponse_autoDetection *smithy.Schema
 
 var GetRegistryResponse_createdAt *smithy.Schema
 
@@ -1237,7 +1468,7 @@ var GetRegistryRecordRequest_recordId *smithy.Schema
 var GetRegistryRecordResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "GetRegistryRecordResponse",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 16)
 var GetRegistryRecordResponse_registryArn *smithy.Schema
 
 var GetRegistryRecordResponse_recordArn *smithy.Schema
@@ -1263,6 +1494,12 @@ var GetRegistryRecordResponse_createdAt *smithy.Schema
 var GetRegistryRecordResponse_updatedAt *smithy.Schema
 
 var GetRegistryRecordResponse_statusReason *smithy.Schema
+
+var GetRegistryRecordResponse_provenance *smithy.Schema
+
+var GetRegistryRecordResponse_createdByAutoDetection *smithy.Schema
+
+var GetRegistryRecordResponse_createdBy *smithy.Schema
 
 var ListRegistriesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -1365,7 +1602,7 @@ var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
 var UpdateRegistryRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "UpdateRegistryRequest",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 6)
 var UpdateRegistryRequest_registryId *smithy.Schema
 
 var UpdateRegistryRequest_name *smithy.Schema
@@ -1376,10 +1613,12 @@ var UpdateRegistryRequest_discoveryConfiguration *smithy.Schema
 
 var UpdateRegistryRequest_approvalConfiguration *smithy.Schema
 
+var UpdateRegistryRequest_autoDetectionConfiguration *smithy.Schema
+
 var UpdateRegistryResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "UpdateRegistryResponse",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 12)
 var UpdateRegistryResponse_name *smithy.Schema
 
 var UpdateRegistryResponse_description *smithy.Schema
@@ -1390,11 +1629,15 @@ var UpdateRegistryResponse_registryArn *smithy.Schema
 
 var UpdateRegistryResponse_discoveryConfiguration *smithy.Schema
 
+var UpdateRegistryResponse_encryptionConfiguration *smithy.Schema
+
 var UpdateRegistryResponse_approvalConfiguration *smithy.Schema
 
 var UpdateRegistryResponse_status *smithy.Schema
 
 var UpdateRegistryResponse_statusReason *smithy.Schema
+
+var UpdateRegistryResponse_autoDetection *smithy.Schema
 
 var UpdateRegistryResponse_createdAt *smithy.Schema
 
@@ -1403,7 +1646,7 @@ var UpdateRegistryResponse_updatedAt *smithy.Schema
 var UpdateRegistryRecordRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "UpdateRegistryRecordRequest",
-}, smithy.ShapeTypeStructure, 9)
+}, smithy.ShapeTypeStructure, 10)
 var UpdateRegistryRecordRequest_registryId *smithy.Schema
 
 var UpdateRegistryRecordRequest_recordId *smithy.Schema
@@ -1422,10 +1665,12 @@ var UpdateRegistryRecordRequest_recordVersion *smithy.Schema
 
 var UpdateRegistryRecordRequest_triggerSynchronization *smithy.Schema
 
+var UpdateRegistryRecordRequest_provenance *smithy.Schema
+
 var UpdateRegistryRecordResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
 	Name:      "UpdateRegistryRecordResponse",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 16)
 var UpdateRegistryRecordResponse_registryArn *smithy.Schema
 
 var UpdateRegistryRecordResponse_recordArn *smithy.Schema
@@ -1451,6 +1696,12 @@ var UpdateRegistryRecordResponse_createdAt *smithy.Schema
 var UpdateRegistryRecordResponse_updatedAt *smithy.Schema
 
 var UpdateRegistryRecordResponse_statusReason *smithy.Schema
+
+var UpdateRegistryRecordResponse_provenance *smithy.Schema
+
+var UpdateRegistryRecordResponse_createdByAutoDetection *smithy.Schema
+
+var UpdateRegistryRecordResponse_createdBy *smithy.Schema
 
 var UpdateRegistryRecordStatusRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.agentregistrycontrol",
@@ -1533,31 +1784,13 @@ func init() {
 
 	AccessDeniedException_message = AccessDeniedException.AddMember("message", _NonBlankString)
 
-	AgentSkillsMdDescriptor_data = AgentSkillsMdDescriptor.AddMember("data", _DescriptorData)
-
-	AgentSkillsMdDescriptor_dataSchemaVersion = AgentSkillsMdDescriptor.AddMember("dataSchemaVersion", _DataSchemaVersion)
-
-	AgentSkillsMdDescriptor_source = AgentSkillsMdDescriptor.AddMember("source", DescriptorSource)
-
-	AgentSkillsAdditionalData_skillMd = AgentSkillsAdditionalData.AddMember("skillMd", AgentSkillsMdDescriptor)
-
-	AgentSkillsDefinitionDescriptor_data = AgentSkillsDefinitionDescriptor.AddMember("data", _DescriptorData)
-
-	AgentSkillsDefinitionDescriptor_dataSchemaVersion = AgentSkillsDefinitionDescriptor.AddMember("dataSchemaVersion", _DataSchemaVersion)
-
-	AgentSkillsDefinitionDescriptor_additionalData = AgentSkillsDefinitionDescriptor.AddMember("additionalData", AgentSkillsAdditionalData)
+	AgentCoreGatewayProtocolType_MCP = AgentCoreGatewayProtocolType.AddMember("MCP", smithyprelude.Unit)
 
 	_AllowedAudienceList_member = _AllowedAudienceList.AddMember("member", _AllowedAudience)
 
 	_AllowedClientsList_member = _AllowedClientsList.AddMember("member", _AllowedClient)
 
 	_AllowedScopesType_member = _AllowedScopesType.AddMember("member", _AllowedScopeType)
-
-	AutoApprovalRule_APPROVE_ALL = AutoApprovalRule.AddMember("APPROVE_ALL", smithyprelude.Unit)
-
-	_AutoApprovalRuleList_member = _AutoApprovalRuleList.AddMember("member", AutoApprovalRule)
-
-	ApprovalConfiguration_autoApprovalRules = ApprovalConfiguration.AddMember("autoApprovalRules", _AutoApprovalRuleList)
 
 	InboundTokenClaimValueType_STRING = InboundTokenClaimValueType.AddMember("STRING", smithyprelude.Unit)
 
@@ -1639,6 +1872,70 @@ func init() {
 
 	AuthorizerConfiguration_customJWTAuthorizer = AuthorizerConfiguration.AddMember("customJWTAuthorizer", CustomJWTAuthorizerConfiguration)
 
+	WorkloadIdentityDetails_workloadIdentityArn = WorkloadIdentityDetails.AddMember("workloadIdentityArn", smithyprelude.String)
+
+	AgentCoreGatewaySourceDetails_protocolType = AgentCoreGatewaySourceDetails.AddMember("protocolType", AgentCoreGatewayProtocolType)
+
+	AgentCoreGatewaySourceDetails_authorizerType = AgentCoreGatewaySourceDetails.AddMember("authorizerType", smithyprelude.String)
+
+	AgentCoreGatewaySourceDetails_authorizerConfiguration = AgentCoreGatewaySourceDetails.AddMember("authorizerConfiguration", AuthorizerConfiguration)
+
+	AgentCoreGatewaySourceDetails_workloadIdentityDetails = AgentCoreGatewaySourceDetails.AddMember("workloadIdentityDetails", WorkloadIdentityDetails)
+
+	AgentCoreRuntimeServerProtocol_HTTP = AgentCoreRuntimeServerProtocol.AddMember("HTTP", smithyprelude.Unit)
+
+	AgentCoreRuntimeServerProtocol_A2A = AgentCoreRuntimeServerProtocol.AddMember("A2A", smithyprelude.Unit)
+
+	AgentCoreRuntimeServerProtocol_MCP = AgentCoreRuntimeServerProtocol.AddMember("MCP", smithyprelude.Unit)
+
+	AgentCoreRuntimeServerProtocol_AGUI = AgentCoreRuntimeServerProtocol.AddMember("AGUI", smithyprelude.Unit)
+
+	AgentCoreRuntimeProtocolConfiguration_serverProtocol = AgentCoreRuntimeProtocolConfiguration.AddMember("serverProtocol", AgentCoreRuntimeServerProtocol)
+
+	AgentCoreRuntimeSourceDetails_protocolConfiguration = AgentCoreRuntimeSourceDetails.AddMember("protocolConfiguration", AgentCoreRuntimeProtocolConfiguration)
+
+	AgentCoreRuntimeSourceDetails_authorizerConfiguration = AgentCoreRuntimeSourceDetails.AddMember("authorizerConfiguration", AuthorizerConfiguration)
+
+	AgentCoreRuntimeSourceDetails_workloadIdentityDetails = AgentCoreRuntimeSourceDetails.AddMember("workloadIdentityDetails", WorkloadIdentityDetails)
+
+	AgentSkillsMdDescriptor_data = AgentSkillsMdDescriptor.AddMember("data", _DescriptorData)
+
+	AgentSkillsMdDescriptor_dataSchemaVersion = AgentSkillsMdDescriptor.AddMember("dataSchemaVersion", _DataSchemaVersion)
+
+	AgentSkillsMdDescriptor_source = AgentSkillsMdDescriptor.AddMember("source", DescriptorSource)
+
+	AgentSkillsAdditionalData_skillMd = AgentSkillsAdditionalData.AddMember("skillMd", AgentSkillsMdDescriptor)
+
+	AgentSkillsDefinitionDescriptor_data = AgentSkillsDefinitionDescriptor.AddMember("data", _DescriptorData)
+
+	AgentSkillsDefinitionDescriptor_dataSchemaVersion = AgentSkillsDefinitionDescriptor.AddMember("dataSchemaVersion", _DataSchemaVersion)
+
+	AgentSkillsDefinitionDescriptor_additionalData = AgentSkillsDefinitionDescriptor.AddMember("additionalData", AgentSkillsAdditionalData)
+
+	AgUiDescriptor_source = AgUiDescriptor.AddMember("source", DescriptorSource)
+
+	AutoApprovalRule_APPROVE_ALL = AutoApprovalRule.AddMember("APPROVE_ALL", smithyprelude.Unit)
+
+	_AutoApprovalRuleList_member = _AutoApprovalRuleList.AddMember("member", AutoApprovalRule)
+
+	ApprovalConfiguration_autoApprovalRules = ApprovalConfiguration.AddMember("autoApprovalRules", _AutoApprovalRuleList)
+
+	AutoDetectionScope_ORGANIZATION = AutoDetectionScope.AddMember("ORGANIZATION", smithyprelude.Unit)
+
+	AutoDetectionConfiguration_scope = AutoDetectionConfiguration.AddMember("scope", AutoDetectionScope)
+
+	AutoDetectionConfiguration_enabled = AutoDetectionConfiguration.AddMember("enabled", smithyprelude.Boolean)
+
+	AutoDetectionStatus_ACTIVE = AutoDetectionStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	AutoDetectionStatus_INACTIVE = AutoDetectionStatus.AddMember("INACTIVE", smithyprelude.Unit)
+
+	AutoDetection_configuration = AutoDetection.AddMember("configuration", AutoDetectionConfiguration)
+
+	AutoDetection_status = AutoDetection.AddMember("status", AutoDetectionStatus)
+
+	AutoDetection_statusReason = AutoDetection.AddMember("statusReason", smithyprelude.String)
+
 	ConflictException_message = ConflictException.AddMember("message", _NonBlankString)
 
 	CustomDescriptor_data = CustomDescriptor.AddMember("data", _DescriptorData)
@@ -1657,6 +1954,8 @@ func init() {
 
 	McpServerDescriptor_source = McpServerDescriptor.AddMember("source", DescriptorSource)
 
+	HttpDescriptor_source = HttpDescriptor.AddMember("source", DescriptorSource)
+
 	Descriptors_mcpServer = Descriptors.AddMember("mcpServer", McpServerDescriptor)
 
 	Descriptors_a2aAgentCard = Descriptors.AddMember("a2aAgentCard", A2aAgentCardDescriptor)
@@ -1664,6 +1963,10 @@ func init() {
 	Descriptors_agentSkillsDefinition = Descriptors.AddMember("agentSkillsDefinition", AgentSkillsDefinitionDescriptor)
 
 	Descriptors_custom = Descriptors.AddMember("custom", CustomDescriptor)
+
+	Descriptors_http = Descriptors.AddMember("http", HttpDescriptor)
+
+	Descriptors_agui = Descriptors.AddMember("agui", AgUiDescriptor)
 
 	RegistryAuthorizerType_CUSTOM_JWT = RegistryAuthorizerType.AddMember("CUSTOM_JWT", smithyprelude.Unit)
 
@@ -1673,9 +1976,39 @@ func init() {
 
 	DiscoveryConfiguration_authorizerType = DiscoveryConfiguration.AddMember("authorizerType", RegistryAuthorizerType)
 
+	EncryptionConfiguration_kmsKeyArn = EncryptionConfiguration.AddMember("kmsKeyArn", _KmsKeyArn)
+
 	_FilterValues_member = _FilterValues.AddMember("member", _FilterValue)
 
 	InternalServerException_message = InternalServerException.AddMember("message", _NonBlankString)
+
+	ProvenanceRelation_DETECTED_FROM = ProvenanceRelation.AddMember("DETECTED_FROM", smithyprelude.Unit)
+
+	SourceType_AWS_BEDROCK_AGENTCORE_RUNTIME = SourceType.AddMember("AWS_BEDROCK_AGENTCORE_RUNTIME", smithyprelude.Unit)
+
+	SourceType_AWS_BEDROCK_AGENTCORE_GATEWAY = SourceType.AddMember("AWS_BEDROCK_AGENTCORE_GATEWAY", smithyprelude.Unit)
+
+	SourceDetails_agentcoreRuntime = SourceDetails.AddMember("agentcoreRuntime", AgentCoreRuntimeSourceDetails)
+
+	SourceDetails_agentcoreGateway = SourceDetails.AddMember("agentcoreGateway", AgentCoreGatewaySourceDetails)
+
+	Provenance_relation = Provenance.AddMember("relation", ProvenanceRelation)
+
+	Provenance_sourceId = Provenance.AddMember("sourceId", _SourceId)
+
+	Provenance_sourceType = Provenance.AddMember("sourceType", SourceType)
+
+	Provenance_sourceDetails = Provenance.AddMember("sourceDetails", SourceDetails)
+
+	_ProvenanceList_member = _ProvenanceList.AddMember("member", Provenance)
+
+	ProvenanceSummary_relation = ProvenanceSummary.AddMember("relation", ProvenanceRelation)
+
+	ProvenanceSummary_sourceId = ProvenanceSummary.AddMember("sourceId", _SourceId)
+
+	ProvenanceSummary_sourceType = ProvenanceSummary.AddMember("sourceType", SourceType)
+
+	_ProvenanceSummaryList_member = _ProvenanceSummaryList.AddMember("member", ProvenanceSummary)
 
 	RecordType_MCP = RecordType.AddMember("MCP", smithyprelude.Unit)
 
@@ -1684,6 +2017,8 @@ func init() {
 	RecordType_CUSTOM = RecordType.AddMember("CUSTOM", smithyprelude.Unit)
 
 	RecordType_SKILL = RecordType.AddMember("SKILL", smithyprelude.Unit)
+
+	RecordType_GATEWAY = RecordType.AddMember("GATEWAY", smithyprelude.Unit)
 
 	RegistryFilterName_STATUS = RegistryFilterName.AddMember("STATUS", smithyprelude.Unit)
 
@@ -1747,6 +2082,12 @@ func init() {
 
 	RegistryRecordSummary_updatedAt = RegistryRecordSummary.AddMember("updatedAt", _DateTimestamp)
 
+	RegistryRecordSummary_createdByAutoDetection = RegistryRecordSummary.AddMember("createdByAutoDetection", smithyprelude.Boolean)
+
+	RegistryRecordSummary_createdBy = RegistryRecordSummary.AddMember("createdBy", _CreatorAccountId)
+
+	RegistryRecordSummary_provenanceSummaryList = RegistryRecordSummary.AddMember("provenanceSummaryList", _ProvenanceSummaryList)
+
 	_RegistryRecordSummaryList_member = _RegistryRecordSummaryList.AddMember("member", RegistryRecordSummary)
 
 	RegistryStatus_CREATING = RegistryStatus.AddMember("CREATING", smithyprelude.Unit)
@@ -1776,6 +2117,8 @@ func init() {
 	RegistrySummary_status = RegistrySummary.AddMember("status", RegistryStatus)
 
 	RegistrySummary_statusReason = RegistrySummary.AddMember("statusReason", smithyprelude.String)
+
+	RegistrySummary_autoDetection = RegistrySummary.AddMember("autoDetection", AutoDetection)
 
 	RegistrySummary_createdAt = RegistrySummary.AddMember("createdAt", _DateTimestamp)
 
@@ -1829,9 +2172,15 @@ func init() {
 
 	UpdatedAgentSkillsDefinitionDescriptor_optionalValue = UpdatedAgentSkillsDefinitionDescriptor.AddMember("optionalValue", UpdatedAgentSkillsDefinitionDescriptorFields)
 
+	UpdatedAgUiDescriptorFields_source = UpdatedAgUiDescriptorFields.AddMember("source", UpdatedDescriptorSource)
+
+	UpdatedAgUiDescriptor_optionalValue = UpdatedAgUiDescriptor.AddMember("optionalValue", UpdatedAgUiDescriptorFields)
+
 	UpdatedApprovalConfiguration_optionalValue = UpdatedApprovalConfiguration.AddMember("optionalValue", ApprovalConfiguration)
 
 	UpdatedAuthorizerConfiguration_optionalValue = UpdatedAuthorizerConfiguration.AddMember("optionalValue", AuthorizerConfiguration)
+
+	UpdatedAutoDetectionConfiguration_optionalValue = UpdatedAutoDetectionConfiguration.AddMember("optionalValue", AutoDetectionConfiguration)
 
 	UpdatedCustomDescriptorFields_data = UpdatedCustomDescriptorFields.AddMember("data", UpdatedDescriptorData)
 
@@ -1859,6 +2208,10 @@ func init() {
 
 	UpdatedMcpServerDescriptor_optionalValue = UpdatedMcpServerDescriptor.AddMember("optionalValue", UpdatedMcpServerDescriptorFields)
 
+	UpdatedHttpDescriptorFields_source = UpdatedHttpDescriptorFields.AddMember("source", UpdatedDescriptorSource)
+
+	UpdatedHttpDescriptor_optionalValue = UpdatedHttpDescriptor.AddMember("optionalValue", UpdatedHttpDescriptorFields)
+
 	UpdatedDescriptorsFields_mcpServer = UpdatedDescriptorsFields.AddMember("mcpServer", UpdatedMcpServerDescriptor)
 
 	UpdatedDescriptorsFields_a2aAgentCard = UpdatedDescriptorsFields.AddMember("a2aAgentCard", UpdatedA2aAgentCardDescriptor)
@@ -1866,6 +2219,10 @@ func init() {
 	UpdatedDescriptorsFields_agentSkillsDefinition = UpdatedDescriptorsFields.AddMember("agentSkillsDefinition", UpdatedAgentSkillsDefinitionDescriptor)
 
 	UpdatedDescriptorsFields_custom = UpdatedDescriptorsFields.AddMember("custom", UpdatedCustomDescriptor)
+
+	UpdatedDescriptorsFields_http = UpdatedDescriptorsFields.AddMember("http", UpdatedHttpDescriptor)
+
+	UpdatedDescriptorsFields_agui = UpdatedDescriptorsFields.AddMember("agui", UpdatedAgUiDescriptor)
 
 	UpdatedDescriptors_optionalValue = UpdatedDescriptors.AddMember("optionalValue", UpdatedDescriptorsFields)
 
@@ -1899,6 +2256,8 @@ func init() {
 
 	CreateRegistryRequest_description = CreateRegistryRequest.AddMember("description", _Description)
 
+	CreateRegistryRequest_encryptionConfiguration = CreateRegistryRequest.AddMember("encryptionConfiguration", EncryptionConfiguration)
+
 	CreateRegistryRequest_discoveryConfiguration = CreateRegistryRequest.AddMember("discoveryConfiguration", DiscoveryConfiguration)
 
 	CreateRegistryRequest_clientToken = CreateRegistryRequest.AddMember("clientToken", _ClientToken)
@@ -1906,6 +2265,8 @@ func init() {
 	CreateRegistryRequest_tags = CreateRegistryRequest.AddMember("tags", _TagsMap)
 
 	CreateRegistryRequest_approvalConfiguration = CreateRegistryRequest.AddMember("approvalConfiguration", ApprovalConfiguration)
+
+	CreateRegistryRequest_autoDetectionConfiguration = CreateRegistryRequest.AddMember("autoDetectionConfiguration", AutoDetectionConfiguration)
 
 	CreateRegistryResponse_registryArn = CreateRegistryResponse.AddMember("registryArn", _RegistryArn)
 
@@ -1924,6 +2285,8 @@ func init() {
 	CreateRegistryRecordRequest_recordVersion = CreateRegistryRecordRequest.AddMember("recordVersion", _RegistryRecordVersion)
 
 	CreateRegistryRecordRequest_clientToken = CreateRegistryRecordRequest.AddMember("clientToken", _ClientToken)
+
+	CreateRegistryRecordRequest_provenance = CreateRegistryRecordRequest.AddMember("provenance", _ProvenanceList)
 
 	CreateRegistryRecordRequest_tags = CreateRegistryRecordRequest.AddMember("tags", _TagsMap)
 
@@ -1951,11 +2314,15 @@ func init() {
 
 	GetRegistryResponse_discoveryConfiguration = GetRegistryResponse.AddMember("discoveryConfiguration", DiscoveryConfiguration)
 
+	GetRegistryResponse_encryptionConfiguration = GetRegistryResponse.AddMember("encryptionConfiguration", EncryptionConfiguration)
+
 	GetRegistryResponse_approvalConfiguration = GetRegistryResponse.AddMember("approvalConfiguration", ApprovalConfiguration)
 
 	GetRegistryResponse_status = GetRegistryResponse.AddMember("status", RegistryStatus)
 
 	GetRegistryResponse_statusReason = GetRegistryResponse.AddMember("statusReason", smithyprelude.String)
+
+	GetRegistryResponse_autoDetection = GetRegistryResponse.AddMember("autoDetection", AutoDetection)
 
 	GetRegistryResponse_createdAt = GetRegistryResponse.AddMember("createdAt", _DateTimestamp)
 
@@ -1990,6 +2357,12 @@ func init() {
 	GetRegistryRecordResponse_updatedAt = GetRegistryRecordResponse.AddMember("updatedAt", _DateTimestamp)
 
 	GetRegistryRecordResponse_statusReason = GetRegistryRecordResponse.AddMember("statusReason", smithyprelude.String)
+
+	GetRegistryRecordResponse_provenance = GetRegistryRecordResponse.AddMember("provenance", _ProvenanceList)
+
+	GetRegistryRecordResponse_createdByAutoDetection = GetRegistryRecordResponse.AddMember("createdByAutoDetection", smithyprelude.Boolean)
+
+	GetRegistryRecordResponse_createdBy = GetRegistryRecordResponse.AddMember("createdBy", _CreatorAccountId)
 
 	ListRegistriesRequest_maxResults = ListRegistriesRequest.AddMember("maxResults", _MaxResults)
 
@@ -2049,6 +2422,8 @@ func init() {
 
 	UpdateRegistryRequest_approvalConfiguration = UpdateRegistryRequest.AddMember("approvalConfiguration", UpdatedApprovalConfiguration)
 
+	UpdateRegistryRequest_autoDetectionConfiguration = UpdateRegistryRequest.AddMember("autoDetectionConfiguration", UpdatedAutoDetectionConfiguration)
+
 	UpdateRegistryResponse_name = UpdateRegistryResponse.AddMember("name", _RegistryName)
 
 	UpdateRegistryResponse_description = UpdateRegistryResponse.AddMember("description", _Description)
@@ -2059,11 +2434,15 @@ func init() {
 
 	UpdateRegistryResponse_discoveryConfiguration = UpdateRegistryResponse.AddMember("discoveryConfiguration", DiscoveryConfiguration)
 
+	UpdateRegistryResponse_encryptionConfiguration = UpdateRegistryResponse.AddMember("encryptionConfiguration", EncryptionConfiguration)
+
 	UpdateRegistryResponse_approvalConfiguration = UpdateRegistryResponse.AddMember("approvalConfiguration", ApprovalConfiguration)
 
 	UpdateRegistryResponse_status = UpdateRegistryResponse.AddMember("status", RegistryStatus)
 
 	UpdateRegistryResponse_statusReason = UpdateRegistryResponse.AddMember("statusReason", smithyprelude.String)
+
+	UpdateRegistryResponse_autoDetection = UpdateRegistryResponse.AddMember("autoDetection", AutoDetection)
 
 	UpdateRegistryResponse_createdAt = UpdateRegistryResponse.AddMember("createdAt", _DateTimestamp)
 
@@ -2086,6 +2465,8 @@ func init() {
 	UpdateRegistryRecordRequest_recordVersion = UpdateRegistryRecordRequest.AddMember("recordVersion", _RegistryRecordVersion)
 
 	UpdateRegistryRecordRequest_triggerSynchronization = UpdateRegistryRecordRequest.AddMember("triggerSynchronization", smithyprelude.Boolean)
+
+	UpdateRegistryRecordRequest_provenance = UpdateRegistryRecordRequest.AddMember("provenance", _ProvenanceList)
 
 	UpdateRegistryRecordResponse_registryArn = UpdateRegistryRecordResponse.AddMember("registryArn", _RegistryArn)
 
@@ -2112,6 +2493,12 @@ func init() {
 	UpdateRegistryRecordResponse_updatedAt = UpdateRegistryRecordResponse.AddMember("updatedAt", _DateTimestamp)
 
 	UpdateRegistryRecordResponse_statusReason = UpdateRegistryRecordResponse.AddMember("statusReason", smithyprelude.String)
+
+	UpdateRegistryRecordResponse_provenance = UpdateRegistryRecordResponse.AddMember("provenance", _ProvenanceList)
+
+	UpdateRegistryRecordResponse_createdByAutoDetection = UpdateRegistryRecordResponse.AddMember("createdByAutoDetection", smithyprelude.Boolean)
+
+	UpdateRegistryRecordResponse_createdBy = UpdateRegistryRecordResponse.AddMember("createdBy", _CreatorAccountId)
 
 	UpdateRegistryRecordStatusRequest_registryId = UpdateRegistryRecordStatusRequest.AddMember("registryId", _RegistryIdentifier, &smithytraits.HTTPLabel{})
 

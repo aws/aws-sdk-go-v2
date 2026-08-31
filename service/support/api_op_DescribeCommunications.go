@@ -13,20 +13,36 @@ import (
 // afterTime and beforeTime parameters to filter by date. You can use the caseId
 // parameter to restrict the results to a specific case.
 //
-// Case data is available for 12 months after creation. If a case was created more
-// than 12 months ago, a request for data might cause an error.
+// Case data is available for 24 months after creation. If a case was created more
+// than 24 months ago, a request for data might cause an error.
 //
 // You can use the maxResults and nextToken parameters to control the pagination
 // of the results. Set maxResults to the number of cases that you want to display
 // on each page, and use nextToken to specify the resumption of pagination.
 //
-//   - You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to
-//     use the Amazon Web Services Support API.
+//   - You must have an Amazon Web Services Business Support+, Amazon Web Services
+//     Enterprise Support, or Amazon Web Services Unified Operations plan to use the
+//     Amazon Web Services Support API. If you're in an Amazon Web Services Region that
+//     doesn't offer one of these Amazon Web Services Support plans, or if you haven't
+//     transitioned to one of these plans, you can use the Amazon Web Services Support
+//     API with a Business, Enterprise On-Ramp, or Enterprise Support plan.
 //
 //   - If you call the Amazon Web Services Support API from an account that
-//     doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the
+//     doesn't have an Amazon Web Services Business Support+, Amazon Web Services
+//     Enterprise Support, or Amazon Web Services Unified Operations plan, the
 //     SubscriptionRequiredException error message appears. For information about
 //     changing your support plan, see [Amazon Web Services Support].
+//
+// Each Communication returned by this operation includes attachment information in two fields:
+//
+//   - attachmentSet : returns only attachments that are 5 MB or smaller.
+//     Attachments larger than 5 MB are not included in this field.
+//
+//   - attachments : returns all attachments regardless of size.
+//
+// Amazon Web Services recommends that you use the attachments field and download
+// each attachment with GetAttachmentDownloadLink, which supports attachments of any size. The attachmentSet
+// field and DescribeAttachmentreturn only attachments that are 5 MB or smaller.
 //
 // [Amazon Web Services Support]: http://aws.amazon.com/premiumsupport/
 func (c *Client) DescribeCommunications(ctx context.Context, params *DescribeCommunicationsInput, optFns ...func(*Options)) (*DescribeCommunicationsOutput, error) {
@@ -48,18 +64,25 @@ type DescribeCommunicationsInput struct {
 
 	// The support case ID requested or returned in the call. The case ID is an
 	// alphanumeric string formatted as shown in this example:
-	// case-12345678910-2013-c4c1d2bf33c5cf47
+	// case-12345678910-exen-2025-c4c1d2bf33c5cf47
 	//
 	// This member is required.
 	CaseId *string
 
 	// The start date for a filtered date search on support case communications. Case
-	// communications are available for 12 months after creation.
+	// communications are available for 24 months after creation.
 	AfterTime *string
 
 	// The end date for a filtered date search on support case communications. Case
-	// communications are available for 12 months after creation.
+	// communications are available for 24 months after creation.
 	BeforeTime *string
+
+	// Specifies whether to validate the request without actually returning
+	// communications. When set to true , the request is validated but no
+	// communications are returned, and the operation returns a
+	// DryRunOperationException . When omitted or set to false , the request runs
+	// normally.
+	DryRun *bool
 
 	// The maximum number of results to return before paginating.
 	MaxResults *int32

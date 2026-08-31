@@ -204,6 +204,174 @@ func (v *CloudWatchLogsDestination) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
+// The set of conditional rules that determine a field's resolved requirement
+// based on the values of other fields in the same registration form. Attached to
+// fields whose FieldRequirement is CONDITIONAL.
+//
+// Evaluation proceeds top-to-bottom through Rules. The first rule whose
+// conditions all evaluate to true wins and its behavior is returned. If no rule
+// matches, the DefaultBehavior is returned.
+type ConditionalBehavior struct {
+
+	// The field behavior that applies when no conditional rule in Rules matches.
+	// Valid values are REQUIRED, OPTIONAL, and DISALLOWED.
+	//
+	// This member is required.
+	DefaultBehavior *string
+
+	// An ordered list of conditional rules. Rules are evaluated top-to-bottom and the
+	// first rule whose conditions all evaluate to true determines the field's
+	// behavior. Rules whose conditions do not all match are skipped and evaluation
+	// continues to the next rule.
+	//
+	// This member is required.
+	Rules []ConditionalRule
+
+	noSmithyDocumentSerde
+}
+
+func (v *ConditionalBehavior) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConditionalBehavior)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConditionalBehavior) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultBehavior != nil {
+		s.WriteString(schemas.ConditionalBehavior_DefaultBehavior, *v.DefaultBehavior)
+	}
+	serializeConditionalRuleList(s, schemas.ConditionalBehavior_Rules, v.Rules)
+}
+func (v *ConditionalBehavior) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConditionalBehavior, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConditionalBehavior_DefaultBehavior:
+			v.DefaultBehavior = new(string)
+			return d.ReadString(schemas.ConditionalBehavior_DefaultBehavior, v.DefaultBehavior)
+		case schemas.ConditionalBehavior_Rules:
+			return deserializeConditionalRuleList(d, schemas.ConditionalBehavior_Rules, &v.Rules)
+		}
+		return nil
+	})
+}
+
+// A single conditional rule that resolves to a field behavior when all of its
+// conditions evaluate to true. Conditions within a rule are combined with logical
+// AND: all conditions must match for the rule to fire.
+type ConditionalRule struct {
+
+	// The conditions that must all evaluate to true for this rule to match.
+	// Conditions are combined with logical AND. Use multiple rules with the same
+	// RuleBehavior to express logical OR.
+	//
+	// This member is required.
+	Conditions []FieldCondition
+
+	// The field behavior that applies when all conditions in this rule match. Valid
+	// values are REQUIRED, OPTIONAL, and DISALLOWED.
+	//
+	// This member is required.
+	RuleBehavior *string
+
+	// Optional per-rule validation constraints (minimum length, maximum length, regex
+	// pattern, allowed select values) that override the field's default validation
+	// when this rule matches.
+	ConditionalValidation *ConditionalValidation
+
+	noSmithyDocumentSerde
+}
+
+func (v *ConditionalRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConditionalRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConditionalRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConditionalValidation != nil {
+		s.WriteStruct(schemas.ConditionalRule_ConditionalValidation)
+		v.ConditionalValidation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFieldConditionList(s, schemas.ConditionalRule_Conditions, v.Conditions)
+	if v.RuleBehavior != nil {
+		s.WriteString(schemas.ConditionalRule_RuleBehavior, *v.RuleBehavior)
+	}
+}
+func (v *ConditionalRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConditionalRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConditionalRule_ConditionalValidation:
+			v.ConditionalValidation = &ConditionalValidation{}
+			return v.ConditionalValidation.Deserialize(d)
+		case schemas.ConditionalRule_Conditions:
+			return deserializeFieldConditionList(d, schemas.ConditionalRule_Conditions, &v.Conditions)
+		case schemas.ConditionalRule_RuleBehavior:
+			v.RuleBehavior = new(string)
+			return d.ReadString(schemas.ConditionalRule_RuleBehavior, v.RuleBehavior)
+		}
+		return nil
+	})
+}
+
+// Per-rule validation constraints that override the field's default validation
+// when the containing rule matches. All fields are optional; only the constraints
+// that need to differ from the field's default validation are provided.
+type ConditionalValidation struct {
+
+	// The allowed values for a select field when this rule applies. A subset of the
+	// field's full option list.
+	AllowedValues []string
+
+	// The maximum length for the field value when this rule applies.
+	MaxLength *int32
+
+	// The minimum length for the field value when this rule applies.
+	MinLength *int32
+
+	// A regular expression that the field value must match when this rule applies.
+	Pattern *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ConditionalValidation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConditionalValidation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConditionalValidation) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSelectChoiceList(s, schemas.ConditionalValidation_AllowedValues, v.AllowedValues)
+	if v.MaxLength != nil {
+		s.WriteInt32(schemas.ConditionalValidation_MaxLength, *v.MaxLength)
+	}
+	if v.MinLength != nil {
+		s.WriteInt32(schemas.ConditionalValidation_MinLength, *v.MinLength)
+	}
+	if v.Pattern != nil {
+		s.WriteString(schemas.ConditionalValidation_Pattern, *v.Pattern)
+	}
+}
+func (v *ConditionalValidation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConditionalValidation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConditionalValidation_AllowedValues:
+			return deserializeSelectChoiceList(d, schemas.ConditionalValidation_AllowedValues, &v.AllowedValues)
+		case schemas.ConditionalValidation_MaxLength:
+			v.MaxLength = new(int32)
+			return d.ReadInt32(schemas.ConditionalValidation_MaxLength, v.MaxLength)
+		case schemas.ConditionalValidation_MinLength:
+			v.MinLength = new(int32)
+			return d.ReadInt32(schemas.ConditionalValidation_MinLength, v.MinLength)
+		case schemas.ConditionalValidation_Pattern:
+			v.Pattern = new(string)
+			return d.ReadString(schemas.ConditionalValidation_Pattern, v.Pattern)
+		}
+		return nil
+	})
+}
+
 // The information for configuration sets that meet a specified criteria.
 type ConfigurationSetFilter struct {
 
@@ -568,6 +736,64 @@ func (v *EventDestination) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.EventDestination_SnsDestination:
 			v.SnsDestination = &SnsDestination{}
 			return v.SnsDestination.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// A single condition on a dependency field's value. Conditions are combined into
+// a ConditionalRule and evaluated together with logical AND.
+type FieldCondition struct {
+
+	// The path of the field whose value determines this condition, for example
+	// companyInfo.businessType.
+	//
+	// This member is required.
+	DependsOnFieldPath *string
+
+	// The comparison operator to apply between the dependency field's value and
+	// Values. Valid values are EQUALS, NOT_EQUALS, IN, NOT_IN, HAS_VALUE, and
+	// NO_VALUE. Operators not in this list are treated as evaluating to false, which
+	// causes the containing rule to be skipped. This allows forward-compatible
+	// additions of new operators without breaking older SDK clients.
+	//
+	// This member is required.
+	Operator *string
+
+	// The values to compare the dependency field's value against. Required for the
+	// EQUALS, NOT_EQUALS, IN, and NOT_IN operators. Omitted for HAS_VALUE and
+	// NO_VALUE, which test only presence.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FieldCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FieldCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FieldCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DependsOnFieldPath != nil {
+		s.WriteString(schemas.FieldCondition_DependsOnFieldPath, *v.DependsOnFieldPath)
+	}
+	if v.Operator != nil {
+		s.WriteString(schemas.FieldCondition_Operator, *v.Operator)
+	}
+	serializeConditionValueList(s, schemas.FieldCondition_Values, v.Values)
+}
+func (v *FieldCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FieldCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FieldCondition_DependsOnFieldPath:
+			v.DependsOnFieldPath = new(string)
+			return d.ReadString(schemas.FieldCondition_DependsOnFieldPath, v.DependsOnFieldPath)
+		case schemas.FieldCondition_Operator:
+			v.Operator = new(string)
+			return d.ReadString(schemas.FieldCondition_Operator, v.Operator)
+		case schemas.FieldCondition_Values:
+			return deserializeConditionValueList(d, schemas.FieldCondition_Values, &v.Values)
 		}
 		return nil
 	})
@@ -3954,6 +4180,12 @@ type RegistrationFieldDefinition struct {
 	// This member is required.
 	SectionPath *string
 
+	// The conditional behavior rules for this field. Only present when
+	// FieldRequirement is CONDITIONAL. Rules are evaluated in order and the first
+	// matching rule determines the field's resolved requirement. If no rule matches,
+	// the DefaultBehavior applies.
+	ConditionalBehavior *ConditionalBehavior
+
 	// The validation rules for a select field.
 	SelectValidation *SelectValidation
 
@@ -3970,6 +4202,11 @@ func (v *RegistrationFieldDefinition) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RegistrationFieldDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConditionalBehavior != nil {
+		s.WriteStruct(schemas.RegistrationFieldDefinition_ConditionalBehavior)
+		v.ConditionalBehavior.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.DisplayHints != nil {
 		s.WriteStruct(schemas.RegistrationFieldDefinition_DisplayHints)
 		v.DisplayHints.SerializeMembers(s)
@@ -4001,6 +4238,9 @@ func (v *RegistrationFieldDefinition) SerializeMembers(s smithy.ShapeSerializer)
 func (v *RegistrationFieldDefinition) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RegistrationFieldDefinition, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.RegistrationFieldDefinition_ConditionalBehavior:
+			v.ConditionalBehavior = &ConditionalBehavior{}
+			return v.ConditionalBehavior.Deserialize(d)
 		case schemas.RegistrationFieldDefinition_DisplayHints:
 			v.DisplayHints = &RegistrationFieldDisplayHints{}
 			return v.DisplayHints.Deserialize(d)

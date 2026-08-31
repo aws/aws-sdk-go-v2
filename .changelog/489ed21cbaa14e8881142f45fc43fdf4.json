@@ -1,0 +1,8 @@
+{
+    "id": "489ed21c-baa1-4e88-8114-2f45fc43fdf4",
+    "type": "documentation",
+    "description": "Updated the descriptions for the AWS Control Tower ListEnabledControls API parameters to make them more accurate and intuitive.",
+    "modules": [
+        "service/controltower"
+    ]
+}

@@ -14,6 +14,13 @@ import (
 type AccessControlConfiguration struct {
 
 	// Specifies whether ACLs are enabled for the knowledge base.
+	//
+	// This setting works together with the data source connector's ACL crawling. To
+	// enforce document-level access control end to end, set isACLEnabled to true and
+	// enable ACL crawling on the connector. For example, for an Amazon S3 data source,
+	// set accessControlConfiguration.crawlAcl to true in the connector template. For
+	// more information, see KbTemplateConfiguration . Enabling only one of the two
+	// settings does not produce a fully ACL-enforced knowledge base.
 	IsACLEnabled *bool
 
 	noSmithyDocumentSerde
@@ -1115,6 +1122,31 @@ type ApprovalPolicy struct {
 
 	// A description of the approval policy.
 	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of an app, including its identifier, name, and metadata.
+type AppSummary struct {
+
+	// The ID of the app.
+	AppId *string
+
+	// The Amazon Resource Name (ARN) of the app.
+	Arn *string
+
+	// The time that the app was created.
+	CreatedTime *time.Time
+
+	// The time that the app was last updated.
+	LastUpdatedTime *time.Time
+
+	// The display name of the app.
+	Name *string
+
+	// The sharing status of the app: PUBLIC if the app is shared publicly, or PRIVATE
+	// if it is private.
+	Visibility AppVisibility
 
 	noSmithyDocumentSerde
 }
@@ -13311,35 +13343,108 @@ type KbTemplateConfiguration struct {
 	// The connector configuration for the knowledge base data source. The structure
 	// depends on the connector type of the data source referenced by DataSourceArn .
 	//
-	// The template must be a JSON object. The required fields vary by connector type:
+	// The template must be a JSON object. All connector types share the following
+	// top-level keys. The value of type and the contents of connectionConfiguration
+	// vary by connector type.
 	//
-	//   - Amazon S3 ( S3V2 ) – Requires connectionConfiguration with bucketName .
-	//   Supports filterConfiguration for inclusion and exclusion prefixes and
-	//   patterns. Supports accessControlConfiguration and
-	//   deletionProtectionConfiguration .
+	//   - type – (Required) The connector type of the data source. This value
+	//   identifies the connector. Valid values: S3V2 , WEBCRAWLERV3 , GOOGLEDRIVEV3 ,
+	//   ONEDRIVEV3 , SHAREPOINTV3 . For the fields required by each connector, see the
+	//   connector-specific list that follows.
 	//
-	//   - Google Drive ( GOOGLEDRIVEV3 ) – Requires connectionConfiguration with
-	//   authType set to SERVICE_ACCOUNT . Supports dataEntityConfiguration with
+	//   - connectionConfiguration – (Required) The connection details for the data
+	//   source. The keys in this object vary by connector type; see the
+	//   connector-specific list that follows.
+	//
+	//   - filterConfiguration – (Optional) Rules that determine which content is
+	//   crawled, such as inclusion and exclusion prefixes, patterns, or file-size
+	//   limits.
+	//
+	//   - accessControlConfiguration – (Optional) Document-level access control (ACL)
+	//   settings. Supported by all connector types except Web Crawler ( WEBCRAWLERV3
+	//   ). The available fields depend on the connector type.
+	//
+	//   - deletionProtectionConfiguration – (Optional) Deletion-protection settings,
+	//   supported by all connector types. Contains enableDeletionProtection (Boolean)
+	//   and deletionProtectionThreshold (String; a value from 1 to 100).
+	//
+	// The following list describes the valid type value, the connectionConfiguration
+	// contents, and any connector-specific fields for each connector type:
+	//
+	//   - Amazon S3 ( type : S3V2 ) – The type value must be S3V2 .
+	//   connectionConfiguration is required and contains:
+	//
+	//   - bucketName – (Required) The name of the Amazon S3 bucket to crawl. Type:
+	//   String. Length: 3–63 characters. Pattern: ^[a-z0-9][.\-a-z0-9]{1,61}[a-z0-9]$ .
+	//
+	//   - bucketOwnerAccountId – (Required) The ID of the AWS account that owns the
+	//   bucket. Type: String. Pattern: ^\d{12}$ .
+	//
+	// Amazon S3 supports the following optional filterConfiguration fields:
+	//
+	//   - inclusionPrefixes or exclusionPrefixes – Amazon S3 key prefixes to include
+	//   or exclude. Type: Array of String. Up to 350 items, each 1–1,024 characters.
+	//
+	//   - inclusionPatterns or exclusionPatterns – Patterns to include or exclude
+	//   objects. Type: Array of String. Up to 350 items, each 1–1,024 characters.
+	//
+	//   - maxFileSizeInMegaBytes – The maximum size, in MB, of a file to ingest. Type:
+	//   String. Pattern: ^\d+$ .
+	//
+	// For Amazon S3, accessControlConfiguration supports the following fields:
+	//
+	//   - crawlAcl – Specifies whether the connector crawls and enforces document
+	//   access control lists (ACLs). Type: Boolean. When set to true , provide ACLs
+	//   either in a global ACL configuration file ( aclConfigurationFilePath ) or in
+	//   per-document metadata files.
+	//
+	//   - aclConfigurationFilePath – The Amazon S3 URI of the global ACL configuration
+	//   file. Type: String. Length: 1–1,024 characters. Optional. If you don't provide a
+	//   global ACL configuration file, define ACLs in per-document metadata files.
+	//
+	//   - defaultAccessType – The access behavior applied to Amazon S3 prefixes that
+	//   are not listed in the ACL configuration. Type: String. The only supported value
+	//   is ALLOW .
+	//
+	// metadataFilesPrefix – (Optional) The Amazon S3 prefix under which per-document
+	//   metadata files are stored. Each metadata file describes a single source document
+	//   and its indexable attributes. This is not the global ACL configuration file. For
+	//   a single global ACL file, use
+	//   accessControlConfiguration.aclConfigurationFilePath . Type: String. Length:
+	//   1–1,024 characters.
+	//
+	//   - Google Drive ( type : GOOGLEDRIVEV3 ) – Requires connectionConfiguration
+	//   with authType set to SERVICE_ACCOUNT . Supports dataEntityConfiguration with
 	//   crawlMyDrive , crawlSharedWithMe , and crawlSharedDrives .
 	//
-	//   - OneDrive ( ONEDRIVEV3 ) – Requires authType at the template root level set
-	//   to TWO_LEGGED_OAUTH . Requires connectionConfiguration with tenantId in UUID
-	//   format. Supports dataEntityConfiguration with crawlPersonalDrives and
+	//   - OneDrive ( type : ONEDRIVEV3 ) – Requires authType at the template root
+	//   level set to TWO_LEGGED_OAUTH . Requires connectionConfiguration with tenantId
+	//   in UUID format. Supports dataEntityConfiguration with crawlPersonalDrives and
 	//   crawlSharedWithMe .
 	//
-	//   - SharePoint ( SHAREPOINTV3 ) – Requires connectionConfiguration with tenantId
-	//   in UUID format. Supports dataEntityConfiguration with siteUrls , crawlFiles ,
-	//   and crawlPages .
+	//   - SharePoint ( type : SHAREPOINTV3 ) – Requires connectionConfiguration with
+	//   tenantId in UUID format. Supports dataEntityConfiguration with siteUrls ,
+	//   crawlFiles , and crawlPages .
 	//
-	//   - Web Crawler ( WEBCRAWLERV3 ) – Requires connectionConfiguration with
+	//   - Web Crawler ( type : WEBCRAWLERV3 ) – Requires connectionConfiguration with
 	//   seedUrls or siteMapUrls (mutually exclusive) and authType . Supports
 	//   crawlConfiguration for crawl depth, rate limits, and scope. Supports
 	//   filterConfiguration for file size limits and URL patterns. Valid values for
 	//   authType : NO_AUTH , BASIC_AUTH , FORM , SAML .
 	//
-	// The optional deletionProtectionConfiguration object is supported by all
-	// connector types. It contains enableDeletionProtection and
-	// deletionProtectionThreshold .
+	// Enabling document-level access control for Amazon S3
+	//
+	// For an Amazon S3 ( S3V2 ) knowledge base, document-level access control is
+	// governed by two settings that must both be enabled:
+	//
+	//   - In this template, set accessControlConfiguration.crawlAcl to true . Define
+	//   ACLs either in a global ACL configuration file, referenced by
+	//   accessControlConfiguration.aclConfigurationFilePath , or in per-document
+	//   metadata files. To control access for prefixes that are not listed in the ACL
+	//   file, you can also set accessControlConfiguration.defaultAccessType .
+	//
+	//   - In the CreateKnowledgeBase or UpdateKnowledgeBase request, set the top-level
+	//   AccessControlConfiguration.isACLEnabled to true .
 	Template document.Interface
 
 	noSmithyDocumentSerde
@@ -18490,7 +18595,38 @@ type S3BucketConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The parameters that are required to connect to a S3 Knowledge Base data source.
+// The parameters that are required to connect to an S3 knowledge base data source.
+//
+// Prerequisites: Amazon S3 bucket access
+//
+// Before you call CreateKnowledgeBase for an Amazon S3 knowledge base, an
+// administrator must grant Amazon QuickSight access to the source S3 bucket. If
+// access has not been granted for the bucket, knowledge base creation fails.
+//
+// To grant access, an administrator adds the bucket in the Amazon QuickSight
+// admin console, under Permissions, Amazon Web Services resources, Amazon S3,
+// Select S3 buckets. This authorizes the Amazon QuickSight service role to read
+// the bucket. The bucket can be in the same Amazon Web Services account or, when
+// the bucket owner has authorized your account, in a different account.
+//
+// The service role requires at least the following permissions on the bucket:
+//
+//   - s3:GetObject
+//
+//   - s3:ListBucket
+//
+//   - s3:GetBucketLocation
+//
+//   - s3:GetObjectVersion
+//
+//   - s3:ListBucketVersions
+//
+// For the full procedure, including cross-account buckets and KMS-encrypted
+// buckets, see the Amazon S3 knowledge base administrator setup guide.
+//
+// To grant access for a specific S3 knowledge base data source without granting
+// account-wide S3 access, provide a custom IAM role on the data source by using
+// RoleArn .
 type S3KnowledgeBaseParameters struct {
 
 	// The URL of the S3 bucket that contains the knowledge base data.
@@ -18498,8 +18634,11 @@ type S3KnowledgeBaseParameters struct {
 	// This member is required.
 	BucketUrl *string
 
-	// The location of metadata files within the S3 bucket that describe the structure
-	// and content of the knowledge base.
+	// The Amazon S3 location (prefix) of per-document metadata files. Each metadata
+	// file describes a single source document and its indexable attributes, such as
+	// title, category, and version. This is not the global ACL configuration file. To
+	// apply a single global ACL file to the entire knowledge base, use the access
+	// control configuration instead.
 	MetadataFilesLocation *string
 
 	// Use the RoleArn structure to override an account-wide role for a specific S3
@@ -18881,6 +19020,27 @@ type ScrollBarOptions struct {
 
 	// The visibility range for the data zoom scroll bar.
 	VisibleRange *VisibleRangeOptions
+
+	noSmithyDocumentSerde
+}
+
+// A filter to apply when searching for apps.
+type SearchAppsFilter struct {
+
+	// The name of the filter attribute.
+	//
+	// This member is required.
+	Name SearchAppsFilterName
+
+	// The comparison operator for the filter.
+	//
+	// This member is required.
+	Operator FilterOperator
+
+	// The value to filter on.
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }

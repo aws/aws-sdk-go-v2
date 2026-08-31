@@ -14712,6 +14712,30 @@ func TestCheckResponseSnapshot_DeleteAnalysis(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteApp(t *testing.T) {
+	want := &DeleteAppOutput{
+		RequestId: ptr.String("__RequestId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteApp.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteApp(context.Background(), &DeleteAppInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		AppId:        ptr.String("__AppId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteApp.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteApprovalPolicy(t *testing.T) {
 	want := &DeleteApprovalPolicyOutput{}
 	status, header, body, err := serdeRespReadSnapshot("DeleteApprovalPolicy.response")
@@ -18079,6 +18103,80 @@ func TestCheckResponseSnapshot_DescribeAnalysisPermissions(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DescribeAnalysisPermissions.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeApp(t *testing.T) {
+	want := &DescribeAppOutput{
+		App: &types.AppSummary{
+			AppId:           ptr.String("__AppId__"),
+			Arn:             ptr.String("__Arn__"),
+			Name:            ptr.String("__Name__"),
+			CreatedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			Visibility:      types.AppVisibility("PRIVATE"),
+		},
+		RequestId: ptr.String("__RequestId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeApp.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeApp(context.Background(), &DescribeAppInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		AppId:        ptr.String("__AppId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeApp.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeAppPermissions(t *testing.T) {
+	want := &DescribeAppPermissionsOutput{
+		AppId: ptr.String("__AppId__"),
+		Arn:   ptr.String("__Arn__"),
+		Permissions: []types.ResourcePermission{
+			{
+				Principal: ptr.String("__Principal__"),
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Principal: ptr.String("__Principal__"),
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		RequestId: ptr.String("__RequestId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeAppPermissions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeAppPermissions(context.Background(), &DescribeAppPermissionsInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		AppId:        ptr.String("__AppId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeAppPermissions.response", err)
 	}
 }
 
@@ -30264,6 +30362,50 @@ func TestCheckResponseSnapshot_ListApprovalPolicies(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListApps(t *testing.T) {
+	want := &ListAppsOutput{
+		AppSummaryList: []types.AppSummary{
+			{
+				AppId:           ptr.String("__AppId__"),
+				Arn:             ptr.String("__Arn__"),
+				Name:            ptr.String("__Name__"),
+				CreatedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Visibility:      types.AppVisibility("PRIVATE"),
+			},
+			{
+				AppId:           ptr.String("__AppId__"),
+				Arn:             ptr.String("__Arn__"),
+				Name:            ptr.String("__Name__"),
+				CreatedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Visibility:      types.AppVisibility("PRIVATE"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+		RequestId: ptr.String("__RequestId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListApps.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListApps(context.Background(), &ListAppsInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListApps.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListAssetBundleExportJobs(t *testing.T) {
 	want := &ListAssetBundleExportJobsOutput{
 		AssetBundleExportJobSummaryList: []types.AssetBundleExportJobSummary{
@@ -36985,6 +37127,62 @@ func TestCheckResponseSnapshot_SearchAnalyses(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_SearchApps(t *testing.T) {
+	want := &SearchAppsOutput{
+		AppSummaryList: []types.AppSummary{
+			{
+				AppId:           ptr.String("__AppId__"),
+				Arn:             ptr.String("__Arn__"),
+				Name:            ptr.String("__Name__"),
+				CreatedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Visibility:      types.AppVisibility("PRIVATE"),
+			},
+			{
+				AppId:           ptr.String("__AppId__"),
+				Arn:             ptr.String("__Arn__"),
+				Name:            ptr.String("__Name__"),
+				CreatedTime:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				LastUpdatedTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Visibility:      types.AppVisibility("PRIVATE"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+		RequestId: ptr.String("__RequestId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("SearchApps.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.SearchApps(context.Background(), &SearchAppsInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		Filters: []types.SearchAppsFilter{
+			{
+				Name:     types.SearchAppsFilterName("APP_ID"),
+				Operator: types.FilterOperator("StringEquals"),
+				Value:    ptr.String("__Value__"),
+			},
+			{
+				Name:     types.SearchAppsFilterName("APP_ID"),
+				Operator: types.FilterOperator("StringEquals"),
+				Value:    ptr.String("__Value__"),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "SearchApps.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_SearchDashboards(t *testing.T) {
 	want := &SearchDashboardsOutput{
 		DashboardSummaryList: []types.DashboardSummary{
@@ -41363,6 +41561,82 @@ func TestCheckResponseSnapshot_UpdateAnalysisPermissions(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateAnalysisPermissions.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateAppPermissions(t *testing.T) {
+	want := &UpdateAppPermissionsOutput{
+		Arn:   ptr.String("__Arn__"),
+		AppId: ptr.String("__AppId__"),
+		Permissions: []types.ResourcePermission{
+			{
+				Principal: ptr.String("__Principal__"),
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Principal: ptr.String("__Principal__"),
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Visibility: types.AppVisibility("PRIVATE"),
+		RequestId:  ptr.String("__RequestId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateAppPermissions.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateAppPermissions(context.Background(), &UpdateAppPermissionsInput{
+		AwsAccountId: ptr.String("__AwsAccountId__"),
+		AppId:        ptr.String("__AppId__"),
+		GrantPermissions: []types.ResourcePermission{
+			{
+				Principal: ptr.String("__Principal__"),
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Principal: ptr.String("__Principal__"),
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		RevokePermissions: []types.ResourcePermission{
+			{
+				Principal: ptr.String("__Principal__"),
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+			{
+				Principal: ptr.String("__Principal__"),
+				Actions: []string{
+					"__Member__",
+					"__Member__",
+				},
+			},
+		},
+		Visibility: types.AppVisibility("PRIVATE"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateAppPermissions.response", err)
 	}
 }
 
@@ -59457,9 +59731,9 @@ func TestCheckResponseSnapshot_Error_InvalidParameterException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DescribeSelfUpgradeConfiguration(context.Background(), &DescribeSelfUpgradeConfigurationInput{
+	_, opErr := svc.DeleteApp(context.Background(), &DeleteAppInput{
 		AwsAccountId: ptr.String("__AwsAccountId__"),
-		Namespace:    ptr.String("__Namespace__"),
+		AppId:        ptr.String("__AppId__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

@@ -1,0 +1,5 @@
+POST /domains/__DomainName__/segment-streams
+
+Content-Type: application/json
+
+{"DestinationArn":"__DestinationArn__","DestinationRoleArn":"__DestinationRoleArn__"}

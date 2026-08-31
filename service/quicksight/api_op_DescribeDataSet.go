@@ -8,8 +8,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Describes a dataset. This operation doesn't support datasets that include
-// uploaded files as a source.
+// Describes a dataset.
 func (c *Client) DescribeDataSet(ctx context.Context, params *DescribeDataSetInput, optFns ...func(*Options)) (*DescribeDataSetOutput, error) {
 	if params == nil {
 		params = &DescribeDataSetInput{}

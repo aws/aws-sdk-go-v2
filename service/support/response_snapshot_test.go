@@ -131,6 +131,7 @@ func TestCheckResponseSnapshot_AddAttachmentsToSet(t *testing.T) {
 				Data:     []byte("blob"),
 			},
 		},
+		DryRun: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -160,12 +161,51 @@ func TestCheckResponseSnapshot_AddCommunicationToCase(t *testing.T) {
 			"__Member__",
 		},
 		AttachmentSetId: ptr.String("__AttachmentSetId__"),
+		UploadIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "AddCommunicationToCase.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CompleteAttachmentUpload(t *testing.T) {
+	want := &CompleteAttachmentUploadOutput{
+		UploadStatus: types.UploadStatus("attachment-ready"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CompleteAttachmentUpload.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CompleteAttachmentUpload(context.Background(), &CompleteAttachmentUploadInput{
+		UploadId: ptr.String("__UploadId__"),
+		CompletedUploads: []types.CompletedUpload{
+			{
+				PartIndex: ptr.Int32(1),
+				ETag:      ptr.String("__ETag__"),
+			},
+			{
+				PartIndex: ptr.Int32(1),
+				ETag:      ptr.String("__ETag__"),
+			},
+		},
+		DryRun: ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CompleteAttachmentUpload.response", err)
 	}
 }
 
@@ -194,6 +234,11 @@ func TestCheckResponseSnapshot_CreateCase(t *testing.T) {
 		Language:        ptr.String("__Language__"),
 		IssueType:       ptr.String("__IssueType__"),
 		AttachmentSetId: ptr.String("__AttachmentSetId__"),
+		UploadIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -220,12 +265,42 @@ func TestCheckResponseSnapshot_DescribeAttachment(t *testing.T) {
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.DescribeAttachment(context.Background(), &DescribeAttachmentInput{
 		AttachmentId: ptr.String("__AttachmentId__"),
+		DryRun:       ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DescribeAttachment.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DescribeAttachmentUploadStatus(t *testing.T) {
+	want := &DescribeAttachmentUploadStatusOutput{
+		UploadStatus: types.UploadStatus("attachment-ready"),
+		FileName:     ptr.String("__FileName__"),
+		UploadProgress: &types.UploadProgress{
+			TotalParts:          ptr.Int32(1),
+			CompletedPartsCount: ptr.Int32(1),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeAttachmentUploadStatus.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeAttachmentUploadStatus(context.Background(), &DescribeAttachmentUploadStatusInput{
+		UploadId: ptr.String("__UploadId__"),
+		DryRun:   ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeAttachmentUploadStatus.response", err)
 	}
 }
 
@@ -249,6 +324,16 @@ func TestCheckResponseSnapshot_DescribeCases(t *testing.T) {
 							Body:        ptr.String("__Body__"),
 							SubmittedBy: ptr.String("__SubmittedBy__"),
 							TimeCreated: ptr.String("__TimeCreated__"),
+							Attachments: []types.AttachmentDetails{
+								{
+									AttachmentId: ptr.String("__AttachmentId__"),
+									FileName:     ptr.String("__FileName__"),
+								},
+								{
+									AttachmentId: ptr.String("__AttachmentId__"),
+									FileName:     ptr.String("__FileName__"),
+								},
+							},
 							AttachmentSet: []types.AttachmentDetails{
 								{
 									AttachmentId: ptr.String("__AttachmentId__"),
@@ -265,6 +350,16 @@ func TestCheckResponseSnapshot_DescribeCases(t *testing.T) {
 							Body:        ptr.String("__Body__"),
 							SubmittedBy: ptr.String("__SubmittedBy__"),
 							TimeCreated: ptr.String("__TimeCreated__"),
+							Attachments: []types.AttachmentDetails{
+								{
+									AttachmentId: ptr.String("__AttachmentId__"),
+									FileName:     ptr.String("__FileName__"),
+								},
+								{
+									AttachmentId: ptr.String("__AttachmentId__"),
+									FileName:     ptr.String("__FileName__"),
+								},
+							},
 							AttachmentSet: []types.AttachmentDetails{
 								{
 									AttachmentId: ptr.String("__AttachmentId__"),
@@ -302,6 +397,16 @@ func TestCheckResponseSnapshot_DescribeCases(t *testing.T) {
 							Body:        ptr.String("__Body__"),
 							SubmittedBy: ptr.String("__SubmittedBy__"),
 							TimeCreated: ptr.String("__TimeCreated__"),
+							Attachments: []types.AttachmentDetails{
+								{
+									AttachmentId: ptr.String("__AttachmentId__"),
+									FileName:     ptr.String("__FileName__"),
+								},
+								{
+									AttachmentId: ptr.String("__AttachmentId__"),
+									FileName:     ptr.String("__FileName__"),
+								},
+							},
 							AttachmentSet: []types.AttachmentDetails{
 								{
 									AttachmentId: ptr.String("__AttachmentId__"),
@@ -318,6 +423,16 @@ func TestCheckResponseSnapshot_DescribeCases(t *testing.T) {
 							Body:        ptr.String("__Body__"),
 							SubmittedBy: ptr.String("__SubmittedBy__"),
 							TimeCreated: ptr.String("__TimeCreated__"),
+							Attachments: []types.AttachmentDetails{
+								{
+									AttachmentId: ptr.String("__AttachmentId__"),
+									FileName:     ptr.String("__FileName__"),
+								},
+								{
+									AttachmentId: ptr.String("__AttachmentId__"),
+									FileName:     ptr.String("__FileName__"),
+								},
+							},
 							AttachmentSet: []types.AttachmentDetails{
 								{
 									AttachmentId: ptr.String("__AttachmentId__"),
@@ -362,6 +477,7 @@ func TestCheckResponseSnapshot_DescribeCases(t *testing.T) {
 		MaxResults:            ptr.Int32(1),
 		Language:              ptr.String("__Language__"),
 		IncludeCommunications: ptr.Bool(true),
+		DryRun:                ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -379,6 +495,16 @@ func TestCheckResponseSnapshot_DescribeCommunications(t *testing.T) {
 				Body:        ptr.String("__Body__"),
 				SubmittedBy: ptr.String("__SubmittedBy__"),
 				TimeCreated: ptr.String("__TimeCreated__"),
+				Attachments: []types.AttachmentDetails{
+					{
+						AttachmentId: ptr.String("__AttachmentId__"),
+						FileName:     ptr.String("__FileName__"),
+					},
+					{
+						AttachmentId: ptr.String("__AttachmentId__"),
+						FileName:     ptr.String("__FileName__"),
+					},
+				},
 				AttachmentSet: []types.AttachmentDetails{
 					{
 						AttachmentId: ptr.String("__AttachmentId__"),
@@ -395,6 +521,16 @@ func TestCheckResponseSnapshot_DescribeCommunications(t *testing.T) {
 				Body:        ptr.String("__Body__"),
 				SubmittedBy: ptr.String("__SubmittedBy__"),
 				TimeCreated: ptr.String("__TimeCreated__"),
+				Attachments: []types.AttachmentDetails{
+					{
+						AttachmentId: ptr.String("__AttachmentId__"),
+						FileName:     ptr.String("__FileName__"),
+					},
+					{
+						AttachmentId: ptr.String("__AttachmentId__"),
+						FileName:     ptr.String("__FileName__"),
+					},
+				},
 				AttachmentSet: []types.AttachmentDetails{
 					{
 						AttachmentId: ptr.String("__AttachmentId__"),
@@ -423,6 +559,7 @@ func TestCheckResponseSnapshot_DescribeCommunications(t *testing.T) {
 		AfterTime:  ptr.String("__AfterTime__"),
 		NextToken:  ptr.String("__NextToken__"),
 		MaxResults: ptr.Int32(1),
+		DryRun:     ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -497,6 +634,7 @@ func TestCheckResponseSnapshot_DescribeCreateCaseOptions(t *testing.T) {
 		ServiceCode:  ptr.String("__ServiceCode__"),
 		Language:     ptr.String("__Language__"),
 		CategoryCode: ptr.String("__CategoryCode__"),
+		DryRun:       ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -553,6 +691,7 @@ func TestCheckResponseSnapshot_DescribeServices(t *testing.T) {
 			"__Member__",
 		},
 		Language: ptr.String("__Language__"),
+		DryRun:   ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -585,6 +724,7 @@ func TestCheckResponseSnapshot_DescribeSeverityLevels(t *testing.T) {
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.DescribeSeverityLevels(context.Background(), &DescribeSeverityLevelsInput{
 		Language: ptr.String("__Language__"),
+		DryRun:   ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -621,6 +761,7 @@ func TestCheckResponseSnapshot_DescribeSupportedLanguages(t *testing.T) {
 		IssueType:    ptr.String("__IssueType__"),
 		ServiceCode:  ptr.String("__ServiceCode__"),
 		CategoryCode: ptr.String("__CategoryCode__"),
+		DryRun:       ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -836,6 +977,79 @@ func TestCheckResponseSnapshot_DescribeTrustedAdvisorChecks(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetAttachmentDownloadLink(t *testing.T) {
+	want := &GetAttachmentDownloadLinkOutput{
+		FileName: ptr.String("__FileName__"),
+		DownloadUrl: &types.DownloadUrl{
+			Url:        ptr.String("__Url__"),
+			ExpiryDate: ptr.String("__ExpiryDate__"),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetAttachmentDownloadLink.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetAttachmentDownloadLink(context.Background(), &GetAttachmentDownloadLinkInput{
+		AttachmentId: ptr.String("__AttachmentId__"),
+		DryRun:       ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetAttachmentDownloadLink.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetAttachmentUploadLinks(t *testing.T) {
+	want := &GetAttachmentUploadLinksOutput{
+		UploadId:      ptr.String("__UploadId__"),
+		PartSizeBytes: ptr.Int64(1),
+		TotalParts:    1,
+		NextIndex:     1,
+		UploadUrls: []types.UploadUrl{
+			{
+				Url:        ptr.String("__Url__"),
+				PartIndex:  1,
+				ExpiryDate: ptr.String("__ExpiryDate__"),
+			},
+			{
+				Url:        ptr.String("__Url__"),
+				PartIndex:  1,
+				ExpiryDate: ptr.String("__ExpiryDate__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetAttachmentUploadLinks.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetAttachmentUploadLinks(context.Background(), &GetAttachmentUploadLinksInput{
+		FileName:      ptr.String("__FileName__"),
+		FileSizeBytes: ptr.Int64(1),
+		UploadId:      ptr.String("__UploadId__"),
+		UploadRange: &types.UploadRange{
+			StartIndex: ptr.Int32(1),
+			EndIndex:   ptr.Int32(1),
+		},
+		DryRun: ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetAttachmentUploadLinks.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_RefreshTrustedAdvisorCheck(t *testing.T) {
 	want := &RefreshTrustedAdvisorCheckOutput{
 		Status: &types.TrustedAdvisorCheckRefreshStatus{
@@ -878,6 +1092,7 @@ func TestCheckResponseSnapshot_ResolveCase(t *testing.T) {
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.ResolveCase(context.Background(), &ResolveCaseInput{
 		CaseId: ptr.String("__CaseId__"),
+		DryRun: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -901,6 +1116,7 @@ func TestCheckResponseSnapshot_Error_AttachmentIdNotFound(t *testing.T) {
 	svc := serdeRespClient(status, header, body)
 	_, opErr := svc.DescribeAttachment(context.Background(), &DescribeAttachmentInput{
 		AttachmentId: ptr.String("__AttachmentId__"),
+		DryRun:       ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -938,6 +1154,7 @@ func TestCheckResponseSnapshot_Error_AttachmentLimitExceeded(t *testing.T) {
 				Data:     []byte("blob"),
 			},
 		},
+		DryRun: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -975,6 +1192,7 @@ func TestCheckResponseSnapshot_Error_AttachmentSetExpired(t *testing.T) {
 				Data:     []byte("blob"),
 			},
 		},
+		DryRun: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1012,6 +1230,7 @@ func TestCheckResponseSnapshot_Error_AttachmentSetIdNotFound(t *testing.T) {
 				Data:     []byte("blob"),
 			},
 		},
+		DryRun: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1049,6 +1268,7 @@ func TestCheckResponseSnapshot_Error_AttachmentSetSizeLimitExceeded(t *testing.T
 				Data:     []byte("blob"),
 			},
 		},
+		DryRun: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1087,6 +1307,11 @@ func TestCheckResponseSnapshot_Error_CaseCreationLimitExceeded(t *testing.T) {
 		Language:        ptr.String("__Language__"),
 		IssueType:       ptr.String("__IssueType__"),
 		AttachmentSetId: ptr.String("__AttachmentSetId__"),
+		UploadIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1120,6 +1345,11 @@ func TestCheckResponseSnapshot_Error_CaseIdNotFound(t *testing.T) {
 			"__Member__",
 		},
 		AttachmentSetId: ptr.String("__AttachmentSetId__"),
+		UploadIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1147,6 +1377,7 @@ func TestCheckResponseSnapshot_Error_DescribeAttachmentLimitExceeded(t *testing.
 	svc := serdeRespClient(status, header, body)
 	_, opErr := svc.DescribeAttachment(context.Background(), &DescribeAttachmentInput{
 		AttachmentId: ptr.String("__AttachmentId__"),
+		DryRun:       ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1157,6 +1388,44 @@ func TestCheckResponseSnapshot_Error_DescribeAttachmentLimitExceeded(t *testing.
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "DescribeAttachmentLimitExceeded.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_DryRunOperationException(t *testing.T) {
+	want := &types.DryRunOperationException{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DryRunOperationException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.AddAttachmentsToSet(context.Background(), &AddAttachmentsToSetInput{
+		AttachmentSetId: ptr.String("__AttachmentSetId__"),
+		Attachments: []types.Attachment{
+			{
+				FileName: ptr.String("__FileName__"),
+				Data:     []byte("blob"),
+			},
+			{
+				FileName: ptr.String("__FileName__"),
+				Data:     []byte("blob"),
+			},
+		},
+		DryRun: ptr.Bool(true),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.DryRunOperationException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.DryRunOperationException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "DryRunOperationException.error", err)
 	}
 }
 
@@ -1184,6 +1453,7 @@ func TestCheckResponseSnapshot_Error_InternalServerError(t *testing.T) {
 				Data:     []byte("blob"),
 			},
 		},
+		DryRun: ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1200,6 +1470,16 @@ func TestCheckResponseSnapshot_Error_InternalServerError(t *testing.T) {
 func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 	want := &types.ThrottlingException{
 		Message: ptr.String("__Message__"),
+		ThrottlingReasons: []types.ThrottlingReason{
+			{
+				Reason:   ptr.String("__Reason__"),
+				Resource: ptr.String("__Resource__"),
+			},
+			{
+				Reason:   ptr.String("__Reason__"),
+				Resource: ptr.String("__Resource__"),
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("ThrottlingException.error")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1214,6 +1494,7 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		ServiceCode:  ptr.String("__ServiceCode__"),
 		Language:     ptr.String("__Language__"),
 		CategoryCode: ptr.String("__CategoryCode__"),
+		DryRun:       ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1224,5 +1505,43 @@ func TestCheckResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ThrottlingException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_UploadIdNotFound(t *testing.T) {
+	want := &types.UploadIdNotFound{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("UploadIdNotFound.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.CompleteAttachmentUpload(context.Background(), &CompleteAttachmentUploadInput{
+		UploadId: ptr.String("__UploadId__"),
+		CompletedUploads: []types.CompletedUpload{
+			{
+				PartIndex: ptr.Int32(1),
+				ETag:      ptr.String("__ETag__"),
+			},
+			{
+				PartIndex: ptr.Int32(1),
+				ETag:      ptr.String("__ETag__"),
+			},
+		},
+		DryRun: ptr.Bool(true),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.UploadIdNotFound
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.UploadIdNotFound, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "UploadIdNotFound.error", err)
 	}
 }

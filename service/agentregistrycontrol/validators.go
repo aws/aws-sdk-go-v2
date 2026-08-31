@@ -387,6 +387,50 @@ func validateA2aAgentCardDescriptor(v *types.A2aAgentCardDescriptor) error {
 	}
 }
 
+func validateAgentCoreGatewaySourceDetails(v *types.AgentCoreGatewaySourceDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgentCoreGatewaySourceDetails"}
+	if v.AuthorizerConfiguration != nil {
+		if err := validateAuthorizerConfiguration(v.AuthorizerConfiguration); err != nil {
+			invalidParams.AddNested("AuthorizerConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WorkloadIdentityDetails != nil {
+		if err := validateWorkloadIdentityDetails(v.WorkloadIdentityDetails); err != nil {
+			invalidParams.AddNested("WorkloadIdentityDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAgentCoreRuntimeSourceDetails(v *types.AgentCoreRuntimeSourceDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgentCoreRuntimeSourceDetails"}
+	if v.AuthorizerConfiguration != nil {
+		if err := validateAuthorizerConfiguration(v.AuthorizerConfiguration); err != nil {
+			invalidParams.AddNested("AuthorizerConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WorkloadIdentityDetails != nil {
+		if err := validateWorkloadIdentityDetails(v.WorkloadIdentityDetails); err != nil {
+			invalidParams.AddNested("WorkloadIdentityDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAgentSkillsAdditionalData(v *types.AgentSkillsAdditionalData) error {
 	if v == nil {
 		return nil
@@ -438,6 +482,23 @@ func validateAgentSkillsMdDescriptor(v *types.AgentSkillsMdDescriptor) error {
 	}
 }
 
+func validateAgUiDescriptor(v *types.AgUiDescriptor) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgUiDescriptor"}
+	if v.Source != nil {
+		if err := validateDescriptorSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAuthorizerConfiguration(v types.AuthorizerConfiguration) error {
 	if v == nil {
 		return nil
@@ -467,6 +528,24 @@ func validateAuthorizingClaimMatchValueType(v *types.AuthorizingClaimMatchValueT
 	}
 	if len(v.ClaimMatchOperator) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ClaimMatchOperator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutoDetectionConfiguration(v *types.AutoDetectionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutoDetectionConfiguration"}
+	if len(v.Scope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -567,6 +646,16 @@ func validateDescriptors(v *types.Descriptors) error {
 			invalidParams.AddNested("AgentSkillsDefinition", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Http != nil {
+		if err := validateHttpDescriptor(v.Http); err != nil {
+			invalidParams.AddNested("Http", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Agui != nil {
+		if err := validateAgUiDescriptor(v.Agui); err != nil {
+			invalidParams.AddNested("Agui", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -619,6 +708,38 @@ func validateDiscoveryConfiguration(v *types.DiscoveryConfiguration) error {
 	if v.AuthorizerConfiguration != nil {
 		if err := validateAuthorizerConfiguration(v.AuthorizerConfiguration); err != nil {
 			invalidParams.AddNested("AuthorizerConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEncryptionConfiguration(v *types.EncryptionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EncryptionConfiguration"}
+	if v.KmsKeyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHttpDescriptor(v *types.HttpDescriptor) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HttpDescriptor"}
+	if v.Source != nil {
+		if err := validateDescriptorSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -714,6 +835,46 @@ func validatePrivateEndpointOverrides(v []types.PrivateEndpointOverride) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PrivateEndpointOverrides"}
 	for i := range v {
 		if err := validatePrivateEndpointOverride(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProvenance(v *types.Provenance) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Provenance"}
+	if len(v.Relation) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Relation"))
+	}
+	if v.SourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceId"))
+	}
+	if v.SourceDetails != nil {
+		if err := validateSourceDetails(v.SourceDetails); err != nil {
+			invalidParams.AddNested("SourceDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProvenanceList(v []types.Provenance) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProvenanceList"}
+	for i := range v {
+		if err := validateProvenance(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -867,6 +1028,30 @@ func validateRegistryRecordOAuthCredentialProvider(v *types.RegistryRecordOAuthC
 	}
 }
 
+func validateSourceDetails(v types.SourceDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SourceDetails"}
+	switch uv := v.(type) {
+	case *types.SourceDetailsMemberAgentcoreGateway:
+		if err := validateAgentCoreGatewaySourceDetails(&uv.Value); err != nil {
+			invalidParams.AddNested("[agentcoreGateway]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.SourceDetailsMemberAgentcoreRuntime:
+		if err := validateAgentCoreRuntimeSourceDetails(&uv.Value); err != nil {
+			invalidParams.AddNested("[agentcoreRuntime]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUpdatedA2aAgentCardDescriptor(v *types.UpdatedA2aAgentCardDescriptor) error {
 	if v == nil {
 		return nil
@@ -1003,6 +1188,40 @@ func validateUpdatedAgentSkillsMdDescriptorFields(v *types.UpdatedAgentSkillsMdD
 	}
 }
 
+func validateUpdatedAgUiDescriptor(v *types.UpdatedAgUiDescriptor) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatedAgUiDescriptor"}
+	if v.OptionalValue != nil {
+		if err := validateUpdatedAgUiDescriptorFields(v.OptionalValue); err != nil {
+			invalidParams.AddNested("OptionalValue", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdatedAgUiDescriptorFields(v *types.UpdatedAgUiDescriptorFields) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatedAgUiDescriptorFields"}
+	if v.Source != nil {
+		if err := validateUpdatedDescriptorSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUpdatedAuthorizerConfiguration(v *types.UpdatedAuthorizerConfiguration) error {
 	if v == nil {
 		return nil
@@ -1010,6 +1229,23 @@ func validateUpdatedAuthorizerConfiguration(v *types.UpdatedAuthorizerConfigurat
 	invalidParams := smithy.InvalidParamsError{Context: "UpdatedAuthorizerConfiguration"}
 	if v.OptionalValue != nil {
 		if err := validateAuthorizerConfiguration(v.OptionalValue); err != nil {
+			invalidParams.AddNested("OptionalValue", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdatedAutoDetectionConfiguration(v *types.UpdatedAutoDetectionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatedAutoDetectionConfiguration"}
+	if v.OptionalValue != nil {
+		if err := validateAutoDetectionConfiguration(v.OptionalValue); err != nil {
 			invalidParams.AddNested("OptionalValue", err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1057,6 +1293,16 @@ func validateUpdatedDescriptorsFields(v *types.UpdatedDescriptorsFields) error {
 			invalidParams.AddNested("AgentSkillsDefinition", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Http != nil {
+		if err := validateUpdatedHttpDescriptor(v.Http); err != nil {
+			invalidParams.AddNested("Http", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Agui != nil {
+		if err := validateUpdatedAgUiDescriptor(v.Agui); err != nil {
+			invalidParams.AddNested("Agui", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1089,6 +1335,40 @@ func validateUpdatedDiscoveryConfiguration(v *types.UpdatedDiscoveryConfiguratio
 	if v.AuthorizerConfiguration != nil {
 		if err := validateUpdatedAuthorizerConfiguration(v.AuthorizerConfiguration); err != nil {
 			invalidParams.AddNested("AuthorizerConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdatedHttpDescriptor(v *types.UpdatedHttpDescriptor) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatedHttpDescriptor"}
+	if v.OptionalValue != nil {
+		if err := validateUpdatedHttpDescriptorFields(v.OptionalValue); err != nil {
+			invalidParams.AddNested("OptionalValue", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdatedHttpDescriptorFields(v *types.UpdatedHttpDescriptorFields) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatedHttpDescriptorFields"}
+	if v.Source != nil {
+		if err := validateUpdatedDescriptorSource(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1132,6 +1412,21 @@ func validateUpdatedMcpServerDescriptorFields(v *types.UpdatedMcpServerDescripto
 	}
 }
 
+func validateWorkloadIdentityDetails(v *types.WorkloadIdentityDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WorkloadIdentityDetails"}
+	if v.WorkloadIdentityArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkloadIdentityArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateRegistryInput(v *CreateRegistryInput) error {
 	if v == nil {
 		return nil
@@ -1140,9 +1435,19 @@ func validateOpCreateRegistryInput(v *CreateRegistryInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
+	if v.EncryptionConfiguration != nil {
+		if err := validateEncryptionConfiguration(v.EncryptionConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.DiscoveryConfiguration != nil {
 		if err := validateDiscoveryConfiguration(v.DiscoveryConfiguration); err != nil {
 			invalidParams.AddNested("DiscoveryConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AutoDetectionConfiguration != nil {
+		if err := validateAutoDetectionConfiguration(v.AutoDetectionConfiguration); err != nil {
+			invalidParams.AddNested("AutoDetectionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1171,6 +1476,11 @@ func validateOpCreateRegistryRecordInput(v *CreateRegistryRecordInput) error {
 	} else if v.Descriptors != nil {
 		if err := validateDescriptors(v.Descriptors); err != nil {
 			invalidParams.AddNested("Descriptors", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Provenance != nil {
+		if err := validateProvenanceList(v.Provenance); err != nil {
+			invalidParams.AddNested("Provenance", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1365,6 +1675,11 @@ func validateOpUpdateRegistryInput(v *UpdateRegistryInput) error {
 			invalidParams.AddNested("DiscoveryConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.AutoDetectionConfiguration != nil {
+		if err := validateUpdatedAutoDetectionConfiguration(v.AutoDetectionConfiguration); err != nil {
+			invalidParams.AddNested("AutoDetectionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1386,6 +1701,11 @@ func validateOpUpdateRegistryRecordInput(v *UpdateRegistryRecordInput) error {
 	if v.Descriptors != nil {
 		if err := validateUpdatedDescriptors(v.Descriptors); err != nil {
 			invalidParams.AddNested("Descriptors", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Provenance != nil {
+		if err := validateProvenanceList(v.Provenance); err != nil {
+			invalidParams.AddNested("Provenance", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

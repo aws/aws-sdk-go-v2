@@ -5567,6 +5567,7 @@ func TestCheckResponseSnapshot_DescribeContact(t *testing.T) {
 					},
 				},
 				VoiceEnhancementMode: types.VoiceEnhancementMode("VOICE_ISOLATION"),
+				ActiveRegion:         ptr.String("__ActiveRegion__"),
 			},
 			InitiationTimestamp:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			DisconnectTimestamp:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -9995,6 +9996,32 @@ func TestCheckResponseSnapshot_GetContactMetrics(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetContactMetrics.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetCrossRegionRouting(t *testing.T) {
+	want := &GetCrossRegionRoutingOutput{
+		IsolatedRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetCrossRegionRouting.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetCrossRegionRouting(context.Background(), &GetCrossRegionRoutingInput{
+		InstanceId: ptr.String("__InstanceId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetCrossRegionRouting.response", err)
 	}
 }
 
@@ -21488,6 +21515,28 @@ func TestCheckResponseSnapshot_UpdateContactTaskTemplate(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "UpdateContactTaskTemplate.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_UpdateCrossRegionRouting(t *testing.T) {
+	want := &UpdateCrossRegionRoutingOutput{}
+	status, header, body, err := serdeRespReadSnapshot("UpdateCrossRegionRouting.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateCrossRegionRouting(context.Background(), &UpdateCrossRegionRoutingInput{
+		InstanceId:  ptr.String("__InstanceId__"),
+		IsolatedAll: true,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateCrossRegionRouting.response", err)
 	}
 }
 

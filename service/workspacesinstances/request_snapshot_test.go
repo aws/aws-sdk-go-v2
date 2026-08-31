@@ -335,9 +335,10 @@ func TestCheckRequestSnapshot_CreateWorkspaceInstance(t *testing.T) {
 				},
 			},
 			CpuOptions: &types.CpuOptionsRequest{
-				AmdSevSnp:      types.AmdSevSnpEnum("enabled"),
-				CoreCount:      ptr.Int32(1),
-				ThreadsPerCore: ptr.Int32(1),
+				AmdSevSnp:            types.AmdSevSnpEnum("enabled"),
+				CoreCount:            ptr.Int32(1),
+				ThreadsPerCore:       ptr.Int32(1),
+				NestedVirtualization: types.NestedVirtualizationEnum("enabled"),
 			},
 			CreditSpecification: &types.CreditSpecificationRequest{
 				CpuCredits: types.CpuCreditsEnum("standard"),
@@ -1063,9 +1064,10 @@ func TestUpdateRequestSnapshot_CreateWorkspaceInstance(t *testing.T) {
 				},
 			},
 			CpuOptions: &types.CpuOptionsRequest{
-				AmdSevSnp:      types.AmdSevSnpEnum("enabled"),
-				CoreCount:      ptr.Int32(1),
-				ThreadsPerCore: ptr.Int32(1),
+				AmdSevSnp:            types.AmdSevSnpEnum("enabled"),
+				CoreCount:            ptr.Int32(1),
+				ThreadsPerCore:       ptr.Int32(1),
+				NestedVirtualization: types.NestedVirtualizationEnum("enabled"),
 			},
 			CreditSpecification: &types.CreditSpecificationRequest{
 				CpuCredits: types.CpuCreditsEnum("standard"),

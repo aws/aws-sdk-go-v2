@@ -2,6 +2,67 @@
 
 package types
 
+type ChannelDestinationType string
+
+// Enum values for ChannelDestinationType
+const (
+	ChannelDestinationTypeS3       ChannelDestinationType = "S3"
+	ChannelDestinationTypeS3Tables ChannelDestinationType = "S3_TABLES"
+)
+
+// Values returns all known values for ChannelDestinationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChannelDestinationType) Values() []ChannelDestinationType {
+	return []ChannelDestinationType{
+		"S3",
+		"S3_TABLES",
+	}
+}
+
+type ChannelEncryptionType string
+
+// Enum values for ChannelEncryptionType
+const (
+	ChannelEncryptionTypeKms ChannelEncryptionType = "KMS"
+)
+
+// Values returns all known values for ChannelEncryptionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChannelEncryptionType) Values() []ChannelEncryptionType {
+	return []ChannelEncryptionType{
+		"KMS",
+	}
+}
+
+type ChannelStatus string
+
+// Enum values for ChannelStatus
+const (
+	ChannelStatusCreating ChannelStatus = "CREATING"
+	ChannelStatusActive   ChannelStatus = "ACTIVE"
+	ChannelStatusUpdating ChannelStatus = "UPDATING"
+	ChannelStatusDeleting ChannelStatus = "DELETING"
+	ChannelStatusFailed   ChannelStatus = "FAILED"
+)
+
+// Values returns all known values for ChannelStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChannelStatus) Values() []ChannelStatus {
+	return []ChannelStatus{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"FAILED",
+	}
+}
+
 type ConsumerStatus string
 
 // Enum values for ConsumerStatus
@@ -112,6 +173,109 @@ func (MinimumThroughputBillingCommitmentOutputStatus) Values() []MinimumThroughp
 		"ENABLED",
 		"DISABLED",
 		"ENABLED_UNTIL_EARLIEST_ALLOWED_END",
+	}
+}
+
+type PartitionTransform string
+
+// Enum values for PartitionTransform
+const (
+	PartitionTransformTimeHour PartitionTransform = "TIME_HOUR"
+)
+
+// Values returns all known values for PartitionTransform. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PartitionTransform) Values() []PartitionTransform {
+	return []PartitionTransform{
+		"TIME_HOUR",
+	}
+}
+
+type RecordFormatType string
+
+// Enum values for RecordFormatType
+const (
+	RecordFormatTypeGsrJson   RecordFormatType = "GSR_JSON"
+	RecordFormatTypeJson      RecordFormatType = "JSON"
+	RecordFormatTypeString    RecordFormatType = "STRING"
+	RecordFormatTypeByteArray RecordFormatType = "BYTE_ARRAY"
+)
+
+// Values returns all known values for RecordFormatType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecordFormatType) Values() []RecordFormatType {
+	return []RecordFormatType{
+		"GSR_JSON",
+		"JSON",
+		"STRING",
+		"BYTE_ARRAY",
+	}
+}
+
+type S3CompressionType string
+
+// Enum values for S3CompressionType
+const (
+	S3CompressionTypeNone S3CompressionType = "NONE"
+	S3CompressionTypeGzip S3CompressionType = "GZIP"
+	S3CompressionTypeZstd S3CompressionType = "ZSTD"
+)
+
+// Values returns all known values for S3CompressionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (S3CompressionType) Values() []S3CompressionType {
+	return []S3CompressionType{
+		"NONE",
+		"GZIP",
+		"ZSTD",
+	}
+}
+
+type S3StorageClass string
+
+// Enum values for S3StorageClass
+const (
+	S3StorageClassStandard           S3StorageClass = "STANDARD"
+	S3StorageClassIntelligentTiering S3StorageClass = "INTELLIGENT_TIERING"
+	S3StorageClassGlacierIr          S3StorageClass = "GLACIER_IR"
+)
+
+// Values returns all known values for S3StorageClass. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (S3StorageClass) Values() []S3StorageClass {
+	return []S3StorageClass{
+		"STANDARD",
+		"INTELLIGENT_TIERING",
+		"GLACIER_IR",
+	}
+}
+
+type S3TablesCompressionType string
+
+// Enum values for S3TablesCompressionType
+const (
+	S3TablesCompressionTypeNone   S3TablesCompressionType = "NONE"
+	S3TablesCompressionTypeZstd   S3TablesCompressionType = "ZSTD"
+	S3TablesCompressionTypeSnappy S3TablesCompressionType = "SNAPPY"
+)
+
+// Values returns all known values for S3TablesCompressionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (S3TablesCompressionType) Values() []S3TablesCompressionType {
+	return []S3TablesCompressionType{
+		"NONE",
+		"ZSTD",
+		"SNAPPY",
 	}
 }
 

@@ -438,6 +438,12 @@ type AgentInfo struct {
 	// The timestamp when the contact was accepted by the agent.
 	AcceptedByAgentTimestamp *time.Time
 
+	// The Region where the agent was active when they handled the contact. For Amazon
+	// Connect Global Resiliency instances enabled for global routing, this indicates
+	// the Region in which the agent's session was established at the time of the
+	// contact.
+	ActiveRegion *string
+
 	// The difference in time, in whole seconds, between AfterContactWorkStartTimestamp
 	// and AfterContactWorkEndTimestamp .
 	AfterContactWorkDuration *int32
@@ -501,6 +507,9 @@ func (v *AgentInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AcceptedByAgentTimestamp != nil {
 		s.WriteTime(schemas.AgentInfo_AcceptedByAgentTimestamp, *v.AcceptedByAgentTimestamp)
 	}
+	if v.ActiveRegion != nil {
+		s.WriteString(schemas.AgentInfo_ActiveRegion, *v.ActiveRegion)
+	}
 	if v.AfterContactWorkDuration != nil {
 		s.WriteInt32(schemas.AgentInfo_AfterContactWorkDuration, *v.AfterContactWorkDuration)
 	}
@@ -551,6 +560,9 @@ func (v *AgentInfo) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AgentInfo_AcceptedByAgentTimestamp:
 			v.AcceptedByAgentTimestamp = new(time.Time)
 			return d.ReadTime(schemas.AgentInfo_AcceptedByAgentTimestamp, v.AcceptedByAgentTimestamp)
+		case schemas.AgentInfo_ActiveRegion:
+			v.ActiveRegion = new(string)
+			return d.ReadString(schemas.AgentInfo_ActiveRegion, v.ActiveRegion)
 		case schemas.AgentInfo_AfterContactWorkDuration:
 			v.AfterContactWorkDuration = new(int32)
 			return d.ReadInt32(schemas.AgentInfo_AfterContactWorkDuration, v.AfterContactWorkDuration)
@@ -31687,7 +31699,7 @@ type TrafficDistributionGroupSummary struct {
 	// was created. The ARN must be provided if the call is from the replicated Region.
 	Id *string
 
-	// The Amazon Resource Name (ARN) of the traffic distribution group.
+	// The Amazon Resource Name (ARN) of the instance.
 	InstanceArn *string
 
 	// Whether this is the default traffic distribution group created during instance

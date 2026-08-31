@@ -9,7 +9,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// List the tags on a resource
+// Lists the tags associated with the specified Amazon Web Services Agent Registry
+// resource. Returns the current tag key-value pairs on the resource.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -27,7 +28,8 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// ARN of a taggable Agent Registry resource.
+	// The Amazon Resource Name (ARN) of the resource to list tags for. Supported
+	// resources include registries and registry records.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -49,7 +51,8 @@ func (v *ListTagsForResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 
 type ListTagsForResourceOutput struct {
 
-	// A map of tag keys to tag values returned by read operations (may be empty).
+	// The tags currently associated with the resource, as a map of tag keys to tag
+	// values.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

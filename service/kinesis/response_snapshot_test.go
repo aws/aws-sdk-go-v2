@@ -133,6 +133,219 @@ func TestCheckResponseSnapshot_AddTagsToStream(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CreateChannel(t *testing.T) {
+	want := &CreateChannelOutput{
+		ChannelDescription: &types.ChannelDescription{
+			ChannelName:              ptr.String("__ChannelName__"),
+			ChannelARN:               ptr.String("__ChannelARN__"),
+			ChannelId:                ptr.String("__ChannelId__"),
+			ChannelStatus:            types.ChannelStatus("CREATING"),
+			ChannelStatusReason:      ptr.String("__ChannelStatusReason__"),
+			ChannelCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ServiceExecutionRoleARN:  ptr.String("__ServiceExecutionRoleARN__"),
+			StreamConfigurationList: []types.ChannelStreamDescription{
+				{
+					StreamARN:               ptr.String("__StreamARN__"),
+					StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					RecordConfiguration: &types.RecordConfiguration{
+						RecordFormatType: types.RecordFormatType("GSR_JSON"),
+						GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+					},
+				},
+				{
+					StreamARN:               ptr.String("__StreamARN__"),
+					StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					RecordConfiguration: &types.RecordConfiguration{
+						RecordFormatType: types.RecordFormatType("GSR_JSON"),
+						GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+					},
+				},
+			},
+			S3DestinationConfiguration: &types.S3DestinationDescription{
+				DataFreshnessInSeconds: ptr.Int32(1),
+				DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+					BucketARN:           ptr.String("__BucketARN__"),
+					ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+					ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+				},
+				StorageConfiguration: &types.S3StorageConfiguration{
+					BucketARN:           ptr.String("__BucketARN__"),
+					ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+					OutputKeyTemplate:   ptr.String("__OutputKeyTemplate__"),
+					StorageClass:        types.S3StorageClass("STANDARD"),
+					CompressionType:     types.S3CompressionType("NONE"),
+				},
+			},
+			S3TablesDestinationConfiguration: &types.S3TablesDestinationDescription{
+				DataFreshnessInSeconds: ptr.Int32(1),
+				DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+					BucketARN:           ptr.String("__BucketARN__"),
+					ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+					ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+				},
+				S3TablesConfigurationList: []types.S3TablesConfiguration{
+					{
+						TableBucketARN:  ptr.String("__TableBucketARN__"),
+						Namespace:       ptr.String("__Namespace__"),
+						TableName:       ptr.String("__TableName__"),
+						CompressionType: types.S3TablesCompressionType("NONE"),
+						PartitionSpec: &types.PartitionSpec{
+							PartitionFields: []types.PartitionField{
+								{
+									Transform:  types.PartitionTransform("TIME_HOUR"),
+									SourceName: ptr.String("__SourceName__"),
+								},
+								{
+									Transform:  types.PartitionTransform("TIME_HOUR"),
+									SourceName: ptr.String("__SourceName__"),
+								},
+							},
+						},
+					},
+					{
+						TableBucketARN:  ptr.String("__TableBucketARN__"),
+						Namespace:       ptr.String("__Namespace__"),
+						TableName:       ptr.String("__TableName__"),
+						CompressionType: types.S3TablesCompressionType("NONE"),
+						PartitionSpec: &types.PartitionSpec{
+							PartitionFields: []types.PartitionField{
+								{
+									Transform:  types.PartitionTransform("TIME_HOUR"),
+									SourceName: ptr.String("__SourceName__"),
+								},
+								{
+									Transform:  types.PartitionTransform("TIME_HOUR"),
+									SourceName: ptr.String("__SourceName__"),
+								},
+							},
+						},
+					},
+				},
+			},
+			EncryptionConfiguration: &types.ChannelEncryptionConfiguration{
+				EncryptionType: types.ChannelEncryptionType("KMS"),
+				KeyId:          ptr.String("__KeyId__"),
+			},
+			LoggingConfiguration: &types.ChannelLoggingConfiguration{
+				CloudWatchLogs: &types.CloudWatchLogs{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CreateChannel.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CreateChannel(context.Background(), &CreateChannelInput{
+		ChannelName:             ptr.String("__ChannelName__"),
+		ServiceExecutionRoleARN: ptr.String("__ServiceExecutionRoleARN__"),
+		StreamConfigurationList: []types.ChannelStreamConfiguration{
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				RecordConfiguration: &types.RecordConfiguration{
+					RecordFormatType: types.RecordFormatType("GSR_JSON"),
+					GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+				},
+			},
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				RecordConfiguration: &types.RecordConfiguration{
+					RecordFormatType: types.RecordFormatType("GSR_JSON"),
+					GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+				},
+			},
+		},
+		S3DestinationConfiguration: &types.S3DestinationConfiguration{
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+			},
+			StorageConfiguration: &types.S3StorageConfiguration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				OutputKeyTemplate:   ptr.String("__OutputKeyTemplate__"),
+				StorageClass:        types.S3StorageClass("STANDARD"),
+				CompressionType:     types.S3CompressionType("NONE"),
+			},
+		},
+		S3TablesDestinationConfiguration: &types.S3TablesDestinationConfiguration{
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+			},
+			S3TablesConfigurationList: []types.S3TablesConfiguration{
+				{
+					TableBucketARN:  ptr.String("__TableBucketARN__"),
+					Namespace:       ptr.String("__Namespace__"),
+					TableName:       ptr.String("__TableName__"),
+					CompressionType: types.S3TablesCompressionType("NONE"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionFields: []types.PartitionField{
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+				{
+					TableBucketARN:  ptr.String("__TableBucketARN__"),
+					Namespace:       ptr.String("__Namespace__"),
+					TableName:       ptr.String("__TableName__"),
+					CompressionType: types.S3TablesCompressionType("NONE"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionFields: []types.PartitionField{
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		EncryptionConfiguration: &types.ChannelEncryptionConfiguration{
+			EncryptionType: types.ChannelEncryptionType("KMS"),
+			KeyId:          ptr.String("__KeyId__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LoggingConfiguration: &types.ChannelLoggingConfiguration{
+			CloudWatchLogs: &types.CloudWatchLogs{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CreateChannel.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CreateStream(t *testing.T) {
 	want := &CreateStreamOutput{}
 	status, header, body, err := serdeRespReadSnapshot("CreateStream.response")
@@ -184,6 +397,27 @@ func TestCheckResponseSnapshot_DecreaseStreamRetentionPeriod(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DecreaseStreamRetentionPeriod.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DeleteChannel(t *testing.T) {
+	want := &DeleteChannelOutput{}
+	status, header, body, err := serdeRespReadSnapshot("DeleteChannel.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteChannel(context.Background(), &DeleteChannelInput{
+		ChannelARN: ptr.String("__ChannelARN__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteChannel.response", err)
 	}
 }
 
@@ -283,12 +517,135 @@ func TestCheckResponseSnapshot_DescribeAccountSettings(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeChannel(t *testing.T) {
+	want := &DescribeChannelOutput{
+		ChannelDescription: &types.ChannelDescription{
+			ChannelName:              ptr.String("__ChannelName__"),
+			ChannelARN:               ptr.String("__ChannelARN__"),
+			ChannelId:                ptr.String("__ChannelId__"),
+			ChannelStatus:            types.ChannelStatus("CREATING"),
+			ChannelStatusReason:      ptr.String("__ChannelStatusReason__"),
+			ChannelCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ServiceExecutionRoleARN:  ptr.String("__ServiceExecutionRoleARN__"),
+			StreamConfigurationList: []types.ChannelStreamDescription{
+				{
+					StreamARN:               ptr.String("__StreamARN__"),
+					StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					RecordConfiguration: &types.RecordConfiguration{
+						RecordFormatType: types.RecordFormatType("GSR_JSON"),
+						GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+					},
+				},
+				{
+					StreamARN:               ptr.String("__StreamARN__"),
+					StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					RecordConfiguration: &types.RecordConfiguration{
+						RecordFormatType: types.RecordFormatType("GSR_JSON"),
+						GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+					},
+				},
+			},
+			S3DestinationConfiguration: &types.S3DestinationDescription{
+				DataFreshnessInSeconds: ptr.Int32(1),
+				DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+					BucketARN:           ptr.String("__BucketARN__"),
+					ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+					ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+				},
+				StorageConfiguration: &types.S3StorageConfiguration{
+					BucketARN:           ptr.String("__BucketARN__"),
+					ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+					OutputKeyTemplate:   ptr.String("__OutputKeyTemplate__"),
+					StorageClass:        types.S3StorageClass("STANDARD"),
+					CompressionType:     types.S3CompressionType("NONE"),
+				},
+			},
+			S3TablesDestinationConfiguration: &types.S3TablesDestinationDescription{
+				DataFreshnessInSeconds: ptr.Int32(1),
+				DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+					BucketARN:           ptr.String("__BucketARN__"),
+					ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+					ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+				},
+				S3TablesConfigurationList: []types.S3TablesConfiguration{
+					{
+						TableBucketARN:  ptr.String("__TableBucketARN__"),
+						Namespace:       ptr.String("__Namespace__"),
+						TableName:       ptr.String("__TableName__"),
+						CompressionType: types.S3TablesCompressionType("NONE"),
+						PartitionSpec: &types.PartitionSpec{
+							PartitionFields: []types.PartitionField{
+								{
+									Transform:  types.PartitionTransform("TIME_HOUR"),
+									SourceName: ptr.String("__SourceName__"),
+								},
+								{
+									Transform:  types.PartitionTransform("TIME_HOUR"),
+									SourceName: ptr.String("__SourceName__"),
+								},
+							},
+						},
+					},
+					{
+						TableBucketARN:  ptr.String("__TableBucketARN__"),
+						Namespace:       ptr.String("__Namespace__"),
+						TableName:       ptr.String("__TableName__"),
+						CompressionType: types.S3TablesCompressionType("NONE"),
+						PartitionSpec: &types.PartitionSpec{
+							PartitionFields: []types.PartitionField{
+								{
+									Transform:  types.PartitionTransform("TIME_HOUR"),
+									SourceName: ptr.String("__SourceName__"),
+								},
+								{
+									Transform:  types.PartitionTransform("TIME_HOUR"),
+									SourceName: ptr.String("__SourceName__"),
+								},
+							},
+						},
+					},
+				},
+			},
+			EncryptionConfiguration: &types.ChannelEncryptionConfiguration{
+				EncryptionType: types.ChannelEncryptionType("KMS"),
+				KeyId:          ptr.String("__KeyId__"),
+			},
+			LoggingConfiguration: &types.ChannelLoggingConfiguration{
+				CloudWatchLogs: &types.CloudWatchLogs{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeChannel.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeChannel(context.Background(), &DescribeChannelInput{
+		ChannelARN: ptr.String("__ChannelARN__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeChannel.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeLimits(t *testing.T) {
 	want := &DescribeLimitsOutput{
 		ShardLimit:               ptr.Int32(1),
 		OpenShardCount:           ptr.Int32(1),
 		OnDemandStreamCount:      ptr.Int32(1),
 		OnDemandStreamCountLimit: ptr.Int32(1),
+		ChannelCount:             ptr.Int32(1),
+		ChannelCountLimit:        ptr.Int32(1),
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeLimits.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -455,6 +812,7 @@ func TestCheckResponseSnapshot_DescribeStreamSummary(t *testing.T) {
 				CurrentMiBps: ptr.Int32(1),
 			},
 			MaxRecordSizeInKiB: ptr.Int32(1),
+			ChannelCount:       ptr.Int32(1),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("DescribeStreamSummary.response")
@@ -695,6 +1053,80 @@ func TestCheckResponseSnapshot_IncreaseStreamRetentionPeriod(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "IncreaseStreamRetentionPeriod.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListChannels(t *testing.T) {
+	want := &ListChannelsOutput{
+		ChannelSummaries: []types.ChannelSummary{
+			{
+				ChannelName:              ptr.String("__ChannelName__"),
+				ChannelARN:               ptr.String("__ChannelARN__"),
+				ChannelId:                ptr.String("__ChannelId__"),
+				ChannelStatus:            types.ChannelStatus("CREATING"),
+				ChannelStatusReason:      ptr.String("__ChannelStatusReason__"),
+				ChannelCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ChannelDestinationType:   types.ChannelDestinationType("S3"),
+				Streams: []types.ChannelStreamIdentifier{
+					{
+						StreamARN:               ptr.String("__StreamARN__"),
+						StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						StreamARN:               ptr.String("__StreamARN__"),
+						StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+			{
+				ChannelName:              ptr.String("__ChannelName__"),
+				ChannelARN:               ptr.String("__ChannelARN__"),
+				ChannelId:                ptr.String("__ChannelId__"),
+				ChannelStatus:            types.ChannelStatus("CREATING"),
+				ChannelStatusReason:      ptr.String("__ChannelStatusReason__"),
+				ChannelCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				ChannelDestinationType:   types.ChannelDestinationType("S3"),
+				Streams: []types.ChannelStreamIdentifier{
+					{
+						StreamARN:               ptr.String("__StreamARN__"),
+						StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						StreamARN:               ptr.String("__StreamARN__"),
+						StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListChannels.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListChannels(context.Background(), &ListChannelsInput{
+		StreamFilter: []types.StreamFilter{
+			{
+				StreamARN:               ptr.String("__StreamARN__"),
+				StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				StreamARN:               ptr.String("__StreamARN__"),
+				StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListChannels.response", err)
 	}
 }
 
@@ -1272,6 +1704,140 @@ func TestCheckResponseSnapshot_UpdateAccountSettings(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_UpdateChannel(t *testing.T) {
+	want := &UpdateChannelOutput{
+		ChannelDescription: &types.ChannelDescription{
+			ChannelName:              ptr.String("__ChannelName__"),
+			ChannelARN:               ptr.String("__ChannelARN__"),
+			ChannelId:                ptr.String("__ChannelId__"),
+			ChannelStatus:            types.ChannelStatus("CREATING"),
+			ChannelStatusReason:      ptr.String("__ChannelStatusReason__"),
+			ChannelCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			ServiceExecutionRoleARN:  ptr.String("__ServiceExecutionRoleARN__"),
+			StreamConfigurationList: []types.ChannelStreamDescription{
+				{
+					StreamARN:               ptr.String("__StreamARN__"),
+					StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					RecordConfiguration: &types.RecordConfiguration{
+						RecordFormatType: types.RecordFormatType("GSR_JSON"),
+						GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+					},
+				},
+				{
+					StreamARN:               ptr.String("__StreamARN__"),
+					StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					RecordConfiguration: &types.RecordConfiguration{
+						RecordFormatType: types.RecordFormatType("GSR_JSON"),
+						GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+					},
+				},
+			},
+			S3DestinationConfiguration: &types.S3DestinationDescription{
+				DataFreshnessInSeconds: ptr.Int32(1),
+				DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+					BucketARN:           ptr.String("__BucketARN__"),
+					ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+					ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+				},
+				StorageConfiguration: &types.S3StorageConfiguration{
+					BucketARN:           ptr.String("__BucketARN__"),
+					ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+					OutputKeyTemplate:   ptr.String("__OutputKeyTemplate__"),
+					StorageClass:        types.S3StorageClass("STANDARD"),
+					CompressionType:     types.S3CompressionType("NONE"),
+				},
+			},
+			S3TablesDestinationConfiguration: &types.S3TablesDestinationDescription{
+				DataFreshnessInSeconds: ptr.Int32(1),
+				DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+					BucketARN:           ptr.String("__BucketARN__"),
+					ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+					ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+				},
+				S3TablesConfigurationList: []types.S3TablesConfiguration{
+					{
+						TableBucketARN:  ptr.String("__TableBucketARN__"),
+						Namespace:       ptr.String("__Namespace__"),
+						TableName:       ptr.String("__TableName__"),
+						CompressionType: types.S3TablesCompressionType("NONE"),
+						PartitionSpec: &types.PartitionSpec{
+							PartitionFields: []types.PartitionField{
+								{
+									Transform:  types.PartitionTransform("TIME_HOUR"),
+									SourceName: ptr.String("__SourceName__"),
+								},
+								{
+									Transform:  types.PartitionTransform("TIME_HOUR"),
+									SourceName: ptr.String("__SourceName__"),
+								},
+							},
+						},
+					},
+					{
+						TableBucketARN:  ptr.String("__TableBucketARN__"),
+						Namespace:       ptr.String("__Namespace__"),
+						TableName:       ptr.String("__TableName__"),
+						CompressionType: types.S3TablesCompressionType("NONE"),
+						PartitionSpec: &types.PartitionSpec{
+							PartitionFields: []types.PartitionField{
+								{
+									Transform:  types.PartitionTransform("TIME_HOUR"),
+									SourceName: ptr.String("__SourceName__"),
+								},
+								{
+									Transform:  types.PartitionTransform("TIME_HOUR"),
+									SourceName: ptr.String("__SourceName__"),
+								},
+							},
+						},
+					},
+				},
+			},
+			EncryptionConfiguration: &types.ChannelEncryptionConfiguration{
+				EncryptionType: types.ChannelEncryptionType("KMS"),
+				KeyId:          ptr.String("__KeyId__"),
+			},
+			LoggingConfiguration: &types.ChannelLoggingConfiguration{
+				CloudWatchLogs: &types.CloudWatchLogs{
+					Enabled:       ptr.Bool(true),
+					LogGroupName:  ptr.String("__LogGroupName__"),
+					LogStreamName: ptr.String("__LogStreamName__"),
+				},
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("UpdateChannel.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.UpdateChannel(context.Background(), &UpdateChannelInput{
+		ChannelARN: ptr.String("__ChannelARN__"),
+		S3DestinationConfiguration: &types.S3DestinationUpdateInput{
+			DataFreshnessInSeconds: ptr.Int32(1),
+		},
+		S3TablesDestinationConfiguration: &types.S3TablesDestinationUpdateInput{
+			DataFreshnessInSeconds: ptr.Int32(1),
+		},
+		LoggingConfiguration: &types.ChannelLoggingUpdateInput{
+			CloudWatchLogs: &types.CloudWatchLogsUpdateInput{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "UpdateChannel.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_UpdateMaxRecordSize(t *testing.T) {
 	want := &UpdateMaxRecordSizeOutput{}
 	status, header, body, err := serdeRespReadSnapshot("UpdateMaxRecordSize.response")
@@ -1456,19 +2022,19 @@ func TestCheckResponseSnapshot_Error_ExpiredNextTokenException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ListShards(context.Background(), &ListShardsInput{
-		StreamName:              ptr.String("__StreamName__"),
-		NextToken:               ptr.String("__NextToken__"),
-		ExclusiveStartShardId:   ptr.String("__ExclusiveStartShardId__"),
-		MaxResults:              ptr.Int32(1),
-		StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		ShardFilter: &types.ShardFilter{
-			Type:      types.ShardFilterType("AFTER_SHARD_ID"),
-			ShardId:   ptr.String("__ShardId__"),
-			Timestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	_, opErr := svc.ListChannels(context.Background(), &ListChannelsInput{
+		StreamFilter: []types.StreamFilter{
+			{
+				StreamARN:               ptr.String("__StreamARN__"),
+				StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				StreamARN:               ptr.String("__StreamARN__"),
+				StreamCreationTimestamp: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
 		},
-		StreamARN: ptr.String("__StreamARN__"),
-		StreamId:  ptr.String("__StreamId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1556,11 +2122,100 @@ func TestCheckResponseSnapshot_Error_KMSAccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{
-		ShardIterator: ptr.String("__ShardIterator__"),
-		Limit:         ptr.Int32(1),
-		StreamARN:     ptr.String("__StreamARN__"),
-		StreamId:      ptr.String("__StreamId__"),
+	_, opErr := svc.CreateChannel(context.Background(), &CreateChannelInput{
+		ChannelName:             ptr.String("__ChannelName__"),
+		ServiceExecutionRoleARN: ptr.String("__ServiceExecutionRoleARN__"),
+		StreamConfigurationList: []types.ChannelStreamConfiguration{
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				RecordConfiguration: &types.RecordConfiguration{
+					RecordFormatType: types.RecordFormatType("GSR_JSON"),
+					GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+				},
+			},
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				RecordConfiguration: &types.RecordConfiguration{
+					RecordFormatType: types.RecordFormatType("GSR_JSON"),
+					GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+				},
+			},
+		},
+		S3DestinationConfiguration: &types.S3DestinationConfiguration{
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+			},
+			StorageConfiguration: &types.S3StorageConfiguration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				OutputKeyTemplate:   ptr.String("__OutputKeyTemplate__"),
+				StorageClass:        types.S3StorageClass("STANDARD"),
+				CompressionType:     types.S3CompressionType("NONE"),
+			},
+		},
+		S3TablesDestinationConfiguration: &types.S3TablesDestinationConfiguration{
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+			},
+			S3TablesConfigurationList: []types.S3TablesConfiguration{
+				{
+					TableBucketARN:  ptr.String("__TableBucketARN__"),
+					Namespace:       ptr.String("__Namespace__"),
+					TableName:       ptr.String("__TableName__"),
+					CompressionType: types.S3TablesCompressionType("NONE"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionFields: []types.PartitionField{
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+				{
+					TableBucketARN:  ptr.String("__TableBucketARN__"),
+					Namespace:       ptr.String("__Namespace__"),
+					TableName:       ptr.String("__TableName__"),
+					CompressionType: types.S3TablesCompressionType("NONE"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionFields: []types.PartitionField{
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		EncryptionConfiguration: &types.ChannelEncryptionConfiguration{
+			EncryptionType: types.ChannelEncryptionType("KMS"),
+			KeyId:          ptr.String("__KeyId__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LoggingConfiguration: &types.ChannelLoggingConfiguration{
+			CloudWatchLogs: &types.CloudWatchLogs{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1586,11 +2241,100 @@ func TestCheckResponseSnapshot_Error_KMSDisabledException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{
-		ShardIterator: ptr.String("__ShardIterator__"),
-		Limit:         ptr.Int32(1),
-		StreamARN:     ptr.String("__StreamARN__"),
-		StreamId:      ptr.String("__StreamId__"),
+	_, opErr := svc.CreateChannel(context.Background(), &CreateChannelInput{
+		ChannelName:             ptr.String("__ChannelName__"),
+		ServiceExecutionRoleARN: ptr.String("__ServiceExecutionRoleARN__"),
+		StreamConfigurationList: []types.ChannelStreamConfiguration{
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				RecordConfiguration: &types.RecordConfiguration{
+					RecordFormatType: types.RecordFormatType("GSR_JSON"),
+					GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+				},
+			},
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				RecordConfiguration: &types.RecordConfiguration{
+					RecordFormatType: types.RecordFormatType("GSR_JSON"),
+					GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+				},
+			},
+		},
+		S3DestinationConfiguration: &types.S3DestinationConfiguration{
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+			},
+			StorageConfiguration: &types.S3StorageConfiguration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				OutputKeyTemplate:   ptr.String("__OutputKeyTemplate__"),
+				StorageClass:        types.S3StorageClass("STANDARD"),
+				CompressionType:     types.S3CompressionType("NONE"),
+			},
+		},
+		S3TablesDestinationConfiguration: &types.S3TablesDestinationConfiguration{
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+			},
+			S3TablesConfigurationList: []types.S3TablesConfiguration{
+				{
+					TableBucketARN:  ptr.String("__TableBucketARN__"),
+					Namespace:       ptr.String("__Namespace__"),
+					TableName:       ptr.String("__TableName__"),
+					CompressionType: types.S3TablesCompressionType("NONE"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionFields: []types.PartitionField{
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+				{
+					TableBucketARN:  ptr.String("__TableBucketARN__"),
+					Namespace:       ptr.String("__Namespace__"),
+					TableName:       ptr.String("__TableName__"),
+					CompressionType: types.S3TablesCompressionType("NONE"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionFields: []types.PartitionField{
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		EncryptionConfiguration: &types.ChannelEncryptionConfiguration{
+			EncryptionType: types.ChannelEncryptionType("KMS"),
+			KeyId:          ptr.String("__KeyId__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LoggingConfiguration: &types.ChannelLoggingConfiguration{
+			CloudWatchLogs: &types.CloudWatchLogs{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1616,11 +2360,100 @@ func TestCheckResponseSnapshot_Error_KMSInvalidStateException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{
-		ShardIterator: ptr.String("__ShardIterator__"),
-		Limit:         ptr.Int32(1),
-		StreamARN:     ptr.String("__StreamARN__"),
-		StreamId:      ptr.String("__StreamId__"),
+	_, opErr := svc.CreateChannel(context.Background(), &CreateChannelInput{
+		ChannelName:             ptr.String("__ChannelName__"),
+		ServiceExecutionRoleARN: ptr.String("__ServiceExecutionRoleARN__"),
+		StreamConfigurationList: []types.ChannelStreamConfiguration{
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				RecordConfiguration: &types.RecordConfiguration{
+					RecordFormatType: types.RecordFormatType("GSR_JSON"),
+					GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+				},
+			},
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				RecordConfiguration: &types.RecordConfiguration{
+					RecordFormatType: types.RecordFormatType("GSR_JSON"),
+					GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+				},
+			},
+		},
+		S3DestinationConfiguration: &types.S3DestinationConfiguration{
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+			},
+			StorageConfiguration: &types.S3StorageConfiguration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				OutputKeyTemplate:   ptr.String("__OutputKeyTemplate__"),
+				StorageClass:        types.S3StorageClass("STANDARD"),
+				CompressionType:     types.S3CompressionType("NONE"),
+			},
+		},
+		S3TablesDestinationConfiguration: &types.S3TablesDestinationConfiguration{
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+			},
+			S3TablesConfigurationList: []types.S3TablesConfiguration{
+				{
+					TableBucketARN:  ptr.String("__TableBucketARN__"),
+					Namespace:       ptr.String("__Namespace__"),
+					TableName:       ptr.String("__TableName__"),
+					CompressionType: types.S3TablesCompressionType("NONE"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionFields: []types.PartitionField{
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+				{
+					TableBucketARN:  ptr.String("__TableBucketARN__"),
+					Namespace:       ptr.String("__Namespace__"),
+					TableName:       ptr.String("__TableName__"),
+					CompressionType: types.S3TablesCompressionType("NONE"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionFields: []types.PartitionField{
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		EncryptionConfiguration: &types.ChannelEncryptionConfiguration{
+			EncryptionType: types.ChannelEncryptionType("KMS"),
+			KeyId:          ptr.String("__KeyId__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LoggingConfiguration: &types.ChannelLoggingConfiguration{
+			CloudWatchLogs: &types.CloudWatchLogs{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1646,11 +2479,100 @@ func TestCheckResponseSnapshot_Error_KMSNotFoundException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{
-		ShardIterator: ptr.String("__ShardIterator__"),
-		Limit:         ptr.Int32(1),
-		StreamARN:     ptr.String("__StreamARN__"),
-		StreamId:      ptr.String("__StreamId__"),
+	_, opErr := svc.CreateChannel(context.Background(), &CreateChannelInput{
+		ChannelName:             ptr.String("__ChannelName__"),
+		ServiceExecutionRoleARN: ptr.String("__ServiceExecutionRoleARN__"),
+		StreamConfigurationList: []types.ChannelStreamConfiguration{
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				RecordConfiguration: &types.RecordConfiguration{
+					RecordFormatType: types.RecordFormatType("GSR_JSON"),
+					GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+				},
+			},
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				RecordConfiguration: &types.RecordConfiguration{
+					RecordFormatType: types.RecordFormatType("GSR_JSON"),
+					GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+				},
+			},
+		},
+		S3DestinationConfiguration: &types.S3DestinationConfiguration{
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+			},
+			StorageConfiguration: &types.S3StorageConfiguration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				OutputKeyTemplate:   ptr.String("__OutputKeyTemplate__"),
+				StorageClass:        types.S3StorageClass("STANDARD"),
+				CompressionType:     types.S3CompressionType("NONE"),
+			},
+		},
+		S3TablesDestinationConfiguration: &types.S3TablesDestinationConfiguration{
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+			},
+			S3TablesConfigurationList: []types.S3TablesConfiguration{
+				{
+					TableBucketARN:  ptr.String("__TableBucketARN__"),
+					Namespace:       ptr.String("__Namespace__"),
+					TableName:       ptr.String("__TableName__"),
+					CompressionType: types.S3TablesCompressionType("NONE"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionFields: []types.PartitionField{
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+				{
+					TableBucketARN:  ptr.String("__TableBucketARN__"),
+					Namespace:       ptr.String("__Namespace__"),
+					TableName:       ptr.String("__TableName__"),
+					CompressionType: types.S3TablesCompressionType("NONE"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionFields: []types.PartitionField{
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		EncryptionConfiguration: &types.ChannelEncryptionConfiguration{
+			EncryptionType: types.ChannelEncryptionType("KMS"),
+			KeyId:          ptr.String("__KeyId__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LoggingConfiguration: &types.ChannelLoggingConfiguration{
+			CloudWatchLogs: &types.CloudWatchLogs{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1676,11 +2598,100 @@ func TestCheckResponseSnapshot_Error_KMSOptInRequired(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{
-		ShardIterator: ptr.String("__ShardIterator__"),
-		Limit:         ptr.Int32(1),
-		StreamARN:     ptr.String("__StreamARN__"),
-		StreamId:      ptr.String("__StreamId__"),
+	_, opErr := svc.CreateChannel(context.Background(), &CreateChannelInput{
+		ChannelName:             ptr.String("__ChannelName__"),
+		ServiceExecutionRoleARN: ptr.String("__ServiceExecutionRoleARN__"),
+		StreamConfigurationList: []types.ChannelStreamConfiguration{
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				RecordConfiguration: &types.RecordConfiguration{
+					RecordFormatType: types.RecordFormatType("GSR_JSON"),
+					GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+				},
+			},
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				RecordConfiguration: &types.RecordConfiguration{
+					RecordFormatType: types.RecordFormatType("GSR_JSON"),
+					GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+				},
+			},
+		},
+		S3DestinationConfiguration: &types.S3DestinationConfiguration{
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+			},
+			StorageConfiguration: &types.S3StorageConfiguration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				OutputKeyTemplate:   ptr.String("__OutputKeyTemplate__"),
+				StorageClass:        types.S3StorageClass("STANDARD"),
+				CompressionType:     types.S3CompressionType("NONE"),
+			},
+		},
+		S3TablesDestinationConfiguration: &types.S3TablesDestinationConfiguration{
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+			},
+			S3TablesConfigurationList: []types.S3TablesConfiguration{
+				{
+					TableBucketARN:  ptr.String("__TableBucketARN__"),
+					Namespace:       ptr.String("__Namespace__"),
+					TableName:       ptr.String("__TableName__"),
+					CompressionType: types.S3TablesCompressionType("NONE"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionFields: []types.PartitionField{
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+				{
+					TableBucketARN:  ptr.String("__TableBucketARN__"),
+					Namespace:       ptr.String("__Namespace__"),
+					TableName:       ptr.String("__TableName__"),
+					CompressionType: types.S3TablesCompressionType("NONE"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionFields: []types.PartitionField{
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		EncryptionConfiguration: &types.ChannelEncryptionConfiguration{
+			EncryptionType: types.ChannelEncryptionType("KMS"),
+			KeyId:          ptr.String("__KeyId__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LoggingConfiguration: &types.ChannelLoggingConfiguration{
+			CloudWatchLogs: &types.CloudWatchLogs{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1706,11 +2717,100 @@ func TestCheckResponseSnapshot_Error_KMSThrottlingException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.GetRecords(context.Background(), &GetRecordsInput{
-		ShardIterator: ptr.String("__ShardIterator__"),
-		Limit:         ptr.Int32(1),
-		StreamARN:     ptr.String("__StreamARN__"),
-		StreamId:      ptr.String("__StreamId__"),
+	_, opErr := svc.CreateChannel(context.Background(), &CreateChannelInput{
+		ChannelName:             ptr.String("__ChannelName__"),
+		ServiceExecutionRoleARN: ptr.String("__ServiceExecutionRoleARN__"),
+		StreamConfigurationList: []types.ChannelStreamConfiguration{
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				RecordConfiguration: &types.RecordConfiguration{
+					RecordFormatType: types.RecordFormatType("GSR_JSON"),
+					GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+				},
+			},
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				RecordConfiguration: &types.RecordConfiguration{
+					RecordFormatType: types.RecordFormatType("GSR_JSON"),
+					GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+				},
+			},
+		},
+		S3DestinationConfiguration: &types.S3DestinationConfiguration{
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+			},
+			StorageConfiguration: &types.S3StorageConfiguration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				OutputKeyTemplate:   ptr.String("__OutputKeyTemplate__"),
+				StorageClass:        types.S3StorageClass("STANDARD"),
+				CompressionType:     types.S3CompressionType("NONE"),
+			},
+		},
+		S3TablesDestinationConfiguration: &types.S3TablesDestinationConfiguration{
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+			},
+			S3TablesConfigurationList: []types.S3TablesConfiguration{
+				{
+					TableBucketARN:  ptr.String("__TableBucketARN__"),
+					Namespace:       ptr.String("__Namespace__"),
+					TableName:       ptr.String("__TableName__"),
+					CompressionType: types.S3TablesCompressionType("NONE"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionFields: []types.PartitionField{
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+				{
+					TableBucketARN:  ptr.String("__TableBucketARN__"),
+					Namespace:       ptr.String("__Namespace__"),
+					TableName:       ptr.String("__TableName__"),
+					CompressionType: types.S3TablesCompressionType("NONE"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionFields: []types.PartitionField{
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		EncryptionConfiguration: &types.ChannelEncryptionConfiguration{
+			EncryptionType: types.ChannelEncryptionType("KMS"),
+			KeyId:          ptr.String("__KeyId__"),
+		},
+		Tags: map[string]string{
+			"key0": "__Value__",
+		},
+		LoggingConfiguration: &types.ChannelLoggingConfiguration{
+			CloudWatchLogs: &types.CloudWatchLogs{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1862,17 +2962,100 @@ func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateStream(context.Background(), &CreateStreamInput{
-		StreamName: ptr.String("__StreamName__"),
-		ShardCount: ptr.Int32(1),
-		StreamModeDetails: &types.StreamModeDetails{
-			StreamMode: types.StreamMode("PROVISIONED"),
+	_, opErr := svc.CreateChannel(context.Background(), &CreateChannelInput{
+		ChannelName:             ptr.String("__ChannelName__"),
+		ServiceExecutionRoleARN: ptr.String("__ServiceExecutionRoleARN__"),
+		StreamConfigurationList: []types.ChannelStreamConfiguration{
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				RecordConfiguration: &types.RecordConfiguration{
+					RecordFormatType: types.RecordFormatType("GSR_JSON"),
+					GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+				},
+			},
+			{
+				StreamARN: ptr.String("__StreamARN__"),
+				RecordConfiguration: &types.RecordConfiguration{
+					RecordFormatType: types.RecordFormatType("GSR_JSON"),
+					GSRSchemaARN:     ptr.String("__GSRSchemaARN__"),
+				},
+			},
+		},
+		S3DestinationConfiguration: &types.S3DestinationConfiguration{
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+			},
+			StorageConfiguration: &types.S3StorageConfiguration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				OutputKeyTemplate:   ptr.String("__OutputKeyTemplate__"),
+				StorageClass:        types.S3StorageClass("STANDARD"),
+				CompressionType:     types.S3CompressionType("NONE"),
+			},
+		},
+		S3TablesDestinationConfiguration: &types.S3TablesDestinationConfiguration{
+			DataFreshnessInSeconds: ptr.Int32(1),
+			DeadLetterQueueS3Configuration: &types.DeadLetterQueueS3Configuration{
+				BucketARN:           ptr.String("__BucketARN__"),
+				ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
+				ErrorOutputPrefix:   ptr.String("__ErrorOutputPrefix__"),
+			},
+			S3TablesConfigurationList: []types.S3TablesConfiguration{
+				{
+					TableBucketARN:  ptr.String("__TableBucketARN__"),
+					Namespace:       ptr.String("__Namespace__"),
+					TableName:       ptr.String("__TableName__"),
+					CompressionType: types.S3TablesCompressionType("NONE"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionFields: []types.PartitionField{
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+				{
+					TableBucketARN:  ptr.String("__TableBucketARN__"),
+					Namespace:       ptr.String("__Namespace__"),
+					TableName:       ptr.String("__TableName__"),
+					CompressionType: types.S3TablesCompressionType("NONE"),
+					PartitionSpec: &types.PartitionSpec{
+						PartitionFields: []types.PartitionField{
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+							{
+								Transform:  types.PartitionTransform("TIME_HOUR"),
+								SourceName: ptr.String("__SourceName__"),
+							},
+						},
+					},
+				},
+			},
+		},
+		EncryptionConfiguration: &types.ChannelEncryptionConfiguration{
+			EncryptionType: types.ChannelEncryptionType("KMS"),
+			KeyId:          ptr.String("__KeyId__"),
 		},
 		Tags: map[string]string{
 			"key0": "__Value__",
 		},
-		WarmThroughputMiBps: ptr.Int32(1),
-		MaxRecordSizeInKiB:  ptr.Int32(1),
+		LoggingConfiguration: &types.ChannelLoggingConfiguration{
+			CloudWatchLogs: &types.CloudWatchLogs{
+				Enabled:       ptr.Bool(true),
+				LogGroupName:  ptr.String("__LogGroupName__"),
+				LogStreamName: ptr.String("__LogStreamName__"),
+			},
+		},
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

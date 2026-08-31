@@ -7,17 +7,40 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Adds additional customer communication to an Amazon Web Services Support case.
-// Use the caseId parameter to identify the case to which to add communication.
-// You can list a set of email addresses to copy on the communication by using the
+// Adds additional customer communication to a Amazon Web Services Support case.
+// Use the caseId parameter to identify the case to which to add communication. To
+// list a set of email addresses to copy on the communication, use the
 // ccEmailAddresses parameter. The communicationBody value contains the text of
 // the communication.
 //
-//   - You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to
-//     use the Amazon Web Services Support API.
+// To attach files larger than 5 MB to the communication, use the uploadIds
+// parameter.
+//
+// Amazon Web Services Support automatically redacts sensitive information from
+// support cases to protect your data. The following information is replaced with
+// [REDACTED_BY_Amazon Web Services] and is not stored:
+//
+//   - Amazon Web Services secret keys - The complete key is replaced. Example:
+//     [REDACTED_BY_Amazon Web Services]
+//
+//   - Private keys - The complete key is replaced. Example: [REDACTED_BY_Amazon
+//     Web Services]
+//
+//   - Credit card numbers - The number is redacted, but the last 4 digits remain.
+//     Example: [REDACTED_BY_Amazon Web Services]-7016
+//
+// This sensitive information is never required by Amazon Web Services Support.
+//
+//   - You must have an Amazon Web Services Business Support+, Amazon Web Services
+//     Enterprise Support, or Amazon Web Services Unified Operations plan to use the
+//     Amazon Web Services Support API. If you're in an Amazon Web Services Region that
+//     doesn't offer one of these Amazon Web Services Support plans, or if you haven't
+//     transitioned to one of these plans, you can use the Amazon Web Services Support
+//     API with a Business, Enterprise On-Ramp, or Enterprise Support plan.
 //
 //   - If you call the Amazon Web Services Support API from an account that
-//     doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the
+//     doesn't have an Amazon Web Services Business Support+, Amazon Web Services
+//     Enterprise Support, or Amazon Web Services Unified Operations plan, the
 //     SubscriptionRequiredException error message appears. For information about
 //     changing your support plan, see [Amazon Web Services Support].
 //
@@ -45,16 +68,29 @@ type AddCommunicationToCaseInput struct {
 	CommunicationBody *string
 
 	// The ID of a set of one or more attachments for the communication to add to the
-	// case. Create the set by calling AddAttachmentsToSet
+	// case. Create the set by calling AddAttachmentsToSet. Each attachment in the set must be 5 MB or
+	// smaller. To attach files larger than 5 MB, use uploadIds .
 	AttachmentSetId *string
 
 	// The support case ID requested or returned in the call. The case ID is an
 	// alphanumeric string formatted as shown in this example:
-	// case-12345678910-2013-c4c1d2bf33c5cf47
+	// case-12345678910-exen-2025-c4c1d2bf33c5cf47
 	CaseId *string
 
 	// The email addresses in the CC line of an email to be added to the support case.
 	CcEmailAddresses []string
+
+	// Specifies whether to validate the request without actually adding the
+	// communication to the case. When set to true , the request is validated but the
+	// communication isn't added, and the operation returns a DryRunOperationException
+	// . When omitted or set to false , the request runs normally.
+	DryRun *bool
+
+	// A list of upload IDs that identify attachments to add to the case. Each uploadId
+	// is returned by the GetAttachmentUploadLinksoperation. The upload must reach the attachment-ready state
+	// by calling CompleteAttachmentUploadbefore it can be passed here. Use uploadIds to attach files of any
+	// supported size, including files larger than 5 MB.
+	UploadIds []string
 
 	noSmithyDocumentSerde
 }

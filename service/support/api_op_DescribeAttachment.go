@@ -14,13 +14,26 @@ import (
 // or case communication. Attachment IDs are returned in the AttachmentDetailsobjects that are
 // returned by the DescribeCommunicationsoperation.
 //
-//   - You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to
-//     use the Amazon Web Services Support API.
+//   - You must have an Amazon Web Services Business Support+, Amazon Web Services
+//     Enterprise Support, or Amazon Web Services Unified Operations plan to use the
+//     Amazon Web Services Support API. If you're in an Amazon Web Services Region that
+//     doesn't offer one of these Amazon Web Services Support plans, or if you haven't
+//     transitioned to one of these plans, you can use the Amazon Web Services Support
+//     API with a Business, Enterprise On-Ramp, or Enterprise Support plan.
 //
 //   - If you call the Amazon Web Services Support API from an account that
-//     doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the
+//     doesn't have an Amazon Web Services Business Support+, Amazon Web Services
+//     Enterprise Support, or Amazon Web Services Unified Operations plan, the
 //     SubscriptionRequiredException error message appears. For information about
 //     changing your support plan, see [Amazon Web Services Support].
+//
+// DescribeAttachment can't return attachments larger than 5 MB. If the specified
+// attachmentId refers to an attachment larger than 5 MB, the request fails with
+// InvalidParameterValueException .
+//
+// To download an attachment of any size, including attachments larger than 5 MB,
+// use GetAttachmentDownloadLink. GetAttachmentDownloadLink returns an Amazon S3 presigned URL that you can
+// use to download the attachment directly.
 //
 // [Amazon Web Services Support]: http://aws.amazon.com/premiumsupport/
 func (c *Client) DescribeAttachment(ctx context.Context, params *DescribeAttachmentInput, optFns ...func(*Options)) (*DescribeAttachmentOutput, error) {
@@ -43,8 +56,17 @@ type DescribeAttachmentInput struct {
 	// The ID of the attachment to return. Attachment IDs are returned by the DescribeCommunications
 	// operation.
 	//
+	// If the specified attachment is larger than 5 MB, this operation returns
+	// InvalidParameterValueException . To download attachments larger than 5 MB, use GetAttachmentDownloadLink.
+	//
 	// This member is required.
 	AttachmentId *string
+
+	// Specifies whether to validate the request without actually retrieving the
+	// attachment. When set to true , the request is validated but no attachment
+	// content is returned, and the operation returns a DryRunOperationException . When
+	// omitted or set to false , the request runs normally.
+	DryRun *bool
 
 	noSmithyDocumentSerde
 }

@@ -290,6 +290,10 @@ func TestCheckResponseSnapshot_ListDiscoverableRegistryRecords(t *testing.T) {
 				Status:        types.RegistryRecordStatus("DRAFT"),
 				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DescriptorTypes: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 			{
 				RegistryArn:   ptr.String("__RegistryArn__"),
@@ -303,6 +307,10 @@ func TestCheckResponseSnapshot_ListDiscoverableRegistryRecords(t *testing.T) {
 				Status:        types.RegistryRecordStatus("DRAFT"),
 				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				DescriptorTypes: []string{
+					"__Member__",
+					"__Member__",
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),

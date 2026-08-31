@@ -31,7 +31,8 @@ func (c *Client) ListDiscoverableRegistryRecords(ctx context.Context, params *Li
 
 type ListDiscoverableRegistryRecordsInput struct {
 
-	// Registry identifier that accepts either ARN or ID format
+	//  The identifier of the registry whose discoverable records are listed. You can
+	// provide either the full Amazon Resource Name (ARN) or the registry ID.
 	//
 	// This member is required.
 	RegistryId *string

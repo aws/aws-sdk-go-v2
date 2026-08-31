@@ -61,6 +61,12 @@ type CreateRegistryRecordInput struct {
 	// The human-readable display name of the registry record
 	DisplayName *string
 
+	// List of provenance entries on a registry record. Capped at one entry today: a
+	// record carries a single DETECTED_FROM lineage. Modeled as a list so additional
+	// relations can be unlocked post-GA by raising this bound without a breaking shape
+	// change.
+	Provenance []types.Provenance
+
 	// The version of the registry record
 	RecordVersion *string
 
@@ -94,6 +100,7 @@ func (v *CreateRegistryRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateRegistryRecordRequest_name, *v.Name)
 	}
+	serializeProvenanceList(s, schemas.CreateRegistryRecordRequest_provenance, v.Provenance)
 	if v.RecordType != "" {
 		s.WriteString(schemas.CreateRegistryRecordRequest_recordType, string(v.RecordType))
 	}

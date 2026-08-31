@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: AWSSupport_20130415.AddCommunicationToCase
 
-{"attachmentSetId":"__AttachmentSetId__","caseId":"__CaseId__","ccEmailAddresses":["__Member__","__Member__"],"communicationBody":"__CommunicationBody__"}
+{"attachmentSetId":"__AttachmentSetId__","caseId":"__CaseId__","ccEmailAddresses":["__Member__","__Member__"],"communicationBody":"__CommunicationBody__","dryRun":true,"uploadIds":["__Member__","__Member__"]}

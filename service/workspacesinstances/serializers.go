@@ -856,6 +856,13 @@ func serializeCBOR_CpuOptionsRequest(v *types.CpuOptionsRequest) (smithycbor.Val
 		}
 		vm["ThreadsPerCore"] = ser
 	}
+	if len(v.NestedVirtualization) > 0 {
+		ser, err := serializeCBOR_NestedVirtualizationEnum(v.NestedVirtualization)
+		if err != nil {
+			return nil, err
+		}
+		vm["NestedVirtualization"] = ser
+	}
 	return vm, nil
 }
 
@@ -1626,6 +1633,10 @@ func serializeCBOR_ManagedInstanceRequest(v *types.ManagedInstanceRequest) (smit
 }
 
 func serializeCBOR_MarketTypeEnum(v types.MarketTypeEnum) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
+
+func serializeCBOR_NestedVirtualizationEnum(v types.NestedVirtualizationEnum) (smithycbor.Value, error) {
 	return smithycbor.String(string(v)), nil
 }
 

@@ -56,6 +56,12 @@ type UpdateRegistryRecordInput struct {
 	// The updated name of the registry record. Omit to leave the name unchanged.
 	Name *string
 
+	// List of provenance entries on a registry record. Capped at one entry today: a
+	// record carries a single DETECTED_FROM lineage. Modeled as a list so additional
+	// relations can be unlocked post-GA by raising this bound without a breaking shape
+	// change.
+	Provenance []types.Provenance
+
 	// The updated type of the registry record. Omit to leave the record type
 	// unchanged.
 	RecordType types.RecordType
@@ -95,6 +101,7 @@ func (v *UpdateRegistryRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateRegistryRecordRequest_name, *v.Name)
 	}
+	serializeProvenanceList(s, schemas.UpdateRegistryRecordRequest_provenance, v.Provenance)
 	if v.RecordId != nil {
 		s.WriteString(schemas.UpdateRegistryRecordRequest_recordId, *v.RecordId)
 	}
@@ -125,7 +132,7 @@ type UpdateRegistryRecordOutput struct {
 	// This member is required.
 	Name *string
 
-	// The &ARN; of the registry record.
+	// The Amazon Resource Name (ARN) of the registry record.
 	//
 	// This member is required.
 	RecordArn *string
@@ -140,7 +147,7 @@ type UpdateRegistryRecordOutput struct {
 	// This member is required.
 	RecordType types.RecordType
 
-	// The &ARN; of the parent registry that owns the record.
+	// The Amazon Resource Name (ARN) of the parent registry that owns the record.
 	//
 	// This member is required.
 	RegistryArn *string
@@ -155,6 +162,15 @@ type UpdateRegistryRecordOutput struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The ID of the Amazon Web Services account that created the registry record.
+	CreatedBy *string
+
+	// Specifies whether the registry record was created by auto-detection. true
+	// indicates the record was automatically created by the service based on the
+	// registry's auto-detection configuration; false indicates the record was created
+	// through a control-plane API call.
+	CreatedByAutoDetection *bool
+
 	// A description of the registry record.
 	Description *string
 
@@ -163,6 +179,12 @@ type UpdateRegistryRecordOutput struct {
 
 	// The human-readable display name of the registry record.
 	DisplayName *string
+
+	// List of provenance entries on a registry record. Capped at one entry today: a
+	// record carries a single DETECTED_FROM lineage. Modeled as a list so additional
+	// relations can be unlocked post-GA by raising this bound without a breaking shape
+	// change.
+	Provenance []types.Provenance
 
 	// The version identifier of the registry record.
 	RecordVersion *string
@@ -187,6 +209,12 @@ func (v *UpdateRegistryRecordOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.UpdateRegistryRecordResponse_createdAt, *v.CreatedAt)
 	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.UpdateRegistryRecordResponse_createdBy, *v.CreatedBy)
+	}
+	if v.CreatedByAutoDetection != nil {
+		s.WriteBool(schemas.UpdateRegistryRecordResponse_createdByAutoDetection, *v.CreatedByAutoDetection)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateRegistryRecordResponse_description, *v.Description)
 	}
@@ -201,6 +229,7 @@ func (v *UpdateRegistryRecordOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateRegistryRecordResponse_name, *v.Name)
 	}
+	serializeProvenanceList(s, schemas.UpdateRegistryRecordResponse_provenance, v.Provenance)
 	if v.RecordArn != nil {
 		s.WriteString(schemas.UpdateRegistryRecordResponse_recordArn, *v.RecordArn)
 	}
@@ -232,6 +261,12 @@ func (v *UpdateRegistryRecordOutput) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.UpdateRegistryRecordResponse_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.UpdateRegistryRecordResponse_createdAt, v.CreatedAt)
+		case schemas.UpdateRegistryRecordResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.UpdateRegistryRecordResponse_createdBy, v.CreatedBy)
+		case schemas.UpdateRegistryRecordResponse_createdByAutoDetection:
+			v.CreatedByAutoDetection = new(bool)
+			return d.ReadBool(schemas.UpdateRegistryRecordResponse_createdByAutoDetection, v.CreatedByAutoDetection)
 		case schemas.UpdateRegistryRecordResponse_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.UpdateRegistryRecordResponse_description, v.Description)
@@ -244,6 +279,8 @@ func (v *UpdateRegistryRecordOutput) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.UpdateRegistryRecordResponse_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.UpdateRegistryRecordResponse_name, v.Name)
+		case schemas.UpdateRegistryRecordResponse_provenance:
+			return deserializeProvenanceList(d, schemas.UpdateRegistryRecordResponse_provenance, &v.Provenance)
 		case schemas.UpdateRegistryRecordResponse_recordArn:
 			v.RecordArn = new(string)
 			return d.ReadString(schemas.UpdateRegistryRecordResponse_recordArn, v.RecordArn)

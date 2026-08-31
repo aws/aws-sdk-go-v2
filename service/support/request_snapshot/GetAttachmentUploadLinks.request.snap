@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSSupport_20130415.GetAttachmentUploadLinks
+
+{"dryRun":true,"fileName":"__FileName__","fileSizeBytes":1,"uploadId":"__UploadId__","uploadRange":{"endIndex":1,"startIndex":1}}

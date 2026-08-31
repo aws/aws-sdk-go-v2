@@ -18570,6 +18570,55 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSlackBidirectionalConfiguration(v **types.SlackBidirectionalConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SlackBidirectionalConfiguration
+	if *v == nil {
+		sv = &types.SlackBidirectionalConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		case "roleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSlackChannel(v **types.SlackChannel, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18641,6 +18690,11 @@ func awsRestjson1_deserializeDocumentSlackConfiguration(v **types.SlackConfigura
 
 	for key, value := range shape {
 		switch key {
+		case "bidirectional":
+			if err := awsRestjson1_deserializeDocumentSlackBidirectionalConfiguration(&sv.Bidirectional, value); err != nil {
+				return err
+			}
+
 		case "transmissionTarget":
 			if err := awsRestjson1_deserializeDocumentSlackTransmissionTarget(&sv.TransmissionTarget, value); err != nil {
 				return err

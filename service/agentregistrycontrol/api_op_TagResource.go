@@ -9,7 +9,10 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Tag a resource with key-value pairs
+// Adds or overwrites one or more tags for the specified Amazon Web Services Agent
+// Registry resource. Tags are key-value pairs that you can use to categorize and
+// manage Amazon Web Services resources. If a tag with the same key already exists
+// on the resource, the service replaces its value with the value you specify.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -27,12 +30,14 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// ARN of a taggable Agent Registry resource.
+	// The Amazon Resource Name (ARN) of the resource to tag. Supported resources
+	// include registries and registry records.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// A map of tag keys to tag values.
+	// The tags to apply to the resource, as a map of tag keys to tag values. Tag keys
+	// must be unique within the request.
 	//
 	// This member is required.
 	Tags map[string]string

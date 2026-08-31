@@ -9,7 +9,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Remove tags from a resource by key
+// Removes one or more tags from the specified Amazon Web Services Agent Registry
+// resource. The operation removes only the tags whose keys you supply; other tags
+// on the resource remain unchanged.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -27,12 +29,14 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// ARN of a taggable Agent Registry resource.
+	// The Amazon Resource Name (ARN) of the resource to remove tags from. Supported
+	// resources include registries and registry records.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// A list of tag keys.
+	// The keys of the tags to remove from the resource. Tags with keys not included
+	// in this list remain on the resource.
 	//
 	// This member is required.
 	TagKeys []string

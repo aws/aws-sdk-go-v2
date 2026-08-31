@@ -9,13 +9,15 @@ import (
 	"time"
 )
 
-// Base mixin for A2A agent card descriptor content
+//	Descriptor that defines the content of an A2A (Agent-to-Agent) agent card
+//
+// registry record. The content is validated against the A2A protocol schema.
 type A2aAgentCardDescriptor struct {
 
-	// Descriptor payload data
+	//  The A2A agent card content, serialized as descriptor payload data.
 	Data *string
 
-	// Version of the descriptor type schema
+	//  The schema version of the descriptor payload.
 	DataSchemaVersion *string
 
 	//  The source location from which the A2A (Agent-to-Agent) agent card descriptor
@@ -64,7 +66,8 @@ func (v *A2aAgentCardDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
 // Additional data for an agent skills definition descriptor.
 type AgentSkillsAdditionalData struct {
 
-	// Base mixin for agent skills markdown descriptor content
+	//  The agent skills markdown descriptor associated with the agent skills
+	// definition.
 	SkillMd *AgentSkillsMdDescriptor
 
 	noSmithyDocumentSerde
@@ -94,17 +97,19 @@ func (v *AgentSkillsAdditionalData) Deserialize(d smithy.ShapeDeserializer) erro
 	})
 }
 
-// Base mixin for agent skills definition descriptor content
+//	Descriptor that defines an agent skills registry record and its associated
+//
+// content.
 type AgentSkillsDefinitionDescriptor struct {
 
 	//  Additional data for the agent skills definition, such as the skills markdown
 	// descriptor.
 	AdditionalData *AgentSkillsAdditionalData
 
-	// Descriptor payload data
+	//  The agent skills definition content, serialized as descriptor payload data.
 	Data *string
 
-	// Version of the descriptor type schema
+	//  The schema version of the descriptor payload.
 	DataSchemaVersion *string
 
 	noSmithyDocumentSerde
@@ -146,13 +151,13 @@ func (v *AgentSkillsDefinitionDescriptor) Deserialize(d smithy.ShapeDeserializer
 	})
 }
 
-// Base mixin for agent skills markdown descriptor content
+// Markdown-format descriptor containing an agent skills document.
 type AgentSkillsMdDescriptor struct {
 
-	// Descriptor payload data
+	//  The agent skills markdown content, serialized as descriptor payload data.
 	Data *string
 
-	// Version of the descriptor type schema
+	//  The schema version of the descriptor payload.
 	DataSchemaVersion *string
 
 	//  The source location from which the agent skills markdown content was retrieved.
@@ -205,12 +210,14 @@ type BatchGetDiscoverableRegistryRecordError struct {
 	// This member is required.
 	ErrorCode BatchGetDiscoverableRegistryRecordErrorCode
 
-	// Record identifier that accepts either ARN or ID format
+	//  The identifier of the record that could not be retrieved, echoed from the
+	// request in the same format that you supplied (ARN or record ID).
 	//
 	// This member is required.
 	RecordId *string
 
-	// Registry identifier that accepts either ARN or ID format
+	//  The identifier of the registry the record was requested from, echoed from the
+	// request.
 	//
 	// This member is required.
 	RegistryId *string
@@ -269,7 +276,7 @@ func (v *BatchGetDiscoverableRegistryRecordError) Deserialize(d smithy.ShapeDese
 // Custom descriptor for user-defined content
 type CustomDescriptor struct {
 
-	// Descriptor payload data
+	// The custom descriptor content, serialized as descriptor payload data.
 	Data *string
 
 	noSmithyDocumentSerde
@@ -302,16 +309,17 @@ func (v *CustomDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
 // registry record.
 type Descriptors struct {
 
-	// Base mixin for A2A agent card descriptor content
+	//  The A2A agent card descriptor, populated when the record type is AGENT.
 	A2aAgentCard *A2aAgentCardDescriptor
 
-	// Base mixin for agent skills definition descriptor content
+	//  The agent skills definition descriptor, populated when the record type is
+	// SKILL.
 	AgentSkillsDefinition *AgentSkillsDefinitionDescriptor
 
-	// Custom descriptor for user-defined content
+	//  The custom descriptor, populated when the record type is CUSTOM.
 	Custom *CustomDescriptor
 
-	// Base mixin for MCP server descriptor content
+	//  The MCP server descriptor, populated when the record type is MCP.
 	McpServer *McpServerDescriptor
 
 	noSmithyDocumentSerde
@@ -368,7 +376,8 @@ func (v *Descriptors) Deserialize(d smithy.ShapeDeserializer) error {
 // The source location from which a descriptor's content was retrieved.
 type DescriptorSource struct {
 
-	// Base mixin for descriptor source from URL
+	//  The URL-based descriptor source, populated when descriptor content is
+	// synchronized from a URL.
 	FromUrl *DescriptorSourceFromUrl
 
 	noSmithyDocumentSerde
@@ -398,10 +407,12 @@ func (v *DescriptorSource) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// Base mixin for descriptor source from URL
+//	A URL-based descriptor source that identifies where descriptor content is
+//
+// retrieved from.
 type DescriptorSourceFromUrl struct {
 
-	// URL source for descriptor content
+	//  The URL from which the descriptor content is retrieved.
 	//
 	// This member is required.
 	Url *string
@@ -436,55 +447,66 @@ func (v *DescriptorSourceFromUrl) Deserialize(d smithy.ShapeDeserializer) error 
 // ListDiscoverableRegistryRecords . This summary does not include descriptors.
 type DiscoverableRegistryRecordSummary struct {
 
-	// Timestamp in ISO 8601 date-time format
+	//  The timestamp when the registry record was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// Registry Record name
+	//  The name of the registry record. Names are unique within a registry.
 	//
 	// This member is required.
 	Name *string
 
-	// Registry Record Amazon Resource Name
+	//  The Amazon Resource Name (ARN) of the registry record.
 	//
 	// This member is required.
 	RecordArn *string
 
-	// Registry Record unique identifier - 12-character alphanumeric string
+	//  The unique identifier of the registry record.
 	//
 	// This member is required.
 	RecordId *string
 
-	// Record type enum for registry record classification
+	//  The type of the registry record. MCP is a Model Context Protocol server
+	// record, AGENT is an Agent-to-Agent (A2A) agent card record, SKILL is an agent
+	// skills definition record, and CUSTOM is a record with a custom descriptor.
 	//
 	// This member is required.
 	RecordType RecordType
 
-	// Version of the registry record
+	//  The version identifier of the registry record.
 	//
 	// This member is required.
 	RecordVersion *string
 
-	// Registry Amazon Resource Name
+	//  The Amazon Resource Name (ARN) of the parent registry that owns the record.
 	//
 	// This member is required.
 	RegistryArn *string
 
-	// Registry record status
+	//  The lifecycle status of the registry record. A record is DRAFT before it is
+	// submitted, PENDING_APPROVAL while awaiting curator review, and APPROVED once it
+	// is approved and discoverable. REJECTED and DEPRECATED records are not
+	// discoverable. The CREATING , UPDATING , CREATE_FAILED , and UPDATE_FAILED
+	// values reflect the state of an in-progress or failed asynchronous change.
 	//
 	// This member is required.
 	Status RegistryRecordStatus
 
-	// Timestamp in ISO 8601 date-time format
+	//  The timestamp when the registry record was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// Description of the Resource
+	//  A human-readable description of the registry record. Use this field to explain
+	// the record's purpose or content to consumers discovering it in the registry.
 	Description *string
 
-	// Display name for a registry record
+	//  The descriptor types that are present on this registry record. Each value
+	// corresponds to a descriptor entry key on the approved record.
+	DescriptorTypes []string
+
+	//  The human-readable display name of the registry record.
 	DisplayName *string
 
 	noSmithyDocumentSerde
@@ -503,6 +525,7 @@ func (v *DiscoverableRegistryRecordSummary) SerializeMembers(s smithy.ShapeSeria
 	if v.Description != nil {
 		s.WriteString(schemas.DiscoverableRegistryRecordSummary_description, *v.Description)
 	}
+	serializeDescriptorTypeList(s, schemas.DiscoverableRegistryRecordSummary_descriptorTypes, v.DescriptorTypes)
 	if v.DisplayName != nil {
 		s.WriteString(schemas.DiscoverableRegistryRecordSummary_displayName, *v.DisplayName)
 	}
@@ -540,6 +563,8 @@ func (v *DiscoverableRegistryRecordSummary) Deserialize(d smithy.ShapeDeserializ
 		case schemas.DiscoverableRegistryRecordSummary_description:
 			v.Description = new(string)
 			return d.ReadString(schemas.DiscoverableRegistryRecordSummary_description, v.Description)
+		case schemas.DiscoverableRegistryRecordSummary_descriptorTypes:
+			return deserializeDescriptorTypeList(d, schemas.DiscoverableRegistryRecordSummary_descriptorTypes, &v.DescriptorTypes)
 		case schemas.DiscoverableRegistryRecordSummary_displayName:
 			v.DisplayName = new(string)
 			return d.ReadString(schemas.DiscoverableRegistryRecordSummary_displayName, v.DisplayName)
@@ -583,7 +608,7 @@ func (v *DiscoverableRegistryRecordSummary) Deserialize(d smithy.ShapeDeserializ
 // Additional data for an MCP server descriptor
 type McpServerAdditionalData struct {
 
-	// MCP tools descriptor containing tool definitions
+	// The MCP tools descriptor that defines the tools exposed by the MCP server.
 	Tools *McpToolsDescriptor
 
 	noSmithyDocumentSerde
@@ -613,16 +638,20 @@ func (v *McpServerAdditionalData) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
-// Base mixin for MCP server descriptor content
+//	Descriptor that defines the content of an MCP (Model Context Protocol) server
+//
+// registry record, including the server definition and its tool definitions. The
+// content is validated against the MCP protocol schema.
 type McpServerDescriptor struct {
 
-	// Additional data for an MCP server descriptor
+	//  Additional data associated with the MCP server descriptor, such as tool
+	// definitions.
 	AdditionalData *McpServerAdditionalData
 
-	// Descriptor payload data
+	//  The MCP server descriptor content, serialized as descriptor payload data.
 	Data *string
 
-	// Version of the descriptor type schema
+	//  The schema version of the descriptor payload.
 	DataSchemaVersion *string
 
 	//  The source location from which the MCP (Model Context Protocol) server
@@ -679,10 +708,10 @@ func (v *McpServerDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
 // MCP tools descriptor containing tool definitions
 type McpToolsDescriptor struct {
 
-	// Descriptor payload data
+	// The MCP tools descriptor content, serialized as descriptor payload data.
 	Data *string
 
-	// Version of the descriptor type schema
+	// The schema version of the descriptor payload.
 	DataSchemaVersion *string
 
 	noSmithyDocumentSerde
@@ -770,7 +799,8 @@ type RegistryRecordsEntry struct {
 	// This member is required.
 	RecordIds []string
 
-	// Registry identifier that accepts either ARN or ID format
+	//  The identifier of the registry to retrieve the records from. You can provide
+	// either the full Amazon Resource Name (ARN) or the registry ID.
 	//
 	// This member is required.
 	RegistryId *string
@@ -806,7 +836,7 @@ func (v *RegistryRecordsEntry) Deserialize(d smithy.ShapeDeserializer) error {
 // Summary information about a registry record, including its descriptors.
 type RegistryRecordSummary struct {
 
-	// Timestamp in ISO 8601 date-time format
+	//  The timestamp when the registry record was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
@@ -817,50 +847,57 @@ type RegistryRecordSummary struct {
 	// This member is required.
 	Descriptors *Descriptors
 
-	// Registry Record name
+	//  The name of the registry record. Names are unique within a registry.
 	//
 	// This member is required.
 	Name *string
 
-	// Registry Record Amazon Resource Name
+	//  The Amazon Resource Name (ARN) of the registry record.
 	//
 	// This member is required.
 	RecordArn *string
 
-	// Registry Record unique identifier - 12-character alphanumeric string
+	//  The unique identifier of the registry record.
 	//
 	// This member is required.
 	RecordId *string
 
-	// Record type enum for registry record classification
+	//  The type of the registry record. MCP is a Model Context Protocol server
+	// record, AGENT is an Agent-to-Agent (A2A) agent card record, SKILL is an agent
+	// skills definition record, and CUSTOM is a record with a custom descriptor.
 	//
 	// This member is required.
 	RecordType RecordType
 
-	// Version of the registry record
+	//  The version identifier of the registry record.
 	//
 	// This member is required.
 	RecordVersion *string
 
-	// Registry Amazon Resource Name
+	//  The Amazon Resource Name (ARN) of the parent registry that owns the record.
 	//
 	// This member is required.
 	RegistryArn *string
 
-	// Registry record status
+	//  The lifecycle status of the registry record. A record is DRAFT before it is
+	// submitted, PENDING_APPROVAL while awaiting curator review, and APPROVED once it
+	// is approved and discoverable. REJECTED and DEPRECATED records are not
+	// discoverable. The CREATING , UPDATING , CREATE_FAILED , and UPDATE_FAILED
+	// values reflect the state of an in-progress or failed asynchronous change.
 	//
 	// This member is required.
 	Status RegistryRecordStatus
 
-	// Timestamp in ISO 8601 date-time format
+	//  The timestamp when the registry record was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// Description of the Resource
+	//  A human-readable description of the registry record. Use this field to explain
+	// the record's purpose or content to consumers discovering it in the registry.
 	Description *string
 
-	// Display name for a registry record
+	//  The human-readable display name of the registry record.
 	DisplayName *string
 
 	noSmithyDocumentSerde

@@ -2298,6 +2298,71 @@ func TestUpdateResponseSnapshot_DescribeRegistrationFieldDefinitions(t *testing.
 					TextValidationDescription: ptr.String("__TextValidationDescription__"),
 					ExampleTextValue:          ptr.String("__ExampleTextValue__"),
 				},
+				ConditionalBehavior: &types.ConditionalBehavior{
+					Rules: []types.ConditionalRule{
+						{
+							Conditions: []types.FieldCondition{
+								{
+									DependsOnFieldPath: ptr.String("__DependsOnFieldPath__"),
+									Operator:           ptr.String("__Operator__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									DependsOnFieldPath: ptr.String("__DependsOnFieldPath__"),
+									Operator:           ptr.String("__Operator__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							RuleBehavior: ptr.String("__RuleBehavior__"),
+							ConditionalValidation: &types.ConditionalValidation{
+								MinLength: ptr.Int32(1),
+								MaxLength: ptr.Int32(1),
+								Pattern:   ptr.String("__Pattern__"),
+								AllowedValues: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						{
+							Conditions: []types.FieldCondition{
+								{
+									DependsOnFieldPath: ptr.String("__DependsOnFieldPath__"),
+									Operator:           ptr.String("__Operator__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									DependsOnFieldPath: ptr.String("__DependsOnFieldPath__"),
+									Operator:           ptr.String("__Operator__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							RuleBehavior: ptr.String("__RuleBehavior__"),
+							ConditionalValidation: &types.ConditionalValidation{
+								MinLength: ptr.Int32(1),
+								MaxLength: ptr.Int32(1),
+								Pattern:   ptr.String("__Pattern__"),
+								AllowedValues: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+					DefaultBehavior: ptr.String("__DefaultBehavior__"),
+				},
 			},
 			{
 				SectionPath:      ptr.String("__SectionPath__"),
@@ -2337,6 +2402,71 @@ func TestUpdateResponseSnapshot_DescribeRegistrationFieldDefinitions(t *testing.
 					},
 					TextValidationDescription: ptr.String("__TextValidationDescription__"),
 					ExampleTextValue:          ptr.String("__ExampleTextValue__"),
+				},
+				ConditionalBehavior: &types.ConditionalBehavior{
+					Rules: []types.ConditionalRule{
+						{
+							Conditions: []types.FieldCondition{
+								{
+									DependsOnFieldPath: ptr.String("__DependsOnFieldPath__"),
+									Operator:           ptr.String("__Operator__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									DependsOnFieldPath: ptr.String("__DependsOnFieldPath__"),
+									Operator:           ptr.String("__Operator__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							RuleBehavior: ptr.String("__RuleBehavior__"),
+							ConditionalValidation: &types.ConditionalValidation{
+								MinLength: ptr.Int32(1),
+								MaxLength: ptr.Int32(1),
+								Pattern:   ptr.String("__Pattern__"),
+								AllowedValues: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+						{
+							Conditions: []types.FieldCondition{
+								{
+									DependsOnFieldPath: ptr.String("__DependsOnFieldPath__"),
+									Operator:           ptr.String("__Operator__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									DependsOnFieldPath: ptr.String("__DependsOnFieldPath__"),
+									Operator:           ptr.String("__Operator__"),
+									Values: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
+							RuleBehavior: ptr.String("__RuleBehavior__"),
+							ConditionalValidation: &types.ConditionalValidation{
+								MinLength: ptr.Int32(1),
+								MaxLength: ptr.Int32(1),
+								Pattern:   ptr.String("__Pattern__"),
+								AllowedValues: []string{
+									"__Member__",
+									"__Member__",
+								},
+							},
+						},
+					},
+					DefaultBehavior: ptr.String("__DefaultBehavior__"),
 				},
 			},
 		},

@@ -140,6 +140,29 @@ func TestCheckResponseSnapshot_AddProfileKey(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_AssociateStreamForSegments(t *testing.T) {
+	want := &AssociateStreamForSegmentsOutput{}
+	status, header, body, err := serdeRespReadSnapshot("AssociateStreamForSegments.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.AssociateStreamForSegments(context.Background(), &AssociateStreamForSegmentsInput{
+		DomainName:         ptr.String("__DomainName__"),
+		DestinationArn:     ptr.String("__DestinationArn__"),
+		DestinationRoleArn: ptr.String("__DestinationRoleArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "AssociateStreamForSegments.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_BatchGetCalculatedAttributeForProfile(t *testing.T) {
 	want := &BatchGetCalculatedAttributeForProfileOutput{
 		Errors: []types.BatchGetCalculatedAttributeForProfileError{
@@ -4761,6 +4784,30 @@ func TestCheckResponseSnapshot_DeleteSegmentDefinition(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DeleteSegmentSubscription(t *testing.T) {
+	want := &DeleteSegmentSubscriptionOutput{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DeleteSegmentSubscription.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DeleteSegmentSubscription(context.Background(), &DeleteSegmentSubscriptionInput{
+		DomainName:            ptr.String("__DomainName__"),
+		SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DeleteSegmentSubscription.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DeleteWorkflow(t *testing.T) {
 	want := &DeleteWorkflowOutput{}
 	status, header, body, err := serdeRespReadSnapshot("DeleteWorkflow.response")
@@ -4876,6 +4923,29 @@ func TestCheckResponseSnapshot_DetectProfileObjectType(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "DetectProfileObjectType.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_DisassociateStreamForSegments(t *testing.T) {
+	want := &DisassociateStreamForSegmentsOutput{
+		Message: ptr.String("__Message__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("DisassociateStreamForSegments.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DisassociateStreamForSegments(context.Background(), &DisassociateStreamForSegmentsInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DisassociateStreamForSegments.response", err)
 	}
 }
 
@@ -7809,6 +7879,41 @@ func TestCheckResponseSnapshot_GetSegmentSnapshot(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetSegmentSubscription(t *testing.T) {
+	want := &GetSegmentSubscriptionOutput{
+		Status:  types.SegmentSubscriptionStatus("STARTING"),
+		Message: ptr.String("__Message__"),
+		ScheduleConfiguration: &types.ScheduleConfiguration{
+			Interval: ptr.Int32(1),
+			Unit:     types.ScheduleConfigurationUnit("HOURLY"),
+		},
+		ScheduledExecutions: &types.ScheduledExecutions{
+			NextExecutedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			LastExecutedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
+		StartedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		LastUpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetSegmentSubscription.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetSegmentSubscription(context.Background(), &GetSegmentSubscriptionInput{
+		DomainName:            ptr.String("__DomainName__"),
+		SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetSegmentSubscription.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetSimilarProfiles(t *testing.T) {
 	want := &GetSimilarProfilesOutput{
 		ProfileIds: []string{
@@ -7842,6 +7947,47 @@ func TestCheckResponseSnapshot_GetSimilarProfiles(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetSimilarProfiles.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetStreamForSegments(t *testing.T) {
+	want := &GetStreamForSegmentsOutput{
+		AssociatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		AssociatedSegments: []types.AssociatedSegment{
+			{
+				SegmentName: ptr.String("__SegmentName__"),
+				Status:      types.EventSubscriptionSegmentStatus("STARTING"),
+				Message:     ptr.String("__Message__"),
+			},
+			{
+				SegmentName: ptr.String("__SegmentName__"),
+				Status:      types.EventSubscriptionSegmentStatus("STARTING"),
+				Message:     ptr.String("__Message__"),
+			},
+		},
+		DomainName:         ptr.String("__DomainName__"),
+		DestinationArn:     ptr.String("__DestinationArn__"),
+		DestinationRoleArn: ptr.String("__DestinationRoleArn__"),
+		State:              types.EventSubscriptionState("RUNNING"),
+		DisassociatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		FailureReason:      ptr.String("__FailureReason__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetStreamForSegments.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetStreamForSegments(context.Background(), &GetStreamForSegmentsInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetStreamForSegments.response", err)
 	}
 }
 
@@ -9319,6 +9465,46 @@ func TestCheckResponseSnapshot_ListSegmentDefinitions(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ListSegmentSubscriptionEvents(t *testing.T) {
+	want := &ListSegmentSubscriptionEventsOutput{
+		Events: []types.SubscriptionEventItem{
+			{
+				ProfileId: ptr.String("__ProfileId__"),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EventType: types.SubscriptionEventType("LIVE"),
+				Event:     types.SubscriptionEvent("JOINED"),
+			},
+			{
+				ProfileId: ptr.String("__ProfileId__"),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				EventType: types.SubscriptionEventType("LIVE"),
+				Event:     types.SubscriptionEvent("JOINED"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListSegmentSubscriptionEvents.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListSegmentSubscriptionEvents(context.Background(), &ListSegmentSubscriptionEventsInput{
+		DomainName:            ptr.String("__DomainName__"),
+		SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+		MaxResults:            ptr.Int32(1),
+		NextToken:             ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListSegmentSubscriptionEvents.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListTagsForResource(t *testing.T) {
 	want := &ListTagsForResourceOutput{
 		Tags: map[string]string{
@@ -9815,6 +10001,39 @@ func TestCheckResponseSnapshot_PutProfileObjectType(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "PutProfileObjectType.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_PutSegmentSubscription(t *testing.T) {
+	want := &PutSegmentSubscriptionOutput{
+		Status: types.SegmentSubscriptionStatus("STARTING"),
+		ScheduleConfiguration: &types.ScheduleConfiguration{
+			Interval: ptr.Int32(1),
+			Unit:     types.ScheduleConfigurationUnit("HOURLY"),
+		},
+		StartedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("PutSegmentSubscription.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.PutSegmentSubscription(context.Background(), &PutSegmentSubscriptionInput{
+		DomainName:            ptr.String("__DomainName__"),
+		SegmentDefinitionName: ptr.String("__SegmentDefinitionName__"),
+		ScheduleConfiguration: &types.ScheduleConfiguration{
+			Interval: ptr.Int32(1),
+			Unit:     types.ScheduleConfigurationUnit("HOURLY"),
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "PutSegmentSubscription.response", err)
 	}
 }
 

@@ -5,6 +5,7 @@ package support
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/support/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -49,6 +50,26 @@ func (m *validateOpAddCommunicationToCase) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCompleteAttachmentUpload struct {
+}
+
+func (*validateOpCompleteAttachmentUpload) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCompleteAttachmentUpload) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CompleteAttachmentUploadInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCompleteAttachmentUploadInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCase struct {
 }
 
@@ -84,6 +105,26 @@ func (m *validateOpDescribeAttachment) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeAttachmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAttachmentUploadStatus struct {
+}
+
+func (*validateOpDescribeAttachmentUploadStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAttachmentUploadStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAttachmentUploadStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAttachmentUploadStatusInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -229,6 +270,46 @@ func (m *validateOpDescribeTrustedAdvisorCheckSummaries) HandleInitialize(ctx co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetAttachmentDownloadLink struct {
+}
+
+func (*validateOpGetAttachmentDownloadLink) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAttachmentDownloadLink) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAttachmentDownloadLinkInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAttachmentDownloadLinkInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAttachmentUploadLinks struct {
+}
+
+func (*validateOpGetAttachmentUploadLinks) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAttachmentUploadLinks) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAttachmentUploadLinksInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAttachmentUploadLinksInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRefreshTrustedAdvisorCheck struct {
 }
 
@@ -257,12 +338,20 @@ func addOpAddCommunicationToCaseValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpAddCommunicationToCase{}, middleware.After)
 }
 
+func addOpCompleteAttachmentUploadValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCompleteAttachmentUpload{}, middleware.After)
+}
+
 func addOpCreateCaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCase{}, middleware.After)
 }
 
 func addOpDescribeAttachmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAttachment{}, middleware.After)
+}
+
+func addOpDescribeAttachmentUploadStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAttachmentUploadStatus{}, middleware.After)
 }
 
 func addOpDescribeCommunicationsValidationMiddleware(stack *middleware.Stack) error {
@@ -293,8 +382,66 @@ func addOpDescribeTrustedAdvisorCheckSummariesValidationMiddleware(stack *middle
 	return stack.Initialize.Add(&validateOpDescribeTrustedAdvisorCheckSummaries{}, middleware.After)
 }
 
+func addOpGetAttachmentDownloadLinkValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAttachmentDownloadLink{}, middleware.After)
+}
+
+func addOpGetAttachmentUploadLinksValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAttachmentUploadLinks{}, middleware.After)
+}
+
 func addOpRefreshTrustedAdvisorCheckValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRefreshTrustedAdvisorCheck{}, middleware.After)
+}
+
+func validateCompletedUpload(v *types.CompletedUpload) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CompletedUpload"}
+	if v.PartIndex == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PartIndex"))
+	}
+	if v.ETag == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ETag"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCompletedUploadList(v []types.CompletedUpload) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CompletedUploadList"}
+	for i := range v {
+		if err := validateCompletedUpload(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUploadRange(v *types.UploadRange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UploadRange"}
+	if v.StartIndex == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartIndex"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpAddAttachmentsToSetInput(v *AddAttachmentsToSetInput) error {
@@ -319,6 +466,28 @@ func validateOpAddCommunicationToCaseInput(v *AddCommunicationToCaseInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "AddCommunicationToCaseInput"}
 	if v.CommunicationBody == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CommunicationBody"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCompleteAttachmentUploadInput(v *CompleteAttachmentUploadInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CompleteAttachmentUploadInput"}
+	if v.UploadId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UploadId"))
+	}
+	if v.CompletedUploads == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CompletedUploads"))
+	} else if v.CompletedUploads != nil {
+		if err := validateCompletedUploadList(v.CompletedUploads); err != nil {
+			invalidParams.AddNested("CompletedUploads", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -352,6 +521,21 @@ func validateOpDescribeAttachmentInput(v *DescribeAttachmentInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeAttachmentInput"}
 	if v.AttachmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AttachmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAttachmentUploadStatusInput(v *DescribeAttachmentUploadStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAttachmentUploadStatusInput"}
+	if v.UploadId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UploadId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -472,6 +656,41 @@ func validateOpDescribeTrustedAdvisorCheckSummariesInput(v *DescribeTrustedAdvis
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeTrustedAdvisorCheckSummariesInput"}
 	if v.CheckIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CheckIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAttachmentDownloadLinkInput(v *GetAttachmentDownloadLinkInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAttachmentDownloadLinkInput"}
+	if v.AttachmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAttachmentUploadLinksInput(v *GetAttachmentUploadLinksInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAttachmentUploadLinksInput"}
+	if v.FileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileName"))
+	}
+	if v.UploadRange != nil {
+		if err := validateUploadRange(v.UploadRange); err != nil {
+			invalidParams.AddNested("UploadRange", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

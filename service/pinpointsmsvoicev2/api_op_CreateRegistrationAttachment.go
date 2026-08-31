@@ -13,7 +13,7 @@ import (
 )
 
 // Create a new registration attachment to use for uploading a file or a URL to a
-// file. The maximum file size is 500KB and valid file extensions are PDF, JPEG and
+// file. The maximum file size is 5MB and valid file extensions are PDF, JPEG and
 // PNG. For example, many sender ID registrations require a signed “letter of
 // authorization” (LOA) to be submitted.
 //
@@ -36,7 +36,7 @@ func (c *Client) CreateRegistrationAttachment(ctx context.Context, params *Creat
 
 type CreateRegistrationAttachmentInput struct {
 
-	// The registration file to upload. The maximum file size is 500KB and valid file
+	// The registration file to upload. The maximum file size is 5MB and valid file
 	// extensions are PDF, JPEG and PNG.
 	AttachmentBody []byte
 

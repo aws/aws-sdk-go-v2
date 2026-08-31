@@ -390,6 +390,25 @@ func (ApplicableToType) Values() []ApplicableToType {
 	}
 }
 
+type AppVisibility string
+
+// Enum values for AppVisibility
+const (
+	AppVisibilityPrivate AppVisibility = "PRIVATE"
+	AppVisibilityPublic  AppVisibility = "PUBLIC"
+)
+
+// Values returns all known values for AppVisibility. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AppVisibility) Values() []AppVisibility {
+	return []AppVisibility{
+		"PRIVATE",
+		"PUBLIC",
+	}
+}
+
 type ArcThickness string
 
 // Enum values for ArcThickness
@@ -5372,6 +5391,31 @@ func (RowLevelPermissionPolicy) Values() []RowLevelPermissionPolicy {
 	return []RowLevelPermissionPolicy{
 		"GRANT_ACCESS",
 		"DENY_ACCESS",
+	}
+}
+
+type SearchAppsFilterName string
+
+// Enum values for SearchAppsFilterName
+const (
+	SearchAppsFilterNameAppId                         SearchAppsFilterName = "APP_ID"
+	SearchAppsFilterNameAppName                       SearchAppsFilterName = "APP_NAME"
+	SearchAppsFilterNameDirectQuicksightSoleOwner     SearchAppsFilterName = "DIRECT_QUICKSIGHT_SOLE_OWNER"
+	SearchAppsFilterNameDirectQuicksightOwner         SearchAppsFilterName = "DIRECT_QUICKSIGHT_OWNER"
+	SearchAppsFilterNameDirectQuicksightViewerOrOwner SearchAppsFilterName = "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
+)
+
+// Values returns all known values for SearchAppsFilterName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchAppsFilterName) Values() []SearchAppsFilterName {
+	return []SearchAppsFilterName{
+		"APP_ID",
+		"APP_NAME",
+		"DIRECT_QUICKSIGHT_SOLE_OWNER",
+		"DIRECT_QUICKSIGHT_OWNER",
+		"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER",
 	}
 }
 

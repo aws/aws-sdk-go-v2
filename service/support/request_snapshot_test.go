@@ -218,6 +218,7 @@ func TestCheckRequestSnapshot_AddAttachmentsToSet(t *testing.T) {
 				Data:     []byte("blob"),
 			},
 		},
+		DryRun: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -251,6 +252,11 @@ func TestCheckRequestSnapshot_AddCommunicationToCase(t *testing.T) {
 			"__Member__",
 		},
 		AttachmentSetId: ptr.String("__AttachmentSetId__"),
+		UploadIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -275,6 +281,44 @@ func TestCheckRequestSnapshot_AddCommunicationToCase(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CompleteAttachmentUpload(t *testing.T) {
+	input := &CompleteAttachmentUploadInput{
+		UploadId: ptr.String("__UploadId__"),
+		CompletedUploads: []types.CompletedUpload{
+			{
+				PartIndex: ptr.Int32(1),
+				ETag:      ptr.String("__ETag__"),
+			},
+			{
+				PartIndex: ptr.Int32(1),
+				ETag:      ptr.String("__ETag__"),
+			},
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CompleteAttachmentUpload(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CompleteAttachmentUpload"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_CreateCase(t *testing.T) {
 	input := &CreateCaseInput{
 		Subject:           ptr.String("__Subject__"),
@@ -289,6 +333,11 @@ func TestCheckRequestSnapshot_CreateCase(t *testing.T) {
 		Language:        ptr.String("__Language__"),
 		IssueType:       ptr.String("__IssueType__"),
 		AttachmentSetId: ptr.String("__AttachmentSetId__"),
+		UploadIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -316,6 +365,7 @@ func TestCheckRequestSnapshot_CreateCase(t *testing.T) {
 func TestCheckRequestSnapshot_DescribeAttachment(t *testing.T) {
 	input := &DescribeAttachmentInput{
 		AttachmentId: ptr.String("__AttachmentId__"),
+		DryRun:       ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -340,6 +390,34 @@ func TestCheckRequestSnapshot_DescribeAttachment(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeAttachmentUploadStatus(t *testing.T) {
+	input := &DescribeAttachmentUploadStatusInput{
+		UploadId: ptr.String("__UploadId__"),
+		DryRun:   ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeAttachmentUploadStatus(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAttachmentUploadStatus"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DescribeCases(t *testing.T) {
 	input := &DescribeCasesInput{
 		CaseIdList: []string{
@@ -354,6 +432,7 @@ func TestCheckRequestSnapshot_DescribeCases(t *testing.T) {
 		MaxResults:            ptr.Int32(1),
 		Language:              ptr.String("__Language__"),
 		IncludeCommunications: ptr.Bool(true),
+		DryRun:                ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -385,6 +464,7 @@ func TestCheckRequestSnapshot_DescribeCommunications(t *testing.T) {
 		AfterTime:  ptr.String("__AfterTime__"),
 		NextToken:  ptr.String("__NextToken__"),
 		MaxResults: ptr.Int32(1),
+		DryRun:     ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -415,6 +495,7 @@ func TestCheckRequestSnapshot_DescribeCreateCaseOptions(t *testing.T) {
 		ServiceCode:  ptr.String("__ServiceCode__"),
 		Language:     ptr.String("__Language__"),
 		CategoryCode: ptr.String("__CategoryCode__"),
+		DryRun:       ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -446,6 +527,7 @@ func TestCheckRequestSnapshot_DescribeServices(t *testing.T) {
 			"__Member__",
 		},
 		Language: ptr.String("__Language__"),
+		DryRun:   ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -473,6 +555,7 @@ func TestCheckRequestSnapshot_DescribeServices(t *testing.T) {
 func TestCheckRequestSnapshot_DescribeSeverityLevels(t *testing.T) {
 	input := &DescribeSeverityLevelsInput{
 		Language: ptr.String("__Language__"),
+		DryRun:   ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -502,6 +585,7 @@ func TestCheckRequestSnapshot_DescribeSupportedLanguages(t *testing.T) {
 		IssueType:    ptr.String("__IssueType__"),
 		ServiceCode:  ptr.String("__ServiceCode__"),
 		CategoryCode: ptr.String("__CategoryCode__"),
+		DryRun:       ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -641,6 +725,68 @@ func TestCheckRequestSnapshot_DescribeTrustedAdvisorCheckSummaries(t *testing.T)
 	}
 }
 
+func TestCheckRequestSnapshot_GetAttachmentDownloadLink(t *testing.T) {
+	input := &GetAttachmentDownloadLinkInput{
+		AttachmentId: ptr.String("__AttachmentId__"),
+		DryRun:       ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAttachmentDownloadLink(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAttachmentDownloadLink"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetAttachmentUploadLinks(t *testing.T) {
+	input := &GetAttachmentUploadLinksInput{
+		FileName:      ptr.String("__FileName__"),
+		FileSizeBytes: ptr.Int64(1),
+		UploadId:      ptr.String("__UploadId__"),
+		UploadRange: &types.UploadRange{
+			StartIndex: ptr.Int32(1),
+			EndIndex:   ptr.Int32(1),
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAttachmentUploadLinks(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAttachmentUploadLinks"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_RefreshTrustedAdvisorCheck(t *testing.T) {
 	input := &RefreshTrustedAdvisorCheckInput{
 		CheckId: ptr.String("__CheckId__"),
@@ -671,6 +817,7 @@ func TestCheckRequestSnapshot_RefreshTrustedAdvisorCheck(t *testing.T) {
 func TestCheckRequestSnapshot_ResolveCase(t *testing.T) {
 	input := &ResolveCaseInput{
 		CaseId: ptr.String("__CaseId__"),
+		DryRun: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -707,6 +854,7 @@ func TestUpdateRequestSnapshot_AddAttachmentsToSet(t *testing.T) {
 				Data:     []byte("blob"),
 			},
 		},
+		DryRun: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -740,6 +888,11 @@ func TestUpdateRequestSnapshot_AddCommunicationToCase(t *testing.T) {
 			"__Member__",
 		},
 		AttachmentSetId: ptr.String("__AttachmentSetId__"),
+		UploadIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -764,6 +917,44 @@ func TestUpdateRequestSnapshot_AddCommunicationToCase(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CompleteAttachmentUpload(t *testing.T) {
+	input := &CompleteAttachmentUploadInput{
+		UploadId: ptr.String("__UploadId__"),
+		CompletedUploads: []types.CompletedUpload{
+			{
+				PartIndex: ptr.Int32(1),
+				ETag:      ptr.String("__ETag__"),
+			},
+			{
+				PartIndex: ptr.Int32(1),
+				ETag:      ptr.String("__ETag__"),
+			},
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CompleteAttachmentUpload(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CompleteAttachmentUpload"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_CreateCase(t *testing.T) {
 	input := &CreateCaseInput{
 		Subject:           ptr.String("__Subject__"),
@@ -778,6 +969,11 @@ func TestUpdateRequestSnapshot_CreateCase(t *testing.T) {
 		Language:        ptr.String("__Language__"),
 		IssueType:       ptr.String("__IssueType__"),
 		AttachmentSetId: ptr.String("__AttachmentSetId__"),
+		UploadIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -805,6 +1001,7 @@ func TestUpdateRequestSnapshot_CreateCase(t *testing.T) {
 func TestUpdateRequestSnapshot_DescribeAttachment(t *testing.T) {
 	input := &DescribeAttachmentInput{
 		AttachmentId: ptr.String("__AttachmentId__"),
+		DryRun:       ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -829,6 +1026,34 @@ func TestUpdateRequestSnapshot_DescribeAttachment(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DescribeAttachmentUploadStatus(t *testing.T) {
+	input := &DescribeAttachmentUploadStatusInput{
+		UploadId: ptr.String("__UploadId__"),
+		DryRun:   ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeAttachmentUploadStatus(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeAttachmentUploadStatus"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DescribeCases(t *testing.T) {
 	input := &DescribeCasesInput{
 		CaseIdList: []string{
@@ -843,6 +1068,7 @@ func TestUpdateRequestSnapshot_DescribeCases(t *testing.T) {
 		MaxResults:            ptr.Int32(1),
 		Language:              ptr.String("__Language__"),
 		IncludeCommunications: ptr.Bool(true),
+		DryRun:                ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -874,6 +1100,7 @@ func TestUpdateRequestSnapshot_DescribeCommunications(t *testing.T) {
 		AfterTime:  ptr.String("__AfterTime__"),
 		NextToken:  ptr.String("__NextToken__"),
 		MaxResults: ptr.Int32(1),
+		DryRun:     ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -904,6 +1131,7 @@ func TestUpdateRequestSnapshot_DescribeCreateCaseOptions(t *testing.T) {
 		ServiceCode:  ptr.String("__ServiceCode__"),
 		Language:     ptr.String("__Language__"),
 		CategoryCode: ptr.String("__CategoryCode__"),
+		DryRun:       ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -935,6 +1163,7 @@ func TestUpdateRequestSnapshot_DescribeServices(t *testing.T) {
 			"__Member__",
 		},
 		Language: ptr.String("__Language__"),
+		DryRun:   ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -962,6 +1191,7 @@ func TestUpdateRequestSnapshot_DescribeServices(t *testing.T) {
 func TestUpdateRequestSnapshot_DescribeSeverityLevels(t *testing.T) {
 	input := &DescribeSeverityLevelsInput{
 		Language: ptr.String("__Language__"),
+		DryRun:   ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -991,6 +1221,7 @@ func TestUpdateRequestSnapshot_DescribeSupportedLanguages(t *testing.T) {
 		IssueType:    ptr.String("__IssueType__"),
 		ServiceCode:  ptr.String("__ServiceCode__"),
 		CategoryCode: ptr.String("__CategoryCode__"),
+		DryRun:       ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1130,6 +1361,68 @@ func TestUpdateRequestSnapshot_DescribeTrustedAdvisorCheckSummaries(t *testing.T
 	}
 }
 
+func TestUpdateRequestSnapshot_GetAttachmentDownloadLink(t *testing.T) {
+	input := &GetAttachmentDownloadLinkInput{
+		AttachmentId: ptr.String("__AttachmentId__"),
+		DryRun:       ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAttachmentDownloadLink(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAttachmentDownloadLink"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetAttachmentUploadLinks(t *testing.T) {
+	input := &GetAttachmentUploadLinksInput{
+		FileName:      ptr.String("__FileName__"),
+		FileSizeBytes: ptr.Int64(1),
+		UploadId:      ptr.String("__UploadId__"),
+		UploadRange: &types.UploadRange{
+			StartIndex: ptr.Int32(1),
+			EndIndex:   ptr.Int32(1),
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetAttachmentUploadLinks(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetAttachmentUploadLinks"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_RefreshTrustedAdvisorCheck(t *testing.T) {
 	input := &RefreshTrustedAdvisorCheckInput{
 		CheckId: ptr.String("__CheckId__"),
@@ -1160,6 +1453,7 @@ func TestUpdateRequestSnapshot_RefreshTrustedAdvisorCheck(t *testing.T) {
 func TestUpdateRequestSnapshot_ResolveCase(t *testing.T) {
 	input := &ResolveCaseInput{
 		CaseId: ptr.String("__CaseId__"),
+		DryRun: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""

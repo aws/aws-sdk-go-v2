@@ -20,6 +20,17 @@ func serializeBatchGetDiscoverableRegistryRecordErrorList(s smithy.ShapeSerializ
 	s.CloseList()
 }
 
+func serializeDescriptorTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeDiscoverableFilterValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	if v == nil {
 		return
@@ -124,6 +135,20 @@ func deserializeBatchGetDiscoverableRegistryRecordErrorList(d smithy.ShapeDeseri
 	return smithy.ReadList(d, s, func() error {
 		vv = types.BatchGetDiscoverableRegistryRecordError{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDescriptorTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 

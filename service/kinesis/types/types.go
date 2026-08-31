@@ -7,6 +7,227 @@ import (
 	"time"
 )
 
+// Describes the configuration and current status of a channel.
+type ChannelDescription struct {
+
+	// The Amazon Resource Name (ARN) of the channel.
+	//
+	// This member is required.
+	ChannelARN *string
+
+	// The time at which the channel was created.
+	//
+	// This member is required.
+	ChannelCreationTimestamp *time.Time
+
+	// The unique identifier of the channel.
+	//
+	// This member is required.
+	ChannelId *string
+
+	// The name of the channel.
+	//
+	// This member is required.
+	ChannelName *string
+
+	// The current status of the channel. Valid values:
+	//
+	//   - CREATING
+	//
+	//   - ACTIVE
+	//
+	//   - UPDATING
+	//
+	//   - DELETING
+	//
+	//   - FAILED - See ChannelStatusReason for the failure cause.
+	//
+	// This member is required.
+	ChannelStatus ChannelStatus
+
+	// The Amazon CloudWatch Logs configuration for the channel.
+	//
+	// This member is required.
+	LoggingConfiguration *ChannelLoggingConfiguration
+
+	// The Amazon Resource Name (ARN) of the IAM role that Amazon Kinesis Data Streams
+	// assumes to write records to the destination.
+	//
+	// This member is required.
+	ServiceExecutionRoleARN *string
+
+	// The source stream configuration for the channel.
+	//
+	// This member is required.
+	StreamConfigurationList []ChannelStreamDescription
+
+	// A message describing the reason for a FAILED status.
+	ChannelStatusReason *string
+
+	// The server-side encryption configuration for the channel.
+	EncryptionConfiguration *ChannelEncryptionConfiguration
+
+	// The configuration for delivery to a general purpose Amazon S3 bucket. Present
+	// only when the channel destination is a general purpose Amazon S3 bucket.
+	S3DestinationConfiguration *S3DestinationDescription
+
+	// The configuration for delivery to streaming tables on Apache Iceberg in Amazon
+	// S3 Tables. Present only when the channel destination is a streaming table.
+	S3TablesDestinationConfiguration *S3TablesDestinationDescription
+
+	noSmithyDocumentSerde
+}
+
+// The server-side encryption configuration for a channel.
+type ChannelEncryptionConfiguration struct {
+
+	// The encryption type. The only valid value is KMS .
+	//
+	// This member is required.
+	EncryptionType ChannelEncryptionType
+
+	// The identifier of the customer managed Amazon Web Services KMS key. You cannot
+	// use the Amazon Kinesis Data Streams service key ( aws/kinesis ).
+	//
+	// This member is required.
+	KeyId *string
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon CloudWatch Logs configuration for a channel.
+type ChannelLoggingConfiguration struct {
+
+	// The Amazon CloudWatch Logs settings for the channel.
+	//
+	// This member is required.
+	CloudWatchLogs *CloudWatchLogs
+
+	noSmithyDocumentSerde
+}
+
+// The updated Amazon CloudWatch Logs configuration for a channel. Used in UpdateChannel.
+type ChannelLoggingUpdateInput struct {
+
+	// The updated Amazon CloudWatch Logs settings for the channel.
+	//
+	// This member is required.
+	CloudWatchLogs *CloudWatchLogsUpdateInput
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the source stream and record configuration when creating a channel.
+type ChannelStreamConfiguration struct {
+
+	// The record format configuration for the source stream.
+	//
+	// This member is required.
+	RecordConfiguration *RecordConfiguration
+
+	// The Amazon Resource Name (ARN) of the source Kinesis data stream.
+	//
+	// This member is required.
+	StreamARN *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the source stream of a channel.
+type ChannelStreamDescription struct {
+
+	// The record format configuration for the source stream.
+	//
+	// This member is required.
+	RecordConfiguration *RecordConfiguration
+
+	// The Amazon Resource Name (ARN) of the source Kinesis data stream.
+	//
+	// This member is required.
+	StreamARN *string
+
+	// The time at which the source stream was created.
+	//
+	// This member is required.
+	StreamCreationTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Identifies a source stream associated with a channel.
+type ChannelStreamIdentifier struct {
+
+	// The Amazon Resource Name (ARN) of the source Kinesis data stream.
+	//
+	// This member is required.
+	StreamARN *string
+
+	// The time at which the source stream was created.
+	//
+	// This member is required.
+	StreamCreationTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a channel, returned by ListChannels.
+type ChannelSummary struct {
+
+	// The Amazon Resource Name (ARN) of the channel.
+	//
+	// This member is required.
+	ChannelARN *string
+
+	// The time at which the channel was created.
+	//
+	// This member is required.
+	ChannelCreationTimestamp *time.Time
+
+	// The destination type of the channel. Valid values:
+	//
+	//   - S3 - Delivery to a general purpose Amazon S3 bucket.
+	//
+	//   - S3_TABLES - Delivery to streaming tables on Apache Iceberg.
+	//
+	// This member is required.
+	ChannelDestinationType ChannelDestinationType
+
+	// The unique identifier of the channel.
+	//
+	// This member is required.
+	ChannelId *string
+
+	// The name of the channel.
+	//
+	// This member is required.
+	ChannelName *string
+
+	// The current status of the channel. Valid values:
+	//
+	//   - CREATING
+	//
+	//   - ACTIVE
+	//
+	//   - UPDATING
+	//
+	//   - DELETING
+	//
+	//   - FAILED - See ChannelStatusReason for the failure cause.
+	//
+	// This member is required.
+	ChannelStatus ChannelStatus
+
+	// The source streams associated with the channel.
+	//
+	// This member is required.
+	Streams []ChannelStreamIdentifier
+
+	// A message describing the reason for a FAILED status.
+	ChannelStatusReason *string
+
+	noSmithyDocumentSerde
+}
+
 // Output parameter of the GetRecords API. The existing child shard of the current
 // shard.
 type ChildShard struct {
@@ -26,6 +247,42 @@ type ChildShard struct {
 	//
 	// This member is required.
 	ShardId *string
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon CloudWatch Logs settings for channel logging.
+type CloudWatchLogs struct {
+
+	// Specifies whether logging to Amazon CloudWatch Logs is enabled.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The name of the Amazon CloudWatch Logs log group. Defaults to
+	// /aws/kinesis/{channelName}/{channelId} .
+	LogGroupName *string
+
+	// The name of the Amazon CloudWatch Logs log stream. Defaults to
+	// DestinationDelivery .
+	LogStreamName *string
+
+	noSmithyDocumentSerde
+}
+
+// The updated Amazon CloudWatch Logs settings for a channel.
+type CloudWatchLogsUpdateInput struct {
+
+	// Specifies whether logging to Amazon CloudWatch Logs is enabled.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The name of the Amazon CloudWatch Logs log group.
+	LogGroupName *string
+
+	// The name of the Amazon CloudWatch Logs log stream.
+	LogStreamName *string
 
 	noSmithyDocumentSerde
 }
@@ -97,6 +354,27 @@ type ConsumerDescription struct {
 	//
 	// This member is required.
 	StreamARN *string
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon S3 dead-letter queue configuration for records that cannot be
+// delivered.
+type DeadLetterQueueS3Configuration struct {
+
+	// The Amazon Resource Name (ARN) of the dead-letter queue Amazon S3 bucket.
+	//
+	// This member is required.
+	BucketARN *string
+
+	// The Amazon Web Services account ID of the expected owner of the dead-letter
+	// queue bucket.
+	//
+	// This member is required.
+	ExpectedBucketOwner *string
+
+	// The Amazon S3 key prefix for error records.
+	ErrorOutputPrefix *string
 
 	noSmithyDocumentSerde
 }
@@ -196,6 +474,34 @@ type MinimumThroughputBillingCommitmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a single partition field.
+type PartitionField struct {
+
+	// The name of the source column used for partitioning. This column must be of the
+	// timestamptz type.
+	//
+	// This member is required.
+	SourceName *string
+
+	// The partition transform to apply. The only valid value is TIME_HOUR .
+	//
+	// This member is required.
+	Transform PartitionTransform
+
+	noSmithyDocumentSerde
+}
+
+// Specifies how the destination table is partitioned.
+type PartitionSpec struct {
+
+	// The list of partition fields.
+	//
+	// This member is required.
+	PartitionFields []PartitionField
+
+	noSmithyDocumentSerde
+}
+
 // Represents the output for PutRecords .
 type PutRecordsRequestEntry struct {
 
@@ -285,6 +591,223 @@ type Record struct {
 	//   - KMS : Use server-side encryption on the records in the stream using a
 	//   customer-managed Amazon Web Services KMS key.
 	EncryptionType EncryptionType
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the format of records read from the source stream.
+type RecordConfiguration struct {
+
+	// The format of records on the source stream. Valid values:
+	//
+	//   - GSR_JSON - Supported only for streaming table (Amazon S3 Tables)
+	//   destinations.
+	//
+	//   - JSON - Supported for both general purpose Amazon S3 and streaming table
+	//   destinations.
+	//
+	//   - STRING - Supported only for general purpose Amazon S3 destinations.
+	//
+	//   - BYTE_ARRAY - Supported only for general purpose Amazon S3 destinations.
+	//
+	// This member is required.
+	RecordFormatType RecordFormatType
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Glue Schema Registry
+	// schema used to validate records. Required when the channel destination is a
+	// streaming table (Amazon S3 Tables), for both the JSON and GSR_JSON record
+	// formats.
+	GSRSchemaARN *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for delivery to a general purpose Amazon S3 bucket. Used in CreateChannel.
+type S3DestinationConfiguration struct {
+
+	// The Amazon S3 storage configuration for the channel.
+	//
+	// This member is required.
+	StorageConfiguration *S3StorageConfiguration
+
+	// The maximum age, in seconds, of undelivered data. Valid range is 300 to 900
+	// seconds (5 to 15 minutes). The default value is 300 seconds.
+	DataFreshnessInSeconds *int32
+
+	// The dead-letter queue configuration for records that cannot be delivered.
+	// Optional for general purpose Amazon S3 destinations. If not specified, it
+	// defaults to the destination bucket with an error prefix.
+	DeadLetterQueueS3Configuration *DeadLetterQueueS3Configuration
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for delivery to a general purpose Amazon S3 bucket. Returned
+// in ChannelDescription.
+type S3DestinationDescription struct {
+
+	// The maximum age, in seconds, of undelivered data.
+	//
+	// This member is required.
+	DataFreshnessInSeconds *int32
+
+	// The dead-letter queue configuration for records that cannot be delivered.
+	//
+	// This member is required.
+	DeadLetterQueueS3Configuration *DeadLetterQueueS3Configuration
+
+	// The Amazon S3 storage configuration for the channel.
+	//
+	// This member is required.
+	StorageConfiguration *S3StorageConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The updated configuration for a general purpose Amazon S3 destination. Used in UpdateChannel
+// . Only DataFreshnessInSeconds can be updated.
+type S3DestinationUpdateInput struct {
+
+	// The maximum age, in seconds, of undelivered data. Valid range is 300 to 900
+	// seconds (5 to 15 minutes).
+	//
+	// This member is required.
+	DataFreshnessInSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon S3 storage settings for a general purpose Amazon S3 destination.
+type S3StorageConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the destination Amazon S3 bucket.
+	//
+	// This member is required.
+	BucketARN *string
+
+	// The compression applied to delivered objects. Valid values:
+	//
+	//   - NONE - No compression.
+	//
+	//   - GZIP - gzip compression.
+	//
+	//   - ZSTD - Zstandard compression.
+	//
+	// This member is required.
+	CompressionType S3CompressionType
+
+	// The Amazon Web Services account ID of the expected owner of the destination
+	// bucket. This value helps prevent delivery to an unintended bucket if ownership
+	// changes.
+	//
+	// This member is required.
+	ExpectedBucketOwner *string
+
+	// The template used to construct the Amazon S3 object key for delivered objects.
+	// If not specified, a default template is used.
+	OutputKeyTemplate *string
+
+	// The Amazon S3 storage class for delivered objects. Valid values:
+	//
+	//   - STANDARD (default)
+	//
+	//   - INTELLIGENT_TIERING
+	//
+	//   - GLACIER_IR
+	StorageClass S3StorageClass
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a destination streaming table on Apache Iceberg.
+type S3TablesConfiguration struct {
+
+	// The compression applied to Parquet data files. Valid values:
+	//
+	//   - NONE - No compression.
+	//
+	//   - ZSTD - Zstandard compression.
+	//
+	//   - SNAPPY - Snappy compression.
+	//
+	// This member is required.
+	CompressionType S3TablesCompressionType
+
+	// The namespace (database) of the destination table.
+	//
+	// This member is required.
+	Namespace *string
+
+	// The Amazon Resource Name (ARN) of the Amazon S3 table bucket.
+	//
+	// This member is required.
+	TableBucketARN *string
+
+	// The name of the destination table. Amazon Kinesis Data Streams creates this
+	// table in the specified table bucket.
+	//
+	// This member is required.
+	TableName *string
+
+	// The partitioning specification for the destination table.
+	PartitionSpec *PartitionSpec
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for delivery to streaming tables on Apache Iceberg. Used in CreateChannel.
+type S3TablesDestinationConfiguration struct {
+
+	// The dead-letter queue configuration for records that cannot be delivered.
+	// Required for streaming table destinations.
+	//
+	// This member is required.
+	DeadLetterQueueS3Configuration *DeadLetterQueueS3Configuration
+
+	// The list of streaming table configurations. Currently, one table is supported
+	// per channel.
+	//
+	// This member is required.
+	S3TablesConfigurationList []S3TablesConfiguration
+
+	// The maximum age, in seconds, of undelivered data. Valid range is 300 to 900
+	// seconds (5 to 15 minutes). The default value is 300 seconds.
+	DataFreshnessInSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for delivery to streaming tables on Apache Iceberg. Returned
+// in ChannelDescription.
+type S3TablesDestinationDescription struct {
+
+	// The maximum age, in seconds, of undelivered data.
+	//
+	// This member is required.
+	DataFreshnessInSeconds *int32
+
+	// The dead-letter queue configuration for records that cannot be delivered.
+	//
+	// This member is required.
+	DeadLetterQueueS3Configuration *DeadLetterQueueS3Configuration
+
+	// The list of streaming table configurations.
+	//
+	// This member is required.
+	S3TablesConfigurationList []S3TablesConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The updated configuration for a streaming table destination. Used in UpdateChannel. Only
+// DataFreshnessInSeconds can be updated.
+type S3TablesDestinationUpdateInput struct {
+
+	// The maximum age, in seconds, of undelivered data. Valid range is 300 to 900
+	// seconds (5 to 15 minutes).
+	//
+	// This member is required.
+	DataFreshnessInSeconds *int32
 
 	noSmithyDocumentSerde
 }
@@ -562,6 +1085,9 @@ type StreamDescriptionSummary struct {
 	// This member is required.
 	StreamStatus StreamStatus
 
+	// The number of channels associated with the stream.
+	ChannelCount *int32
+
 	// The number of enhanced fan-out consumers registered with the stream.
 	ConsumerCount *int32
 
@@ -605,6 +1131,20 @@ type StreamDescriptionSummary struct {
 	// The warm throughput in MB/s for the stream. This represents the throughput
 	// capacity that will be immediately available for write operations.
 	WarmThroughput *WarmThroughputObject
+
+	noSmithyDocumentSerde
+}
+
+// Filters ListChannels results by source stream.
+type StreamFilter struct {
+
+	// The Amazon Resource Name (ARN) of the source stream to filter by.
+	//
+	// This member is required.
+	StreamARN *string
+
+	// The creation timestamp of the source stream.
+	StreamCreationTimestamp *time.Time
 
 	noSmithyDocumentSerde
 }

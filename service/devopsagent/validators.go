@@ -2792,6 +2792,21 @@ func validateServiceNowServiceDetails(v *types.ServiceNowServiceDetails) error {
 	}
 }
 
+func validateSlackBidirectionalConfiguration(v *types.SlackBidirectionalConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SlackBidirectionalConfiguration"}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSlackChannel(v *types.SlackChannel) error {
 	if v == nil {
 		return nil
@@ -2823,6 +2838,11 @@ func validateSlackConfiguration(v *types.SlackConfiguration) error {
 	} else if v.TransmissionTarget != nil {
 		if err := validateSlackTransmissionTarget(v.TransmissionTarget); err != nil {
 			invalidParams.AddNested("TransmissionTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Bidirectional != nil {
+		if err := validateSlackBidirectionalConfiguration(v.Bidirectional); err != nil {
+			invalidParams.AddNested("Bidirectional", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

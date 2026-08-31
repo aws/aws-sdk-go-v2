@@ -13,6 +13,9 @@ const (
 	ConnectorOperationStateRollbackInProgress ConnectorOperationState = "ROLLBACK_IN_PROGRESS"
 	ConnectorOperationStateRollbackFailed     ConnectorOperationState = "ROLLBACK_FAILED"
 	ConnectorOperationStateRollbackComplete   ConnectorOperationState = "ROLLBACK_COMPLETE"
+	ConnectorOperationStateRestartInProgress  ConnectorOperationState = "RESTART_IN_PROGRESS"
+	ConnectorOperationStateRestartComplete    ConnectorOperationState = "RESTART_COMPLETE"
+	ConnectorOperationStateRestartFailed      ConnectorOperationState = "RESTART_FAILED"
 )
 
 // Values returns all known values for ConnectorOperationState. Note that this can
@@ -28,6 +31,9 @@ func (ConnectorOperationState) Values() []ConnectorOperationState {
 		"ROLLBACK_IN_PROGRESS",
 		"ROLLBACK_FAILED",
 		"ROLLBACK_COMPLETE",
+		"RESTART_IN_PROGRESS",
+		"RESTART_COMPLETE",
+		"RESTART_FAILED",
 	}
 }
 
@@ -89,6 +95,7 @@ const (
 	ConnectorOperationTypeUpdateConnectorConfiguration ConnectorOperationType = "UPDATE_CONNECTOR_CONFIGURATION"
 	ConnectorOperationTypeIsolateConnector             ConnectorOperationType = "ISOLATE_CONNECTOR"
 	ConnectorOperationTypeRestoreConnector             ConnectorOperationType = "RESTORE_CONNECTOR"
+	ConnectorOperationTypeRestartConnector             ConnectorOperationType = "RESTART_CONNECTOR"
 )
 
 // Values returns all known values for ConnectorOperationType. Note that this can
@@ -101,6 +108,7 @@ func (ConnectorOperationType) Values() []ConnectorOperationType {
 		"UPDATE_CONNECTOR_CONFIGURATION",
 		"ISOLATE_CONNECTOR",
 		"RESTORE_CONNECTOR",
+		"RESTART_CONNECTOR",
 	}
 }
 
@@ -108,11 +116,12 @@ type ConnectorState string
 
 // Enum values for ConnectorState
 const (
-	ConnectorStateRunning  ConnectorState = "RUNNING"
-	ConnectorStateCreating ConnectorState = "CREATING"
-	ConnectorStateUpdating ConnectorState = "UPDATING"
-	ConnectorStateDeleting ConnectorState = "DELETING"
-	ConnectorStateFailed   ConnectorState = "FAILED"
+	ConnectorStateRunning    ConnectorState = "RUNNING"
+	ConnectorStateCreating   ConnectorState = "CREATING"
+	ConnectorStateUpdating   ConnectorState = "UPDATING"
+	ConnectorStateDeleting   ConnectorState = "DELETING"
+	ConnectorStateFailed     ConnectorState = "FAILED"
+	ConnectorStateRestarting ConnectorState = "RESTARTING"
 )
 
 // Values returns all known values for ConnectorState. Note that this can be
@@ -126,6 +135,7 @@ func (ConnectorState) Values() []ConnectorState {
 		"UPDATING",
 		"DELETING",
 		"FAILED",
+		"RESTARTING",
 	}
 }
 

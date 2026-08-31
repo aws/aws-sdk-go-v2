@@ -8,8 +8,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Creates a dataset. This operation doesn't support datasets that include
-// uploaded files as a source.
+// Creates a dataset.
 func (c *Client) CreateDataSet(ctx context.Context, params *CreateDataSetInput, optFns ...func(*Options)) (*CreateDataSetOutput, error) {
 	if params == nil {
 		params = &CreateDataSetInput{}

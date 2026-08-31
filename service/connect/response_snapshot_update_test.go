@@ -3491,6 +3491,7 @@ func TestUpdateResponseSnapshot_DescribeContact(t *testing.T) {
 					},
 				},
 				VoiceEnhancementMode: types.VoiceEnhancementMode("VOICE_ISOLATION"),
+				ActiveRegion:         ptr.String("__ActiveRegion__"),
 			},
 			InitiationTimestamp:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			DisconnectTimestamp:         ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -7791,6 +7792,33 @@ func TestUpdateResponseSnapshot_GetContactMetrics(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetContactMetrics.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetCrossRegionRouting(t *testing.T) {
+	want := &GetCrossRegionRoutingOutput{
+		IsolatedRegions: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	proto := restjson1.New(schemas.AmazonConnectService)
+	opSchema := smithy.NewOperationSchema(schemas.GetCrossRegionRouting, schemas.GetCrossRegionRoutingResponse, schemas.GetCrossRegionRoutingResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetCrossRegionRouting.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -16143,6 +16171,28 @@ func TestUpdateResponseSnapshot_UpdateContactTaskTemplate(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("UpdateContactTaskTemplate.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_UpdateCrossRegionRouting(t *testing.T) {
+	want := &UpdateCrossRegionRoutingOutput{}
+	proto := restjson1.New(schemas.AmazonConnectService)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateCrossRegionRouting, schemas.UpdateCrossRegionRoutingResponse, schemas.UpdateCrossRegionRoutingResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateCrossRegionRouting.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

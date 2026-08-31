@@ -198,6 +198,30 @@ type AppflowIntegrationWorkflowStep struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a segment associated with a membership event stream.
+type AssociatedSegment struct {
+
+	// An optional message providing context, such as a failure reason.
+	Message *string
+
+	// The unique name of the segment definition.
+	SegmentName *string
+
+	// The subscription status of the segment. The following are valid values:
+	//
+	//   - STARTING: The segment is being prepared to publish membership events.
+	//
+	//   - RUNNING: The segment is actively publishing membership events to the
+	//   stream.
+	//
+	//   - STOPPED: The segment has stopped publishing membership events.
+	//
+	//   - FAILED: The segment failed to publish membership events.
+	Status EventSubscriptionSegmentStatus
+
+	noSmithyDocumentSerde
+}
+
 // Mathematical expression and a list of attribute items specified in that
 // expression.
 type AttributeDetails struct {
@@ -225,7 +249,10 @@ type AttributeDimension struct {
 	// This member is required.
 	DimensionType AttributeDimensionType
 
-	// The values to apply the DimensionType on.
+	// The values to apply the DimensionType on. To reference a calculated attribute
+	// or profile attribute as a dynamic value, use handlebar notation:
+	// {{_profile.ProfileAttributeName}} or
+	// {{_calculated_attribute.CalculatedAttributeName}} .
 	//
 	// This member is required.
 	Values []string
@@ -465,7 +492,10 @@ type CalculatedAttributeDimension struct {
 	// This member is required.
 	DimensionType AttributeDimensionType
 
-	// The values to apply the DimensionType with.
+	// The values to apply the DimensionType with. To reference a calculated attribute
+	// or profile attribute as a dynamic value, use handlebar notation:
+	// {{_profile.ProfileAttributeName}} or
+	// {{_calculated_attribute.CalculatedAttributeName}} .
 	//
 	// This member is required.
 	Values []string
@@ -680,7 +710,10 @@ type DateDimension struct {
 	// This member is required.
 	DimensionType DateDimensionType
 
-	// The values to apply the DimensionType on.
+	// The values to apply the DimensionType on. To reference a calculated attribute
+	// or profile attribute as a dynamic value, use handlebar notation:
+	// {{_profile.ProfileAttributeName}} or
+	// {{_calculated_attribute.CalculatedAttributeName}} .
 	//
 	// This member is required.
 	Values []string
@@ -1062,7 +1095,10 @@ type ExtraLengthValueProfileDimension struct {
 	// This member is required.
 	DimensionType StringDimensionType
 
-	// The values to apply the DimensionType on.
+	// The values to apply the DimensionType on. To reference a calculated attribute
+	// or profile attribute as a dynamic value, use handlebar notation:
+	// {{_profile.ProfileAttributeName}} or
+	// {{_calculated_attribute.CalculatedAttributeName}} .
 	//
 	// This member is required.
 	Values []string
@@ -2207,7 +2243,10 @@ type ProfileDimension struct {
 	// This member is required.
 	DimensionType StringDimensionType
 
-	// The values to apply the DimensionType on.
+	// The values to apply the DimensionType on. To reference a calculated attribute
+	// or profile attribute as a dynamic value, use handlebar notation:
+	// {{_profile.ProfileAttributeName}} or
+	// {{_calculated_attribute.CalculatedAttributeName}} .
 	//
 	// This member is required.
 	Values []string
@@ -2810,6 +2849,34 @@ type SalesforceSourceProperties struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for scheduled segment membership event notifications.
+type ScheduleConfiguration struct {
+
+	// The interval between scheduled executions.
+	//
+	// This member is required.
+	Interval *int32
+
+	// The unit for the interval. The following are valid values:
+	//
+	//   - HOURLY: The interval is measured in hours.
+	Unit ScheduleConfigurationUnit
+
+	noSmithyDocumentSerde
+}
+
+// Information about scheduled execution timestamps.
+type ScheduledExecutions struct {
+
+	// The timestamp of the last successful scheduled execution.
+	LastExecutedAt *time.Time
+
+	// The timestamp of the next scheduled execution.
+	NextExecutedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the configuration details of a scheduled-trigger flow that you
 // define. Currently, these settings only apply to the scheduled-trigger type.
 type ScheduledTriggerProperties struct {
@@ -3000,6 +3067,34 @@ type SourceSegment struct {
 
 	// The unique name of the segment definition.
 	SegmentDefinitionName *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a single segment membership event.
+type SubscriptionEventItem struct {
+
+	// Whether the profile joined or left the segment. The following are valid values:
+	//
+	//   - JOINED: The profile joined the segment.
+	//
+	//   - LEFT: The profile left the segment.
+	Event SubscriptionEvent
+
+	// The type of event that triggered the membership change. The following are valid
+	// values:
+	//
+	//   - LIVE: Real-time event triggered by a profile or calculated attribute change
+	//   (Classic segments only).
+	//
+	//   - SCHEDULE: Event generated during a scheduled execution.
+	EventType SubscriptionEventType
+
+	// The unique identifier of a customer profile.
+	ProfileId *string
+
+	// The timestamp of when the membership change was detected.
+	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }

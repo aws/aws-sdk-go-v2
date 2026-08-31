@@ -41,7 +41,15 @@ type CreateRegistryInput struct {
 	// Approval configuration for registry records
 	ApprovalConfiguration *types.ApprovalConfiguration
 
-	// Client token for idempotency
+	// The optional auto-detection configuration for the registry. When provided, the
+	// registry is automatically populated with resources discovered according to the
+	// configuration. Omit this field for registries whose records are managed
+	// exclusively through the Agent Registry Control API.
+	AutoDetectionConfiguration *types.AutoDetectionConfiguration
+
+	// A unique, case-sensitive identifier to ensure that the operation completes no
+	// more than one time. If this token matches a previous request, the service
+	// ignores the request, but does not return an error.
 	ClientToken *string
 
 	// The description of the registry
@@ -49,6 +57,13 @@ type CreateRegistryInput struct {
 
 	// Discovery configuration for the registry
 	DiscoveryConfiguration *types.DiscoveryConfiguration
+
+	// The optional server-side encryption configuration for the registry. When you
+	// provide this field, the specified customer-managed Amazon Web Services KMS key
+	// encrypts the registry's content. Omit this field to use an Amazon Web
+	// Services-owned encryption key. You cannot change the encryption configuration
+	// after registry creation.
+	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// Tags to associate with the registry
 	Tags map[string]string
@@ -68,6 +83,11 @@ func (v *CreateRegistryInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ApprovalConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.AutoDetectionConfiguration != nil {
+		s.WriteStruct(schemas.CreateRegistryRequest_autoDetectionConfiguration)
+		v.AutoDetectionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateRegistryRequest_clientToken, *v.ClientToken)
 	}
@@ -77,6 +97,11 @@ func (v *CreateRegistryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DiscoveryConfiguration != nil {
 		s.WriteStruct(schemas.CreateRegistryRequest_discoveryConfiguration)
 		v.DiscoveryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateRegistryRequest_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.Name != nil {

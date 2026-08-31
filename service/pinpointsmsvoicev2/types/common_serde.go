@@ -172,6 +172,30 @@ func serializeCarrierStatusInformationList(s smithy.ShapeSerializer, schema *smi
 	s.CloseList()
 }
 
+func serializeConditionalRuleList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ConditionalRule) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeConditionValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeConfigurationSetFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ConfigurationSetFilter) {
 	if v == nil {
 		return
@@ -266,6 +290,19 @@ func serializeEventTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeFieldConditionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []FieldCondition) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -1288,6 +1325,34 @@ func deserializeCarrierStatusInformationList(d smithy.ShapeDeserializer, s *smit
 	})
 }
 
+func deserializeConditionalRuleList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ConditionalRule) error {
+	*v = make([]ConditionalRule, 0)
+	var vv ConditionalRule
+	return smithy.ReadList(d, s, func() error {
+		vv = ConditionalRule{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeConditionValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeConfigurationSetFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ConfigurationSetFilter) error {
 	*v = make([]ConfigurationSetFilter, 0)
 	var vv ConfigurationSetFilter
@@ -1396,6 +1461,20 @@ func deserializeEventTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[
 		}
 
 		*v = append(*v, EventType(vv))
+		return nil
+	})
+}
+
+func deserializeFieldConditionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]FieldCondition) error {
+	*v = make([]FieldCondition, 0)
+	var vv FieldCondition
+	return smithy.ReadList(d, s, func() error {
+		vv = FieldCondition{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
 		return nil
 	})
 }

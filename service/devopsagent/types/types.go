@@ -3328,6 +3328,24 @@ type ServiceNowServiceDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for bidirectional Slack communication.
+type SlackBidirectionalConfiguration struct {
+
+	// IAM role ARN that AWS DevOps Agent assumes to exchange messages with your Slack
+	// workspace on behalf of this association.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// Whether bidirectional communication is enabled for this association. When you
+	// set this value to true, you can mention the agent in a configured Slack channel
+	// and it responds in that channel. When you omit this value or set it to false,
+	// the agent ignores mentions and only sends notifications.
+	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
 // Represents a Slack channel with its ID and optional name.
 type SlackChannel struct {
 
@@ -3359,6 +3377,10 @@ type SlackConfiguration struct {
 	//
 	// This member is required.
 	WorkspaceName *string
+
+	// Optional bidirectional communication configuration. Supply this configuration
+	// and set enabled to true so you can interact with the agent directly from Slack.
+	Bidirectional *SlackBidirectionalConfiguration
 
 	noSmithyDocumentSerde
 }

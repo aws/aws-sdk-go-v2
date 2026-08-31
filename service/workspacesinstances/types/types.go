@@ -87,6 +87,9 @@ type CpuOptionsRequest struct {
 	// Number of CPU cores to allocate.
 	CoreCount *int32
 
+	// Specifies whether to enable or disable nested virtualization.
+	NestedVirtualization NestedVirtualizationEnum
+
 	// Number of threads per CPU core.
 	ThreadsPerCore *int32
 

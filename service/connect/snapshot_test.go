@@ -2138,6 +2138,18 @@ func TestCheckSnapshot_GetContactMetrics(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetCrossRegionRouting(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCrossRegionRouting(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCrossRegionRouting")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetCurrentMetricData(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCurrentMetricData(context.Background(), nil, func(o *Options) {
@@ -4135,6 +4147,18 @@ func TestCheckSnapshot_UpdateContactTaskTemplate(t *testing.T) {
 	_, err := svc.UpdateContactTaskTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateContactTaskTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateCrossRegionRouting(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCrossRegionRouting(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCrossRegionRouting")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6853,6 +6877,18 @@ func TestUpdateSnapshot_GetContactMetrics(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetCrossRegionRouting(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCrossRegionRouting(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCrossRegionRouting")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetCurrentMetricData(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCurrentMetricData(context.Background(), nil, func(o *Options) {
@@ -8850,6 +8886,18 @@ func TestUpdateSnapshot_UpdateContactTaskTemplate(t *testing.T) {
 	_, err := svc.UpdateContactTaskTemplate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateContactTaskTemplate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateCrossRegionRouting(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCrossRegionRouting(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCrossRegionRouting")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

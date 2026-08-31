@@ -82,10 +82,20 @@ type CreateKnowledgeBaseInput struct {
 	// access.
 	Permissions []types.ResourcePermission
 
-	// The Amazon Resource Name (ARN) of the primary owner for the knowledge base. The
-	// specified user is always granted owner access, regardless of what is specified
-	// in the Permissions field. If you don't specify a primary owner, the knowledge
-	// base is created without one.
+	// The Amazon Resource Name (ARN) of the Amazon QuickSight user or group to set as
+	// the primary owner of the knowledge base. The specified principal is always
+	// granted owner access, regardless of what is specified in the Permissions field.
+	//
+	// This must be an Amazon QuickSight principal ARN, not an IAM user or role ARN.
+	// The API caller is never assigned as the owner automatically. If you don't
+	// specify a primary owner and don't grant owner access in Permissions , the
+	// knowledge base is created without an owner, even when you call the operation as
+	// an Amazon QuickSight user.
+	//
+	// When you call CreateKnowledgeBase as an IAM user or an assumed IAM role,
+	// specify PrimaryOwnerArn (as an Amazon QuickSight principal ARN) or an owner
+	// entry in Permissions so that the knowledge base has an owner. Although
+	// optional, specifying a primary owner is recommended.
 	PrimaryOwnerArn *string
 
 	// The tags to assign to the knowledge base. If you don't specify tags, the

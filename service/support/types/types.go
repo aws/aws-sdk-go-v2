@@ -39,7 +39,7 @@ type AttachmentDetails struct {
 //
 //   - caseId - The support case ID requested or returned in the call. The case ID
 //     is an alphanumeric string formatted as shown in this example:
-//     case-12345678910-2013-c4c1d2bf33c5cf47.
+//     case-12345678910-exen-2025-c4c1d2bf33c5cf47.
 //
 //   - categoryCode - The category of problem for the support case. Corresponds to
 //     the CategoryCode values returned by a call to DescribeServices.
@@ -49,8 +49,9 @@ type AttachmentDetails struct {
 //
 //   - language - The language in which Amazon Web Services Support handles the
 //     case. Amazon Web Services Support currently supports Chinese (“zh”), English
-//     ("en"), Japanese ("ja") and Korean (“ko”). You must specify the ISO 639-1 code
-//     for the language parameter if you want support in that language.
+//     ("en"), Japanese ("ja") , Chinese ("zh"), Spanish ("es"), Portuguese ("pt"),
+//     French ("fr"), Korean (“ko”), and Turkish ("tr"). You must specify the ISO 639-1
+//     code for the language parameter if you want support in that language.
 //
 //   - nextToken - A resumption point for pagination.
 //
@@ -92,7 +93,7 @@ type CaseDetails struct {
 
 	// The support case ID requested or returned in the call. The case ID is an
 	// alphanumeric string formatted as shown in this example:
-	// case-12345678910-2013-c4c1d2bf33c5cf47
+	// case-12345678910-exen-2025-c4c1d2bf33c5cf47
 	CaseId *string
 
 	// The category of problem for the support case.
@@ -107,8 +108,9 @@ type CaseDetails struct {
 
 	// The language in which Amazon Web Services Support handles the case. Amazon Web
 	// Services Support currently supports Chinese (“zh”), English ("en"), Japanese
-	// ("ja") and Korean (“ko”). You must specify the ISO 639-1 code for the language
-	// parameter if you want support in that language.
+	// ("ja") , Chinese ("zh"), Spanish ("es"), Portuguese ("pt"), French ("fr"),
+	// Korean (“ko”), and Turkish ("tr"). You must specify the ISO 639-1 code for the
+	// language parameter if you want support in that language.
 	Language *string
 
 	// The five most recent communications between you and Amazon Web Services Support
@@ -175,8 +177,20 @@ type Category struct {
 // communication, and the date and time of the communication.
 type Communication struct {
 
-	// Information about the attachments to the case communication.
+	// Information about the attachments to the case communication that are 5 MB or
+	// smaller. This field doesn't include attachments larger than 5 MB. To enumerate
+	// every attachment on the communication, including attachments larger than 5 MB,
+	// use the attachments field instead.
 	AttachmentSet []AttachmentDetails
+
+	// Information about all attachments on the case communication. This includes
+	// attachments added through AddAttachmentsToSet and attachments uploaded through
+	// GetAttachmentUploadLinks .
+	//
+	// Use this field to enumerate every attachment on the communication. To download
+	// an attachment listed in this field, use GetAttachmentDownloadLink. GetAttachmentDownloadLink returns a
+	// presigned URL that works for attachments of any size.
+	Attachments []AttachmentDetails
 
 	// The text of the communication between the customer and Amazon Web Services
 	// Support.
@@ -184,7 +198,7 @@ type Communication struct {
 
 	// The support case ID requested or returned in the call. The case ID is an
 	// alphanumeric string formatted as shown in this example:
-	// case-12345678910-2013-c4c1d2bf33c5cf47
+	// case-12345678910-exen-2025-c4c1d2bf33c5cf47
 	CaseId *string
 
 	// The identity of the account that submitted, or responded to, the support case.
@@ -229,6 +243,26 @@ type CommunicationTypeOptions struct {
 	noSmithyDocumentSerde
 }
 
+// Identifies a single uploaded part of a multipart attachment upload. Pass a list
+// of CompletedUpload objects to CompleteAttachmentUpload to finalize the upload.
+type CompletedUpload struct {
+
+	// The ETag returned in the response headers when the part was uploaded to Amazon
+	// S3. The ETag value identifies the part contents.
+	//
+	// This member is required.
+	ETag *string
+
+	// The index of the uploaded part. This is the same partIndex value returned for
+	// the corresponding entry in the uploadUrls field of the GetAttachmentUploadLinks
+	// response.
+	//
+	// This member is required.
+	PartIndex *int32
+
+	noSmithyDocumentSerde
+}
+
 // Date and time (UTC) format in RFC 3339 : 'yyyy-MM-dd'T'HH:mm:ss.SSSZZ'.
 type DateInterval struct {
 
@@ -238,6 +272,26 @@ type DateInterval struct {
 	//  A JSON object containing start and date time (UTC). Date and time format is
 	// RFC 3339 : 'yyyy-MM-dd'T'HH:mm:ss.SSSZZ'.
 	StartDateTime *string
+
+	noSmithyDocumentSerde
+}
+
+// A presigned URL for downloading an attachment, along with the date and time the
+// URL expires. Returned by GetAttachmentDownloadLink.
+type DownloadUrl struct {
+
+	// The date and time, in ISO-8601 format, when the presigned URL expires. Download
+	// the attachment before this time.
+	//
+	// This member is required.
+	ExpiryDate *string
+
+	// The presigned HTTPS URL that you can use to download the attachment. Download
+	// URLs are served from downloadv1.attachments.support.{region}.amazonaws.com . The
+	// downloadv1 prefix is subject to change.
+	//
+	// This member is required.
+	Url *string
 
 	noSmithyDocumentSerde
 }
@@ -338,6 +392,18 @@ type SupportedLanguage struct {
 
 	//  Full language description e.g. ENGLISH
 	Language *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about why a request was throttled.
+type ThrottlingReason struct {
+
+	// The reason that the request was throttled.
+	Reason *string
+
+	// The resource that caused the request to be throttled.
+	Resource *string
 
 	noSmithyDocumentSerde
 }
@@ -576,6 +642,61 @@ type TrustedAdvisorResourcesSummary struct {
 	//
 	// This member is required.
 	ResourcesSuppressed int64
+
+	noSmithyDocumentSerde
+}
+
+// The progress of a multipart attachment upload, returned by DescribeAttachmentUploadStatus.
+type UploadProgress struct {
+
+	// The number of parts that have been successfully uploaded.
+	CompletedPartsCount *int32
+
+	// The total number of parts that the file is split into.
+	TotalParts *int32
+
+	noSmithyDocumentSerde
+}
+
+// The range of part indexes for which to return presigned upload URLs from GetAttachmentUploadLinks.
+type UploadRange struct {
+
+	// The starting part index of the range, inclusive. Part indexes start at 1.
+	//
+	// This member is required.
+	StartIndex *int32
+
+	// The ending part index of the range, exclusive. The range is half-open:
+	// startIndex is inclusive and endIndex is exclusive. For example, a range with
+	// startIndex of 1 and endIndex of 4 requests URLs for parts 1, 2, and 3. The
+	// range size ( endIndex - startIndex ) must not exceed 10. If you omit endIndex ,
+	// the service defaults to startIndex + 10, capped by the total number of parts.
+	EndIndex *int32
+
+	noSmithyDocumentSerde
+}
+
+// A presigned URL for uploading a single part of a multipart attachment upload,
+// along with the part index and the date and time the URL expires. Returned by GetAttachmentUploadLinks.
+type UploadUrl struct {
+
+	// The date and time, in ISO-8601 format, when the presigned URL expires. Upload
+	// the part before this time.
+	//
+	// This member is required.
+	ExpiryDate *string
+
+	// The index of the part that this URL uploads.
+	//
+	// This member is required.
+	PartIndex int32
+
+	// The presigned HTTPS URL that you use to upload a single part with HTTP PUT .
+	// Upload URLs are served from uploadv1.attachments.support.{region}.amazonaws.com
+	// . The uploadv1 prefix is subject to change.
+	//
+	// This member is required.
+	Url *string
 
 	noSmithyDocumentSerde
 }

@@ -89,11 +89,20 @@ type GetRegistryOutput struct {
 	// Approval configuration for registry records
 	ApprovalConfiguration *types.ApprovalConfiguration
 
+	// The registry's auto-detection properties, including the requested configuration
+	// and the current detection status. Present only when auto-detection was
+	// configured for the registry.
+	AutoDetection *types.AutoDetection
+
 	// The description of the registry
 	Description *string
 
 	// Discovery configuration for the registry
 	DiscoveryConfiguration *types.DiscoveryConfiguration
+
+	// The server-side encryption configuration for the registry. Appears only when a
+	// customer-managed Amazon Web Services KMS key encrypts the registry.
+	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// The reason for the current status. Typically populated when the status
 	// indicates a failure state.
@@ -117,6 +126,11 @@ func (v *GetRegistryOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ApprovalConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.AutoDetection != nil {
+		s.WriteStruct(schemas.GetRegistryResponse_autoDetection)
+		v.AutoDetection.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetRegistryResponse_createdAt, *v.CreatedAt)
 	}
@@ -126,6 +140,11 @@ func (v *GetRegistryOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DiscoveryConfiguration != nil {
 		s.WriteStruct(schemas.GetRegistryResponse_discoveryConfiguration)
 		v.DiscoveryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.GetRegistryResponse_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.Name != nil {
@@ -153,6 +172,9 @@ func (v *GetRegistryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GetRegistryResponse_approvalConfiguration:
 			v.ApprovalConfiguration = &types.ApprovalConfiguration{}
 			return v.ApprovalConfiguration.Deserialize(d)
+		case schemas.GetRegistryResponse_autoDetection:
+			v.AutoDetection = &types.AutoDetection{}
+			return v.AutoDetection.Deserialize(d)
 		case schemas.GetRegistryResponse_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.GetRegistryResponse_createdAt, v.CreatedAt)
@@ -162,6 +184,9 @@ func (v *GetRegistryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GetRegistryResponse_discoveryConfiguration:
 			v.DiscoveryConfiguration = &types.DiscoveryConfiguration{}
 			return v.DiscoveryConfiguration.Deserialize(d)
+		case schemas.GetRegistryResponse_encryptionConfiguration:
+			v.EncryptionConfiguration = &types.EncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
 		case schemas.GetRegistryResponse_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.GetRegistryResponse_name, v.Name)

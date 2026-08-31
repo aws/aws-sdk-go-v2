@@ -307,6 +307,9 @@ func TestUpdateResponseSnapshot_GetRegistry(t *testing.T) {
 			},
 			AuthorizerType: types.RegistryAuthorizerType("CUSTOM_JWT"),
 		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
 		ApprovalConfiguration: &types.ApprovalConfiguration{
 			AutoApprovalRules: []types.AutoApprovalRule{
 				types.AutoApprovalRule("APPROVE_ALL"),
@@ -315,8 +318,16 @@ func TestUpdateResponseSnapshot_GetRegistry(t *testing.T) {
 		},
 		Status:       types.RegistryStatus("CREATING"),
 		StatusReason: ptr.String("__StatusReason__"),
-		CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		AutoDetection: &types.AutoDetection{
+			Configuration: &types.AutoDetectionConfiguration{
+				Scope:   types.AutoDetectionScope("ORGANIZATION"),
+				Enabled: ptr.Bool(true),
+			},
+			Status:       types.AutoDetectionStatus("ACTIVE"),
+			StatusReason: ptr.String("__StatusReason__"),
+		},
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	proto := restjson1.New(schemas.AgentRegistryControl)
 	opSchema := smithy.NewOperationSchema(schemas.GetRegistry, schemas.GetRegistryResponse, schemas.GetRegistryResponse)
@@ -492,12 +503,252 @@ func TestUpdateResponseSnapshot_GetRegistryRecord(t *testing.T) {
 			Custom: &types.CustomDescriptor{
 				Data: ptr.String("__Data__"),
 			},
+			Http: &types.HttpDescriptor{
+				Source: &types.DescriptorSource{
+					FromUrl: &types.DescriptorSourceFromUrl{
+						Url: ptr.String("__Url__"),
+						CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+								},
+							},
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			Agui: &types.AgUiDescriptor{
+				Source: &types.DescriptorSource{
+					FromUrl: &types.DescriptorSourceFromUrl{
+						Url: ptr.String("__Url__"),
+						CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+								},
+							},
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
 		},
 		RecordVersion: ptr.String("__RecordVersion__"),
 		Status:        types.RegistryRecordStatus("DRAFT"),
 		CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		StatusReason:  ptr.String("__StatusReason__"),
+		Provenance: []types.Provenance{
+			{
+				Relation:   types.ProvenanceRelation("DETECTED_FROM"),
+				SourceId:   ptr.String("__SourceId__"),
+				SourceType: types.SourceType("AWS::BedrockAgentCore::Runtime"),
+				SourceDetails: &types.SourceDetailsMemberAgentcoreRuntime{
+					Value: types.AgentCoreRuntimeSourceDetails{
+						ProtocolConfiguration: &types.AgentCoreRuntimeProtocolConfiguration{
+							ServerProtocol: types.AgentCoreRuntimeServerProtocol("HTTP"),
+						},
+						AuthorizerConfiguration: &types.AuthorizerConfigurationMemberCustomJWTAuthorizer{
+							Value: types.CustomJWTAuthorizerConfiguration{
+								DiscoveryUrl: ptr.String("__DiscoveryUrl__"),
+								AllowedAudience: []string{
+									"__Member__",
+									"__Member__",
+								},
+								AllowedClients: []string{
+									"__Member__",
+									"__Member__",
+								},
+								AllowedScopes: []string{
+									"__Member__",
+									"__Member__",
+								},
+								CustomClaims: []types.CustomClaimValidationType{
+									{
+										InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
+										InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
+										AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
+											ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
+												Value: "__ClaimMatchValueTypeMemberMatchValueString__",
+											},
+											ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
+										},
+									},
+									{
+										InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
+										InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
+										AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
+											ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
+												Value: "__ClaimMatchValueTypeMemberMatchValueString__",
+											},
+											ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
+										},
+									},
+								},
+								PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+									Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+										Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+									},
+								},
+								PrivateEndpointOverrides: []types.PrivateEndpointOverride{
+									{
+										Domain: ptr.String("__Domain__"),
+										PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+											Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+												Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+											},
+										},
+									},
+									{
+										Domain: ptr.String("__Domain__"),
+										PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+											Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+												Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+											},
+										},
+									},
+								},
+							},
+						},
+						WorkloadIdentityDetails: &types.WorkloadIdentityDetails{
+							WorkloadIdentityArn: ptr.String("__WorkloadIdentityArn__"),
+						},
+					},
+				},
+			},
+			{
+				Relation:   types.ProvenanceRelation("DETECTED_FROM"),
+				SourceId:   ptr.String("__SourceId__"),
+				SourceType: types.SourceType("AWS::BedrockAgentCore::Runtime"),
+				SourceDetails: &types.SourceDetailsMemberAgentcoreRuntime{
+					Value: types.AgentCoreRuntimeSourceDetails{
+						ProtocolConfiguration: &types.AgentCoreRuntimeProtocolConfiguration{
+							ServerProtocol: types.AgentCoreRuntimeServerProtocol("HTTP"),
+						},
+						AuthorizerConfiguration: &types.AuthorizerConfigurationMemberCustomJWTAuthorizer{
+							Value: types.CustomJWTAuthorizerConfiguration{
+								DiscoveryUrl: ptr.String("__DiscoveryUrl__"),
+								AllowedAudience: []string{
+									"__Member__",
+									"__Member__",
+								},
+								AllowedClients: []string{
+									"__Member__",
+									"__Member__",
+								},
+								AllowedScopes: []string{
+									"__Member__",
+									"__Member__",
+								},
+								CustomClaims: []types.CustomClaimValidationType{
+									{
+										InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
+										InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
+										AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
+											ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
+												Value: "__ClaimMatchValueTypeMemberMatchValueString__",
+											},
+											ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
+										},
+									},
+									{
+										InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
+										InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
+										AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
+											ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
+												Value: "__ClaimMatchValueTypeMemberMatchValueString__",
+											},
+											ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
+										},
+									},
+								},
+								PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+									Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+										Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+									},
+								},
+								PrivateEndpointOverrides: []types.PrivateEndpointOverride{
+									{
+										Domain: ptr.String("__Domain__"),
+										PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+											Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+												Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+											},
+										},
+									},
+									{
+										Domain: ptr.String("__Domain__"),
+										PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+											Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+												Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+											},
+										},
+									},
+								},
+							},
+						},
+						WorkloadIdentityDetails: &types.WorkloadIdentityDetails{
+							WorkloadIdentityArn: ptr.String("__WorkloadIdentityArn__"),
+						},
+					},
+				},
+			},
+		},
+		CreatedByAutoDetection: ptr.Bool(true),
+		CreatedBy:              ptr.String("__CreatedBy__"),
 	}
 	proto := restjson1.New(schemas.AgentRegistryControl)
 	opSchema := smithy.NewOperationSchema(schemas.GetRegistryRecord, schemas.GetRegistryRecordResponse, schemas.GetRegistryRecordResponse)
@@ -594,8 +845,16 @@ func TestUpdateResponseSnapshot_ListRegistries(t *testing.T) {
 				},
 				Status:       types.RegistryStatus("CREATING"),
 				StatusReason: ptr.String("__StatusReason__"),
-				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AutoDetection: &types.AutoDetection{
+					Configuration: &types.AutoDetectionConfiguration{
+						Scope:   types.AutoDetectionScope("ORGANIZATION"),
+						Enabled: ptr.Bool(true),
+					},
+					Status:       types.AutoDetectionStatus("ACTIVE"),
+					StatusReason: ptr.String("__StatusReason__"),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 			{
 				Name:        ptr.String("__Name__"),
@@ -669,8 +928,16 @@ func TestUpdateResponseSnapshot_ListRegistries(t *testing.T) {
 				},
 				Status:       types.RegistryStatus("CREATING"),
 				StatusReason: ptr.String("__StatusReason__"),
-				CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AutoDetection: &types.AutoDetection{
+					Configuration: &types.AutoDetectionConfiguration{
+						Scope:   types.AutoDetectionScope("ORGANIZATION"),
+						Enabled: ptr.Bool(true),
+					},
+					Status:       types.AutoDetectionStatus("ACTIVE"),
+					StatusReason: ptr.String("__StatusReason__"),
+				},
+				CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -699,30 +966,58 @@ func TestUpdateResponseSnapshot_ListRegistryRecords(t *testing.T) {
 	want := &ListRegistryRecordsOutput{
 		RegistryRecords: []types.RegistryRecordSummary{
 			{
-				RegistryArn:   ptr.String("__RegistryArn__"),
-				RecordArn:     ptr.String("__RecordArn__"),
-				RecordId:      ptr.String("__RecordId__"),
-				Name:          ptr.String("__Name__"),
-				DisplayName:   ptr.String("__DisplayName__"),
-				Description:   ptr.String("__Description__"),
-				RecordType:    types.RecordType("MCP"),
-				RecordVersion: ptr.String("__RecordVersion__"),
-				Status:        types.RegistryRecordStatus("DRAFT"),
-				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RegistryArn:            ptr.String("__RegistryArn__"),
+				RecordArn:              ptr.String("__RecordArn__"),
+				RecordId:               ptr.String("__RecordId__"),
+				Name:                   ptr.String("__Name__"),
+				DisplayName:            ptr.String("__DisplayName__"),
+				Description:            ptr.String("__Description__"),
+				RecordType:             types.RecordType("MCP"),
+				RecordVersion:          ptr.String("__RecordVersion__"),
+				Status:                 types.RegistryRecordStatus("DRAFT"),
+				CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedByAutoDetection: ptr.Bool(true),
+				CreatedBy:              ptr.String("__CreatedBy__"),
+				ProvenanceSummaryList: []types.ProvenanceSummary{
+					{
+						Relation:   types.ProvenanceRelation("DETECTED_FROM"),
+						SourceId:   ptr.String("__SourceId__"),
+						SourceType: types.SourceType("AWS::BedrockAgentCore::Runtime"),
+					},
+					{
+						Relation:   types.ProvenanceRelation("DETECTED_FROM"),
+						SourceId:   ptr.String("__SourceId__"),
+						SourceType: types.SourceType("AWS::BedrockAgentCore::Runtime"),
+					},
+				},
 			},
 			{
-				RegistryArn:   ptr.String("__RegistryArn__"),
-				RecordArn:     ptr.String("__RecordArn__"),
-				RecordId:      ptr.String("__RecordId__"),
-				Name:          ptr.String("__Name__"),
-				DisplayName:   ptr.String("__DisplayName__"),
-				Description:   ptr.String("__Description__"),
-				RecordType:    types.RecordType("MCP"),
-				RecordVersion: ptr.String("__RecordVersion__"),
-				Status:        types.RegistryRecordStatus("DRAFT"),
-				CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-				UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				RegistryArn:            ptr.String("__RegistryArn__"),
+				RecordArn:              ptr.String("__RecordArn__"),
+				RecordId:               ptr.String("__RecordId__"),
+				Name:                   ptr.String("__Name__"),
+				DisplayName:            ptr.String("__DisplayName__"),
+				Description:            ptr.String("__Description__"),
+				RecordType:             types.RecordType("MCP"),
+				RecordVersion:          ptr.String("__RecordVersion__"),
+				Status:                 types.RegistryRecordStatus("DRAFT"),
+				CreatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:              ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CreatedByAutoDetection: ptr.Bool(true),
+				CreatedBy:              ptr.String("__CreatedBy__"),
+				ProvenanceSummaryList: []types.ProvenanceSummary{
+					{
+						Relation:   types.ProvenanceRelation("DETECTED_FROM"),
+						SourceId:   ptr.String("__SourceId__"),
+						SourceType: types.SourceType("AWS::BedrockAgentCore::Runtime"),
+					},
+					{
+						Relation:   types.ProvenanceRelation("DETECTED_FROM"),
+						SourceId:   ptr.String("__SourceId__"),
+						SourceType: types.SourceType("AWS::BedrockAgentCore::Runtime"),
+					},
+				},
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -916,6 +1211,9 @@ func TestUpdateResponseSnapshot_UpdateRegistry(t *testing.T) {
 			},
 			AuthorizerType: types.RegistryAuthorizerType("CUSTOM_JWT"),
 		},
+		EncryptionConfiguration: &types.EncryptionConfiguration{
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
 		ApprovalConfiguration: &types.ApprovalConfiguration{
 			AutoApprovalRules: []types.AutoApprovalRule{
 				types.AutoApprovalRule("APPROVE_ALL"),
@@ -924,8 +1222,16 @@ func TestUpdateResponseSnapshot_UpdateRegistry(t *testing.T) {
 		},
 		Status:       types.RegistryStatus("CREATING"),
 		StatusReason: ptr.String("__StatusReason__"),
-		CreatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		UpdatedAt:    ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		AutoDetection: &types.AutoDetection{
+			Configuration: &types.AutoDetectionConfiguration{
+				Scope:   types.AutoDetectionScope("ORGANIZATION"),
+				Enabled: ptr.Bool(true),
+			},
+			Status:       types.AutoDetectionStatus("ACTIVE"),
+			StatusReason: ptr.String("__StatusReason__"),
+		},
+		CreatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	proto := restjson1.New(schemas.AgentRegistryControl)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateRegistry, schemas.UpdateRegistryResponse, schemas.UpdateRegistryResponse)
@@ -1101,12 +1407,252 @@ func TestUpdateResponseSnapshot_UpdateRegistryRecord(t *testing.T) {
 			Custom: &types.CustomDescriptor{
 				Data: ptr.String("__Data__"),
 			},
+			Http: &types.HttpDescriptor{
+				Source: &types.DescriptorSource{
+					FromUrl: &types.DescriptorSourceFromUrl{
+						Url: ptr.String("__Url__"),
+						CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+								},
+							},
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			Agui: &types.AgUiDescriptor{
+				Source: &types.DescriptorSource{
+					FromUrl: &types.DescriptorSourceFromUrl{
+						Url: ptr.String("__Url__"),
+						CredentialProviderConfigurations: []types.RegistryRecordCredentialProviderConfiguration{
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+								},
+							},
+							{
+								CredentialProviderType: types.RegistryRecordCredentialProviderType("OAUTH"),
+								CredentialProvider: &types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider{
+									Value: types.RegistryRecordOAuthCredentialProvider{
+										ProviderArn: ptr.String("__ProviderArn__"),
+										GrantType:   types.RegistryRecordOAuthGrantType("CLIENT_CREDENTIALS"),
+										Scopes: []string{
+											"__Member__",
+											"__Member__",
+										},
+										CustomParameters: map[string]string{
+											"key0": "__Value__",
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
 		},
 		RecordVersion: ptr.String("__RecordVersion__"),
 		Status:        types.RegistryRecordStatus("DRAFT"),
 		CreatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		UpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 		StatusReason:  ptr.String("__StatusReason__"),
+		Provenance: []types.Provenance{
+			{
+				Relation:   types.ProvenanceRelation("DETECTED_FROM"),
+				SourceId:   ptr.String("__SourceId__"),
+				SourceType: types.SourceType("AWS::BedrockAgentCore::Runtime"),
+				SourceDetails: &types.SourceDetailsMemberAgentcoreRuntime{
+					Value: types.AgentCoreRuntimeSourceDetails{
+						ProtocolConfiguration: &types.AgentCoreRuntimeProtocolConfiguration{
+							ServerProtocol: types.AgentCoreRuntimeServerProtocol("HTTP"),
+						},
+						AuthorizerConfiguration: &types.AuthorizerConfigurationMemberCustomJWTAuthorizer{
+							Value: types.CustomJWTAuthorizerConfiguration{
+								DiscoveryUrl: ptr.String("__DiscoveryUrl__"),
+								AllowedAudience: []string{
+									"__Member__",
+									"__Member__",
+								},
+								AllowedClients: []string{
+									"__Member__",
+									"__Member__",
+								},
+								AllowedScopes: []string{
+									"__Member__",
+									"__Member__",
+								},
+								CustomClaims: []types.CustomClaimValidationType{
+									{
+										InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
+										InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
+										AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
+											ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
+												Value: "__ClaimMatchValueTypeMemberMatchValueString__",
+											},
+											ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
+										},
+									},
+									{
+										InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
+										InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
+										AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
+											ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
+												Value: "__ClaimMatchValueTypeMemberMatchValueString__",
+											},
+											ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
+										},
+									},
+								},
+								PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+									Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+										Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+									},
+								},
+								PrivateEndpointOverrides: []types.PrivateEndpointOverride{
+									{
+										Domain: ptr.String("__Domain__"),
+										PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+											Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+												Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+											},
+										},
+									},
+									{
+										Domain: ptr.String("__Domain__"),
+										PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+											Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+												Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+											},
+										},
+									},
+								},
+							},
+						},
+						WorkloadIdentityDetails: &types.WorkloadIdentityDetails{
+							WorkloadIdentityArn: ptr.String("__WorkloadIdentityArn__"),
+						},
+					},
+				},
+			},
+			{
+				Relation:   types.ProvenanceRelation("DETECTED_FROM"),
+				SourceId:   ptr.String("__SourceId__"),
+				SourceType: types.SourceType("AWS::BedrockAgentCore::Runtime"),
+				SourceDetails: &types.SourceDetailsMemberAgentcoreRuntime{
+					Value: types.AgentCoreRuntimeSourceDetails{
+						ProtocolConfiguration: &types.AgentCoreRuntimeProtocolConfiguration{
+							ServerProtocol: types.AgentCoreRuntimeServerProtocol("HTTP"),
+						},
+						AuthorizerConfiguration: &types.AuthorizerConfigurationMemberCustomJWTAuthorizer{
+							Value: types.CustomJWTAuthorizerConfiguration{
+								DiscoveryUrl: ptr.String("__DiscoveryUrl__"),
+								AllowedAudience: []string{
+									"__Member__",
+									"__Member__",
+								},
+								AllowedClients: []string{
+									"__Member__",
+									"__Member__",
+								},
+								AllowedScopes: []string{
+									"__Member__",
+									"__Member__",
+								},
+								CustomClaims: []types.CustomClaimValidationType{
+									{
+										InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
+										InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
+										AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
+											ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
+												Value: "__ClaimMatchValueTypeMemberMatchValueString__",
+											},
+											ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
+										},
+									},
+									{
+										InboundTokenClaimName:      ptr.String("__InboundTokenClaimName__"),
+										InboundTokenClaimValueType: types.InboundTokenClaimValueType("STRING"),
+										AuthorizingClaimMatchValue: &types.AuthorizingClaimMatchValueType{
+											ClaimMatchValue: &types.ClaimMatchValueTypeMemberMatchValueString{
+												Value: "__ClaimMatchValueTypeMemberMatchValueString__",
+											},
+											ClaimMatchOperator: types.ClaimMatchOperatorType("EQUALS"),
+										},
+									},
+								},
+								PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+									Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+										Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+									},
+								},
+								PrivateEndpointOverrides: []types.PrivateEndpointOverride{
+									{
+										Domain: ptr.String("__Domain__"),
+										PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+											Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+												Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+											},
+										},
+									},
+									{
+										Domain: ptr.String("__Domain__"),
+										PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
+											Value: &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{
+												Value: "__SelfManagedLatticeResourceMemberResourceConfigurationIdentifier__",
+											},
+										},
+									},
+								},
+							},
+						},
+						WorkloadIdentityDetails: &types.WorkloadIdentityDetails{
+							WorkloadIdentityArn: ptr.String("__WorkloadIdentityArn__"),
+						},
+					},
+				},
+			},
+		},
+		CreatedByAutoDetection: ptr.Bool(true),
+		CreatedBy:              ptr.String("__CreatedBy__"),
 	}
 	proto := restjson1.New(schemas.AgentRegistryControl)
 	opSchema := smithy.NewOperationSchema(schemas.UpdateRegistryRecord, schemas.UpdateRegistryRecordResponse, schemas.UpdateRegistryRecordResponse)

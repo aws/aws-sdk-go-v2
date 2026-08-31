@@ -674,6 +674,63 @@ var CloudWatchLogsDestination_IamRoleArn *smithy.Schema
 
 var CloudWatchLogsDestination_LogGroupArn *smithy.Schema
 
+var ConditionalBehavior = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "ConditionalBehavior",
+}, smithy.ShapeTypeStructure, 2)
+var ConditionalBehavior_Rules *smithy.Schema
+
+var ConditionalBehavior_DefaultBehavior *smithy.Schema
+
+var _ConditionalFieldBehavior = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "ConditionalFieldBehavior",
+}, smithy.ShapeTypeString, 0)
+
+var ConditionalRule = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "ConditionalRule",
+}, smithy.ShapeTypeStructure, 3)
+var ConditionalRule_Conditions *smithy.Schema
+
+var ConditionalRule_RuleBehavior *smithy.Schema
+
+var ConditionalRule_ConditionalValidation *smithy.Schema
+
+var _ConditionalRuleList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "ConditionalRuleList",
+}, smithy.ShapeTypeList, 1)
+var _ConditionalRuleList_member *smithy.Schema
+
+var ConditionalValidation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "ConditionalValidation",
+}, smithy.ShapeTypeStructure, 4)
+var ConditionalValidation_MinLength *smithy.Schema
+
+var ConditionalValidation_MaxLength *smithy.Schema
+
+var ConditionalValidation_Pattern *smithy.Schema
+
+var ConditionalValidation_AllowedValues *smithy.Schema
+
+var _ConditionOperator = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "ConditionOperator",
+}, smithy.ShapeTypeString, 0)
+
+var _ConditionValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "ConditionValue",
+}, smithy.ShapeTypeString, 0)
+
+var _ConditionValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "ConditionValueList",
+}, smithy.ShapeTypeList, 1)
+var _ConditionValueList_member *smithy.Schema
+
 var ConfigurationSetFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "ConfigurationSetFilter",
@@ -890,6 +947,22 @@ var _EventTypeList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "EventTypeList",
 }, smithy.ShapeTypeList, 1)
 var _EventTypeList_member *smithy.Schema
+
+var FieldCondition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "FieldCondition",
+}, smithy.ShapeTypeStructure, 3)
+var FieldCondition_DependsOnFieldPath *smithy.Schema
+
+var FieldCondition_Operator *smithy.Schema
+
+var FieldCondition_Values *smithy.Schema
+
+var _FieldConditionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.pinpointsmsvoicev2",
+	Name:      "FieldConditionList",
+}, smithy.ShapeTypeList, 1)
+var _FieldConditionList_member *smithy.Schema
 
 var _FieldPath = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
@@ -2264,7 +2337,7 @@ var _RegistrationDisassociationBehavior = smithy.NewSchema(smithy.ShapeID{
 var RegistrationFieldDefinition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
 	Name:      "RegistrationFieldDefinition",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
 var RegistrationFieldDefinition_SectionPath *smithy.Schema
 
 var RegistrationFieldDefinition_FieldPath *smithy.Schema
@@ -2278,6 +2351,8 @@ var RegistrationFieldDefinition_SelectValidation *smithy.Schema
 var RegistrationFieldDefinition_TextValidation *smithy.Schema
 
 var RegistrationFieldDefinition_DisplayHints *smithy.Schema
+
+var RegistrationFieldDefinition_ConditionalBehavior *smithy.Schema
 
 var _RegistrationFieldDefinitionList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.pinpointsmsvoicev2",
@@ -5794,6 +5869,38 @@ func init() {
 
 	CloudWatchLogsDestination_LogGroupArn = CloudWatchLogsDestination.AddMember("LogGroupArn", _LogGroupArn)
 
+	_ConditionValueList_member = _ConditionValueList.AddMember("member", _ConditionValue)
+
+	FieldCondition_DependsOnFieldPath = FieldCondition.AddMember("DependsOnFieldPath", _FieldPath)
+
+	FieldCondition_Operator = FieldCondition.AddMember("Operator", _ConditionOperator)
+
+	FieldCondition_Values = FieldCondition.AddMember("Values", _ConditionValueList)
+
+	_FieldConditionList_member = _FieldConditionList.AddMember("member", FieldCondition)
+
+	_SelectChoiceList_member = _SelectChoiceList.AddMember("member", _SelectChoice)
+
+	ConditionalValidation_MinLength = ConditionalValidation.AddMember("MinLength", smithyprelude.Integer)
+
+	ConditionalValidation_MaxLength = ConditionalValidation.AddMember("MaxLength", smithyprelude.Integer)
+
+	ConditionalValidation_Pattern = ConditionalValidation.AddMember("Pattern", smithyprelude.String)
+
+	ConditionalValidation_AllowedValues = ConditionalValidation.AddMember("AllowedValues", _SelectChoiceList)
+
+	ConditionalRule_Conditions = ConditionalRule.AddMember("Conditions", _FieldConditionList)
+
+	ConditionalRule_RuleBehavior = ConditionalRule.AddMember("RuleBehavior", _ConditionalFieldBehavior)
+
+	ConditionalRule_ConditionalValidation = ConditionalRule.AddMember("ConditionalValidation", ConditionalValidation)
+
+	_ConditionalRuleList_member = _ConditionalRuleList.AddMember("member", ConditionalRule)
+
+	ConditionalBehavior_Rules = ConditionalBehavior.AddMember("Rules", _ConditionalRuleList)
+
+	ConditionalBehavior_DefaultBehavior = ConditionalBehavior.AddMember("DefaultBehavior", _ConditionalFieldBehavior)
+
 	_FilterValueList_member = _FilterValueList.AddMember("member", _FilterValue)
 
 	ConfigurationSetFilter_Name = ConfigurationSetFilter.AddMember("Name", _ConfigurationSetFilterName)
@@ -6488,9 +6595,9 @@ func init() {
 
 	RegistrationFieldDefinition_DisplayHints = RegistrationFieldDefinition.AddMember("DisplayHints", RegistrationFieldDisplayHints)
 
-	_RegistrationFieldDefinitionList_member = _RegistrationFieldDefinitionList.AddMember("member", RegistrationFieldDefinition)
+	RegistrationFieldDefinition_ConditionalBehavior = RegistrationFieldDefinition.AddMember("ConditionalBehavior", ConditionalBehavior)
 
-	_SelectChoiceList_member = _SelectChoiceList.AddMember("member", _SelectChoice)
+	_RegistrationFieldDefinitionList_member = _RegistrationFieldDefinitionList.AddMember("member", RegistrationFieldDefinition)
 
 	RegistrationFieldValueInformation_FieldPath = RegistrationFieldValueInformation.AddMember("FieldPath", _FieldPath)
 

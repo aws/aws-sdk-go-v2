@@ -7926,6 +7926,23 @@ func awsRestjson1_serializeDocumentServiceNowServiceDetails(v *types.ServiceNowS
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSlackBidirectionalConfiguration(v *types.SlackBidirectionalConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSlackChannel(v *types.SlackChannel, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7946,6 +7963,13 @@ func awsRestjson1_serializeDocumentSlackChannel(v *types.SlackChannel, value smi
 func awsRestjson1_serializeDocumentSlackConfiguration(v *types.SlackConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Bidirectional != nil {
+		ok := object.Key("bidirectional")
+		if err := awsRestjson1_serializeDocumentSlackBidirectionalConfiguration(v.Bidirectional, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.TransmissionTarget != nil {
 		ok := object.Key("transmissionTarget")

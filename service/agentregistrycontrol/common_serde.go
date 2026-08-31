@@ -73,6 +73,23 @@ func serializeSelfManagedLatticeResource(s smithy.ShapeSerializer, schema *smith
 	}
 }
 
+func serializeSourceDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v types.SourceDetails) {
+	switch vv := v.(type) {
+	case *types.SourceDetailsMemberAgentcoreGateway:
+		s.WriteUnion(schema, schemas.SourceDetails_agentcoreGateway)
+		s.WriteStruct(schemas.SourceDetails_agentcoreGateway)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.SourceDetailsMemberAgentcoreRuntime:
+		s.WriteUnion(schema, schemas.SourceDetails_agentcoreRuntime)
+		s.WriteStruct(schemas.SourceDetails_agentcoreRuntime)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func deserializeAuthorizerConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.AuthorizerConfiguration) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
@@ -138,6 +155,22 @@ func deserializeSelfManagedLatticeResource(d smithy.ShapeDeserializer, s *smithy
 		switch ms {
 		case schemas.SelfManagedLatticeResource_resourceConfigurationIdentifier:
 			vv := &types.SelfManagedLatticeResourceMemberResourceConfigurationIdentifier{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeSourceDetails(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.SourceDetails) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.SourceDetails_agentcoreGateway:
+			vv := &types.SourceDetailsMemberAgentcoreGateway{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.SourceDetails_agentcoreRuntime:
+			vv := &types.SourceDetailsMemberAgentcoreRuntime{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -225,6 +258,32 @@ func serializeMatchValueStringList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializePrivateEndpointOverrides(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PrivateEndpointOverride) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeProvenanceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Provenance) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeProvenanceSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ProvenanceSummary) {
 	if v == nil {
 		return
 	}
@@ -462,6 +521,34 @@ func deserializePrivateEndpointOverrides(d smithy.ShapeDeserializer, s *smithy.S
 	var vv types.PrivateEndpointOverride
 	return smithy.ReadList(d, s, func() error {
 		vv = types.PrivateEndpointOverride{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeProvenanceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Provenance) error {
+	*v = make([]types.Provenance, 0)
+	var vv types.Provenance
+	return smithy.ReadList(d, s, func() error {
+		vv = types.Provenance{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeProvenanceSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ProvenanceSummary) error {
+	*v = make([]types.ProvenanceSummary, 0)
+	var vv types.ProvenanceSummary
+	return smithy.ReadList(d, s, func() error {
+		vv = types.ProvenanceSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

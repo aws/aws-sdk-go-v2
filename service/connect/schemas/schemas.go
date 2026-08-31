@@ -1219,6 +1219,13 @@ var GetContactMetrics = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/metrics/contact",
 	Code: 200})
 
+var GetCrossRegionRouting = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "GetCrossRegionRouting",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/cross-region-routing/{InstanceId}",
+	Code: 200})
+
 var GetCurrentMetricData = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "GetCurrentMetricData",
@@ -2388,6 +2395,13 @@ var UpdateContactTaskTemplate = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/contact/task-template",
 	Code: 200})
 
+var UpdateCrossRegionRouting = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "UpdateCrossRegionRouting",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/cross-region-routing/{InstanceId}",
+	Code: 200})
+
 var UpdateDataTableAttribute = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "UpdateDataTableAttribute",
@@ -2785,6 +2799,26 @@ var AccessType = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeEnum, 1)
 var AccessType_ALLOW *smithy.Schema
 
+var _ACGRInstanceArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ACGRInstanceArn",
+}, smithy.ShapeTypeString, 0)
+
+var _ACGRInstanceIdOrArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ACGRInstanceIdOrArn",
+}, smithy.ShapeTypeString, 0)
+
+var _ACGRTrafficDistributionGroupArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ACGRTrafficDistributionGroupArn",
+}, smithy.ShapeTypeString, 0)
+
+var _ACGRTrafficDistributionGroupId = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "ACGRTrafficDistributionGroupId",
+}, smithy.ShapeTypeString, 0)
+
 var _ActionSummaries = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ActionSummaries",
@@ -2955,7 +2989,7 @@ var _AgentIds_member *smithy.Schema
 var AgentInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "AgentInfo",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var AgentInfo_Id *smithy.Schema
 
 var AgentInfo_AcceptedByAgentTimestamp *smithy.Schema
@@ -2983,6 +3017,8 @@ var AgentInfo_AgentInitiatedHoldDuration *smithy.Schema
 var AgentInfo_StateTransitions *smithy.Schema
 
 var AgentInfo_VoiceEnhancementMode *smithy.Schema
+
+var AgentInfo_ActiveRegion *smithy.Schema
 
 var _AgentLastName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -9237,11 +9273,6 @@ var Instance_InstanceAccessUrl *smithy.Schema
 
 var Instance_Tags *smithy.Schema
 
-var _InstanceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connect",
-	Name:      "InstanceArn",
-}, smithy.ShapeTypeString, 0)
-
 var InstanceAttributeType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "InstanceAttributeType",
@@ -9582,6 +9613,12 @@ var _ISO8601Datetime = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ISO8601Datetime",
 }, smithy.ShapeTypeString, 0)
+
+var _IsolatedRegionsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "IsolatedRegionsList",
+}, smithy.ShapeTypeList, 1)
+var _IsolatedRegionsList_member *smithy.Schema
 
 var _IsReadOnly = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -15437,11 +15474,6 @@ var TrafficDistributionGroup_Tags *smithy.Schema
 
 var TrafficDistributionGroup_IsDefault *smithy.Schema
 
-var _TrafficDistributionGroupArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connect",
-	Name:      "TrafficDistributionGroupArn",
-}, smithy.ShapeTypeString, 0)
-
 var _TrafficDistributionGroupId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "TrafficDistributionGroupId",
@@ -19741,6 +19773,18 @@ var GetContactMetricsResponse_Id *smithy.Schema
 
 var GetContactMetricsResponse_Arn *smithy.Schema
 
+var GetCrossRegionRoutingRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "GetCrossRegionRoutingRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetCrossRegionRoutingRequest_InstanceId *smithy.Schema
+
+var GetCrossRegionRoutingResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "GetCrossRegionRoutingResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetCrossRegionRoutingResponse_IsolatedRegions *smithy.Schema
+
 var GetCurrentMetricDataRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "GetCurrentMetricDataRequest",
@@ -23330,6 +23374,19 @@ var UpdateContactTaskTemplateResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateContactTaskTemplateResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var UpdateCrossRegionRoutingRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "UpdateCrossRegionRoutingRequest",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateCrossRegionRoutingRequest_InstanceId *smithy.Schema
+
+var UpdateCrossRegionRoutingRequest_IsolatedAll *smithy.Schema
+
+var UpdateCrossRegionRoutingResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "UpdateCrossRegionRoutingResponse",
+}, smithy.ShapeTypeStructure, 0)
+
 var UpdateDataTableAttributeRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "UpdateDataTableAttributeRequest",
@@ -24442,6 +24499,8 @@ func init() {
 	AgentInfo_StateTransitions = AgentInfo.AddMember("StateTransitions", _StateTransitions)
 
 	AgentInfo_VoiceEnhancementMode = AgentInfo.AddMember("VoiceEnhancementMode", VoiceEnhancementMode)
+
+	AgentInfo_ActiveRegion = AgentInfo.AddMember("ActiveRegion", _ActiveRegion)
 
 	_PotentialAudioQualityIssues_member = _PotentialAudioQualityIssues.AddMember("member", _PotentialAudioQualityIssue)
 
@@ -29033,6 +29092,8 @@ func init() {
 
 	_InvisibleTaskTemplateFields_member = _InvisibleTaskTemplateFields.AddMember("member", InvisibleFieldInfo)
 
+	_IsolatedRegionsList_member = _IsolatedRegionsList.AddMember("member", _AwsRegion)
+
 	IvrRecordingTrack_ALL = IvrRecordingTrack.AddMember("ALL", smithyprelude.Unit)
 
 	LexBot_Name = LexBot.AddMember("Name", _BotName)
@@ -30781,15 +30842,15 @@ func init() {
 
 	TrafficDistributionGroupStatus_UPDATE_IN_PROGRESS = TrafficDistributionGroupStatus.AddMember("UPDATE_IN_PROGRESS", smithyprelude.Unit)
 
-	TrafficDistributionGroup_Id = TrafficDistributionGroup.AddMember("Id", _TrafficDistributionGroupId)
+	TrafficDistributionGroup_Id = TrafficDistributionGroup.AddMember("Id", _ACGRTrafficDistributionGroupId)
 
-	TrafficDistributionGroup_Arn = TrafficDistributionGroup.AddMember("Arn", _TrafficDistributionGroupArn)
+	TrafficDistributionGroup_Arn = TrafficDistributionGroup.AddMember("Arn", _ACGRTrafficDistributionGroupArn)
 
 	TrafficDistributionGroup_Name = TrafficDistributionGroup.AddMember("Name", _Name128)
 
 	TrafficDistributionGroup_Description = TrafficDistributionGroup.AddMember("Description", _Description250)
 
-	TrafficDistributionGroup_InstanceArn = TrafficDistributionGroup.AddMember("InstanceArn", _InstanceArn)
+	TrafficDistributionGroup_InstanceArn = TrafficDistributionGroup.AddMember("InstanceArn", _ACGRInstanceArn)
 
 	TrafficDistributionGroup_Status = TrafficDistributionGroup.AddMember("Status", TrafficDistributionGroupStatus)
 
@@ -30797,13 +30858,13 @@ func init() {
 
 	TrafficDistributionGroup_IsDefault = TrafficDistributionGroup.AddMember("IsDefault", _Boolean)
 
-	TrafficDistributionGroupSummary_Id = TrafficDistributionGroupSummary.AddMember("Id", _TrafficDistributionGroupId)
+	TrafficDistributionGroupSummary_Id = TrafficDistributionGroupSummary.AddMember("Id", _ACGRTrafficDistributionGroupId)
 
-	TrafficDistributionGroupSummary_Arn = TrafficDistributionGroupSummary.AddMember("Arn", _TrafficDistributionGroupArn)
+	TrafficDistributionGroupSummary_Arn = TrafficDistributionGroupSummary.AddMember("Arn", _ACGRTrafficDistributionGroupArn)
 
 	TrafficDistributionGroupSummary_Name = TrafficDistributionGroupSummary.AddMember("Name", _Name128)
 
-	TrafficDistributionGroupSummary_InstanceArn = TrafficDistributionGroupSummary.AddMember("InstanceArn", _InstanceArn)
+	TrafficDistributionGroupSummary_InstanceArn = TrafficDistributionGroupSummary.AddMember("InstanceArn", _ACGRInstanceArn)
 
 	TrafficDistributionGroupSummary_Status = TrafficDistributionGroupSummary.AddMember("Status", TrafficDistributionGroupStatus)
 
@@ -32211,15 +32272,15 @@ func init() {
 
 	CreateTrafficDistributionGroupRequest_Description = CreateTrafficDistributionGroupRequest.AddMember("Description", _Description250)
 
-	CreateTrafficDistributionGroupRequest_InstanceId = CreateTrafficDistributionGroupRequest.AddMember("InstanceId", _InstanceIdOrArn)
+	CreateTrafficDistributionGroupRequest_InstanceId = CreateTrafficDistributionGroupRequest.AddMember("InstanceId", _ACGRInstanceIdOrArn)
 
 	CreateTrafficDistributionGroupRequest_ClientToken = CreateTrafficDistributionGroupRequest.AddMember("ClientToken", _ClientToken)
 
 	CreateTrafficDistributionGroupRequest_Tags = CreateTrafficDistributionGroupRequest.AddMember("Tags", _TagMap)
 
-	CreateTrafficDistributionGroupResponse_Id = CreateTrafficDistributionGroupResponse.AddMember("Id", _TrafficDistributionGroupId)
+	CreateTrafficDistributionGroupResponse_Id = CreateTrafficDistributionGroupResponse.AddMember("Id", _ACGRTrafficDistributionGroupId)
 
-	CreateTrafficDistributionGroupResponse_Arn = CreateTrafficDistributionGroupResponse.AddMember("Arn", _TrafficDistributionGroupArn)
+	CreateTrafficDistributionGroupResponse_Arn = CreateTrafficDistributionGroupResponse.AddMember("Arn", _ACGRTrafficDistributionGroupArn)
 
 	CreateUseCaseRequest_InstanceId = CreateUseCaseRequest.AddMember("InstanceId", _InstanceId, &smithytraits.HTTPLabel{})
 
@@ -32989,6 +33050,10 @@ func init() {
 
 	GetContactMetricsResponse_Arn = GetContactMetricsResponse.AddMember("Arn", _ARN)
 
+	GetCrossRegionRoutingRequest_InstanceId = GetCrossRegionRoutingRequest.AddMember("InstanceId", _ACGRInstanceIdOrArn, &smithytraits.HTTPLabel{})
+
+	GetCrossRegionRoutingResponse_IsolatedRegions = GetCrossRegionRoutingResponse.AddMember("IsolatedRegions", _IsolatedRegionsList)
+
 	GetCurrentMetricDataRequest_InstanceId = GetCurrentMetricDataRequest.AddMember("InstanceId", _InstanceId, &smithytraits.HTTPLabel{})
 
 	GetCurrentMetricDataRequest_Filters = GetCurrentMetricDataRequest.AddMember("Filters", Filters)
@@ -33183,9 +33248,9 @@ func init() {
 
 	GetTrafficDistributionResponse_TelephonyConfig = GetTrafficDistributionResponse.AddMember("TelephonyConfig", TelephonyConfig)
 
-	GetTrafficDistributionResponse_Id = GetTrafficDistributionResponse.AddMember("Id", _TrafficDistributionGroupId)
+	GetTrafficDistributionResponse_Id = GetTrafficDistributionResponse.AddMember("Id", _ACGRTrafficDistributionGroupId)
 
-	GetTrafficDistributionResponse_Arn = GetTrafficDistributionResponse.AddMember("Arn", _TrafficDistributionGroupArn)
+	GetTrafficDistributionResponse_Arn = GetTrafficDistributionResponse.AddMember("Arn", _ACGRTrafficDistributionGroupArn)
 
 	GetTrafficDistributionResponse_SignInConfig = GetTrafficDistributionResponse.AddMember("SignInConfig", SignInConfig)
 
@@ -33957,7 +34022,7 @@ func init() {
 
 	ListTrafficDistributionGroupsRequest_NextToken = ListTrafficDistributionGroupsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
 
-	ListTrafficDistributionGroupsRequest_InstanceId = ListTrafficDistributionGroupsRequest.AddMember("InstanceId", _InstanceIdOrArn, &smithytraits.HTTPQuery{Name: "instanceId"})
+	ListTrafficDistributionGroupsRequest_InstanceId = ListTrafficDistributionGroupsRequest.AddMember("InstanceId", _ACGRInstanceIdOrArn, &smithytraits.HTTPQuery{Name: "instanceId"})
 
 	ListTrafficDistributionGroupsResponse_NextToken = ListTrafficDistributionGroupsResponse.AddMember("NextToken", _NextToken)
 
@@ -33965,7 +34030,7 @@ func init() {
 
 	ListTrafficDistributionGroupUsersRequest_TrafficDistributionGroupId = ListTrafficDistributionGroupUsersRequest.AddMember("TrafficDistributionGroupId", _TrafficDistributionGroupIdOrArn, &smithytraits.HTTPLabel{})
 
-	ListTrafficDistributionGroupUsersRequest_MaxResults = ListTrafficDistributionGroupUsersRequest.AddMember("MaxResults", _MaxResult10, &smithytraits.HTTPQuery{Name: "maxResults"})
+	ListTrafficDistributionGroupUsersRequest_MaxResults = ListTrafficDistributionGroupUsersRequest.AddMember("MaxResults", _MaxResult1000, &smithytraits.HTTPQuery{Name: "maxResults"})
 
 	ListTrafficDistributionGroupUsersRequest_NextToken = ListTrafficDistributionGroupUsersRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
 
@@ -34115,7 +34180,7 @@ func init() {
 
 	ReleasePhoneNumberRequest_ClientToken = ReleasePhoneNumberRequest.AddMember("ClientToken", _ClientToken, &smithytraits.HTTPQuery{Name: "clientToken"})
 
-	ReplicateInstanceRequest_InstanceId = ReplicateInstanceRequest.AddMember("InstanceId", _InstanceIdOrArn, &smithytraits.HTTPLabel{})
+	ReplicateInstanceRequest_InstanceId = ReplicateInstanceRequest.AddMember("InstanceId", _ACGRInstanceIdOrArn, &smithytraits.HTTPLabel{})
 
 	ReplicateInstanceRequest_ReplicaRegion = ReplicateInstanceRequest.AddMember("ReplicaRegion", _AwsRegion)
 
@@ -35232,6 +35297,10 @@ func init() {
 	UpdateContactTaskTemplateRequest_TaskTemplateId = UpdateContactTaskTemplateRequest.AddMember("TaskTemplateId", _TaskTemplateId)
 
 	UpdateContactTaskTemplateRequest_ContactId = UpdateContactTaskTemplateRequest.AddMember("ContactId", _ContactId)
+
+	UpdateCrossRegionRoutingRequest_InstanceId = UpdateCrossRegionRoutingRequest.AddMember("InstanceId", _ACGRInstanceIdOrArn, &smithytraits.HTTPLabel{})
+
+	UpdateCrossRegionRoutingRequest_IsolatedAll = UpdateCrossRegionRoutingRequest.AddMember("IsolatedAll", _Boolean)
 
 	UpdateDataTableAttributeRequest_InstanceId = UpdateDataTableAttributeRequest.AddMember("InstanceId", _InstanceId, &smithytraits.HTTPLabel{})
 

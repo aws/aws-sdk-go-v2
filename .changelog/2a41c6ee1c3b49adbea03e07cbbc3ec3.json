@@ -1,0 +1,8 @@
+{
+    "id": "2a41c6ee-1c3b-49ad-bea0-3e07cbbc3ec3",
+    "type": "feature",
+    "description": "Amazon MSK Connect now supports restarting newly created connectors via the asynchronous RestartConnector API. Restart all tasks or only failed tasks, while preserving configuration and committed offsets. This returns a connector operation ARN that you can track with DescribeConnectorOperation.",
+    "modules": [
+        "service/kafkaconnect"
+    ]
+}
